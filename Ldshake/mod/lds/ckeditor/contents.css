@@ -1,0 +1,49 @@
+/*
+Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+
+body
+{
+	/* Font */	
+	font-family: Arial, Verdana, sans-serif;
+	font-size: 12pt;
+	line-height: 1.5em;
+
+	/* Text color */
+	color: #000;
+
+	/* Remove the background color to make it transparent */
+	background-color: #fff;
+	
+	/* PAU: This padding is just for the editor, it feels more comfortable to the user to have space at the bottom. */
+	padding-bottom: 100px;
+}
+
+/* preserved spaces for rtl list item bullets. (#6249)*/
+ol,ul,dl
+{
+    padding-right:40px;
+}
+
+html
+{
+	/* #3658: [IE6] Editor document has horizontal scrollbar on long lines
+	To prevent this misbehavior, we show the scrollbar always */
+	_overflow-y: scroll;
+	/* #6341: The text cursor must be set on the editor area. */
+	cursor: text;
+	/* #6632: Avoid having "text" shape of cursor in IE7 scrollbars.*/
+	*cursor:auto;
+}
+
+img:-moz-broken
+{
+	-moz-force-broken-image-icon : 1;
+	width : 24px;
+	height : 24px;
+}
+img, input, textarea
+{
+	cursor: default;
+}

@@ -1,0 +1,10 @@
+<html class="dj_webkit dj_contentbox">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <link rel='stylesheet' href='css/niftyCorners.css'/>
+        <link rel='stylesheet' href='css/summarypage.css'/>
+        <link rel='stylesheet' href='css/summary.css'/>
+		<title>Web Collage</title>
+	</head>
+	<body id="theBody" class="tundra" style="overflow: auto;">
+		<div id="SummaryTabContent">
