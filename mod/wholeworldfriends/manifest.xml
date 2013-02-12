@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+	<field key="author" value="Miguel-Angel Carralero-Martinez, Pedro Latorre-Bilsen, Davinia Hernandez-Leo" />
+	<field key="version" value="1.2" />
+	<field key="description" value="Whole world are friends plugin. When a user register, automatically makes friend of all and all users makes friend of him. ALERT- The users registered before the plugin activation, are NOT automatically friends. Only makes the relationship betwen the newuser and registered users." />
+	<field key="website" value="http://gti.upf.edu/" />
+	<field key="copyright" value="GTI-Learning" />
+	<field key="licence" value="Universitat Pompeu Fabra (Barcelona)" />
+</plugin_manifest>

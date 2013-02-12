@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin_manifest>
+	<field key="author" value="ColdTrick IT Solutions" />
+	<field key="version" value="0.1" />
+	<field key="description" value="Manage some of your sites metatags" />
+	<field key="website" value="http://www.coldtrick.com/" />
+	<field key="copyright" value="(C) ColdTrick IT Solutions 2009" />
+	<field key="licence" value="GNU Public License version 2" />
+	<field key="elgg_version" value="2009031301" />
+</plugin_manifest>
+<!--
+Manage some of your sites metatags
+
+Features:
+- manage: keywords, description, robots, author
+
+Version history:
+
+0.1:
+	- initial release
+	
+-->
