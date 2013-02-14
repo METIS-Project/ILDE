@@ -1,0 +1,23 @@
+
+
+<div dojoType="dijit.Dialog" id="deployDialog" title="${deployGluePS.title}">
+    <div id="DeployContent" style="padding:10px 0px 10px 0px;"></div>
+    <div align="center">
+        <button dojoType="dijit.form.Button" id="DeployOkButton" onclick="GluepsExport.close();">
+            ${common.ok}
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="ExportingDialog" title="${export.title}">
+    <div id="ExportContent" style="padding:20px;"></div>
+    <div>
+        <button dojoType="dijit.form.Button" id="ExportOkButton" onclick="ExportManager.close();">
+            ${common.ok}
+        </button>
+    </div>
+</div>
+
+<div id="WaitWhileLoadingPane" class="waitWhileLoadingPane">
+    ${common.waiting} <img src="images/loading.gif"/>
+</div>

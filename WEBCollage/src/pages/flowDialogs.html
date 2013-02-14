@@ -1,0 +1,127 @@
+<div dojoType="dijit.Dialog" id="LDRoleEditDialog" title="${roles.edit}" style="width: 400px">
+	<div style="max-height: 500px; overflow : auto;">
+		<div style="padding-bottom:10px;">
+			<div dojoType="dijit.form.TextBox" id="LDRoleTitle" style="font-size: larger; font-weight: bold;"></div>
+		</div>
+		<div dojoType="dijit.TitlePane" title="${roles.edit.people}" style="padding-bottom:10px;">
+			<table>
+				<tr>
+					<td> ${roles.edit.min} </td>
+					<td><div dojoType="dijit.form.TextBox" id="LDRoleEditMinPersons"></div></td>
+				</tr>
+				<tr>
+					<td> ${roles.edit.max} </td>
+					<td><div dojoType="dijit.form.TextBox" id="LDRoleEditMaxPersons"></div></td>
+				</tr>
+			</table>
+		</div>
+		<div dojoType="dijit.TitlePane" title="${roles.edit.description}">
+			<div dojoType="dijit.form.Textarea" id="LDRoleEditDescription" style="height: 150px;"></div>
+		</div>
+		<div dojoType="dijit.layout.ContentPane" align="center">
+			<button dojoType="dijit.form.Button" onclick="EditRoleDialog.ok();">
+				${common.ok}
+			</button>
+			<button dojoType="dijit.form.Button" onclick="EditRoleDialog.cancel();">
+				${common.cancel}
+			</button>
+		</div>
+	</div>
+</div>
+<div dojoType="dijit.Dialog" id="SelectorDialog" title="${selector.select}">
+	<div class="niceDialogContent">
+		<div dojoType="dijit.TitlePane" title="${selector.type.phase}"  style="padding-bottom:20px;">
+			<table class="patternList">
+				<tr class="patternListRow">
+					<td class="patternListCell" style="font-size: 12px; opacity: 1; ">${selector.phase.title}</td>
+					<td class="patternListCellSelectable"><img src="images/icons/help.png"></td>
+					<td class="patternListCell"><div dojoType="dijit.form.Button" label="${common.select}" onclick="PatternSelector.selectBlankPhase();" style="padding-left: 5px;"></div></td>
+				</tr>
+			</table>
+		</div>
+		<div dojoType="dijit.TitlePane" title="${selector.type.clfps}" style="width: 650px; padding-bottom:10px;">
+			<div dojoType="dijit.layout.BorderContainer"  style="height: 320px;">
+				<div dojoType="dijit.layout.ContentPane" splitter="true" region="left" style="width:40%;">
+					<div dojoType="dijit.layout.ContentPane" id="SelectorPatternList"></div>
+				</div>
+				<div dojoType="dijit.layout.ContentPane" region="center" style="margin: 10px">
+					<div dojoType="dijit.TitlePane" open="false" title="${selector.criteria.attitudinal}" style="padding-bottom:5px;">
+						<div id="SelectorActitudinalContent"></div>
+					</div>
+					<div dojoType="dijit.TitlePane" open="false" title="${selector.criteria.procedural}" style="padding-bottom:5px;">
+						<div id="SelectorProceduralContent"></div>
+					</div>
+					<div dojoType="dijit.TitlePane" open="false" title="${selector.criteria.problem}" style="padding-bottom:5px;">
+						<div id="SelectorProblemContent"></div>
+					</div>
+					<div dojoType="dijit.TitlePane" open="false" title="${selector.criteria.complexity}">
+						<input dojoType="dijit.form.RadioButton" id="selectorcomplexity_any" name="selectorcomplexity" checked="checked" value="any" type="radio" />
+						<label for="selectorcomplexity_any">${selector.complexity.any}</label>
+						<br/>
+						<input dojoType="dijit.form.RadioButton" id="selectorcomplexity_low" name="selectorcomplexity" value="low" type="radio" />
+						<label for="selectorcomplexity_low">${selector.complexity.low}</label>
+						<br/>
+						<input dojoType="dijit.form.RadioButton" id="selectorcomplexity_medium" name="selectorcomplexity" value="medium" type="radio" />
+						<label for="selectorcomplexity_medium">${selector.complexity.medium}</label>
+						<br/>
+						<input dojoType="dijit.form.RadioButton" id="selectorcomplexity_high" name="selectorcomplexity" value="high" type="radio" />
+						<label for="selectorcomplexity_high">${selector.complexity.high}</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="SelectorPatternButtonPanel" dojoType="dijit.layout.ContentPane" align="center">
+			<button dojoType="dijit.form.Button" label="${common.cancel}" onclick="PatternSelector.cancel();"></button>
+		</div>
+	</div>
+</div>
+<div dojoType="dijit.Dialog" id="LDActivityEditDialog" showTitle="true" title="${activity.edit}" style="width:500px;">
+	<div style="max-height: 550px; overflow : auto;">
+		<div class="niceDialogContent" >
+			<div style="padding-bottom:10px;">
+				<div dojoType="dijit.form.TextBox" id="LDActivityTitle" style="font-size: larger; font-weight: bold;"></div>
+			</div>
+			<div dojoType="dijit.TitlePane" title="${activity.edit.description}" style="padding-bottom:10px; overflow : auto;">
+				<div dojoType="dijit.form.Textarea" id="LDActivityDescription"></div>
+			</div>
+			<div id="LDActivityLOContainer" dojoType="dijit.TitlePane" title="${activity.edit.los}" style="padding-bottom:10px; overflow : auto;">
+				<div dojoType="dijit.layout.ContentPane" id="LDActivityLOs">
+					<ul id="LDActivityLOsList"></ul>
+				</div>
+				<div dojoType="dijit.layout.ContentPane" align="center">
+					<div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
+						<span></span>
+						${printSimpleTooltipDialog("LDActivityLOSelector", "SelectLOsList_activity", "dijit.layout.ContentPane", "activity.edit.los", "width: 250px; max-height: 200px; overflow: auto;")}
+					</div>
+				</div>
+			</div>
+			<div dojoType="dijit.TitlePane" title="${activity.edit.resources}" style="padding-bottom:10px; overflow : auto;">
+				<div dojoType="dijit.layout.ContentPane" id="LDActivityResources">
+					<ul id="LDActivityResourcesList"></ul>
+				</div>
+				<div dojoType="dijit.layout.ContentPane" align="center">
+					<div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
+						<span></span>
+						${printResourceSelectorTooltipDialog("LDActivityResourceSelector", "activity", "width: 250px; max-height: 200px; overflow : auto;")}
+					</div>
+				</div>
+			</div>
+			<!-- buttons  -->
+			<div dojoType="dijit.layout.ContentPane" align="center">
+				<button dojoType="dijit.form.Button" onclick="EditActivityDialog.ok();">
+					${common.ok}
+				</button>
+				<button dojoType="dijit.form.Button" onclick="EditActivityDialog.cancel();">
+					${common.cancel}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div id="removeClfpDialog" dojoType="dijit.Dialog" showTitle="true" title="${resources.delete}">
+	<div id ="removeClfpDialogInfo" dojoType="dijit.layout.ContentPane" align="center"></div>
+	<div dojoType="dijit.layout.ContentPane" align="center">
+		<button id="removeClfpDialogOk" dojoType="dijit.form.Button" label="${common.ok}"></button>
+		<button id="removeClfpDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}"></button>
+	</div>
+</div>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- JNLP File for Ontoolsearch client integrated in WebCollage -->
+<jnlp
+  spec="1.0+"
+  codebase="http://localhost/wc/ontoolsearch/"
+  href="http://localhost/wc/ontoolsearch//osclient.jnlp">
+  <information>
+    <title>Ontoolsearch applet client for WebCollage</title>
+    <vendor>Group of Intelligent and Cooperative Systems (GSIC)</vendor>
+    <homepage href="http://www.gsic.uva.es/ontoolsearch/index.html"/>
+    <description>Ontoolsearch applet client for WebCollage</description>
+    <icon href="http://www.gsic.uva.es/ontoolsearch/images/OntoolsearchIcon.jpg"/>
+    <icon kind="splash" href="http://www.gsic.uva.es/ontoolsearch/images/OntoolsearchIcon.jpg"/>
+  </information>
+  <security>
+      <all-permissions/>
+  </security>  
+  <resources>
+    <j2se version="1.6"/>
+    <jar href="osclient.jar"/>    
+    <jar href="lib/plugin.jar"/>
+    <jar href="lib/jung/colt.jar"/>
+    <jar href="lib/jung/commons-collections-3.2.jar"/>
+    <jar href="lib/jung/jung-1.7.6.jar"/>
+    <jar href="lib/restlet/org.restlet.ext.atom.jar"/>
+    <jar href="lib/restlet/org.restlet.ext.net.jar"/>
+    <jar href="lib/restlet/org.restlet.ext.xml.jar"/>
+    <jar href="lib/restlet/org.restlet.jar"/>
+    <jar href="lib/protege/commons-logging-1.1.1.jar"/>
+    <jar href="lib/protege/icu4j_3_4.jar"/>
+    <jar href="lib/protege/iri.jar"/>
+    <jar href="lib/protege/jena.jar"/>
+    <jar href="lib/protege/log4j-1.2.12.jar"/>
+    <jar href="lib/protege/looks.jar"/>
+    <jar href="lib/protege/orphanNodesAlg.jar"/>
+    <jar href="lib/protege/protege-owl.jar"/>
+    <jar href="lib/protege/protege.jar"/>
+    <jar href="lib/protege/xercesImpl.jar"/>
+  </resources>
+  <applet-desc 
+         name="Ontoolsearch Applet client"
+         main-class="osclient.launch.OntoolsearchApplet"
+         width="1100"
+         height="800">
+  </applet-desc>
+  <update check="background"/>
+</jnlp> 

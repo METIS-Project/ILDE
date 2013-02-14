@@ -1,0 +1,135 @@
+{
+	"patterns": [
+		{
+                        "name": "test", 
+                        "title": "Test individual",
+                        "description": "completar y corregir un test o examen.",
+			"assessedActivity": "Contestar test",
+			"assessmentActivity": "Corregir test",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessed": "assessedAsTest",
+                            "assessment": "assessmentAsTest"
+                        }
+		},
+		{
+                        "name": "observations",
+                        "title": "Observaciones de trabajo colaborativo",
+                        "description": "observar el trabajo colaborativo según se desarrolla en entornos presenciales.",
+			"assessmentActivity": "Observar colaboración",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsObservation",
+                            "assessed": "assessedAsObservation"
+                        }
+		},		
+		{
+                        "name": "reportassessment", 
+                        "title": "Revisión de informe escrito",
+                        "description": "evaluar un informe escrito por lo alumnos.",
+			"assessmentActivity": "Revisar informe",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsReportreview",
+                            "assessed": "assessedAsReportreview"
+                        }
+		},
+		{
+                        "name": "oralpresentation", 
+                        "title": "Presentación oral",
+                        "description": "realizar una presentación oral, que es evaluada.",
+			"assessedActivity": "Hacer presentación oral",
+			"assessmentActivity": "Observar y evaluar presentación",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPresentation",
+                            "assessed": "assessedAsPresentation"
+                        }
+		},
+		{
+                        "name": "performance", 
+                        "title": "Evaluación de 'performance'",
+                        "description": "completar una tarea que requiere determinados conocimientos o habilidades; esta actividad es observada y evaluada.",
+			"assessmentActivity": "Observar y evaluar 'performance'",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPerformance",
+                            "assessed": "assessedAsPerformance"
+                        }
+		},
+		{
+                        "name": "portfolio", 
+                        "title": "Evaluación de portafolio",
+                        "description": "evaluar un portafolio compilado por los alumnos a lo lardo de cierto periodo de tiempo.",
+			"assessmentActivity": "Evaluar portafolio",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPortfolio",
+                            "assessed": "assessedAsPortfolio"
+                        }
+		},
+		{
+                        "name": "roledetection",
+                        "title": "Detección de roles",
+                        "description": "usar aplicaciones de análisis de interacciones para estudiar automáticamente los roles que los estudiantes toman durante las actividades colaborativas.",
+			"assessmentActivity": "Analizar interacciones para inferir roles",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsRoles"
+                        }
+		},
+		{
+                        "name": "interactionanalisys", "title": "Análisis de interacciones",
+                        "description": "el evaluador es la misma persona o grupo que el evaluado.",
+			"assessmentActivity": "Analizar interacciones en el trabajo colaborativo",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsIA"
+                        }
+		},
+                {
+                        "name": "rubric",
+                        "title": "Rubricas",
+                        "description": "añadir una rúbrica, que guía al evaluador en la tarea de evaluar a los alumnos.",
+			"generaltype": "resource",
+                        "actions": {
+                            "assessment": "assessmentAsRubric"
+                        }
+		},
+		{
+                        "name": "sharedgrades",
+                        "title": "Nota compartida",
+                        "description": "utilizar la evaluación para poner una nota que es compartida por todos los miembros de cada grupo.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsShared",
+                            "assessed": "assessedAsShared"
+                        }
+		},
+		{
+                        "name": "selfassessment",
+                        "title": "Auto evaluación",
+                        "description": "el evaluador es la misma persona o grupo que el evaluado.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsSelf"
+                        }
+		},
+		{
+                        "name": "anonymous", "title": "Evaluación anónima",
+                        "description": "el evaluador es anónimo, se oculta su identidad.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsAnonymous"
+                        }
+		},
+		{
+                        "name": "random", "title": "Evaluación de miembro de grupo aleatorio",
+                        "description": "la evaluación es realizada por un único estudiante de cada grupo, elegido aleatoriamente.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsRandom"
+                        }
+		}
+	]
+}

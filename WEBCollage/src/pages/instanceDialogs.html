@@ -1,0 +1,418 @@
+<div id="pantalla_obtener_alumnos" dojoType="dijit.Dialog" title="${participantes.seleccionarAlumnos}" style="max-width:700px;">
+    <div dojoType="dijit.TitlePane" title="${participantes.lms}" style="padding-bottom:20px;">
+        <div style="overflow: auto;">
+            <table>
+                <tr id="lms">
+                    <td>
+                        ${participantes.instalacion_lms}
+                    </td>
+                    <td>
+                        <select id="selectLMS_installation" name="select" dojoType="dijit.form.Select" >
+                        </select>
+                    </td>
+                    <td><div id="loadingSelectLMSInstallation"></div></td>
+                    <td>
+                        <div id="gestionLMS" dojoType="dijit.form.Button" label="${participantes.gestionar_lms}">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        <div id="lmsGLueErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+                        </div>
+                    </td>
+                </tr>
+                <tr id="lmsGlue">
+                    <td>
+                        ${participantes.lms}
+                    </td>
+                    <td>
+                        <select id="selectLMS_installation_glue" name="select" dojoType="dijit.form.Select" >
+                        </select>
+                    </td>
+                    <td><div id="loadingSelectLMSGlue"></div></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div dojoType="dijit.Dialog" id="adminGestionLMS" showTitle="true" title="${participantes.gestionar_lms}" style="max-width:400px;">
+        <div dojoType="dijit.layout.ContentPane">
+            <table align="center">
+                <tr>
+                    <td>
+                        <div id="crearLMS" dojoType="dijit.form.Button" label="${participantes.crearInstalacionLMS}">
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="table" dojoType="dijit.TitlePane" title="${participantes.mostrarinstanciaslms}" style="width:100%;padding-bottom:20px;">
+            <div id="tablalms" style="height:20em; overflow:auto;">
+            </div>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="aceptaradmingestion" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="rechazaradmingestion" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+    <div dojoType="dijit.Dialog" id="dialogoCrearLMS" showTitle="true" title="${participantes.crearInstalacionLMS}">
+        <div id="dialogoCrearLMSErrorReport" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <form id="formUploadFile" name="formUploadFile" method="POST" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>
+                            ${participantes.tipolms}
+                        </td>
+                        <td>
+                            <select id="selectLMS" name="selectLMS" dojoType="dijit.form.Select">
+                            </select>
+                        </td>
+                    </tr>
+                    <tr id="uploadFile">
+                        <td>${participantes.fichero}</td>
+                        <td> <input id="archivo" name="archivo" size="28"  type="file"/></td>
+                        <td><input type="hidden" name="MAX_FILE_SIZE" value="100000" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ${participantes.nombrelms}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoCrearLMStitulo" name="titulo" style="width:200px;" maxlength="60"/>
+                        </td>
+                    </tr>
+                    <tr id="instance_id">
+                        <td>
+                            ${participantes.uri}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoCrearLMSuri" name="instance_id" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr id="username">
+                        <td>
+                            ${participantes.usuariolms}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoCrearLMSusuario" name="username" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr id="password">
+                        <td>
+                            ${users.password}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoCrearLMSpass" name="password" type="password" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr  id="toolid">
+                        <td>
+                            ${participants.toolid}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoCrearLMStoolId" name="toolid" style="width:200px;" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="aceptarCrearLMS" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="cancelarCrearLMS" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+    <div id="ConfirmacionEliminar" dojoType="dijit.Dialog" showTitle="true">
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            ${participantes.eliminarinst}
+            <br>
+            <button id="confirmareliminacion" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="rechazarelminacion" dojoType="dijit.form.Button" label="${common.cancel}" onclick="LmsManagement.closeDeleteConfirmDialog();">
+            </button>
+        </div>
+    </div>
+
+    <div dojoType="dijit.TitlePane" title="${participantes.clase}" style="padding-bottom:20px;">
+        <div style="overflow: auto;">
+            <div id="getClasesErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+            </div>
+            <table>               
+                <tr>
+                    <td>
+                        <select id="select_clases" name="select" dojoType="dijit.form.Select">
+                        </select>
+                    </td>
+                    <td><div id="loadingSelectClases"></div></td>
+                    <!--
+                    <td>
+                        <button id="boton_obtener_participantes" dojoType="dijit.form.Button" label="${participantes.obtener}" onclick="ParticipantSelection.checkGetParticipants();">
+                        </button>
+                    </td>-->
+            </table>
+        </div>
+    </div>
+    <div id="alumnos" dojoType="dijit.TitlePane" title="${participantes.participantes}" style="padding-bottom:20px;">
+        <div style="overflow: auto;">
+            <div id="getParticipantsErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+            </div>
+            <div id="loadingBotonObtenerParticipantes"></div>
+            <div id="tabla_alumnos" style="height:15em; overflow:auto;">
+            </div>
+            <div id="numberOfClassParticipants" align="left" width="180" style="padding:6px;"></div>
+        </div>
+    </div>
+
+    <!-- Ventana que muestra información relativa a los participantes que se añaden, los que se mantienen y los que se eliminan-->
+    <div dojoType="dijit.Dialog" id="comparacionAlumnos" showTitle="true" title="${participantes.cambioAlumnos}">
+        <table>
+            <tr>
+                <td>
+                    <input dojoType="dijit.form.TextBox" id="comparacionAlumnosIdInst" name="comparacionAlumnosInst" type="hidden"/>
+                </td>
+                <td>
+                    <input dojoType="dijit.form.TextBox" id="comparacionAlumnosIdClase" name="comparacionAlumnosIdClase" type="hidden"/>
+                </td>
+                <td>
+                    <input dojoType="dijit.form.TextBox" id="comparacionAlumnosIdLmsGlue" name="comparacionAlumnosIdLmsGlue" type="hidden"/>
+                </td>
+            </tr>
+            <tr>
+                <td width="220">
+                    <div id="alumnosAnadidos" align="center" dojoType="dijit.TitlePane" title="${participantes.alumnosAnadidos}">
+                        <div  style="height:15em; overflow:auto;">
+                            <table id="tablaAlumnosAnyadidos">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td width="220">
+                    <div id="alumnosEliminados" align="center" dojoType="dijit.TitlePane" title="${participantes.alumnosEliminados}">
+                        <div style="height:15em; ; overflow:auto;">
+                            <table id="tablaAlumnosEliminados">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td width="220">
+                    <div id="alumnosPermanecen" align="center" dojoType="dijit.TitlePane" title="${participantes.alumnosPermanecen}">
+                        <div style="height:15em; ; overflow:auto;">
+                            <table id="tablaAlumnosPermanecen">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="numAlumnosAnadidos" align="right" width="220"></td>
+                <td id="numAlumnosEliminados" align="right" width="220"></td>
+                <td id="numAlumnosPermanecen" align="right" width="220"></td>
+            </tr>
+            <tr></tr>
+        </table>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="botonAceptarCambiosAlumnos" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="botonCancelarCambiosAlumnos" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+    <div id="changeTypeDialog" dojoType="dijit.Dialog" showTitle="true" title="${changeTypeTitle}">
+        <div id ="changeTypeDialogInfo" dojoType="dijit.layout.ContentPane">
+        ${changeType.info}
+        </div>
+        <div><input id="participantId" dojoType="dijit.form.TextBox" name="participantId" type="hidden"/>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="changeTypeDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="changeTypeDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+
+    <div dojoType="dijit.Dialog" id="dialogoEditarLMS" showTitle="true" >
+        <div id="dialogoEditarLMSErrorReport" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <form id="formUploadFileEditar" name="formUploadFileEditar" method="POST" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>
+                            ${participantes.tipolms}
+                        </td>
+                        <td>
+                            <select id="dialogoEditarSelectLMS" name="select" dojoType="dijit.form.Select">
+                            </select>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMSidlms_inst" name="idlms_inst" type="hidden"/>
+                        </td>
+                    </tr>
+                    <tr id="uploadFileEditar">
+                        <td>${participantes.fichero}</td>
+                        <td> <input id="archivoEditar" name="archivoEditar" size="28" type="file" onchange="LmsManagement.getNameNewLmsFile(this.value);"></td>
+                        <td><input type="hidden" name="MAX_FILE_SIZE" value="100000" /></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ${participantes.nombrelms}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMStitulo" name="titulo" style="width:200px;" maxlength="60"/>
+                        </td>
+                    </tr>
+                    <tr id="instance_idEditar">
+                        <td>
+                            ${participantes.uri}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMSuri" name="instance_id" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr id="usernameEditar">
+                        <td>
+                            ${participantes.usuariolms}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMSusuario" name="username" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr id="passwordEditar">
+                        <td>
+                            ${users.password}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMSpass" name="password" type="password" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr  id="toolidEditar">
+                        <td>
+                            ${participants.toolid}
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogoEditarLMStoolId" name="toolid" style="width:200px;" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button dojoType="dijit.form.Button" label="${common.ok}" onclick="LmsManagement.checkEditInstallation();">
+            </button>
+            <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="LmsManagement.closeEditLmsInstallationDialog();">
+            </button>
+        </div>
+
+    </div>
+    <!--Botones para la pestaña Gestión Participantes -->
+    <div dojoType="dijit.form.Button" id="aceptarCambios" label="${common.ok}" iconClass="clipOkIcon" disabled="false" onclick="ParticipantSelection.showParticipantComparation();">
+    </div>
+    <div dojoType="dijit.form.Button" id="cancelarCambios" label="${common.cancel}" disabled="false" onclick="ParticipantSelection.hideParticipantSelectionDialog();">
+    </div>
+</div>
+
+
+<!--Ventana de asignación de alumnos a una instancia de grupo-->
+<div dojoType="dijit.Dialog" id="alumnosAsignadosClase" showTitle="true" title="${participants.alumnosasignados}">
+    <table>
+        <tr>
+            <td width="260">
+                <div id="alumnosAsignados" align="center" dojoType="dijit.TitlePane" title="${participants.alumnosasignadosgrupo}">
+                    <div style="height:15em; overflow:auto;">
+                        <table id="tablaAlumnosAsignados">
+                        </table>
+                    </div>
+                </div>
+            </td>
+            <td width="20">
+
+            </td>
+            <td width="260">
+                <div id="alumnosClase" align="center" dojoType="dijit.TitlePane" title="${participants.alumnosdisponibles}">
+                    <div style="height:15em; overflow:auto;">
+                        <table id="tablaAlumnosDisponibles">
+                        </table>
+                    </div>
+                </div>
+            </td>
+            <td width="20">
+
+            </td>
+            <td width="260">
+                <div id="alumnosYaAsignados" align="center" dojoType="dijit.TitlePane" title="${participants.alumnosasignadosotrasinstancias}">
+                    <div style="height:15em; overflow:auto;">
+                        <table id="tablaAlumnosAsignadosOtrasInstancias">
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="num1" align="right" width="180"></td>
+            <td width="20"></td>
+            <td id="num2" align="right" width="180"></td>
+            <td width="20"></td>
+            <td id="num3" align="right" width="180"></td>
+        </tr>
+        <tr></tr>
+    </table>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="botonAceptarAlumnosAsignados" dojoType="dijit.form.Button" label="${common.ok}" onclick="InstanceStudentManagement.confirmStudentChanges();">
+        </button>
+        <button id="botonCancelarAlumnosAsignados" dojoType="dijit.form.Button" label="${common.cancel}" onclick="InstanceStudentManagement.hideStudents();">
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="divProfesoresAsignados" showTitle="true" title="${participants.profesoresasignados}">
+    <table>
+        <tr>
+            <td width="250">
+                <div id="profesoresAsignados" align="center" dojoType="dijit.TitlePane" title="${participants.profesoresasignadosgrupo}">
+                    <div style="height:12em; overflow:auto;">
+                        <table id="tablaProfesoresAsignados">
+                        </table>
+                    </div>
+                </div>
+            </td>
+            <td width="20">
+            </td>
+            <td width="250">
+                <div id="profesoresClase" align="center" dojoType="dijit.TitlePane" title="${participants.profesoresdisponibles}">
+                    <div style="height:12em; overflow:auto;">
+                        <table id="tablaProfesoresDisponibles">
+                        </table>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td id="numProfesoresAsignados" align="right" width="250"></td>
+            <td width="20"></td>
+            <td id="numProfesoresDisponibles" align="right" width="250"></td>
+        </tr>
+        <tr></tr>
+    </table>
+
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="botonAceptarProfesoresAsignados" dojoType="dijit.form.Button" label="${common.ok}" onclick="InstanceTeacherManagement.confirmTeacherChanges();">
+        </button>
+        <button id="botonCancelarProfesoresAsignados" dojoType="dijit.form.Button" label="${common.cancel}" onclick="InstanceTeacherManagement.hideTeachers();">
+        </button>
+    </div>
+</div>

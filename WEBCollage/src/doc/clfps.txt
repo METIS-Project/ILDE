@@ -1,0 +1,37 @@
+
+Implementing CLFPs
+
+Functions that must be implemented:
+
+* Factory
+
+ - create(): clfp
+there must be a Factory object (e.g., PyramidFactory) with a method to create a pattern 
+(including particularization, such as number of levels in a pyramid):
+	
+* The clfp object
+
+ - getLearners(): [Role]
+returns an array with the top level learners of the role structure.
+
+ - getStaff(): [Role]
+returns an array with the top level staff of the role structure.
+
+ - getFlow(): [Act]
+returns an ordered array with the acts of the CLFP.
+ 
+ - getRenderer(): object
+returns the renderer capable of doing "paint(surface, clfp, transform)";
+ 
+ - getPatternName(): String
+returns the static name of the pattern.
+
+ 
+* Renderer
+
+ - paint(clfp, surface, transform, detailedLinks): void
+ 
+ - getSize(): {width: number, height: number}
+ 
+ - getDesiredPositionForSubplay(clfp, index): {x: number, y: number}
+ 

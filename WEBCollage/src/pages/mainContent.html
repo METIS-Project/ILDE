@@ -1,0 +1,267 @@
+<div id="mainWindow" dojoType="dijit.layout.BorderContainer"
+	design="headline">
+	<div dojoType="dijit.Toolbar" id="toolbar" region="top">
+		<div dojoType="dijit.form.Button" id="toolbar.undo"
+			iconClass="dijitEditorIcon dijitEditorIconUndo" showLabel="false">
+			${common.undo}</div>
+		<div dojoType="dijit.form.Button" id="toolbar.redo"
+			iconClass="dijitEditorIcon dijitEditorIconRedo" showLabel="false">
+			${common.redo}</div>
+		<span style="width: 500px;"></span>
+		<div dojoType="dijit.form.Button" id="toolbar.clip"
+			iconClass="clipOkIcon">${clip.label}</div>
+		<div dojoType="dijit.form.DropDownButton" id="toolbar.exportmenu"
+			iconClass="zipIcon">
+			<span></span>
+			<div dojoType="dijit.TooltipDialog">
+				<div dojoType="dijit.form.Button" id="toolbar.imsld.zip"
+					iconClass="zipIcon">${export.imsld.title}</div><br/>
+				<div dojoType="dijit.form.Button" id="toolbar.workflow.zip"
+					iconClass="zipIcon">${export.workflow.title}</div>
+			</div>
+		</div>
+
+
+		<div dojoType="dijit.form.Button" id="createGluePSDesign"
+			iconClass="gluePSIcon" onclick="GluepsExport.exportImsldPrevious();">
+			${deployGluePS.title}</div>
+
+		<div dojoType="dijit.form.Button" id="toolbar.exit"
+			iconClass="exitIcon">${common.exit}</div>
+
+		<div dojoType="dijit.form.Button" id="toolbar.save"
+			iconClass="dijitEditorIcon dijitEditorIconSave" disabled="true">
+			${common.saved}</div>
+
+	</div>
+	<div id="MainWindowTabContainer" dojoType="dijit.layout.TabContainer"
+		region="center">
+		<!-- general window -->
+		<div id="MainWindowGeneralTab" dojoType="dijit.layout.ContentPane"
+			title="${general.general}" style="padding: 20px;">
+			<div id="LDTitle" dojoType="dijit.TitlePane" title="${general.title}"
+				style="width: 50%; padding-bottom: 20px;">
+				<p id="LDTitleContent"></p>
+				<span id="LDTitleAlert"></span>
+				<div dojoType="dijit.form.DropDownButton">
+					<span>${common.edit}</span> ${getChangeTitleDialog()}
+				</div>
+			</div>
+			<div id="LDPrerrequisites" dojoType="dijit.TitlePane"
+				title="${general.prerrequisites}"
+				style="width: 50%; padding-bottom: 20px;">
+				<p id="LDPrerrequisitesContent"></p>
+				<span id="LDPrerrequisitesAlert"></span>
+				<div dojoType="dijit.form.DropDownButton">
+					<span>${common.edit}</span> ${getChangePrerrequisitesDialog()}
+				</div>
+			</div>
+			<div id="LDLearningObjectives" dojoType="dijit.TitlePane"
+				title="${general.los}" style="width: 50%;">
+				<ul id="LDLearningOobjectivesContent">
+				</ul>
+				<span id="LDLosAlert"></span>
+				<button dojoType="dijit.form.Button" label="${common.add}"
+					onclick="General.openAddLoDialog();"></button>
+				<div dojoType="dijit.Dialog" id="LDLearningObjectiveAddDialog"
+					title="${general.newLo}"
+					execute="General.addLearningObjective(arguments[0]);">
+					<table>
+						<tr>
+							<td>${general.loName}</td>
+							<td><input id="LDLearningObjectiveAddName"
+								dojoType="dijit.form.TextBox" name="name" /></td>
+						</tr>
+						<tr>
+							<td>${general.loDescription}</td>
+							<td><input id="LDLearningObjectiveAddDescription"
+								dojoType="dijit.form.Textarea" name="description"
+								style="height: 100px" /></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button dojoType="dijit.form.Button" label="${common.ok}"
+									type="submit"></button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div dojoType="dijit.Dialog" id="LDLearningObjectiveEditDialog"
+					title="${general.editLo}"
+					execute="General.finishedEditingLO(arguments[0]);">
+					<table>
+						<tr>
+							<td>${general.loName}</td>
+							<td><input id="LDLearningObjectiveEditName"
+								dojoType="dijit.form.TextBox" name="name" /></td>
+						</tr>
+						<tr>
+							<td>${general.loDescription}</td>
+							<td><input id="LDLearningObjectiveEditDescription"
+								dojoType="dijit.form.Textarea" name="description"
+								style="height: 100px" /></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<button dojoType="dijit.form.Button" label="${common.ok}"
+									type="submit"></button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="deleteLoDialog" dojoType="dijit.Dialog" showTitle="true"
+					title="${general.deleteLo}">
+					<div id="deleteLoDialogInfo" dojoType="dijit.layout.ContentPane"
+						align="center"></div>
+					<div dojoType="dijit.layout.ContentPane" align="center">
+						<button id="deleteLoDialogOk" dojoType="dijit.form.Button"
+							label="${common.ok}"></button>
+						<button id="deleteLoDialogCancel" dojoType="dijit.form.Button"
+							label="${common.cancel}"></button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Pestaña Gestión de participantes -->
+		<div id="ParticipantesTab" dojoType="dijit.layout.ContentPane"
+			title="${tab.participantes}" style="margin-left: 20px;">
+			<div dojoType="dijit.TitlePane"
+				title="${participantes.instanciaClaseElegidas}"
+				style="width: 50%; padding: 18px 20px 20px 0px;">
+				<div style="overflow: auto;">
+					<table id="tablaInfo" class="installationSelected">
+						<tr>
+							<th>${participantes.instanciaElegida}</th>
+							<th>${participantes.lmsElegido}</th>
+							<th>${participantes.claseElegida}</th>
+						</tr>
+						<tr>
+							<td><p id="instancia_elegida">${participantes.instanciaElegida}</p></td>
+							<td><p id="lms_elegido">${participantes.lmsElegido}</p></td>
+							<td><p id="clase_elegida">${participantes.claseElegida}</p></td>
+						</tr>
+					</table>
+				</div>
+				<div id="elegirInstancia" dojoType="dijit.form.Button"
+					label="${participantes.botonSeleccionar}"></div>
+			</div>
+			<div dojoType="dijit.TitlePane"
+				title="${participantes.listadoAlumnos}"
+				style="width: 50%; padding-bottom: 20px;">
+				<div id="prueba" style="height: 50%; overflow: auto;">
+					<table id="participantesElegidos">
+					</table>
+				</div>
+				<div id="numeroParticipantesElegidos" align="left"
+					style="padding: 6px;"></div>
+				<!--Botonón para actualizar el listado de participantes-->
+				<div dojoType="dijit.form.Button" id="actualizarParticipantes">
+					${participantes.botonActualizarListadoAlumnos}</div>
+			</div>
+		</div>
+
+		<!-- flow window -->
+		<div id="MainWindowFlowTab" dojoType="dijit.layout.BorderContainer"
+			title="${flow.flow}">
+			<!-- structure tree -->
+			<div dojoType="dijit.layout.ContentPane" region="left"
+				splitter="true" style="padding: 20px; width: 20%;">
+				<div id="LDFlowStructureTree"></div>
+			</div>
+			<!-- paint window -->
+			<div id="FlowPaintContainer" dojoType="dijit.layout.ContentPane"
+				region="center" style="padding: 0px; position: relative;">
+				<div id="FlowOptions" class="flowOptionsPane">
+					<div style="display: inline-block">
+						<input id="FlowOptionsShowAssessment"
+							dojotype="dijit.form.CheckBox" name="flowoptions" checked="false"
+							value="on" type="checkbox" /> <label
+							for="FlowOptionsShowAssessment">${flow.options.show.assessment}</label>
+					</div>
+					<div style="display: inline-block; width: 25px;"></div>
+					<div style="display: inline-block">
+						<input id="ShowParticipantFlow" dojotype="dijit.form.CheckBox"
+							name="participantFlow" checked="false" value="on" type="checkbox" />
+						<label for="ShowParticipantFlow">${participantFlow.show}</label>
+					</div>
+					<div style="display: inline-block; width: 100px;"></div>
+					<div style="display: inline-block">${flow.options.zoom}</div>
+					<div style="display: inline-block;">
+						<div class="flowOptionsZoom" id="FlowOptionsZoom"
+							dojoType="dijit.form.HorizontalSlider" intermediateChanges="true"
+							value="5" minimum="0" maximum="10"></div>
+					</div>
+					<div id="FlowOptionsZoomValue"
+						style="width: 50px; display: inline-block">100%</div>
+				</div>
+				<div id="FlowPaintSurface"></div>
+				<div id="FlowEditMenuWhenEmpty" class="flowEditMenuWhenEmpty">
+					<span id="EmptyFlowAlert"></span>
+					<div id="FlowEditMenuWhenEmptyContent"
+						class="flowEditMenuWhenEmptyContent">${flow.clfp.add}</div>
+				</div>
+				<div id="FlowSelectModeAnnouncement"
+					class="flowSelectModeAnnouncement">
+					<div id="FlowSelectModeAnnouncementText"
+						class="flowSelectModeAnnouncementText"></div>
+					<div id="FlowSelectModeAnnouncementButton"
+						class="flowSelectModeAnnouncementButton"
+						onclick="LearningFlowSelectMode.cancel();">
+						(${common.cancel})</div>
+				</div>
+			</div>
+		</div>
+		<!-- resource window -->
+		<div id="MainWindowResourcesTab" dojoType="dijit.layout.ContentPane"
+			title="${resources.resources}" style="padding: 20px;">
+			<div dojoType="dijit.layout.ContentPane" align="center">
+				<button iconClass="addButton" dojoType="dijit.form.Button"
+					onclick="ResourceManager.newDocument();">
+					${resources.newDoc}</button>
+				<button iconClass="addButton" dojoType="dijit.form.Button"
+					onclick="ResourceManager.newTool();">${resources.newTool}
+				</button>
+			</div>
+			<div dojoType="dijit.layout.ContentPane" id="LDResourcesContent">
+			</div>
+		</div>
+		<!-- assessment window 
+        <div id="MainWindowAssessmentTab" dojoType="dijit.layout.ContentPane" title="${assessment.assessment}" style="margin:20px;">
+            <div id="AssessmentSummaryContent">
+            </div>
+        </div>
+        -->
+		<!-- table window -->
+		<div id="MainWindowSummaryTab" dojoType="dijit.layout.ContentPane"
+			title="${summary.summary}" style="padding: 20px; margin-top: 5px;">
+			<div id="SummaryTabMenu">
+				<button dojoType="dijit.form.Button"
+					onclick="TableGenerator.openNewWindow();">${summary.open}
+				</button>
+			</div>
+			<div id="SummaryTabContent"></div>
+		</div>
+	</div>
+</div>
+
+<div id="dialogAlert" dojoType="dijit.Dialog" showTitle="true">
+	<div id="dialogAlertInfo" dojoType="dijit.layout.ContentPane"
+		align="center"></div>
+	<div dojoType="dijit.layout.ContentPane" align="center">
+		<button id="dialogAlertOk" dojoType="dijit.form.Button"
+			label="${common.ok}"
+			onclick="ParticipantManagement.hideDialogAlert();"></button>
+	</div>
+</div>
+
+
+<div id="RenameComponentTitleDialogHandle"></div>
+
+
+
+<div>
+	<span id="ruler"
+		style="visibility: hidden; white-space: nowrap; font-size: 9pt; font-family: Arial; font-weight: bold"></span>
+</div>
+

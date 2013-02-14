@@ -1,0 +1,4 @@
+grouppattern.jigsawgroup.title=Jigsaw Groups
+grouppattern.jigsawgroup.groupnumberok=For ${0} students and ${1} Expert Groups, ${2} Jigsaw Groups is a good number. In this way, there are enough students in each Jigsaw Group to distribute among them the ${1} subproblems proposed in this Jigsaw. 
+grouppattern.jigsawgroup.groupcompositionok.exact=The ${0} students are distributed in ${2} Jigsaw Groups of the same size. In this way, one of them can become an expert in one of the ${1} different subproblems proposed in the Jigsaw.
+grouppattern.jigsawgroup.groupcompositionok.aprox=The ${0} students are distributed in ${2} Jigsaw Groups of the same size aproximately. In this way, at least one of them will become an expert in one of the ${1} different subproblems proposed in the Jigsaw.

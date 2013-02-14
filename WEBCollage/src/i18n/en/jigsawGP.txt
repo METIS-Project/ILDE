@@ -1,0 +1,8 @@
+grouppattern.jigsawgroup.title=Jigsaw Groups
+
+grouppattern.jigsawgroup.fewexpertgroups=We need more than one Expert group in order to configure Jigsaw groups.
+grouppattern.jigsawgroup.fewstudents=The number of students is ${0}, but we need at least ${1}!
+
+grouppattern.jigsawgroup.range=There must be between 2 and ${0} Jigsaw groups.
+grouppattern.jigsawgroup.best=The best number of Jigsaw groups is ${0}.
+

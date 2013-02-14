@@ -1,0 +1,140 @@
+<!-- resource: document -->
+<div id="deleteDocumentDialog" dojoType="dijit.Dialog" showTitle="true" title="${resources.delete}">
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        ${resources.delete.confirm}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="deleteDocumentDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+        </button>
+        <button id="deleteDocumentDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDDocumentResourceEditDialog" title="${resources.editDoc}">
+    <div dojoType="dijit.layout.ContentPane">
+        <table>
+            <tr>
+                <td>
+                    ${resources.editDoc.name}
+                </td>
+                <td>
+                    <input id="LDDocumentResourceEditName" dojoType="dijit.form.TextBox"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ${resources.editDoc.link}
+                </td>
+                <td>
+                    <input id="LDDocumentResourceLink" dojoType="dijit.form.TextBox"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button dojoType="dijit.form.Button" onclick="EditDocumentDialog.ok();">
+            ${common.ok}
+        </button>
+        <button dojoType="dijit.form.Button" onclick="EditDocumentDialog.cancel();">
+            ${common.cancel}
+        </button>
+    </div>
+</div>
+<!-- resource: tool -->
+<div dojoType="dijit.Dialog" id="LDDocumentToolEditDialog" title="${resources.editTool}">
+    <!-- change -->
+    <div dojoType="dijit.TitlePane" title="${resources.tool.name}" style="padding-bottom: 10px;">
+       <div id="LDDocumentToolEditNameErrorReport" class="errorReport">
+       </div>
+        <input id="LDDocumentToolEditName" dojoType="dijit.form.TextBox"/>
+    </div>
+    <!-- change -->
+    <div dojoType="dijit.TitlePane" title="${resources.tool.link}">
+        <div dojoType="dijit.layout.ContentPane">
+            <div id="LDDocumentToolDescription"></div> 
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button dojoType="dijit.form.Button" onclick="EditToolDialog.openOntoolSearch();">
+                ${resources.tool.search.ontoolsearch}
+            </button>
+            <button dojoType="dijit.form.Button" onclick="EditToolDialog.openKeyWordSearch();">
+                ${resources.tool.search.keyword}
+            </button>
+            <button id="searchToolVle" dojoType="dijit.form.Button" onclick="EditToolDialog.openVLEDialog();">
+                ${resources.tool.search.vle}
+            </button>
+        </div>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button dojoType="dijit.form.Button" onclick="EditToolDialog.checkTitle();">
+            ${common.ok}
+        </button>
+        <button dojoType="dijit.form.Button" onclick="EditToolDialog.cancel();">
+            ${common.cancel}
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDDocumentToolVLEEditDialog" title="${resources.tool.vle.title}" style="max-width: 350px;min-width: 250px;">
+    <div dojoType="dijit.layout.ContentPane">
+        <table>
+            <tr>
+                <td>
+                    ${resources.tool.vle.select}
+                </td>
+                <td>
+                    <select id="selectToolVLUE" name="select" dojoType="dijit.form.Select" >
+                    </select>
+                </td>
+                <td><div id="loadingSelectToolVLUE"></div></td>
+            </tr>
+        </table>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button dojoType="dijit.form.Button" id="toolVLEOkButton" onclick="EditToolVLEDialog.ok();">
+            ${common.ok}
+        </button>
+        <button dojoType="dijit.form.Button" onclick="EditToolVLEDialog.cancel();">
+            ${common.cancel}
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDDocumentToolKeywordDialog" title="${resources.tool.ontool.title}">
+    <div dojoType="dijit.layout.ContentPane">
+        <table>
+            <tr>
+                <td>
+                    ${resources.tool.ontool.keywords}
+                </td>
+                <td>
+                    <input id="LDDocumentToolKeywords" dojoType="dijit.form.TextBox"/>
+                </td>
+                <td>
+                    <button dojoType="dijit.form.Button" onclick="EditToolKeywordDialog.doSearch();">${resources.tool.ontool.search}</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- change -->
+    <div dojoType="dijit.TitlePane" title="${resources.tool.ontool.results}">
+        <div id="LDDocumentToolKeywordsResults" style="width: 500px; height: 400px; overflow: scroll;" ></div>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <div dojoType="dijit.form.Button" onclick="EditToolKeywordDialog.cancel();">
+            ${common.cancel}
+        </div>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDOntoolsearchWaitDialog" title="${resources.tool.ontool.title}">
+    <div dojoType="dijit.layout.ContentPane">
+        ${resources.tool.ontool.description}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button dojoType="dijit.form.Button" onclick="OntoolsearchDialog.cancel();">
+            ${common.cancel}
+        </button>
+    </div>
+</div>

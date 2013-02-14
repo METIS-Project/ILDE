@@ -1,0 +1,137 @@
+
+
+<div dojoType="dijit.Dialog" id="AssessmentSelectorDialog" title="${selector.select}">
+    <div dojoType="dijit.layout.BorderContainer" style="width: 600px; height: 450px;">
+        <div dojoType="dijit.layout.ContentPane" region="center" title="${selector.type.assessment}">
+            <div id="SelectorAssessmentPatternList" dojoType="dijit.layout.ContentPane">
+            </div>
+        </div>
+        <div id="SelectorAssessmentPatternButtonPanel" dojoType="dijit.layout.ContentPane" region="bottom" align="center">
+            <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="AssessmentPatternSelector.cancel();">
+            </button>
+        </div>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDAssessmentEditDialog" showTitle="true" title="${assessment.edit}">
+    <div class="niceDialogContent">
+        <!--   <div id="LDAssessmentEditDialogStackMain" dojoType="dijit.layout.ContentPane"> -->
+        <div id="LDAssessmentTitle" style="padding-bottom:10px;font-size: larger; font-weight: bold;">
+        </div>
+        <div id="LDAssessmentLOContainer" dojoType="dijit.TitlePane" title="${assessment.edit.los}" style="padding-bottom:10px;">
+            <div dojoType="dijit.layout.ContentPane" id="LDAssessmentLOs">
+                <ul id="LDAssessmentLOsList">
+                </ul>
+            </div>
+            <div dojoType="dijit.layout.ContentPane" align="center">
+                <div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
+                    <span></span>
+                    ${printSimpleTooltipDialog("LDAssessmentLOSelector", "SelectLOsList_assessment", "dijit.layout.ContentPane", "assessment.edit.los")}
+                </div>
+            </div>
+        </div>
+        <div dojoType="dijit.TitlePane" title="${assessment.edit.process}" style="padding:0px;padding-bottom:10px;">
+            <!-- <div class="assessmentFlowContainer"> -->
+            <div id="LDAssessmentFlowHeader" class="assessmentFlowHeader">
+                <div class="assessmentFlowSection">
+                    ${assessment.edit.what}
+                </div>
+                <div class="assessmentFlowSection">
+                    ${assessment.edit.how}
+                </div>
+                <div class="assessmentFlowSection">
+                    <div>${assessment.edit.whatfor}</div>
+                    <div id="LDAssessmentFunctionsEdit">
+                        <div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
+                            <span></span>
+                            <div id="AddAssessmentFunctionDialog" dojoType="dijit.TooltipDialog" onOpen="DialogModaler.pushPopups();">
+                                <div dojoType="dijit.TitlePane" title="${assessment.edit.functions.new}">
+                                    <button dojoType="dijit.form.Button" label="${assessment.edit.functions.summative.use}" onclick="EditAssessmentDialog.addFunction('summative');" type="submit">
+                                    </button>
+                                    <br/>
+                                    <button dojoType="dijit.form.Button" label="${assessment.edit.functions.formative.use}" onclick="EditAssessmentDialog.addFunction('formative');" type="submit">
+                                    </button>
+                                    <br/>
+                                    <button dojoType="dijit.form.Button" label="${assessment.edit.functions.diagnosis.use}" onclick="EditAssessmentDialog.addFunction('diagnosis');" type="submit">
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id ="LDAssessmentPaintSurface" class="assessmentFlowPaint" style="width: 600px; height: 200px;overflow:hidden;">
+            </div>
+        </div>
+        <div dojoType="dijit.TitlePane" title="${assessment.patterns.list.title}">
+            <div id="PatternListInAssessmentTitle">
+                ${assessment.patterns.list} <button dojoType="dijit.form.Button" onclick="EditAssessmentDialog.addAssessmentPattern('general');">${assessment.patterns.list.new}</button>
+            </div>
+            <div id="PatternListInAssessmentContents" style="position:relative;height:75px;overflow:auto;">
+            </div>
+        </div>
+        <!-- buttons  -->
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button dojoType="dijit.form.Button" onclick="EditAssessmentDialog.ok();">
+                ${common.ok}
+            </button>
+            <button dojoType="dijit.form.Button" onclick="EditAssessmentDialog.cancel();">
+                ${common.cancel}
+            </button>
+        </div>
+    </div>
+</div>
+
+<div id="deletePatternDialog" dojoType="dijit.Dialog" showTitle="true" title="${assessment.patterns.delete}">
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        ${assessment.patterns.delete.confirm}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="deletePatternDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+        </button>
+        <button id="deletePatternDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+        </button>
+    </div>
+</div>
+
+<div id="removeAssessmentDialog" dojoType="dijit.Dialog" showTitle="true" title="${assessment.delete}">
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        ${assessment.delete.confirm}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="removeAssessmentDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+        </button>
+        <button id="removeAssessmentDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+        </button>
+    </div>
+</div>
+
+<div dojoType="dijit.Dialog" id="LDSummativeAssessmentEditDialog" title="${assessment.edit.summative}">
+    <table>
+        <tr>
+            <td>
+                ${assessment.edit.summative.name}
+            </td>
+            <td>
+                <input id="SummativeAssessmentEditName" dojoType="dijit.form.TextBox" name="name"/>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ${assessment.edit.summative.description}
+            </td>
+            <td>
+                <input id="SummativeAssessmentEditDescription" dojoType="dijit.form.Textarea" name="description" style="height:100px"/>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <button dojoType="dijit.form.Button" label="${common.ok}" onclick="EditSummativeAssessmentDialog.save();">
+                </button>
+                <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="EditSummativeAssessmentDialog.cancel();">
+                </button>
+            </td>
+        </tr>
+    </table>
+</div>

@@ -1,0 +1,160 @@
+
+
+
+.element {
+    border: thin solid black;
+    width: 115px;
+}
+
+.elementSelected {
+    border: medium dashed #333333;
+}
+
+.elementGap {
+    text-align: center;
+    background: white;
+    width: 60px;
+}
+
+
+.elementEmpty {
+    border: thin dashed black;
+    text-align: center;
+    font-size: smaller;
+    background: #f0f0f0;
+    padding: 3px;
+}
+
+.elementSummative {
+    border: thin solid black;
+    text-align: center;
+    font-size: small;
+}
+
+.functionContainer {
+    width: 115px;
+    font-size: small;
+}
+
+.elementHead {
+    padding: 7px;
+    text-align: center;
+}
+
+
+.elementSmall {
+    width: 60px;
+    font-size: smaller;
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+div.elementSmall div.elementHead {
+    padding: 3px;
+}
+
+.elementTitle {
+    font-weight: bold;
+    text-align: center;
+}
+
+div.elementSmall span.elementTitle {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+.elementButton {
+    text-align: center;
+    font-size: smaller;
+    padding-bottom: 5px;
+}
+
+.elementLearningObjectives {
+    font-style: italic;
+}
+
+.elementDescription {
+    font-size: small;
+}
+
+.elementResources {
+    font-style: italic;
+}
+
+.elementLearningObjectives, .elementDescription, .elementResources {
+    padding-bottom: 3px;
+    padding-top: 3px;
+    border-top: thin dashed #d0d0d0;
+}
+
+div.learningElement {
+    background-color: #d5e4ff;
+}
+
+div.learningElement div.elementData {
+    background-color: #f4f8ff;
+}
+
+div.supportElement {
+    background-color: #dfffd5;
+}
+
+div.supportElement div.elementData {
+    background-color: #f8fff4;
+}
+
+div.assessmentElement {
+    background-color: #fffad5;
+}
+
+div.assessmentElement div.elementData {
+    background-color: #fffef4;
+}
+
+div.staffElement, div.learnerElement {
+    border: thin solid #505050;
+}
+div.staffElement {
+    background-color: #e9e9e9;
+}
+
+div.staffElement div.elementData {
+    background-color: #f9f9f9;
+}
+
+div.learnerElement {
+    background-color: #fafafa;
+}
+
+div.learnerElement div.elementData {
+    background-color: #e9e9e9;
+}
+
+.elementRoleIcon {
+    width: 25px;
+    height: 25px;
+    padding-right: 5px;
+}
+
+
+
+
+.elementInLo {
+    width: auto;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+div.elementInLo {
+    padding: 1px;
+    padding-left: 2px;
+    padding-right: 3px;
+}
+
+div.elementInLo span.elementTitle {
+    font-weight: normal;
+    font-size: smaller;
+}
+
+
+

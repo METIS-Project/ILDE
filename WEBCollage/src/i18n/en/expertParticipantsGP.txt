@@ -1,0 +1,10 @@
+grouppattern.expertgroupparticipants.title=Expert group distribution
+
+grouppattern.expertgroupparticipants.notinjg=Some experts are in no Jigsaw group. They should be removed from Expert groups.
+
+grouppattern.expertgroupparticipants.2manyfromjg=Some expert groups have too many students from the same Jigsaw group
+grouppattern.expertgroupparticipants.smalljg=Some Jigsaw groups are too small!
+
+grouppattern.expertgroupparticipants.distribute=Some students need to be distributed from Jigsaw groups to Expert groups.
+
+grouppattern.expertgroupparticipants.ok=All students are well distributed. 

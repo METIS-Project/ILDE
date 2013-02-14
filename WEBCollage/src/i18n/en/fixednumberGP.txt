@@ -1,0 +1,11 @@
+grouppattern.fixednumbergroups.title=Fixed Group Number
+grouppattern.fixednumbergroups.number=The specified number of groups is ${0}
+grouppattern.fixednumbergroups.unspecified=Group number not specified.
+
+
+grouppattern.fixednumbergroups.menuitem.number=Set the number of groups (currently ${0})
+grouppattern.fixednumbergroups.menuitem.unspecified=Set the number of groups (unspecified)
+
+help.grouppattern.fixednumbergroups.menuitem=This sets the number of groups that should be in this phase.
+
+grouppattern.fixednumbergroups.dialog.title=Select number of groups

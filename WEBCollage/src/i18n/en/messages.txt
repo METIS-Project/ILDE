@@ -1,0 +1,850 @@
+common.ok=OK
+common.cancel=Cancel
+common.edit=Edit
+common.add=Add
+common.error.noServer=Couldn't connect to server.
+common.select=Select
+common.select.confirm=Confirm selection
+common.back=Go back
+common.exit=Exit
+common.waiting=Loading...
+
+common.saved=Saved :)
+common.save=Save!
+common.saving=Saving...
+
+common.pattern.doc=Read about pattern '${0}'
+
+common.undo=Undo
+common.redo=Redo
+
+menu.title.default=Options
+menu.title.role=Group '${0}' options
+menu.title.activity=Activity '${0}' options
+menu.title.act=${0} (${1}) options
+menu.title.clfp=${0} options
+
+loader.load.error=Couldn't load the design!
+loader.save.error=Couldn't save!
+loader.save.noAccess=You don't have access to edit this script. The design will be closed
+loader.loading.wait=<p>Loading design. Please wait!</p>
+loader.title=Loading...
+loader.load.noAccess=You don't have access to see this script. Have you logged in?
+loader.save.sessionExpired=Your session has expired. If you do not login your instance will be closed and the made changes won't be saved.<br/> Do you want to login?
+loader.save.sessionExpired.title=Session expired
+
+export.imsld.title=Export script into IMS-LD
+export.workflow.title=Export script into workflow definition
+export.waiting=Please wait while the package is being created...
+export.message=Click <a href='${0}'>here</a> to download the package.
+export.error=Couldn't export the script!
+
+index.toolNamePrefix=Web Instance
+index.newDesign=New design
+index.title=Title:
+index.create=Create
+index.noSave=I won't need to save
+index.play=Play
+index.openOwn=My designs
+index.openPublic=Designs created by others
+index.error.noName=I need a name for the new design!
+index.error.noLogin=You didn't log in.<br/>Please try again to log in.
+index.error.noCreate=It was not possible to create the document.<br/>Please try a diferent name or contact the admin.
+
+design.type.public.short=Public
+design.type.visible.short=Visible
+design.type.private.short=Private
+design.type.public.long=Public (any user can see and edit the design).
+design.type.visible.long=Visible (any user can see the design in read-only mode, but only you can modify it).
+design.type.private.long=Private (only you can see or modify the design).
+
+users.login=Login
+users.register=Register new user
+users.logout=Logout
+
+users.nickname=Username
+users.password=Password
+users.repeatPassword=Confirm password
+users.email=e-mail
+users.error.login=The username or password are incorrect.
+users.error.userExists=The username '${0}' already exists.
+users.error.differentPassword=The typed passwords do not match.
+users.error.noPassword=The password must at least contain ${0} characters.
+users.error.userBlank=The username must not contain blank spaces.
+users.error.noUser=The username must contain at least ${0} characters.
+
+general.general=General
+general.title=Title
+general.editTitle=Edit title
+general.prerrequisites=Prerrequisites
+general.editPrerrequisites=Edit prerrequisites
+general.los=Learning objectives
+general.newLo=New learning objective
+general.loName=Name
+general.loDescription=Description
+general.editLo=Edit learning objective
+general.deleteLo=Delete learning objective
+general.deleteLo.confirm=Are you sure you want to delete learning objective '${0}'?
+
+
+flow.flow=Learning activity flow
+flow.structure=Structure
+flow.options.show.assessment=Show assessment flow
+flow.options.zoom=Zoom: 
+
+structuretree.dialog.title=Learning Flow Structure
+
+flow.activities=Activities
+flow.activities.add=Add new activity
+flow.activities.add.relative=Add new activity...
+flow.activities.add.before=... before this one
+flow.activities.add.after=... after this one
+flow.activities.added.new=New
+flow.activities.edit=Edit
+flow.activities.delete=Delete activity
+flow.activities.assess=Assess this activity
+flow.activities.makeassessor=Make this an assessor's task
+flow.activities.move.up=Move activity up
+flow.activities.move.down=Move activity down
+
+flow.activities.gap=Here!
+picker.location.new=Choose the location of new activity
+picker.location.activity=Choose existing activity
+picker.location.clfp=Choose new position for phase
+picker.move.gap=Move here
+picker.move.act=Move here
+
+flow.clfp.remove=Remove this ${0}
+flow.clfp.remove.confirm=Are you sure you want to delete ${0}?
+flow.clfp.move=Move this ${0}...
+flow.clfp.add=Add phases...
+flow.clfp.configure=Configure ${0}...
+flow.clfp.configure.act=Edit '${0}'...
+flow.clfp.substitute=Replace ${0} with detailed phases...
+flow.clfp.add.before=... before this ${0}
+flow.clfp.add.after=... after this ${0}
+
+flow.select.clfp=Select this ${0}
+flow.select.activity=Select this activity: '${0}'
+
+
+resources.resources=Resources
+resources.newDoc=New document
+resources.editDoc=Edit document
+resources.editDoc.name=Name
+resources.editDoc.link=Link
+resources.newTool=New tool
+resources.editTool=Edit tool
+resources.editTool.name=Name
+resources.editTool.description=Description
+resources.inActivity.tools=Tools
+resources.inActivity.docs=Documents
+
+resources.delete=Delete resource
+resources.delete.confirm=Are you sure you want to delete this resource from the script?
+
+
+resources.tool.description.default=No link
+resources.tool.description.ontoolquery=Tool description
+resources.tool.description.ontoolurl=Specific tool
+resources.tool.description.gluepsid=VLE tool: ${0}
+resources.tool.description.gluepsid.notset=(not set)
+
+resources.tool.name=Tool name (in Web Instance Collage)
+resources.tool.link=Tool link
+resources.tool.search.ontoolsearch=Search tool in OntoolSearch
+resources.tool.search.keyword=Search tool by keyword
+resources.tool.search.vle=Search tool in VLE
+resources.tool.vle.title=Tool selection from the VLE
+resources.tool.vle.select=VLE tool
+resources.tool.vle.selectinfo=-- Select a tool --
+resources.tool.ontool.title=Waiting for Ontoolsearch...
+resources.tool.ontool.description=OntoolSearch is opened in another window/tab. I'm waiting for it to finish.<br/> However, you can close OntoolSearch by clicking on 'cancel'.
+resources.tool.ontool.title=Keyword tool search
+resources.tool.ontool.keywords=Keyword(s)
+resources.tool.ontool.search=Search
+resources.tool.ontool.results=Search results
+resources.tool.ontool.select=select
+
+assessment.assessment=Assessment
+assessment.title.empty=[Empty assessment]
+assessment.task=[Assess task]
+assessment.chooseActivity=[Choose activity!]
+flow.assessment.edit=Configure assessment
+assessment.edit=Configure assessment
+assessment.edit.process=Assessment flow
+assessment.edit.what=What to assess
+assessment.edit.how=Assess task
+assessment.edit.whatfor=Usage of assessment results
+assessment.edit.function.remove=Remove usage of assessment results
+assessment.delete=Remove this assessment
+assessment.delete.confirm=Are you sure you want to delete this assessment?
+
+assessment.edit.los=Assessed learning objectives
+assessment.edit.source.choose=Choose learning activity to assess...
+assessment.edit.source.change=Change learning activity to assess...
+assessment.edit.source.configpattern=Choose assessment technique...
+
+assessment.edit.analysis.choose=Choose activity were the 'assess task' is performed...
+assessment.edit.analysis.change=Change activity were the 'assess task' is performed...
+assessment.edit.analysis.configpattern=Choose assessment technique...
+assessment.edit.functions=Assessment purposes
+assessment.edit.functions.new=New purpose
+assessment.edit.functions.summative=Grade students
+assessment.edit.functions.formative=Provide feedback
+assessment.edit.functions.diagnosis=Intervene or modify activity
+assessment.edit.functions.summative.use=Use assessment to grade students
+assessment.edit.functions.formative.use=Use assessment to provide feedback
+assessment.edit.functions.diagnosis.use=Use assessment to intervene or modify learning activity
+assessment.edit.choose.activity=Choose activity
+
+assessment.edit.summative=Edit summative assessment
+assessment.edit.summative.name=Assessment name
+assessment.edit.summative.description=Description
+assessment.edit.summative.name.empty=Edit assessment
+
+assessment.edit.summativeFunction.edit=Edit summative assessment...
+assessment.edit.formativeFunction.edit=Choose activity to deliver feedback...
+assessment.edit.diagnosisFunction.edit=Change activity to be adapted to assessment results...
+
+assessment.edit.assessor=Assessor:
+assessment.edit.assessee=Assessed student or group:
+
+assessment.link.choose=Choose activity
+
+assessment.patterns.delete=Delete assessment pattern
+assessment.patterns.delete.confirm=Are you sure you want to delete this assessment pattern?
+assessment.patterns.list.title=Additional configuration
+assessment.patterns.list=Assessment patterns applied to this assessment: 
+assessment.patterns.list.new=Add...
+
+assessment.conflict.dialog=Solve pattern conflicts
+assessment.conflict=Conflicts
+assessment.conflict.pattern.one=Including the pattern '${newpattern}' requires removing the following pattern: ${oldpatterns}. There can be only one assessment technique in each assessment.
+assessment.conflict.pattern.several=Including this pattern '${newpattern}' requires removing the following patterns: ${oldpatterns}. There can be only one assessment technique in each assessment.
+assessment.conflict.assessment.activity.first=Including the pattern '${pattern}' is in conflict with the 'assess task' '${activity}'.<br/>What would you like to do?
+assessment.conflict.assessment.activity.other=Also, it is in conflict with the 'assess task' '${activity}'.<br/>What would you like to do?
+assessment.conflict.assessed.activity.first=Including the pattern '${pattern}' is in conflict with the assessed activity '${activity}'.<br/>What would you like to do?
+assessment.conflict.assessed.activity.other=Also, it is in conflict with the assessed activity '${activity}'.<br/>What would you like to do?
+
+assessment.conflict.activity.delete=Remove the current activity, and create a new one.
+assessment.conflict.activity.replace=Adapt the current activity to the pattern.
+assessment.conflict.activity.ignore=Create new activity, and leave the current one in the script.
+
+summary.summary=Summary
+summary.open=Open in new window
+summary.title=Title: 
+summary.prerrequisites=Prerrequisites: 
+summary.objectives=Learning objectives:
+
+summary.assessmentlink.assessment=This is the 'assess task' in: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.assessed=This activity is assessed in: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.formative=This activity receives feedback from assessment: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.diagnosis=This activity can be modified according to results from assessment: <strong>${0} - ${1}</strong>.
+
+summary.general.head=General information:
+summary.flow.head=Learning activity flow:
+summary.assessment.head=Assessment plan:
+
+summary.activity.asssessment=The 'assess task' is: <strong>'${activity}'</strong> (in <strong>${act}</strong>, at <strong>${clfp}</strong>.<br/>Carried out by <strong>${role}</strong>).
+summary.activity.asssessment.no=The 'assess task' is not yet defined.
+summary.activity.asssessed=This assessment assesses the activity: <strong>'${activity}'</strong> (in <strong>${act}</strong>, at <strong>${clfp}</strong>.<br/>Carried out by <strong>${role}</strong>).
+summary.activity.asssessed.no=The assessed activity is not yet defined.
+
+summary.function.summative=This assessment is used to grade students: <strong>'${name}'</strong>, ${description}
+summary.function.formative=This assessment is used to give feedback in the activity: <strong>'${activity}'</strong> (in <strong>${act}</strong>, at <strong>${clfp}</strong>.<br/>Carried out by <strong>${role}</strong>).
+summary.function.diagnosis=The results of this assessment are used to modify the activity: <strong>'${activity}'</strong> (in <strong>${act}</strong>, at <strong>${clfp}</strong>.<br/>Carried out by <strong>${role}</strong>).
+summary.function.formative.no=This assessment is used to give feedback (but it has not yet been configured in which activity).
+summary.function.diagnosis.no=The results of this assessment are used to modify an activity (but this activity has not yet been chosen).
+
+summary.patterns.one=The following pattern has been applied to this assessment: <strong>${0}</strong>.
+summary.patterns.several=The following patterns have been applied to this assessment: <strong>${0}</strong>.
+
+selector.select=Create new phase
+selector.type.clfps=Create phases from a CLFP
+selector.type.phase=Create new empty phase
+selector.phase.title=New empty phase
+selector.phase2.title=New empty phase (with different types of students' groups)
+ 
+selector.type.assessment=Assessment
+selector.criteria.attitudinal=Attitudinal objective
+selector.criteria.procedural=Procedural objective
+selector.criteria.problem=Problems
+selector.criteria.complexity=Complexity
+
+selector.complexity.any=Any
+selector.complexity.low=Low risk
+selector.complexity.medium=Medium risk
+selector.complexity.high=High risk
+
+selector.table.pattern=Pattern
+selector.table.type=Type
+selector.messages.clfp.a=CLFP
+selector.messages.clfp.b=a CLFP
+selector.messages.activity.a=Activity
+selector.messages.activity.b=an activity pattern
+selector.messages.resource.a=Resource
+selector.messages.resource.b=a resource pattern
+selector.messages.role.a=Role
+selector.messages.role.b=a role pattern
+selector.messages.learner=students
+selector.messages.staff=teachers
+selector.messages.choose=Choose ${0}
+selector.messages.error.role=Sorry, I need a pattern for ${0},<br/> not for ${1}.
+selector.messages.error.type=Sorry, I need ${0},<br/> not ${1}.
+
+selector.assessment.technique=Assessment technique:
+selector.assessment.configuration=Assessment configuration:
+
+activity.edit=Edit activity
+activity.edit.description=Description
+activity.edit.los=Learning objectives
+activity.edit.resources=Resources
+
+activity.shortDescription=In <strong>${act}</strong>, at <strong>${clfp}</strong>.<br/>Carried out by <strong>${role}</strong>.
+activity.assessmentDescription.a=Assessment pattern:
+activity.assessmentDescription.b=<br/>Assessment data come from activity <strong>${0}</strong>.
+activity.assessmentDescription.c=<br/>Assessment analysis is carried out in activity <strong>${0}</strong>.
+activity.assessmentDescription.d=<br/>Assessment analysis is automatic.
+activity.assessmentRelationship.a=Assessment: <strong>${0}</strong>.
+activity.assessmentRelationship.b=<br/>Assessment data is assessed in <strong>${0}</strong>.
+activity.assessmentRelationship.c=<br/>Assessment data comes from activity <strong>${0}</strong>.
+activity.assessmentRelationship.d=<br/>Provides feedback to students in activity <strong>${0}</strong>.
+activity.assessmentRelationship.e=<br/>Supports instructional decisions taken in activity <strong>${0}</strong>.
+
+roles.edit=Edit role
+roles.edit.title=Edit role '${0}'
+roles.edit.people=Number of people per group
+roles.edit.min=Minimum:
+roles.edit.max=Maximum:
+roles.edit.description=Description
+roles.common.rol=Role
+roles.common.teacher=Teacher
+
+clip.label=Pending actions
+clip.menu.title=Pending actions:
+clip.actions.groups.general=General configuration
+clip.actions.groups.los=Configure learning objectives
+clip.actions.groups.resources=Configure resources
+clip.actions.groups.assessments=Complete configuration of assessments
+clip.actions.groups.clfp=Complete configuration of activities in CLFP ${0}
+clip.new.actions=New actions to complete!
+clip.actions.text.title=Input the title of the design.
+clip.actions.text.prerrequisites=Input the prerrequisites of the design.
+clip.actions.text.los=Add some learning objectives for the script.
+clip.actions.text.flow=Add a CLFP to configure the structure of the learning flow.
+
+clip.actions.text.object.activity=Edit activity
+clip.actions.text.object.ref.activity=Edit activity '${0}'.
+clip.actions.text.object.resource=Use resource in activity
+clip.actions.text.object.ref.resource=Use resource '${0}' in some activity.
+clip.actions.text.object.lo=Use learning objective in the script.
+clip.actions.text.object.ref.lo=Use learning objective '${0}' in the script.
+clip.actions.text.object.assessmentflow=Configure assessment.
+clip.actions.text.object.ref.assessmentflow=Configure assessment '${0}'.
+
+clip.actions.reason.setAssessmentActivity=This assessment is incomplete: it does not indicate who is the assessor, nor in which activity the 'assess task' is to be performed. You should fix this by indicating the 'assess task'.
+clip.actions.reason.setAssessedActivity=This assessment is incomplete: it does not indicate what is the assessed activity. Therefore, it's not clear who is the assessee, nor what is to be assessed. You should fix this by selecting one 'assessed activity'.
+clip.actions.reason.addAssessmentFunction=You haven't indicated how the assessment results are to be used in the script. If you think this assessment will have any impact on the students, or if you want to use the assessment results with formative purposes, you can indicate this by adding 'assessment result usages'.
+clip.actions.reason.editSummativeAssessmentFunction=This assessment is going to be used to grade students, but you haven't indicated how exactly. You should describe the way in which the results of this assessment affect the students' grades.
+clip.actions.reason.editFormativeAssessmentFunction=This assessment is going to be used to deliver feedback to the students. However, you haven't indicated in which activity the students will receive the feedback. You should indicate this.
+clip.actions.reason.editDiagnosisAssessmentFunction=This assessment is going to be used to gather information, in order to correct wrong situations. You should indicate in which activity the assessor is going to intervene (for instance, to intruduce changes on the script after the assessment).
+
+clip.actions.reason.general=This activity hasn't been configured yet, and is therefore empty. You should edit the description of the activity, to indicate the tasks to do to the participants (those who have to perform this activity). Additionally, you can indicate the learning objectives and the resources linked with this activity.
+clip.actions.reason.feedback=According to the assessment plan, feedback is delivered here (from assessment '${0}'). You should edit this activity accordingly, taking into account the fact that feedback will be available for the students.
+clip.actions.reason.modify=According to the assessment plan, this activity is susceptible of being modified, or otherwise the teacher might intervene, according to some results of assessment '${0}'. You should configure the activity taking this fact int account.
+clip.actions.reason.assessed=This activity is going to be assessed (in assessment '${0}'). Probably the configuration of this activity should take this fact into account (for instance, do you need to give instructions to the students?, or do you need to clarify to the students the type and purpose of the assessment?); if you think it's necessary, you can add that information to the description of the activity (which the students will read).
+clip.actions.reason.assessment=This activity is an 'assess task'! This means that the person assigned to it will take the role of assessor. You probably should give the needed instructions to the assessor, as well as including the needed resources, so that the assessment is properly carried out. You can add this information in the description of this activity (which the assessor will read).
+
+clip.actions.reason.pursueLO=Include this learning objective in a learning activity.
+clip.actions.reason.assessLO=Include this learning objective in an assessment,<br/>so that it is assessed.
+
+
+clip.actions.reason.assessedAsTest=In this activity, the students will have to carry out a test. You should write instructions about how to complete it. Additionally, you should deliver the needed materials (such as the test); this could be done as a resources linked in the activity, or by any other means.
+clip.actions.reason.assessmentAsTest=In this activity the assessor will assess a test. Have you written the appropriate instructions? Additionally, you need to make sure that the assessor will receive all the tests that are to be assessed.
+clip.actions.reason.assessmentAsObservation=In this activity the assessor will observe a collaborative process, in order to assess it. You should make sure that either the needed resources are available, or that the assessor has access to observe the activity. Perhaps it's necessary to make sure that this activity and the assessed activity happen at the same time (e.g., they are not in different phases of the script).
+clip.actions.reason.assessedAsReportreview=This activity is assessed as a 'Report review'. Therefore, in this activity the students are expected to produce a document for the assessor. The activity should be configured accordingly.
+clip.actions.reason.assessmentAsReportreview=In this 'assess task', the assessor will review the students' reports. You should write the needed intruction as to how to review the documents in the description of this activity. Additionally, you need to make sure that the assessor will have access to the documents.
+clip.actions.reason.assessedAsPresentation=This activity is assessed as an 'Oral presentation'. Therefore, the students are expected to carry out a presentation. The needed instructions and resources should be provided in this activity to the students.
+clip.actions.reason.assessmentAsPresentation=In this 'assess task', the assessor will watch and assess an oral presentation. Therefore, you should include the needed instruction explaining how to assess it. Additionally, you should make sure that the assessor has access to the presentations: either as a recorded performance, or by observing it. In this case, this activity should take place at the same time as the presentation (e.g., they should be in the same phase).
+clip.actions.reason.assessedAsPerformance=In this activity, students' performance is assessed. Therefore, the students are expected to perform some specific tasks. The needed instructions about this task and resources should be provided in this activity to the students.
+clip.actions.reason.assessmentAsPerformance=In this 'assess task', the assessor will watch and assess the students' performance on some task. Therefore, you should include the needed instruction explaining how to assess it. Additionally, you should make sure that the assessor has access to the performance: either as a recorded document, or by observing it. In this case, this activity should take place at the same time as the performance (e.g., they should be in the same phase).
+clip.actions.reason.assessedAsPortfolio=In this activity, students are expected to compile a portfolio for evaluation. You should give the needed instructions and provide resources so that the students can prepare it.
+clip.actions.reason.assessmentAsPortfolio=In this 'assess task', the assessor is to assess students' portfolios. You should give the assessor the needed instructions (in the description of the activity). Additionally, you need to make sure that the assessor will have access to the students' portfolios.
+
+clip.actions.reason.assessmentAsRoles=In this activity, a 'Role detection' assessment is carried out. This assessment is based on the analysis of interactions between students. You should prepare the needed software in order to be able to carry out the assessment, and link with this activity (see the 'Role detection' pattern documentation for more information about this software).
+clip.actions.reason.assessmentAsRubric=In this 'assess task', 'Rubrics' are expected. Therefore, you should provide the assessor with a rubrics document (which you can link as a resource in the activity). You can include also instruction about how to use the rubrics.
+clip.actions.reason.assessedAsShared=This activity is assessed, in such way that the grades are shared by all the members or each group. You should probably indicate this to the students, so that they are aware of the assessment conditions.
+clip.actions.reason.assessmentAsShared=In this 'assess task', students in each group are given the same grade. You should give instructions to the assessor indicating this fact.
+clip.actions.reason.assessmentAsSelf=This assessment is a 'Self-assessment'. Therefore, you need to make sure that the assessor is the same person/group as the assessee.
+clip.actions.reason.assessmentAsAnonymous=This 'assess task' is anonymous. You should indicate that to the assessor (for instance, in the description of this assessment activity).
+clip.actions.reason.assessmentAsIA=In this activity, an 'Interaction analysis' is carried out. This 'assess task' is based on the analysis of interactions between students. You should prepare the needed software in order to be able to carry out the 'assess task', and link with this activity (see the 'Interaction analysis' pattern documentation for more information about this software).
+clip.actions.reason.assessmentAsRandom=In this 'assess task', groups are assessed by choosing one random member from each group; this member will have the responsibility of the assessment. You should give instructions to the assessor about how to pick group members and carry out the assessment.
+
+clip.menu.ignore.all=Ignore these actions
+clip.menu.ignore.action=Ignore this action
+clip.menu.goto.action=Go to edit window
+
+
+clfps.phase.title=Phase
+clfps.phase.edit.addgroup=... add group type to the phase
+clfps.phase.edit.removegroup=Remove group type '${0}'
+clfps.phase.newgrouptype=New group type
+clfps.phase.support=Support activity
+clfps.phase.activity=Learning activity
+
+
+clfps.brainstorming.title=Brainstorming
+clfps.brainstorming.group=Brainstorming group
+clfps.brainstorming.support=Support activity
+
+clfps.jigsaw.title=Jigsaw
+clfps.jigsaw.jigsaw.group=Jigsaw group
+clfps.jigsaw.jigsaw.phase=Jigsaw phase
+clfps.jigsaw.jigsaw.activity1=Global discussion
+clfps.jigsaw.jigsaw.activity2=Solution proposal
+clfps.jigsaw.jigsaw.support=Discussion support
+clfps.jigsaw.expert.group=Expert group
+clfps.jigsaw.expert.phase=Expert phase
+clfps.jigsaw.expert.activity=Subproblem discussion
+clfps.jigsaw.expert.support=Discussion support
+clfps.jigsaw.individual.phase=Individual phase
+clfps.jigsaw.individual.activity=Individual study
+clfps.jigsaw.individual.support=Support individual study
+
+clfps.peerreview.title=Peer review
+clfps.peerreview.reviewers=Reviewers
+clfps.peerreview.review=Review
+clfps.peerreview.review.activity=Review your partner's work
+clfps.peerreview.review.support=Support activity 1
+clfps.peerreview.feedback=Feedback
+clfps.peerreview.feedback.activity=Feedback analysis
+clfps.peerreview.feedback.support=Support activity 2
+clfps.peerreview.discussion=Discussion
+clfps.peerreview.discussion.group=Discussion group
+clfps.peerreview.discussion.activity=Discuss review
+clfps.peerreview.discussion.support=Support activity 3
+clfps.peerreview.improve=Refine and improve work
+clfps.peerreview.improve.activity=Improve your work with the review
+clfps.peerreview.improve.support=Support activity 4
+
+
+clfps.pyramid.dialog.title=Pyramid: number of levels
+clfps.pyramid.dialog.intro=Choose the number of levels for the pyramid:
+clfps.pyramid.title=Pyramid
+clfps.pyramid.class=Class
+clfps.pyramid.student=Student
+clfps.pyramid.group=Level ${0} group
+clfps.pyramid.level=Level ${0}
+clfps.pyramid.support=Support activity ${0}
+
+clfps.simulation.title=Simulation
+clfps.sumulation.students=Students
+clfps.sumulation.information=Role information
+clfps.sumulation.information.deliver=Delivery of role information
+clfps.sumulation.information.support=Support activity 1
+clfps.sumulation.defining=Role definition
+clfps.sumulation.defining.activity=Study role
+clfps.sumulation.defining.support=Support activity 2
+clfps.sumulation.defining.role=New role
+clfps.sumulation.groups=Simulation groups
+clfps.sumulation.groupos.role=New group
+clfps.sumulation.groups.activity=Prepare simulation
+clfps.sumulation.groups.support=Support activity 3
+clfps.sumulation.simulation=Simulation
+clfps.sumulation.simulation.activity=Simulation
+clfps.sumulation.simulation.support=Support activity 4
+clfps.sumulation.share=Share
+clfps.sumulation.share.activity=Share
+clfps.sumulation.share.support=Support activity 5
+clfps.simulation.edit.addrole=... add role
+clfps.simulation.edit.addgroup=... add simulation group
+
+clfps.tapps.title=TAPPS
+clfps.tapps.pair=Pair
+clfps.tapps.studentA=Student A
+clfps.tapps.studentB=Student B
+clfps.tapps.solve=Solve problem
+clfps.tapps.listen=Listen to solution
+clfps.tapps.problem=Problem ${0}
+clfps.tapps.support=Support activity
+clfps.tapps.edit.add=... add problem
+
+clfps.tps.title=Think Pair Share (TPS)
+clfps.tps.students=Students
+clfps.tps.think=Think
+clfps.tps.think.activity=Individual study
+clfps.tps.think.support=Individual study support
+clfps.tps.pair=Pair
+clfps.tps.pair.role=Pair
+clfps.tps.pair.activity=Pair discussion
+clfps.tps.pair.support=Discussion support
+clfps.tps.share=Share
+clfps.tps.share.activity=Share with the classroom
+clfps.tps.share.support=Support activity
+
+
+pattern.observations.activity=Observe collaboration
+pattern.observations.title=Observations
+
+patterns.presentstion.activity=Oral presentation
+patterns.presentstion.assess=Assess presentation
+patterns.presentstion.title=Oral presentation
+
+patterns.performance.activity=Performance assessment
+patterns.performance.activity=Assess performance
+
+patterns.report.title=Report assessment
+patterns.report.activity=Review report
+
+patterns.self.title=Self assessment
+patterns.self.activity=Self assessment
+
+patterns.test.title=Test
+patterns.test.assess=Assess test
+patterns.test.activity=Test
+
+patterns.tutoring.title=Tutoring sessions
+patterns.tutoring.activity=Attend to tutoring sessions
+patterns.tutoring.assess=Manage tutoring session
+
+
+%help
+
+help.assessment.icon.assessment=This icon represents an 'assess task' (part of assessment '${0}'), which is carried out in this phase.
+help.assessment.icon.assessment.no=This icon represents an assessment, whose 'assess task' has not been chosen yet (thus the assessment is still outside the script).
+help.assessment.icon.assessed=This icon menas that a learning activity (in this phase) is assessed, in assessment '${0}'.
+help.assessment.icon.diagnosis=This icon means that the results from assessment '${0}' are used to intervene or adapt an activity in this phase.
+help.assessment.icon.formative=This icon means that the results from assessment '${0}' are used to give feedback to students in an activity of this phase.
+
+help.flow.select.clfp=This option 'activates' this CLFP, so that it can be edited. There can be only one active CLFP at any given moment.
+help.flow.select.activity=Select this activity!
+
+help.flow.assessment.edit=This element is part of an assessment embedded in the script. Click here to edit it.
+help.assessment.delete=Click here to delete this assessment from the script. The activities related to the assessment will remain in the script; however, Web Collage will consider them as disconnected from this assessment.
+help.roles.edit.title=Click here to edit this role. You can configure the name of the role, its description, and the minimum and maximun number of people assigned to each instance of this role.
+help.flow.clfp.configure.act=Click here to see and configure the roles and activities contained in this phase. You can also change the name of the phase.
+help.flow.clfp.substitute=This option serves to replace the activities contained in this phase with the activities proposed by a CLFP. Please note that if you integrate a CLFP in this phase, the activities previously included will be deleted. This option is useful, however, to describe in detail the work of this phase, according to a new CLFP; to do this, you will have to select a CLFP from the list.
+help.flow.clfp.add.before=This lets you add activities previous to this CLFP. These new activities are organized also as a CLFP, so you will have to select one.
+help.flow.clfp.add.after=Through this option you can add activities after this CLFP. These new activities are organized also as a CLFP, so you will have to select one.
+help.flow.clfp.move=Use this option to move all the activities contained in this CLFP. You will be able to move them to any other place of the learning flow.
+help.flow.clfp.remove=This option removes the CLFP from the script. All the activities, phases and roles will be deleted. Also, any CLFP that is inside a phase of this CLFP would be deleted.
+help.common.pattern.doc=Click here to read the documentation of this pattern.
+
+help.general.editLo=Click here to edit this learning objective. You can change the name of the objective, as well as its description.
+help.general.deleteLo=Click here to delete this learning objective from the script.
+
+help.resources.editTool=Click here to edit this tool. You can indicate its name and a description for it.
+help.resources.editDocument=Click here to edit this document. You can indicate its name and the link (URL) to find it.
+help.resources.delete=Click here to remove this resource from the script.
+
+help.flow.activities.add=Click here to create a new activity for this role.
+help.assessment.edit=Click here to edit this assessment. You can indicate the activities related to this assessment, as well as configure it according to assessment patterns.
+help.activity.edit=Click here to edit this activity. You can indicate the title, description, learning objectives and the resources linked to this activity.
+help.flow.activities.add.before=Click here to create a new activity before this one.
+help.flow.activities.add.after=Click here to create a new activity after this one.
+help.flow.activities.assess=Click here to create a new assessment, in which this activity is assessed. Please note that the assessment will be incomplete: it will not indicate who is the assessor nor the assessor's task. You will have to configure this later.
+help.flow.activities.makeassessor=Click here to create a new assessment, in which this activity is the assessor's activity. Please note that the assessment will be incomplete: it will not indicate which learning activity is assessed. You will have to configure this later.
+help.flow.activities.move.up=This option will move the activity upwards, placing it previous to the one on top of it (that is, it will happen earlier in the script).
+help.flow.activities.move.down=This option will move the activity downwards, placing in after the one bellow (that is, this activity will happen later in the script).
+help.flow.activities.delete=Click here to delete this activity from the script.
+
+help.picker.move.act=Select this to move the CLFP into this phase. Please note that this will configure the phase as the CLFP that is moved here. This means that the activities that existed previously inside this phase will be deleted from the script.
+help.picker.move.gap=Selecct this to move the CLFP into this position.
+help.picker.select.act=Select this phase, to see the roles and activities included in it.
+help.picker.select.activitygap=Select this position for the new activity.
+help.picker.select.activity=Select this activity.
+
+
+help.clfp.add.first=Choose this option to add a CLFP to the script, to create the basic structure of the script.
+
+help.ignore.actions=This will remove this alert from the advisor, so that it won't be displayed again.
+help.clip.menu.ignore.all=This will remove all the current alerts from this group, so that they won't be displayed again.
+help.clip.menu.goto.action=Choose this to make Web Collage open the window where you can carry out this action.
+help.clip.menu.ignore.action=This will remove this alert from the advisor, so that it won't be displayed again.
+
+help.assessment.patterns.delete=Delete this pattern from the assessment. This will not delete any activity, though, or change anything else about the assessment.
+help.assessment.patterns.list.new=Add new pattern to this assessment. Through assessment patterns you can configure certain aspects of the assessment. Click here to see a list of available patterns.
+help.assessment.edit.summativeFunction.edit=Click here to indicate the way in which students are graded.
+help.assessment.edit.formativeFunction.edit=This element indicates that, after the assessment results are ready, feedback will be delivered to the student. Click here to indicate in which activity the feedback is handed to the students. Later, it would be convenient to take into account this fact, to configure the selected activity.
+help.assessment.edit.diagnosisFunction.edit=This element indicates that an activity can be modified, according to the assessment results. Click here to indicate the learning activity that can be modified. Also, when you configure this activity, it would be convenient to take into account the fact that it might be modified.
+help.assessment.edit.function.remove=Click here to remove this usage of assessment results.
+
+help.assessment.edit.analysis.choose=Click here to choose the activity in which the 'assess task' is carried out. This is useful to indicate who is the assessor, when the 'assess task' is carried out, and how this is completed.
+help.assessment.edit.analysis.change=Click here to change the activity in which the 'assess task' is carried out. This is useful to indicate who is the assessor, when the 'assess task' is carried out, and how this is completed.
+help.assessment.edit.analysis.configpattern=Click here to select an assessment technique, which may give information about how to configure the 'assess task' (how the assessor should carry out this task). Only one assessment technique can be applied in each assessment.
+
+help.assessment.edit.source.choose=Click here to choose the assessed activity. This is useful to indicate what is to be assessed (by the assessor in the assessment activity) and, therefore, who is the assessee. Please note that the assessed activity should be a learning activity, carried out by students. Also, depending on the type of assessment, the assessed activity should contain instructions for the students about how to proceed to be assessed.
+help.assessment.edit.source.change=Click here to change the assessed activity. This is useful to indicate what is to be assessed (by the assessor in the assessment activity) and, therefore, who is the assessee. Please note that the assessed activity should be a learning activity, carried out by students. Also, depending on the type of assessment, the assessed activity should contain instructions for the students about how to proceed to be assessed. Please note that the previous assessed activity will not be removed from the script (just, it is not assessed here anymore).
+help.assessment.edit.source.configpattern=Click here to select an assessment technique, which give information about how to configure the assessed activity (what the students should do in this activity). Only one assessment technique can be applied in each assessment.
+
+
+help.clfps.tapps.edit.add=Click here to add a new problem to the TAPPS. This pattern can have any number of problems for each pair of students to solve.
+help.clfps.simulation.edit.addrole=Click here to add a new simulation role. You can create any number of roles, each of them with a different description and preparation activities.
+help.clfps.simulation.edit.addgroup=Click here to add a new simulation group. You can create any number of group, and each of them can perform a different simulation.
+help.clfps.phase.edit.addrole=Click here to add a new role to the phase. You can create any number of roles, each of them with a different description and preparation activities.
+help.clfps.phase.edit.addgroup=Click here to add a new group to the phase. You can create any number of group.
+
+instancias.editar=Edit instance
+instancias.eliminar=Delete instance
+instancias.editar.info=Click here to edit this instance
+instancias.eliminar.info=Click here to delete this instance
+instancias.nueva=New instance
+instancias.errorNoName=Please, specify a name for the instance
+instancias.titulo=Title
+
+versiones.version=Version
+versiones.ver=See version
+versiones.instanciar=Instantiate version
+versiones.eliminar=Delete version
+versiones.ver.info=Click here to see this design version
+versiones.instanciar.info=Click here to instantiate this design version
+versiones.eliminar.info=Click here to delete this design version
+
+disenos.editar=Edit design
+disenos.instanciar=Instantiate design
+disenos.eliminar=Delete design
+disenos.clonar=Clone design
+disenos.editar.info=Click here to edit this design
+disenos.instanciar.info=Click here to instantiate the last design version
+disenos.eliminar.info=Click here to delete this design
+disenos.clonar.info=Click here to create a copy of the design
+
+tab.metodo=Design teaching method
+tab.participantes=Participant management
+participantes.lms=LMS selection
+participantes.errorGetLms=Unable to get the list of LMS
+participantes.lms.select=-- Select a LMS installation --
+participantes.clase=Class selection
+participantes.clase.select=-- Select a class --
+participantes.participantes=List of class participants
+participantes.tipoLMS.select=-- Select a LMS type --
+participantes.crearInstalacionLMS=Create LMS Installation
+participantes.optioneditlms=Edit LMS Installation
+participantes.optiondeletelms=Delete LMS Installation
+participantes.mostrarinstanciaslms=List of LMS Installations
+participantes.gestionar_lms=LMS Management
+participantes.editarInstalacionLMS=Edit Installation
+participantes.obtenerclases=Obtain Class
+participantes.eliminarinst=Do you really want to delete this installation?
+participantes.tipolms=LMS Type
+participantes.nombrelms=Name
+participantes.usuariolms=User
+participantes.lmsintallation.edit=Click here to Edit the LMS Installation
+participantes.lmsintallation.delete=Click here to Delete the LMS Installation
+participantes.confirmacioneliminar=Delete LMS Installation
+participantes.lmsglue.select=-- Select a glue LMS --
+participantes.lmsglue=LMS:
+participantes.fichero=File
+
+participantes.crearinstalacion.idlms=Please, select a LMS type
+participantes.crearinstalacion.title=Please, specify a LMS name
+participantes.crearinstalacion.uri=Please, specify a URI
+participantes.crearinstalacion.user=Please, specify a username
+participantes.crearinstalacion.passwd=Please, specify a password
+participantes.crearinstalacion.toolid=Please, specify a toolid
+participantes.crearinstalacion.file=Please, select a file to upload
+participantes.imposibleactualizar=A LMS installation in use can not be edited
+
+instanceLoader.load.error=Couldn't load the instance!
+instanceLoader.save.error=Couldn't save!
+instanceLoader.save.noAccess=You don't have access to edit this script. The instance will be closed
+instanceLoader.loading.wait=<p>Loading instance. Please wait!</p>
+instanceLoader.title=Loading...
+instanceLoader.load.noAccess=You don't have access to see this script. Have you logged in?
+instanceLoader.save.sessionExpired=Your session has expired. <br/>If you do not login your instance will be closed and the made changes won't be saved.<br/> Do you want to login?
+
+participantes.instanciaClaseElegidas=LMS installation and class selected
+participantes.instanciaElegida=LMS installation
+participantes.claseElegida=Class
+participantes.listadoAlumnos=Participant List
+participantes.botonSeleccionar=Select
+participantes.botonActualizarListadoAlumnos=Update list
+participantes.seleccionarAlumnos=Participants selection
+participantes.instalacion_lms=LMS Installation
+participantes.cambioAlumnos=Participant changes
+participantes.alumnosAnadidos=Participants to be added
+participantes.alumnosEliminados=Participants to be deleted
+participantes.alumnosPermanecen=Participants remain
+participantes.obtener=Get participants
+participantes.lmsElegido=LMS type
+participantes.errorGetParticipants=Unable to get the list of class participants
+participantes.numberParticipants=Number of class participants: 
+participantes.errorGetClasses=Unable to get the list of classes
+
+participantes.nombre=Name
+participantes.tipo=Type
+participantes.user=User
+
+actualizar.aviso=Warning
+actualizar.aviso.info=Please, click before on select button and choose an installation and a class
+
+participantes.obtenerparticipantes.cambios=Warning! Changes were detected in participants
+participantes.editarinstalacion.error=Unexpected error while editing installation
+
+participantes.aviso=Warning!!
+participantes.imposibilidadborrar=A LMS installation in use can not be deleted
+participantes.elegirinstancia=Change
+
+
+roles.see=View rol
+activity.see=View activity
+help.activity.see=Click here to view this activity. You can view the title, description, learning objectives and the resources linked to this activity.
+help.roles.see.title=Click here to view this role. You can view the name of the role, its description, and the minimum and maximun number of people assigned to each instance of this role.
+
+assessment.see=View assessment
+help.assessment.see=Click here to view this assessment. You can view the activities related to this assessment, as well as its configuration according to assessment patterns.
+
+roles.see.title=View role '${0}'
+
+flow.clfp.see.act=View phase '${0}'...
+help.flow.clfp.see.act=Click here to see the roles and activities contained in this phase. You can also see the name of the phase.
+
+flow.activities.see=View phase
+
+flow.assessment.see=View assessment
+help.flow.assessment.see=This element is part of an assessment embedded in the script. Click here to see it.
+help.flow.select.clfp.see=This option 'activates' this CLFP, so that it can be seen. There can be only one active CLFP at any given moment.
+
+ldmanager.eliminardiseno=Do you really want to delete this design?
+
+learningflow.clonar=Clone this group instance
+learningflow.clonar.help=Click here to clone this group instance
+learningflow.borrar=Delete this group instance
+learningflow.borrar.help=Click here to delete this group instance
+learningflow.asignarparticipantes=Assign users to group instance
+learningflow.asignarparticipantes.help=Click here to assign users to this group instance
+learningflow.asignarprofesores=Assign teachers to group instance
+learningflow.asignarprofesores.help=Click here to assign teachers to this group instance
+learningflowGroups.mostrarclfp=Show associated CLFP
+learningflowGroups.mostrarclfp.help=Click here to show the CLFP associated to the group instance
+participants.alumnosasignados=Assignment of students to the group instance
+participants.alumnosasignadosgrupo=Students assigned to this instance
+participants.alumnosasignadosgrupotemp=Temporary students
+participants.alumnosdisponibles=Available students
+participants.profesoresasignados=Teachers assigned
+participants.profesoresasignadosgrupo=Teachers assigned
+participants.profesoresdisponibles=Available teachers
+
+participants.asignaralumnos=Assign student to the instance
+participants.asignaralumnos.help=Click here to assign the student to the instance
+participants.asignartodosalumnos=Assign all the students to the instance
+participants.asignartodosalumnos.help=Click here to assign all the available students to the instance
+participants.asignarprofesores=Assign teacher to the group
+participants.asignarprofesores.help=Click here to assign the teacher to the group
+participants.asignartodosprofesores=Assign all the teachers to the group instance
+participants.asignartodosprofesores.help=Click here to assign all the teachers to the group instance
+
+participants.desasignaralumnos=Reject student from the instance
+participants.desasignaralumnos.help=Click here to reject the student from the instance
+participants.desasignartodosalumnos=Reject all the students from the instance
+participants.desasignartodosalumnos.help=Click here to reject all the students assigned to the instance
+participants.desasignarprofesores=Reject teacher from the group instance
+participants.desasignarprofesores.help=Click here to reject the teacher from the instance
+participants.desasignartodosprofesores=Reject all the teachers from the group instance
+participants.desasignartodosprofesores.help=Click here to reject all the teachers from this group
+
+nombre.estudiantes=Students Name
+
+participants.alumnosasignadosotrasinstancias=Students assigned to other instances
+
+participants.numasignados=Students assigned to other instances: 
+participants.numdisponibles=Available students: 
+participants.perteneciente=Students assigned to this instance: 
+participants.pertenecienteProfesor=Teachers assigned to this instance: 
+participants.alumnoselegidos=Please, first of all get the participants by the participant management tab
+
+learningflow.verparticipantes=Students assigned to this instance
+learningflow.verprofesores=Teachers assigned to this instance
+learningflow.verparticipantes.help=Click here to visualize the participants assigned to this group
+
+participants.toolid=Toolid
+participantes.uri=URI
+
+fichero.notSupportedFormat=Format file not supported
+fichero.error=Error uploading file
+
+deployGluePS.title=Deploy in Glue!PS
+deployGluePS.error=Error while Deploying in Glue!PS
+
+registerResult.title=Register new user result
+registerResult.exit=The new user has been successfully registered
+
+participantFlow.show=Show participant flow
+
+groupPatternAlerts.title=Pattern alerts
+groupPatternAlerts.proposedGroupNumberInfo=The pattern suggests using a number of groups which is different of the current number of groups
+groupPatternAlerts.proposedGroupCompositionInfo=The pattern suggest a group configuration which is different of the current group composition
+
+groupPatternAlerts.proposedGroupNumberAlert=The proposed number of groups (${0}) is different of the current number of groups (${1})
+groupPatternAlerts.proposedGroupCompositionAlert=The proposed group configuration is different of the current group configuration
+groupPatternAlerts.leftAlert=Click left to see further group advices
+groupPatternAlerts.rightAlert=Click right to see further group advices
+
+groupPatternOptions.title=Group pattern options
+help.groupPattern.delete=Click here to delete this group pattern
+help.groupPattern.documentation=Click here to read the group pattern documentation
+
+groupPattern.updateGroupNumber=Update the number of groups
+groupPattern.updateGroupNumberOK=The number of groups is OK
+groupPattern.disabledGroupNumber=Can't update the number of groups
+
+groupPattern.updateGroupComposition=Update the group composition
+groupPattern.updateGroupCompositionOK=The group composition is OK
+groupPattern.disabledGroupComposition=Can't update the group composition
+
+groupPattern.delete=Delete this group pattern
+groupPattern.documentation=Read group pattern documentation
+groupPattern.emptyGroup=There are empty groups
+groupPattern.notAsigned=There are students without assign to a group
+groupPattern.notAsignedTeacher=There are no teachers asigned to the phase
+groupPattern.notAsignedTeacher.help=You should assign at least one teacher to the group of the teachers
+
+groupPattern.updatesNeeded.alert=${0} more updates will be necessary to update this.
+groupPattern.baddependencies=Some other phases must be checked before this one can be updated.
+
+groupPattern.management.dialogtitle=Group pattern management
+groupPattern.managment.newgn=Add group number pattern
+groupPattern.managment.newpa=Add student assignation pattern
+  
+groupPattern.management.move.down=Move down
+help.groupPattern.management.move.down=Move down
+groupPattern.management.move.up=Move up
+help.groupPattern.management.move.up=Move up
+
+
+groupPattern.management.undelete=Keep this pattern
+help.groupPattern.management.undelete=Keep this pattern
+groupPattern.management.delete=Delete this pattern
+help.groupPattern.management.delete=Delete this pattern
+
+groupPattern.general.lessthan=Less than ${1}: ${0} 
+groupPattern.general.morethan=More than ${1}: ${0}
+
+groupPattern.nopatterns=There are no patterns to configure this. You can try adding them!
+
+grouplayer.menu.title=Group members
+grouplayer.menu.itemhelp=Click to select this participant
+
+groupPattern.manage=Manage group policy
+help.groupPattern.manage=Add rules to control the number of groups and student distribution
+
+
+changeTypeToStudent=Change to student
+changeTypeToStudent.help=The participant becomes student type
+changeTypeToTeacher=Change to teacher
+changeTypeToTeacher.help=The participant becomes teacher type
+changeTypeTitle=Confirmation of the change of type
+changeType.info=If you change the type, the participant will be deleted of all those groups where is currently assigned.<br />Are you sure you want to make the change?
+
+toolNameError=Please, enter a name for the tool
+
+
+
+
+
+
+
+
+
+

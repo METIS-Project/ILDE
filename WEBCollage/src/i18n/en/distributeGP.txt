@@ -1,0 +1,5 @@
+grouppattern.groupparticipantsdistribute.title=Randon distribution
+
+
+grouppattern.groupparticipantsdistribute.exact=We need ${0} students per group.
+grouppattern.groupparticipantsdistribute.noexact=We need between ${0} and ${1} students per group.

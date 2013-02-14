@@ -1,0 +1,42 @@
+grouppattern.expertgroup.title=Expert Groups
+
+grouppattern.expertgroup.number.alert=The specified number of subproblems is ${0}, so there should be ${0} groups.
+grouppattern.expertgroup.nonumber.alert=There must be at least 2 expert groups (each group will work on one subproblem).
+
+grouppattern.expertgroup.dialog.title=Expert group: subproblem number
+grouppattern.expertgroup.dialog.text=Select the number of subproblems for this Jigsaw
+
+grouppattern.expertgroup.menuitem=Set subproblem number (${0})
+grouppattern.expertgroup.menuitem.help=This sets the number of <font color='brown'>subproblems</font> for this Jigsaw. The number of <font color='brown'>subproblems</font> determines the numebr of <font color='green'>Expert Groups</font>, as each <font color='green'>Expert Group</font> will focus on a single <font color='brown'>subproblem</font>.<br/><br/>
+grouppattern.expertgroup.menuitem.help.unset=Currently, the number of <font color='brown'>subproblems</font> is unspecified.
+grouppattern.expertgroup.menuitem.help.set=Currently, the number of <font color='brown'>subproblems</font> is ${0}.
+grouppattern.expertgroup.unsetsubproblems=unspecified
+
+
+grouppattern.expertgroup.np.groupcompositionok=Since we don't know the participants yet, we cannot distribute them...
+
+grouppattern.expertgroup.justone.unset.alert.text=There's just on expert group
+grouppattern.expertgroup.justone.unset.alert.help=Just one <font color='green'>Expert Group</font> would mean only one <font color='brown'>subproblem</font> for the Jigsaw, and that wouldn't work.<br/><br/>To fix this, either <b>create more <font color='green'>Expert Groups</green> manually</b>, or <b>set the number of <font color='brown'>subproblems</font> in the menu next to this icon</b>, so that the number of <font color='green'>Expert Groups</font> can be set automatically.
+grouppattern.expertgroup.justone.unset.wtd.help=The number of <font color='green'>Expert Groups</font> cannot be automatically updated, since you have not specified the number of <font color='brown'>subproblems</font>.<br/><br/>Please note that <b>you can specify the number of <font color='brown'>subproblems</font> below in this menu</b>.
+grouppattern.expertgroup.justone.unset.ok=The number of <font color='green'>Expert Groups</font> is ok, as there is more than one.
+
+grouppattern.expertgroup.gn.set.alert.text=We need ${0} Expert Groups (not ${1})
+grouppattern.expertgroup.gn.set.alert.help=The number of <font color='brown'>subproblems</font> specified for this Jigsaw is ${0}, and therefore we need ${0} <font color='green'>Expert Groups</font>. However, the current number of <font color='green'>Expert Groups</font> is ${1}.<br/><br/>The number of <font color='green'>Expert Groups</font> <b>should be fixed to coindice with the number of <font color='brown'>subproblems</font></b>.
+
+grouppattern.expertgroup.gn.set.wtd.help=The number of <font color='green'>Expert Groups</font> cannot be automatically updated, since you have not specified the number of <font color='brown'>subproblems</font>.<br/><br/>Please note that <b>you can specify the number of <font color='brown'>subproblems</font> below in this menu</b>.
+grouppattern.expertgroup.gn.set.wtd.create=<b>This will create ${0} new <font color='green'>${1}</font> in order to have ${2}.</b><br/><br/>  
+grouppattern.expertgroup.gn.set.wtd.delete=<b>This will delete ${0} <font color='green'>${1}</font> in order to have ${2}.</b><br/><br/> 
+grouppattern.expertgroup.gn.set.wtd.more=As the number of <font color='brown'>subproblems</font> has been set to ${0}, we need ${0} <font color='green'>Expert Groups</font>. 
+
+grouppattern.expertgroup.justone.set.ok=The number of <font color='green'>Expert Groups</font> is ok, as there is more than one.
+
+
+
+
+grouppattern.expertgroup.singular=Expert Group
+grouppattern.expertgroup.plural=Expert Groups
+
+grouppattern.expertgroup.list.named=${0} ${1}
+grouppattern.expertgroup.list.separator=, 
+grouppattern.expertgroup.list.lastseparator= and 
+
