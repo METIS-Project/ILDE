@@ -15,7 +15,8 @@
 
 	admin_gatekeeper(); // Only admins can make someone an admin
 	action_gatekeeper();
-	
+	global $CONFIG;
+
 	// Get variables
 	$username = get_input('username');
 	$password = get_input('password');
@@ -41,6 +42,24 @@
 			
 			$new_user->admin_created = true;
 			$new_user->isnew = '1';
+
+            $vars = array();
+            $vars['new_user'] = $new_user;
+            $vars['site'] = $CONFIG->site;
+            $vars['site_url'] = $CONFIG->url;
+            $vars['password'] = $password;
+
+            $body = elgg_view('emails/newmember',$vars);
+
+
+            notify_user (
+                $guid,
+                $_SESSION['user']->getGUID(),
+                T("Welcome to %1!", $CONFIG->site->name),
+                $body,
+                array('html' => true)
+            );
+
 			
 			system_message(sprintf(elgg_echo("adduser:ok"),$CONFIG->sitename));
 		} else {

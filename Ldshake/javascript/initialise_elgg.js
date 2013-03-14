@@ -28,7 +28,8 @@ $(document).ready(function () {
 	var els = ['#leftcolumn_widgets', '#middlecolumn_widgets', '#rightcolumn_widgets', '#widget_picker_gallery' ];
 	var $els = $(els.toString());
 	
-	$els.sortable({
+
+    $els.sortable({
 		items: '.draggable_widget',
 		handle: '.drag_handle',
 		cursor: 'move',

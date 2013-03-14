@@ -63,7 +63,10 @@
 			</li>
 			<li>
 				<img src="<?php echo $url ?>mod/lds/images/xul4.png" style="border: 1px solid #000" />
-				<p>Add your domain or IP for example <strong>ldshake.upf.edu</strong></p>
+                <?php
+                    $system_url = parse_url($url);
+?>
+				<p>Add <strong><?php echo $system_url['host'];?></strong></p>
 			</li>
 		</ul>
 	</div>

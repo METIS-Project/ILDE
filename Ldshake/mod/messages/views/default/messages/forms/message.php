@@ -86,7 +86,6 @@
 
                     //populate the send to box with a user's friends
                     echo "<option value='{$g->guid}'>" . $g->name .' (group)</option>';
-
                 }
 				/// LdShake change ///
     	        foreach($vars['friends'] as $friend){
@@ -110,6 +109,6 @@
 		<div><?php echo T("Message"); ?>
 		<textarea class="input-textarea" name="message" style="height: 300px; margin-top: 5px;"></textarea>
 		</div>
-		<p><input type="submit" class="submit_button" value="<?php echo T("Let it fly!"); ?>" /></p>
+		<p><input type="submit" class="submit_button" value="<?php echo T("Send"); ?>" /></p>
 	
 	</form>

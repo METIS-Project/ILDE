@@ -51,9 +51,9 @@
       
       $site = get_entity($CONFIG->site_guid);
       $from_name = $site->name;
-      
+      $html = is_array($params) ? $params['html'] : false;
 		  
-      return phpmailer_send($from_email, $from_name, $to->email, '', $subject, $message);
+      return phpmailer_send($from_email, $from_name, $to->email, '', $subject, $message, null, $html);
     }
     
     /**

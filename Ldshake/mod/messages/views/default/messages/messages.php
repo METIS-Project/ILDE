@@ -138,8 +138,15 @@
                                     echo "<input type='hidden' name='non_member_group_reply' value='" . $vars['entity']->nonMemberGroupReply . "' />";
 	
 	        			?>
-	        			<input type="submit" class="submit_button" value="<?php echo T("Let it fly!"); ?>" />
+	        			<input type="submit" class="submit_button" value="<?php echo T("Send"); ?>" />
+                        <?php
+                        if($vars['entity']->groupReply) {
+                        ?>
                         <input id="group_submit" type="submit" class="submit_button" value="<?php echo T("Reply to all"); ?>" />
+                        <?php
+                        }
+                        ?>
+
 				</p>
 			</form>
             <script type="text/javascript" src="<?php echo $vars['url']; ?>vendors/jquery/jquery-1.4.3.min.js"></script>

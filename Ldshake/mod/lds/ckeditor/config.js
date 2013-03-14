@@ -50,7 +50,10 @@ CKEDITOR.editorConfig = function( config )
 		    ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote','CreateDiv'],
 		    ['TextColor','BGColor']
 		];
-	
+
+    config.pasteFromWordRemoveFontStyles = false;
+    config.pasteFromWordRemoveStyles = false;
+
 	/*
 	config.toolbar_Full =
 	[

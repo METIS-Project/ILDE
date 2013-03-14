@@ -59,7 +59,8 @@ class DocumentRevisionObject extends ElggObject
 		$revision->description = $document->description;
 		$revision->lds_revision_id = $document->lds_revision_id;
 		$revision->lds_guid = $document->lds_guid;
-		
+        $revision->container_guid = $document->lds_guid;
+
 		//If the document from which we crate the revision is published, the revision will be marked as published
 		//and the document itserl will be unmarked (so the published version stays the same until a republish happens)
 		$revision->published = $document->published;

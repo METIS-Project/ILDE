@@ -35,7 +35,7 @@
             echo "<input type='hidden' name='non_member_user_group' value='" . $vars['entity']->nonMemberGroupReply . "' />";
 
         ?>
-	    <input type="submit" class="submit_button" value="<?php echo T("Let it fly!"); ?>" />
+	    <input type="submit" class="submit_button" value="<?php echo T("Send"); ?>" />
 	</p>
 	
 </form>

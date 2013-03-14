@@ -67,6 +67,7 @@ class DocumentEditorRevisionObject extends ElggObject
 		$revision->editorType = $document->editorType;
 		$revision->lds_revision_id = $document->lds_revision_id;
 		$revision->lds_guid = $document->lds_guid;
+        $revision->container_guid = $document->lds_guid;
 		$revision->previewDir = $document->revisionDir.'_'.$revision->lds_revision_id;
 		$revision->id = $document->revisionDir.lds_revision_id;
 		

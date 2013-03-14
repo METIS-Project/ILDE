@@ -45,8 +45,9 @@ class DocumentObject extends ElggObject {
   public function __construct($lds_guid, $guid = null) {
     parent::__construct($guid);
     $this->lds_guid = $lds_guid;
+    $this->container_guid = $lds_guid;
     $this->access_id = 2;
-    //$this->write_access_id = 2;
+
   }
  
   // more customizations here

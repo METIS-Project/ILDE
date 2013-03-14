@@ -30,7 +30,7 @@ ProxyPassReverse /exelearning http://127.0.0.1:8080/
  * List of environments, containing the regular expression of the server name that defines them.
  */
 $envUrls = array (
-	'devel' =>		'^localhost|^127\.0\.0\.1',
+	'devel' =>		'^localhost|^127\.0\.0\.1,|^web\.dev',
 	'staging' =>	'^ldshake3\.upf\.edu',
 	'prod' =>		'^ldshake\.upf\.edu'
 );
@@ -49,7 +49,7 @@ $confOptions = array (
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-						'devel' =>		'ldshake',
+						'devel' =>		'ldshake_trunk',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'
 					),
@@ -142,7 +142,7 @@ $confPaths = array (
 	 */	
 	'dataroot' =>	array (
 						'devel' =>		'/var/lib/ldshake/',
-						'staging' =>	'G:/editors-data/',
+						'staging' =>	'/var/lib/ldshake/',
 						'prod' =>		'/var/lib/ldshake/'
 					),
 
@@ -169,7 +169,7 @@ $confPaths = array (
 					),
 	
 	/**
-	 * HTML previews of WebCOllage & eXe
+	 * HTML previews of WebCollage & eXe
 	 */
 	'editors_content' => array (
 						'devel' =>		'/var/www/ldshake/',
@@ -187,7 +187,7 @@ $confPaths = array (
 							),		
 							
 	/**
-	 * Location of the ZIP tool
+	 * Location of the zip tool
 	 */
 	'zip_path' => array (
 						'devel' =>		'zip',
