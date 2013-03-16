@@ -315,22 +315,24 @@
 	 * @param string $method The method
 	 * @return Array containing commands and values, including method and api
 	 */
-	function get_parameters_for_method($method)
-	{
-		global $CONFIG, $METHODS;
+    function get_parameters_for_method($method) {
+        global $METHODS;
 
-		$method = sanitise_string($method);
-		$sanitised = array();
-		
-		foreach ($CONFIG->input as $k => $v)
-		{
-			if ((isset($METHODS[$method]['parameters'][$k])) || ($k == 'auth_token') || ($k == 'method'))
-				$sanitised[$k] = get_input($k); // Make things go through the sanitiser	
-		}
-	
-		return $sanitised;
-	}
-	
+        $sanitised = array();
+
+        // if there are parameters, sanitize them
+        if (isset($METHODS[$method]['parameters'])) {
+            foreach ($METHODS[$method]['parameters'] as $k => $v) {
+                $param = get_input($k); // Make things go through the sanitiser
+                if ($param !== '' && $param !== null) {
+                    $sanitised[$k] = $param;
+                }
+            }
+        }
+
+        return $sanitised;
+    }
+
 	/**
 	 * Obtain a token for a user.
 	 *
