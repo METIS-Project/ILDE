@@ -31,6 +31,7 @@
 	// Register some default PAM methods, plugins can add their own
 	register_pam_handler('pam_auth_usertoken', 'required'); // Either token present and valid OR method doesn't require one.
 
+/*
     $path = explode('/', $_SERVER['PATH_INFO']);
 
     if (!count($path))
@@ -40,7 +41,11 @@
     foreach($path as $ep)
         if(strlen($ep))
             $query[] = $ep;
+*/
 
+    global $API_QUERY;
+    $query = ldshake_rest_params();
+    $API_QUERY = $query;
 	// Get parameter variables
 	$method = $query[0];
     set_input('method', $method);

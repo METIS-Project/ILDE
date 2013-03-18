@@ -39,10 +39,19 @@ function rest_login() {
 expose_function("login", "rest_login", array(), elgg_echo('login'), "POST", false, false);
 
 function lds_data() {
-    $postdata = file_get_contents("php://input");
+    global $API_QUERY;
+
+    if(!isset($_FILES['design']) || !isset($_FILES['properties']))
+        return array();
+
+    if($_FILES['design']['error'] || $_FILES['properties']['error'])
+        return array();
+
+    if(!($xmlproperties = file_get_contents($_FILES['properties']['tmp_name'])))
+        return array();
 
     $xmldoc = new DOMDocument();
-    $xmldoc->loadXML($postdata);
+    $xmldoc->loadXML($xmlproperties);
 
     $xpathvar = new Domxpath($xmldoc);
 
@@ -138,4 +147,18 @@ function ldshake_array_to_xml(array $data, $n = 0)
     }
 
     return $output;
+}
+
+function ldshake_rest_params() {
+    $path = explode('/', $_SERVER['PATH_INFO']);
+
+    if (!count($path))
+        throw new SecurityException(elgg_echo('SecurityException:APIAccessDenied'));
+
+    $query = array();
+    foreach($path as $ep)
+        if(strlen($ep))
+            $query[] = $ep;
+
+    return $query;
 }
