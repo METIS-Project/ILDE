@@ -54,12 +54,12 @@ $confOptions = array (
 						'prod' =>		'ldshake'
 					),
 	'dbuser' =>		array (
-						'devel' =>		'user',
+						'devel' =>		'root',
 						'staging' =>	'user',
 						'prod' =>		'user'
 					),
 	'dbpass' =>		array (
-						'devel' =>		'pass',
+						'devel' =>		'a7',
 						'staging' =>	'pass',
 						'prod' =>		'pass'
 					),
