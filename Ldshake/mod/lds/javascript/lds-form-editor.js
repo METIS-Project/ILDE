@@ -169,7 +169,7 @@ function ajax_submit (redirect)
 		};
 	}
 	
-	if(editorType == 'exe')
+	else//if(editorType == 'exe')
 	{
         documents[currentTab].body = editor.getData();
 
@@ -185,7 +185,8 @@ function ajax_submit (redirect)
 			granularity: $('#granularity_input').val(),
 			editor_id: editor_id,
 			editorType: editorType,
-            documents: documents
+            documents: documents,
+            document_url: document_url
         };
 	}
 	

@@ -48,6 +48,7 @@ $isNew = false;
 
 $editor_type = get_input('editorType');
 $docSession = get_input('editor_id');
+$document_url = get_input('document_url');
 
 //We first create the LDS (or update it)
 if (get_input('guid') > 0)
@@ -72,7 +73,8 @@ else
 	$document_editor->lds_revision_id = 0;
 	$document_editor->save();
 	$isNew = true;
-} 
+}
+
 
 $lds->title = get_input('title');
 $lds->granularity = get_input('granularity');
@@ -82,7 +84,7 @@ $lds->completeness = get_input('completeness');
 //modified by an ajax call to share.php
 if (get_input('guid') == 0)
 {
-	$lds->access_id = 1;
+	$lds->access_id = 2;
 	//$lds->write_access_id = 0;
 }
 
@@ -118,10 +120,15 @@ if($editordocument[0]->lds_revision_id != $revision->id)
 //create a new revision if htis is the first save in this session
 if(get_input('guid') > 0 && get_input('revision') == 0)
 	DocumentEditorRevisionObject::createRevisionFromDocumentEditor($editordocument[0]);
-	
+
+
+$save_params = array(
+    'url' => $document_url
+);
+
 //save the contents and join the resultsIds
 $editor = editorsFactory::getInstance($document_editor);
-list($document_editor, $resultIds_add) = $editor->saveDocument();
+list($document_editor, $resultIds_add) = $editor->saveDocument($save_params);
 $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
 	
 $editordocument[0]->lds_revision_id = $revision->id;

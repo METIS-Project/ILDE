@@ -87,12 +87,16 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div id="rich_text_box" style="display: none;">
                 <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
 				</div>
+                <!--
                 <?php if ($editor == 'exe'): ?>
 					<iframe id="lds_editor_body" src="/exelearning/<?php echo $editor_id ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
 				<?php else: ?>
 				<?php echo $CONFIG->root ?>
 					<iframe id="lds_editor_body" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
 				<?php endif; ?>
+				-->
+
+                <iframe id="lds_editor_body" src=<?php echo "{$document_url}"; ?> width="958" height="616" style="border: 1px solid grey;"></iframe>
 					
 			</div>
             <div id="lds_edit_tabs" class="scrollable">
@@ -193,6 +197,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var editor_id = <?php echo $editor_id ?>;
 		var groups = <?php echo $groups ?>;
         var documents = <?php echo $initDocuments ?>;
+        var document_url = "<?php echo $document_url ?>";
 		friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;
 		friends['editors'] = <?php echo $editors ?>;

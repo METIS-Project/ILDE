@@ -567,6 +567,8 @@ class EditorsFactory
 			return new WebCollageEditor($document);
 		if($document->editorType == 'exe')
 			return new exeLearningEditor($document);
+        if($document->editorType == 'webcollagerest')
+            return new RestEditor($document);
 	}
 
 	public static function getTempInstance($editorType)
@@ -575,11 +577,15 @@ class EditorsFactory
 			return new WebCollageEditor(null);
 		if($editorType == 'exe')
 			return new exeLearningEditor(null);
+        if($editorType == 'webcollagerest')
+            return new RestEditor(null);
 	}
 }
 
 class RestEditor extends Editor
 {
+    public $document_url;
+
     public function getDocumentId()
     {
         return $_document->guid;
@@ -592,14 +598,29 @@ class RestEditor extends Editor
         global $CONFIG;
         $user = get_loggedin_user();
         $rand_id = mt_rand(1000000,5000000);
-        $filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
-        copy($CONFIG->path.'vendors/exelearning/sample.elp', $filename_editor);
-        file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        unlink($filename_editor);
+        //copy($CONFIG->path.'vendors/exelearning/sample.elp', $filename_editor);
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
 
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //$this->_document->url = $response;
+        //$this->_document->save();
         $vars['editor_id'] = $rand_id;
-        $vars['editor'] = 'exe';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor'] = 'webcollagerest';
 
         return $vars;
     }
@@ -686,34 +707,36 @@ class RestEditor extends Editor
         return true;
     }
 
-    //TODO (Pau) Fer que totes les crides portin l'editor_id (mai s'agafi de request
-    //aquí dins.
-    public function saveNewDocument($editor_id = null)
+    public function saveNewDocument($params = null)
     {
         global $CONFIG;
 
         //save the contents
-        if (is_null($editor_id))
-            $docSession = get_input('editor_id');
-        else
-            $docSession = $editor_id;
+        $docSession = $params['editor_id'];
 
         $resultIds = new stdClass();
         $user = get_loggedin_user();
-        $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
-        file('http://127.0.0.1/exelearning/?save='. $docSession);
+
+        $uri = $params['url'];
+        $response = \Httpful\Request::get($uri)
+            ->sendIt();
+
+        //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
+        //file('http://127.0.0.1/exelearning/?save='. $docSession);
 
         $rand_id = mt_rand(400,9000000);
 
         //create a new file to store the document
-        $filestorename = $lds->guid.(string)$rand_id;
+        $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        copy($filename_editor, $file->getFilenameOnFilestore());
-        unlink($filename_editor);
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_data);
+        //copy($filename_editor, $file->getFilenameOnFilestore());
+        //unlink($filename_editor);
 
         $this->_document->file_guid = $file->guid;
         $this->_document->save();
 
+        /*
         //export the contents to the most common formats supported by exelarning
         $this->_document->ims_ld = $this->saveNewExportDocument($docSession, 'IMS');
         $this->_document->scorm = $this->saveNewExportDocument($docSession, 'scorm');
@@ -725,7 +748,7 @@ class RestEditor extends Editor
         $this->_document->pub_scorm = $this->saveNewExportDocument($docSession, 'scorm');
         $this->_document->pub_scorm2004 = $this->saveNewExportDocument($docSession, 'scorm2004');
         $this->_document->pub_webZip = $this->saveNewExportDocument($docSession, 'zipFile');
-
+        */
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
         $this->_document->pub_previewDir = rand_str(64);
@@ -734,13 +757,14 @@ class RestEditor extends Editor
         $this->_document->rev_last = 0;
         $this->_document->lds_revision_id = 0;
 
+        /*
         //create the preview page with a single page html document
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
         exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
         exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
         if(strlen((string)$docSession) > 0)
             exec('rm -r --interactive=never '.$CONFIG->exedata.'export/singlePage/'.$docSession);
-
+        */
         $resultIds->guid = $this->_document->lds_guid;
         $resultIds->file_guid = $file->guid;
 
@@ -754,12 +778,12 @@ class RestEditor extends Editor
         file('http://127.0.0.1/exelearning/?unload='. $docSession);
     }
 
-    public function saveDocument()
+    public function saveDocument($params=null)
     {
         if($this->_document->file_guid)
             $this->saveExistingDocument();
         else
-            $this->saveNewDocument();
+            $this->saveNewDocument($params);
     }
 
     //update the previous contents

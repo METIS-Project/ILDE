@@ -45,7 +45,13 @@ define ('LDS_ENTITY_TYPE', 'LdS');
 function lds_init()
 {	
 	global $CONFIG;
-	
+
+	///REST setup
+    $CONFIG->rest_serializer = function($payload = array()) {
+        return $payload;
+    };
+
+    $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
 	//Load the model classes
 	//TODO could include the whole directory...
 	require_once __DIR__.'/model/LdSObject.php';
@@ -179,7 +185,7 @@ function lds_page_handler ($page)
         ->body($bin, 'application/octet-stream')
         ->sendIt();
 */
-
+/*
     $fd = fopen($bin, 'r');
 
 
@@ -196,7 +202,7 @@ function lds_page_handler ($page)
     curl_exec($ch);
     //echo curl_error($ch);
     curl_close($ch);
-
+*/
     //$uri = 'https://github.com/api/v2/xml/user/show/nategood';
     //$request = Request::get($uri)->send();
 
