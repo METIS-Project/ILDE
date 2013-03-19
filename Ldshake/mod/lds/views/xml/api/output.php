@@ -16,4 +16,3 @@ $result = $vars['result'];
 $export = $result->export();
 
 echo ldshake_array_to_xml($export->result);
-?>

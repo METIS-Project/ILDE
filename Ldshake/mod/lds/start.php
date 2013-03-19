@@ -58,7 +58,9 @@ function lds_init()
 	require_once __DIR__.'/editors/editorsFactory.php';
 
     require_once __DIR__.'/rest.php';
-	
+    require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
+
+
 	//Our css stuff
 	extend_view('css','lds/css');
 	
@@ -134,8 +136,71 @@ function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
     }
 }
 
+
+
 function lds_page_handler ($page)
 {
+    $multipart_serializer = function($payload = array()) {
+        return $payload;
+    };
+
+    $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713";
+    $xml = "some random data";
+    $post = array(
+        "uploadData"=>"test",
+        "randomData"=>$xml,
+        "randomData56"=>"@/etc/pam.conf",
+        "randomData43"=>"@/var/www/ilde/_graphics/ldshake-logo.jpg;type=image/jpeg",
+    );
+
+    $post = array(
+        "uploadData"=>"test",
+        "randomData"=>$xml,
+    );
+
+    $bin ="sdfgt5yerhur6i58z0293tpwt8m43333333ty3487";
+    $bin ='/etc/pam.conf';
+
+/*
+    $response = \Httpful\Request::post($uri, $post)
+        ->sendsType(\Httpful\Mime::FORM)
+        ->sendIt();
+*/
+    /*
+    $response = \Httpful\Request::post($uri)
+        ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
+        ->body($post, 'multipart/form-data')
+        ->expectsJson()
+        ->sendIt();
+    */
+/*
+    $response = \Httpful\Request::post($uri)
+        ->registerPayloadSerializer('application/octet-stream', $multipart_serializer)
+        ->body($bin, 'application/octet-stream')
+        ->sendIt();
+*/
+
+    $fd = fopen($bin, 'r');
+
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, trim($uri));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    curl_setopt($ch, CURLOPT_PUT, 1);
+    curl_setopt($ch, CURLOPT_INFILE, $fd);
+    curl_setopt($ch, CURLOPT_INFILESIZE, filesize($bin));
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    //curl_setopt($ch, CURLOPT_POSTFIELDS, $bin);
+    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)");
+    curl_exec($ch);
+    //echo curl_error($ch);
+    curl_close($ch);
+
+    //$uri = 'https://github.com/api/v2/xml/user/show/nategood';
+    //$request = Request::get($uri)->send();
+
+    //echo "{$request->body->name} joined GitHub on " . date('M jS', strtotime($request->body->{'created-at'})) ."\n";
 	//Nothing here will be exposed to non-logged users, so go away!
 	//UPDATE: Except for the external view...
 
