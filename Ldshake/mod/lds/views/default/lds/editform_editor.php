@@ -89,14 +89,14 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
                 <!--
                 <?php if ($editor == 'exe'): ?>
-					<iframe id="lds_editor_body" src="/exelearning/<?php echo $editor_id ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
+					<iframe id="lds_editor_iframe" src="/exelearning/<?php echo $editor_id ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
 				<?php else: ?>
 				<?php echo $CONFIG->root ?>
-					<iframe id="lds_editor_body" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
+					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
 				<?php endif; ?>
 				-->
 
-                <iframe id="lds_editor_body" src=<?php echo "{$document_url}"; ?> width="958" height="616" style="border: 1px solid grey;"></iframe>
+                <iframe id="lds_editor_iframe" src=<?php echo "{$document_url}"; ?> width="958" height="616" style="border: 1px solid grey;"></iframe>
 					
 			</div>
             <div id="lds_edit_tabs" class="scrollable">

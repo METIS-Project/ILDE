@@ -93,8 +93,8 @@ function ajax_submit (redirect)
 	
 	if(editorType == 'webcollage')
 	{
-		top.window.document.getElementById('lds_editor_body').contentWindow.TableGenerator.generateSummary();
-		top.window.document.getElementById('lds_editor_body').contentWindow.Loader.save_ldshake();
+		top.window.document.getElementById('lds_editor_iframe').contentWindow.TableGenerator.generateSummary();
+		top.window.document.getElementById('lds_editor_iframe').contentWindow.Loader.save_ldshake();
 		
 		submitData = 
 		{
@@ -108,7 +108,7 @@ function ajax_submit (redirect)
 			granularity: $('#granularity_input').val(),
 			webcollage_id: webcollage_id,
 			editorType: editorType,
-			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_body').contentWindow.document.getElementById('SummaryTabContent').innerHTML)
+			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML)
 		};
 	}
 	

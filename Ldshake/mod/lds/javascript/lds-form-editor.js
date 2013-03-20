@@ -150,8 +150,8 @@ function ajax_submit (redirect)
 	
 	if(editorType == 'webcollage')
 	{
-		top.window.document.getElementById('lds_editor_body').contentWindow.TableGenerator.generateSummary();
-		top.window.document.getElementById('lds_editor_body').contentWindow.Loader.save_ldshake();
+		top.window.document.getElementById('lds_editor_iframe').contentWindow.TableGenerator.generateSummary();
+		top.window.document.getElementById('lds_editor_iframe').contentWindow.Loader.save_ldshake();
 		
 		submitData = 
 		{
@@ -165,7 +165,7 @@ function ajax_submit (redirect)
 			granularity: $('#granularity_input').val(),
 			editor_id: editor_id,
 			editorType: editorType,
-			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_body').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
+			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
 		};
 	}
 	
@@ -327,7 +327,7 @@ function loadData ()
 
     $('#lds_edit_tabs li.lds_tab').click(function () {
 
-        $('#lds_editor_body').fadeOut(200, function() {
+        $('#lds_editor_iframe').fadeOut(200, function() {
             $('#rich_text_box').show(200,function() {resizeCK();});
         });
 
@@ -454,7 +454,7 @@ function resizeEditorFrame ()
 {
     var wHeight = $(window).height() - $('#lds_edit_contents').offset().top - 50;
     wHeight = Math.max (wHeight, 300);
-    $('#lds_editor_body').height(wHeight);
+    $('#lds_editor_iframe').height(wHeight);
     $('#lds_edit_contents').height(wHeight);
     $('#rich_text_box').height(wHeight);
 
@@ -582,7 +582,7 @@ function tabs()
             editor.setData('');
 
             $('#lds_edit_tabs li.current').click(function () {
-                $('#lds_editor_body').fadeOut(200, function() {
+                $('#lds_editor_iframe').fadeOut(200, function() {
                     $('#rich_text_box').show(200,function() {resizeCK();});
                 });
             });
@@ -755,7 +755,7 @@ $(document).ready(function()
     $('.lds_exetab').click(function () {
 
         $('#rich_text_box').fadeOut(200, function() {
-            $('#lds_editor_body').show();
+            $('#lds_editor_iframe').show();
         });
 
 

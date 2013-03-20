@@ -631,13 +631,27 @@ class RestEditor extends Editor
         global $CONFIG;
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
         $rand_id = mt_rand(400,5000000);
-        $filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
-        copy($filename_lds, $filename_editor);
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
 
-        file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        unlink($filename_editor);
-        $vars['editor'] = 'exe';
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -781,18 +795,34 @@ class RestEditor extends Editor
     public function saveDocument($params=null)
     {
         if($this->_document->file_guid)
-            $this->saveExistingDocument();
+            $this->saveExistingDocument($params);
         else
             $this->saveNewDocument($params);
     }
 
     //update the previous contents
-    public function saveExistingDocument()
+    public function saveExistingDocument($params=null)
     {
         global $CONFIG;
         $user = get_loggedin_user();
         $resultIds = new stdClass();
-        $docSession = get_input('editor_id');
+        $docSession = $params['editor_id'];
+
+        $uri = $params['url'];
+        $response = \Httpful\Request::get($uri)
+            ->sendIt();
+
+        //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
+        //file('http://127.0.0.1/exelearning/?save='. $docSession);
+
+        $rand_id = mt_rand(400,9000000);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_data);
+
+        /*
         $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
         file('http://127.0.0.1/exelearning/?save='. $docSession);
 
@@ -801,10 +831,13 @@ class RestEditor extends Editor
         copy($filename_editor, $filename_lds);
         unlink($filename_editor);
 
+        */
+
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
 
 
+        /*
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
         exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
         if(strlen((string)$docSession) > 0)
@@ -812,17 +845,20 @@ class RestEditor extends Editor
         if(strlen((string)$old_previewDir) > 0)
             exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$old_previewDir);
 
+
         $this->updateExportDocument($this->_document->ims_ld, $docSession, 'IMS');
         $this->updateExportDocument($this->_document->scorm, $docSession, 'scorm');
         $this->updateExportDocument($this->_document->scorm2004, $docSession, 'scorm2004');
         $this->updateExportDocument($this->_document->webZip, $docSession, 'zipFile');
 
+        */
         $revisions = get_entities_from_metadata('document_guid',$this->_document->guid,'object','LdS_document_editor_revision',0,10000,0,'time_created');
         $resultIds->count = count($revisions);
 
         //create the diff content against the last saved revision
         if(count($revisions) > 0)
         {
+            /*
             $output = array();
             exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py".' '.$CONFIG->editors_content.'content/exe/'.$revisions[count($revisions)-1]->previewDir.'/index.html'.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/index.html', $output);
             $diff = implode('', $output);
@@ -832,6 +868,7 @@ class RestEditor extends Editor
             $handle = fopen($CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/diff.html', "w");
             fwrite($handle, $diff);
             fclose($handle);
+            */
         }
 
         $this->_document->save();
@@ -842,5 +879,193 @@ class RestEditor extends Editor
     public function __construct($document=null)
     {
         $this->_document = $document;
+    }
+}
+
+class GluepsManager
+{
+    public $lds;
+    public $document;
+    public $document_url;
+    public $instance_url;
+
+    public function newInstantiation() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function loadInstantiation() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function loadDocument() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function saveDocument() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function deployDocument() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function getVle() {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = mt_rand(400,5000000);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds}"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
     }
 }
