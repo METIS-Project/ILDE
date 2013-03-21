@@ -5,6 +5,22 @@ include_once ("manager/i18nParser.php");
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <html>
     <head>
+        
+       <script type="text/javascript" > 
+            var currentPage = window.location.href;
+            var topMostWindow = window.top.location.href;
+            //Check if it is contained in an iframe
+            if (currentPage != topMostWindow)
+            {               
+                var posInt = currentPage.lastIndexOf('?');
+                //Get the parameters provided in the url
+                var parameters = currentPage.substring(posInt+1);
+                //Redirect to the suitable page including the parameters
+                window.location.assign("main.php?"+parameters);
+            }           
+        </script>
+        
+
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="icon" type="image/png" href="images/wic2.png" /> 
 
