@@ -597,7 +597,7 @@ class RestEditor extends Editor
     {
         global $CONFIG;
         $user = get_loggedin_user();
-        $rand_id = mt_rand(1000000,5000000);
+        $rand_id = rand_str(64);//mt_rand(1000000,5000000);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
         //copy($CONFIG->path.'vendors/exelearning/sample.elp', $filename_editor);
@@ -618,8 +618,18 @@ class RestEditor extends Editor
 
         //$this->_document->url = $response;
         //$this->_document->save();
+
         $vars['editor_id'] = $rand_id;
-        $vars['document_url'] = $response->raw_body;
+        //http://appserver.ldshake.edu/designapp/?document_id=value&sectoken=value
+        $doc_url = parse_url($response->raw_body);
+        $url_path = explode('/', $doc_url['path']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        $vars['document_url'] = "{$response->raw_body}";
+        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
         $vars['editor'] = 'webcollagerest';
 
         return $vars;
@@ -630,13 +640,20 @@ class RestEditor extends Editor
     {
         global $CONFIG;
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
-        $rand_id = mt_rand(400,5000000);
+        $rand_id = rand_str(64);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds}"
+        );
+
+        $doc_contents = file_get_contents($filename_lds);
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => $doc_contents
         );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
@@ -651,7 +668,15 @@ class RestEditor extends Editor
         //file('http://127.0.0.1/exelearning/?load='.$rand_id);
         //unlink($filename_editor);
         $vars['editor'] = 'webcollagerest';
-        $vars['document_url'] = $response->raw_body;
+        $doc_url = parse_url($response->raw_body);
+        $url_path = explode('/', $doc_url['path']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        $vars['document_url'] = "{$response->raw_body}";
+        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -733,6 +758,7 @@ class RestEditor extends Editor
 
         $uri = $params['url'];
         $response = \Httpful\Request::get($uri)
+            ->addHeader('Authorization', "Bearer {$docSession}")
             ->sendIt();
 
         //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
@@ -743,7 +769,7 @@ class RestEditor extends Editor
         //create a new file to store the document
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        file_put_contents($file->getFilenameOnFilestore(), $response->raw_data);
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
         //copy($filename_editor, $file->getFilenameOnFilestore());
         //unlink($filename_editor);
 
@@ -789,7 +815,7 @@ class RestEditor extends Editor
 
     public function unload($docSession)
     {
-        file('http://127.0.0.1/exelearning/?unload='. $docSession);
+        //file('http://127.0.0.1/exelearning/?unload='. $docSession);
     }
 
     public function saveDocument($params=null)
@@ -810,6 +836,7 @@ class RestEditor extends Editor
 
         $uri = $params['url'];
         $response = \Httpful\Request::get($uri)
+            ->addHeader('Authorization', "Bearer {$docSession}")
             ->sendIt();
 
         //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
@@ -820,7 +847,7 @@ class RestEditor extends Editor
         //create a new file to store the document
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_data);
+        file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_body);
 
         /*
         $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
@@ -905,6 +932,7 @@ class GluepsManager
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->addHeader('Authorization', $docSession)
             ->body($post, 'multipart/form-data')
             ->sendIt();
 

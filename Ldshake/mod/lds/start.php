@@ -51,7 +51,8 @@ function lds_init()
         return $payload;
     };
 
-    $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
+    //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
+    $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
 	//Load the model classes
 	//TODO could include the whole directory...
 	require_once __DIR__.'/model/LdSObject.php';
@@ -150,7 +151,7 @@ function lds_page_handler ($page)
         return $payload;
     };
 
-    $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713";
+    $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=10729";
     $xml = "some random data";
     $post = array(
         "uploadData"=>"test",
@@ -167,6 +168,18 @@ function lds_page_handler ($page)
     $bin ="sdfgt5yerhur6i58z0293tpwt8m43333333ty3487";
     $bin ='/etc/pam.conf';
 
+    $save_params = array(
+        'url' => "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713",
+        'editor_id' => "345etrd5w54wedtr54",
+        "randomData56"=>"@/etc/pam.conf",
+    );
+    /*
+    $response = \Httpful\Request::post($uri)
+        ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
+        ->addHeader('Authorization', "rtetdchj")
+        ->body($save_params, 'multipart/form-data')
+        ->sendIt();
+*/
 /*
     $response = \Httpful\Request::post($uri, $post)
         ->sendsType(\Httpful\Mime::FORM)

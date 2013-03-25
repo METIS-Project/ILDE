@@ -96,7 +96,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<?php endif; ?>
 				-->
 
-                <iframe id="lds_editor_iframe" src=<?php echo "{$document_url}"; ?> width="958" height="616" style="border: 1px solid grey;"></iframe>
+                <iframe id="lds_editor_iframe" src="<?php echo $document_iframe_url; ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
 					
 			</div>
             <div id="lds_edit_tabs" class="scrollable">
@@ -194,7 +194,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var mytags = <?php echo $tags ?>;
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();
-		var editor_id = <?php echo $editor_id ?>;
+		var editor_id = "<?php echo $editor_id ?>";
 		var groups = <?php echo $groups ?>;
         var documents = <?php echo $initDocuments ?>;
         var document_url = "<?php echo $document_url ?>";

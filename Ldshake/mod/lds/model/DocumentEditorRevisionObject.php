@@ -55,6 +55,7 @@ class DocumentEditorRevisionObject extends ElggObject
 
 	public static function createRevisionFromDocumentEditor ($document)
 	{
+        /*
 		$revision = new DocumentEditorRevisionObject($document->guid);
 		$editor = EditorsFactory::getInstance($document);
 		
@@ -84,6 +85,7 @@ class DocumentEditorRevisionObject extends ElggObject
 		$document->published = '0';
 		
 		$revision->save ();
+        */
 	}
 }
  

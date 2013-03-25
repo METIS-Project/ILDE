@@ -72,7 +72,7 @@ if (isloggedin()) :
 				<div id="toolbar_lds_types">
 				<ul>
 					<li id="tb_newlds_basic"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
-					<li id="tb_newlds_exe"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/exe/"><?php echo T("eXeLearning") ?></a></li>
+					<li id="tb_newlds_wic"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
 				</ul>
 			</div>
 			</div>
