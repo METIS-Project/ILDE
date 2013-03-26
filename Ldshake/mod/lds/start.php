@@ -51,7 +51,7 @@ function lds_init()
         return $payload;
     };
 
-    //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
+    $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
 	//Load the model classes
 	//TODO could include the whole directory...
@@ -442,7 +442,9 @@ function lds_exec_browse ($params)
 function lds_exec_new ($params)
 {
 	global $CONFIG;
-	
+
+    require_once __DIR__.'/patterns/coursemap.php';
+
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
 	$vars['referer'] = $CONFIG->url.'pg/lds/';
 	
@@ -468,7 +470,9 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][0]->guid = '0';
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
-	
+    if(count($params) == 3)
+        $vars['initDocuments'][0]->body = get_coursemap_pattern();
+
 	//And a support doc!
 	$vars['initDocuments'][1] = new stdClass();
 	$vars['initDocuments'][1]->title = T("Support Document");

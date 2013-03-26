@@ -646,15 +646,15 @@ class RestEditor extends Editor
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
-            'document' => "@{$filename_lds}"
+            'document' => "@{$filename_lds};type=application/json; charset=UTF-8"
         );
 
         $doc_contents = file_get_contents($filename_lds);
-        $post = array(
+        /*$post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
             'document' => $doc_contents
-        );
+        );*/
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
@@ -756,9 +756,10 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
-        $uri = $params['url'];
+        $uri = $params['url'].'?XDEBUG_SESSION_START=16713';
         $response = \Httpful\Request::get($uri)
             ->addHeader('Authorization', "Bearer {$docSession}")
+            ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
         //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
@@ -837,6 +838,7 @@ class RestEditor extends Editor
         $uri = $params['url'];
         $response = \Httpful\Request::get($uri)
             ->addHeader('Authorization', "Bearer {$docSession}")
+            ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
         //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
