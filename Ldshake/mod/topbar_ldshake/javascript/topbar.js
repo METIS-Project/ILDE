@@ -39,6 +39,18 @@ $(document).ready(function()
 		e.preventDefault();
 		e.stopPropagation();
 	});
+
+    $('#tb_new_option_author').hover(function (e)
+    {
+
+        if(e.type == 'mouseleave') {
+            document.elementFromPoint(e.pageX, e.pageY).id == ''
+        }
+        console.log('' + e.pageX + ' ' + e.pageY);
+            //document.elementFromPoint(e.x, e.y).id;
+
+        $('#new_menu_author').toggle();
+    });
 	
 	$('#toolbar_lds_types').click (function (e) {
 		e.stopPropagation();

@@ -70,12 +70,19 @@ if (isloggedin()) :
 					?>
 				</ul>
 				<div id="toolbar_lds_types">
-				<ul>
-					<li id="tb_newlds_basic"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
-                    <li id="tb_newlds_pattern"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
-					<li id="tb_newlds_wic"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
-				</ul>
-			</div>
+                    <ul>
+                        <li id="tb_new_option_conceptualize"><?php echo T("Conceptualize") ?></li>
+                        <li id="tb_new_option_author"><?php echo T("Author") ?></li>
+                        <li id="tb_new_option_implement"><?php echo T("Implement") ?></li>
+                    </ul>
+			    </div>
+                <div id="new_menu_author">
+                    <ul>
+                        <li id="tb_newlds_basic"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
+                        <li id="tb_newlds_pattern"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
+                        <li id="tb_newlds_wic"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
+                    </ul>
+                </div>
 			</div>
 		</div>
 		<div id="ldshake_topbar_container_right">

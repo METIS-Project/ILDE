@@ -165,6 +165,18 @@
     left: 110px;
 }
 
+#new_menu_author {
+    position: absolute;
+    display: none;
+    background-color: #19371A;
+    padding: 15px;
+    background-color: #19371A;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 1px 4px #666666;
+    top: 67px;
+    left: 210px;
+}
+
 #toolbar_lds_types ul {
 	margin: 0;
 	padding: 0;
