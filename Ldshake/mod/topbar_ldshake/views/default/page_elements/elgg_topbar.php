@@ -69,21 +69,28 @@ if (isloggedin()) :
 					echo elgg_view('elgg_topbar/extend', $vars);
 					?>
 				</ul>
-				<div id="toolbar_lds_types">
+				<div id="toolbar_lds_types" class="menu">
                     <ul>
-                        <li id="tb_new_option_conceptualize"><?php echo T("Conceptualize") ?></li>
-                        <li id="tb_new_option_author"><?php echo T("Author") ?></li>
-                        <li id="tb_new_option_implement"><?php echo T("Implement") ?></li>
+                        <li id="tb_new_option_conceptualize" class="menu_option menu_suboption"><?php echo T("Conceptualize") ?></li>
+                        <li id="tb_new_option_author" class="menu_option menu_suboption"><?php echo T("Author") ?></li>
+                        <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>
                     </ul>
 			    </div>
-                <div id="new_menu_author">
+                <div id="new_menu_author" class="menu">
                     <ul>
-                        <li id="tb_newlds_basic"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
-                        <li id="tb_newlds_pattern"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
-                        <li id="tb_newlds_wic"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
+                        <li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
+                        <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
+                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
                     </ul>
                 </div>
-			</div>
+                <div id="new_menu_implement" class="menu">
+                    <ul>
+                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
+                        <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("See your VLE") ?></a></li>
+                        <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("Register your VLE") ?></a></li>
+                    </ul>
+                </div>
+            </div>
 		</div>
 		<div id="ldshake_topbar_container_right">
 			<div id="ldshake_topbar_serach">
