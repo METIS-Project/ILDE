@@ -26,7 +26,7 @@ $(document).ready(function()
 	$('#ldshake_topbar_menu_switch').click (function (e)
 	{
 		$('#ldshake_topbar_user_menu').css('left', $('#layout_canvas').offset().left + $('#layout_canvas').width() - $('#ldshake_topbar_user_menu').width() - 20);
-		$('#ldshake_topbar_user_menu').fadeToggle();
+		$('#ldshake_topbar_user_menu').fadeToggle(200);
 		$('#ldshake_topbar_user_options').toggleClass('menu_active');
 		e.preventDefault();
 		e.stopPropagation();

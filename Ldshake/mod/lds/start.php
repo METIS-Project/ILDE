@@ -61,7 +61,8 @@ function lds_init()
 	require_once __DIR__.'/model/DocumentRevisionObject.php';
 	require_once __DIR__.'/model/DocumentEditorRevisionObject.php';
 	require_once __DIR__.'/model/DeferredNotification.php';
-	
+    require_once __DIR__.'/model/ImplementationObject.php';
+
 	require_once __DIR__.'/editors/editorsFactory.php';
 
     require_once __DIR__.'/rest.php';
