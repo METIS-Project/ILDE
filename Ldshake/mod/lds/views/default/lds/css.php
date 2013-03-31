@@ -999,23 +999,26 @@ del {
 
 
 #lds_single_share_popup {
-	z-index: 100000;
-	position: fixed;
 	width: 500px;
-	background-color: #fff;
-	padding: 10px;
 	top: 100px;
 	left: 50%;
 	margin-left: -260px;
-	border: 10px solid rgba(120,120,120,0.42);
-	-moz-border-radius: 5px 5px 5px 5px;
-	-webkit-border-radius: 5px 5px 5px 5px;
-	border-radius: 5px 5px 5px 5px;
-	-webkit-background-clip: padding-box;
+}
+
+.lds_popup {
+    z-index: 100000;
+    position: fixed;
+    background-color: #fff;
+    padding: 10px;
+    border: 10px solid rgba(120,120,120,0.42);
+    -moz-border-radius: 5px 5px 5px 5px;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+    -webkit-background-clip: padding-box;
     -moz-background-clip: padding;
     background-clip: padding-box;
-	display: none;
-	font-size: 13px;
+    display: none;
+    font-size: 13px;
 }
 
 .close_popup {

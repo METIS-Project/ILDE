@@ -35,6 +35,22 @@
 
 $(document).ready(function()
 {
+    $('#clonelds_submit').click(function (){
+        var submitData =
+        {
+            guid: $('#lds_edit_guid').val(),
+            title: $('input[name=new_lds_title]').val()
+        };
+
+        $.post (baseurl + "action/lds/clone", submitData, function(data) {
+            window.location = baseurl + 'pg/lds/view/' + data;
+        });
+    });
+
+    $('#clonelds_show_popup').click(function (){
+        $('#clonelds_popup').fadeToggle(200);
+    });
+
 	$('#lds_action_publish,#lds_action_republish').click(function (){
 		$('.publishbutton').css('visibility','hidden');
 		$('.lds_loading').show();

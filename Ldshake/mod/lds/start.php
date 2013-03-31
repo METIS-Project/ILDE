@@ -79,6 +79,7 @@ function lds_init()
 	register_page_handler('lds','lds_page_handler');
 	
 	//LdS actions:
+    register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
 	register_action("lds/save_editor", false, $CONFIG->pluginspath . "lds/actions/lds/save_editor.php");
 	register_action("lds/delete", false, $CONFIG->pluginspath . "lds/actions/lds/delete.php");

@@ -36,7 +36,7 @@
 
 ?>
 
-<div id="lds_single_share_popup">
+<div id="lds_single_share_popup" class="lds_popup">
 	<a class="close_popup<?php if ($am_i_starter) echo ' edit' ?>" id="lds_single_share_popup_close" href="#"><?php echo T("Done") ?></a>
 	<h3><?php echo T("LdS Sharing options") ?></h3>
 	<ul id="added_contacts">

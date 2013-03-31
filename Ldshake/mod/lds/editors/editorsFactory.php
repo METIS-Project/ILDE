@@ -3,6 +3,7 @@ include_once(__DIR__.'/../rand.php');
 class Editor
 {
 	private $_document;
+    private $_lds;
 
 	//return the filesystem path of an ElggFile object
 	public function getFullFilePath($file_guid)
@@ -33,11 +34,56 @@ class Editor
 	}
 }
 
+class ManagerFactory {
+    public static function getManager($lds) {
+        return new richTextEditor(array(), $lds);
+    }
+}
+
+class richTextEditor extends Editor
+{
+    public function cloneLdS($title = null)
+    {
+        $lds = new LdSObject();
+        if($title)
+            $lds->title = $title;
+        $lds->granularity = 0;
+        $lds->completeness = 0;
+        $lds->cloned = 1;
+        $lds->parent = $this->_lds->guid;
+
+        $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
+        foreach ($tagFields as $field)
+            $lds->$field = $this->_lds->$field;
+
+        $lds->save();
+        create_annotation($lds->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+        $revision = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
+        $revision = $revision[0];
+
+        foreach($this->_document as $d) {
+            $newdoc = new DocumentObject($lds->guid);
+            $newdoc->description = $d->description;
+            $newdoc->title = $d->title;
+            $newdoc->lds_revision_id = $revision->id;
+            $newdoc->save();
+        }
+
+        return $lds;
+    }
+
+    public function __construct($document = array(), $lds = null)
+    {
+        $this->_lds = $lds;
+        $this->_document = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
+    }
+}
+
 class exeLearningEditor extends Editor
 {
 	public function getDocumentId()
 	{
-		return $_document->guid;
+		return $this->_document->guid;
 
 	}
 
