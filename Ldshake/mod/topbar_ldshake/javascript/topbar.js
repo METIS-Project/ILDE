@@ -58,7 +58,7 @@ $(document).ready(function()
 
     $('#tb_new_option_author').mouseleave(function (e)
     {
-        $nm = $('#new_menu_author')
+        $nm = $('#new_menu_author');
 
         var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
         var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());

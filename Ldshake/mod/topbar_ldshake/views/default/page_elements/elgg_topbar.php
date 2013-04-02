@@ -51,9 +51,9 @@ if (isloggedin()) :
 				$user = get_loggedin_user();
 				if ($user->isExpert):
 				?>
-				<a href="<?php echo $vars['url']; ?>pg/lds/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/header_logo_transp.png" alt="LdShake" /></a>
+				<a href="<?php echo $vars['url']; ?>pg/lds/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
 				<?php else:	?>
-				<a href="<?php echo $vars['url']; ?>pg/lds/firststeps/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/header_logo_transp.png" alt="LdShake" /></a>
+				<a href="<?php echo $vars['url']; ?>pg/lds/firststeps/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
 				<?php endif; ?>
 			</div>
 			<div id="toolbarlinks">
@@ -87,7 +87,7 @@ if (isloggedin()) :
                     <ul>
                         <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
                         <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("See your VLE") ?></a></li>
-                        <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("Register your VLE") ?></a></li>
+                        <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Register your VLE") ?></a></li>
                     </ul>
                 </div>
             </div>

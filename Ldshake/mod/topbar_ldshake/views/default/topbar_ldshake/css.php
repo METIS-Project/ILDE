@@ -16,6 +16,10 @@
 	margin-right: 30px;
 }
 
+#ldshake_topbar_logo img {
+    height: 34px;
+}
+
 #ldshake_topbar_container_left {
 	float: left;
 	width: 580px;

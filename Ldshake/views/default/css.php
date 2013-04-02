@@ -2209,6 +2209,10 @@ div.ajax_loader {
 	float: left;
 }
 
+#footer-logos img {
+    height: 57px;
+}
+
 #footer-contents
 {
 	margin: 10px 0 0 20px;

@@ -114,38 +114,8 @@ function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
 
     if ($subtype == 'LdS') {
         return lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
-
-        /*
-        $write_permission = $params['entity']->write_access_id ?: 0;
-        $user = $params['user'];
-
-        if (($write_permission) && ($user))
-        {
-            $list_ini=get_members_of_access_collection($write_permission, $idonly = false);
-            $list=array();
-            if (is_array($list_ini))
-            {
-                foreach ($list_ini as $member){
-                    $list[]=$member[guid];
-                }
-            }
-
-            if (
-                (($write_permission!=0) && (in_array($user->guid,$list)))
-                ||
-                ($params['entity']->owner_guid==$user->guid)
-                ||
-                (($write_permission==1) && (isloggedin()))
-                ||($write_permission==2)
-                ){
-                return true;
-                }
-        }
-        */
     }
 }
-
-
 
 function lds_page_handler ($page)
 {
@@ -348,6 +318,18 @@ function lds_exec_search ($params) {
 	
 	$body = elgg_view('lds/search',$vars);
 	page_draw($query, $body);
+}
+
+function lds_exec_vle ($params)
+{
+    $query = urldecode(get_input('q'));
+
+    $vars['query'] = $query;
+    $vars['list'] = lds_contTools::searchLdS($query);
+    $vars['count'] = count ($vars['list']);
+
+    $body = elgg_view('lds/search',$vars);
+    page_draw($query, $body);
 }
 
 function lds_exec_trashed ($params)

@@ -187,7 +187,7 @@
 		
 		#footer-logos {
 			height: 66px;
-			width: 824px;
+			/*width: 824px;*/
 			float: left;
 		}
 		
@@ -203,7 +203,11 @@
 			padding: 5px;
 			float: left;
 		}
-		
+
+        #footer-logos img {
+            height: 57px;
+        }
+
 		#footer-contents
 		{
 			margin: 16px 0 0 30px;
@@ -329,9 +333,17 @@
 		<div id="footer">
 			<div id="footer-logos">
 				<ul>
-					<li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/upf-logo.png" alt="<?php echo T("UPF logo") ?>"></a></li>
-					<li><a href="http://gti.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/gti-small.png" alt="<?php echo T("GTI UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logo-footer-metis.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logos-footer-llp.png" alt="<?php echo T("UPF logo") ?>"></a></li>
                     <li><a href="http://ldshake.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/powered-by-ldshake.png" alt="<?php echo T("Powered by LdShake") ?>" /></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/glueps-inside.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/WC-inside.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/openglm-supported.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/cadmos-supported.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/metis/ouldi-inside-supported.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <!--<li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/upf-logo.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                    <li><a href="http://gti.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/gti-small.png" alt="<?php echo T("GTI UPF logo") ?>"></a></li>
+                    <li><a href="http://ldshake.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/powered-by-ldshake.png" alt="<?php echo T("Powered by LdShake") ?>" /></a></li>-->
                 </ul>
 			</div>
 		</div>
