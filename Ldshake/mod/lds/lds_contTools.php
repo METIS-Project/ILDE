@@ -1127,7 +1127,7 @@ SQL;
 
     }
 
-    public static function getUserEditableLdSs($user_id, $count = false, $limit = 0, $offset = 0) {
+    public static function getUserEditableLdSs($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
         if(isadminloggedin()) {
@@ -1157,8 +1157,20 @@ SQL;
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id('object', 'LdS');
 
+        $metadata_join = "";
+        $metadata_query = "";
+
+        if($m_key && $m_value) {
+            $metadata_key_id = get_metastring_id($m_key);
+            $metadata_value_id = get_metastring_id($m_value);
+
+            $metadata_join = 'JOIN metadata m ON e.guid = m.entity_guid';
+            $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
+        }
+
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
+SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
+AND (
 	(e.owner_guid = {$user_id})
 	OR
 	(

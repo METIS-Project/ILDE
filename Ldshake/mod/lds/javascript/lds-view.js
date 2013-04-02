@@ -49,6 +49,13 @@ $(document).ready(function()
 
     $('#clonelds_show_popup').click(function (){
         $('#clonelds_popup').fadeToggle(200);
+        $('input[name=new_lds_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#clonelds_submit').click();
+                }
+            })
+            .focus();
     });
 
 	$('#lds_action_publish,#lds_action_republish').click(function (){

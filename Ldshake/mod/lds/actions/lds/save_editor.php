@@ -64,6 +64,7 @@ else
 	$lds = new LdSObject();
 	$lds->owner_guid = get_loggedin_userid();
 	$lds->external_editor = true;
+    $lds->editor_type = $editor_type;
 	$user = get_loggedin_user();
 	$lds->save();
 	

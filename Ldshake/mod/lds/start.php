@@ -229,7 +229,7 @@ function lds_page_handler ($page)
 		gatekeeper();
 	
 	//Special case: my lds's url is short: doesn't have an explicit section, so we add it automatically
-	if ($page[0] == '' || $page[0] == 'created-by-me' || $page[0] == 'shared-with-me')
+	if ($page[0] == '' || $page[0] == 'created-by-me' || $page[0] == 'shared-with-me' || $page[0] == 'created-with')
 		array_unshift($page, 'main');
 		
 	//Sub_controller dispatcher
@@ -318,10 +318,15 @@ function lds_exec_main ($params)
         $vars['list'] = lds_contTools::enrichLdS($entities);
         $vars['title'] = T("LdS shared with me");
     }
+    elseif ($params[1] == 'created-with')
+    {
+        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[2]);
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[2]);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("Created with").$params[2];
+    }
     else
     {
-        //$vars['count'] = lds_contTools::countMyLds();
-        //$entities = lds_contTools::getMyLds(50, $offset);
         $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
