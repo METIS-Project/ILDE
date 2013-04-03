@@ -78,9 +78,11 @@ if (isloggedin()) :
 			    </div>
                 <div id="new_menu_author" class="menu">
                     <ul>
-                        <li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>
+                        <!--<li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>-->
                         <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
+                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/uploadlds/openglm/"><?php echo T("OpenGLM (upload)") ?></a></li>
+                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/cadmos/"><?php echo T("CADMOS (upload)") ?></a></li>
                     </ul>
                 </div>
                 <div id="new_menu_implement" class="menu">

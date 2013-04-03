@@ -187,6 +187,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var new_lds = (initLdS.guid == '0') ? true : false;
 		var documents = <?php echo $initDocuments ?>;
 		var mytags = <?php echo $tags ?>;
+        var editor_type = '<?php echo $editor_type ?>';
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();
 		friends['available'] = <?php echo $jsonfriends ?>;

@@ -157,7 +157,7 @@
 
 <script type="text/javascript">
 	var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
-	var friends = new Array()
+	var friends = new Array();
     var new_lds = false;
 	friends['available'] = <?php echo $jsonfriends ?>;
 	friends['viewers'] = <?php echo $viewers ?>;

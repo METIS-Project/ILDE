@@ -18,6 +18,9 @@
 
 #ldshake_topbar_logo img {
     height: 34px;
+    background-color: #fff;
+    border-radius: 3px;
+    margin-right: 30px;
 }
 
 #ldshake_topbar_container_left {

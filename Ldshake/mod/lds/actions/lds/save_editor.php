@@ -65,6 +65,7 @@ else
 	$lds->owner_guid = get_loggedin_userid();
 	$lds->external_editor = true;
     $lds->editor_type = $editor_type;
+    $lds->implementable = '1';
 	$user = get_loggedin_user();
 	$lds->save();
 	

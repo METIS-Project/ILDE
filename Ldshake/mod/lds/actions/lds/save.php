@@ -56,7 +56,7 @@ else
 	//We're creating it from scratch. Construct a new obj.
 	$lds = new LdSObject();
 	$lds->owner_guid = get_loggedin_userid();
-    $lds->editor_type = 'richtext';
+    $lds->editor_type = get_input('editor_type');
 	$isNew = true;
 } 
 

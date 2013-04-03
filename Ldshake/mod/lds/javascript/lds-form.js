@@ -157,7 +157,8 @@ function ajax_submit (redirect)
 		tags: $('#as-values-tags').val(),
 		completeness: $('#completeness_input').val(),
 		granularity: $('#granularity_input').val(),
-		documents: documents
+		documents: documents,
+        editor_type: editor_type
     };
 
 	$.post (baseurl + "action/lds/save", submitData, function (data)

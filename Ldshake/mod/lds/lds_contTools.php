@@ -1455,6 +1455,38 @@ SQL;
         }
     }
 
+    public static function getVLE()
+    {
+        if ($vles = get_entities('object', 'vle_data', get_loggedin_userid())) {
+            return $vles[0];
+        } else {
+            $vle = new ElggObject();
+            $vle->subtype = 'vle_data';
+            $vle->url = '';
+            $vle->username = '';
+            $vle->password = '';
+            $vle->type = '';
+            $vle->save();
+            return $vle;
+        }
+
+        return false;
+    }
+
+    public static function getVLECourses($vle)
+    {
+        ////REST CALLS
+        ////
+        $courses = array(
+            array('id' => '34', 'name' => 'course A'),
+            array('id' => '74', 'name' => 'course B'),
+            array('id' => '82', 'name' => 'course C'),
+            array('id' => '83', 'name' => 'course D')
+        );
+
+        return $courses;
+    }
+
     private function build_comment_notification($notification, $guid_list) {
         $vars['ldsTitle'] = $notification->title;
         $vars['fromName'] = $notification->name;

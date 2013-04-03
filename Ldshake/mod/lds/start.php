@@ -294,6 +294,7 @@ function lds_exec_main ($params)
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[2]);
         $vars['list'] = lds_contTools::enrichLdS($entities);
         $vars['title'] = T("Created with").$params[2];
+        $vars['editor_filter'] = $params[2];
     }
     else
     {
@@ -305,6 +306,32 @@ function lds_exec_main ($params)
 
     $vars['section'] = $params[1];
     $body = elgg_view('lds/mylds',$vars);
+
+    page_draw($vars['title'], $body);
+}
+
+function lds_exec_implementable ($params)
+{
+    $offset = get_input('offset') ?: '0';
+
+    if (strlen($params[1]))
+    {
+        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[1]);
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[1]);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("Created with") . ' ' . $params[1];
+        $vars['editor_filter'] = $params[1];
+    }
+    else
+    {
+        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "implementable", '1');
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "implementable", $params[1]);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("All my LdS");
+    }
+
+    $vars['section'] = $params[1];
+    $body = elgg_view('lds/implementable',$vars);
 
     page_draw($vars['title'], $body);
 }
@@ -322,14 +349,14 @@ function lds_exec_search ($params) {
 
 function lds_exec_vle ($params)
 {
-    $query = urldecode(get_input('q'));
-
-    $vars['query'] = $query;
-    $vars['list'] = lds_contTools::searchLdS($query);
-    $vars['count'] = count ($vars['list']);
-
-    $body = elgg_view('lds/search',$vars);
-    page_draw($query, $body);
+    $vle = lds_contTools::getVLE();
+    $courses = lds_contTools::getVLECourses($vle);
+    $vars = array(
+        'vle' => $vle,
+        'courses' => $courses
+    );
+    $body = elgg_view('lds/vledata',$vars);
+    page_draw('VLE', $body);
 }
 
 function lds_exec_trashed ($params)
@@ -452,15 +479,19 @@ function lds_exec_new ($params)
 	$vars['all_can_read'] = 'true';
 	
 	$vars['initLdS'] = json_encode($vars['initLdS']);
-	
+
+    $vars['editor_type'] = 'richtext';
+
 	//And also an empty Document
 	$vars['initDocuments'][0] = new stdClass();
 	$vars['initDocuments'][0]->title = T("Untitled Document");
 	$vars['initDocuments'][0]->guid = '0';
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
-    if(count($params) == 3)
+    if(count($params) == 3) {
         $vars['initDocuments'][0]->body = get_coursemap_pattern();
+        $vars['editor_type'] = 'coursemap';
+    }
 
 	//And a support doc!
 	$vars['initDocuments'][1] = new stdClass();
@@ -483,6 +514,7 @@ function lds_exec_new ($params)
     $vars['starter'] = get_loggedin_user();
 
     $vars['title'] = T("New LdS");
+
     echo elgg_view('lds/editform',$vars);
 }
 
@@ -703,6 +735,8 @@ function lds_exec_edit ($params)
     $vars['starter'] = get_user($editLdS->owner_guid);
 
     $vars['title'] = T("Edit LdS");
+    $vars['editor_type'] = $editLdS->editor_type;
+
     echo elgg_view('lds/editform',$vars);
 }
 

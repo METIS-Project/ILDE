@@ -35,41 +35,11 @@
  ********************************************************************************/
 
 ?>
-<?php
-extract($vars);
 
-T('Enter your VLE data');
-?>
+<div id="clonelds_popup" class="lds_popup">
+    <a class="close_popup" id="ldsclone_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Enter the LdS title") ?></h3>
+    <input type="text" name="new_lds_title" />
 
-<form action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>">
-
-    <span class="vle_form_label"><?php T('VLE name')?></span>
-    <input class="vle_form_input" type="text" name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
-    <span class="vle_form_label"><?php T('VLE type')?></span>
-    <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->type)?>" />
-    <span class="vle_form_label"><?php T('VLE url')?></span>
-    <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->url)?>" />
-    <span class="vle_form_label"><?php T('VLE username')?></span>
-    <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
-    <span class="vle_form_label"><?php T('VLE password')?></span>
-    <input class="vle_form_input" type="text" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
-    <input class="vle_form_submit" type="submit" name="vle_submit" />
-
-</form>
-
-
-<div>
-    <?php echo T('Available VLE courses')?>
-    <div>
-        <?php foreach($courses as $fvle):?>
-        <div class="vle_info_box">
-            <div class="vle_info_field">
-                <span class="vle_info_name_label"><?php echo T('Course id')?></span>: <span class="vle_info_name_data"><?php echo $fvle->id?></span>
-            </div>
-            <div class="vle_info_field">
-                <span class="vle_info_name_label"><?php echo T('Course name')?></span>: <span class="vle_info_name_data"><?php echo $fvle->name?></span>
-            </div>
--        </div>
-        <?php endforeach;?>
-    </div>
+    <input type="button" id="clonelds_submit" />
 </div>

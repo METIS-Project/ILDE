@@ -660,6 +660,7 @@ class RestEditor extends Editor
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->sendIt();
 
         //$this->_document->url = $response;
@@ -707,6 +708,7 @@ class RestEditor extends Editor
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->sendIt();
 
         //copy($filename_lds, $filename_editor);
@@ -804,7 +806,7 @@ class RestEditor extends Editor
 
         $uri = $params['url'].'?XDEBUG_SESSION_START=16713';
         $response = \Httpful\Request::get($uri)
-            ->addHeader('Authorization', "Bearer {$docSession}")
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
@@ -883,7 +885,7 @@ class RestEditor extends Editor
 
         $uri = $params['url'];
         $response = \Httpful\Request::get($uri)
-            ->addHeader('Authorization', "Bearer {$docSession}")
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
@@ -980,7 +982,7 @@ class GluepsManager
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->addHeader('Authorization', $docSession)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->body($post, 'multipart/form-data')
             ->sendIt();
 
