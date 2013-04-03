@@ -347,14 +347,14 @@ function lds_exec_implementations ($params)
         $vars['count'] = get_entities('object', 'LdS_implementation', get_loggedin_userid(), '', 50, $offset, true);
         $entities = get_entities('object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("LdS created by me");
+        $vars['title'] = T("Created by me > Implementations");
     }
     elseif ($params[1] == 'shared-with-me')
     {
         $vars['count'] = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), true, 0 , 0);
         $entities = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("Created with") . ' ' . $params[1];
+        $vars['title'] = T("Shared with me > Implementations");
         $vars['editor_filter'] = $params[1];
     }
     else
@@ -362,7 +362,7 @@ function lds_exec_implementations ($params)
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my LdS > implementable in VLE");
+        $vars['title'] = T("All my LdS > Implementations");
     }
 
     $vars['section'] = $params[1];
