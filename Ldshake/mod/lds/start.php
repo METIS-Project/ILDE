@@ -80,6 +80,7 @@ function lds_init()
 	
 	//LdS actions:
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
+    register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
 	register_action("lds/save_editor", false, $CONFIG->pluginspath . "lds/actions/lds/save_editor.php");
 	register_action("lds/delete", false, $CONFIG->pluginspath . "lds/actions/lds/delete.php");
@@ -327,10 +328,11 @@ function lds_exec_implementable ($params)
         $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "implementable", '1');
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "implementable", $params[1]);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my LdS");
+        $vars['title'] = T("All my LdS > implementable in VLE");
     }
 
     $vars['section'] = $params[1];
+    $vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementable',$vars);
 
     page_draw($vars['title'], $body);

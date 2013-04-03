@@ -40,7 +40,8 @@
 <div id="two_column_left_sidebar">
     <div id="owner_block">
         <ul id="lds_side_sections">
-            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable' ?></a></li>
+            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable' ?>"><?php echo T('All my LdS') ?></a></li>
+            <li><?php echo T("Authored with") ?></li>
             <li><a<?php if ($section == 'webcollagerest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/webcollagerest' ?>"><?php echo T("WebCollage") ?></a></li>
             <li><a<?php if ($section == 'openglmrest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/openglmrest' ?>"><?php echo T("OpenGLM") ?></a></li>
             <li><a<?php if ($section == 'cadmosrest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/cadmosrest' ?>"><?php echo T("CADMOS") ?></a></li>
@@ -86,7 +87,7 @@
                             <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->external_editor ? 'exe' : 'doc' ?>-icon-20.png" alt="LdS" /></a>
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_implement_action" href="#"><?php echo T("Implement as") ?></a>
+                                    <a lds_id="<?php echo $item->lds->guid ?>" class="lds_implement_action" href="#"><?php echo T("Implement as") ?></a>
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
 						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>

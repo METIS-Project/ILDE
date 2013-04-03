@@ -35,6 +35,54 @@
 
 $(document).ready(function()
 {
+    $('#implementlds_submit').click(function (){
+        var submitData =
+        {
+            lds_id: $('#implement_popup input[name=lds_id]').val(),
+            vle_course_id: $('input:radio[name=course]:checked').val(),
+            title: $('input[name=new_implementation_title]').val()
+        };
+
+        $.post (baseurl + "action/lds/implement", submitData, function(data) {
+            window.location = baseurl + 'pg/lds/implementations/';
+        });
+    });
+
+    $('.lds_implement_action').click(function (){
+        $('#implement_popup input[name=lds_id]').val($(this).attr('lds_id'));
+        $('#implement_popup').fadeToggle(200);
+        $('input[name=new_implementation_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#implementlds_submit').click();
+                }
+            })
+            .focus();
+    });
+
+    $('#clonelds_submit').click(function (){
+        var submitData =
+        {
+            guid: $('#lds_edit_guid').val(),
+            title: $('input[name=new_lds_title]').val()
+        };
+
+        $.post (baseurl + "action/lds/clone", submitData, function(data) {
+            window.location = baseurl + 'pg/lds/view/' + data;
+        });
+    });
+
+    $('#clonelds_show_popup').click(function (){
+        $('#clonelds_popup').fadeToggle(200);
+        $('input[name=new_lds_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#clonelds_submit').click();
+                }
+            })
+            .focus();
+    });
+
 	//Delete LdS
 	$('.lds_action_delete').click (function ()
 	{

@@ -1478,10 +1478,9 @@ SQL;
         ////REST CALLS
         ////
         $courses = array(
-            array('id' => '34', 'name' => 'course A'),
-            array('id' => '74', 'name' => 'course B'),
-            array('id' => '82', 'name' => 'course C'),
-            array('id' => '83', 'name' => 'course D')
+            array('id' => '2_34', 'name' => 'Agora VLE, English level A1'),
+            array('id' => '2_74', 'name' => 'Agora VLE, English level A2'),
+            array('id' => '2_82', 'name' => 'Agora VLE, Alphabetization course'),
         );
 
         return $courses;

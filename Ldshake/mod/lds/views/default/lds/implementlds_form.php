@@ -36,10 +36,19 @@
 
 ?>
 
-<div id="clonelds_popup" class="lds_popup">
-    <a class="close_popup" id="ldsclone_popup_close" href="#"><?php echo T("Cancel") ?></a>
-    <h3><?php echo T("Enter the LdS title") ?></h3>
-    <input type="text" name="new_lds_title" />
+<div id="implement_popup" class="lds_popup">
+    <a class="close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Select one of your registered VLEs") ?></h3>
 
-    <input type="button" id="clonelds_submit" />
+    <?php
+    foreach($courses as $course):
+    ?>
+    <div>
+        <input type="radio" name="course" value="<?php echo $course['id'];?>"/><span class="course-name"><?php echo $course['name'];?></span>
+    </div>
+    <?php endforeach; ?>
+    <input type="text" name="new_implementation_title" />
+    <input type="hidden" name="lds_id" />
+
+    <input type="button" id="implementlds_submit" />
 </div>

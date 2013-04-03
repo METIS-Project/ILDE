@@ -43,7 +43,7 @@
 		<p><?php echo T("A site where teachers <span style=\"color:#960001\">(LdShakers)</span> co-edit and share Learning design Solutions <span style=\"color:#960001\">(LdS)</span>") ?></p>
 		<div id="fs_never_again"><a href="<?php echo $url ?>pg/lds/make_expert/<?php echo get_loggedin_userid() ?>/"><?php echo T("OK, don't show me this page again") ?></a></div>
 	</div>
-	<div id="fs_xul">
+	<div id="fs_xul" style="display: none;">
 		<h2>What you need to do to be able to edit eXeLearning resources?</h2>
         To be able to edit or create eXeLearning resources you will need to install <strong>Firefox</strong> (<strong><a href="http://www.firefox.com/" target="_blank">download here</a></strong>).</p>
         <p>Finally you will need to install the <strong>add on

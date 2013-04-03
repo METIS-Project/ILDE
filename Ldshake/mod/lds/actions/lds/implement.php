@@ -1,3 +1,4 @@
+<?php
 /*********************************************************************************
  * LdShake is a platform for the social sharing and co-edition of learning designs
  * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
@@ -32,48 +33,26 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
+/**
+ * LdS save controller.
+ */
+require_once __DIR__.'/../../lds_contTools.php';
 
-$(document).ready(function()
-{
+$lds_id = get_input('lds_id');
+$title = get_input('title');
+$vle_course = get_input('vle_course_id');
+$vle_course = explode('_', $vle_course);
+$vle_id = $vle_course[0];
+$course_id = $vle_course[1];
 
-	$('#lds_action_publish,#lds_action_republish').click(function (){
-		$('.publishbutton').css('visibility','hidden');
-		$('.lds_loading').show();
-		$.get(baseurl + "action/lds/publish", {doc:$(this).attr('data-guid'),action:'publish'}, function (data)
-		{
-			if (data.substring(0, 2) == 'ok') {
-				$('.lds_publish_url').val(data.substring(3));
-                $('.lds_publish_embed').val('<iframe height="600px" width="100%" frameborder="1" src="' + data.substring(3) + '"></iframe>');
-            }
-			
-			$('#lds_publish_wrapper,#lds_republish_wrapper').hide();
-			$('#lds_unpublish_wrapper').show();
-			$('.publishbutton').css('visibility','visible');
-			$('.lds_loading').hide();
-		});
-		return false;
-	});
-	
-	
-	$('#lds_action_unpublish,#lds_action_unpublish2').click(function (){
-		if (confirm ('Are you sure you want to unpublish this document?\nAll the external links to the document will be broken!'))
-		{
-			$('.publishbutton').css('visibility','hidden');
-			$('.lds_loading').show();
-			$.get(baseurl + "action/lds/publish", {doc:$(this).attr('data-guid'),action:'unpublish'}, function (data)
-			{
-				$('.publishbutton').css('visibility','visible');
-				$('.lds_loading').hide();
-				$('#lds_unpublish_wrapper').hide();
-				$('#lds_republish_wrapper').hide();
-				$('#lds_publish_wrapper').show();
-			});
-		}
-		return false;
-	});
-	
-	$('#the_lds').dblclick(function ()
-	{
-		window.location = baseurl + 'pg/lds/edit/' + $('#lds_edit_guid').val() + '/';
-	});
-});
+$lds = get_entity($lds_id);
+
+$implementation = new ElggObject();
+$implementation->subtype = 'LdS_implementation';
+$implementation->title = $lds->title;
+$implementation->vle_id = $vle_id;
+$implementation->couse_id = $course_id;
+$implementation->lds_id = $lds->guid;
+$implementation->save();
+
+return 'ok';

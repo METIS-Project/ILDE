@@ -116,9 +116,18 @@
 	visibility: hidden;
 }
 
+#my_lds_list .lds_implement_action {
+    diaplay: block;
+    float: left;
+    font-size: 11px;
+    padding-left: 5px;
+    padding-top: 2px;
+    width: 89px;
+}
+
 #my_lds_list .lds_title_tags {
 	display: block;
-	width: 308px;
+	width: 238px;
 	float: left;
 	white-space: nowrap;
 	overflow: hidden;
@@ -1003,6 +1012,13 @@ del {
 	top: 100px;
 	left: 50%;
 	margin-left: -260px;
+}
+
+#implement_popup {
+    width: 500px;
+    top: 100px;
+    left: 50%;
+    margin-left: -260px;
 }
 
 .lds_popup {
