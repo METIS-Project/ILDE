@@ -49,9 +49,10 @@ $lds = get_entity($lds_id);
 
 $implementation = new ElggObject();
 $implementation->subtype = 'LdS_implementation';
-$implementation->title = $lds->title;
+$implementation->container_guid = $lds->guid;
+$implementation->title = $title;
 $implementation->vle_id = $vle_id;
-$implementation->couse_id = $course_id;
+$implementation->course_id = $course_id;
 $implementation->lds_id = $lds->guid;
 $implementation->save();
 

@@ -115,7 +115,12 @@ class lds_contTools
 		$richList = array();
 		foreach ($list as $lds)
 		{
+            if($lds->getSubtype() != 'LdS') {
+                $implementation = $lds;
+                $lds = get_entity($lds->container_guid);
+            }
 			$obj = new stdClass();
+            $obj->implementation = $implementation;
 			$obj->lds = $lds; //The LdS itself
 			$obj->starter = get_entity($lds->owner_guid);
 			
@@ -1112,6 +1117,107 @@ SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtyp
 	OR
 	(
 		e.guid IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
+		)
+	)
+) order by time_updated asc {$query_limit}
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return $entities;
+
+    }
+
+    public static function getUserEditableImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+        global $CONFIG;
+
+        if(isadminloggedin()) {
+            /*
+            $query_limit = ($limit == 0) ? '' : "9999";
+            if($count)
+                return get_entities('object', 'LdS', 0, '', $query_limit, $offset, true);
+
+            return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
+            */
+            $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
+            $subtype = get_subtype_id('object', 'LdS_implementation');
+
+            $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' order by time_updated desc {$query_limit}
+SQL;
+            $entities = get_data($query, "entity_row_to_elggstar");
+
+            if($count)
+                return count($entities);
+
+            return $entities;
+        }
+
+        $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
+        $subtype = get_subtype_id('object', 'LdS_implementation');
+
+        $metadata_join = "";
+        $metadata_query = "";
+
+        if($m_key && $m_value) {
+            $metadata_key_id = get_metastring_id($m_key);
+            $metadata_value_id = get_metastring_id($m_value);
+
+            $metadata_join = 'JOIN metadata m ON e.guid = m.entity_guid';
+            $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
+        }
+
+        $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
+AND (
+	(e.owner_guid = {$user_id})
+	OR
+	(
+		e.container_guid IN (
+			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
+				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+			)
+		)
+	)
+	OR
+	(
+		e.container_guid IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
+		)
+	)
+) order by time_updated desc {$query_limit}
+SQL;
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return $entities;
+
+    }
+
+    public static function getUserSharedImplementationWithMe($user_id, $count = false, $limit = 0, $offset = 0) {
+        global $CONFIG;
+
+        $query_limit = ($limit == 0) ? '' : "limit {$offset}, {$limit}";
+        $subtype = get_subtype_id('object', 'LdS_implementation');
+
+        $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
+	(
+		e.container_guid IN (
+			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
+				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+			)
+		)
+	)
+	OR
+	(
+		e.container_guid IN (
 			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
 		)
 	)

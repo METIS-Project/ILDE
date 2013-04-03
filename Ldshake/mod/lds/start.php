@@ -338,6 +338,40 @@ function lds_exec_implementable ($params)
     page_draw($vars['title'], $body);
 }
 
+function lds_exec_implementations ($params)
+{
+    $offset = get_input('offset') ?: '0';
+
+    if ($params[1] == 'created-by-me')
+    {
+        $vars['count'] = get_entities('object', 'LdS_implementation', get_loggedin_userid(), '', 50, $offset, true);
+        $entities = get_entities('object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("LdS created by me");
+    }
+    elseif ($params[1] == 'shared-with-me')
+    {
+        $vars['count'] = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), true, 0 , 0);
+        $entities = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("Created with") . ' ' . $params[1];
+        $vars['editor_filter'] = $params[1];
+    }
+    else
+    {
+        $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
+        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("All my LdS > implementable in VLE");
+    }
+
+    $vars['section'] = $params[1];
+    $vars['courses'] = lds_contTools::getVLECourses($vle);
+    $body = elgg_view('lds/implementations',$vars);
+
+    page_draw($vars['title'], $body);
+}
+
 function lds_exec_search ($params) {
 	$query = urldecode(get_input('q'));
 	

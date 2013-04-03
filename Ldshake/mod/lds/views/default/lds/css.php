@@ -187,7 +187,7 @@
 #my_lds_list .lds_date {
 	float: left;
 	padding-right: 3px;
-	width: 85px;
+	width: 115px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-align: right;
