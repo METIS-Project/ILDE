@@ -36,6 +36,9 @@ class Editor
 
 class ManagerFactory {
     public static function getManager($lds) {
+
+        if($lds->getSubtype() == 'LdS_implementation')
+            return new GluepsManager($lds);
         return new richTextEditor(array(), $lds);
     }
 }
@@ -965,6 +968,27 @@ class GluepsManager
     public $document;
     public $document_url;
     public $instance_url;
+    public $_implementation;
+
+    public function __construct($implementation=null)
+    {
+        $this->_implementation = $implementation;
+    }
+
+    public function cloneImplementation($title = null) {
+        $implementation = new ElggObject();
+        $implementation->subtype = 'LdS_implementation';
+        $implementation->access_id = $this->_implementation->access_id;
+        $implementation->container_guid = $this->_implementation->container_guid;
+        if(!$title)
+            $title = $this->_implementation->title;
+        $implementation->title = $title;
+        $implementation->vle_id = $this->_implementation->vle_id;
+        $implementation->course_id = $this->_implementation->course_id;
+        $implementation->lds_id = $this->_implementation->lds_id;
+        $implementation->save();
+        return $implementation;
+    }
 
     public function newInstantiation() {
         global $CONFIG;

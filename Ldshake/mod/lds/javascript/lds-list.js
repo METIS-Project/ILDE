@@ -61,10 +61,52 @@ $(document).ready(function()
     });
 
     $("input[name='lds_select']").change(function () {
-        if($("input[name='lds_select']:checked").length != 1)
+        if($("input[name='lds_select']:checked").length != 1) {
             $("#duplicate_design").attr('disabled','disabled');
-        else
+            $("#duplicate_implementation").attr('disabled','disabled');
+            $("#implementations_by_design").attr('disabled','disabled');
+            $("#view_design").attr('disabled','disabled');
+        }
+        else {
             $("#duplicate_design").removeAttr('disabled');
+            $("#implementations_by_design").removeAttr('disabled');
+            $("#duplicate_implementation").removeAttr('disabled');
+            $("#view_design").removeAttr('disabled');
+        }
+    });
+
+    $("#implementations_by_design").click(function (event) {
+        var lds = $("input[name='lds_select']:checked").val();
+        window.location = baseurl + 'pg/lds/implementations/design/' + lds;
+    });
+
+    $("#cloneimplementation_submit").click(function (event) {
+        var submitData =
+        {
+            guid: $("input[name='lds_select']:checked").val(),
+            title: $('input[name=new_implementation_title]').val()
+        };
+
+        $.post (baseurl + "action/lds/cloneimplementation", submitData, function(data) {
+            window.location = baseurl + 'pg/lds/implementations';
+        });
+    });
+
+    $('#duplicate_implementation').click(function (event) {
+        $('#cloneimplementation_popup').fadeToggle(200);
+        $('input[name=new_implementation_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#cloneimplementation_submit').click();
+                }
+            })
+            .focus();
+    });
+
+    $("#view_design").click(function (event) {
+        var implementation = $("input[name='lds_select']:checked").val();
+        var lds = $("input#imp_design_" + implementation).val();
+        window.location = baseurl + 'pg/lds/view/' + lds;
     });
 
     $('#clonelds_submit').click(function (){

@@ -49,6 +49,8 @@ $lds = get_entity($lds_id);
 
 $implementation = new ElggObject();
 $implementation->subtype = 'LdS_implementation';
+$implementation->access_id = ACCESS_PUBLIC;
+$implementation->owner_guid = get_loggedin_userid();
 $implementation->container_guid = $lds->guid;
 $implementation->title = $title;
 $implementation->vle_id = $vle_id;

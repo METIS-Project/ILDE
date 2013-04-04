@@ -65,7 +65,7 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
 			<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
-			<a class="leftbutton" id="lds_import_button" href="#"><?php echo T("Import an eXe Learning file") ?></a>
+			<!--<a class="leftbutton" id="lds_import_button" href="#"><?php echo T("Import an eXe Learning file") ?></a>-->
 			<?php else: ?>
 			<span><?php echo T("%1 is editing this LdS",lds_contTools::isLockedBy($lds->guid)->name) ?></span>
 			<?php endif; ?>
@@ -73,13 +73,13 @@ function encodeURIComponent($str) {
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
 	</div>
 
-	<form id="editorfileupload" action="<?php echo $url ?>action/lds/import_editor_file" method="post" enctype="multipart/form-data">
+	<!--<form id="editorfileupload" action="<?php echo $url ?>action/lds/import_editor_file" method="post" enctype="multipart/form-data">
 		<label for="file">ELP file:</label>
 		<input type="file" name="file" id="file" />
 		<input type="hidden" name="guid" value="<?php echo $currentDoc->guid ?>" />
 		<input type="hidden" name="lds_guid" value="<?php echo $lds->guid ?>" />
 		<input type="submit" name="submit" value="Submit" />
-	</form>
+	</form>-->
 
 <div id="lds_view_tab_container" style="width:953px;" class="scrollable">
 	<?php /** Botonets de scroll **/ ?>

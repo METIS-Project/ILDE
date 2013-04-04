@@ -80,6 +80,7 @@ function lds_init()
 	
 	//LdS actions:
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
+    register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
 	register_action("lds/save_editor", false, $CONFIG->pluginspath . "lds/actions/lds/save_editor.php");
@@ -360,6 +361,12 @@ function lds_exec_implementations ($params)
     elseif ($params[1] == 'design')
     {
         $design_guid = $params[2];
+        $lds = get_entity($design_guid);
+        $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, null, null, $design_guid);
+        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, null, null, $design_guid);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
+        $vars['editor_filter'] = $params[1];
 
     }
     else

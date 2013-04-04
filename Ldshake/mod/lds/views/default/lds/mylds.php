@@ -44,6 +44,10 @@
 			<li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
 			<li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
 			<li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
+            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
 		</ul>
 	</div>
 	<div id="owner_block_bottom"></div>
@@ -74,7 +78,7 @@
 			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
 			<?php endif; ?>
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
-            <input type="submit" style="border-color:#999; margin:5px 0;" id="see_design" value="<?php echo T("See implementations") ?>" />
+            <input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" />
 		</div>
 		<ul id="my_lds_list">
 			<?php foreach($list as $item): ?>
