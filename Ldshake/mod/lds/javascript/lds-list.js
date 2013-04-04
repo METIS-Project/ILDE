@@ -60,6 +60,13 @@ $(document).ready(function()
             .focus();
     });
 
+    $("input[name='lds_select']").change(function () {
+        if($("input[name='lds_select']:checked").length != 1)
+            $("#duplicate_design").attr('disabled','disabled');
+        else
+            $("#duplicate_design").removeAttr('disabled');
+    });
+
     $('#clonelds_submit').click(function (){
         var submitData =
         {
@@ -72,7 +79,7 @@ $(document).ready(function()
         });
     });
 
-    $('#clonelds_show_popup').click(function (){
+    $('#duplicate_design').click(function (event) {
         $('#clonelds_popup').fadeToggle(200);
         $('input[name=new_lds_title]')
             .keypress(function(e) {
@@ -83,7 +90,11 @@ $(document).ready(function()
             .focus();
     });
 
-	//Delete LdS
+    $('.lds_close_popup').click(function () {
+        $('#clonelds_popup').fadeToggle(200);
+    });
+
+        //Delete LdS
 	$('.lds_action_delete').click (function ()
 	{
 		if (confirm ("Are you sure you want to delete the following LdS?\n\n" + $(this).attr('data-title')))

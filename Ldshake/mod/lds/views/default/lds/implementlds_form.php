@@ -37,7 +37,7 @@
 ?>
 
 <div id="implement_popup" class="lds_popup">
-    <a class="close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <a class="lds_close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
     <h3><?php echo T("Select one of your registered VLEs") ?></h3>
 
     <?php

@@ -166,7 +166,7 @@
 	padding-top: 2px;
 	white-space: nowrap;
 	overflow: hidden;
-	width: 255px;
+	width: 229px;
 	color: #777;
 	float: left;
 	font-size: 11px;
@@ -1496,4 +1496,10 @@ form#editorfileupload {
 .user_menu_friends_of
 {
 	display: none;
+}
+
+input[type="submit"]:disabled,input[type="button"]:disabled {
+    color: graytext;
+    cursor: default;
+    background: #F6F6F6;
 }

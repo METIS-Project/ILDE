@@ -153,7 +153,6 @@
 <div id="shade"></div>
 
 <?php include ('single_share_form.php') ?>
-<?php include ('clonelds_form.php') ?>
 
 <script type="text/javascript">
 	var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;

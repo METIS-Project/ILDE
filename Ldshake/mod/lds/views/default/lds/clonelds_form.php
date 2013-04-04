@@ -37,7 +37,7 @@
 ?>
 
 <div id="clonelds_popup" class="lds_popup">
-    <a class="close_popup" id="ldsclone_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <a class="lds_close_popup" id="ldsclone_popup_close" href="#"><?php echo T("Cancel") ?></a>
     <h3><?php echo T("Enter the LdS title") ?></h3>
         <input type="text" name="new_lds_title" />
 

@@ -42,7 +42,7 @@
 			echo elgg_view("input/file",array('internalname' => 'profileicon'));
 		
 		?>
-		<br /><input type="submit" class="submit_button" value="<?php echo T("Uplaoad"); ?>" />
+		<br /><input type="submit" class="submit_button" value="<?php echo T("Upload"); ?>" />
 	</p>
 	</form>
 </div>

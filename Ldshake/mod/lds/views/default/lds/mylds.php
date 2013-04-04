@@ -73,6 +73,8 @@
 			<?php else: ?>
 			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
 			<?php endif; ?>
+            <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
+            <input type="submit" style="border-color:#999; margin:5px 0;" id="see_design" value="<?php echo T("See implementations") ?>" />
 		</div>
 		<ul id="my_lds_list">
 			<?php foreach($list as $item): ?>
@@ -129,3 +131,5 @@
 		</div>
 	</div>
 </div>
+
+<?php include ('clonelds_form.php') ?>

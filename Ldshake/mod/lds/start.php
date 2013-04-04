@@ -357,6 +357,11 @@ function lds_exec_implementations ($params)
         $vars['title'] = T("Shared with me > Implementations");
         $vars['editor_filter'] = $params[1];
     }
+    elseif ($params[1] == 'design')
+    {
+        $design_guid = $params[2];
+
+    }
     else
     {
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);

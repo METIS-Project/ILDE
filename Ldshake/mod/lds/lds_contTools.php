@@ -1132,7 +1132,7 @@ SQL;
 
     }
 
-    public static function getUserEditableImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+    public static function getUserEditableImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null, $container_guid = null) {
         global $CONFIG;
 
         if(isadminloggedin()) {
@@ -1143,11 +1143,14 @@ SQL;
 
             return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
             */
+            $container_guid_query = "";
+            if($container_guid)
+                $container_guid_query = "AND e.container_guid = {$container_guid}";
             $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
             $subtype = get_subtype_id('object', 'LdS_implementation');
 
             $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' order by time_updated desc {$query_limit}
+SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype $container_guid_query AND e.enabled = 'yes' order by time_updated desc {$query_limit}
 SQL;
             $entities = get_data($query, "entity_row_to_elggstar");
 
@@ -1171,8 +1174,12 @@ SQL;
             $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
         }
 
+        $container_guid_query = "";
+        if($container_guid)
+            $container_guid_query = "AND e.container_guid = {$container_guid}";
+
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
+SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype $container_guid_query AND e.enabled = 'yes' {$metadata_query}
 AND (
 	(e.owner_guid = {$user_id})
 	OR

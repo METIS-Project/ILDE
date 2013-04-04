@@ -545,7 +545,7 @@ $translations = array (
 "Current avatar"
 => "Imatge actual",
 
-"Uplaoad"
+"Upload"
 => "Carrega",
 
 "Profile picture cropping tool"
