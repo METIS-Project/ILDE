@@ -1146,6 +1146,7 @@ SQL;
             $container_guid_query = "";
             if($container_guid)
                 $container_guid_query = "AND e.container_guid = {$container_guid}";
+
             $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
             $subtype = get_subtype_id('object', 'LdS_implementation');
 

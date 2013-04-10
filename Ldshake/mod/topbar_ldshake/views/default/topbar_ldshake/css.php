@@ -216,6 +216,7 @@
 }
 
 .menu, .menu_option:first-child{
+    z-index: 1000;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
 }

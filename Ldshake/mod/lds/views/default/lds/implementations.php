@@ -41,9 +41,13 @@
     <div id="owner_block">
         <ul id="lds_side_sections">
             <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
-            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo $url . '/pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo $url . '/pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php $url . '/pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
+            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
+            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
         </ul>
     </div>
     <div id="owner_block_bottom"></div>
@@ -73,13 +77,16 @@
                 <?php else: ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
                 <?php endif; ?>
+                <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_implementation" value="<?php echo T("Duplicate implementation") ?>" disabled="disabled" />
+                <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
             </div>
             <ul id="my_lds_list">
                 <?php foreach($list as $item): ?>
                     <?php if ($section != 'trashed'): ?>
                         <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
-                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
+                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
+                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds->guid ?>" />
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
@@ -128,4 +135,12 @@
             <?php echo lds_viewTools::pagination($count, 50) ?>
         </div>
     </div>
+</div>
+
+<div id="cloneimplementation_popup" class="lds_popup">
+    <a class="lds_close_popup" id="ldsimmplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Enter the implementation title") ?></h3>
+    <input type="text" name="new_implementation_title" />
+
+    <input type="button" id="cloneimplementation_submit" />
 </div>
