@@ -74,7 +74,7 @@
 			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
 			<?php endif; ?>
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
-            <input type="submit" style="border-color:#999; margin:5px 0;" id="see_design" value="<?php echo T("See implementations") ?>" />
+            <input type="button" style="border-color:#999; margin:5px 0;" id="see_design" value="<?php echo T("See implementations") ?>" />
 		</div>
 		<ul id="my_lds_list">
 			<?php foreach($list as $item): ?>
@@ -85,7 +85,7 @@
 				<?php else: ?>
 				<div class="lds_select_spacer"></div>
 				<?php endif; ?>
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->external_editor ? 'exe' : 'doc' ?>-icon-20.png" alt="LdS" /></a>
+				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
 					<?php if (!$item->locked): ?>
 					<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a>

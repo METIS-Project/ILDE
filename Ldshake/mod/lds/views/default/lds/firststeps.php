@@ -74,7 +74,7 @@
 		<li class="show_tooltip t_s1">
 			<a class="callforaction" href="<?php echo $url ?>pg/ldshakers/"><?php echo T("Start discovering other LdShakers") ?> ▶</a>
 			<div class="fs-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
-				<img src="<?php echo $url ?>_graphics/ld-shake-1.png" height="60" />
+				<img src="<?php echo $url ?>_graphics/ld-shake-1.PNG" height="60" />
 			</div>
 			<h4><?php echo T("Shake hands with other teachers!") ?></h4>
 			<p><?php echo T("Manage de different groups of LdShakers with whom you are sharing LdS.") ?></p>
@@ -83,7 +83,7 @@
 		<li class="show_tooltip t_s2">
 			<a class="callforaction" href="<?php echo $url ?>pg/lds/created-by-me/"><?php echo T("Publish your LdS") ?> ▶</a>
 			<div class="fs-pill" style="background-color: #FEFBC2; transform: rotate(-0.9deg); -o-transform: rotate(-0.9deg); -moz-transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg);">
-				<img src="<?php echo $url ?>_graphics/ld-shake-3.png" height="60" />
+				<img src="<?php echo $url ?>_graphics/ld-shake-3.PNG" height="60" />
 			</div>
 			<h4><?php echo T("Shake your students with the learning designs!") ?></h4>
 			<p><?php echo T("Publish the LdS you created: they can be publicly available and linked with a shareable URL.") ?></p>
@@ -92,7 +92,7 @@
 		<li class="show_tooltip t_s3">
 			<a class="callforaction" href="<?php echo $url ?>pg/lds/browse/"><?php echo T("Discover LdS") ?> ▶</a>
 			<div class="fs-pill" style="background-color: #99DBE7; transform: rotate(-1.3deg); -o-transform: rotate(-1.3deg); -moz-transform: rotate(-1.3deg); -webkit-transform: rotate(-1.3deg);">
-				<img src="<?php echo $url ?>_graphics/ld-shake-2.png" height="60" />
+				<img src="<?php echo $url ?>_graphics/ld-shake-2.PNG" height="60" />
 			</div>
 			<h4><?php echo T("Shake different learning design solutions!") ?></h4>
 			<p><?php echo T("Search for LdS proposed by other LdShakers, or collaborate with them in their co-edition.") ?></p>
@@ -101,7 +101,7 @@
 		<li class="show_tooltip t_s4">
 			<a class="callforaction" href="<?php echo $url ?>pg/lds/new/"><?php echo T("Create your first LdS") ?> ▶</a>
 			<div class="fs-pill" style="background-color: #FFD9D4; transform: rotate(1.9deg); -o-transform: rotate(1.9deg); -moz-transform: rotate(1.9deg); -webkit-transform: rotate(1.9deg);">
-				<img src="<?php echo $url ?>_graphics/ld-shake-4.png" height="60" />
+				<img src="<?php echo $url ?>_graphics/ld-shake-4.PNG" height="60" />
 			</div>
 			<h4><?php echo T("Shake up your way of working!") ?></h4>
 			<p><?php echo T("Create your LdS and share them with other LdShakers so that they can see, comment or co-edit them.") ?></p>

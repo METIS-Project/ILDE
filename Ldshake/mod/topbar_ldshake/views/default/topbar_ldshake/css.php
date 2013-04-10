@@ -168,6 +168,7 @@
     box-shadow: 0 1px 4px #666666;
     top: 37px;
     left: 110px;
+    z-index: 10000;
 }
 
 #new_menu_author {
@@ -180,7 +181,6 @@
 #toolbar_lds_types ul,
 .menu ul {
 	margin: 0;
-	padding: 0;
     padding: 0px;
 }
 

@@ -306,22 +306,22 @@
 			</div>
 			<div id="claims">
 				<div class="home-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
-					<img src="_graphics/ld-shake-1.png" height="60" />
+					<img src="_graphics/ld-shake-1.PNG" height="60" />
 					<p><?php echo T("Shake hands with other teachers!") ?></p>
 				</div>
 				
 				<div class="home-pill" style="background-color: #99DBE7; transform: rotate(-1.3deg); -o-transform: rotate(-1.3deg); -moz-transform: rotate(-1.3deg); -webkit-transform: rotate(-1.3deg);">
-					<img src="_graphics/ld-shake-2.png" height="60" />
+					<img src="_graphics/ld-shake-2.PNG" height="60" />
 					<p><?php echo T("Shake different learning design solutions!") ?></p>
 				</div>
 				
 				<div class="home-pill" style="background-color: #FEFBC2; transform: rotate(-0.9deg); -o-transform: rotate(-0.9deg); -moz-transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg);">
-					<img src="_graphics/ld-shake-3.png" height="60" />
+					<img src="_graphics/ld-shake-3.PNG" height="60" />
 					<p><?php echo T("Shake your students with the learning designs!") ?></p>
 				</div>
 				
 				<div class="home-pill" style="background-color: #FFD9D4; transform: rotate(1.9deg); -o-transform: rotate(1.9deg); -moz-transform: rotate(1.9deg); -webkit-transform: rotate(1.9deg);">
-					<img src="_graphics/ld-shake-4.png" height="60" />
+					<img src="_graphics/ld-shake-4.PNG" height="60" />
 					<p><?php echo T("Shake up your way of working!") ?></p>
 				</div>
 				

@@ -53,7 +53,7 @@ function lds_init()
 
     $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
-	//Load the model classes
+    //Load the model classes
 	//TODO could include the whole directory...
 	require_once __DIR__.'/model/LdSObject.php';
 	require_once __DIR__.'/model/DocumentObject.php';
@@ -123,6 +123,9 @@ function lds_page_handler ($page)
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
+/*
+    GluepsManager::getCourses();
+
 
     $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=10729";
     $xml = "some random data";
@@ -146,6 +149,7 @@ function lds_page_handler ($page)
         'editor_id' => "345etrd5w54wedtr54",
         "randomData56"=>"@/etc/pam.conf",
     );
+*/
     /*
     $response = \Httpful\Request::post($uri)
         ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
@@ -213,8 +217,8 @@ function lds_page_handler ($page)
 			//Pau: Add a welcome LdS
 			//present in actions/register.php and actions/useradd.php
 			$wl = new LdSObject();
-			$wl->acces_id = 0;
-			$wl->write_access_id = 0;
+			$wl->acces_id = 2;
+            $wl->editor_type = 'doc';
 			$wl->title = "My first LdS";
 			$wl->owner_guid = $user->guid;
 			$wl->container_guid = $user->guid;
@@ -226,38 +230,11 @@ function lds_page_handler ($page)
 			$doc->title = "My first LdS";
 			$doc->description = elgg_view('lds/welcome_lds');
 			$doc->owner_guid = $user->guid;
-			$doc->container_guid = $user->guid;
+			$doc->container_guid = $wl->guid;
 			$doc->access_id = '2';
-			$doc->write_access_id = '2';
 			$doc->save();
 			//End add a welcome LdS
-			
-			if ($user->ispati == '1') {
-				//Pau: Add a Pati LdS
-				//present in actions/register.php and actions/useradd.php
-				$wl = new LdSObject();
-				$wl->acces_id = 0;
-				$wl->write_access_id = 0;
-				$wl->title = "Diseño de actividad con QuesTInSitu";
-				$wl->owner_guid = $user->guid;
-				$wl->container_guid = $user->guid;
-				$wl->granularity = '0';
-				$wl->completeness = '0';
-				$wl->save ();
-				
-				$doc = new DocumentObject($wl->guid);
-				$doc->title = "Diseño de actividad con QuesTInSitu";
-				$doc->description = elgg_view('lds/QTIS_lds');
-				$doc->owner_guid = $user->guid;
-				$doc->container_guid = $user->guid;
-				$doc->access_id = '2';
-				$doc->write_access_id = '2';
-				$doc->save();
-				//End add a pati LdS
 
-				$user->ispati = '0';
-			}
-			
 			$user->isnew = '0';
 			$user->save();
 		}
@@ -326,7 +303,7 @@ function lds_exec_implementable ($params)
     else
     {
         $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "implementable", '1');
-        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "implementable", $params[1]);
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "implementable", '1');
         $vars['list'] = lds_contTools::enrichLdS($entities);
         $vars['title'] = T("All my LdS > implementable in VLE");
     }
@@ -521,7 +498,7 @@ function lds_exec_new ($params)
 	
 	$vars['initLdS'] = json_encode($vars['initLdS']);
 
-    $vars['editor_type'] = 'richtext';
+    $vars['editor_type'] = 'doc';
 
 	//And also an empty Document
 	$vars['initDocuments'][0] = new stdClass();
@@ -610,6 +587,8 @@ function lds_exec_neweditor ($params)
 	$vars['starter'] = get_loggedin_user();
 	
 	$vars['am_i_starter'] = true;
+
+    $vars['editor_type'] = $params[1];
 	
 	$vars['title'] = T("New LdS");
 	

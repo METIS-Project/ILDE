@@ -55,21 +55,62 @@ function lds_data() {
 
     $xpathvar = new Domxpath($xmldoc);
 
-    $queryResult = $xpathvar->query('//login/username');
-    foreach($queryResult as $result){
-        $username = $result->textContent;
+    $queryResult = $xpathvar->query('//lds/id');
+    $id = $queryResult[0]->textContent;
+
+    $queryResult = $xpathvar->query('//lds/type');
+    $type = $queryResult[0]->textContent;
+
+    $queryResult = $xpathvar->query('//lds/title');
+    $title = $queryResult[0]->textContent;
+
+    $queryResult = $xpathvar->query('//lds/revision');
+    $revision = $queryResult[0]->textContent;
+
+    $queryResult = $xpathvar->query('//lds/tags');
+    $elemtags = $queryResult[0];
+
+    $tags = array('tag' => array());
+    foreach($elemtags->childNodes as $tagnode) {
+
+        $tag = array();
+        foreach($elemtags->childNodes as $tagnode)
+            $tag[$tagnode->nodeName] = $tagnode->nodeValue;
+
+        $tags['tag'][] = $tag;
     }
 
-    $queryResult = $xpathvar->query('//login/password');
-    foreach($queryResult as $result){
-        $password = $result->textContent;
+    $tags = array('tag' => array());
+    foreach($elemtags->childNodes as $tagnode) {
+
+        $tag = array();
+        foreach($elemtags->childNodes as $tagnode)
+            $tag[$tagnode->nodeName] = $tagnode->nodeValue;
+
+        $tags['tag'] = $tag;
     }
 
-    $token = 00;//auth_gettoken($username, $password);
+    $lds = LdSFactory::buildLdS(array(
+        'tag' => $tags['tag'],
+        'doc' =>    array(
+            'file' => $_FILES['design']['tmp_name']
+        )
+    ));
 
-    $result = SuccessResult::getInstance(array(
-            'token' => $token)
+    $id = $lds->guid;
+    $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
+    $revision = $revision[0];
+
+    $result = array(
+        'id' => $id,
+        'type' => $type,
+        'title' => $title,
+        'revision' => $revision,
+        'tags' => $tags
     );
+
+
+    $result = SuccessResult::getInstance($result);
 
     return $result;
 }

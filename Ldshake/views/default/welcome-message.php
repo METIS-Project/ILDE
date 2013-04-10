@@ -2,22 +2,22 @@
 
 <div style="width: 600px; margin: 0 auto;">
 	<div class="home-pill" style="background-color: #DDEFAA; -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
-		<img src="_graphics/ld-shake-1.png" />
+		<img src="_graphics/ld-shake-1.PNG" />
 		<p>Shake hands with other teachers!</p>
 	</div>
 	
 	<div class="home-pill" style="background-color: #99DBE7; -moz-transform: rotate(-1.3deg); -webkit-transform: rotate(-1.3deg);">
-		<img src="_graphics/ld-shake-2.png" />
+		<img src="_graphics/ld-shake-2.PNG" />
 		<p>Shake different learning design solutions!</p>
 	</div>
 	
 	<div class="home-pill" style="background-color: #FEFBC2; -moz-transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg);">
-		<img src="_graphics/ld-shake-3.png" />
+		<img src="_graphics/ld-shake-3.PNG" />
 		<p>Shake your students with the learning designs!</p>
 	</div>
 	
 	<div class="home-pill" style="background-color: #FFD9D4; -moz-transform: rotate(1.9deg); -webkit-transform: rotate(1.9deg);">
-		<img src="_graphics/ld-shake-4.png" />
+		<img src="_graphics/ld-shake-4.PNG" />
 		<p>Shake up your way of working!</p>
 	</div>
 </div>

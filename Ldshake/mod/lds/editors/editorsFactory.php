@@ -6,7 +6,7 @@ class Editor
     private $_lds;
 
 	//return the filesystem path of an ElggFile object
-	public function getFullFilePath($file_guid)
+	public static function getFullFilePath($file_guid)
 	{
 		$file = get_entity($file_guid);
 		$readfile = new ElggFile();
@@ -16,7 +16,7 @@ class Editor
 	}
 
 	//create an ElggFile, object and return it
-	public function getNewFile($filename)
+	public static function getNewFile($filename)
 	{
 		$user = get_loggedin_user();
 		$file = new ElggFile();
@@ -628,6 +628,74 @@ class EditorsFactory
 	}
 }
 
+class LdSFactory
+{
+    public static function buildLdS($ldsparams = null) {
+
+        //We're creating it from scratch. Construct a new obj.
+        $lds = new LdSObject();
+        $lds->owner_guid = get_loggedin_userid();
+        $lds->editor_type = $ldsparams['editor_type'];
+
+        $lds->title = $ldsparams['title'];
+        if(isset($ldsparams['granularity'])) $lds->granularity = $ldsparams['granularity'];
+        if(isset($ldsparams['completeness'])) $lds->completeness = $ldsparams['completeness'];
+
+        $lds->access_id = 2;
+
+//Now the tags. We'll delete the existing ones to save them again
+        $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
+        foreach ($tagFields as $field)
+        {
+            if(isset($ldsparams['tags'][$field])) {
+                $newTags = explode(',', $ldsparams['tags'][$field]);
+                foreach ($newTags as $k=>$v) if(empty($v)) unset($newTags[$k]);
+                $lds->$field = $newTags;
+            }
+        }
+
+        $lds->save();
+        lds_contTools::markLdSAsViewed ($lds->guid);
+        create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        OpenglmEditor::buildDocument(array(
+            'lds' => $lds,
+            'file' => $ldsparams['doc']['file']
+        ));
+
+        return $lds;
+
+    }
+}
+
+class OpenglmEditor extends Editor {
+    public static function buildDocument($params = null) {
+
+        global $CONFIG;
+
+        //create a new file to store the document
+        $filestorename = $params['lds']->guid.'_'.rand_str(64);
+        $file = Editor::getNewFile($filestorename);
+        copy($params['file'], $file->getFilenameOnFilestore());
+
+        $document = new DocumentEditorObject($params['lds']->guid);
+        $document->file_guid = $file->guid;
+        $document->save();
+
+        //assign a random string to each directory
+        $document->previewDir = rand_str(64);
+        $document->pub_previewDir = rand_str(64);
+        $document->revisionDir = rand_str(64);
+
+        $document->rev_last = 0;
+        $document->lds_revision_id = 0;
+
+        $document->save();
+
+        return $document;
+    }
+}
+
 class RestEditor extends Editor
 {
     public $document_url;
@@ -965,6 +1033,52 @@ class GluepsManager
     public $document;
     public $document_url;
     public $instance_url;
+
+    public static function getCourses() {
+        global $CONFIG;
+        $url = 'http://pandora.tel.uva.es/pruebamoodle/';
+        $type = 'Moodle';
+        $username = 'ldshake';
+        $password = 'Ld$haK3';
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $get = array(
+            'type' => $type,
+            'accessLocation' => $url,
+            'creduser' => $username,
+            'credsecret' => $password
+        );
+
+        $uri = "http://pandora.tel.uva.es/METIS/GLUEPSManager/courses?"
+            ."type=".urlencode($get['type'])."&"
+            ."accessLocation=".urlencode($get['accessLocation'])."&"
+            ."creduser=".urlencode($get['creduser'])."&"
+            ."credsecret=".urlencode($get['credsecret']);
+
+        /*$uri = "{$CONFIG->url}services/dummy.php/AR/GLUEPSManager/courses?"
+            ."type=".urlencode($get['type'])."&"
+            ."accessLocation=".urlencode($get['accessLocation'])."&"
+            ."creduser=".urlencode($get['creduser'])."&"
+            ."credsecret=".urlencode($get['credsecret'])."&"
+        ."XDEBUG_SESSION_START=16713";
+*/
+
+        $response = \Httpful\Request::get($uri)
+            ->addHeader('Accept', 'application/json')
+            //->expectsXML()
+            ->basicAuth('ldshake','Ld$haK3')
+            ->sendIt();
+
+        //copy($filename_lds, $filename_editor);
+
+        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+        //unlink($filename_editor);
+        $vars['editor'] = 'webcollagerest';
+        $vars['document_url'] = $response->raw_body;
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
 
     public function newInstantiation() {
         global $CONFIG;
