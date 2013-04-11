@@ -53,6 +53,8 @@ function lds_init()
 
     $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
+    $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
+
     //Load the model classes
 	//TODO could include the whole directory...
 	require_once __DIR__.'/model/LdSObject.php';
@@ -124,33 +126,34 @@ function lds_page_handler ($page)
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
-/*
-    GluepsManager::getCourses();
+    //GluepsManager::getCourses();
+    //GluepsManager::getCourseInfo();
 
+    /*
 
-    $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=10729";
-    $xml = "some random data";
-    $post = array(
-        "uploadData"=>"test",
-        "randomData"=>$xml,
-        "randomData56"=>"@/etc/pam.conf",
-        "randomData43"=>"@/var/www/ilde/_graphics/ldshake-logo.jpg;type=image/jpeg",
-    );
+        $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=10729";
+        $xml = "some random data";
+        $post = array(
+            "uploadData"=>"test",
+            "randomData"=>$xml,
+            "randomData56"=>"@/etc/pam.conf",
+            "randomData43"=>"@/var/www/ilde/_graphics/ldshake-logo.jpg;type=image/jpeg",
+        );
 
-    $post = array(
-        "uploadData"=>"test",
-        "randomData"=>$xml,
-    );
+        $post = array(
+            "uploadData"=>"test",
+            "randomData"=>$xml,
+        );
 
-    $bin ="sdfgt5yerhur6i58z0293tpwt8m43333333ty3487";
-    $bin ='/etc/pam.conf';
+        $bin ="sdfgt5yerhur6i58z0293tpwt8m43333333ty3487";
+        $bin ='/etc/pam.conf';
 
-    $save_params = array(
-        'url' => "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713",
-        'editor_id' => "345etrd5w54wedtr54",
-        "randomData56"=>"@/etc/pam.conf",
-    );
-*/
+        $save_params = array(
+            'url' => "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713",
+            'editor_id' => "345etrd5w54wedtr54",
+            "randomData56"=>"@/etc/pam.conf",
+        );
+    */
     /*
     $response = \Httpful\Request::post($uri)
         ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
@@ -310,7 +313,7 @@ function lds_exec_implementable ($params)
     }
 
     $vars['section'] = $params[1];
-    $vars['courses'] = lds_contTools::getVLECourses($vle);
+    $vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementable',$vars);
 
     page_draw($vars['title'], $body);

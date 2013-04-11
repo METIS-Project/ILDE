@@ -40,10 +40,8 @@ require_once __DIR__.'/../../lds_contTools.php';
 
 $lds_id = get_input('lds_id');
 $title = get_input('title');
-$vle_course = get_input('vle_course_id');
-$vle_course = explode('_', $vle_course);
-$vle_id = $vle_course[0];
-$course_id = $vle_course[1];
+$vle_id = get_input('vle_id');
+$course_id = get_input('course_id');
 
 $lds = get_entity($lds_id);
 

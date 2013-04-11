@@ -41,10 +41,10 @@
     <h3><?php echo T("Select one of your registered VLEs") ?></h3>
 
     <?php
-    foreach($courses as $course):
+    foreach($vle_info->courses as $key=>$name):
     ?>
     <div>
-        <input type="radio" name="course" value="<?php echo $course['id'];?>"/><span class="course-name"><?php echo $course['name'];?></span>
+        <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo 25?>" /><span class="course-name"><?php echo $name;?></span>
     </div>
     <?php endforeach; ?>
     <input type="text" name="new_implementation_title" />

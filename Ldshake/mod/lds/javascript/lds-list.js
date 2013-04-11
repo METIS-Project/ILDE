@@ -39,7 +39,8 @@ $(document).ready(function()
         var submitData =
         {
             lds_id: $('#implement_popup input[name=lds_id]').val(),
-            vle_course_id: $('input:radio[name=course]:checked').val(),
+            course_id: $('input:radio[name=course]:checked').val(),
+            vle_id: $('input:radio[name=course]:checked').attr('vle_id'),
             title: $('input[name=new_implementation_title]').val()
         };
 

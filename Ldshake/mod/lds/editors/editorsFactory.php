@@ -1118,34 +1118,27 @@ class GluepsManager
         return $implementation;
     }
 
-    public static function getCourses() {
+    public static function getVleInfo() {
         global $CONFIG;
-        $url = 'http://pandora.tel.uva.es/pruebamoodle/';
+        $url = $CONFIG->glueps_url;
+        $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
-        $username = 'ldshake';
-        $password = 'Ld$haK3';
+        $username = 'metis';
+        $password = 'M3t1$project';
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
         $get = array(
             'type' => $type,
-            'accessLocation' => $url,
+            'accessLocation' => $vle_url,
             'creduser' => $username,
             'credsecret' => $password
         );
 
-        $uri = "http://pandora.tel.uva.es/METIS/GLUEPSManager/courses?"
+        $uri = "{$url}courses?"
             ."type=".urlencode($get['type'])."&"
             ."accessLocation=".urlencode($get['accessLocation'])."&"
             ."creduser=".urlencode($get['creduser'])."&"
             ."credsecret=".urlencode($get['credsecret']);
-
-        /*$uri = "{$CONFIG->url}services/dummy.php/AR/GLUEPSManager/courses?"
-            ."type=".urlencode($get['type'])."&"
-            ."accessLocation=".urlencode($get['accessLocation'])."&"
-            ."creduser=".urlencode($get['creduser'])."&"
-            ."credsecret=".urlencode($get['credsecret'])."&"
-        ."XDEBUG_SESSION_START=16713";
-*/
 
         $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
@@ -1153,15 +1146,42 @@ class GluepsManager
             ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
-        //copy($filename_lds, $filename_editor);
+        return $response->body;
+    }
 
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
-        $vars['editor'] = 'webcollagerest';
-        $vars['document_url'] = $response->raw_body;
-        $vars['editor_id'] = $rand_id;
+    public static function getCourseInfo() {
+        global $CONFIG;
+        $url = $CONFIG->glueps_url;
+        $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
+        $type = 'Moodle';
+        $username = 'metis';
+        $password = 'M3t1$project';
+        $course = '3';
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
-        return $vars;
+
+        $get = array(
+            'type' => $type,
+            'accessLocation' => $vle_url,
+            'creduser' => $username,
+            'credsecret' => $password,
+            'course' => $course
+        );
+
+        $uri = "{$url}courses?"
+            ."type=".urlencode($get['type'])."&"
+            ."accessLocation=".urlencode($get['accessLocation'])."&"
+            ."creduser=".urlencode($get['creduser'])."&"
+            ."credsecret=".urlencode($get['credsecret'])."&"
+            ."course=".urlencode($get['course']);
+
+        $response = \Httpful\Request::get($uri)
+            ->addHeader('Accept', 'application/json')
+            //->expectsXML()
+            ->basicAuth('ldshake','Ld$haK3')
+            ->sendIt();
+
+        return $response->body;
     }
 
     public function newInstantiation() {
