@@ -15,4 +15,5 @@
 $result = $vars['result'];
 $export = $result->export();
 
+echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
 echo ldshake_array_to_xml($export->result);

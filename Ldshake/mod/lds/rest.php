@@ -38,6 +38,29 @@ function rest_login() {
 }
 expose_function("login", "rest_login", array(), elgg_echo('login'), "POST", false, false);
 
+function rest_logout() {
+    $result = logout();
+
+    set_input('view', 'status');
+    $result = SuccessResult::getInstance($result);
+
+
+    return $result;
+}
+expose_function("logout", "rest_logout", array(), elgg_echo('logout'), "GET", false, false);
+
+function rest_ping() {
+    $result = true;
+
+    set_input('view', 'status');
+    $result = SuccessResult::getInstance($result);
+
+
+    return $result;
+}
+expose_function("ping", "rest_ping", array(), elgg_echo('ping'), "GET", false, false);
+
+
 function lds_data() {
     global $API_QUERY;
 
@@ -152,13 +175,61 @@ function lds_query() {
     }
 
     $result = array(
-        'ldss' => array('lds' => $lds)
+        'lds_list' => array('lds' => $lds)
     );
     $result = SuccessResult::getInstance($result);
 
     return $result;
 }
 expose_function("ldseditorlist", "lds_query", array(), elgg_echo('ldsdata'), "GET", true, false);
+
+function lds_view() {
+    global $API_QUERY;
+
+    $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 50, 0);
+
+    $ldss = array();
+    $lds = array();
+    foreach($entities as $e) {
+
+        if(!($revision = $e->getAnnotations('revised_docs_editor', 1, 0, 'desc')))
+            $revision = $e->getAnnotations('revised_docs', 1, 0, 'desc');
+        $revision = $revision[0]->id;
+
+        $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+        $tags = array();
+        foreach ($tagtypes as $type)
+        {
+            $tag = array();
+            $tag['category'] =$type;
+            if (is_array($e->$type))
+                $tag['value'] = implode(',',$e->$type);
+            elseif (is_string($e->$type) && strlen($e->$type))
+                $tag['value'] = $e->$type;
+            else
+                $tag['value'] = '';
+
+            $tags['tag'][] = $tag;
+        }
+
+        $lds[] = array(
+            'id' => $e->guid,
+            'type' => $e->editor_type,
+            'title' => $e->title,
+            'revision' => $revision,
+            'tags' => $tags
+        );
+
+    }
+
+    $result = array(
+        'lds_list' => array('lds' => $lds)
+    );
+    $result = SuccessResult::getInstance($result);
+
+    return $result;
+}
+expose_function("ldsviewlist", "lds_view", array(), elgg_echo('ldsdata'), "GET", true, false);
 
 function lds_update($params) {
     global $API_QUERY;
