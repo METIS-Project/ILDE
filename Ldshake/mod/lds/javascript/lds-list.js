@@ -112,7 +112,7 @@ $(document).ready(function()
     $('#clonelds_submit').click(function (){
         var submitData =
         {
-            guid: $('#lds_edit_guid').val(),
+            guid: $("input[name='lds_select']:checked").val(),
             title: $('input[name=new_lds_title]').val()
         };
 
@@ -133,7 +133,7 @@ $(document).ready(function()
     });
 
     $('.lds_close_popup').click(function () {
-        $('#clonelds_popup').fadeToggle(200);
+        $('#clonelds_popup, .lds_popup').fadeToggle(200);
     });
 
         //Delete LdS

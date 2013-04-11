@@ -76,18 +76,18 @@ if (isloggedin()) :
                         <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>
                     </ul>
 			    </div>
-                <div id="new_menu_author" class="menu">
+                <div id="new_menu_author" class="menu level2">
                     <ul>
                         <!--<li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>-->
                         <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
-                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/uploadlds/openglm/"><?php echo T("OpenGLM (upload)") ?></a></li>
-                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/cadmos/"><?php echo T("CADMOS (upload)") ?></a></li>
+                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("OpenGLM (upload)") ?></a></li>
+                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("CADMOS (upload)") ?></a></li>
                     </ul>
                 </div>
-                <div id="new_menu_implement" class="menu">
+                <div id="new_menu_implement" class="menu level2">
                     <ul>
-                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
+                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
                         <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("See your VLE") ?></a></li>
                         <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Register your VLE") ?></a></li>
                     </ul>

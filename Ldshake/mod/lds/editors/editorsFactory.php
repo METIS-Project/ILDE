@@ -54,6 +54,7 @@ class richTextEditor extends Editor
         $lds->completeness = 0;
         $lds->cloned = 1;
         $lds->parent = $this->_lds->guid;
+        $lds->editor_type = $this->_lds->editor_type;
 
         $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
         foreach ($tagFields as $field)
@@ -638,9 +639,11 @@ class LdSFactory
         //We're creating it from scratch. Construct a new obj.
         $lds = new LdSObject();
         $lds->owner_guid = get_loggedin_userid();
-        $lds->editor_type = $ldsparams['editor_type'];
+        $lds->editor_type = $ldsparams['type'];
 
         $lds->title = $ldsparams['title'];
+        $lds->granularity = 0;
+        $lds->completeness = 0;
         if(isset($ldsparams['granularity'])) $lds->granularity = $ldsparams['granularity'];
         if(isset($ldsparams['completeness'])) $lds->completeness = $ldsparams['completeness'];
 
@@ -669,6 +672,45 @@ class LdSFactory
         return $lds;
 
     }
+
+    public static function updateLdS($ldsparams = null) {
+
+        //We're creating it from scratch. Construct a new obj.
+        $lds = get_entity($ldsparams['id']);
+        //$lds->owner_guid = get_loggedin_userid();
+        //$lds->editor_type = $ldsparams['type'];
+
+        $lds->title = $ldsparams['title'];
+        //$lds->granularity = 0;
+        //$lds->completeness = 0;
+        if(isset($ldsparams['granularity'])) $lds->granularity = $ldsparams['granularity'];
+        if(isset($ldsparams['completeness'])) $lds->completeness = $ldsparams['completeness'];
+
+        //$lds->access_id = 2;
+
+//Now the tags. We'll delete the existing ones to save them again
+        $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
+        foreach ($tagFields as $field)
+        {
+            if(isset($ldsparams['tags'][$field])) {
+                $newTags = explode(',', $ldsparams['tags'][$field]);
+                foreach ($newTags as $k=>$v) if(empty($v)) unset($newTags[$k]);
+                $lds->$field = $newTags;
+            }
+        }
+
+        $lds->save();
+        lds_contTools::markLdSAsViewed ($lds->guid);
+        create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        OpenglmEditor::updateDocument(array(
+            'lds' => $lds,
+            'file' => $ldsparams['doc']['file']
+        ));
+
+        return $lds;
+
+    }
 }
 
 class OpenglmEditor extends Editor {
@@ -683,7 +725,6 @@ class OpenglmEditor extends Editor {
 
         $document = new DocumentEditorObject($params['lds']->guid);
         $document->file_guid = $file->guid;
-        $document->save();
 
         //assign a random string to each directory
         $document->previewDir = rand_str(64);
@@ -692,6 +733,25 @@ class OpenglmEditor extends Editor {
 
         $document->rev_last = 0;
         $document->lds_revision_id = 0;
+
+        $document->save();
+
+        return $document;
+    }
+
+    public static function updateDocument($params = null) {
+
+        global $CONFIG;
+
+        //$document = new DocumentEditorObject($params['lds']->guid);
+        $editordocument = get_entities_from_metadata('lds_guid',$params['lds']->guid,'object','LdS_document_editor', 0, 100);
+        $document = $editordocument[0];
+
+        //$document->file_guid = $file->guid;
+        $fullfilepath = Editor::getFullFilePath($document->file_guid);
+        copy($params['file'], $fullfilepath);
+
+        //TODO: update revision data
 
         $document->save();
 

@@ -1016,12 +1016,12 @@ del {
 
 #implement_popup {
     width: 500px;
-    top: 100px;
-    left: 50%;
     margin-left: -260px;
 }
 
 .lds_popup {
+    top: 100px;
+    left: 50%;
     z-index: 100000;
     position: fixed;
     background-color: #fff;

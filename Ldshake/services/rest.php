@@ -49,6 +49,7 @@
 	// Get parameter variables
 	$method = $query[0];
     set_input('method', $method);
+    set_input('view', 'xml');
 	$result = null;
 
     $headers = getallheaders();

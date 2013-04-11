@@ -168,7 +168,11 @@
     box-shadow: 0 1px 4px #666666;
     top: 37px;
     left: 110px;
-    z-index: 10000;
+    z-index: 900;
+}
+
+.menu.level2 {
+    z-index: 901;
 }
 
 #new_menu_author {

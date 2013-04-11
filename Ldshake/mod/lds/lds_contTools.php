@@ -119,56 +119,115 @@ class lds_contTools
                 $implementation = $lds;
                 $lds = get_entity($lds->container_guid);
             }
-			$obj = new stdClass();
-            $obj->implementation = $implementation;
-			$obj->lds = $lds; //The LdS itself
-			$obj->starter = get_entity($lds->owner_guid);
-			
-			$latest = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
-			$obj->last_contributor = get_entity($latest[0]->owner_guid);
-			$obj->last_contribution_at = $latest[0]->time_created;
-			$obj->num_contributions = $lds->countAnnotations('revised_docs');
-			
-			//$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
-			//$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
+            if($lds) {
+                $obj = new stdClass();
+                $obj->implementation = $implementation;
+                $obj->lds = $lds; //The LdS itself
+                $obj->starter = get_entity($lds->owner_guid);
 
-            $obj->num_viewers = count(lds_contTools::getViewersIds($lds->guid));
-            $obj->num_editors = count(lds_contTools::getEditorsIds($lds->guid));
-            if($lds->all_can_view == 'yes')
-                $obj->num_viewers = -1;
+                $latest = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
+                $obj->last_contributor = get_entity($latest[0]->owner_guid);
+                $obj->last_contribution_at = $latest[0]->time_created;
+                $obj->num_contributions = $lds->countAnnotations('revised_docs');
 
-            if($lds->all_can_view === null && $lds->access_id < 3 && $lds->access_id > 0)
-                $obj->num_viewers = -1;
+                //$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
+                //$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
 
-			$obj->num_comments = $lds->countAnnotations('generic_comment');
-			$obj->num_documents = get_entities_from_metadata ('lds_guid',$lds->guid,'object','LdS_document', 0, 10000, 0, '', 0, true);
+                $obj->num_viewers = count(lds_contTools::getViewersIds($lds->guid));
+                $obj->num_editors = count(lds_contTools::getEditorsIds($lds->guid));
+                if($lds->all_can_view == 'yes')
+                    $obj->num_viewers = -1;
 
-			$obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid());
-			$obj->locked_by = get_user($lds->editing_by);
-			
-			//Add an is_new flag if the user hasn't seen it.
-			$seenLds = get_user(get_loggedin_userid())->seen_lds;
-			if (is_null($seenLds)) $seenLds = array();
-			if (is_string($seenLds)) $seenLds = array($seenLds);
-			
-			$isnew = true;
-			foreach ($seenLds as $sl)
-			{
-				$sl = explode(':',$sl);
-				if ($sl[0] == $lds->guid && $sl[1] >= $lds->time_updated - 5)
-				{
-					$isnew = false;
-					break;
-				}
-			}
-			$obj->new = $isnew;
+                if($lds->all_can_view === null && $lds->access_id < 3 && $lds->access_id > 0)
+                    $obj->num_viewers = -1;
 
-			$richList[] = $obj;
+                $obj->num_comments = $lds->countAnnotations('generic_comment');
+                $obj->num_documents = get_entities_from_metadata ('lds_guid',$lds->guid,'object','LdS_document', 0, 10000, 0, '', 0, true);
+
+                $obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid());
+                $obj->locked_by = get_user($lds->editing_by);
+
+                //Add an is_new flag if the user hasn't seen it.
+                $seenLds = get_user(get_loggedin_userid())->seen_lds;
+                if (is_null($seenLds)) $seenLds = array();
+                if (is_string($seenLds)) $seenLds = array($seenLds);
+
+                $isnew = true;
+                foreach ($seenLds as $sl)
+                {
+                    $sl = explode(':',$sl);
+                    if ($sl[0] == $lds->guid && $sl[1] >= $lds->time_updated - 5)
+                    {
+                        $isnew = false;
+                        break;
+                    }
+                }
+                $obj->new = $isnew;
+
+                $richList[] = $obj;
+            }
 		}
 		
 		return $richList;
 	}
-	
+
+    public static function enrichImplementation ($list)
+    {
+        if (!is_array($list) && !empty($list)) $list = array ($list);
+        if (empty($list)) $list = array();
+
+        $richList = array();
+        foreach ($list as $implementation)
+        {
+            $obj = new stdClass();
+            $obj->implementation = $implementation;
+//            $obj->lds = $lds; //The LdS itself
+            $obj->starter = get_entity($lds->owner_guid);
+
+            $latest = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
+            $obj->last_contributor = get_entity($latest[0]->owner_guid);
+            $obj->last_contribution_at = $latest[0]->time_created;
+            $obj->num_contributions = $implementation->countAnnotations('revised_docs');
+
+            //$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
+            //$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
+
+            $obj->num_viewers = count(lds_contTools::getViewersIds($implementation->guid));
+            $obj->num_editors = count(lds_contTools::getEditorsIds($implementation->guid));
+            if($lds->all_can_view == 'yes')
+                $obj->num_viewers = -1;
+
+            if($lds->all_can_view === null)
+                $obj->num_viewers = -1;
+
+            $obj->num_comments = $implementation->countAnnotations('generic_comment');
+
+            $obj->locked = ($implementation->editing_tstamp > time() - 60 && $implementation->editing_by != get_loggedin_userid());
+            $obj->locked_by = get_user($implementation->editing_by);
+
+            //Add an is_new flag if the user hasn't seen it.
+            $seenImplementation = get_user(get_loggedin_userid())->seen_implementation;
+            if (is_null($seenImplementation)) $seenImplementation = array();
+            if (is_string($seenImplementation)) $seenImplementation = array($seenImplementation);
+
+            $isnew = true;
+            foreach ($seenImplementation as $sl)
+            {
+                $sl = explode(':',$sl);
+                if ($sl[0] == $implementation->guid && $sl[1] >= $implementation->time_updated - 5)
+                {
+                    $isnew = false;
+                    break;
+                }
+            }
+            $obj->new = $isnew;
+
+            $richList[] = $obj;
+        }
+
+        return $richList;
+    }
+
 	/**
 	 * 
 	 * Returns the user Object that is editing this LdS, or false if noone is editing it.

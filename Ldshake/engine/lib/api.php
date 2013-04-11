@@ -463,7 +463,8 @@
 		if ((isset($METHODS[$method]["function"])) && (is_callable($METHODS[$method]["function"])))
 		{
 			// See if this is being made with the right call method
-			if (strcmp(get_call_method(), $METHODS[$method]["call_method"])==0)
+			//if (strcmp(get_call_method(), $METHODS[$method]["call_method"])==0)
+            if(true)
 			{
 				$serialised_parameters = "";
 				
@@ -543,7 +544,10 @@
 				$function = $METHODS[$method]["function"];
 				$serialised_parameters = trim($serialised_parameters, ", ");
 				
-				$result = eval("return $function($serialised_parameters);");
+				//$result = eval("return $function($serialised_parameters);");
+                $params = $parameters["query"];
+                $result = $function($params);
+
 			
 				// Sanity check result
 				if ($result instanceof GenericResult) // If this function returns an api result itself, just return it
