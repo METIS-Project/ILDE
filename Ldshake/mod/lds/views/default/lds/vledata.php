@@ -37,39 +37,54 @@
 ?>
 <?php
 extract($vars);
-
-T('Enter your VLE data');
 ?>
-
-<form action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>">
-
-    <span class="vle_form_label"><?php T('VLE name')?></span>
-    <input class="vle_form_input" type="text" name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
-    <span class="vle_form_label"><?php T('VLE type')?></span>
-    <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->type)?>" />
-    <span class="vle_form_label"><?php T('VLE url')?></span>
-    <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->url)?>" />
-    <span class="vle_form_label"><?php T('VLE username')?></span>
-    <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
-    <span class="vle_form_label"><?php T('VLE password')?></span>
-    <input class="vle_form_input" type="text" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
-    <input class="vle_form_submit" type="submit" name="vle_submit" />
-
-</form>
+<div id="lds_vle_page">
+    <div class="lds_form_title">
+        <?php echo T('Enter your VLE details');?>
+    </div>
 
 
-<div>
-    <?php echo T('Available VLE courses')?>
+    <form id="lds_vle_form" action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
+
+        <div class="lds_form_block">
+            <span class="vle_form_label"><?php echo T('VLE name')?>:</span>
+            <input class="vle_form_input" type="text" name="vle_name" value="<?php echo $vle->name?>" />
+        </div>
+        <div class="lds_form_block">
+            <span class="vle_form_label"><?php echo T('VLE type')?></span>
+            <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
+        </div>
+        <div class="lds_form_block">
+            <span class="vle_form_label"><?php echo T('VLE url')?></span>
+            <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
+        </div>
+        <div class="lds_form_block">
+            <span class="vle_form_label"><?php echo T('VLE username')?></span>
+            <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
+        </div>
+        <div class="lds_form_block">
+            <span class="vle_form_label"><?php echo T('VLE password')?></span>
+            <input class="vle_form_input" type="text" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
+        </div>
+
+        <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />
+
+    </form>
+
+
     <div>
-        <?php foreach($courses as $fvle):?>
-        <div class="vle_info_box">
-            <div class="vle_info_field">
-                <span class="vle_info_name_label"><?php echo T('Course id')?></span>: <span class="vle_info_name_data"><?php echo $fvle->id?></span>
-            </div>
-            <div class="vle_info_field">
-                <span class="vle_info_name_label"><?php echo T('Course name')?></span>: <span class="vle_info_name_data"><?php echo $fvle->name?></span>
-            </div>
--        </div>
-        <?php endforeach;?>
+        <?php echo T('Available VLE courses')?>
+        <div>
+            <?php foreach($courses as $fvle):?>
+            <div class="vle_info_box">
+                <div class="vle_info_field">
+                    <span class="vle_info_name_label"><?php echo T('Course id')?></span>: <span class="vle_info_name_data"><?php echo $fvle->id?></span>
+                </div>
+                <div class="vle_info_field">
+                    <span class="vle_info_name_label"><?php echo T('Course name')?></span>: <span class="vle_info_name_data"><?php echo $fvle->name?></span>
+                </div>
+    -        </div>
+            <?php endforeach;?>
+        </div>
     </div>
 </div>

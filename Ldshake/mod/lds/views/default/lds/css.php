@@ -1503,3 +1503,39 @@ input[type="submit"]:disabled,input[type="button"]:disabled {
     cursor: default;
     background: #F6F6F6;
 }
+
+/*** VLE form ***/
+#lds_vle_page {
+padding: 20px;
+}
+
+.lds_form_title {
+font-size: 17px;
+background-color: grey;
+padding: 3px;
+border-bottom: 2px solid red;
+}
+
+#lds_vle_form {
+margin-top: 15px;
+width: 40%;
+}
+
+.lds_form_block {
+font-weight: bold;
+padding: 4px 5px 4px 5px;
+background-color: #f4f4f4;
+border: 1px solid #fff;
+}
+
+.vle_form_label {
+width: 30%;
+display: inline-block;
+color: #666;
+}
+
+.vle_form_input {
+border-radius: 4px;
+background-color: #fcfcfc;
+width: 65%;
+}

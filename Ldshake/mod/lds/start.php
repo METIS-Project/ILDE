@@ -84,6 +84,8 @@ function lds_init()
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
+    register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
+
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
 	register_action("lds/save_editor", false, $CONFIG->pluginspath . "lds/actions/lds/save_editor.php");
 	register_action("lds/delete", false, $CONFIG->pluginspath . "lds/actions/lds/delete.php");
@@ -97,7 +99,7 @@ function lds_init()
 	register_action("lds/pdf_export_editor", false, $CONFIG->pluginspath . "lds/actions/lds/pdf_export_editor.php");
 	register_action("lds/ping_editing_editor", false, $CONFIG->pluginspath . "lds/actions/lds/ping_editing_editor.php");
 	register_action("lds/file_export", false, $CONFIG->pluginspath . "lds/actions/lds/file_export.php");
-	register_action("lds/mass_add_user", false, $CONFIG->pluginspath . "lds/actions/lds/mass_add_user.php");
+	//register_action("lds/mass_add_user", false, $CONFIG->pluginspath . "lds/actions/lds/mass_add_user.php");
 	register_action("lds/deferred_send", false, $CONFIG->pluginspath . "lds/actions/lds/deferred_send.php");
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
 
@@ -388,11 +390,30 @@ function lds_exec_search ($params) {
 
 function lds_exec_vle ($params)
 {
-    $vle = lds_contTools::getVLE();
-    $courses = lds_contTools::getVLECourses($vle);
+    $user = get_loggedin_user();
+
+    if(!$user->vle) {
+        $vle = new ElggObject();
+        $vle->subtype = 'user_vle';
+        $vle->access_id = ACCESS_PUBLIC;
+        $vle->owner_guid = get_loggedin_userid();
+        $vle->username = '';
+        $vle->password = '';
+        $vle->vle_url = '';
+        $vle->vle_type = '';
+        $user->vle = $vle->save();
+        $user->save();
+    } else {
+        $vle = get_entity($user->vle);
+    }
+
+    $gluepsm = new GluepsManager($vle);
+    $vle_info = $gluepsm->getVleInfo();
+
+    //$courses = lds_contTools::getVLECourses($vle);
     $vars = array(
         'vle' => $vle,
-        'courses' => $courses
+        'vle_info' => $vle_info
     );
     $body = elgg_view('lds/vledata',$vars);
     page_draw('VLE', $body);

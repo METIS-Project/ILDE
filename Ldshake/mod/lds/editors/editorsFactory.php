@@ -76,6 +76,11 @@ class richTextEditor extends Editor
             $newdoc->save();
         }
 
+        if($editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100)) {
+            $em = EditorsFactory::getInstance($editordocument[0]);
+            $em->cloneDocument($lds->guid);
+        }
+
         return $lds;
     }
 
@@ -1031,6 +1036,40 @@ class RestEditor extends Editor
         return array($this->_document, $resultIds);
     }
 
+    public function cloneDocument($lds)
+    {
+        global $CONFIG;
+
+
+        $rand_id = mt_rand(400,9000000);
+
+        $clone = new DocumentEditorObject($lds->guid);
+
+        $file_origin = Editor::getFullFilePath($this->_document->file_guid);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($file_origin, $file->getFilenameOnFilestore());
+
+        $clone->file_guid = $file->guid;
+        $clone->save();
+
+        //assign a random string to each directory
+        $clone->previewDir = rand_str(64);
+        $clone->pub_previewDir = rand_str(64);
+        $clone->revisionDir = rand_str(64);
+
+        $clone->rev_last = 0;
+        $clone->lds_revision_id = 0;
+
+        $clone->save();
+
+        create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        return array($clone);
+    }
+
     public function unload($docSession)
     {
         //file('http://127.0.0.1/exelearning/?unload='. $docSession);
@@ -1136,11 +1175,13 @@ class GluepsManager
     public $instance_url;
     public $_implementation;
     public $_glueps_document;
+    public $_vle;
 
-    public function __construct($implementation=null, $glueps_document=null)
+    public function __construct($vle = null, $implementation=null, $glueps_document=null)
     {
         $this->_implementation = $implementation;
         $this->_document = $glueps_document;
+        $this->_vle = $vle;
     }
 
     public function cloneImplementation($title = null) {
@@ -1154,23 +1195,99 @@ class GluepsManager
         $implementation->vle_id = $this->_implementation->vle_id;
         $implementation->course_id = $this->_implementation->course_id;
         $implementation->lds_id = $this->_implementation->lds_id;
+
+        $implementation->granularity = 0;
+        $implementation->completeness = 0;
+        $implementation->cloned = 1;
+        $implementation->parent = $this->_implementation->guid;
+        $implementation->editor_type = $this->_implementation->editor_type;
+
+        $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
+        foreach ($tagFields as $field)
+            $implementation->$field = $this->_implementation->$field;
+
+        $implementation->save();
+        create_annotation($implementation->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+        $revision = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
+        $revision = $revision[0];
+
+        foreach($this->_document as $d) {
+            $newdoc = new DocumentObject($implementation->guid);
+            $newdoc->description = $d->description;
+            $newdoc->title = $d->title;
+            $newdoc->lds_revision_id = $revision->id;
+            $newdoc->save();
+        }
+
+        if($editordocument = get_entities_from_metadata('lds_guid',$this->_implementation->guid,'object','LdS_document_editor', 0, 100)) {
+            //$em = EditorsFactory::getInstance($editordocument[0]);
+            //$em->cloneDocument($lds->guid);
+
+            $rand_id = mt_rand(400,9000000);
+
+            $clone = new DocumentEditorObject($lds->guid);
+
+            $file_origin = Editor::getFullFilePath($this->_document->file_guid);
+
+            //create a new file to store the document
+            $filestorename = (string)$rand_id;
+            $file = $this->getNewFile($filestorename);
+            file_put_contents($file_origin, $file->getFilenameOnFilestore());
+
+            $clone->file_guid = $file->guid;
+            $clone->save();
+
+            //assign a random string to each directory
+            $clone->previewDir = rand_str(64);
+            $clone->pub_previewDir = rand_str(64);
+            $clone->revisionDir = rand_str(64);
+
+            $clone->rev_last = 0;
+            $clone->lds_revision_id = 0;
+
+            $clone->save();
+
+            create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        }
+
+
         $implementation->save();
         return $implementation;
     }
 
-    public static function getVleInfo() {
+    private function validateVle() {
+        if(
+            strlen($this->_vle->username) &&
+            strlen($this->_vle->password) &&
+            strlen($this->_vle->vle_type) &&
+            strlen($this->_vle->vle_url)
+        )
+            return true;
+
+        return false;
+    }
+
+    public function getVleInfo() {
         global $CONFIG;
+
+        if(!$this->validateVle())
+            return false;
+
         $url = $CONFIG->glueps_url;
+
+        /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
         $username = 'metis';
         $password = 'M3t1$project';
+        */
 
         $get = array(
-            'type' => $type,
-            'accessLocation' => $vle_url,
-            'creduser' => $username,
-            'credsecret' => $password
+            'type' => $this->_vle->vle_type,
+            'accessLocation' => $this->_vle->vle_url,
+            'creduser' => $this->_vle->username,
+            'credsecret' => $this->_vle->password
         );
 
         $uri = "{$url}courses?"

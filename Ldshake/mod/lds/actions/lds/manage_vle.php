@@ -35,25 +35,21 @@
  ********************************************************************************/
 
 global $CONFIG;
-$vle_id = (int)get_input('vle_id');
+//$vle_id = (int)get_input('vle_id');
+$vle_type = get_input('vle_type');
 $vle_name = get_input('vle_name');
 $vle_url = get_input('vle_url');
 $vle_username = get_input('vle_username');
 $vle_password = get_input('vle_password');
 
-if($vle_id) {
-    $vle = get_entity($vle_id);
-} else {
-    $vle = new ElggObject();
-    $vle->subtype = 'vle';
-}
+$user = get_loggedin_user();
+$vle = get_entity($user->vle);
 
-$vle->subtype = 'vle';
-$vle->vle_id = $vle_id;
-$vle->vle_name = $vle_name;
+$vle->name = $vle_name;
 $vle->vle_url = $vle_url;
-$vle->vle_username = $vle_username;
-$vle->vle_password = $vle_password;
+$vle->vle_type = $vle_type;
+$vle->username = $vle_username;
+$vle->password = $vle_password;
 
 $vle->save();
 
