@@ -62,6 +62,8 @@ else
 {
 	//We're creating it from scratch. Construct a new obj.
 	$lds = new LdSObject();
+    if($editor_type == 'gluepsrest')
+        $lds->subtype = 'LdS_implementation';
 	$lds->owner_guid = get_loggedin_userid();
 	$lds->external_editor = true;
     $lds->editor_type = $editor_type;

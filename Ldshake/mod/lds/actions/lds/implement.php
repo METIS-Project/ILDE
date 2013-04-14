@@ -54,6 +54,7 @@ $implementation->title = $title;
 $implementation->vle_id = $vle_id;
 $implementation->course_id = $course_id;
 $implementation->lds_id = $lds->guid;
+$implementation->editor_type = 'glueps';
 $implementation->save();
 
-return 'ok';
+echo $implementation->guid;

@@ -5,6 +5,9 @@ class Editor
 	private $_document;
     private $_lds;
 
+    public function getDocument() {
+        return $this->_document;
+    }
 	//return the filesystem path of an ElggFile object
 	public static function getFullFilePath($file_guid)
 	{
@@ -621,6 +624,18 @@ class EditorsFactory
             return new RestEditor($document);
 	}
 
+    public static function getManager($lds)
+    {
+        $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
+        $document = $documents[0];
+        if($document->editorType == 'webcollage')
+            return new WebCollageEditor($document);
+        if($document->editorType == 'exe')
+            return new exeLearningEditor($document);
+        if($document->editorType == 'webcollagerest')
+            return new RestEditor($document);
+    }
+
 	public static function getTempInstance($editorType)
 	{
 		if($editorType == 'webcollage')
@@ -762,11 +777,11 @@ class OpenglmEditor extends Editor {
 class RestEditor extends Editor
 {
     public $document_url;
+    private $_rest_id;
 
     public function getDocumentId()
     {
-        return $_document->guid;
-
+        return $this->_document->guid;
     }
 
     //load an empty data file to start a new document
@@ -827,12 +842,59 @@ class RestEditor extends Editor
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8"
         );
 
-        $doc_contents = file_get_contents($filename_lds);
-        /*$post = array(
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $response = \Httpful\Request::post($uri)
+            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+            ->body($post, 'multipart/form-data')
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->sendIt();
+
+        $vars['editor'] = 'webcollagerest';
+        $doc_url = parse_url($response->raw_body);
+        $url_path = explode('/', $doc_url['path']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        $this->_rest_id = $doc_id;
+        $vars['document_url'] = "{$response->raw_body}";
+        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    public function putImplementation()
+    {
+        global $CONFIG;
+        $vle_info = GluepsManager::getVleInfo();
+        $course_info = GluepsManager::getCourseInfo();
+        $vle_info->id = '789';
+        $vle_info->name = 'my vle';
+        $wic_vle_data = array(
+            'learningEnvironment' => $vle_info,
+            'course' => $course_info
+        );
+
+        $json_wic_vle_data = json_encode($wic_vle_data);
+
+        $putData = tmpfile();
+        fwrite($putData, $json_wic_vle_data);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = rand_str(64);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
-            'document' => $doc_contents
-        );*/
+            'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
+            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+        );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
@@ -842,10 +904,6 @@ class RestEditor extends Editor
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->sendIt();
 
-        //copy($filename_lds, $filename_editor);
-
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
         $vars['editor'] = 'webcollagerest';
         $doc_url = parse_url($response->raw_body);
         $url_path = explode('/', $doc_url['path']);
@@ -854,6 +912,7 @@ class RestEditor extends Editor
             if(strlen($up))
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
         $vars['editor_id'] = $rand_id;
@@ -956,19 +1015,6 @@ class RestEditor extends Editor
         $this->_document->file_guid = $file->guid;
         $this->_document->save();
 
-        /*
-        //export the contents to the most common formats supported by exelarning
-        $this->_document->ims_ld = $this->saveNewExportDocument($docSession, 'IMS');
-        $this->_document->scorm = $this->saveNewExportDocument($docSession, 'scorm');
-        $this->_document->scorm2004 = $this->saveNewExportDocument($docSession, 'scorm2004');
-        $this->_document->webZip = $this->saveNewExportDocument($docSession, 'zipFile');
-
-        //create the published files
-        $this->_document->pub_ims_ld = $this->saveNewExportDocument($docSession, 'IMS');
-        $this->_document->pub_scorm = $this->saveNewExportDocument($docSession, 'scorm');
-        $this->_document->pub_scorm2004 = $this->saveNewExportDocument($docSession, 'scorm2004');
-        $this->_document->pub_webZip = $this->saveNewExportDocument($docSession, 'zipFile');
-        */
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
         $this->_document->pub_previewDir = rand_str(64);
@@ -977,14 +1023,6 @@ class RestEditor extends Editor
         $this->_document->rev_last = 0;
         $this->_document->lds_revision_id = 0;
 
-        /*
-        //create the preview page with a single page html document
-        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
-        exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
-        exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
-        if(strlen((string)$docSession) > 0)
-            exec('rm -r --interactive=never '.$CONFIG->exedata.'export/singlePage/'.$docSession);
-        */
         $resultIds->guid = $this->_document->lds_guid;
         $resultIds->file_guid = $file->guid;
 
@@ -1093,14 +1131,16 @@ class RestEditor extends Editor
 class GluepsManager
 {
     public $lds;
-    public $document;
+    public $_document;
     public $document_url;
     public $instance_url;
     public $_implementation;
+    public $_glueps_document;
 
-    public function __construct($implementation=null)
+    public function __construct($implementation=null, $glueps_document=null)
     {
         $this->_implementation = $implementation;
+        $this->_document = $glueps_document;
     }
 
     public function cloneImplementation($title = null) {
@@ -1125,7 +1165,6 @@ class GluepsManager
         $type = 'Moodle';
         $username = 'metis';
         $password = 'M3t1$project';
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
         $get = array(
             'type' => $type,
@@ -1142,7 +1181,6 @@ class GluepsManager
 
         $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
-            //->expectsXML()
             ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
@@ -1157,8 +1195,6 @@ class GluepsManager
         $username = 'metis';
         $password = 'M3t1$project';
         $course = '3';
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
-
 
         $get = array(
             'type' => $type,
@@ -1184,35 +1220,112 @@ class GluepsManager
         return $response->body;
     }
 
-    public function newInstantiation() {
+    public static function newImplementation($params = null) {
         global $CONFIG;
-        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
-        $rand_id = mt_rand(400,5000000);
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+        $url = $CONFIG->glueps_url;
+        $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
+        $type = 'Moodle';
+        $username = 'metis';
+        $password = 'M3t1$project';
+        $course = $params['course'];//'3';
 
-        $post = array(
-            'lang' => 'en',
-            'sectoken' => $rand_id,
-            'document' => "@{$filename_lds}"
+        $vle_info = GluepsManager::getVleInfo();
+        $course_info = GluepsManager::getCourseInfo();
+        $vle_info->id = '789';
+        $vle_info->name = 'my vle';
+        $wic_vle_data = array(
+            'learningEnvironment' => $vle_info,
+            'course' => $course_info
         );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $json_wic_vle_data = json_encode($wic_vle_data);
+
+        $putData = tmpfile();
+        fwrite($putData, $json_wic_vle_data);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        $lds = $params['lds'];
+        $ldsm = EditorsFactory::getManager($lds);
+        $document = $ldsm->getDocument();
+        $filename_lds = Editor::getFullFilePath($document->file_guid);
+        $sectoken = rand_str(32);
+
+        $post = array(
+            'NewDeployTitleName' => $params['title'],
+            'instType' => $params['type'],
+            'sectoken' => $sectoken,
+            'archiveWic' => "@{$filename_lds};type=application/json; charset=UTF-8",
+            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+        );
+
+        $uri = "{$url}deploys";
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->body($post, 'multipart/form-data')
+            ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
-        //copy($filename_lds, $filename_editor);
+        $xmldoc = new DOMDocument();
+        $xmldoc->loadXML($response->raw_body);
+        $xpathvar = new Domxpath($xmldoc);
 
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
-        $vars['editor'] = 'webcollagerest';
-        $vars['document_url'] = $response->raw_body;
-        $vars['editor_id'] = $rand_id;
+        $queryResult = $xpathvar->query('//lds/id');
+        $doc_url = $queryResult->item(0)->nodeValue;
+
+        $url_path = explode('/', $doc_url['path']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+
+        $vars = array();
+        $vars['editor_id'] = $sectoken;
+        $vars['document_url'] = "{$doc_url}";
+        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}/gui/glueps/deploy.html?deploy_id={$deploy_id}&sectoken={$sectoken}";
+        $vars['editor'] = 'gluepsrest';
 
         return $vars;
+    }
+
+    public function updateImplementation($params = null) {
+        global $CONFIG;
+        $url = $CONFIG->glueps_url;
+
+        $uri = "{$url}deploys/{$params['id']}";
+        $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
+            ->basicAuth('ldshake','Ld$haK3')
+            ->sendIt();
+
+        return $response->body;
+    }
+
+    public function deployImplementation($params = null) {
+        global $CONFIG;
+        $url = $CONFIG->glueps_url;
+
+        $uri = "{$url}deploys/{$params['id']}/static";
+        $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
+            ->basicAuth('ldshake','Ld$haK3')
+            ->sendIt();
+
+        return $response->body;
+    }
+
+    public static function getImplementation($params = null) {
+        global $CONFIG;
+        $url = $CONFIG->glueps_url;
+
+        $uri = "{$url}deploys/{$params['id']}";
+
+        $response = \Httpful\Request::get($uri)
+            //->addHeader('Accept', 'application/json')
+            //->expectsXML()
+            ->basicAuth('ldshake','Ld$haK3')
+            ->sendIt();
+
+        return $response->body;
     }
 
     public function loadInstantiation() {
@@ -1275,7 +1388,7 @@ class GluepsManager
         return $vars;
     }
 
-    public function saveDocument() {
+/*    public function depsaveDocument() {
         global $CONFIG;
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
         $rand_id = mt_rand(400,5000000);
@@ -1304,6 +1417,7 @@ class GluepsManager
 
         return $vars;
     }
+*/
 
     public function deployDocument() {
         global $CONFIG;
@@ -1363,5 +1477,128 @@ class GluepsManager
         $vars['editor_id'] = $rand_id;
 
         return $vars;
+    }
+
+
+    public function saveNewDocument($params = null)
+    {
+        global $CONFIG;
+
+        //save the contents
+        $docSession = $params['editor_id'];
+
+        $resultIds = new stdClass();
+        $user = get_loggedin_user();
+
+        $glueps_xmlcontent = GluepsManager::getImplementation($params);
+
+        $rand_id = mt_rand(400,9000000);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($file->getFilenameOnFilestore(), $glueps_xmlcontent);
+        //copy($filename_editor, $file->getFilenameOnFilestore());
+        //unlink($filename_editor);
+
+        $this->_document->file_guid = $file->guid;
+        $this->_document->save();
+
+        //assign a random string to each directory
+        $this->_document->previewDir = rand_str(64);
+        $this->_document->pub_previewDir = rand_str(64);
+        $this->_document->revisionDir = rand_str(64);
+
+        $this->_document->rev_last = 0;
+        $this->_document->lds_revision_id = 0;
+
+        $resultIds->guid = $this->_document->lds_guid;
+        $resultIds->file_guid = $file->guid;
+
+        $this->_document->save();
+
+        return array($this->_document, $resultIds);
+    }
+
+    public function saveDocument($params=null)
+    {
+        if($this->_document->file_guid)
+            $this->saveExistingDocument($params);
+        else
+            $this->saveNewDocument($params);
+    }
+
+    //update the previous contents
+    public function saveExistingDocument($params=null)
+    {
+        global $CONFIG;
+        $user = get_loggedin_user();
+        $resultIds = new stdClass();
+        $docSession = $params['editor_id'];
+
+        $glueps_xmlcontent = GluepsManager::getImplementation($params);
+
+        //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
+        //file('http://127.0.0.1/exelearning/?save='. $docSession);
+
+        $rand_id = mt_rand(400,9000000);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($this->getFullFilePath($this->_document->file_guid), $glueps_xmlcontent);
+
+        /*
+        $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
+        file('http://127.0.0.1/exelearning/?save='. $docSession);
+
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+
+        copy($filename_editor, $filename_lds);
+        unlink($filename_editor);
+
+        */
+
+        $old_previewDir = $this->_document->previewDir;
+        $this->_document->previewDir = rand_str(64);
+
+
+        /*
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
+        exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
+        if(strlen((string)$docSession) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->exedata.'export/singlePage/'.$docSession);
+        if(strlen((string)$old_previewDir) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$old_previewDir);
+
+
+        $this->updateExportDocument($this->_document->ims_ld, $docSession, 'IMS');
+        $this->updateExportDocument($this->_document->scorm, $docSession, 'scorm');
+        $this->updateExportDocument($this->_document->scorm2004, $docSession, 'scorm2004');
+        $this->updateExportDocument($this->_document->webZip, $docSession, 'zipFile');
+
+        */
+        $revisions = get_entities_from_metadata('document_guid',$this->_document->guid,'object','LdS_document_editor_revision',0,10000,0,'time_created');
+        $resultIds->count = count($revisions);
+
+        //create the diff content against the last saved revision
+        if(count($revisions) > 0)
+        {
+            /*
+            $output = array();
+            exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py".' '.$CONFIG->editors_content.'content/exe/'.$revisions[count($revisions)-1]->previewDir.'/index.html'.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/index.html', $output);
+            $diff = implode('', $output);
+            //insert an inline style definition to highlight the differences
+            $diff = str_replace("<del", "<del style=\"background-color: #fcc;display: inline-block;text-decoration: none;\" ", $diff);
+            $diff = str_replace("<ins", "<ins style=\"background-color: #cfc;display: inline-block;text-decoration: none;\" ", $diff);
+            $handle = fopen($CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/diff.html', "w");
+            fwrite($handle, $diff);
+            fclose($handle);
+            */
+        }
+
+        $this->_document->save();
+
+        return array($this->_document, $resultIds);
     }
 }

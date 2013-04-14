@@ -147,8 +147,35 @@ function ajax_submit (redirect)
 	//Put the current editor data in the array before sending it
 	//documents[currentTab].body = editor.getData();
 	var submitData = null;
-	
-	if(editorType == 'webcollage')
+    var save_url = "action/lds/save_editor";
+
+    if(editorType == 'gluepsrest')
+    {
+        save_url = "action/lds/save_glueps";
+
+        documents[currentTab].body = editor.getData();
+
+        submitData =
+        {
+            guid: $('#lds_edit_guid').val(),
+            revision: $('#lds_edit_revision').val(),
+            title: $('#lds_edit_title').val(),
+            discipline: $('#as-values-discipline').val(),
+            pedagogical_approach: $('#as-values-pedagogical_approach').val(),
+            tags: $('#as-values-tags').val(),
+            completeness: $('#completeness_input').val(),
+            granularity: $('#granularity_input').val(),
+            editor_id: editor_id,
+            editorType: editorType,
+            documents: documents,
+            document_url: document_url,
+            lds_id: lds_id,
+            vle_id: vle_id,
+            course_id: course_id
+        };
+
+    }
+	else if(editorType == 'webcollage')
 	{
 		top.window.document.getElementById('lds_editor_iframe').contentWindow.TableGenerator.generateSummary();
 		top.window.document.getElementById('lds_editor_iframe').contentWindow.Loader.save_ldshake();
@@ -190,7 +217,7 @@ function ajax_submit (redirect)
         };
 	}
 	
-	$.post (baseurl + "action/lds/save_editor", submitData, function (data)
+	$.post (baseurl + save_url, submitData, function (data)
 	{
 		if (redirect == false)
 		{

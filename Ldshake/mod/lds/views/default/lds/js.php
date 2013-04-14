@@ -37,7 +37,7 @@
 ?>
 
 <?php
-if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor'):
+if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps'):
 ?>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/autoSuggest/jquery.autoSuggest.js"></script>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor/ckeditor.js"></script>
@@ -47,7 +47,7 @@ if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_c
 endif;
 if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit'):
 	echo Utils::getJsDeclaration('lds', 'lds-form');
-elseif (get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor'):
+elseif (get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps'):
 	echo Utils::getJsDeclaration('lds', 'lds-form-editor');
 endif;
 if (get_context() == 'lds_exec_main' || get_context() == 'lds_exec_browse' || get_context() == 'lds_exec_trashed' || get_context() == 'lds_exec_implementable' || get_context() == 'lds_exec_implementations'):
