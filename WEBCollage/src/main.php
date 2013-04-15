@@ -172,13 +172,16 @@ include_once ("manager/i18nParser.php");
 		?>
 
 		<title>Web Instance Collage <?php
+                $document_id = isset($_REQUEST['document_id']) ? '"' . $_REQUEST['document_id'] . '"' : '""';
+                $sectoken = isset($_REQUEST['sectoken']) ? '"' . $_REQUEST['sectoken'] . '"' : '""';
+                
 		$ldid = isset($_REQUEST['ldid']) ? '"' . $_REQUEST['ldid'] . '"' : '""';
 		$subtitle = isset($_REQUEST['ldid']) ? ': ' . $_REQUEST['ldid'] : '';
 
 		echo $subtitle;
 			?></title>
 	</head>
-	<body ldid=<?php echo $ldid; ?> class="claro">
+	<body ldid=<?php echo $ldid; ?> document_id= <?php echo $document_id ?> sectoken= <?php echo $sectoken ?> class="claro">
 		<?php
 		include_once ("manager/dialogs/changeTitle.php");
 		include_once ("manager/dialogs/changePrerrequisites.php");

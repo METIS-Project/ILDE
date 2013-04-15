@@ -463,13 +463,23 @@ var ParticipantManagement = {
             dojo.byId("clase_elegida").innerHTML = "<b>" + DesignInstance.data.classObj.name + "</b>";
             ParticipantManagement.showDeployButton(DesignInstance.data.instObj.id);
         }else{
-            dojo.style("tablaInfo","display","none");
-            dojo.byId("instancia_elegida").innerHTML =  "";
-            dojo.byId("clase_elegida").innerHTML = "";
-            dojo.style("createGluePSDesign","display","none");
+            if (Loader.ldShakeMode && (DesignInstance.data.classObj.id !="" || DesignInstance.data.lmsObj.id!="")){
+                dojo.style("tablaInfo","display","");
+                dojo.byId("instancia_elegida").innerHTML =  "";
+                dojo.byId("clase_elegida").innerHTML = "<b>" + DesignInstance.data.classObj.name + "</b>";
+                dojo.byId("lms_elegido").innerHTML = "<b>" + DesignInstance.data.lmsObj.name + "</b>";
+            }
+            else{
+                dojo.style("tablaInfo","display","none");
+                dojo.byId("instancia_elegida").innerHTML =  "";
+                dojo.byId("clase_elegida").innerHTML = "";
+                dojo.style("createGluePSDesign","display","none");
+            }
         }
         ParticipantManagement.checkInstallation();
-        ParticipantManagement.showSelectedLmsType();
+        if (!Loader.ldShakeMode){
+            ParticipantManagement.showSelectedLmsType();
+        }
         ParticipantManagement.showChosenParticipants();
     },
              
@@ -558,7 +568,8 @@ var ParticipantManagement = {
             }
         }
         //Se reconstruye la tabla con el nuevo listado de participantes
-        if (DesignInstance.data && DesignInstance.data.participants && DesignInstance.data.instObj.id!=""){
+        //if (Loader.ldShakeMode || (DesignInstance.data && DesignInstance.data.participants && DesignInstance.data.instObj.id!="")){
+        if (DesignInstance.data && DesignInstance.data.participants && (DesignInstance.data.instObj.id!="" || DesignInstance.data.participants.length>0)){
             var th = table.appendChild(document.createElement("th"));
             th.innerHTML = i18n.get("participantes.nombre");
             th = table.appendChild(document.createElement("th"));

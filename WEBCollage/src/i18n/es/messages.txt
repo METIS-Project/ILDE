@@ -33,7 +33,8 @@ loader.load.noAccess=No tiene permiso para ver este script. ¿Ha iniciado su ses
 loader.save.sessionExpired=Su sesión ha expirado. Si no inicia sesión se cerrará el diseño y se perderán los cambios realizados. <br />¿Desea iniciar sesión?
 loader.save.sessionExpired.title=Sesión expirada
 
-export.title=Exportar script a IMS-LD
+export.imsld.title=Exportar script a IMS-LD
+export.workflow.title=Exportar script a definición de flujo de trabajo
 export.waiting=Por favor espere mientras se crea el paquete IMS-LD...
 export.message=Haga click <a href='${0}'>aquí</a> para bajar el paquete IMS-LD.
 export.error=¡No se pudo empaquetar el diseño!

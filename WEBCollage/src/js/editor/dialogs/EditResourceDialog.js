@@ -330,7 +330,18 @@ var EditToolDialog = {
                     dijit.byId("searchToolVle").set("disabled",false);
                 }
                 else{
-                    dijit.byId("searchToolVle").set("disabled",true);
+                    //if (Loader.ldShakeMode && DesignInstance.data.vleTools.length > 0){
+                    if (DesignInstance.data.vleTools.length > 0){
+                        dijit.byId("searchToolVle").set("disabled",false);
+                    }
+                    else{
+                        dijit.byId("searchToolVle").set("disabled",true);
+                    }
+                }
+                //Ocultar los botones ontoolsearch y keyword si WIC está contenido en ldshake
+                if (Loader.ldShakeMode){
+                    dijit.byId("searchOntoolSearch").domNode.style.display = "none";
+                    dijit.byId("searchKeyword").domNode.style.display = "none";
                 }
             }
         };

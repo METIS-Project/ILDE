@@ -2,8 +2,10 @@
 
 require_once '../manager/JSON.php';
 require_once '../manager/db/db.php';
+require_once '../manager/db/usersdb.php';
 require_once '../manager/db/designsdb.php';
 require_once '../ldshake/lib/Serializer.php';
+include_once '../manager/export/imsld.php';
 
 /**
  *  Class that represents a Design from WebInstanceCollage as a REST resource
@@ -15,6 +17,7 @@ class DesignResource {
     private $method;
     private $document_id;
     private $content_type;
+    private $format_value;
 
     /**
      * Creates a DesignResource object
@@ -22,10 +25,11 @@ class DesignResource {
      * @param type $document_id Identifier of the document 
      * @param type $content_type The type of content expected by the client as response
      */
-    function __construct($method, $document_id, $content_type) {
+    function __construct($method, $document_id, $content_type, $format_value = NULL) {
         $this->method = $method;
         $this->document_id = $document_id;
         $this->content_type = $content_type;
+        $this->format_value = $format_value;
     }
 
     /**
@@ -39,17 +43,24 @@ class DesignResource {
         if ($load == false) {
             return new ResponseData(404, 'The resource does not exists', 'text/html');
         }
-
         if (strcmp($this->method, "get") == 0) {
-            if (strcmp($this->content_type, 'xml') == 0) {
-                return $this->get_xml();
-            } elseif (strcmp($this->content_type, 'json') == 0) {
-                return $this->get_json();
+            if ($this->format_value == NULL) {
+                if (strpos($this->content_type, 'application/xml') !== false) {
+                    return $this->get_xml();
+                } elseif (strpos($this->content_type, 'application/json') !== false) {
+                    return $this->get_json();
+                } else {
+                    return $this->get_binary();
+                }
             } else {
-                return $this->get_binary();
+                if (strcmp(strtolower($this->format_value), "imsld") == 0) {
+                    return $this->get_imsld();
+                } else {
+                    return new ResponseData(501, '', 'text/html');
+                }
             }
         } elseif (strcmp($this->method, "delete") == 0) {
-            return $this->delete();           
+            return $this->delete();
         } else {
             return new ResponseData(501, '', 'text/html');
         }
@@ -60,39 +71,57 @@ class DesignResource {
      * @return ResponseData The response containing the design as an XML and the status code. If a error is produced, the response includes instead the cause of the error
      */
     function get_xml() {
-        //Get and check the sectoken associated to this document
-        $sectoken_request = "";
-        foreach (getallheaders() as $nombre => $valor) {
-            if (strcmp($nombre, 'Authorization') == 0) {
-                //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
-                if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
-                    $sectoken_request = substr($valor, strlen("Bearer") + 1);
-                    break;
-                } else {
-                    return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
-                }
-            }
-        }
-        if (strlen($sectoken_request) == 0) {
-            return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Authentication required';
+            exit;
         }
 
+        //Authenticate the user
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        $password = sha1(md5($password));
 
-        //Check the sectoken provided matches the one stored in the database for this design
         $link = connectToDB();
-        $row = loadSectokenDB($link, $sectoken_request);
-        if ($row == false) {
-            return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
-        } else {
-            $docid_database = $row['docid'];
-            if (strcmp($this->document_id, $docid_database) != 0) {
-                return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
-            }
+        if (getUserDataDB($link, $username, $password) == false) {
+
+            return new ResponseData(401, 'The credentials provided are not correct', 'text/html');
         }
+
+
+        //Get and check the sectoken associated to this document
+        /* $sectoken_request = "";
+          foreach (getallheaders() as $nombre => $valor) {
+          if (strcmp($nombre, 'Authorization') == 0) {
+          //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
+          if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
+          $sectoken_request = substr($valor, strlen("Bearer") + 1);
+          break;
+          } else {
+          return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
+          }
+          }
+          }
+          if (strlen($sectoken_request) == 0) {
+          return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+          }
+
+
+          //Check the sectoken provided matches the one stored in the database for this design
+          $link = connectToDB();
+          $row = loadSectokenDB($link, $sectoken_request);
+          if ($row == false) {
+          return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
+          } else {
+          $docid_database = $row['docid'];
+          if (strcmp($this->document_id, $docid_database) != 0) {
+          return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
+          }
+          } */
 
 
         //Check the user is the owner of the design and it exists in the database
-        $username = 'ldshake_default_user';
         if (getAccessDB($link, $username, $this->document_id, 'read')) {
             $load = loadDesignDB($link, $this->document_id);
             if ($load != false) {
@@ -118,40 +147,56 @@ class DesignResource {
      * @return ResponseData The response containing the design as an JSON and the status code. If a error is produced, the response includes instead the cause of the error
      */
     function get_json() {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Authentication required';
+            exit;
+        }
+
+        //Authenticate the user
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        $password = sha1(md5($password));
+
+        $link = connectToDB();
+        if (getUserDataDB($link, $username, $password) == false) {
+
+            return new ResponseData(401, 'The credentials provided are not correct', 'text/html');
+        }
 
         //Get and check the sectoken associated to this document
-        $sectoken_request = "";
-        foreach (getallheaders() as $nombre => $valor) {
-            if (strcmp($nombre, 'Authorization') == 0) {
-                //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
-                if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
-                    $sectoken_request = substr($valor, strlen("Bearer") + 1);
-                    break;
-                } else {
-                    return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
-                }
-            }
-        }
-        if (strlen($sectoken_request) == 0) {
-            return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
-        }
+        /* $sectoken_request = "";
+          foreach (getallheaders() as $nombre => $valor) {
+          if (strcmp($nombre, 'Authorization') == 0) {
+          //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
+          if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
+          $sectoken_request = substr($valor, strlen("Bearer") + 1);
+          break;
+          } else {
+          return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
+          }
+          }
+          }
+          if (strlen($sectoken_request) == 0) {
+          return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+          }
 
 
-        //Check the sectoken provided matches the one stored in the database for this design
-        $link = connectToDB();
-        $row = loadSectokenDB($link, $sectoken_request);
-        if ($row == false) {
-            return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
-        } else {
-            $docid_database = $row['docid'];
-            if (strcmp($this->document_id, $docid_database) != 0) {
-                return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
-            }
-        }
+          //Check the sectoken provided matches the one stored in the database for this design
+          $link = connectToDB();
+          $row = loadSectokenDB($link, $sectoken_request);
+          if ($row == false) {
+          return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
+          } else {
+          $docid_database = $row['docid'];
+          if (strcmp($this->document_id, $docid_database) != 0) {
+          return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
+          }
+          } */
 
 
         //Check the user is the owner of the design and it exists in the database
-        $username = 'ldshake_default_user';
         if (getAccessDB($link, $username, $this->document_id, 'read')) {
             $load = loadDesignDB($link, $this->document_id);
             if ($load != false) {
@@ -177,49 +222,167 @@ class DesignResource {
      * @return ResponseData The response containing the design as an file forcing its download and the status code. If a error is produced, the response includes instead the cause of the error
      */
     function get_binary() {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Authentication required';
+            exit;
+        }
+
+        //Authenticate the user
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        $password = sha1(md5($password));
+
+        $link = connectToDB();
+        if (getUserDataDB($link, $username, $password) == false) {
+
+            return new ResponseData(401, 'The credentials provided are not correct', 'text/html');
+        }
 
         //Get and check the sectoken associated to this document
-        $sectoken_request = "";
-        foreach (getallheaders() as $nombre => $valor) {
-            if (strcmp($nombre, 'Authorization') == 0) {
-                //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
-                if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
-                    $sectoken_request = substr($valor, strlen("Bearer") + 1);
-                    break;
-                } else {
-                    return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
-                }
-            }
-        }
-        if (strlen($sectoken_request) == 0) {
-            return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
-        }
+        /* $sectoken_request = "";
+          foreach (getallheaders() as $nombre => $valor) {
+          if (strcmp($nombre, 'Authorization') == 0) {
+          //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
+          if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
+          $sectoken_request = substr($valor, strlen("Bearer") + 1);
+          break;
+          } else {
+          return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
+          }
+          }
+          }
+          if (strlen($sectoken_request) == 0) {
+          return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+          }
 
 
-        //Check the sectoken provided matches the one stored in the database for this design
-        $link = connectToDB();
-        $row = loadSectokenDB($link, $sectoken_request);
-        if ($row == false) {
-            return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
-        } else {
-            $docid_database = $row['docid'];
-            if (strcmp($this->document_id, $docid_database) != 0) {
-                return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
-            }
-        }
+          //Check the sectoken provided matches the one stored in the database for this design
+          $link = connectToDB();
+          $row = loadSectokenDB($link, $sectoken_request);
+          if ($row == false) {
+          return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
+          } else {
+          $docid_database = $row['docid'];
+          if (strcmp($this->document_id, $docid_database) != 0) {
+          return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
+          }
+          } */
 
 
         //Check the user is the owner of the design and it exists in the database
-        $username = 'ldshake_default_user';
         if (getAccessDB($link, $username, $this->document_id, 'read')) {
             $load = loadDesignDB($link, $this->document_id);
             if ($load != false) {
                 $data = $this->generate_json($load);
                 if ($data != false) {
                     // Success!
-                    return new ResponseData(200, $data, 'application/force-download');
+                    //return new ResponseData(200, $data, 'application/force-download');
+                    $upload_directory = dirname(dirname(__FILE__)) . '/tmp/';
+                    $name = $this->document_id;
+                    $destination = $upload_directory . time() . "_" . $name;
+                    $file = fopen($destination, "w");
+                    $file = fwrite($file, $data);
+        
+                    $file_path = $destination;
+                    $filename = basename($file_path);
+
+                    if (file_exists($file_path)) {
+                        header('Content-Description: File Transfer');
+                        header('Content-Type: application/octet-stream');
+                        header('Content-Disposition: attachment; filename=' . $filename);
+                        header('Content-Transfer-Encoding: binary');
+                        header('Expires: 0');
+                        header('Cache-Control: must-revalidate');
+                        header('Pragma: public');
+                        header('Content-Length: ' . filesize($file_path));
+                        ob_clean();
+                        flush();
+                        readfile($file_path);
+                        //We no longer need the file, so we delete it
+                        unlink($file_path);
+                        exit;
+                    }
+                       
                 } else {
                     return new ResponseData(500, 'Error while generating the design as a JSON', 'text/html');
+                }
+            } else {
+                return new ResponseData(500, 'Unable to load the design from the database', 'text/html');
+            }
+        } else {
+            return new ResponseData(401, 'The user is not authorized to access this design', 'text/html');
+        }
+
+        return $response;
+    }
+
+    /**
+     * GET request of the design as a zip file containing the design in IMSLD format
+     * @return ResponseData The response containing the design as an file forcing its download and the status code. If a error is produced, the response includes instead the cause of the error
+     */
+    function get_imsld() {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Authentication required';
+            exit;
+        }
+
+        //Authenticate the user
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        $password = sha1(md5($password));
+
+        $link = connectToDB();
+        if (getUserDataDB($link, $username, $password) == false) {
+
+            return new ResponseData(401, 'The credentials provided are not correct', 'text/html');
+        }
+
+        //Check the user is the owner of the design and it exists in the database
+        if (getAccessDB($link, $username, $this->document_id, 'read')) {
+            $load = loadDesignDB($link, $this->document_id);
+            if ($load != false) {
+                $design = $load['design'];
+                $instance = $load['instance'];
+                $data = LdshakeIMSLDInstanceExport($this->document_id, $design, $instance);
+                if ($data != false) {
+                    // Success!
+
+                    $file_path = $data;
+                    $filename = basename($file_path);
+
+                    /* if (is_file($file_path)) {
+                      header('Content-Type: application/force-download');
+                      header('Content-Disposition: attachment; filename=' . $filename);
+                      header('Content-Transfer-Encoding: binary');
+                      header('Content-Length: ' . filesize($file_path));
+                      readfile($file_path);
+                      exit;
+                      } */
+
+                    if (file_exists($file_path)) {
+                        header('Content-Description: File Transfer');
+                        header('Content-Type: application/octet-stream');
+                        header('Content-Disposition: attachment; filename=' . $filename);
+                        header('Content-Transfer-Encoding: binary');
+                        header('Expires: 0');
+                        header('Cache-Control: must-revalidate');
+                        header('Pragma: public');
+                        header('Content-Length: ' . filesize($file_path));
+                        ob_clean();
+                        flush();
+                        readfile($file_path);
+                        //We no longer need the file, so we delete it
+                        unlink($file_path);
+                        exit;
+                    }
+
+                    //return new ResponseData(200, $data, 'application/force-download');
+                } else {
+                    return new ResponseData(500, 'Error while generating the IMSLD zip file', 'text/html');
                 }
             } else {
                 return new ResponseData(500, 'Unable to load the design from the database', 'text/html');
@@ -237,43 +400,60 @@ class DesignResource {
      */
     function delete() {
 
-        //Get and check the sectoken associated to this document
-        $sectoken_request = "";
-        foreach (getallheaders() as $nombre => $valor) {
-            if (strcmp($nombre, 'Authorization') == 0) {
-                //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
-                if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
-                    $sectoken_request = substr($valor, strlen("Bearer") + 1);
-                    break;
-                } else {
-                    return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
-                }
-            }
-        }
-        if (strlen($sectoken_request) == 0) {
-            return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header('WWW-Authenticate: Basic realm="My Realm"');
+            header('HTTP/1.0 401 Unauthorized');
+            echo 'Authentication required';
+            exit;
         }
 
+        //Authenticate the user
+        $username = $_SERVER['PHP_AUTH_USER'];
+        $password = $_SERVER['PHP_AUTH_PW'];
+        $password = sha1(md5($password));
 
-        //Check the sectoken provided matches the one stored in the database for this design
         $link = connectToDB();
-        $row = loadSectokenDB($link, $sectoken_request);
-        if ($row == false) {
-            return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
-        } else {
-            $docid_database = $row['docid'];
-            if (strcmp($this->document_id, $docid_database) != 0) {
-                return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
-            }
+        if (getUserDataDB($link, $username, $password) == false) {
+
+            return new ResponseData(401, 'The credentials provided are not correct', 'text/html');
         }
+
+        //Get and check the sectoken associated to this document
+        /* $sectoken_request = "";
+          foreach (getallheaders() as $nombre => $valor) {
+          if (strcmp($nombre, 'Authorization') == 0) {
+          //the header containing the sectoken must be defined as 'Authorization: Bearer {sectoken}'
+          if (strlen($valor) > strlen("Bearer") && strcmp(substr($valor, 0, strlen("Bearer")), "Bearer") == 0) {
+          $sectoken_request = substr($valor, strlen("Bearer") + 1);
+          break;
+          } else {
+          return new ResponseData(400, 'The header Authorization does not follow the schema \'Authorization: Bearer {sectoken}\'', 'text/html');
+          }
+          }
+          }
+          if (strlen($sectoken_request) == 0) {
+          return new ResponseData(400, 'The header \'Authorization: Bearer {sectoken}\' with the sectoken for this design is missing', 'text/html');
+          }
+
+
+          //Check the sectoken provided matches the one stored in the database for this design
+          $link = connectToDB();
+          $row = loadSectokenDB($link, $sectoken_request);
+          if ($row == false) {
+          return new ResponseData(500, 'The sectoken provided does not have a design associated', 'text/html');
+          } else {
+          $docid_database = $row['docid'];
+          if (strcmp($this->document_id, $docid_database) != 0) {
+          return new ResponseData(401, 'The sectoken provided for this design is not correct', 'text/html');
+          }
+          } */
 
 
         //Check the user is the owner of the design and it exists in the database
-        $username = 'ldshake_default_user';
         if (getAccessDB($link, $username, $this->document_id, 'write')) {
             $deleted_design = deleteDesignDB($this->document_id, $username);
             if ($deleted_design == true) {
-                $deleted_sectoken = deleteSectokenDB($link, $sectoken_request);
+                $deleted_sectoken = deleteSectokenDocumentDB($link, $this->document_id);
                 if ($deleted_sectoken == true) {
                     //success
                     return new ResponseData(200, '', 'text/html');
@@ -289,8 +469,8 @@ class DesignResource {
 
         return $response;
     }
-    
-     /**
+
+    /**
      * Converts the design to a XML
      * @param type $data The design content to convert to XML
      * @return type The design as an XML of false if there is an error

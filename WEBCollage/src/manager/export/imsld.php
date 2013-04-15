@@ -90,7 +90,6 @@ function IMSLDCreateDesign($folder, $design, $uolid) {
 function IMSLDExport($ldid, $design) {
     $folder = "export/packages/" . rand_str(8) . "_$ldid";
     $uolid = "UOL_" . rand_str(12);
-
     IMSLDPrepareFolder($folder);
     IMSLDCreateDesign($folder, $design, $uolid);
     $url = IMSLDZipUgly($folder, $ldid);
@@ -106,6 +105,21 @@ function IMSLDInstanceExport($ldid, $design, $instance) {
     IMSLDInstanceCreateManifest($folder, $instance, $design, $uolid);
     $url = IMSLDZipUgly($folder, $ldid);
     IMSLDPrepareDownload($url);
+}
+
+function LdshakeIMSLDInstanceExport($ldid, $design, $instance) {
+    $folder = "export/packages/" . rand_str(8) . "_$ldid";
+    $uolid = "UOL_" . rand_str(12);
+    
+    $folder = dirname(dirname(__FILE__))."/export/packages/" . rand_str(8) . "_$ldid";
+    
+    IMSLDPrepareFolder($folder);
+    IMSLDCreateDesign($folder, $design, $uolid);
+    IMSLDInstanceCreateManifest($folder, $instance, $design, $uolid);
+    $url = IMSLDZipUgly($folder, $ldid);
+    //$pos = strpos($url, "manager");
+    //$url = substr($url, $pos);
+    return $url;
 }
 
 

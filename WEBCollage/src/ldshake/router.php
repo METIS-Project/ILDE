@@ -38,6 +38,18 @@ if (isset($_REQUEST["_route_"]))
                 $response = $designResource->exec();
                 RestUtils::sendResponse($response->getStatus(), $response->getBody(), $response->getContentType());
             }
+            else{
+                $arguments = explode(".", $route_array[1]);
+                if (count($arguments)==2 && is_numeric($arguments[0])){
+                    $method = $data->getMethod();
+                    $document_id = $arguments[0];
+                    $format_value = $arguments[1];
+                    $content_type = $data->getHttpAccept();
+                    $designResource = new DesignResource($method, $document_id, $content_type, $format_value);
+                    $response = $designResource->exec();
+                    RestUtils::sendResponse($response->getStatus(), $response->getBody(), $response->getContentType());
+                }
+            }
         }
         if (count($route_array)==3)
         {

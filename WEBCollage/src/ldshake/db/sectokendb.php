@@ -38,13 +38,27 @@ function loadSectokenDB($link, $sectoken) {
 }
 
 /**
- * Delete a sectoken from the database
+ * Delete a sectoken entry from the database
  * @param resource $link Identifier of the mysql link
  * @param string $sectoken The security token associated to the design
- * @return boolean The sectoken has been deleted or not
+ * @return boolean The sectoken entry has been deleted or not
  */
 function deleteSectokenDB($link, $sectoken) {
     $sql = "delete from sectokens where sectoken='" . mysql_real_escape_string($sectoken) . "'";
+    if (mysql_query($sql, $link)) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Delete a sectoken from the database
+ * @param resource $link Identifier of the mysql link
+ * @param int $docid The document identifier
+ * @return boolean The sectoken entry has been deleted or not
+ */
+function deleteSectokenDocumentDB($link, $docid) {
+    $sql = "delete from sectokens where docid='" . mysql_real_escape_string($docid) . "'";
     if (mysql_query($sql, $link)) {
         return true;
     }
