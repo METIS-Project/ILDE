@@ -25,7 +25,7 @@
 		{
 			font-size: 19px;
 			margin: 10px 0;
-			text-align: right;
+			/*text-align: right;*/
 		}
 		
 		#topbar
@@ -59,9 +59,7 @@
 			top: 50%;
 			left: 50%;
 			margin-top: -175px;/* half elements height*/
-			margin-left: -455px;/* half elements width*/
-			width: 911px;
-			height: 350px;
+			margin-left: -235px;/* half elements width*/
 		}
 		
 		#logo
@@ -300,11 +298,11 @@
 		<div id="contentswrapper">
 			<div id="logo">
 				<h1>		
-					<img src="<?php echo $url ?>_graphics/ldshake-logo-home.png" alt="LdShake logo" />
+					<img src="<?php echo $url ?>_graphics/metis/ilde-logo.png" alt="Ilde logo" />
 				</h1>
-				<h2><?php echo T("A Web2.0 tool for the <span %1>social sharing and<br /> co-editing</span> of <span %2>learning design solutions</span>.", 'style="color: #709900;"', 'style="color: #960001;"') ?></h2>
+				<h2>Integrated Learning Design Environment</h2>
 			</div>
-			<div id="claims">
+			<!--<div id="claims">
 				<div class="home-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
 					<img src="_graphics/ld-shake-1.PNG" height="60" />
 					<p><?php echo T("Shake hands with other teachers!") ?></p>
@@ -326,7 +324,7 @@
 				</div>
 				
 				<div style="clear:both;"></div>
-			</div>
+			</div>-->
 		</div>
 	</div>
 	<div id="bottombar">

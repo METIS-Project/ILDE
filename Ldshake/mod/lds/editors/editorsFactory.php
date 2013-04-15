@@ -1225,7 +1225,7 @@ class GluepsManager
 
             $rand_id = mt_rand(400,9000000);
 
-            $clone = new DocumentEditorObject($lds->guid);
+            $clone = new DocumentEditorObject($implementation->guid);
 
             $file_origin = Editor::getFullFilePath($this->_document->file_guid);
 
@@ -1235,7 +1235,6 @@ class GluepsManager
             file_put_contents($file_origin, $file->getFilenameOnFilestore());
 
             $clone->file_guid = $file->guid;
-            $clone->save();
 
             //assign a random string to each directory
             $clone->previewDir = rand_str(64);
@@ -1247,7 +1246,7 @@ class GluepsManager
 
             $clone->save();
 
-            create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+            create_annotation($implementation->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         }
 
@@ -1256,7 +1255,7 @@ class GluepsManager
         return $implementation;
     }
 
-    private function validateVle() {
+    public function validateVle() {
         if(
             strlen($this->_vle->username) &&
             strlen($this->_vle->password) &&

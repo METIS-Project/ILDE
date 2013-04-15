@@ -43,7 +43,7 @@
 define ('LDS_ENTITY_TYPE', 'LdS');
 
 function lds_init()
-{	
+{
 	global $CONFIG;
 
 	///REST setup
@@ -307,6 +307,7 @@ function lds_exec_main ($params)
 function lds_exec_implementable ($params)
 {
     $offset = get_input('offset') ?: '0';
+    $user = get_loggedin_user();
 
     if (strlen($params[1]))
     {
@@ -326,7 +327,15 @@ function lds_exec_implementable ($params)
 
     $vars['section'] = $params[1];
     $vars['section'] = $params[1];
-    $vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
+
+
+    if($user->vle) {
+        $vle = get_entity($user->vle);
+        $gluepsm = new GluepsManager($vle);
+        $vars['vle_info'] = $gluepsm->getVleInfo();
+    }
+
+    //$vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementable',$vars);
 
     page_draw($vars['title'], $body);
