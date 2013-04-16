@@ -1091,8 +1091,17 @@ function lds_exec_newimplementglueps($params)
     $vars['course_id'] = $course;
     $vars['implementation_id'] = $implementation->guid;
 
-    $vars_glueps = GluepsManager::newImplementation(array('course'=>3, 'title' => $params[3]));
-    $vars = $vars + $vars_glueps;
+    $user = get_loggedin_user();
+    if($user->vle) {
+        $vle = get_entity($user->vle);
+        $gluepsm = new GluepsManager($vle);
+        //$vars['vle_info'] = $gluepsm->getVleInfo();
+        $vars_glueps = $gluepsm->newImplementation(array('course'=>3, 'title' => $params[3], 'lds' => $lds));
+        $vars = $vars + $vars_glueps;
+    }
+
+    //$vars_glueps = GluepsManager::newImplementation(array('course'=>3, 'title' => $params[3]));
+    //$vars = $vars + $vars_glueps;
 
     echo elgg_view('lds/implementform_editor',$vars);
 }

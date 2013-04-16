@@ -2,7 +2,7 @@
 include_once(__DIR__.'/../rand.php');
 class Editor
 {
-	private $_document;
+	public $_document;
     private $_lds;
 
     public function getDocument() {
@@ -999,25 +999,33 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
-        $uri = $params['url'].'?XDEBUG_SESSION_START=16713';
+        $uri = $params['url'];
         $response = \Httpful\Request::get($uri)
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
-        //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
-        //file('http://127.0.0.1/exelearning/?save='. $docSession);
-
-        $rand_id = mt_rand(400,9000000);
-
         //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
         file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
-        //copy($filename_editor, $file->getFilenameOnFilestore());
-        //unlink($filename_editor);
-
         $this->_document->file_guid = $file->guid;
+        $this->_document->save();
+
+
+        $uri = $params['url'].'.imsld';
+        $response = \Httpful\Request::get($uri)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->addHeader('Accept', 'application/json; charset=UTF-8')
+            ->sendIt();
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id.'.zip';
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
+        $this->_document->file_imsld_guid = $file->guid;
         $this->_document->save();
 
         //assign a random string to each directory
@@ -1029,7 +1037,7 @@ class RestEditor extends Editor
         $this->_document->lds_revision_id = 0;
 
         $resultIds->guid = $this->_document->lds_guid;
-        $resultIds->file_guid = $file->guid;
+        $resultIds->file_guid = $this->_document->file_guid;
 
         $this->_document->save();
 
@@ -1097,26 +1105,22 @@ class RestEditor extends Editor
             ->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
 
-        //$filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
-        //file('http://127.0.0.1/exelearning/?save='. $docSession);
-
-        $rand_id = mt_rand(400,9000000);
-
         //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
         file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_body);
 
-        /*
-        $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';
-        file('http://127.0.0.1/exelearning/?save='. $docSession);
+        $uri = $params['url'].'.imsld';
+        $response = \Httpful\Request::get($uri)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->addHeader('Accept', 'application/json; charset=UTF-8')
+            ->sendIt();
 
-        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id;
+        file_put_contents($this->getFullFilePath($this->_document->file_imsld_guid), $response->raw_body);
 
-        copy($filename_editor, $filename_lds);
-        unlink($filename_editor);
-
-        */
 
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
@@ -1336,7 +1340,7 @@ class GluepsManager
         return $response->body;
     }
 
-    public static function newImplementation($params = null) {
+    public function newImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
@@ -1345,7 +1349,7 @@ class GluepsManager
         $password = 'M3t1$project';
         $course = $params['course'];//'3';
 
-        $vle_info = GluepsManager::getVleInfo();
+        $vle_info = $this->getVleInfo();
         $course_info = GluepsManager::getCourseInfo();
         $vle_info->id = '789';
         $vle_info->name = 'my vle';
@@ -1364,14 +1368,14 @@ class GluepsManager
         $lds = $params['lds'];
         $ldsm = EditorsFactory::getManager($lds);
         $document = $ldsm->getDocument();
-        $filename_lds = Editor::getFullFilePath($document->file_guid);
+        $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
         $sectoken = rand_str(32);
 
         $post = array(
-            'NewDeployTitleName' => $params['title'],
-            'instType' => $params['type'],
+            'NewDeployTitleName' => 'new imp',
+            'instType' => 'IMS LD',
             'sectoken' => $sectoken,
-            'archiveWic' => "@{$filename_lds};type=application/json; charset=UTF-8",
+            'archiveWic' => "@{$filename_lds}",
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 
