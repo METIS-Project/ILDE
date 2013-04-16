@@ -72,18 +72,17 @@ extract($vars);
     </form>
 
 
-    <div>
-        <?php echo T('Available VLE courses')?>
-        <div>
-            <?php foreach($courses as $fvle):?>
-            <div class="vle_info_box">
-                <div class="vle_info_field">
-                    <span class="vle_info_name_label"><?php echo T('Course id')?></span>: <span class="vle_info_name_data"><?php echo $fvle->id?></span>
-                </div>
-                <div class="vle_info_field">
-                    <span class="vle_info_name_label"><?php echo T('Course name')?></span>: <span class="vle_info_name_data"><?php echo $fvle->name?></span>
-                </div>
-    -        </div>
+    <div id="vle_test_box">
+        <div class="vle_info_title lds_form_title"><?php echo T('Available VLE courses')?></div>
+        <div class="vle_info_box">
+            <?php
+            $courses = (array)$vle_info->courses;
+            ksort($courses);
+            foreach($courses as $key => $fvle):?>
+            <div class="vle_info_element">
+                <span class="vle_info_key_data"><?php echo $key ?></span>
+                <span class="vle_info_name_data"><?php echo $fvle?></span>
+             </div>
             <?php endforeach;?>
         </div>
     </div>

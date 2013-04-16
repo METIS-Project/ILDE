@@ -1307,7 +1307,7 @@ class GluepsManager
         return $response->body;
     }
 
-    public static function getCourseInfo() {
+    public function getCourseInfo($course_id) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
@@ -1317,10 +1317,10 @@ class GluepsManager
         $course = '3';
 
         $get = array(
-            'type' => $type,
-            'accessLocation' => $vle_url,
-            'creduser' => $username,
-            'credsecret' => $password,
+            'type' => $this->_vle->vle_type,
+            'accessLocation' => $this->_vle->vle_url,
+            'creduser' => $this->_vle->username,
+            'credsecret' => $this->_vle->password,
             'course' => $course
         );
 
@@ -1355,8 +1355,16 @@ class GluepsManager
         $vle_info->name = 'my vle';
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
-            'course' => $course_info
+            'course' => $course_info,
+            'name' => 'my vle',
+            'type' => $type,
+            'creduser' => $username,
+            'credsecret' => $password,
+            'participants' => $course_info->participants
         );
+        //unset($vle_info->courses);
+        //$vle_info->course = $course_info;
+        //$vle_info->participants = $course_info->participants;
 
         $json_wic_vle_data = json_encode($wic_vle_data);
 

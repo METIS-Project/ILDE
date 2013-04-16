@@ -1539,3 +1539,10 @@ border-radius: 4px;
 background-color: #fcfcfc;
 width: 65%;
 }
+
+.vle_info_element {
+padding: 4px 5px 4px 5px;  background-color: #F4F4F4;  border: 1px solid #FFF;
+}
+.vle_info_key_data {
+background-color: #C4C4C4;  padding: 5px;
+}

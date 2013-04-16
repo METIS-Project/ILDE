@@ -428,6 +428,47 @@ function lds_exec_vle ($params)
     page_draw('VLE', $body);
 }
 
+function lds_exec_vledata ($params)
+{
+    $user = get_loggedin_user();
+
+    if(!$user->vle) {
+        $vle = new ElggObject();
+        $vle->subtype = 'user_vle';
+        $vle->access_id = ACCESS_PUBLIC;
+        $vle->owner_guid = get_loggedin_userid();
+        $vle->username = '';
+        $vle->password = '';
+        $vle->vle_url = '';
+        $vle->vle_type = '';
+        $user->vle = $vle->save();
+        $user->save();
+    } else {
+        $vle = get_entity($user->vle);
+    }
+
+    $gluepsm = new GluepsManager($vle);
+    $vle_info = $gluepsm->getVleInfo();
+
+    $courses = (array)$vle_info->courses;
+    ksort($courses);
+    $participants = array();
+
+    foreach($courses as $key => $fvle) {
+        $participants[$key]['name'] = $fvle;
+        $course_participants = $gluepsm->getCourseInfo($key);
+        $participants[$key]['participants'] = $course_participants;
+    }
+
+    //$courses = lds_contTools::getVLECourses($vle);
+    $vars = array(
+        'vle' => $vle,
+        'vle_info' => $vle_info
+    );
+    $body = elgg_view('lds/vledata',$vars);
+    page_draw('VLE', $body);
+}
+
 function lds_exec_trashed ($params)
 {
 	//We need to see all the entities, including the deleted ones.
