@@ -58,6 +58,7 @@ class richTextEditor extends Editor
         $lds->cloned = 1;
         $lds->parent = $this->_lds->guid;
         $lds->editor_type = $this->_lds->editor_type;
+        $lds->external_editor = $this->_lds->external_editor;
 
         $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
         foreach ($tagFields as $field)
@@ -76,7 +77,7 @@ class richTextEditor extends Editor
             $newdoc->save();
         }
 
-        if($editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100)) {
+        if($editordocument = get_entities_from_metadata('lds_guid',$this->_lds->guid,'object','LdS_document_editor', 0, 100)) {
             $em = EditorsFactory::getInstance($editordocument[0]);
             $em->cloneDocument($lds->guid);
         }
@@ -1048,19 +1049,19 @@ class RestEditor extends Editor
     {
         global $CONFIG;
 
-
         $rand_id = mt_rand(400,9000000);
 
-        $clone = new DocumentEditorObject($lds->guid);
+        $clone = new DocumentEditorObject($lds);
 
         $file_origin = Editor::getFullFilePath($this->_document->file_guid);
 
         //create a new file to store the document
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        file_put_contents($file_origin, $file->getFilenameOnFilestore());
+        copy($file_origin, $file->getFilenameOnFilestore());
 
         $clone->file_guid = $file->guid;
+        $clone->editorType = $this->_document->editorType;
         $clone->save();
 
         //assign a random string to each directory
@@ -1073,7 +1074,7 @@ class RestEditor extends Editor
 
         $clone->save();
 
-        create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+        create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         return array($clone);
     }

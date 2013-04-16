@@ -33,20 +33,56 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
-/**
- * LdS clone controller.
- *
- */
-require_once __DIR__.'/../../lds_contTools.php';
 
-global $CONFIG;
-$guid = get_input('guid');
-$title = get_input('title');
+?>
+<?php
+extract($vars);
+?>
+<div id="lds_vle_page">
+    <?php
+    $courses = (array)$vle_info->courses;
+    ksort($courses);
+    foreach($courses as $key => $fvle):?>
 
-$lds = get_entity($guid);
+    <div id="vle_test_box">
+        <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " {$fvle}" ?></div>
+        <div class="vle_info_box">
+            <?php
+            foreach($participants[$key] as $p_id => $p):?>
+                <div class="vle_info_element">
+                    <span class="vle_info_key_data"><?php echo $p->id ?></span>
+                    <span class="vle_info_name_data"><?php echo $p->name?></span>
+                    <span class="vle_info_other_data"><?php echo $p->learningEnvironmentData?></span>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+    <?php endforeach;?>
 
-//$ldsm = ManagerFactory::getManager($lds);
-$ldsm = new richTextEditor(null, $lds);
-$cloned = $ldsm->cloneLdS($title);
+    <div id="vle_test_box">
+        <div class="vle_info_title lds_form_title"><?php echo T('Internal tools') ?></div>
+        <div class="vle_info_box">
+            <?php
+            foreach($internal_tools as $p_id => $p):?>
+                <div class="vle_info_element">
+                    <span class="vle_info_key_data"><?php echo $p_id ?></span>
+                    <span class="vle_info_name_data"><?php echo $p?></span>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
 
-echo $cloned->guid;
+    <div id="vle_test_box">
+        <div class="vle_info_title lds_form_title"><?php echo T('External tools') ?></div>
+        <div class="vle_info_box">
+            <?php
+            foreach($external_tools as $p_id => $p):?>
+                <div class="vle_info_element">
+                    <span class="vle_info_key_data"><?php echo $p_id ?></span>
+                    <span class="vle_info_name_data"><?php echo $p?></span>
+                </div>
+            <?php endforeach;?>
+        </div>
+    </div>
+
+</div>

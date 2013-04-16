@@ -379,6 +379,7 @@ function lds_exec_implementations ($params)
         $vars['title'] = T("All my LdS > Implementations");
     }
 
+    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0, 'implemented', '1');
     $vars['section'] = $params[1];
     $vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
@@ -455,17 +456,26 @@ function lds_exec_vledata ($params)
     $participants = array();
 
     foreach($courses as $key => $fvle) {
-        $participants[$key]['name'] = $fvle;
-        $course_participants = $gluepsm->getCourseInfo($key);
-        $participants[$key]['participants'] = $course_participants;
+        $participants[$key] = (array)$gluepsm->getCourseInfo($key)->participants;
+        uasort($participants[$key], function($a, $b) { return (int)$a->id - (int)$b->id; });
     }
+
+    $external_tools = (array)$vle_info->externalTools;
+    ksort($external_tools);
+
+    $internal_tools = (array)$vle_info->internalTools;
+    ksort($internal_tools);
 
     //$courses = lds_contTools::getVLECourses($vle);
     $vars = array(
         'vle' => $vle,
-        'vle_info' => $vle_info
+        'vle_info' => $vle_info,
+        'participants' => $participants,
+        'internal_tools' => $internal_tools,
+        'external_tools' => $external_tools,
     );
-    $body = elgg_view('lds/vledata',$vars);
+
+    $body = elgg_view('lds/vledatacomplete',$vars);
     page_draw('VLE', $body);
 }
 

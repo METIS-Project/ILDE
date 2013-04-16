@@ -62,6 +62,14 @@
         <?php endif; ?>
     </div>
 
+    <?php echo T("Filter by design") ?>
+    <select id="filter_by_design">
+        <option value="0">Select a design</option>
+        <?php foreach($designfilter as $df): ?>
+            <option value="<?php echo $df->guid?>"><?php echo $df->title ?></option>
+        <?php endforeach; ?>
+    </select>
+
     <div class="filters">
         <div class="paging">
             <?php echo lds_viewTools::pagination($count, 50) ?>
