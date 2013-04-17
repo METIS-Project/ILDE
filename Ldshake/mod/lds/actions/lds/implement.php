@@ -46,7 +46,7 @@ $course_id = get_input('course_id');
 $lds = get_entity($lds_id);
 
 $implementation = new ElggObject();
-$implementation->subtype = 'LdS_implementation';
+$implementation->subtype = 'LdS_implementation_helper';
 $implementation->access_id = ACCESS_PUBLIC;
 $implementation->owner_guid = get_loggedin_userid();
 $implementation->container_guid = $lds->guid;
@@ -54,7 +54,7 @@ $implementation->title = $title;
 $implementation->vle_id = $vle_id;
 $implementation->course_id = $course_id;
 $implementation->lds_id = $lds->guid;
-$implementation->editor_type = 'glueps';
+$implementation->editor_type = 'gluepsrest';
 $implementation->save();
 
 echo $implementation->guid;

@@ -56,6 +56,7 @@ class richTextEditor extends Editor
         $lds->granularity = 0;
         $lds->completeness = 0;
         $lds->cloned = 1;
+        $lds->implementable = $this->_lds->implementable;
         $lds->parent = $this->_lds->guid;
         $lds->editor_type = $this->_lds->editor_type;
         $lds->external_editor = $this->_lds->external_editor;
@@ -1351,16 +1352,16 @@ class GluepsManager
         $course = $params['course'];//'3';
 
         $vle_info = $this->getVleInfo();
-        $course_info = GluepsManager::getCourseInfo();
-        $vle_info->id = '789';
-        $vle_info->name = 'my vle';
+        $course_info = $this->getCourseInfo($course);
+        $vle_info->id = $this->_vle->guid;
+        $vle_info->name = $this->_vle->title;
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
-            'name' => 'my vle',
+            'name' => $vle_info->name,
             'type' => $type,
-            'creduser' => $username,
-            'credsecret' => $password,
+            'creduser' => $this->_vle->username,
+            'credsecret' => $this->_vle->password,
             'participants' => $course_info->participants
         );
         //unset($vle_info->courses);
@@ -1399,10 +1400,10 @@ class GluepsManager
         $xmldoc->loadXML($response->raw_body);
         $xpathvar = new Domxpath($xmldoc);
 
-        $queryResult = $xpathvar->query('//lds/id');
-        $doc_url = $queryResult->item(0)->nodeValue;
+        $queryResult = $xpathvar->query('//deploy');
+        $doc_url = $queryResult->item(0)->getAttribute('id');
 
-        $url_path = explode('/', $doc_url['path']);
+        $url_path = explode('/', $doc_url);
         $url_path_filtered = array();
         foreach ($url_path as $up)
             if(strlen($up))
@@ -1411,8 +1412,8 @@ class GluepsManager
 
         $vars = array();
         $vars['editor_id'] = $sectoken;
-        $vars['document_url'] = "{$doc_url}";
-        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}/gui/glueps/deploy.html?deploy_id={$deploy_id}&sectoken={$sectoken}";
+        $vars['document_url'] = "{$url}deploys/{$deploy_id}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&ldshakeToken={$sectoken}";
         $vars['editor'] = 'gluepsrest';
 
         return $vars;

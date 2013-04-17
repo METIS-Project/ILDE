@@ -1093,21 +1093,21 @@ function lds_exec_newimplementglueps($params)
     else
         $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
-    $implementation = get_entity($params[1]);
-    $lds = get_entity($implementation->lds_id);
-    $course = get_entity($implementation->course_id);
+    $implementation_helper = get_entity($params[1]);
+    $lds = get_entity($implementation_helper->lds_id);
+    //$course = get_entity($implementation->course_id);
 
     $vars['referer'] = $CONFIG->url.'pg/lds/';
 
     //Create an empty LdS object to initialize the form
     $vars['initLdS'] = new stdClass();
-    $vars['initLdS']->title = $implementation->title;
+    $vars['initLdS']->title = $implementation_helper->title;
     $vars['initLdS']->granularity = '0';
     $vars['initLdS']->completeness = '0';
     $vars['initLdS']->tags = '';
     $vars['initLdS']->discipline = '';
     $vars['initLdS']->pedagogical_approach = '';
-    $vars['initLdS']->guid = $implementation->guid;
+    $vars['initLdS']->guid = $implementation_helper->guid;
 
     //And a support doc!
     $vars['initDocuments'][0] = new stdClass();
@@ -1133,21 +1133,22 @@ function lds_exec_newimplementglueps($params)
 
     $vars['am_i_starter'] = true;
 
-    $vars['editor_type'] = $implementation->editor_type;
+    $vars['editor_type'] = $implementation_helper->editor_type;
 
     $vars['title'] = T("New LdS");
 
     $vars['lds_id'] = $lds->guid;
-    $vars['vle_id'] = '777';
-    $vars['course_id'] = $course;
-    $vars['implementation_id'] = $implementation->guid;
+
+    $vars['course_id'] = $implementation_helper->course_id;
+    $vars['implementation_helper_id'] = $implementation_helper->guid;
 
     $user = get_loggedin_user();
     if($user->vle) {
         $vle = get_entity($user->vle);
+        $vars['vle_id'] = $vle->guid;
         $gluepsm = new GluepsManager($vle);
         //$vars['vle_info'] = $gluepsm->getVleInfo();
-        $vars_glueps = $gluepsm->newImplementation(array('course'=>3, 'title' => $params[3], 'lds' => $lds));
+        $vars_glueps = $gluepsm->newImplementation(array('course'=>3, 'title' => $implementation_helper->title, 'lds' => $lds));
         $vars = $vars + $vars_glueps;
     }
 

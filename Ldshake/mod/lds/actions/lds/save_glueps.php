@@ -54,12 +54,29 @@ $lds_id = get_input('lds_id');
 $vle_id = get_input('vle_id');
 $course_id = get_input('course_id');
 
-$implementation = get_entity(get_input('guid'));
-if($gluepsdocument = get_entities_from_metadata('lds_guid',$implementation->guid,'object','LdS_document_editor', 0, 100)){
+if (get_input('guid') > 0)
+{
+    $implementation = get_entity(get_input('guid'));
+    $gluepsdocument = get_entities_from_metadata('lds_guid',$implementation->guid,'object','LdS_document_editor', 0, 100);
     $glueps_document = $gluepsdocument[0];
 }
 else
 {
+    $implementation_helper = get_entity(get_input('implementation_helper_id'));
+    //We're creating it from scratch. Construct a new obj.
+    $implementation = new LdSObject();
+    $implementation->subtype = 'LdS_implementation';
+    $implementation->owner_guid = get_loggedin_userid();
+    $implementation->external_editor = true;
+    $implementation->editor_type = $editor_type;
+    $implementation->title = $implementation_helper->title;
+    $implementation->vle_id = $implementation_helper->vle_id;
+    $implementation->course_id = $implementation_helper->course_id;
+    $implementation->lds_id = $implementation_helper->lds_id;
+    //$lds->implementable = '1';
+    $user = get_loggedin_user();
+    $implementation->save();
+
     $glueps_document = new DocumentEditorObject($implementation->guid, 0);
     $glueps_document->editorType = $editor_type;
     $glueps_document->lds_guid = $implementation->guid;
@@ -123,7 +140,8 @@ $save_params = array(
 
 //save the contents and join the resultsIds
 //$editor = editorsFactory::getInstance($glueps_document);
-$editor = new GluepsManager($implementation, $gluepsdocument[0]);
+$vle = get_entity($user->vle);
+$editor = new GluepsManager($vle, $implementation, $gluepsdocument[0]);
 list($glueps_document, $resultIds_add) = $editor->saveDocument($save_params);
 $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
 

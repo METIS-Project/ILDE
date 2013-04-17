@@ -171,7 +171,8 @@ function ajax_submit (redirect)
             document_url: document_url,
             lds_id: lds_id,
             vle_id: vle_id,
-            course_id: course_id
+            course_id: course_id,
+            implementation_helper_id: implementation_helper_id
         };
 
     }
