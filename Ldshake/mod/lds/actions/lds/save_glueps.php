@@ -135,7 +135,6 @@ if(get_input('guid') > 0 && get_input('revision') == 0)
 $save_params = array(
     'url' => $document_url,
     'editor_id' => $docSession,
-    'id' => $glueps_id
 );
 
 //save the contents and join the resultsIds
@@ -232,10 +231,12 @@ if (is_array($_POST['documents']))
     }
 }
 
+/*
 if ($isNew) {
     $implementation->notify = 1;
     $implementation->save();
 }
+*/
 /*
 header('HTTP/1.1 200 OK');
 header('Cache-Control: no-cache, must-revalidate');

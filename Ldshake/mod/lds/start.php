@@ -85,6 +85,7 @@ function lds_init()
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
+    register_action("lds/save_glueps", false, $CONFIG->pluginspath . "lds/actions/lds/save_glueps.php");
 
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
 	register_action("lds/save_editor", false, $CONFIG->pluginspath . "lds/actions/lds/save_editor.php");
@@ -375,7 +376,7 @@ function lds_exec_implementations ($params)
     {
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("All my LdS > Implementations");
     }
 
@@ -1076,8 +1077,14 @@ function lds_exec_implementeditor($params)
 
     //make an editor object with the document that we want to edit
     $editor = EditorsFactory::getInstance($editordocument[0]);
-    $vars_editor = $editor->editDocument();
-    $return = $editor->putImplementation();
+    //$vars_editor = $editor->editDocument();
+
+    $user = get_loggedin_user();
+    if($user->vle) {
+        $vle = get_entity($user->vle);
+        $vars_editor = $editor->putImplementation(array('course_id' => 3, 'vle' => $vle));
+    }
+
     $vars = $vars + $vars_editor;
 
     echo elgg_view('lds/editform_editor',$vars);
@@ -1107,7 +1114,7 @@ function lds_exec_newimplementglueps($params)
     $vars['initLdS']->tags = '';
     $vars['initLdS']->discipline = '';
     $vars['initLdS']->pedagogical_approach = '';
-    $vars['initLdS']->guid = $implementation_helper->guid;
+    $vars['initLdS']->guid = 0;
 
     //And a support doc!
     $vars['initDocuments'][0] = new stdClass();

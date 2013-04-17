@@ -201,7 +201,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     var lds_id = <?php echo $lds_id ?>;
     var vle_id = <?php echo $vle_id ?>;
     var course_id = "<?php echo $course_id ?>";
-    var implementation_helper_id = "<?php echo $implementation_id ?>";
+    var implementation_helper_id = "<?php echo $implementation_helper_id ?>";
 
     friends['available'] = <?php echo $jsonfriends ?>;
     friends['viewers'] = <?php echo $viewers ?>;

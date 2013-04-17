@@ -873,13 +873,15 @@ class RestEditor extends Editor
         return $vars;
     }
 
-    public function putImplementation()
+    public function putImplementation($params)
     {
         global $CONFIG;
-        $vle_info = GluepsManager::getVleInfo();
-        $course_info = GluepsManager::getCourseInfo();
-        $vle_info->id = '789';
-        $vle_info->name = 'my vle';
+        $vle = $params['vle'];
+        $gluepsm = new GluepsManager($vle);
+        $vle_info = $gluepsm->getVleInfo();
+        $course_info = $gluepsm->getCourseInfo($params['course_id']);
+        $vle_info->id = $vle->guid;
+        $vle_info->name = $vle->name;
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info
@@ -1354,7 +1356,7 @@ class GluepsManager
         $vle_info = $this->getVleInfo();
         $course_info = $this->getCourseInfo($course);
         $vle_info->id = $this->_vle->guid;
-        $vle_info->name = $this->_vle->title;
+        $vle_info->name = $this->_vle->name;
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
@@ -1447,7 +1449,7 @@ class GluepsManager
         global $CONFIG;
         $url = $CONFIG->glueps_url;
 
-        $uri = "{$url}deploys/{$params['id']}";
+        $uri = "{$params['url']}";
 
         $response = \Httpful\Request::get($uri)
             //->addHeader('Accept', 'application/json')
@@ -1455,7 +1457,7 @@ class GluepsManager
             ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
-        return $response->body;
+        return $response->raw_body;
     }
 
     public function loadInstantiation() {
@@ -1551,21 +1553,25 @@ class GluepsManager
 
     public function deployDocument() {
         global $CONFIG;
+
+        $load_vars = $this->loadDocument();
+
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $design_contents = file_get_contents($filename_lds);
         $rand_id = mt_rand(400,5000000);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
+        /*
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds}"
         );
+        */
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
-        $response = \Httpful\Request::post($uri)
-            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->body($post, 'multipart/form-data')
+        $uri = "{$CONFIG->glueps_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$load_vars['document_url']}/static";
+        $response = \Httpful\Request::put($uri, $design_contents)
             ->sendIt();
 
         //copy($filename_lds, $filename_editor);
@@ -1626,7 +1632,7 @@ class GluepsManager
 
         //create a new file to store the document
         $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
+        $file = Editor::getNewFile($filestorename);
         file_put_contents($file->getFilenameOnFilestore(), $glueps_xmlcontent);
         //copy($filename_editor, $file->getFilenameOnFilestore());
         //unlink($filename_editor);

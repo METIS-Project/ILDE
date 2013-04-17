@@ -182,7 +182,7 @@ class lds_contTools
             $obj = new stdClass();
             $obj->implementation = $implementation;
 //            $obj->lds = $lds; //The LdS itself
-            $obj->starter = get_entity($lds->owner_guid);
+            $obj->starter = get_entity($implementation->owner_guid);
 
             $latest = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
             $obj->last_contributor = get_entity($latest[0]->owner_guid);

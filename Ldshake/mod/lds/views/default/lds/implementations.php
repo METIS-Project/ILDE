@@ -94,14 +94,14 @@
                         <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
                                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
-                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds->guid ?>" />
+                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->implementation->guid ?>" />
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
                             <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Edit") ?></a>
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
 						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->implementation->title ?></a>
