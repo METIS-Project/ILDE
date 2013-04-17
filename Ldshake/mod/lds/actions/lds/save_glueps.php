@@ -73,9 +73,10 @@ else
     $implementation->vle_id = $implementation_helper->vle_id;
     $implementation->course_id = $implementation_helper->course_id;
     $implementation->lds_id = $implementation_helper->lds_id;
-    //$lds->implementable = '1';
-    $user = get_loggedin_user();
     $implementation->save();
+
+    $user = get_loggedin_user();
+
 
     $glueps_document = new DocumentEditorObject($implementation->guid, 0);
     $glueps_document->editorType = $editor_type;

@@ -112,7 +112,8 @@
 	font-size: 11px;
 	padding-left: 5px;
 	padding-top: 2px;
-	width: 29px;
+    padding-right: 3px;
+	/*width: 29px;*/
 	visibility: hidden;
 }
 

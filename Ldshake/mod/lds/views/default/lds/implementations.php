@@ -81,7 +81,7 @@
             <div id="my_lds_list_header">
                 <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                 <?php if ($section != 'trashed'): ?>
-                    <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected LdS") ?>" />
+                    <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected implementations") ?>" />
                 <?php else: ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
                 <?php endif; ?>
@@ -98,10 +98,11 @@
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
-                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
+                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'edit') ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
 						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->implementation->title ?></a>

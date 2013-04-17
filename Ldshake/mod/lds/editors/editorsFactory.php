@@ -1496,17 +1496,53 @@ class GluepsManager
         $rand_id = mt_rand(400,5000000);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
+        $url = $CONFIG->glueps_url;
+        $course = $params['course'];
+
+        $vle_info = $this->getVleInfo();
+        $course_info = $this->getCourseInfo($course);
+        $vle_info->id = $this->_vle->guid;
+        $vle_info->name = $this->_vle->name;
+        $wic_vle_data = array(
+            'learningEnvironment' => $vle_info,
+            'course' => $course_info,
+            'name' => $vle_info->name,
+            'type' => $this->_vle->$type,
+            'creduser' => $this->_vle->username,
+            'credsecret' => $this->_vle->password,
+            'participants' => $course_info->participants
+        );
+
+        $json_wic_vle_data = json_encode($wic_vle_data);
+
+        $putData = tmpfile();
+        fwrite($putData, $json_wic_vle_data);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        /*
+        $lds = $params['lds'];
+        $ldsm = EditorsFactory::getManager($lds);
+        $document = $ldsm->getDocument();
+        $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
+        */
+
+        $sectoken = rand_str(32);
+
         $post = array(
-            'lang' => 'en',
-            'sectoken' => $rand_id,
-            'document' => "@{$filename_lds}"
+            'NewDeployTitleName' => 'new imp',
+            'instType' => 'IMS LD',
+            'sectoken' => $sectoken,
+            'archiveWic' => "@{$filename_lds}",
+            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
-        $response = \Httpful\Request::post($uri)
+        $uri = "{$CONFIG->glueps_url}deploys";
+        $response = \Httpful\Request::put($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
+            ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
         //copy($filename_lds, $filename_editor);

@@ -999,7 +999,7 @@ function lds_exec_implementeditor($params)
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 
-    lds_contTools::markLdSAsViewed ($params[1]);
+    //lds_contTools::markLdSAsViewed ($params[1]);
 
     //Pass the LdS properties to the form
     $vars['initLdS'] = new stdClass();
@@ -1053,36 +1053,145 @@ function lds_exec_implementeditor($params)
     $vars['initLdS'] = json_encode($vars['initLdS']);
     $vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
-    //These are all my friends
-    /*
-	$friends = lds_contTools::getFriendsArray(get_loggedin_userid());
-	$arrays = lds_contTools::buildFriendArrays($friends, $editLdS->access_id, $editLdS->write_access_id);
-
-	$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
-	$vars['viewers'] = json_encode($arrays['viewers']);
-	$vars['editors'] = json_encode($arrays['editors']);
-	$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
-    */
-    //These are all my friends
     $arrays = lds_contTools::buildObjectsArray($editLdS);
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
     $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
-    $vars['title'] = T("Edit LdS");
+    $vars['title'] = T("Edit implementation");
 
     //We're editing. Fetch it from the DB
     $editordocument = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
 
+
     //make an editor object with the document that we want to edit
     $editor = EditorsFactory::getInstance($editordocument[0]);
-    //$vars_editor = $editor->editDocument();
+
+    $user = get_loggedin_user();
+    if($user->vle) {
+        $vle = get_entity($user->vle);
+        $vars_editor = $editor->putImplementation(array('course_id' => $params[2], 'vle' => $vle));
+    }
+
+    $vars = $vars + $vars_editor;
+
+    echo elgg_view('lds/editform_editor',$vars);
+}
+
+function lds_exec_implementglueps($params)
+{
+    global $CONFIG;
+
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
+        $vars['referer'] = $CONFIG->url.'pg/lds/';
+    else
+        $vars['referer'] = $_SERVER['HTTP_REFERER'];
+
+    $editLdS = get_entity($params[1]);
+
+    if (!$editLdS->canEdit())
+    {
+        register_error("You don't have permissions to edit this LdS.");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+    }
+
+    if ($user = lds_contTools::isLockedBy($params[1]))
+    {
+        $fstword = explode(' ',$user->name);
+        $fstword = $fstword[0];
+        register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+    }
+
+    //lds_contTools::markLdSAsViewed ($params[1]);
+
+    //Pass the LdS properties to the form
+    $vars['initLdS'] = new stdClass();
+    $vars['initLdS']->title = $editLdS->title;
+    $vars['initLdS']->granularity = $editLdS->granularity;
+    $vars['initLdS']->completeness = $editLdS->completeness;
+
+    $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+    foreach ($tagtypes as $type)
+    {
+        if (is_array($editLdS->$type))
+            $vars['initLdS']->$type = implode(',',$editLdS->$type);
+        elseif (is_string($editLdS->$type) && strlen($editLdS->$type))
+            $vars['initLdS']->$type = $editLdS->$type;
+        else
+            $vars['initLdS']->$type = '';
+    }
+
+    $vars['initLdS']->guid = $params[1];
+
+    //For each of the documents that this LdS has...
+    $documents = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document', 0, 100);
+    $vars['initDocuments'] = array();
+
+    if(is_array($documents)) {
+        //Send their data to the form
+        foreach ($documents as $doc)
+        {
+            $obj = new stdClass();
+            $obj->title = $doc->title;
+            $obj->guid = $doc->guid;
+            $obj->body = $doc->description;
+            $obj->modified = '0';
+            $vars['initDocuments'][] = $obj;
+        }
+    } else {
+        $vars['initDocuments'][0] = new stdClass();
+        $vars['initDocuments'][0]->title = T("Support Document");
+        $vars['initDocuments'][0]->guid = '0';
+        $vars['initDocuments'][0]->modified = '0';
+        $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
+    }
+
+    Utils::osort($vars['initDocuments'], 'guid');
+    $vars['initDocuments'] = json_encode($vars['initDocuments']);
+
+    $vars['am_i_starter'] = (get_loggedin_userid() == $editLdS->owner_guid);
+    $vars['starter'] = get_user($editLdS->owner_guid);
+    //$vars['all_can_read'] = ($editLdS->access_id == '1') ? 'true':'false';
+    $vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
+    $vars['initLdS'] = json_encode($vars['initLdS']);
+    $vars['tags'] = json_encode(lds_contTools::getMyTags ());
+
+    $arrays = lds_contTools::buildObjectsArray($editLdS);
+    $vars['jsonfriends'] = json_encode($arrays['available']);
+    $vars['viewers'] = json_encode($arrays['viewers']);
+    $vars['editors'] = json_encode($arrays['editors']);
+    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+
+    $vars['title'] = T("Edit implementation");
+
+    //We're editing. Fetch it from the DB
+    $editordocument = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
+
+
+    //make an editor object with the document that we want to edit
+    //$editor = EditorsFactory::getInstance($editordocument[0]);
 
     $user = get_loggedin_user();
     if($user->vle) {
         $vle = get_entity($user->vle);
         $vars_editor = $editor->putImplementation(array('course_id' => 3, 'vle' => $vle));
+    }
+
+    $vars['lds_id'] = $lds->guid;
+
+    $vars['course_id'] = $implementation_helper->course_id;
+    $vars['implementation_helper_id'] = '0';
+
+    $user = get_loggedin_user();
+    if($user->vle) {
+        $vle = get_entity($user->vle);
+        $vars['vle_id'] = $vle->guid;
+        $gluepsm = new GluepsManager($vle, $lds, $editordocument[0]);
+        $vars_glueps = $gluepsm->editDocument(array('course'=>3, 'title' => $lds->title));
+        $vars = $vars + $vars_glueps;
     }
 
     $vars = $vars + $vars_editor;
@@ -1142,7 +1251,7 @@ function lds_exec_newimplementglueps($params)
 
     $vars['editor_type'] = $implementation_helper->editor_type;
 
-    $vars['title'] = T("New LdS");
+    $vars['title'] = T("New implementation");
 
     $vars['lds_id'] = $lds->guid;
 
