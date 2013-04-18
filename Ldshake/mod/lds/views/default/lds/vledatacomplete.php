@@ -38,51 +38,70 @@
 <?php
 extract($vars);
 ?>
-<div id="lds_vle_page">
-    <?php
-    $courses = (array)$vle_info->courses;
-    ksort($courses);
-    foreach($courses as $key => $fvle):?>
 
-    <div id="vle_test_box">
-        <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " {$fvle}" ?></div>
-        <div class="vle_info_box">
-            <?php
-            foreach($participants[$key] as $p_id => $p):?>
-                <div class="vle_info_element">
-                    <span class="vle_info_key_data"><?php echo $p->id ?></span>
-                    <span class="vle_info_name_data"><?php echo $p->name?></span>
-                    <span class="vle_info_other_data"><?php echo $p->learningEnvironmentData?></span>
-                </div>
-            <?php endforeach;?>
-        </div>
+<div id="two_column_left_sidebar">
+    <div id="owner_block">
+        <ul id="lds_side_sections">
+            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
+            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
+            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+        </ul>
     </div>
-    <?php endforeach;?>
+    <div id="owner_block_bottom"></div>
+</div>
 
-    <div id="vle_test_box">
-        <div class="vle_info_title lds_form_title"><?php echo T('Internal tools') ?></div>
-        <div class="vle_info_box">
-            <?php
-            foreach($internal_tools as $p_id => $p):?>
-                <div class="vle_info_element">
-                    <span class="vle_info_key_data"><?php echo $p_id ?></span>
-                    <span class="vle_info_name_data"><?php echo $p?></span>
-                </div>
-            <?php endforeach;?>
+<div id="two_column_left_sidebar_maincontent">
+    <div id="lds_vle_page">
+        <?php
+        $courses = (array)$vle_info->courses;
+        ksort($courses);
+        foreach($courses as $key => $fvle):?>
+
+        <div id="vle_test_box">
+            <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " {$fvle}" ?></div>
+            <div class="vle_info_box">
+                <?php
+                foreach($participants[$key] as $p_id => $p):?>
+                    <div class="vle_info_element">
+                        <span class="vle_info_key_data"><?php echo $p->id ?></span>
+                        <span class="vle_info_name_data"><?php echo $p->name?></span>
+                        <span class="vle_info_other_data"><?php echo $p->learningEnvironmentData?></span>
+                    </div>
+                <?php endforeach;?>
+            </div>
         </div>
-    </div>
+        <?php endforeach;?>
 
-    <div id="vle_test_box">
-        <div class="vle_info_title lds_form_title"><?php echo T('External tools') ?></div>
-        <div class="vle_info_box">
-            <?php
-            foreach($external_tools as $p_id => $p):?>
-                <div class="vle_info_element">
-                    <span class="vle_info_key_data"><?php echo $p_id ?></span>
-                    <span class="vle_info_name_data"><?php echo $p?></span>
-                </div>
-            <?php endforeach;?>
+        <div id="vle_test_box">
+            <div class="vle_info_title lds_form_title"><?php echo T('Internal tools') ?></div>
+            <div class="vle_info_box">
+                <?php
+                foreach($internal_tools as $p_id => $p):?>
+                    <div class="vle_info_element">
+                        <span class="vle_info_key_data"><?php echo $p_id ?></span>
+                        <span class="vle_info_name_data"><?php echo $p?></span>
+                    </div>
+                <?php endforeach;?>
+            </div>
         </div>
-    </div>
 
+        <div id="vle_test_box">
+            <div class="vle_info_title lds_form_title"><?php echo T('External tools') ?></div>
+            <div class="vle_info_box">
+                <?php
+                foreach($external_tools as $p_id => $p):?>
+                    <div class="vle_info_element">
+                        <span class="vle_info_key_data"><?php echo $p_id ?></span>
+                        <span class="vle_info_name_data"><?php echo $p?></span>
+                    </div>
+                <?php endforeach;?>
+            </div>
+        </div>
+
+    </div>
 </div>

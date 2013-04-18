@@ -57,7 +57,11 @@ $course_id = get_input('course_id');
 if (get_input('guid') > 0)
 {
     $implementation = get_entity(get_input('guid'));
-    $gluepsdocument = get_entities_from_metadata('lds_guid',$implementation->guid,'object','LdS_document_editor', 0, 100);
+    $gluepsdocument = get_entities_from_metadata_multi(array(
+            'lds_guid' => $editLdS->guid,
+            'editorType' => $editor_type
+        ),
+        'object','LdS_document_editor', 0, 100);
     $glueps_document = $gluepsdocument[0];
 }
 else
@@ -117,7 +121,11 @@ if (get_input('revision') == 0)
 }
 
 //We get the revision id to send it back to the form
-$gluepsdocument = get_entities_from_metadata('lds_guid',$implementation->guid,'object','LdS_document_editor', 0, 100);
+//$gluepsdocument = get_entities_from_metadata('lds_guid',$implementation->guid,'object','LdS_document_editor', 0, 100);
+$gluepsdocument = get_entities_from_metadata_multi(array(
+        'lds_guid' => $implementation->guid,
+        'editorType' => $editor_type),
+    'object','LdS_document_editor', 0, 100);
 $revision = $implementation->getAnnotations('revised_docs_editor', 1, 0, 'desc');
 $revision = $revision[0];
 $resultIds->revision = $revision->id;
@@ -140,10 +148,17 @@ $save_params = array(
 
 //save the contents and join the resultsIds
 //$editor = editorsFactory::getInstance($glueps_document);
-$vle = get_entity($user->vle);
-$editor = new GluepsManager($vle, $implementation, $gluepsdocument[0]);
-list($glueps_document, $resultIds_add) = $editor->saveDocument($save_params);
-$resultIds = (object)((array)$resultIds + (array)$resultIds_add);
+if($editor_type == 'gluepsrest') {
+    $vle = get_entity($user->vle);
+    $editor = new GluepsManager($vle, $implementation, $gluepsdocument[0]);
+    list($glueps_document, $resultIds_add) = $editor->saveDocument($save_params);
+    $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
+}
+else {
+    $editor = editorsFactory::getInstance($gluepsdocument[0]);
+    list($document_editor, $resultIds_add) = $editor->saveDocument($save_params);
+    $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
+}
 
 $gluepsdocument[0]->lds_revision_id = $revision->id;
 $gluepsdocument[0]->save();

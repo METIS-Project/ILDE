@@ -98,14 +98,16 @@
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
-                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>
+                            <!--<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>-->
+                            <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'edit') ?>"><?php echo T("Edit") ?></a>
-                                    <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>
+                                    <a class="lds_edit_action" href="<?php echo $url."pg/lds/editglueps/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
+                                    <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
-						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->implementation->title ?></a>
+						<!--<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->implementation, 'view') ?>"><?php echo $item->implementation->title ?></a>-->
+                                    <span class="lds_title"><?php echo $item->implementation->title ?></span>
                                     <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>

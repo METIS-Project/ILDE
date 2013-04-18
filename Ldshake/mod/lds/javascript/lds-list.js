@@ -45,7 +45,7 @@ $(document).ready(function()
         };
 
         $.post (baseurl + "action/lds/implement", submitData, function(data) {
-            window.location = baseurl + 'pg/lds/newimplementglueps/'+data;
+            window.location = baseurl + 'pg/lds/implementeditor/'+data;
         });
     });
 

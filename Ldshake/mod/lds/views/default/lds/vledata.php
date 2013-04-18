@@ -38,7 +38,9 @@
 <?php
 extract($vars);
 ?>
+
 <div id="lds_vle_page">
+
     <div class="lds_form_title">
         <?php echo T('Enter your VLE details');?>
     </div>

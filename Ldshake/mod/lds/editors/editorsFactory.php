@@ -1361,7 +1361,7 @@ class GluepsManager
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
             'name' => $vle_info->name,
-            'type' => $type,
+            'type' => $this->_vle->vle_type,
             'creduser' => $this->_vle->username,
             'credsecret' => $this->_vle->password,
             'participants' => $course_info->participants
@@ -1490,11 +1490,10 @@ class GluepsManager
         return $vars;
     }
 
-    public function loadDocument() {
+    public function editDocument($params) {
         global $CONFIG;
-        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $filename_lds = Editor::getFullFilePath($this->_document->file_guid);
         $rand_id = mt_rand(400,5000000);
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
         $url = $CONFIG->glueps_url;
         $course = $params['course'];
@@ -1507,7 +1506,7 @@ class GluepsManager
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
             'name' => $vle_info->name,
-            'type' => $this->_vle->$type,
+            'type' => $this->_vle->vle_type,
             'creduser' => $this->_vle->username,
             'credsecret' => $this->_vle->password,
             'participants' => $course_info->participants
@@ -1530,28 +1529,39 @@ class GluepsManager
         $sectoken = rand_str(32);
 
         $post = array(
-            'NewDeployTitleName' => 'new imp',
-            'instType' => 'IMS LD',
+            'NewDeployTitleName' => $params['title'],
+            'instType' => 'GLUEPS',
             'sectoken' => $sectoken,
             'archiveWic' => "@{$filename_lds}",
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->glueps_url}deploys";
-        $response = \Httpful\Request::put($uri)
+        $uri = "{$url}deploys";
+        $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
             ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
 
-        //copy($filename_lds, $filename_editor);
+        $xmldoc = new DOMDocument();
+        $xmldoc->loadXML($response->raw_body);
+        $xpathvar = new Domxpath($xmldoc);
 
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
-        $vars['editor'] = 'webcollagerest';
-        $vars['document_url'] = $response->raw_body;
-        $vars['editor_id'] = $rand_id;
+        $queryResult = $xpathvar->query('//deploy');
+        $doc_url = $queryResult->item(0)->getAttribute('id');
+
+        $url_path = explode('/', $doc_url);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+
+        $vars = array();
+        $vars['editor_id'] = $sectoken;
+        $vars['document_url'] = "{$url}deploys/{$deploy_id}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&ldshakeToken={$sectoken}";
+        $vars['editor'] = 'gluepsrest';
 
         return $vars;
     }

@@ -88,7 +88,7 @@ if (isloggedin()) :
                 <div id="new_menu_implement" class="menu level2">
                     <ul>
                         <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
-                        <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("See your VLE") ?></a></li>
+                        <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vledata/"><?php echo T("See your VLE") ?></a></li>
                         <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Register your VLE") ?></a></li>
                     </ul>
                 </div>

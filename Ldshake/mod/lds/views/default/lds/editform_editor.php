@@ -198,6 +198,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var groups = <?php echo $groups ?>;
         var documents = <?php echo $initDocuments ?>;
         var document_url = "<?php echo $document_url ?>";
+        var implementation = <?php echo $implementation  ? 'true' : 'false';?>;
 		friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;
 		friends['editors'] = <?php echo $editors ?>;

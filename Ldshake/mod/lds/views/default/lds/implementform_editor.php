@@ -104,7 +104,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
                     <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
-                    <li class="lds_exetab"> <?php echo T("WebCollage") ?></li>
+                    <li class="lds_exetab"> <?php echo T("GluePs") ?></li>
 
                 </ul>
             </div>
@@ -202,7 +202,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     var vle_id = <?php echo $vle_id ?>;
     var course_id = "<?php echo $course_id ?>";
     var implementation_helper_id = "<?php echo $implementation_helper_id ?>";
-
+    var implementation = true;
     friends['available'] = <?php echo $jsonfriends ?>;
     friends['viewers'] = <?php echo $viewers ?>;
     friends['editors'] = <?php echo $editors ?>;

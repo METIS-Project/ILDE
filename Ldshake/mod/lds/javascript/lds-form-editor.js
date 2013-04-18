@@ -201,6 +201,9 @@ function ajax_submit (redirect)
 	{
         documents[currentTab].body = editor.getData();
 
+        if(implementation)
+            save_url = "action/lds/save_glueps";
+
 		submitData = 
 		{
 			guid: $('#lds_edit_guid').val(),
