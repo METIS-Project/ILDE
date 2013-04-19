@@ -36,6 +36,17 @@
 $(document).ready(function()
 {
 
+    var height_correction = function () {
+        $('#layout_canvas').css('min-height',
+            window.innerHeight -
+                $('#ldshake_topbar').outerHeight() -
+                $('#layout_footer').outerHeight() -
+                $('#footer_ending').outerHeight());
+    }
+
+    height_correction();
+    $(window).resize(height_correction);
+
     $('#filter_by_design').change(function (){
         var guid = $(this).val();
         window.location = baseurl + 'pg/lds/implementations/design/'+guid;
