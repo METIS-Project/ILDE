@@ -35,6 +35,12 @@
 
 $(document).ready(function()
 {
+
+    $('#filter_by_design').change(function (){
+        var guid = $(this).val();
+        window.location = baseurl + 'pg/lds/implementations/design/'+guid;
+    });
+
     $('#implementlds_submit').click(function (){
         var submitData =
         {

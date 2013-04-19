@@ -382,8 +382,8 @@ function lds_exec_implementations ($params)
         $vars['title'] = T("All my LdS > Implementations");
     }
 
-    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0, 'implemented', '1');
-    $vars['section'] = $params[1];
+    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0, 'implementable', '1');
+    $vars['section'] = 'imp-'.$params[1];
     $vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
 

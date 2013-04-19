@@ -50,5 +50,5 @@
     <input type="text" name="new_implementation_title" />
     <input type="hidden" name="lds_id" />
 
-    <input type="button" id="implementlds_submit" />
+    <input type="button" id="implementlds_submit" value="<?php echo T('Implement')?>" />
 </div>

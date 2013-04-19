@@ -41,5 +41,5 @@
     <h3><?php echo T("Enter the LdS title") ?></h3>
         <input type="text" name="new_lds_title" />
 
-    <input type="button" id="clonelds_submit" />
+    <input type="button" id="clonelds_submit" value="<?php echo T('Duplicate')?>" />
 </div>

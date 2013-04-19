@@ -1302,7 +1302,13 @@ a.rightbutton:active {
 	padding-top: 80px;
 }
 
-#lds_side_sections a
+#lds_side_sections_imp
+{
+    padding-top: 20px;
+}
+
+#lds_side_sections a,
+#lds_side_sections_imp a
 {
 	display: block;
 	text-decoration: none;
@@ -1310,7 +1316,9 @@ a.rightbutton:active {
 	padding: 4px;
 }
 
-#lds_side_sections a:hover
+#lds_side_sections a:hover,
+#lds_side_sections_imp a:hover
+
 {
 	display: block;
 	text-decoration: none;
@@ -1321,7 +1329,8 @@ a.rightbutton:active {
 	border-radius: 3px;
 }
 
-#lds_side_sections a.current
+#lds_side_sections a.current,
+#lds_side_sections_imp a.current
 {
 	display: block;
 	text-decoration: none;
@@ -1334,7 +1343,8 @@ a.rightbutton:active {
 	border-radius: 3px;
 }
 
-#lds_side_sections a.current:hover
+#lds_side_sections a.current:hover,
+#lds_side_sections_imp a.current:hover
 {
 	display: block;
 	text-decoration: none;
@@ -1571,4 +1581,8 @@ color: #666;
 .vle_info_name_data {
     display: inline-block;
     width: 80px;
+}
+
+.lds_close_popup {
+    float: right;
 }
