@@ -133,6 +133,7 @@ $(document).ready(function()
 	
 	$('body').click(function() {
 		$('#toolbar_lds_types').fadeOut(200);
+        $('.menu').fadeOut(200);
 		$('#tb_newlds a').removeClass('menu_active');
 		
 		$('#ldshake_topbar_user_menu').hide();
