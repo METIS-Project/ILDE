@@ -42,14 +42,10 @@ extract($vars);
 <div id="two_column_left_sidebar">
     <div id="owner_block">
         <ul id="lds_side_sections">
-            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
-            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
-            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
-            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
-            <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
-            <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-            <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-            <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+            <!--<li><a<?php if ($section == 'generalinfo') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/generalinfo' ?>"><?php echo T("General info") ?></a></li>-->
+            <li><a<?php if ($section == 'courses') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/courses' ?>"><?php echo T("Courses") ?></a></li>
+            <li><a<?php if ($section == 'internaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/internaltools' ?>"><?php echo T("Internal tools") ?></a></li>
+            <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/externaltools' ?>"><?php echo T("External tools") ?></a></li>
         </ul>
     </div>
     <div id="owner_block_bottom"></div>
@@ -57,12 +53,15 @@ extract($vars);
 
 <div id="two_column_left_sidebar_maincontent">
     <div id="lds_vle_page">
+
         <?php
+        if($section == 'courses'){
+
         $courses = (array)$vle_info->courses;
         ksort($courses);
         foreach($courses as $key => $fvle):?>
 
-        <div id="vle_test_box">
+        <div id="vle_data_box">
             <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " {$fvle}" ?></div>
             <div class="vle_info_box">
                 <?php
@@ -70,27 +69,36 @@ extract($vars);
                     <div class="vle_info_element">
                         <span class="vle_info_key_data"><?php echo $p->id ?></span>
                         <span class="vle_info_name_data"><?php echo $p->name?></span>
-                        <span class="vle_info_other_data"><?php echo $p->learningEnvironmentData?></span>
+                        <?php
+                            $data = explode(';', $p->learningEnvironmentData);
+                        ?>
+                        <span class="vle_info_other_data"><?php echo $data[2]?></span>
                     </div>
                 <?php endforeach;?>
             </div>
         </div>
-        <?php endforeach;?>
+        <?php endforeach;
+        }
 
-        <div id="vle_test_box">
+        if($section == 'internaltools'){ ?>
+        <div id="vle_data_box">
             <div class="vle_info_title lds_form_title"><?php echo T('Internal tools') ?></div>
             <div class="vle_info_box">
                 <?php
                 foreach($internal_tools as $p_id => $p):?>
                     <div class="vle_info_element">
-                        <span class="vle_info_key_data"><?php echo $p_id ?></span>
+                        <!--<span class="vle_info_key_data"><?php echo $p_id ?></span>-->
                         <span class="vle_info_name_data"><?php echo $p?></span>
                     </div>
                 <?php endforeach;?>
             </div>
         </div>
+        <?php
+        }
 
-        <div id="vle_test_box">
+        if($section == 'externaltools'){ ?>
+
+        <div id="vle_data_box">
             <div class="vle_info_title lds_form_title"><?php echo T('External tools') ?></div>
             <div class="vle_info_box">
                 <?php
@@ -102,6 +110,9 @@ extract($vars);
                 <?php endforeach;?>
             </div>
         </div>
+        <?php
+        }
+        ?>
 
     </div>
 </div>

@@ -201,24 +201,46 @@ function ajax_submit (redirect)
 	{
         documents[currentTab].body = editor.getData();
 
-        if(implementation)
+        if(implementation) {
             save_url = "action/lds/save_glueps";
+            submitData =
+            {
+                guid: $('#lds_edit_guid').val(),
+                revision: $('#lds_edit_revision').val(),
+                title: $('#lds_edit_title').val(),
+                discipline: $('#as-values-discipline').val(),
+                pedagogical_approach: $('#as-values-pedagogical_approach').val(),
+                tags: $('#as-values-tags').val(),
+                completeness: $('#completeness_input').val(),
+                granularity: $('#granularity_input').val(),
+                editor_id: editor_id,
+                editorType: editorType,
+                documents: documents,
+                document_url: document_url,
+                implementation_helper_id: implementation_helper_id,
+                lds_id: lds_id,
+                vle_id: vle_id,
+                course_id: course_id
+            };
+        } else {
+            submitData =
+            {
+                guid: $('#lds_edit_guid').val(),
+                revision: $('#lds_edit_revision').val(),
+                title: $('#lds_edit_title').val(),
+                discipline: $('#as-values-discipline').val(),
+                pedagogical_approach: $('#as-values-pedagogical_approach').val(),
+                tags: $('#as-values-tags').val(),
+                completeness: $('#completeness_input').val(),
+                granularity: $('#granularity_input').val(),
+                editor_id: editor_id,
+                editorType: editorType,
+                documents: documents,
+                document_url: document_url,
+            };
+        }
 
-		submitData = 
-		{
-			guid: $('#lds_edit_guid').val(),
-			revision: $('#lds_edit_revision').val(),
-			title: $('#lds_edit_title').val(),
-			discipline: $('#as-values-discipline').val(),
-			pedagogical_approach: $('#as-values-pedagogical_approach').val(),
-			tags: $('#as-values-tags').val(),
-			completeness: $('#completeness_input').val(),
-			granularity: $('#granularity_input').val(),
-			editor_id: editor_id,
-			editorType: editorType,
-            documents: documents,
-            document_url: document_url
-        };
+
 	}
 	
 	$.post (baseurl + save_url, submitData, function (data)

@@ -1512,14 +1512,15 @@ padding: 20px;
 
 .lds_form_title {
 font-size: 17px;
-background-color: grey;
+background-color: rgb(215, 223, 255);
 padding: 3px;
 border-bottom: 2px solid red;
+color: rgb(71, 71, 71);
+font-size: 19px;
 }
 
 #lds_vle_form {
-margin-top: 15px;
-width: 40%;
+font-size: 17px;
 }
 
 .lds_form_block {
@@ -1530,20 +1531,44 @@ border: 1px solid #fff;
 }
 
 .vle_form_label {
-width: 30%;
+width: 20%;
 display: inline-block;
 color: #666;
 }
 
 .vle_form_input {
-border-radius: 4px;
-background-color: #fcfcfc;
-width: 65%;
+    border-radius: 4px;
+    background-color: #fcfcfc;
+    width: 75%;
 }
 
 .vle_info_element {
-padding: 4px 5px 4px 5px;  background-color: #F4F4F4;  border: 1px solid #FFF;
+    padding: 4px 5px 4px 5px;  background-color: #F4F4F4;  border: 1px solid #FFF;
 }
 .vle_info_key_data {
-background-color: #C4C4C4;  padding: 5px;
+    background-color: #C4C4C4;
+    padding: 5px;
+    width: 18px;
+    display: inline-block;
+    text-align: center;
+}
+
+#vle_test_box {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+.vle_info_working {
+    font-size: 17px;
+    background-color: rgb(194, 243, 194);
+    padding: 5px;
+}
+
+#vle_data_box {
+    margin-bottom: 30px;
+}
+
+.vle_info_name_data {
+    display: inline-block;
+    width: 80px;
 }

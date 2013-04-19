@@ -350,14 +350,14 @@ function lds_exec_implementations ($params)
     {
         $vars['count'] = get_entities('object', 'LdS_implementation', get_loggedin_userid(), '', 50, $offset, true);
         $entities = get_entities('object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("Created by me > Implementations");
     }
     elseif ($params[1] == 'shared-with-me')
     {
         $vars['count'] = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), true, 0 , 0);
         $entities = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), false, 50, $offset);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("Shared with me > Implementations");
         $vars['editor_filter'] = $params[1];
     }
@@ -365,9 +365,11 @@ function lds_exec_implementations ($params)
     {
         $design_guid = $params[2];
         $lds = get_entity($design_guid);
-        $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, null, null, $design_guid);
-        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, null, null, $design_guid);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        //$vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, null, null, $design_guid);
+        //$entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, null, null, $design_guid);
+        $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, 'lds_id', $design_guid);
+        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, 'lds_id', $design_guid);
+        $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
         $vars['editor_filter'] = $params[1];
 
@@ -408,6 +410,7 @@ function lds_exec_vle ($params)
         $vle->subtype = 'user_vle';
         $vle->access_id = ACCESS_PUBLIC;
         $vle->owner_guid = get_loggedin_userid();
+        $vle->name = '';
         $vle->username = '';
         $vle->password = '';
         $vle->vle_url = '';
@@ -474,7 +477,12 @@ function lds_exec_vledata ($params)
         'participants' => $participants,
         'internal_tools' => $internal_tools,
         'external_tools' => $external_tools,
+        'section' => 'courses'
     );
+
+    if(isset($params[1]))
+        if(strlen($params[1]))
+            $vars['section'] = $params[1];
 
     $body = elgg_view('lds/vledatacomplete',$vars);
     page_draw('VLE', $body);
@@ -1001,12 +1009,36 @@ function lds_exec_implementeditor($params)
 
     //lds_contTools::markLdSAsViewed ($params[1]);
 
+    /*
+    if($editLdS->getSubtype() == 'LdS') {
+        $implementation_helper = get_entity($params[2]);
+        $vars['implementation_helper_id'] = $implementation_helper->guid;
+        $vars['lds_id'] = $editLdS->guid;
+        $vars['course_id'] = $implementation_helper->course_id;
+        $vars['vle_id'] = $implementation_helper->vle_id;
+        $vars['initLdS']->title = $implementation_helper->title;
+    } else {
+        $vars['implementation_helper_id'] = 0;
+        $vars['lds_id'] = $editLdS->lds_id;
+        $vars['course_id'] = $editLdS->course_id;
+        $vars['vle_id'] = $editLdS->vle_id;
+    }
+    */
+
     //Pass the LdS properties to the form
     if($editLdS->getSubtype() == 'LdS_implementation') {
+
+        $vars['lds_id'] = $editLdS->lds_id;
+        $vars['course_id'] = $editLdS->course_id;
+        $vars['vle_id'] = $editLdS->vle_id;
+
         $vars['initLdS'] = new stdClass();
+
         $vars['initLdS']->title = $editLdS->title;
         $vars['initLdS']->granularity = $editLdS->granularity;
         $vars['initLdS']->completeness = $editLdS->completeness;
+
+
 
         $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
         foreach ($tagtypes as $type)
@@ -1023,8 +1055,18 @@ function lds_exec_implementeditor($params)
         $vars['initLdS']->guid = $params[1];
 
     } else {
+
+        $implementation_helper = $editLdS;
+        $editLdS = get_entity($editLdS->lds_id);
+        $vars['implementation_helper_id'] = $implementation_helper->guid;
+        $vars['lds_id'] = $editLdS->guid;
+        $vars['course_id'] = $implementation_helper->course_id;
+        $vars['vle_id'] = $implementation_helper->vle_id;
+
+
         $vars['initLdS'] = new stdClass();
-        $vars['initLdS']->title = 'Untitled implementation';
+        $vars['initLdS']->title = $implementation_helper->title;
+        //$vars['initLdS']->title = 'Untitled implementation';
         $vars['initLdS']->granularity = '0';
         $vars['initLdS']->completeness = '0';
         $vars['initLdS']->tags = '';
@@ -1032,7 +1074,6 @@ function lds_exec_implementeditor($params)
         $vars['initLdS']->pedagogical_approach = '';
         $vars['initLdS']->guid = '0';
     }
-
 
     //For each of the documents that this LdS has...
     $documents = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document', 0, 100);
@@ -1057,6 +1098,8 @@ function lds_exec_implementeditor($params)
         $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this implementation...").'</p>';
     }
 
+
+
     Utils::osort($vars['initDocuments'], 'guid');
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
 
@@ -1075,6 +1118,8 @@ function lds_exec_implementeditor($params)
 
     $vars['title'] = T("Edit implementation");
 
+
+
     //We're editing. Fetch it from the DB
     $editordocument = get_entities_from_metadata_multi(array(
             'lds_guid' => $editLdS->guid,
@@ -1084,18 +1129,22 @@ function lds_exec_implementeditor($params)
 
 
     $vars['implementation'] = true;
+
+
+
     //make an editor object with the document that we want to edit
     $editor = EditorsFactory::getInstance($editordocument[0]);
 
     $user = get_loggedin_user();
     if($user->vle) {
         $vle = get_entity($user->vle);
-        $vars_editor = $editor->putImplementation(array('course_id' => $params[2], 'vle' => $vle));
+        $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle));
     }
 
     $vars = $vars + $vars_editor;
 
-    echo elgg_view('lds/editform_editor',$vars);
+    //echo elgg_view('lds/editform_editor',$vars);
+    echo elgg_view('lds/implementform_editor',$vars);
 }
 
 function lds_exec_editglueps($params)
@@ -1187,7 +1236,11 @@ function lds_exec_editglueps($params)
     $vars['title'] = T("Edit implementation");
 
     //We're editing. Fetch it from the DB
-    $editordocument = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
+    $editordocument = get_entities_from_metadata_multi(array(
+            'lds_guid' => $editLdS->guid,
+            'editorType' => 'gluepsrest'
+        ),
+        'object','LdS_document_editor', 0, 100);
 
 
     //make an editor object with the document that we want to edit
@@ -1202,12 +1255,20 @@ function lds_exec_editglueps($params)
     if($user->vle) {
         $vle = get_entity($user->vle);
         $vars['vle_id'] = $vle->guid;
-        $gluepsm = new GluepsManager($vle, $editLdS, $editordocument[0]);
-        $vars_glueps = $gluepsm->editDocument(array('course'=>$lds->course_id, 'title' => $editLdS->title));
+        if(!$editordocument) {
+            $gluepsm = new GluepsManager($vle);
+            $editordocument = get_entities_from_metadata_multi(array(
+                    'lds_guid' => $editLdS->guid,
+                    'editorType' => 'webcollagerest'
+                ),
+                'object','LdS_document_editor', 0, 100);
+            $vars_glueps = $gluepsm->newImplementation(array('course'=>$editLdS->course_id, 'title' => $editLdS->title, 'lds' => $editLdS, 'document' => $editordocument[0]));
+        } else {
+            $gluepsm = new GluepsManager($vle, $editLdS, $editordocument[0]);
+            $vars_glueps = $gluepsm->editDocument(array('course'=>$editLdS->course_id, 'title' => $editLdS->title));
+        }
         $vars = $vars + $vars_glueps;
     }
-
-
 
     echo elgg_view('lds/implementform_editor',$vars);
 }

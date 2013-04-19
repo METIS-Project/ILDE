@@ -117,11 +117,13 @@ function encodeURIComponent($str) {
 	<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
 		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
 			<div class="lds_loading" style="margin-top: 4px;"></div>
+            <!--
 			<?php if ($iseXe): ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php else: ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php endif; ?>
+			-->
 			<a class="publishbutton rightbutton" href="#" id="lds_action_unpublish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
 			<?php echo T("Public link:") ?>
 			<?php if ($iseXe): ?>
@@ -135,22 +137,26 @@ function encodeURIComponent($str) {
 		</div>
 		<div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
 			<div class="lds_loading" style="margin-top: 4px;"></div>
+            <!--
 			<?php if ($iseXe): ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php else: ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php endif; ?>
+			-->
 			<a class="publishbutton rightbutton" href="#" id="lds_action_publish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Publish this document") ?></a>
 			<span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
 			<div style="clear:both"></div>
 		</div>
 		<div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
 			<div class="lds_loading" style="margin-top: 4px;"></div>
+            <!--
 			<?php if ($iseXe): ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php else: ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php endif; ?>
+			-->
 			<a class="publishbutton rightbutton" href="#" id="lds_action_republish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Republish this document") ?></a>
 			<a class="publishbutton rightbutton" href="#" id="lds_action_unpublish2" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
 			<?php echo T("Public link <strong>(older version published)</strong>:") ?>
@@ -165,11 +171,13 @@ function encodeURIComponent($str) {
 		</div>
 	<?php else: ?>
 		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
+        <!--
 		<?php if ($iseXe): ?>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 		<?php else: ?>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 		<?php endif; ?>
+		-->
 		<?php echo T("Public link:") ?>
 		<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
             <?php echo T("Embed link:") ?>
@@ -178,20 +186,24 @@ function encodeURIComponent($str) {
 		</div>
 		<div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
 			<span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
+            <!--
 			<?php if ($iseXe): ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php else: ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php endif; ?>
+			-->
 			<div style="clear:both"></div>
 		</div>
 		<div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
+            <!--
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php if ($iseXe): ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php else: ?>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php endif; ?>
+			-->
 			<?php echo T("Public link:") ?>
 			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
 			<?php echo T("<strong>Warning:</strong> An older version of this document is published.") ?>
@@ -200,6 +212,7 @@ function encodeURIComponent($str) {
             <div style="clear:both"></div>
 		</div>
 	<?php endif; ?>
+        <!--
 	<?php if ($iseXe): ?>
 	<div id="lds_export">
 		<?php if ($currentDoc->editorType == 'exe'): ?>
@@ -211,9 +224,12 @@ function encodeURIComponent($str) {
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->webZip . "&title=" . encodeURIComponent($lds->title . "_html.zip") ?>" style="float: left;"><?php echo T("Save as zipped web page") ?></a>
 	</div>
 	<?php endif; ?>
+    -->
 	
 <div id="payload">
-	<?php if (!$iseXe): ?>
+	<?php
+    $iseXe = false;
+    if (!$iseXe): ?>
 	<div id="the_lds">
 		<?php echo $currentDoc->description ?>
 	</div>

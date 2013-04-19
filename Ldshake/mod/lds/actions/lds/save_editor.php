@@ -49,9 +49,19 @@ $isNew = false;
 $editor_type = get_input('editorType');
 $docSession = get_input('editor_id');
 $document_url = get_input('document_url');
+$is_implementation = get_input('is_implementation');
+
+$new_imp = false;
+
+if(get_input('guid') > 0) {
+    $lds = get_entity(get_input('guid'));
+    if($lds->getSubtype() == 'LdS' && $is_implementation) {
+        $new_imp = true;
+    }
+}
 
 //We first create the LDS (or update it)
-if (get_input('guid') > 0)
+if (get_input('guid') > 0 && !$new_imp)
 {
 	//We're editing. Fetch it from the DB
 	$lds = get_entity(get_input('guid'));
@@ -62,8 +72,6 @@ else
 {
 	//We're creating it from scratch. Construct a new obj.
 	$lds = new LdSObject();
-    if($editor_type == 'gluepsrest')
-        $lds->subtype = 'LdS_implementation';
 	$lds->owner_guid = get_loggedin_userid();
 	$lds->external_editor = true;
     $lds->editor_type = $editor_type;

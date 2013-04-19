@@ -96,7 +96,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<?php endif; ?>
 				-->
 
-                <iframe id="lds_editor_iframe" src="<?php echo $document_iframe_url; ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
+                <iframe id="lds_editor_iframe" src="<?php echo $document_iframe_url; ?>" width="958" height="616" style="border: 0px solid grey;"></iframe>
 
             </div>
             <div id="lds_edit_tabs" class="scrollable">
@@ -104,7 +104,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
                     <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
-                    <li class="lds_exetab"> <?php echo T("GluePs") ?></li>
+                    <li class="lds_exetab"> <?php echo T("WebCollage") ?></li>
 
                 </ul>
             </div>

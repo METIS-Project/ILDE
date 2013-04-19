@@ -62,6 +62,7 @@
         <?php endif; ?>
     </div>
 
+    <!--
     <?php echo T("Filter by design") ?>
     <select id="filter_by_design">
         <option value="0">Select a design</option>
@@ -69,6 +70,7 @@
             <option value="<?php echo $df->guid?>"><?php echo $df->title ?></option>
         <?php endforeach; ?>
     </select>
+-->
 
     <div class="filters">
         <div class="paging">
@@ -94,7 +96,7 @@
                         <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
                                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
-                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->implementation->guid ?>" />
+                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
@@ -102,7 +104,7 @@
                             <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action" href="<?php echo $url."pg/lds/editglueps/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action" href="<?php echo $url."pg/lds/implementeditor/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
                                     <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
                                 <?php endif; ?>
                                 <span class="lds_title_tags">

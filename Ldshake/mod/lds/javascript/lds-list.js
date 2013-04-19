@@ -64,14 +64,14 @@ $(document).ready(function()
     $("input[name='lds_select']").change(function () {
         if($("input[name='lds_select']:checked").length != 1) {
             $("#duplicate_design").attr('disabled','disabled');
-            $("#duplicate_implementation").attr('disabled','disabled');
+            //$("#duplicate_implementation").attr('disabled','disabled');
             $("#implementations_by_design").attr('disabled','disabled');
             $("#view_design").attr('disabled','disabled');
         }
         else {
             $("#duplicate_design").removeAttr('disabled');
             $("#implementations_by_design").removeAttr('disabled');
-            $("#duplicate_implementation").removeAttr('disabled');
+            //$("#duplicate_implementation").removeAttr('disabled');
             $("#view_design").removeAttr('disabled');
         }
     });
@@ -107,7 +107,7 @@ $(document).ready(function()
     $("#view_design").click(function (event) {
         var implementation = $("input[name='lds_select']:checked").val();
         var lds = $("input#imp_design_" + implementation).val();
-        window.location = baseurl + 'pg/lds/view/' + lds;
+        window.location = baseurl + 'pg/lds/vieweditor/' + lds;
     });
 
     $('#clonelds_submit').click(function (){
@@ -118,7 +118,7 @@ $(document).ready(function()
         };
 
         $.post (baseurl + "action/lds/clone", submitData, function(data) {
-            window.location = baseurl + 'pg/lds/view/' + data;
+            window.location = baseurl + 'pg/lds/vieweditor/' + data;
         });
     });
 

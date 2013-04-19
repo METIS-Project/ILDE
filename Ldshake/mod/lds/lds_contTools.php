@@ -181,7 +181,7 @@ class lds_contTools
         {
             $obj = new stdClass();
             $obj->implementation = $implementation;
-//            $obj->lds = $lds; //The LdS itself
+            $obj->lds_id = $implementation->lds_id; //The LdS itself
             $obj->starter = get_entity($implementation->owner_guid);
 
             $latest = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
@@ -1244,7 +1244,7 @@ AND (
 	(e.owner_guid = {$user_id})
 	OR
 	(
-		e.container_guid IN (
+		e.guid IN (
 			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
 				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
 			)
@@ -1252,7 +1252,7 @@ AND (
 	)
 	OR
 	(
-		e.container_guid IN (
+		e.guid IN (
 			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
 		)
 	)

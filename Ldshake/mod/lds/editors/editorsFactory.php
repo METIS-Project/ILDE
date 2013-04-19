@@ -1314,18 +1314,20 @@ class GluepsManager
     public function getCourseInfo($course_id) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
         $username = 'metis';
         $password = 'M3t1$project';
         $course = '3';
+        */
 
         $get = array(
             'type' => $this->_vle->vle_type,
             'accessLocation' => $this->_vle->vle_url,
             'creduser' => $this->_vle->username,
             'credsecret' => $this->_vle->password,
-            'course' => $course
+            'course' => $course_id
         );
 
         $uri = "{$url}courses?"
@@ -1347,11 +1349,13 @@ class GluepsManager
     public function newImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
         $username = 'metis';
         $password = 'M3t1$project';
-        $course = $params['course'];//'3';
+        */
+        $course = $params['course'];
 
         $vle_info = $this->getVleInfo();
         $course_info = $this->getCourseInfo($course);
@@ -1379,12 +1383,13 @@ class GluepsManager
 
         $lds = $params['lds'];
         $ldsm = EditorsFactory::getManager($lds);
-        $document = $ldsm->getDocument();
+        //$document = $ldsm->getDocument();
+        $document = $params['document'];
         $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
         $sectoken = rand_str(32);
 
         $post = array(
-            'NewDeployTitleName' => 'new imp',
+            'NewDeployTitleName' => $lds->title,
             'instType' => 'IMS LD',
             'sectoken' => $sectoken,
             'archiveWic' => "@{$filename_lds}",
@@ -1532,7 +1537,7 @@ class GluepsManager
             'NewDeployTitleName' => $params['title'],
             'instType' => 'GLUEPS',
             'sectoken' => $sectoken,
-            'archiveWic' => "@{$filename_lds}",
+            'archiveWic' => "@{$filename_lds};type=application/xml",
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 

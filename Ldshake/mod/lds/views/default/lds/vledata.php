@@ -49,7 +49,7 @@ extract($vars);
     <form id="lds_vle_form" action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
 
         <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE name')?>:</span>
+            <span class="vle_form_label"><?php echo T('VLE name')?></span>
             <input class="vle_form_input" type="text" name="vle_name" value="<?php echo $vle->name?>" />
         </div>
         <div class="lds_form_block">
@@ -66,16 +66,16 @@ extract($vars);
         </div>
         <div class="lds_form_block">
             <span class="vle_form_label"><?php echo T('VLE password')?></span>
-            <input class="vle_form_input" type="text" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
+            <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
         </div>
 
         <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />
 
     </form>
 
-
+<?php if($vle_info):?>
     <div id="vle_test_box">
-        <div class="vle_info_title lds_form_title"><?php echo T('Available VLE courses')?></div>
+        <div class="vle_info_working"><?php echo T('Your VLE details are working properly. These are the courses available')?></div>
         <div class="vle_info_box">
             <?php
             $courses = (array)$vle_info->courses;
@@ -83,9 +83,10 @@ extract($vars);
             foreach($courses as $key => $fvle):?>
             <div class="vle_info_element">
                 <span class="vle_info_key_data"><?php echo $key ?></span>
-                <span class="vle_info_name_data"><?php echo $fvle?></span>
+                <span class="vle_info_course_name_data"><?php echo $fvle?></span>
              </div>
             <?php endforeach;?>
         </div>
     </div>
+<?php endif; ?>
 </div>

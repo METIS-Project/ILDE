@@ -58,11 +58,21 @@ if (get_input('guid') > 0)
 {
     $implementation = get_entity(get_input('guid'));
     $gluepsdocument = get_entities_from_metadata_multi(array(
-            'lds_guid' => $editLdS->guid,
+            'lds_guid' => $implementation->guid,
             'editorType' => $editor_type
         ),
         'object','LdS_document_editor', 0, 100);
-    $glueps_document = $gluepsdocument[0];
+    if(!$gluepsdocument) {
+        $glueps_document = new DocumentEditorObject($implementation->guid, 0);
+        $glueps_document->editorType = $editor_type;
+        $glueps_document->lds_guid = $implementation->guid;
+        $glueps_document->lds_revision_id = 0;
+        $glueps_document->save();
+    } else {
+        $glueps_document = $gluepsdocument[0];
+    }
+
+
 }
 else
 {
@@ -72,7 +82,8 @@ else
     $implementation->subtype = 'LdS_implementation';
     $implementation->owner_guid = get_loggedin_userid();
     $implementation->external_editor = true;
-    $implementation->editor_type = $editor_type;
+    //$implementation->editor_type = $editor_type;
+    $implementation->editor_type = 'gluepsrest';
     $implementation->title = $implementation_helper->title;
     $implementation->vle_id = $implementation_helper->vle_id;
     $implementation->course_id = $implementation_helper->course_id;
