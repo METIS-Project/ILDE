@@ -206,6 +206,10 @@
 								input.val("");
 							}
 						case 13: // return
+                            $(this).blur();
+                            e.preventDefault();
+                            $(this).focus();
+                            /*
 							tab_press = false;
 							var active = $("li.active:first", results_holder);
 							if(active.length > 0){
@@ -215,6 +219,7 @@
 							if(opts.neverSubmit || active.length > 0){
 								e.preventDefault();
 							}
+							*/
 							break;
 						default:
 							if(opts.showResultList){

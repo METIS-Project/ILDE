@@ -1043,8 +1043,8 @@ del {
 }
 
 .remove_contributor {
-	diplay: block;
-	padding: 9px 5px 0 0;
+	display: block;
+	padding: 3px 5px 0 0;
 	margin: 0 10px 0 10px;
 	float: right;
 	font-size: 24px;
@@ -1069,8 +1069,7 @@ del {
 	font-size: 13px;
 	padding: 3px 5px;
 	text-align: center;
-	width: 65px;
-    height: 36px;
+	min-width: 65px;
 }
 
 .can_view_option:hover {
@@ -1113,7 +1112,7 @@ del {
 	font-size: 13px;
 	padding: 3px 5px;
 	text-align: center;
-	width: 65px
+	min-width: 65px;
 }
 
 .can_edit_option.pressed {
@@ -1178,7 +1177,7 @@ del {
 .share_type_switch {
 	display: block;
 	float: right;
-	/*margin: 9px 10px 0 0;*/
+	margin: 9px 10px 0 0;
 }
 
 .static_label {
@@ -1538,6 +1537,7 @@ font-weight: bold;
 padding: 4px 5px 4px 5px;
 background-color: #f4f4f4;
 border: 1px solid #fff;
+box-shadow: 0 0 10px #e0e0e0;
 }
 
 .vle_form_label {
@@ -1550,10 +1550,12 @@ color: #666;
     border-radius: 4px;
     background-color: #fcfcfc;
     width: 75%;
+    box-shadow: inset 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .vle_info_element {
     padding: 4px 5px 4px 5px;  background-color: #F4F4F4;  border: 1px solid #FFF;
+    box-shadow: 0 0 10px #e0e0e0;
 }
 .vle_info_key_data {
     background-color: #C4C4C4;
