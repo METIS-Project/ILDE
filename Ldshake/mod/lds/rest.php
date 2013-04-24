@@ -107,14 +107,21 @@ function lds_data() {
         }
     }
 
-    $lds = LdSFactory::buildLdS(array(
+    $lds_data = array(
         'type' => $type,
         'title' => $title,
         'tags' => $tags['tags'],
         'doc' =>    array(
             'file' => $_FILES['design']['tmp_name']
         )
-    ));
+    );
+
+    if(isset($_FILES['design_imsld']))
+        if(!$_FILES['design_imsld']['error'])
+            $lds_data['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
+
+    $lds = LdSFactory::buildLdS($lds_data);
+
 
     $id = $lds->guid;
     $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
@@ -234,8 +241,12 @@ expose_function("ldsviewlist", "lds_view", array(), elgg_echo('ldsdata'), "GET",
 function lds_update($params) {
     global $API_QUERY;
 
-    if(isset($params[2]))
-        return lds_download($params);
+    if(isset($params[2])) {
+        if(is_numeric($params[2]))
+            return lds_download($params);
+        if($params[2] == 'imsld')
+            return lds_download($params);
+    }
 
     if(!isset($_FILES['design']) || !isset($_FILES['properties']))
         return array();
@@ -280,15 +291,20 @@ function lds_update($params) {
         }
     }
 
-    $lds = LdSFactory::updateLdS(array(
+    $update = array(
         'id' => $id,
         'type' => $type,
         'title' => $title,
         'tags' => $tags['tags'],
         'doc' =>    array(
-        'file' => $_FILES['design']['tmp_name']
-        )
-    ));
+            'file' => $_FILES['design']['tmp_name']
+        ));
+
+    if(isset($_FILES['design_imsld']))
+        if(!$_FILES['design_imsld']['error'])
+            $update['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
+
+    $lds = LdSFactory::updateLdS($update);
 
     $id = $lds->guid;
     $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');

@@ -143,7 +143,7 @@
             </ul>
         </form>
     <?php else: ?>
-        <p class="noresults"><?php echo T("Oops, no LdS here!") ?></p>
+        <p class="noresults"><?php echo T("Oops, no implementations here!") ?></p>
     <?php endif; ?>
 
 

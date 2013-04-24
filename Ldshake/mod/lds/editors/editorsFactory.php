@@ -686,10 +686,15 @@ class LdSFactory
         lds_contTools::markLdSAsViewed ($lds->guid);
         create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
-        OpenglmEditor::buildDocument(array(
+        $build = array(
             'lds' => $lds,
             'file' => $ldsparams['doc']['file']
-        ));
+        );
+
+        if(isset($ldsparams['doc']['file_imsld']))
+            $build['file_imsld'] = $ldsparams['doc']['file_imsld'];
+
+        OpenglmEditor::buildDocument($build);
 
         return $lds;
 
@@ -725,10 +730,15 @@ class LdSFactory
         lds_contTools::markLdSAsViewed ($lds->guid);
         create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
-        OpenglmEditor::updateDocument(array(
+        $update = array(
             'lds' => $lds,
             'file' => $ldsparams['doc']['file']
-        ));
+        );
+
+        if(isset($ldsparams['doc']['file_imsld']))
+            $update['file_imsld'] = $ldsparams['doc']['file_imsld'];
+
+        OpenglmEditor::updateDocument($update);
 
         return $lds;
 
@@ -747,6 +757,13 @@ class OpenglmEditor extends Editor {
 
         $document = new DocumentEditorObject($params['lds']->guid);
         $document->file_guid = $file->guid;
+
+        $filestorename = $params['lds']->guid.'_'.rand_str(64);
+        $file = Editor::getNewFile($filestorename);
+        if(isset($params['file_imsld']))
+            copy($params['file_imsld'], $file->getFilenameOnFilestore());
+
+        $document->ims_ld = $file->guid;
 
         //assign a random string to each directory
         $document->previewDir = rand_str(64);
@@ -772,6 +789,9 @@ class OpenglmEditor extends Editor {
         //$document->file_guid = $file->guid;
         $fullfilepath = Editor::getFullFilePath($document->file_guid);
         copy($params['file'], $fullfilepath);
+
+        $fullfilepath = Editor::getFullFilePath($document->ims_ld);
+        copy($params['file_imsld'], $fullfilepath);
 
         //TODO: update revision data
 
@@ -1420,7 +1440,7 @@ class GluepsManager
         $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&ldshakeToken={$sectoken}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
         $vars['editor'] = 'gluepsrest';
 
         return $vars;
