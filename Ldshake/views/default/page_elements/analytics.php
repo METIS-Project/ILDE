@@ -10,14 +10,15 @@ if (!preg_match('/localhost/', $_SERVER['HTTP_HOST'])):
 		'^193\.145\.56\.244$',
 		'^193\.145\.39', // Last part can be anything, WiFi connections from the UPF
 		'^127\.0\.0', //Localhost
+        '^192\.168', //Localhost
 	);
 	$regexp = implode('|', $excludedIPs);
-	//if (!preg_match("/($regexp)/", $_SERVER['REMOTE_ADDR'])):
+	if (!preg_match("/($regexp)/", $_SERVER['REMOTE_ADDR'])):
 ?>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-36286106-2']);
+  _gaq.push(['_setAccount', 'UA-40421532-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -28,6 +29,6 @@ if (!preg_match('/localhost/', $_SERVER['HTTP_HOST'])):
 
 </script>
 <?php 
-	//endif;
+	endif;
 endif;
 ?>
