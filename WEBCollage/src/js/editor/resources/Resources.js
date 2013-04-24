@@ -8,6 +8,10 @@ var Resources = {
     */
     updateDisplay: function() {
         Resources.generateResourceTable();
+        //We only show the new tool button if a class and LMS has been provided by ldshake
+        if (Loader.ldShakeMode==true && (DesignInstance.data.classObj.id =="" || DesignInstance.data.lmsObj.id=="")){
+            dijit.byId("buttonNewTool").domNode.style.display="none";
+        }
     },
 
     /**

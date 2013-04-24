@@ -470,10 +470,10 @@ var ParticipantManagement = {
                 dojo.byId("lms_elegido").innerHTML = "<b>" + DesignInstance.data.lmsObj.name + "</b>";
             }
             else{
-                dojo.style("tablaInfo","display","none");
-                dojo.byId("instancia_elegida").innerHTML =  "";
-                dojo.byId("clase_elegida").innerHTML = "";
-                dojo.style("createGluePSDesign","display","none");
+                if (Loader.ldShakeMode){
+                    //Hide the participant management tab
+                    dojo.style(dijit.byId("ParticipantesTab").controlButton.domNode,{display:"none"});
+                }
             }
         }
         ParticipantManagement.checkInstallation();

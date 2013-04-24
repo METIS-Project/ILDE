@@ -250,6 +250,10 @@ class DesignListResource {
         $design_json = json_encode($document_obj->design);
 
         if (isset($vle_info_obj->learningEnvironment->id)) {
+            //Check the le hasn't changed
+            if (isset($document_obj->instance->lmsObj->id) && strcmp($document_obj->instance->lmsObj->id, $vle_info_obj->learningEnvironment->id)!=0){
+                return new ResponseData(500, "The learningEnvironment id provided doesn't match the learningEnvironment id from the deploy", 'text/html');
+            }
             $document_obj->instance->lmsObj->id = $vle_info_obj->learningEnvironment->id;
         }
         if (isset($vle_info_obj->learningEnvironment->name)) {
@@ -257,6 +261,10 @@ class DesignListResource {
         }
 
         if (isset($vle_info_obj->course->id)) {
+            //Check the course hasn't changed
+            if (isset($document_obj->instance->classObj->id) && strcmp($document_obj->instance->classObj->id, $vle_info_obj->course->id)!=0){
+                return new ResponseData(500, "The course id provided doesn't match the course id from the deploy", 'text/html');
+            }
             $document_obj->instance->classObj->id = $vle_info_obj->course->id;
         }
         if (isset($vle_info_obj->course->name)) {
@@ -272,7 +280,10 @@ class DesignListResource {
             } else {
                 $participant->participantType = "student";
             }
-            array_push($document_obj->instance->participants, $participant);
+            if (!$this->existParticipant($document_obj->instance->participants, $participant->participantId)){
+                array_push($document_obj->instance->participants, $participant);
+            }
+
         }
 
         //Add the internal tools to the instance information
@@ -280,7 +291,9 @@ class DesignListResource {
             $tool = new stdClass();
             $tool->toolId = $toolId;
             $tool->toolName = $toolName;
-            array_push($document_obj->instance->vleTools, $tool);
+            if (!$this->existTool($document_obj->instance->vleTools, $tool->toolId)){
+                 array_push($document_obj->instance->vleTools, $tool);
+            }
         }
         
         //Add the external tools to the instance information
@@ -288,7 +301,9 @@ class DesignListResource {
             $tool = new stdClass();
             $tool->toolId = $toolId;
             $tool->toolName = $toolName;
-            array_push($document_obj->instance->vleTools, $tool);
+            if (!$this->existTool($document_obj->instance->vleTools, $tool->toolId)){
+                 array_push($document_obj->instance->vleTools, $tool);
+            }
         }
 
         $instance_json = json_encode($document_obj->instance);
@@ -330,6 +345,36 @@ class DesignListResource {
         $url = "http://" . $_SERVER['HTTP_HOST'] . ":" . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];
         $url_resource = $url . "/" . $docid;
         return $url_resource;
+    }
+    
+    /**
+     * Check if a participant is contained in an array of participants
+     * @param type $array Array of participants
+     * @param type $participantId Identifier of the participant to look for
+     * @return boolean The participant exists or not
+     */
+    private function existParticipant($array, $participantId){
+        foreach($array as $participant){
+            if(strcmp($participant->participantId, $participantId)==0){
+                return true;
+            }          
+        }
+        return false;
+    }
+    
+        /**
+     * Check if a tool is contained in an array of tools
+     * @param type $array Array of tools
+     * @param type $toolId Identifier of the tool to look for
+     * @return boolean The tool exists or not
+     */
+    private function existTool($array, $toolId){
+        foreach($array as $tool){
+            if(strcmp($tool->toolId, $toolId)==0){
+                return true;
+            }          
+        }
+        return false;
     }
 
 }

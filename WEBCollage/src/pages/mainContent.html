@@ -143,8 +143,8 @@
 						</tr>
 					</table>
 				</div>
-				<div id="elegirInstancia" dojoType="dijit.form.Button"
-					label="${participantes.botonSeleccionar}"></div>
+				<button id="elegirInstancia" dojoType="dijit.form.Button"
+					label="${participantes.botonSeleccionar}"></button>
 			</div>
 			<div dojoType="dijit.TitlePane"
 				title="${participantes.listadoAlumnos}"
@@ -156,8 +156,8 @@
 				<div id="numeroParticipantesElegidos" align="left"
 					style="padding: 6px;"></div>
 				<!--Botonón para actualizar el listado de participantes-->
-				<div dojoType="dijit.form.Button" id="actualizarParticipantes">
-					${participantes.botonActualizarListadoAlumnos}</div>
+				<button dojoType="dijit.form.Button" id="actualizarParticipantes">
+					${participantes.botonActualizarListadoAlumnos}</button>
 			</div>
 		</div>
 
@@ -219,7 +219,7 @@
 				<button iconClass="addButton" dojoType="dijit.form.Button"
 					onclick="ResourceManager.newDocument();">
 					${resources.newDoc}</button>
-				<button iconClass="addButton" dojoType="dijit.form.Button"
+				<button iconClass="addButton" dojoType="dijit.form.Button" id="buttonNewTool"
 					onclick="ResourceManager.newTool();">${resources.newTool}
 				</button>
 			</div>

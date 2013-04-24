@@ -284,7 +284,7 @@ class DesignResource {
                     $destination = $upload_directory . time() . "_" . $name;
                     $file = fopen($destination, "w");
                     $file = fwrite($file, $data);
-        
+                    //fclose($file);
                     $file_path = $destination;
                     $filename = basename($file_path);
 
