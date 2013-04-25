@@ -931,21 +931,26 @@ class RestEditor extends Editor
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
-        $response = \Httpful\Request::post($uri)
-            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->sendIt();
+        try {
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->body($post, 'multipart/form-data')
+                ->basicAuth('ldshake_default_user','LdS@k$1#')
+                ->sendIt();
 
-        $vars['editor'] = 'webcollagerest';
-        $vars['editor_label'] = 'WebCollage';
-        $doc_url = parse_url($response->raw_body);
-        $url_path = explode('/', $doc_url['path']);
-        $url_path_filtered = array();
-        foreach ($url_path as $up)
-            if(strlen($up))
-                $url_path_filtered[] = $up;
-        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+            $vars['editor'] = 'webcollagerest';
+            $vars['editor_label'] = 'WebCollage';
+            $doc_url = parse_url($response->raw_body);
+            $url_path = explode('/', $doc_url['path']);
+            $url_path_filtered = array();
+            foreach ($url_path as $up)
+                if(strlen($up))
+                    $url_path_filtered[] = $up;
+            $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
@@ -1421,28 +1426,36 @@ class GluepsManager
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 
-        $uri = "{$url}deploys";
-        $response = \Httpful\Request::post($uri)
-            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake','Ld$haK3')
-            ->sendIt();
+        try {
+            $uri = "{$url}deploys";
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->body($post, 'multipart/form-data')
+                ->basicAuth('ldshake','Ld$haK3')
+                ->sendIt();
 
-        $xmldoc = new DOMDocument();
-        $xmldoc->loadXML($response->raw_body);
-        $xpathvar = new Domxpath($xmldoc);
+            if($response.code != 200)
+                throw new Exception("Document load failed");
+            $xmldoc = new DOMDocument();
+            $xmldoc->loadXML($response->raw_body);
+            $xpathvar = new Domxpath($xmldoc);
 
-        $queryResult = $xpathvar->query('//deploy');
-        $doc_url = $queryResult->item(0)->getAttribute('id');
+            $queryResult = $xpathvar->query('//deploy');
+            $doc_url = $queryResult->item(0)->getAttribute('id');
 
-        $url_path = explode('/', $doc_url);
-        $url_path_filtered = array();
-        foreach ($url_path as $up)
-            if(strlen($up))
-                $url_path_filtered[] = $up;
-        $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+            $url_path = explode('/', $doc_url);
+            $url_path_filtered = array();
+            foreach ($url_path as $up)
+                if(strlen($up))
+                    $url_path_filtered[] = $up;
+            $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+        } catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url);
+        }
 
-        $vars = array();
+
+$vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
