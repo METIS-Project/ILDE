@@ -148,6 +148,8 @@ function ajax_submit (redirect)
 	//documents[currentTab].body = editor.getData();
 	var submitData = null;
     var save_url = "action/lds/save_editor";
+    var goto_url = $('#lds_edit_referer').val();
+    goto_url = baseurl + 'pg/lds';
 
     if(editorType == 'gluepsrest')
     {
@@ -174,6 +176,8 @@ function ajax_submit (redirect)
             course_id: course_id,
             implementation_helper_id: implementation_helper_id
         };
+
+        goto_url = baseurl + 'pg/lds/implementations';
 
     }
 	else if(editorType == 'webcollage')
@@ -222,6 +226,7 @@ function ajax_submit (redirect)
                 vle_id: vle_id,
                 course_id: course_id
             };
+            goto_url = baseurl + 'pg/lds/implementations';
         } else {
             submitData =
             {
@@ -290,12 +295,14 @@ function ajax_submit (redirect)
 
 				saveSharingOptions (function ()
 				{
-					window.location = $('#lds_edit_referer').val();
+					//window.location = $('#lds_edit_referer').val();
+                    window.location = goto_url;
 				});
 			}
 			else
 			{
-				window.location = $('#lds_edit_referer').val();
+				//window.location = $('#lds_edit_referer').val();
+                window.location = goto_url;
 			}
 		}
 	});
