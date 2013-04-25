@@ -681,6 +681,7 @@ actualizar.aviso=Aviso
 actualizar.aviso.info=Por favor, haz click antes en el botón elegir y selecciona una instalación y una clase
 
 participantes.obtenerparticipantes.cambios=¡Aviso! Se han detectado cambios en los participantes
+participantes.obtenerparticipantesLdshake.cambios=Aviso! Se ha actualizado la lista de participantes del diseño original debido a cambios en la composición de la clase
 participantes.editarinstalacion.error=Error inesperado a la hora de editar la instalación
 
 participantes.aviso=¡¡Aviso!!

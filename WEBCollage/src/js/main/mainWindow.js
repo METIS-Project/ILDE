@@ -62,8 +62,7 @@ dojo.addOnLoad(function() {
     }
     ParticipantManagement.init();
     ParticipantSelection.init();
-    LmsManagement.init();
-       
+    LmsManagement.init();   
     //Hide the webinstancecollage elements which can't be shown when it is contained in a iframe of ldshake
     if (Loader.ldShakeMode){
         dijit.byId("toolbar.exportmenu").domNode.style.display = "none";
@@ -71,7 +70,7 @@ dojo.addOnLoad(function() {
         dijit.byId("toolbar.exit").domNode.style.display = "none";
         dijit.byId("elegirInstancia").domNode.style.display = "none";
         dijit.byId("actualizarParticipantes").domNode.style.display = "none"; 
-        dijit.byId("LDTitle").domNode.style.display = "none";         
+        dijit.byId("LDTitle").domNode.style.display = "none";
     }
 });
 

@@ -270,22 +270,14 @@ class DesignListResource {
         if (isset($vle_info_obj->course->name)) {
             $document_obj->instance->classObj->name = $vle_info_obj->course->name;
         }
-
-        foreach ($vle_info_obj->course->participants as $p) {
-            $participant = new stdClass();
-            $participant->participantId = $p->id;
-            $participant->name = $p->name;
-            if (isset($p->isStaff) && strcmp($p->isStaff, "") != 0) {
-                $participant->participantType = "teacher";
-            } else {
-                $participant->participantType = "student";
-            }
-            if (!$this->existParticipant($document_obj->instance->participants, $participant->participantId)){
-                array_push($document_obj->instance->participants, $participant);
-            }
-
+        
+        //Update the participants info and the group composition
+        $participantChanges = $this->updateParticipantInfo($document_obj, $vle_info_obj);
+        //If there have been changes, we add a property so that the javascript code can know that fact and display an alert to the client
+        if ($participantChanges){
+            $document_obj->instance->participantChanges = true;
         }
-
+        
         //Add the internal tools to the instance information
         foreach ($vle_info_obj->learningEnvironment->internalTools as $toolId => $toolName){
             $tool = new stdClass();
@@ -345,6 +337,63 @@ class DesignListResource {
         $url = "http://" . $_SERVER['HTTP_HOST'] . ":" . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];
         $url_resource = $url . "/" . $docid;
         return $url_resource;
+    }
+    
+    /**
+     * Update the participants info in the document from the vle information
+     * @param type $document_obj The webcollage document object
+     * @param type $vle_info_obj The VLE object
+     * @return boolean There have been changes or not
+     */
+    function updateParticipantInfo($document_obj, $vle_info_obj){
+        $changes = true;
+        //Get the participants of the course
+        $courseParts = array();
+        foreach ($vle_info_obj->course->participants as $pc) {
+            $participant = new stdClass();
+            $participant->participantId = $pc->id;
+            $participant->name = $pc->name;
+            if (isset($pc->isStaff) && strcmp($pc->isStaff, "") != 0) {
+                $participant->participantType = "teacher";
+            } else {
+                $participant->participantType = "student";
+            }
+            array_push($courseParts, $participant);
+            /*if (!$this->existParticipant($document_obj->instance->participants, $participant->participantId)){
+                array_push($document_obj->instance->participants, $participant);
+            }*/
+        }
+        
+        //Get the id of the participants who disappear from the instance
+        $deleteParts = array();
+        foreach ($document_obj->instance->participants as $pi){
+            if (!$this->existParticipant($courseParts, $pi->participantId)){
+                array_push($deleteParts, $pi->participantId);
+            }
+        }
+        
+        if (count($deleteParts)==0 && count($courseParts)==count($document_obj->instance->participants)){
+            $changes = false;
+        }
+        
+        //Set the new participant list
+        $document_obj->instance->participants = array();
+        $document_obj->instance->participants = array_values($courseParts);
+       
+        //Delete from the groups the appearances of the participants who disappear
+        foreach ($deleteParts as $dp){
+            foreach ($document_obj->instance->groups as $group){
+                foreach($group->instances as $instance){
+                    for ($i=0; $i< count($instance->participants); $i++){
+                        if (strcmp($dp, $instance->participants[$i])==0){
+                            array_splice($instance->participants, $i, 1);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return $changes;
     }
     
     /**

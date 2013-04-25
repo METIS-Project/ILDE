@@ -680,6 +680,7 @@ actualizar.aviso=Warning
 actualizar.aviso.info=Please, click before on select button and choose an installation and a class
 
 participantes.obtenerparticipantes.cambios=Warning! Changes were detected in participants
+participantes.obtenerparticipantesLdshake.cambios=Warning! The participant list from the original design has been updated due to changes in the composition of the class
 participantes.editarinstalacion.error=Unexpected error while editing installation
 
 participantes.aviso=Warning!!

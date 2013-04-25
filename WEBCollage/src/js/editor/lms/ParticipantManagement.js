@@ -457,6 +457,13 @@ var ParticipantManagement = {
      */    
     updateDisplay: function(){
         
+        if (Loader.ldShakeMode && DesignInstance.data.participantChanges && DesignInstance.data.participantChanges==true){
+            ParticipantManagement.showDialogAlert(i18n.get("actualizar.aviso"),i18n.get("participantes.obtenerparticipantesLdshake.cambios"));
+            //An ugly way of doing things to avoid that the alert appears againg
+            DesignInstance.data.participantChanges = undefined;
+            Loader.save("");
+        }
+        
         if (DesignInstance.data!= null && DesignInstance.data.instObj.id!=""){
             dojo.style("tablaInfo","display","");
             dojo.byId("instancia_elegida").innerHTML = "<b>" + DesignInstance.data.instObj.name + "</b>";
