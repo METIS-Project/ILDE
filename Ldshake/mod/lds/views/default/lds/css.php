@@ -1588,3 +1588,7 @@ color: #666;
 .lds_close_popup {
     float: right;
 }
+
+#editimplementation_popup {
+    left: 20%;
+}

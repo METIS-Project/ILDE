@@ -108,14 +108,14 @@
                             <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action" href="<?php echo $url."pg/lds/implementeditor/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action lds_select_implement_action" lds="<?php echo "{$item->implementation->guid}" ?>" href="<?php echo $url."pg/lds/implementeditor/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
                                     <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
 						<!--<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->implementation, 'view') ?>"><?php echo $item->implementation->title ?></a>-->
                                     <span class="lds_title"><?php echo $item->implementation->title ?></span>
                                     <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
-					</span>
+					            </span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
                                 <?php if ($item->locked): ?>
                                     <span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
@@ -160,4 +160,17 @@
     <input type="text" name="new_implementation_title" />
 
     <input type="button" id="cloneimplementation_submit" />
+</div>
+
+<div id="editimplementation_popup" class="lds_popup">
+    <a class="lds_close_popup" id="editimplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Select the editor that you want to use to edit the implementation") ?></h3>
+
+        <div>
+            <a href="<?php echo $url.'pg/lds/implementeditor/'?>"><span class="editor-name">WebCollage</span></a>
+        </div>
+        <div>
+            <a href="<?php echo $url.'pg/lds/editglueps/'?>"><span class="editor-name">GLUE!-PS</span></a>
+        </div>
+
 </div>

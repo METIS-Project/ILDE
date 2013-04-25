@@ -132,6 +132,7 @@ class exeLearningEditor extends Editor
 		file('http://127.0.0.1/exelearning/?load='.$rand_id);
 		unlink($filename_editor);
 		$vars['editor'] = 'exe';
+        $vars['editor_label'] = 'eXeLearning';
 		$vars['editor_id'] = $rand_id;
 
 		return $vars;
@@ -392,9 +393,9 @@ XML;
 
         //variables for the edition window php
         $vars['editor'] = 'webcollage';
+        $vars['editor_label'] = 'WebCollage';
         $vars['file_editor'] = $filename_editor;
         $vars['editor_id'] = $rand_id;
-        $vars['editor'] = 'webcollage';
 
         return $vars;
     }
@@ -603,6 +604,7 @@ XML;
         file('http://127.0.0.1/webcollage/manager/loadXML.php?id='.$rand_id);
         unlink($filename_editor);
         $vars['editor'] = 'webcollage';
+        $vars['editor_label'] = 'WebCollage';
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -851,6 +853,7 @@ class RestEditor extends Editor
         $vars['document_url'] = "{$response->raw_body}";
         $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
 
         return $vars;
     }
@@ -878,6 +881,7 @@ class RestEditor extends Editor
             ->sendIt();
 
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
         $doc_url = parse_url($response->raw_body);
         $url_path = explode('/', $doc_url['path']);
         $url_path_filtered = array();
@@ -934,6 +938,7 @@ class RestEditor extends Editor
             ->sendIt();
 
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
         $doc_url = parse_url($response->raw_body);
         $url_path = explode('/', $doc_url['path']);
         $url_path_filtered = array();
@@ -1442,6 +1447,7 @@ class GluepsManager
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
         $vars['editor'] = 'gluepsrest';
+        $vars['editor_label'] = 'GLUE!-PS';
 
         return $vars;
     }
@@ -1509,6 +1515,7 @@ class GluepsManager
         //file('http://127.0.0.1/exelearning/?load='.$rand_id);
         //unlink($filename_editor);
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
         $vars['document_url'] = $response->raw_body;
         $vars['editor_id'] = $rand_id;
 
@@ -1587,6 +1594,7 @@ class GluepsManager
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&ldshakeToken={$sectoken}";
         $vars['editor'] = 'gluepsrest';
+        $vars['editor_label'] = 'GLUE!-PS';
 
         return $vars;
     }
@@ -1650,6 +1658,7 @@ class GluepsManager
         //file('http://127.0.0.1/exelearning/?load='.$rand_id);
         //unlink($filename_editor);
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
         $vars['document_url'] = $response->raw_body;
         $vars['editor_id'] = $rand_id;
 
@@ -1680,6 +1689,7 @@ class GluepsManager
         //file('http://127.0.0.1/exelearning/?load='.$rand_id);
         //unlink($filename_editor);
         $vars['editor'] = 'webcollagerest';
+        $vars['editor_label'] = 'WebCollage';
         $vars['document_url'] = $response->raw_body;
         $vars['editor_id'] = $rand_id;
 

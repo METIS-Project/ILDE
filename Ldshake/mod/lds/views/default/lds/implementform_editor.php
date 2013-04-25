@@ -104,7 +104,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
                     <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
-                    <li class="lds_exetab"> <?php echo T("WebCollage") ?></li>
+                    <li class="lds_exetab"> <?php echo $editor_label ?></li>
 
                 </ul>
             </div>

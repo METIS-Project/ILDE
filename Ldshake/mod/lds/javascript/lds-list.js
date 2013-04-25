@@ -47,6 +47,18 @@ $(document).ready(function()
     height_correction();
     $(window).resize(height_correction);
 
+    $(".lds_select_implement_action").click(function (event) {
+        event.preventDefault();
+        window.implement_lds = $(this).attr('lds');
+        $("#editimplementation_popup").fadeToggle(200);
+    });
+
+    $("#editimplementation_popup a").click(function (event) {
+        event.preventDefault();
+        var editor = $(this).attr('href');
+        window.location = editor+window.implement_lds;
+    });
+
     $('#filter_by_design').change(function (){
         var guid = $(this).val();
         window.location = baseurl + 'pg/lds/implementations/design/'+guid;
@@ -151,7 +163,7 @@ $(document).ready(function()
     });
 
     $('.lds_close_popup').click(function () {
-        $('#clonelds_popup, .lds_popup').fadeToggle(200);
+        $('#clonelds_popup, .lds_popup').fadeOut(200);
     });
 
         //Delete LdS
