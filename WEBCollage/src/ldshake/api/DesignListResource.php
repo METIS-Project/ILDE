@@ -248,10 +248,16 @@ class DesignListResource {
         //Set the proper design title
         $document_obj->design->title = $title;
         $design_json = json_encode($document_obj->design);
-
+        
+        if (isset($document_obj->instance->lmsObj->id) && strcmp($document_obj->instance->lmsObj->id,"")!=0){
+            $lmsObj_had_id = true;
+        }else{
+            $lmsObj_had_id = false;
+        }
+        
         if (isset($vle_info_obj->learningEnvironment->id)) {
             //Check the le hasn't changed
-            if (isset($document_obj->instance->lmsObj->id) && strcmp($document_obj->instance->lmsObj->id, $vle_info_obj->learningEnvironment->id)!=0){
+            if ($lmsObj_had_id && strcmp($document_obj->instance->lmsObj->id, $vle_info_obj->learningEnvironment->id)!=0){
                 return new ResponseData(500, "The learningEnvironment id provided doesn't match the learningEnvironment id from the deploy", 'text/html');
             }
             $document_obj->instance->lmsObj->id = $vle_info_obj->learningEnvironment->id;
@@ -259,10 +265,9 @@ class DesignListResource {
         if (isset($vle_info_obj->learningEnvironment->name)) {
             $document_obj->instance->lmsObj->name = $vle_info_obj->learningEnvironment->name;
         }
-
         if (isset($vle_info_obj->course->id)) {
             //Check the course hasn't changed
-            if (isset($document_obj->instance->classObj->id) && strcmp($document_obj->instance->classObj->id, $vle_info_obj->course->id)!=0){
+            if (isset($document_obj->instance->classObj->id) && strcmp($document_obj->instance->classObj->id,"")!=0 && strcmp($document_obj->instance->classObj->id, $vle_info_obj->course->id)!=0){
                 return new ResponseData(500, "The course id provided doesn't match the course id from the deploy", 'text/html');
             }
             $document_obj->instance->classObj->id = $vle_info_obj->course->id;
@@ -273,8 +278,8 @@ class DesignListResource {
         
         //Update the participants info and the group composition
         $participantChanges = $this->updateParticipantInfo($document_obj, $vle_info_obj);
-        //If there have been changes, we add a property so that the javascript code can know that fact and display an alert to the client
-        if ($participantChanges){
+        //If there have been changes and there was a lms already selected, we add a property so that the javascript code can know that fact and display an alert to the client
+        if ($participantChanges && $lmsObj_had_id){
             $document_obj->instance->participantChanges = true;
         }
         
