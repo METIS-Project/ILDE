@@ -30,7 +30,7 @@ if (isset($_REQUEST["_route_"]))
         {
             if (is_numeric($route_array[1]))
             {
-                //echo "/webcollage2/ldshake/ldsdoc{document_id}";
+                //echo "/webcollage2/ldshake/ldsdoc/{document_id}";
                 $method = $data->getMethod();
                 $document_id = $route_array[1];
                 $content_type = $data->getHttpAccept();
@@ -57,7 +57,13 @@ if (isset($_REQUEST["_route_"]))
             {
                 if (strcmp($route_array[2],"summary")==0)
                 {
-                    echo "/webcollage2/ldshake/ldsdoc{document_id}/summary";
+                    //echo "/webcollage2/ldshake/ldsdoc/{document_id}/summary";
+                    $method = $data->getMethod();
+                    $document_id = $route_array[1];
+                    $content_type = $data->getHttpAccept();
+                    $designResource = new DesignResource($method, $document_id, $content_type, null, true);
+                    $response = $designResource->exec();
+                    RestUtils::sendResponse($response->getStatus(), $response->getBody(), $response->getContentType());
                 }
                 if (strcmp($route_array[2],"diff")==0)
                 {
