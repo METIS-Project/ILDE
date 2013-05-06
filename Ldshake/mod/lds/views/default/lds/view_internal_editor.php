@@ -225,6 +225,12 @@ function encodeURIComponent($str) {
 	</div>
 	<?php endif; ?>
     -->
+
+    <?php if(isset($upload)): ?>
+        <div id="lds_export">
+            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($currentDoc->upload_filename) ?>" style="float: left;"><?php echo T("Download binary file") ?></a>
+        </div>
+    <?php endif; ?>
 	
 <div id="payload">
 	<?php

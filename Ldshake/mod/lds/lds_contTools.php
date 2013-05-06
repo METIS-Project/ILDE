@@ -1460,7 +1460,9 @@ SQL;
 
     public static function LdSUserEditRights($lds_id, $user_id) {
 
-        $subtype = get_subtype_id('object', 'LdS');
+        $entity = get_entity($lds_id);
+        //$subtype = get_subtype_id('object', 'LdS');
+        $subtype = $entity->subtype;
 
         $query = <<<SQL
 SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND e.guid = {$lds_id} AND (

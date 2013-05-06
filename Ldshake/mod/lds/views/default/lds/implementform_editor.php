@@ -203,6 +203,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     var course_id = "<?php echo $course_id ?>";
     var implementation_helper_id = "<?php echo $implementation_helper_id ?>";
     var implementation = true;
+    var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
     friends['available'] = <?php echo $jsonfriends ?>;
     friends['viewers'] = <?php echo $viewers ?>;
     friends['editors'] = <?php echo $editors ?>;

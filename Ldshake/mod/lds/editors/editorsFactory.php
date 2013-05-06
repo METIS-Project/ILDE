@@ -631,6 +631,10 @@ class EditorsFactory
 			return new exeLearningEditor($document);
         if($document->editorType == 'webcollagerest')
             return new RestEditor($document);
+        if($document->editorType == 'openglm')
+            return new UploadEditor($document);
+        if($document->editorType == 'cadmos')
+            return new UploadEditor($document);
 	}
 
     public static function getManager($lds)
@@ -653,6 +657,10 @@ class EditorsFactory
 			return new exeLearningEditor(null);
         if($editorType == 'webcollagerest')
             return new RestEditor(null);
+        if($editorType == 'openglm')
+            return new UploadEditor(null, $editorType);
+        if($editorType == 'cadmos')
+            return new UploadEditor(null, $editorType);
 	}
 }
 
@@ -1205,6 +1213,335 @@ class RestEditor extends Editor
     }
 }
 
+class UploadEditor extends Editor
+{
+    public $document_url;
+    private $_editorType;
+
+    public function getDocumentId()
+    {
+        return $this->_document->guid;
+    }
+
+    //load an empty data file to start a new document
+    public function newEditor()
+    {
+        global $CONFIG;
+        $user = get_loggedin_user();
+        $rand_id = rand_str(64);//mt_rand(1000000,5000000);
+
+        $vars['editor_id'] = 0;
+
+        $vars['document_url'] = null;
+        $vars['document_iframe_url'] = null;
+        $vars['editor'] = $this->_editorType;
+        $vars['editor_label'] = 'File Upload';
+
+        return $vars;
+    }
+
+    //load the document into the exelearning server
+    public function editDocument()
+    {
+        global $CONFIG;
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = rand_str(64);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $vars['editor'] = $this->_document->editorType;
+        $vars['editor_label'] = '';
+        $vars['document_url'] = null;
+        $vars['document_iframe_url'] = null;
+        $vars['editor_id'] = 0;
+        $vars['upload'] = true;
+
+        return $vars;
+    }
+
+    public function putImplementation($params)
+    {
+        global $CONFIG;
+        $vle = $params['vle'];
+        $gluepsm = new GluepsManager($vle);
+        $vle_info = $gluepsm->getVleInfo();
+        $course_info = $gluepsm->getCourseInfo($params['course_id']);
+        $vle_info->id = $vle->guid;
+        $vle_info->name = $vle->name;
+        $wic_vle_data = array(
+            'learningEnvironment' => $vle_info,
+            'course' => $course_info
+        );
+
+        $json_wic_vle_data = json_encode($wic_vle_data);
+
+        $putData = tmpfile();
+        fwrite($putData, $json_wic_vle_data);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+        $rand_id = rand_str(64);
+        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $post = array(
+            'lang' => 'en',
+            'sectoken' => $rand_id,
+            'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
+            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+        );
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        try {
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->body($post, 'multipart/form-data')
+                ->basicAuth('ldshake_default_user','LdS@k$1#')
+                ->sendIt();
+
+            $vars['editor'] = 'webcollagerest';
+            $vars['editor_label'] = 'WebCollage';
+            $doc_url = parse_url($response->raw_body);
+            $url_path = explode('/', $doc_url['path']);
+            $url_path_filtered = array();
+            foreach ($url_path as $up)
+                if(strlen($up))
+                    $url_path_filtered[] = $up;
+            $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+        } catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+        }
+
+        $this->_rest_id = $doc_id;
+        $vars['document_url'] = "{$response->raw_body}";
+        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        $vars['editor_id'] = $rand_id;
+
+        return $vars;
+    }
+
+    //function to export a document to a given format and return the file guid
+    public function saveNewExportDocument($docSession, $format)
+    {
+        global $CONFIG;
+        $filestorename = rand_str(32).'.zip';
+        $file = $this->getNewFile($filestorename);
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type='.$format.'&filename='.$docSession);
+        copy($CONFIG->exedata.'export/'.$docSession.'.zip', $file->getFilenameOnFilestore());
+        exec('rm --interactive=never '.$CONFIG->exedata.'export/'.$docSession.'.zip');
+        return $file->guid;
+    }
+
+    //update the exported documents
+    public function updateExportDocument($file_guid, $docSession, $format)
+    {
+        global $CONFIG;
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type='.$format.'&filename='.$docSession);
+        copy($CONFIG->exedata.'export/'.$docSession.'.zip', $this->getFullFilePath($file_guid));
+        exec('rm --interactive=never '.$CONFIG->exedata.'export/'.$docSession.'.zip');
+        return true;
+    }
+
+    public function calcHash($docSession)
+    {
+        global $CONFIG;
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=hashPage');
+        $hash = sha1_file($CONFIG->exedata.'export/hashPage/'.$docSession.'/index.html');
+        if(strlen((string)$docSession) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->exedata.'export/hashPage/'.$docSession);
+        return $hash;
+    }
+
+    //update the published documents
+    public function updatePublish()
+    {
+        global $CONFIG;
+        copy($this->getFullFilePath($this->_document->ims_ld), $this->getFullFilePath($this->_document->pub_ims_ld));
+        copy($this->getFullFilePath($this->_document->scorm), $this->getFullFilePath($this->_document->pub_scorm));
+        copy($this->getFullFilePath($this->_document->scorm2004), $this->getFullFilePath($this->_document->pub_scorm2004));
+        copy($this->getFullFilePath($this->_document->webZip), $this->getFullFilePath($this->_document->pub_webZip));
+        if(strlen((string)$this->_document->pub_previewDir) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
+        exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
+    }
+
+    //copy the published documents to the new revision
+    public function publishedRevision($revision)
+    {
+        $revision->pub_ims_ld = $this->_document->pub_ims_ld;
+        $revision->pub_scorm = $this->_document->pub_scorm;
+        $revision->pub_scorm2004 = $this->_document->pub_scorm2004;
+        $revision->pub_webZip = $this->_document->pub_webZip;
+        $revision->pub_previewDir = $this->_document->pub_previewDir;
+    }
+
+    //create a directory with the preview for the new revision
+    public function revisionPreview($revision)
+    {
+        global $CONFIG;
+        exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$revision->previewDir);
+
+        return true;
+    }
+
+    public function saveNewDocument($params = null)
+    {
+        global $CONFIG;
+
+        //save the contents
+        $docSession = $params['editor_id'];
+
+        $resultIds = new stdClass();
+        $user = get_loggedin_user();
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        $file_origin = Editor::getFullFilePath($docSession);
+        copy($file->getFilenameOnFilestore(), $file_origin);
+        $this->_document->file_guid = $file->guid;
+        $this->_document->upload_filename = $file->upload_filename;
+        $this->_document->save();
+
+        /*
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id.'.zip';
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
+        $this->_document->file_imsld_guid = $file->guid;
+        $this->_document->save();
+        */
+
+        //assign a random string to each directory
+        $this->_document->previewDir = rand_str(64);
+        $this->_document->pub_previewDir = rand_str(64);
+        $this->_document->revisionDir = rand_str(64);
+
+        $this->_document->rev_last = 0;
+        $this->_document->lds_revision_id = 0;
+
+        $resultIds->guid = $this->_document->lds_guid;
+        $resultIds->file_guid = $this->_document->file_guid;
+
+        $this->_document->save();
+
+        return array($this->_document, $resultIds);
+    }
+
+    public function cloneDocument($lds)
+    {
+        global $CONFIG;
+
+        $rand_id = mt_rand(400,9000000);
+
+        $clone = new DocumentEditorObject($lds);
+
+        $file_origin = Editor::getFullFilePath($this->_document->file_guid);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        copy($file_origin, $file->getFilenameOnFilestore());
+
+        $clone->file_guid = $file->guid;
+        $clone->editorType = $this->_document->editorType;
+        $clone->save();
+
+        //assign a random string to each directory
+        $clone->previewDir = rand_str(64);
+        $clone->pub_previewDir = rand_str(64);
+        $clone->revisionDir = rand_str(64);
+
+        $clone->rev_last = 0;
+        $clone->lds_revision_id = 0;
+
+        $clone->save();
+
+        create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        return array($clone);
+    }
+
+    public function unload($docSession)
+    {
+        //file('http://127.0.0.1/exelearning/?unload='. $docSession);
+    }
+
+    public function saveDocument($params=null)
+    {
+        if($this->_document->file_guid)
+            $this->saveExistingDocument($params);
+        else
+            $this->saveNewDocument($params);
+    }
+
+    //update the previous contents
+    public function saveExistingDocument($params=null)
+    {
+        global $CONFIG;
+        $user = get_loggedin_user();
+        $resultIds = new stdClass();
+        $docSession = $params['editor_id'];
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $file_origin = Editor::getFullFilePath($docSession);
+        copy($file_origin, Editor::getFullFilePath($this->_document->file_guid));
+
+        $old_previewDir = $this->_document->previewDir;
+        $this->_document->previewDir = rand_str(64);
+        $file = get_entity($docSession);
+        $this->_document->upload_filename = $file->upload_filename;
+
+
+        /*
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
+        exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
+        if(strlen((string)$docSession) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->exedata.'export/singlePage/'.$docSession);
+        if(strlen((string)$old_previewDir) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$old_previewDir);
+
+
+        $this->updateExportDocument($this->_document->ims_ld, $docSession, 'IMS');
+        $this->updateExportDocument($this->_document->scorm, $docSession, 'scorm');
+        $this->updateExportDocument($this->_document->scorm2004, $docSession, 'scorm2004');
+        $this->updateExportDocument($this->_document->webZip, $docSession, 'zipFile');
+
+        */
+        $revisions = get_entities_from_metadata('document_guid',$this->_document->guid,'object','LdS_document_editor_revision',0,10000,0,'time_created');
+        $resultIds->count = count($revisions);
+
+        //create the diff content against the last saved revision
+        if(count($revisions) > 0)
+        {
+            /*
+            $output = array();
+            exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py".' '.$CONFIG->editors_content.'content/exe/'.$revisions[count($revisions)-1]->previewDir.'/index.html'.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/index.html', $output);
+            $diff = implode('', $output);
+            //insert an inline style definition to highlight the differences
+            $diff = str_replace("<del", "<del style=\"background-color: #fcc;display: inline-block;text-decoration: none;\" ", $diff);
+            $diff = str_replace("<ins", "<ins style=\"background-color: #cfc;display: inline-block;text-decoration: none;\" ", $diff);
+            $handle = fopen($CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/diff.html', "w");
+            fwrite($handle, $diff);
+            fclose($handle);
+            */
+        }
+
+        $this->_document->save();
+
+        return array($this->_document, $resultIds);
+    }
+
+    public function __construct($document=null, $editorType = null)
+    {
+        $this->_document = $document;
+        $this->_editorType = $editorType;
+    }
+}
+
 class GluepsManager
 {
     public $lds;
@@ -1434,7 +1771,7 @@ class GluepsManager
                 ->basicAuth('ldshake','Ld$haK3')
                 ->sendIt();
 
-            if($response.code != 200)
+            if($response->code != 200)
                 throw new Exception("Document load failed");
             $xmldoc = new DOMDocument();
             $xmldoc->loadXML($response->raw_body);

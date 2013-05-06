@@ -44,7 +44,7 @@
     foreach($vle_info->courses as $key=>$name):
     ?>
     <div>
-        <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo 25?>" /><span class="course-name"><?php echo $name;?></span>
+        <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $name;?></span>
     </div>
     <?php endforeach; ?>
     <input type="text" name="new_implementation_title" />

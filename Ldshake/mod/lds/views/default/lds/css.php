@@ -1592,3 +1592,9 @@ color: #666;
 #editimplementation_popup {
     left: 20%;
 }
+
+#upload_result{
+    border-width: 0px;
+    width: 0px;
+    height: 0px;
+}

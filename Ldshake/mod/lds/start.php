@@ -85,6 +85,8 @@ function lds_init()
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
+    register_action("lds/pre_upload", false, $CONFIG->pluginspath . "lds/actions/lds/pre_upload.php");
+
     register_action("lds/save_glueps", false, $CONFIG->pluginspath . "lds/actions/lds/save_glueps.php");
 
 	register_action("lds/save", false, $CONFIG->pluginspath . "lds/actions/lds/save.php");
@@ -119,7 +121,7 @@ function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
 
     //if ($subtype == 'LdS' || $params['entity']->getSubtype() == 'LdS_document' || $params['entity']->getSubtype() == 'LdS_document_editor') {
 
-    if ($subtype == 'LdS') {
+    if ($subtype == 'LdS' || $subtype == 'LdS_implementation') {
         return lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
     }
 }
@@ -333,7 +335,9 @@ function lds_exec_implementable ($params)
     if($user->vle) {
         $vle = get_entity($user->vle);
         $gluepsm = new GluepsManager($vle);
+        $vars['vle_id'] = $vle->guid;
         $vars['vle_info'] = $gluepsm->getVleInfo();
+
     }
 
     //$vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
@@ -618,9 +622,18 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
     if(count($params) == 3) {
-        $vars['initDocuments'][0]->body = get_coursemap_pattern();
-        $vars['editor_type'] = 'coursemap';
+        switch($params[2]) {
+            case 'pattern':
+                $vars['initDocuments'][0]->body = get_coursemap_pattern();
+                $vars['editor_type'] = 'coursemap';
+                break;
+            case 'upload':
+                $vars['initDocuments'][0]->body = '';
+                $vars['editor_type'] = $params[3];
+                break;
+        }
     }
+
 
 	//And a support doc!
 	$vars['initDocuments'][1] = new stdClass();
@@ -645,6 +658,63 @@ function lds_exec_new ($params)
     $vars['title'] = T("New LdS");
 
     echo elgg_view('lds/editform',$vars);
+}
+
+function lds_exec_upload ($params)
+{
+    global $CONFIG;
+
+    require_once __DIR__.'/patterns/coursemap.php';
+
+
+    $editor = editorsFactory::getTempInstance($params[1]);
+    $vars = $editor->newEditor();
+
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    $vars['referer'] = $CONFIG->url.'pg/lds/';
+
+    //Create an empty LdS object to initialize the form
+    $vars['initLdS'] = new stdClass();
+    $vars['initLdS']->title = T("Untitled LdS");
+    $vars['initLdS']->granularity = '0';
+    $vars['initLdS']->completeness = '0';
+    $vars['initLdS']->tags = '';
+    $vars['initLdS']->discipline = '';
+    $vars['initLdS']->pedagogical_approach = '';
+    $vars['initLdS']->guid = '0';
+
+    $vars['am_i_starter'] = true;
+
+    $vars['all_can_read'] = 'true';
+
+    $vars['initLdS'] = json_encode($vars['initLdS']);
+
+    //Add a support doc!
+    $vars['initDocuments'][0] = new stdClass();
+    $vars['initDocuments'][0]->title = T("Support Document");
+    $vars['initDocuments'][0]->guid = '0';
+    $vars['initDocuments'][0]->modified = '0';
+    $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
+
+    $vars['editor_type'] = $params[1];
+    $vars['upload'] = true;
+
+    $vars['initDocuments'] = json_encode($vars['initDocuments']);
+
+    $vars['tags'] = json_encode(lds_contTools::getMyTags ());
+
+    $available = lds_contTools::getAvailableUsers(null);
+
+    $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
+    $vars['viewers'] = json_encode(array());
+    $vars['editors'] = json_encode(array());
+    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+
+    $vars['starter'] = get_loggedin_user();
+
+    $vars['title'] = T("New LdS");
+
+    echo elgg_view('lds/editform_editor',$vars);
 }
 
 function lds_exec_neweditor ($params)
@@ -1135,10 +1205,18 @@ function lds_exec_implementeditor($params)
     //make an editor object with the document that we want to edit
     $editor = EditorsFactory::getInstance($editordocument[0]);
 
-    $user = get_loggedin_user();
-    if($user->vle) {
-        $vle = get_entity($user->vle);
+    /*
+    if(!($vle = $editLdS->vle)) {
+        $owner = get_entity($vars['vle_id']);
+        $vle = $owner->vle;
+    }
+    */
+
+    if($vle = get_entity($vars['vle_id'])) {
         $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle));
+    } else {
+        register_error("VLE error");
+        forward($CONFIG->url.'pg/lds/');
     }
 
     $vars = $vars + $vars_editor;
@@ -1252,9 +1330,8 @@ function lds_exec_editglueps($params)
     $vars['implementation_helper_id'] = '0';
 
     $user = get_loggedin_user();
-    if($user->vle) {
-        $vle = get_entity($user->vle);
-        $vars['vle_id'] = $vle->guid;
+    $vars['vle_id'] = $editLdS->vle_id;
+    if($vle = get_entity($vars['vle_id'])) {
         if(!$editordocument) {
             $gluepsm = new GluepsManager($vle);
             $editordocument = get_entities_from_metadata_multi(array(
@@ -1268,6 +1345,9 @@ function lds_exec_editglueps($params)
             $vars_glueps = $gluepsm->editDocument(array('course'=>$editLdS->course_id, 'title' => $editLdS->title));
         }
         $vars = $vars + $vars_glueps;
+    } else {
+        register_error(T("VLE error"));
+        forward($CONFIG->url.'pg/lds/');
     }
 
     echo elgg_view('lds/implementform_editor',$vars);
@@ -1571,6 +1651,14 @@ function lds_exec_vieweditor ($params)
 
 	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
 
+    switch($editordocument->editorType) {
+        case 'openglm':
+            $vars['upload'] = true;
+            break;
+        default:
+            $vars['upload'] = false;
+
+    }
 	$vars['editor'] = $editordocument[0]->editorType;
 
 	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);

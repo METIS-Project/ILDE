@@ -151,6 +151,18 @@ function ajax_submit (redirect)
     var goto_url = $('#lds_edit_referer').val();
     goto_url = baseurl + 'pg/lds';
 
+    if(upload) {
+        if(!parseInt(editor_id)) {
+            $("#upload_result").unbind('load');
+            $("#upload_result").load(function() {
+                editor_id = $("#upload_result").contents().find("body").text();
+                ajax_submit(true);
+            });
+            $("#file_upload_form").submit();
+            return true;
+        }
+    }
+
     if(editorType == 'gluepsrest')
     {
         save_url = "action/lds/save_glueps";
@@ -199,10 +211,7 @@ function ajax_submit (redirect)
 			editorType: editorType,
 			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
 		};
-	}
-	
-	else//if(editorType == 'exe')
-	{
+	} else {
         documents[currentTab].body = editor.getData();
 
         if(implementation) {
@@ -241,7 +250,7 @@ function ajax_submit (redirect)
                 editor_id: editor_id,
                 editorType: editorType,
                 documents: documents,
-                document_url: document_url,
+                document_url: document_url
             };
         }
 
@@ -382,7 +391,11 @@ function loadData ()
         $('#lds_edit_tabs li.lds_newtab').before ('<li class="lds_tab"><span class="lds_tab_title">' + documents[i].title + '</span> <span class="lds_tab_options">▲</span></li>');
 
     //Highlight the first one and fill the ckeditor
-    $('#lds_edit_tabs li.lds_exetab').addClass('current');
+    if(!upload)
+        $('#lds_edit_tabs li.lds_exetab').addClass('current');
+    else
+        $('#lds_edit_tabs li.lds_tab:first-child').addClass('current');
+
     editor.setData (documents[0].body);
 
     $('#lds_edit_tabs li.lds_tab').click(function () {

@@ -162,12 +162,14 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 			<?php include ('single_share_form.php') ?>
 		</form>
 	</div>
-	<div id="lds_edit_tabs_popup">
+
+    <div id="lds_edit_tabs_popup">
 		<ul>
 			<li><a href="#" id="lds_edit_rename_tab"><?php echo T("Rename this document") ?></a></li>
 			<li><a href="#" id="lds_edit_delete_tab"><?php echo T("Delete this document") ?></a></li>
 		</ul>
 	</div>
+
 </div>
 <div class="clearfloat"></div>
 </div><!-- /#page_wrapper -->

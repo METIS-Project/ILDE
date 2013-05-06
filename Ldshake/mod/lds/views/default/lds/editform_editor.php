@@ -43,7 +43,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
 <div id="layout_canvas">
 	<div id="one_column" style="padding-bottom:0 !important">
-		<form id="lds_edit_form" action="<?php echo $url ?>" method="post">
+		<div id="lds_edit_form" action="<?php echo $url ?>" method="post">
 			<input type="hidden" id="lds_edit_guid" name="guid" value="0" />
 			<input type="hidden" id="lds_edit_revision" name="revision" value="0" />
 			<input type="hidden" id="lds_edit_referer" name="referer" value="<?php echo $referer ?>" />
@@ -82,9 +82,19 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 						<?php echo T("Tags") ?>: <span class="tooltip"><?php echo T("Click here to add tags to the LdS") ?></span><span id="lds_edit_tags_list"></span>
 					</div>
 				</div>
-			</div>
+                <?php if(isset($upload)):?>
+                <form id="file_upload_form" name="file_upload_name" target="upload_result_name" action="<?php echo $url.'action/lds/pre_upload' ?>" method="POST" enctype="multipart/form-data" >
+                    <input name="file" id="file_input" size="50" type="file" />
+                </form>
+                <?php endif; ?>
+
+            </div>
 			<div id="lds_edit_contents">
+                <?php if(!isset($upload)): ?>
                 <div id="rich_text_box" style="display: none;">
+                <?php else: ?>
+                <div id="rich_text_box" style="display: block;">
+                <?php endif; ?>
                 <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
 				</div>
                 <!--
@@ -95,22 +105,24 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
 				<?php endif; ?>
 				-->
-
+                <?php if(!isset($upload)): ?>
                 <iframe id="lds_editor_iframe" src="<?php echo $document_iframe_url; ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
-					
+                <?php endif; ?>
+
 			</div>
             <div id="lds_edit_tabs" class="scrollable">
                 <?php /** Botonets de scroll **/ ?>
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
                     <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
+                    <?php if(!isset($upload)): ?>
                     <li class="lds_exetab"> <?php echo T("WebCollage") ?></li>
-
+                    <?php endif; ?>
                 </ul>
             </div>
 			<br>
-	
-			<!-- Hidden stuff -->
+
+            <!-- Hidden stuff -->
 			<div id="shade" style="display:block;"></div>
 			
 			<div id="lds_loading_contents"><?php echo T("Loading...") ?></div>
@@ -176,8 +188,11 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 			</div>
 			
 			<?php include ('single_share_form.php') ?>
-		</form>
+		</div>
 	</div>
+
+    <iframe id="upload_result" name="upload_result_name"></iframe>
+
 </div>
 
 <div class="clearfloat"></div>
@@ -199,6 +214,8 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var documents = <?php echo $initDocuments ?>;
         var document_url = "<?php echo $document_url ?>";
         var implementation = false;
+        var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
+
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;
 		friends['editors'] = <?php echo $editors ?>;

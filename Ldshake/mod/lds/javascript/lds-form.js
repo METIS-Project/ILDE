@@ -146,7 +146,7 @@ function ajax_submit (redirect)
 	
 	//Put the current editor data in the array before sending it
 	documents[currentTab].body = editor.getData();
-	
+
 	var submitData = 
 	{
 		guid: $('#lds_edit_guid').val(),
@@ -161,7 +161,7 @@ function ajax_submit (redirect)
         editor_type: editor_type
     };
 
-	$.post (baseurl + "action/lds/save", submitData, function (data)
+    $.post (baseurl + "action/lds/save", submitData, function (data)
 	{
 		if (redirect == false)
 		{
