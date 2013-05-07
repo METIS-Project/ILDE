@@ -617,7 +617,7 @@ class DesignResource {
             $file = fopen($dest_sf, "w");
             fwrite($file, $html);
             fclose($file);
-            $zip->addFile($dest_sf, "summary.html");
+            $zip->addFile($dest_sf, "index.html");
 
             //Add the student and teacher images
             $zip->addFile("../images/students.png", "images/students.png");
