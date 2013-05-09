@@ -658,7 +658,7 @@ function tabs()
                 $('#lds_editor_iframe').fadeOut(200, function() {
                     $('#rich_text_box').show(200,function() {resizeCK();});
                 });
-            });
+            }).click();
         }
     });
 

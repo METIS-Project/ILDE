@@ -115,13 +115,51 @@ $(document).ready(function()
 
     $('#new_menu_implement').mouseleave(function (e)
     {
-        $nm = $('#tb_new_option_implement')
+        $nm = $('#tb_new_option_implement');
         var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
         var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
 
         if(!evalX || !evalY) {
             $(this).fadeOut(200);
             $('#tb_new_option_implement')
+                .css('background-color', '')
+                .css('color', '');
+        }
+    });
+
+    $('#tb_new_option_conceptualize').mouseenter(function (e)
+    {
+        var menuOffsetX = $(e.target.parentElement.parentElement).position().left;
+        var menuOffsetY = $(e.target.parentElement.parentElement).position().top;
+        $('#new_menu_conceptualize').css('top', $(e.target).position().top + menuOffsetY + 5);
+        $('#new_menu_conceptualize').css('left', $(e.target).outerWidth() + menuOffsetX - 5);
+
+        $('#new_menu_conceptualize').fadeIn(200);
+    }).mouseleave(function (e)
+    {
+        var $nm = $('#new_menu_conceptualize');
+
+        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
+        var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());
+
+        if(!evalX || !evalY) {
+            $nm.fadeOut(200);
+        } else {
+            $(this)
+                .css('background-color', 'rgb(56, 99, 47)')
+                .css('color', '#fff');
+        }
+    });
+
+    $('#new_menu_conceptualize').mouseleave(function (e)
+    {
+        var $nm = $('#tb_new_option_conceptualize');
+        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
+        var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
+
+        if(!evalX || !evalY) {
+            $(this).fadeOut(200);
+            $nm
                 .css('background-color', '')
                 .css('color', '');
         }

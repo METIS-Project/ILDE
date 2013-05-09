@@ -199,9 +199,17 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 </div><!-- /#page_wrapper -->
 </div><!-- /#page_container -->
 	<script type="text/javascript">
-		var t9n = {
-			suggestEnterTags : "<?php echo T("Enter tags here") ?>"
-		};
+        var t9n = {
+            suggestEnterTags : "<?php echo T("Enter tags here") ?>",
+            newDocTitle : "<?php echo T("Please write the new document's title:") ?>",
+            newDocTitleEmpty : "<?php echo T("Oops! The document title cannot be empty.") ?>",
+            newDocTitleRepeated : "<?php echo T("Oops! There is already one document with this title in the LdS.") ?>",
+            docSetTitle : "<?php echo T("Please write a new title for the document:") ?>",
+            docConfirmDelete : "<?php echo T("Are you sure you want to delete the following document?") ?>",
+            untitledDoc : "<?php echo T("Untitled document") ?>",
+            confirmExit : "<?php echo T("You have unsaved data. Are you sure you want to leave the editor?") ?>"
+        };
+
 		var initLdS = <?php echo $initLdS ?>;
         var new_lds = (initLdS.guid == '0') ? true : false;
 		var documents = "2";

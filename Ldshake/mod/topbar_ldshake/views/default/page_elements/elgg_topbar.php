@@ -92,6 +92,12 @@ if (isloggedin()) :
                         <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Register your VLE") ?></a></li>
                     </ul>
                 </div>
+                <div id="new_menu_conceptualize" class="menu level2">
+                    <ul>
+                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("New Rich Text") ?></a></li>
+                    </ul>
+                </div>
+
             </div>
 		</div>
 		<div id="ldshake_topbar_container_right">
