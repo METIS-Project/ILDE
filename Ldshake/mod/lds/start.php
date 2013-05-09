@@ -622,10 +622,10 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
     if(count($params) == 3) {
-        switch($params[2]) {
+        switch($params[1]) {
             case 'pattern':
                 $vars['initDocuments'][0]->body = get_coursemap_pattern();
-                $vars['editor_type'] = 'coursemap';
+                $vars['editor_type'] = $params[2];
                 break;
             case 'upload':
                 $vars['initDocuments'][0]->body = '';
@@ -1212,6 +1212,10 @@ function lds_exec_implementeditor($params)
     }
     */
 
+    $user = get_loggedin_user();
+    if($vars['vle_id'] <= 30 ) {
+        $vars['vle_id'] = $user->vle;
+    }
     if($vle = get_entity($vars['vle_id'])) {
         $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle));
     } else {
@@ -1331,6 +1335,9 @@ function lds_exec_editglueps($params)
 
     $user = get_loggedin_user();
     $vars['vle_id'] = $editLdS->vle_id;
+    if($vars['vle_id'] <= 30 ) {
+        $vars['vle_id'] = $user->vle;
+    }
     if($vle = get_entity($vars['vle_id'])) {
         if(!$editordocument) {
             $gluepsm = new GluepsManager($vle);

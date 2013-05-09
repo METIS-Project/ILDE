@@ -1070,6 +1070,20 @@ class RestEditor extends Editor
         $this->_document->file_imsld_guid = $file->guid;
         $this->_document->save();
 
+
+        $uri = $params['url'].'/summary';
+        $response = \Httpful\Request::get($uri)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->sendIt();
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
+        $this->_document->preview_guid = $file->guid;
+        $this->_document->save();
+
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
         $this->_document->pub_previewDir = rand_str(64);
