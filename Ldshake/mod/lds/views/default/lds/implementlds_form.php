@@ -47,6 +47,7 @@
         <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $name;?></span>
     </div>
     <?php endforeach; ?>
+    <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
     <input type="text" name="new_implementation_title" />
     <input type="hidden" name="lds_id" />
 

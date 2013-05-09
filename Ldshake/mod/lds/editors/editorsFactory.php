@@ -1774,7 +1774,8 @@ class GluepsManager
             'instType' => 'IMS LD',
             'sectoken' => $sectoken,
             'archiveWic' => "@{$filename_lds}",
-            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
+            'lang' => 'en'
         );
 
         try {
@@ -1956,7 +1957,7 @@ $vars = array();
         $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&ldshakeToken={$sectoken}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 
