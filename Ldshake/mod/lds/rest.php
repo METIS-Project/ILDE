@@ -242,7 +242,7 @@ function lds_update($params) {
     global $API_QUERY;
 
     if(isset($params[2])) {
-        if(is_numeric($params[2]))
+        if(is_numeric($params[1]))
             return lds_download($params);
         if($params[2] == 'imsld')
             return lds_download($params);

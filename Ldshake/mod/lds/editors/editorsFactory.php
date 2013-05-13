@@ -671,6 +671,7 @@ class LdSFactory
         //We're creating it from scratch. Construct a new obj.
         $lds = new LdSObject();
         $lds->owner_guid = get_loggedin_userid();
+        $lds->external_editor = true;
         $lds->editor_type = $ldsparams['type'];
 
         $lds->title = $ldsparams['title'];
@@ -800,8 +801,15 @@ class OpenglmEditor extends Editor {
         $fullfilepath = Editor::getFullFilePath($document->file_guid);
         copy($params['file'], $fullfilepath);
 
-        $fullfilepath = Editor::getFullFilePath($document->ims_ld);
-        copy($params['file_imsld'], $fullfilepath);
+        if(isset($params['file_imsld'])) {
+            if(!$document->ims_ld) {
+                $filestorename = $params['lds']->guid.'_'.rand_str(64);
+                $document->ims_ld = Editor::getNewFile($filestorename);
+            }
+
+            $fullfilepath = Editor::getFullFilePath($document->ims_ld);
+            copy($params['file_imsld'], $fullfilepath);
+        }
 
         //TODO: update revision data
 
@@ -1810,7 +1818,7 @@ class GluepsManager
 $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 
@@ -1957,7 +1965,7 @@ $vars = array();
         $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 

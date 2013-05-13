@@ -38,17 +38,20 @@
 
 <div id="implement_popup" class="lds_popup">
     <a class="lds_close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
+    <input type="text" size="60" name="new_implementation_title" />
+
     <h3><?php echo T("Select one of your registered VLEs") ?></h3>
 
-    <?php
-    foreach($vle_info->courses as $key=>$name):
-    ?>
-    <div>
-        <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $name;?></span>
+    <div style="max-height: 200px; overflow-y: auto;">
+        <?php
+        foreach($vle_info->courses as $key=>$name):
+            ?>
+            <div style="max-height: 400px; overflow: auto;">
+                <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $name;?></span>
+            </div>
+        <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
-    <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
-    <input type="text" name="new_implementation_title" />
     <input type="hidden" name="lds_id" />
 
     <input type="button" id="implementlds_submit" value="<?php echo T('Implement')?>" />
