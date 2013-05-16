@@ -136,7 +136,7 @@
 
 #my_lds_list .lds_locked .lds_title_tags {
 	display: block;
-	width: 345px;
+	width: 267px;
 	float: left;
 	white-space: nowrap;
 	overflow: hidden;
@@ -179,7 +179,7 @@
 	padding-top: 2px;
 	white-space: nowrap;
 	overflow: hidden;
-	width: 255px;
+	width: 229px;
 	color: #777;
 	float: left;
 	font-size: 11px;
