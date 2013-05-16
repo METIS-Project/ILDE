@@ -231,6 +231,7 @@ function initCKED ()
 	$('#lds_edit_body').ckeditor(function ()
 	{
 		editor = this;
+        editor.dataProcessor = null;
 		resizeCK();
 		loadData ();
 		

@@ -142,9 +142,10 @@
             <div style="clear:both"></div>
 		</div>
 	<?php endif; ?>
-	<div id="the_lds">
-		<?php echo $currentDoc->description ?>
-	</div>
+
+	<iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>">
+
+	</iframe>
 <?php endif; ?>
 </div>
 

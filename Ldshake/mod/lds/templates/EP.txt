@@ -1,0 +1,271 @@
+<p><p class="MsoNormal" align="center" style="text-align:center"><b><span lang="EN-GB" style="font-size:16.0pt;mso-bidi-font-family:Arial">METIS
+extracting patterns template <o:p></o:p></span></b></p>
+
+<p class="MsoNormal" align="center" style="text-align:center"><b><span lang="EN-GB" style="font-size:16.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">Please use the
+patterns template below to extract a pattern from the methodology design
+narratives authored by the METIS partners.&nbsp;
+This is meant to be a simple task where you read a partner’s design
+narrative and you think about what the activity reminds you of in regards to an
+activity you completed.&nbsp; The goal is to
+understand and articulate the similarity between the two activities.&nbsp; The similarity may not necessarily capture
+everything about the activity, but it does capture a design element.&nbsp; To facilitate this we are providing the
+template below where you can articulate what is similar about the context,
+problem and method of solution.&nbsp; <o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">Please review
+design narratives that resonates (at least 2) with you and use the </span></i><span lang="EN-GB"><a href="https://docs.google.com/spreadsheet/ccc?key=0ApiNZunquTigdHc3Y1g3OGZnT2JKcU55Z25nWVdaSkE#gid=0"><i>methodology
+cross-review spreadsheet</i></a></span><i><span lang="EN-GB"> to indicate whose
+design narrative you have reviewed, the pattern (name) and any notes by <b>22<sup>nd</sup> of May 2013</b>. Then
+upload you completed template </span></i><span lang="EN-GB"><a href="https://sites.google.com/a/metis-project.org/metis-internal/workpackages/wp3-workshop-design/methodology-cross-review/methodology-design-patterns"><i>here</i></a></span><i><span lang="EN-GB">.<o:p></o:p></span></i></p>
+
+<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="1" type="1">
+ <li class="MsoNormal" style="text-align:justify;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Name<o:p></o:p></span></b></li>
+</ol>
+
+<p class="MsoNormal" style="margin-left:36.0pt;text-align:justify"><b><span lang="EN-GB">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">Design patterns are intended to be used as
+part of a pattern language, as an infrastructure for design-level conversation.
+As such, the name of a pattern should be amenable for use as a noun in such a
+conversation. It should be short, memorable and indicative of the big idea of
+the pattern identified.</span></i><i><span lang="EN-GB"><o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<div style="mso-element:para-border-div;border:solid windowtext 1.0pt;
+mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt">
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+</div>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="2" type="1">
+ <li class="MsoNormal" style="text-align:justify;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Problem<o:p></o:p></span></b></li>
+</ol>
+
+<p class="MsoNormal" style="text-align:justify"><b><span lang="EN-GB">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">The problem description provides a clear and
+succinct presentation of the motivation for the pattern, its raison d'être.<o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">The educational research literature tends to
+shy away from the term “problem”, as it may suggest a negative attitude. This
+thesis takes the position of the design literature, and specifically the
+computer science tradition, were problems are seen as opportunities for action.<o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">From a design perspective, where there is no
+problem, nothing needs to be changed, no act of design is required and
+consequently there are no questions for research.<o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="3" type="1">
+ <li class="MsoNormal" style="text-align:justify;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Context<o:p></o:p></span></b></li>
+</ol>
+
+<p class="MsoNormal" style="text-align:justify"><b><span lang="EN-GB">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">A fundamental premise of design is that
+problems and solutions are rarely universal. The scope of any statement needs
+to be qualified if it is to be meaningful.</span></i><i><span lang="EN-GB"><o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<div style="mso-element:para-border-div;border:solid windowtext 1.0pt;
+mso-border-alt:solid windowtext .5pt;padding:1.0pt 4.0pt 1.0pt 4.0pt">
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify;border:none;mso-border-alt:solid windowtext .5pt;
+padding:0cm;mso-padding-alt:1.0pt 4.0pt 1.0pt 4.0pt"><span lang="EN-GB">&nbsp;<o:p></o:p></span></p>
+
+</div>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="4" type="1">
+ <li class="MsoNormal" style="text-align:justify;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Method of solution<o:p></o:p></span></b></li>
+</ol>
+
+<p class="MsoNormal" style="text-align:justify"><b><span lang="EN-GB">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">The solution is the centrepiece of the
+pattern. In scientific terms, it is the claim that under certain conditions the
+described actions will have a particular effect which addresses the problem.</span></i><i><span lang="EN-GB"><o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">The solution would ideally be articulated at
+a level of detail which allows immediate implementation, and yet is applicable
+beyond the specific experiences from which it is described. However, in a
+hierarchy of patterns, several levels of abstraction will be represented and
+the respective solutions will be positioned appropriately.</span></i><i><span lang="EN-GB"><o:p></o:p></span></i></p>
+
+<p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  <p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal" style="text-align:justify"><b><i><span lang="EN-GB">&nbsp;</span></i></b></p>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p></p>

@@ -1,0 +1,385 @@
+<div class=WordSection1>
+
+<p class=MsoTitle><a name=h.2ofvyt3c7u80></a><b><font size=7 color=black
+face=Arial><span lang=EN-GB style='font-size:36.0pt;line-height:115%'><span
+style='line-height:115%'>Design Pattern - support</span></span></font></b></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Yishay Mor, <a
+href="mailto:Yishay.Mor@Open.ac.uk"><font color="#1155cc"><span
+style='color:#1155CC'>Yishay.Mor@Open.ac.uk</span></font></a></span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'><img border=0 width=88 height=31 id=image00.png
+src="http://ilde.upf.edu/mod/lds/templates/DesignPatternTemplateSupport_files/image001.png"></span></font><font
+size=2><span lang=EN-GB style='font-size:10.0pt;line-height:115%;background:
+white'>This work is licensed under a</span></font><span lang=EN-GB><a
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
+color=black><span style='font-size:10.0pt;line-height:115%;color:black;
+background:white;text-decoration:none'> </span></font></a><a
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
+color="#4374b7"><span style='font-size:10.0pt;line-height:115%;color:#4374B7;
+background:white;text-decoration:none'>Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 Unported License</span></font></a></span><font
+size=2><span lang=EN-GB style='font-size:10.0pt;line-height:115%;background:
+white'>.</span></font></p>
+
+<p class=MsoNormal><font size=2 color="#980000" face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;color:#980000'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Having articulated
+the core elements of your pattern, you should now:</span></font></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>1.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Seek initial feedback from people
+who are familiar with the context from which this pattern emerged.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>2.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Identify additional examples,
+ideally from other people’s experience, where this pattern is present.</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>3.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Elaborate the pattern, using the
+additional sections listed below. You do not need to necessarily include all
+sections.</span></p>
+
+<h1><a name=h.qvahxbv2llx1></a><b><font size=5 color=red face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
+style='line-height:115%'>Name</span></span></font></b></h1>
+
+<h1><a name=h.5yzmzrtpdxrr></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Summary</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Write this last.</span></font></i></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><font size=2 color=black
+face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:115%'>The <a
+href="http://www.ld-grid.org/resources/representations-and-languages/design-patterns"><font
+color="#1155cc"><span style='color:#1155CC'>Design patterns</span></font></a>
+paradigm (Alexander et al, 1977) was developed as a form of design language
+within architecture. This was done with the explicit aim of externalizing
+knowledge to allow the accumulation and generalization of solutions and to
+allow all members of a community or design group to participate in discussions
+relating to design. These patterns were organized into coherent systems called
+pattern languages where patterns are related to each other. The original
+definition of a design pattern positions it as a high-level specification of a
+method of design which specifies the context of discussion, the particulars of
+the problem, and how these can be addressed by the designated design
+instruments. A pattern has three facets: descriptive, normative, and
+communicative. It is an analytic form, used to describe design situations and
+solutions; a meta-design tool, used to highlight key issues and dictate a
+method of resolving them; and a communicative tool enabling different
+communities to discuss design issues and solutions. The core of a design
+pattern can be seen as a local functional statement: “for problem P, under
+circumstances C, solution S has been known to work”. Design patterns were
+described as abstractions of expert knowledge; they generalise from successful
+practice without detaching from its context. As such, they offer a two-way
+bridge between practice and theory: opening practical wisdom to theoretical
+scrutiny and allowing theory to be projected into practice.</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.ili2du207lq></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Illustration</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>A graphic or photo
+intended to provide the reader with a vivid mental image for the pattern. </span></font></i></p>
+
+<h1><a name=h.z1viddwjtksy></a><b><font size=5 color=red face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
+style='line-height:115%'>Problem</span></span></font></b></h1>
+
+<h2><a name=h.cp8dltpujsvm></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Synopsis</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>A single sentence
+highlighting the essence of the problem.</span></font></i></p>
+
+<h2><a name=h.anily5xl7q6u></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Forces</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The objectives and
+constraints constituting the problem. Often the complexity of noteworthy
+problems emerges from a tension between forces: objectives which seem to
+contradict, or are incompatible with the constraints.</span></font></i></p>
+
+<h1><a name=h.rp2ab0xev1s0></a><b><font size=5 color=red face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
+style='line-height:115%'>Context</span></span></font></b></h1>
+
+<h2><a name=h.7q6ee1gpwilr></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Origins</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The origins of a
+pattern define its context in the most reliable manner: the characterisation of
+the common features of the situation descriptions of the design narratives from
+which it was derived.</span></font></i></p>
+
+<h3><a name=h.1wp2y2y2ho32></a><b><font size=3 color="#666666" face=Arial><span
+lang=EN-GB style='font-size:12.0pt;line-height:115%'><span style='line-height:
+115%'>Material</span></span></font></b></h3>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>What are the
+spatial characteristics of the settings? What tools and resources are available
+to protagonists?</span></font></i></p>
+
+<h3><a name=h.te3ka1pdhqtq></a><b><font size=3 color="#666666" face=Arial><span
+lang=EN-GB style='font-size:12.0pt;line-height:115%'><span style='line-height:
+115%'>Social</span></span></font></b></h3>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Who are the
+protagonists, what are the relationships between them, and what are the social
+and institutional configurations in which they operate?</span></font></i></p>
+
+<h3><a name=h.lwpuy0475aas></a><b><font size=3 color="#666666" face=Arial><span
+lang=EN-GB style='font-size:12.0pt;line-height:115%'><span style='line-height:
+115%'>Intentional </span></span></font></b></h3>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>What are the
+protagonists beliefs, desires and intentions, which shape the problem space?</span></font></i></p>
+
+<h3><a name=h.a1i7nvu5jrof></a><b><font size=3 color="#666666" face=Arial><span
+lang=EN-GB style='font-size:12.0pt;line-height:115%'><span style='line-height:
+115%'>Force Map</span></span></font></b></h3>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>A</span></font></i><span
+lang=EN-GB><a
+href="http://www.ld-grid.org/resources/representations-and-languages/force-map"><i><font
+color=black><span style='color:black;font-style:italic;text-decoration:none'> </span></font></i></a><a
+href="http://www.ld-grid.org/resources/representations-and-languages/force-map"><i><font
+color="#1155cc"><span style='color:#1155CC;font-style:italic'>Force Map</span></font></i></a><i><span
+style='font-style:italic'> is a graphical representation of the context of a
+design challenge. It includes iconic representations of the key elements in
+this context (social, material and intentional factors), and lines noting the
+relationships between them. These relationships are marked &quot;+&quot; when
+supportive, and &quot;-&quot; when indicating a tension. The design challenge
+can often be defined in terms of resolving some of these tensions.</span></i></span></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'><img border=0 width=399 height=386 id=image01.jpg
+src="http://ilde.upf.edu/mod/lds/templates/DesignPatternTemplateSupport_files/image002.jpg"></span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><a name=h.vtg4rospuxek></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Expansion</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Based on the
+analysis of the pattern, it may be justifiable to claim a broader scope of
+applicability than can be directly deduced from the originating narratives.
+Such a claim is speculative until verified experimentally or by independent
+application, and should be noted with caution.</span></font></i></p>
+
+<h2><a name=h.5zeefr78fftl></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Boundaries</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Specifying the
+boundaries of a pattern – where it does not apply – is arguably as important as
+where it does. These boundaries need to be clearly marked where there is a risk
+that a pattern would be applied erroneously. </span></font></i></p>
+
+<h1><a name=h.b11t0notn161></a><b><font size=5 color=red face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
+style='line-height:115%'>Solution</span></span></font></b></h1>
+
+<h2><a name=h.7xrtpmxyi5un></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Pedagogical aspects</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Features of the
+pattern pertaining to its pedagogical structure and driven by its learning
+objectives, irrespective of the technical implementation.</span></font></i></p>
+
+<h2><a name=h.hlq0gnp1dent></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Technical aspects</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Technological
+requirements derived from the pedagogical aspects and necessary for their success.</span></font></i></p>
+
+<h2><a name=h.msqzbxn2gyl5></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Diagram</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>When appropriate, a
+diagram should be added to elucidate the solution. In contrast to the
+illustration, which communicates at an intuitive or metaphoric level, the
+diagram is like a blue-print for implementation.</span></font></i></p>
+
+<h1><a name=h.51pfvpt0cvxo></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Related Patterns</span></span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Note hierarchical, structural and
+lateral links to other design patterns.</span></font></p>
+
+<h2><a name=h.ud05wn3ltiec></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Uses (makes use of)</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Patterns used as components by the
+present pattern.</span></font></p>
+
+<h2><a name=h.az80vy3auyou></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Used by</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Pattern which use the present pattern
+as a component.</span></font></p>
+
+<h2><a name=h.3qc21mma9m9s></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Extends</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Patterns at a higher level of
+abstraction, elaborated by the present pattern.</span></font></p>
+
+<h2><a name=h.mtr8oopuihn></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Extended by</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Patterns at a greater level of
+specificity, elaborating the present pattern.</span></font></p>
+
+<h2><a name=h.c16s2oy2czwr></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Conflicts</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Patterns excluding, excluded by or
+otherwise clashing with the present pattern.</span></font></p>
+
+<h2><a name=h.ol6dnkyjg2l4></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Associated</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Patterns used in conjunction with the
+present pattern.</span></font></p>
+
+<h1><a name=h.afob0c2xdwg0></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Support</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>If the solution is
+the claim, then the support section is its theoretical and empirical
+substantiation. This section is not common in non-scientific uses of design
+patterns, e.g. in software engineering pattern languages. Where a partial
+equivalent would be the “known uses” section. The latter is however more in way
+of demonstration than evidence.</span></font></i></p>
+
+<h2><a name=h.3r5o70epulpr></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Theoretical</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Theoretical
+alignment justifies the pattern by reference to domain theories.</span></font></i></p>
+
+<h2><a name=h.5jeho3lb4y4></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Empirical</span></span></font></b></h2>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>(This was your
+examples section).</span></font></i></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Empirical
+calibration justifies the pattern by reference to data from cases where it
+appears to have had a positive effect. These would primarily be derived from
+the design experiment at hand and supplemented by external documented cases.</span></font></i></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.llnc1xxae0iw></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Liabilities</span></span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Liabilities are the potential
+negative effects and points of failure associated with a pattern.</span></font></p>
+
+<h2><a name=h.sp85snqyl3kc></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Risks</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Risks refer to possible direct
+negative side effects. These need to be averted, often by applying a related
+pattern.</span></font></p>
+
+<h2><a name=h.wk2dwgj9c013></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Limitations</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Limitations note the patterns
+shortcomings, setting the readers expectations in perspective, and highlighting
+the additional conditions needed for this pattern to be effective.</span></font></p>
+
+<h1><a name=h.yi81108dzb7m></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Notes</span></span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Additional comments, reflecting on
+the pattern at a theoretical level or linking it to related work.</span></font></p>
+
+<h2><a name=h.ob8nlkmexqez></a><b><font size=4 color=black face=Arial><span
+lang=EN-GB style='font-size:14.0pt;line-height:115%'><span style='line-height:
+115%'>Potential extensions</span></span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Conjectures as to how the pattern
+could be extended and further developed to provide better results or cover a
+broader context.</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.tbdxc6ypkxn1></a><b><font size=5 color=black face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%'><span style='line-height:
+115%'>Data and References </span></span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+</div>

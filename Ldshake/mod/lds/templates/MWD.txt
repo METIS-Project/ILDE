@@ -1,0 +1,1334 @@
+<div class=WordSection1>
+
+<p class=MsoTitle><a name="_Toc355954521"><b><font size=5 face=Arial><span
+lang=EN-GB style='font-size:16.0pt'>METIS Workshop Design (version 0.7)</span></font></b></a></p>
+
+<p class=MsoSubtitle><a name="_Toc355954522"><i><font size=3 face=Arial><span
+lang=EN-GB style='font-size:12.0pt;font-style:italic'>Summary</span></font></i></a></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-US style='font-size:11.0pt'>Despite the abundance of high-quality
+educational technology, and the wealth of research demonstrating its value,
+educators are still struggling to make effective use of these technologies and
+the associated pedagogies in their daily practices. Arguably, this is a gap in
+the capacity for learning design: educators need the tools and competencies
+which would allow them to identify educational challenges, describe the context
+in which they arise, identify the opportunities afforded by technology, project
+the insights derived from research, and devise new learning experiences. To
+address this gap, educators need tools and practices. Tools that would support
+them through the cycle of learning design – from conception to deployment and
+evaluation of techno-educational innovations. Professional practices that use
+such tools to ensure the robustness and effectiveness of their innovations and
+make learning design a daily habit and part of their professional identity. The
+METIS project (</span><span lang=EN-GB><a href="http://metis-project.org/"><span
+lang=EN-US>http://metis-project.org/</span></a></span></font><span lang=EN-US>)
+aims to contribute to this aim, by providing educators with an Integrated
+Learning Design Environment (ILDE) and a workshop package for training
+educators in using the ILDE to support effective learning design.</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>This document describes the aims,
+organisational requirements and activity structure for METIS learning design
+workshops. The aims are specified in terms of outcomes for participants and the
+METIS project. The organisational requirements describe the human and other
+resources required to run a workshop. The activity structure describes a
+reusable structure of activities to enable participants to reach the learning
+outcomes specified. It includes a description of the tools and the information
+resources for both participants and facilitators for each activity.</span></font></p>
+
+<p class=MsoTocHeading><b><font size=4 color="#365f91" face=Cambria><span
+lang=EN-US style='font-size:14.0pt;line-height:115%'>Contents</span></font></b></p>
+
+<p class=MsoToc1><span lang=EN-GB><a href="#_Toc355954521">METIS workshop
+structure version 0.6<font color=black><span style='color:windowtext;
+display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>1</span></font></a></span></p>
+
+<p class=MsoToc2><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954522"><i><span style='font-style:italic'>Summary</span></i><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>1</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954523">Workshop aims and organisation<font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>2</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954524">1<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Learning and other outcomes<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>2</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954525">2<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Workshop organisation<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>2</span></font></a></span></font></p>
+
+<p class=MsoToc2><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954526">2.1<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>        </span></font>Duration<font color=black><span style='color:windowtext;
+display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>2</span></font></a></span></font></p>
+
+<p class=MsoToc2><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954527">2.2<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>        </span></font>People: Participants, facilitators and others<font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>2</span></font></a></span></font></p>
+
+<p class=MsoToc2><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954528">2.3<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>        </span></font>Resources<font color=black><span style='color:windowtext;
+display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>3</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954529">Workshop activity structure<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>3</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954530">1<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Introduction (0.30 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>3</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954531">2<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>How to ruin a course (0.33 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>3</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954532">3<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Personas (0.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>4</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954533">4<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Barriers and challenges (0.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>5</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954534">5<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Active tasks and examples of ‘X’ (0.5 hour)<font
+color=black><span style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>5</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954535">6<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Initiate, Ideate, Investigate: produce your Vision
+(1.5 hours)<font color=black><span style='color:windowtext;display:none;
+text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>6</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954536">7<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Connect: gather tools and resources (0.75 hour)<font
+color=black><span style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>6</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954537">8<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Prototype (1.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>7</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954538">9<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>       </span></font>Evaluate (0.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>7</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954539">10<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>         </span></font>Reflect (0.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>7</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954540">11<font color=black face=Calibri><span
+style='font-family:"Calibri","sans-serif";color:windowtext;text-decoration:
+none'>         </span></font>Wrap up (0.5 hour)<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'> </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>7</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954541">Next steps for WP3 to move towards D3.3<font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>8</span></font></a></span></font></p>
+
+<p class=MsoToc1><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'><a href="#_Toc355954542">References<font color=black><span
+style='color:windowtext;display:none;text-decoration:none'>. </span></font><font
+color=black><span style='color:windowtext;display:none;text-decoration:none'>8</span></font></a></span></font></p>
+
+<p class=MsoNormal><span lang=EN-GB>&nbsp;</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoTitle><a name="_Toc355954523"><b><font size=5 face=Arial><span
+lang=EN-GB style='font-size:16.0pt'>Workshop aims and organisation</span></font></b></a></p>
+
+<h1><a name="_Toc355954524"><b><font size=5 face=Arial><span lang=EN-GB
+style='font-size:16.0pt'>1<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><span
+lang=EN-GB>Learning and other outcomes</span></a></h1>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Our research of user concerns suggests that
+practitioners have limited interest in training on learning design in general,
+but are have much higher interest in learning design for specific themes, such
+as collaborative learning, formative assessment or project based learning.
+Hence, the workshop design presented here is a meta-design that is flexible and
+can be customised to a specific theme. In this document, this theme is noted as
+‘X’. </span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>The intended learning and other outcomes
+for a METIS workshop on learning design for ‘X’ are shown in figure 1. The
+learning design is intended to be applicable across a range of topics.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal align=center style='text-align:center'><font size=2
+face=Arial><span style='font-size:11.0pt'><img width=631 height=250
+id="Picture 3" src="http://ilde.upf.edu/mod/lds/templates/workshop-structure-v0.7a_files/image001.png"></span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoCaption><b><font size=1 color=black face=Arial><span lang=EN-GB
+style='font-size:9.0pt;color:windowtext;font-weight:normal'>Figure </span></font></b><font
+color=black><span lang=EN-GB style='color:windowtext;font-weight:normal'>1</span></font><font
+color=black><span lang=EN-GB style='color:windowtext;font-weight:normal'>: Learning
+and other outcomes of the workshop</span></font></p>
+
+<h1><a name="_Toc355954525"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>2<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Workshop organisation</span></font></a></h1>
+
+<h2><a name="_Toc355954526"><b><font size=3 face=Arial><span lang=EN-GB
+style='font-size:12.0pt'>2.1<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=3><span lang=EN-GB style='font-size:12.0pt'>Duration</span></font></a><font
+size=3><span lang=EN-GB style='font-size:12.0pt'> </span></font></h2>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The total duration of the activities in the workshop(s) is 7.5 hours (</span></font><span lang=EN-GB>Table 1</span><span lang=EN-GB>). The activities need to run in the
+order they are presented in the ‘Workshop activity structure’ section, but they
+can be split into two sessions (e.g.one 4 hour workshop including  activities 1
+to 6  followed by one 3.5 hour workshop consisting of activities 7 to 11).</span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=0 cellspacing=0 cellpadding=0 width=502
+ style='width:376.4pt;margin-left:4.65pt;border-collapse:collapse'>
+ <tr height=25 style='height:18.8pt'>
+  <td width=39 nowrap height=25 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:18.8pt'>
+  <p class=MsoNormal><b><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black;
+  font-weight:bold'>&nbsp;</span></font></b></p>
+  </td>
+  <td width=398 height=25 valign=top style='width:298.3pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.8pt'>
+  <p class=MsoNormal><b><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black;
+  font-weight:bold'>Activity</span></font></b></p>
+  </td>
+  <td width=65 height=25 valign=top style='width:49.0pt;border:solid windowtext 1.0pt;
+  border-left:none;padding:0cm 5.4pt 0cm 5.4pt;height:18.8pt'>
+  <p class=MsoNormal><b><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black;
+  font-weight:bold'>Hours</span></font></b></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>1</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Introduction
+  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.25</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>2</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>How
+  to ruin a course </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.33</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>3</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Personas</span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>4</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Barriers
+  and challenges </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>5</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Evidence
+  and examples of X </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>6</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Initiate,
+  Ideate, Investigate: produce your Vision  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>1.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>7</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Connect:
+  gather tools and resources  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.75</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>8</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Prototype 
+  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>1.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>9</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Evaluate
+  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>10</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Reflect 
+  </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.5</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>11</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Wrap
+  up </span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>0.25</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;border:solid windowtext 1.0pt;
+  border-top:none;padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>&nbsp;</span></font></p>
+  </td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal><b><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black;
+  font-weight:bold'>Total</span></font></b></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><b><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black;font-weight:bold'>7.08</span></font></b></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:15.0pt'></td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border:
+  solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;
+  height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Activities
+  1 to 6 (half day workshop 1: Context and vision, plus wrap up)</span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>3.58</span></font></p>
+  </td>
+ </tr>
+ <tr height=20 style='height:15.0pt'>
+  <td width=39 nowrap height=20 valign=bottom style='width:29.1pt;padding:0cm 5.4pt 0cm 5.4pt;
+  height:15.0pt'></td>
+  <td width=398 nowrap height=20 valign=bottom style='width:298.3pt;border:
+  solid windowtext 1.0pt;border-top:none;padding:0cm 5.4pt 0cm 5.4pt;
+  height:15.0pt'>
+  <p class=MsoNormal><font size=2 color=black face=Calibri><span lang=EN-GB
+  style='font-size:11.0pt;font-family:"Calibri","sans-serif";color:black'>Activities
+  7 to 11  (half day workshop 2: Prototype and evaluate, plus intro and ice
+  breaker)</span></font></p>
+  </td>
+  <td width=65 nowrap height=20 valign=bottom style='width:49.0pt;border-top:
+  none;border-left:none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  padding:0cm 5.4pt 0cm 5.4pt;height:15.0pt'>
+  <p class=MsoNormal align=right style='text-align:right'><font size=2
+  color=black face=Calibri><span lang=EN-GB style='font-size:11.0pt;font-family:
+  "Calibri","sans-serif";color:black'>3.25</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoCaption><a name="_Ref355974754"><b><font size=2 color=black
+face=Arial><span lang=EN-GB style='font-size:10.0pt;color:windowtext'>Table </span></font></b></a><font
+size=2 color=black><span lang=EN-GB style='font-size:10.0pt;color:windowtext'>1</span></font><font
+size=2 color=black><span lang=EN-GB style='font-size:10.0pt;color:windowtext'>:
+activity durations</span></font></p>
+
+<h2><a name="_Toc355954527"><b><font size=3 face=Arial><span lang=EN-GB
+style='font-size:12.0pt'>2.2<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=3><span lang=EN-GB style='font-size:12.0pt'>People: Participants,
+facilitators and others</span></font></a></h2>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Participants work in teams composed of 3 to
+6 members. This team size encourages and facilitates each team member to be
+fully involved in design discussions throughout the workshop. A team size of 3
+to 6 members is optimal because it allows for a diverse range of views to be
+debated. Teams of more than 6 often split up into smaller teams and lose focus;
+this  should be avoided if possible. </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>It is highly advisable to allocate a ‘<i><span
+style='font-style:italic'>critical friend’</span></i> to each team to challenge
+design thinking and stimulate focused and informed discussion </span></font><span
+lang=EN-GB>(</span><span lang=EN-GB><a href="#_ENREF_1" title="Cross, 2012 #550"><font
+color=black><span style='color:windowtext;text-decoration:none'>Cross, et al.,
+2012, p. 28</span></font></a></span><span lang=EN-GB>)</span><span lang=EN-GB>.
+This ‘critical friend’ role could be played by the workshop facilitators
+circulating amongst the teams, but if there are many more teams than
+facilitators it is advisable to recruit additional ‘critical friends’ to ensure
+that each team can benefit from their input and challenges.  A learning design
+workshop <i><span style='font-style:italic'>facilitator</span></i> must have
+detailed knowledge of the both the workshop topic and the Integrated&nbsp;<b><span
+style='font-weight:bold'>Learning Design</span></b>&nbsp;Environment (ILDE) so he/she
+can answer any question that might arise during the workshop. A distinction
+needs to be made between a <i><span style='font-style:italic'>critical friend</span></i>
+and a <i><span style='font-style:italic'>facilitator</span></i>. A <i><span
+style='font-style:italic'>critical friend </span></i>is required to have
+knowledge of the topic in order to prompt and encourage a focused and robust
+discussion. Obviously, some awareness of the ILDE will be useful for <i><span
+style='font-style:italic'>critical friends</span></i>. A learning design
+workshop <i><span style='font-style:italic'>facilitator</span></i> is an expert
+on both the topic and the ILDE. </span></p>
+
+<h2><a name="_Toc355954528"><b><font size=3 face=Arial><span lang=EN-GB
+style='font-size:12.0pt'>2.3<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=3><span lang=EN-GB style='font-size:12.0pt'>Resources</span></font></a></h2>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Each team needs access to one or more
+laptop or desktop computers with internet access to interact with the ILDE and
+other online resources. Prior to the workshop starting, an empty learning design
+for each team will be created in the ILDE, and all team members will be given
+editing rights for that learning design. If other resources such as printed
+material and specific online resources are required for a particular activity,
+they are described within the relevant activity in the activity structure that
+follows. </span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoTitle><a name="_Toc355954529"><b><font size=5 face=Arial><span
+lang=EN-GB style='font-size:16.0pt'>Workshop activity structure</span></font></b></a></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>A diagram of the structure of the participants’ activities during the
+workshop is shown in Figure 2. This illustrates the relationships between the
+activities, the tools to be used, the resources to be produced.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<div style='border:solid windowtext 1.0pt;padding:1.0pt 4.0pt 1.0pt 4.0pt'>
+
+<p class=MsoNormal style='page-break-after:avoid;border:none;padding:0cm'><font
+size=2 face=Arial><span style='font-size:11.0pt'><img border=0 width=621
+height=721 id="Picture 2" src="http://ilde.upf.edu/mod/lds/templates/workshop-structure-v0.7a_files/image002.jpg"></span></font></p>
+
+</div>
+
+<p class=MsoCaption><b><font size=1 color="#4f81bd" face=Arial><span
+lang=EN-GB style='font-size:9.0pt;font-weight:normal'>&nbsp;</span></font></b></p>
+
+<p class=MsoCaption><b><font size=1 color=black face=Arial><span lang=EN-GB
+style='font-size:9.0pt;color:windowtext;font-weight:normal'>Figure </span></font></b><font
+color=black><span lang=EN-GB style='color:windowtext;font-weight:normal'>2</span></font><font
+color=black><span lang=EN-GB style='color:windowtext;font-weight:normal'>:
+Participants activities, tools used, and resources produced</span></font></p>
+
+<h1><a name="_Toc355954530"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>1<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Introduction (0.30 hour)</span></font></a><font
+size=4><span lang=EN-GB style='font-size:14.0pt'> </span></font></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Facilitators introduce themselves, describe the structure of workshop,
+the organisation in terms of the available human resources, tools and
+information and the intended learning outcomes.  They also introduce the
+critical friends and explain their role in workshop. </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><i><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-style:italic'>Facilitators’ resource: slideshow
+with notes</span></font></i><span lang=EN-GB>, <i><span style='font-style:italic'>ILDE</span></i>.</span></p>
+
+<h1><a name="_Toc355954531"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>2<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>How to ruin a learning
+experience (0.33 hour)</span></font></a></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>(Reuse of OULDI activity <a
+href="http://cloudworks.ac.uk/cloud/view/2597">http://cloudworks.ac.uk/cloud/view/2597</a>).</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>This icebreaker activity will focus on the
+key issues and strategies that impact on the success (or otherwise) of learning
+and teaching within their context.  The output of this activity will be a
+design checklist which can be used as one of the design evaluation tools in a
+mid-way design review and at the end of the workshop.</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>&nbsp;</span></font></b></p>
+
+<p class=MsoNormal style='text-align:justify'><b><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-weight:bold'>Resources (all to be
+available online and in printed form at the workshop)</span></font></b></p>
+
+<p class=MsoNormal style='text-align:justify'><i><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-style:italic'>Participants’ resources</span></font></i><span
+lang=EN-GB>:</span></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>Instructions</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>1.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>List the 10 best ways to ensure your
+module or short course will fail!</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>2.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Share these with the others by
+uploading your lists to the ILDE.</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>3.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>What are the key themes?</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><b><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>A first version of a design checklist which
+can be used as one of the design evaluation tools in a mid-way design review
+and at the end of the workshop. The checklist will be uploaded to the ILDE.</span></font></p>
+
+<h1><a name="_Toc355954532"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>3<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Personas (0.5 hour)</span></font></a></h1>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>“Personas are a tool for sharing our
+understanding of our expected users, as a starting point for design” (Mor,
+2013).  In this activity the participants will create descriptions of 2 or 3
+personas relevant to the context in which they teach. This activity is a first
+step towards a detailed specification of the context in which the “X” learning
+activity will occur.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'><font size=2
+face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:Wingdings'>ü<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>Printed and online versions of the
+<a
+href="https://docs.google.com/document/d/1-Fl63RuBIyB1AXKGFxG5sEDVXQ8UgxCeFsEVggZvWhQ/pub">Personas
+template</a> will be provided for participants. (The online version will be in
+the ILDE).</span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The personas created will be uploaded or linked to the ILDE.</span></font></p>
+
+<h1><a name="_Toc355954533"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>4<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Barriers and challenges (0.66
+hour)</span></font></a></h1>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>20 minutes team work, 20 minutes
+plenary (assuming 3 or 4 teams)</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>In this activity the participants are asked to describe what they see
+as the barriers and challenges with respect to designing and running ‘X’
+learning activities in their context. Facilitators refer to the activity “How
+to ruin a course”, where they will have already created a list that is likely
+to be applicable to any type of course or activity. This activity prompts
+participants to relate their current understanding of the workshop topic (X) to
+the context in which they teach. It also allows the facilitators and critical
+friends to gain an understanding of each team’s context. The participants will
+use the personas created in the “Personas” activity to discuss and answer the
+following questions for a learning activity  on ‘X’ (e.g. collaborative
+learning)</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoListParagraphCxSpFirst style='margin-left:72.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>a)<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>What are the barriers and
+challenges from a learners’ perspective of ‘X’?</span></p>
+
+<p class=MsoListParagraphCxSpLast style='margin-left:72.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>b)<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>What are the barriers and
+challenges in implementing ‘X’ in your course or topic area?</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>This will be a collaborative mapping exercise:</span></font></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Each participant writes down 3-4
+barriers and 3-4 motivations, each one on a separate post-it (5 minutes).</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Participants place their post-its
+on an A1 paper and arrange them in some order or map (15 minutes).</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Each group presents its map to the
+whole workshop (10 minutes)</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Each participant thinks about
+their own view, discusses them with one other member and works collaboratively
+towards a team list of at least 5 barriers/challenges for learners and 5 for barriers/challenges
+for implementation. (20 minutes)</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Each team shares their list with the wider
+group. These will be shared with the other teams by displaying them in the
+workshop and each team will describe one from the learners’ perspective and on
+from the implementation perspective in the plenary (one only to limit the time
+spent on sharing). Facilitators foster focused discussion of remaining barriers/challenges
+between different teams to occur during breaks.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><b><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-weight:bold'>Resources (all to be
+available online and in printed form at the workshop)</span></font></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><i><span lang=EN-GB style='font-style:italic'>Facilitators’
+resources: slideshow of questions (as above)</span></i><span lang=EN-GB>.</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><i><span lang=EN-GB style='font-style:italic'>Participants’
+resources: slideshow with questions as above with notes indicating themes that
+they might discuss (e.g. technical, motivational, temporal challenges). </span></i><span
+lang=EN-GB>(As an a<i><span style='font-style:italic'>lternative to post-its,
+participants can use a concept mapping tool of their choice.)</span></i></span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>Instructions</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>1.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>As individuals, write down 3-4
+barriers and 3-4 motivations, each one on a separate post-it. Use green post it
+notes for barriers/challenges from learners’ perspective, yellow post-it notes
+for barriers/challenges for implementation (5 minutes).</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>2.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Share these with the others in
+your team by placing your  post-its on an A1 paper and collaborate to arrange
+them in some order or map (15 minutes)</span></p>
+
+<p class=MsoListParagraphCxSpMiddle style='margin-left:54.0pt;text-align:justify;
+text-indent:-18.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>3.<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Each team should  present its map
+to the whole workshop; focus on describing up to 5 barriers/challenges for
+learners, and up to 5 barriers/challenges to implementation from the map  (20
+minutes) </span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><i><span lang=EN-GB style='font-style:italic'>Critical
+friends’ resources: document describing suggestions for questions to ask</span></i><span
+lang=EN-GB>.</span></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><b><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Each team should produce a list of up to 5 barriers/challenges for
+learners, and a list of up to 5 barriers/challenges to implementation. These
+will be added to the output produced in the first activity ‘How to ruin a
+course’ to produce a new version of the team’s evaluation checklist </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<h1><a name="_Toc355954534"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>5<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><span
+lang=EN-GB>Evidence </span></a><font size=4><span lang=EN-GB style='font-size:
+14.0pt'>and examples of ‘X’ (0.5 hour)</span></font></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The facilitators present a few examples of X that are chosen so as to
+be relevant to the participants. (four or five examples should be sufficient).
+Evidence demonstrating that each example is effective is also presented.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Each team selects one or two for review, and notes design features that
+may be transferred to their context.  </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Facilitators and critical friends will support the discussion by
+pointing out particular aspects of the example designs critical to the success 
+of the example. </span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><b><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>Slides showing the example
+designs, descriptions of their use, and evidence of their success. </span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-align:justify;text-indent:-18.0pt'><font
+size=2 face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings'>ü<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>Copies of academic papers will
+also be provided. The focus of the presentation will vary depending on the
+participants, and  will vary from workshop to workshop. </span></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>&nbsp;</span></font></b></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Notes on potentially useful design features added to the ILDE.</span></font></p>
+
+<h1><a name="_Toc355954535"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>6<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Initiate, Ideate, Investigate:
+produce your Vision (1.5 hours)</span></font></a></h1>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>In this activity each team will describe
+their vision for a ‘X’ activity. This is a first draft, and it may be modified
+during the workshop. This vision should focus on describing the effects the activity
+is intended to have on the learners (not on how these effects will be achieved
+which is the focus of activity 8 ‘Prototype’). </span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>&nbsp;</span></font></b></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+color=blue face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings;color:blue'>ü<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp; </span></font></span></font><span
+lang=EN-GB>Printed templates for the <a
+href="http://www2.le.ac.uk/projects/oer/oers/beyond-distance-research-alliance/7Cs-toolkit/archived-7cs-resources/course-map-resources/Course%20Map%20MS%20Word%20format.docx/view">Course
+Map</a> need to be provided to participants and they will be able to complete
+this within the ILDE.  </span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+color=blue face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:
+Wingdings;color:blue'>ü<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp; </span></font></span></font><span
+lang=EN-GB>For the Learning Outcomes View (Galley, R., 2010) A3 sheets of paper
+and<span class=MsoHyperlink><u><font color=blue face=Arial><span
+style='font-family:"Arial","sans-serif"'> </span></font></u></span>CompendiumLD
+icon post-it notes need to be provided, along with a guide showing participants
+how to create a  Learning Outcomes View  in CompendiumLD should participants
+wish to produce a digital version..  </span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The vision should be described in terms of </span></font></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><i><span lang=EN-GB style='font-style:italic'>Learning
+outcomes</span></i><span lang=EN-GB><br>
+Other outcomes (e.g. affective outcomes such as individual motivation,
+confidence, team building)</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><i><span lang=EN-GB style='font-style:italic'>Leaners’
+outputs</span></i><span lang=EN-GB><br>
+An initial description of the evidence required to indicate  that the learners
+have reached the learning outcomes. Examples include a written piece of work,
+and an observable behaviour.</span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Participants will produce representations
+such as <a
+href="http://www2.le.ac.uk/projects/oer/oers/beyond-distance-research-alliance/7Cs-toolkit/archived-7cs-resources/course-map-resources/Course%20Map%20MS%20Word%20format.docx/view">Course
+Map</a>  and <a href="http://compendiumld.open.ac.uk/#loView">Learning Outcomes
+View</a>.</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>The Learning Outcomes View is probably most
+appropriate as that view is very simple to produce, and gives a specification
+that a single  activity can be evaluated heuristically against. In contrast the
+Course Map is intended to describe complete courses as a whole such as a course
+of 100 or more hours of study time. The Course Map could still be applied to
+show the context for the ‘X’  learning activity that the participants will
+design.  Other representations of context could also be introduced (e.g.
+factors and concerns table) to help focus participants’ attention on
+consideration of the context where the design will be run.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<h1><a name="_Toc355954536"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>7<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Connect: gather tools and
+resources (0.75 hour)</span></font></a></h1>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>By this stage of the workshop participants will
+have an idea of the kind of behaviours they want their learners to demonstrate,
+as well as the kind of products/competencies they desire learners to produce/become
+proficient in during the learning activity they are collaboratively designing. These
+need to be described in the learning outcomes view.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>In this activity the learners are shown a
+set of ‘X’ learning patterns. The examples used in the “5 Evidence and examples
+of ‘X’” activity will provide concrete examples of some or all of the patterns
+that are now made available to the participants.  </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Each team will select one or more patterns
+which best suit their articulated Vision as defined by the Course Map, Learning
+Outcomes view, Personas and the  barriers and challenges that  they developed
+during the preceding activities.  If more than one pattern is chosen it could
+be because there are alternatives, or because the team thinks that a sequence
+of ‘X’ activities is necessary.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>They now begin the detailed design. Questions that should be used as
+prompts for this session include:</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Which parts of the activity should
+be synchronous, and which should be asynchronous?</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Which tools have the right
+affordances for your activity?</span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>This could be carried out further using a Think-Pair-Share activity.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoListParagraph style='text-indent:-18.0pt'><font size=2
+face=Wingdings><span lang=EN-GB style='font-size:11.0pt;font-family:Wingdings'>ü<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;
+</span></font></span></font><span lang=EN-GB>A set of design patterns for X. 
+These should be provided both online and in printed form.</span></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Output</span></font></b></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The selected pattern(s), a set of resources that are to be used within
+the activity and an annotated diagram of the pattern(s) showing:</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'> </span></font></p>
+
+<p class=MsoListParagraphCxSpFirst style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>asynchronous and synchronous
+stages within the design</span></p>
+
+<p class=MsoListParagraphCxSpLast style='text-indent:-18.0pt'><font size=2
+face=Symbol><span lang=EN-GB style='font-size:11.0pt;font-family:Symbol'>·<font
+size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>where particular tools and
+resources are used.  </span></p>
+
+<h1><a name="_Toc355954537"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>8<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Prototype (1.5 hour)</span></font></a></h1>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>Participants work together to produce a
+prototype of an ‘X’ activity. The prototypes illustrate tasks the facilitator
+and learners may choose to undertake. Prototyping would use a suitable ILDE
+tool or be carried out using the technology of the team’s choice (including
+paper).</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoNormal style='text-align:justify'><i><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-style:italic'>Participants’ resources:
+a guide to the affordances of the ILDE instantiation and deployment tools which
+explains which tools may be best suited to instantiate and run patterns of type
+X.</span></font></i></p>
+
+<h1><a name="_Toc355954538"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>9<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Evaluate (0.75 hour)</span></font></a></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>An  appropriate summary view of each team’s design is selected by the
+team to be shared and evaluated. The summary view to be used will depend on ‘X’
+(e.g. if ‘X’ is Collaborative Learning the appropriate summary view will be
+generated by Web Collage).</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoCommentText><font size=2 face=Arial><span lang=EN-GB
+style='font-size:10.0pt'>Designs are swapped amongst each group and evaluated
+heuristically (<a
+href="http://www.ld-grid.org/resources/methods-and-methodologies/heuristic-evaluation">http://www.ld-grid.org/resources/methods-and-methodologies/heuristic-evaluation</a><span
+class=MsoHyperlink><u><font color=blue face=Arial><span style='font-family:
+"Arial","sans-serif"'>). </span></font></u></span></span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Facilitators and critical friends advise on how to apply the teams
+evaluation checklist to the design in question.</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>The final step is to share the result of
+the evaluation back to group as a whole.</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoNormal style='text-align:justify'><i><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt;font-style:italic'>Participants’ resources:
+the design of another team, along with the same team’s evaluation checklist
+(i.e. the output from Activity 4).  </span></font></i></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='text-align:justify'><font size=2 face=Arial><span
+lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<h1><a name="_Toc355954539"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>10<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Reflect (0.5 hour)</span></font></a></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>In the last activity (‘Evaluate’), each group’s design was evaluated by
+another group, and the results of the evaluation shared. Now everyone should
+have an understanding of all the designs. </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>Participant groups should now reflect on if and how their activity
+design could be connected to other groups designs to produce a course. </span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<h1><a name="_Toc355954540"><b><font size=4 face=Arial><span lang=EN-GB
+style='font-size:14.0pt'>11<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp; </span></font></span></font></b><font
+size=4><span lang=EN-GB style='font-size:14.0pt'>Wrap up (0.25 hour)</span></font></a></h1>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>The facilitators conclude by describing how participants can find out
+more about learning design in general, and the ILDE in particular.</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><b><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-weight:bold'>Resources</span></font></b></p>
+
+<p class=MsoNormal><i><font size=2 face=Arial><span lang=EN-GB
+style='font-size:11.0pt;font-style:italic'>Facilitators’ resource: slideshow
+with notes</span></font></i><span lang=EN-GB>, <i><span style='font-style:italic'>ILDE</span></i>.</span></p>
+
+<p class=MsoTitle><a name="_Toc355954542"><b><font size=4 face=Arial><span
+lang=EN-GB style='font-size:14.0pt'>References</span></font></b></a></p>
+
+<p class=MsoTitle><b><font size=1 face=Arial><span lang=EN-GB style='font-size:
+2.0pt'>&nbsp;</span></font></b></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-36.0pt'><a
+name="_ENREF_1"><font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt'>Cross,
+S., Galley, R., Brasher, A., &amp; Weller, M. (2012). OULDI-JISC Project
+Evaluation Report. </span></font></a></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-21.8pt'><font size=2
+face=Arial><span lang=EN-GB style='font-size:11.0pt'>Retrieved 3/8/2012, from </span></font><a
+href="http://oro.open.ac.uk/34140/1/OULDI_Evaluation_Report_Final.pdf"><span
+lang=EN-GB>http://oro.open.ac.uk/34140/1/OULDI_Evaluation_Report_Final.pdf</span></a></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-36.0pt;text-autospace:
+none'><font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-36.0pt;text-autospace:
+none'><font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt'>Mor, Y.
+(2013). Personas - The Learning Design Grid, Retrieved 9/5/2013, from</span></font></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-indent:-21.8pt;text-autospace:
+none'><font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt'><a
+href="http://www.ld-grid.org/resources/representations-and-languages/personas">http://www.ld-grid.org/resources/representations-and-languages/personas</a></span></font></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;text-align:justify;text-indent:
+-36.0pt'><font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+</div>
+
+<font size=2 face=Arial><span lang=EN-GB style='font-size:11.0pt;font-family:
+"Arial","sans-serif"'><br clear=all style='page-break-before:auto'>
+</span></font>
+
+<div class=WordSection2>
+
+<p class=MsoNormal><font size=2 face=Arial><span lang=EN-GB style='font-size:
+11.0pt'>&nbsp;</span></font></p>
+
+</div>

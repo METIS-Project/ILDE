@@ -126,11 +126,48 @@ function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
     }
 }
 
+function LdSAnnotations($type, $subtype, $annotation, $threshold = 1, $owner_guid = 0, $count = false, $limit = 0, $offset = 0) {
+    global $CONFIG;
+
+    $query_limit = ($limit == 0) ? '' : "limit {$offset}, {$limit}";
+    $subtype = get_subtype_id($type, $subtype);
+    $owner = ($owner_guid == 0) ? '' : " AND owner_guid ='{$owner_guid}'";
+
+    $annotation = get_metastring_id($annotation);
+
+    $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
+	(
+		(
+			SELECT DISTINCT COUNT(id) FROM {$CONFIG->dbprefix}annotations ac WHERE ac.entity_guid = e.guid AND ac.name_id = {$annotation} {$owner}
+		) >= {$threshold}
+
+	)
+) order by time_updated asc {$query_limit}
+SQL;
+
+    $entities = get_data($query, "entity_row_to_elggstar");
+
+    if($count)
+        return count($entities);
+
+    return $entities;
+}
+
 function lds_page_handler ($page)
 {
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
+
+
+    //$t = lds_contTools::getAllTagsAndFrequencies(0);
+    //$c = get_entities_from_metadata('completeness', '1', 'object', 'LdS', 0, 9999);
+        //$r = LdSAnnotations('object', 'LdS', 'generic_comment', 1, 2, false);
+    //$r = LdSAnnotations('object', 'LdS', 'generic_comment', 1, get_loggedin_userid(), false);
+    //$v = get_annotations($r[0]->guid, 'object', 'LdS', 'generic_comment', '', get_loggedin_userid(), 9999);
+    //$time = time() - 1000000;
+    //$e = get_entities_where('time_updated > '. $time, 'object', 'LdS', 0, '', 9999);
     /*
     $vle_info = GluepsManager::getCourses();
     $course_info = GluepsManager::getCourseInfo();
@@ -621,11 +658,23 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][0]->guid = '0';
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
+    if(isset($params[1])) {
+        require_once __DIR__.'/templates/templates.php';
+        $body = ldshake_get_template($params[1]);
+    }
     if(count($params) == 3) {
         switch($params[1]) {
             case 'pattern':
                 $vars['initDocuments'][0]->body = get_coursemap_pattern();
                 $vars['editor_type'] = $params[2];
+                break;
+            case 'template':
+                require_once __DIR__.'/templates/templates.php';
+                $vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
+                if($params[2] == 'design_pattern') {
+                    $vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
+                }
+                //$vars['editor_type'] = $params[2];
                 break;
             case 'upload':
                 $vars['initDocuments'][0]->body = '';
@@ -641,8 +690,20 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][1]->guid = '0';
 	$vars['initDocuments'][1]->modified = '0';
 	$vars['initDocuments'][1]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
-	
-	$vars['initDocuments'] = json_encode($vars['initDocuments']);
+
+    if(count($params) == 3) {
+        switch($params[1]) {
+            case 'template':
+                require_once __DIR__.'/templates/templates.php';
+                if($params[2] == 'design_pattern') {
+                    $vars['initDocuments'][1]->body = ldshake_get_template('DPS');
+                }
+                break;
+        }
+    }
+
+
+    $vars['initDocuments'] = json_encode($vars['initDocuments']);
 	
 	$vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
@@ -1493,6 +1554,20 @@ function lds_exec_historyeditor ($params)
 	//page_draw('LdS History', $body);
 	
 	access_show_hidden_entities($access_status);
+}
+
+function lds_exec_view_iframe ($params)
+{
+    global $CONFIG;
+
+    $doc = get_entity($params[1]);
+    $vars['doc'] = $doc;
+    if (is_numeric($doc->document_guid))
+        $vars['title'] = get_entity($doc->document_guid)->title;
+    else
+        $vars['title'] = $doc->title;
+
+    echo elgg_view('lds/view_iframe',$vars);
 }
 
 function lds_exec_viewext ($params)

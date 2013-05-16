@@ -1,0 +1,128 @@
+<div class=WordSection1>
+
+<p class=MsoTitle><a name=h.2ofvyt3c7u80></a><b><font size=7 color=black
+face=Arial><span lang=EN-GB style='font-size:36.0pt;line-height:115%'><span
+style='line-height:115%'>Design Pattern</span></span></font></b></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Yishay Mor, <a
+href="mailto:Yishay.Mor@Open.ac.uk"><font color="#1155cc"><span
+style='color:#1155CC'>Yishay.Mor@Open.ac.uk</span></font></a></span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'><img border=0 width=88 height=31 id=image00.png
+src="http://ilde.upf.edu/mod/lds/templates/DesignPatternTemplate_files/image001.png"></span></font><font size=2><span
+lang=EN-GB style='font-size:10.0pt;line-height:115%;background:white'>This work
+is licensed under a</span></font><span lang=EN-GB><a
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
+color=black><span style='font-size:10.0pt;line-height:115%;color:black;
+background:white;text-decoration:none'> </span></font></a><a
+href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
+color="#4374b7"><span style='font-size:10.0pt;line-height:115%;color:#4374B7;
+background:white;text-decoration:none'>Creative Commons
+Attribution-NonCommercial-ShareAlike 3.0 Unported License</span></font></a></span><font
+size=2><span lang=EN-GB style='font-size:10.0pt;line-height:115%;background:
+white'>.</span></font></p>
+
+<p class=MsoNormal><strong><b><font size=2 color=black face=Arial><span
+lang=EN-GB style='font-size:11.0pt;line-height:115%;font-family:"Arial","sans-serif"'>&nbsp;</span></font></b></strong></p>
+
+<p class=MsoNormal><strong><b><font size=2 color=black face=Arial><span
+lang=EN-GB style='font-size:11.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Replace
+the guidance text (in italics) with your own content.</span></font></b></strong></p>
+
+<h1><a name=h.qvahxbv2llx1></a><b><font size=5 color=red face=Arial><span
+lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
+style='line-height:115%'>Name</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Design patterns are
+intended to be used as part of a pattern language, as an infrastructure for
+design-level conversation. As such, the name of a pattern should be amenable
+for use as a noun in such a conversation. It should be short, memorable and
+indicative of the big idea of the pattern.</span></font></i></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Replace the
+document name and delete this section.</span></font></i></p>
+
+<h1><a name=h.5yzmzrtpdxrr></a><a name=h.z1viddwjtksy></a><b><font size=5
+color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
+color:red'><span style='line-height:115%'>Problem</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The problem
+description provides a clear and succinct presentation of the motivation for
+the pattern, its raison d'être.</span></font></i></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The educational
+research literature tends to shy away from the term “problem”, as it may
+suggest a negative attitude. In the design literature, and specifically the
+computer science tradition, problems are seen as opportunities for action.</span></font></i><span
+lang=EN-GB> <i><span style='font-style:italic'>From a design perspective, where
+there is no problem, nothing needs to be changed, no act of design is required
+and consequently there are no questions for research.</span></i></span></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>In either case –
+explain what this pattern aims to achieve.</span></font></i></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>If you prefer –
+rename this section as “Challenge”.</span></font></i></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.cp8dltpujsvm></a><a name=h.rp2ab0xev1s0></a><b><font size=5
+color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
+color:red'><span style='line-height:115%'>Context</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>A fundamental
+premise of design is that problems and solutions are rarely universal. The
+scope of any statement needs to be qualified if it is to be meaningful. Note
+the material, social and intentional characteristics of the setting in which
+the problem is embedded. These are the things you can’t change.</span></font></i></p>
+
+<h1><a name=h.7q6ee1gpwilr></a><a name=h.b11t0notn161></a><b><font size=5
+color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
+color:red'><span style='line-height:115%'>Solution</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The solution is the
+centrepiece of the pattern. In scientific terms, it is the claim that under
+certain conditions the described actions will have a particular effect which
+addresses the problem.</span></font></i></p>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>The solution would
+ideally be articulated at a level of detail which allows immediate
+implementation, and yet is applicable beyond the specific experiences from
+which it is derived. </span></font></i></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.7xrtpmxyi5un></a><a name=h.afob0c2xdwg0></a><a
+name=h.3r5o70epulpr></a><a name=h.5jeho3lb4y4></a><b><font size=5 color=red
+face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
+color:red'><span style='line-height:115%'>Examples</span></span></font></b></h1>
+
+<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Justify the pattern
+by reference to data from cases where it appears to have had a positive effect.
+These would primarily be derived from the design experiment at hand and
+supplemented by external documented cases.</span></font></i></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h1><a name=h.llnc1xxae0iw></a><a name=h.tbdxc6ypkxn1></a><b><font size=5
+color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
+color:red'><span style='line-height:115%'>Data and References </span></span></font></b></h1>
+
+<h1><b><font size=5 color=red face=Arial><span lang=EN-GB>&nbsp;</span></font></b></h1>
+
+</div>

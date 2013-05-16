@@ -1,0 +1,161 @@
+<p><p class="MsoTitle"><span lang="EN-GB">Methodology
+Design Narrative Template<o:p></o:p></span></p>
+
+<p class="MsoTitle"><span lang="EN-GB" style="font-size: 12pt;">(Information about the
+template at <br>
+http://www.ld-grid.org/resources/representations-and-languages/design-narratives)<o:p></o:p></span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB">&nbsp;</span></b></p>
+
+<ol style="margin-top:0cm" start="1" type="1">
+ <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
+     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Situation <o:p></o:p></span></b></li>
+</ol>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="2" type="1">
+ <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
+     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Task<o:p></o:p></span></b></li>
+</ol>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+
+<ol style="margin-top:0cm" start="3" type="1">
+ <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
+     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Actions </span></b><span lang="EN-GB">(How did you try to address
+     the issue?)<b><o:p></o:p></b></span></li>
+</ol>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity<o:p></o:p></span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border:solid windowtext 1.0pt;
+  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
+  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity goal(s) or intended outcome (“X”)<o:p></o:p></span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity title &amp; description<o:p></o:p></span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-bottom:12.0pt"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity materials<o:p></o:p></span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-left:36.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">The “how” (steps A, B, C, that lead to Y
+  or the activity outcomes)<o:p></o:p></span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-left:18.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
+  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
+  padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity outcomes (“Y”) (positive)<o:p></o:p></span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
+  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
+  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-left:18.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
+  </td>
+ </tr>
+</tbody></table>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-size:16.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+
+<ol style="margin-top:0cm" start="4" type="1">
+ <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
+     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Reflection <o:p></o:p></span></b></li>
+</ol>
+
+<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
+ mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
+ .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
+ <tbody><tr>
+  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
+  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
+  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
+  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
+  <a name="_GoBack"></a>
+  <p class="MsoNormal"><span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-family:
+  Arial">&nbsp;</span></p>
+  </td>
+ </tr></tbody></table></p>

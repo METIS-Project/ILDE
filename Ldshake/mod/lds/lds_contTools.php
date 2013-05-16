@@ -1459,6 +1459,7 @@ SQL;
     }
 
     public static function LdSUserEditRights($lds_id, $user_id) {
+        global $CONFIG;
 
         $entity = get_entity($lds_id);
         //$subtype = get_subtype_id('object', 'LdS');
