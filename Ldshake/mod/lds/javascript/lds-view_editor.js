@@ -42,8 +42,13 @@ $(document).ready(function()
 		
 		var h = Math.max(400, height - top - commentHeight);
 		
-		if(iseXe)
-			$('#payload').height (h);
+		if(iseXe) {
+			$('#payload').height(h);
+            $('#the_lds').height(h-2);
+            $('#internal_iviewer').width($('#payload').width()-2);
+            $('#the_lds').width($('#payload').width()-2);
+
+        }
 	}
 	
 	resizeViewport();

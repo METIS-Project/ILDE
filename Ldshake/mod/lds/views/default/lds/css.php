@@ -749,7 +749,7 @@ del {
 #the_lds {
 	margin-top: 20px;
 	border: 1px solid #777;
-	padding: 27px 34px 27px 19px;
+	/*padding: 27px 34px 27px 19px;*/
 	box-shadow: 2px 2px 1px #ccc;
 	-webkit-box-shadow: 2px 2px 1px #ccc;
 	-moz-box-shadow: 2px 2px 1px #ccc;

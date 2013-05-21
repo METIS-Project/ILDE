@@ -36,6 +36,22 @@
 $(document).ready(function()
 {
 
+    function resizeViewport () {
+        $('#footer_ending').css('display', 'none');
+        var top = $('#the_lds').offset().top;
+        var height = $(window).height();
+        var commentHeight = $('#layout_footer').outerHeight();
+
+        var h = Math.max(400, height - top - commentHeight);
+
+        $('#the_lds').height(h-2-20);
+        $('#the_lds').width($('#one_column').width()-2);
+    }
+
+    resizeViewport();
+
+    $(window).resize(resizeViewport);
+
 	$('#lds_action_publish,#lds_action_republish').click(function (){
 		$('.publishbutton').css('visibility','hidden');
 		$('.lds_loading').show();

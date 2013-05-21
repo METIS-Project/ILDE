@@ -172,9 +172,9 @@ $confPaths = array (
 	 * HTML previews of WebCollage & eXe
 	 */
 	'editors_content' => array (
-						'devel' =>		'/var/www/ldshake/',
-						'staging' =>	'/var/www/ldshake/',
-						'prod' =>		'/var/www/ldshake/'
+						'devel' =>		'/var/www/ilde/',
+						'staging' =>	'/var/www/ilde/',
+						'prod' =>		'/var/www/ilde/'
 						),
 	
 	/**

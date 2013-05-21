@@ -234,11 +234,14 @@ function encodeURIComponent($str) {
 	
 <div id="payload">
     <?php if ($editor == 'exe'): ?>
-        <iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
-    <?php elseif ($editor == 'webcollagerest'): ?>
-        <iframe src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php else:?>
+        <div id="the_lds" style="height: 100%;padding: 0px;margin: 0px;width: 100%;">
+            <?php echo $currentDoc->description ?>
+        </div>
     <?php endif; ?>
-
 </div>
 <div id="comment_switcher">
 <a href="#lds_info_wrapper">+ View and add comments (<?php echo $nComments ?>)</a>
