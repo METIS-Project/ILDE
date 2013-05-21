@@ -591,7 +591,7 @@ function initDocName ()
 	{
 		//If we haven't changed the title of the 1st document yet,
 		//the LdS title will be the document title as well.
-		changeDocTitle = (documents[0].title == t9n.untitledDoc);
+		changeDocTitle = true;//(documents[0].title == t9n.untitledDoc);
 		$affectedTab = $('#lds_edit_tabs li.lds_tab:eq(0)').find('.lds_tab_title');
 	});
 	

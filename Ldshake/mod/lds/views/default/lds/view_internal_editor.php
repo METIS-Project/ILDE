@@ -233,19 +233,12 @@ function encodeURIComponent($str) {
     <?php endif; ?>
 	
 <div id="payload">
-	<?php
-    $iseXe = false;
-    if (!$iseXe): ?>
-	<div id="the_lds">
-		<?php echo $currentDoc->description ?>
-	</div>
-	<?php else: ?>
-		<?php if ($editor == 'exe'): ?>
-			<iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
-		<?php else: ?>
-			<iframe src="<?php echo $CONFIG->url ?>content/webcollage/<?php echo $currentDoc->previewDir?>.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
-		<?php endif; ?>
-	<?php endif; ?>
+    <?php if ($editor == 'exe'): ?>
+        <iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
+    <?php elseif ($editor == 'webcollagerest'): ?>
+        <iframe src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" width="960" height="100%" style="border: 1px solid #aaa;"></iframe>
+    <?php endif; ?>
+
 </div>
 <div id="comment_switcher">
 <a href="#lds_info_wrapper">+ View and add comments (<?php echo $nComments ?>)</a>

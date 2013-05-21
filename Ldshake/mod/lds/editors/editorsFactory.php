@@ -848,6 +848,7 @@ class RestEditor extends Editor
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        //$uri = "http://pandora.tel.uva.es/~wic/wic2Ldshake/ldshake/router.php?_route_=ldsdoc/";
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
@@ -860,7 +861,7 @@ class RestEditor extends Editor
         $vars['editor_id'] = $rand_id;
         //http://appserver.ldshake.edu/designapp/?document_id=value&sectoken=value
         $doc_url = parse_url($response->raw_body);
-        $url_path = explode('/', $doc_url['path']);
+        $url_path = explode('/', $doc_url['path'].$doc_url['query']);
         $url_path_filtered = array();
         foreach ($url_path as $up)
             if(strlen($up))
@@ -899,7 +900,7 @@ class RestEditor extends Editor
         $vars['editor'] = 'webcollagerest';
         $vars['editor_label'] = 'WebCollage';
         $doc_url = parse_url($response->raw_body);
-        $url_path = explode('/', $doc_url['path']);
+        $url_path = explode('/', $doc_url['path'].$doc_url['query']);
         $url_path_filtered = array();
         foreach ($url_path as $up)
             if(strlen($up))
@@ -957,7 +958,7 @@ class RestEditor extends Editor
             $vars['editor'] = 'webcollagerest';
             $vars['editor_label'] = 'WebCollage';
             $doc_url = parse_url($response->raw_body);
-            $url_path = explode('/', $doc_url['path']);
+            $url_path = explode('/', $doc_url['path'].$doc_url['query']);
             $url_path_filtered = array();
             foreach ($url_path as $up)
                 if(strlen($up))
@@ -1049,7 +1050,14 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
-        $uri = $params['url'];
+        $url_path = explode('/', $params['url']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}";
         $response = \Httpful\Request::get($uri)
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
@@ -1064,7 +1072,7 @@ class RestEditor extends Editor
         $this->_document->save();
 
 
-        $uri = $params['url'].'.imsld';
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'.imsld';
         $response = \Httpful\Request::get($uri)
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
@@ -1078,24 +1086,27 @@ class RestEditor extends Editor
         $this->_document->file_imsld_guid = $file->guid;
         $this->_document->save();
 
-
-        $uri = $params['url'].'/summary';
-        $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->sendIt();
-
-        //create a new file to store the document
-        $rand_id = mt_rand(400,9000000);
-        $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
-        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
-        $this->_document->preview_guid = $file->guid;
-        $this->_document->save();
-
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
         $this->_document->pub_previewDir = rand_str(64);
         $this->_document->revisionDir = rand_str(64);
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'/summary';
+        $response = \Httpful\Request::get($uri)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->sendIt();
+
+        $putData = tmpfile();
+        fwrite($putData, $response->raw_body);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
+        mkdir($preview_path);
+        $zip = new ZipArchive();
+        $zip->open($m_fd['uri']);
+        $zip->extractTo($preview_path);
+        $zip->close();
 
         $this->_document->rev_last = 0;
         $this->_document->lds_revision_id = 0;
@@ -1163,7 +1174,14 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $docSession = $params['editor_id'];
 
-        $uri = $params['url'];
+        $url_path = explode('/', $params['url']);
+        $url_path_filtered = array();
+        foreach ($url_path as $up)
+            if(strlen($up))
+                $url_path_filtered[] = $up;
+        $doc_id = $url_path_filtered[count($url_path_filtered) -1];
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}";
         $response = \Httpful\Request::get($uri)
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
@@ -1174,7 +1192,7 @@ class RestEditor extends Editor
         $filestorename = (string)$rand_id;
         file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_body);
 
-        $uri = $params['url'].'.imsld';
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'.imsld';
         $response = \Httpful\Request::get($uri)
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->addHeader('Accept', 'application/json; charset=UTF-8')
@@ -1189,6 +1207,23 @@ class RestEditor extends Editor
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
 
+
+        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'/summary';
+        $response = \Httpful\Request::get($uri)
+            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->sendIt();
+
+        $putData = tmpfile();
+        fwrite($putData, $response->raw_body);
+        fseek($putData, 0);
+        $m_fd = stream_get_meta_data($putData);
+
+        $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
+        mkdir($preview_path);
+        $zip = new ZipArchive();
+        $zip->open($m_fd['uri']);
+        $zip->extractTo($preview_path);
+        $zip->close();
 
         /*
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
@@ -1324,7 +1359,7 @@ class UploadEditor extends Editor
             $vars['editor'] = 'webcollagerest';
             $vars['editor_label'] = 'WebCollage';
             $doc_url = parse_url($response->raw_body);
-            $url_path = explode('/', $doc_url['path']);
+            $url_path = explode('/', $doc_url['path'].$doc_url['query']);
             $url_path_filtered = array();
             foreach ($url_path as $up)
                 if(strlen($up))
@@ -2135,8 +2170,8 @@ $vars = array();
 
         //create a new file to store the document
         $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
-        file_put_contents($this->getFullFilePath($this->_document->file_guid), $glueps_xmlcontent);
+        //$file = $this->getNewFile($filestorename);
+        file_put_contents(Editor::getFullFilePath($this->_document->file_guid), $glueps_xmlcontent);
 
         /*
         $filename_editor = $CONFIG->exedata.'export/'.$docSession.'.elp';

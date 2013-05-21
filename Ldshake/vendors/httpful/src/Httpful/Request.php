@@ -44,7 +44,7 @@ class Request
            $payload,
            $parse_callback,
            $error_callback,
-           $follow_redirects        = false,
+           $follow_redirects        = true,
            $max_redirects           = self::MAX_REDIRECTS_DEFAULT,
            $payload_serializers     = array();
 
@@ -748,6 +748,7 @@ class Request
         if ($this->follow_redirects) {
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
             curl_setopt($ch, CURLOPT_MAXREDIRS, $this->max_redirects);
+            curl_setopt($ch, CURLOPT_POSTREDIR, 3);
         }
 
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, $this->strict_ssl);

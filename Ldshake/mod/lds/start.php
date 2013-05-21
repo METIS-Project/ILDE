@@ -53,6 +53,7 @@ function lds_init()
 
     $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
+    //$CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/ldshake/router.php?_route_=ldsdoc/";
     $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
 
     //Load the model classes
@@ -1588,8 +1589,8 @@ function lds_exec_viewext ($params)
 
 	$doc = get_entity($publishedId);
 	$vars['doc'] = $doc;
-	if (is_numeric($doc->document_guid))
-		$vars['title'] = get_entity($doc->document_guid)->title;
+	if (is_numeric($doc->lds_guid))
+		$vars['title'] = get_entity($doc->lds_guid)->title;
 	else
 		$vars['title'] = $doc->title;
 	
