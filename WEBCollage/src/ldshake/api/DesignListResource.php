@@ -229,6 +229,7 @@ class DesignListResource {
 
         //Convert the json string into a php object
         $json_content_vle_info = file_get_contents($destination_vle_info);
+        
         if ($json_content_vle_info == false) {
             return new ResponseData(500, "Error while trying to get the content of the file containing the vle, course and participant info", 'text/html');
         }
@@ -356,7 +357,7 @@ class DesignListResource {
         $courseParts = array();
         foreach ($vle_info_obj->course->participants as $pc) {
             $participant = new stdClass();
-            $participant->participantId = $pc->id;
+            $participant->participantId = $pc->name;
             $participant->name = $pc->name;
             if (isset($pc->isStaff) && strcmp($pc->isStaff, "") != 0) {
                 $participant->participantType = "teacher";
