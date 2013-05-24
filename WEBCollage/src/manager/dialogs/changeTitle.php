@@ -8,7 +8,7 @@ function getChangeTitleDialog() {
 	$output .= '</td>';
 	$output .= '</tr>';
 	$output .= '<tr>';
-	$output .= '<td colspan="2" align="center">';
+	$output .= '<td align="center">';
 	$output .= '<button dojoType="dijit.form.Button" label="${common.ok}" type="submit">';
 	$output .= '</button>';
 	$output .= '</td>';

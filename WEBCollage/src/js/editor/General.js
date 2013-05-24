@@ -24,10 +24,10 @@ var General = {
         dlg.onOpen = function() {
             dijit.byId("LDTitleChangeTextbox").set("value", LearningDesign.data.title);
         };
-        dlg = dijit.byId("LDPrerrequisitesChangeDialog");
+        /*dlg = dijit.byId("LDPrerrequisitesChangeDialog");
         dlg.onOpen = function() {
             dijit.byId("LDPrerrequisitesChangeTextarea").set("value", LearningDesign.data.prerrequisites);
-        };
+        };*/
         dojo.connect(dojo.byId("deleteLoDialogOk"), "onclick", function(){
             General.closeDeleteLoDialog();
             General.removeLO(General.tmpLo);
@@ -36,7 +36,21 @@ var General = {
             General.closeDeleteLoDialog();
         });
     },
+    
+     /**
+     * Abre la ventana de editar requisitos previos
+     */ 
+    openEditPrerreqDialog : function() {
+        dijit.byId('LDPrerrequisitesEditPrerrequisites').set("value", LearningDesign.data.prerrequisites);
+        dijit.byId('LDPrerrequisitesEditDialog').show();
+    },
 
+    closeEditPrerreqDialog : function() {
+        var prerrequisites = dijit.byId('LDPrerrequisitesEditPrerrequisites').get('value');
+        General.setPrerrequisites(prerrequisites);
+        dijit.byId('LDPrerrequisitesEditDialog').hide();
+    },
+    
     /**
      * Abre la ventana de añadir objetivo
      */ 

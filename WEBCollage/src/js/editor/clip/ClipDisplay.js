@@ -191,6 +191,9 @@ var ClipDisplay = {
                         data : {
                             action : action
                         },
+                        onClick : function(data) {
+                            ClipActions.activate(data.action);
+                        },
                         title : i18n.get("clip.menu.title"),
                         menuStyle : "default"
 
