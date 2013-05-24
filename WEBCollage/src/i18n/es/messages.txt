@@ -767,6 +767,7 @@ participantes.uri=URI
 fichero.notSupportedFormat=Formato de fichero no soportado
 fichero.error=Error al subir el fichero
 
+export.title=Exportar
 deployGluePS.title=Despliegue en Glue!PS
 deployGluePS.error=Error al desplegar en Glue!PS
 
