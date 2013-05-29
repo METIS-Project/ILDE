@@ -41,14 +41,17 @@
     <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
     <input type="text" size="60" name="new_implementation_title" />
 
-    <h3><?php echo T("Select one of your registered VLEs") ?></h3>
+    <h3><?php echo T("Select one of your couses") ?></h3>
 
-    <div style="max-height: 200px; overflow-y: auto;">
-        <?php
-        foreach($vle_info->courses as $key=>$name):
-            ?>
-            <div style="max-height: 400px; overflow: auto;">
-                <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $name;?></span>
+    <div style="max-height: 300px; overflow-y: auto;">
+        <?php foreach($vle_data as $vle_id=>$vle): ?>
+            <div class="vle_implement_form_vle_name"><?php echo $vle->item->name ?></div>
+            <div class="vle_implement_form_vle_courses">
+            <?php foreach($vle->courses as $key=>$course): ?>
+                <div>
+                    <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $course;?></span>
+                </div>
+            <?php endforeach; ?>
             </div>
         <?php endforeach; ?>
     </div>

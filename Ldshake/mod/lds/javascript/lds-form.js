@@ -136,6 +136,7 @@ function generateTagList (source)
 	else
 	{
 		$('#lds_edit_tags .tooltip').show();
+        html = "";
 	}
 	$('#lds_edit_tags_list').html(html);
 }
@@ -327,7 +328,6 @@ function initTags ()
 		//var e = jQuery.Event("keydown");
 		//e.which = 9; // # Some key code value
 		//$(this).trigger(e);
-
 		//$(this).keydown(9);
 	});
 }
@@ -611,6 +611,11 @@ function initDocName ()
 			}
 		}
 	});
+
+    $('#lds_edit_title').blur(function(){
+        if ($.trim($(this).val()).length == 0)
+            $(this).val(t9n.untitledLdS)
+    });
 }
 
 $(document).ready(function()

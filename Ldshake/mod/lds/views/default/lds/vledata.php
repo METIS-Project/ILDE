@@ -38,55 +38,84 @@
 <?php
 extract($vars);
 ?>
+<div id="two_column_left_sidebar">
+    <div id="owner_block">
+        <div class="vle_list_add_item"><a href="<?php echo "{$url}pg/lds/vle/"?>"><?php echo T('Add a new VLE'); ?></a></div>
 
-<div id="lds_vle_page">
-
-    <div class="lds_form_title">
-        <?php echo T('Enter your VLE details');?>
+        <div class="ldshake_sidebar_block_title"><?php echo T("Your VLEs"); ?></div>
+        <?php    foreach($vlelist as $vvle):?>
+                <div class="vle_list_item <?php echo ($vvle->guid == $vle->guid ? 'current' : '');?>"><a href="<?php echo "{$url}pg/lds/vle/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
+        <?php endforeach;?>
     </div>
+</div>
+
+<div id="two_column_left_sidebar_maincontent">
+    <div id="lds_vle_page">
+
+        <!--<div class="lds_form_title">
+            <?php if($vle->new)
+                echo T('Enter your new VLE details');
+            else
+                echo T('Update ').'<i>'.$vle->name.'</i> configuration';
+            ?>
+        </div>-->
 
 
-    <form id="lds_vle_form" action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
-
-        <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE name')?></span>
-            <input class="vle_form_input" type="text" name="vle_name" value="<?php echo $vle->name?>" />
-        </div>
-        <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE type')?></span>
-            <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
-        </div>
-        <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE url')?></span>
-            <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
-        </div>
-        <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE username')?></span>
-            <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
-        </div>
-        <div class="lds_form_block">
-            <span class="vle_form_label"><?php echo T('VLE password')?></span>
-            <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
+        <div id="content_area_user_title">
+            <h2>            <?php if($vle->new)
+                    echo T('Enter your new VLE details');
+                else
+                    echo T('Update ').'<i>'.$vle->name.'</i> configuration';
+                ?>
+            </h2>
         </div>
 
-        <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />
+        <form id="lds_vle_form" action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
 
-    </form>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE name')?></span>
+                <input class="vle_form_input" type="text" name="vle_name" value="<?php echo $vle->name?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE type')?></span>
+                <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE url')?></span>
+                <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE username')?></span>
+                <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE password')?></span>
+                <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
+            </div>
 
-<?php if($vle_info):?>
-    <div id="vle_test_box">
-        <div class="vle_info_working"><?php echo T('Your VLE details are working properly. These are the courses available')?></div>
-        <div class="vle_info_box">
-            <?php
-            $courses = (array)$vle_info->courses;
-            ksort($courses);
-            foreach($courses as $key => $fvle):?>
-            <div class="vle_info_element">
-                <span class="vle_info_key_data"><?php echo $key ?></span>
-                <span class="vle_info_course_name_data"><?php echo $fvle?></span>
-             </div>
-            <?php endforeach;?>
+            <input type="hidden" name="vle_id" value="<?php echo $vle->guid;?>" />
+
+            <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />
+
+        </form>
+
+    <?php if($vle_info instanceof stdClass):?>
+        <div id="vle_test_box">
+            <div class="vle_info_working"><?php echo T('Your VLE details are working properly. These are the courses available')?></div>
+            <div class="vle_info_box">
+                <?php
+                $courses = (array)$vle_info->courses;
+                ksort($courses);
+                foreach($courses as $key => $fvle):?>
+                <div class="vle_info_element">
+                    <span class="vle_info_key_data"><?php echo $key ?></span>
+                    <span class="vle_info_course_name_data"><?php echo $fvle?></span>
+                 </div>
+                <?php endforeach;?>
+            </div>
         </div>
+    <?php elseif(!$vle->new): ?>
+            <div class="vle_info_working"><?php echo T('There are no courses available with the provided VLE configuration.')?></div>
+    <?php endif; ?>
     </div>
-<?php endif; ?>
 </div>

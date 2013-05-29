@@ -107,7 +107,7 @@ if (isloggedin()) :
 			<div id="ldshake_topbar_serach">
 				<form id="searchform" action="<?php echo $vars['url']; ?>pg/lds/search/" method="get">
 					<span id="ldshake_topbar_search_submit"><a href="#"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/search.png" /></a></span>
-					<input type="text" size="21" name="q" placeholder="Search" id="ldshake_topbar_search_input" />
+					<input type="text" size="21" name="q" placeholder="<?php echo T('Search %1', 'LdS')?>" id="ldshake_topbar_search_input" />
 				</form>
 			</div>
 			<div id="ldshake_topbar_avatar">

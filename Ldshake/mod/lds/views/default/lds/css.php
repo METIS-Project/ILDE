@@ -753,7 +753,7 @@ del {
 	box-shadow: 2px 2px 1px #ccc;
 	-webkit-box-shadow: 2px 2px 1px #ccc;
 	-moz-box-shadow: 2px 2px 1px #ccc;
-	min-height: 500px;
+	/*min-height: 500px;*/
     width: 900px;
 }
 
@@ -1531,6 +1531,7 @@ font-size: 19px;
 
 #lds_vle_form {
 font-size: 17px;
+margin-top: 20px;
 }
 
 .lds_form_block {
@@ -1567,7 +1568,7 @@ color: #666;
 }
 
 #vle_test_box {
-    width: 70%;
+    margin-top: 30px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1584,6 +1585,60 @@ color: #666;
 .vle_info_name_data {
     display: inline-block;
     width: 80px;
+}
+
+.vle_list_add_item a {
+    text-decoration: none;
+    color: #464646;
+    font-weight: bold;
+    padding: 5px;
+    display: block;
+}
+
+.vle_list_item a {
+    text-decoration: none;
+    color: #464646;
+    padding: 5px;
+    display: block;
+}
+
+
+.vle_list_item,
+.vle_list_add_item {
+    margin-top: 20px;
+    text-align: center;
+    background-color: #B4FFA6;
+    /*padding: 5px;*/
+    border-radius: 4px;
+    margin-left: 20px;
+}
+
+.vle_list_add_item {
+    margin-top: 80px;
+}
+
+.ldshake_sidebar_block_title {
+    margin-left: 20px;
+    margin-top: 30px;
+    font-size: 17px;
+    border-bottom: 2px grey solid;
+}
+
+.vle_list_item.current {
+    border: 1px green solid;
+}
+
+.vle_list_add_item:hover {
+    background-color: #8ED581;
+}
+
+.vle_list_item:hover {
+    background-color: #78CE78;
+}
+
+.vle_implement_form_vle_name {
+    font-weight: bold;
+    margin-top: 5px;
 }
 
 .lds_close_popup {

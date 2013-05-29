@@ -45,7 +45,7 @@
 
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
-		<h2>Resultats per: <i><?php echo $query; ?></i></h2>
+		<h2><?php echo T('Results for');?>: <i><?php echo $query; ?></i></h2>
 	</div>
 	
 	<div class="filters">

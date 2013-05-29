@@ -367,16 +367,18 @@ function lds_exec_implementable ($params)
     }
 
     $vars['section'] = $params[1];
-    $vars['section'] = $params[1];
 
-
-    if($user->vle) {
-        $vle = get_entity($user->vle);
-        $gluepsm = new GluepsManager($vle);
-        $vars['vle_id'] = $vle->guid;
-        $vars['vle_info'] = $gluepsm->getVleInfo();
-
+    if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
+        $vle_data = array();
+        foreach($vles as $vle) {
+            $gluepsm = new GluepsManager($vle);
+            if($vle_info = $gluepsm->getVleInfo())
+                $vle_info->item = $vle;
+                $vle_data[$vle->guid] = $vle_info;
+        }
     }
+
+    $vars['vle_data'] = $vle_data;
 
     //$vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementable',$vars);
@@ -445,9 +447,11 @@ function lds_exec_search ($params) {
 
 function lds_exec_vle ($params)
 {
-    $user = get_loggedin_user();
+    $vlelist = get_entities('object', 'user_vle', get_loggedin_userid(), '', 9999);
+    if(!$vlelist)
+        $vlelist = array();
 
-    if(!$user->vle) {
+    if(!isset($params[1]) || !is_numeric($params[1])) {
         $vle = new ElggObject();
         $vle->subtype = 'user_vle';
         $vle->access_id = ACCESS_PUBLIC;
@@ -457,10 +461,9 @@ function lds_exec_vle ($params)
         $vle->password = '';
         $vle->vle_url = '';
         $vle->vle_type = '';
-        $user->vle = $vle->save();
-        $user->save();
+        $vle->new = 1;
     } else {
-        $vle = get_entity($user->vle);
+        $vle = get_entity($params[1]);
     }
 
     $gluepsm = new GluepsManager($vle);
@@ -469,7 +472,8 @@ function lds_exec_vle ($params)
     //$courses = lds_contTools::getVLECourses($vle);
     $vars = array(
         'vle' => $vle,
-        'vle_info' => $vle_info
+        'vle_info' => $vle_info,
+        'vlelist' => $vlelist,
     );
     $body = elgg_view('lds/vledata',$vars);
     page_draw('VLE', $body);
@@ -792,7 +796,7 @@ function lds_exec_neweditor ($params)
 	
 	//Create an empty LdS object to initialize the form
 	$vars['initLdS'] = new stdClass();
-	$vars['initLdS']->title = 'Untitled LdS';
+	$vars['initLdS']->title = T('Untitled LdS');
 	$vars['initLdS']->granularity = '0';
 	$vars['initLdS']->completeness = '0';
 	$vars['initLdS']->tags = '';

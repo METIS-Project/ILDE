@@ -180,12 +180,12 @@ $(document).ready(function()
 
 	
 	//Submit search form when clicked the icon
-	/*
+
 	$('#ldshake_topbar_search_submit').click (function ()
 	{
 		$('#searchform').submit();
 		return false;
 	});
-	*/
+
 	
 });

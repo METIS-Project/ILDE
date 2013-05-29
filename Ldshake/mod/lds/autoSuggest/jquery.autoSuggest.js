@@ -82,6 +82,7 @@
 				var results_holder = $('<div class="as-results" id="as-results-'+x+'"></div>').hide();
 				var results_ul =  $('<ul class="as-list"></ul>');
 				var values_input = $('<input type="hidden" class="as-values" name="as_values_'+x+'" id="as-values-'+x+'" />');
+                //values_input.val(",");
 				var prefill_value = "";
 				if(typeof opts.preFill == "string"){
 					var vals = opts.preFill.split(",");					
@@ -341,7 +342,12 @@
 				}
 				
 				function add_selected_item(data, num){
-					values_input.val(values_input.val()+data[opts.selectedValuesProp]+",");
+                    var first_value;
+
+                    first_value = "";
+                    if(values_input.val() == "")
+                        first_value = ",";
+					values_input.val(first_value+values_input.val()+data[opts.selectedValuesProp]+",");
 					var item = $('<li class="as-selection-item" id="as-selection-'+num+'"></li>').click(function(){
 							opts.selectionClick.call(this, $(this));
 							selections_holder.children().removeClass("selected");
@@ -349,6 +355,11 @@
 						}).mousedown(function(){ input_focus = false; });
 					var close = $('<a class="as-close">&times;</a>').click(function(){
 							values_input.val(values_input.val().replace(","+data[opts.selectedValuesProp]+",",","));
+                            if(values_input.val() == ",") {
+                                values_input.val("");
+                                prefill_value = "";
+                            }
+
 							opts.selectionRemoved.call(this, item);
 							input_focus = true;
 							input.focus();

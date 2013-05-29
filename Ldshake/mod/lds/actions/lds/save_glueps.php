@@ -84,7 +84,7 @@ else
     $implementation->external_editor = true;
     //$implementation->editor_type = $editor_type;
     $implementation->editor_type = 'gluepsrest';
-    $implementation->title = $implementation_helper->title;
+    $implementation->title = get_input('title');
     $implementation->vle_id = $implementation_helper->vle_id;
     $implementation->course_id = $implementation_helper->course_id;
     $implementation->lds_id = $implementation_helper->lds_id;

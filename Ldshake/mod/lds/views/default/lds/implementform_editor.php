@@ -192,6 +192,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         docSetTitle : "<?php echo T("Please write a new title for the document:") ?>",
         docConfirmDelete : "<?php echo T("Are you sure you want to delete the following document?") ?>",
         untitledDoc : "<?php echo T("Untitled Document") ?>",
+        untitledLdS : "<?php echo T("Untitled Implementation") ?>",
         confirmExit : "<?php echo T("You have unsaved data. Are you sure you want to leave the editor?") ?>"
     };
 

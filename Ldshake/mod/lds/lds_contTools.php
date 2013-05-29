@@ -55,16 +55,22 @@ class lds_contTools
 		}
 		
 		//Fast fast fast! Only the first 50 results
-		$i == 0;
+		$i = 0;
 		if (is_array($ids)) {
 			foreach ($ids as $id) {
 				if ($i == 50) break;
 				
 				$aux = get_entity($id);
 				if ($aux) {
-					if ($aux->subtype == get_subtype_id('object', 'LdS')) {
-						$lds[] = $aux;
-						$i++;
+					if ($aux->subtype == get_subtype_id('object', 'LdS') ||
+                        $aux->subtype == get_subtype_id('object', 'LdS_document')) {
+                        if($aux->subtype == get_subtype_id('object', 'LdS_document'))
+                            $aux = get_entity($aux->lds_guid);
+
+                        if($aux) {
+                            $lds[] = $aux;
+                            $i++;
+                        }
 					}
 				}
 			}
@@ -122,6 +128,7 @@ class lds_contTools
             if($lds) {
                 $obj = new stdClass();
                 $obj->implementation = $implementation;
+                $lds->title = ($lds->title == '') ? T('Untitled LdS') : $lds->title;
                 $obj->lds = $lds; //The LdS itself
                 $obj->starter = get_entity($lds->owner_guid);
 
@@ -180,6 +187,7 @@ class lds_contTools
         foreach ($list as $implementation)
         {
             $obj = new stdClass();
+            $implementation->title = ($implementation->title == '') ? T('Untitled implementation') : $implementation->title;
             $obj->implementation = $implementation;
             $obj->lds_id = $implementation->lds_id; //The LdS itself
             $obj->starter = get_entity($implementation->owner_guid);

@@ -47,7 +47,7 @@
 				$user = get_loggedin_user();
 				add_submenu_item(elgg_echo('usersettings:user:opt:linktext'),$CONFIG->wwwroot . "pg/settings/user/{$user->username}/");
 				add_submenu_item(T("Edit profile icon"), $CONFIG->wwwroot . 'mod/profile/editicon.php');
-				add_submenu_item(elgg_echo('usersettings:plugins:opt:linktext'),$CONFIG->wwwroot . "pg/settings/plugins/{$user->username}/");
+				//add_submenu_item(elgg_echo('usersettings:plugins:opt:linktext'),$CONFIG->wwwroot . "pg/settings/plugins/{$user->username}/");
 				add_submenu_item(elgg_echo('usersettings:statistics:opt:linktext'),$CONFIG->wwwroot . "pg/settings/statistics/{$user->username}/");
 			}
 	}

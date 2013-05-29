@@ -44,12 +44,15 @@ $(document).ready(function()
 
         var h = Math.max(400, height - top - commentHeight);
 
-        $('#the_lds').height(h-2-20);
+        h = Math.max(h-2-20, $('#the_lds').contents().find('body').height());
+        $('#the_lds').height(h);
+        //$('#the_lds').height($('#the_lds').contents().find('body').height());
         $('#the_lds').width($('#one_column').width()-2);
     }
 
     resizeViewport();
 
+    $('#the_lds').load(resizeViewport);
     $(window).resize(resizeViewport);
 
 	$('#lds_action_publish,#lds_action_republish').click(function (){

@@ -39,7 +39,7 @@ var first_save;
 var hash = '0';
 var timer = null;
 var ping_interval = 30;
-var edit_timeout = 600;
+var edit_timeout = 60;
 
 //Saves the current document tab, the one that we are editing
 var currentTab = 0;
@@ -136,6 +136,7 @@ function generateTagList (source)
 	else
 	{
 		$('#lds_edit_tags .tooltip').show();
+        html = "";
 	}
 	$('#lds_edit_tags_list').html(html);
 }
@@ -305,11 +306,13 @@ function ajax_submit (redirect)
 				saveSharingOptions (function ()
 				{
 					//window.location = $('#lds_edit_referer').val();
+                    window.onbeforeunload = null;
                     window.location = goto_url;
 				});
 			}
 			else
 			{
+                window.onbeforeunload = null;
 				//window.location = $('#lds_edit_referer').val();
                 window.location = goto_url;
 			}
@@ -430,7 +433,7 @@ function check_activity()
 {
 	if (activity == false)
 	{
-		ajax_submit (true);
+		//ajax_submit (true);
 	}
 	else
 	{
@@ -558,6 +561,11 @@ function initDocName ()
                 $affectedTab.text(documents[0].title);
             }
         }
+    });
+
+    $('#lds_edit_title').blur(function(){
+        if ($.trim($(this).val()).length == 0)
+            $(this).val(t9n.untitledLdS)
     });
 }
 
@@ -838,11 +846,11 @@ $(document).ready(function()
 
 	//Before exit warning.
 	//Doesn't really work w/firebug enabled. Will always warn.
-//	window.onbeforeunload = function ()
-//	{
-//		documents[currentTab].body = editor.getData();
-//		
-//		if (beforeEditChecksum != calcChecksum ())
-//			return "You have unsaved data. Are you sure you want to leave the editor?";
-//	};
+    window.onbeforeunload = function ()
+    {
+        documents[currentTab].body = editor.getData();
+
+        if (beforeEditChecksum != calcChecksum ())
+            return t9n.confirmExit;
+    };
 });

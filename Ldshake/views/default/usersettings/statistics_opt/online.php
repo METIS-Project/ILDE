@@ -13,7 +13,7 @@
 	$user = $_SESSION['user'];
 	
 	$logged_in = 0;
-	$log = get_system_log($_SESSION['user']->guid, "login", "ElggUser", 1);
+	$log = get_system_log($_SESSION['user']->guid, "login", "ElggUser", "user");
 	if ($log)
 		$logged_in=$log[0]->time_created;
 	
