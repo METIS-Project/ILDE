@@ -68,6 +68,17 @@ class DesignListResource {
         } else {
             $sectoken_request = $_POST["sectoken"];
         }
+        
+        //Get the ldshake_frame_origin value, the domain where LdShake is located.
+        //It should be mandatory
+        $frame_origin_request = null;
+        if (!isset($_POST["ldshake_frame_origin"])){
+            //return new ResponseData(400, 'The parameter \'ldshake_frame_origin\' for the design is missing', 'text/html');
+        } elseif (strlen($_POST["ldshake_frame_origin"]) == 0){
+            //return new ResponseData(400, 'The parameter \'ldshake_frame_origin\' can not be an empty string', 'text/html');
+        } else {
+            $frame_origin_request = $_POST["ldshake_frame_origin"];
+        }
 
         $link = connectToDB();
         $row = loadSectokenDB($link, $sectoken_request);
@@ -85,13 +96,13 @@ class DesignListResource {
         //Check if a design in webcollage format has been provided
         if (!isset($_FILES['document'])) {
             //Create the design from scratch
-            return $this->post_create($sectoken_request, $title, $username);
+            return $this->post_create($sectoken_request, $title, $username, $frame_origin_request);
         } elseif (!isset($_FILES['vle_info'])) {
             //Create the design from an existing design file
-            return $this->post_upload($sectoken_request, $title, $username);
+            return $this->post_upload($sectoken_request, $title, $username, $frame_origin_request);
         } else {
             //Create the design from an existing design file and the vle, course, participant info
-            return $this->post_upload_vle($sectoken_request, $title, $username);
+            return $this->post_upload_vle($sectoken_request, $title, $username, $frame_origin_request);
         }
         return $response;
     }
@@ -101,9 +112,10 @@ class DesignListResource {
      * @param string $sectoken The security token associated to the design
      * @param string $title The title of the document
      * @param string $username The name of the user owner of the document
+     * @param string $frame_origin The protocol and domain where the LdShake that makes the request is located
      * @return ResponseData Response containing the code with the result
      */
-    function post_create($sectoken, $title, $username) {
+    function post_create($sectoken, $title, $username, $frame_origin) {
         $upload_directory = dirname(dirname(__FILE__)) . '/designs/';
         $destination = $upload_directory . "empty_design.json";
         $json_content = file_get_contents($destination);
@@ -116,7 +128,11 @@ class DesignListResource {
                 return new ResponseData(500, 'Error while generating the default design as a PHP object', 'text/html');
             } else {
                 //Set the proper design title
-                $data_obj->design->title = $title;
+                $data_obj->design->title = $title;            
+                //If a ldshake_frame_origin has been provided, we add a property so that the javascript code can check this value is correct
+                if ($frame_origin!=null){
+                    $data_obj->instance->ldshakeFrameOrigin = $frame_origin;
+                }           
                 $design_json = json_encode($data_obj->design);
                 $instance_json = json_encode($data_obj->instance);
 
@@ -142,9 +158,10 @@ class DesignListResource {
      * @param string $sectoken The security token associated to the design
      * @param string $title The title of the document
      * @param string $username The name of the user owner of the document
+     * @param string $frame_origin The protocol and domain where the LdShake that makes the request is located
      * @return ResponseData Response containing the code with the result
      */
-    function post_upload($sectoken, $title, $username) {
+    function post_upload($sectoken, $title, $username, $frame_origin) {
         //UPDATE of an existing design in LD-Shake but not in WebInstanceCollage
         $upload_directory = dirname(dirname(__FILE__)) . '/tmp/';
         $name = basename($_FILES['document']['name']);
@@ -163,7 +180,11 @@ class DesignListResource {
                     return new ResponseData(500, 'Error while generating the default design as a PHP object', 'text/html');
                 } else {
                     //Set the proper design title
-                    $data_obj->design->title = $title;
+                    $data_obj->design->title = $title;    
+                    //If a ldshake_frame_origin has been provided, we add a property so that the javascript code can check this value is correct
+                    if ($frame_origin!=null){
+                        $data_obj->instance->ldshakeFrameOrigin = $frame_origin;
+                    }
                     $design_json = json_encode($data_obj->design);
                     $instance_json = json_encode($data_obj->instance);
                     $todoDesign_json = json_encode($data_obj->todoDesign);
@@ -202,9 +223,10 @@ class DesignListResource {
      * @param string $sectoken The security token associated to the design
      * @param string $title The title of the document
      * @param string $username The name of the user owner of the document
+     * @param string $frame_origin The protocol and domain where the LdShake that makes the request is located
      * @return ResponseData Response containing the code with the result
      */
-    function post_upload_vle($sectoken, $title, $username) {
+    function post_upload_vle($sectoken, $title, $username, $frame_origin) {
         //UPDATE of an existing design in LD-Shake but not in WebInstanceCollage
         //Store the document file 
         $upload_directory = dirname(dirname(__FILE__)) . '/tmp/';
@@ -248,6 +270,10 @@ class DesignListResource {
 
         //Set the proper design title
         $document_obj->design->title = $title;
+        //If a ldshake_frame_origin has been provided, we add a property so that the javascript code can check this value is correct
+        if ($frame_origin!=null){
+            $data_obj->instance->ldshakeFrameOrigin = $frame_origin;
+        }
         $design_json = json_encode($document_obj->design);
         
         if (isset($document_obj->instance->lmsObj->id) && strcmp($document_obj->instance->lmsObj->id,"")!=0){
