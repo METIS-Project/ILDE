@@ -113,7 +113,7 @@ var GroupPatternsDialog = {
         this.patterns = GroupPatternManager.getPatternsForAct(actid);
         this.templists = {
             "gn" : this.createTempList(this.patterns.gn),
-            "pa" : this.createTempList(this.patterns.pa),
+            "pa" : this.createTempList(this.patterns.pa)
         };
 
         this.reopen();
@@ -193,13 +193,17 @@ var GroupPatternsDialog = {
     },
 
     moveUp : function(type, index) {
-
+        var tp = this.templists[type][index];
+        this.templists[type][index] =  this.templists[type][index-1];
+        this.templists[type][index-1] =  tp;
         this.reopen();
 
     },
 
     moveDown : function(type, index) {
-
+        var tp = this.templists[type][index];
+        this.templists[type][index] =  this.templists[type][index+1];
+        this.templists[type][index+1] =  tp;
         this.reopen();
     },
 
