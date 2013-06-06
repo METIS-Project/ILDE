@@ -83,12 +83,15 @@ var LearningFlowMenus = {
                 data : data,
                 help : i18n.get("help.roles.edit.title")
             });
-
-            items.push({
-                isSeparator : true
-            });
+            var addedSeparator = false;
             //Sólo se muestra la opción de clonar en aquellos que esté permitido
             if(data.letClone != false) {
+                if (!addedSeparator){
+                    items.push({
+                        isSeparator : true
+                    });
+                    addedSeparator = true;
+                }
                 items.push({
                     label : i18n.get("learningflow.clonar"),
                     icon : "copy",
@@ -101,6 +104,12 @@ var LearningFlowMenus = {
                 });
             }
             if(data.letDelete == true) {
+                if (!addedSeparator){
+                    items.push({
+                        isSeparator : true
+                    });
+                    addedSeparator = true;
+                }
                 items.push({
                     label : i18n.get("learningflow.borrar"),
                     icon : "delete",
@@ -112,7 +121,13 @@ var LearningFlowMenus = {
                     help : i18n.get("learningflow.borrar.help")
                 });
             }
-            if (data.letAsignUsers==true){
+            if (data.letAsignUsers==true && (Loader.ldShakeMode==false || (DesignInstance.data.classObj.id !="" && DesignInstance.data.lmsObj.id!=""))){
+                if (!addedSeparator){
+                    items.push({
+                        isSeparator : true
+                    });
+                    addedSeparator = true;
+                }
                 items.push({
                     label: i18n.get("learningflow.asignarparticipantes"),
                     icon: "edit",
@@ -123,12 +138,20 @@ var LearningFlowMenus = {
                     help: i18n.get("learningflow.asignarparticipantes.help")
                 });
             }
-            items.push({
-                label: i18n.get("learningflow.verparticipantes"),
-                icon: "student",
-                data: data,
-                help: InstanceStudentManagement.showTooltipAssignedStudents(data.idInstancia)
-            });
+            if (Loader.ldShakeMode==false || (DesignInstance.data.classObj.id !="" && DesignInstance.data.lmsObj.id!="")){
+                if (!addedSeparator){
+                    items.push({
+                        isSeparator : true
+                    });
+                    addedSeparator = true;
+                }
+                items.push({
+                    label: i18n.get("learningflow.verparticipantes"),
+                    icon: "student",
+                    data: data,
+                    help: InstanceStudentManagement.showTooltipAssignedStudents(data.idInstancia)
+                });
+            }
             if (data.letShowClfp==true){
                 items.push( {
                     isSeparator : true
@@ -147,22 +170,24 @@ var LearningFlowMenus = {
         }
             
         //Se muestra este menú si la asignación de profesores se realiza en el círculo
-        if (data.allowAssignTeacher==1) {
-            items.push({
-                label: i18n.get("learningflow.asignarprofesores"),
-                icon: "edit",
-                onClick: function(data) {
-                    InstanceTeacherManagement.showTeachers(DesignInstance.instanciasGrupo(data.role)[0].id, data.clfp);
-                },
-                data: data,
-                help: i18n.get("learningflow.asignarprofesores.help")
-            });
-            items.push({
-                label: i18n.get("learningflow.verprofesores"),
-                icon: "teacher",
-                data: data,
-                help: InstanceTeacherManagement.showTooltipAssignedTeachers(DesignInstance.instanciasGrupo(data.role)[0].id)
-            });
+        if (data.allowAssignTeacher==1){
+            if (Loader.ldShakeMode==false || (DesignInstance.data.classObj.id !="" && DesignInstance.data.lmsObj.id!="")) {
+                items.push({
+                    label: i18n.get("learningflow.asignarprofesores"),
+                    icon: "edit",
+                    onClick: function(data) {
+                        InstanceTeacherManagement.showTeachers(DesignInstance.instanciasGrupo(data.role)[0].id, data.clfp);
+                    },
+                    data: data,
+                    help: i18n.get("learningflow.asignarprofesores.help")
+                });
+                items.push({
+                    label: i18n.get("learningflow.verprofesores"),
+                    icon: "teacher",
+                    data: data,
+                    help: InstanceTeacherManagement.showTooltipAssignedTeachers(DesignInstance.instanciasGrupo(data.role)[0].id)
+                });
+            }
         }
         else{
 

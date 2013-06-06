@@ -26,6 +26,11 @@ var MainLearningFlowRenderer = {
     },
 
     update: function(animate) {
+                      
+        if (Loader.ldShakeMode==true && (DesignInstance.data.classObj.id =="" || DesignInstance.data.lmsObj.id=="")){
+            dojo.byId("divShowParticipantFlow").style.display="none";
+        }
+        
         var how = {
             paintAssessment: dijit.byId("FlowOptionsShowAssessment").checked, //Indica si debe pintarse el flujo de evaluación
             paintAlerts: true, //Indica si deben pintarse las alertas,

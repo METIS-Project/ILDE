@@ -62,15 +62,43 @@ dojo.addOnLoad(function() {
     }
     ParticipantManagement.init();
     ParticipantSelection.init();
-    LmsManagement.init();   
-    //Hide the webinstancecollage elements which can't be shown when it is contained in a iframe of ldshake
+    LmsManagement.init(); 
+    
     if (Loader.ldShakeMode){
-        dijit.byId("toolbar.exportmenu").domNode.style.display = "none";
-        dijit.byId("createGluePSDesign").domNode.style.display = "none";
-        dijit.byId("toolbar.exit").domNode.style.display = "none";
-        dijit.byId("elegirInstancia").domNode.style.display = "none";
-        dijit.byId("actualizarParticipantes").domNode.style.display = "none"; 
-        dijit.byId("LDTitle").domNode.style.display = "none";
+        
+        //Hide the webinstancecollage elements which can't be shown when it is contained in a iframe of ldshake
+       dijit.byId("toolbar.exportmenu").domNode.style.display = "none";
+       dijit.byId("createGluePSDesign").domNode.style.display = "none";
+       dijit.byId("toolbar.exit").domNode.style.display = "none";
+       dijit.byId("elegirInstancia").domNode.style.display = "none";
+       dijit.byId("actualizarParticipantes").domNode.style.display = "none"; 
+       dijit.byId("LDTitle").domNode.style.display = "none";
+       
+       //Listen to the message event from LdShake to change the title of the design 
+       window.addEventListener('message', setTitle, false);     
+       
+       function setTitle(event) {
+           if (typeof DesignInstance.data.ldshakeFrameOrigin != 'undefined'){
+               var  ldshakeFrameOrigin = DesignInstance.data.ldshakeFrameOrigin;
+           }
+           else{
+               //ldshakeFrameOrigin = 'http://localhost';
+               ldshakeFrameOrigin = 'http://193.145.50.135';
+           }
+           if(event.origin !== ldshakeFrameOrigin){
+            return;
+           }else{
+                var data = JSON.decode(event.data);
+                //Check the event type
+                if (data.type == "ldshake_name"){
+                    var title = data.data;
+                    LearningDesign.setTitle(title);
+                }
+                else{
+                    return;
+                }
+           }
+       }
     }
 });
 

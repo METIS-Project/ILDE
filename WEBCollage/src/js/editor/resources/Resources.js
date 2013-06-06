@@ -11,6 +11,7 @@ var Resources = {
         //We only show the new tool button if a class and LMS has been provided by ldshake
         if (Loader.ldShakeMode==true && (DesignInstance.data.classObj.id =="" || DesignInstance.data.lmsObj.id=="")){
             dijit.byId("buttonNewTool").domNode.style.display="none";
+            dojo.byId("toolsLi").style.display="none";
         }
     },
 
@@ -111,6 +112,7 @@ var Resources = {
         this.generateItemTable(LearningDesign.data.resources, "doc", documentTable);
 
         var tools = mainList.appendChild(document.createElement("li"));
+        tools.id = "toolsLi";
         tools.className = "resourceTable";
         tools.innerHTML = i18n.get("resources.inActivity.tools");
         var toolTable = tools.appendChild(document.createElement("table"));
