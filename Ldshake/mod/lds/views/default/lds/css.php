@@ -1584,7 +1584,7 @@ color: #666;
 
 .vle_info_name_data {
     display: inline-block;
-    width: 80px;
+    /*width: 80px;*/
 }
 
 .vle_list_add_item a {
@@ -1610,7 +1610,7 @@ color: #666;
     background-color: #B4FFA6;
     /*padding: 5px;*/
     border-radius: 4px;
-    margin-left: 20px;
+    /*margin-left: 20px;*/
 }
 
 .vle_list_add_item {
@@ -1618,7 +1618,7 @@ color: #666;
 }
 
 .ldshake_sidebar_block_title {
-    margin-left: 20px;
+    /*margin-left: 20px;*/
     margin-top: 30px;
     font-size: 17px;
     border-bottom: 2px grey solid;
@@ -1626,6 +1626,7 @@ color: #666;
 
 .vle_list_item.current {
     border: 1px green solid;
+    font-weight: bold;
 }
 
 .vle_list_add_item:hover {

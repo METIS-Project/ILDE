@@ -337,7 +337,7 @@
                     <li><a href="http://www.gsic.uva.es/glueps/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/glueps-inside.png" alt="<?php echo T("GLUEPS") ?>"></a></li>
                     <li><a href="http://www.gsic.uva.es/webcollage/index.php?l=en" target="_blank"><img src="<?php echo $url ?>_graphics/metis/WC-inside.png" alt="<?php echo T("WebCollage") ?>"></a></li>
                     <li><a href="http://sourceforge.net/projects/openglm/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/openglm-supported.png" alt="<?php echo T("OpenGLM") ?>"></a></li>
-                    <li><a href="http://cosy.ds.unipi.gr/cadmos/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/cadmos-supported.png" alt="<?php echo T("CADMOS") ?>"></a></li>
+                    <li><a href="http://cosy.ds.unipi.gr/index.php?option=com_content&view=article&id=117&Itemid=71" target="_blank"><img src="<?php echo $url ?>_graphics/metis/cadmos-supported.png" alt="<?php echo T("CADMOS") ?>"></a></li>
                     <li><a href="http://www.open.ac.uk/blogs/OULDI/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/ouldi-inside-supported.png" alt="<?php echo T("Ouldi tools") ?>"></a></li>
                     <!--<li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/upf-logo.png" alt="<?php echo T("UPF logo") ?>"></a></li>
                     <li><a href="http://gti.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/gti-small.png" alt="<?php echo T("GTI UPF logo") ?>"></a></li>

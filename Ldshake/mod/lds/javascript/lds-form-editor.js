@@ -561,6 +561,11 @@ function initDocName ()
                 $affectedTab.text(documents[0].title);
             }
         }
+
+        function postMessageWicChangeTitle(title){
+            var win = document.getElementById("lds_editor_iframe").contentWindow;
+            win.postMessage(title, "http://pandora.tel.uva.es");
+        }
     });
 
     $('#lds_edit_title').blur(function(){

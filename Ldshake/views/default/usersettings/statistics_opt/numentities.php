@@ -17,6 +17,7 @@
 	if ($entity_stats)
 	{
 ?>
+<!--
 <div class="usersettings_statistics">
     <h3><?php echo elgg_echo('usersettings:statistics:label:numentities'); ?></h3>
     <table>
@@ -50,4 +51,5 @@ END;
         ?>
     </table>
 </div>
+-->
 <?php } ?>

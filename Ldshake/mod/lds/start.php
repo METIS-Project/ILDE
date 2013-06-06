@@ -483,52 +483,75 @@ function lds_exec_vledata ($params)
 {
     $user = get_loggedin_user();
 
-    if(!$user->vle) {
-        $vle = new ElggObject();
-        $vle->subtype = 'user_vle';
-        $vle->access_id = ACCESS_PUBLIC;
-        $vle->owner_guid = get_loggedin_userid();
-        $vle->username = '';
-        $vle->password = '';
-        $vle->vle_url = '';
-        $vle->vle_type = '';
-        $user->vle = $vle->save();
-        $user->save();
+    $vlelist = get_entities('object', 'user_vle', get_loggedin_userid(), '', 9999);
+    if(!$vlelist)
+        $vlelist = array();
+
+    if(!isset($params[1]) || !is_numeric($params[1])) {
+        if(count($vlelist))
+            $vle = $vlelist[0];
+        else {
+            $vle = new ElggObject();
+            $vle->subtype = 'user_vle';
+            $vle->access_id = ACCESS_PUBLIC;
+            $vle->owner_guid = get_loggedin_userid();
+            $vle->name = '';
+            $vle->username = '';
+            $vle->password = '';
+            $vle->vle_url = '';
+            $vle->vle_type = '';
+            $vle->new = 1;
+
+            $vle = null;
+        }
     } else {
-        $vle = get_entity($user->vle);
+        $vle = get_entity($params[1]);
     }
 
-    $gluepsm = new GluepsManager($vle);
-    $vle_info = $gluepsm->getVleInfo();
+    if($vle) {
+        $gluepsm = new GluepsManager($vle);
+        $vle_info = $gluepsm->getVleInfo();
 
-    $courses = (array)$vle_info->courses;
-    ksort($courses);
-    $participants = array();
+        $courses = (array)$vle_info->courses;
+        ksort($courses);
+        $participants = array();
 
-    foreach($courses as $key => $fvle) {
-        $participants[$key] = (array)$gluepsm->getCourseInfo($key)->participants;
-        uasort($participants[$key], function($a, $b) { return (int)$a->id - (int)$b->id; });
+        foreach($courses as $key => $fvle) {
+            $participants[$key] = (array)$gluepsm->getCourseInfo($key)->participants;
+            //uasort($participants[$key], function($a, $b) { return (int)$a->id - (int)$b->id; });
+            uasort($participants[$key], function($a, $b) { return strnatcasecmp($a->name, $b->name);});
+        }
+
+        $external_tools = (array)$vle_info->externalTools;
+        ksort($external_tools);
+
+        $internal_tools = (array)$vle_info->internalTools;
+        ksort($internal_tools);
+
+        //$courses = lds_contTools::getVLECourses($vle);
+        $vars = array(
+            'vle' => $vle,
+            'vlelist' => $vlelist,
+            'vle_info' => $vle_info,
+            'participants' => $participants,
+            'internal_tools' => $internal_tools,
+            'external_tools' => $external_tools,
+            'section' => 'courses'
+        );
+    } else {
+        $vars = array(
+            'vle' => null,
+            'vle_info' => null,
+            'participants' => null,
+            'internal_tools' => null,
+            'external_tools' => null,
+            'section' => 'courses'
+        );
     }
 
-    $external_tools = (array)$vle_info->externalTools;
-    ksort($external_tools);
-
-    $internal_tools = (array)$vle_info->internalTools;
-    ksort($internal_tools);
-
-    //$courses = lds_contTools::getVLECourses($vle);
-    $vars = array(
-        'vle' => $vle,
-        'vle_info' => $vle_info,
-        'participants' => $participants,
-        'internal_tools' => $internal_tools,
-        'external_tools' => $external_tools,
-        'section' => 'courses'
-    );
-
-    if(isset($params[1]))
-        if(strlen($params[1]))
-            $vars['section'] = $params[1];
+    if(isset($params[2]))
+        if(strlen($params[2]))
+            $vars['section'] = $params[2];
 
     $body = elgg_view('lds/vledatacomplete',$vars);
     page_draw('VLE', $body);
@@ -1128,6 +1151,11 @@ function lds_exec_implementeditor($params)
         $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
+    if($lds = get_entity($editLdS->lds_id))
+        if($lds->editor_type == 'openglm') {
+            lds_exec_editglueps($params);
+            return true;
+        }
 
     if (!$editLdS->canEdit())
     {
@@ -1407,12 +1435,13 @@ function lds_exec_editglueps($params)
     if($vle = get_entity($vars['vle_id'])) {
         if(!$editordocument) {
             $gluepsm = new GluepsManager($vle);
+            $lds = get_entity($editLdS->lds_id);
             $editordocument = get_entities_from_metadata_multi(array(
                     'lds_guid' => $editLdS->guid,
-                    'editorType' => 'webcollagerest'
+                    'editorType' => $lds->editor_type//'webcollagerest'
                 ),
                 'object','LdS_document_editor', 0, 100);
-            $vars_glueps = $gluepsm->newImplementation(array('course'=>$editLdS->course_id, 'title' => $editLdS->title, 'lds' => $editLdS, 'document' => $editordocument[0]));
+            $vars_glueps = $gluepsm->newImplementation(array('course'=>$editLdS->course_id, 'title' => $editLdS->title, 'implementation' => $editLdS, 'document' => $editordocument[0]));
         } else {
             $gluepsm = new GluepsManager($vle, $editLdS, $editordocument[0]);
             $vars_glueps = $gluepsm->editDocument(array('course'=>$editLdS->course_id, 'title' => $editLdS->title));

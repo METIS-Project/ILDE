@@ -841,9 +841,14 @@ class RestEditor extends Editor
         //file('http://127.0.0.1/exelearning/?load='.$rand_id);
         //unlink($filename_editor);
 
+        $ldshake_url = parse_url($CONFIG->url);
+        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
+            'name' => T('Untitled LdS'),
+            'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
@@ -881,12 +886,18 @@ class RestEditor extends Editor
         global $CONFIG;
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
         $rand_id = rand_str(64);
+        $lds = get_entity($this->_document->lds_guid);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+
+        $ldshake_url = parse_url($CONFIG->url);
+        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
-            'document' => "@{$filename_lds};type=application/json; charset=UTF-8"
+            'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
+            'name' => $lds->title,
+            'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
@@ -1456,20 +1467,22 @@ class UploadEditor extends Editor
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
         $file_origin = Editor::getFullFilePath($docSession);
-        copy($file->getFilenameOnFilestore(), $file_origin);
+        copy($file_origin, $file->getFilenameOnFilestore());
         $this->_document->file_guid = $file->guid;
         $this->_document->upload_filename = $file->upload_filename;
         $this->_document->save();
 
-        /*
+
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id.'.zip';
         $file = $this->getNewFile($filestorename);
-        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
+        $file_origin = Editor::getFullFilePath($docSession);
+        copy($file_origin, $file->getFilenameOnFilestore());
         $this->_document->file_imsld_guid = $file->guid;
+        $this->_document->upload_filename_imsld = $file->upload_filename;
         $this->_document->save();
-        */
+
 
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
@@ -1546,6 +1559,7 @@ class UploadEditor extends Editor
         $rand_id = mt_rand(400,9000000);
         $file_origin = Editor::getFullFilePath($docSession);
         copy($file_origin, Editor::getFullFilePath($this->_document->file_guid));
+        copy($file_origin, Editor::getFullFilePath($this->_document->file_imsld_guid));
 
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
@@ -1705,7 +1719,7 @@ class GluepsManager
         if(!$this->validateVle())
             return false;
 
-        $url = $CONFIG->glueps_url;
+        $glueps_url = $CONFIG->glueps_url;
 
         /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
@@ -1721,16 +1735,27 @@ class GluepsManager
             'credsecret' => $this->_vle->password
         );
 
-        $uri = "{$url}courses?"
+        $uri = "{$glueps_url}courses?"
             ."type=".urlencode($get['type'])."&"
             ."accessLocation=".urlencode($get['accessLocation'])."&"
             ."creduser=".urlencode($get['creduser'])."&"
             ."credsecret=".urlencode($get['credsecret']);
 
-        $response = \Httpful\Request::get($uri)
-            ->addHeader('Accept', 'application/json')
-            ->basicAuth('ldshake','Ld$haK3')
-            ->sendIt();
+        try {
+            $response = \Httpful\Request::get($uri)
+                ->addHeader('Accept', 'application/json')
+                ->basicAuth('ldshake','Ld$haK3')
+                ->sendIt();
+
+            if($response->code > 399)
+                throw new Exception("VLE server error");
+
+            }
+        catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url . 'pg/lds/');
+            return false;
+        }
 
         return $response->body;
     }
@@ -1805,15 +1830,15 @@ class GluepsManager
         fseek($putData, 0);
         $m_fd = stream_get_meta_data($putData);
 
-        $lds = $params['lds'];
-        $ldsm = EditorsFactory::getManager($lds);
+        $implementation = $params['implementation'];
+        //$ldsm = EditorsFactory::getManager($lds);
         //$document = $ldsm->getDocument();
         $document = $params['document'];
         $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
         $sectoken = rand_str(32);
 
         $post = array(
-            'NewDeployTitleName' => $lds->title,
+            'NewDeployTitleName' => $implementation->title,
             'instType' => 'IMS LD',
             'sectoken' => $sectoken,
             'archiveWic' => "@{$filename_lds}",
@@ -1933,6 +1958,26 @@ $vars = array();
     public function editDocument($params) {
         global $CONFIG;
         $filename_lds = Editor::getFullFilePath($this->_document->file_guid);
+
+        $lds = get_entity($this->_document->lds_guid);
+        $design = get_entity($lds->lds_id);
+        $editordocument = get_entities_from_metadata_multi(array(
+                'lds_guid' => $lds->guid,
+                'editorType' => $design->editor_type//'webcollagerest'
+            ),
+            'object','LdS_document_editor', 0, 100);
+
+        if($editordocument[0]->time_updated > $this->_document->time_updated)
+        {
+            $filename_lds = Editor::getFullFilePath($editordocument[0]->file_imsld_guid);
+            $instType = 'IMS LD';
+            $archiveWic = "@{$filename_lds}";
+        } else {
+            $filename_lds = Editor::getFullFilePath($this->_document->file_guid);
+            $instType = 'GLUEPS';
+            $archiveWic = "@{$filename_lds};type=application/xml";
+        }
+
         $rand_id = mt_rand(400,5000000);
 
         $url = $CONFIG->glueps_url;
@@ -1970,9 +2015,9 @@ $vars = array();
 
         $post = array(
             'NewDeployTitleName' => $params['title'],
-            'instType' => 'GLUEPS',
+            'instType' => $instType,
             'sectoken' => $sectoken,
-            'archiveWic' => "@{$filename_lds};type=application/xml",
+            'archiveWic' => $archiveWic,
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 

@@ -41,11 +41,26 @@ extract($vars);
 
 <div id="two_column_left_sidebar">
     <div id="owner_block">
-        <ul id="lds_side_sections">
-            <!--<li><a<?php if ($section == 'generalinfo') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/generalinfo' ?>"><?php echo T("General info") ?></a></li>-->
-            <li><a<?php if ($section == 'courses') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/courses' ?>"><?php echo T("Courses") ?></a></li>
-            <li><a<?php if ($section == 'internaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/internaltools' ?>"><?php echo T("Internal tools") ?></a></li>
-            <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/externaltools' ?>"><?php echo T("External tools") ?></a></li>
+        <ul id="lds_side_sections" style="padding-top: 0px;">
+            <li>
+                <div class="ldshake_sidebar_block_title"><?php echo T("Your VLEs"); ?></div>
+                <?php    foreach($vlelist as $vvle):?>
+                    <div class="vle_list_item <?php echo ($vvle->guid == $vle->guid ? 'current' : '');?>"><a href="<?php echo "{$url}pg/lds/vledata/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
+                <?php endforeach;?>
+            </li>
+
+        </ul>
+
+        <ul id="lds_side_sections" style="padding-top: 5px;">
+
+            <li style="margin-bottom:22px;">
+                <div class="ldshake_sidebar_block_title"><?php echo T("VLE sections"); ?></div>
+            </li>
+        <!--<li><a<?php if ($section == 'generalinfo') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/generalinfo' ?>"><?php echo T("General info") ?></a></li>-->
+            <li><a<?php if ($section == 'courses') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/courses' ?>"><?php echo T("Courses") ?></a></li>
+            <li><a<?php if ($section == 'internaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/internaltools' ?>"><?php echo T("Internal tools") ?></a></li>
+            <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/externaltools' ?>"><?php echo T("External tools") ?></a></li>
+            <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vle/'.$vle->guid ?>"><?php echo T("VLE configuration") ?></a></li>
         </ul>
     </div>
     <div id="owner_block_bottom"></div>
@@ -67,12 +82,14 @@ extract($vars);
                 <?php
                 foreach($participants[$key] as $p_id => $p):?>
                     <div class="vle_info_element">
-                        <span class="vle_info_key_data"><?php echo $p->id ?></span>
+                        <!--<span class="vle_info_key_data"><?php echo $p->id ?></span>-->
                         <span class="vle_info_name_data"><?php echo $p->name?></span>
                         <?php
                             $data = explode(';', $p->learningEnvironmentData);
+                        if(strlen($data[2])):
                         ?>
-                        <span class="vle_info_other_data"><?php echo $data[2]?></span>
+                        <span class="vle_info_other_data"><?php echo htmlentities('<').$data[2].htmlentities('>'); ?></span>
+                        <?php endif; ?>
                     </div>
                 <?php endforeach;?>
             </div>

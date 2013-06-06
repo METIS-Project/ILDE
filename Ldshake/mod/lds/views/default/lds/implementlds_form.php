@@ -41,7 +41,7 @@
     <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
     <input type="text" size="60" name="new_implementation_title" />
 
-    <h3><?php echo T("Select one of your couses") ?></h3>
+    <h3><?php echo T("Select one of your VLE spaces") ?></h3>
 
     <div style="max-height: 300px; overflow-y: auto;">
         <?php foreach($vle_data as $vle_id=>$vle): ?>

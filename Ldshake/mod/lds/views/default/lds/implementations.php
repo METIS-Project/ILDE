@@ -95,7 +95,9 @@
                 <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
             </div>
             <ul id="my_lds_list">
-                <?php foreach($list as $item): ?>
+                <?php foreach($list as $item):
+                    $lds=get_entity($item->lds_id);
+                    ?>
                     <?php if ($section != 'trashed'): ?>
                         <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
@@ -108,7 +110,7 @@
                             <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
                             <div class="lds_info">
                                 <?php if (!$item->locked): ?>
-                                    <a class="lds_edit_action lds_select_implement_action" lds="<?php echo "{$item->implementation->guid}" ?>" href="<?php echo $url."pg/lds/implementeditor/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
+                                    <a class="lds_edit_action <?php echo ($lds->editor_type == 'webcollagerest' ? ' lds_select_implement_action': '') ?>" lds="<?php echo "{$item->implementation->guid}" ?>" href="<?php echo $url."pg/lds/editglueps/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
                                     <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
