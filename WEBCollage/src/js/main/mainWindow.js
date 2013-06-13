@@ -88,7 +88,7 @@ dojo.addOnLoad(function() {
            if(event.origin !== ldshakeFrameOrigin){
             return;
            }else{
-                var data = JSON.decode(event.data);
+                var data = event.data;
                 //Check the event type
                 if (data.type == "ldshake_name"){
                     var title = data.data;

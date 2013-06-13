@@ -2,7 +2,6 @@
 <html>
     <head>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <script type="text/javascript" src="js/lib/JSON.js"></script>
         <title>Web Instance Collage </title>
         <script type="text/javascript" >
             
@@ -14,7 +13,7 @@
                 if(event.origin !== ldshakeFrameOrigin){
                     return;
                 }else{
-                    var data = JSON.decode(event.data);
+                    var data = event.data;
                     //Check the event type
                     if (data.type == "ldshake_sectoken"){
                         var sectoken = data.data;
@@ -38,8 +37,7 @@
             function postMessageIsReady(){
                 var ready = {type: "ldshake_editor_ready", 
                              data: true};
-                //parent.postMessage(JSON.encode(ready), "http://localhost");
-                parent.postMessage(JSON.encode(ready), ldshake_sectoken);
+                parent.postMessage(ready, ldshake_sectoken);
             }
             
         </script>
@@ -50,7 +48,8 @@
         require_once 'manager/JSON.php';
         require_once 'manager/db/db.php';
         require_once 'manager/db/designsdb.php';
-        $ldshake_frame_origin = 'http://localhost';
+        //$ldshake_frame_origin = 'http://localhost';
+        $ldshake_frame_origin = 'http://193.145.50.135';
         $link = connectToDB();
         $data= loadDesignDB($link, $document_id);
         if ($data!=false){
