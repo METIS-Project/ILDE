@@ -635,6 +635,8 @@ class EditorsFactory
             return new UploadEditor($document);
         if($document->editorType == 'cadmos')
             return new UploadEditor($document);
+        if($document->editorType == 'cld')
+            return new UploadEditor($document);
 	}
 
     public static function getManager($lds)
@@ -661,6 +663,8 @@ class EditorsFactory
             return new UploadEditor(null, $editorType);
         if($editorType == 'cadmos')
             return new UploadEditor(null, $editorType);
+        if($editorType == 'cld')
+            return new UploadEditor(null, $editorType);
 	}
 }
 
@@ -673,6 +677,7 @@ class LdSFactory
         $lds->owner_guid = get_loggedin_userid();
         $lds->external_editor = true;
         $lds->editor_type = $ldsparams['type'];
+        $lds->implementable = 1;
 
         $lds->title = $ldsparams['title'];
         $lds->granularity = 0;
@@ -768,6 +773,7 @@ class OpenglmEditor extends Editor {
 
         $document = new DocumentEditorObject($params['lds']->guid);
         $document->file_guid = $file->guid;
+        $document->editorType = $params['lds']->editor_type;
 
         $filestorename = $params['lds']->guid.'_'.rand_str(64);
         $file = Editor::getNewFile($filestorename);
@@ -873,7 +879,10 @@ class RestEditor extends Editor
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
+        //http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id=456
+        $vars['document_url'] = "{$response->raw_body}";
         $vars['editor'] = 'webcollagerest';
         $vars['editor_label'] = 'WebCollage';
 
@@ -919,7 +928,8 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -928,6 +938,7 @@ class RestEditor extends Editor
     public function putImplementation($params)
     {
         global $CONFIG;
+        $lds = $params['lds'];
         $vle = $params['vle'];
         $gluepsm = new GluepsManager($vle);
         $vle_info = $gluepsm->getVleInfo();
@@ -950,11 +961,16 @@ class RestEditor extends Editor
         $rand_id = rand_str(64);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
+        $ldshake_url = parse_url($CONFIG->url);
+        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+
         $post = array(
             'lang' => 'en',
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
-            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
+            'name' => $lds->title,
+            'ldshake_frame_origin' => $ldshake_frame_origin,
         );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
@@ -981,7 +997,8 @@ class RestEditor extends Editor
 
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -1459,6 +1476,8 @@ class UploadEditor extends Editor
         //save the contents
         $docSession = $params['editor_id'];
 
+        $doc_file = get_entity($docSession);
+
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
@@ -1469,7 +1488,7 @@ class UploadEditor extends Editor
         $file_origin = Editor::getFullFilePath($docSession);
         copy($file_origin, $file->getFilenameOnFilestore());
         $this->_document->file_guid = $file->guid;
-        $this->_document->upload_filename = $file->upload_filename;
+        $this->_document->upload_filename = $doc_file->upload_filename;
         $this->_document->save();
 
 
@@ -1480,7 +1499,7 @@ class UploadEditor extends Editor
         $file_origin = Editor::getFullFilePath($docSession);
         copy($file_origin, $file->getFilenameOnFilestore());
         $this->_document->file_imsld_guid = $file->guid;
-        $this->_document->upload_filename_imsld = $file->upload_filename;
+        $this->_document->upload_filename_imsld = $doc_file->upload_filename;
         $this->_document->save();
 
 
@@ -1554,7 +1573,7 @@ class UploadEditor extends Editor
         $user = get_loggedin_user();
         $resultIds = new stdClass();
         $docSession = $params['editor_id'];
-
+        $doc_file = get_entity($docSession);
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
         $file_origin = Editor::getFullFilePath($docSession);
@@ -1564,7 +1583,7 @@ class UploadEditor extends Editor
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
         $file = get_entity($docSession);
-        $this->_document->upload_filename = $file->upload_filename;
+        $this->_document->upload_filename = $doc_file->upload_filename;
 
 
         /*
@@ -1834,7 +1853,11 @@ class GluepsManager
         //$ldsm = EditorsFactory::getManager($lds);
         //$document = $ldsm->getDocument();
         $document = $params['document'];
-        $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
+        if($document->file_imsld_guid)
+            $filename_lds = Editor::getFullFilePath($document->file_imsld_guid);
+        else
+            $filename_lds = Editor::getFullFilePath($document->file_guid);
+
         $sectoken = rand_str(32);
 
         $post = array(
@@ -1855,7 +1878,7 @@ class GluepsManager
                 ->sendIt();
 
             if($response->code != 200)
-                throw new Exception("Document load failed");
+                throw new Exception($response->code. ' ' .$response->body);
             $xmldoc = new DOMDocument();
             $xmldoc->loadXML($response->raw_body);
             $xpathvar = new Domxpath($xmldoc);

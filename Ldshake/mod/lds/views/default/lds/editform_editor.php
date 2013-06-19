@@ -106,7 +106,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<?php endif; ?>
 				-->
                 <?php if(!isset($upload)): ?>
-                <iframe id="lds_editor_iframe" src="<?php echo $document_iframe_url; ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
+                <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php endif; ?>
 
 			</div>
@@ -222,6 +222,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var groups = <?php echo $groups ?>;
         var documents = <?php echo $initDocuments ?>;
         var document_url = "<?php echo $document_url ?>";
+        var document_iframe_url = "<?php echo $document_iframe_url ?>";
         var implementation = false;
         var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
 

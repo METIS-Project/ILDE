@@ -97,7 +97,9 @@ if (isloggedin()) :
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("New Rich Text") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/design_pattern"><?php echo T("Design Pattern") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/MDN"><?php echo T("Design Narrative") ?></a></li>
-                        <!--<li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/EP"><?php echo T("Extracting Patterns") ?></a></li>-->
+                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/PC"><?php echo T("Persona Card") ?></a></li>
+                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/FC"><?php echo T("Factors and Concerns") ?></a></li>
+                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/upload/cld"><?php echo T("CompendiumLD (upload)") ?></a></li>
                     </ul>
                 </div>
 

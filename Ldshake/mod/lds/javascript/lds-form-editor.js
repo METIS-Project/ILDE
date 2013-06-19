@@ -33,6 +33,23 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
+
+$(document).ready(function() {
+    window.addEventListener('message',function(event) {
+        if(event.origin !== 'http://pandora.tel.uva.es') return;
+        var editor_iframe = document.getElementById("lds_editor_iframe");
+        var m_sectoken = {
+            "type": "ldshake_sectoken",
+            "data": editor_id
+        }
+
+        editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
+    },false);
+
+    $("#lds_editor_iframe").attr("src", document_iframe_url);
+    //$("#lds_editor_iframe").css("display", "block");
+});
+
 //Controls the time the user has been idle. Might close the form i order to let other users edit the LdS
 var activity;
 var first_save;
@@ -542,7 +559,8 @@ function initDocName ()
     {
         //If we haven't changed the title of the 1st document yet,
         //the LdS title will be the document title as well.
-        changeDocTitle = (documents[0].title == t9n.untitledDoc);
+        //changeDocTitle = (documents[0].title == t9n.untitledDoc);
+        changeDocTitle = true;
         $affectedTab = $('#lds_edit_tabs li.lds_tab:eq(0)').find('.lds_tab_title');
     });
 
@@ -554,17 +572,23 @@ function initDocName ()
             {
                 documents[0].title = $(this).val();
                 $affectedTab.text(documents[0].title);
+                postMessageWicChangeTitle(documents[0].title);
             }
             else
             {
                 documents[0].title = t9n.untitledDoc;
                 $affectedTab.text(documents[0].title);
+                postMessageWicChangeTitle(documents[0].title);
             }
         }
 
         function postMessageWicChangeTitle(title){
             var win = document.getElementById("lds_editor_iframe").contentWindow;
-            win.postMessage(title, "http://pandora.tel.uva.es");
+            var m_title = {
+                "type": "ldshake_name",
+                "data": title
+            }
+            win.postMessage(m_title, "http://pandora.tel.uva.es");
         }
     });
 

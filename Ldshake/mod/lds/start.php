@@ -106,6 +106,7 @@ function lds_init()
 	//register_action("lds/mass_add_user", false, $CONFIG->pluginspath . "lds/actions/lds/mass_add_user.php");
 	register_action("lds/deferred_send", false, $CONFIG->pluginspath . "lds/actions/lds/deferred_send.php");
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
+    register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
 
 	//Include the helper functions
 	require_once __DIR__.'/lds_contTools.php';
@@ -1311,7 +1312,7 @@ function lds_exec_implementeditor($params)
         $vars['vle_id'] = $user->vle;
     }
     if($vle = get_entity($vars['vle_id'])) {
-        $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle));
+        $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle, 'lds' => $editLdS));
     } else {
         register_error("VLE error");
         forward($CONFIG->url.'pg/lds/');
@@ -1436,11 +1437,20 @@ function lds_exec_editglueps($params)
         if(!$editordocument) {
             $gluepsm = new GluepsManager($vle);
             $lds = get_entity($editLdS->lds_id);
-            $editordocument = get_entities_from_metadata_multi(array(
-                    'lds_guid' => $editLdS->guid,
-                    'editorType' => $lds->editor_type//'webcollagerest'
-                ),
-                'object','LdS_document_editor', 0, 100);
+
+            if($lds->editor_type == 'webcollagerest')
+                $editordocument = get_entities_from_metadata_multi(array(
+                        'lds_guid' => $editLdS->guid,
+//                        'editorType' => $lds->editor_type//'webcollagerest'
+                    ),
+                    'object','LdS_document_editor', 0, 100);
+            else
+                $editordocument = get_entities_from_metadata_multi(array(
+                        'lds_guid' => $editLdS->lds_id,
+//                        'editorType' => $lds->editor_type//'webcollagerest'
+                    ),
+                    'object','LdS_document_editor', 0, 100);
+
             $vars_glueps = $gluepsm->newImplementation(array('course'=>$editLdS->course_id, 'title' => $editLdS->title, 'implementation' => $editLdS, 'document' => $editordocument[0]));
         } else {
             $gluepsm = new GluepsManager($vle, $editLdS, $editordocument[0]);
@@ -2090,6 +2100,16 @@ function lds_exec_make_newbie ($params)
 	}
 	
 	forward('pg/lds/');
+}
+
+function lds_exec_tree ($params)
+{
+
+    $vars = array();
+
+    $body = elgg_view('lds/tree',$vars);
+
+    page_draw($vars['title'], $body);
 }
 
 function lds_exec_404 ($view = '')

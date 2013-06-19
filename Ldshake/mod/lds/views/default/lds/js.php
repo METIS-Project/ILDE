@@ -59,6 +59,12 @@ endif;
 if (get_context() == 'lds_exec_viewrevision' || get_context() == 'lds_exec_viewrevisioneditor'):
 	echo Utils::getJsDeclaration('lds', 'lds-revision');
 endif;
+if (get_context() == 'lds_exec_tree'): ?>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<?php
+    echo Utils::getJsDeclaration('lds', 'lds-tree');
+
+endif;
 if (get_context() == 'lds_exec_view'):
 	echo Utils::getJsDeclaration('lds', 'lds-view');
 	echo Utils::getJsDeclaration('lds', 'lds-share');

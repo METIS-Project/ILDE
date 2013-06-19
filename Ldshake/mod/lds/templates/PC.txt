@@ -1,0 +1,176 @@
+<div class=WordSection1>
+
+<h1><b><font size=5 color=black face=Arial><span style='font-size:18.0pt;
+line-height:115%'><span style='line-height:115%'>Persona Card - Learning Design</span></span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'><img width=80 height=28 id=image00.png
+src="http://ilde.upf.edu/mod/lds/templates/Personacard_files/image001.jpg"></span></font><font size=2><span
+style='font-size:10.0pt;line-height:115%;background:white'>This work by the OU
+H817 module “Openness and innovation in elearning” (</span></font><a
+href="http://www3.open.ac.uk/study/postgraduate/course/h817.htm"><font size=2
+color="#1155cc"><span style='font-size:10.0pt;line-height:115%;color:#1155CC;
+background:white'>http://www3.open.ac.uk/study/postgraduate/course/h817.htm</span></font></a><font
+size=2><span style='font-size:10.0pt;line-height:115%;background:white'>)  is
+licensed under a</span></font><a
+href="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/deed.en_GB"><font
+size=2 color=black><span style='font-size:10.0pt;line-height:115%;color:black;
+background:white;text-decoration:none'> </span></font></a><a
+href="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/deed.en_GB"><font
+size=2 color="#4374b7"><span style='font-size:10.0pt;line-height:115%;
+color:#4374B7;background:white'>Creative Commons
+Attribution-NonCommercial-ShareAlike 2.0 UK: England &amp; Wales License</span></font></a><font
+size=2><span style='font-size:10.0pt;line-height:115%;background:white'>.</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>See <a
+href="http://www.ld-grid.org/resources/representations-and-languages/personas"><font
+color="#1155cc"><span style='color:#1155CC'>http://www.ld-grid.org/resources/representations-and-languages/personas</span></font></a>
+for a short introduction to personas. To use this template, open it at <a
+href="http://goo.gl/m1Fp6"><font color="#1155cc"><span style='color:#1155CC'>http://goo.gl/m1Fp6</span></font></a>,
+make a copy and edit.</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=624
+ style='width:100%;margin-left:4.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'><img border=0 width=89 height=178
+  id=image01.png src="http://ilde.upf.edu/mod/lds/templates/Personacard_files/image002.png"></span></font></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border:solid black 1.0pt;
+  border-left:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Name: </span></font></b></p>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Gender: </span></font></b></p>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Age:</span></font></b></p>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Lives in ... with
+  ... Likes ...</span></font></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Education and
+  experience</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Role and
+  responsibilities</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Technical skills</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Subject domain
+  skills and knowledge</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Motivation and
+  desires</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Goals and
+  expectations</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Obstacles to their
+  success</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=130 valign=top style='width:97.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><b><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt;font-weight:bold'>Unique assets</span></font></b></p>
+  </td>
+  <td width=494 valign=top style='width:370.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+</div>

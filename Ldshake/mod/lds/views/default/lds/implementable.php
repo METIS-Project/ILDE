@@ -43,8 +43,8 @@
             <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable' ?>"><?php echo T('All my LdS') ?></a></li>
             <li><?php echo T("Authored with") ?></li>
             <li><a<?php if ($section == 'webcollagerest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/webcollagerest' ?>"><?php echo T("WebCollage") ?></a></li>
-            <li><a<?php if ($section == 'openglmrest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/openglmrest' ?>"><?php echo T("OpenGLM") ?></a></li>
-            <li><a<?php if ($section == 'cadmosrest') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/cadmosrest' ?>"><?php echo T("CADMOS") ?></a></li>
+            <li><a<?php if ($section == 'openglm') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/openglm' ?>"><?php echo T("OpenGLM") ?></a></li>
+            <li><a<?php if ($section == 'cadmos') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementable/cadmos' ?>"><?php echo T("CADMOS") ?></a></li>
         </ul>
     </div>
     <div id="owner_block_bottom"></div>

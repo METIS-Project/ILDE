@@ -237,6 +237,8 @@ function encodeURIComponent($str) {
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif ($editor == 'cld'): ?>
+        <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
     <?php else:?>
         <div id="the_lds" style="height: 100%;padding: 0px;margin: 0px;width: 100%;">
             <?php echo $currentDoc->description ?>

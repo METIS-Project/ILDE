@@ -1973,3 +1973,37 @@ p.MsoListParagraph {
     margin-left: 18px!important;
 }
 
+/***** tree diagram *****/
+.tree .node {
+    cursor: pointer;
+}
+
+.tree .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+}
+
+.tree .node text {
+    font: 10px sans-serif;
+}
+
+.tree .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
+
+/***** image viewer *****/
+.lds_image_viewer {
+    width: 100%;
+}
+
+.lds_image_viewer svg,
+.lds_image_viewer img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    max-width: 900px;
+}
+

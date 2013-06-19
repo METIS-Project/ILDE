@@ -300,7 +300,7 @@
 				<h1>		
 					<img src="<?php echo $url ?>_graphics/metis/ilde-logo.png" alt="Ilde logo" />
 				</h1>
-				<h2>Integrated Learning Design Environment</h2>
+				<h2><img height="70" src="<?php echo $url ?>_graphics/metis/ilde-home.png" alt="Ilde logo" /></h2>
 			</div>
 			<!--<div id="claims">
 				<div class="home-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">

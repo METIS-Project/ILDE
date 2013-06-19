@@ -6,6 +6,8 @@ function ldshake_get_template($template){
         'EP' => 'EP',
         'design_pattern' => 'DP',
         'DPS' => 'DPS',
+        'PC' => 'PC',
+        'FC' => 'FC',
         't1e' => 'e_text_integrat',
         't2e' => 'e_equip',
         't3e' => 'e_mapa',

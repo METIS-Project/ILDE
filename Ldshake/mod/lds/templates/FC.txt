@@ -1,0 +1,332 @@
+<div class=WordSection1>
+
+<h1><b><font size=5 color=black face=Arial><span style='font-size:18.0pt'>Analysing
+Context: Factors and Concerns</span></font></b></h1>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'><img width=74 height=26 id=image00.png
+src="http://ilde.upf.edu/mod/lds/templates/FactorsandConcerns_files/image001.png"></span></font><font size=2><span
+style='font-size:10.0pt;line-height:115%;background:white'>This work by the OU
+H817 module “Openness and innovation in elearning” (</span></font><a
+href="http://www3.open.ac.uk/study/postgraduate/course/h817.htm"><font size=2
+color="#1155cc"><span style='font-size:10.0pt;line-height:115%;color:#1155CC;
+background:white'>http://www3.open.ac.uk/study/postgraduate/course/h817.htm</span></font></a><font
+size=2><span style='font-size:10.0pt;line-height:115%;background:white'>)  is
+licensed under a </span></font><a
+href="http://creativecommons.org/licenses/by-nc-sa/2.0/uk/deed.en_GB"><font
+size=2 color="#4374b7"><span style='font-size:10.0pt;line-height:115%;
+color:#4374B7;background:white'>Creative Commons
+Attribution-NonCommercial-ShareAlike 2.0 UK: England &amp; Wales License</span></font></a><font
+size=2><span style='font-size:10.0pt;line-height:115%;background:white'>.</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>To use this template, open it at: </span></font><u><font
+color="#1155cc"><span style='color:#1155CC'>http://goo.gl/mZzCT</span></font></u>
+create a copy and edit (or copy the content to a medium of your choice)</p>
+
+<h4><a name=h.62shacjaaoh0></a><i><font size=2 color="#666666" face=Arial><span
+style='font-size:11.0pt'>Read about factors and concerns at: <a
+href="http://cloudworks.ac.uk/cloud/view/6788"><font color="#1155cc"><span
+style='color:#1155CC'>http://cloudworks.ac.uk/cloud/view/6788</span></font></a>
+</span></font></i></h4>
+
+<h2><b><font size=4 color=black face=Arial><span style='font-size:14.0pt'>Factors</span></font></b></h2>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=608
+ style='width:456.0pt;margin-left:-.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Factor</span></font></p>
+  </td>
+  <td valign=top style='border:solid black 1.0pt;border-left:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Notes</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <h3 style='margin:0cm;margin-bottom:.0001pt'><b><font size=3 color="#666666"
+  face=Arial><span style='font-size:12.0pt'>Material</span></font></b></h3>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Characteristics of the physical
+  space and the tools and objects which the actors have access to.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>add lines as needed</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <h3 style='margin:0cm;margin-bottom:.0001pt'><b><font size=3 color="#666666"
+  face=Arial><span style='font-size:12.0pt'>Social</span></font></b></h3>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Organisational structure, grouping
+  of and relations between various actors, conventions and norms</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>add lines as needed</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <h3 style='margin:0cm;margin-bottom:.0001pt'><b><font size=3 color="#666666"
+  face=Arial><span style='font-size:12.0pt'>Intentional</span></font></b></h3>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Beliefs, desires, motivations,
+  expectations, and mental or emotional barriers of individual actors.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>add lines as needed</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span style='font-size:14.0pt'>Concerns</span></font></b></h2>
+
+<h3><a name=h.f5ggq2i3d8eg></a><b><font size=3 color="#666666" face=Arial><span
+style='font-size:12.0pt'>&lt;Persona name&gt;: &lt;role&gt; (replace)</span></font></b></h3>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=611
+ style='width:458.25pt;margin-left:-.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Concerns </span></font></p>
+  </td>
+  <td valign=top style='border:solid black 1.0pt;border-left:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Notes</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h3><b><font size=3 color="#666666" face=Arial><span style='font-size:12.0pt'>&lt;Persona
+name&gt;: &lt;role&gt; (replace)</span></font></b></h3>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=616
+ style='width:462.0pt;margin-left:-.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Concerns </span></font></p>
+  </td>
+  <td valign=top style='border:solid black 1.0pt;border-left:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Notes</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h3><a name=h.xdd1nvwmkql></a><b><font size=3 color="#666666" face=Arial><span
+style='font-size:12.0pt'>&lt;Persona name&gt;: &lt;role&gt; (replace)</span></font></b></h3>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=611
+ style='width:458.25pt;margin-left:-.75pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Concerns </span></font></p>
+  </td>
+  <td valign=top style='border:solid black 1.0pt;border-left:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>Notes</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td valign=top style='border:solid black 1.0pt;border-top:none;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td valign=top style='border-top:none;border-left:none;border-bottom:solid black 1.0pt;
+  border-right:solid black 1.0pt;padding:5.0pt 5.4pt 5.0pt 5.4pt'>
+  <p class=MsoNormal style='line-height:normal'><font size=2 color=black
+  face=Arial><span style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
+11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+</div>
