@@ -215,5 +215,6 @@ var ChangeManager = {
         ParticipantManagement.updateDisplay();
         LearningFlow.updateDisplay();
         Resources.updateDisplay();
+        TableGenerator.updateDisplay();
     }
 };

@@ -272,7 +272,7 @@ class DesignListResource {
         $document_obj->design->title = $title;
         //If a ldshake_frame_origin has been provided, we add a property so that the javascript code can check this value is correct
         if ($frame_origin!=null){
-            $data_obj->instance->ldshakeFrameOrigin = $frame_origin;
+            $document_obj->instance->ldshakeFrameOrigin = $frame_origin;
         }
         $design_json = json_encode($document_obj->design);
         

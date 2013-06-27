@@ -69,13 +69,11 @@ dojo.addOnLoad(function() {
         //Hide the webinstancecollage elements which can't be shown when it is contained in a iframe of ldshake
        dijit.byId("toolbar.exportmenu").domNode.style.display = "none";
        dijit.byId("createGluePSDesign").domNode.style.display = "none";
+       dijit.byId("toolbar.save").domNode.style.display = "none";
        dijit.byId("toolbar.exit").domNode.style.display = "none";
        dijit.byId("elegirInstancia").domNode.style.display = "none";
        dijit.byId("actualizarParticipantes").domNode.style.display = "none"; 
-       dijit.byId("LDTitle").domNode.style.display = "none";
-       
-       //Listen to the message event from LdShake to change the title of the design 
-       window.addEventListener('message', setTitle, false);     
+       dijit.byId("LDTitle").domNode.style.display = "none";  
        
        function setTitle(event) {
            if (typeof DesignInstance.data.ldshakeFrameOrigin != 'undefined'){
@@ -99,6 +97,9 @@ dojo.addOnLoad(function() {
                 }
            }
        }
+                  
+       //Listen to the message event from LdShake to change the title of the design 
+       window.addEventListener('message', setTitle, false);   
     }
 });
 

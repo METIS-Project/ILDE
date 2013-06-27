@@ -9,8 +9,7 @@
             window.addEventListener('message', getEventMessage, false);
             
             function getEventMessage(event) {
-                var  ldshakeFrameOrigin = ldshake_sectoken;
-                if(event.origin !== ldshakeFrameOrigin){
+                if(event.origin !== frameOrigin){
                     return;
                 }else{
                     var data = event.data;
@@ -37,7 +36,7 @@
             function postMessageIsReady(){
                 var ready = {type: "ldshake_editor_ready", 
                              data: true};
-                parent.postMessage(ready, ldshake_sectoken);
+                parent.postMessage(ready, frameOrigin);
             }
             
         </script>
@@ -59,7 +58,7 @@
                 $ldshake_frame_origin = $instance->ldshakeFrameOrigin;
             }
         }
-        echo "<script type=\"text/javascript\">var ldshake_sectoken='$ldshake_frame_origin';";
+        echo "<script type=\"text/javascript\">var frameOrigin='$ldshake_frame_origin';";
         echo "postMessageIsReady()";
         echo "</script>";
         ?>

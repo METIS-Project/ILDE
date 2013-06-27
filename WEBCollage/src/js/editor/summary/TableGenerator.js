@@ -6,14 +6,16 @@
 var TableGenerator = {
 
     init: function(){
-        dojo.connect(dijit.byId("MainWindowTabContainer").tablist, "onButtonClick", function(){
+        /*dojo.connect(dijit.byId("MainWindowTabContainer").tablist, "onButtonClick", function(){
             if (dijit.byId("MainWindowTabContainer").selectedChildWidget.id == "MainWindowSummaryTab") {
                 TableGenerator.generateSummary();
             }
-        });
+        });*/
     },
-
-
+    
+    updateDisplay: function(){
+        TableGenerator.generateSummary();
+    },
 	
     generateSummary: function(){
         var element = dojo.byId("SummaryTabContent");
