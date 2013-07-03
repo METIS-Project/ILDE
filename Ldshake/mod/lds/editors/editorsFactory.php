@@ -1,4 +1,40 @@
 <?php
+/*********************************************************************************
+ * LdShake is a platform for the social sharing and co-edition of learning designs
+ * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
+ *
+ * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY Universitat Pompeu Fabra (UPF), Barcelona,
+ * UPF DISCLAIMS THE WARRANTY OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses.
+ *
+ * You can contact the Interactive Technologies Group (GTI), Universitat Pompeu Fabra, Barcelona.
+ * headquarters at c/Roc Boronat 138, Barcelona, or at email address davinia.hernandez@upf.edu
+ *
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the "Powered by
+ * LdShake" logo with a link to the website http://ldshake.upf.edu.
+ * If the display of the logo is not reasonably feasible for
+ * technical reasons, the Appropriate Legal Notices must display the words
+ * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
+ ********************************************************************************/
+
+
 include_once(__DIR__.'/../rand.php');
 class Editor
 {
@@ -53,6 +89,7 @@ class richTextEditor extends Editor
         $lds = new LdSObject();
         if($title)
             $lds->title = $title;
+        $lds->access_id = $this->_lds->access_id;
         $lds->granularity = 0;
         $lds->completeness = 0;
         $lds->cloned = 1;
@@ -637,6 +674,8 @@ class EditorsFactory
             return new UploadEditor($document);
         if($document->editorType == 'cld')
             return new UploadEditor($document);
+        if($document->editorType == 'image')
+            return new UploadEditor($document);
 	}
 
     public static function getManager($lds)
@@ -664,6 +703,8 @@ class EditorsFactory
         if($editorType == 'cadmos')
             return new UploadEditor(null, $editorType);
         if($editorType == 'cld')
+            return new UploadEditor(null, $editorType);
+        if($editorType == 'image')
             return new UploadEditor(null, $editorType);
 	}
 }
@@ -985,6 +1026,9 @@ class RestEditor extends Editor
             $vars['editor'] = 'webcollagerest';
             $vars['editor_label'] = 'WebCollage';
             $doc_url = parse_url($response->raw_body);
+            if(!isset($doc_url['scheme']) || !isset($doc_url['host']) || !isset($doc_url['path']))
+                throw new Exception("Invalid document URL: {$response->raw_body}");
+
             $url_path = explode('/', $doc_url['path'].$doc_url['query']);
             $url_path_filtered = array();
             foreach ($url_path as $up)
@@ -992,7 +1036,8 @@ class RestEditor extends Editor
                     $url_path_filtered[] = $up;
             $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         } catch (Exception $e) {
-            echo 'Caught exception: ',  $e->getMessage(), "\n";
+            register_error(htmlentities($e->getMessage()));
+            forward($CONFIG->url . 'pg/lds/');
         }
 
         $this->_rest_id = $doc_id;
@@ -1343,6 +1388,50 @@ class UploadEditor extends Editor
         return $vars;
     }
 
+    public function cloneDocument($lds)
+    {
+        global $CONFIG;
+
+        $rand_id = mt_rand(400,9000000);
+
+        $clone = new DocumentEditorObject($lds);
+
+        $file_origin = Editor::getFullFilePath($this->_document->file_guid);
+
+        //create a new file to store the document
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        copy($file_origin, $file->getFilenameOnFilestore());
+        $clone->file_guid = $file->guid;
+        $clone->upload_filename = $this->_document->upload_filename;
+
+        if($this->_document->file_imsld_guid) {
+            $filestorename = (string)$rand_id.'.zip';
+            $file = $this->getNewFile($filestorename);
+            $file_origin = Editor::getFullFilePath($this->_document->file_imsld_guid);
+            copy($file_origin, $file->getFilenameOnFilestore());
+            $clone->file_imsld_guid = $file->guid;
+            $clone->upload_filename_imsld = $this->_document->upload_filename_imsld;
+        }
+
+        $clone->editorType = $this->_document->editorType;
+        $clone->save();
+
+        //assign a random string to each directory
+        $clone->previewDir = rand_str(64);
+        $clone->pub_previewDir = rand_str(64);
+        $clone->revisionDir = rand_str(64);
+
+        $clone->rev_last = 0;
+        $clone->lds_revision_id = 0;
+
+        $clone->save();
+
+        create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+
+        return array($clone);
+    }
+
     public function putImplementation($params)
     {
         global $CONFIG;
@@ -1517,40 +1606,6 @@ class UploadEditor extends Editor
         $this->_document->save();
 
         return array($this->_document, $resultIds);
-    }
-
-    public function cloneDocument($lds)
-    {
-        global $CONFIG;
-
-        $rand_id = mt_rand(400,9000000);
-
-        $clone = new DocumentEditorObject($lds);
-
-        $file_origin = Editor::getFullFilePath($this->_document->file_guid);
-
-        //create a new file to store the document
-        $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
-        copy($file_origin, $file->getFilenameOnFilestore());
-
-        $clone->file_guid = $file->guid;
-        $clone->editorType = $this->_document->editorType;
-        $clone->save();
-
-        //assign a random string to each directory
-        $clone->previewDir = rand_str(64);
-        $clone->pub_previewDir = rand_str(64);
-        $clone->revisionDir = rand_str(64);
-
-        $clone->rev_last = 0;
-        $clone->lds_revision_id = 0;
-
-        $clone->save();
-
-        create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
-
-        return array($clone);
     }
 
     public function unload($docSession)
@@ -2044,27 +2099,38 @@ $vars = array();
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
         );
 
-        $uri = "{$url}deploys";
-        $response = \Httpful\Request::post($uri)
-            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake','Ld$haK3')
-            ->sendIt();
+        try {
+            $uri = "{$url}deploys";
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->body($post, 'multipart/form-data')
+                ->basicAuth('ldshake','Ld$haK3')
+                ->sendIt();
 
-        $xmldoc = new DOMDocument();
-        $xmldoc->loadXML($response->raw_body);
-        $xpathvar = new Domxpath($xmldoc);
+            if($response->code != 200)
+                throw new Exception("GLUEPS!: " . $response->code. ' ' .$response->body);
 
-        $queryResult = $xpathvar->query('//deploy');
-        $doc_url = $queryResult->item(0)->getAttribute('id');
+            $xmldoc = new DOMDocument();
+            $xmldoc->loadXML($response->raw_body);
+            $xpathvar = new Domxpath($xmldoc);
 
-        $url_path = explode('/', $doc_url);
-        $url_path_filtered = array();
-        foreach ($url_path as $up)
-            if(strlen($up))
-                $url_path_filtered[] = $up;
-        $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+            $queryResult = $xpathvar->query('//deploy');
+            $doc_url = $queryResult->item(0)->getAttribute('id');
 
+            $url_path = explode('/', $doc_url);
+            $url_path_filtered = array();
+            foreach ($url_path as $up)
+                if(strlen($up))
+                    $url_path_filtered[] = $up;
+            $deploy_id = $url_path_filtered[count($url_path_filtered) -1];
+
+
+        }
+        catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url . 'pg/lds/');
+            return false;
+        }
         $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";

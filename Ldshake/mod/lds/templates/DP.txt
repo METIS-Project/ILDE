@@ -4,26 +4,6 @@
 face=Arial><span lang=EN-GB style='font-size:36.0pt;line-height:115%'><span
 style='line-height:115%'>Design Pattern</span></span></font></b></p>
 
-<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%'>Yishay Mor, <a
-href="mailto:Yishay.Mor@Open.ac.uk"><font color="#1155cc"><span
-style='color:#1155CC'>Yishay.Mor@Open.ac.uk</span></font></a></span></font></p>
-
-<p class=MsoNormal><font size=2 color=black face=Arial><span style='font-size:
-11.0pt;line-height:115%'><img border=0 width=88 height=31 id=image00.png
-src="http://ilde.upf.edu/mod/lds/templates/DesignPatternTemplate_files/image001.png"></span></font><font size=2><span
-lang=EN-GB style='font-size:10.0pt;line-height:115%;background:white'>This work
-is licensed under a</span></font><span lang=EN-GB><a
-href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
-color=black><span style='font-size:10.0pt;line-height:115%;color:black;
-background:white;text-decoration:none'> </span></font></a><a
-href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><font size=2
-color="#4374b7"><span style='font-size:10.0pt;line-height:115%;color:#4374B7;
-background:white;text-decoration:none'>Creative Commons
-Attribution-NonCommercial-ShareAlike 3.0 Unported License</span></font></a></span><font
-size=2><span lang=EN-GB style='font-size:10.0pt;line-height:115%;background:
-white'>.</span></font></p>
-
 <p class=MsoNormal><strong><b><font size=2 color=black face=Arial><span
 lang=EN-GB style='font-size:11.0pt;line-height:115%;font-family:"Arial","sans-serif"'>&nbsp;</span></font></b></strong></p>
 

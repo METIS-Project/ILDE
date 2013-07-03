@@ -39,3 +39,6 @@
 <?php extract ($vars) ?>
 <div class="tree">
 </div>
+<script type="text/javascript">
+    var d3_data = <?php echo $tree;?>
+</script>

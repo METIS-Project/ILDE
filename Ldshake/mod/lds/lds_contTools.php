@@ -191,6 +191,11 @@ class lds_contTools
             $obj->implementation = $implementation;
             $obj->lds_id = $implementation->lds_id; //The LdS itself
             $obj->starter = get_entity($implementation->owner_guid);
+            $obj->glueps = get_entities_from_metadata_multi(array(
+                    'lds_guid' => $implementation->guid,
+                    'editorType' => 'gluepsrest'
+                ),
+                'object','LdS_document_editor', 0, 100);
 
             $latest = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
             $obj->last_contributor = get_entity($latest[0]->owner_guid);
@@ -1455,6 +1460,60 @@ SQL;
 
     }
 
+    public static function getUsersEditedDesign($lds_id, $count = false) {
+        global $CONFIG;
+
+        $query = <<<SQL
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}annotations a ON a.owner_guid = e.guid WHERE a.entity_guid = {$lds_id} AND e.enabled = 'yes' AND e.access_id > 0
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return $entities;
+    }
+
+    public static function getModificationsByUser($lds_id, $user_id, $count = false) {
+        global $CONFIG;
+
+        $annotation_name_id = get_metastring_id('revised_docs');
+        $annotation_name_id_2 = get_metastring_id('revised_docs_editor');
+
+        $query = <<<SQL
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}annotations a JOIN {$CONFIG->dbprefix}entities e ON a.entity_guid = e.guid WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2}) AND a.owner_guid = {$user_id} AND a.entity_guid = {$lds_id} AND e.enabled = 'yes' AND e.access_id > 0
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return $entities;
+    }
+
+    public static function getModifiedLdSsByDate($user_id = 0, $start = null, $end = null, $count = false) {
+        global $CONFIG;
+
+        $annotation_name_id = get_metastring_id('revised_docs');
+        $annotation_name_id_2 = get_metastring_id('revised_docs_editor');
+
+        $user_q = '';
+        if($user_id)
+            $user_q = "AND a.owner_guid = {$user_id}";
+        $query = <<<SQL
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2}) AND a.time_created >= {$start} AND a.time_created < {$end} AND e.enabled = 'yes' AND e.access_id > 0 {$user_q}
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return $entities;
+    }
+
 
     public static function LdSCanEdit($lds_id, $user) {
         global $CONFIG;
@@ -1500,6 +1559,182 @@ SQL;
 
         return false;
 
+    }
+
+    public static function stat_getSharedEditableLdSs($count = false) {
+        global $CONFIG;
+
+        $ms_yes = get_metastring_id("yes");
+        $ms_no = get_metastring_id("no");
+        $ms_all = get_metastring_id("all_can_view");
+        $ms_welcome = get_metastring_id("welcome");
+        if(!$ms_welcome)
+            $ms_welcome = 0;
+        $ms_true = get_metastring_id("1");
+
+        $subtype = get_subtype_id('object', 'LdS');
+
+        $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND e.access_id > 0 AND (
+	((
+		EXISTS (
+			SELECT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.guid_two = e.guid AND (rg.relationship = 'lds_editor_group')
+		)
+	)
+	OR
+	(
+		e.guid IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE (ru.relationship = 'lds_editor') AND ru.guid_two = e.guid
+		)
+	))
+	AND
+	(
+		NOT EXISTS (
+			SELECT * FROM {$CONFIG->dbprefix}metadata m WHERE m.entity_guid = e.guid AND name_id = {$ms_welcome} AND value_id = {$ms_true}
+		)
+	)
+	AND
+	(
+        NOT EXISTS (
+          SELECT * FROM {$CONFIG->dbprefix}objects_entity o WHERE o.guid = e.guid AND o.title = 'My first LdS'
+        )
+	)
+)
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return
+            $entities;
+
+    }
+
+    public static function stat_getImplementedLdSs($count = false) {
+        global $CONFIG;
+
+        $m_lds_id = get_metastring_id("lds_id");
+        $subtype = get_subtype_id('object', 'LdS');
+        $subtype_implementation = get_subtype_id('object', 'LdS_implementation');
+
+        $query = <<<SQL
+SELECT DISTINCT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = {$subtype} AND e.enabled = 'yes' AND e.access_id > 0 AND (
+	(
+		EXISTS (
+			SELECT DISTINCT ei.guid FROM {$CONFIG->dbprefix}entities ei JOIN metadata mi ON ei.guid = mi.entity_guid WHERE ei.subtype = {$subtype_implementation} AND ei.enabled = 'yes' AND ei.access_id > 0 AND mi.name_id = {$m_lds_id} AND mi.value_id IN (
+		      SELECT DISTINCT msi.id FROM {$CONFIG->dbprefix}metastrings msi WHERE msi.string = e.guid
+			)
+		)
+	)
+)
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return
+            $entities;
+
+    }
+
+    public static function getPrivateDesigns($user_id = 0, $count = false) {
+        global $CONFIG;
+
+        $ms_yes = get_metastring_id("yes");
+        $ms_no = get_metastring_id("no");
+        $ms_all = get_metastring_id("all_can_view");
+        $ms_welcome = get_metastring_id("welcome");
+        if(!$ms_welcome)
+            $ms_welcome = 0;
+        $ms_true = get_metastring_id("1");
+
+        $user_id_query = "";
+        if($user_id)
+            $user_id_query = "AND e.owner_guid = {$user_id}";
+
+        $subtype = get_subtype_id('object', 'LdS');
+
+        $query = <<<SQL
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND e.access_id > 0 {$user_id_query} AND (
+	(
+		NOT EXISTS (
+			SELECT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.guid_two = e.guid AND (rg.relationship = 'lds_editor_group' OR rg.relationship = 'lds_viewer_group')
+		)
+	)
+	AND
+	(
+		e.guid NOT IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE (ru.relationship = 'lds_editor' OR ru.relationship = 'lds_viewer') AND ru.guid_two = e.guid
+		)
+	)
+	AND
+	(
+		NOT EXISTS (
+			SELECT * FROM {$CONFIG->dbprefix}metadata m WHERE m.entity_guid = e.guid AND name_id = {$ms_all} AND value_id = {$ms_yes}
+		)
+	)
+	AND
+	(
+		NOT EXISTS (
+			SELECT * FROM {$CONFIG->dbprefix}metadata m WHERE m.entity_guid = e.guid AND name_id = {$ms_welcome} AND value_id = {$ms_true}
+		)
+	)
+	AND
+	(
+        NOT EXISTS (
+          SELECT * FROM {$CONFIG->dbprefix}objects_entity o WHERE o.guid = e.guid AND o.title = 'My first LdS'
+        )
+	)
+)
+SQL;
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+
+        if($count)
+            return count($entities);
+
+        return
+            $entities;
+
+    }
+
+    public static function stat_getReadSharedUsers($lds_id) {
+        $members = array();
+
+        $lds = get_entity($lds_id);
+
+        $viewers = array();
+        $editors = self::getEditorsUsers($lds_id);
+
+        if(is_array($viewers))
+            $members = array_merge($viewers, $members);
+
+        if(is_array($editors))
+            $members = array_merge($editors, $members);
+
+        $users = array();
+
+        foreach($members as $member) {
+            if($member instanceof ElggUser)
+                $users[] = $member;
+            elseif ($member instanceof ElggGroup) {
+                $users = array_merge($users, $member->getMembers(9999));
+            }
+        }
+
+        $user_guids = array();
+        foreach($users as $user) {
+            $user_guids[] = $user->getGUID();
+        }
+
+        //$user_guids[] = $lds->owner_guid;
+        $unique_user_guids = array_unique($user_guids);
+
+        return $unique_user_guids;
     }
 
     public static function buildObjectsArray($lds = null)	{

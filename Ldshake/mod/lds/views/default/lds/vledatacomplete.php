@@ -60,7 +60,7 @@ extract($vars);
             <li><a<?php if ($section == 'courses') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/courses' ?>"><?php echo T("Courses") ?></a></li>
             <li><a<?php if ($section == 'internaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/internaltools' ?>"><?php echo T("Internal tools") ?></a></li>
             <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vledata/'.$vle->guid.'/externaltools' ?>"><?php echo T("External tools") ?></a></li>
-            <li><a<?php if ($section == 'externaltools') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vle/'.$vle->guid ?>"><?php echo T("VLE configuration") ?></a></li>
+            <li><a<?php if ($section == 'config') echo ' class="current"' ?> href="<?php echo $url.'pg/lds/vle/'.$vle->guid ?>"><?php echo T("VLE configuration") ?></a></li>
         </ul>
     </div>
     <div id="owner_block_bottom"></div>
@@ -77,7 +77,7 @@ extract($vars);
         foreach($courses as $key => $fvle):?>
 
         <div id="vle_data_box">
-            <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " {$fvle}" ?></div>
+            <div class="vle_info_title lds_form_title"><?php echo T('Participants for course') . " \"{$fvle}\"" ?></div>
             <div class="vle_info_box">
                 <?php
                 foreach($participants[$key] as $p_id => $p):?>

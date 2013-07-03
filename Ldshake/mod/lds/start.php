@@ -67,6 +67,7 @@ function lds_init()
     require_once __DIR__.'/model/ImplementationObject.php';
 
 	require_once __DIR__.'/editors/editorsFactory.php';
+    require_once __DIR__.'/stadistics.php';
 
     require_once __DIR__.'/rest.php';
     require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
@@ -161,6 +162,8 @@ function lds_page_handler ($page)
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
+
+    //$e = lds_contTools::getModifiedLdSsByDate(0, time() - 3600*24*10, time());
 
 
     //$t = lds_contTools::getAllTagsAndFrequencies(0);
@@ -279,11 +282,13 @@ function lds_page_handler ($page)
 			$wl = new LdSObject();
 			$wl->acces_id = 2;
             $wl->editor_type = 'doc';
+            $wl->editor_subtype = 'doc';
 			$wl->title = "My first LdS";
 			$wl->owner_guid = $user->guid;
 			$wl->container_guid = $user->guid;
 			$wl->granularity = '0';
 			$wl->completeness = '0';
+            $wl->welcome = 1;
 			$wl->save ();
 			
 			$doc = new DocumentObject($wl->guid);
@@ -417,7 +422,6 @@ function lds_exec_implementations ($params)
         $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
         $vars['editor_filter'] = $params[1];
-
     }
     else
     {
@@ -691,26 +695,7 @@ function lds_exec_new ($params)
         require_once __DIR__.'/templates/templates.php';
         $body = ldshake_get_template($params[1]);
     }
-    if(count($params) == 3) {
-        switch($params[1]) {
-            case 'pattern':
-                $vars['initDocuments'][0]->body = get_coursemap_pattern();
-                $vars['editor_type'] = $params[2];
-                break;
-            case 'template':
-                require_once __DIR__.'/templates/templates.php';
-                $vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
-                if($params[2] == 'design_pattern') {
-                    $vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
-                }
-                //$vars['editor_type'] = $params[2];
-                break;
-            case 'upload':
-                $vars['initDocuments'][0]->body = '';
-                $vars['editor_type'] = $params[3];
-                break;
-        }
-    }
+
 
 
 	//And a support doc!
@@ -720,6 +705,36 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][1]->modified = '0';
 	$vars['initDocuments'][1]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
 
+    $vars['editor_subtype'] = 0;
+
+    if(count($params) == 3) {
+        switch($params[1]) {
+            case 'pattern':
+                $vars['initDocuments'][0]->body = get_coursemap_pattern();
+                $vars['editor_type'] = $params[2];
+                $vars['editor_subtype'] = $params[2];
+                break;
+            case 'template':
+                require_once __DIR__.'/templates/templates.php';
+                $templates = ldshake_get_template($params[2]);
+                $i=0;
+                foreach($templates as $template) {
+                    $vars['initDocuments'][$i++]->body = $template;
+                }
+                $vars['editor_subtype'] = $params[2];
+
+                //$vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
+
+                //$vars['editor_type'] = $params[2];
+                break;
+            case 'upload':
+                $vars['initDocuments'][0]->body = '';
+                $vars['editor_type'] = $params[3];
+                $vars['editor_subtype'] = $params[3];
+                break;
+        }
+    }
+/*
     if(count($params) == 3) {
         switch($params[1]) {
             case 'template':
@@ -730,7 +745,7 @@ function lds_exec_new ($params)
                 break;
         }
     }
-
+*/
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
 	
@@ -747,6 +762,7 @@ function lds_exec_new ($params)
 
     $vars['title'] = T("New LdS");
 
+    $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
     echo elgg_view('lds/editform',$vars);
 }
 
@@ -787,6 +803,7 @@ function lds_exec_upload ($params)
     $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
 
     $vars['editor_type'] = $params[1];
+    $vars['editor_subtype'] = $params[1];
     $vars['upload'] = true;
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
@@ -803,6 +820,8 @@ function lds_exec_upload ($params)
     $vars['starter'] = get_loggedin_user();
 
     $vars['title'] = T("New LdS");
+
+    $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -860,6 +879,7 @@ function lds_exec_neweditor ($params)
 	$vars['am_i_starter'] = true;
 
     $vars['editor_type'] = $params[1];
+    $vars['editor_subtype'] = 0;
 	
 	$vars['title'] = T("New LdS");
 	
@@ -945,6 +965,7 @@ function lds_exec_importexe ($params)
 
 function lds_exec_edit ($params)
 {
+    global $CONFIG;
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
 	if (preg_match('/(new|edit)/',$_SERVER['HTTP_REFERER']))
 		$vars['referer'] = $CONFIG->url.'pg/lds/';
@@ -1194,7 +1215,7 @@ function lds_exec_implementeditor($params)
     if($editLdS->getSubtype() == 'LdS_implementation') {
 
         $vars['lds_id'] = $editLdS->lds_id;
-        $vars['course_id'] = $editLdS->course_id;
+        $vars['course_id'] = ($editLdS->course_id ? $editLdS->course_id : 0);
         $vars['vle_id'] = $editLdS->vle_id;
 
         $vars['initLdS'] = new stdClass();
@@ -1225,7 +1246,7 @@ function lds_exec_implementeditor($params)
         $editLdS = get_entity($editLdS->lds_id);
         $vars['implementation_helper_id'] = $implementation_helper->guid;
         $vars['lds_id'] = $editLdS->guid;
-        $vars['course_id'] = $implementation_helper->course_id;
+        $vars['course_id'] = ($implementation_helper->course_id ? $implementation_helper->course_id : 0);
         $vars['vle_id'] = $implementation_helper->vle_id;
 
 
@@ -1369,7 +1390,10 @@ function lds_exec_editglueps($params)
             $vars['initLdS']->$type = '';
     }
 
-    $vars['initLdS']->guid = $params[1];
+    if($editLdS->getSubtype() != 'LdS_implementation_helper')
+        $vars['initLdS']->guid = $params[1];
+    else
+        $vars['initLdS']->guid = 0;
 
     //For each of the documents that this LdS has...
     $documents = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document', 0, 100);
@@ -1425,7 +1449,7 @@ function lds_exec_editglueps($params)
 
     $vars['lds_id'] = $editLdS->lds_id;
 
-    $vars['course_id'] = $editLdS->course_id;
+    $vars['course_id'] = ($editLdS->course_id ? $editLdS->course_id : 0);
     $vars['implementation_helper_id'] = '0';
 
     $user = get_loggedin_user();
@@ -1465,6 +1489,7 @@ function lds_exec_editglueps($params)
     echo elgg_view('lds/implementform_editor',$vars);
 }
 
+//TODO: deprecated
 function lds_exec_newimplementglueps($params)
 {
     global $CONFIG;
@@ -1711,7 +1736,9 @@ function lds_exec_view ($params)
 {
 	$id = $params[1];
 	$vars['lds'] = get_entity($id);
-	//TODO permission / exist checks
+    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+
+    //TODO permission / exist checks
 
 	lds_contTools::markLdSAsViewed ($id);
 	
@@ -2102,14 +2129,39 @@ function lds_exec_make_newbie ($params)
 	forward('pg/lds/');
 }
 
+function lds_treebuilder($lds_id) {
+    $tree = array();
+    $lds = get_entity($lds_id);
+    $tree['name'] = $lds->title;
+    if($children = get_entities_from_metadata('parent', $lds->guid, 'object', 'LdS', 0 , 9999)) {
+        $tree['children'] = array();
+
+        foreach($children as $c)
+            $tree['children'][] = lds_treebuilder($c->guid);
+    }
+    return $tree;
+}
+
 function lds_exec_tree ($params)
 {
 
     $vars = array();
 
+    $tree = lds_treebuilder($params[1]);
+
+    $tree_json = json_encode($tree);
+
+    $vars['tree'] = $tree_json;
+
     $body = elgg_view('lds/tree',$vars);
 
     page_draw($vars['title'], $body);
+}
+
+function lds_exec_csv ($params)
+{
+
+    lds_csv_private();
 }
 
 function lds_exec_404 ($view = '')

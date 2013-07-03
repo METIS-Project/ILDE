@@ -1,4 +1,4 @@
-d3_data = {
+d3_data_old = {
     "name": "flare",
     "children": [
         {
@@ -430,7 +430,7 @@ function collapse(d) {
     }
 }
 
-root.children.forEach(collapse);
+//root.children.forEach(collapse);
 update(root);
 
 d3.select(self.frameElement).style("height", "800px");
