@@ -40,6 +40,8 @@
     <a class="lds_close_popup" id="ldsclone_popup_close" href="#"><?php echo T("Cancel") ?></a>
     <h3><?php echo T("Enter the LdS title") ?></h3>
         <input type="text" name="new_lds_title" />
+<br />
 
+    <div id="clonelds_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title!");?></div>
     <input type="button" id="clonelds_submit" value="<?php echo T('Duplicate')?>" />
 </div>

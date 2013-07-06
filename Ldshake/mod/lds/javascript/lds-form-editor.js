@@ -170,6 +170,12 @@ function ajax_submit (redirect)
     goto_url = baseurl + 'pg/lds';
 
     if(upload) {
+        if(!$("#file_input").val().length) {
+            $("#form_file_input_empty").show();
+            $("#lds_edit_buttons").removeClass('busy');
+            return false;
+        }
+
         if(!parseInt(editor_id)) {
             $("#upload_result").unbind('load');
             $("#upload_result").load(function() {
@@ -570,15 +576,21 @@ function initDocName ()
         {
             if ($.trim($(this).val()).length > 0)
             {
-                documents[0].title = $(this).val();
-                $affectedTab.text(documents[0].title);
-                postMessageWicChangeTitle(documents[0].title);
+                if(!upload && editorType != 'webcollagerest' && editorType != 'gluepsrest') {
+                    documents[0].title = $(this).val();
+                    $affectedTab.text(documents[0].title);
+                }
+                if(editorType == 'webcollagerest')
+                    postMessageWicChangeTitle($(this).val());
             }
             else
             {
-                documents[0].title = t9n.untitledDoc;
-                $affectedTab.text(documents[0].title);
-                postMessageWicChangeTitle(documents[0].title);
+                if(!upload && editorType != 'webcollagerest' && editorType != 'gluepsrest') {
+                    documents[0].title = t9n.untitledDoc;
+                    $affectedTab.text(documents[0].title);
+                }
+                if(editorType == 'webcollagerest')
+                    postMessageWicChangeTitle(t9n.untitledDoc);
             }
         }
 

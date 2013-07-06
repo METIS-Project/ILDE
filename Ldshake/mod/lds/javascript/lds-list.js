@@ -73,9 +73,12 @@ $(document).ready(function()
             title: $('input[name=new_implementation_title]').val()
         };
 
-        $.post (baseurl + "action/lds/implement", submitData, function(data) {
-            window.location = baseurl + 'pg/lds/implementeditor/'+data;
-        });
+        if(submitData.title.length == 0 || !submitData.vle_id)
+            $('#impl_submit_incomplete').show();
+        else
+            $.post (baseurl + "action/lds/implement", submitData, function(data) {
+                window.location = baseurl + 'pg/lds/implementeditor/'+data;
+            });
     });
 
     $('.lds_implement_action').click(function (){
@@ -146,9 +149,12 @@ $(document).ready(function()
             title: $('input[name=new_lds_title]').val()
         };
 
-        $.post (baseurl + "action/lds/clone", submitData, function(data) {
-            window.location = baseurl + 'pg/lds/vieweditor/' + data;
-        });
+        if(submitData.title.length == 0)
+            $('#clonelds_submit_incomplete').show();
+        else
+            $.post (baseurl + "action/lds/clone", submitData, function(data) {
+                window.location = baseurl + 'pg/lds/vieweditor/' + data;
+            });
     });
 
     $('#duplicate_design').click(function (event) {

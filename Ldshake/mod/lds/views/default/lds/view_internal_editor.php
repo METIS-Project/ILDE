@@ -89,7 +89,8 @@ function encodeURIComponent($str) {
 		<?php if (is_array($ldsDocs)): ?>
 			<?php foreach ($ldsDocs as $doc): ?>
 			<?php if ($doc->guid == $currentDocId): ?>
-				<li class="activetab"><?php echo $doc->title ?></li><?php else: ?>
+				<li class="activetab"><?php echo $doc->title ?></li>
+            <?php else: ?>
 				<li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $doc->title ?></a></li><?php endif; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
@@ -228,7 +229,7 @@ function encodeURIComponent($str) {
 
     <?php if(isset($upload)): ?>
         <div id="lds_export">
-            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($currentDoc->upload_filename) ?>" style="float: left;"><?php echo T("Download binary file") ?></a>
+            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $uploadDoc->file_guid . "&title=" . encodeURIComponent($uploadDoc->upload_filename) ?>" style="float: left;"><?php echo T("Download binary file") ?></a>
         </div>
     <?php endif; ?>
 	
@@ -240,7 +241,7 @@ function encodeURIComponent($str) {
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
     <?php else:?>
-        <div id="the_lds" style="height: 100%;padding: 0px;margin: 0px;width: 100%;">
+        <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
             <?php echo $currentDoc->description ?>
         </div>
     <?php endif; ?>

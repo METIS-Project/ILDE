@@ -40,7 +40,22 @@
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<div id="left_filters">
-			<?php
+            <h3><?php echo T("Tools") ?></h3>
+            <ul class="tag_selector">
+                <?php foreach ($editor_subtype as $k=>$v): ?>
+                    <li>
+                        <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($k) ?>"><?php echo $v ?></a>
+                    </li>
+                <?php endforeach; ?>
+                <?php foreach ($editor_type as $k=>$v): ?>
+                    <li>
+                        <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($k) ?>"><?php echo $v ?></a>
+                    </li>
+                <?php endforeach; ?>
+
+            </ul>
+
+            <?php
 			if (is_array($tags)):
 			foreach ($tags as $classname=>$tagclass):
 			?>
@@ -71,6 +86,10 @@
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
 		<?php if ($filtering): ?>
+            <?php
+            if(isset($editor_type[$tagv])) $tagv = $editor_type[$tagv];
+            if(isset($editor_subtype[$tagv])) $tagv = $editor_subtype[$tagv];
+            ?>
 		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo T("All LdS") ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
 		<?php else: ?>
 		<h2><?php echo T("All LdS") ?></h2>

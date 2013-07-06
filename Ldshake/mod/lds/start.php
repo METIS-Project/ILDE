@@ -618,6 +618,26 @@ function lds_exec_browse ($params)
 	//$vars['tags'] = lds_contTools::getBrowseTagsAndFrequencies (get_loggedin_userid());
 	$vars['tags'] = lds_contTools::getAllTagsAndFrequencies (get_loggedin_userid());
 
+    $tools = array();
+
+    $vars['editor_subtype'] = array(
+        'design_pattern' => 'Design Pattern',
+        'MDN' => 'Design Narrative',
+        'PC' => 'Persona Card',
+        'FC' => 'Factors and Concerns',
+        'HE' => 'Heuristic Evaluation',
+    );
+
+    $vars['editor_type'] = array(
+        'cld' => 'CompendiumLD',
+        'webcollagerest' => 'WebCollage',
+        'openglm' => 'OpenGLM',
+        'cadmos' => 'CADMOS',
+        'image' => 'Image',
+    );
+
+    $tools['editor_subtype'] =
+
 	$vars['filtering'] = false;
 	//If there is some filtering by tag
     if (get_input('tagk') && get_input('tagv'))
@@ -632,7 +652,7 @@ function lds_exec_browse ($params)
 
         //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 10, $offset, '');
         //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 9999, 0, '');
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv']);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, $offset, $vars['tagk'], $vars['tagv']);
         //$vars['count'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 0, 0, '', 0, true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
@@ -650,7 +670,7 @@ function lds_exec_browse ($params)
         $vars['list'] = array();
     }
     Utils::osort($vars['list'], array('title' => true));
-    $vars['list'] = array_slice($vars['list'], $offset, 10);
+    $vars['list'] = array_slice($vars['list'], 0, 10);
 
     $vars['list'] = lds_contTools::enrichLdS($vars['list']);
 
@@ -707,6 +727,7 @@ function lds_exec_new ($params)
 
     $vars['editor_subtype'] = 0;
 
+
     if(count($params) == 3) {
         switch($params[1]) {
             case 'pattern':
@@ -731,6 +752,7 @@ function lds_exec_new ($params)
                 $vars['initDocuments'][0]->body = '';
                 $vars['editor_type'] = $params[3];
                 $vars['editor_subtype'] = $params[3];
+
                 break;
         }
     }
@@ -822,6 +844,19 @@ function lds_exec_upload ($params)
     $vars['title'] = T("New LdS");
 
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
+
+
+    $vars['upload_link'] = "";
+
+    if($params[1] == 'openglm')
+        $vars['upload_link'] = "OpenGLM is a desktop tool, you need to <a href=\"http://sourceforge.net/projects/openglm/files/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+    if($params[1] == 'cadmos')
+        $vars['upload_link'] = "CADMOS is a desktop tool, you need to <a href=\"http://cosy.ds.unipi.gr/cadmos/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+    if($params[1] == 'cld')
+        $vars['upload_link'] = "CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+    if($params[1] == 'image')
+        $vars['upload_link'] = "Upload a jpeg, png,gif or svg image.";
+
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -1215,6 +1250,7 @@ function lds_exec_implementeditor($params)
     if($editLdS->getSubtype() == 'LdS_implementation') {
 
         $vars['lds_id'] = $editLdS->lds_id;
+        $name = $editLdS->title;
         $vars['course_id'] = ($editLdS->course_id ? $editLdS->course_id : 0);
         $vars['vle_id'] = $editLdS->vle_id;
 
@@ -1245,6 +1281,7 @@ function lds_exec_implementeditor($params)
         $implementation_helper = $editLdS;
         $editLdS = get_entity($editLdS->lds_id);
         $vars['implementation_helper_id'] = $implementation_helper->guid;
+        $name = $implementation_helper->title;
         $vars['lds_id'] = $editLdS->guid;
         $vars['course_id'] = ($implementation_helper->course_id ? $implementation_helper->course_id : 0);
         $vars['vle_id'] = $implementation_helper->vle_id;
@@ -1333,7 +1370,7 @@ function lds_exec_implementeditor($params)
         $vars['vle_id'] = $user->vle;
     }
     if($vle = get_entity($vars['vle_id'])) {
-        $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle, 'lds' => $editLdS));
+        $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle, 'lds' => $editLdS, 'name' => $name));
     } else {
         register_error("VLE error");
         forward($CONFIG->url.'pg/lds/');
@@ -1798,15 +1835,19 @@ function lds_exec_vieweditor ($params)
 	$id = $params[1];
 	$lds = get_entity($id);
 	$vars['lds'] = $lds;
+    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//TODO permission / exist checks
 
 	lds_contTools::markLdSAsViewed ($id);
 
 	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
 
-    switch($editordocument->editorType) {
+    switch($editordocument[0]->editorType) {
+        case 'cld':
+        case 'image':
         case 'openglm':
             $vars['upload'] = true;
+            $vars['uploadDoc'] = $editordocument[0];
             break;
         default:
             $vars['upload'] = false;
@@ -2158,10 +2199,48 @@ function lds_exec_tree ($params)
     page_draw($vars['title'], $body);
 }
 
-function lds_exec_csv ($params)
+
+function lds_exec_datatracking ($params) {
+    global $CONFIG;
+
+    $body = elgg_view('lds/tracking');
+    echo page_draw(T('Tracking'), $body);
+
+}
+
+
+function lds_exec_tracking ($params)
 {
 
-    lds_csv_private();
+    switch($params[1]) {
+        case 'tool':
+            lds_tracking_tool();
+            break;
+        case 'userweeks':
+            lds_tracking_user_reviews();
+            break;
+        case 'ldsedits':
+            lds_tracking_edit_list();
+            break;
+        case 'ldsprivate':
+            lds_tracking_private();
+            break;
+        case 'ldssharing':
+            lds_tracking_sharing();
+            break;
+        case 'ldsimplemented':
+            lds_tracking_implemented();
+            break;
+        case 'ldscomments':
+            lds_tracking_comments();
+            break;
+        case 'ldsviewed':
+            lds_tracking_viewed();
+            break;
+
+    }
+
+    //lds_csv_private();
 }
 
 function lds_exec_404 ($view = '')

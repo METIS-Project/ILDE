@@ -1,0 +1,1807 @@
+<h1><b><font size=5 color=black face=Arial><span lang=EN-GB style='font-size:
+18.0pt;line-height:115%'>Support document</span></font></b></h1>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'><a
+href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_GB"><font size=2
+color="#4374b7" face=Helvetica><span style='font-size:10.0pt;line-height:115%;
+font-family:"Helvetica","sans-serif";color:#4374B7;background:whitesmoke;
+text-decoration:none'><img border=0 width=88 height=31
+src="http://ilde.upf.edu/mod/lds/templates/HeuristicEvaluationTemplate_files/image001.png"
+alt="Creative Commons Licence"></span></font></a></span></font><font size=2
+face=Helvetica><span lang=EN-GB style='font-size:10.0pt;line-height:115%;
+font-family:"Helvetica","sans-serif";background:whitesmoke'>This work by<span
+class=apple-converted-space><font face=Helvetica><span style='font-family:"Helvetica","sans-serif"'>&nbsp;</span></font></span>Yishay
+Mor<span class=apple-converted-space><font face=Helvetica><span
+style='font-family:"Helvetica","sans-serif"'>&nbsp;</span></font></span>is
+licensed under a<span class=apple-converted-space><font face=Helvetica><span
+style='font-family:"Helvetica","sans-serif"'>&nbsp;</span></font></span></span></font><span
+lang=EN-GB><a href="http://creativecommons.org/licenses/by-sa/3.0/deed.en_GB"><font
+size=2 color="#4374b7" face=Helvetica><span style='font-size:10.0pt;line-height:
+115%;font-family:"Helvetica","sans-serif";color:#4374B7;background:whitesmoke'>Creative
+Commons Attribution-ShareAlike 3.0 Unported License</span></font></a></span><font
+size=2 face=Helvetica><span lang=EN-GB style='font-size:10.0pt;line-height:
+115%;font-family:"Helvetica","sans-serif";background:whitesmoke'>.</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'><a
+href="http://www.ld-grid.org/resources/methods-and-methodologies/heuristic-evaluation"><i><font
+color="#1155cc"><span style='color:#1155CC;font-style:italic'>Heuristic
+evaluation </span></font></i></a><i><span style='font-style:italic'>has been
+recognised as a powerful technique for evaluating learning design. </span></i></span></font></p>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>However, in order
+to adapt it to this use, the designer / researcher needs to define a protocol
+and a set of Heuristics. In a heuristic evaluation, a group of experts (usually
+5-7) are asked to “walk through” the evaluated system as if they were users
+(learners) engaged in a typical activity. The experts are presented with a set
+of design heuristics - “rules of thumb” against which they are asked to assess
+their experience. Often they are provided with a score sheet, where they are
+asked to note any violation of these heuristics and rate its severity.</span></font></i></p>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>This template is
+designed to simplify the process of conducting a heuristic evaluation. You
+should use it to produce the evaluation protocol you will present to your
+experts. Create a document from this template, and edit it - replacing the
+guidance notes with your own text. The final product should be sufficient to
+guide and support an expert in evaluating your project.</span></font></i></p>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Start by editing the
+following paragraph, to introduce the concept of heuristic evaluation to your
+experts, work through the document, and end by deleting these two paragraphs.</span></font></i></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>Your task</span></span></font></b></h2>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Here is an example
+of evaluator instructions from the nQuire Moon Rock Demonstrator project,
+developed for the Wolfson OpenScience Laboratory:</span></font></i></p>
+
+<p class=Normal1 style='margin-left:36.0pt'><i><font size=2 color=black
+face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:115%;
+font-style:italic'>You'll play the role of a member of the general public who:
+(A) has an interest in science; (B) has no previous experience on nQuire nor
+inquiry learning; (C) has no expertise on geology.</span></font></i></p>
+
+<p class=Normal1 style='margin-left:36.0pt'><i><font size=2 color=black
+face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:115%;
+font-style:italic'>The activity is not supervised. Therefore, the system should
+be sufficient to guide you through the inquiry. The experimenter will only
+provide guidance when the evaluator needs help to complete the process. The
+evaluator must complete the following process:</span></font></i></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:18.0pt'><i><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%;font-style:italic'>1<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></i><i><span
+lang=EN-GB style='font-style:italic'>Access the website:
+http://pontos.open.ac.uk/nquire/latest</span></i></p>
+
+<p class=Normal1 style='margin-left:72.0pt;text-indent:-18.0pt'><i><font
+size=2 color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;
+line-height:115%;font-style:italic'>2<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></i><span
+lang=EN-GB>Create a new user and log in.</span></p>
+
+<p class=Normal1 style='margin-left:72.0pt;text-indent:-18.0pt'><i><font
+size=2 color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;
+line-height:115%;font-style:italic'>3<font size=1 face="Times New Roman"><span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font></span></font></i><span
+lang=EN-GB>Complete the Moon rock comparison inquiry. Some activities have
+links to external sites; these are not evaluated here</span></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB>&nbsp;</span></font></b></h2>
+
+<font size=2 color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;
+line-height:115%;font-family:"Arial","sans-serif";color:black'><br clear=all
+style='page-break-before:always'>
+</span></font>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>Heuristics</span></span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Below are exemplar four sets of heuristics.
+While the overall emphasis is on usability, they all consider factors of
+learning design and content design as well. </span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>There is considerable overlap between
+these sets, and yet each one includes some unique heuristics. It is also worth
+considering the different ways of representing the heuristics to the
+evaluators.</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>You can use one of these sets, pick
+and choose from them, or develop your own Heuristics.</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h3><b><font size=3 color="#666666" face=Arial><span lang=EN-GB
+style='font-size:12.0pt;line-height:115%'><span style='line-height:115%'>Bealle
+and Sharples (2002)</span></span></font></b></h3>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>(used by the n<i><span
+style='font-style:italic'>Quire Moon Rock Demonstrator project, developed for
+the Wolfson OpenScience Laboratory)</span></i></span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Feedback</span></font></b><span
+lang=EN-GB>: inform the user about what is going on using appropriate feedback
+in a timely</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>manner.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Everyday language</span></font></b><span
+lang=EN-GB>: use simple language, avoid technical terms, follow real-world
+conventions</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>to make things appear logical.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Undo</span></font></b><span
+lang=EN-GB>: people make mistakes, so it should be easy to recover to a
+sensible point.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Consistency</span></font></b><span
+lang=EN-GB>: doing similar things in similar places should have similar
+effects. Also, support the</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>conventions of the specific types of
+computer and operating systems such as Windows or</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>MacOS.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Recognition not
+recall</span></font></b><span lang=EN-GB>: make next steps and critical
+information visible and memorable. Allow</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>people to recognise what they should
+do next, not remember what it is.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Simple design</span></font></b><span
+lang=EN-GB>: keep things crisp and simple, to minimise the information presented
+to the user.</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Make the design aesthetically
+pleasing to the target audience.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Expert use</span></font></b><span
+lang=EN-GB>: provide accelerators (keyboard short cuts and advanced techniques)
+that allow</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>experts to work faster.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Error recovery</span></font></b><span
+lang=EN-GB>: try and design the system to prevent errors occurring, and when
+they do</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>provide clear messages and suggest
+appropriate solutions.</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Documentation</span></font></b><span
+lang=EN-GB>: it is best to design a system that requires no documentation, but
+complex</span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>features or very different systems
+may need it. It should be well organised, (searchable and</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>well structured), focussed on the
+task of the user, simple to follow with concrete steps, and</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>concise. It should ideally be
+available on the system so it is accessible when needed.</span></font></p>
+
+<h3><b><font size=3 color="#666666" face=Arial><span lang=EN-GB
+style='font-size:12.0pt;line-height:115%'><span style='line-height:115%'>Ssemugabi
+&amp; de Villiers (2010)</span></span></font></b></h3>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Category 1: General
+interface usability criteria (based on Nielsen’s heuristics, modified for
+e-learning context)</span></font></b></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>1 Visibility of
+system status</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The website keeps the user
+informed through constructive, appropriate and timely feedback.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The system responds to
+user-initiated actions. There are no surprise actions by the site or tedious
+data entry sequences.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>2 Match between the
+system and the real world i.e. match between designer model and user model</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Language usage in terms of
+phrases, symbols, and concepts is similar to that of users in their day-to-day
+environment.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Metaphor usage corresponds to
+real-world objects/concepts, e.g. understandable and meaningful symbolic
+representations are used to ensure that the symbols, icons and names are
+intuitive within the context of the task</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>performed.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Information is arranged in a
+natural and logical order.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>3 Learner control
+and freedom</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Users control the system.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Users can exit the system at any
+time, even when they have made mistakes.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>There are facilities for Undo and
+Redo.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>4 Consistency and
+adherence to standards</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The same concepts, words, symbols,
+situations, or actions refer to the same thing.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Common platform standards are
+followed.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>5 Error prevention,
+in particular, prevention of peripheral usability-related errors</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The system is designed in such a way
+that the users cannot easily make serious errors.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>When a user makes an error, the
+application gives an appropriate error message.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>6 Recognition rather
+than recall</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Objects to be manipulated, options
+for selection, and actions to be taken are visible.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The user does not need to recall
+information from one part of a dialogue to another.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Instructions on how to use the
+system are visible or easily retrievable whenever appropriate.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Displays are simple and multiple
+page displays are minimised.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>7 Flexibility and
+efficiency of use</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site caters for different
+levels of users, from novice to expert.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Shortcuts or accelerators, unseen
+by novice users, are provided to speed up interaction and task completion by
+frequent users.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The system is flexible to enable
+users to adjust settings to suit themselves, i.e. to customise the system.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>8 Aesthetics and
+minimalism in design</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Site dialogues do not contain
+irrelevant or rarely needed information, which could distract users.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>9 Recognition,
+diagnosis, and recovery from errors</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Error messages are expressed in
+plain language.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Error messages define problems
+precisely and give quick, simple, constructive, specific instructions for
+recovery.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>If a typed command results in an
+error, users need not retype the entire command, but only the faulty part.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>10 Help and
+documentation</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site has a help facility and
+other documentation to support users’ needs.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Information in these facilities is
+easy to search, task-focused, and lists concrete steps to accomplish a task.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Category 2: Website-specific
+criteria</span></font></b></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>11 Simplicity of
+site navigation, organisation and structure</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site has a simple navigational
+structure.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Users should know where they are
+and have the option to select where to go next, e.g. via a site map or
+breadcrumbs.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The navigational options are
+limited, so as not to overwhelm the user.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Related information is placed
+together.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Information is organised
+hierarchically, moving from the general to the specific.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Common browser standards are
+followed.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Each page has the required navigation
+buttons or hyperlinks (links), such as previous (back) next and home.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>12 Relevance of site
+content to the learner and the learning process</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Content is engaging, relevant,
+appropriate and clear to learners using the WBL site.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The material has no biases such as
+racial and gender biases, which may be deemed offensive.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>It is clear which materials are
+copyrighted and which are not.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The authors of the content are of
+reputable authority.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Category 3:
+Educational criteria: Learner-centred instructional design, grounded in
+learning theory</span></font></b></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>13 Clarity of goals,
+objectives and outcomes</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>There are clear goals, objectives
+and outcomes for learning encounters.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The reason for inclusion of each
+page or document on the site is clear.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>14 Effectiveness of
+collaborative learning (where such is available)</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Facilities and activities are
+available that encourage learner-learner and learner-teacher interactions.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Facilities are provided for both
+asynchronous and synchronous communication, such as e-mail, discussion forums
+and chat rooms.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>15 Level of learner
+control</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Apart from controlling the
+interactions with the site, learners have some freedom to direct their
+learning, either individually or collaboratively, and to have a sense of
+ownership of it.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learners are given some control of
+the content they learn, how it is learned, and the sequence of units.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Individual learners can customise
+the site to suit their personal learning strategies.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Educators can customise learning
+artefacts to the individual learner, for example, tests and performance
+evaluations can be customised to the learner’s ability.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Where appropriate, learners take
+the initiative regarding the methods, time, place, content, and sequence of
+learning.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>16 Support for
+personally significant approaches to learning</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>There are multiple representations
+and varying views of learning artefacts and tasks.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site supports different
+strategies for learning and indicates clearly which styles it supports.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site is used in combination
+with other mediums of instruction to support learning.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Metacognition (the ability of a
+learner to plan, monitor and evaluate his/her own cognitive skills) is
+encouraged.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learning activities are scaffolded
+by learner support and by optional additional information.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>17 Cognitive error
+recognition, diagnosis and recovery</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Cognitive conflict, bridging and
+problem-based learning strategies are used in the
+recognition-diagnosis-recovery cycle.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learners have access to a rich and
+complex environment in which they can explore different solutions to problems.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learners are permitted to learn by
+their mistakes and are provided with help to recover from cognitive errors.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>18 Feedback,
+guidance and assessment</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Apart from the system’s
+interface-feedback by the system, considered under Criterion 1, learners give
+and receive prompt and frequent feedback about their activities and the
+knowledge being constructed.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learners are guided as they
+perform tasks.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Quantitative feedback, e.g.
+grading of learners’ activities, is given, so that learners are aware of their
+level of performance.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>19 Context
+meaningful to domain and learner</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Knowledge is presented within a
+meaningful and authentic context that supports effective learning.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Authentic, contextualised tasks
+are undertaken rather than abstract instruction.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The application enables context-
+and content-dependent knowledge construction.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>Learning occurs in a context of
+use so that knowledge and skills are transferable to similar contexts.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The representations are
+understandable and meaningful, ensuring that symbols, icons and names used are
+intuitive within the context of the learning task.</span></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>20 Learner
+motivation, creativity and active learning</span></font></b></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>The site has content and
+interactive features that attract, motivate and retain learners, and that
+promote creativity, e.g. the online activities are situated in real-world
+practice, and interest and engage the learners.</span></p>
+
+<p class=Normal1 style='margin-left:36.0pt;text-indent:-18.0pt'><font size=2
+color=black face=Arial><span lang=EN-GB style='font-size:11.0pt;line-height:
+115%'>●<font size=1 face="Times New Roman"><span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;
+</span></font></span></font><span lang=EN-GB>To promote active learning and
+critical thinking, tasks require learners to compare, analyse and classify
+information, and to make deductions.</span></p>
+
+<h3><b><font size=3 color="#666666" face=Arial><span lang=EN-GB
+style='font-size:12.0pt;line-height:115%'><span style='line-height:115%'>Albion
+(1999</span></span></font></b></h3>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Interface design
+heuristics [after Nielsen (1994)] </span></font></b></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=624
+ style='width:468.0pt;margin-left:4.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Ensures visibility of
+  system status  </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border:solid black 1.0pt;
+  border-left:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>The software keeps the user
+  informed about what is  going on through appropriate and timely feedback. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Maximises match between
+  the system and the real world </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software speaks the
+  users' language rather than jargon. Information appears in a natural and
+  logical order. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Maximises user control
+  and freedom</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Users are able to exit
+  locations and undo mistakes. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>Maximises consistency and matches
+  standards </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>Users do not have to wonder whether
+  different words, situations or actions mean the same thing. </span></font></p>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>Common operating system standards
+  are followed. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Prevents errors</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>The design provides guidance which
+  reduces the risk of user errors. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Supports recognition rather
+  than recall</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>Objects, actions and options are
+  visible. The user does not have to rely on memory. Information is visible or
+  easily accessed whenever appropriate. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Supports flexibility and
+  efficiency of use</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software allows
+  experienced users to use shortcuts and adjust settings to suit. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Uses aesthetic and
+  minimalist design </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software provides an
+  appealing overall design and does not display irrelevant or infrequently used
+  information.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Helps users recognise,
+  diagnose and recover from errors </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Error messages are
+  expressed in plain language, clearly indicate the problem and recommend a
+  solution. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Provides help and
+  documentation </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software provides
+  appropriate online help and documentation which is easily accessed and
+  related to the users' needs.</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Educational design
+heuristics [after Quinn (1996)] </span></font></b></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=624
+ style='width:468.0pt;margin-left:4.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Clear goals and
+  objectives </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border:solid black 1.0pt;
+  border-left:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software makes it
+  clear to the learner what is to be accomplished and what will be gained from
+  its use. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Context meaningful to
+  domain and learner </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The activities in the software
+  are situated in practice and will interest and engage a learner. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Content clearly and
+  multiply represented and multiply navigable </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The message in the
+  software is unambiguous. The software supports learner preferences for
+  different access pathways. The learner is able to find relevant information
+  while engaged in an activity.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Activities scaffolded</span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software provides
+  support for learner activities to allow working within existing competence
+  while encountering meaningful chunks of knowledge.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Elicit learner
+  understandings</span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software requires
+  learners to articulate their conceptual understandings as the basis for
+  feedback.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Formative evaluation </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'> The software provides
+  learners with constructive feedback on their endeavours. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Performance should be
+  'criteria-referenced' </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software will
+  produce clear and measurable outcomes that would support competency-based
+  evaluation.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Support for transference
+  and acquiring 'self-learning' skills </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software supports
+  transference of skills beyond the learning environment and will facilitate
+  the learner becoming able to self-improve. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=263 valign=top style='width:197.25pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Support for
+  collaborative learning </span></font></p>
+  </td>
+  <td width=361 valign=top style='width:270.75pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software provides
+  opportunities and support for learning through interaction with others
+  through discussion or other collaborative activities.</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><b><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-weight:bold'>Content heuristics</span></font></b><span
+lang=EN-GB> </span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=624
+ style='width:468.0pt;margin-left:4.5pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Establishment of context
+  </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border:solid black 1.0pt;
+  border-left:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The photographs,
+  documents and other materials related to the simulated schools create a sense
+  of immersion in a simulated reality.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Relevance to
+  professional practice</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>The problem scenarios and included
+  tasks are realistic and relevant to the professional </span></font></p>
+  <p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+  style='font-size:11.0pt;line-height:115%'>practice of teachers.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Representation of
+  professional responses to issues </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The sample solutions
+  represent a realistic range of teacher responses to the issues and challenge
+  users to consider alternative approaches. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Relevance of reference
+  materials</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The reference materials
+  included in the package are relevant to the problem scenarios and are at a
+  level appropriate to the users.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Presentation of video
+  resources</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The video clips of
+  teacher interviews and class activities are relevant and readily accessible
+  to the user.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Assistance is supportive
+  rather than prescriptive</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The contextual help
+  supports the user in locating relevant resources and dealing with the
+  scenarios without restricting the scope of individual responses. </span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Materials are engaging </span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The presentation style
+  and content of the software encourages a user to continue working through the
+  scenarios.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Presentation of
+  resources</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The software presents
+  useful resources for teacher professional development in an interesting and
+  accessible manner.</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=262 valign=top style='width:196.5pt;border:solid black 1.0pt;
+  border-top:none;padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>Overall effectiveness of
+  materials</span></font></p>
+  </td>
+  <td width=362 valign=top style='width:271.5pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:5.0pt 5.0pt 5.0pt 5.0pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>The materials are likely
+  to be effective in increasing teachers' confidence and capacity for
+  integrating information technology into teaching and learning.</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<h3><b><font size=3 color="#666666" face=Arial><span lang=EN-GB
+style='font-size:12.0pt;line-height:115%'><span style='line-height:115%'>Benson
+et al (2001)</span></span></font></b></h3>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>1. <u>Visibility of system status</u>:
+The e-learning program keeps the learner informed about what is happening, through
+appropriate feedback within reasonable time.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the learner
+know where they are at all times, how they got there, and how to get back to
+the point from which they started?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. When modules and
+other components of the e-learning (e.g., streaming video) are loading, is the
+status of the upload communicated clearly?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the learner
+have confidence that the e-learning program is operating the way it was
+designed to operate?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>2. <u>Match between system and the
+real world</u>: The e-learning programís interface employs words, phrases and
+concepts familiar to the learner, rather than system-oriented terms. Wherever
+possible, the e-learning program utilizes real-world conventions that make
+information appear in a natural and logical order.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning programís navigation and interactive design utilize metaphors that
+are familiar to the learner either in terms of traditional learning
+environments (e.g., lectures, quizzes, etc.) or in terms related to the
+specific content of the program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is the cognitive
+load of the interface as low as possible to enable learners to engage with the
+content, tasks, and problems as quickly as possible?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program adhere to good principles of human information processing?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>3. <u>User control and freedom</u>:
+The e-learning program allows the learner to recover from input mistakes and
+provides a clearly marked ìemergency exitî to leave an unwanted state without
+having to go through an extended dialogue.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program allow the learner to move around in the program in an
+unambiguous manner, including the capability to go back and review previous
+sections?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the
+e-learning program allow the learner to leave whenever desired, but easily
+return to the closest logical point in the program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program distinguish between input errors and cognitive errors,
+allowing easy recovery from the former always, and from the latter when it is
+pedagogically appropriate?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>4. <u>Consistency and standards</u>:
+The e-learning program is consistent in its use of different words, situations,
+or actions and it adheres to general software and platform conventions.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program function properly as long as the computerís screen
+resolution, memory allocations, bandwidth, browsers, plug-ins, and other
+technical aspects meet the required specifications?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the
+e-learning program include interactions that are counter-intuitive with respect
+to common software conventions?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning product adhere to widely recognized standards for interactions
+(e.g., going back in a Web browser)?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>5. <u>Error prevention</u>: The
+e-learning program is carefully designed to prevent common problems from
+occurring in the first place.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is the e-learning
+program designed so that the learner recognizes when he/she has made a mistake
+related to input rather than content?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is the e-learning
+program designed to take advantage of screen design conventions and guidelines
+that clarify meaning?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Is the e-learning
+program designed to provide a second chance when unexpected input is received
+(e.g., ìYou typed ìbatî in response to the question. Did you mean ìtab?î)?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>6. <u>Recognition rather than recall</u>:
+The e-learning program makes objects, actions, and options visible so that the
+user does not have to remember information from one part of the program to
+another. Instructions for use of the program are visible or easily retrievable.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+interface of the e-learning program speak for itself so that extensive
+consultation of a manual or other documentation does not interfere with
+learning?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Are icons and
+other screen elements designed so that they are as intuitive as possible?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program provide user-friendly hints and/or clear directions when the
+learner requests assistance?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>7. <u>Flexibility and efficiency of
+use</u>: The e-learning program is designed to speed up interactions for the
+experienced learner, but also cater to the needs of the inexperienced learner.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is the e-learning
+program designed to make the best use of useful graphics and other media
+elements that download as quickly as possible?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is the e-learning
+program designed to allow large media files to be downloaded in advance so that
+learner wait time is minimized?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the program
+allow keyboard short cuts that make frequent interactions as efficient as
+possible?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>8. <u>Aesthetic and minimalist design</u>:
+Screen displays do not contain information that is irrelevant, and ìbells and
+whistlesî are not gratuitously added to the e-learning program.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Are the font
+choices, colors, and sizes consistent with good screen design recommendations
+for e-learning programs?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Are extra media
+features (e.g., streaming video) in the e-learning program supportive of
+learning, motivation, content, or other goals?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the e-learning
+program utilize white space and other screen design conventions appropriately?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>9. <u>Help users recognize, diagnose,
+and recover from errors</u>: The e-learning program expresses error messages in
+plain language (without programmer codes), precisely indicates the problem, and
+constructively suggests a solution.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the learner
+receive meaningful feedback concerning the nature of any input they make into
+the program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. If the learner
+answers a question incorrectly, is he/she told the correct answer and why the
+answer given was wrong, if this is instructionally appropriate?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. When feedback is
+provided, is it given in a clear, direct, and friendly (non-condescending)
+manner?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>10. <u>Help and documentation</u>:
+When it is absolutely necessary to provide help and documentation, the
+e-learning program provides any such information in a manner that is easy to
+search. Any help provided is focused on the learner's task, lists concrete
+steps to be carried out, and is not be too large.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is help provided
+that is screen or context specific?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is help and
+documentation available from any logical part of the e-learning program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program include a map or table of contents that allows you to see
+what you have seen and not seen?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>11. <u>Interactivity</u>: The
+e-learning program provides content-related interactions and tasks that support
+meaningful learning.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program provide too many long sections of text to read without
+meaningful interactions?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the
+e-learning engage the learner in content-specific tasks to complete and
+problems to solve that take advantage of the state-of-the-art of e-learning
+design?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program provide a level of experiential learning congruent with the
+content and capabilities of the target audience?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>12. <u>Message Design</u>: The
+e-learning program presents information in accord with sound principles of
+information-processing theory.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is the most
+important information on the screen placed in the areas most likely to attract
+the learnerís attention?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the
+e-learning program follow good information presentation guidelines with respect
+to organization and layout?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Are graphics in
+the e-learning program used to clarify content, motivate, or serve other
+pedagogical goals?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>13. <u>Learning Design</u>: The
+interactions in the e-learning program have been designed in accord with sound
+principles of learning theory.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program provide for instructional interactions that reflect sound
+learning theory?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the
+e-learning program engage learners in tasks that are closely aligned with the
+learning goals and objectives?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program inform learners of the objectives of the program and remind
+them of prior learning?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>14. <u>Assessment</u>: The e-learning
+program provides assessment opportunities that are aligned with the program
+objectives and content.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program provide opportunities for self-assessments that advance
+learner achievement?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. If appropriate to
+the context, do assessments provide sufficient feedback to the learner to
+provide remedial directions?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Are higher order
+assessments (e.g., analysis, synthesis, and evaluation) provided wherever
+appropriate rather than lower order assessments (e.g., recall and recognition)?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>15. <u>Media Integration</u>: The
+inclusion of media in the e-learning program serves clear pedagogical and/or
+motivational purposes.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is media included
+that is obviously superfluous, i.e., lacking a strong connection to the
+objectives and design of the program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is the most
+appropriate media selected to match message design guidelines or to support
+specific instructional design principles?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. If appropriate to
+the context, are various forms media included for remediation and/or
+enrichment?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>16. <u>Resources</u>: The e-learning
+program provides access to all the resources necessary to support effective
+learning.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the
+e-learning program provide access to a range of resources (e.g., examples or
+real data archives) appropriate to the learning context?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. If the e-learning
+program includes links to external World Wide Web or Intranet resources, are
+the links kept up-to-date?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Are resources
+provided in a manner that replicates as closely as possible their availability
+and use in the real world?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>17. <u>Performance Support Tool</u>s:
+The e-learning program provides access to performance support tools that are
+relevant to the content and objectives.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Are performance
+support tools provided that mimic their access in the real world?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Provided the
+context is appropriate, does the e-learning program provide sufficient search
+capabilities?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Provided the
+context is appropriate, does the e-learning program provide access to peers,
+experts, instructors, and other human resources?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>18. <u>Learning Management</u>: The
+e-learning program enables learners to monitor their progress through the
+material.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Does the learner
+know what he/she is doing and how he/she is doing within various parts of the
+e-learning program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does the learner
+perceive options for additional guidance, instruction, or other forms of
+assistance when it is needed?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the learner
+possess an adequate understanding of what he/she has completed and what remains
+to be done within any specific unit (e.g., a course) of e-learning?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>19. <u>Feedback</u>: The e-learning
+program provides feedback that is contextual and relevant to the problem or
+task in which the learner is engaged.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is the feedback
+given at any specific time tailored to the content being studied, problem being
+solved, or task being completed by the learner?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Does feedback
+provide the learner with information concerning his/her current level of
+achievement within the program?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program provide learners with opportunities to access extended
+feedback from instructors, experts, peers, or others through e-mail or other
+Internet communications?</span></font></p>
+
+<h2><b><font size=3 color=black face=Arial><span lang=EN-GB style='font-size:
+12.0pt;line-height:115%;background:white'>20. <u>Content</u>: The content of
+the e-learning program is organized in a manner than is clear to the learner.</span></font></b></h2>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>Sample questions to
+ask yourself:</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>a. Is the content
+organized in manageable modules or other types of units?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>b. Is the content
+broken to appropriate chunks so that learners can process them without too much
+cognitive load?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;background:white'>c. Does the
+e-learning program provides advanced organizers, summaries, and other
+components that foster more efficient and effective learning?</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>References</span></span></font></b></h2>
+
+<h3><b><font size=1 color=black face=Arial><span lang=EN-GB style='font-size:
+9.0pt;line-height:115%;color:black;background:white;font-weight:normal'>Beale,
+R. &amp; Sharples, M. (2002), 'Design guide for developers of educational
+software', <i><span style='font-style:italic'>British Educational
+Communications and Technology Agency.</span></i> </span></font></b><span
+lang=EN-GB><a
+href="http://www.eee.bham.ac.uk/sharplem/Papers/Design%20Guide.pdf"><font
+size=2 color="#1155cc" face="Trebuchet MS"><span style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:#1155CC;
+font-weight:normal'>www.eee.bham.ac.uk/sharplem/Papers/Design%20Guide.pdf</span></font></a></span><font
+size=2 color=black face="Trebuchet MS"><span lang=EN-GB style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:black;
+font-weight:normal'> </span></font></h3>
+
+<h3><b><font size=2 color=black face="Trebuchet MS"><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%;font-family:"Trebuchet MS","sans-serif";
+color:black;font-weight:normal'>Ssemugabi, S. &amp; de Villiers, R. (2010),
+'Effectiveness of heuristic evaluation in usability evaluation of e-learning
+applications in higher education', <i><span style='font-style:italic'>South
+African Computer Journal</span></i> 45 (0). </span></font></b><span lang=EN-GB><a
+href="http://sacj.cs.uct.ac.za/index.php/sacj/article/view/37"><font size=2
+color="#1155cc" face="Trebuchet MS"><span style='font-size:10.0pt;line-height:
+115%;font-family:"Trebuchet MS","sans-serif";color:#1155CC;font-weight:normal'>http://sacj.cs.uct.ac.za/index.php/sacj/article/view/37</span></font></a></span></h3>
+
+<h3><b><font size=2 color=black face="Trebuchet MS"><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%;font-family:"Trebuchet MS","sans-serif";
+color:black;font-weight:normal'>Hagen, P.; Robertson, T.; Kan, M. &amp; Sadler,
+K. (2005), 'Emerging research methods for understanding mobile technology use'
+'Proceedings of the 17th Australia conference on Computer-Human Interaction:
+Citizens Online: Considerations for Today and the Future' , Computer-Human
+Interaction Special Interest Group (CHISIG) of Australia , 1-10. </span></font></b><span
+lang=EN-GB><a
+href="http://research.it.uts.edu.au/idhup/wordpress/wp-content/uploads/2009/10/Hagen_OzCHI2005.pdf.pdf"><font
+size=2 color="#1155cc" face="Trebuchet MS"><span style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:#1155CC;
+font-weight:normal'>research.it.uts.edu.au/idhup/wordpress/wp-content/uploads/2009/10/Hagen_OzCHI2005.pdf.pdf</span></font></a></span></h3>
+
+<h3><b><font size=2 color=black face="Trebuchet MS"><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%;font-family:"Trebuchet MS","sans-serif";
+color:black;font-weight:normal'>Kjeldskov, J.; Graham, C.; Pedell, S.; Vetere,
+F.; Howard, S.; Balbo, S. &amp; Davies, J. (2005), 'Evaluating the usability of
+a mobile guide: The influence of location, participants and resources',<i><span
+style='font-style:italic'>Behaviour and Information Technology</span></i> 24
+(1) , 51-66. </span></font></b><span lang=EN-GB><a
+href="http://disweb.dis.unimelb.edu.au/staff/showard/papers/BIT2005.pdf"><font
+size=2 color="#1155cc" face="Trebuchet MS"><span style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:#1155CC;
+font-weight:normal'>disweb.dis.unimelb.edu.au/staff/showard/papers/BIT2005.pdf</span></font></a></span><font
+size=2 color=black face="Trebuchet MS"><span lang=EN-GB style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:black;
+font-weight:normal'> </span></font></h3>
+
+<h3><b><font size=2 color=black face="Trebuchet MS"><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%;font-family:"Trebuchet MS","sans-serif";
+color:black;font-weight:normal'>Reeves, T. C.; Benson, L.; Elliott, D.; Grant,
+M.; Holschuh, D.; Kim, B.; Kim, H.; Lauber, E. &amp; Loh, C. S. (2002),
+Usability and Instructional Design Heuristics for E-Learning Evaluation, in P.
+Barker &amp; S. Rebelsky, ed., in 'Proceedings of World Conference on
+Educational Multimedia, Hypermedia and Telecommunications 2002 (pp.
+1615-1621).' , AACE, Chesapeake, VA. </span></font></b><span lang=EN-GB><a
+href="http://www.csloh.com/research/pdf/EdMedia2002.pdf"><font size=2
+color="#333333" face="Trebuchet MS"><span style='font-size:10.0pt;line-height:
+115%;font-family:"Trebuchet MS","sans-serif";color:#333333;font-weight:normal'>http://www.csloh.com/research/pdf/EdMedia2002.pdf</span></font></a></span><font
+size=2 color=black face="Trebuchet MS"><span lang=EN-GB style='font-size:10.0pt;
+line-height:115%;font-family:"Trebuchet MS","sans-serif";color:black;
+font-weight:normal'>, </span></font><span lang=EN-GB><a
+href="http://treeves.coe.uga.edu/edit8350/HEIPEP.html"><font size=2
+color="#333333" face="Trebuchet MS"><span style='font-size:10.0pt;line-height:
+115%;font-family:"Trebuchet MS","sans-serif";color:#333333;font-weight:normal'>http://treeves.coe.uga.edu//edit8350/HEIPEP.html</span></font></a></span></h3>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%'>Albion, P. (1999), Heuristic
+evaluation of educational multimedia: from theory to practice, <i><span
+style='font-style:italic'>in</span></i> 'Proceedings ASCILITE 1999: 16th Annual
+Conference of the Australasian Society for Computers in Learning in Tertiary
+Education: Responding to Diversity' , pp. 9--15 .</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%'>Nielsen, J. (1994), <i><span
+style='font-style:italic'>Heuristic evaluation</span></i> , John Wiley &amp;
+Sons, Inc. , New York, NY, USA , pp. 25-62 .</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%'>Nielsen, J. (1994), 'How to conduct a
+heuristic evaluation' .  </span></font><span lang=EN-GB><a
+href="http://www.useit.com/papers/heuristic/heuristic_evaluation.html"><font
+color="#333333"><span style='color:#333333'>http://www.useit.com/papers/heuristic/heuristic_evaluation.html</span></font></a></span></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:10.0pt;line-height:115%'>Nielsen, J. &amp; Molich, R. (1990),
+Heuristic evaluation of user interfaces, <i><span style='font-style:italic'>in</span></i>
+'CHI '90: Proceedings of the SIGCHI conference on Human factors in computing
+systems' , ACM Press, New York, NY , pp. 249-256 </span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+

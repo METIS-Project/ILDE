@@ -816,10 +816,12 @@ class OpenglmEditor extends Editor {
         $document->file_guid = $file->guid;
         $document->editorType = $params['lds']->editor_type;
 
-        $filestorename = $params['lds']->guid.'_'.rand_str(64);
+        $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
         $file = Editor::getNewFile($filestorename);
         if(isset($params['file_imsld']))
             copy($params['file_imsld'], $file->getFilenameOnFilestore());
+        else
+            copy($params['file'], $file->getFilenameOnFilestore());
 
         $document->ims_ld = $file->guid;
 
@@ -850,12 +852,20 @@ class OpenglmEditor extends Editor {
 
         if(isset($params['file_imsld'])) {
             if(!$document->ims_ld) {
-                $filestorename = $params['lds']->guid.'_'.rand_str(64);
+                $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
                 $document->ims_ld = Editor::getNewFile($filestorename);
             }
 
             $fullfilepath = Editor::getFullFilePath($document->ims_ld);
             copy($params['file_imsld'], $fullfilepath);
+        } else {
+            if(!$document->ims_ld) {
+                $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
+                $document->ims_ld = Editor::getNewFile($filestorename);
+            }
+
+            $fullfilepath = Editor::getFullFilePath($document->ims_ld);
+            copy($params['file'], $fullfilepath);
         }
 
         //TODO: update revision data
@@ -1010,7 +1020,7 @@ class RestEditor extends Editor
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
             'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
-            'name' => $lds->title,
+            'name' => $params['name'],
             'ldshake_frame_origin' => $ldshake_frame_origin,
         );
 

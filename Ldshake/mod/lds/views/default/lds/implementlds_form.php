@@ -38,7 +38,7 @@
 
 <div id="implement_popup" class="lds_popup">
     <a class="lds_close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
-    <h3><?php echo T("Enter you the title of your new implementation") ?></h3>
+    <h3><?php echo T("Enter the title of your new implementation") ?></h3>
     <input type="text" size="60" name="new_implementation_title" />
 
     <h3><?php echo T("Select one of your VLE spaces") ?></h3>
@@ -55,6 +55,8 @@
             </div>
         <?php endforeach; ?>
     </div>
+
+    <div id="impl_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title and check a VLE!");?></div>
     <input type="hidden" name="lds_id" />
 
     <input type="button" id="implementlds_submit" value="<?php echo T('Implement')?>" />

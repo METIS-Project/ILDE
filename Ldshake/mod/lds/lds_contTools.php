@@ -1493,7 +1493,7 @@ SQL;
         return $entities;
     }
 
-    public static function getModifiedLdSsByDate($user_id = 0, $start = null, $end = null, $count = false) {
+    public static function getModificationsLdSsByDate($user_id = 0, $start = null, $end = null, $count = false) {
         global $CONFIG;
 
         $annotation_name_id = get_metastring_id('revised_docs');
@@ -1503,7 +1503,7 @@ SQL;
         if($user_id)
             $user_q = "AND a.owner_guid = {$user_id}";
         $query = <<<SQL
-SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2}) AND a.time_created >= {$start} AND a.time_created < {$end} AND e.enabled = 'yes' AND e.access_id > 0 {$user_q}
+SELECT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2}) AND a.time_created >= {$start} AND a.time_created < {$end} AND e.enabled = 'yes' AND e.access_id > 0 {$user_q}
 SQL;
 
         $entities = get_data($query, "entity_row_to_elggstar");

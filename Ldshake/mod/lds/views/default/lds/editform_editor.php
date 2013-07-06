@@ -84,8 +84,10 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
                 <?php if(isset($upload)):?>
                 <form id="file_upload_form" name="file_upload_name" target="upload_result_name" action="<?php echo $url.'action/lds/pre_upload' ?>" method="POST" enctype="multipart/form-data" >
-                    <input name="file" id="file_input" size="50" type="file" />
+                    <div style="clear:both"></div>
+                    <input name="file" id="file_input" size="50" type="file" /> <span id="form_file_input_empty" style="display:none;color:red"><?php echo T("You must select a file!");?></span>
                 </form>
+                    <div style="padding:5px;color:grey"><?php echo $upload_link;?></div>
                 <?php endif; ?>
 
             </div>

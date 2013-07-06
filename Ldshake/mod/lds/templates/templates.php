@@ -8,6 +8,7 @@ function ldshake_get_template($template){
         'DPS' => array('DPS'),
         'PC' => array('PC','yishay'),
         'FC' => array('FC','yishay'),
+        'HE' => array('HE','HEs'),
         't1e' => array('e_text_integrat'),
         't2e' => array('e_equip'),
         't3e' => array('e_mapa'),

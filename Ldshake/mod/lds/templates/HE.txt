@@ -1,0 +1,344 @@
+<div class=WordSection1>
+
+<h1><b><font size=5 color=black face=Arial><span lang=EN-GB style='font-size:
+18.0pt;line-height:115%'><span style='line-height:115%'>Heuristic Evaluation of
+e-Learning: <span style='background:yellow'>&lt;LdS&gt;</span></span></span></font></b></h1>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>See the support
+document for instructions for using this template.</span></font></i></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Heuristic evaluation is a technique
+borrowed from usability research, where a group of experts is asked to assess a
+particular design using a given rubric (set of heuristics). It offers a
+low-cost rapid evaluation which often uncovers design flaws at an early stage.</span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>Thank you for agreeing to help us
+evaluate <span style='background:yellow'>&lt;project name&gt;</span>. Today you
+will be asked to put yourself in the learner’s seat, review the project, and
+note any design flaws you perceive. </span></font></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>Introducing <span
+style='background:yellow'>&lt;LdS&gt;</span></span></span></font></b></h2>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Add a paragraph or
+two introducing your LdS: what are you creating, who is the target audience,
+what do you aim to achieve?</span></font></i></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>Your task</span></span></font></b></h2>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Instruct the
+evaluator how to perform the evaluation. Tell them what role they assume, and
+what actions they should take. Often, the instructions suggest that the
+evaluator first does a quick pass through the evaluated system, then goes
+through it systematically and monitors the heuristics (below). You might want
+to suggest that evaluators take a quick note of the design flaws they notice,
+then return to their score sheet at the end and fill in the gaps. </span></font></i></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>The Heuristics</span></span></font></b></h2>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Present the
+evaluator with a set of heuristics to apply as they review your LdS. </span></font></i></p>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Review the
+heuristics sets in the appendix. Select the ones that are relevant to your LdS,
+edit them to better fit your context, and add your own.</span></font></i></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<h2><b><font size=4 color=black face=Arial><span lang=EN-GB style='font-size:
+14.0pt;line-height:115%'><span style='line-height:115%'>Scoring sheet</span></span></font></b></h2>
+
+<p class=Normal1><i><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%;font-style:italic'>Provide evaluators
+with a scoring sheet to use during the evaluation. </span></font></i></p>
+
+<p class=Normal1><font size=2 color=black face=Arial><span lang=EN-GB
+style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+
+<table class=MsoNormalTable border=1 cellspacing=0 cellpadding=0 width=624
+ style='width:468.3pt;border-collapse:collapse;border:none'>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <h3 style='line-height:normal'><b><font size=3 color="#666666" face=Arial><span
+  lang=EN-GB style='font-size:12.0pt'>Location</span></font></b></h3>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm .5pt 0cm .5pt'>
+  <h3 style='line-height:normal'><b><font size=3 color="#666666" face=Arial><span
+  lang=EN-GB style='font-size:12.0pt'>Issue</span></font></b></h3>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm .5pt 0cm .5pt'>
+  <h3 style='line-height:normal'><b><font size=3 color="#666666" face=Arial><span
+  lang=EN-GB style='font-size:12.0pt'>Heuristic</span></font></b></h3>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm .5pt 0cm .5pt'>
+  <h3 style='line-height:normal'><b><font size=3 color="#666666" face=Arial><span
+  lang=EN-GB style='font-size:12.0pt'>Severity</span></font></b></h3>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border:solid black 1.0pt;
+  border-left:none;padding:0cm .5pt 0cm .5pt'>
+  <h3 style='line-height:normal'><b><font size=3 color="#666666" face=Arial><span
+  lang=EN-GB style='font-size:12.0pt'>Recommended action (optional)</span></font></b></h3>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>Where
+  was the issue noticed?</span></font></i></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>Describe
+  the issue that you noticed</span></font></i></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>Which
+  heuristic does it violate?</span></font></i></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>How
+  bad is it (0-5)?</span></font></i></p>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>0 -
+  not a problem</span></font></i></p>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>5 -
+  catastrophic, show stopper.</span></font></i></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><i><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt;font-style:italic'>Suggest
+  how to rectify this issue</span></font></i></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+ <tr>
+  <td width=125 valign=top style='width:93.65pt;border:solid black 1.0pt;
+  border-top:none;padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.65pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+  <td width=125 valign=top style='width:93.7pt;border-top:none;border-left:
+  none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;
+  padding:0cm .5pt 0cm .5pt'>
+  <p class=Normal1 style='line-height:normal'><font size=2 color=black
+  face=Arial><span lang=EN-GB style='font-size:11.0pt'>&nbsp;</span></font></p>
+  </td>
+ </tr>
+</table>
+
+<h1><b><font size=5 color=black face=Arial><span lang=EN-GB>&nbsp;</span></font></b></h1>
+
+<b><font size=5 color=black face=Arial><span lang=EN-GB style='font-size:18.0pt;
+line-height:115%;font-family:"Arial","sans-serif";color:black;font-weight:bold'><br
+clear=all style='page-break-before:always'>
+</span></font></b>
+
+</div>
