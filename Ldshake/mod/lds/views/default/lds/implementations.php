@@ -104,7 +104,9 @@
                                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
                                 <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
                             <?php else: ?>
-                                <div class="lds_select_spacer"></div>
+                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
+                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
+                                <!--<div class="lds_select_spacer"></div>-->
                             <?php endif; ?>
                             <!--<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>-->
                             <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
@@ -160,8 +162,9 @@
     <a class="lds_close_popup" id="ldsimmplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>
     <h3><?php echo T("Enter the implementation title") ?></h3>
     <input type="text" name="new_implementation_title" />
-
-    <input type="button" id="cloneimplementation_submit" />
+    <br />
+    <div id="cloneimplementation_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title!");?></div>
+    <input type="button" id="cloneimplementation_submit" value="<?php echo T('Duplicate')?>" />
 </div>
 
 <div id="editimplementation_popup" class="lds_popup">

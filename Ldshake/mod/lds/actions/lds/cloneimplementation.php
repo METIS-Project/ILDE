@@ -45,7 +45,11 @@ $title = get_input('title');
 
 $implementation = get_entity($guid);
 
-$impm = ManagerFactory::getManager($implementation);
-$cloned = $impm->cloneImplementation($title);
+//$impm = ManagerFactory::getManager($implementation);
 
-echo 'ok';
+$impm = new richTextEditor(null, $implementation);
+$cloned = $impm->cloneLdS($title);
+
+//$cloned = $impm->cloneImplementation($title);
+
+echo $cloned->guid;

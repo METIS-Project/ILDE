@@ -44,7 +44,7 @@ extract($vars);
 
         <div class="ldshake_sidebar_block_title"><?php echo T("Your VLEs"); ?></div>
         <?php    foreach($vlelist as $vvle):?>
-                <div class="vle_list_item <?php echo ($vvle->guid == $vle->guid ? 'current' : '');?>"><a href="<?php echo "{$url}pg/lds/vle/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
+                <div class="vle_list_item <?php echo ($vvle->guid == $vle_id ? 'current' : '');?>"><a href="<?php echo "{$url}pg/lds/vle/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
         <?php endforeach;?>
     </div>
 </div>
@@ -74,7 +74,7 @@ extract($vars);
 
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE name')?></span>
-                <input class="vle_form_input" type="text" name="vle_name" value="<?php echo $vle->name?>" />
+                <input class="vle_form_input" type="text" name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE type')?></span>
@@ -93,11 +93,13 @@ extract($vars);
                 <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
             </div>
 
-            <input type="hidden" name="vle_id" value="<?php echo $vle->guid;?>" />
+            <input type="hidden" name="vle_id" value="<?php echo $vle_id;?>" />
+            <input id="vle_delete_flag" type="hidden" name="vle_delete_flag" value="0" />
 
-            <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />
+            <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />   <?php if(!$vle->new) {?><input id="vle_delete" class="vle_form_submit" type="submit" name="vle_delete" value="<?php echo T('Delete')?>" /><?php }?>
 
-        </form>
+
+            </form>
 
     <?php if($vle_info instanceof stdClass):?>
         <div id="vle_test_box">

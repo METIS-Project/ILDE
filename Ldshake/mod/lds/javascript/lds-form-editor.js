@@ -176,6 +176,7 @@ function ajax_submit (redirect)
             return false;
         }
 
+        //upload the file first
         if(!parseInt(editor_id)) {
             $("#upload_result").unbind('load');
             $("#upload_result").load(function() {
@@ -846,7 +847,11 @@ $(document).ready(function()
 	});
 
     tabs ();
-	
+
+    $("#file_input").change(function() {
+       editor_id = 0;
+    });
+
 	//Save action
 	$('#lds_edit_save').click (function () {
 		ajax_submit (false);

@@ -467,16 +467,33 @@ function lds_exec_vle ($params)
         $vle->vle_url = '';
         $vle->vle_type = '';
         $vle->new = 1;
+        $id = 0;
     } else {
         $vle = get_entity($params[1]);
+        $id = $vle->guid;
     }
 
     $gluepsm = new GluepsManager($vle);
-    $vle_info = $gluepsm->getVleInfo();
 
-    //$courses = lds_contTools::getVLECourses($vle);
+    if($vle->new)
+        $vle_info = false;
+    else
+        if(!($vle_info = $gluepsm->getVleInfo(true))) {
+            $name = $vle->name;
+            $vle = new ElggObject();
+            $vle->subtype = 'user_vle';
+            $vle->access_id = ACCESS_PUBLIC;
+            $vle->owner_guid = get_loggedin_userid();
+            $vle->name = $name;
+            $vle->username = '';
+            $vle->password = '';
+            $vle->vle_url = '';
+            $vle->vle_type = '';
+        };
+
     $vars = array(
         'vle' => $vle,
+        'vle_id' => $id,
         'vle_info' => $vle_info,
         'vlelist' => $vlelist,
     );
@@ -855,7 +872,7 @@ function lds_exec_upload ($params)
     if($params[1] == 'cld')
         $vars['upload_link'] = "CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
     if($params[1] == 'image')
-        $vars['upload_link'] = "Upload a jpeg, png,gif or svg image.";
+        $vars['upload_link'] = "Upload a jpeg, png, gif or svg image.";
 
 
     echo elgg_view('lds/editform_editor',$vars);
@@ -1832,8 +1849,14 @@ function lds_exec_view ($params)
 //TODO rewrite urls.
 function lds_exec_vieweditor ($params)
 {
+    global $CONFIG;
 	$id = $params[1];
 	$lds = get_entity($id);
+    if(!$lds->external_editor) {
+        $url = $CONFIG->url;
+        forward("{$url}pg/lds/view/{$id}");
+    }
+
 	$vars['lds'] = $lds;
     create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//TODO permission / exist checks
@@ -2219,6 +2242,12 @@ function lds_exec_tracking ($params)
         case 'userweeks':
             lds_tracking_user_reviews();
             break;
+        case 'userdays':
+            lds_tracking_user_reviews_days();
+            break;
+        case 'usermonths':
+            lds_tracking_user_reviews_months();
+            break;
         case 'ldsedits':
             lds_tracking_edit_list();
             break;
@@ -2237,7 +2266,6 @@ function lds_exec_tracking ($params)
         case 'ldsviewed':
             lds_tracking_viewed();
             break;
-
     }
 
     //lds_csv_private();
@@ -2248,4 +2276,25 @@ function lds_exec_404 ($view = '')
 	header("HTTP/1.0 404 Not Found");
 	$body = elgg_view("lds/404{$view}",$vars);
 	page_draw('Not found', $body);
+}
+
+///PFC maria
+function lds_exec_patterns ($params)
+{
+    $body = elgg_view('lds/patterns');
+    page_draw($title, $body);
+}
+
+function lds_exec_query ($params) {
+
+
+    $query = urldecode(get_input('q'));
+    $vars['query'] = $query;
+    $vars['list'] = lds_contTools::searchPatterns($query);
+    $vars['count'] = count ($vars['list']);
+
+
+    $body = elgg_view('lds/query', $vars);
+    page_draw($query, $body);
+
 }

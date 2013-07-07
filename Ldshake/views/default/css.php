@@ -2183,7 +2183,7 @@ div.ajax_loader {
 
 #footer_ending {
 	background: url(<?php echo $vars['url']; ?>_graphics/ldshake_back_linen_shadow_down.gif) no-repeat center top;
-	height: 20px;
+	height: 0px;
 }
 
 #footer-logos {

@@ -72,6 +72,9 @@ elseif (get_context() == 'lds_exec_vieweditor'):
 	echo Utils::getJsDeclaration('lds', 'lds-view_editor');
 	echo Utils::getJsDeclaration('lds', 'lds-share');
 endif;
+if (get_context() == 'lds_exec_vle'):
+	echo Utils::getJsDeclaration('lds', 'lds-vle');
+endif;
 if (get_context() == 'lds_exec_info'):
 	echo Utils::getJsDeclaration('lds', 'lds-share');
 endif;

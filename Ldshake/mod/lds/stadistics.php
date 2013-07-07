@@ -48,6 +48,10 @@ function lds_echocsv($header = null, $data, $title = "") {
 
     fwrite($out,"\xEF\xBB\xBF");
 
+    //$header_t= array();
+    //foreach($header as $h)
+    //    $header_t[] = '="'.$h.'"';
+
     fputcsv($out, $header, ';', '"');
 
     foreach($data as $d)
@@ -333,6 +337,86 @@ function lds_tracking_user_reviews() {
     }
 
     lds_echocsv($header, $data, 'reviews-weeks');
+
+}
+
+function lds_tracking_user_reviews_days() {
+    $header = array("user id", "username", " total number of reviews");
+
+    for($i=0; $i<365; $i++) {
+        $header[] = date("Y-m-d", strtotime("2013.001+{$i}days"))." (count)";
+        $header[] = '="'.date("Y-m-d", strtotime("2013.001+{$i}days")).'"';
+    }
+
+    $data = array();
+
+    $users = get_entities('user','',0,'',9999);
+
+    //count reviews
+    foreach($users as $user) {
+        $user_reviews = array();
+        $user_total_count = 0;
+        for($i=0; $i<365; $i++) {
+            $end = $i+1;
+            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2013.001+{$i}days"), strtotime("2013.001+{$end}days"));
+
+            if(!$reviews)
+                $reviews = array();
+
+            $user_reviews[] = count($reviews);
+            $user_total_count += count($reviews);
+
+            $user_week_list = array();
+            foreach($reviews as $review) {
+                $user_week_list["{$review->guid}"] = isset($user_week_list["{$review->guid}"]) ? $user_week_list["{$review->guid}"]+1 : 1;
+            }
+
+            $user_reviews[] = implode(',',array_keys($user_week_list));
+        }
+        $data[] = array_merge(array($user->guid, $user->username, $user_total_count), $user_reviews);
+    }
+
+    lds_echocsv($header, $data, 'reviews-days');
+
+}
+
+function lds_tracking_user_reviews_months() {
+    $header = array("user id", "username", " total number of reviews");
+
+    for($i=0; $i<12; $i++) {
+        $header[] = date("Y-m-d", strtotime("2013.001+{$i}months"))." (count)";
+        $header[] = '="'.date("Y-m-d", strtotime("2013.001+{$i}months")).'"';
+    }
+
+    $data = array();
+
+    $users = get_entities('user','',0,'',9999);
+
+    //count reviews
+    foreach($users as $user) {
+        $user_reviews = array();
+        $user_total_count = 0;
+        for($i=0; $i<12; $i++) {
+            $end = $i+1;
+            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2013.001+{$i}months"), strtotime("2013.001+{$end}months"));
+
+            if(!$reviews)
+                $reviews = array();
+
+            $user_reviews[] = count($reviews);
+            $user_total_count += count($reviews);
+
+            $user_week_list = array();
+            foreach($reviews as $review) {
+                $user_week_list["{$review->guid}"] = isset($user_week_list["{$review->guid}"]) ? $user_week_list["{$review->guid}"]+1 : 1;
+            }
+
+            $user_reviews[] = implode(',',array_keys($user_week_list));
+        }
+        $data[] = array_merge(array($user->guid, $user->username, $user_total_count), $user_reviews);
+    }
+
+    lds_echocsv($header, $data, 'reviews-months');
 
 }
 

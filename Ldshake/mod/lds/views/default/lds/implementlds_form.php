@@ -56,7 +56,7 @@
         <?php endforeach; ?>
     </div>
 
-    <div id="impl_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title and check a VLE!");?></div>
+    <div id="impl_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title and select a VLE space!");?></div>
     <input type="hidden" name="lds_id" />
 
     <input type="button" id="implementlds_submit" value="<?php echo T('Implement')?>" />

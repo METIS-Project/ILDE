@@ -96,14 +96,14 @@ $(document).ready(function()
     $("input[name='lds_select']").change(function () {
         if($("input[name='lds_select']:checked").length != 1) {
             $("#duplicate_design").attr('disabled','disabled');
-            //$("#duplicate_implementation").attr('disabled','disabled');
+            $("#duplicate_implementation").attr('disabled','disabled');
             $("#implementations_by_design").attr('disabled','disabled');
             $("#view_design").attr('disabled','disabled');
         }
         else {
             $("#duplicate_design").removeAttr('disabled');
             $("#implementations_by_design").removeAttr('disabled');
-            //$("#duplicate_implementation").removeAttr('disabled');
+            $("#duplicate_implementation").removeAttr('disabled');
             $("#view_design").removeAttr('disabled');
         }
     });
@@ -120,9 +120,12 @@ $(document).ready(function()
             title: $('input[name=new_implementation_title]').val()
         };
 
-        $.post (baseurl + "action/lds/cloneimplementation", submitData, function(data) {
-            window.location = baseurl + 'pg/lds/implementations';
-        });
+        if(submitData.title.length == 0)
+            $('#cloneimplementation_submit_incomplete').show();
+        else
+            $.post (baseurl + "action/lds/cloneimplementation", submitData, function(data) {
+                window.location = baseurl + 'pg/lds/implementations';
+            });
     });
 
     $('#duplicate_implementation').click(function (event) {

@@ -127,6 +127,8 @@ class lds_viewTools
 				return $CONFIG->url . 'pg/lds/shared-with-me/';
 			case 'list':
 				return $CONFIG->url . 'pg/lds/browse/';
+            case 'patterns':
+                return $CONFIG->url . 'pg/lds/query/';
 		}
 	}
 }

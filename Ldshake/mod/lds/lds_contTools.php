@@ -1947,4 +1947,176 @@ SQL;
 
         return $notification_data;
     }
+
+
+    ///PFC maria
+    public static function filterWords($list){
+
+        //Lista de palabras vacías de Google
+        $stopWord=array("I", "a", "about", "an", "are", "as", "at", "be", "by", "com", "for", "from", "how", "in", "is", "it", 'of', "on", "or", "that", "the", "this", "to", "was", "what", "when", "where", "who", "will", "with", "the", "www");
+        //comprobamos si la palabra esta en el array
+        for($i=0; $i<=count($list); ++$i){
+            if(in_array($list[$i], $stopWord)){
+                unset($list[$i]);
+
+            }
+        }
+
+        //Eliminamos palabras repetidas y posiciones vacias
+        $listResult=array_values(array_unique($list));
+        $listResult=array_values(array_filter($listResult));
+        return $listResult;
+
+    }
+    public static function callOntology(){
+        $listOntology=array();
+        $java_obj=new Java("OwlPaser0513");
+        $lista=new Java("java.util.HashMap");
+        $lista=$java_obj->dameKeywords();
+        $it=new Java("java.util.Iterator");
+        $it=$lista->entrySet()->iterator();
+        while($it->hasNext()){
+            $e=new Java("java.util.Map");
+            $e=$e->$it->next();
+            $patron=$e->getKey();
+            $keywords=$e->getVlue();
+            $listOntology[$patron]=$keywords;
+        }
+        return $listOntology;
+    }
+    public static function searchPatterns($query) {
+
+        $contWord = array();
+        $query = addslashes($query);
+        //Llamamos a WordNet para que nos devuelva la lista con las palabras de la query y sus sinónimos e hièrónimos
+        $totalList = lds_contTools::searchWordnet($query);
+        //Filtramos tal lista para asegurarnos que no contenga ni palabras vacías ni repetidas
+        $listQueryWord = lds_contTools::filterWords($totalList);
+        //Llamamos a la ontología
+        // $listTextOntology= lds_contTools::callOntology($searchFilter);
+
+        $listTextOntology = array("JIGSAW" => "cat dog feline blabla to ", "PYRAMID" => "cat, cat", "TPS" => "dog, familiaris canine familiariss", "SIMULATION"=>"dog, canine");
+        $listTextOntology=str_replace(",", " ", $listTextOntology);
+        $listTextOntology_aux = $listTextOntology;
+        $contWord = array();
+        for ($i = 0; $i < count($listTextOntology_aux); ++$i) {
+            $cont = 0;
+            //Extraemos el primero
+            $text = array_shift($listTextOntology);
+            //El patrón del que
+            $pattern = array_search($text, $listTextOntology_aux);
+
+            $text = $text . " ";
+            for ($j = 0; $j < count($listQueryWord); ++$j) {
+                if (stristr($text, $listQueryWord[$j] . " ") != FALSE) {
+                    ++$cont;
+                }
+            }
+
+
+            $contWord[$pattern] = $cont;
+        }
+        //ordenamos el array de mayor a menor
+        arsort($contWord);
+
+        return $contWord;
+    }
+
+
+    public static function searchSyns($text) {
+
+        //Convertimos en array el bloque de texto, utilizando como delimitador los carácteres de espacio
+        $list = preg_split('/[\s]+/', $text);
+        //Creamos el array a rellenar con los sinonimos e hiperonimos
+        $syns = array();
+        //Ponemos el contador que nos determinará en el sentido que estamos a uno, el sentido 1.
+        $cont = 1;
+
+        //Recorremos el array resultado de dividir el bloque de texto
+        for ($j = 0; $j <= count($list); ++$j) {
+
+            //Si encontramos un sentido de la plabra y es de los tres primeros
+            if (strcmp("Sense", $list[$j]) == 0 && $cont <= 3) {
+                //Puntero auxiliar que se podiciona en la primera palabra del sentido correspondiente de la palabra
+                $k = $j + 1;
+                //Recorremos el resto de la lista
+                while ($k <= (count($list))) {
+
+                    //Eliminamos los antónimos
+                    if (strcmp('(vs.', $list[$k]) == 0) {
+                        $k = 2 + $k;
+                    }
+                    //Si sigue perteneciendo al mismo sentido lo guardamos
+                    if (strcmp("Sense", $list[$k]) != 0) {
+                        //Guardamos el string en nuestro array
+                        array_push($syns, $list[$k]);
+                        //Se aumenta el puntero
+                        ++$k;
+                    }
+                    //Si cambiamos de sentido salimos del bucle while para buscar el siguiente sentido
+                    else {
+                        break 1;
+                    }
+                }
+                //Aumentamos el contador
+                $cont = $cont + 1;
+            }
+        }
+
+        //Eliminamos numero, comas y demás texto no deseado
+        $syns = preg_replace('/[0-9,;#=>()-]/', "", $syns);
+        $syns = str_replace('prenominal', "", $syns);
+        $syns = str_replace('predicate', "", $syns);
+
+        //Eliminamos las palabras que empiecen por mayúsculas.
+        for ($i = 0; $i <= count($syns); ++$i) {
+            //Comprobamos si la palabra tiene todos sus carácteres en minúscula
+            if (!(ctype_lower($syns[$i]))) {
+                //Si tienen carácteres en mayúscula eliminamos la palabra del array
+                unset($syns[$i]);
+            }
+        }
+
+        //Eliminamos los terminos vacios
+        $syns = array_filter($syns);
+        //Reposicionamos el array
+        $syns = array_values($syns);
+
+        return $syns;
+    }
+
+    public static function searchWordnet($query) {
+
+        //Pasamos a minúsculas todo el string de la query, para evitar problemas
+        $query = strtolower($query);
+        $listWord = array(); //lista a devolver con todas las palabras de la query y sus sinónimos e hiperónimos
+        $dirWordNet = "/usr/local/WordNet-3.0/bin/wn ";
+        $queryWord = explode(" ", $query);
+        for ($i = 0; $i <= count($queryWord); ++$i) {
+            $synonims[$i] = array();
+            //Sinonimos de objeto
+            $resultN[$i] = shell_exec($dirWordNet . $queryWord[$i] . " -synsn");
+            $synsN[$i] = lds_contTools::searchSyns($resultN[$i]);
+            //Sinonimo de verbo
+            $resultV[$i] = shell_exec($dirWordNet . $queryWord[$i] . " -synsv");
+            $synsV[$i] = lds_contTools::searchSyns($resultV[$i]);
+            //Sinonimo del adverbio
+            $resultR[$i] = shell_exec($dirWordNet . $queryWord[$i] . " -synsr");
+            $synsR[$i] = lds_contTools::searchSyns($resultR[$i]);
+            //Sinonimo del adjetivo
+            $resultA[$i] = shell_exec($dirWordNet . $queryWord[$i] . " -synsa");
+            $synsA[$i] = lds_contTools::searchSyns($resultA[$i]);
+
+            //Unimos todos los sinónimos resultantes en un mismo array
+            $synonims[$i] = array_merge($synsN[$i], $synsV[$i], $synsR[$i], $synsA[$i]);
+
+
+            //Unir todos los sinónimos y las palabras query
+            $listWord[] = $queryWord[$i];
+            $listWord = array_merge($listWord, $synonims[$i]);
+        }
+
+        return $listWord;
+    }
+
 }

@@ -41,6 +41,7 @@ $vle_name = get_input('vle_name');
 $vle_url = get_input('vle_url');
 $vle_username = get_input('vle_username');
 $vle_password = get_input('vle_password');
+$vle_delete = (int)get_input('vle_delete_flag', 0);
 
 $user = get_loggedin_user();
 if($vle_id) {
@@ -58,4 +59,9 @@ $vle->username = $vle_username;
 $vle->password = $vle_password;
 $vle->save();
 
-forward($CONFIG->url.'pg/lds/vle/'.$vle->guid);
+if($vle_delete) {
+    $vle->delete();
+    forward($CONFIG->url.'pg/lds/vle/');
+}
+else
+    forward($CONFIG->url.'pg/lds/vle/'.$vle->guid);
