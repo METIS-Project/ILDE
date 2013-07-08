@@ -78,7 +78,7 @@
             <ul id="my_lds_list">
                 <?php foreach($list as $item): ?>
                     <?php if ($section != 'trashed'): ?>
-                        <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
+                        <li class="lds_list_element<?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
                                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
                             <?php else: ?>
@@ -86,17 +86,12 @@
                             <?php endif; ?>
                             <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
                             <div class="lds_info">
-                                <?php if (!$item->locked): ?>
-                                    <a lds_id="<?php echo $item->lds->guid ?>" class="lds_implement_action" href="#"><?php echo T("Implement as") ?></a>
-                                <?php endif; ?>
+                                <a lds_id="<?php echo $item->lds->guid ?>" class="lds_implement_action" href="#"><?php echo T("Implement as") ?></a>
                                 <span class="lds_title_tags">
-						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
+						<a class="lds_title" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
                                     <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-                                <?php if ($item->locked): ?>
-                                    <span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
-                                <?php endif; ?>
                                 <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
                             </div>
                             <div class="clearfloat"></div>

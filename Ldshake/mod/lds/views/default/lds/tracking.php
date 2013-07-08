@@ -47,7 +47,7 @@ extract($vars);
 Produce a LD
 Number of designs produced by each user
 Number of designs created / modified by days/weeks/months
-<a href="<?php echo $url ."pg/lds/tracking/userweeks";?>">List of designs modified by each user by days/weeks/months</a>
+List of designs modified by each user by <a href="<?php echo $url ."pg/lds/tracking/userdays";?>">days</a>/<a href="<?php echo $url ."pg/lds/tracking/userweeks";?>">weeks</a>/<a href="<?php echo $url ."pg/lds/tracking/usermonths";?>">months</a>
 
 <a href="<?php echo $url ."pg/lds/tracking/ldsedits";?>">Co-produce a LD</a>
 Number of reviews (edits) to a design (in global or by users)
@@ -81,5 +81,13 @@ Number of comments associated to each design by commenter
 <a href="<?php echo $url ."pg/lds/tracking/ldsviewed";?>">Explore LDs</a>
 Number of times a user viewed a design (by user and by design)
 Number of times a design has been viewed by user and by design)
+
+
+Number of members in the community
+Number of groups
+Number of members in each group
+Number of designs published (accessible outside LdShake)
+Visits to the site / pages
+Number of designs created with each tool
 
 </pre>

@@ -116,8 +116,8 @@
                                     <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
                                 <?php endif; ?>
                                 <span class="lds_title_tags">
-						<!--<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->implementation, 'view') ?>"><?php echo $item->implementation->title ?></a>-->
-                                    <span class="lds_title"><?php echo $item->implementation->title ?></span>
+						            <!--<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->implementation, 'view') ?>"><?php echo $item->implementation->title ?></a>-->
+                                    <span class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>"><?php echo $item->implementation->title ?></span>
                                     <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					            </span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>

@@ -228,23 +228,32 @@ function encodeURIComponent($str) {
     -->
 
     <?php if(isset($upload)): ?>
-        <div id="lds_export">
-            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $uploadDoc->file_guid . "&title=" . encodeURIComponent($uploadDoc->upload_filename) ?>" style="float: left;"><?php echo T("Download binary file") ?></a>
-        </div>
+        <?php if($upload): ?>
+            <div id="lds_export">
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $uploadDoc->file_guid . "&title=" . encodeURIComponent($uploadDoc->upload_filename) ?>" style="float: left;"><?php echo T("Download binary file") ?></a>
+            </div>
+        <?php endif; ?>
     <?php endif; ?>
 	
 <div id="payload">
-    <?php if ($editor == 'exe'): ?>
-        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
-    <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
-        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
-    <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
-        <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+    <?php if ($currentDoc->getSubtype() == 'LdS_document_editor'): ?>
+        <?php if ($editor == 'exe'): ?>
+            <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+        <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+            <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+        <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
+            <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+        <?php else:?>
+            <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
+                <?php echo $currentDoc->description ?>
+            </div>
+        <?php endif; ?>
     <?php else:?>
         <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
             <?php echo $currentDoc->description ?>
         </div>
     <?php endif; ?>
+
 </div>
 <div id="comment_switcher">
 <a href="#lds_info_wrapper">+ View and add comments (<?php echo $nComments ?>)</a>

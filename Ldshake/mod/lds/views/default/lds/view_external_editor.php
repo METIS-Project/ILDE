@@ -118,19 +118,32 @@
 	<h1 id="doctitle"><?php echo $lds->title ?></h1>
 
 <div id="exportcontainer">
-	<?php if ($doc->editorType == 'exe'): ?>
-	<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/scorm">Save as SCORM</a>
-	<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/scorm2004">Save as SCORM 2004</a>
-	<?php endif; ?>
-	<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/ims_ld">Save as IMS-LD</a>
-	<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/webZip">Save as zipped web page</a>
+	<?php if ($doc->editorType == 'webcollagerest'): ?>
+        <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/imsld">Save as IMS-LD</a>
+        <!--<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/webZip">Save as zipped web page</a>-->
+    <?php else: ?>
+        <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/binary">Download binary file</a>
+    <?php endif; ?>
+
 </div>
-	<?php if ($doc->editorType == 'exe'): ?>
-		<iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $doc->pub_previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" width="100%" height="100%"></iframe>
-	<?php else: ?>
+    <?php
+    $editor = $doc->editorType;
+    $currentDoc = $doc;
+    ?>
+    <?php if ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+    <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
+        <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+    <?php else:?>
+    <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
+        <?php echo $currentDoc->description ?>
+    </div>
+    <?php endif; ?>
+
+    <!--
+	<?php if ($doc->editorType == 'webcollage'): ?>
 		<iframe src="<?php echo $CONFIG->url ?>content/webcollage/<?php echo $doc->pub_previewDir?>.html?t=<?php echo rand(0, 1000) ?>" width="100%" height="100%"></iframe>
 	<?php endif; ?>
-	
-
+	-->
 </body>
 </html>

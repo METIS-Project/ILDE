@@ -1105,6 +1105,7 @@ class RestEditor extends Editor
     //update the published documents
     public function updatePublish()
     {
+        /*
         global $CONFIG;
         copy($this->getFullFilePath($this->_document->ims_ld), $this->getFullFilePath($this->_document->pub_ims_ld));
         copy($this->getFullFilePath($this->_document->scorm), $this->getFullFilePath($this->_document->pub_scorm));
@@ -1113,6 +1114,7 @@ class RestEditor extends Editor
         if(strlen((string)$this->_document->pub_previewDir) > 0)
             exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
         exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
+        */
     }
 
     //copy the published documents to the new revision
@@ -1129,7 +1131,7 @@ class RestEditor extends Editor
     public function revisionPreview($revision)
     {
         global $CONFIG;
-        exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$revision->previewDir);
+        //exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$revision->previewDir);
 
         return true;
     }
@@ -1229,6 +1231,18 @@ class RestEditor extends Editor
         copy($file_origin, $file->getFilenameOnFilestore());
 
         $clone->file_guid = $file->guid;
+
+        if($this->_document->file_imsld_guid) {
+            $file_origin = Editor::getFullFilePath($this->_document->file_imsld_guid);
+
+            //create a new file to store the document
+            $filestorename = (string)$rand_id.'.zip';
+            $file = $this->getNewFile($filestorename);
+            copy($file_origin, $file->getFilenameOnFilestore());
+
+            $clone->file_imsld_guid = $file->guid;
+        }
+
         $clone->editorType = $this->_document->editorType;
         $clone->save();
 
@@ -1283,7 +1297,6 @@ class RestEditor extends Editor
 
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
-        $filestorename = (string)$rand_id;
         file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_body);
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'.imsld';
@@ -1293,8 +1306,12 @@ class RestEditor extends Editor
             ->sendIt();
 
         //create a new file to store the document
-        $rand_id = mt_rand(400,9000000);
-        $filestorename = (string)$rand_id;
+        if(!$this->_document->file_imsld_guid) {
+            $rand_id = mt_rand(400,9000000);
+            $filestorename = (string)$rand_id.'.zip';
+            $file = $this->getNewFile($filestorename);
+            $this->_document->file_imsld_guid = $file->guid;
+        }
         file_put_contents($this->getFullFilePath($this->_document->file_imsld_guid), $response->raw_body);
 
 
@@ -1550,6 +1567,7 @@ class UploadEditor extends Editor
     //update the published documents
     public function updatePublish()
     {
+        /*
         global $CONFIG;
         copy($this->getFullFilePath($this->_document->ims_ld), $this->getFullFilePath($this->_document->pub_ims_ld));
         copy($this->getFullFilePath($this->_document->scorm), $this->getFullFilePath($this->_document->pub_scorm));
@@ -1558,6 +1576,7 @@ class UploadEditor extends Editor
         if(strlen((string)$this->_document->pub_previewDir) > 0)
             exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
         exec('cp -r '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->pub_previewDir);
+        */
     }
 
     //copy the published documents to the new revision

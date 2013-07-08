@@ -353,6 +353,7 @@ function lds_exec_main ($params)
 
 function lds_exec_implementable ($params)
 {
+    global $CONFIG;
     $offset = get_input('offset') ?: '0';
     $user = get_loggedin_user();
 
@@ -382,6 +383,9 @@ function lds_exec_implementable ($params)
                 $vle_info->item = $vle;
                 $vle_data[$vle->guid] = $vle_info;
         }
+    } else {
+        register_error("You need to register a VLE first.");
+        forward($CONFIG->url.'pg/lds/vle');
     }
 
     $vars['vle_data'] = $vle_data;
@@ -468,17 +472,22 @@ function lds_exec_vle ($params)
         $vle->vle_type = '';
         $vle->new = 1;
         $id = 0;
+        $vle_info = true;
     } else {
         $vle = get_entity($params[1]);
         $id = $vle->guid;
+        $gluepsm = new GluepsManager($vle);
+        $vle_info = $gluepsm->getVleInfo(true);
     }
 
-    $gluepsm = new GluepsManager($vle);
+    //$gluepsm = new GluepsManager($vle);
 
+    /*
     if($vle->new)
         $vle_info = false;
     else
         if(!($vle_info = $gluepsm->getVleInfo(true))) {
+
             $name = $vle->name;
             $vle = new ElggObject();
             $vle->subtype = 'user_vle';
@@ -489,7 +498,9 @@ function lds_exec_vle ($params)
             $vle->password = '';
             $vle->vle_url = '';
             $vle->vle_type = '';
+
         };
+    */
 
     $vars = array(
         'vle' => $vle,
@@ -503,11 +514,14 @@ function lds_exec_vle ($params)
 
 function lds_exec_vledata ($params)
 {
+    global $CONFIG;
     $user = get_loggedin_user();
 
     $vlelist = get_entities('object', 'user_vle', get_loggedin_userid(), '', 9999);
-    if(!$vlelist)
-        $vlelist = array();
+    if(!$vlelist) {
+        register_error("You need to register a VLE first.");
+        forward($CONFIG->url.'pg/lds/vle');
+    }
 
     if(!isset($params[1]) || !is_numeric($params[1])) {
         if(count($vlelist))
@@ -643,6 +657,7 @@ function lds_exec_browse ($params)
         'PC' => 'Persona Card',
         'FC' => 'Factors and Concerns',
         'HE' => 'Heuristic Evaluation',
+        'coursemap' => 'Course Map',
     );
 
     $vars['editor_type'] = array(
@@ -1237,13 +1252,14 @@ function lds_exec_implementeditor($params)
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 
-    if ($user = lds_contTools::isLockedBy($params[1]))
-    {
-        $fstword = explode(' ',$user->name);
-        $fstword = $fstword[0];
-        register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
-        header("Location: " . $_SERVER['HTTP_REFERER']);
-    }
+    if($editLdS->getSubtype() == 'LdS_implementation')
+        if ($user = lds_contTools::isLockedBy($params[1]))
+        {
+            $fstword = explode(' ',$user->name);
+            $fstword = $fstword[0];
+            register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+        }
 
     //lds_contTools::markLdSAsViewed ($params[1]);
 
@@ -1344,21 +1360,28 @@ function lds_exec_implementeditor($params)
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
 
     $vars['am_i_starter'] = (get_loggedin_userid() == $editLdS->owner_guid);
-    $vars['starter'] = get_user($editLdS->owner_guid);
     //$vars['all_can_read'] = ($editLdS->access_id == '1') ? 'true':'false';
     $vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
     $vars['initLdS'] = json_encode($vars['initLdS']);
     $vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
-    $arrays = lds_contTools::buildObjectsArray($editLdS);
-    $vars['jsonfriends'] = json_encode($arrays['available']);
-    $vars['viewers'] = json_encode($arrays['viewers']);
-    $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    if($editLdS->getSubtype() == 'LdS_implementation') {
+        $arrays = lds_contTools::buildObjectsArray($editLdS);
+        $vars['starter'] = get_user($editLdS->owner_guid);
+        $vars['jsonfriends'] = json_encode($arrays['available']);
+        $vars['viewers'] = json_encode($arrays['viewers']);
+        $vars['editors'] = json_encode($arrays['editors']);
+        $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    } else {
+        $available = lds_contTools::getAvailableUsers(null);
+        $vars['starter'] = get_user(get_loggedin_userid());
+        $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
+        $vars['viewers'] = json_encode(array());
+        $vars['editors'] = json_encode(array());
+        $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    }
 
     $vars['title'] = T("Edit implementation");
-
-
 
     //We're editing. Fetch it from the DB
     $editordocument = get_entities_from_metadata_multi(array(
@@ -1417,13 +1440,14 @@ function lds_exec_editglueps($params)
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
 
-    if ($user = lds_contTools::isLockedBy($params[1]))
-    {
-        $fstword = explode(' ',$user->name);
-        $fstword = $fstword[0];
-        register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
-        header("Location: " . $_SERVER['HTTP_REFERER']);
-    }
+    if($editLdS->getSubtype() == 'LdS_implementation')
+        if ($user = lds_contTools::isLockedBy($params[1]))
+        {
+            $fstword = explode(' ',$user->name);
+            $fstword = $fstword[0];
+            register_error("{$user->name} is editing this implementation. You cannot edit it until {$fstword} finishes.");
+            header("Location: " . $_SERVER['HTTP_REFERER']);
+        }
 
     //lds_contTools::markLdSAsViewed ($params[1]);
 
@@ -1743,9 +1767,11 @@ function lds_exec_viewexteditor ($params)
 		//return the published file according to the second parameter
 		if(strlen($params[2]) > 0)
 		{
-			switch ($params[2]) {
-			    case 'ims_ld':
-			        $file_guid = $vars['doc']->pub_ims_ld;
+            $down_filename = $vars['lds']->title.'_'.$params[2].'.zip';
+
+            switch ($params[2]) {
+			    case 'imsld':
+			        $file_guid = $vars['doc']->file_imsld_guid;
 			        break;
 			    case 'webZip':
 			        $file_guid = $vars['doc']->pub_webZip;
@@ -1756,11 +1782,15 @@ function lds_exec_viewexteditor ($params)
 			    case 'scorm2004':
 			        $file_guid = $vars['doc']->pub_scorm2004;
 			        break;
+                case 'binary':
+                    $file_guid = $vars['doc']->file_guid;
+                    $down_filename = $vars['doc']->upload_filename;
+                    break;
 			    default:
 			    	return '';
 			    	break;
 			}
-			
+
 			$file = get_entity($file_guid);
 			$readfile = new ElggFile();
 			$readfile->owner_guid = $file->owner_guid;
@@ -1768,7 +1798,7 @@ function lds_exec_viewexteditor ($params)
 			$filename = $readfile->getFilenameOnFilestore();
 			header('Content-Description: File Transfer');
 		    header('Content-Type: application/octet-stream');
-		    header('Content-Disposition: attachment; filename='.urlencode($vars['lds']->title.'_'.$params[2]).'.zip');
+		    header('Content-Disposition: attachment; filename="'.$down_filename.'"');
 		    header('Content-Transfer-Encoding: binary');
 		    header('Expires: 0');
 		    header('Cache-Control: must-revalidate, post-check=0, pre-check=0');

@@ -37,4 +37,18 @@ $(document).ready(function () {
     $('#vle_delete').click(function() {
         $('#vle_delete_flag').val('1');
     });
+
+    $('input[name=vle_submit]').click(function(e) {
+        if($('input[name=vle_name]').val().length == 0
+            || $('input[name=vle_type]').val().length == 0
+            || $('input[name=vle_url]').val().length == 0
+            || $('input[name=vle_username]').val().length == 0
+            || $('input[name=vle_password]').val().length == 0
+            ) {
+            e.preventDefault();
+            $('#vledata_submit_incomplete').show();
+        }
+    });
+
+
 });

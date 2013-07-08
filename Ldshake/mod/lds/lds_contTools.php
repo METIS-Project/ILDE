@@ -39,6 +39,8 @@
  * Set of helper functions for the LdS module 
  */
 
+include_once __DIR__.'/Java.inc';
+
 class lds_contTools
 {
 	/**

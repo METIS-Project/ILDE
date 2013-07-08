@@ -442,10 +442,14 @@ function loadData ()
 //PAU: Basic concurrence control. Send editing signal to the server every <ping_interval> secs.
 function ping_editing ()
 {
-	$.post (baseurl + 'action/lds/ping_editing_editor', {entity_guid:$('#lds_edit_guid').val(), editing: true}, function (data)
-	{
-		setTimeout ('ping_editing()', 1000 * ping_interval);
-	});
+    if ($('#lds_edit_guid').val() != '0')
+    {
+        $.post (baseurl + 'action/lds/ping_editing', {entity_guid:$('#lds_edit_guid').val(), editing: true}, function (data)
+        {
+            setTimeout ('ping_editing()', 1000 * ping_interval);
+        });
+    }
+    else setTimeout ('ping_editing()', 1000 * ping_interval);
 }
 
 function autosave_and_exit ()
@@ -479,7 +483,7 @@ function free_lds ()
 		//TODO: Add some visual feedback for the time the ajax request is made? (e.g. "Saving changes..." or "Freeing resource...")
 		$.ajax({
 	        type:	'POST',
-	        url:	baseurl + 'action/lds/ping_editing_editor',
+	        url:	baseurl + 'action/lds/ping_editing',
 	        data:	{entity_guid:$('#lds_edit_guid').val(), editing: false, editor_id: editor_id, editorType: editorType}, 
 	        async:	false,
 	        success: function(msg)

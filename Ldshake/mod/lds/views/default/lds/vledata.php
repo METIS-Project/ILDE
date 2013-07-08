@@ -101,9 +101,11 @@ extract($vars);
 
             </form>
 
+        <div id="vledata_submit_incomplete" style="display:none;color:red"><?php echo T("You must fill every field!");?></div>
+
     <?php if($vle_info instanceof stdClass):?>
         <div id="vle_test_box">
-            <div class="vle_info_working"><?php echo T('Your VLE details are working properly. These are the courses available')?></div>
+            <div class="vle_info_working"><?php echo T('Your VLE configuration is working properly, these are the available courses')?></div>
             <div class="vle_info_box">
                 <?php
                 $courses = (array)$vle_info->courses;
@@ -116,6 +118,8 @@ extract($vars);
                 <?php endforeach;?>
             </div>
         </div>
+    <?php elseif(!$vle_info): ?>
+            <div class="vle_info_working" style="background:red;"><?php echo T('This configuration is not correct.')?></div>
     <?php elseif(!$vle->new): ?>
             <div class="vle_info_working"><?php echo T('There are no courses available with the provided VLE configuration.')?></div>
     <?php endif; ?>
