@@ -1820,6 +1820,12 @@ function lds_exec_view ($params)
 {
 	$id = $params[1];
 	$vars['lds'] = get_entity($id);
+    if($vars['lds']->external_editor) {
+        set_context("lds_exec_vieweditor");
+        lds_exec_vieweditor($params);
+        return true;
+    }
+
     create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 
     //TODO permission / exist checks
@@ -2226,7 +2232,9 @@ function lds_exec_make_newbie ($params)
 function lds_treebuilder($lds_id) {
     $tree = array();
     $lds = get_entity($lds_id);
-    $tree['name'] = $lds->title;
+    $user = get_user($lds->owner_guid);
+    $tree['name'] = $lds->title . ' (' . $user->username . ')';
+    $tree['lds_guid'] = $lds->guid;
     if($children = get_entities_from_metadata('parent', $lds->guid, 'object', 'LdS', 0 , 9999)) {
         $tree['children'] = array();
 
@@ -2241,7 +2249,9 @@ function lds_exec_tree ($params)
 
     $vars = array();
 
-    $tree = lds_treebuilder($params[1]);
+    $lds = get_entity($params[1]);
+    $vars['lds'] = $lds;
+    $tree = lds_treebuilder($lds->guid);
 
     $tree_json = json_encode($tree);
 
@@ -2249,7 +2259,7 @@ function lds_exec_tree ($params)
 
     $body = elgg_view('lds/tree',$vars);
 
-    page_draw($vars['title'], $body);
+    page_draw($lds->title, $body);
 }
 
 
@@ -2315,11 +2325,15 @@ function lds_exec_patterns ($params)
     page_draw($title, $body);
 }
 
+
+
+
 function lds_exec_query ($params) {
 
 
     $query = urldecode(get_input('q'));
     $vars['query'] = $query;
+
     $vars['list'] = lds_contTools::searchPatterns($query);
     $vars['count'] = count ($vars['list']);
 
@@ -2327,4 +2341,24 @@ function lds_exec_query ($params) {
     $body = elgg_view('lds/query', $vars);
     page_draw($query, $body);
 
+}
+
+function lds_exec_test ($params) {
+
+    $lista=new Java("java.util.HashMap");
+    $on=new Java("parser.OwlPaser0513");
+    $lista=$on->dameKeywords();
+    $i=0;
+
+    $it=new Java("java.util.Iterator");
+    $it=$lista->entrySet()->iterator();
+    while($it->hasNext()){
+        $e=new Java("java.util.Map");
+        $e=$it->next();
+        $patron=$e->getKey();
+        $keywords=$e->getValue();
+        echo $keywords;
+        $a=0;
+        //$listOntology[$patron]=$keywords;
+    }
 }

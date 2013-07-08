@@ -36,6 +36,8 @@
 $(document).ready(function()
 {
 
+    lds_submit_click = false;
+
     var height_correction = function () {
         $('#layout_canvas').css('min-height',
             window.innerHeight -
@@ -122,10 +124,14 @@ $(document).ready(function()
 
         if(submitData.title.length == 0)
             $('#cloneimplementation_submit_incomplete').show();
-        else
-            $.post (baseurl + "action/lds/cloneimplementation", submitData, function(data) {
-                window.location = baseurl + 'pg/lds/implementations';
-            });
+        else {
+            if(!lds_submit_click) {
+                lds_submit_click = true;
+                $.post (baseurl + "action/lds/cloneimplementation", submitData, function(data) {
+                    window.location = baseurl + 'pg/lds/implementations';
+                });
+            }
+        }
     });
 
     $('#duplicate_implementation').click(function (event) {
@@ -154,10 +160,16 @@ $(document).ready(function()
 
         if(submitData.title.length == 0)
             $('#clonelds_submit_incomplete').show();
-        else
+        else {
+            if(!lds_submit_click) {
+            lds_submit_click = true;
+            //$(this).attr('disabled', 'disabled');
+            //$('input[name=new_lds_title]').attr('disabled','disabled');
             $.post (baseurl + "action/lds/clone", submitData, function(data) {
                 window.location = baseurl + 'pg/lds/vieweditor/' + data;
             });
+            }
+        }
     });
 
     $('#duplicate_design').click(function (event) {

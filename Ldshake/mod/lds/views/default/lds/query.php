@@ -72,7 +72,7 @@
         </form>
 
     </div>
-                <?php echo elgg_view('lds/wordnetlist', $vars) ?>
+                <?php echo elgg_view('lds/querylist', $vars) ?>
 
 
     <div class="filters">

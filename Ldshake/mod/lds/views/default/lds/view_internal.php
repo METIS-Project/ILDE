@@ -56,6 +56,7 @@
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
+        <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 <div id="lds_view_tab_container" style="width:953px;" class="scrollable">
 <?php /** Botonets de scroll **/ ?>

@@ -1950,7 +1950,6 @@ SQL;
         return $notification_data;
     }
 
-
     ///PFC maria
     public static function filterWords($list){
 
@@ -1970,19 +1969,35 @@ SQL;
         return $listResult;
 
     }
+
     public static function callOntology(){
         $listOntology=array();
-        $java_obj=new Java("OwlPaser0513");
-        $lista=new Java("java.util.HashMap");
+        $numPatterns=16;
+        $java_obj=new Java("parser.OwlPaser0513");
+        $lista=java("java.util.HashMap");
+
         $lista=$java_obj->dameKeywords();
-        $it=new Java("java.util.Iterator");
+
+        $it=java("java.util.Iterator");
+        //  echo $lista=java_values($lista->toArray());
+        $cont=0;
         $it=$lista->entrySet()->iterator();
-        while($it->hasNext()){
-            $e=new Java("java.util.Map");
-            $e=$e->$it->next();
-            $patron=$e->getKey();
-            $keywords=$e->getVlue();
+        while($cont<$numPatterns){
+            //$it->hasNext()!=0){
+            $cont++;
+            $e=java("java.util.Map");
+            $e=$it->next();
+            //  $patron=$e->getKey();
+            //$e=java_values($e);
+            $patron=java_values($e->getKey());
+            $patron=explode('_', $patron);
+            $patron=$patron[1];
+            $keywords=java_values($e->getValue());
+            //echo $patron . "</br>". "</br>";
+//echo $keywords . "</br>" . "</br>" . "</br>" . $cont;
             $listOntology[$patron]=$keywords;
+
+
         }
         return $listOntology;
     }
@@ -1995,9 +2010,9 @@ SQL;
         //Filtramos tal lista para asegurarnos que no contenga ni palabras vacías ni repetidas
         $listQueryWord = lds_contTools::filterWords($totalList);
         //Llamamos a la ontología
-        // $listTextOntology= lds_contTools::callOntology($searchFilter);
+        $listTextOntology= lds_contTools::callOntology();
 
-        $listTextOntology = array("JIGSAW" => "cat dog feline blabla to ", "PYRAMID" => "cat, cat", "TPS" => "dog, familiaris canine familiariss", "SIMULATION"=>"dog, canine");
+        //$listTextOntology = array("JIGSAW" => "cat dog feline blabla to ", "PYRAMID" => "cat, cat", "TPS" => "dog, familiaris canine familiariss", "SIMULATION"=>"dog, canine");
         $listTextOntology=str_replace(",", " ", $listTextOntology);
         $listTextOntology_aux = $listTextOntology;
         $contWord = array();
@@ -2005,7 +2020,7 @@ SQL;
             $cont = 0;
             //Extraemos el primero
             $text = array_shift($listTextOntology);
-            //El patrón del que
+            //El patrón del que pertenece
             $pattern = array_search($text, $listTextOntology_aux);
 
             $text = $text . " ";
@@ -2015,8 +2030,9 @@ SQL;
                 }
             }
 
-
-            $contWord[$pattern] = $cont;
+            if ($cont>0){
+                $contWord[$pattern] = $cont;
+            }
         }
         //ordenamos el array de mayor a menor
         arsort($contWord);
@@ -2120,5 +2136,4 @@ SQL;
 
         return $listWord;
     }
-
 }

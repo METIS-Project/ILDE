@@ -114,6 +114,7 @@ class richTextEditor extends Editor
         $revision = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
         $revision = $revision[0];
 
+        if(is_array($this->_document))
         foreach($this->_document as $d) {
             $newdoc = new DocumentObject($lds->guid);
             $newdoc->description = $d->description;

@@ -37,8 +37,16 @@
 ?>
 
 <?php extract ($vars) ?>
+
+<div id="one_column" style="padding-bottom:0 !important">
+    <div id="content_area_user_title">
+        <h2><?php echo $lds->title ?></h2>
+    </div>
+    <div id="lds_view_actions">
+    </div>
 <div class="tree">
 </div>
 <script type="text/javascript">
     var d3_data = <?php echo $tree;?>
 </script>
+</div>

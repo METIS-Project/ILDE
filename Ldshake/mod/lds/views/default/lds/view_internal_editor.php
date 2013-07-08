@@ -71,6 +71,7 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
+        <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 
 	<!--<form id="editorfileupload" action="<?php echo $url ?>action/lds/import_editor_file" method="post" enctype="multipart/form-data">

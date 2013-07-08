@@ -143,6 +143,8 @@ function update(source) {
 
 // Toggle children on click.
 function click(d) {
+    window.location = baseurl + 'pg/lds/view/' + d.lds_guid;
+    /*
     if (d.children) {
         d._children = d.children;
         d.children = null;
@@ -151,5 +153,6 @@ function click(d) {
         d._children = null;
     }
     update(d);
+    */
 }
 

@@ -75,13 +75,5 @@
 		<div class="paging">
 			<?php echo lds_viewTools::pagination($count) ?>
 		</div>
-	</div>
 	
-	<?php echo elgg_view('lds/query', $vars) ?>
-	
-	<div class="filters">
-		<div class="paging">
-			<?php echo lds_viewTools::pagination($count) ?>
-		</div>
-	</div>
 </div>

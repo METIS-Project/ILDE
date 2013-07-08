@@ -44,16 +44,20 @@
     <h3><?php echo T("Select one of your VLE spaces") ?></h3>
 
     <div style="max-height: 300px; overflow-y: auto;">
+        <?php if(is_array($vle_data)): ?>
         <?php foreach($vle_data as $vle_id=>$vle): ?>
             <div class="vle_implement_form_vle_name"><?php echo $vle->item->name ?></div>
             <div class="vle_implement_form_vle_courses">
+            <?php if(isset($vle->courses)): ?>
             <?php foreach($vle->courses as $key=>$course): ?>
                 <div>
                     <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $course;?></span>
                 </div>
             <?php endforeach; ?>
+            <?php endif; ?>
             </div>
         <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 
     <div id="impl_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title and select a VLE space!");?></div>

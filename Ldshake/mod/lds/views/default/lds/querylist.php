@@ -38,44 +38,61 @@
 
 <?php extract($vars) ?>
 <?php if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
-<ul id="wordnet_list">
+<ul id="query_list">
     
      
     
 	<?php 
+        //Obtenemos el array de contador de palabras devueltos por searchPattern
         $contWord_aux = $vars['list'];
+        //El peso mayor será 7, porque imprimiremos los 7 primeros patrones 
         $peso = 7;
+        //Array donde guardaremos los patrones y sus pesos
         $arrayPesos = array();
+        //Hacemos un barrido de los siete primeros del array
         for ($i = 0; $i <= 7; ++$i) {
-
+            //Obtenemos su contador
             $value = array_shift($vars['list']);
-
+            //Obtenemos el patrón al que pertenece
             $patron = array_search($value, $contWord_aux);
-            
+            //Lo introducimos en nuestro array donde guardarmemos los patrones y sus pesos
             $arrayPesos[$patron] = $peso;
             $contWord_aux = $vars['list'];
-
+            //Comprobamos si tenemos otro patrón con el mismo cantador
             while (in_array($value, $vars['list'])) {
-
+                //obtenemos el contador 
                 $valueA = array_shift($vars['list']);
-
+                //Obtenemos el patron
                 $patron = array_search($valueA, $contWord_aux);
-                //echo $patron;
-                //echo $contWord[$patron]. "<br>";
                 $contWord_aux = $vars['list'];
+                //Lo incluimos en el array
                 $arrayPesos[$patron] = $peso;
-                // unset($contWord[$patron]);   
-                //array_values($contWord);
             }
+            //Disminuimos el peso
             --$peso;
         }
         $cont=0;
-        for($i=0; $i<=count($arrayPesos)+1; ++$i):
+        for($i=0; $i<7; ++$i):
                  $listaux=$arrayPesos;
                  $aux=array_shift($arrayPesos);
                  $patterns=array_search($aux, $listaux);
                  $peso=(int)$aux;
+                 //Codificamos el nombre del patrón devuelto para que se imprima de la manera correcta
+                 $patternsaux="";
+                 $patternsname="";
+                 for($j=0; $j<=strlen($patterns); ++$j){
+                     if (ctype_upper($patterns[$j])){
+                         $patternsaux[$j]=" ".$patterns[$j];
+                     }
+                     else{
+                     $patternsaux[$j]=$patterns[$j];
+                     }
+                     $patternsname=$patternsname.$patternsaux[$j];
+                 }
+                 //Ponemos la primera letra en mayúsculas
+                 $patternsname=ucwords($patternsname);
                  ++$cont;
+                 //Alineamos según vayan saliendo del array
                  switch($cont){
                      case 1:
                          $aling="center";
@@ -89,14 +106,13 @@
                          break;
                  };
                
-                 
           ?>
-    <div id="pattern_result"  align=<?php echo $aling ?> ><FONT SIZE= <?php echo $peso?> color="#800000"><?php echo $patterns ?></FONT> 
-       <p <img align="center" src="<?php echo $vars['url']; ?>mod/lds/images/<?php echo $patterns?>.gif"   width='120' height='70'  tittle="<?php echo $patterns ?>"  /> </p>
-    </div>
+   
+     <div id="pattern_result"  align="<?php echo $aling ?>"><FONT SIZE= <?php echo $peso?> color="#800000"><?php echo $patternsname ?></FONT>
+       <p> <img align="center" src="<?php echo $vars['url']; ?>mod/lds/images/<?php echo $patterns?>.gif"   width='120' height='70'  tittle="<?php echo $patterns ?>" /> </p>
+    </div> 
     
-    
-	<?php endfor ?>
+	<?php endfor;?>
 </ul>
 <?php else: ?>
 	<p class="noresults"><?php echo T("Oops, no results here!") ?></p>
