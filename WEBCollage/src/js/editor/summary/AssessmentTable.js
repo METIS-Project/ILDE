@@ -62,8 +62,8 @@ var AssessmentTable = {
             var func = assessment.functions[i];
             if (func.subtype == "summative") {
                 text = dojo.string.substitute(i18n.get("summary.function.summative"), {
-                    name: func.name,
-                    description: func.description
+                    name: "func.name",
+                    description: "func.description"
                 });
             } else {
                 activity = IDPool.getObject(func.link);

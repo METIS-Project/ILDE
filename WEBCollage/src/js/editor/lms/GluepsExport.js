@@ -160,6 +160,7 @@ var GluepsExport = {
         var fileUrl = zipurl.substring(0,pos+1);
         fileUrl = fileUrl + "icmanifest.xml";
         var vleSelect = GluepsExport.buildGlueldId(DesignInstance.data.lmsObj.id);
+        var courseSelect = GluepsExport.buildGlueldId(DesignInstance.data.classObj.id);
         var teacherNames = GluepsExport.buildTeachersString();
         var themeSelect=1;   
                     
@@ -175,6 +176,7 @@ var GluepsExport = {
                 deploy_title: deployTitle,
                 file_url: fileUrl,
                 vle_select: vleSelect,
+                course_select: courseSelect,
                 teacher_names: teacherNames,
                 theme_select: themeSelect,
                 user: user,

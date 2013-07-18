@@ -10,12 +10,12 @@ var FixedSizeGroupPatternFactory = {
     getDefinition : function() {
         return FixedSizeGroupPattern;
     },
-    newPattern : function(actId) {
-        return new FixedSizeGroupPattern(actId);
+    newPattern : function(actId, instanceId) {
+        return new FixedSizeGroupPattern(actId, instanceId);
     }
 };
 
-var FixedSizeGroupPattern = function(actId) {
+var FixedSizeGroupPattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "gn";
     this.title = FixedSizeGroupPatternFactory.getTitle();
@@ -23,6 +23,7 @@ var FixedSizeGroupPattern = function(actId) {
     this.number = -1;
 
     this.actId = actId;
+    this.instanceid = instanceId;
     this.clfpId = LearningDesign.findClfpParentOf(actId).clfp.id;
 
     IDPool.registerNewObject(this);

@@ -29,7 +29,7 @@ var TPS = function(staff) {
 
     if (staff && staff.length > 0) {
         var staffRole = staff[0];
-    } else {
+    }else {
         staffRole = new Role(i18n.get("roles.common.teacher"), "staff");
         this.ownRoles.push(staffRole);
     }
@@ -246,6 +246,43 @@ TPS.prototype.createInitialInstances = function(){
     {
         groupUpper.instances[n].idParent = instancias[n].id;
     }
+};
+
+TPS.prototype.getAvailableGroupPatterns = function(type, actid){
+    var availables = new Array();
+    
+    //En la fase think no hay patrones disponibles porque no es posible asignar participantes y crear grupos
+    if (this.getFlow()[0].id == actid){
+        availables["gn"] = new Array();
+        availables["pa"] = new Array();
+    //En la fase pair hay patrones disponibles porque es posible asignar participantes y crear grupos
+    }else if (this.getFlow()[1].id == actid){
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups");
+        availables["pa"] = new Array("groupparticipantsdistributepattern");
+    }else{
+        //En la fase share no hay patrones disponibles porque no es posible asignar participantes y crear grupos
+        availables["gn"] = new Array();
+        availables["pa"] = new Array();
+    }      
+    
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+    }
+    return patterns;     
+};
+
+TPS.prototype.canDeleteInstance = function(roleid, instanceId){
+    var instance = IDPool.getObject(instanceId);
+    if(DesignInstance.instanciasGrupoMismoPadre(roleid, instance.idParent).length > 1) {
+        var letDelete = true;
+    } else {
+        letDelete = false;
+    }
+    return letDelete;
 };
 
 Factory.registerFactory("tps", TPS, TPSFactory);

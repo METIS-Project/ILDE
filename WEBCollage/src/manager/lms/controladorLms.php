@@ -287,7 +287,7 @@ function createGluePSDeploy($designId, $deployTitle, $fileUrl, $vleSelect, $teac
     return $result;
 }
 
-function createGluePSDesignDeploy($url, $title, $zipUrl, $imsldType, $deployTitle, $fileUrl, $vleSelect, $teacherNames, $themeSelect, $user, $pass) {
+function createGluePSDesignDeploy($url, $title, $zipUrl, $imsldType, $deployTitle, $fileUrl, $vleSelect, $courseSelect, $teacherNames, $themeSelect, $user, $pass) {
     //$instancia = new lmsGluePS("", "", "");
     $instancia = new lmsGluePS($url, $user, $pass);
     $url = $url . "/designs";
@@ -297,7 +297,7 @@ function createGluePSDesignDeploy($url, $title, $zipUrl, $imsldType, $deployTitl
     $designId = substr($designId, $startPos);
     if ($designId != false) {
         $url = $url . "/" . $designId . "/deploys";
-        $deployid = $instancia->createDeploy($url, $deployTitle, $fileUrl, $vleSelect, $teacherNames, $themeSelect, $user, $pass);
+        $deployid = $instancia->createDeploy($url, $deployTitle, $fileUrl, $vleSelect, $courseSelect, $teacherNames, $themeSelect, $user, $pass);
         //nos quedamos con el identificador numérico del despliegue
         $startPos= strpos($deployid, "/deploys/") + strlen("/deploys/");
         $deployid = substr($deployid, $startPos);
@@ -362,11 +362,12 @@ if ($task === 'obtener_lms') {
     $deployTitle = $_REQUEST['deploy_title'];
     $fileUrl = $_REQUEST['file_url'];
     $vleSelect = $_REQUEST['vle_select'];
+    $courseSelect = $_REQUEST['course_select'];
     $teacherNames = $_REQUEST['teacher_names'];
     $themeSelect = $_REQUEST['theme_select'];
     $user = $_REQUEST['user'];
     $pass = $_REQUEST['pass'];
-    $result = createGluePSDesignDeploy($url, $title, $zipUrl, $imsldType, $deployTitle, $fileUrl, $vleSelect, $teacherNames, $themeSelect, $user, $pass);
+    $result = createGluePSDesignDeploy($url, $title, $zipUrl, $imsldType, $deployTitle, $fileUrl, $vleSelect, $courseSelect, $teacherNames, $themeSelect, $user, $pass);
 } else {
     $result = array("ok" => false);
 }

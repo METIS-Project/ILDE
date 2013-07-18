@@ -36,7 +36,7 @@ var PeerReview = function(staff) {
 
     if (staff && staff.length > 0) {
         var staffRole = staff[0];
-    } else {
+    }else {
         staffRole = new Role(i18n.get("roles.common.teacher"), "staff");
         this.ownRoles.push(staffRole);
     }
@@ -409,5 +409,40 @@ PeerReview.prototype.createInitialInstances = function(){
         g.instances[n].idParent = instancias[n].id;
     }
 };
+
+PeerReview.prototype.getAvailableGroupPatterns = function(type, actid){   
+    
+    var availables = new Array();
+    
+    //Los patrones de asignación de participantes y de grupos sólo están disponibles en la fase de review
+    if (this.getFlow()[0].id == actid){
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups");
+        availables["pa"] = new Array("groupparticipantsdistributepattern");
+    }else{
+        availables["gn"] = new Array();
+        availables["pa"] = new Array();
+    }        
+      
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+
+    }
+    return patterns;        
+};
+
+PeerReview.prototype.canDeleteInstance = function(roleid, instanceId){
+    var instance = IDPool.getObject(instanceId);
+    if(DesignInstance.instanciasGrupoMismoPadre(roleid, instance.idParent).length > 1) {
+        var letDelete = true;
+    } else {
+        letDelete = false;
+    }
+    return letDelete;
+};
+
 
 Factory.registerFactory("peerreview", PeerReview, PeerReviewFactory);

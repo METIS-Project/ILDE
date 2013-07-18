@@ -2,6 +2,8 @@ var GroupPatternsDialog = {
 
     dlg : null,
     actid : null,
+    clfpid : null,
+    instanceid : null,
 
     patterns : null,
     templists : null,
@@ -20,23 +22,32 @@ var GroupPatternsDialog = {
             "gn" : dojo.byId("groupPatternsGNList"),
             "pa" : dojo.byId("groupPatternsPAList")
         };
-        this.initAvailablePatterns("gn", GroupPatternManager.getFactories("gn"), "groupPatternsNewGN");
-        this.initAvailablePatterns("pa", GroupPatternManager.getFactories("pa"), "groupPatternsNewPA");
+        
     },
     initAvailablePatterns : function(type, list, containerid) {
         var table = "<table>";
 
         for(var i = 0; i < list.length; i++) {
-            table += '<tr><td>' + list[i].getTitle() + '</td><td><div id="' + containerid + '_' + i + '"></div></td></tr>';
+            table += '<tr><td>' + list[i].getTitle() + '</td><td><div id="' + containerid + '_' + list[i].getId() + '"></div></td></tr>';
         }
 
         table += "</table>"
 
         var gnnode = dojo.byId(containerid);
+        
+        if (gnnode.hasChildNodes()){
+            while (gnnode.childNodes.length>=1){
+                gnnode.removeChild(gnnode.firstChild);
+            }
+        }
+        
         gnnode.innerHTML = table;
 
         for(var i = 0; i < list.length; i++) {
-            var id = containerid + "_" + i;
+            var id = containerid + "_" + list[i].getId();
+            if (dijit.byId(id)){
+                dijit.byId(id).destroyRecursive(true);
+            }
             var button = new dijit.form.Button({
                 label : i18n.get("common.select"),
                 type : "submit"
@@ -44,9 +55,9 @@ var GroupPatternsDialog = {
 
             dojo.connect(dojo.byId(id), "onclick", {
                 type : type,
-                index : i
+                id: list[i].getId()
             }, function() {
-                GroupPatternsDialog.addPattern(this.type, this.index);
+                GroupPatternsDialog.addPattern(this.type, this.id);
             });
         }
     },
@@ -107,8 +118,15 @@ var GroupPatternsDialog = {
         return items;
     },
 
-    open : function(actid) {
+    open : function(actid, clfpid, instanceid) {
         this.actid = actid;
+        this.clfpid = clfpid;
+        this.instanceid = instanceid;
+       
+        //this.initAvailablePatterns("gn", GroupPatternManager.getFactories("gn"), "groupPatternsNewGN");
+        this.initAvailablePatterns("gn", GroupPatternManager.getFactoriesSupportedAct("gn", actid, clfpid), "groupPatternsNewGN");
+        //this.initAvailablePatterns("pa", GroupPatternManager.getFactories("pa"), "groupPatternsNewPA");
+        this.initAvailablePatterns("pa", GroupPatternManager.getFactoriesSupportedAct("pa",actid, clfpid), "groupPatternsNewPA");
 
         this.patterns = GroupPatternManager.getPatternsForAct(actid);
         this.templists = {
@@ -122,10 +140,12 @@ var GroupPatternsDialog = {
     createTempList : function(patternlist) {
         var tl = [];
         for(var i = 0; i < patternlist.length; i++) {
-            tl.push({
-                obj : patternlist[i],
-                state : "original"
-            });
+            //if (patternlist[i].instanceid == this.instanceid){
+                tl.push({
+                    obj : patternlist[i],
+                    state : "original"
+                });
+            //}
         }
         return tl;
     },
@@ -140,41 +160,60 @@ var GroupPatternsDialog = {
 
         var table = "";
         for(var i = 0; i < this.templists[type].length; i++) {
-            var id = "groupPatternsDialog_item_" + type + "_" + i;
-            ids[i] = id;
-            var title = this.templists[type][i].obj.getTitle();
-            titles[i] = title;
+            if (this.templists[type][i].state=="added" || this.templists[type][i].obj.instanceid == this.instanceid){
+                var id = "groupPatternsDialog_item_" + type + "_" + i;
+                ids[i] = id;
+                var title = this.templists[type][i].obj.getTitle();
+                titles[i] = title;
 
-            var p = this.templists[type][i];
-            table += '<tr><td id="' + id + '" style="color:' + this.colors[p.state] + '">';
-            table += title;
-            table += '</td></tr>';
+                var p = this.templists[type][i];
+                table += '<tr><td id="' + id + '" style="color:' + this.colors[p.state] + '">';
+                table += title;
+                table += '</td></tr>';
+            }
         }
         this.tables[type].innerHTML = table;
 
-        for(var i = 0; i < ids.length; i++) {
-            MenuManager.registerThing(dojo.byId(ids[i]), {
-                getItems : function(data) {
-                    return GroupPatternsDialog.getMenu(data);
-                },
-                data : {
-                    type : type,
-                    index : i
-                },
-                title : titles[i],
-                menuStyle : "default"
-            });
+        //for(var i = 0; i < ids.length; i++) {
+        for(var i = 0; i < this.templists[type].length; i++) {
+            if (this.templists[type][i].obj.instanceid == this.instanceid){
+                MenuManager.registerThing(dojo.byId(ids[i]), {
+                    getItems : function(data) {
+                        return GroupPatternsDialog.getMenu(data);
+                    },
+                    data : {
+                        type : type,
+                        index : i
+                    },
+                    title : titles[i],
+                    menuStyle : "default"
+                });
+            }
         }
     },
 
     /* manage patterns */
 
-    addPattern : function(type, index) {
-        this.templists[type].push({
-            obj : GroupPatternManager.getFactory(type, index),
-            state : "added"
-        });
-        this.updateList(type);
+    //addPattern : function(type, index) {
+    addPattern : function(type, id) {
+        var alreadyExists = false;
+        //var factory = GroupPatternManager.getFactory(type, index);
+        var factory = GroupPatternManager.getFactoryById(type, id);
+        var factoryId = factory.getId();
+        for (var i =0; i < this.templists[type].length; i++){
+            if ( (typeof this.templists[type][i].obj.patternid!="undefined" && this.templists[type][i].obj.patternid == factoryId  && this.templists[type][i].obj.instanceid == this.instanceid && this.templists[type][i].obj.patternid == factoryId) || (typeof this.templists[type][i].obj.getId=="function" && this.templists[type][i].obj.getId() == factoryId)){
+                alreadyExists = true;
+                break;
+            }
+        }
+        if (!alreadyExists){
+            this.templists[type].push({
+                //obj : GroupPatternManager.getFactory(type, index),
+                obj : GroupPatternManager.getFactoryById(type, id),
+                state : "added"
+            });
+            this.updateList(type);
+        }
     },
 
     remove : function(type, index) {
@@ -213,24 +252,32 @@ var GroupPatternsDialog = {
         this.savePatternList("gn");
         this.savePatternList("pa");
         GroupPatternManager.init();
+        Loader.save("");
     },
     savePatternList : function(type) {
         
         for(var ti = 0; ti < this.templists[type].length; ti++) {
             var tp = this.templists[type][ti];
             if(tp.state == "added") {
-                this.patterns[type].splice(ti, 0, tp.obj.newPattern(this.actid));
+                var newObj = tp.obj.newPattern(this.actid, this.instanceid);
+                tp.obj = newObj;
             }
         }
 
         for(var ti = this.templists[type].length - 1; ti >= 0; ti--) {
             var tp = this.templists[type][ti];
             if(tp.state == "removed") {
-                this.patterns[type].splice(ti, 1);
+                this.templists[type].splice(ti, 1);
             }
         }
+        
+        for (var pi = 0; pi < this.templists[type].length; pi++){
+            this.patterns[type][pi] = this.templists[type][pi].obj;
+        }
 
-        Loader.save("");
+        if (this.patterns[type].length > this.templists[type].length){
+            this.patterns[type].splice(this.templists[type].length, this.patterns[type].length - this.templists[type].length);
+        }
     },
 
     ok : function() {

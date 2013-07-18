@@ -318,8 +318,8 @@ roles.edit.description=Descripción
 roles.common.rol=Rol
 roles.common.teacher=Profesor
 
-clip.label=Acciones pendientes
-clip.menu.title=Acciones pendientes:
+clip.label=Acciones a considerar
+clip.menu.title=Acciones a considerar:
 clip.actions.groups.general=Configuración general
 clip.actions.groups.los=Configurar objectivos de aprendizaje
 clip.actions.groups.resources=Configurar recursos
@@ -801,9 +801,17 @@ groupPattern.disabledGroupNumber=No se puede actualizar la composición de grupo
 groupPattern.delete=Borrar este patrón de grupos
 groupPattern.documentation=Leer documentación del patrón de grupos
 groupPattern.emptyGroup=Hay grupos vacíos
+groupPattern.emptyGroup.help=Debería asignar estudiantes a cada instancia de grupo en esta fase
 groupPattern.notAsigned=Hay estudiantes no asignados a ningún grupo
+groupPattern.notAsigned.help=Podría querer que cada estudiante esté asignado a alguna instancia de grupo de la fase
+groupPattern.noAvailableParticipants=No hay estudiantes disponibles para ser asignados a los grupos
+groupPattern.noAvailableParticipants.help=Cada grupo en una fase debería tener estudiantes asignados
 groupPattern.notAsignedTeacher=No hay ningún profesor asignado a la fase
-groupPattern.notAsignedTeacher.help=Debería asignar al menos un profesor al grupo de los profesores
+groupPattern.notAsignedTeacher.help=Debería asignar al menos un profesor a esta fase
+groupPattern.noAvailableTeachers=No hay profesores disponibles para ser asignados a la fase
+groupPattern.noAvailableTeachers.help=Cada fase debería tener un  profesor asignado
+groupPattern.notAsignedSomeTeachers=Hay profesores no asignados a la fase
+groupPattern.notAsignedSomeTeachers.help=Podría querer que cada profesor esté asignado a la fase
 
 
 groupPattern.add=Añadir un patrón de grupo

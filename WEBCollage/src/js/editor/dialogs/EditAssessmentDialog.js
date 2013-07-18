@@ -318,7 +318,7 @@ var EditAssessmentDialog = {
         
         ChangeManager.startGroup();
 
-        if(conflicts.patterns) {
+        if(conflicts!= null && conflicts.patterns) {
             for(var i = 0; i < conflicts.patterns.length; i++) {
                 var pattern = conflicts.patterns[i];
                 var index = this.assessmentPatterns.all.indexOf(pattern);
@@ -663,8 +663,8 @@ var EditSummativeAssessmentDialog = {
         this.dlg.show();
     },
     save : function() {
-        this.assessmentFunction.name = dijit.byId("SummativeAssessmentEditName").set("value");
-        this.assessmentFunction.description = dijit.byId("SummativeAssessmentEditDescription").set("value");
+        this.assessmentFunction.name = dijit.byId("SummativeAssessmentEditName").get("value");
+        this.assessmentFunction.description = dijit.byId("SummativeAssessmentEditDescription").get("value");
         ChangeManager.assessmentFunctionEdited(this.assessmentFunction);
         this.close();
     },

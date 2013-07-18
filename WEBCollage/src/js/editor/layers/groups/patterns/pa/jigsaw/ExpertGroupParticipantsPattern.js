@@ -10,18 +10,19 @@ var ExpertGroupParticipantsPatternFactory = {
     getDefinition : function() {
         return ExpertGroupParticipantsPattern;
     },
-    newPattern : function(actId) {
-        return new ExpertGroupParticipantsPattern(actId);
+    newPattern : function(actId, instanceId) {
+        return new ExpertGroupParticipantsPattern(actId, instanceId);
     }
 };
 
-var ExpertGroupParticipantsPattern = function(actId) {
+var ExpertGroupParticipantsPattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "pa";
     this.title = ExpertGroupParticipantsPatternFactory.getTitle();
     this.patternid = ExpertGroupParticipantsPatternFactory.getId();
 
     this.actId = actId;
+    this.instanceid = instanceId;
     this.clfpId = LearningDesign.findClfpParentOf(actId).clfp.id;
     this.jigsawActId = IDPool.getObject(this.clfpId).getFlow()[0].id;
 

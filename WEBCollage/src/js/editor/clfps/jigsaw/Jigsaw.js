@@ -349,4 +349,30 @@ Jigsaw.prototype.createInitialInstances = function() {
 
 };
 
+Jigsaw.prototype.getAvailableGroupPatterns = function(type, aactid){
+    var availables = new Array();
+    availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups", "expertgrouppattern", "jigsawgrouppattern");
+    availables["pa"] = new Array("groupparticipantsdistributepattern", "expertgroupparticipantspattern");
+    
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+
+    }
+    return patterns;        
+};                    
+                    
+Jigsaw.prototype.canDeleteInstance = function(roleid, instanceId){   
+    var instance = IDPool.getObject(instanceId);
+    if(DesignInstance.instanciasGrupoMismoPadre(roleid, instance.idParent).length > 1) {
+        var letDelete = true;
+    } else {
+        letDelete = false;
+    }
+    return letDelete;
+};
+
 Factory.registerFactory("jigsaw", Jigsaw, JigsawFactory);

@@ -186,12 +186,29 @@ Pyramid.prototype.getEditionMenu = function(link) {
  * @param level Nivel en el que se encuentra la instancia a clonar
  */
 Pyramid.prototype.clonar = function(idInstancia, level){
-    var instancia = IDPool.objects[idInstancia];
+        var levelZero = false;
+        var instancia = IDPool.getObject(idInstancia);
+        var grupoInstancia = DesignInstance.grupoInstancia(instancia);
+        var roleid = grupoInstancia.roleid;       
+        //Buscamos el rol en el nivel 0, que se corresponde con flow.length - 1
+        var act = this.getFlow()[this.flow.length - 1];
+        for (var i = 0; i < act.roleparts.length; i++){
+            if (act.roleparts[i].roleId == roleid){
+                levelZero = true;
+            }
+        }
+        if (levelZero){
+            DesignInstance.copiarEstructuraTop(instancia);
+        }else{
+            DesignInstance.copiarEstructura(instancia, instancia.idParent, instancia.id);
+        }
+        
+    /*var instancia = IDPool.objects[idInstancia];
     if (level>0){
         DesignInstance.copiarEstructura(instancia, instancia.idParent, instancia.id);
     }else{
         DesignInstance.copiarEstructuraTop(instancia);
-    }
+    }*/
 };
 
 /**
@@ -320,6 +337,45 @@ Pyramid.prototype.createInitialInstances = function(){
     {
         groupUpper.instances[n].idParent = instancias[n].id;
     }
+};
+
+Pyramid.prototype.getAvailableGroupPatterns = function(type, actid){
+    var availables = new Array();
+    
+    //En el nivel cero de la pirámide no están disponibles los patrones de asignación de participantes ni de grupos
+    if (this.getFlow()[this.flow.length - 1].id == actid){
+        availables["gn"] = [];
+        availables["pa"] = [];
+    //En el nivel superior están disponibles todos los patrones
+    }else if (this.getFlow()[0].id == actid){
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups");
+        availables["pa"] = new Array("groupparticipantsdistributepattern");
+    }else{
+        //En los niveles intermedios sólo están disponibles los patrones de grupos
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups");
+        availables["pa"] = new Array();
+    }      
+    
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+
+    }
+    return patterns;        
+};
+
+    
+Pyramid.prototype.canDeleteInstance = function(roleid, instanceId){
+    var instance = IDPool.getObject(instanceId);
+    if(DesignInstance.instanciasGrupoMismoPadre(roleid, instance.idParent).length > 1) {
+        var letDelete = true;
+    } else {
+        letDelete = false;
+    }
+    return letDelete;
 };
 
 Factory.registerFactory("pyramid", Pyramid, PyramidFactory);

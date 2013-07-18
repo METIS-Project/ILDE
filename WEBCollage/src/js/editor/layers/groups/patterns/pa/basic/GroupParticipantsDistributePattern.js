@@ -10,18 +10,19 @@ var GroupParticipantsDistributePatternFactory = {
     getDefinition : function() {
         return GroupParticipantsDistributePattern;
     },
-    newPattern : function(actId) {
-        return new GroupParticipantsDistributePattern(actId);
+    newPattern : function(actId, instanceId) {
+        return new GroupParticipantsDistributePattern(actId, instanceId);
     }
 };
 
-var GroupParticipantsDistributePattern = function(actId) {
+var GroupParticipantsDistributePattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "pa";
     this.title = GroupParticipantsDistributePatternFactory.getTitle();
     this.patternid = GroupParticipantsDistributePatternFactory.getId();
 
     this.actId = actId;
+    this.instanceid = instanceId;
     this.clfpId = LearningDesign.findClfpParentOf(actId).clfp.id;
 
     IDPool.registerNewObject(this);

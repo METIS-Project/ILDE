@@ -527,4 +527,42 @@ Simulation.prototype.createInitialInstances = function(){
     }
 };
 
+Simulation.prototype.getAvailableGroupPatterns = function(type, actid){
+    var availables = new Array();
+    
+    //Role information no tiene patrones disponibles
+    if (this.getFlow()[0].id == actid){
+        availables["gn"] = [];
+        availables["pa"] = [];
+    //Role definition y simulation groups tienen disponibles los mismos patrones
+    }else if (this.getFlow()[1].id == actid || this.getFlow()[2].id == actid){
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups");
+        availables["pa"] = new Array("groupparticipantsdistributepattern");
+    }else{
+        //Simulation no tiene disponible patrones
+        availables["gn"] = new Array();
+        availables["pa"] = new Array();
+    }      
+    
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+
+    }
+    return patterns;           
+};
+
+Simulation.prototype.canDeleteInstance = function(roleid, instanceId){
+    var instance = IDPool.getObject(instanceId);
+    if(DesignInstance.instanciasGrupoMismoPadre(roleid, instance.idParent).length > 1) {
+        var letDelete = true;
+    } else {
+        letDelete = false;
+    }
+    return letDelete;
+};
+
 Factory.registerFactory("simulation", Simulation, SimulationFactory);

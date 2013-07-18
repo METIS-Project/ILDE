@@ -85,7 +85,7 @@ table.resourceTable th{
 }
 
 .clipIcon {
-    background-image: url('../images/alert.png'); /* mega-image */
+    background-image: url('../images/icons/help.png'); /* mega-image */
     background-repeat: no-repeat;
     width: 18px;
     height: 18px;

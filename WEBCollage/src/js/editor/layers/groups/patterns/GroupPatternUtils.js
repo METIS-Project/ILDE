@@ -86,7 +86,9 @@ var GroupPatternUtils = {
      */
     fixGroupNumber : function(result, previousProposal, number, explanation) {
         result.ok = false;
-        if (previousProposal) {
+        //if (previousProposal) {
+        //Comprobar si existe una propuesta previa en la que el número de grupos no coincide con la propuesta actual
+        if (previousProposal && result.proposal.number!=number) {
             result.fixable = false;
         } else {
             result.fixable = true;
@@ -104,7 +106,23 @@ var GroupPatternUtils = {
      * @param {Object} numberExplanation
      */
     compareExactGroupNumber : function(instanceId, result, previousProposal, actId, number, numberExplanation) {
-        if (number == result.proposal.getNumber()) {
+        var needFix = false;
+        var studentRoles = Context.getStudentRoles(actId);
+        //Puede haber varios roles en cada fase. Para cada uno de ellos el número de instacias será el mismo
+        for (var sr = 0; sr < studentRoles.length; sr++){
+            var groupId = studentRoles[sr].id;
+            var clfp = DesignInstance.clfpRole(studentRoles[sr]);
+            var instances = ClfpsCommon.getInstances(clfp, groupId, LearningFlow);
+            //if (instances.length != result.proposal.getNumber()){
+            //Comprobar que el número de instancias del grupo coincide con el especificado
+            if (instances.length != number){
+                needFix = true;
+            }
+        }
+            
+            
+        //if (number == result.proposal.getNumber()) {
+        if (needFix == false){
             this.appendExplanation(result, numberExplanation);
         } else {
             this.fixGroupNumber(result, previousProposal, number, numberExplanation);
@@ -155,5 +173,5 @@ var GroupPatternUtils = {
             text : alert,
             help : help ? help : ""
         });
-    },
+    }
 };

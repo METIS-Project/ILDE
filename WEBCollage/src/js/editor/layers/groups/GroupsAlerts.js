@@ -20,63 +20,67 @@ var GroupsAlerts = {
     },
     paintGroupPatternsAlerts : function(block, flowRenderer, participantFlow) {
         for (var i = 0; i < block.renderClfps.length; i++) {
-            //Obtener y pintar alertas a la izquierda
-            var alerts = GroupsAlerts.showSideAlert(block.renderClfps[i].clfp, flowRenderer, "left");
-            if (alerts) {
-                //Pintar alertas del clfp
-                var clfp = block.renderClfps[i].clfp;
-                var imageLeftGroup = flowRenderer.bigGroup.createGroup();
+            if (i==0) {
+                //Obtener y pintar alertas a la izquierda
+                var alerts = GroupsAlerts.showSideAlert(block.renderClfps, flowRenderer, "left");
+                if (alerts){
+                    //Pintar alertas del clfp
+                    var clfp = block.renderClfps[i].clfp;
+                    var imageLeftGroup = flowRenderer.bigGroup.createGroup();
 
-                var imageLeft = imageLeftGroup.createImage({
-                    x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 - 62,
-                    y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
-                    width : 18,
-                    height : 18,
-                    src : "images/icons/person.png"
-                });
-                flowRenderer.animator.addNoAnimStuff(imageLeft);
-                MenuManager.registerThing(imageLeft, {
-                    getItems : function(data) {
-                        return GroupsAlerts.getGroupPatternAlertsMenu(data);
-                    },
-                    data : {
-                        alerts : [{
-                            text : i18n.get("groupPatternAlerts.leftAlert"),
-                            help : ""
-                        }]
-                    },
-                    menuStyle : "groupPatternAlerts"
-                });
+                    var imageLeft = imageLeftGroup.createImage({
+                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 - 62,
+                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
+                        width : 18,
+                        height : 18,
+                        src : "images/icons/person.png"
+                    });
+                    flowRenderer.animator.addNoAnimStuff(imageLeft);
+                    MenuManager.registerThing(imageLeft, {
+                        getItems : function(data) {
+                            return GroupsAlerts.getGroupPatternAlertsMenu(data);
+                        },
+                        data : {
+                            alerts : [{
+                                text : i18n.get("groupPatternAlerts.leftAlert"),
+                                help : ""
+                            }]
+                        },
+                        menuStyle : "groupPatternAlerts"
+                    });
+                }
             }
 
-            //Obtener y pintar alertas a la derecha
-            alerts = GroupsAlerts.showSideAlert(block.renderClfps[i].clfp, flowRenderer, "right");
-            if (alerts) {
-                //Pintar alertas del clfp
-                var clfp = block.renderClfps[i].clfp;
-                var width = clfp.getRenderer().getSize(clfp, flowRenderer.uiListener).width * this.scale;
-                var imageRightGroup = flowRenderer.bigGroup.createGroup();
+            if (i==0) {
+                //Obtener y pintar alertas a la derecha
+                alerts = GroupsAlerts.showSideAlert(block.renderClfps, flowRenderer, "right");
+                if (alerts){
+                    //Pintar alertas del clfp
+                    var clfp = block.renderClfps[i].clfp;
+                    var width = clfp.getRenderer().getSize(clfp, flowRenderer.uiListener).width * this.scale;
+                    var imageRightGroup = flowRenderer.bigGroup.createGroup();
 
-                var imageRight = imageRightGroup.createImage({
-                    x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 + 62 - 18,
-                    y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
-                    width : 18,
-                    height : 18,
-                    src : "images/icons/person.png"
-                });
-                flowRenderer.animator.addNoAnimStuff(imageRight);
-                MenuManager.registerThing(imageRight, {
-                    getItems : function(data) {
-                        return GroupsAlerts.getGroupPatternAlertsMenu(data);
-                    },
-                    data : {
-                        alerts : [{
-                            text : i18n.get("groupPatternAlerts.rightAlert"),
-                            help : ""
-                        }]
-                    },
-                    menuStyle : "groupPatternAlerts"
-                });
+                    var imageRight = imageRightGroup.createImage({
+                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 + 62 - 18,
+                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
+                        width : 18,
+                        height : 18,
+                        src : "images/icons/person.png"
+                    });
+                    flowRenderer.animator.addNoAnimStuff(imageRight);
+                    MenuManager.registerThing(imageRight, {
+                        getItems : function(data) {
+                            return GroupsAlerts.getGroupPatternAlertsMenu(data);
+                        },
+                        data : {
+                            alerts : [{
+                                text : i18n.get("groupPatternAlerts.rightAlert"),
+                                help : ""
+                            }]
+                        },
+                        menuStyle : "groupPatternAlerts"
+                    });
+                }
             }
 
             var clfpid = block.renderClfps[i].clfp.id;
@@ -84,12 +88,12 @@ var GroupsAlerts = {
             if (!instanceid) {
                 instanceid = 0;
             }
-
+            //Obtener y pintar alertas para cada un de las fases
             for (var j = 0; j < block.renderClfps[i].clfp.flow.length; j++) {
                 var actid = block.renderClfps[i].clfp.flow[j].id;
-                var roleStaff = block.renderClfps[i].clfp.flow[j].staff[0];
-                var instancesStaff = DesignInstance.instanciasGrupo(roleStaff);
-                var idinstStaff = instancesStaff[instancesStaff.length - 1].id;
+                //var roleStaff = block.renderClfps[i].clfp.flow[j].staff[0];
+                //var instancesStaff = DesignInstance.instanciasGrupo(roleStaff);
+                //var idinstStaff = instancesStaff[instancesStaff.length - 1].id;
                 var posx = participantFlow.acts[actid].x;
                 var posy = participantFlow.acts[actid].y;
 
@@ -98,7 +102,8 @@ var GroupsAlerts = {
                 var size = 16;
                 var halfsize = size / 2;
                 var distance = 40;
-
+                
+                //Pintar cuadrado para las opciones del patrón de grupo
                 var circleGroup = flowRenderer.bigGroup.createGroup();
                 var circle = circleGroup.createRect({
                     x : posx + (distance * block.renderClfps[i].scale) - halfsize,
@@ -107,6 +112,7 @@ var GroupsAlerts = {
                     height : size
                 }).setFill(this.circlePaint.fill).setStroke(this.circlePaint.stroke);
                 flowRenderer.animator.addNoAnimStuff(circle);
+                //Añadir menú de opciones del patrón de grupo
                 MenuManager.registerThing(circle, {
                     getItems : function(data) {
                         return GroupsAlerts.getGroupMenu(data);
@@ -121,7 +127,7 @@ var GroupsAlerts = {
                 });
 
                 //Pintar alertas de la fase
-                var alerts = GroupsAlerts.getActAlerts(block.renderClfps[i].clfp, block.renderClfps[i].clfp.flow[j], flowRenderer, instanceid);
+                alerts = GroupsAlerts.getActAlerts(block.renderClfps[i].clfp, block.renderClfps[i].clfp.flow[j], flowRenderer, instanceid);
                 if (alerts.length > 0) {
                     var alertdistance = 5;
                     var imageActGroup = flowRenderer.bigGroup.createGroup();
@@ -168,7 +174,8 @@ var GroupsAlerts = {
         if (actstate.pa) {
             alerts = alerts.concat(actstate.pa.alerts);
         }
-        return alerts;
+        //Comentar esta línea para mostrar las otras posibles alertas
+        //return alerts;
 
         if (Context.isClassSelected()) {
             //Obtener alertas de grupos vacíos
@@ -180,13 +187,29 @@ var GroupsAlerts = {
                 var instances = DesignInstance.instanciasGrupo(act.learners[0]);
                 var disponibles = ClfpsCommon.obtainAvailableStudentsClfpMain(clfp);
             }
-            for (var i = 0; i < instances.length; i++) {
-                if (instances[i].participants.length == 0) {
-                    alerts.push({
-                        text : i18n.get("groupPattern.emptyGroup"),
-                        help : "some nice help"
-                    });
-                    break;
+            
+            if (disponibles.length == 0){
+                for (var i = 0; i < instances.length; i++) {
+                    if (instances[i].participants.length == 0) {
+                        alerts.push({
+                            text : i18n.get("groupPattern.noAvailableParticipants"),
+                            help : i18n.get("groupPattern.noAvailableParticipants.help"), 
+                            icon : "gpaRed"
+                        });
+                        break;
+                    }
+                }
+            }
+            else{
+                for (var i = 0; i < instances.length; i++) {
+                    if (instances[i].participants.length == 0) {
+                        alerts.push({
+                            text : i18n.get("groupPattern.emptyGroup"),
+                            help : i18n.get("groupPattern.emptyGroup.help"),
+                            icon : "gpaRed"
+                        });
+                        break;
+                    }
                 }
             }
 
@@ -196,7 +219,8 @@ var GroupsAlerts = {
                 if (!DesignInstance.perteneceGrupo(grupo, disponibles[i])) {
                     alerts.push({
                         text : i18n.get("groupPattern.notAsigned"),
-                        help : "other nice help"
+                        help : i18n.get("groupPattern.notAsigned.help"),
+                        icon : "gpa"
                     });
                     break;
                 }
@@ -204,21 +228,43 @@ var GroupsAlerts = {
 
             //Obtener alertas de profesores no asignados
             grupo = DesignInstance.getGrupo(act.staff[0]);
-            if (grupo.instances[0].participants.length == 0) {
+            var available = ClfpsCommon.obtainAvailableTeachers(clfp, grupo.instances[0].id);
+            //Si no hay profesores disponibles para ser asignados y está vacío se muestra alerta
+            if (available.length == 0 && grupo.instances[0].participants.length == 0){
                 alerts.push({
-                    text : i18n.get("groupPattern.notAsignedTeacher"),
-                    help : i18n.get("groupPattern.notAsignedTeacher.help")
+                    text: i18n.get("groupPattern.noAvailableTeachers"),
+                    help: i18n.get("groupPattern.noAvailableTeachers.help"),
+                    icon : "gpaRed"
                 });
+                
+            }else{
+                //Mostrar alerta de que no hay ningún profesor asignado
+                if (grupo.instances[0].participants.length == 0) {
+                    alerts.push({
+                        text : i18n.get("groupPattern.notAsignedTeacher"),
+                        help : i18n.get("groupPattern.notAsignedTeacher.help"),
+                        icon : "gpaRed"
+                    });
+                }else{
+                    if (available.length > 0){
+                        alerts.push({
+                            text : i18n.get("groupPattern.notAsignedSomeTeachers"),
+                            help : i18n.get("groupPattern.notAsignedSomeTeachers.help"),
+                            icon : "gpa"
+                        });
+                    }                   
+                }
             }
         }
 
         return alerts;
     },
-    showSideAlert : function(clfp, flowRenderer, side) {
+    showSideAlert : function(renderClfps, flowRenderer, side) {
+        var clfpTop = renderClfps[0].clfp;
         //Obtenemos la instancia de la que depende actualmente el patrón (si es que es un patrón dependiente)
 
-        if (flowRenderer.uiListener.instanceid[clfp.id]) {
-            var instanciaDepende = IDPool.getObject(flowRenderer.uiListener.instanceid[clfp.id]);
+        if (flowRenderer.uiListener.instanceid[clfpTop.id]) {
+            var instanciaDepende = IDPool.getObject(flowRenderer.uiListener.instanceid[clfpTop.id]);
             var g = DesignInstance.grupoInstancia(instanciaDepende);
             var clfpGrupo = DesignInstance.clfpRole(IDPool.getObject(g.roleid));
             //Obtemos las posibles instancias de las que puede depender el patrón
@@ -238,13 +284,17 @@ var GroupsAlerts = {
                 startIndex = pos + 1;
                 endIndex = instanciasDependePatron.length;
             }
-
-            //Para cada posible instancia de la que puede depender el patrón
-            for (var i = startIndex; i < endIndex; i++) {
-                for (var j = 0; j < clfp.flow.length; j++) {
-                    var act = clfp.flow[j];
-                    if (GroupsAlerts.actHasAlerts(clfp, act, flowRenderer, instanciasDependePatron[i].id)) {
-                        return true;
+                
+            //Para cada patrón que están uno a continuación de otro se comprueba si tiene alertas. Si alguno de ellos tiene alertas hay que mostrarlas
+            for (var rc=0; rc < renderClfps.length; rc++){
+                var clfp = renderClfps[rc].clfp;
+                //Para cada posible instancia de la que puede depender el patrón
+                for (var i = startIndex; i < endIndex; i++) {
+                    for (var j = 0; j < clfp.flow.length; j++) {
+                        var act = clfp.flow[j];
+                        if (GroupsAlerts.actHasAlerts(clfp, act, flowRenderer, instanciasDependePatron[i].id)) {
+                            return true;
+                        }
                     }
                 }
             }
@@ -260,7 +310,7 @@ var GroupsAlerts = {
             label : i18n.get("groupPattern.manage"),
             icon : "edit",
             onClick : function(data) {
-                GroupPatternsDialog.open(data.actid);
+                GroupPatternsDialog.open(data.actid, data.clfpid, data.instanceid);
             },
             data : data,
             help : i18n.get("help.groupPattern.manage")
@@ -280,29 +330,32 @@ var GroupsAlerts = {
     },
     getGroupMenuAddConfig : function(items, data, patterns) {
         for (var i = 0; i < patterns.length; i++) {
-            items.push({
-                isSeparator : true
-            });
-            items.push({
-                icon : "edit",
-                label : patterns[i].getTitle() + "..."
-            });
-            var pattern = patterns[i];
-            if (pattern.getMenuItems) {
-                var subitems = pattern.getMenuItems();
-                for (var j = 0; j < subitems.length; j++) {
-                    items.push({
-                        label : subitems[j].label,
-                        help : subitems[j].label,
-                        isSubMenu : true,
-                        onClick : function(data) {
-                            data.pattern.menuItemClicked(data.index);
-                        },
-                        data : {
-                            pattern : pattern,
-                            index : j
-                        }
-                    });
+            //Sólo mostrar los elementos correspondientes a instancia activa del cflp
+            if (patterns[i].instanceid == data.instanceid){
+                items.push({
+                    isSeparator : true
+                });
+                items.push({
+                    icon : "edit",
+                    label : patterns[i].getTitle() + "..."
+                });
+                var pattern = patterns[i];
+                if (pattern.getMenuItems) {
+                    var subitems = pattern.getMenuItems();
+                    for (var j = 0; j < subitems.length; j++) {
+                        items.push({
+                            label : subitems[j].label,
+                            help : subitems[j].label,
+                            isSubMenu : true,
+                            onClick : function(data) {
+                                data.pattern.menuItemClicked(data.index);
+                            },
+                            data : {
+                                pattern : pattern,
+                                index : j
+                            }
+                        });
+                    }
                 }
             }
 
@@ -338,7 +391,7 @@ var GroupsAlerts = {
         });
     },
     /* to remove */
-    getGroupPatternMenu : function(data) {
+    /*getGroupPatternMenu : function(data) {
         var items = new Array();
         return items;
 
@@ -496,7 +549,7 @@ var GroupsAlerts = {
         });
 
         return items;
-    },
+    },*/
     getDefaultMenu : function(data) {
         var items = new Array();
         items.push({
@@ -515,10 +568,15 @@ var GroupsAlerts = {
      */
     getGroupPatternAlertsMenu : function(data) {
         var items = new Array();
-
+        
         for (var i = 0; i < data.alerts.length; i++) {
+            if (typeof data.alerts[i].icon == 'undefined'){
+                var icon = "gpa";
+            }else{
+                icon = data.alerts[i].icon;
+            }
             items.push({
-                icon : "gpa",
+                icon: icon,
                 label : data.alerts[i].text,
                 help : data.alerts[i].help
             });

@@ -8,6 +8,18 @@
 /*global UndoManager, ClipManager, ChangeManager*/
 
 var Loader = {
+    
+    ldShakeMode: false,
+   
+    ldShakeInfo: {
+        document_id: "",
+        sectoken: ""
+    },
+    
+    resetLdShakeInfo: function(){
+        Loader.ldShakeInfo.document_id = "";
+        Loader.ldShakeInfo.sectoken = "";
+    },
 
     /**
      * Últimas acciones realizadas por el usuario
@@ -21,7 +33,11 @@ var Loader = {
         dojo.connect(dojo.byId("toolbar.save"), "onclick", function() {
             Loader.save("! " + Loader.lastActions);
         });
+        
+        Loader.resetLdShakeInfo();
+        Loader.ldShakeMode = false;
     },
+    
     inheritance : {
         "act" : Act,
         "clfpact" : Act,
@@ -36,16 +52,17 @@ var Loader = {
         "groupInstance" : GroupInstance,
         "group" : Group
     },
-
-    /**
+    
+        /**
      * Carga de un diseño del usuario
      */
-    load : function() {
+    loadLdshakeDesign : function() {
         var bindArgs = {
-            url : "manager/manageDesigns.php",
+            url : "ldshake/api/manageLdshakeDesigns.php",
             content : {
-                task : "load",
-                id : LearningDesign.ldid //Identificador del diseño a cargar
+                task : "loadLdshakeDesign",
+                document_id : Loader.ldShakeInfo.document_id, //Identificador LdShake del diseño a cargar
+                sectoken: Loader.ldShakeInfo.sectoken //Token used to make sure it is the owner of the document
             },
             handleAs : "json",
             contentType : "application/json; charset=utf-8",
@@ -64,18 +81,84 @@ var Loader = {
         this.showLoadingDialog();
         dojo.xhrGet(bindArgs);
     },
+
+    /**
+     * Carga de un diseño del usuario
+     */
+    load : function() {
+        if (!Loader.ldShakeMode){
+            var bindArgs = {
+                url : "manager/manageDesigns.php",
+                content : {
+                    task : "load",
+                    id : LearningDesign.ldid //Identificador del diseño a cargar
+                },
+                handleAs : "json",
+                contentType : "application/json; charset=utf-8",
+                load : function(data) {
+                    Loader.gotcha(data);
+                    UndoManager.reset();
+                    Loader.hideLoadingDialog();
+                },
+                error : function(error) {
+                    console.log(error.message);
+                    console.log(error.stack);
+                    Loader.hideLoadingDialog();
+    //                alert(i18n.get("loader.load.error"));
+                }
+            };
+            this.showLoadingDialog();
+            dojo.xhrGet(bindArgs);
+        }else{
+            Loader.loadLdshakeDesign();
+        }
+    },
     updateToLastVersion : function(data) {
 
     },
+    
     /**
      * Deshace el último cambio cargando la versión anterior del diseño
      */
     undo : function() {
+        if (!Loader.ldShakeMode){
+            var bindArgs = {
+                url : "manager/manageDesigns.php",
+                content : {
+                    task : 'undo',
+                    id : LearningDesign.ldid
+                },
+                handleAs : "json",
+                contentType : "application/json; charset=utf-8",
+                load : function(data) {
+                    UndoManager.undone();
+                    Loader.gotcha(data);
+                    Loader.hideLoadingDialog();
+                },
+                error : function(error) {
+                    console.log(error);
+                    Loader.hideLoadingDialog();
+                    alert(i18n.get("loader.load.error"));
+                }
+            };
+            this.showLoadingDialog();
+            dojo.xhrGet(bindArgs);
+        }
+        else{
+            Loader.undoLdshakeDesign();           
+        }
+    },
+    
+        /**
+     * Deshace el último cambio cargando la versión anterior del diseño
+     */
+    undoLdshakeDesign : function() {
         var bindArgs = {
-            url : "manager/manageDesigns.php",
+            url : "ldshake/api/manageLdshakeDesigns.php",
             content : {
-                task : 'undo',
-                id : LearningDesign.ldid
+                task : 'undoLdshakeDesign',
+                document_id : Loader.ldShakeInfo.document_id, //Identificador LdShake del diseño a cargar
+                sectoken: Loader.ldShakeInfo.sectoken //Token used to make sure it is the owner of the document
             },
             handleAs : "json",
             contentType : "application/json; charset=utf-8",
@@ -93,15 +176,50 @@ var Loader = {
         this.showLoadingDialog();
         dojo.xhrGet(bindArgs);
     },
+    
+    
     /**
      * Rehace el último cambio
      */
     redo : function() {
+        if (!Loader.ldShakeMode){
+            var bindArgs = {
+                url : "manager/manageDesigns.php",
+                content : {
+                    task : 'redo',
+                    id : LearningDesign.ldid
+                },
+                handleAs : "json",
+                contentType : "application/json; charset=utf-8",
+                load : function(data) {
+                    UndoManager.redone();
+                    Loader.gotcha(data);
+                    Loader.hideLoadingDialog();
+                },
+                error : function(error) {
+                    console.log(error);
+                    Loader.hideLoadingDialog();
+                    alert(i18n.get("loader.load.error"));
+                }
+            };
+            this.showLoadingDialog();
+            dojo.xhrGet(bindArgs);
+        }
+        else{
+            Loader.redoLdshakeDesign();
+        }
+    },
+    
+        /**
+     * Rehace el último cambio
+     */
+    redoLdshakeDesign : function() {
         var bindArgs = {
-            url : "manager/manageDesigns.php",
+            url : "ldshake/api/manageLdshakeDesigns.php",
             content : {
-                task : 'redo',
-                id : LearningDesign.ldid
+                task : 'redoLdshakeDesign',
+                document_id : Loader.ldShakeInfo.document_id, //Identificador LdShake del diseño a cargar
+                sectoken: Loader.ldShakeInfo.sectoken //Token used to make sure it is the owner of the document
             },
             handleAs : "json",
             contentType : "application/json; charset=utf-8",
@@ -119,20 +237,60 @@ var Loader = {
         this.showLoadingDialog();
         dojo.xhrGet(bindArgs);
     },
+    
+    
     /**
      * Guarda un diseño del usuario
      * @param lastActions Últimas acciones realizadas por el usuario
      */
     save : function(lastActions) {
+        if (!Loader.ldShakeMode){
+            this.lastActions = lastActions;
+            if(LearningDesign.ldid.length > 0) {
+                DesignInstance.data.instanceid = LearningFlow.instanceid;
+                var bindArgs = {
+                    url : "manager/manageDesigns.php",
+                    handleAs : "json",
+                    content : {
+                        task : 'save',
+                        id : LearningDesign.ldid,
+                        design : JSON.encode(LearningDesign.data),
+                        instance : JSON.encode(DesignInstance.data),
+                        todoDesign : JSON.encode(ClipManager.getTodo()),
+                        todoInstance : "",
+                        actions : lastActions
+                    },
+                    load : function(data) {
+                        Loader.savedOk(data);
+                    },
+                    error : function(error) {
+                        Loader.savedBad(error);
+                    }
+                };
+
+                dojo.xhrPost(bindArgs);
+                this.setSaveState("saving");
+            }
+        }else{
+           Loader.saveLdshakeDesign(lastActions);
+        }
+    },
+    
+     /**
+     * Guarda un diseño del usuario
+     * @param lastActions Últimas acciones realizadas por el usuario
+     */
+    saveLdshakeDesign : function(lastActions) {
         this.lastActions = lastActions;
         if(LearningDesign.ldid.length > 0) {
             DesignInstance.data.instanceid = LearningFlow.instanceid;
             var bindArgs = {
-                url : "manager/manageDesigns.php",
+                url : "ldshake/api/manageLdshakeDesigns.php",
                 handleAs : "json",
                 content : {
-                    task : 'save',
-                    id : LearningDesign.ldid,
+                    task : 'saveLdshakeDesign',
+                    document_id : Loader.ldShakeInfo.document_id, //Identificador LdShake del diseño a cargar
+                    sectoken: Loader.ldShakeInfo.sectoken, //Token used to make sure it is the owner of the document
                     design : JSON.encode(LearningDesign.data),
                     instance : JSON.encode(DesignInstance.data),
                     todoDesign : JSON.encode(ClipManager.getTodo()),
@@ -151,6 +309,7 @@ var Loader = {
             this.setSaveState("saving");
         }
     },
+    
     /**
      * Acciones a realizar si el diseño se ha guardado correctamente
      * @param data Información sobre el resultado de la operación de almacenamiento
@@ -320,14 +479,20 @@ var Loader = {
             //Resetar datos
             LearningDesign.clear();
             ClipManager.clear();
-            //Recargar la página de la que procede
-            if(window.opener) {
-                window.opener.location.reload();
-            } else {
-                window.location.assign("index.php");
+            
+            if (!Loader.ldShakeMode){
+                //Recargar la página de la que procede
+                if(window.opener) {
+                    window.opener.location.reload();
+                } else {
+                    window.location.assign("index.php");
+                }
+                //Cerramos el diseño
+                window.close();
+            }else{
+                window.location.assign("blank.php");
             }
-            //Cerramos el diseño
-            window.close();
+            
         } else {
             this.cast(data.design);
             this.cast(data.instance);

@@ -172,5 +172,5 @@ var GroupsLayer = {
             }
             this.participantFlow.participants[p].links.push(link);
         } 
-    },
+    }
 };

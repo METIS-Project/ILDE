@@ -257,7 +257,7 @@ class lmsGluePS implements lms {
         return false;
     }
 
-    function createDeploy($url, $deployTitle, $fileUrl, $vleSelect, $teacherNames, $themeSelect, $user, $pass) {
+    function createDeploy($url, $deployTitle, $fileUrl, $vleSelect, $courseSelect, $teacherNames, $themeSelect, $user, $pass) {
         //cURL handler creation
         $ch = curl_init();
         
@@ -275,7 +275,7 @@ class lmsGluePS implements lms {
 
         $fullPath = $cwd . "/../../" . $fileUrl;
 
-        $data = array('NewDeployTitleName' => $deployTitle, 'archiveWic' => '@' . $fullPath, 'vleSelect' => $vleSelect,
+        $data = array('NewDeployTitleName' => $deployTitle, 'archiveWic' => '@' . $fullPath, 'vleSelect' => $vleSelect, 'courseSelect' => $courseSelect,
             'newDeployTextBoxTeacher' => $teacherNames, 'instType' => $this->instType, 'temaSelect' => $themeSelect);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 

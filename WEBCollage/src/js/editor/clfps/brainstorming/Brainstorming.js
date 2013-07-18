@@ -215,4 +215,27 @@ Brainstorming.prototype.createInitialInstances = function(){
     }
 };
 
+Brainstorming.prototype.getAvailableGroupPatterns = function(type, actid){   
+    
+    var availables = new Array();
+    //Sólo hay un grupo. No pueden aplicarse patrones de número de grupos
+    availables["gn"] = new Array();
+    //Los participantes pueden distribuirse de forma aleatoria
+    availables["pa"] = new Array("groupparticipantsdistributepattern");
+    
+    var factories = GroupPatternManager.patternFactories[type];
+    var patterns = new Array();
+    for (var i = 0; i < factories.length; i++){
+        if (availables[type].indexOf(factories[i].getId())!=-1){
+            patterns.push(factories[i]);
+        }
+    }   
+    return patterns;      
+};
+
+Brainstorming.prototype.canDeleteInstance = function(roleid, instanceId){
+    //Sólo hay una instancia en un único grupo y no puede ser borrada
+    return false;
+};
+
 Factory.registerFactory("brainstorming", Brainstorming, BrainstormingFactory);

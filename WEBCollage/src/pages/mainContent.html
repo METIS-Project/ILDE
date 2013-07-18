@@ -8,8 +8,6 @@
 			iconClass="dijitEditorIcon dijitEditorIconRedo" showLabel="false">
 			${common.redo}</div>
 		<span style="width: 500px;"></span>
-		<div dojoType="dijit.form.Button" id="toolbar.clip"
-			iconClass="clipOkIcon">${clip.label}</div>
 		<div dojoType="dijit.form.DropDownButton" id="toolbar.exportmenu"
 			iconClass="zipIcon">
 			<span></span>
@@ -32,6 +30,8 @@
 		<div dojoType="dijit.form.Button" id="toolbar.save"
 			iconClass="dijitEditorIcon dijitEditorIconSave" disabled="true">
 			${common.saved}</div>
+                <div dojoType="dijit.form.Button" id="toolbar.clip"
+			iconClass="clipOkIcon" style="position:absolute; right:0px;">${clip.label}</div>
 
 	</div>
 	<div id="MainWindowTabContainer" dojoType="dijit.layout.TabContainer"

@@ -6,8 +6,10 @@ var ClipRenderer = {
 	},
 
 	image : {
-		src : "images/alert.png",
-		emphasis : "images/alert_e.png"
+		//src : "images/alert.png",
+		//emphasis : "images/alert_e.png"
+                src : "images/icons/help.png",
+		emphasis : "images/icons/help_e.png"
 	},
 
 	paint : function(surface, animator, isGroup, group, position) {
@@ -58,7 +60,7 @@ var ClipRenderer = {
 		if(ClipDisplay.actionIsPending(link)) {
 			var element = dojo.byId(containerId).appendChild(document.createElement("img"));
 			dojo.addClass(element, "alertBlock");
-			dojo.attr(element, "src", "images/alert.png");
+			dojo.attr(element, "src", "images/icons/help.png");
 
 			MenuManager.registerThing(element, {
 				getItems : function(data) {

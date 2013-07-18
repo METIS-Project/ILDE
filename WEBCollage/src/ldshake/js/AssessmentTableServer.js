@@ -67,7 +67,7 @@ var AssessmentTableServer = {
         for (var i = 0; i < assessment.functions.length; i++) {
             var func = assessment.functions[i];
             if (func.subtype == "summative") {
-                text = "This assessment is used to grade students: <strong>'" + func.name + "'</strong>, " + func.description;
+                text = "This assessment is used to grade students: <strong>'" + "func.name" + "'</strong>, " + "func.description";
             } else {
                 activity = TableGeneratorServer.findActivity(func.link);
                 if (activity) {

@@ -2,7 +2,7 @@
 
 var RenameElementDialog = {
     dlgHandle : null,
-    tooltiopDialog : null,
+    tooltipDialog : null,
     titledComponent : null,
 
     init : function() {
@@ -29,10 +29,10 @@ var RenameElementDialog = {
                 RenameElementDialog.setTitle(formValues.title);
             },
             style : "position: absolute; top: 0px; left: 0px;",
-            content : content,
+            content : content/*,
             onMouseLeave : function() {
                 RenameElementDialog.tooltipDialog.destroy();
-            }
+            }*/
         });
 
         dojo.style(this.dlgHandle, {

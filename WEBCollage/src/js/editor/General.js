@@ -77,7 +77,7 @@ var General = {
         dojo.byId("LDTitleContent").innerHTML = LearningDesign.data.title;
         dojo.byId("LDPrerrequisitesContent").innerHTML = LearningDesign.data.prerrequisites.replace(/\n/g, "<br/>");
         this.generateLOTable();
-        this.updateAlerts();
+        //this.updateAlerts();
     },
 
     /**

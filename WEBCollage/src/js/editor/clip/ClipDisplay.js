@@ -49,11 +49,9 @@ var ClipDisplay = {
             x : event.clientX,
             y : event.clientY
         };
-        var x = 1;
+        /*var x = 1;
         var x = 2;
-        y = x;
-        
-        
+        y = x;*/
     },
     drag : function(event) {
         if(this.dragPoint) {
@@ -61,11 +59,13 @@ var ClipDisplay = {
             var dx = event.clientX - this.dragPoint.x;
             var dy = event.clientY - this.dragPoint.y;
 
-            var cx = dojo.style(this.clip, "left");
+            //var cx = dojo.style(this.clip, "left");
+            var cx = dojo.style(this.clip, "right").split("px")[0];
             var cy = dojo.style(this.clip, "top");
 
             dojo.style(this.clip, {
-                "left" : (cx + dx) + "px",
+                //"left" : (cx + dx) + "px",
+                "right" : (cx - dx) + "px",
                 "top" : Math.max(cy + dy, 0) + "px"
             });
 
@@ -111,7 +111,7 @@ var ClipDisplay = {
             dojo.animateProperty({
                 node : this.clip,
                 properties : {
-                    left : {
+                    right : {
                         start : from,
                         end : to,
                         unit : "px"

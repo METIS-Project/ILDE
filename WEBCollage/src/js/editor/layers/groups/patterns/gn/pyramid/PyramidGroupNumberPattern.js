@@ -10,12 +10,12 @@ var PyramidGroupNumberPatternFactory = {
   getDefinition: function() {
     return PyramidGroupNumberPattern;
   },
-  newPattern: function(actId) {
-    return new PyramidGroupNumberPattern(actId);
+  newPattern: function(actId, instanceId) {
+    return new PyramidGroupNumberPattern(actId, instanceId);
   }
 };
 
-var PyramidGroupNumberPattern = function(actId) {
+var PyramidGroupNumberPattern = function(actId, instanceId) {
   /**
    * Indicador de tipo
    */
@@ -34,6 +34,7 @@ var PyramidGroupNumberPattern = function(actId) {
    * Acto afectado por el patrón
    */
   this.actId = actId;
+  this.instanceid = instanceId;
   /**
    * Clfp en el que está el acto
    */

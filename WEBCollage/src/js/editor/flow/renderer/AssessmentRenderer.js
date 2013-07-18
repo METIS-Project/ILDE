@@ -226,11 +226,14 @@ var AssessmentFlowRenderer = {
          width : backgroundwidth,
          height : backgroundwidth,
          }).setFill(this.style.fill);*/
+        if (iconData!=null)
+        {
 
-        var image = fillgroup.createImage(iconData);
-        uiListener.registerActiveElement(image, {
-            id : assessment.id
-        });
+            var image = fillgroup.createImage(iconData);
+            uiListener.registerActiveElement(image, {
+                id : assessment.id
+            });
+        }
     },
     getAssessmentIconName : function(assessment) {
         var patterns = assessment.getPatterns();

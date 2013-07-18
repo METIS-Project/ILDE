@@ -100,7 +100,7 @@ var GroupsRenderer = {
                 onClick : function(data) {
                     GroupPaintManager.participantClicked(data);
                 },
-                data : data.participants[i],
+                data : data.participants[i]
             });
         }
 

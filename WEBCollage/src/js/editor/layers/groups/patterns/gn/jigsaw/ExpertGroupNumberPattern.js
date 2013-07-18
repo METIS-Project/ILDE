@@ -10,12 +10,12 @@ var ExpertGroupNumberPatternFactory = {
     getDefinition : function() {
         return ExpertGroupNumberPattern;
     },
-    newPattern : function(actId) {
-        return new ExpertGroupNumberPattern(actId);
+    newPattern : function(actId, instanceId) {
+        return new ExpertGroupNumberPattern(actId, instanceId);
     }
 };
 
-var ExpertGroupNumberPattern = function(actId) {
+var ExpertGroupNumberPattern = function(actId, instanceId) {
     /**
      * Indicador de tipo
      */
@@ -34,6 +34,7 @@ var ExpertGroupNumberPattern = function(actId) {
      * Acto afectado por el patrón
      */
     this.actId = actId;
+    this.instanceid = instanceId;
     /**
      * Clfp en el que está el acto
      */

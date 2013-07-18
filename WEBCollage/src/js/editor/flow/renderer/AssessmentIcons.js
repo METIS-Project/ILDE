@@ -118,15 +118,19 @@ AssessmentIcons = {
 
     getDataFixedWidth2: function(name, width, center) {
         var data = this[name];
-        var k = width / data.width;
-        return {
-            src: data.src,
-            emp: data.emp,
-            width: data.width * k,
-            height: data.height * k,
-            x: center.x - .5 * data.width * k,
-            y: center.y - .5 * data.height * k
-        };
+        if (data!=null)
+        {
+            var k = width / data.width;
+            return {
+                src: data.src,
+                emp: data.emp,
+                width: data.width * k,
+                height: data.height * k,
+                x: center.x - .5 * data.width * k,
+                y: center.y - .5 * data.height * k
+            };
+        }
+        return null;
     },
     
     getData: function(name, scale, center) {

@@ -33,7 +33,8 @@ var MainLearningFlowRenderer = {
         
         var how = {
             paintAssessment: dijit.byId("FlowOptionsShowAssessment").checked, //Indica si debe pintarse el flujo de evaluación
-            paintAlerts: true, //Indica si deben pintarse las alertas,
+            //paintAlerts: true, //Indica si deben pintarse las alertas,
+            paintAlerts: false, //We do not want to show the alerts by now
             paintParticipantFlow: dijit.byId("ShowParticipantFlow").checked, //Indica si debe pintarse el flujo de participantes
             currentDisplayInfo: LearningFlow.currentDisplayInfo
         };

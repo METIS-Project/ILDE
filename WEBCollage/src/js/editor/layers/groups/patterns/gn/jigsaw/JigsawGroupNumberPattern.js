@@ -10,12 +10,12 @@ var JigsawGroupNumberPatternFactory = {
     getDefinition : function() {
         return JigsawGroupNumberPattern;
     },
-    newPattern : function(actId) {
-        return new JigsawGroupNumberPattern(actId);
+    newPattern : function(actId, instanceId) {
+        return new JigsawGroupNumberPattern(actId, instanceId);
     }
 };
 
-var JigsawGroupNumberPattern = function(actId) {
+var JigsawGroupNumberPattern = function(actId, instanceId) {
     /**
      * Indicador de tipo
      */
@@ -34,6 +34,7 @@ var JigsawGroupNumberPattern = function(actId) {
      * Acto afectado por el patrón
      */
     this.actId = actId;
+    this.instanceid = instanceId;
     /**
      * Clfp en el que está el acto
      */
