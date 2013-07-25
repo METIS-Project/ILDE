@@ -54,6 +54,8 @@
                 <?php endforeach; ?>
 
             </ul>
+            <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></h3></a>
+            <br />
 
             <?php
 			if (is_array($tags)):

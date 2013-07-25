@@ -96,11 +96,11 @@
 				<?php endif; ?>
 				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
-					<?php if (!$item->locked): ?>
-					<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a>
-					<?php endif; ?>
 					<span class="lds_title_tags">
-						<a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
+       					<?php if (!$item->locked): ?>
+                            <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a>
+                        <?php endif; ?>
+                        <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
 					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
@@ -108,8 +108,8 @@
 					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
 					<?php endif; ?>
 					<span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+                    <div class="clearfloat"></div>
 				</div>
-				<div class="clearfloat"></div>
 			</li>
 			<?php else: ?>
 			<li class="lds_list_element">
@@ -122,9 +122,9 @@
 					</span>
 					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
 					<span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
-				</div>
-				<div class="clearfloat"></div>
-			</li>
+                    <div class="clearfloat"></div>
+                </div>
+            </li>
 			<?php endif; ?>
 			<?php endforeach; ?>
 		</ul>

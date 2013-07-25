@@ -33,6 +33,8 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
+lds_submit_click = false;
+
 function checkboxes ()
 {
 	$('#ldshakers_select_all').change (function ()
@@ -81,17 +83,22 @@ function createGroup ()
 	{
 		$(this).find('.errnote').slideUp('fast');
 		$form = $(this);
-		$.post (baseurl + "action/ldshakers/addgroup", {name: $('#new_group_name').val()}, function (data)
-		{
-			if (data == 'ok')
-			{
-				window.location.reload();
-			}
-			else
-			{
-				$form.find('.errnote').slideDown('fast');
-			}
-		});
+
+        if(!lds_submit_click) {
+            lds_submit_click = true;
+            $.post (baseurl + "action/ldshakers/addgroup", {name: $('#new_group_name').val()}, function (data)
+            {
+                if (data == 'ok')
+                {
+                    window.location.reload();
+                }
+                else
+                {
+                    $form.find('.errnote').slideDown('fast');
+                    lds_submit_click = false;
+                }
+            });
+        }
 		return false;
 	});
 }

@@ -163,8 +163,6 @@ $(document).ready(function()
         else {
             if(!lds_submit_click) {
             lds_submit_click = true;
-            //$(this).attr('disabled', 'disabled');
-            //$('input[name=new_lds_title]').attr('disabled','disabled');
             $.post (baseurl + "action/lds/clone", submitData, function(data) {
                 window.location = baseurl + 'pg/lds/vieweditor/' + data;
             });

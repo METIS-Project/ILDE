@@ -43,27 +43,26 @@ ini_set('memory_limit', '512M');
 
 $forcedEnv = $argv[1];
 $debug = $argv[2];
-
+//$forcedEnv = 'devel';
 
 if($debug == "true")
-	$debug = true;
+    $debug = true;
 else
-	$debug = false;
+    $debug = false;
 
 //Fool the thing and tell it I'm an admin
-global $is_admin;               
-$is_admin = true; 
+global $is_admin;
+$is_admin = true;
 
 require_once(__DIR__."/../../../../engine/start.php");
 require_once __DIR__.'/../../lds_contTools.php';
 
-//$dns = get_entities_from_metadata('notify', '2', 'object', 'LdS', 0, 1000);
 $dns = get_entities_from_metadata('sent', '0', 'object', 'DeferredNotification', 0, 1000);
 
 
 if (is_array($dns)) {
-	foreach ($dns as $dn) {
-		$send = true;
+    foreach ($dns as $dn) {
+        $send = true;
 
         /*
 		if($debug) {
@@ -73,49 +72,16 @@ if (is_array($dns)) {
 				$send = true;
 		}
         */
+        if(!($dn->time_created > (time() - 3600))) {
+            $dn->sent = 1;
+            $dn->save();
+            $send = false;
+        }
 
-		if ($send) {
-            /*
-            //Biologia: Notify everybody in the site :S
-            $vars['ldsTitle'] = $lds->title;
-            $vars['fromName'] = $_SESSION['user']->name;
-            $vars['ldsUrl'] = lds_viewTools::url_for($lds);
-            $vars['senderUrl'] = ldshakers_viewTools::urlFor($_SESSION['user'], 'user');
-            $body = elgg_view('emails/newlds',$vars);
+        if ($send) {
 
-            //Gets all the user IDs of the current user's friends:
-            $ldshakers = get_loggedin_user()->getFriends('', 10000, 0);
-            $ids = array ();
-            foreach ($ldshakers as $l) {
-                $dn = new DeferredNotification();
-                $dn->owner_guid = get_loggedin_userid();
-                $dn->access_id = 2;
-                $dn->write_access_id = 2;
-                $dn->receiver_guid = $l->guid;
-                $dn->sent = 0;
-                $dn->title = T("New LdS in LdShake: %1", $lds->title);
-                $dn->description = $body;
-                $dn->save();
-            }
-            */
             $users_guids = lds_contTools::getViewAccessUsers($dn->content_guid);
             $notification_list = lds_contTools::build_notification($dn, $users_guids);
-
-            /*
-            $vars = array();
-            $owner = get_user($lds->owner_guid);
-            $vars['ldsTitle'] = $lds->title;
-            $vars['fromName'] = $owner->name;
-            $vars['ldsUrl'] = lds_viewTools::url_for($lds);
-            $vars['senderUrl'] = ldshakers_viewTools::urlFor($owner, 'user');
-
-            $description = elgg_view('emails/newlds',$vars);
-            $title = T("New LdS in LdShake: %1", $lds->title);
-
-            $owner_guid = $lds->owner_guid;
-            */
-
-
 
             foreach ($notification_list as $nf) {
                 if($nf['recipient_guid'] != $nf['sender_guid']) {
@@ -126,7 +92,8 @@ if (is_array($dns)) {
                         $nf['recipient_guid'],
                         $nf['sender_guid'],
                         $nf['title'],
-                        $nf['body']
+                        $nf['body'],
+                        array('html' => $nf['html'])
                     );
 
                 }
@@ -134,10 +101,6 @@ if (is_array($dns)) {
 
             $dn->sent = 1;
             $dn->save();
-            /*
-            /$lds->notify = 3;
-            $lds->save();
-            */
         }
-	}
+    }
 }

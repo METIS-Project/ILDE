@@ -80,7 +80,7 @@ class Utils
 	public static function normalizeSpace ($string)
 	{
 		//Remove the firebug div fisr
-		$string = preg_replace('/<div.*_firebugConsole.*>\s*&nbsp;<\/div>/', '', $string);
+		//$string = preg_replace('/<div.*_firebugConsole.*>\s*&nbsp;<\/div>/', '', $string);
 		return trim(preg_replace('/\s+/', ' ', $string));
 	}
 	

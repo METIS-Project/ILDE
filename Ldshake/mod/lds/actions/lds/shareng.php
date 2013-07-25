@@ -130,4 +130,9 @@ if($lds->notify == '1') {
     $lds->save();
 }
 
-echo 'ok';
+$result = new StdClass();
+$result->result = "ok";
+$result->requestCompleted = true;
+
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($result);

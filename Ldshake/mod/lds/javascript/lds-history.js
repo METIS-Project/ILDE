@@ -52,7 +52,7 @@ var lightgreen = "rgb(208, 242, 208)";
  * Metrics constants
  */
 var revision_info_offset_y = 25;
-var revision_lines_offset = 200;
+var revision_lines_offset = 250;
 var revision_radius = 10;
 var revision_canvas_left = 0;
 var revision_canvas_top = 0;
@@ -166,15 +166,15 @@ $(document).ready(function()
 
 			//Draw the info container
 			ctx.moveTo(10.5, 100 * i + revision_info_offset_y + 0.5);
-			ctx.lineTo(140.5, 100 * i + revision_info_offset_y + 0.5);
-			ctx.quadraticCurveTo(150.5, 100 * i + revision_info_offset_y + 0.5, 150.5, 100 * i + revision_info_offset_y + 10.5);
-			ctx.lineTo(150.5, 100 * i + revision_info_offset_y + 40.5);
-			ctx.quadraticCurveTo(150.5, 100 * i + revision_info_offset_y + 50.5, 140.5, 100 * i + revision_info_offset_y + 50.5);
+			ctx.lineTo(180.5, 100 * i + revision_info_offset_y + 0.5);
+			ctx.quadraticCurveTo(190.5, 100 * i + revision_info_offset_y + 0.5, 190.5, 100 * i + revision_info_offset_y + 10.5);
+			ctx.lineTo(190.5, 100 * i + revision_info_offset_y + 40.5);
+			ctx.quadraticCurveTo(190.5, 100 * i + revision_info_offset_y + 50.5, 180.5, 100 * i + revision_info_offset_y + 50.5);
 			ctx.lineTo(10.5, 100 * i + revision_info_offset_y + 50.5);
 			ctx.quadraticCurveTo(0.5, 100 * i + revision_info_offset_y + 50.5, 0.5, 100 * i + revision_info_offset_y + 40.5);
 			ctx.lineTo(0.5, 100 * i + revision_info_offset_y + 10.5);
 			ctx.quadraticCurveTo(0.5, 100 * i + revision_info_offset_y + 0.5, 10.5, 100 * i + revision_info_offset_y + 0.5);
-			ctx.moveTo (150.5, 100 * i + 50.5);
+			ctx.moveTo (190.5, 100 * i + 50.5);
 			ctx.lineTo (revision_lines_offset + 70 * doc_list.length, 100 * i + 50.5);
 
 			ctx.closePath();
@@ -183,8 +183,9 @@ $(document).ready(function()
 			ctx.drawImage(document.getElementById('revision_avatar_' + rev_history[i].id), 10, 100 * i + revision_info_offset_y + 5);
 			
 			ctx.fillText("Revision " + rev_history[i].revision_number, 60, 100 * i + revision_info_offset_y + 17);  
-			ctx.fillText(rev_history[i].author, 60, 100 * i + revision_info_offset_y + 29);  
-			ctx.fillText(rev_history[i].date, 60, 100 * i + revision_info_offset_y + 41);  
+			ctx.fillText(rev_history[i].author, 60, 100 * i + revision_info_offset_y + 29);
+            var utc_date = new Date(rev_history[i].date*1000);
+			ctx.fillText(utc_date.toDateString()+' '+utc_date.toLocaleTimeString(), 60, 100 * i + revision_info_offset_y + 41);
 		}
 		
 		

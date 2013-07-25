@@ -215,6 +215,51 @@ function saveSharingOptions (callback)
 	}
 }
 
+function saveSharingOptionsNG (save_seq, callback)
+{
+    //If we've already saved the LdS, we save the sharing data
+    if ($('#lds_edit_guid').val() != '0')
+    {
+        var submitData =
+        {
+            guid: $('#lds_edit_guid').val(),
+            editors: getArrayIds(friends['editors']).join(','),
+            viewers: getArrayIds(friends['viewers']).join(','),
+            allCanView: (allCanView) ? '1' : '0'
+        };
+
+        $.ajax({
+            type: "POST",
+            url: baseurl + "action/lds/shareng",
+            data: submitData,
+            dataType: "json",
+            timeout: ajax_timeout * 1000,
+            success: function (data) {
+                if(!data.requestCompleted) {
+                    save_seq[save_seq.current] = false;
+                    save_seq.retry_count++;
+                    save_seq.save(save_seq);
+                    return false;
+                }
+
+                save_seq[save_seq.current] = true;
+                save_seq.retry_count=0;
+                save_seq.save(save_seq);
+            },
+            error: function() {
+                save_seq[save_seq.current] = false;
+                save_seq.retry_count++;
+                save_seq.save(save_seq);
+            }
+        });
+    }
+    else
+    {
+        //We don't store the sharing options. We'll postpone the job for the first "save".
+        sharingOptionsPendingToSave = true;
+    }
+}
+
 function initSharingOptions ()
 {
 	initContactList('editors');

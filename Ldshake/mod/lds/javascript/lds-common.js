@@ -70,9 +70,10 @@ function tooltips ()
 						}
 						else
 						{
+                            var halfWidth = $(id).outerWidth()/2;
 							$(id)
-							.css('top',$caller.offset().top + 25)
-							.css('left',$caller.offset().left)
+							.css('top',$caller.offset().top + $caller.outerHeight())
+							.css('left',$caller.offset().left + $caller.outerWidth()/2 - halfWidth)
 							.fadeIn('fast');
 						}
 					}, 200);
@@ -106,7 +107,22 @@ function tooltips ()
 
 $(document).ready(function()
 {
-	$('#lds_delete_button').click (function ()
+    $("span.utc-time").each(function(){
+        var $span=$(this);
+        var time=parseInt($span.text());
+        var span_date = new Date(time*1000);
+
+        $span.removeClass("utc-time");
+
+        /*if(span_date.toLocaleFormat)
+            $span.text(span_date.toLocaleFormat("%c"));
+        else
+            $span.text(span_date.toLocaleString());
+            */
+        $span.text(span_date.toDateString()+' '+span_date.toLocaleTimeString());
+    });
+
+    $('#lds_delete_button').click (function ()
 	{
 		if (confirm ("Are you sure you want to delete this LdS?\n\n"))
 		{

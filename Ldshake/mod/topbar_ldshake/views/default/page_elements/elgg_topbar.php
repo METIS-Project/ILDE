@@ -79,7 +79,6 @@ if (isloggedin()) :
                 <div id="new_menu_author" class="menu level2">
                     <ul>
                         <!--<li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>-->
-                        <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/openglm"><?php echo T("OpenGLM (upload)") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cadmos"><?php echo T("CADMOS (upload)") ?></a></li>
@@ -94,7 +93,7 @@ if (isloggedin()) :
                 </div>
                 <div id="new_menu_conceptualize" class="menu level2">
                     <ul>
-                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("New Rich Text") ?></a></li>
+                        <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/design_pattern"><?php echo T("Design Pattern") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/MDN"><?php echo T("Design Narrative") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/PC"><?php echo T("Persona Card") ?></a></li>
@@ -102,6 +101,7 @@ if (isloggedin()) :
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/HE"><?php echo T("Heuristic Evaluation") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cld"><?php echo T("CompendiumLD (upload)") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Image (upload)") ?></a></li>
+                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("For other conceptualizations") ?></a></li>
                     </ul>
                 </div>
 
@@ -114,13 +114,11 @@ if (isloggedin()) :
 					<input type="text" size="21" name="q" placeholder="<?php echo T('Search %1', 'LdS')?>" id="ldshake_topbar_search_input" />
 				</form>
 			</div>
-			<div id="ldshake_topbar_avatar">
-				<a href="<?php echo $vars['url']. 'pg/ldshakers/' . $_SESSION['user']->username ?>/"><img class="user_mini_avatar" src="<?php echo $_SESSION['user']->getIcon('tiny'); ?>" alt="<?php echo $_SESSION['user']->name ?>"/></a>
-			</div>
-			
-			<div style="float:left;">
+
+			<div style="float:right;">
 				<a href="#" id="ldshake_topbar_menu_switch">
-					<span id="ldshake_topbar_user_options"><?php echo get_loggedin_user()->name; ?></span>
+                    <?php $name = get_loggedin_user()->name; ?>
+					<span id="ldshake_topbar_user_options"><?php echo (strlen($name) > 15 ? substr($name,0,13).'...' : $name); ?></span>
 				</a>
 				
 				<ul id="ldshake_topbar_user_menu">
@@ -131,7 +129,11 @@ if (isloggedin()) :
 					<li><a href="<?php echo $vars['url']; ?>action/logout"><?php echo T("Log out") ?></a></li>
 				</ul>
 			</div>
-		</div>
+            <div id="ldshake_topbar_avatar">
+                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $_SESSION['user']->username ?>/"><img class="user_mini_avatar" src="<?php echo $_SESSION['user']->getIcon('tiny'); ?>" alt="<?php echo $_SESSION['user']->name ?>"/></a>
+            </div>
+
+        </div>
 	</div>
 </div>
 

@@ -78,7 +78,7 @@ END;
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?hash=<?php printf("%u", crc32(elgg_view("css")));?>" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>vendors/jquery/css/ui-lightness/jquery-ui-1.8.6.custom.css" type="text/css" />
-	<link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />
+    <link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />
 	
 <?php 
 

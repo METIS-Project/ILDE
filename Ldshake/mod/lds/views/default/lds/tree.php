@@ -47,6 +47,7 @@
 <div class="tree">
 </div>
 <script type="text/javascript">
-    var d3_data = <?php echo $tree;?>
+    var d3_data = <?php echo $tree;?>;
+    var lds_guid = <?php echo $lds->guid;?>;
 </script>
 </div>

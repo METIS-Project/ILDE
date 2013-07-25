@@ -56,6 +56,7 @@
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
+        <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
         <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 <div id="lds_view_tab_container" style="width:953px;" class="scrollable">
@@ -154,6 +155,7 @@
 <div id="shade"></div>
 
 <?php include ('single_share_form.php') ?>
+<?php include ('clonelds_form.php') ?>
 
 <script type="text/javascript">
 	var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;

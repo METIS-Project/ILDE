@@ -219,6 +219,7 @@ if ( !CKEDITOR.env )
 		 * if ( CKEDITOR.env.isCompatible )
 		 *     alert( "Your browser is pretty cool!" );
 		 */
+        mobile = 0;
 		env.isCompatible =
 			!env.mobile && (
 			( env.ie && version >= 6 ) ||

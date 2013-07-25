@@ -45,7 +45,7 @@
 			<?php if ($item->locked): ?>
 				<div>
 					<?php $fstword = explode(' ',$item->locked_by->name); $fstword = $fstword[0]; ?>
-					<?php echo T("%1 is editing.") ?>
+					<?php echo T("%1 is editing.", $item->locked_by->name) ?>
 				</div>
 			<?php else: ?>
 				<?php if ($item->lds->canEdit() || $item->lds->owner_guid == get_loggedin_userid()): ?>

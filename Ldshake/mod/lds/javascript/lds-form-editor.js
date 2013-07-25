@@ -47,16 +47,20 @@ $(document).ready(function() {
     },false);
 
     $("#lds_editor_iframe").attr("src", document_iframe_url);
-    //$("#lds_editor_iframe").css("display", "block");
 });
 
 //Controls the time the user has been idle. Might close the form i order to let other users edit the LdS
 var activity;
 var first_save;
+var saving_started = false;
 var hash = '0';
 var timer = null;
 var ping_interval = 30;
 var edit_timeout = 60;
+var ajax_retry_max = 3;
+
+var saving_started = false;
+var ajax_timeout = 30;
 
 //Saves the current document tab, the one that we are editing
 var currentTab = 0;
@@ -158,10 +162,112 @@ function generateTagList (source)
 	$('#lds_edit_tags_list').html(html);
 }
 
-function ajax_submit (redirect)
+function save_error() {
+    $('#lds_edit_buttons').removeClass('busy');
+    saving_started = false;
+    alert("There is a network error, check your connection and try again!");
+}
+
+function save_lds(save_seq, params) {
+    if(!save_seq) {
+        if(saving_started)
+            return false;
+
+        saving_started = true;
+        $('#lds_edit_buttons').addClass('busy');
+        save_seq = new Object();
+        save_seq.lds = false;
+        save_seq.params = params;
+        save_seq.share = false;
+        save_seq.retry_count = 0;
+        save_seq.stop = false;
+        save_seq.save = arguments.callee;
+        save_seq.cancel = function() {
+            $('#lds_edit_buttons').removeClass('busy');
+            saving_started = false;
+            if(save_seq.timer)
+                clearTimeout(save_seq.timer);
+        }
+        save_seq.timer = null;
+    } else {
+        params = save_seq.params;
+    }
+
+    if(save_seq.timer)
+        clearTimeout(save_seq.timer);
+
+    save_seq.timer = setTimeout ('save_error()', 1000 * ajax_timeout*1.4);
+
+    if( save_seq.stop
+        || save_seq.retry_count > ajax_retry_max) {
+        $('#lds_edit_buttons').removeClass('busy');
+        saving_started = false;
+        if(save_seq.timer) {
+            clearTimeout(save_seq.timer);
+            save_seq.timer = null;
+        }
+        alert("There is a network error, check your connection and try again!");
+        return true;
+    }
+
+    if(!save_seq.upload && upload) {
+        save_seq.current = 'upload';
+        upload_file(save_seq);
+        return true;
+    }
+
+    if(!save_seq.lds) {
+        save_seq.current = 'lds';
+        ajax_submit(save_seq, params.redirect);
+        return true;
+    }
+
+    if(!save_seq.share && sharingOptionsPendingToSave) {
+        save_seq.current = 'share';
+        saveSharingOptionsNG(save_seq);
+        return true;
+    }
+
+    if( save_seq.lds
+        &&(save_seq.share || !sharingOptionsPendingToSave)
+        &&(save_seq.upload || !upload)
+        ) {
+        if(save_seq.timer) {
+            clearTimeout(save_seq.timer);
+            save_seq.timer = null;
+        }
+
+        if(params.redirect) {
+            window.onbeforeunload = null;
+            window.location = $('#lds_edit_referer').val();
+        } else {
+            $('#lds_edit_buttons').removeClass('busy');
+            saving_started = false;
+        }
+        return true;
+    }
+}
+
+function upload_file(save_seq) {
+    if(!$("#file_input").val().length && $('#lds_edit_guid').val() == "0") {
+        $("#form_file_input_empty").show();
+        save_seq.cancel();
+        return false;
+    }
+
+    $("#upload_result").unbind('load');
+    $("#upload_result").load(function() {
+        editor_id = $("#upload_result").contents().find("body").text();
+        save_seq[save_seq.current] = true;
+        save_seq.retry_count=0;
+        save_seq.save(save_seq);
+    });
+    $("#file_upload_form").submit();
+    return true;
+}
+
+function ajax_submit (save_seq, redirect)
 {
-	$('#lds_edit_buttons').addClass('busy');
-	
 	//Put the current editor data in the array before sending it
 	//documents[currentTab].body = editor.getData();
 	var submitData = null;
@@ -169,8 +275,9 @@ function ajax_submit (redirect)
     var goto_url = $('#lds_edit_referer').val();
     goto_url = baseurl + 'pg/lds';
 
+    /*
     if(upload) {
-        if(!$("#file_input").val().length) {
+        if(!$("#file_input").val().length && $('#lds_edit_guid').val() == "0") {
             $("#form_file_input_empty").show();
             $("#lds_edit_buttons").removeClass('busy');
             return false;
@@ -187,6 +294,7 @@ function ajax_submit (redirect)
             return true;
         }
     }
+    */
 
     if(editorType == 'gluepsrest')
     {
@@ -278,70 +386,92 @@ function ajax_submit (redirect)
                 document_url: document_url
             };
         }
-
-
 	}
-	
-	$.post (baseurl + save_url, submitData, function (data)
-	{
-		if (redirect == false)
-		{
-			$('#lds_edit_buttons').removeClass('busy');
-			
-			//Assign all the returning guids to the documents
-			var returnData = $.parseJSON (data);
-	
-			//First, the main LdS guid:
-			$('#lds_edit_guid').val(returnData.LdS);
-			
-			//Then the revision created
-			$('#lds_edit_revision').val(returnData.revision);
 
-            //Then all the documents
-            for (var i = 0; i < returnData.docs.length; i++)
+    submitData.lds_recovery = lds_recovery;
+
+    $.ajax({
+        type: "POST",
+        url: baseurl + save_url,
+        data: submitData,
+        dataType: "json",
+        success: function (returnData) {
+            if (redirect == false)
             {
-                documents[i].guid = returnData.docs[i].id;
-                //We only modify from 0 to 1 (not the other way round)
-                if (documents[i].modified == '0')
-                    documents[i].modified = returnData.docs[i].modified;
+                if(!returnData.requestCompleted) {
+                    save_seq[save_seq.current] = false;
+                    save_seq.retry_count++;
+                    save_seq.save(save_seq);
+                    return false;
+                }
+
+                //First, the main LdS guid:
+                $('#lds_edit_guid').val(returnData.LdS);
+
+                //Then the revision created
+                $('#lds_edit_revision').val(returnData.revision);
+
+                //Then all the documents
+                for (var i = 0; i < returnData.docs.length; i++)
+                {
+                    documents[i].guid = returnData.docs[i].id;
+                    //We only modify from 0 to 1 (not the other way round)
+                    if (documents[i].modified == '0')
+                        documents[i].modified = returnData.docs[i].modified;
+                }
+
+                if(first_save)
+                {
+                    ping_editing();
+                    first_save = false;
+                }
+
+                /*
+                if (sharingOptionsPendingToSave)
+                    saveSharingOptions ();
+                    */
             }
+            else
+            {
+                $('#lds_edit_guid').val(returnData.LdS);
 
-			//Now we save the sharing options
-			if(first_save)
-			{
-				ping_editing();
-				first_save = false;
-			}
-			
-			if (sharingOptionsPendingToSave)
-				saveSharingOptions ();
-		}
-		else
-		{
-			//Save the sharing options and then leave
-			if (sharingOptionsPendingToSave)
-			{
-				//Assign all the returning guids to the documents
-				var returnData = $.parseJSON (data);
+                /*
+                //Save the sharing options and then leave
+                if (sharingOptionsPendingToSave)
+                {
+                    //Assign all the returning guids to the documents
+                    var returnData = $.parseJSON (data);
 
-				//First, the main LdS guid:
-				$('#lds_edit_guid').val(returnData.LdS);
+                    //First, the main LdS guid:
+                    $('#lds_edit_guid').val(returnData.LdS);
 
-				saveSharingOptions (function ()
-				{
-					//window.location = $('#lds_edit_referer').val();
+                    saveSharingOptions (function ()
+                    {
+                        //window.location = $('#lds_edit_referer').val();
+                        window.onbeforeunload = null;
+                        window.location = goto_url;
+                    });
+                }
+                else
+                {
                     window.onbeforeunload = null;
+                    //window.location = $('#lds_edit_referer').val();
                     window.location = goto_url;
-				});
-			}
-			else
-			{
-                window.onbeforeunload = null;
-				//window.location = $('#lds_edit_referer').val();
-                window.location = goto_url;
-			}
-		}
-	});
+                }
+                */
+            }
+            save_seq[save_seq.current] = true;
+            save_seq.retry_count=0;
+            save_seq.save(save_seq);
+        },
+
+        timeout: ajax_timeout * 1000,
+        error: function() {
+            save_seq[save_seq.current] = false;
+            save_seq.retry_count++;
+            save_seq.save(save_seq);
+        }
+    });
 }
 
 function initSliders ()
@@ -549,7 +679,6 @@ function initCKED ()
 function resizeCK ()
 {
     var wHeight = $(window).height() - $('#lds_edit_contents').offset().top - 50;
-    console.log(wHeight);
     wHeight = Math.max (wHeight, 300);
     editor.resize(null,wHeight);
 }
@@ -697,8 +826,9 @@ function tabs()
 
         if (tabTitle != null && !error)
         {
+            var doc_recovery = Math.floor((Math.random()*100000000000000000)+1);
             $('#lds_edit_tabs li.lds_tab:last').after ('<li class="lds_tab"><span class="lds_tab_title">' + tabTitle + '</span> <span class="lds_tab_options">▲</span></li>');
-            documents.push ({guid:'0',title:tabTitle,body:'',modified:'0'});
+            documents.push ({guid:'0',title:tabTitle,body:'',modified:'0',doc_recovery:doc_recovery});
 
             //First, get the editor data and put it into the array.
             documents[currentTab].body = editor.getData();
@@ -811,6 +941,12 @@ function inaction_trigger ()
 
 $(document).ready(function()
 {
+    lds_recovery = Math.floor((Math.random()*100000000000000000)+1);
+    for(var i=0; i<documents.length;i++) {
+        if(documents[i].guid == "0")
+            documents[i].doc_recovery = Math.floor((Math.random()*100000000000000000)+1);
+    }
+
     resizeEditorFrame();
 	top.window.onclick = active;
 	top.window.onkeypress = active;
@@ -856,17 +992,17 @@ $(document).ready(function()
        editor_id = 0;
     });
 
-	//Save action
-	$('#lds_edit_save').click (function () {
-		ajax_submit (false);
-		return false;
-	});
-	
-	//Save and exit action
-	$('#lds_edit_save_exit_editor').click (function () {
-		ajax_submit (true);
-		return false;
-	});
+    //Save action
+    $('#lds_edit_save').click (function () {
+        save_lds (null,{redirect: false});
+        return false;
+    });
+
+    //Save and exit action
+    $('#lds_edit_save_exit_editor').click (function () {
+        save_lds (null,{redirect: true});
+        return false;
+    });
 	
 	//Save shortcut: Ctrl+S
 	$(document).keyup(function (e)

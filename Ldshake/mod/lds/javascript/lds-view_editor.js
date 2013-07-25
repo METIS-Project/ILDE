@@ -35,26 +35,60 @@
 
 $(document).ready(function()
 {
+    document_resized_once = 0;
 	function resizeViewport () {
 		var top = $('#payload').offset().top;
-		var height = $(window).height();
+        var height = image ? $(document).height() : $(window).height();
 		var commentHeight = $('#comment_switcher').outerHeight();
-		
-		var h = Math.max(400, height - top - commentHeight);
-		
-		if(iseXe) {
-			$('#payload').height(h);
+
+        var lastItemBottom = $('#comment_switcher').offset().top + commentHeight;
+
+		var h = Math.max(400, height - top - commentHeight + document_resized_once*commentHeight);
+		if(!image || (image && lastItemBottom < height)) {
+            $('#payload').height(h);
             $('#the_lds').height(h-2);
             $('#internal_iviewer').width($('#payload').width()-2);
             $('#the_lds').width($('#payload').width()-2);
-
+            if(image) document_resized_once = 1;
         }
 	}
 	
 	resizeViewport();
 	
 	$(window).resize(resizeViewport);
-	
+    $('#image_document_view').load(resizeViewport);
+    $('#svg_document_view').load(resizeViewport);
+
+    $('#clonelds_submit').click(function (){
+        var submitData =
+        {
+            guid: $("input#lds_edit_guid").val(),
+            title: $('input[name=new_lds_title]').val()
+        };
+
+        if(submitData.title.length == 0)
+            $('#clonelds_submit_incomplete').show();
+        else {
+            if(!lds_submit_click) {
+                lds_submit_click = true;
+                $.post (baseurl + "action/lds/clone", submitData, function(data) {
+                    window.location = baseurl + 'pg/lds/vieweditor/' + data;
+                });
+            }
+        }
+    });
+
+    $('#duplicate_design').click(function (event) {
+        $('#clonelds_popup').fadeToggle(200);
+        $('input[name=new_lds_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#clonelds_submit').click();
+                }
+            })
+            .focus();
+    });
+
 	$('#comment_switcher a').click (function () {
 		$('#lds_info_wrapper').show ();
 	});

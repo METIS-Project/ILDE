@@ -41,9 +41,14 @@ require_once __DIR__.'/../../lds_contTools.php';
 //Is the LdS new?
 $isNew = false;
 
+$lds_recovery = get_input('lds_recovery', "0");
+
 //The object we'll return (jsonencoded) to the form.
 $resultIds = new stdClass();
 $resultIds->docs = array ();
+
+if(get_input('guid') <= 0 && $recovered_lds = get_entities_from_metadata("lds_recovery", $lds_recovery, 'object', 'LdS', get_loggedin_userid(), 1))
+    set_input('guid', $recovered_lds[0]->guid);
 
 //We first create the LDS (or update it)
 if (get_input('guid') > 0)
@@ -55,6 +60,7 @@ else
 {
 	//We're creating it from scratch. Construct a new obj.
 	$lds = new LdSObject();
+    $lds->lds_recovery = $lds_recovery;
 	$lds->owner_guid = get_loggedin_userid();
 
     $editor_types = explode(',', get_input('editor_type'));
@@ -88,7 +94,7 @@ foreach ($tagFields as $field)
 }
 
 $lds->save();
-lds_contTools::markLdSAsViewed ($lds->guid);
+//lds_contTools::markLdSAsViewed ($lds->guid);
 $resultIds->LdS = $lds->guid;
 
 //We now determine if we already saved in the same edition session or not, in order to create a new revision.
@@ -96,6 +102,8 @@ if (get_input('revision') == 0)
 {
 	//We save for the first time in this edition session. So we create a revision.
 	create_annotation($lds->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+} else {
+    $lds->lds_recovery = 0;
 }
 //We get the revision id to send it back to the form
 $revision = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
@@ -107,11 +115,34 @@ $resultIds->revision = $revision->id;
 
 $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
 
+$recovered_documents = array();
+if (is_array($_POST['documents']))
+{
+    foreach ($_POST['documents'] as $doc) {
+        if((int)$doc['guid'] == 0) {
+            if($recovered_document = get_entities_from_metadata_multi(
+                array(
+                    'lds_guid'=>$lds->guid,
+                    'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1)) {
+                //$recovered_documents = array_merge($recovered_documents, $recovered_document);
+                $recovered_documents[$doc['doc_recovery']]=$recovered_document[0]->guid;
+            }
+        }
+    }
+}
+
 //Here we have the document ids of the LDS.
 $docIds = array();
 if (is_array($documents))
 	foreach ($documents as $doc)
 		$docIds[] = $doc->guid;
+/*
+if (is_array($recovered_documents))
+    foreach ($recovered_documents as $doc)
+        $docIds[] = $doc->guid;
+
+$docIds = array_unique($docIds);
+*/
 
 //And now we save each document
 if (is_array($_POST['documents']))
@@ -119,10 +150,19 @@ if (is_array($_POST['documents']))
 	foreach ($_POST['documents'] as $doc)
 	{
 		//The submitted doc exists in the db
-		if (in_array($doc['guid'], $docIds))
+		if (in_array($doc['guid'], $docIds) || isset($recovered_documents[$doc['doc_recovery']]))
 		{
 			//Edit
-			$docObj = get_entity($doc['guid']);
+            if(isset($recovered_documents[$doc['doc_recovery']])){
+                $docs_recovered = get_entities_from_metadata_multi(
+                    array(
+                        'lds_guid'=>$lds->guid,
+                        'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1);
+                $docObj = $docs_recovered[0];
+
+            } else {
+                $docObj = get_entity($doc['guid']);
+            }
 			
 			//First we check if we modified the body of the document
 			if ($docObj->description != Utils::normalizeSpace($doc['body']) || $docObj->title!= trim($doc['title']))
@@ -149,6 +189,7 @@ if (is_array($_POST['documents']))
 		{
 			//Create
 			$docObj = new DocumentObject($lds->guid);
+            $docObj->doc_recovery = $doc['doc_recovery'];
 			$docObj->title = $doc['title']; 
 			$docObj->description = Utils::normalizeSpace($doc['body']);; //We put it in ths desciption in order to use the objects_entity table of elgg db
 			$docObj->lds_revision_id = $revision->id;
@@ -158,7 +199,7 @@ if (is_array($_POST['documents']))
 		}
 		
 		//Remove the item from docIds (marking it as "done")
-		unset($docIds[array_search($doc['guid'], $docIds)]);
+		unset($docIds[array_search($docObj->guid, $docIds)]);
 	}
 	
 	//For the rest of the docIds, we'll disable them (if they were in the array it means that ths user has removed them in the form)
@@ -182,36 +223,13 @@ if (is_array($_POST['documents']))
 	}
 }
 
-/*
 if ($isNew) {
-	//Biologia: Notify everybody in the site :S
-	$vars['ldsTitle'] = $lds->title;
-	$vars['fromName'] = $_SESSION['user']->name;
-	$vars['ldsUrl'] = lds_viewTools::url_for($lds);
-	$vars['senderUrl'] = ldshakers_viewTools::urlFor($_SESSION['user'], 'user');				
-	$body = elgg_view('emails/newlds',$vars);
-	
-	//Gets all the user IDs of the current user's friends:
-	$ldshakers = get_loggedin_user()->getFriends('', 10000, 0);
-	$ids = array ();
-	foreach ($ldshakers as $l) {
-		$ids[] = $l->guid;
-	}
-	$ids = array_unique($ids);
-	
-	notify_user (
-		$ids, 
-		$_SESSION['user']->getGUID(), 
-		T("New LdS in LdShake: %1", $lds->title), 
-		$body
-	);
-}
-*/
-
-if ($isNew) {
-
     $lds->notify = 1;
     $lds->save();
 }
 
+$resultIds->requestCompleted = true;
+
+header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultIds);
+

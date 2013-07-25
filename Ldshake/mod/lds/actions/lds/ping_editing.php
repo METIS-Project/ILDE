@@ -57,6 +57,6 @@ else
 	$lds->editing_by = null;
 	$lds->save_ktu();
 }
-lds_contTools::markLdSAsViewed ($lds->guid);
+//lds_contTools::markLdSAsViewed ($lds->guid);
 
 echo "ok";

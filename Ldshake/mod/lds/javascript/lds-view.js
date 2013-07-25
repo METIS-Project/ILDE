@@ -55,6 +55,37 @@ $(document).ready(function()
     $('#the_lds').load(resizeViewport);
     $(window).resize(resizeViewport);
 
+
+    $('#clonelds_submit').click(function (){
+        var submitData =
+        {
+            guid: $("input#lds_edit_guid").val(),
+            title: $('input[name=new_lds_title]').val()
+        };
+
+        if(submitData.title.length == 0)
+            $('#clonelds_submit_incomplete').show();
+        else {
+            if(!lds_submit_click) {
+                lds_submit_click = true;
+                $.post (baseurl + "action/lds/clone", submitData, function(data) {
+                    window.location = baseurl + 'pg/lds/vieweditor/' + data;
+                });
+            }
+        }
+    });
+
+    $('#duplicate_design').click(function (event) {
+        $('#clonelds_popup').fadeToggle(200);
+        $('input[name=new_lds_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    $('#clonelds_submit').click();
+                }
+            })
+            .focus();
+    });
+
 	$('#lds_action_publish,#lds_action_republish').click(function (){
 		$('.publishbutton').css('visibility','hidden');
 		$('.lds_loading').show();

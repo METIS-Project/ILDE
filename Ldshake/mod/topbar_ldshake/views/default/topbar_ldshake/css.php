@@ -3,12 +3,13 @@
 	/*background: #002E02;*/
 	background: url("<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/bg-header.png") repeat-x scroll left top #002E02;
 	font-size: 13px;
+    min-width: 997px;
 }
 
 #ldshake_topbar_wrapper {
 	margin: 0 auto;
-	width: 997px;
 	padding: 3px 0;
+    width: 997px;
 }
 
 #ldshake_topbar_logo {
@@ -25,12 +26,13 @@
 
 #ldshake_topbar_container_left {
 	float: left;
-	width: 580px;
+	width: 560px;
 	position: relative;
 }
 
 #ldshake_topbar_container_right {
 	float: right;
+    width: 413px;
 }
 
 #ldshake_topbar #toolbarlinks #toolbar_options {
@@ -54,7 +56,7 @@
 
 #ldshake_topbar_avatar {
 	margin: 3px 10px 0 0;
-	float: left;
+	float: right;
 }
 
 #ldshake_topbar_avatar img {
@@ -64,10 +66,10 @@
 
 #ldshake_topbar_user_options {
 	display: block;
-	margin: 9px 5px 0 0;
+	margin: 9px 0px 0 0;
 	padding-right: 15px;
 	background: url("<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/down-arrow.png") no-repeat scroll right 7px;
-	max-width: 150px;
+	max-width: 120px;
 	overflow: hidden;
 	white-space: nowrap;
 	float: left;
@@ -105,7 +107,7 @@
 
 #ldshake_topbar_serach {
 	float: left;
-	margin: 4px 35px 0 0;
+	margin: 4px 0px 0 0;
 }
 
 #ldshake_topbar_search_input {

@@ -53,6 +53,7 @@
 	background-color: #eee;
 	border-bottom: 1px solid #ccc;
 	height: 22px;
+    overflow: hidden;
 }
 
 #my_lds_list>li.new {
@@ -72,7 +73,7 @@
 }
 
 .lds_padded {
-	padding-left: 28px;
+	padding-left: 37px;
 }
 
 #my_lds_list .lds_select {
@@ -107,13 +108,15 @@
 }
 
 #my_lds_list .lds_edit_action {
-	diaplay: block;
+	/*
+    display: block;
 	float: left;
+    padding-top: 2px;
+    width: 29px;
+    */
 	font-size: 11px;
 	padding-left: 5px;
-	padding-top: 2px;
     padding-right: 3px;
-	/*width: 29px;*/
 	visibility: hidden;
 }
 
@@ -128,15 +131,21 @@
 
 #my_lds_list .lds_title_tags {
 	display: block;
-	width: 238px;
+	width: 307px;
 	float: left;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
+#my_lds_list .lds_title_tags:hover {
+    overflow: visible;
+    position: relative;
+    z-index: 9999;
+}
+
 #my_lds_list .lds_locked .lds_title_tags {
 	display: block;
-	width: 267px;
+	width: 307px;
 	float: left;
 	white-space: nowrap;
 	overflow: hidden;
@@ -146,6 +155,14 @@
 	/*display: block;
 	float: left;*/
 	margin-right: 5px;
+}
+
+#my_lds_list .lds_title {
+    background-color: #EEE;
+}
+
+#my_lds_list .lds_title.new {
+    background-color: #FFF;
 }
 
 .lds_small_tag {
@@ -543,7 +560,7 @@
 }
 
 #revision_graph_titles {
-	padding-left: 200px;
+	padding-left: 250px;
 	border-bottom: 1px solid #aaa;
 	height: 100px;
 	margin-bottom: 0;
@@ -2004,6 +2021,6 @@ p.MsoListParagraph {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    max-width: 900px;
+    max-width: 957px;
 }
 

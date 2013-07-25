@@ -64,7 +64,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 			<?php endforeach; ?>
 		</ul>
 		<div id="revision_graph_wrapper">
-			<canvas id="revision_graph" width="<?php echo (160 + 70 * $numDocs) ?>" height="<?php echo (100 * $numRevisions)?>">  
+			<canvas id="revision_graph" width="<?php echo (210 + 70 * $numDocs) ?>" height="<?php echo (100 * $numRevisions)?>">
 				<div class="browseralert">Your browser does not support HTML5 canvas.<br />Upgrade to a newer browser (e.g. <a href="http://www.firefox.com" target="_blank">Firefox</a>, <a href="http://www.opera.com" target="_blank">Opera</a>, <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>, <a href="http://www.beautyoftheweb.com/" target="_blank">Internet Explorer 9</a>) for a better browsing experience.</div>
 
 				<ul id="iefallback_list">

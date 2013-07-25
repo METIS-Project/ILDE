@@ -47,7 +47,86 @@ class lds_contTools
 	 * Performs a full-text search in the LdS (title for all and description for the plain text ones). 
 	 * @param unknown_type $query
 	 */
-	public static function searchLdS ($query) {
+
+
+    public static function searchLdS($query, $offset = 0, $user_id = 0) {
+        global $CONFIG;
+
+        if(!$user_id)
+            $user_id = get_loggedin_userid();
+
+        $subtype = get_subtype_id('object', 'LdS');
+
+        //$mj = '';
+        $mw = '';
+/*
+        if($mk && $mv) {
+            $mk_id = get_metastring_id($mk);
+            $mv_id = get_metastring_id($mv);
+
+            //$mj = "JOIN metadata m ON e.guid = m.entity_guid";
+            $mw = "md.name_id='{$mk_id}' AND  md.value_id='{$mv_id}' AND";
+        }
+*/
+        $tp_k = get_metastring_id("pedagogical_approach");
+        $td_k = get_metastring_id("discipline");
+        $tt_k = get_metastring_id("tags");
+        $t_v = get_metastring_id($query);
+
+        if($t_v)
+            $tags_query = "OR ( md.name_id IN ($tp_k,$td_k,$tt_k) AND md.value_id = '{$t_v}' )";
+        else
+            $tags_query = "";
+
+        $acv_k = get_metastring_id("all_can_view");
+        $acv_v = get_metastring_id("yes");
+
+        $query = mysql_real_escape_string($query);
+
+        $query = <<<SQL
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
+	(e.owner_guid = {$user_id})
+	OR
+	(
+		m.name_id = '{$acv_k}' AND m.value_id = '{$acv_v}'
+	)
+	OR
+	(
+		e.guid NOT IN (
+		    SELECT DISTINCT acvm.entity_guid FROM metadata acvm WHERE acvm.name_id = '{$acv_k}'
+		)
+		AND
+		e.access_id < 3 AND e.access_id > 0
+	)
+	OR
+	(
+		e.guid IN (
+			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship IN ('lds_editor_group', 'lds_viewer_group') AND rg.guid_one IN (
+				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+			)
+		)
+	)
+	OR
+	(
+		e.guid IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ('lds_editor', 'lds_viewer') AND ru.guid_one = {$user_id}
+		)
+	)
+) AND (
+	  (o.title LIKE '%{$query}%' OR do.title LIKE '%{$query}%' OR do.description LIKE '%{$query}%')
+	  {$tags_query}
+	)
+	 order by e.time_updated desc limit {$offset},11
+SQL;
+
+        if($entities = get_data($query, "entity_row_to_elggstar"))
+            return self::enrichLdS($entities);
+
+        return false;
+    }
+
+	public static function searchLdS_old ($query) {
+        global $CONFIG;
 		$query = addslashes($query);
 		
 		$sql = "SELECT guid FROM {$CONFIG->dbprefix}objects_entity WHERE MATCH (title,description) AGAINST ('$query')";
@@ -93,19 +172,21 @@ class lds_contTools
 	{
 		$lds = get_entity($lds_guid);
 		$user = get_user(get_loggedin_userid());
-		$seenLds = $user->seen_lds;
-		if (is_null($seenLds)) $seenLds = array();
-		if (is_string($seenLds)) $seenLds = array($seenLds);
-		foreach ($seenLds as $k=>$v)
-		{
-			$parts = explode (':',$v);
-			if ($parts[0] == $lds_guid)
-				unset($seenLds[$k]);
-		}
-		
-		$seenLds[] = $lds_guid.':'.$lds->time_updated;
-		$user->seen_lds = $seenLds;
-		$user->save();
+        if($lds && $user) {
+            $seenLds = $user->seen_lds;
+            if (is_null($seenLds)) $seenLds = array();
+            if (is_string($seenLds)) $seenLds = array($seenLds);
+            foreach ($seenLds as $k=>$v)
+            {
+                $parts = explode (':',$v);
+                if ($parts[0] == $lds_guid)
+                    unset($seenLds[$k]);
+            }
+
+            $seenLds[] = $lds_guid.':'.$lds->time_updated;
+            $user->seen_lds = $seenLds;
+            $user->save();
+        }
 	}
 	
 	/**
@@ -134,10 +215,11 @@ class lds_contTools
                 $obj->lds = $lds; //The LdS itself
                 $obj->starter = get_entity($lds->owner_guid);
 
-                $latest = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
+                $revision_type = $lds->external_editor ? 'revised_docs_editor' : 'revised_docs';
+                $latest = $lds->getAnnotations($revision_type, 1, 0, 'desc');
                 $obj->last_contributor = get_entity($latest[0]->owner_guid);
                 $obj->last_contribution_at = $latest[0]->time_created;
-                $obj->num_contributions = $lds->countAnnotations('revised_docs');
+                $obj->num_contributions = $lds->countAnnotations($revision_type);
 
                 //$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
                 //$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
@@ -162,6 +244,21 @@ class lds_contTools
                 if (is_string($seenLds)) $seenLds = array($seenLds);
 
                 $isnew = true;
+
+
+                if($last_viewed = get_annotations($lds->guid, 'object','LdS','viewed_LdS','',get_loggedin_userid(), 1,"","time_created desc")) {
+                    $last_viewed = $last_viewed[0]->time_created;
+                }  else {
+                    $last_viewed = 0;
+                }
+
+                if($obj->last_contributor->guid == get_loggedin_userid()) {
+                    $isnew = false;
+                } elseif($lds->time_updated - 15 < $last_viewed){
+                    $isnew = false;
+                }
+
+                /*
                 foreach ($seenLds as $sl)
                 {
                     $sl = explode(':',$sl);
@@ -171,6 +268,8 @@ class lds_contTools
                         break;
                     }
                 }
+                */
+
                 $obj->new = $isnew;
 
                 $richList[] = $obj;
@@ -199,10 +298,10 @@ class lds_contTools
                 ),
                 'object','LdS_document_editor', 0, 100);
 
-            $latest = $implementation->getAnnotations('revised_docs', 1, 0, 'desc');
+            $latest = $implementation->getAnnotations('revised_docs_editor', 1, 0, 'desc');
             $obj->last_contributor = get_entity($latest[0]->owner_guid);
             $obj->last_contribution_at = $latest[0]->time_created;
-            $obj->num_contributions = $implementation->countAnnotations('revised_docs');
+            $obj->num_contributions = $implementation->countAnnotations('revised_docs_editor');
 
             //$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
             //$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
@@ -226,15 +325,19 @@ class lds_contTools
             if (is_string($seenImplementation)) $seenImplementation = array($seenImplementation);
 
             $isnew = true;
-            foreach ($seenImplementation as $sl)
-            {
-                $sl = explode(':',$sl);
-                if ($sl[0] == $implementation->guid && $sl[1] >= $implementation->time_updated - 5)
-                {
-                    $isnew = false;
-                    break;
-                }
+
+            if($last_viewed = get_annotations($lds->guid, 'object','LdS','viewed_LdS','',get_loggedin_userid(), 1,"","time_created desc")) {
+                $last_viewed = $last_viewed[0]->time_created;
+            }  else {
+                $last_viewed = 0;
             }
+
+            if($obj->last_contributor->guid == get_loggedin_userid()) {
+                $isnew = false;
+            } elseif($lds->time_updated - 15 < $last_viewed){
+                $isnew = false;
+            }
+
             $obj->new = $isnew;
 
             $richList[] = $obj;
@@ -349,7 +452,7 @@ class lds_contTools
 				'id' => $rev->revision->id,
 				'revision_number' => $rev->revision_number,
 				'author' => $rev->author->username,
-				'date' => date('j M y H:i',$rev->revision->time_created),
+				'date' => (int)$rev->revision->time_created,//date('j M y H:i',$rev->revision->time_created),
 				'revised_docs' => $docs,
 				'deleted_docs' => $rev->deleted_documents,
 			);
@@ -1194,7 +1297,7 @@ SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtyp
 			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
 		)
 	)
-) order by time_updated asc {$query_limit}
+) order by time_updated desc {$query_limit}
 SQL;
 
         $entities = get_data($query, "entity_row_to_elggstar");
@@ -1779,7 +1882,7 @@ SQL;
 		$fields = array ('tags', 'discipline', 'pedagogical_approach');
 		
 		$lds = self::getBrowseLdsList('', 10000, 0);
-		
+
 		if (!is_array($lds)) return false;
 		
 		$ids = array (); 
@@ -1821,7 +1924,8 @@ SQL;
 	{
 		$fields = array ('tags', 'discipline', 'pedagogical_approach');
 		
-		$lds = get_entities('object','LdS',0,'',100000,0);
+		//$lds = get_entities('object','LdS',0,'',100000,0);
+        $lds = self::getUserViewableLdSs(get_loggedin_userid());
 		
 		if (!is_array($lds)) return false;
 		
@@ -1841,7 +1945,7 @@ SQL;
 		
 		if (count($ids) && count($fieldids))
 		{
-			$sql = "SELECT k.string AS k, v.string AS v FROM {$CONFIG->dbprefix}metadata m LEFT JOIN {$CONFIG->dbprefix}metastrings k ON m.name_id = k.id LEFT JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE entity_guid IN (".implode(',',$ids).") AND m.name_id IN (".implode(',', $fieldids).")";
+			$sql = "SELECT DISTINCT entity_guid, k.string AS k, v.string AS v FROM {$CONFIG->dbprefix}metadata m LEFT JOIN {$CONFIG->dbprefix}metastrings k ON m.name_id = k.id LEFT JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE entity_guid IN (".implode(',',$ids).") AND m.name_id IN (".implode(',', $fieldids).")";
 			$res = execute_query ($sql, get_db_link('read'));
 			while ($row = mysql_fetch_object($res)) {
 				if (isset ($tags[$row->k][$row->v]))

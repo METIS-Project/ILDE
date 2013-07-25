@@ -30,7 +30,7 @@ ProxyPassReverse /exelearning http://127.0.0.1:8080/
  * List of environments, containing the regular expression of the server name that defines them.
  */
 $envUrls = array (
-	'devel' =>		'^localhost|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11',
+	'devel' =>		'^localhost|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11|^95\.23\.158\.182',
 	'staging' =>	'^ldshake3\.upf\.edu',
 	'prod' =>		'^ldshake\.upf\.edu'
 );

@@ -107,10 +107,52 @@
                  };
                
           ?>
-   
+            <?php
+            $lhref="";
+
+            if(!strcmp("$patternsname","Design narrative")) {$lhref="http://ilde.upf.edu/pg/lds/view/2242/";$t_text = "At the UVA team, teacher workshops were held to promote learning design and implementation of collaborative learning activities. Following the most widely used format and technologies at our institution, the idea was to teach/practice design for blended learning (i.e. combining face-to-face and online activities) courses, and using Moodle VLEs as the main technological support (alongside other web tools). ";}
+            if(!strcmp("$patternsname","Controlled Group Formation")) {$lhref="http://ilde.upf.edu/pg/lds/view/2228/";$t_text = "How can a group of students be formed when they are asked to work on an assignment to collaborative build knowledge?";}
+            if(!strcmp("$patternsname","Free G F")) {$lhref="http://ilde.upf.edu/pg/lds/view/2224/";$t_text = "How can a group of students be formed when they are asked to work on a large demanding assignment?";}
+            if(!strcmp("$patternsname","Facilitator")) {$lhref="http://ilde.upf.edu/pg/lds/view/2220/";$t_text = "Students might be guided towards greater independence (autonomous learning) in collaborative learning situations and, at the same time, towards effective collaboration.";}
+            if(!strcmp("$patternsname","Guiding Questions")) {$lhref="http://ilde.upf.edu/pg/lds/view/2216/";$t_text = "A group of students that collaboratively perform a learning task are not sure on the criteria for deciding whether they have completed it or whether it fulfils the expected results.";}
+            if(!strcmp("$patternsname","Management of On-Line Questionnaires")) {$lhref="http://ilde.upf.edu/pg/lds/view/2212/";$t_text = "How can web-based questionnaires be created, delivered and graded?";}
+            if(!strcmp("$patternsname","Structured Space for Group Task")) {$lhref="http://ilde.upf.edu/pg/lds/view/2208/";$t_text = "Sometimes students require an online space that facilitates their collaboration.";}
+            if(!strcmp("$patternsname","The Assessment Task As A Vehicle For Learning")) {$lhref="http://ilde.upf.edu/pg/lds/view/2204/";$t_text = "Assessment regimes which prioritize technical measurement issues, such as validity and reliability, may ignore the effects of the test on students’ approaches to learning. On the other hand, we do need to assess students’ work, and our approaches must be fair and  reasonable.";}
+            if(!strcmp("$patternsname","Enriching Discussions by Generating Cognitive Conflicts")) {$lhref="http://ilde.upf.edu/pg/lds/view/2200/";$t_text = "Sometimes students are reluctant to challenge each other’s different views on a particular subject or the results from a particular activity during a discussion.";}
+            if(!strcmp("$patternsname","Preparing Fruitful Discussions Using Surveys")) {$lhref="http://ilde.upf.edu/pg/lds/view/2196/";$t_text = "The exploration of contradictory views in a discussion can promote a deeper understanding of a subject. It can stimulate each participant to develop their own opinions and explore their reason for them.";}
+            if(!strcmp("$patternsname","Discussion Group")) {$lhref="http://ilde.upf.edu/pg/lds/view/2189/";$t_text = "Discussion groups are the most common way of organizing activity in networked learning environments. The degree to which a discussion is structured, and the choice of structure, is key in determining how successfully the discussion will promote learning for the participants.";}
+            if(!strcmp("$patternsname","Introductory Activity Learning Design Awareness")) {$lhref="http://ilde.upf.edu/pg/lds/view/2183/";$t_text = "Students may be aware of the collaborative learning process that they will perform so that their learning is potentially meaningful and so that positive interdependence among the members of the groups is encouraged. This pattern discusses how this might be accomplished. ";}
+            if(!strcmp("$patternsname","Enriching The Learning Process")) {$lhref="http://ilde.upf.edu/pg/lds/view/2169/";$t_text = "How can the learning process be designed so that the (group of) students that perform some activities at faster rates can employ the time till the rest of the group finish (note that in collaborative learning synchronization of group activities is a key issue) to escalate the level and quality of the learning experiences?";}
+            if(!strcmp("$patternsname","Thinking Aloud Pair Problem Solving")) {$lhref="http://ilde.upf.edu/pg/lds/view/2155/";$t_text = "If students face a series of problems whose solutions imply reasoning processes, an adequatecollaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","Simulation")) {$lhref="http://ilde.upf.edu/pg/lds/view/2147/";$t_text = "If groups of students face a problem whose resolution implies the simulation of a situation in which several characters are involved, an adequate collaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","Brainstorming")) {$lhref="http://ilde.upf.edu/pg/lds/view/2141/";$t_text = "If groups of students face the resolution of a problem whose solution requires the generation of a large number of possible answers/ideas in a short period of time, an adequate collaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","TPS")) {$lhref="http://ilde.upf.edu/pg/lds/view/2111/";$t_text = "If groups of students face resolution of a challenging or open-ended question, an adequate collaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","Pyramid")) {$lhref="http://ilde.upf.edu/pg/lds/view/2100/";$t_text = "If groups of students face resolution of a complex problem/task, usually without a concrete solution, whose resolution implies the achievement of gradual consensus among all the students, an adequate collaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","Jigsaw")) {$lhref="http://ilde.upf.edu/pg/lds/view/2092/";$t_text = "If groups of students face resolution of a complex problem/task that can be easily divided into sections or independent sub-problems, an adequate collaborative learning flow may be planned.";}
+            if(!strcmp("$patternsname","Mapping Forces")) {$lhref="http://ilde.upf.edu/pg/lds/view/1766/";$t_text = "Design challenges are complex and intertwined. Many argue they are fundementally \"Wicked problems\" (Rittel, 1973). The first challenge a designer faces is identifying the design challenge: understanding what are the forces that define the context for which she designs, and what in the configuration of these forces does she wish to change.";}
+            if(!strcmp("$patternsname","Structuredspace For Group Tasks")) {$lhref="http://ilde.upf.edu/pg/lds/view/2208/";$t_text = "Sometimes students require an online space that facilitates their collaboration.";}
+
+
+            $tooltip_id = 't_'.str_replace(' ','_', strtolower($patternsname));
+
+            ?>
+            <?php if (!strlen($lhref)): ?>
      <div id="pattern_result"  align="<?php echo $aling ?>"><FONT SIZE= <?php echo $peso?> color="#800000"><?php echo $patternsname ?></FONT>
-       <p> <img align="center" src="<?php echo $vars['url']; ?>mod/lds/images/<?php echo $patterns?>.gif"   width='120' height='70'  tittle="<?php echo $patterns ?>" /> </p>
-    </div> 
+       <p> <!--<img align="center" src="<?php echo $vars['url']; ?>mod/lds/images/<?php echo $patterns?>.gif"   width='120' height='70'  tittle="<?php echo $patterns ?>" /> --></p>
+    </div>
+            <?php endif;?>
+
+            <?php if (strlen($lhref)): ?>
+            <div id="pattern_result" align="<?php echo (strlen($patternsname) < 25) ? $aling : "center"?>"><FONT SIZE= <?php echo $peso?> color="#800000"><span  class="show_tooltip <?php echo $tooltip_id ?>"><a href="<?php echo $lhref;?>"><?php echo $patternsname ?></a></span></FONT>
+                <p> <!--<img align="center" src="<?php echo $vars['url']; ?>mod/lds/images/<?php echo $patterns?>.gif"   width='120' height='70'  tittle="<?php echo $patterns ?>" /> --></p>
+            </div>
+            <div class="tooltip_bl" id="<?php echo $tooltip_id ?>" style="width: 280px;">
+                <div class="tooltip_bl_stem"></div>
+                <div class="tooltip_bl_body"><?php echo $t_text ?></div>
+            </div>
+
+        <?php endif;?>
+
     
 	<?php endfor;?>
 </ul>

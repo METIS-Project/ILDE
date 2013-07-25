@@ -50,7 +50,6 @@ class DocumentEditorRevisionObject extends ElggObject
 		parent::__construct($guid);
 		$this->document_guid = $document_guid;
 		$this->access_id = 2;
-		$this->write_access_id = 2;
 	}
 
 	public static function createRevisionFromDocumentEditor ($document)
@@ -63,14 +62,21 @@ class DocumentEditorRevisionObject extends ElggObject
 		$filestorename = 'rev_'.$document->guid.'_'.$document->lds_revision_id;
 		$file = $editor->getNewFile($filestorename);
 		copy($readfile, $file->getFilenameOnFilestore());
-	
 		$revision->file_guid = $file->guid;
+
+   		$readfile = $editor->getFullFilePath($document->file_imsld_guid);
+		$filestorename = 'rev_'.$document->guid.'_imsld_'.$document->lds_revision_id;
+		$file = $editor->getNewFile($filestorename);
+		copy($readfile, $file->getFilenameOnFilestore());
+		$revision->file_imsld_guid = $file->guid;
+
+
 		$revision->editorType = $document->editorType;
 		$revision->lds_revision_id = $document->lds_revision_id;
 		$revision->lds_guid = $document->lds_guid;
         $revision->container_guid = $document->lds_guid;
 		$revision->previewDir = $document->revisionDir.'_'.$revision->lds_revision_id;
-		$revision->id = $document->revisionDir.lds_revision_id;
+		$revision->id = $document->revisionDir.'_'.lds_revision_id;
 		
 		$editor->revisionPreview($revision);
 		

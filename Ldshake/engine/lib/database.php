@@ -384,7 +384,7 @@
         function update_data($query) {
             
             global $CONFIG, $DB_QUERY_CACHE;
-            
+
             $dblink = get_db_link('write');
             
             // Invalidate query cache

@@ -42,10 +42,15 @@ $path = Editor::getFullFilePath($doc->file_guid);
 
 $contents = file_get_contents($path);
 $expires = 14 * 60*60*24;
+$ext = pathinfo($doc->upload_filename, PATHINFO_EXTENSION);
+if($ext == 'svg')
+    $ct = 'image/svg+xml';
+else
+    $ct = 'image';
 
-header("Content-Type: image");
+header("Content-Type: {$ct}");
 header("Content-Length: " . strlen($contents));
 header("Cache-Control: public", true);
 header("Pragma: public", true);
-header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $expires) . ' GMT', true);
+header('Expires: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT', true);
 echo $contents;

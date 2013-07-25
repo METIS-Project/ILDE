@@ -94,6 +94,7 @@ class richTextEditor extends Editor
         $lds->granularity = 0;
         $lds->completeness = 0;
         $lds->cloned = 1;
+        $lds->all_can_view = $this->_lds->all_can_view;
         $lds->implementable = $this->_lds->implementable;
         $lds->parent = $this->_lds->guid;
         $lds->editor_type = $this->_lds->editor_type;
@@ -752,7 +753,7 @@ class LdSFactory
         }
 
         $lds->save();
-        lds_contTools::markLdSAsViewed ($lds->guid);
+        //lds_contTools::markLdSAsViewed ($lds->guid);
         create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         $build = array(
@@ -796,7 +797,7 @@ class LdSFactory
         }
 
         $lds->save();
-        lds_contTools::markLdSAsViewed ($lds->guid);
+        //lds_contTools::markLdSAsViewed ($lds->guid);
         create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         $update = array(
@@ -1669,17 +1670,15 @@ class UploadEditor extends Editor
         $user = get_loggedin_user();
         $resultIds = new stdClass();
         $docSession = $params['editor_id'];
-        $doc_file = get_entity($docSession);
-        //create a new file to store the document
-        $rand_id = mt_rand(400,9000000);
-        $file_origin = Editor::getFullFilePath($docSession);
-        copy($file_origin, Editor::getFullFilePath($this->_document->file_guid));
-        copy($file_origin, Editor::getFullFilePath($this->_document->file_imsld_guid));
+        if($doc_file = get_entity($docSession)) {
+            //create a new file to store the document
+            $file_origin = Editor::getFullFilePath($docSession);
+            copy($file_origin, Editor::getFullFilePath($this->_document->file_guid));
+            copy($file_origin, Editor::getFullFilePath($this->_document->file_imsld_guid));
+            $this->_document->upload_filename = $doc_file->upload_filename;
+        }
 
-        $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
-        $file = get_entity($docSession);
-        $this->_document->upload_filename = $doc_file->upload_filename;
 
 
         /*

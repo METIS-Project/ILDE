@@ -99,6 +99,7 @@ function lds_init()
 	register_action("lds/publish", false, $CONFIG->pluginspath . "lds/actions/lds/publish.php");
 	register_action("lds/publish_editor", false, $CONFIG->pluginspath . "lds/actions/lds/publish_editor.php");
 	register_action("lds/share", false, $CONFIG->pluginspath . "lds/actions/lds/share.php");
+    register_action("lds/shareng", false, $CONFIG->pluginspath . "lds/actions/lds/shareng.php");
 	register_action("lds/ping_editing", false, $CONFIG->pluginspath . "lds/actions/lds/ping_editing.php");
 	register_action("lds/pdf_export", false, $CONFIG->pluginspath . "lds/actions/lds/pdf_export.php");
 	register_action("lds/pdf_export_editor", false, $CONFIG->pluginspath . "lds/actions/lds/pdf_export_editor.php");
@@ -445,11 +446,13 @@ function lds_exec_implementations ($params)
 
 function lds_exec_search ($params) {
 	$query = urldecode(get_input('q'));
+    $offset = (int)get_input('offset', 0);
 	
 	$vars['query'] = $query;
-	$vars['list'] = lds_contTools::searchLdS($query);
-	$vars['count'] = count ($vars['list']);
-	
+	$vars['list'] = lds_contTools::searchLdS($query, $offset);
+    $vars['count'] = count ($vars['list']) + $offset;
+    //$vars['list'] = array_slice($vars['list'], $offset, 10);
+
 	$body = elgg_view('lds/search',$vars);
 	page_draw($query, $body);
 }
@@ -684,7 +687,7 @@ function lds_exec_browse ($params)
 
         //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 10, $offset, '');
         //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 9999, 0, '');
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, $offset, $vars['tagk'], $vars['tagv']);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, $vars['tagk'], $vars['tagv']);
         //$vars['count'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 0, 0, '', 0, true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
@@ -702,7 +705,7 @@ function lds_exec_browse ($params)
         $vars['list'] = array();
     }
     Utils::osort($vars['list'], array('title' => true));
-    $vars['list'] = array_slice($vars['list'], 0, 10);
+    $vars['list'] = array_slice($vars['list'], $offset, 10);
 
     $vars['list'] = lds_contTools::enrichLdS($vars['list']);
 
@@ -1379,6 +1382,7 @@ function lds_exec_implementeditor($params)
         $vars['viewers'] = json_encode(array());
         $vars['editors'] = json_encode(array());
         $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+        $vars['am_i_starter'] = true;
     }
 
     $vars['title'] = T("Edit implementation");
@@ -2247,15 +2251,25 @@ function lds_treebuilder($lds_id) {
 function lds_exec_tree ($params)
 {
 
+    //We need to see all the entities, including the deleted ones.
+    $access_status = access_get_show_hidden_status();
+    access_show_hidden_entities(true);
+
     $vars = array();
 
     $lds = get_entity($params[1]);
     $vars['lds'] = $lds;
+
+    while($lds->parent)
+        $lds = get_entity($lds->parent);
+
     $tree = lds_treebuilder($lds->guid);
 
     $tree_json = json_encode($tree);
 
     $vars['tree'] = $tree_json;
+
+    access_show_hidden_entities($access_status);
 
     $body = elgg_view('lds/tree',$vars);
 
@@ -2325,18 +2339,12 @@ function lds_exec_patterns ($params)
     page_draw($title, $body);
 }
 
-
-
-
 function lds_exec_query ($params) {
-
-
     $query = urldecode(get_input('q'));
     $vars['query'] = $query;
 
     $vars['list'] = lds_contTools::searchPatterns($query);
     $vars['count'] = count ($vars['list']);
-
 
     $body = elgg_view('lds/query', $vars);
     page_draw($query, $body);

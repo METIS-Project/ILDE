@@ -71,6 +71,7 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
+        <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
         <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 
@@ -236,8 +237,11 @@ function encodeURIComponent($str) {
         <?php endif; ?>
     <?php endif; ?>
 	
-<div id="payload">
+<div id="payload" style="width: 100%;">
     <?php if ($currentDoc->getSubtype() == 'LdS_document_editor'): ?>
+        <script>
+            image = <?php echo ($editor == 'cld' || $editor == 'image') ? 'true':'false';?>;
+        </script>
         <?php if ($editor == 'exe'): ?>
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
@@ -245,12 +249,15 @@ function encodeURIComponent($str) {
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
         <?php else:?>
-            <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
+            <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
                 <?php echo $currentDoc->description ?>
             </div>
         <?php endif; ?>
     <?php else:?>
-        <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
+        <script>
+            image = false;
+        </script>
+        <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
             <?php echo $currentDoc->description ?>
         </div>
     <?php endif; ?>
@@ -269,12 +276,11 @@ function encodeURIComponent($str) {
 <div id="shade"></div>
 
 <?php include ('single_share_form.php') ?>
+<?php include ('clonelds_form.php') ?>
 
-	<div class="clearfloat"></div>
-</div><!-- /#layout_canvas -->
+<div class="clearfloat"></div>
 
-</div>
-</div>
+
 <script type="text/javascript">
 	var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
     var new_lds = false;

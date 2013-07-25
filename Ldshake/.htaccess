@@ -45,7 +45,7 @@ DirectoryIndex index.php
 # php 5, apache 1 and 2
 <IfModule mod_php5.c>
 	# default memory limit to 64Mb
-	php_value memory_limit 64M
+	php_value memory_limit 128M
 	# to make sure register global is off
 	php_value register_globals 0
 	# max post size to 8Mb

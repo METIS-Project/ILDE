@@ -10,7 +10,6 @@ var tree = d3.layout.tree()
     .size([height, width]);
 
 var diagonal = d3.svg.diagonal();
-    //.projection(function(d) { return [d.y, d.x]; });
 
 var svg = d3.select(".tree").append("svg")
     .attr("width", width + margin.right + margin.left)
@@ -77,12 +76,20 @@ function update(source) {
         .attr("r", 1e-6)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
+    /*
     nodeEnter.append("text")
         .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
         .attr("dy", ".35em")
         .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
         .text(function(d) { return d.name; })
-        .style("fill-opacity", 1e-6);
+        .style("fill-opacity", 1e-6)
+        .style("font-size", "12px")
+        .style("font-weight", function(d) { return (d.lds_guid == window.lds_guid) ? "bold" : "normal"; });
+        */
+
+    nodeEnter.append("foreignObject").attr("height","100%").attr("width","100%")
+        .append("xhtml:body")
+        .append("div").text("some text");
 
     // Transition nodes to their new position.
     var nodeUpdate = node.transition()
