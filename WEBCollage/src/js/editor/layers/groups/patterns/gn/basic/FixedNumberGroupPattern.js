@@ -7,6 +7,9 @@ var FixedNumberGroupPatternFactory = {
     getId : function() {
         return "fixednumbergroups";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.fixednumbergroups.info");
+    },   
     getDefinition : function() {
         return FixedNumberGroupPattern;
     },
@@ -19,6 +22,7 @@ var FixedNumberGroupPattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "gn";
     this.title = FixedNumberGroupPatternFactory.getTitle();
+    this.info = FixedNumberGroupPatternFactory.getInfo();
     this.patternid = FixedNumberGroupPatternFactory.getId();
     this.number = -1;
 
@@ -31,6 +35,10 @@ var FixedNumberGroupPattern = function(actId, instanceId) {
 
 FixedNumberGroupPattern.prototype.getTitle = function() {
     return this.title;
+};
+
+FixedNumberGroupPattern.prototype.getInfo = function() {
+    return this.info;
 };
 
 /**
@@ -81,7 +89,7 @@ FixedNumberGroupPattern.prototype.menuItemClicked = function(index) {
 FixedNumberGroupPattern.prototype.openDialog = function(minimum, maximum) {
     var dlg = new dijit.Dialog({
         id : "FixedNumberGroupPatternNumberDialog",
-        title : "the title"
+        title : i18n.get("grouppattern.fixednumbergroups.title")
     });
     //var initialValue = Math.max(this.number, 2);
     //var minimum = 2;

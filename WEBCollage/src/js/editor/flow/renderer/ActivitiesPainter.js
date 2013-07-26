@@ -293,7 +293,7 @@ var ActivitiesPainter = {
             isSeparator : true
         });
 
-        items.push({
+        /*items.push({
             label : i18n.get("flow.activities.assess"),
             icon : "assessactivity",
             onClick : function(data) {
@@ -301,7 +301,7 @@ var ActivitiesPainter = {
             },
             data : data,
             help : i18n.get("help.flow.activities.assess")
-        });
+        });*/
         items.push({
             label : i18n.get("flow.activities.makeassessor"),
             icon : "assessactivity",

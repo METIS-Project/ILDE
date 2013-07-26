@@ -349,11 +349,24 @@ Jigsaw.prototype.createInitialInstances = function() {
 
 };
 
-Jigsaw.prototype.getAvailableGroupPatterns = function(type, aactid){
+Jigsaw.prototype.getAvailableGroupPatterns = function(type, actid){
     var availables = new Array();
-    availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups", "expertgrouppattern", "jigsawgrouppattern");
-    availables["pa"] = new Array("groupparticipantsdistributepattern", "expertgroupparticipantspattern");
     
+    // patterns for the individual or jigsaw phase
+    if (this.getFlow()[0].id == actid || this.getFlow()[2].id == actid){
+        availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups", "jigsawgrouppattern");
+        availables["pa"] = new Array("groupparticipantsdistributepattern");
+    }else{
+         // patterns for the expert phase
+         if (this.getFlow()[1].id == actid){
+            availables["gn"] = new Array("fixednumbergroups", "fixedsizegroups", "expertgrouppattern");
+            availables["pa"] = new Array("groupparticipantsdistributepattern", "expertgroupparticipantspattern");
+         }else{
+              //This should not happen
+              availables["gn"] = new Array();
+              availables["pa"] = new Array();
+         }
+    }
     var factories = GroupPatternManager.patternFactories[type];
     var patterns = new Array();
     for (var i = 0; i < factories.length; i++){

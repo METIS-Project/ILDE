@@ -61,7 +61,6 @@ design.type.private.long=Private (only you can see or modify the design).
 users.login=Login
 users.register=Register new user
 users.logout=Logout
-
 users.nickname=Username
 users.password=Password
 users.repeatPassword=Confirm password
@@ -127,7 +126,6 @@ flow.clfp.add.after=... after this ${0}
 flow.select.clfp=Select this ${0}
 flow.select.activity=Select this activity: '${0}'
 
-
 resources.resources=Resources
 resources.newDoc=New document
 resources.editDoc=Edit document
@@ -142,7 +140,6 @@ resources.inActivity.docs=Documents
 
 resources.delete=Delete resource
 resources.delete.confirm=Are you sure you want to delete this resource from the script?
-
 
 resources.tool.description.default=No link
 resources.tool.description.ontoolquery=Tool description
@@ -179,6 +176,7 @@ assessment.edit.whatfor=Usage of assessment results
 assessment.edit.function.remove=Remove usage of assessment results
 assessment.delete=Remove this assessment
 assessment.delete.confirm=Are you sure you want to delete this assessment?
+assessment.selectActivity=Select <i>an activity</i> to configure the assessment!
 
 assessment.edit.los=Assessed learning objectives
 assessment.edit.source.choose=Choose learning activity to assess...
@@ -393,7 +391,6 @@ clfps.phase.newgrouptype=New group type
 clfps.phase.support=Support activity
 clfps.phase.activity=Learning activity
 
-
 clfps.brainstorming.title=Brainstorming
 clfps.brainstorming.group=Brainstorming group
 clfps.brainstorming.support=Support activity
@@ -483,7 +480,6 @@ clfps.tps.share=Share
 clfps.tps.share.activity=Share with the classroom
 clfps.tps.share.support=Support activity
 
-
 pattern.observations.activity=Observe collaboration
 pattern.observations.title=Observations
 
@@ -508,8 +504,6 @@ patterns.tutoring.title=Tutoring sessions
 patterns.tutoring.activity=Attend to tutoring sessions
 patterns.tutoring.assess=Manage tutoring session
 
-
-%help
 
 help.assessment.icon.assessment=This icon represents an 'assess task' (part of assessment '${0}'), which is carried out in this phase.
 help.assessment.icon.assessment.no=This icon represents an assessment, whose 'assess task' has not been chosen yet (thus the assessment is still outside the script).
@@ -619,6 +613,8 @@ participantes.clase=Class selection
 participantes.clase.select=-- Select a class --
 participantes.participantes=List of class participants
 participantes.tipoLMS.select=-- Select a LMS type --
+participantes.adminLMS=Administrar LMS
+participantes.crearLMS=Crear LMS
 participantes.crearInstalacionLMS=Create LMS Installation
 participantes.optioneditlms=Edit LMS Installation
 participantes.optiondeletelms=Delete LMS Installation
@@ -671,6 +667,9 @@ participantes.lmsElegido=LMS type
 participantes.errorGetParticipants=Unable to get the list of class participants
 participantes.numberParticipants=Number of class participants: 
 participantes.errorGetClasses=Unable to get the list of classes
+participantes.gestionar_lms=LMS Management
+participantes.mostrarinstanciaslms=List of LMS installations
+participantes.confirmacioneliminar=Delete LMS installation
 
 participantes.nombre=Name
 participantes.tipo=Type
@@ -678,6 +677,7 @@ participantes.user=User
 
 actualizar.aviso=Warning
 actualizar.aviso.info=Please, click before on select button and choose an installation and a class
+actualizar.aviso.fallo=Unable to get the updated participant list
 
 participantes.obtenerparticipantes.cambios=Warning! Changes were detected in participants
 participantes.obtenerparticipantesLdshake.cambios=Warning! The participant list from the original design has been updated due to changes in the composition of the class
@@ -744,7 +744,6 @@ participants.desasignarprofesores=Reject teacher from the group instance
 participants.desasignarprofesores.help=Click here to reject the teacher from the instance
 participants.desasignartodosprofesores=Reject all the teachers from the group instance
 participants.desasignartodosprofesores.help=Click here to reject all the teachers from this group
-
 nombre.estudiantes=Students Name
 
 participants.alumnosasignadosotrasinstancias=Students assigned to other instances
@@ -790,6 +789,8 @@ help.groupPattern.documentation=Click here to read the group pattern documentati
 groupPattern.updateGroupNumber=Update the number of groups
 groupPattern.updateGroupNumberOK=The number of groups is OK
 groupPattern.disabledGroupNumber=Can't update the number of groups
+groupPattern.noAditionalConfiguration=Nothing to configure
+groupPattern.noAditionalConfiguration.help=The pattern does not need any aditional configuration
 
 groupPattern.updateGroupComposition=Update the group composition
 groupPattern.updateGroupCompositionOK=The group composition is OK
@@ -816,12 +817,13 @@ groupPattern.baddependencies=Some other phases must be checked before this one c
 groupPattern.management.dialogtitle=Group pattern management
 groupPattern.managment.newgn=Add group number pattern
 groupPattern.managment.newpa=Add student assignation pattern
+groupPattern.managment.currentgn=Group number patterns
+groupPattern.managment.currentpa=Student assignation patterns
   
 groupPattern.management.move.down=Move down
 help.groupPattern.management.move.down=Move down
 groupPattern.management.move.up=Move up
 help.groupPattern.management.move.up=Move up
-
 
 groupPattern.management.undelete=Keep this pattern
 help.groupPattern.management.undelete=Keep this pattern
@@ -840,6 +842,9 @@ groupPattern.manage=Manage group policy
 help.groupPattern.manage=Add rules to control the number of groups and student distribution
 
 
+groupPattern.add=Add a group pattern
+help.groupPattern.add=Add a group pattern to the phase
+
 changeTypeToStudent=Change to student
 changeTypeToStudent.help=The participant becomes student type
 changeTypeToTeacher=Change to teacher
@@ -848,13 +853,3 @@ changeTypeTitle=Confirmation of the change of type
 changeType.info=If you change the type, the participant will be deleted of all those groups where is currently assigned.<br />Are you sure you want to make the change?
 
 toolNameError=Please, enter a name for the tool
-
-
-
-
-
-
-
-
-
-

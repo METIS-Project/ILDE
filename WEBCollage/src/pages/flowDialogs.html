@@ -1,5 +1,5 @@
-<div dojoType="dijit.Dialog" id="LDRoleEditDialog" title="${roles.edit}" style="width: 400px">
-	<div style="max-height: 500px; overflow : auto;">
+<div dojoType="dijit.Dialog" id="LDRoleEditDialog" title="${roles.edit}">
+	
 		<div style="padding-bottom:10px;">
 			<div dojoType="dijit.form.TextBox" id="LDRoleTitle" style="font-size: larger; font-weight: bold;"></div>
 		</div>
@@ -16,7 +16,7 @@
 			</table>
 		</div>
 		<div dojoType="dijit.TitlePane" title="${roles.edit.description}">
-			<div dojoType="dijit.form.Textarea" id="LDRoleEditDescription" style="height: 150px;"></div>
+			<input id="LDRoleEditDescription" dojoType="dijit.form.SimpleTextarea" style="min-width:350px;min-height:100px;overflow:auto;" />                        
 		</div>
 		<div dojoType="dijit.layout.ContentPane" align="center">
 			<button dojoType="dijit.form.Button" onclick="EditRoleDialog.ok();">
@@ -26,11 +26,10 @@
 				${common.cancel}
 			</button>
 		</div>
-	</div>
 </div>
 <div dojoType="dijit.Dialog" id="SelectorDialog" title="${selector.select}">
-	<div class="niceDialogContent">
-		<div dojoType="dijit.TitlePane" title="${selector.type.phase}"  style="padding-bottom:20px;">
+	<div dojoType="dijit.layout.ContentPane"  style="width:675px; height: 350px;">
+		<div dojoType="dijit.TitlePane" title="${selector.type.phase}"  style="width: 650px; padding-bottom:20px;">
 			<table class="patternList">
 				<tr class="patternListRow">
 					<td class="patternListCell" style="font-size: 12px; opacity: 1; ">${selector.phase.title}</td>
@@ -70,53 +69,47 @@
 				</div>
 			</div>
 		</div>
+        </div>
 		<div id="SelectorPatternButtonPanel" dojoType="dijit.layout.ContentPane" align="center">
 			<button dojoType="dijit.form.Button" label="${common.cancel}" onclick="PatternSelector.cancel();"></button>
 		</div>
-	</div>
 </div>
-<div dojoType="dijit.Dialog" id="LDActivityEditDialog" showTitle="true" title="${activity.edit}" style="width:500px;">
-	<div style="max-height: 550px; overflow : auto;">
-		<div class="niceDialogContent" >
+<div dojoType="dijit.Dialog" id="LDActivityEditDialog" showTitle="true" title="${activity.edit}">
+		<div dojoType="dijit.layout.ContentPane"  style="min-width:400px;max-height: 350px;">
 			<div style="padding-bottom:10px;">
 				<div dojoType="dijit.form.TextBox" id="LDActivityTitle" style="font-size: larger; font-weight: bold;"></div>
 			</div>
-			<div dojoType="dijit.TitlePane" title="${activity.edit.description}" style="padding-bottom:10px; overflow : auto;">
-				<div dojoType="dijit.form.Textarea" id="LDActivityDescription"></div>
+			<div dojoType="dijit.TitlePane" title="${activity.edit.description}" style="padding-bottom:10px;">
+                                <input id="LDActivityDescription" dojoType="dijit.form.SimpleTextarea" style="min-width:350px;min-height:100px;overflow:auto;" />
 			</div>
-			<div id="LDActivityLOContainer" dojoType="dijit.TitlePane" title="${activity.edit.los}" style="padding-bottom:10px; overflow : auto;">
-				<div dojoType="dijit.layout.ContentPane" id="LDActivityLOs">
-					<ul id="LDActivityLOsList"></ul>
+			<div id="LDActivityLOContainer" dojoType="dijit.TitlePane" title="${activity.edit.los}" style="padding-bottom:10px;">
+				<div dojoType="dijit.layout.ContentPane" id="LDActivityLOs" >
+					<ul id="LDActivityLOsList" style="margin:0px;"></ul>
 				</div>
 				<div dojoType="dijit.layout.ContentPane" align="center">
 					<div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
 						<span></span>
-						${printSimpleTooltipDialog("LDActivityLOSelector", "SelectLOsList_activity", "dijit.layout.ContentPane", "activity.edit.los", "width: 250px; max-height: 200px; overflow: auto;")}
+						${printSimpleTooltipDialog("LDActivityLOSelector", "SelectLOsList_activity", "dijit.layout.ContentPane", "activity.edit.los", "width: 250px; max-height: 75px; overflow: auto;")}
 					</div>
 				</div>
 			</div>
-			<div dojoType="dijit.TitlePane" title="${activity.edit.resources}" style="padding-bottom:10px; overflow : auto;">
+			<div dojoType="dijit.TitlePane" title="${activity.edit.resources}" style="padding-bottom:10px;">
 				<div dojoType="dijit.layout.ContentPane" id="LDActivityResources">
-					<ul id="LDActivityResourcesList"></ul>
+					<ul id="LDActivityResourcesList" style="margin:0px;"></ul>
 				</div>
 				<div dojoType="dijit.layout.ContentPane" align="center">
 					<div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
 						<span></span>
-						${printResourceSelectorTooltipDialog("LDActivityResourceSelector", "activity", "width: 250px; max-height: 200px; overflow : auto;")}
+						${printResourceSelectorTooltipDialog("LDActivityResourceSelector", "activity", "width: 250px; max-height: 75px; overflow : auto;")}
 					</div>
 				</div>
-			</div>
-			<!-- buttons  -->
-			<div dojoType="dijit.layout.ContentPane" align="center">
-				<button dojoType="dijit.form.Button" onclick="EditActivityDialog.ok();">
-					${common.ok}
-				</button>
-				<button dojoType="dijit.form.Button" onclick="EditActivityDialog.cancel();">
-					${common.cancel}
-				</button>
 			</div>
 		</div>
-	</div>
+    		<!-- buttons  -->
+		<div dojoType="dijit.layout.ContentPane" align="center">
+                    <button dojoType="dijit.form.Button" onclick="EditActivityDialog.ok();">${common.ok}</button>
+                    <button dojoType="dijit.form.Button" onclick="EditActivityDialog.cancel();">${common.cancel}</button>
+		</div>
 </div>
 <div id="removeClfpDialog" dojoType="dijit.Dialog" showTitle="true" title="${resources.delete}">
 	<div id ="removeClfpDialogInfo" dojoType="dijit.layout.ContentPane" align="center"></div>

@@ -44,10 +44,14 @@ var General = {
         dijit.byId('LDPrerrequisitesEditPrerrequisites').set("value", LearningDesign.data.prerrequisites);
         dijit.byId('LDPrerrequisitesEditDialog').show();
     },
-
-    closeEditPrerreqDialog : function() {
+    
+    saveEditPrerreqDialog : function() {
         var prerrequisites = dijit.byId('LDPrerrequisitesEditPrerrequisites').get('value');
         General.setPrerrequisites(prerrequisites);
+        dijit.byId('LDPrerrequisitesEditDialog').hide();
+    },
+
+    closeEditPrerreqDialog : function() {
         dijit.byId('LDPrerrequisitesEditDialog').hide();
     },
     
@@ -58,6 +62,10 @@ var General = {
         dijit.byId("LDLearningObjectiveAddName").set("value", "");
         dijit.byId("LDLearningObjectiveAddDescription").set("value", "");
         dijit.byId('LDLearningObjectiveAddDialog').show();
+    },
+    
+    closeAddLoDialog: function(){
+        dijit.byId('LDLearningObjectiveAddDialog').hide();
     },
     
     openDeleteLoDialog: function(lo){
@@ -206,6 +214,10 @@ var General = {
         dijit.byId("LDLearningObjectiveEditDialog").show();
         dijit.byId("LDLearningObjectiveEditName").setValue(lo.title);
         dijit.byId("LDLearningObjectiveEditDescription").setValue(lo.description);
+    },
+    
+    closeEditLO: function(){
+        dijit.byId("LDLearningObjectiveEditDialog").hide();
     },
 
     /**

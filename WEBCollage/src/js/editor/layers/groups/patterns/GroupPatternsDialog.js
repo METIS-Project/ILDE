@@ -28,7 +28,9 @@ var GroupPatternsDialog = {
         var table = "<table>";
 
         for(var i = 0; i < list.length; i++) {
-            table += '<tr><td>' + list[i].getTitle() + '</td><td><div id="' + containerid + '_' + list[i].getId() + '"></div></td></tr>';
+            //table += '<tr><td>' + list[i].getTitle() + '</td><td><div id="' + containerid + '_' + list[i].getId() + '"></div></td></tr>';
+            table += '<tr><td>' + list[i].getTitle() + '</td><td><div id="' + containerid + '_' + list[i].getId() + '"></div></td>';
+            table += '<td><img id="' + containerid + '_' + list[i].getId() + '_help' + '" src="images/icons/help.png" height="16" width="16" style="margin-left:10px;"></td></tr>';
         }
 
         table += "</table>"
@@ -59,8 +61,19 @@ var GroupPatternsDialog = {
             }, function() {
                 GroupPatternsDialog.addPattern(this.type, this.id);
             });
+            var id_help = id + "_help";
+            if (dijit.byId("tt_"+ id_help)){
+                dijit.byId("tt_"+ id_help).destroyRecursive(true);
+            }
+            new dijit.Tooltip({
+                    id : "tt_" + id_help,
+                    label : list[i].getInfo(),
+                    connectId : id_help,
+                    showDelay : 10
+           });
         }
     },
+    
     getMenu : function(data) {
         var items = [];
 
@@ -122,7 +135,9 @@ var GroupPatternsDialog = {
         this.actid = actid;
         this.clfpid = clfpid;
         this.instanceid = instanceid;
-       
+        
+        this.showPatterns();
+        
         //this.initAvailablePatterns("gn", GroupPatternManager.getFactories("gn"), "groupPatternsNewGN");
         this.initAvailablePatterns("gn", GroupPatternManager.getFactoriesSupportedAct("gn", actid, clfpid), "groupPatternsNewGN");
         //this.initAvailablePatterns("pa", GroupPatternManager.getFactories("pa"), "groupPatternsNewPA");
@@ -154,6 +169,47 @@ var GroupPatternsDialog = {
         this.updateList("gn");
         this.updateList("pa");
     },
+    
+    /**
+     * Display only the group pattern types available for this clfp and phase and hide the others buttons and table elements
+     */
+    showPatterns: function(){
+        var listGnPatterns = GroupPatternManager.getFactoriesSupportedAct("gn", this.actid, this.clfpid);
+                    
+        var tableButtons = dojo.byId("tableGpmButtons");
+        var tdTableButtons = tableButtons.getElementsByTagName("td");
+            
+        var tableList = dojo.byId("tableGpmList");
+        var tdTableList = tableList.getElementsByTagName("td");
+            
+        if (listGnPatterns.length == 0){
+            tdTableButtons[0].style.display="none";
+            tdTableList[0].style.display="none";
+        }else{
+            tdTableButtons[0].style.display="";
+            tdTableList[0].style.display="";
+        }
+        
+        var listPaPatterns = GroupPatternManager.getFactoriesSupportedAct("pa", this.actid, this.clfpid);
+
+        if (listPaPatterns.length == 0){
+            tdTableButtons[2].style.display="none";
+            tdTableList[2].style.display="none";
+        }else{
+            tdTableButtons[2].style.display="";
+            tdTableList[2].style.display="";
+        }
+        
+        if (listGnPatterns.length == 0 || listPaPatterns.length == 0){
+            tdTableButtons[1].style.display="none";
+            tdTableList[1].style.display="none";
+        }else{
+            tdTableButtons[1].style.display="";
+            tdTableList[1].style.display="";
+        }
+
+    },
+    
     updateList : function(type) {
         var ids = [];
         var titles = [];
@@ -176,7 +232,7 @@ var GroupPatternsDialog = {
 
         //for(var i = 0; i < ids.length; i++) {
         for(var i = 0; i < this.templists[type].length; i++) {
-            if (this.templists[type][i].obj.instanceid == this.instanceid){
+            if (this.templists[type][i].state=="added" || this.templists[type][i].obj.instanceid == this.instanceid){
                 MenuManager.registerThing(dojo.byId(ids[i]), {
                     getItems : function(data) {
                         return GroupPatternsDialog.getMenu(data);

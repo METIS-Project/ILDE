@@ -101,11 +101,15 @@ var ParticipantManagement = {
                 idlmsCourse: idlmsCourse
             },
             load: function(data){
-                ParticipantManagement.addInfoGlue(idlms_installation, idlmsSystem, idlmsCourse);
-                ParticipantManagement.showParticipantsAdd(data);
-                ParticipantManagement.showParticipantsDelete(data);
-                ParticipantManagement.showParticipantsRemain(data);
-                dijit.byId("comparacionAlumnos").show();
+                if (data.ok){
+                    ParticipantManagement.addInfoGlue(idlms_installation, idlmsSystem, idlmsCourse);
+                    ParticipantManagement.showParticipantsAdd(data);
+                    ParticipantManagement.showParticipantsDelete(data);
+                    ParticipantManagement.showParticipantsRemain(data);
+                    dijit.byId("comparacionAlumnos").show();
+                }else{
+                    ParticipantManagement.showDialogAlert(i18n.get("participantes.botonActualizarListadoAlumnos"),i18n.get("actualizar.aviso.fallo"));
+                }
             }
         };
         dojo.xhrPost(bindArgs);

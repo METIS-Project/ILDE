@@ -91,40 +91,44 @@ var GroupsAlerts = {
             //Obtener y pintar alertas para cada un de las fases
             for (var j = 0; j < block.renderClfps[i].clfp.flow.length; j++) {
                 var actid = block.renderClfps[i].clfp.flow[j].id;
-                //var roleStaff = block.renderClfps[i].clfp.flow[j].staff[0];
-                //var instancesStaff = DesignInstance.instanciasGrupo(roleStaff);
-                //var idinstStaff = instancesStaff[instancesStaff.length - 1].id;
                 var posx = participantFlow.acts[actid].x;
                 var posy = participantFlow.acts[actid].y;
-
-                //var posx = flowRenderer.graphicElements.clfps[clfpid].x + flowRenderer.graphicElements.clfps[clfpid].width;
-                //var posy = flowRenderer.graphicElements.acts[actid].instances[idinstStaff].y + flowRenderer.graphicElements.acts[actid].instances[idinstStaff].height / 2;
                 var size = 16;
                 var halfsize = size / 2;
                 var distance = 40;
-                
-                //Pintar cuadrado para las opciones del patrón de grupo
-                var circleGroup = flowRenderer.bigGroup.createGroup();
-                var circle = circleGroup.createRect({
-                    x : posx + (distance * block.renderClfps[i].scale) - halfsize,
-                    y : posy - halfsize,
-                    width : size,
-                    height : size
-                }).setFill(this.circlePaint.fill).setStroke(this.circlePaint.stroke);
-                flowRenderer.animator.addNoAnimStuff(circle);
-                //Añadir menú de opciones del patrón de grupo
-                MenuManager.registerThing(circle, {
-                    getItems : function(data) {
-                        return GroupsAlerts.getGroupMenu(data);
-                    },
-                    data : {
-                        actid : actid,
-                        instanceid : instanceid,
-                        clfpid : clfpid,
-                        uiListener : flowRenderer.uiListener
-                    },
-                    menuStyle : "groupPatternOptions"
-                });
+                var listGnPatterns = GroupPatternManager.getFactoriesSupportedAct("gn", actid, clfpid);
+                var listPaPatterns = GroupPatternManager.getFactoriesSupportedAct("pa", actid, clfpid);
+                if (listGnPatterns.length > 0 || listPaPatterns.length > 0){
+                    //var roleStaff = block.renderClfps[i].clfp.flow[j].staff[0];
+                    //var instancesStaff = DesignInstance.instanciasGrupo(roleStaff);
+                    //var idinstStaff = instancesStaff[instancesStaff.length - 1].id;
+
+                    //var posx = flowRenderer.graphicElements.clfps[clfpid].x + flowRenderer.graphicElements.clfps[clfpid].width;
+                    //var posy = flowRenderer.graphicElements.acts[actid].instances[idinstStaff].y + flowRenderer.graphicElements.acts[actid].instances[idinstStaff].height / 2;
+
+                    //Pintar cuadrado para las opciones del patrón de grupo
+                    var circleGroup = flowRenderer.bigGroup.createGroup();
+                    var circle = circleGroup.createRect({
+                        x : posx + (distance * block.renderClfps[i].scale) - halfsize,
+                        y : posy - halfsize,
+                        width : size,
+                        height : size
+                    }).setFill(this.circlePaint.fill).setStroke(this.circlePaint.stroke);
+                    flowRenderer.animator.addNoAnimStuff(circle);
+                    //Añadir menú de opciones del patrón de grupo
+                    MenuManager.registerThing(circle, {
+                        getItems : function(data) {
+                            return GroupsAlerts.getGroupMenu(data);
+                        },
+                        data : {
+                            actid : actid,
+                            instanceid : instanceid,
+                            clfpid : clfpid,
+                            uiListener : flowRenderer.uiListener
+                        },
+                        menuStyle : "groupPatternOptions"
+                    });
+                }
 
                 //Pintar alertas de la fase
                 alerts = GroupsAlerts.getActAlerts(block.renderClfps[i].clfp, block.renderClfps[i].clfp.flow[j], flowRenderer, instanceid);
@@ -319,8 +323,14 @@ var GroupsAlerts = {
         items.push({
             isSeparator : true
         });
-        this.getGroupMenuAddUpdateItem(items, data, "gn");
-        this.getGroupMenuAddUpdateItem(items, data, "pa");
+        var listGnPatterns = GroupPatternManager.getFactoriesSupportedAct("gn", data.actid, data.clfpid);
+        if (listGnPatterns.length > 0){
+            this.getGroupMenuAddUpdateItem(items, data, "gn");
+        }
+        var listPaPatterns = GroupPatternManager.getFactoriesSupportedAct("pa", data.actid, data.clfpid);
+        if (listPaPatterns.length > 0){
+            this.getGroupMenuAddUpdateItem(items, data, "pa");
+        }
 
         var patterns = GroupPatternManager.getPatternsForAct(data.actid);
         this.getGroupMenuAddConfig(items, data, patterns.gn);
@@ -345,7 +355,7 @@ var GroupsAlerts = {
                     for (var j = 0; j < subitems.length; j++) {
                         items.push({
                             label : subitems[j].label,
-                            help : subitems[j].label,
+                            help : subitems[j].help,
                             isSubMenu : true,
                             onClick : function(data) {
                                 data.pattern.menuItemClicked(data.index);
@@ -356,6 +366,12 @@ var GroupsAlerts = {
                             }
                         });
                     }
+                }else{
+                    items.push({
+                        label : i18n.get("groupPattern.noAditionalConfiguration"),
+                        isSubMenu : true,
+                        help : i18n.get("groupPattern.noAditionalConfiguration.help")
+                    });
                 }
             }
 

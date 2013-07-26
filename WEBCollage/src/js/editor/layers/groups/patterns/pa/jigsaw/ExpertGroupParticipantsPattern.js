@@ -7,6 +7,9 @@ var ExpertGroupParticipantsPatternFactory = {
     getId : function() {
         return "expertgroupparticipantspattern";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.expertgroupparticipants.info");
+    },
     getDefinition : function() {
         return ExpertGroupParticipantsPattern;
     },
@@ -19,6 +22,7 @@ var ExpertGroupParticipantsPattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "pa";
     this.title = ExpertGroupParticipantsPatternFactory.getTitle();
+    this.info = ExpertGroupParticipantsPatternFactory.getInfo();
     this.patternid = ExpertGroupParticipantsPatternFactory.getId();
 
     this.actId = actId;
@@ -31,6 +35,10 @@ var ExpertGroupParticipantsPattern = function(actId, instanceId) {
 
 ExpertGroupParticipantsPattern.prototype.getTitle = function() {
     return this.title;
+};
+
+ExpertGroupParticipantsPattern.prototype.getInfo = function() {
+    return this.info;
 };
 
 ExpertGroupParticipantsPattern.prototype.getExternalActDependency = function() {

@@ -20,5 +20,8 @@ var i18n = {
     },
     getReplaced2 : function(key, value1, value2) {
         return this.getReplaced(key, [value1, value2]);
+    },
+    getReplaced3 : function(key, value1, value2, value3) {
+        return this.getReplaced(key, [value1, value2, value3]);
     }
 };

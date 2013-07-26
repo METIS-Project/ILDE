@@ -1,10 +1,10 @@
 grouppattern.expertgroupparticipants.title=Expert group distribution
+grouppattern.expertgroupparticipants.info=Nothing needs to be fixed. You want the students <br/> in each jigsaw group to be distributed among the <br/> expert groups so that every expert group has the <br/> same size.
 
 grouppattern.expertgroupparticipants.notinjg=Some experts are in no Jigsaw group. They should be removed from Expert groups.
 
 grouppattern.expertgroupparticipants.2manyfromjg=Some expert groups have too many students from the same Jigsaw group
 grouppattern.expertgroupparticipants.smalljg=Some Jigsaw groups are too small!
-
 grouppattern.expertgroupparticipants.distribute=Some students need to be distributed from Jigsaw groups to Expert groups.
 
 grouppattern.expertgroupparticipants.ok=All students are well distributed. 

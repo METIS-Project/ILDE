@@ -611,7 +611,7 @@ var EditAssessmentDialog = {
                 target : target,
                 assessfunction : assessfunction
             },
-            title : "Select <i>an activity</i> to configure the assessment!"
+            title : i18n.get("assessment.selectActivity")
         };
         
         this.dlg.hide();

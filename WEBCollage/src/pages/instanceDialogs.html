@@ -7,7 +7,7 @@
                         ${participantes.instalacion_lms}
                     </td>
                     <td>
-                        <select id="selectLMS_installation" name="select" dojoType="dijit.form.Select" >
+                        <select id="selectLMS_installation" name="select" dojoType="dijit.form.Select" maxHeight="-1">
                         </select>
                     </td>
                     <td><div id="loadingSelectLMSInstallation"></div></td>
@@ -29,7 +29,7 @@
                         ${participantes.lms}
                     </td>
                     <td>
-                        <select id="selectLMS_installation_glue" name="select" dojoType="dijit.form.Select" >
+                        <select id="selectLMS_installation_glue" name="select" dojoType="dijit.form.Select" maxHeight="-1">
                         </select>
                     </td>
                     <td><div id="loadingSelectLMSGlue"></div></td>
@@ -50,7 +50,7 @@
             </table>
         </div>
 
-        <div id="table" dojoType="dijit.TitlePane" title="${participantes.mostrarinstanciaslms}" style="width:100%;padding-bottom:20px;">
+        <div id="table" dojoType="dijit.TitlePane" title="${participantes.mostrarinstanciaslms}" style="width:100%;">
             <div id="tablalms" style="height:20em; overflow:auto;">
             </div>
         </div>
@@ -73,7 +73,7 @@
                             ${participantes.tipolms}
                         </td>
                         <td>
-                            <select id="selectLMS" name="selectLMS" dojoType="dijit.form.Select">
+                            <select id="selectLMS" name="selectLMS" dojoType="dijit.form.Select" maxHeight="-1">
                             </select>
                         </td>
                     </tr>
@@ -152,7 +152,7 @@
             <table>               
                 <tr>
                     <td>
-                        <select id="select_clases" name="select" dojoType="dijit.form.Select">
+                        <select id="select_clases" name="select" dojoType="dijit.form.Select" maxHeight="-1">
                         </select>
                     </td>
                     <td><div id="loadingSelectClases"></div></td>
@@ -256,7 +256,7 @@
                             ${participantes.tipolms}
                         </td>
                         <td>
-                            <select id="dialogoEditarSelectLMS" name="select" dojoType="dijit.form.Select">
+                            <select id="dialogoEditarSelectLMS" name="select" dojoType="dijit.form.Select" maxHeight="-1">
                             </select>
                         </td>
                         <td>
@@ -319,10 +319,10 @@
         </div>
 
     </div>
-    <!--Botones para la pestaña Gestión Participantes -->
-    <div dojoType="dijit.form.Button" id="aceptarCambios" label="${common.ok}" iconClass="clipOkIcon" disabled="false" onclick="ParticipantSelection.showParticipantComparation();">
-    </div>
-    <div dojoType="dijit.form.Button" id="cancelarCambios" label="${common.cancel}" disabled="false" onclick="ParticipantSelection.hideParticipantSelectionDialog();">
+    <div align="center">
+        <!--Botones para la pestaña Gestión Participantes -->
+        <button dojoType="dijit.form.Button" id="aceptarCambios" label="${common.ok}" disabled="false" onclick="ParticipantSelection.showParticipantComparation();"></button>
+        <button dojoType="dijit.form.Button" id="cancelarCambios" label="${common.cancel}" disabled="false" onclick="ParticipantSelection.hideParticipantSelectionDialog();"></button>
     </div>
 </div>
 

@@ -7,6 +7,9 @@ var FixedSizeGroupPatternFactory = {
     getId : function() {
         return "fixedsizegroups";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.fixedsizegroups.info");
+    },
     getDefinition : function() {
         return FixedSizeGroupPattern;
     },
@@ -19,6 +22,7 @@ var FixedSizeGroupPattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "gn";
     this.title = FixedSizeGroupPatternFactory.getTitle();
+    this.info = FixedSizeGroupPatternFactory.getInfo();
     this.patternid = FixedSizeGroupPatternFactory.getId();
     this.number = -1;
 
@@ -31,6 +35,10 @@ var FixedSizeGroupPattern = function(actId, instanceId) {
 
 FixedSizeGroupPattern.prototype.getTitle = function() {
     return this.title;
+};
+
+FixedSizeGroupPattern.prototype.getInfo = function() {
+    return this.info;
 };
 
 FixedSizeGroupPattern.prototype.check = function(instanceId, result, proposed) {
@@ -65,7 +73,7 @@ FixedSizeGroupPattern.prototype.menuItemClicked = function(index) {
 FixedSizeGroupPattern.prototype.openDialog = function() {
     var dlg = new dijit.Dialog({
         id : "FixedSizeGroupPatternNumberDialog",
-        title : "the title"
+        title : i18n.get("grouppattern.fixedsizegroups.title")
     });
     var initialValue = Math.max(this.number, 2);
 

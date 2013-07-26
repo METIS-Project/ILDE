@@ -1,7 +1,7 @@
 
 
 <div dojoType="dijit.Dialog" id="AssessmentSelectorDialog" title="${selector.select}">
-    <div dojoType="dijit.layout.BorderContainer" style="width: 600px; height: 450px;">
+    <div dojoType="dijit.layout.BorderContainer" style="width: 600px; height: 350px;">
         <div dojoType="dijit.layout.ContentPane" region="center" title="${selector.type.assessment}">
             <div id="SelectorAssessmentPatternList" dojoType="dijit.layout.ContentPane">
             </div>
@@ -14,7 +14,7 @@
 </div>
 
 <div dojoType="dijit.Dialog" id="LDAssessmentEditDialog" showTitle="true" title="${assessment.edit}">
-    <div class="niceDialogContent">
+    <div dojoType="dijit.layout.ContentPane"  style="max-height: 350px;">
         <!--   <div id="LDAssessmentEditDialogStackMain" dojoType="dijit.layout.ContentPane"> -->
         <div id="LDAssessmentTitle" style="padding-bottom:10px;font-size: larger; font-weight: bold;">
         </div>
@@ -26,7 +26,7 @@
             <div dojoType="dijit.layout.ContentPane" align="center">
                 <div dojoType="dijit.form.DropDownButton" iconClass="addIcon">
                     <span></span>
-                    ${printSimpleTooltipDialog("LDAssessmentLOSelector", "SelectLOsList_assessment", "dijit.layout.ContentPane", "assessment.edit.los")}
+                    ${printSimpleTooltipDialog("LDAssessmentLOSelector", "SelectLOsList_assessment", "dijit.layout.ContentPane", "assessment.edit.los", "width: 250px; max-height: 75px; overflow: auto;")}
                 </div>
             </div>
         </div>
@@ -68,9 +68,10 @@
             <div id="PatternListInAssessmentTitle">
                 ${assessment.patterns.list} <button dojoType="dijit.form.Button" onclick="EditAssessmentDialog.addAssessmentPattern('general');">${assessment.patterns.list.new}</button>
             </div>
-            <div id="PatternListInAssessmentContents" style="position:relative;height:75px;overflow:auto;">
+            <div id="PatternListInAssessmentContents" style="position:relative;height:75px;">
             </div>
         </div>
+   </div>
         <!-- buttons  -->
         <div dojoType="dijit.layout.ContentPane" align="center">
             <button dojoType="dijit.form.Button" onclick="EditAssessmentDialog.ok();">
@@ -80,7 +81,6 @@
                 ${common.cancel}
             </button>
         </div>
-    </div>
 </div>
 
 <div id="deletePatternDialog" dojoType="dijit.Dialog" showTitle="true" title="${assessment.patterns.delete}">
@@ -108,13 +108,13 @@
 </div>
 
 <div dojoType="dijit.Dialog" id="LDSummativeAssessmentEditDialog" title="${assessment.edit.summative}">
-    <table>
+    <table cellspacing="10">
         <tr>
             <td>
                 ${assessment.edit.summative.name}
             </td>
             <td>
-                <input id="SummativeAssessmentEditName" dojoType="dijit.form.TextBox" name="name"/>
+                <input id="SummativeAssessmentEditName" dojoType="dijit.form.TextBox" name="name" style="width:250px;"/>
             </td>
         </tr>
         <tr>
@@ -122,7 +122,7 @@
                 ${assessment.edit.summative.description}
             </td>
             <td>
-                <input id="SummativeAssessmentEditDescription" dojoType="dijit.form.Textarea" name="description" style="height:100px"/>
+                <input id="SummativeAssessmentEditDescription" dojoType="dijit.form.SimpleTextarea" name="description" style="min-width:350px;min-height:100px;overflow:auto;" />
             </td>
         </tr>
         <tr>

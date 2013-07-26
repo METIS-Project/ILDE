@@ -22,6 +22,8 @@ var FlowDialogs = {
 		};
 		loSelectorDlg.execute = function() {
 			EditActivityDialog.pickUpSelectedLOs();
+                        //Save the selected learning objectives
+                        EditActivityDialog.save();
 		};
 
 		var resourceSelectorDlg = dijit.byId("LDActivityResourceSelector");
@@ -30,6 +32,8 @@ var FlowDialogs = {
 		};
 		resourceSelectorDlg.execute = function() {
 			EditActivityDialog.pickUpSelectedResources();
+                        //Save the selected resources
+                        EditActivityDialog.save();
 		};
 	},
 

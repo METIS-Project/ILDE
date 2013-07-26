@@ -7,6 +7,9 @@ var GroupParticipantsDistributePatternFactory = {
     getId : function() {
         return "groupparticipantsdistributepattern";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.groupparticipantsdistribute.info");
+    },
     getDefinition : function() {
         return GroupParticipantsDistributePattern;
     },
@@ -19,6 +22,7 @@ var GroupParticipantsDistributePattern = function(actId, instanceId) {
     this.type = "groupPattern";
     this.subtype = "pa";
     this.title = GroupParticipantsDistributePatternFactory.getTitle();
+    this.info = GroupParticipantsDistributePatternFactory.getInfo();
     this.patternid = GroupParticipantsDistributePatternFactory.getId();
 
     this.actId = actId;
@@ -30,6 +34,10 @@ var GroupParticipantsDistributePattern = function(actId, instanceId) {
 
 GroupParticipantsDistributePattern.prototype.getTitle = function() {
     return this.title;
+};
+
+GroupParticipantsDistributePattern.prototype.getInfo = function() {
+    return this.info;
 };
 
 GroupParticipantsDistributePattern.prototype.check = function(instanceId, result, previousProposal) {

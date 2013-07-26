@@ -1,31 +1,31 @@
 <div dojoType="dijit.Dialog" id="groupPatternsDialog" showTitle="true" title="${groupPattern.management.dialogtitle}" style="max-width:600px;">
 	<div dojoType="dijit.layout.ContentPane">
-		<table>
+		<table id="tableGpmButtons">
 			<tr>
-				<td width="360px" align="center">
+				<td width="260px" align="center">
 				<div dojoType="dijit.form.DropDownButton" iconClass="addIcon" label="${groupPattern.managment.newgn}">
 					<span></span>
 					${printVerySimpleTooltipDialog("groupPatternsNewGNDlg", "groupPatternsNewGN")}
 				</div></td>
 				<td width="20px"></td>
-				<td width="360px" align="center">
+				<td width="260px" align="center">
 				<div dojoType="dijit.form.DropDownButton" iconClass="addIcon" label="${groupPattern.managment.newpa}">
 					<span></span>
 					${printVerySimpleTooltipDialog("groupPatternsNewPADlg", "groupPatternsNewPA")}
 				</div></td>
 			</tr>
 		</table>
-		<table>
+		<table id="tableGpmList">
 			<tr>
-				<td width="360px" align="center">
-				<div align="center" dojoType="dijit.TitlePane" title="${participants.alumnosasignadosgrupo}">
+				<td width="260px" align="center">
+				<div align="center" dojoType="dijit.TitlePane" title="${groupPattern.managment.currentgn}">
 					<div style="height:15em; overflow:auto;">
 						<table id="groupPatternsGNList"></table>
 					</div>
 				</div></td>
 				<td width="20px"></td>
-				<td width="360px" align="center">
-				<div align="center" dojoType="dijit.TitlePane" title="${participants.alumnosdisponibles}">
+				<td width="260px" align="center">
+				<div align="center" dojoType="dijit.TitlePane" title="${groupPattern.managment.currentpa}">
 					<div style="height:15em; overflow:auto;">
 						<table id="groupPatternsPAList"></table>
 					</div>

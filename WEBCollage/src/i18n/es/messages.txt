@@ -124,6 +124,7 @@ flow.clfp.add.before=... antes de ${0}
 flow.clfp.add.after=... después de ${0}
 
 flow.select.clfp=Seleccionar ${0}
+flow.select.activity=Seleccionar esta actividad: '${0}'
 
 resources.resources=Recursos
 resources.newDoc=Nuevo documento
@@ -139,7 +140,6 @@ resources.inActivity.docs=Documentos
 
 resources.delete=Eliminar recurso
 resources.delete.confirm=¿Realmente quiere eliminar este recurso del script?
-
 
 resources.tool.description.default=No link
 resources.tool.description.ontoolquery=Tool description
@@ -176,6 +176,7 @@ assessment.edit.whatfor=Uso de los resultados de evaluación
 assessment.edit.function.remove=Eliminar uso de los resultados de la evaluación
 assessment.delete=Eliminar esta evaluación
 assessment.delete.confirm=¿Estás seguro de querer eliminar esta evaluación?
+assessment.selectActivity=Selecciona <i>una actividad</i> para configurar la evaluación!
 
 assessment.edit.los=Objetivos de aprendizaje evaluados
 assessment.edit.source.choose=Elegir actividad de aprendizaje a evaluar...
@@ -388,6 +389,7 @@ clfps.phase.edit.addgroup=... añadir nuevo tipo de grupos a la fase
 clfps.phase.edit.removegroup=Eliminat tipo de grupos '${0}'
 clfps.phase.newgrouptype=Nuevo tipo de grupos
 clfps.phase.support=Actividad de apoyo
+clfps.phase.activity=Actividad de aprendizaje
 
 clfps.brainstorming.title=Brainstorming
 clfps.brainstorming.group=Grupo de brainstorming
@@ -478,7 +480,6 @@ clfps.tps.share=Comparte
 clfps.tps.share.activity=Compartir con la clase
 clfps.tps.share.support=Actividad de apoyo
 
-
 pattern.observations.activity=Observar la colaboración
 pattern.observations.title=Observación
 
@@ -502,7 +503,6 @@ patterns.test.activity=Test
 patterns.tutoring.title=Sesión de tutoría
 patterns.tutoring.activity=Asistir a sesión de tutoría
 patterns.tutoring.assess=Realizar sesión de tutoría
-
 
 
 help.assessment.icon.assessment=Este icono representa una tarea de evaluar (dentro de la evaluación '${0}'), que se lleva a cabo dentro de esta fase.
@@ -573,9 +573,6 @@ help.assessment.edit.source.change=Haga click aquí para cambiar la actividad de
 help.assessment.edit.source.configpattern=Haga click aquí para elegir una técnica de evaluación, que puede dar información acerca de cómo configurar la actividad evaluada (cómo deben actuar los alumnos en ésta). Sólo se puede aplicar una técnica de evaluación en cada evaluación.
 
 
-
-
-
 help.clfps.tapps.edit.add=Haga click aquí para añadir un nuevo problema al TAPPS. Este CLFP puede contener tantos problemas como se desee para las parejas de estudiantes.
 help.clfps.simulation.edit.addrole=Haga click aquí para añadir un nuevo rol de la simulación. Puede crear tantos roles como sea necesario, cada uno de los cuales con una descripción y actividad de preparación diferente.
 help.clfps.simulation.edit.addgroup=Haga click aquí para añadir un nuevo grupo de simulación. Puede crear tantos grupos como sea necesario; cada grupo puede realizar una simulación diferente.
@@ -621,8 +618,9 @@ participantes.crearLMS=Crear LMS
 participantes.crearInstalacionLMS=Crear Nueva Instalación
 participantes.optioneditlms=Editar instalación de LMS
 participantes.optiondeletelms=Eliminar instalación de LMS
+participantes.mostrarinstanciaslms=Lista de instalaciones de LMS
+participantes.gestionar_lms=Gestión de LMS
 participantes.editarInstalacionLMS=Editar instalación
-participantes.eliminarInstalacionLMS=Eliminar instalación
 participantes.obtenerclases=Obtener Clase
 participantes.eliminarinst=¿Está seguro que desea eliminar la instalación?
 participantes.tipolms=Tipo LMS:
@@ -630,7 +628,19 @@ participantes.nombrelms=Nombre
 participantes.usuariolms=Usuario
 participantes.lmsintallation.edit=Click aquí para editar la instalación de LMS
 participantes.lmsintallation.delete=Click aquí para eliminar la instalación de LMS
+participantes.confirmacioneliminar=Borrar instalación de LMS
 participantes.lmsglue.select=-- Seleccione un lms de glue --
+participantes.lmsglue=LMS:
+participantes.fichero=Fichero
+
+participantes.crearinstalacion.idlms=Por favor, selecciona un tipo de LMS
+participantes.crearinstalacion.title=Por favor, especifica un nombre de LMS
+participantes.crearinstalacion.uri=Por favor, especifica una URI
+participantes.crearinstalacion.user=Por favor, especifica un nombre de usuario
+participantes.crearinstalacion.passwd=Por favor, especifica una contraseña
+participantes.crearinstalacion.toolid=Por favor, especifica un toolid
+participantes.crearinstalacion.file=Por favor, selecciona un fichero a subir
+participantes.imposibleactualizar=No se puede editar una instalación de LMS en uso
 
 instanceLoader.load.error=¡No he podido cargar la instancia!
 instanceLoader.save.error=¡No se ha podido guardar!
@@ -648,30 +658,18 @@ participantes.botonSeleccionar=Elegir
 participantes.botonActualizarListadoAlumnos=Actualizar lista
 participantes.seleccionarAlumnos= Obtención de participantes
 participantes.instalacion_lms=Instalación de LMS
-participantes.cambioAlumnos=Cambios en los participanttes
-participantes.gestionar_lms=Gestión de LMS
-participantes.mostrarinstanciaslms=Listado de Instalaciones de LMS
-participantes.confirmacioneliminar=Borrar Instalación de LMS
-participantes.lmsElegido=Tipo de LMS elegido
-participantes.lmsglue=LMS:
-participantes.fichero=Fichero
-
-participantes.crearinstalacion.idlms=Por favor, seleccione un tipo de LMS
-participantes.crearinstalacion.title=Por favor, especifique un nombre de LMS
-participantes.crearinstalacion.uri=Por favor, especifique una URI
-participantes.crearinstalacion.user=Por favor, especifique un nombre de usuario
-participantes.crearinstalacion.passwd=Por favor, especifique una contraseña
-participantes.crearinstalacion.toolid=Por favor, especifique un toolid
-participantes.crearinstalacion.file=Por favor, selecciona el fichero a subir
-participantes.imposibleactualizar=No se puede editar una instalación de LMS en uso
-
+participantes.cambioAlumnos=Cambios en los participantes
 participantes.alumnosAnadidos=Participantes que se añadirán
 participantes.alumnosEliminados=Participantes que se eliminarán
 participantes.alumnosPermanecen=Participantes que permanecen
 participantes.obtener=Obtener Participantes
+participantes.lmsElegido=Tipo de LMS elegido
 participantes.errorGetParticipants=No se puedo obtener la lista de participantes de la clase
 participantes.numberParticipants=Participantes de la clase: 
 participantes.errorGetClasses=No se pudo obtener la lista de clases
+participantes.gestionar_lms=Gestión de LMS
+participantes.mostrarinstanciaslms=Listado de Instalaciones de LMS
+participantes.confirmacioneliminar=Borrar Instalación de LMS
 
 participantes.nombre=Nombre
 participantes.tipo=Tipo
@@ -679,6 +677,7 @@ participantes.user=Usuario
 
 actualizar.aviso=Aviso
 actualizar.aviso.info=Por favor, haz click antes en el botón elegir y selecciona una instalación y una clase
+actualizar.aviso.fallo=No se ha podido obtener la lista actualizada de participantes
 
 participantes.obtenerparticipantes.cambios=¡Aviso! Se han detectado cambios en los participantes
 participantes.obtenerparticipantesLdshake.cambios=Aviso! Se ha actualizado la lista de participantes del diseño original debido a cambios en la composición de la clase
@@ -700,7 +699,6 @@ help.assessment.see=Haga click aquí para ver esta evaluación. De este modo pue
 roles.see.title=Ver rol '${0}'
 
 flow.clfp.see.act=Ver fase '${0}'...
-
 help.flow.clfp.see.act=Haga click aquí para ver las actividades y roles incluidos en esta fase. También podrá ver el nombre de la fase.
 
 flow.activities.see=Ver fase
@@ -760,7 +758,6 @@ learningflow.verparticipantes=Listado de estudiantes asignados a esta instancia
 learningflow.verprofesores=Ver los profesores asignados
 learningflow.verparticipantes.help=Pinche aquí para ver la lista de estudiantes asignados a este grupo
 
-
 participants.toolid=Toolid
 participantes.uri=URI
 
@@ -789,14 +786,15 @@ groupPatternOptions.title=Opciones del patrón de grupo
 help.groupPattern.delete=Haga click aquí para eliminar este patrón de grupo
 help.groupPattern.documentation=Haga click aquí para leer la documentación del patrón de grupo
 
-
 groupPattern.updateGroupNumber=Actualizar el número de grupos
 groupPattern.updateGroupNumberOK=El número de grupos es correcto
 groupPattern.disabledGroupNumber=No se puede actualizar el número de grupos
+groupPattern.noAditionalConfiguration=Nada que configurar
+groupPattern.noAditionalConfiguration.help=El patrón no necesita ninguna configuración adicional
 
 groupPattern.updateGroupComposition=Actualizar la composición de grupos
-groupPattern.updateGroupCompositionOK=La composición de groups es correcta
-groupPattern.disabledGroupNumber=No se puede actualizar la composición de grupos
+groupPattern.updateGroupCompositionOK=La composición de grupos es correcta
+groupPattern.disabledGroupComposition=No se puede actualizar la composición de grupos
 
 groupPattern.delete=Borrar este patrón de grupos
 groupPattern.documentation=Leer documentación del patrón de grupos
@@ -812,6 +810,36 @@ groupPattern.noAvailableTeachers=No hay profesores disponibles para ser asignado
 groupPattern.noAvailableTeachers.help=Cada fase debería tener un  profesor asignado
 groupPattern.notAsignedSomeTeachers=Hay profesores no asignados a la fase
 groupPattern.notAsignedSomeTeachers.help=Podría querer que cada profesor esté asignado a la fase
+
+groupPattern.updatesNeeded.alert=${0} actualizaciones más serán necesarias para actualizar esta.
+groupPattern.baddependencies=Algunas fases deben ser comprobadas antes de que se pueda actualizar esta.
+
+groupPattern.management.dialogtitle=Gestión de patrones de grupos
+groupPattern.managment.newgn=Añadir patrón de número de grupos
+groupPattern.managment.newpa=Añadir patrón de asignación de estudiantes
+groupPattern.managment.currentgn=Patrones de número de grupos
+groupPattern.managment.currentpa=Patrones de asignación de estudiantes
+  
+groupPattern.management.move.down=Mover abajo
+help.groupPattern.management.move.down=Mover abajo
+groupPattern.management.move.up=Mover arriba
+help.groupPattern.management.move.up=Mover arriba
+
+groupPattern.management.undelete=Conservar este patrón
+help.groupPattern.management.undelete=Conservar este patrón
+groupPattern.management.delete=Borrar este patrón
+help.groupPattern.management.delete=Borrar este patrón
+
+groupPattern.general.lessthan=Menos de ${1}: ${0} 
+groupPattern.general.morethan=Más de ${1}: ${0}
+
+groupPattern.nopatterns=No hay patrones para configurar esto. ¡Puedes añadirles!
+
+grouplayer.menu.title=Miembros del grupo
+grouplayer.menu.itemhelp=Haz click para seleccionar este participante
+
+groupPattern.manage=Gestionar la política de grupos
+help.groupPattern.manage=Añadir reglas para controlar el número de grupos y la distribución de los estudiantes
 
 
 groupPattern.add=Añadir un patrón de grupo

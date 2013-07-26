@@ -55,12 +55,13 @@
                                 <button dojoType="dijit.form.Button" label="${common.edit}"
                                         onclick="General.openEditPrerreqDialog();"></button>
                                 <div dojoType="dijit.Dialog" id="LDPrerrequisitesEditDialog"
-					title="${general.prerrequisites}" style="min-width:350px;overflow:auto">
+					title="${general.prerrequisites}">
                                         <div dojoType="dijit.layout.ContentPane">
-                                            <input id="LDPrerrequisitesEditPrerrequisites" dojoType="dijit.form.SimpleTextarea" style="min-height:200px;overflow:auto;" name="name"/>
+                                            <input id="LDPrerrequisitesEditPrerrequisites" dojoType="dijit.form.SimpleTextarea" style="min-width:350px;min-height:100px;overflow:auto;" name="name"/>
                                         </div>
-                                    <div dojoType="dijit.layout.ContentPane" align="center">
-                                        <button dojoType="dijit.form.Button" onclick="General.closeEditPrerreqDialog();">${common.ok}</button>
+                                    <div align="center">
+                                        <button dojoType="dijit.form.Button" onclick="General.saveEditPrerreqDialog();">${common.ok}</button>
+                                        <button dojoType="dijit.form.Button" onclick="General.closeEditPrerreqDialog();">${common.cancel}</button>
                                     </div>
 				</div>
 			</div>
@@ -75,8 +76,7 @@
 					title="${general.newLo}"
 					execute="General.addLearningObjective(arguments[0]);"
                                         style="min-width:350px;overflow:auto">
-                                        <div dojoType="dijit.layout.ContentPane">
-					<table>
+					<table cellspacing="10">
 						<tr>
 							<td>${general.loName}</td>
 							<td><input id="LDLearningObjectiveAddName"
@@ -86,39 +86,34 @@
 							<td>${general.loDescription}</td>
 							<td><input id="LDLearningObjectiveAddDescription"
 								dojoType="dijit.form.SimpleTextarea" name="description"
-								style="min-width:250px;min-height:100px;overflow:auto;" /></td>
-						</tr>
-						<tr>
-							<td align="center" colspan="2">
-								<button dojoType="dijit.form.Button" label="${common.ok}"
-									type="submit"></button>
-							</td>
+								style="min-width:350px;min-height:100px;overflow:auto;" /></td>
 						</tr>
 					</table>
+                                        <div align="center">
+                                            <button dojoType="dijit.form.Button" label="${common.ok}" type="submit"></button>
+                                            <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="General.closeAddLoDialog();"></button>
                                         </div>
 				</div>
 				<div dojoType="dijit.Dialog" id="LDLearningObjectiveEditDialog"
 					title="${general.editLo}"
 					execute="General.finishedEditingLO(arguments[0]);">
-					<table>
+					<table cellspacing="10">
 						<tr>
 							<td>${general.loName}</td>
 							<td><input id="LDLearningObjectiveEditName"
-								dojoType="dijit.form.TextBox" name="name" /></td>
+								dojoType="dijit.form.TextBox" name="name" style="width:250px;"/></td>
 						</tr>
 						<tr>
 							<td>${general.loDescription}</td>
 							<td><input id="LDLearningObjectiveEditDescription"
-								dojoType="dijit.form.Textarea" name="description"
-								style="height: 100px" /></td>
-						</tr>
-						<tr>
-							<td align="center">
-								<button dojoType="dijit.form.Button" label="${common.ok}"
-									type="submit"></button>
-							</td>
+								dojoType="dijit.form.SimpleTextarea" name="description"
+								style="min-width:350px;min-height:100px;overflow:auto;" /></td>
 						</tr>
 					</table>
+                                        <div align="center">
+                                            <button dojoType="dijit.form.Button" label="${common.ok}" type="submit"></button>
+                                            <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="General.closeEditLO();"></button>
+                                        </div>
 				</div>
 				<div id="deleteLoDialog" dojoType="dijit.Dialog" showTitle="true"
 					title="${general.deleteLo}">

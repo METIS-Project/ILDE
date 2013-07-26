@@ -1,4 +1,9 @@
-grouppattern.jigsawgroup.title=Jigsaw Groups
-grouppattern.jigsawgroup.groupnumberok=For ${0} students and ${1} Expert Groups, ${2} Jigsaw Groups is a good number. In this way, there are enough students in each Jigsaw Group to distribute among them the ${1} subproblems proposed in this Jigsaw. 
-grouppattern.jigsawgroup.groupcompositionok.exact=The ${0} students are distributed in ${2} Jigsaw Groups of the same size. In this way, one of them can become an expert in one of the ${1} different subproblems proposed in the Jigsaw.
-grouppattern.jigsawgroup.groupcompositionok.aprox=The ${0} students are distributed in ${2} Jigsaw Groups of the same size aproximately. In this way, at least one of them will become an expert in one of the ${1} different subproblems proposed in the Jigsaw.
+grouppattern.jigsawgroup.title=Grupos de Jigsaw
+grouppattern.jigsawgroup.info=No es necesario fijar nada. Quiere que el número de grupos <br/> dependa del número de estudiantes disponibles y del de <br/> grupos de expertos.
+
+grouppattern.jigsawgroup.fewexpertgroups=Necesitamos más de un Grupo de Expertos para configurar los Grupos de Jigsaw.
+grouppattern.jigsawgroup.fewstudents=El número de estudiantes es ${0}, pero necesitamos al menos ${1}!
+
+grouppattern.jigsawgroup.range=Debe haber entre 2 y ${0} grupos de Jigsaw.
+grouppattern.jigsawgroup.best=Puesto que el número de estudiantes es ${0} y queremos ${1} grupos de expertos, el mejor número de grupos de Jigsaw es ${2}.
+

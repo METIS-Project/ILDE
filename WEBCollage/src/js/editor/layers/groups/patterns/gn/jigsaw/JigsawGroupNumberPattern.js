@@ -7,6 +7,9 @@ var JigsawGroupNumberPatternFactory = {
     getId : function() {
         return "jigsawgrouppattern";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.jigsawgroup.info");
+    },
     getDefinition : function() {
         return JigsawGroupNumberPattern;
     },
@@ -25,6 +28,7 @@ var JigsawGroupNumberPattern = function(actId, instanceId) {
      * Nombre del patrón
      */
     this.title = JigsawGroupNumberPatternFactory.getTitle();
+    this.info = JigsawGroupNumberPatternFactory.getInfo();
     /**
      * Identificador del patrón
      */
@@ -52,8 +56,13 @@ JigsawGroupNumberPattern.prototype.getTitle = function() {
     return this.title;
 };
 
+JigsawGroupNumberPattern.prototype.getInfo = function() {
+    return this.info;
+};
+
 JigsawGroupNumberPattern.prototype.getExternalActDependency = function() {
     return {
+        //Depende de la fase de expertos
         actid : this.expertActId,
         type : "gn"
     };
@@ -69,12 +78,14 @@ JigsawGroupNumberPattern.prototype.check = function(instanceId, result, previous
 
     var expertGroupNumber = GroupPatternManager.getStateGroupCount(instanceId, this.expertActId);
 
+    //al menos dos grupos de expertos son necesarios
     if (expertGroupNumber < 2) {
         GroupPatternUtils.addAlert(result, i18n.get("grouppattern.jigsawgroup.fewexpertgroups"));
         result.ok = result.fixable = false;
         return;
     }
 
+    //al menos dos estudiantes por cada grupo de expertos son necesarios
     var minStudents = 2 * expertGroupNumber;
 
     if (studentCount < minStudents) {
@@ -84,11 +95,12 @@ JigsawGroupNumberPattern.prototype.check = function(instanceId, result, previous
         return;
     }
 
+    //redondeo hacia abajo del número de alumnos en cada grupo de expertos
     var expertNumber = Math.floor(studentCount / expertGroupNumber);
     var maxJigsawGroups = expertNumber;
 
     var rangeExplanation = i18n.getReplaced1("grouppattern.jigsawgroup.range", maxJigsawGroups);
-    var prefExplanation = i18n.getReplaced1("grouppattern.jigsawgroup.best", maxJigsawGroups);
+    var prefExplanation = i18n.getReplaced3("grouppattern.jigsawgroup.best", studentCount, expertGroupNumber, maxJigsawGroups);
 
     GroupPatternUtils.compareMinMaxPrefGroupNumber(instanceId, result, previousProposal, this.actId, 2, maxJigsawGroups, maxJigsawGroups, rangeExplanation, prefExplanation);
 };

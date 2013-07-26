@@ -7,6 +7,9 @@ var PyramidGroupNumberPatternFactory = {
   getId: function() {
     return "jigsawgrouppattern";
   },
+  getInfo: function() {
+    return i18n.get("grouppattern.jigsawgroup.info");
+  },
   getDefinition: function() {
     return PyramidGroupNumberPattern;
   },
@@ -25,6 +28,7 @@ var PyramidGroupNumberPattern = function(actId, instanceId) {
    * Nombre del patrón
    */
   this.title = PyramidGroupNumberPatternFactory.getTitle();
+  this.info = PyramidGroupNumberPatternFactory.getInfo();
   /**
    * Identificador del patrón
    */
@@ -53,6 +57,10 @@ var PyramidGroupNumberPattern = function(actId, instanceId) {
 
 PyramidGroupNumberPattern.prototype.getTitle = function() {
   return this.title;
+};
+
+PyramidGroupNumberPattern.prototype.getInfo = function() {
+  return this.info;
 };
 
 PyramidGroupNumberPattern.prototype.getExternalActDependency = function() {

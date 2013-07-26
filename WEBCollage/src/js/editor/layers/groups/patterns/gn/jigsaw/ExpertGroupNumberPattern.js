@@ -7,6 +7,9 @@ var ExpertGroupNumberPatternFactory = {
     getId : function() {
         return "expertgrouppattern";
     },
+    getInfo : function() {
+        return i18n.get("grouppattern.expertgroup.info");
+    },
     getDefinition : function() {
         return ExpertGroupNumberPattern;
     },
@@ -25,6 +28,7 @@ var ExpertGroupNumberPattern = function(actId, instanceId) {
      * Nombre del patrón
      */
     this.title = ExpertGroupNumberPatternFactory.getTitle();
+    this.info = ExpertGroupNumberPatternFactory.getInfo();
     /**
      * Identificador del patrón
      */
@@ -52,6 +56,10 @@ var ExpertGroupNumberPattern = function(actId, instanceId) {
 
 ExpertGroupNumberPattern.prototype.getTitle = function() {
     return this.title;
+};
+
+ExpertGroupNumberPattern.prototype.getInfo = function() {
+    return this.info;
 };
 
 ExpertGroupNumberPattern.prototype.getMenuItems = function() {
