@@ -812,7 +812,7 @@ groupPattern.notAsignedSomeTeachers=There are some teachers without assign to th
 groupPattern.notAsignedSomeTeachers.help=You might want to assign every teacher to this phase
 
 groupPattern.updatesNeeded.alert=${0} more updates will be necessary to update this.
-groupPattern.baddependencies=Some other phases must be checked before this one can be updated.
+groupPattern.baddependencies=Some dependencies must be checked before this phase can be updated.
 
 groupPattern.management.dialogtitle=Group pattern management
 groupPattern.managment.newgn=Add group number pattern

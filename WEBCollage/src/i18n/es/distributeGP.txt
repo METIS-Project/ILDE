@@ -1,0 +1,7 @@
+grouppattern.groupparticipantsdistribute.title=Distribución aleatoria
+grouppattern.groupparticipantsdistribute.title.alert=<font color='brown'>Distribución aleatoria</font>
+grouppattern.groupparticipantsdistribute.info=No es necesario fijar nada. Quiere que los estudiantes se <br/> distribuyan de forma aleatoria entre los grupos de modo <br/> que cada grupo tenga el mismo tamaño.
+
+
+grouppattern.groupparticipantsdistribute.exact=Se necesitan ${0} estudiantes por grupo.
+grouppattern.groupparticipantsdistribute.noexact=Se necesitan entre ${0} y ${1} estudiantes por grupo.

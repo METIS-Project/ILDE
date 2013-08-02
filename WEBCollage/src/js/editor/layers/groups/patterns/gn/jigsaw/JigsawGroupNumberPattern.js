@@ -80,7 +80,7 @@ JigsawGroupNumberPattern.prototype.check = function(instanceId, result, previous
 
     //al menos dos grupos de expertos son necesarios
     if (expertGroupNumber < 2) {
-        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.jigsawgroup.fewexpertgroups"));
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.jigsawgroup.title") + ": "  + i18n.get("grouppattern.jigsawgroup.fewexpertgroups"));
         result.ok = result.fixable = false;
         return;
     }
@@ -90,7 +90,7 @@ JigsawGroupNumberPattern.prototype.check = function(instanceId, result, previous
 
     if (studentCount < minStudents) {
         var text = i18n.getReplaced2("grouppattern.jigsawgroup.fewstudents", studentCount, minStudents);
-        GroupPatternUtils.addAlert(result, text);
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.jigsawgroup.title") + ": "  + text);
         result.ok = result.fixable = false;
         return;
     }
@@ -102,7 +102,7 @@ JigsawGroupNumberPattern.prototype.check = function(instanceId, result, previous
     var rangeExplanation = i18n.getReplaced1("grouppattern.jigsawgroup.range", maxJigsawGroups);
     var prefExplanation = i18n.getReplaced3("grouppattern.jigsawgroup.best", studentCount, expertGroupNumber, maxJigsawGroups);
 
-    GroupPatternUtils.compareMinMaxPrefGroupNumber(instanceId, result, previousProposal, this.actId, 2, maxJigsawGroups, maxJigsawGroups, rangeExplanation, prefExplanation);
+    GroupPatternUtils.compareMinMaxPrefGroupNumber(instanceId, result, previousProposal, this.actId, 2, maxJigsawGroups, maxJigsawGroups, i18n.get("grouppattern.jigsawgroup.title") + ": "  + rangeExplanation, i18n.get("grouppattern.jigsawgroup.title") + ": " + prefExplanation);
 };
 
 GroupPatternManager.registerPatternFactory("gn", JigsawGroupNumberPatternFactory);

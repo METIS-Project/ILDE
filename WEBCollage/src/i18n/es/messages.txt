@@ -812,7 +812,7 @@ groupPattern.notAsignedSomeTeachers=Hay profesores no asignados a la fase
 groupPattern.notAsignedSomeTeachers.help=Podría querer que cada profesor esté asignado a la fase
 
 groupPattern.updatesNeeded.alert=${0} actualizaciones más serán necesarias para actualizar esta.
-groupPattern.baddependencies=Algunas fases deben ser comprobadas antes de que se pueda actualizar esta.
+groupPattern.baddependencies=Algunas dependencias deben ser comprobadas antes de que se pueda actualizar esta fase.
 
 groupPattern.management.dialogtitle=Gestión de patrones de grupos
 groupPattern.managment.newgn=Añadir patrón de número de grupos

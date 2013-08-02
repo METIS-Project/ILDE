@@ -1,4 +1,5 @@
 grouppattern.jigsawgroup.title=Jigsaw Groups
+grouppattern.jigsawgroup.title.alert=<font color='brown'>Jigsaw Groups</font>
 grouppattern.jigsawgroup.info=Nothing needs to be fixed. You want the group number <br/> depends on the number of both available students and <br/> expert groups
 
 grouppattern.jigsawgroup.fewexpertgroups=We need more than one Expert group in order to configure Jigsaw groups.

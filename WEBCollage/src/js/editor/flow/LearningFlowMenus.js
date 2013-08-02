@@ -130,7 +130,7 @@ var LearningFlowMenus = {
                 }
                 items.push({
                     label: i18n.get("learningflow.asignarparticipantes"),
-                    icon: "edit",
+                    icon: "adduser",
                     onClick: function(data) {
                         InstanceStudentManagement.showStudents(data.idInstancia, data.clfp);
                     },

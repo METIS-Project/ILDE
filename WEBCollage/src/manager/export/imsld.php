@@ -103,7 +103,8 @@ function IMSLDInstanceExport($ldid, $design, $instance) {
     IMSLDPrepareFolder($folder);
     IMSLDCreateDesign($folder, $design, $uolid);
     IMSLDInstanceCreateManifest($folder, $instance, $design, $uolid);
-    $url = IMSLDZipUgly($folder, $ldid);
+    $url = IMSLDZipSmart($folder, $ldid);
+    //$url = IMSLDZipUgly($folder, $ldid);
     IMSLDPrepareDownload($url);
 }
 
@@ -116,7 +117,9 @@ function LdshakeIMSLDInstanceExport($ldid, $design, $instance) {
     IMSLDPrepareFolder($folder);
     IMSLDCreateDesign($folder, $design, $uolid);
     IMSLDInstanceCreateManifest($folder, $instance, $design, $uolid);
-    $url = IMSLDZipUgly($folder, $ldid);
+    $url = IMSLDZipSmart($folder, $ldid);
+    //$url = IMSLDZipUgly($folder, $ldid);
+    //
     //$pos = strpos($url, "manager");
     //$url = substr($url, $pos);
     return $url;
@@ -134,6 +137,55 @@ function IMSLDZipUgly($folder, $name) {
     $cmd = "cd $folder;zip -r $name.zip *";
     exec($cmd);
     return $filename;
+}
+
+function IMSLDZipSmart($folder, $name) {
+    $filename = "$folder/$name.zip";
+    //Create the zip file
+    $zip = new ZipArchive();
+    if ($zip->open($filename, ZIPARCHIVE::CREATE)==TRUE){
+        //If it opens the file, there aren't any files with that name
+        zipFolder($folder, $zip, $folder);
+        $zip->close();
+    }
+    return $filename;
+}
+
+function zipFolder($folder, $zip, $base_folder) {
+    //Check it is a directory
+    if (is_dir($folder)) {
+        if (($df = opendir($folder)) !== false) {
+            $base = explode($base_folder, $folder);
+            if (count($base) >= 2 && strcmp($base[1], "") != 0) {
+                //Avoid the '/' character
+                $base_path = substr($base[1], 1);
+            } else {
+                $base_path = "";
+            }
+            if (strlen($base_path) > 0) {
+                $zip->addEmptyDir($base_path);
+            }
+            while (($file = readdir($df)) !== false) {
+                if (is_dir($folder . "/" . $file) && $file != "." && $file != "..") {
+
+                    zipFolder($folder . "/" . $file, $zip, $base_folder);
+                } elseif (is_file($folder . "/" . $file) && $file != "." && $file != "..") {
+                    $base = explode($base_folder, $folder);
+                    if (count($base) >= 2 && strcmp($base[1], "") != 0) {
+                        $base_path = substr($base[1], 1);
+                    } else {
+                        $base_path = "";
+                    }
+                    if (strlen($base_path) == 0) {
+                        $zip->addFile($folder . "/" . $file, $file);
+                    } else {
+                        $zip->addFile($folder . "/" . $file, $base_path . "/" . $file);
+                    }
+                }
+            }
+            closedir($df);
+        }
+    }
 }
 
 function IMSLDZipAddFolder($zip, $folder, $path) {

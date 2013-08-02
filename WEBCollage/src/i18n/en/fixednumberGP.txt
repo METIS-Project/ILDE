@@ -1,4 +1,5 @@
 grouppattern.fixednumbergroups.title=Fixed Group Number
+grouppattern.fixednumbergroups.title.alert=<font color='brown'>Fixed Group Number</font>
 grouppattern.fixednumbergroups.info=The group number is fixed. You want to set explicitly <br/> how many groups there are in the phase.
 grouppattern.fixednumbergroups.number=The specified number of groups is ${0}
 grouppattern.fixednumbergroups.unspecified=Group number not specified.

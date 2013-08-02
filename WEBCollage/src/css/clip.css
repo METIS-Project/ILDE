@@ -39,7 +39,7 @@
 }
 
 .clipContent {
-    max-height: 330px;
+    max-height: 300px;
     min-height: 250px;
     overflow: auto;
 }

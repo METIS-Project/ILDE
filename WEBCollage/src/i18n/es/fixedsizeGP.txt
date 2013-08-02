@@ -1,0 +1,19 @@
+grouppattern.fixedsizegroups.title=Tamaño de grupos Fijo
+grouppattern.fixedsizegroups.title.alert=<font color='brown'>Tamaño de grupos Fijo</font>
+grouppattern.fixedsizegroups.info=El tamaño de los grupos es fijo. Quiere que el número de grupos <br/> dependa del número de estudiantes disponibles para esta fase.
+
+grouppattern.fixedsizegroups.number=Debido a que ${0}, podemos tener ${1} de tamaño ${2}
+grouppattern.fixedsizegroups.students.one=1 estudiante
+grouppattern.fixedsizegroups.students.several=hay ${0} estudiantes
+grouppattern.fixedsizegroups.group.one=1 grupo
+grouppattern.fixedsizegroups.group.several=${0} grupos
+
+grouppattern.fixedsizegroups.unspecified=Tamaño de grupo no especificado
+
+
+grouppattern.fixedsizegroups.menuitem.number=Establecer el tamaño de los grupos (actualmente ${0})
+grouppattern.fixedsizegroups.menuitem.unspecified=Establecer el tamaño de los grupos (no especificado)
+
+help.grouppattern.fixedsizegroups.menuitem=Esto establece el tamaño de los grupos para esta fase, el número de estudiantes deseado en cada grupo.
+
+grouppattern.fixedsizegroups.dialog.title=Seleccione el tamaño de los grupos deseado:

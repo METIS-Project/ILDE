@@ -1,4 +1,5 @@
 grouppattern.fixedsizegroups.title=Fixed Group Size
+grouppattern.fixedsizegroups.title.alert=<font color='brown'>Fixed Group Size</font>
 grouppattern.fixedsizegroups.info=The group size is fixed. You want the group number <br/> depends on how many students there are available <br/> for this phase.
 
 grouppattern.fixedsizegroups.number=Since there ${0}, we can have ${1} of size ${2}

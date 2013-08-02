@@ -48,10 +48,10 @@ FixedNumberGroupPattern.prototype.getInfo = function() {
  */
 FixedNumberGroupPattern.prototype.check = function(instanceId, result, proposed) {
     if (this.number > 0) {
-        var text = i18n.getReplaced1("grouppattern.fixednumbergroups.number", this.number)
+        var text = i18n.get("grouppattern.fixednumbergroups.title") + ": " + i18n.getReplaced1("grouppattern.fixednumbergroups.number", this.number)
         GroupPatternUtils.compareExactGroupNumber(instanceId, result, proposed, this.actId, this.number, text);
     } else {
-        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.fixednumbergroups.unspecified"));
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.fixednumbergroups.title") + ": " + i18n.get("grouppattern.fixednumbergroups.unspecified"));
     }
 };
 

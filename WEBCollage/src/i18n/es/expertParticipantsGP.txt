@@ -1,0 +1,11 @@
+grouppattern.expertgroupparticipants.title=Distribución de grupos de expertos
+grouppattern.expertgroupparticipants.title.alert=<font color='brown'>Distribución de grupos de expertos</font>
+grouppattern.expertgroupparticipants.info=No es necesario fijar nada. Quiere que los estudiantes de <br/> cada grupo de Jigsaw se distribuyan entre los grupos de <br/> expertos de modo que todos los grupos de expertos tengan <br/> el mismo tamaño.
+
+grouppattern.expertgroupparticipants.notinjg=Algunos expertos no están en ningún grupo de Jigsaw. Deberían eliminarse de los grupos de expertos.
+
+grouppattern.expertgroupparticipants.2manyfromjg=Algunos grupos de expertos tienen demasiados estudiantes del mismo grupo de Jigsaw
+grouppattern.expertgroupparticipants.smalljg=Algunos grupos de Jigsaw son demasiado pequeños!
+grouppattern.expertgroupparticipants.distribute=Algunos estudiantes necesitan ser distribuidos de los Grupos de Jigsaw a los Grupos de Expertos.
+
+grouppattern.expertgroupparticipants.ok=Todos los estudiantes están bien distribuidos. 

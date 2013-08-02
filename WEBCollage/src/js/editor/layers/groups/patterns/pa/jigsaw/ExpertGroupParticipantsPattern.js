@@ -98,7 +98,7 @@ ExpertGroupParticipantsPattern.prototype.check = function(instanceId, result, pr
     }
 
     if (eNotInJG.length > 0) {
-        var text = i18n.GroupPatternUtils.addAlert(result, i1n8.get("grouppattern.expertgroupparticipants.notinjg"));
+        var text = i18n.GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.title") + ": " + i1n8.get("grouppattern.expertgroupparticipants.notinjg"));
         needToFix = true;
     }
 
@@ -141,13 +141,13 @@ ExpertGroupParticipantsPattern.prototype.check = function(instanceId, result, pr
     }
     if (removed) {
         needToFix = true;
-        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.2manyfromjg"));
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.title") + ": " + i18n.get("grouppattern.expertgroupparticipants.2manyfromjg"));
     }
 
     if (badJG.length > 0) {
         needToFix = true;
         canFix = false;
-        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.smalljg"));
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.title") + ": " + i18n.get("grouppattern.expertgroupparticipants.smalljg"));
     } else {
         /* add available students from JG to EG */
         var added = false;
@@ -176,7 +176,7 @@ ExpertGroupParticipantsPattern.prototype.check = function(instanceId, result, pr
         }
         if (added) {
             needToFix = true;
-            GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.distribute"));
+            GroupPatternUtils.addAlert(result, i18n.get("grouppattern.expertgroupparticipants.title") + ": " + i18n.get("grouppattern.expertgroupparticipants.distribute"));
         }
     }
 

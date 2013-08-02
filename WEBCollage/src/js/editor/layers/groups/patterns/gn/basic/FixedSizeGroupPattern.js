@@ -46,10 +46,11 @@ FixedSizeGroupPattern.prototype.check = function(instanceId, result, proposed) {
         var studentCount = Context.getAvailableStudents(this.clfpId, instanceId).length;
         var n = Math.max(1, Math.floor(studentCount / this.number));
 
-        var text = i18n.getReplaced("grouppattern.fixedsizegroups.number", [(studentCount == 1 ? i18n.get("grouppattern.fixedsizegroups.students.one") : i18n.getReplaced1("grouppattern.fixedsizegroups.students.several", studentCount)), (n == 1 ? i18n.get("grouppattern.fixedsizegroups.group.one") : i18n.getReplaced1("grouppattern.fixedsizegroups.group.several", n)), this.number]);
+        var text = i18n.get("grouppattern.fixedsizegroups.title") + ": ";
+        text += i18n.getReplaced("grouppattern.fixedsizegroups.number", [(studentCount == 1 ? i18n.get("grouppattern.fixedsizegroups.students.one") : i18n.getReplaced1("grouppattern.fixedsizegroups.students.several", studentCount)), (n == 1 ? i18n.get("grouppattern.fixedsizegroups.group.one") : i18n.getReplaced1("grouppattern.fixedsizegroups.group.several", n)), this.number]);
         GroupPatternUtils.compareExactGroupNumber(instanceId, result, proposed, this.actId, n, text);
     } else {
-        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.fixedsizegroups.unspecified"));
+        GroupPatternUtils.addAlert(result, i18n.get("grouppattern.fixedsizegroups.title") + ": " + i18n.get("grouppattern.fixedsizegroups.unspecified"));
     }
 };
 

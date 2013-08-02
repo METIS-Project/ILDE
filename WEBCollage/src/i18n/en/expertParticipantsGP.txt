@@ -1,4 +1,5 @@
 grouppattern.expertgroupparticipants.title=Expert group distribution
+grouppattern.expertgroupparticipants.title.alert=<font color='brown'>Expert group distribution</font>
 grouppattern.expertgroupparticipants.info=Nothing needs to be fixed. You want the students <br/> in each jigsaw group to be distributed among the <br/> expert groups so that every expert group has the <br/> same size.
 
 grouppattern.expertgroupparticipants.notinjg=Some experts are in no Jigsaw group. They should be removed from Expert groups.

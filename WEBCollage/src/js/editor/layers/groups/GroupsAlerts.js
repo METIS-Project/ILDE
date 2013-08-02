@@ -21,6 +21,13 @@ var GroupsAlerts = {
     paintGroupPatternsAlerts : function(block, flowRenderer, participantFlow) {
         for (var i = 0; i < block.renderClfps.length; i++) {
             if (i==0) {
+                if (block.renderClfps[i].scale < 1){
+                    var closerx = 7;
+                    var closery = 4;
+                }else{
+                    var closerx = 0;
+                    var closery = 0;
+                }
                 //Obtener y pintar alertas a la izquierda
                 var alerts = GroupsAlerts.showSideAlert(block.renderClfps, flowRenderer, "left");
                 if (alerts){
@@ -29,10 +36,10 @@ var GroupsAlerts = {
                     var imageLeftGroup = flowRenderer.bigGroup.createGroup();
 
                     var imageLeft = imageLeftGroup.createImage({
-                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 - 62,
-                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
-                        width : 18,
-                        height : 18,
+                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 - 56 + closerx,
+                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32 + closery,
+                        width : 20 * block.renderClfps[i].scale,
+                        height : 20 * block.renderClfps[i].scale,
                         src : "images/icons/person.png"
                     });
                     flowRenderer.animator.addNoAnimStuff(imageLeft);
@@ -52,6 +59,13 @@ var GroupsAlerts = {
             }
 
             if (i==0) {
+                if (block.renderClfps[i].scale < 1){
+                    var closerx = - 2;
+                    var closery = 4;
+                }else{
+                    var closerx = 0;
+                    var closery = 0;
+                }
                 //Obtener y pintar alertas a la derecha
                 alerts = GroupsAlerts.showSideAlert(block.renderClfps, flowRenderer, "right");
                 if (alerts){
@@ -61,10 +75,10 @@ var GroupsAlerts = {
                     var imageRightGroup = flowRenderer.bigGroup.createGroup();
 
                     var imageRight = imageRightGroup.createImage({
-                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 + 62 - 18,
-                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32,
-                        width : 18,
-                        height : 18,
+                        x : flowRenderer.graphicElements.clfps[clfp.id].x + flowRenderer.graphicElements.clfps[clfp.id].width / 2 + 44 + closerx,
+                        y : flowRenderer.graphicElements.clfps[clfp.id].y - 32 + closery,
+                        width : 20 * block.renderClfps[i].scale,
+                        height : 20 * block.renderClfps[i].scale,
                         src : "images/icons/person.png"
                     });
                     flowRenderer.animator.addNoAnimStuff(imageRight);
@@ -93,7 +107,7 @@ var GroupsAlerts = {
                 var actid = block.renderClfps[i].clfp.flow[j].id;
                 var posx = participantFlow.acts[actid].x;
                 var posy = participantFlow.acts[actid].y;
-                var size = 16;
+                var size = 20;
                 var halfsize = size / 2;
                 var distance = 40;
                 var listGnPatterns = GroupPatternManager.getFactoriesSupportedAct("gn", actid, clfpid);
@@ -108,13 +122,22 @@ var GroupsAlerts = {
 
                     //Pintar cuadrado para las opciones del patrón de grupo
                     var circleGroup = flowRenderer.bigGroup.createGroup();
-                    var circle = circleGroup.createRect({
+                    /*var circle = circleGroup.createRect({
                         x : posx + (distance * block.renderClfps[i].scale) - halfsize,
                         y : posy - halfsize,
                         width : size,
                         height : size
                     }).setFill(this.circlePaint.fill).setStroke(this.circlePaint.stroke);
+                    flowRenderer.animator.addNoAnimStuff(circle);*/
+                    var circle = circleGroup.createImage({
+                        x : posx + (distance * block.renderClfps[i].scale) - halfsize,
+                        y : posy - halfsize * block.renderClfps[i].scale,
+                        width : size * block.renderClfps[i].scale,
+                        height : size * block.renderClfps[i].scale,
+                        src: "images/icons/setting_pattern.png"
+                    });
                     flowRenderer.animator.addNoAnimStuff(circle);
+                    
                     //Añadir menú de opciones del patrón de grupo
                     MenuManager.registerThing(circle, {
                         getItems : function(data) {
@@ -133,13 +156,18 @@ var GroupsAlerts = {
                 //Pintar alertas de la fase
                 alerts = GroupsAlerts.getActAlerts(block.renderClfps[i].clfp, block.renderClfps[i].clfp.flow[j], flowRenderer, instanceid);
                 if (alerts.length > 0) {
-                    var alertdistance = 5;
+                    if (block.renderClfps[i].scale < 1){
+                        var alertdistance = 3;
+                    }else{
+                        var alertdistance = 16;
+                    }
+
                     var imageActGroup = flowRenderer.bigGroup.createGroup();
                     var imageAct = imageActGroup.createImage({
-                        x : posx + halfsize + alertdistance + (distance * block.renderClfps[i].scale),
-                        y : posy - halfsize,
-                        width : 18,
-                        height : 18,
+                        x : posx + (distance * block.renderClfps[i].scale) + alertdistance,
+                        y : posy - halfsize * block.renderClfps[i].scale,
+                        width : size * block.renderClfps[i].scale,
+                        height : size * block.renderClfps[i].scale,
                         src : "images/icons/person.png"
                     });
                     flowRenderer.animator.addNoAnimStuff(imageAct);

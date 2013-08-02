@@ -67,7 +67,7 @@ GroupParticipantsDistributePattern.prototype.check = function(instanceId, result
         explanation = i18n.getReplaced2("grouppattern.groupparticipantsdistribute.noexact", m, m + 1);
     }
 
-    GroupPatternUtils.fixParticipantMovements(students, result, previousProposal, movements, explanation);
+    GroupPatternUtils.fixParticipantMovements(students, result, previousProposal, movements, i18n.get("grouppattern.groupparticipantsdistribute.title") + ": " + explanation);
 };
 
 GroupPatternManager.registerPatternFactory("pa", GroupParticipantsDistributePatternFactory);

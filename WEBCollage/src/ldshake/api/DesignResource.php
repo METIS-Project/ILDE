@@ -582,7 +582,7 @@ class DesignResource {
     private function generate_zip_summary($data){
     
         $html = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-        $html .= '<html ><head>';
+        $html .= '<html><head>';
         $html .= '<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">';
         $html .= '<link rel="stylesheet" type="text/css" href="css/summary.css"/>';
         $html .= '<script type="text/javascript" src="js/TableGeneratorServer.js"></script>';

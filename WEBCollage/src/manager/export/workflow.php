@@ -132,7 +132,8 @@ function WorkflowInstanceExport($ldid, $design, $instance) {
 
 	WorkflowPrepareFolder($folder);
 	WorkflowCreateManifests($folder, $instance, $design, $uolid);
-	$url = WorkflowZipUgly($folder, $ldid);
+        $url = WorkflowZipSmart($folder, $ldid);
+	//$url = WorkflowZipUgly($folder, $ldid);
 	WorkflowPrepareDownload($url);
 }
 
@@ -148,11 +149,22 @@ function WorkflowZipUgly($folder, $name) {
 	return $filename;
 }
 
+function WorkflowZipSmart($folder, $name) {
+    $filename = "$folder/$name.zip";
+    //Create the zip file
+    $zip = new ZipArchive();
+    if ($zip->open($filename, ZIPARCHIVE::CREATE)==TRUE){
+        //If it opens the file, there aren't any files with that name
+        zipFolder($folder, $zip, $folder);
+        $zip->close();
+    }
+    return $filename;
+}
+
 function WorkflowPrepareDownload($url) {
 	$json = new Services_JSON();
 	echo $json->encode(array("ok" => true, "url" => "manager/$url"));
 }
-
 
 
 

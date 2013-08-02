@@ -82,10 +82,10 @@ ExpertGroupNumberPattern.prototype.menuItemClicked = function(index) {
  */
 ExpertGroupNumberPattern.prototype.check = function(instanceId, result, previousProposal) {
     if (this.subproblemCount > 1) {
-        var text = i18n.getReplaced1("grouppattern.expertgroup.number.alert", this.subproblemCount);
+        var text = i18n.get("grouppattern.expertgroup.title") + ": " + i18n.getReplaced1("grouppattern.expertgroup.number.alert", this.subproblemCount);
         GroupPatternUtils.compareExactGroupNumber(instanceId, result, previousProposal, this.actId, this.subproblemCount, text);
     } else {
-        GroupPatternUtils.compareMinGroupNumber(instanceId, result, previousProposal, this.actId, 2, i18n.get("grouppattern.expertgroup.nonumber.alert"));
+        GroupPatternUtils.compareMinGroupNumber(instanceId, result, previousProposal, this.actId, 2, i18n.get("grouppattern.expertgroup.title") + ": " + i18n.get("grouppattern.expertgroup.nonumber.alert"));
     }
 };
 
