@@ -160,6 +160,18 @@ SQL;
 
 function lds_page_handler ($page)
 {
+    global $CONFIG;
+
+    $user = get_loggedin_userid();
+
+    $last_visit = isset($_SESSION['last_visit']) ? $_SESSION['last_visit'] : 0;
+    $_SESSION['last_visit'] = time();
+
+    if($last_visit - time() > 600)
+        $CONFIG->site->annotate('unique_visit','1',2, $user);
+
+    $CONFIG->site->annotate('page_visit','1',2, $user);
+
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
@@ -2237,8 +2249,12 @@ function lds_treebuilder($lds_id) {
     $tree = array();
     $lds = get_entity($lds_id);
     $user = get_user($lds->owner_guid);
-    $tree['name'] = $lds->title . ' (' . $user->username . ')';
+    $tree['title'] = $lds->title;
+    $tree['name'] = $user->name;
+    $tree['username'] = $user->username;
     $tree['lds_guid'] = $lds->guid;
+    $tree['owner_icon'] = $user->getIcon('small');
+    $tree['tags_html'] = lds_viewTools::all_tag_display ($lds);
     if($children = get_entities_from_metadata('parent', $lds->guid, 'object', 'LdS', 0 , 9999)) {
         $tree['children'] = array();
 
@@ -2260,7 +2276,8 @@ function lds_exec_tree ($params)
     $lds = get_entity($params[1]);
     $vars['lds'] = $lds;
 
-    while($lds->parent)
+    $i=0;
+    while($lds->parent && ($i++)<2)
         $lds = get_entity($lds->parent);
 
     $tree = lds_treebuilder($lds->guid);
@@ -2280,7 +2297,18 @@ function lds_exec_tree ($params)
 function lds_exec_datatracking ($params) {
     global $CONFIG;
 
-    $body = elgg_view('lds/tracking');
+    $vars['nUsers'] = get_entities('user','',0,'',9999, 0, true);
+    $vars['nGroups'] = get_entities('group','',0,'',9999, 0, true);
+
+    $vars['nPublished']    = get_entities_from_metadata('published','1','object','LdS_document',0,9999,0,'', 0, true)
+                        + get_entities_from_metadata('published','1','object','LdS_document_editor',0,9999,0,'', 0, true);
+
+
+    /*
+    $vars['uVisits'] = $CONFIG->site->countAnnotations('unique_visit');
+    $vars['pVisits'] = $CONFIG->site->countAnnotations('page_visit');
+    */
+    $body = elgg_view('lds/tracking', $vars);
     echo page_draw(T('Tracking'), $body);
 
 }
@@ -2292,6 +2320,9 @@ function lds_exec_tracking ($params)
     switch($params[1]) {
         case 'tool':
             lds_tracking_tool();
+            break;
+        case 'groups':
+            lds_tracking_groups();
             break;
         case 'userweeks':
             lds_tracking_user_reviews();
@@ -2336,7 +2367,7 @@ function lds_exec_404 ($view = '')
 function lds_exec_patterns ($params)
 {
     $body = elgg_view('lds/patterns');
-    page_draw($title, $body);
+    page_draw("", $body);
 }
 
 function lds_exec_query ($params) {

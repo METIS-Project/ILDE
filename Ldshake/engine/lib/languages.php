@@ -89,8 +89,10 @@
 				$language = $CONFIG->language;
 				
 			if (isset($CONFIG->translations[$language][$message_key])) {
+                //exec('echo \''. $message_key .' => '.$CONFIG->translations[$language][$message_key].'\' >> /var/lib/ldshake/en.txt');
 				return $CONFIG->translations[$language][$message_key];
 			} else if (isset($CONFIG->translations["en"][$message_key])) {
+                //exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
 				return $CONFIG->translations["en"][$message_key];
 			}
 				

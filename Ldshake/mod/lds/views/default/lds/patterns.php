@@ -60,8 +60,16 @@
                 <form id="searchqueryform" action="<?php echo $vars['url']; ?>pg/lds/query" method="get">
 					
 					<input type="text" size="50" name="q" placeholder="Search" id="searchqueryform" />
-                                        <span id="two_column_right_down_query"><a href="<?php echo lds_viewTools::getUrl() ?>"><img src="<?php echo $vars['url']; ?>mod/lds/images/search.png" /></a></span>
-		
+
+                                                <input type="submit" value="" style="
+                                                        background: url(<?php echo $vars['url']; ?>mod/lds/images/search.png);
+                                                        width: 19px;
+                                                        height: 16px;
+                                                        border: 0px;
+                                                        padding: 0px;
+                                                        margin: 0px;
+                                                    ">
+
              
                 </form>
              

@@ -62,7 +62,7 @@
 		#doc {
 			padding: 20px;
 			font-family: Helvetica, Arial, sans-serif;
-			font-size: 18px;
+			font-size: 12pt;
 			line-height: 1.6em;
 		}
 	</style>

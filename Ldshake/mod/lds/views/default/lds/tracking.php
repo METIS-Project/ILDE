@@ -42,7 +42,9 @@ extract($vars);
 </div>
 
 <pre>
-<a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number and list of designs created with each tool by each user</a>
+
+<a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number of designs created with each tool</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_tool";?>">Number and list of designs created with each tool by each user</a>
 
 Produce a LD
 Number of designs produced by each user
@@ -59,12 +61,11 @@ Number of users with whom a design has been shared with editing right
 Number of users with whom a design has been shared with view right
 users with whom a design has been shared with editing right
 users with whom a design has been shared with view right
-
 Number of designs shared with others with editing rights
 List of designs shared with others with editing rights
 
-Number of private designs (no shared, no view / editing rights for others)
 <a href="<?php echo $url ."pg/lds/tracking/ldsprivate";?>">List of private designs</a>
+Number of private designs (no shared, no view / editing rights for others)
 
 
 <a href="<?php echo $url ."pg/lds/tracking/ldsimplemented";?>">Instantiate (Implement) a LD</a>
@@ -72,7 +73,7 @@ Number of designs associated to at least a VLE
 List of designs associated to at least a VLE by implementer
 Number of implementations (design associated to VLEs) for a design
 
-Deploy an instantiated LD
+Deploy an instantiated LD (2nd prototype)
 Number of times a deployment package is created for a design (to be coordinated with UVa-GLUEPS)
 
 <a href="<?php echo $url ."pg/lds/tracking/ldscomments";?>">Provide feedback on a LD</a>
@@ -83,11 +84,18 @@ Number of times a user viewed a design (by user and by design)
 Number of times a design has been viewed by user and by design)
 
 
-Number of members in the community
+Number of members in the community: <?php echo $nUsers;?>
+
+
+-<a href="<?php echo $url ."pg/lds/tracking/groups";?>">Groups</a>
 Number of groups
 Number of members in each group
-Number of designs published (accessible outside LdShake)
+
+Number of designs published (accessible outside LdShake): <?php echo $nPublished;?>
+
+
 Visits to the site / pages
-Number of designs created with each tool
+
+
 
 </pre>

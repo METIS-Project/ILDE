@@ -46,6 +46,7 @@ class LdSObject extends ElggObject
 	public function __construct($guid = null)
 	{
 		parent::__construct($guid);
+        $this->access_id = 2;
 	}
 	
 	public function getURL()

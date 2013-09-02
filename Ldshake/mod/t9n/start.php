@@ -133,7 +133,9 @@ function t9n_exec_parseViews ($page) {
  */
 function T ($copy) {
  	global $CONFIG;
-	
+
+    //exec('echo \''. $copy .' ==> '.$copy.'\' >> /var/lib/ldshake/en.txt');
+
 	$vars = func_get_args ();
 	array_shift($vars);
 

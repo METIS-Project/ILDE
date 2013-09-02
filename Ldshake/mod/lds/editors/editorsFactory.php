@@ -90,7 +90,7 @@ class richTextEditor extends Editor
         if($title)
             $lds->title = $title;
         $lds->subtype = $this->_lds->getSubtype();
-        $lds->access_id = $this->_lds->access_id;
+        $lds->access_id = 2;
         $lds->granularity = 0;
         $lds->completeness = 0;
         $lds->cloned = 1;
@@ -124,6 +124,7 @@ class richTextEditor extends Editor
             $newdoc->save();
         }
 
+        //TODO: fix non existing subtype on empty database
         if($editordocument = get_entities_from_metadata('lds_guid',$this->_lds->guid,'object','LdS_document_editor', 0, 100)) {
             foreach($editordocument as $e_d) {
                 $em = EditorsFactory::getInstance($e_d);

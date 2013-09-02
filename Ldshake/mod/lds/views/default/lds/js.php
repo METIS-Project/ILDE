@@ -40,7 +40,7 @@
 if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'):
 ?>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/autoSuggest/jquery.autoSuggest.js<?php echo "?q=".rand(1,9999); ?>"></script>
-	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor/ckeditor.js<?php echo "?q=".rand(1,9999); ?>"></script>
+	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor/ckeditor.js<?php echo "?q=0001"; ?>"></script>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor/adapters/jquery.js"></script>
 	<?php
 	echo Utils::getJsDeclaration('lds', 'lds-share');
@@ -60,7 +60,7 @@ if (get_context() == 'lds_exec_viewrevision' || get_context() == 'lds_exec_viewr
 	echo Utils::getJsDeclaration('lds', 'lds-revision');
 endif;
 if (get_context() == 'lds_exec_tree'): ?>
-    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="<?php echo $vars['url'] ?>vendors/d3/d3.v3.min.js" charset="utf-8"></script>
 <?php
     echo Utils::getJsDeclaration('lds', 'lds-tree');
 

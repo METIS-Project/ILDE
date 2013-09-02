@@ -1991,7 +1991,9 @@ p.MsoListParagraph {
 }
 
 /***** tree diagram *****/
-.tree .node {
+.tree .node .title,
+.tree .node .expand,
+.tree .node .username{
     cursor: pointer;
 }
 

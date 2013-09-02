@@ -420,7 +420,7 @@ function lds_tracking_user_reviews_months() {
 
 }
 
-function lds_tracking_tool() {
+function lds_tracking_user_tool() {
 
     $header = array("user id", "username", "Design Pattern (number)", "Design Pattern", "Design Narrative (number)", "Design Narrative", "Persona Card (number)", "Persona Card", "Factors and Concerns (number)", "Factors and Concerns","Heuristic Evaluation (number)","Heuristic Evaluation","Course Map (number)", "Course Map", "CompendiumLD (number)","CompendiumLD","Image (number)","Image","WebCollage (number)","WebCollage","OpenGLM (number)","OpenGLM", "CADMOS (number)", "CADMOS");
 
@@ -490,10 +490,83 @@ function lds_tracking_tool() {
 
     }
 
-    lds_echocsv($header, $data, "tool");
-
-
+    lds_echocsv($header, $data, "user_tool");
 }
+
+function lds_tracking_tool() {
+
+    $header = array("tool", "number of designs");
+
+    $data = array();
+
+
+    //count designs
+    $editor_subtypes = array(
+        array('design_pattern', "Design Pattern"),
+        array('MDN', "Design Narrative"),
+        array('PC', "Persona Card"),
+        array('FC', "Factors and Concerns"),
+        array('HE', "Heuristic Evaluation"),
+        array('coursemap', "Course Map"),
+    );
+
+    $editor_types = array(
+        array('cld', "CompendiumLD"),
+        array('image', "Image"),
+        array('webcollagerest', "WebCollage"),
+        array('openglm', "OpenGLM"),
+        array('cadmos', "CADMOS"),
+    );
+
+
+
+    foreach($editor_subtypes as $e_s) {
+        $row = array();
+        $ldss = get_entities_from_metadata('editor_subtype',$e_s[0], 'object', 'LdS', 0, 9999);
+        if(!$ldss)
+            $ldss = array();
+
+        $row[] = $e_s[1];
+        $row[] = count($ldss);
+
+        $data[] = $row;
+
+    }
+
+    foreach($editor_types as $e_t) {
+        $row = array();
+        $ldss = get_entities_from_metadata('editor_type',$e_t[0], 'object', 'LdS', $user->guid, 9999);
+        if(!$ldss)
+            $ldss = array();
+
+        $row[] = $e_t[1];
+        $row[] = count($ldss);
+
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, "tool");
+}
+
+
+function lds_tracking_groups() {
+    $header = array("group id", "group name", "members");
+
+
+    $data = array();
+
+    $groups = get_entities('group','',0,'',9999);
+    if($groups)
+        foreach($groups as $group) {
+            $group_data = array();
+            $group_data[] = $group->guid;
+            $group_data[] = $group->name;
+            $group_data[] = $group->getMembers(9999, 0, true);
+            $data[] = $group_data;
+        }
+    lds_echocsv($header, $data,'groups');
+}
+
 
 function lds_csv_private () {
 
