@@ -22,7 +22,7 @@ var svg = d3.select(".tree").append("svg")
     .attr("id", "g_duplicate_tree")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var maxDepth = 2,
+var maxDepth = 3,
     minDepth = 0;
 
 var exclusivemode = false;
@@ -50,7 +50,7 @@ root.x0 = width / 2;//height / 2;
 root.y0 = 0;//0;
 
 function collapse(d) {
-    if (d.children && d.depth > 1) {
+    if (d.children && d.depth > 2) {
         d._children = d.children;
         d.children = null;
         //update(d);
@@ -184,8 +184,58 @@ function update(source) {
         .style("font-weight", function(d) { return (d.lds_guid == window.lds_guid) ? "bold" : "normal"; });
         */
 
-    if ( navigator.userAgent.indexOf("MSIE")>0 )
+    if ( navigator.userAgent.indexOf("MSIE")>0 || navigator.userAgent.indexOf("Gecko")>0 )
     {
+        var box = nodeEnter.append("g");
+
+        box.append("rect").attr("width",nodeWidth).attr("height",nodeHeight).
+            attr("rx",3).attr("ry",3).
+            attr("fill", "#739c00").
+            attr("stroke", "olive").
+            attr("stroke-width", "2");
+
+        box.append("rect").attr("width",nodeWidth-10).attr("height",30).
+            attr("x",5).attr("y",5).
+            attr("rx",3).attr("ry",3).
+            attr("fill", "#83BE66").
+            attr("stroke", "olive").
+            attr("stroke-width", "2");
+
+        box.append("text").text(function(d) {return d.title.substring(0,12)})
+            .attr("x",10).attr("y",25)
+            .attr("class","title")
+            //.style("display", "block")
+            .style("background-color", "#83BE66")
+            //.style("border-radius", "3px")
+            //.style("padding", "3px")
+            .style("font-size", "20px")
+            .style("color", "#474747")
+            .on("click", function(d){
+                window.location = baseurl + 'pg/lds/view/' + d.lds_guid;
+            });
+
+        box.append("image")
+            .attr("x",10).attr("y",60)
+            .attr("xlink:href",function(d) {return d.owner_icon;})
+            .attr("width",40).attr("height",40);
+
+        box.append("text").text(function(d) {return d.name.substring(0,10)})
+            .attr("x",60).attr("y",80)
+            .attr("class","username")
+            //.style("display", "block")
+            //.style("width", "40px")
+            //.style("float", "left")
+            //.style("background-color", "#83BE66")
+            //.style("border-radius", "3px")
+            //.style("padding", "3px")
+            .style("font-size", "14px")
+            .style("font-weight", "bold")
+            .style("margin-left", "4px")
+            .attr("fill", "#EBEBEB")
+            .on("click", function(d){
+                window.location = baseurl + 'pg/ldshakers/' + d.username;
+            });
+
     }
     else {
         var box = nodeEnter.append("g").append("foreignObject").attr("width",nodeWidth+20).attr("height",nodeHeight)
@@ -223,35 +273,6 @@ function update(source) {
             .append("div").html(function(d) {return d.tags_html})
             .style("width", "1800px")
             .style("height", "5000px");
-
-        nodeEnter
-            .filter(function (d) {
-                return d.lds_guid == lds_guid;
-            })
-            .append("text").attr("transform", function(d) { return "translate(" + (-22) + ", "+(nodeHeight/2 + 7)+")"; })
-            .text("<<")
-            .style("font-size", "15px")
-            .style("font-weight", "bold")
-            .on("click", function(e){
-                //e.stopPropagation();
-                exclusivemode = !exclusivemode;
-                update(root);
-            });
-
-        nodeEnter
-            .filter(function (d) {
-                return d.lds_guid == lds_guid;
-            })
-            .append("text").attr("transform", function(d) { return "translate(" + (nodeWidth + 5) + ", "+(nodeHeight/2 + 7)+")"; })
-            .text(">>")
-            .style("font-size", "15px")
-            .style("font-weight", "bold")
-            .on("click", function(e){
-                //e.stopPropagation();
-                exclusivemode = !exclusivemode;
-                update(root);
-            });
-
 
         var UserBox = box.append("div")
                             //.style("height", "20px")
@@ -312,35 +333,79 @@ function update(source) {
             .style("font-weight","bold")
             .text("+");
             */
-
-        var childIcon = nodeEnter.append("g")
-            //.attr("class", "node")
-            .filter(function (d) {
-                return d.children || d._children;
-            })
-            .attr("transform", function(d) { return "translate(" + nodeWidth/2 + ", " + nodeHeight + ")"; })
-            .on("click", click);
-
-        childIcon.append("circle")
-            .attr("r", 10)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-        childIcon
-            .append("foreignObject").attr("width","20").attr("height","20").attr("transform", "translate(-10,-12)")
-            .append("xhtml:body").style("width", "20px").style("height", "20px")
-            .style("display", "table")
-            .style("overflow", "hidden")
-            .style("background-color", "rgba(0, 0, 0, 0)")
-            .append("div")
-            .attr("class","expand")
-            .style("width", "100%").style("height", "100%")
-            .style("display", "table-cell")
-            .style("text-align","center")
-            .style("vertical-align","middle")
-            .style("font-size","17px")
-            .style("font-weight","bold")
-            .text("+");
     }
+
+    node
+        .filter(function (d) {
+            return d.lds_guid == lds_guid;
+        })
+        .append("text").attr("transform", function(d) { return "translate(" + (-22) + ", "+(nodeHeight/2 + 7)+")"; })
+        .text("<<")
+        .style("font-size", "15px")
+        .style("font-weight", "bold")
+        .on("click", function(e){
+            //e.stopPropagation();
+            exclusivemode = !exclusivemode;
+            update(root);
+        });
+
+    node
+        .filter(function (d) {
+            return d.lds_guid == lds_guid;
+        })
+        .append("text").attr("transform", function(d) { return "translate(" + (nodeWidth + 5) + ", "+(nodeHeight/2 + 7)+")"; })
+        .text(">>")
+        .style("font-size", "15px")
+        .style("font-weight", "bold")
+        .on("click", function(e){
+            //e.stopPropagation();
+            exclusivemode = !exclusivemode;
+            update(root);
+        });
+
+    var childIcon = nodeEnter.append("g")
+        //.attr("class", "node")
+        .filter(function (d) {
+            return d.children || d._children;
+        })
+        .attr("transform", function(d) { return "translate(" + nodeWidth/2 + ", " + nodeHeight + ")"; })
+        .on("click", click);
+
+    childIcon.append("circle")
+        .attr("r", 10)
+        .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
+
+
+    childIcon.filter(function (d) {
+            return d.children || d._children;
+        })
+        .append("text").text("")
+        .attr("class","state")
+        .attr("x",-5).attr("y",6)
+        .style("margin-left", "4px")
+        .style("color", "black")
+        .style("cursor", "pointer")
+        .style("font-size","17px")
+        .style("font-weight","bold");
+
+    /*
+    childIcon
+        .append("foreignObject").attr("width","20").attr("height","20").attr("transform", "translate(-10,-12)")
+        .append("xhtml:body").style("width", "20px").style("height", "20px")
+        .style("display", "table")
+        .style("overflow", "hidden")
+        .style("background-color", "rgba(0, 0, 0, 0)")
+        .append("div")
+        .attr("class","expand")
+        .style("width", "100%").style("height", "100%")
+        .style("display", "table-cell")
+        .style("text-align","center")
+        .style("vertical-align","middle")
+        .style("font-size","17px")
+        .style("font-weight","bold")
+        .text("+");
+        */
+
 
     // Transition nodes to their new position.
 
@@ -358,6 +423,26 @@ function update(source) {
         .attr("r", 10)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
         ;
+
+    nodeUpdate.select("text.state")
+        .filter(function (d) {
+            return d.children || d._children;
+        })
+        .filter(function (d) {
+            return d.children != null;
+        })
+        .text("-")
+        .attr("x",-3).attr("y",4);
+
+    nodeUpdate.select("text.state")
+        .filter(function (d) {
+            return d.children || d._children;
+        })
+        .filter(function (d) {
+            return d.children == null;
+        })
+        .text("+")
+        .attr("x",-5).attr("y",6);
 
 
     nodeUpdate.select("text")

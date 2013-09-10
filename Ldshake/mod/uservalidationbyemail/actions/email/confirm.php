@@ -30,7 +30,7 @@
 			$user = get_entity($user_guid);
 			$user->enable();
 			
-			notify_user($user_guid, $CONFIG->site->guid, sprintf(elgg_echo('email:validate:success:subject'), $user->username), sprintf(elgg_echo('email:validate:success:body'), $user->name), NULL, 'email');
+			//notify_user($user_guid, $CONFIG->site->guid, sprintf(elgg_echo('email:validate:success:subject'), $user->username), sprintf(elgg_echo('email:validate:success:body'), $user->name), NULL, 'email');
 			
 		} else
 			register_error(elgg_echo('email:confirm:fail'));

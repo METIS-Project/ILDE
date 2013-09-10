@@ -68,7 +68,7 @@
 
     <?php echo T("Filter by design") ?>
     <select id="filter_by_design">
-        <option value="0">Select a design</option>
+        <option value="0"><?php echo T("Select a design") ?></option>
         <?php foreach($designfilter as $df): ?>
             <?php if(strlen($df->title)):?>
             <option value="<?php echo $df->guid?>"><?php echo $df->title ?></option>

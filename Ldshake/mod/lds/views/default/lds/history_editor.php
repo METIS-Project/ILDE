@@ -59,55 +59,24 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 			<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'view') ?>">View this LdS</a>
 		</div>
 
-<?php if ($editor == 'webcollage'): ?>
-	<ul>
-		<?php foreach ($history as $rev): ?>
-		<li><div style="clear: both; width: 100%;">
-		<br>
-			<div id="lds_revision_details" style="border:1px solid green;margin-bottom: 3px;margin-top: 12px;">
-			<a href="<?php echo $rev->author->getUrl() ?>"><img src="<?php echo $rev->author->getIcon('tiny') ?>" /></a> <strong>Revision <?php echo $rev->revision_number ?></strong> by <a href="<?php echo $rev->author->getUrl() ?>"><?php echo $rev->author->name ?></a> on <?php echo date('j M Y H:i', $rev->revision->time_created) ?>
-			</div>
-			</div>
-			<div style="width:630px; height: 500px;float:left;border:1px solid #ccc; overflow: auto">
-			<?php if ($document->lds_revision_id != $rev->revision->id): ?>
-				<img src="<?php echo $CONFIG->url ?>content/webcollage/rev_<?php echo $document->lds_guid; ?>_<?php echo $document->guid; ?>_<?php echo $rev->revision->id; ?>.jpg?t=<?php echo rand(0, 1000)?>" width="600"></img>
-			<?php else: ?>
-				<img src="<?php echo $CONFIG->url ?>content/webcollage/rev_<?php echo $document->lds_guid; ?>_<?php echo $document->guid; ?>.jpg?t=<?php echo rand(0, 1000)?>" width="600"></img>
-			<?php endif; ?>
-
-			</div>
-			<div style="width:300px; height: 500px;float:right;border:1px solid #ccc; overflow: auto">
-			<?php if ($document->lds_revision_id != $rev->revision->id): ?>
-				<?php  echo $rev->revised_documents[0]->changelog; ?>
-			<?php else: ?>
-				<?php  echo $document->changelog; ?>
-			<?php endif; ?>
-			</div>
-		</li>
-		<br>
-		<?php endforeach; ?>
-	</ul>
-<?php endif; ?>
-
-<?php if ($editor == 'exe'): ?>
 <br>
 	<ul>
 		<?php foreach ($history as $rev): ?>
 		<li>		
 			<div id="lds_revision_details" style="border:1px solid green;">
 				<a href="<?php echo $rev->author->getUrl() ?>"><img src="<?php echo $rev->author->getIcon('tiny') ?>" /></a>
+<!--
 				<?php if ($document->lds_revision_id != $rev->revision->id): ?>
 					<a href="<?php echo $vars['url']?>pg/lds/viewrevisioneditor/<?php echo $rev->revised_documents[0]->guid ?>">
 				<?php else: ?>
 					<a href="<?php echo $vars['url']?>pg/lds/viewrevisioneditor/<?php echo $document->guid ?>">
 				<?php endif; ?>	
 						<strong>Revision <?php echo $rev->revision_number ?></strong>
-					</a>by <a href="<?php echo $rev->author->getUrl() ?>"><?php echo $rev->author->name ?></a> on <?php echo date('j M Y H:i', $rev->revision->time_created) ?>
+					</a>--><strong>Revision <?php echo $rev->revision_number ?></strong> by <a href="<?php echo $rev->author->getUrl() ?>"><?php echo $rev->author->name ?></a> on <?php echo date('j M Y H:i', $rev->revision->time_created) ?>
 			</div>
 		</li>
 		<?php endforeach; ?>
 	</ul>
-<?php endif; ?>
 
 	</div>
 </div>

@@ -56,7 +56,15 @@
 				unset_config('disable_api', $site->getGUID());
 			else
 				set_config('disable_api', 'disabled', $site->getGUID());
-			
+
+            $registration = get_input('disable_registration');
+            if ($registration)
+                unset_config('disable_registration', $site->getGUID());
+            else
+                set_config('disable_registration', 'disabled', $site->getGUID());
+
+
+
 			// Now ping home
 			//if ((!isset($usage)) || ($usage!='disabled'))
 			//{

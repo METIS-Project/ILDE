@@ -46,8 +46,10 @@ extract($vars);
 <a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number of designs created with each tool</a>
 <a href="<?php echo $url ."pg/lds/tracking/user_tool";?>">Number and list of designs created with each tool by each user</a>
 
+List of <a href="<?php echo $url ."pg/lds/tracking/iduser";?>">users</a>/<a href="<?php echo $url ."pg/lds/tracking/idgroup";?>">groups</a>/<a href="<?php echo $url ."pg/lds/tracking/idlds";?>">LdS</a> with id and name.
+
 Produce a LD
-Number of designs produced by each user
+<a href="<?php echo $url ."pg/lds/tracking/created_by_user";?>">Number of designs produced by each user</a>
 Number of designs created / modified by days/weeks/months
 List of designs modified by each user by <a href="<?php echo $url ."pg/lds/tracking/userdays";?>">days</a>/<a href="<?php echo $url ."pg/lds/tracking/userweeks";?>">weeks</a>/<a href="<?php echo $url ."pg/lds/tracking/usermonths";?>">months</a>
 
@@ -94,7 +96,18 @@ Number of members in each group
 Number of designs published (accessible outside LdShake): <?php echo $nPublished;?>
 
 
-Visits to the site / pages
+<a href="<?php
+    if($url == "http://web.dev/ilde/")
+        echo 'https://www.google.com/';
+    if($url == "http://ilde.upf.edu/")
+        echo 'https://www.google.com/analytics/web/?hl=es&pli=1#report/visitors-overview/a40421532w69605041p71724745/%3F_u.date00%3D20130903%26_u.date01%3D20130903/';
+    if($url == "http://ilde.upf.edu/agora/")
+        echo 'https://www.google.com/analytics/web/?hl=es&pli=1#report/visitors-overview/a40421532w69605041p76205020/%3F_u.date00%3D20130903%26_u.date01%3D20130903/';
+    if($url == "http://ilde.upf.edu/kek/")
+        echo 'https://www.google.com/analytics/web/?hl=es&pli=1#report/visitors-overview/a40421532w69605041p76202644/%3F_u.date00%3D20130903%26_u.date01%3D20130903/';
+    if($url == "http://ilde.upf.edu/ou/")
+        echo 'https://www.google.com/analytics/web/?hl=es&pli=1#report/visitors-overview/a40421532w69605041p76200864/%3F_u.date00%3D20130903%26_u.date01%3D20130903/';
+?>">Visits to the site / pages (request access to the data sending an email to pablo.abna at gmail.com with a google enabled account)</a>
 
 
 

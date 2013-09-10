@@ -86,6 +86,10 @@ $(document).ready(function()
             .focus();
     });
 
+    $('#ldsclone_popup_close').click(function (event) {
+        $('#clonelds_popup').fadeToggle(200);
+    });
+
 	$('#lds_action_publish,#lds_action_republish').click(function (){
 		$('.publishbutton').css('visibility','hidden');
 		$('.lds_loading').show();

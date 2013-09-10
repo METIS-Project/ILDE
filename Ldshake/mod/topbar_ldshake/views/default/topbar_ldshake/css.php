@@ -38,6 +38,9 @@
 #ldshake_topbar #toolbarlinks #toolbar_options {
 	margin: 0;
 	margin-top: 9px;
+    width: 565px;
+    /*height: 30px;*/
+    /*overflow: hidden;*/
 }
 
 #ldshake_topbar #toolbarlinks #toolbar_options li {

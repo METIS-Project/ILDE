@@ -154,6 +154,31 @@ function lds_tracking_implemented() {
     lds_echocsv($header, $data, 'implemented');
 }
 
+function lds_tracking_created_by_user() {
+
+//$header = array("id", "title", "number of users", "users");
+
+    $header = array('username', 'number of designs created', 'design list');
+    $data = array();
+
+
+    $users = get_entities('user','', 0, "", 9999);
+    foreach($users as $user) {
+        $ldss = get_entities('object','LdS', $user->guid, "", 9999);
+        if(!$ldss)
+            $ldss=array();
+
+        $a_lds_list = array();
+        foreach($ldss as $lds) {
+            $a_lds_list[] = $lds->guid;
+        }
+        $a_lds_string = implode(',',array_keys($a_lds_list));
+
+        $data[] = array($user->username, count($ldss), $a_lds_string);
+    }
+    lds_echocsv($header, $data, 'created_by_user');
+}
+
 function lds_tracking_sharing() {
 
 //$header = array("id", "title", "number of users", "users");
@@ -565,6 +590,37 @@ function lds_tracking_groups() {
             $data[] = $group_data;
         }
     lds_echocsv($header, $data,'groups');
+}
+
+function lds_tracking_id_name($type) {
+    $header = array("{$type} id", "name");
+    if($type == "user")
+        $header[] = "username";
+
+    $data = array();
+
+    if($type == "group")
+        $entities = get_entities('group','',0,'',9999);
+    if($type == "user")
+        $entities = get_entities('user','',0,'',9999);
+    if($type == "lds")
+        $entities = get_entities('object','LdS',0,'',9999);
+
+
+    if($entities)
+        foreach($entities as $entity) {
+            $e_data = array();
+            $e_data[] = $entity->guid;
+            if($type == "lds")
+                $e_data[] = $entity->title;
+            else
+                $e_data[] = $entity->name;
+
+            if($type == "user")
+                $e_data[] = $entity->username;
+            $data[] = $e_data;
+        }
+    lds_echocsv($header, $data,"id_{$type}");
 }
 
 

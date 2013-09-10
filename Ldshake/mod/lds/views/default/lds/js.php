@@ -50,7 +50,7 @@ if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit'):
 elseif (get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'):
 	echo Utils::getJsDeclaration('lds', 'lds-form-editor');
 endif;
-if (get_context() == 'lds_exec_main' || get_context() == 'lds_exec_browse' || get_context() == 'lds_exec_trashed' || get_context() == 'lds_exec_implementable' || get_context() == 'lds_exec_implementations'):
+if (get_context() == 'lds_exec_main' || get_context() == 'lds_exec_browse' || get_context() == 'lds_exec_trashed' || get_context() == 'lds_exec_implementable' || get_context() == 'lds_exec_implementations' || get_context() == 'lds_exec_about' || get_context() == 'lds_exec_help'):
 	echo Utils::getJsDeclaration('lds', 'lds-list');
 endif;
 if (get_context() == 'lds_exec_history'):

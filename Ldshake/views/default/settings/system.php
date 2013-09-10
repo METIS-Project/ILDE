@@ -43,6 +43,16 @@
 			$on = ($vars['config']->disable_api ?  "" : elgg_echo('installation:disableapi:label'));
 		$form_body .= elgg_view("input/checkboxes", array('options' => array(elgg_echo('installation:disableapi:label')), 'internalname' => 'api', 'value' => $on ));
 		$form_body .= "</p>";
+
+
+        $form_body .= "<p class=\"admin_debug\">" . T("Enable registration") . "<br />";
+        $on = T('Enable registration');
+        if ((isset($CONFIG->disable_registration)) && ($CONFIG->disable_registration == true))
+            $on = ($vars['config']->disable_registration ?  "" : T('Enable registration'));
+        $form_body .= elgg_view("input/checkboxes", array('options' => array(T('Enable registration')), 'internalname' => 'disable_registration', 'value' => $on ));
+        $form_body .= "</p>";
+
+
 		
 		$form_body .= "<p class=\"admin_usage\">" . elgg_echo('installation:usage') . "<br />";
 		$on = elgg_echo('installation:usage:label');

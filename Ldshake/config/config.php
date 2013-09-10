@@ -26,6 +26,19 @@ ProxyPassReverse /exelearning http://127.0.0.1:8080/
  
  */
 
+$moodleUrls = array (
+    'devel' =>		'',
+    'staging' =>	'',
+    'prod' =>		''
+);
+
+$defaultLang = array (
+    'devel' =>		'en',
+    'staging' =>	'en',
+    'prod' =>		'en'
+);
+
+
 /**
  * List of environments, containing the regular expression of the server name that defines them.
  */
@@ -49,7 +62,8 @@ $confOptions = array (
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-						'devel' =>		'metis_patterns',
+                        'devel' =>		'ldshake_trunk',
+						//'devel' =>		'metis_patterns',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'
 					),

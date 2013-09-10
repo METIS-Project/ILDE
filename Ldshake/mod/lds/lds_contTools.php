@@ -1431,10 +1431,11 @@ SQL;
             */
             $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
             $subtype = get_subtype_id('object', 'LdS');
+            $user_id = get_loggedin_userid();
 
             $query = <<<SQL
 SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
-oe.title <> 'My first LdS'
+oe.title <> 'My first LdS' OR e.owner_guid = {$user_id}
 ) order by time_updated desc {$query_limit}
 SQL;
             $entities = get_data($query, "entity_row_to_elggstar");

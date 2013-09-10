@@ -131,10 +131,14 @@
 
 #my_lds_list .lds_title_tags {
 	display: block;
-	width: 307px;
+	width: 397px;
 	float: left;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+#my_lds_list .lds_title_tags.implementable {
+    width: 307px;
 }
 
 #my_lds_list .lds_title_tags:hover {
@@ -184,7 +188,7 @@
 	padding-top: 2px;
 	white-space: nowrap;
 	overflow: hidden;
-	width: 229px;
+	width: 199px;
 	color: #777;
 	float: left;
 	font-size: 11px;
@@ -205,7 +209,7 @@
 #my_lds_list .lds_date {
 	float: left;
 	padding-right: 3px;
-	width: 115px;
+	width: 85px;
 	overflow: hidden;
 	white-space: nowrap;
 	text-align: right;
@@ -2009,7 +2013,7 @@ p.MsoListParagraph {
 
 .tree .link {
     fill: none;
-    stroke: #ccc;
+    stroke: #666;
     stroke-width: 1.5px;
 }
 
@@ -2026,3 +2030,7 @@ p.MsoListParagraph {
     max-width: 957px;
 }
 
+/** ABOUT HELP**/
+#metis-about {
+    padding: 30px;
+}

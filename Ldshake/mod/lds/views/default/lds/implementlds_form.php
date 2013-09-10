@@ -40,6 +40,8 @@
     <a class="lds_close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
     <h3><?php echo T("Enter the title of your new implementation") ?></h3>
     <input type="text" size="60" name="new_implementation_title" />
+    <br />
+    <br />
 
     <h3><?php echo T("Select one of your VLE spaces") ?></h3>
 

@@ -56,7 +56,7 @@ var saving_started = false;
 var hash = '0';
 var timer = null;
 var ping_interval = 30;
-var edit_timeout = 60;
+var edit_timeout = 60000;
 var ajax_retry_max = 3;
 
 var saving_started = false;
@@ -584,14 +584,14 @@ function ping_editing ()
 
 function autosave_and_exit ()
 {
-	//TODO $('#edit_lds').submit();
+    save_lds (null,{redirect: true});
 }
 
 function check_activity()
 {
 	if (activity == false)
 	{
-		//ajax_submit (true);
+        autosave_and_exit();
 	}
 	else
 	{
@@ -636,7 +636,8 @@ function initCKED ()
 
         //Concurrence control
         ping_editing();
-        /*inaction_trigger();*/
+
+        //inaction_trigger();
 
         //Stopped loading:
         $('#shade,#lds_loading_contents').hide();
@@ -920,11 +921,12 @@ function tabs()
 
 function inaction_trigger ()
 {
-    timer = setTimeout ('autosave_and_exit()', 1000 * edit_timeout);
+    timer = setTimeout ('check_activity()', 1000 * edit_timeout);
 
     $('input').change (function ()
     {
-        clearTimeout (timer);
+        //clearTimeout (timer);
+        activity = true;
     });
 
     //We're capturing keypresses here cos it's possible that the user spends a long time in the field.
@@ -934,7 +936,7 @@ function inaction_trigger ()
             //CKEDITOR.instances['description'].document.on ('keyup', function ()
         {
             alert ('ei');
-            clearTimeout (timer);
+            activity = true;
         });
     });
 }

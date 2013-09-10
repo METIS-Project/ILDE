@@ -89,7 +89,11 @@ $(document).ready(function()
             .focus();
     });
 
-	$('#comment_switcher a').click (function () {
+    $('#ldsclone_popup_close').click(function (event) {
+        $('#clonelds_popup').fadeToggle(200);
+    });
+
+    $('#comment_switcher a').click (function () {
 		$('#lds_info_wrapper').show ();
 	});
 	

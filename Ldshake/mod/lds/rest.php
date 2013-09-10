@@ -112,13 +112,16 @@ function lds_data() {
         'title' => $title,
         'tags' => $tags['tags'],
         'doc' =>    array(
-            'file' => $_FILES['design']['tmp_name']
+            'file' => $_FILES['design']['tmp_name'],
+            'filename' => $_FILES['design']['name']
         )
     );
 
     if(isset($_FILES['design_imsld']))
-        if(!$_FILES['design_imsld']['error'])
-            $lds_data['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
+        if(!$_FILES['design_imsld']['error']) {
+                $lds_data['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
+                $lds_data['doc']['filename_imsld'] = $_FILES['design_imsld']['tmp_name'];
+        }
 
     $lds = LdSFactory::buildLdS($lds_data);
 
@@ -297,12 +300,15 @@ function lds_update($params) {
         'title' => $title,
         'tags' => $tags['tags'],
         'doc' =>    array(
-            'file' => $_FILES['design']['tmp_name']
+            'file' => $_FILES['design']['tmp_name'],
+            'filename' => $_FILES['design']['name']
         ));
 
     if(isset($_FILES['design_imsld']))
-        if(!$_FILES['design_imsld']['error'])
+        if(!$_FILES['design_imsld']['error']) {
             $update['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
+            $update['doc']['filename_imsld'] = $_FILES['design_imsld']['name'];
+        }
 
     $lds = LdSFactory::updateLdS($update);
 

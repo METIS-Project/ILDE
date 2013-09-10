@@ -110,6 +110,8 @@ function lds_init()
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
     register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
 
+    add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/admin/vle/');
+
 	//Include the helper functions
 	require_once __DIR__.'/lds_contTools.php';
 	require_once __DIR__.'/lds_viewTools.php';
@@ -293,7 +295,7 @@ function lds_page_handler ($page)
 			//Pau: Add a welcome LdS
 			//present in actions/register.php and actions/useradd.php
 			$wl = new LdSObject();
-			$wl->acces_id = 2;
+			$wl->access_id = 2;
             $wl->editor_type = 'doc';
             $wl->editor_subtype = 'doc';
 			$wl->title = "My first LdS";
@@ -309,7 +311,7 @@ function lds_page_handler ($page)
 			$doc->description = elgg_view('lds/welcome_lds');
 			$doc->owner_guid = $user->guid;
 			$doc->container_guid = $wl->guid;
-			$doc->access_id = '2';
+			$doc->access_id = 2;
 			$doc->save();
 			//End add a welcome LdS
 
@@ -397,7 +399,7 @@ function lds_exec_implementable ($params)
                 $vle_data[$vle->guid] = $vle_info;
         }
     } else {
-        register_error("You need to register a VLE first.");
+        register_error(T("You need to register a VLE first."));
         forward($CONFIG->url.'pg/lds/vle');
     }
 
@@ -661,6 +663,7 @@ function lds_exec_browse ($params)
 	$order = get_input('order') ?: 'newest';
 	$offset = get_input('offset') ?: '0';
 
+
 	//$vars['tags'] = lds_contTools::getBrowseTagsAndFrequencies (get_loggedin_userid());
 	$vars['tags'] = lds_contTools::getAllTagsAndFrequencies (get_loggedin_userid());
 
@@ -682,6 +685,7 @@ function lds_exec_browse ($params)
         'cadmos' => 'CADMOS',
         'image' => 'Image',
     );
+
 
     $tools['editor_subtype'] =
 
@@ -716,6 +720,8 @@ function lds_exec_browse ($params)
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
     }
+
+
     Utils::osort($vars['list'], array('title' => true));
     $vars['list'] = array_slice($vars['list'], $offset, 10);
 
@@ -1049,10 +1055,10 @@ function lds_exec_edit ($params)
 {
     global $CONFIG;
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
-	if (preg_match('/(new|edit)/',$_SERVER['HTTP_REFERER']))
+	//if (preg_match('/(new|edit)/',$_SERVER['HTTP_REFERER']))
 		$vars['referer'] = $CONFIG->url.'pg/lds/';
-	else
-		$vars['referer'] = $_SERVER['HTTP_REFERER'];
+	//else
+	//	$vars['referer'] = $_SERVER['HTTP_REFERER'];
 	
 	$editLdS = get_entity($params[1]);
 	
@@ -1249,10 +1255,10 @@ function lds_exec_implementeditor($params)
     global $CONFIG;
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
-        $vars['referer'] = $CONFIG->url.'pg/lds/';
-    else
-        $vars['referer'] = $_SERVER['HTTP_REFERER'];
+    //if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
+        $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
+    //else
+    //    $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
     if($lds = get_entity($editLdS->lds_id))
@@ -1443,10 +1449,10 @@ function lds_exec_editglueps($params)
     global $CONFIG;
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
-        $vars['referer'] = $CONFIG->url.'pg/lds/';
-    else
-        $vars['referer'] = $_SERVER['HTTP_REFERER'];
+    //if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
+        $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
+    //else
+    //    $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
 
@@ -1548,6 +1554,8 @@ function lds_exec_editglueps($params)
 
     $user = get_loggedin_user();
     $vars['vle_id'] = $editLdS->vle_id;
+
+    //TODO:DEPRECATED
     if($vars['vle_id'] <= 30 ) {
         $vars['vle_id'] = $user->vle;
     }
@@ -2318,6 +2326,15 @@ function lds_exec_tracking ($params)
 {
 
     switch($params[1]) {
+        case 'iduser':
+            lds_tracking_id_name("user");
+            break;
+        case 'idgroup':
+            lds_tracking_id_name("group");
+            break;
+        case 'idlds':
+            lds_tracking_id_name("lds");
+            break;
         case 'tool':
             lds_tracking_tool();
             break;
@@ -2351,6 +2368,9 @@ function lds_exec_tracking ($params)
         case 'ldsviewed':
             lds_tracking_viewed();
             break;
+        case 'created_by_user':
+            lds_tracking_created_by_user();
+            break;
     }
 
     //lds_csv_private();
@@ -2382,22 +2402,18 @@ function lds_exec_query ($params) {
 
 }
 
-function lds_exec_test ($params) {
+function lds_exec_about ($params) {
+    $body = elgg_view('lds/about.en', array());
+    page_draw(T("About"), $body);
+}
 
-    $lista=new Java("java.util.HashMap");
-    $on=new Java("parser.OwlPaser0513");
-    $lista=$on->dameKeywords();
-    $i=0;
+function lds_exec_help ($params) {
+    $body = elgg_view('lds/help.en', array());
+    page_draw(T("Help"), $body);
+}
 
-    $it=new Java("java.util.Iterator");
-    $it=$lista->entrySet()->iterator();
-    while($it->hasNext()){
-        $e=new Java("java.util.Map");
-        $e=$it->next();
-        $patron=$e->getKey();
-        $keywords=$e->getValue();
-        echo $keywords;
-        $a=0;
-        //$listOntology[$patron]=$keywords;
-    }
+function lds_exec_test2 ($params) {
+
+    page_draw("test", "test");
+    //echo "test";
 }

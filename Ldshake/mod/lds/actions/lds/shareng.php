@@ -63,6 +63,7 @@ foreach($del_viewers as $v) {
 }
 
 foreach($add_viewers as $v) {
+    $lds->access_id = 2;
     $e = get_entity($v);
     $relationship = ($e->type == 'user') ? 'lds_viewer' : 'lds_viewer_group';
     add_entity_relationship($v, $relationship, $guid);
@@ -73,6 +74,7 @@ if ($allCanView != '0') {
      if(!check_entity_relationship($lds->owner_guid, 'lds_all_can_view', $guid))
         add_entity_relationship($lds->owner_guid, 'lds_all_can_view', $guid);
     */
+    $lds->access_id = 2;
     $lds->all_can_view = "yes";
 } else {
     /*
@@ -96,6 +98,7 @@ foreach($del_editors as $e) {
 }
 
 foreach($add_editors as $e) {
+    $lds->access_id = 2;
     $en = get_entity($e);
     $relationship = ($en->type == 'user') ? 'lds_editor' : 'lds_editor_group';
     add_entity_relationship($e, $relationship, $guid);

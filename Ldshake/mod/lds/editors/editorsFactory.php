@@ -759,11 +759,14 @@ class LdSFactory
 
         $build = array(
             'lds' => $lds,
-            'file' => $ldsparams['doc']['file']
+            'file' => $ldsparams['doc']['file'],
+            'filename' => $ldsparams['doc']['filename'],
         );
 
-        if(isset($ldsparams['doc']['file_imsld']))
+        if(isset($ldsparams['doc']['file_imsld'])) {
             $build['file_imsld'] = $ldsparams['doc']['file_imsld'];
+            $build['filename_imsld'] = $ldsparams['doc']['filename_imsld'];
+        }
 
         OpenglmEditor::buildDocument($build);
 
@@ -803,11 +806,14 @@ class LdSFactory
 
         $update = array(
             'lds' => $lds,
-            'file' => $ldsparams['doc']['file']
+            'file' => $ldsparams['doc']['file'],
+            'filename' => $ldsparams['doc']['filename']
         );
 
-        if(isset($ldsparams['doc']['file_imsld']))
+        if(isset($ldsparams['doc']['file_imsld'])) {
             $update['file_imsld'] = $ldsparams['doc']['file_imsld'];
+            $update['filename_imsld'] = $ldsparams['doc']['filename_imsld'];
+        }
 
         OpenglmEditor::updateDocument($update);
 
@@ -828,12 +834,16 @@ class OpenglmEditor extends Editor {
 
         $document = new DocumentEditorObject($params['lds']->guid);
         $document->file_guid = $file->guid;
+        $document->upload_filename = $params['filename'];
+
         $document->editorType = $params['lds']->editor_type;
 
         $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
         $file = Editor::getNewFile($filestorename);
-        if(isset($params['file_imsld']))
+        if(isset($params['file_imsld'])) {
             copy($params['file_imsld'], $file->getFilenameOnFilestore());
+            $document->upload_filename_imsld = $params['filename_imsld'];
+        }
         else
             copy($params['file'], $file->getFilenameOnFilestore());
 
@@ -863,6 +873,7 @@ class OpenglmEditor extends Editor {
         //$document->file_guid = $file->guid;
         $fullfilepath = Editor::getFullFilePath($document->file_guid);
         copy($params['file'], $fullfilepath);
+        $document->upload_filename = $params['filename'];
 
         if(isset($params['file_imsld'])) {
             if(!$document->ims_ld) {
@@ -872,6 +883,7 @@ class OpenglmEditor extends Editor {
 
             $fullfilepath = Editor::getFullFilePath($document->ims_ld);
             copy($params['file_imsld'], $fullfilepath);
+            $document->upload_filename_imsld = $params['filename_imsld'];
         } else {
             if(!$document->ims_ld) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
@@ -1958,12 +1970,16 @@ class GluepsManager
 
         $sectoken = rand_str(32);
 
+        $ldshake_url = parse_url($CONFIG->url);
+        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+
         $post = array(
             'NewDeployTitleName' => $implementation->title,
             'instType' => 'IMS LD',
             'sectoken' => $sectoken,
             'archiveWic' => "@{$filename_lds}",
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
+            'ldshake_frame_origin' => $ldshake_frame_origin,
             'lang' => 'en'
         );
 
@@ -1996,10 +2012,11 @@ class GluepsManager
         }
 
 
-$vars = array();
+        $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
+        //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang=en";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 
@@ -2134,12 +2151,17 @@ $vars = array();
 
         $sectoken = rand_str(32);
 
+        $ldshake_url = parse_url($CONFIG->url);
+        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+
+
         $post = array(
             'NewDeployTitleName' => $params['title'],
             'instType' => $instType,
             'sectoken' => $sectoken,
             'archiveWic' => $archiveWic,
-            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+            'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
+            'ldshake_frame_origin' => $ldshake_frame_origin,
         );
 
         try {
@@ -2177,7 +2199,8 @@ $vars = array();
         $vars = array();
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
+        //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang=en";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 

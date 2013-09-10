@@ -44,8 +44,8 @@
 			}
 			$feedref = <<<END
 			
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="{$url}" />
-	<link rel="alternate" type="application/odd+xml" title="OpenDD" href="{$url2}" />
+	<!--<link rel="alternate" type="application/rss+xml" title="RSS" href="{$url}" />-->
+	<!--<link rel="alternate" type="application/odd+xml" title="OpenDD" href="{$url2}" />-->
 			
 END;
 		} else {
@@ -75,9 +75,12 @@ END;
 
 	//Pau: We append a checksum of the generated css file in order to break all clients' caches.
 	?>
-	<!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?hash=<?php printf("%u", crc32(elgg_view("css")));?>" type="text/css" />-->
-    <link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?q=0001" type="text/css" />
-	<link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
+	<!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?hash=<?php /*printf("%u", crc32(elgg_view("css")));*/?>" type="text/css" />-->
+    <!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?q=0001" type="text/css" />-->
+    <style type="text/css">
+        <?php echo elgg_view("css"); ?>
+    </style>
+    <link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>vendors/jquery/css/ui-lightness/jquery-ui-1.8.6.custom.css" type="text/css" />
     <link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />
 	
@@ -86,5 +89,5 @@ END;
 		echo $feedref;
 		//echo elgg_view('metatags',$vars); //Pau... i removed it :S 
 	
-		//echo elgg_view('page_elements/analytics', $vars);
+		echo elgg_view('page_elements/analytics', $vars);
 ?>

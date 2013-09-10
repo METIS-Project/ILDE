@@ -388,7 +388,7 @@
         }
 
     </style>
-    <?php echo elgg_view('page_elements/analytics', $vars) ?>
+    <?php /*echo elgg_view('page_elements/analytics', $vars)*/ ?>
 </head>
 <body>
 <div id="doc">

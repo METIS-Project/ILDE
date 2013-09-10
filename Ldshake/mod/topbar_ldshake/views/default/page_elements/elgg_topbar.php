@@ -68,6 +68,8 @@ if (isloggedin()) :
 					//allow people to extend this top menu
 					echo elgg_view('elgg_topbar/extend', $vars);
 					?>
+                    <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
+
 				</ul>
 				<div id="toolbar_lds_types" class="menu">
                     <ul>

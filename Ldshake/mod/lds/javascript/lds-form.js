@@ -54,8 +54,9 @@ var $affectedTab = null;
 //Controls the time the user has been idle. Might close the form i order to let other users edit the LdS
 var timer = null;
 var ping_interval = 30;
-var edit_timeout = 600;
+var edit_timeout = 6000;
 var ajax_retry_max = 3;
+var activity = true;
 
 var saving_started = false;
 var ajax_timeout = 30;
@@ -369,7 +370,7 @@ function initCKED ()
 
         //Concurrence control
         ping_editing();
-        inaction_trigger();
+        //inaction_trigger();
 
         //Stopped loading:
         $('#shade,#lds_loading_contents').hide();
@@ -672,16 +673,30 @@ function ping_editing ()
 
 function autosave_and_exit ()
 {
-    //TODO $('#edit_lds').submit();
+    save_lds (null,{redirect: true});
+}
+
+function check_activity()
+{
+    if (activity == false)
+    {
+        autosave_and_exit();
+    }
+    else
+    {
+        activity = false;
+        timer = setTimeout ('check_activity()', 1000 * edit_timeout);
+    }
 }
 
 function inaction_trigger ()
 {
-    timer = setTimeout ('autosave_and_exit()', 1000 * edit_timeout);
+    timer = setTimeout ('check_activity()', 1000 * edit_timeout);
 
     $('input').change (function ()
     {
-        clearTimeout (timer);
+        //clearTimeout (timer);
+        activity = true;
     });
 
     //We're capturing keypresses here cos it's possible that the user spends a long time in the field.
@@ -691,7 +706,7 @@ function inaction_trigger ()
             //CKEDITOR.instances['description'].document.on ('keyup', function ()
         {
             alert ('ei');
-            clearTimeout (timer);
+            activity = true;
         });
     });
 }

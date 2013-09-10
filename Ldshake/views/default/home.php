@@ -291,7 +291,9 @@
 				<input type="submit" value="Login"  tabindex="3" />
 			</div>
 		</form>
+        <?php if(!$vars['config']->disable_registration): ?>
 		<div id="register"><?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a></div>
+        <?php endif; ?>
 	</div>
 	<?php echo elgg_view('messages/list', array('object' => $sysmessages)); ?>
 	<div id="middlecontents">
