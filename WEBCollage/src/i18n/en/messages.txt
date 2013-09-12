@@ -71,7 +71,6 @@ users.error.differentPassword=The typed passwords do not match.
 users.error.noPassword=The password must at least contain ${0} characters.
 users.error.userBlank=The username must not contain blank spaces.
 users.error.noUser=The username must contain at least ${0} characters.
-
 general.general=General
 general.title=Title
 general.editTitle=Edit title
@@ -357,7 +356,6 @@ clip.actions.reason.assessment=This activity is an 'assess task'! This means tha
 clip.actions.reason.pursueLO=Include this learning objective in a learning activity.
 clip.actions.reason.assessLO=Include this learning objective in an assessment,<br/>so that it is assessed.
 
-
 clip.actions.reason.assessedAsTest=In this activity, the students will have to carry out a test. You should write instructions about how to complete it. Additionally, you should deliver the needed materials (such as the test); this could be done as a resources linked in the activity, or by any other means.
 clip.actions.reason.assessmentAsTest=In this activity the assessor will assess a test. Have you written the appropriate instructions? Additionally, you need to make sure that the assessor will receive all the tests that are to be assessed.
 clip.actions.reason.assessmentAsObservation=In this activity the assessor will observe a collaborative process, in order to assess it. You should make sure that either the needed resources are available, or that the assessor has access to observe the activity. Perhaps it's necessary to make sure that this activity and the assessed activity happen at the same time (e.g., they are not in different phases of the script).
@@ -382,7 +380,6 @@ clip.actions.reason.assessmentAsRandom=In this 'assess task', groups are assesse
 clip.menu.ignore.all=Ignore these actions
 clip.menu.ignore.action=Ignore this action
 clip.menu.goto.action=Go to edit window
-
 
 clfps.phase.title=Phase
 clfps.phase.edit.addgroup=... add group type to the phase
@@ -424,7 +421,6 @@ clfps.peerreview.discussion.support=Support activity 3
 clfps.peerreview.improve=Refine and improve work
 clfps.peerreview.improve.activity=Improve your work with the review
 clfps.peerreview.improve.support=Support activity 4
-
 
 clfps.pyramid.dialog.title=Pyramid: number of levels
 clfps.pyramid.dialog.intro=Choose the number of levels for the pyramid:
@@ -504,6 +500,7 @@ patterns.tutoring.title=Tutoring sessions
 patterns.tutoring.activity=Attend to tutoring sessions
 patterns.tutoring.assess=Manage tutoring session
 
+%help
 
 help.assessment.icon.assessment=This icon represents an 'assess task' (part of assessment '${0}'), which is carried out in this phase.
 help.assessment.icon.assessment.no=This icon represents an assessment, whose 'assess task' has not been chosen yet (thus the assessment is still outside the script).
@@ -549,9 +546,7 @@ help.picker.select.act=Select this phase, to see the roles and activities includ
 help.picker.select.activitygap=Select this position for the new activity.
 help.picker.select.activity=Select this activity.
 
-
 help.clfp.add.first=Choose this option to add a CLFP to the script, to create the basic structure of the script.
-
 help.ignore.actions=This will remove this alert from the advisor, so that it won't be displayed again.
 help.clip.menu.ignore.all=This will remove all the current alerts from this group, so that they won't be displayed again.
 help.clip.menu.goto.action=Choose this to make Web Collage open the window where you can carry out this action.
@@ -571,7 +566,6 @@ help.assessment.edit.analysis.configpattern=Click here to select an assessment t
 help.assessment.edit.source.choose=Click here to choose the assessed activity. This is useful to indicate what is to be assessed (by the assessor in the assessment activity) and, therefore, who is the assessee. Please note that the assessed activity should be a learning activity, carried out by students. Also, depending on the type of assessment, the assessed activity should contain instructions for the students about how to proceed to be assessed.
 help.assessment.edit.source.change=Click here to change the assessed activity. This is useful to indicate what is to be assessed (by the assessor in the assessment activity) and, therefore, who is the assessee. Please note that the assessed activity should be a learning activity, carried out by students. Also, depending on the type of assessment, the assessed activity should contain instructions for the students about how to proceed to be assessed. Please note that the previous assessed activity will not be removed from the script (just, it is not assessed here anymore).
 help.assessment.edit.source.configpattern=Click here to select an assessment technique, which give information about how to configure the assessed activity (what the students should do in this activity). Only one assessment technique can be applied in each assessment.
-
 
 help.clfps.tapps.edit.add=Click here to add a new problem to the TAPPS. This pattern can have any number of problems for each pair of students to solve.
 help.clfps.simulation.edit.addrole=Click here to add a new simulation role. You can create any number of roles, each of them with a different description and preparation activities.
@@ -834,14 +828,11 @@ groupPattern.general.lessthan=Less than ${1}: ${0}
 groupPattern.general.morethan=More than ${1}: ${0}
 
 groupPattern.nopatterns=There are no patterns to configure this. You can try adding them!
-
 grouplayer.menu.title=Group members
 grouplayer.menu.itemhelp=Click to select this participant
 
 groupPattern.manage=Manage group policy
 help.groupPattern.manage=Add rules to control the number of groups and student distribution
-
-
 groupPattern.add=Add a group pattern
 help.groupPattern.add=Add a group pattern to the phase
 

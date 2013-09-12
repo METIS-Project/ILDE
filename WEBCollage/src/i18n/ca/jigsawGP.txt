@@ -1,0 +1,9 @@
+﻿grouppattern.jigsawgroup.title=Grups trencaclosques
+grouppattern.jigsawgroup.title.alert=<font color='brown'>Jigsaw Groups</font>
+grouppattern.jigsawgroup.info=Nothing needs to be fixed. You want the group number <br/> depends on the number of both available students and <br/> expert groups
+
+grouppattern.jigsawgroup.fewexpertgroups=Necessitem més d'un Grup d'experts per tal de configurar els grups trencaclosques.
+grouppattern.jigsawgroup.fewstudents=El número de estudiants és ${0}, però necessitem al menys ${1}!
+
+grouppattern.jigsawgroup.range=Ha d'aver-hi entre 2 i ${0} grups trencaclosques.
+grouppattern.jigsawgroup.best=El millor número de grups trencaclosques és ${0}.

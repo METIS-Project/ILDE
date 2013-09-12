@@ -1,0 +1,11 @@
+﻿grouppattern.expertgroupparticipants.title=Distribució de grup d'experts
+grouppattern.expertgroupparticipants.title.alert=<font color='brown'>Expert group distribution</font>
+grouppattern.expertgroupparticipants.info=Nothing needs to be fixed. You want the students <br/> in each jigsaw group to be distributed among the <br/> expert groups so that every expert group has the <br/> same size.
+
+grouppattern.expertgroupparticipants.notinjg=Alguns experts no es troben en cap grup trencaclosques. Han de ser eliminats dels Grups d'experts.
+
+grouppattern.expertgroupparticipants.2manyfromjg=Alguns grups d'experts tenen massa estudiants del mateix grup trencaclsoques
+grouppattern.expertgroupparticipants.smalljg=Alguns grups trencaclosques són massa petits!
+grouppattern.expertgroupparticipants.distribute=Alguns estudiants necessiten ser distribuïts dels grups trencaclosques a grups d'experts.
+
+grouppattern.expertgroupparticipants.ok=Tots els estudiants estan ben distribuïts. 

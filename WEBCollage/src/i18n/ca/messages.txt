@@ -1,0 +1,830 @@
+common.ok=OK
+common.cancel=Cancel·lar
+common.edit=Editar
+common.add=Afegir
+common.error.noServer=No s'ha pogut connectar al servidor.
+common.select=Selecciona
+common.select.confirm=Confirma selecció
+common.back=Tornar enrere
+common.exit=Sortida
+common.waiting=Carregant...
+
+common.saved=Guardat :)
+common.save=Guardar!
+common.saving=Guardant...
+
+common.pattern.doc=Llegir sobre el patró '${0}'
+
+common.undo=Desfer
+common.redo=Refer
+
+menu.title.default=Opcions
+menu.title.role=Opcions de grup '${0}'
+menu.title.activity=Opcions d'activitat '${0}'
+menu.title.act=${0} (${1}) opcions
+menu.title.clfp=${0} opcions
+
+loader.load.error=No s'ha pogut carregar el disseny!
+loader.save.error=No s'ha pogut guardar!
+loader.save.noAccess=No tens accès per a editar aquest script. El disseny es tancarà
+loader.loading.wait=<p>Carregant disseny. Si us plau, espera!</p>
+loader.title=Carregant...
+loader.load.noAccess=No tens accès pera veure aquest script. Has iniciat sessió?
+loader.save.sessionExpired=La teva sessió ha expirat. Si no has iniciat sessió, els teus exemples es tancaran i els canvis realitzats no seran guardats.<br/> Vols iniciar sessió?
+loader.save.sessionExpired.title=Sessió expirada
+
+export.imsld.title=Exportar script a IMS-LD
+export.workflow.title=Exportar script a la definició del flux de treball
+export.waiting=Si us plau, esperi mentre s'està creant el paquet...
+export.message=Pitja <a href='${0}'>aquí</a> per a descarregar el paquet.
+export.error=No s'ha pogut exportar l'script!
+
+index.toolNamePrefix=Exemple de web
+index.newDesign=Nou disseny
+index.title=Títol:
+index.create=Crear
+index.noSave=No necessitaré guardar
+index.play=Jugar
+index.openOwn=Els meus dissenys
+index.openPublic=Dissenys creats per altres
+index.error.noName=Necessito un nom per al nou disseny!
+index.error.noLogin=No has iniciat sessió.<br/>Si us plau, intenta iniciar sessió de nou.
+index.error.noCreate=No ha set possible crear el document.<br/>Si us plau, prova un nom diferent o contacta amb l'administrador.
+
+design.type.public.short=Public
+design.type.visible.short=Visible
+design.type.private.short=Privat
+design.type.public.long=Public (qualsevol usuari pot veure i editar el disseny).
+design.type.visible.long=Visible (qualsevol usuari pot veure el disseny en mode només lectura, però només tu pots modificar-lo).
+design.type.private.long=Privat (només tu pots veure o modificar el disseny).
+
+users.login=Iniciar sessió
+users.register=Registrar nou usuari
+users.logout=Tancar sessió
+
+users.nickname=Nom d'usuari
+users.password=Contrasenya
+users.repeatPassword=Confirma contrasenya
+users.email=correu
+users.error.login=El nom d'usuari o contrasenya són incorrectes.
+users.error.userExists=El nom d'usuari '${0}' ja existeix.
+users.error.differentPassword=Les contraseyes no coincideixen.
+users.error.noPassword=La contrasenya ha de tenir ${0} caràcters com a mínim.
+users.error.userBlank=El nom d'usuari no ha de tenir espais en blanc.
+users.error.noUser=El nom d'usuari ha de tenir al menys ${0} caràcters.
+
+general.general=General
+general.title=Títol
+general.editTitle=Editar títol
+general.prerrequisites=Requisits previs
+general.editPrerrequisites=Editar requisits previs
+general.los=Aprendre objectius
+general.newLo=Nou objectiu d'aprenentatge
+general.loName=Nom
+general.loDescription=Descripció
+general.editLo=Editar objectiu d'aprenentatge
+general.deleteLo=Eliminar objectiu d'aprenentatge
+general.deleteLo.confirm=Estàs segur de voler eliminar l'objectiu d'aprenentatge '${0}'?
+
+
+flow.flow=Aprenent flux d'activitat
+flow.structure=Estructura
+flow.options.show.assessment=Compartir el flux d'avaluació
+flow.options.zoom=Zoom: 
+
+structuretree.dialog.title=Aprenent estructura de flux
+
+flow.activities=Activitats
+flow.activities.add=Afegir nova activitat
+flow.activities.add.relative=Afegir nova activitat...
+flow.activities.add.before=... abans d'aquesta
+flow.activities.add.after=... després d'aquesta
+flow.activities.added.new=Nou
+flow.activities.edit=Editar
+flow.activities.delete=Eliminar activitat
+flow.activities.assess=Avaluar aquesta activitat
+flow.activities.makeassessor=Fer d'aquesta tasca un avaluador
+flow.activities.move.up=Pujar activitat
+flow.activities.move.down=Descarregar activitat
+
+flow.activities.gap=Aquí!
+picker.location.new=Escollir la localització de la nova activitat
+picker.location.activity=Escollir activitat existent
+picker.location.clfp=Escollir nova posició per fase
+picker.move.gap=Moure aquí
+picker.move.act=Moure aquí
+
+flow.clfp.remove=Eliminar aquest ${0}
+flow.clfp.remove.confirm=Estàs sequr que vols eliminar ${0}?
+flow.clfp.move=Moure aquest ${0}...
+flow.clfp.add=Afegir fases...
+flow.clfp.configure=Configurar ${0}...
+flow.clfp.configure.act=Editar '${0}'...
+flow.clfp.substitute=Reemplaçar ${0} amb fases detallades...
+flow.clfp.add.before=... abans d'aquest ${0}
+flow.clfp.add.after=... després d'aquest ${0}
+
+flow.select.clfp=Escull aquest ${0}
+flow.select.activity=Escull aquesta activitat: '${0}'
+
+
+resources.resources=Recursos
+resources.newDoc=Nou document
+resources.editDoc=Editar document
+resources.editDoc.name=Nom
+resources.editDoc.link=Enllaç
+resources.newTool=Nova eina
+resources.editTool=Editar eina
+resources.editTool.name=Nom
+resources.editTool.description=Descripció
+resources.inActivity.tools=Eines
+resources.inActivity.docs=Documents
+
+resources.delete=Eliminar recurs
+resources.delete.confirm=Estàs segur que vols eliminar aquest recurs de l'script?
+
+
+resources.tool.description.default=Cap enllaç
+resources.tool.description.ontoolquery=Descripció d'eines
+resources.tool.description.ontoolurl=Eina especifica
+resources.tool.description.gluepsid=Eina VLE: ${0}
+resources.tool.description.gluepsid.notset=(no establert)
+
+resources.tool.name=Nom de l'eina (en Collage de la instància de web)
+resources.tool.link=Eina d'enllaç
+resources.tool.search.ontoolsearch=Buscar eina en OntoolSearch
+resources.tool.search.keyword=Buscar eina amb teclat
+resources.tool.search.vle=Buscar eina en VLE
+resources.tool.vle.title=Selecció d'eina desde VLE
+resources.tool.vle.select=Eina VLE
+resources.tool.vle.selectinfo=-- Seleccionar una eina --
+resources.tool.ontool.title=Esperant per Ontoolsearch...
+resources.tool.ontool.description=OntoolSearch està obert en una altra finestra/tab. Estic esperant per aixó per finalitzar.<br/> No obstant, pots tancar OntoolSearch pitjant en 'cancel·lar'.
+resources.tool.ontool.title=Eina de cerca ràpida
+resources.tool.ontool.keywords=Paraula(s) clau(s)
+resources.tool.ontool.search=Cerca
+resources.tool.ontool.results=Cercar resultats
+resources.tool.ontool.select=seleccionar
+
+assessment.assessment=Valoració
+assessment.title.empty=[Valoració buida]
+assessment.task=[Tasca d'avaluació]
+assessment.chooseActivity=[Escollir activitat!]
+flow.assessment.edit=Configurar valoració
+assessment.edit=Configurar valoració
+assessment.edit.process=Flux d'avaluació
+assessment.edit.what=Que valorar
+assessment.edit.how=Avaluar tasca
+assessment.edit.whatfor=Ús dels resultats d'avaluació
+assessment.edit.function.remove=Eliminar l'ús dels resultats d'avaluació
+assessment.delete=Eliminar aquesta valoració
+assessment.delete.confirm=Estàs segur que vols eliminar aqusta valoració?
+
+assessment.edit.los=Objectius d'aprenentatge avaluats
+assessment.edit.source.choose=Escollir activitat d'aprenentatge per avaluar...
+assessment.edit.source.change=Canviar activitat d'aprenentatge per avaluar...
+assessment.edit.source.configpattern=Escollir tècnica d'avaluació...
+
+assessment.edit.analysis.choose=Escollir activitat on es porta a terme la 'tasca d'avaluació'...
+assessment.edit.analysis.change=Canviar activitat on es porta a terme la 'tasca d'avaluació'...
+assessment.edit.analysis.configpattern=Escollir tècnica d'avaluació...
+assessment.edit.functions=Propòsits d'avaluació
+assessment.edit.functions.new=Nou propòsit
+assessment.edit.functions.summative=Notes d'estudiants
+assessment.edit.functions.formative=Proveïr feedback
+assessment.edit.functions.diagnosis=Intervindre o modificar activitat
+assessment.edit.functions.summative.use=Emprar avaluació a les notes d'estudiant
+assessment.edit.functions.formative.use=Emprar avaluació per proveïr feedback
+assessment.edit.functions.diagnosis.use=Emprar avaluació per intervindre o modificar activiat d'aprenentatge
+assessment.edit.choose.activity=Escollir activitat
+
+assessment.edit.summative=Editar l'avaluació summativa
+assessment.edit.summative.name=Nom de l'avaluació
+assessment.edit.summative.description=Descripció
+assessment.edit.summative.name.empty=Editar avaluació
+
+assessment.edit.summativeFunction.edit=Editar l'avaluació summativa...
+assessment.edit.formativeFunction.edit=Escull l'activitat per donar feedback...
+assessment.edit.diagnosisFunction.edit=Canvia l'activitat per ser adaptada als resultats de l'avaluació...
+
+assessment.edit.assessor=Assessor:
+assessment.edit.assessee=Grup o estudiants avaluats:
+
+assessment.link.choose=Escollir activitat
+
+assessment.patterns.delete=Eliminar patró d'avaluació
+assessment.patterns.delete.confirm=Estàs segur que vols eliminar aquest patró d'avaluació?
+assessment.patterns.list.title=configuració adicional
+assessment.patterns.list=Patrons d'avaluació aplicats a aquesta avaluació: 
+assessment.patterns.list.new=Afegir...
+
+assessment.conflict.dialog=Resoldre conflictes de patrons
+assessment.conflict=Conflictes
+assessment.conflict.pattern.one=Incloure el patró '${newpattern}' requereix eliminar el següent patró: ${oldpatterns}. Només pot haver una tècnica d'avaluació en cada avaluació.
+assessment.conflict.pattern.several=Incloure aquest patró '${newpattern}' requereix eliminar els següents patróns: ${oldpatterns}. Només pot haver una tècnica d'avaluació en cada avaluació.
+assessment.conflict.assessment.activity.first=Incloure el patró '${pattern}' es troba en conflicte amb la 'tasca a avaluar' '${activity}'.<br/>Què t'agradaria fer?
+assessment.conflict.assessment.activity.other=També, això és un conflicte amb la 'tasca a avaluar' '${activity}'.<br/>Què t'agradaria fer?
+assessment.conflict.assessed.activity.first=Incloure el patró '${pattern}' es troba en conflicte amb l'activitat avaluada '${activity}'.<br/>Què t'agradaria fer?
+assessment.conflict.assessed.activity.other=També, això és un conflicte amb l'activitat avaluada '${activity}'.<br/>Què t'agradaria fer?
+
+assessment.conflict.activity.delete=Elimina l'activitat actual, i crea una nova.
+assessment.conflict.activity.replace=Adapta l'activitat actual al patró.
+assessment.conflict.activity.ignore=Crea una nova activitat i deixa l'actual en l'script.
+
+summary.summary=Resum
+summary.open=Obrir en una finestra nova
+summary.title=Títol: 
+summary.prerrequisites=Requisits previs: 
+summary.objectives=Objectius d'aprenentatge:
+
+summary.assessmentlink.assessment=Aquesta és la 'tasca d'avaluació' en: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.assessed=Aquesta activitat s'ha avaluat en: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.formative=Aquesta activitat reb un feedback de l'avaluació: <strong>${0} - ${1}</strong>.
+summary.assessmentlink.diagnosis=Aquesta activitat pot ser modificada d'acord als resultats de l'avaluació: <strong>${0} - ${1}</strong>.
+
+summary.general.head=Informació general:
+summary.flow.head=Flux d'activitat d'aprenentatge:
+summary.assessment.head=Pla d'avaluació:
+
+summary.activity.asssessment=La 'tasca d'avaluació' és: <strong>'${activity}'</strong> (en <strong>${act}</strong>, a <strong>${clfp}</strong>.<br/>Portat a terme per <strong>${role}</strong>).
+summary.activity.asssessment.no=La 'tasca d'avaluació' encara no es troba definida.
+summary.activity.asssessed=Aquesta avaluació, avalua l'activitat: <strong>'${activity}'</strong> (en <strong>${act}</strong>, a <strong>${clfp}</strong>.<br/>Portat a terme per <strong>${role}</strong>).
+summary.activity.asssessed.no=L'activitat avaluada encara no es troba definida.
+
+summary.function.summative=Aquesta avaluació s'empra per les notes dels estudiants: <strong>'${name}'</strong>, ${description}
+summary.function.formative=Aquesta avaluació s'empra per a donar feedback en l'activitat: <strong>'${activity}'</strong> (en <strong>${act}</strong>, a <strong>${clfp}</strong>.<br/>Portat a terme per <strong>${role}</strong>).
+summary.function.diagnosis=Els resultats d'aquesta avaluació són emprades per a modificar l'activitat: <strong>'${activity}'</strong> (en <strong>${act}</strong>, a <strong>${clfp}</strong>.<br/>Portat a terme per <strong>${role}</strong>).
+summary.function.formative.no=Aquesta avaluació s'empra per a donar feedback (però encara no s'ha configurat en quina activitat).
+summary.function.diagnosis.no=Els resultats d'aquesta avaluació són emprats per a modificar una activitat (però aquesta activitat encara no ha estat escollida).
+
+summary.patterns.one=El següent patró s'ha aplicat a aquesta avaluació: <strong>${0}</strong>.
+summary.patterns.several=Els següents patrons s'han aplicat a aquesta avaluació: <strong>${0}</strong>.
+
+selector.select=Crear nova fase
+selector.type.clfps=Crear fases d'un CLFP
+selector.type.phase=Crear nova fase buida
+selector.phase.title=Nova fase buida
+selector.phase2.title=Nova fase buida (amb diferents tipus de grups d'estudiants)
+ 
+selector.type.assessment=Avaluació
+selector.criteria.attitudinal=Objectiu actitudinal
+selector.criteria.procedural=Objectiu del procediment
+selector.criteria.problem=Problemes
+selector.criteria.complexity=Complexitat
+
+selector.complexity.any=Qualsevol
+selector.complexity.low=Risc baix
+selector.complexity.medium=Risc mitjà
+selector.complexity.high=Risc alt
+
+selector.table.pattern=Patró
+selector.table.type=Tipus
+selector.messages.clfp.a=CLFP
+selector.messages.clfp.b=a CLFP
+selector.messages.activity.a=Activitat
+selector.messages.activity.b=un patró d'activitat
+selector.messages.resource.a=Recurs
+selector.messages.resource.b=un patró de recursos
+selector.messages.role.a=Rol
+selector.messages.role.b=un patró de rol
+selector.messages.learner=estudiants
+selector.messages.staff=professors
+selector.messages.choose=Escull ${0}
+selector.messages.error.role=Ho lamento, necessito un patró per ${0},<br/> no per ${1}.
+selector.messages.error.type=Ho lamento, necessito ${0},<br/> no ${1}.
+
+selector.assessment.technique=Tècnica d'avaluació:
+selector.assessment.configuration=Configuració d'avalució:
+
+activity.edit=Editar activitat
+activity.edit.description=Descripció
+activity.edit.los=Objectius d'aprenentatge
+activity.edit.resources=Recursos
+
+activity.shortDescription=En <strong>${act}</strong>, a <strong>${clfp}</strong>.<br/>Portat a terme per <strong>${role}</strong>.
+activity.assessmentDescription.a=Patró d'avaluació:
+activity.assessmentDescription.b=<br/>Dades d'avaluació provinents de l'activitat <strong>${0}</strong>.
+activity.assessmentDescription.c=<br/>L'anàlisi d'avaluació és portada a terme en l'activitat <strong>${0}</strong>.
+activity.assessmentDescription.d=<br/>L'anàlisi d'avaluació és automàtica.
+activity.assessmentRelationship.a=Avaluació: <strong>${0}</strong>.
+activity.assessmentRelationship.b=<br/>La dada d'avaluació és avaluada en <strong>${0}</strong>.
+activity.assessmentRelationship.c=<br/>La dada d'avaluació ve de l'activitat <strong>${0}</strong>.
+activity.assessmentRelationship.d=<br/>Dona feedback als estudiants en l'activitat <strong>${0}</strong>.
+activity.assessmentRelationship.e=<br/>Suporta decisions educatives preses en l'activitat <strong>${0}</strong>.
+
+roles.edit=Editar rol
+roles.edit.title=Editar rol '${0}'
+roles.edit.people=Número de persones per goup
+roles.edit.min=Mínim:
+roles.edit.max=Màxim:
+roles.edit.description=Descripció
+roles.common.rol=Rol
+roles.common.teacher=Professor
+
+clip.label=Accions pendents
+clip.menu.title=Accions pendents:
+clip.actions.groups.general=Configuració general
+clip.actions.groups.los=configuració d'objectius d'aprenentatge
+clip.actions.groups.resources=Configuració de recursos
+clip.actions.groups.assessments=Configuració completa d'avaluacions
+clip.actions.groups.clfp=Configuració completa d'activitats en CLFP ${0}
+clip.new.actions=Noves accions per a completar!
+clip.actions.text.title=Introduïr el títol del disseny.
+clip.actions.text.prerrequisites=Introduïr els requisits previs del disseny.
+clip.actions.text.los=Afegir alguns objectius d'aprenentatge per l'script.
+clip.actions.text.flow=Afegir un CLFP per a configurar l'estructura del flux d'aprenentatge.
+
+clip.actions.text.object.activity=Editar activitat
+clip.actions.text.object.ref.activity=Editar activitat '${0}'.
+clip.actions.text.object.resource=Emprar recursos en l'activitat
+clip.actions.text.object.ref.resource=Emprar recurs '${0}' en alguna activitat.
+clip.actions.text.object.lo=Emprar objectius d'aprenentatge en l'script.
+clip.actions.text.object.ref.lo=Emprar objectius d'aprenentatge '${0}' en l'script.
+clip.actions.text.object.assessmentflow=Configurar avaluació.
+clip.actions.text.object.ref.assessmentflow=Configurar avaluació '${0}'.
+
+clip.actions.reason.setAssessmentActivity=Aquesta avaluació està incompleta: això no indica qui és l'avaluador, ni en quina activitat s'ha realitzat la tasca d'avaluació. Ho podràs resoldre indicant la tasca d'avaluació.
+clip.actions.reason.setAssessedActivity=Aquesta avaluació està incompleta: això no indica que és l'activitat d'avaluació. Per tant, no està clar qui és l'avaluador, ni què s'ha d'avaluar. Ho podràs resoldre escollint una activitat avaluada.
+clip.actions.reason.addAssessmentFunction=No has indicat com s'empran els resultats d'avalució en l'script. Si penses que aquesta avaluació tindrà un impacte en el estudiants, o si vols emprar els resultats de l'avaluació amb propòsits formatius, ho pots indicar afegint 'resultats d'usos de l'avaluació'.
+clip.actions.reason.editSummativeAssessmentFunction=Aquesta avaluació s'emprarà a les notes dels estudiants, però no has indicat exàctament com fer-ho. Has de descriure el mode en que els resultats d'aquesta avaluació afecta les notes dels estudiants.
+clip.actions.reason.editFormativeAssessmentFunction=Aquesta avaluació s'emprarà per donar feedback als estudiants. No obstant, no has indicat en quina activitat els estudiants rebran el feedback. Has d'indicar-ho.
+clip.actions.reason.editDiagnosisAssessmentFunction=Aquesta avaluació s'emprarà per recopilar informació, per tal de corregir situacions errònies. Has d'indicar en quina activitat l'avaluador intervindrà (com ara, introduïr canvis en l'script després de l'avaluació).
+
+clip.actions.reason.general=Encara no s'ha configurat aquesta activitat, i per tant, està buida. Hauries d'editar la descripció de l'activitat, per tal d'indicar les tasques a fer als participants (aquells que pertanyen a aquesta activitat). A més, pots indicar els objectius d'aprenentatge i els recursos enllaçats amb aquesta activitat.
+clip.actions.reason.feedback=D'acord al pla d'avaluació, el feedback es mostra aquí (de l'avaluació '${0}'). En conseqüència, hauries d'editar aquesta activitat tenint en compte el fet que el feedback serà disponible pels estudiants.
+clip.actions.reason.modify=D'acord al pla d'avaluació, aquesta activitat és susceptible de ser modificada o, d'una altre manera, el professor podria intervindre d'acord a alguns resultats de l'avaluació '${0}'. Hauries de configurar l'activitat prenent aquest assumpte en compte.
+clip.actions.reason.assessed=Aquesta activitat serà avaluada (en l'avaluació '${0}'). Probablement, la configuració d'aquesta activitat ha de tenir en compte aquest factor (per exemple, necessites donar instruccions als estudiants?, o necessites aclarir als estudiants el tipus d'avaluació i el seu proposit?); si creus que no es necessari, pots afegir informació a la descripció de l'activitat (que els estudiants llegiran).
+clip.actions.reason.assessment=Aquesta activitat és una tasca d'avaluació! Això significa que la persona assignada a la tasca, pendrà el rol d'avaluador. Probablement, hauràs de donar les instruccions necessàries al avaluador, així com incloure els recursos necessaris, per tal de dur a terme l'avaluació apropiadamanet. Pots afegir aquesta informació en la descripció de l'activitat (que llegirà l'avaluador).
+
+clip.actions.reason.pursueLO=Inclou aquest objectiu d'aprenentatge en una activitat d'aprenentatge.
+clip.actions.reason.assessLO=Inclou aquest objectiu d'aprenentatge en una avaluació,<br/>per a que s'avalui.
+
+clip.actions.reason.assessedAsTest=En aquesta activitat, els estudiants realitzaran una prova. Hauràs d'escriure instruccions sobre com complertar-la. A més, has d'entregar els materials necessaris (com la pròpia prova); això es pot realitzar mitjançant un enllaç en l'activitat, o per qualsevol altre mètode.
+clip.actions.reason.assessmentAsTest=En aquesta activitat, l'avaluador avaluarà el test. Has escrit les instruccions apropiades? A més, necessites estar segur que l'avaluador rebrà totes les proves que han de ser avaluades.
+clip.actions.reason.assessmentAsObservation=En aquesta activitat, l'avaluador observarà un procés col·laboratiu, per tal d'avaluar-lo. Has d'estar segur que qualsevol dels recursos que es necessitin han d'estar disponibles, o que l'avaluador tingui accés a observar l'activitat. Podria ser necessari asegurar-se que tant aquesta activitat com l'activitat avaluada s'esdevinguin al mateix temps (ex., no estiguin en diferents fases de l'script).
+clip.actions.reason.assessedAsReportreview=Aquesta activitat s'avaluarà com un 'informe d'opinió'. Per tant, en aquesta activitat, els estudiants hauran de produïr un document per l'avaluador. L'activitat ha de ser configurada apropiadament.
+clip.actions.reason.assessmentAsReportreview=En aquesta tasca d'avaluació, l'avaluador revisarà els informes dels estudiants. Has de donar les instruccions necessàries sobre com revisar els documents en la descripció d'aquesta activitat. A més, necessites estar segur que l'avaluador tindrà accés als documents.
+clip.actions.reason.assessedAsPresentation=Aquesta activitat s'avaluarà com una 'presentació oral'. Per tant, els estudiants hauràn de realitzar una presentació. S'ha de proveïr als estudiants amb les instruccions i els recursos necessaris.
+clip.actions.reason.assessmentAsPresentation=En aquesta tasca d'avaluació, l'avaluador observarà i avaluarà una presentació oral. Per tant, has de donar les instruccions necessàries sobre com avaluar-la. A més, necessites estar segur que l'avaluador tindrà accés a les presentacions: ja sigui mitjançant una gravació, o observant-la. En aquest cas, l'activitat ha de succeïr al mateix temps que la presentació (ex., han d'estar en la mateixa fase).
+clip.actions.reason.assessedAsPerformance=En aquesta activitat, s'avaluarà el rendiment dels estudiants. Per tant, els estudiants han de realitzar algunes tasques específiques. S'ha de proveïr als estudiants amb les instruccions i els recursos necessaris.
+clip.actions.reason.assessmentAsPerformance=En aquesta tasca d'avaluació, l'avaluador observarà i avaluarà el rendiment dels estudiants en algunes tasques. Per tant, has de donar les instruccions necessàries sobre com avaluar-lo. A més, necessites estar segur que l'avaluador tindrà accés al treball: ja sigui mitjançant una gravació, o observant-lo. En aquest cas, l'activitat ha de succeïr al mateix temps que el treball (ex., han d'estar en la mateixa fase).
+clip.actions.reason.assessedAsPortfolio=En aquesta activitat, s'espera que els estudiants elaborin un portfolio per l'avaluació. Has de proveïr els recursos i la informació necessària per tal que els estudiants puguin preparar-lo.
+clip.actions.reason.assessmentAsPortfolio=En aquesta tasca d'avaluació, l'avaluador ha d'avaluar els portfolios dels estudiants. Has de donar a l'avaluador les instruccions necessàries (en la descripció de l'activitat). A més, necessites estar segur que l'avaluador tindrà accés als portfolios dels estudiants.
+
+clip.actions.reason.assessmentAsRoles=En aquesta activitat, es durà a terme una avaluació de detecció de rols. Aquesta avaluació es basa en l'anàlisi de les interaccions entre estudiants. Has de preparar el software necessari per tal que es pugui dur a terme l'avaluació, i enllaçar-la amb aquesta activitat (veure la documentació de patrons sobre la detecció de rols per a més informació sobre aquest software).
+clip.actions.reason.assessmentAsRubric=En aquesta tasca d'avaluació, s'esperen rúbriques. Per tant, hauràs de proveïra l'assessor amb un document de rúbriques (que pots enllaçar com un recurs en l'activitat). També pots incloure instruccions sobre com emprar les rúbriques.
+clip.actions.reason.assessedAsShared=Aquesta activitat s'avalua de tal manera que les notes es mostren a tots els membres o a cada grup. Probablement hauràs d'indicar-ho als estudiants, per tal que siguin conscients de les condicions.
+clip.actions.reason.assessmentAsShared=En aquesta tasca d'avaluació, els estudiants de cada grup tenen la mateixa nota. Hauràs de donar les instruccions a l'avaluador indicant aquest fet.
+clip.actions.reason.assessmentAsSelf=Aquesta avaluació és una auto-avaluació. Per tant, has d'estar segur que l'avaluador sigui la mateixa persona/grup que l'avaluat.
+clip.actions.reason.assessmentAsAnonymous=Aquesta tasca d'avaluació és anònima. Hauràs d'indicar-ho a l'avaluador (per exemple, en la descripció d'aquesta activitat d'avaluació).
+clip.actions.reason.assessmentAsIA=En aquesta activitat, es du a terme l'anàlisi d'interacció. Aquesta tasca d'avaluació es basa en l'anàlisi d'intraccions entre estudiants. Has de preparar el software necessari per tal que es pugui dur a terme la tasca d'avaluació, i enllaçar-la amb aquesta activitat (veure la documentació de patrons sobre l'anàlisi d'interaccions per a més informació sobre aquest software).
+clip.actions.reason.assessmentAsRandom=En aquesta tasca d'avaluació, s'avaluen els grups escollint un membre aleatori de cada grup; aquest membre tindrà la responsabilitat de la valoració. Has de donar les instruccions necessàries a l'avaluador sobre com escollir els membres del grup i dur a terme l'avaluació.
+
+clip.menu.ignore.all=Ignora aquestes accions
+clip.menu.ignore.action=Ignora aquesta acció
+clip.menu.goto.action=Anar a la finestra d'edició
+
+clfps.phase.title=Fase
+clfps.phase.edit.addgroup=... afegir el tipus de grup a la fase
+clfps.phase.edit.removegroup=Eliminar el tipus de grup '${0}'
+clfps.phase.newgrouptype=Nou tipus de grup
+clfps.phase.support=Activitat de suport
+clfps.phase.activity=Activitat d'aprenentatge
+
+clfps.brainstorming.title=Pluja d'idees
+clfps.brainstorming.group=Conjunt de pluja d'idees
+clfps.brainstorming.support=Activitat de suport
+
+clfps.jigsaw.title=Trencaclosques
+clfps.jigsaw.jigsaw.group=Grups trencaclosques
+clfps.jigsaw.jigsaw.phase=Fase del trencaclosques
+clfps.jigsaw.jigsaw.activity1=Discussió global
+clfps.jigsaw.jigsaw.activity2=Proposta de solució
+clfps.jigsaw.jigsaw.support=Suport de discussió
+clfps.jigsaw.expert.group=Grup d'experts
+clfps.jigsaw.expert.phase=Fase experta
+clfps.jigsaw.expert.activity=Discussió del subproblema
+clfps.jigsaw.expert.support=Suport de discussió
+clfps.jigsaw.individual.phase=Fase individual
+clfps.jigsaw.individual.activity=Estudi individual
+clfps.jigsaw.individual.support=Suport de l'estudi individual
+
+clfps.peerreview.title=Revisió per parelles
+clfps.peerreview.reviewers=Revisors
+clfps.peerreview.review=Revisió
+clfps.peerreview.review.activity=Revisar el treball dels companys
+clfps.peerreview.review.support=Activitat de suport 1
+clfps.peerreview.feedback=Feedback
+clfps.peerreview.feedback.activity=Analitzar feedback
+clfps.peerreview.feedback.support=Activitat de suport 2
+clfps.peerreview.discussion=Discussió
+clfps.peerreview.discussion.group=Grups de discussió
+clfps.peerreview.discussion.activity=Revisió de discussió
+clfps.peerreview.discussion.support=Activitat de suport 3
+clfps.peerreview.improve=Refinar i millorar el treball
+clfps.peerreview.improve.activity=Millorar el teu treball amb la revisió
+clfps.peerreview.improve.support=Activitat de suport 4
+
+clfps.pyramid.dialog.title=Piràmide: número de nivells
+clfps.pyramid.dialog.intro=Escollir el numero de nivells per la piràmide:
+clfps.pyramid.title=Piràmide
+clfps.pyramid.class=Tipus
+clfps.pyramid.student=Estudiant
+clfps.pyramid.group=Nivell ${0} grup
+clfps.pyramid.level=Nivell ${0}
+clfps.pyramid.support=Activitat de suport ${0}
+
+clfps.simulation.title=Simulació
+clfps.sumulation.students=Estudiants
+clfps.sumulation.information=Informació del rol
+clfps.sumulation.information.deliver=Entrega de la informació de rol
+clfps.sumulation.information.support=Activitat de suport 1
+clfps.sumulation.defining=Definició del rol
+clfps.sumulation.defining.activity=Rol d'estudi
+clfps.sumulation.defining.support=Activitat de suport 2
+clfps.sumulation.defining.role=Nou rol
+clfps.sumulation.groups=Grups de simulació
+clfps.sumulation.groupos.role=Nou grup
+clfps.sumulation.groups.activity=Preparar simulació
+clfps.sumulation.groups.support=Activitat de suport 3
+clfps.sumulation.simulation=Simulació
+clfps.sumulation.simulation.activity=Simulació
+clfps.sumulation.simulation.support=Activitat de suport 4
+clfps.sumulation.share=Compartir
+clfps.sumulation.share.activity=Compartir
+clfps.sumulation.share.support=Activitat de suport 5
+clfps.simulation.edit.addrole=... afegir rol
+clfps.simulation.edit.addgroup=... afegir grup de simulació
+
+clfps.tapps.title=TAPPS
+clfps.tapps.pair=Parell
+clfps.tapps.studentA=Estudiant A
+clfps.tapps.studentB=Estudiant B
+clfps.tapps.solve=Solucionar problema
+clfps.tapps.listen=Escoltar la solució
+clfps.tapps.problem=Problema ${0}
+clfps.tapps.support=activitat de suport
+clfps.tapps.edit.add=... afegir problema
+
+clfps.tps.title=Pensa, discuteix, comparteix (TPS)
+clfps.tps.students=Estudiants
+clfps.tps.think=Pensar
+clfps.tps.think.activity=Estudi individual
+clfps.tps.think.support=Suport d'estudi individual
+clfps.tps.pair=Parell
+clfps.tps.pair.role=Parell
+clfps.tps.pair.activity=Discussió per parelles
+clfps.tps.pair.support=Suport de discussió
+clfps.tps.share=Compartir
+clfps.tps.share.activity=Compartir amb la classe
+clfps.tps.share.support=Activitat de suport
+
+pattern.observations.activity=Observar col·laboració
+pattern.observations.title=Observacions
+
+patterns.presentstion.activity=Presentació oral
+patterns.presentstion.assess=Avaluar presentació
+patterns.presentstion.title=Presentació oral
+
+patterns.performance.activity=Avaluació de l'exercici
+patterns.performance.activity=Avaluar l'exercici
+
+patterns.report.title=Informe d'avaluació
+patterns.report.activity=Revisió de l'informe
+
+patterns.self.title=Autoavaluació
+patterns.self.activity=Autoavaluació
+
+patterns.test.title=Prova
+patterns.test.assess=Avaluar les proves
+patterns.test.activity=Prova
+
+patterns.tutoring.title=Sessions de tutoria
+patterns.tutoring.activity=Assitir a les sessions de tutoria
+patterns.tutoring.assess=Gestionar la sessió de turoria
+
+
+%help
+
+help.assessment.icon.assessment=Aquesta icona representa una tasca d'avaluació (part de l'avaluació '${0}'), que es duu a terme en aquesta fase.
+help.assessment.icon.assessment.no=Aquesta icona representa una avaluació, la tasca d'avaluació de la qual no ha estat encara escollida (així l'avaluació encara està fora de l'script).
+help.assessment.icon.assessed=Aquesta icona indica que una activitat d'aprenentatge (en aquesta fase) està avaluada, en l'avaluació '${0}'.
+help.assessment.icon.diagnosis=Aquesta icona indica que els resultats de l'avaluació '${0}' són emprades per intervindre o adaptar una activitat en aquesta fase.
+help.assessment.icon.formative=Aquesta icona indica que els resultats de l'avaluació '${0}' són emprades per donar feedback als estudiants en una activitat en aquesta fase.
+
+help.flow.select.clfp=Aquesta opció activa aquest CLFP, per tal que es pugui editar. Només pot haver-hi un CLFP activat en tot moment.
+help.flow.select.activity=Escull aquesta activitat!
+
+help.flow.assessment.edit=Aquest element és part d'una avaluació integrada en l'script. Feu clic aquí per editar-lo.
+help.assessment.delete=Feu click aquí per eliminar aquesta avaluació de l'script. Les activitats relaciones a l'avaluació romandran en l'script; no obstant, la Web Collage les considerarà com desconnectades d'aquesta avaluació.
+help.roles.edit.title=Feu click aquí per editar aquest rol. Pots configurar el nom del rol, la seva descripció, i el número mínim i màxim de gent assignada a cada instància d'aquest rol.
+help.flow.clfp.configure.act=Feu click aquí per veure i configurar els rols i activitats continguts en aquesta fase. També pots canviar el nom de la fase.
+help.flow.clfp.substitute=Aquesta activitat s'empra per a reemplaçar les activitats contingudes en aquesta fase amb les activitats proposades per un CLFP. Si us plau, tingues en compte que si integres un CLFP en aquesta fase, les activitats incloses prèviament s'eliminaran. Aquesta opció és molt útil, no obstant, per descriure el treball d'aquesta fase en detall, d'acord a un nou CLFP; per fer-ho, tindràs que seleccionar un CLFP de la llista.
+help.flow.clfp.add.before=Això et permet afegir activitats abans d'aquest CLFP. Aquestes noves activitats també s'organitzen com un CLFP, pel que hauràs d'escollir una.
+help.flow.clfp.add.after=Mitjançant aquest opció, podràs afegir activitats després d'aquest CLFP. Aquestes noves activitats també s'organitzen com un CLFP, pel que hauràs d'escollir una.
+help.flow.clfp.move=Empra aquesta opció per a moure totes les activitats contingudes en aquest CFLP. Serà capaç de moure-les a qualsevol lloc del flux d'aprenentatge.
+help.flow.clfp.remove=Aquesta opció elimina el CLFP de l'script. Totes les activitats, fases i rols s'eliminaran. També, qualsevol CLFP que estigui en fase amb aquest CLFP serà eliminat.
+help.common.pattern.doc=Feu clic aquí per a llegir la codumentació d'aquest patró.
+
+help.general.editLo=Feu clic aquí per a editar aquest objectiu d'aprenentatge. Pots canviar el nom de l'objectiu, així com la seva descripció.
+help.general.deleteLo=Feu clic aquí per a per a eliminar aquest objectiu d'aprenentatge de l'script.
+
+help.resources.editTool=Feu clic aquí per a editar aquesta eina. Pots indicar el seu nom i la seva descripció.
+help.resources.editDocument=Feu clic aquí per a editar aquest document. Pots indicar el seu nom i l'enllaç (URL) per a trobar-lo.
+help.resources.delete=Feu clic aquí per a eliminar aquest recurs de l'script.
+
+help.flow.activities.add=Feu clic aquí per a per a crear una nova activitat per aquest rol.
+help.assessment.edit=Feu clic aquí per a editar aquesta avaluació. Pots editar les activitats relacionades a aquesta avaluació, així com configurar-la d'acord als patrons d'avaluació.
+help.activity.edit=Feu clic aquí per a editar aquesta activitat. Pots indicar el títol, descripció, objectius d'aprenentatge i els recursos vinvulats a aquesta activitat.
+help.flow.activities.add.before=Feu clic aquí per a crear una nova activitat abans d'aquesta.
+help.flow.activities.add.after=Feu clic aquí per a crear una nova activitat després d'aquesta.
+help.flow.activities.assess=Feu clic aquí per a crear una nova avaluació, on aquesta activitat és avaluada. Si us plau, tingues en compte que l'avaluació estarà incompleta: això no indicarà qui és l'avaluador ni l'avaluador de la tasca. Ho tindràs que configurar més endavant.
+help.flow.activities.makeassessor=Feu clic aquí per a crear una nova avaluació, en que aquesta activitat és l'activitat de l'avaluador. Si us plau, tingues en compte que l'avaluació estarà incompleta: això no indicarà quina activitat d'aprenentatge serà avaluada. Ho tindràs que configurar més endavant.
+help.flow.activities.move.up=Aquesta opció mourà l'activitat cap amunt, col·locant-se abans de la de damunt (és a dir, aquesta activitat succeirà abans en l'script).
+help.flow.activities.move.down=Aquesta opció mourà l'activitat cap abaix, col·locant-se després de la de sota (és a dir, aquesta activitat succeirà després en l'script).
+help.flow.activities.delete=Feu clic aquí per a eliminar l'activitat de l'script.
+
+help.picker.move.act=Escull això per moure el CLFP dintre d'aquesta fase. Si us plau, tingues en compte que això configurarà la fase la qual s'ha desplaçat el CLFP. Això indica, que les activitats existents prèviament en aquesta fase seran eliminades de l'script.
+help.picker.move.gap=Escull això per moure el CLFP en aquesta posició.
+help.picker.select.act=Escull aquesta fase per a veure els rols i les activitats incloses en aquesta.
+help.picker.select.activitygap=Escull aquesta posició per la nova activitat.
+help.picker.select.activity=Escull aquesta activitat.
+
+help.clfp.add.first=Escull aquesta opció per afegir un CLFP a l'script, per a crear l'estructura bàsica de l'script.
+help.ignore.actions=Això eliminarà aquesta alerta de l'assessor, per tant, no tornarà a aparèixer.
+help.clip.menu.ignore.all=Això eliminarà totes les alertes actuals d'aquest grup, per tant, no tornaran a aparèixer.
+help.clip.menu.goto.action=Escull això per fer que el Web Collage obri la finestra on pots realitzar aquesta acció.
+help.clip.menu.ignore.action=Això eliminarà aquesta alerta de l'assessor, per tant, no tornarà a aparèixer.
+
+help.assessment.patterns.delete=Elimina aquest patró de l'avaluació. Però això no eliminarà cap activitat, o canviarà qualsevol cosa sobre l'avaluació.
+help.assessment.patterns.list.new=Afegeix un nou patró a aquesta avaluació. Mitjançant els patrons d'avaluació, podràs configurar alguns aspectes de l'avaluació. Feu clic aquí per a veure una llista dels patrons disponibles.
+help.assessment.edit.summativeFunction.edit=Feu clic aquí per a indicar el mode en que seran avaluats els estudiants.
+help.assessment.edit.formativeFunction.edit=Aquest element indica que, després que es tinguin els resultats de l'avaluació, es donarà un feedback a l'estudiant. Feu clic aquí per a indicar en quina activitat s'entrega a l'estudiant el feedback. Després, seria convenient tenir en compte aquest fet, per tal de configurar l'activitat escollida.
+help.assessment.edit.diagnosisFunction.edit=Aquest element indica que una activitat pot ser modificada d'acord als resultats de l'avaluació. Feu clic aquí per a indicar l'activitat d'aprenentatge que pot ser modificada. També, quan configuris aquesta activitat, seria convenient tenir en compte el fet que podria ser modificada.
+help.assessment.edit.function.remove=Feu clic per eliminar l'ús dels resultats de l'avaluació.
+
+help.assessment.edit.analysis.choose=Feu clic aquí per a escollir l'activitat en que es durà a terme la tasca d'avaluació. És molt útil per a indicar qui és l'avaluador, quan es du a terme la tasca, i com s'ha completat.
+help.assessment.edit.analysis.change=Feu clic aquí per a canviar l'activitat en que es durà a terme la tasca d'avaluació. És molt útil per a indicar qui és l'avaluador, quan es du a terme la tasca, i com s'ha completat.
+help.assessment.edit.analysis.configpattern=Feu clic aquí per a escollir una tècnica d'avalució, que pot donar informació sobre com configurar la tasca d'avaluació (com portarà a terme aquesta tasca l'avaluador). Només es pot aplicar una tècnica d'avalució en cada avaluació.
+
+help.assessment.edit.source.choose=Feu clic aquí per a escollir l'activitat avaluada. És molt útil per a indicar que serà avaluat (per l'avaluador en l'activitat d'avaluació) i, per tant, qui és l'avaluat. Si us plau, tingues en compte que l'activitat avaluada ha de ser una activitat d'aprenentatge duta a terme pels estudiants. També, depenent del tipus d'avaluació, l'activitat avaluada hauria de contenir instruccions pels estudiants sobre com procedir per a ser avaluats.
+help.assessment.edit.source.change=Feu clic aquí per a canviar l'activitat avaluada. És molt útil per a indicar que serà avaluat (per l'avaluador en l'activitat d'avaluació) i, per tant, qui és l'avaluat. Si us plau, tingues en compte que l'activitat avaluada ha de ser una activitat d'aprenentatge duta a terme pels estudiants. També, depenent del tipus d'avaluació, l'activitat avaluada hauria de contenir instruccions pels estudiants sobre com procedir per a ser avaluats. Si us plau, tingues en compte que les activitats avaluades previament, no s'eliminaran de l'script (simplement, no s'avaluarà aquí mai més).
+help.assessment.edit.source.configpattern=Feu clic aquí per a escollir una tècnica d'avaluació, que dona informació sobre com configurar l'activitat d'avaluació (el que l'estudiant ha de fer en aquesta activitat). Només es pot aplicar una tècnica d'avaluació en cada avaluació.
+
+help.clfps.tapps.edit.add=Feu clic aquí per a afegir un nou problema al TAPPS. Aquest patró pot tenir quasevol número de problemes a resoldre per a cada parella d'estudiants.
+help.clfps.simulation.edit.addrole=Feu clic aquí per a afegir un nou rol de simulació. Pots crear quasevol quantitat de rols, cadascun d'ells amb una descripció i preparació d'activitats diferents.
+help.clfps.simulation.edit.addgroup=Feu clic aquí per a afegir un nou grup de simulació. Pots crear qualsevol quantitat de grups, i cadascun d'ells pot realitzar una simulació diferent.
+help.clfps.phase.edit.addrole=Feu clic aquí per a afegir un nou rol a la fase. Pots crear quasevol quantitat de rols, cadascun d'ells amb una descripció i preparació d'activitats diferents.
+help.clfps.phase.edit.addgroup=Feu clic aquí per a afegir un nou grup a la fase. Pots crear qualsevol quantitat de grups.
+
+instancias.editar=Editar instància
+instancias.eliminar=Eliminar instància
+instancias.editar.info=Feu clic aquí per a editar aquesta instància
+instancias.eliminar.info=Feu clic aquí per a eliminar aquesta instància
+instancias.nueva=Nova instància
+instancias.errorNoName=Si us plau, especifica un nom per la instància
+instancias.titulo=Títol
+
+versiones.version=Versió
+versiones.ver=Veure la versió
+versiones.instanciar=Versió instanciada
+versiones.eliminar=Eliminar versió
+versiones.ver.info=Feu clic aquí per a veure aquesta versió de disseny
+versiones.instanciar.info=Feu clic aquí per a instanciar aquesta versió de disseny
+versiones.eliminar.info=Feu clic aquí per a eliminar aquesta versió de disseny
+
+disenos.editar=Editar disseny
+disenos.instanciar=Instanciar disseny
+disenos.eliminar=Eliminar disseny
+disenos.clonar=Copiar disseny
+disenos.editar.info=Feu clic aquí per a editar aquest disseny
+disenos.instanciar.info=Feu clic aquí per a instanciar la última versió del disseny
+disenos.eliminar.info=Feu clic aquí per a eliminar aquest disseny
+disenos.clonar.info=Feu clic aquí per a crear una còpia del disseny
+
+tab.metodo=Dissenyar mètode d'ensenyament
+tab.participantes=Gestió del participant
+participantes.lms=Selecció LMS
+participantes.errorGetLms=No s'ha pogut obtenir la llista de LMS
+participantes.lms.select=-- Escull una instal·lació LMS --
+participantes.clase=Selecció de classe
+participantes.clase.select=-- Escull una classe --
+participantes.participantes=Llista de participant de la classe
+participantes.tipoLMS.select=-- Escull un tipus de LMS --
+participantes.crearInstalacionLMS=Crear una instal·lació LMS
+participantes.optioneditlms=Editar instal·lació LMS
+participantes.optiondeletelms=Eliminar instal·lació LMS
+participantes.mostrarinstanciaslms=Llista d'instal·lacions LMS
+participantes.gestionar_lms=Gestió de LMS
+participantes.editarInstalacionLMS=Editar instal·lació
+participantes.obtenerclases=Obtenir classes
+participantes.eliminarinst=Segur que vols eliminar aquesta instal·lació?
+participantes.tipolms=Tipus de LMS
+participantes.nombrelms=Nom
+participantes.usuariolms=Usuari
+participantes.lmsintallation.edit=Feu clic aquí per a editar l'instal·lació LMS
+participantes.lmsintallation.delete=Feu clic aquí per a eliminar l'instal·lació LMS
+participantes.confirmacioneliminar=Eliminar instal·lació LMS
+
+participantes.lmsglue.select=-- Ecull un glue LMS --
+participantes.lmsglue=LMS:
+participantes.fichero=Arxiu
+
+participantes.crearinstalacion.idlms=Si us plau, escull un tipus de LMS
+participantes.crearinstalacion.title=Si us plau, especifica un nom de LMS
+participantes.crearinstalacion.uri=Si us plau, especifica una URI
+participantes.crearinstalacion.user=Si us plau, especifica un nom d'usuari
+participantes.crearinstalacion.passwd=Si us plau, especifica una contrasenya
+participantes.crearinstalacion.toolid=Si us plau, especifica un codi de seguiment (Tool ID)
+participantes.crearinstalacion.file=Si us plau, especifica un arxiu per actualitzar
+participantes.imposibleactualizar=No es pot editar una instal·lació LMS en marxa
+
+instanceLoader.load.error=No s'ha pogut carregar la instància!
+instanceLoader.save.error=No s'ha pogut guardar!
+instanceLoader.save.noAccess=No tens accés per a editar aquest script. La instància es tancarà
+instanceLoader.loading.wait=<p>Carregant instància. Si us plau, esperi!</p>
+instanceLoader.title=Carregant...
+instanceLoader.load.noAccess=No tens accés per veure aquest script. Has iniciat sessió?
+instanceLoader.save.sessionExpired=La teva sessió s'ha exhaurit. <br/>Si no inicies sessió, la teva instància es tancarà i els canvis realitzats no es guardaran.<br/> Vols iniciar sessió?
+
+participantes.instanciaClaseElegidas=Classe i instal·lació LMS escollides
+participantes.instanciaElegida=Instal·lació LMS
+participantes.claseElegida=Classe
+participantes.listadoAlumnos=Llista de participants
+participantes.botonSeleccionar=Seleccionar
+participantes.botonActualizarListadoAlumnos=Actualitzar llista
+participantes.seleccionarAlumnos=Escollir participants
+participantes.instalacion_lms=Instal·lació de LMS
+participantes.cambioAlumnos=Canvis de participants
+participantes.alumnosAnadidos=Participants afegits
+participantes.alumnosEliminados=Participants eliminats
+participantes.alumnosPermanecen=Participants que queden
+participantes.obtener=Obtenir participants
+participantes.lmsElegido=Tipus de LMS
+participantes.errorGetParticipants=No s'ha pogut obtenir la llista de participants de la classe
+participantes.numberParticipants=Número de participants de la classe: 
+participantes.errorGetClasses=No s'ha pogut obtenir la llista de classes
+
+participantes.nombre=Nom
+participantes.tipo=Tipus
+participantes.user=Usuari
+
+actualizar.aviso=Alerta
+actualizar.aviso.info=Si us plau, abans de fer clic al botó de selecció, escull una instal·lació i una classe
+
+participantes.obtenerparticipantes.cambios=Alerta! Els canvis seran detectats en els participants
+participantes.editarinstalacion.error=Error inesperat mentre s'editava la instal·lació
+
+participantes.aviso=Alerta!!
+participantes.imposibilidadborrar=Una instal·lació LMS en marxa no pot ser eliminada
+participantes.elegirinstancia=Canviar
+
+roles.see=Veure rol
+activity.see=Veure activitat
+help.activity.see=Feu clic aquí per a veure aquest activitat. Pots veure el títol, la descripció, els objectius d'aprenentatge i els recursos relacionats a aquesta activitat.
+help.roles.see.title=Feu clic aquí per a veure aquest rol. Pots veure el nom del rol, la seva descripció, i el número mínim i màxim de persones assignades a cada instància d'aquest rol.
+
+assessment.see=Veure avaluació
+help.assessment.see=Feu Clic aquí per a veure aquesta avaluació. Pots veure les activitats relacionades a aquesta avaluació, així com la seva configuració d'acord amb els patrons d'avaluació.
+
+roles.see.title=Veure el rol '${0}'
+
+flow.clfp.see.act=Veure la fase '${0}'...
+help.flow.clfp.see.act=Feu clic aquí per veure els rols i activitats contingudes en aquesta fase. També pots veure el nom de la fase.
+
+flow.activities.see=Veure la fase
+
+flow.assessment.see=Veure l'avaluació
+help.flow.assessment.see=Aquest element forma part d'una avaluació incrustada en l'script. Feu clic aquí per a veure'l.
+help.flow.select.clfp.see=Aquesta opció activa aquest CLFP, de manera que es pugui veure. Només pot haver-hi un CLFP actiu en tot moment.
+
+ldmanager.eliminardiseno=Estàs segur de voler eliminar aquest disseny?
+
+learningflow.clonar=Clonar aquesta instància de grup
+learningflow.clonar.help=Feu clic per a clonar aquesta instància de grup
+learningflow.borrar=Eliminar aquesta instància de grup
+learningflow.borrar.help=Feu clic per a eliminar aquesta instància de grup
+learningflow.asignarparticipantes=Assignar usuaris a una instància de grup
+learningflow.asignarparticipantes.help=Feu clic per a assignar usuaris a una instància de grup
+learningflow.asignarprofesores=Assignar professors a una instància de grup
+learningflow.asignarprofesores.help=Feu clic per a assignar professors a una instància de grup
+learningflowGroups.mostrarclfp=Mostrar CLFP associats
+learningflowGroups.mostrarclfp.help=Feu clci aquí per a mostrar els CLFP associats a la instància de grup
+participants.alumnosasignados=Assignació d'estudiants a la instància de grup
+participants.alumnosasignadosgrupo=Estudiants assignats a aquesta instància
+participants.alumnosasignadosgrupotemp=Estudiants temporals
+participants.alumnosdisponibles=Estudiants disponibles
+participants.profesoresasignados=Professors assignats
+participants.profesoresasignadosgrupo=Professors assignats
+participants.profesoresdisponibles=Professors disponibles
+
+participants.asignaralumnos=Assignar estudiants a la instància
+participants.asignaralumnos.help=Feu clic aquí per assignar estudiants a la instància
+participants.asignartodosalumnos=Assignar tots els estudiants a la instància
+participants.asignartodosalumnos.help=Feu clic aquí per assignar tots els estudiants disponibles a la instància
+participants.asignarprofesores=Assignar professor al grup
+participants.asignarprofesores.help=Feu clic aquí per assignar el professor al grup
+participants.asignartodosprofesores=Assignar tots els professors a la instància de grup
+participants.asignartodosprofesores.help=Feu clic aquí per assignar tots els professors a la instància de grup
+
+participants.desasignaralumnos=Rebutjar alumnes de la instància
+participants.desasignaralumnos.help=Feu clic a quí per a rebutjar els alumnes de la instància
+participants.desasignartodosalumnos=Rebutjar tots els alumnes de la instància
+participants.desasignartodosalumnos.help=Feu clic aquí per a rebutjar els alumnes assignats a la instància
+participants.desasignarprofesores=Rebutjar professor de la instància de grup
+participants.desasignarprofesores.help=Feu clic aquí per a rebutjar al professor de la instància de grup
+participants.desasignartodosprofesores=Rebutjar tots els professors de la instància de grup
+participants.desasignartodosprofesores.help=Feu clic aquí per a rebutjar tots els professors d'aquest grup
+
+nombre.estudiantes=Nom dels estudiants
+
+participants.alumnosasignadosotrasinstancias=Estudiants assignats a altres instàncies
+
+participants.numasignados=Estudiants assignats a altres instàncies:
+participants.numdisponibles=Estudiants disponibles:
+participants.perteneciente=Estudiants assignats a aquesta instància:
+participants.pertenecienteProfesor=Professors assignats a aquesta instància:
+participants.alumnoselegidos=Si us plau, primer de tot escull als participants mitjatçant la pestanya Gestió de participants
+
+learningflow.verparticipantes=Estudiants assignats a aquesta instància
+learningflow.verprofesores=Professors assignats a aquesta instància
+learningflow.verparticipantes.help=Feu clic aquí per a veure els participants assignat a aquest grup
+
+participants.toolid=Codi de seguiment (Tool ID)
+participantes.uri=URI
+
+fichero.notSupportedFormat=Format d'arxiu no suportat
+fichero.error=Error al carregar l'arxiu
+
+deployGluePS.title=Implementar en Glue!PS
+deployGluePS.error=Error mentre s'implementava en Glue!PS
+registerResult.title=Resultat de registrar nou usuari
+registerResult.exit=El nou usuari s'ha registrar correctament
+
+participantFlow.show=Mostrar el flux de participant
+
+groupPatternAlerts.title=Patrons d'alertes
+groupPatternAlerts.proposedGroupNumberInfo=El patró suggereix emprar un número diferent de grups de l'actual
+groupPatternAlerts.proposedGroupCompositionInfo=El patró suggereix una configuració de grup diferenta a l'actual composició del grup
+
+groupPatternAlerts.proposedGroupNumberAlert=El nombre de grups proposats (${0}) és diferent de l'actual número de grups (${1})
+groupPatternAlerts.proposedGroupCompositionAlert=La configuració de grup proposta és diferent de l'actual configuració
+groupPatternAlerts.leftAlert=Feu clic a l'esquerra per veure més consells de grup
+groupPatternAlerts.rightAlert=Feu clic a la dreta per veure més consells de grup
+
+groupPatternOptions.title=Opcions de patró de grup
+help.groupPattern.delete=Feu clic a quí per eliminar el patró de grup
+help.groupPattern.documentation=Feu clic aquí per llegir la documentació del patró de grup
+
+groupPattern.updateGroupNumber=Actualitzar el nombre de grups
+groupPattern.updateGroupNumberOK=El nombre de grups és correcte
+groupPattern.disabledGroupNumber=No es pot actualitzar el nombre de grups
+
+groupPattern.updateGroupComposition=Actualitzar composició del grup
+groupPattern.updateGroupCompositionOK=La composició del grup és correcte
+groupPattern.disabledGroupComposition=No es pot actualitzar la composició del grup
+
+groupPattern.delete=Eliminar aquest patró de grup
+groupPattern.documentation=Llegir la documentació del patró de grup
+groupPattern.emptyGroup=Hi ha grups buits
+groupPattern.notAsigned=Hi ha estudiants sense un grup assignat
+groupPattern.notAsignedTeacher=No hi ha professors assignats a la fase
+groupPattern.notAsignedTeacher.help=Hauries d'assignar com a mínim un professor del grup de professors
+
+groupPattern.updatesNeeded.alert=Es necessitaran ${0} actualitzacions més per a que estigui actualitzat.
+groupPattern.baddependencies=Altres fases han de ser revisader abans que aquesta pugui ser actualitzada.
+
+groupPattern.management.dialogtitle=Gestió del patró de grup
+groupPattern.managment.newgn=Afegir patró del número de grup
+groupPattern.managment.newpa=Afegir patró d'assignació d'estudiant
+  
+groupPattern.management.move.down=Moure a sota
+help.groupPattern.management.move.down=Moure a sota
+groupPattern.management.move.up=Moure a munt
+help.groupPattern.management.move.up=Moure a munt
+
+
+groupPattern.management.undelete=Conservar aquest patró
+help.groupPattern.management.undelete=Conservar aquest patró
+groupPattern.management.delete=Eliminar aquest patró
+help.groupPattern.management.delete=Eliminar aquest patró
+
+groupPattern.general.lessthan=Meny de ${1}: ${0} 
+groupPattern.general.morethan=Més de ${1}: ${0}
+
+groupPattern.nopatterns=No hi ha patrons per a configurar-ho. Pots intentar afegir-los!
+
+grouplayer.menu.title=Membres del grup
+grouplayer.menu.itemhelp=Feu clic aquí per a seleccionar aauest participant
+
+groupPattern.manage=Administrar la directiva del grup
+help.groupPattern.manage=Afegir normes per controla el nombre de grups i la distribució dels estudiants
+
+changeTypeToStudent=Canviar a estudiant
+changeTypeToStudent.help=El participant ara és un estudiant
+changeTypeToTeacher=Canviar a professor
+changeTypeToTeacher.help=El participant ara és un professor
+changeTypeTitle=Confirmació de canvi de tipus
+changeType.info=Si canvies el tipus, el participants s'eliminarà de tots aquells grups on està assignat actualment.<br />Estàs segur que vols fer el canvi?
+
+toolNameError=Si us plau, escriu un nom per l'eina

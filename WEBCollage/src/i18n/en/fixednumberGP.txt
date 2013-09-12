@@ -4,7 +4,6 @@ grouppattern.fixednumbergroups.info=The group number is fixed. You want to set e
 grouppattern.fixednumbergroups.number=The specified number of groups is ${0}
 grouppattern.fixednumbergroups.unspecified=Group number not specified.
 
-
 grouppattern.fixednumbergroups.menuitem.number=Set the number of groups (currently ${0})
 grouppattern.fixednumbergroups.menuitem.unspecified=Set the number of groups (unspecified)
 

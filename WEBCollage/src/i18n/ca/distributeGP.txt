@@ -1,0 +1,6 @@
+grouppattern.groupparticipantsdistribute.title=Distribució aleatòria
+grouppattern.groupparticipantsdistribute.title.alert=<font color='brown'>Random distribution</font>
+grouppattern.groupparticipantsdistribute.info=Nothing needs to be fixed. You want the students <br/> are distributed randomly among the groups <br/>so that each group has the same size.
+
+grouppattern.groupparticipantsdistribute.exact=Necessitem ${0} estudiants per grup.
+grouppattern.groupparticipantsdistribute.noexact=Necessitem entre ${0} i ${1} estudiants per grup.

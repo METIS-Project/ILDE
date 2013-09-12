@@ -24,15 +24,20 @@ function getJavascriptMessages() {
 }
 
 function i18nGetLocale() {
-	if (isset($_GET['l'])) {
-		$l = $_GET['l'];
-		if ($l == "es" || $l == "en") {
+        if (isset($_GET['lang'])){
+            //admit lang parameter from ldshake
+            $l = $_GET['lang'];
+        }else if (isset($_GET['l'])){
+            $l = $_GET['l'];
+        }
+	if (isset($l)) {
+		if ($l == "es" || $l == "en" || $l == "ca") {
 			setcookie("l", $l);
 			return $l;
 		}
 	} else if (isset($_COOKIE['l'])) {
 		$l = $_COOKIE['l'];
-		if ($l == "es" || $l == "en") {
+		if ($l == "es" || $l == "en" || $l == "ca") {
 			return $l;
 		}
 	}

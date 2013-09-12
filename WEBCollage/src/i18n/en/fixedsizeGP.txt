@@ -10,7 +10,6 @@ grouppattern.fixedsizegroups.group.several=${0} groups
 
 grouppattern.fixedsizegroups.unspecified=Group size not specified
 
-
 grouppattern.fixedsizegroups.menuitem.number=Set group size of groups (currently ${0})
 grouppattern.fixedsizegroups.menuitem.unspecified=Set the groups size (unspecified)
 
