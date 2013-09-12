@@ -1,0 +1,44 @@
+
+.body {
+}
+.title, .solutionTitle, .problemTitle, .guidelinesTitle {
+    font-family: arial;
+    top: 20px;
+}
+
+.patterntitle {
+    font-variant: small-caps;
+}
+
+.title {
+    font-size: 24px;
+    text-align: center;
+    padding: 20px;
+}		
+
+.problemTitle, .solutionTitle, .guidelinesTitle  {
+    font-size: 18px;
+}
+
+.problem, .solution, .solutionTitle, .problemTitle, .guidelinesTitle, .guidelines {
+    padding: 20px;
+    width: 60%;
+    left: 20%;
+    text-align: left;
+    position: relative;
+}
+
+.problem, .solution, .guidelines {
+    font-family: tahoma;
+    border: 1px solid black;
+}
+
+.problem {
+    background: #f8f8f8;
+}
+.solution {
+    background: #f4f4f4;
+}
+.guidelines {
+    background: #f0f0f0;
+}

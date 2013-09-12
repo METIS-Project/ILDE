@@ -1,0 +1,25 @@
+{
+	"patterns": [
+		{"id": "brainstorming", "name": "Brainstorming", "type": "clfp",
+			"cat": ["low", "share", "confidence", "respect", "attention", "several"]
+		},
+		{"id": "pyramid", "name": "Pyramid", "type": "clfp",
+			"cat": ["medium", "interdependence", "discussion", "consensus"]
+		},
+		{"id": "tps", "name": "Think Pair Share (TPS)", "type": "clfp",
+			"cat": ["low", "interdependence", "discussion", "attention", "memory", "openended"]
+		},
+		{"id": "jigsaw", "name": "Jigsaw", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability"]
+		},
+		{"id": "tapps", "name": "Think Aloud Pair Problem Solving (TAPPS)", "type": "clfp",
+			"cat": ["medium", "discussion", "practice", "analytical", "solve", "problems"]
+		},
+		{"id": "peerreview", "name": "Peer review", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability", "divisible"]
+		},
+		{"id": "simulation", "name": "Simulation", "type": "clfp",
+			"cat": ["medium", "interdependence", "accountability", "simulation"]
+		}
+	]
+}
