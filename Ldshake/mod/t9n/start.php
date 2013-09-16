@@ -42,10 +42,10 @@
 function t9n_init() {	
 	global $CONFIG;
 	
-	$CONFIG->currentLang = 'en';
-	//include_once "data/{$CONFIG->currentLang}.php";
+	//$CONFIG->currentLang = 'en';
+	include_once "data/{$CONFIG->language}.php";
 	
-	//$CONFIG->t9n = $translations;
+	$CONFIG->t9n = $translations;
 	
 	register_page_handler('translation','t9n_page_handler');
 }
@@ -133,21 +133,23 @@ function t9n_exec_parseViews ($page) {
  */
 function T ($copy) {
  	global $CONFIG;
-
-    //exec('echo \''. $copy .' ==> '.$copy.'\' >> /var/lib/ldshake/en.txt');
+    /*
+    if ($CONFIG->url == "http://web.dev/ilde/")
+        exec('echo \''. $copy .' ==> '.$copy.'\' >> /var/lib/ldshake/en.txt');
+    */
 
 	$vars = func_get_args ();
 	array_shift($vars);
 
-    /*
+
 	if (isset($CONFIG->t9n[$copy])) {
 		$translation = $CONFIG->t9n[$copy]; 
 	} else {
 		$translation = $copy;
 	}
-    */
 
-    $translation = $copy;
+
+    //$translation = $copy;
 	
 	foreach ($vars as $k=>$var) {
 		$translation = str_replace('%'.($k + 1), $var, $translation);

@@ -35,13 +35,13 @@
  ********************************************************************************/
 
 global $CONFIG;
+admin_gatekeeper();
 $vle_id = (int)get_input('vle_id');
 $vle_type = get_input('vle_type');
 $vle_name = get_input('vle_name');
 $vle_url = get_input('vle_url');
-$vle_username = get_input('vle_username');
-$vle_password = get_input('vle_password');
-$vle_system = get_input('vle_name_select', null);
+//$vle_username = get_input('vle_username');
+//$vle_password = get_input('vle_password');
 $vle_delete = (int)get_input('vle_delete_flag', 0);
 
 $user = get_loggedin_user();
@@ -49,21 +49,20 @@ if($vle_id) {
     $vle = get_entity($vle_id);
 } else {
     $vle = new ElggObject();
-    $vle->subtype = 'user_vle';
+    $vle->subtype = 'system_vle';
     $vle->access_id = ACCESS_PUBLIC;
     $vle->owner_guid = get_loggedin_userid();
 }
 $vle->name = $vle_name;
 $vle->vle_url = $vle_url;
 $vle->vle_type = $vle_type;
-$vle->username = $vle_username;
-$vle->password = $vle_password;
-if($vle_system) $vle->vle_system = $vle_system;
+$vle->username = "";
+$vle->password = "";
 $vle->save();
 
 if($vle_delete) {
     $vle->delete();
-    forward($CONFIG->url.'pg/lds/vle/');
+    forward($CONFIG->url.'pg/lds/admin/vle/');
 }
 else
-    forward($CONFIG->url.'pg/lds/vle/'.$vle->guid);
+    forward($CONFIG->url.'pg/lds/admin/vle/'.$vle->guid);

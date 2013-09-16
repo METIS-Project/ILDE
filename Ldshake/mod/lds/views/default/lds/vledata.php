@@ -40,11 +40,11 @@ extract($vars);
 ?>
 <div id="two_column_left_sidebar">
     <div id="owner_block">
-        <div class="vle_list_add_item"><a href="<?php echo "{$url}pg/lds/vle/"?>"><?php echo T('Add a new VLE'); ?></a></div>
+        <div class="vle_list_add_item"><a href="<?php if(!$vle_admin) echo "{$url}pg/lds/vle/"; else echo "{$url}pg/lds/admin/vle/";?>"><?php echo T('Add a new VLE'); ?></a></div>
 
-        <div class="ldshake_sidebar_block_title"><?php echo T("Your VLEs"); ?></div>
+        <div class="ldshake_sidebar_block_title"><?php echo ($vle_admin) ? T("System VLEs") : T("Your VLEs"); ?></div>
         <?php    foreach($vlelist as $vvle):?>
-                <div class="vle_list_item <?php echo ($vvle->guid == $vle_id ? 'current' : '');?>"><a href="<?php echo "{$url}pg/lds/vle/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
+                <div class="vle_list_item <?php echo ($vvle->guid == $vle_id ? 'current' : '');?>"><a href="<?php echo (!$vle_admin) ? "{$url}pg/lds/vle/{$vvle->guid}" : "{$url}pg/lds/admin/vle/{$vvle->guid}"?>"><?php echo $vvle->name ?></a></div>
         <?php endforeach;?>
     </div>
 </div>
@@ -62,7 +62,8 @@ extract($vars);
 
 
         <div id="content_area_user_title">
-            <h2>            <?php if($vle->new)
+            <h2>            <?php
+                if($vle->new)
                     echo T('Enter your new VLE details');
                 else
                     echo T('Update ').'<i>'.$vle->name.'</i> configuration';
@@ -70,20 +71,31 @@ extract($vars);
             </h2>
         </div>
 
-        <form id="lds_vle_form" action="<?php echo $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
+        <form id="lds_vle_form" action="<?php echo ($vle_admin) ? $CONFIG->url . 'action/lds/admin/manage_vle' : $CONFIG->url . 'action/lds/manage_vle' ?>" method="post" >
 
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE name')?></span>
-                <input class="vle_form_input" type="text" name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
+                <?php if($vle->vle_system || $vle->new):?>
+                <select name="vle_name_select">
+                    <option><?php echo T("Select a VLE");?></option>
+                    <?php foreach($svlelist as $vvle): ?>
+                    <option value="<?php echo $vvle->guid;?>" <?php if($vle->vle_system == $vvle->guid): ?> selected="selected" <?php endif; ?>><?php echo $vvle->name;?></option>
+                    <?php endforeach; ?>
+                </select>
+                <?php endif;?>
+                <input class="vle_form_input" type="text" <?php if($vle->vle_system || $vle->new): ?> hidden="hidden" <?php endif; ?> name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
             </div>
+
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE type')?></span>
-                <input class="vle_form_input" type="text" name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
+                <input class="vle_form_input <?php if($vle->vle_system || $vle->new): ?>readonly<?php endif; ?>" type="text" <?php if($vle->vle_system || $vle->new): ?>readonly="readonly"<?php endif; ?> name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE url')?></span>
-                <input class="vle_form_input" type="text" name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
+                <input class="vle_form_input <?php if($vle->vle_system || $vle->new): ?>readonly<?php endif; ?>" type="text" <?php if($vle->vle_system || $vle->new): ?>readonly="readonly"<?php endif; ?> name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
             </div>
+
+            <?php if(!$vle_admin): ?>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE username')?></span>
                 <input class="vle_form_input" type="text" name="vle_username" value="<?php echo htmlspecialchars($vle->username)?>" />
@@ -92,6 +104,7 @@ extract($vars);
                 <span class="vle_form_label"><?php echo T('VLE password')?></span>
                 <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
             </div>
+            <?php endif; ?>
 
             <input type="hidden" name="vle_id" value="<?php echo $vle_id;?>" />
             <input id="vle_delete_flag" type="hidden" name="vle_delete_flag" value="0" />
@@ -103,6 +116,7 @@ extract($vars);
 
         <div id="vledata_submit_incomplete" style="display:none;color:red"><?php echo T("You must fill every field!");?></div>
 
+<?php if(!$vle_admin): ?>
     <?php if($vle_info instanceof stdClass):?>
         <div id="vle_test_box">
             <div class="vle_info_working"><?php echo T('Your VLE configuration is working properly, these are the available courses')?></div>
@@ -123,5 +137,10 @@ extract($vars);
     <?php elseif(!$vle->new): ?>
             <div class="vle_info_working"><?php echo T('There are no courses available with the provided VLE configuration.')?></div>
     <?php endif; ?>
+        <?php endif; ?>
     </div>
 </div>
+
+<script>
+    var svlelist_data = <?php echo json_encode($svlelist_data);?>
+</script>

@@ -50,5 +50,19 @@ $(document).ready(function () {
         }
     });
 
+    $('select[name=vle_name_select]').change(function() {
+        var selected_id = $(this).val();
+        if(svlelist_data[selected_id]) {
+            $('input[name=vle_name]').val(svlelist_data[selected_id].name);
+            $('input[name=vle_type]').val(svlelist_data[selected_id].vle_type);
+            $('input[name=vle_url]').val(svlelist_data[selected_id].vle_url);
+            $('input[name=vle_username]').focus();
+        } else {
+            $('input[name=vle_name]').val("");
+            $('input[name=vle_type]').val("");
+            $('input[name=vle_url]').val("");
+        }
+    });
+
 
 });

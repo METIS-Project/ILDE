@@ -1541,6 +1541,25 @@ input[type="submit"]:disabled,input[type="button"]:disabled {
 padding: 20px;
 }
 
+select[name="vle_name_select"] {
+    border-radius: 4px;
+    background-color: #FCFCFC;
+    width: 75%;
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.1);
+    color: #333;
+    border: 1px solid #CCC;
+    font: 120% Arial, Helvetica, sans-serif;
+}
+
+input[name="vle_type"].readonly,
+input[name="vle_url"].readonly {
+    background: #EFEFEF !important;
+}
+
+.vle_form_input:focus {
+    border: 1px solid #92F06D !important;
+}
+
 .lds_form_title {
 font-size: 17px;
 background-color: rgb(215, 223, 255);

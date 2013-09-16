@@ -86,7 +86,10 @@ function lds_init()
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
+
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
+    register_action("lds/admin/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/admin/manage_vle.php", true);
+
     register_action("lds/pre_upload", false, $CONFIG->pluginspath . "lds/actions/lds/pre_upload.php");
 
     register_action("lds/save_glueps", false, $CONFIG->pluginspath . "lds/actions/lds/save_glueps.php");
@@ -110,7 +113,8 @@ function lds_init()
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
     register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
 
-    add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/admin/vle/');
+
+    add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
 
 	//Include the helper functions
 	require_once __DIR__.'/lds_contTools.php';
@@ -124,8 +128,6 @@ register_plugin_hook('permissions_check', 'object', 'lds_write_permission_check'
 function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
 {
     $subtype = $params['entity']->getSubtype();
-
-    //if ($subtype == 'LdS' || $params['entity']->getSubtype() == 'LdS_document' || $params['entity']->getSubtype() == 'LdS_document_editor') {
 
     if ($subtype == 'LdS' || $subtype == 'LdS_implementation') {
         return lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
@@ -474,6 +476,7 @@ function lds_exec_search ($params) {
 function lds_exec_vle ($params)
 {
     $vlelist = get_entities('object', 'user_vle', get_loggedin_userid(), '', 9999);
+    $svlelist = get_entities('object', 'system_vle', 0, '', 9999);
     if(!$vlelist)
         $vlelist = array();
 
@@ -496,34 +499,23 @@ function lds_exec_vle ($params)
         $gluepsm = new GluepsManager($vle);
         $vle_info = $gluepsm->getVleInfo(true);
     }
+    $svlelist_data = array();
 
-    //$gluepsm = new GluepsManager($vle);
-
-    /*
-    if($vle->new)
-        $vle_info = false;
-    else
-        if(!($vle_info = $gluepsm->getVleInfo(true))) {
-
-            $name = $vle->name;
-            $vle = new ElggObject();
-            $vle->subtype = 'user_vle';
-            $vle->access_id = ACCESS_PUBLIC;
-            $vle->owner_guid = get_loggedin_userid();
-            $vle->name = $name;
-            $vle->username = '';
-            $vle->password = '';
-            $vle->vle_url = '';
-            $vle->vle_type = '';
-
-        };
-    */
+    foreach($svlelist as $svle) {
+        $svle_data = array();
+        $svle_data['name']=$svle->name;
+        $svle_data['vle_type']=$svle->vle_type;
+        $svle_data['vle_url']=$svle->vle_url;
+        $svlelist_data[$svle->guid] = $svle_data;
+    }
 
     $vars = array(
         'vle' => $vle,
         'vle_id' => $id,
         'vle_info' => $vle_info,
         'vlelist' => $vlelist,
+        'svlelist' => $svlelist,
+        'svlelist_data' => $svlelist_data,
     );
     $body = elgg_view('lds/vledata',$vars);
     page_draw('VLE', $body);
@@ -2416,4 +2408,53 @@ function lds_exec_test2 ($params) {
 
     page_draw("test", "test");
     //echo "test";
+}
+
+function lds_exec_admin ($params) {
+    admin_gatekeeper();
+
+    switch($params[1]) {
+        case 'vle':
+            lds_admin_vle($params);
+            break;
+    }
+}
+
+function lds_admin_vle ($params) {
+    admin_gatekeeper();
+
+    $vlelist = get_entities('object', 'system_vle', 0, '', 9999);
+    if(!$vlelist)
+        $vlelist = array();
+
+    if(!isset($params[2]) || !is_numeric($params[2])) {
+        $vle = new ElggObject();
+        $vle->subtype = 'system_vle';
+        $vle->access_id = ACCESS_PUBLIC;
+        $vle->owner_guid = get_loggedin_userid();
+        $vle->name = '';
+        $vle->username = '';
+        $vle->password = '';
+        $vle->vle_url = '';
+        $vle->vle_type = '';
+        $vle->new = 1;
+        $id = 0;
+        $vle_info = true;
+    } else {
+        $vle = get_entity($params[2]);
+        $id = $vle->guid;
+        //$gluepsm = new GluepsManager($vle);
+        //$vle_info = $gluepsm->getVleInfo(true);
+    }
+
+    $vars = array(
+        'vle' => $vle,
+        'vle_id' => $id,
+        'vle_info' => $vle_info,
+        'vlelist' => $vlelist,
+        'vle_admin' => true,
+    );
+
+    $body = elgg_view('lds/vledata',$vars);
+    page_draw('VLE', $body);
 }

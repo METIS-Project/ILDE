@@ -928,7 +928,7 @@ class RestEditor extends Editor
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
         $post = array(
-            'lang' => 'en',
+            'lang' => $CONFIG->language,
             'sectoken' => $rand_id,
             'name' => T('Untitled LdS'),
             'ldshake_frame_origin' => $ldshake_frame_origin
@@ -957,7 +957,7 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
         //http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id=456
         $vars['document_url'] = "{$response->raw_body}";
         $vars['editor'] = 'webcollagerest';
@@ -979,7 +979,7 @@ class RestEditor extends Editor
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
         $post = array(
-            'lang' => 'en',
+            'lang' => $CONFIG->language,
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
             'name' => $lds->title,
@@ -1006,7 +1006,7 @@ class RestEditor extends Editor
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -2016,7 +2016,7 @@ class GluepsManager
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang=en";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$CONFIG->language}";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 
@@ -2200,7 +2200,7 @@ class GluepsManager
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang=en";
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$CONFIG->language}";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
 
