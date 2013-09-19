@@ -1026,9 +1026,16 @@ You cannot reply to this email.",
 'down' => 'Sota',
 'email:confirm:success' => '¡Has confirmat la teva direcció de email!',
 'email' => 'Direcció de email',
-'email:validate:body' => 'Hola %s,',
+'email:validate:body' => 'Hola %s,
+
+Si us play, confirma el teu email obrint l\'enllaç que hi ha a continuació.
+
+%s
+',
 'email:validate:subject' => '¡%s, si us plau confirma la teva direcció de email!',
-'email:validate:success:body' => 'Hola %s,',
+'email:validate:success:body' => 'Hola %s
+
+Fel·licitats, has validat el teu email.",',
 'email:validate:success:subject' => '¡Email validat, %s!',
 'enable' => 'Habilitar',
 'en' => 'Anglès',

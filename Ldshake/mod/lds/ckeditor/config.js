@@ -5,7 +5,7 @@ For licensing, see LICENSE.html or http://ckeditor.com/license
 
 CKEDITOR.editorConfig = function( config )
 {
-	config.language = 'en';
+	config.language = language;
 	config.uiColor = '#C7D4A3';
 	
 	config.extraPlugins = 'MediaEmbed';

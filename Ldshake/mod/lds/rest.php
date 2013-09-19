@@ -1,13 +1,42 @@
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: saden
- * Date: 17/03/13
- * Time: 17:02
- * To change this template use File | Settings | File Templates.
- */
+/*********************************************************************************
+ * LdShake is a platform for the social sharing and co-edition of learning designs
+ * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
+ *
+ * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
+ *
+ * This program is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU Affero General Public License version 3 as published by the
+ * Free Software Foundation with the addition of the following permission added
+ * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
+ * IN WHICH THE COPYRIGHT IS OWNED BY Universitat Pompeu Fabra (UPF), Barcelona,
+ * UPF DISCLAIMS THE WARRANTY OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License along with
+ * this program; if not, see http://www.gnu.org/licenses.
+ *
+ * You can contact the Interactive Technologies Group (GTI), Universitat Pompeu Fabra, Barcelona.
+ * headquarters at c/Roc Boronat 138, Barcelona, or at email address davinia.hernandez@upf.edu
+ *
+ * The interactive user interfaces in modified source and object code versions
+ * of this program must display Appropriate Legal Notices, as required under
+ * Section 5 of the GNU Affero General Public License version 3.
+ *
+ * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
+ * these Appropriate Legal Notices must retain the display of the "Powered by
+ * LdShake" logo with a link to the website http://ldshake.upf.edu.
+ * If the display of the logo is not reasonably feasible for
+ * technical reasons, the Appropriate Legal Notices must display the words
+ * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
+ ********************************************************************************/
 
+?>
 
+<?php
 // The authentication token api
 
 function rest_login() {
@@ -49,16 +78,22 @@ function rest_logout() {
 }
 expose_function("logout", "rest_logout", array(), elgg_echo('logout'), "GET", false, false);
 
-function rest_ping() {
+function lds_rest_ping($lds_id) {
+
+    $lds = get_entity($lds_id);
+    //Sets the editing timestamp to now
+    $lds->editing_tstamp = time();
+    //And saves who's editing it
+    $lds->editing_by = get_loggedin_userid();
+    $lds->save_ktu();
     $result = true;
 
     set_input('view', 'status');
     $result = SuccessResult::getInstance($result);
 
-
     return $result;
 }
-expose_function("ping", "rest_ping", array(), elgg_echo('ping'), "GET", false, false);
+//expose_function("ping", "rest_ping", array(), elgg_echo('ping'), "GET", false, false);
 
 
 function lds_data() {
@@ -93,7 +128,7 @@ function lds_data() {
     $queryResult = $xpathvar->query('//lds/tags');
     $elemtags = $queryResult->item(0);
 
-    $tags = array('tags' => array());
+    $tags = array('tag' => array());
     foreach($elemtags->childNodes as $tagnode) {
         if($tagnode instanceof DOMElement) {
             $tag = array();
@@ -103,7 +138,10 @@ function lds_data() {
             $queryResult = $xpathvar->query('value', $tagnode);
             $tagvalue = $queryResult->item(0)->nodeValue;
 
-            $tags['tags'][$tagcategory] = $tagvalue;
+            //$tags['tag'][$tagcategory] = $tagvalue;
+            $tags['tag'][] = array(
+                'category' => $tagcategory,
+                'value' => $tagvalue);
         }
     }
 
@@ -128,15 +166,16 @@ function lds_data() {
 
     $id = $lds->guid;
     $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
-    $revision = $revision[0];
+    $revision = $revision[0]->id;
 
     $result = array(
-        'id' => $id,
-        'type' => $type,
-        'title' => $title,
-        'revision' => $revision,
-        'tags' => $tags
-    );
+        'lds' => array(
+            'id' => $id,
+            'type' => $type,
+            'title' => $title,
+            'revision' => $revision,
+            'tags' => $tags
+    ));
 
 
     $result = SuccessResult::getInstance($result);
@@ -229,7 +268,6 @@ function lds_view() {
             'revision' => $revision,
             'tags' => $tags
         );
-
     }
 
     $result = array(
@@ -245,10 +283,16 @@ function lds_update($params) {
     global $API_QUERY;
 
     if(isset($params[2])) {
-        if(is_numeric($params[1]))
+        if(is_numeric($params[1]) && $params[2] == 'data')
             return lds_download($params);
-        if($params[2] == 'imsld')
-            return lds_download($params);
+
+        if(is_numeric($params[1]) && $params[2] == 'properties')
+            return lds_view_properties($params[1]);
+
+        if(is_numeric($params[1]) && $params[2] == 'ping')
+            return lds_rest_ping($params[1]);
+        //if($params[2] == 'imsld')
+        //    return lds_download($params);
     }
 
     if(!isset($_FILES['design']) || !isset($_FILES['properties']))
@@ -280,17 +324,19 @@ function lds_update($params) {
     $queryResult = $xpathvar->query('//lds/tags');
     $elemtags = $queryResult->item(0);
 
-    $tags = array('tags' => array());
+    $tags = array('tag' => array());
     foreach($elemtags->childNodes as $tagnode) {
         if($tagnode instanceof DOMElement) {
-            $tag = array();
             $queryResult = $xpathvar->query('category', $tagnode);
             $tagcategory = $queryResult->item(0)->nodeValue;
 
             $queryResult = $xpathvar->query('value', $tagnode);
             $tagvalue = $queryResult->item(0)->nodeValue;
 
-            $tags['tags'][$tagcategory] = $tagvalue;
+            //$tags['tags'][$tagcategory] = $tagvalue;
+            $tags['tag'][] = array(
+                'category' => $tagcategory,
+                'value' => $tagvalue);
         }
     }
 
@@ -346,6 +392,46 @@ function lds_update($params) {
     return $result;
 }
 expose_function("lds", "lds_update", array(), elgg_echo('ldsupdate'), "POST", true, false);
+
+function lds_view_properties($lds_id) {
+    global $API_QUERY;
+
+    $e = get_entity($lds_id);
+    if(!($revision = $e->getAnnotations('revised_docs_editor', 1, 0, 'desc')))
+        $revision = $e->getAnnotations('revised_docs', 1, 0, 'desc');
+    $revision = $revision[0]->id;
+
+    $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+    $tags = array();
+    foreach ($tagtypes as $type)
+    {
+        $tag = array();
+        $tag['category'] =$type;
+        if (is_array($e->$type))
+            $tag['value'] = implode(',',$e->$type);
+        elseif (is_string($e->$type) && strlen($e->$type))
+            $tag['value'] = $e->$type;
+        else
+            $tag['value'] = '';
+
+        $tags['tag'][] = $tag;
+    }
+
+    $lds = array(
+        'id' => $e->guid,
+        'type' => $e->editor_type,
+        'title' => $e->title,
+        'revision' => $revision,
+        'tags' => $tags
+    );
+
+    $result = array(
+        'lds_list' => array('lds' => $lds)
+    );
+    $result = SuccessResult::getInstance($result);
+
+    return $result;
+}
 
 function lds_download($params = null) {
     global $API_QUERY;

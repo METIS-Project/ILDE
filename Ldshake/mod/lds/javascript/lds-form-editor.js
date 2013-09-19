@@ -38,16 +38,49 @@ $(document).ready(function() {
     window.addEventListener('message',function(event) {
         if(event.origin !== 'http://pandora.tel.uva.es') return;
         var editor_iframe = document.getElementById("lds_editor_iframe");
-        var m_sectoken = {
-            "type": "ldshake_sectoken",
-            "data": editor_id
+        if(event.data.type == 'ldshake_editor_ready') {
+            var m_sectoken = {
+                "type": "ldshake_sectoken",
+                "data": editor_id
+            }
+
+            if(editorType == 'gluepsrest'
+                && $('#lds_edit_guid').val() == '0')
+                save_lds (null,{redirect: false});
+            editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
         }
 
-        editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
+        if(event.data.type == 'ldshake_deployed') {
+            register_deployment();
+        }
     },false);
 
     $("#lds_editor_iframe").attr("src", document_iframe_url);
 });
+
+function register_deployment() {
+    var submitData = {
+        guid: $('#lds_edit_guid').val(),
+        lds_id: lds_id,
+        vle_id: vle_id,
+        course_id: course_id
+    }
+
+    if(submitData.guid != '0') {
+        $.ajax({
+            type: "POST",
+            url: baseurl + 'action/lds/register_deployment',
+            data: submitData,
+            dataType: "json",
+            success: function (returnData) {
+            },
+
+            timeout: ajax_timeout * 1000,
+            error: function() {
+            }
+        });
+    }
+}
 
 //Controls the time the user has been idle. Might close the form i order to let other users edit the LdS
 var activity;
@@ -955,8 +988,8 @@ $(document).ready(function()
 
     //$('#lds_edit_body').hide();
 
-    active();
-	check_activity();
+    //active();
+	//check_activity();
 
     initCKED ();
     initDocName ();

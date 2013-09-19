@@ -91,6 +91,7 @@ else
     $implementation->vle_id = $implementation_helper->vle_id;
     $implementation->course_id = $implementation_helper->course_id;
     $implementation->lds_id = $implementation_helper->lds_id;
+    $implementation->helper_id = $implementation_helper->guid;
     $implementation->save();
 
     $user = get_loggedin_user();

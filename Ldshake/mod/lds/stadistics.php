@@ -154,6 +154,48 @@ function lds_tracking_implemented() {
     lds_echocsv($header, $data, 'implemented');
 }
 
+function lds_tracking_implementations() {
+
+    $ldss = get_entities('object','LdS_implementation',0,"",9999);
+
+    $header = array("id", "title", "design id", "number of deployments, creator id");
+
+    $data = array();
+
+    foreach($ldss as $lds) {
+        $row = array();
+        $row[] = $lds->guid;
+        $row[] = $lds->title;
+        $row[] = $lds->lds_id;
+        $nDeployments = $lds->countAnnotations('deployed_implementation');
+        $row[] = $nDeployments;
+        $row[] = $lds->owner_guid;
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, 'implementations');
+}
+
+function lds_tracking_deployments() {
+
+    $header = array("id", "implementation id", "user id", 'deployment date');
+
+    $data = array();
+
+    $deployments = get_annotations(0, 'object', 'deployed_implementation', "", 0, 9999);
+
+    foreach($deployments as $d) {
+        $row = array();
+        $row[] = $d->id;
+        $row[] = $d->entity_guid;
+        $row[] = $d->owner_guid;
+        $row[] = date('d-m-Y_H:i:s', $d->time_created);
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, 'deployments');
+}
+
 function lds_tracking_created_by_user() {
 
 //$header = array("id", "title", "number of users", "users");

@@ -45,6 +45,31 @@ if (isloggedin()) :
 
 <div id="ldshake_topbar">
 	<div id="ldshake_topbar_wrapper">
+        <div id="ldshake_topbar_container_right">
+            <div style="float:right;">
+                <a href="#" id="ldshake_topbar_menu_switch">
+                    <?php $name = get_loggedin_user()->name; ?>
+                    <span id="ldshake_topbar_user_options"><?php echo (strlen($name) > 15 ? substr($name,0,13).'...' : $name); ?></span>
+                </a>
+
+                <ul id="ldshake_topbar_user_menu">
+                    <li><a href="<?php echo $vars['url']; ?>pg/settings/"><?php echo T("Account settings") ?></a></li>
+                    <?php if ($vars['user']->admin || $vars['user']->siteadmin): ?>
+                        <li><a href="<?php echo $vars['url']; ?>pg/admin/"><?php echo T("Site administration") ?></a></li>
+                    <?php endif; ?>
+                    <li><a href="<?php echo $vars['url']; ?>action/logout"><?php echo T("Log out") ?></a></li>
+                </ul>
+            </div>
+            <div id="ldshake_topbar_avatar">
+                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $_SESSION['user']->username ?>/"><img class="user_mini_avatar" src="<?php echo $_SESSION['user']->getIcon('tiny'); ?>" alt="<?php echo $_SESSION['user']->name ?>"/></a>
+            </div>
+            <div id="ldshake_topbar_serach">
+                <form id="searchform" action="<?php echo $vars['url']; ?>pg/lds/search/" method="get">
+                    <span id="ldshake_topbar_search_submit"><a href="#"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/search.png" /></a></span>
+                    <input type="text" size="21" name="q" placeholder="<?php echo T('Search %1', 'LdS')?>" id="ldshake_topbar_search_input" />
+                </form>
+            </div>
+        </div>
 		<div id="ldshake_topbar_container_left">
 			<div id="ldshake_topbar_logo">
 				<?php 
@@ -109,33 +134,6 @@ if (isloggedin()) :
 
             </div>
 		</div>
-		<div id="ldshake_topbar_container_right">
-			<div id="ldshake_topbar_serach">
-				<form id="searchform" action="<?php echo $vars['url']; ?>pg/lds/search/" method="get">
-					<span id="ldshake_topbar_search_submit"><a href="#"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/search.png" /></a></span>
-					<input type="text" size="21" name="q" placeholder="<?php echo T('Search %1', 'LdS')?>" id="ldshake_topbar_search_input" />
-				</form>
-			</div>
-
-			<div style="float:right;">
-				<a href="#" id="ldshake_topbar_menu_switch">
-                    <?php $name = get_loggedin_user()->name; ?>
-					<span id="ldshake_topbar_user_options"><?php echo (strlen($name) > 15 ? substr($name,0,13).'...' : $name); ?></span>
-				</a>
-				
-				<ul id="ldshake_topbar_user_menu">
-					<li><a href="<?php echo $vars['url']; ?>pg/settings/"><?php echo T("Account settings") ?></a></li>
-<?php if ($vars['user']->admin || $vars['user']->siteadmin): ?>
-					<li><a href="<?php echo $vars['url']; ?>pg/admin/"><?php echo T("Site administration") ?></a></li>
-<?php endif; ?>
-					<li><a href="<?php echo $vars['url']; ?>action/logout"><?php echo T("Log out") ?></a></li>
-				</ul>
-			</div>
-            <div id="ldshake_topbar_avatar">
-                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $_SESSION['user']->username ?>/"><img class="user_mini_avatar" src="<?php echo $_SESSION['user']->getIcon('tiny'); ?>" alt="<?php echo $_SESSION['user']->name ?>"/></a>
-            </div>
-
-        </div>
 	</div>
 </div>
 

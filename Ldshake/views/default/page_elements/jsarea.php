@@ -1,5 +1,6 @@
 <script type="text/javascript">
 var baseurl = '<?php echo $vars['url'] ?>';
+var language = '<?php echo $vars['config']->language ?>';
 </script>
 <!--<script type="text/javascript" src="<?php echo $vars['url']; ?>vendors/jquery/jquery-1.4.3.min.js"></script>-->
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js"></script>

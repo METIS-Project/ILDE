@@ -85,6 +85,7 @@ function lds_init()
 	//LdS actions:
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
+    register_action("lds/register_deployment", false, $CONFIG->pluginspath . "lds/actions/lds/register_deployment.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
 
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
@@ -113,8 +114,8 @@ function lds_init()
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
     register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
 
-
-    add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
+    if (get_context() == 'admin')
+        add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
 
 	//Include the helper functions
 	require_once __DIR__.'/lds_contTools.php';
@@ -501,7 +502,7 @@ function lds_exec_vle ($params)
     }
     $svlelist_data = array();
 
-    foreach($svlelist as $svle) {
+    if(is_array($svlelist))foreach($svlelist as $svle) {
         $svle_data = array();
         $svle_data['name']=$svle->name;
         $svle_data['vle_type']=$svle->vle_type;
@@ -1420,14 +1421,18 @@ function lds_exec_implementeditor($params)
     */
 
     $user = get_loggedin_user();
+
+    //TODO:deprecated
     if($vars['vle_id'] <= 30 ) {
         $vars['vle_id'] = $user->vle;
     }
+    //
+
     if($vle = get_entity($vars['vle_id'])) {
         $vars_editor = $editor->putImplementation(array('course_id' => $vars['course_id'], 'vle' => $vle, 'lds' => $editLdS, 'name' => $name));
     } else {
-        register_error("VLE error");
-        forward($CONFIG->url.'pg/lds/');
+        register_error("The associated VLE no longer exists.");
+        forward($CONFIG->url.'pg/lds/implementations');
     }
 
     $vars = $vars + $vars_editor;
@@ -1447,6 +1452,11 @@ function lds_exec_editglueps($params)
     //    $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
+
+    if($editLdS->getSubType() == 'LdS_implementation_helper'){
+        if($helper_implemented = get_entities_from_metadata('helper_id', $editLdS->guid,'object','LdS_implementation',0,1))
+            $editLdS = $helper_implemented[0];
+    }
 
     if (!$editLdS->canEdit())
     {
@@ -1551,6 +1561,13 @@ function lds_exec_editglueps($params)
     if($vars['vle_id'] <= 30 ) {
         $vars['vle_id'] = $user->vle;
     }
+    //
+
+    if(!(get_entity($vars['vle_id']))) {
+        register_error(T("The associated VLE no longer exists."));
+        forward($CONFIG->url.'pg/lds/implementations');
+    }
+
     if($vle = get_entity($vars['vle_id'])) {
         if(!$editordocument) {
             $gluepsm = new GluepsManager($vle);
@@ -1577,7 +1594,7 @@ function lds_exec_editglueps($params)
         $vars = $vars + $vars_glueps;
     } else {
         register_error(T("VLE error"));
-        forward($CONFIG->url.'pg/lds/');
+        forward($CONFIG->url.'pg/lds/implementations');
     }
 
     echo elgg_view('lds/implementform_editor',$vars);

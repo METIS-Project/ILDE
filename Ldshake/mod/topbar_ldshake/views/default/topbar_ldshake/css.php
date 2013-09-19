@@ -21,7 +21,7 @@
     height: 34px;
     background-color: #fff;
     border-radius: 3px;
-    margin-right: 30px;
+    margin-right: 10px;
 }
 
 #ldshake_topbar_container_left {
@@ -35,17 +35,27 @@
     width: 413px;
 }
 
-#ldshake_topbar #toolbarlinks #toolbar_options {
+#toolbarlinks {
+    width: 400px;
+    height: 35px;
+    float: left;
+}
+
+#ldshake_topbar #toolbar_options {
 	margin: 0;
 	margin-top: 9px;
-    width: 565px;
-    /*height: 30px;*/
+    width: 520px;
+    height: 26px;
     /*overflow: hidden;*/
 }
 
 #ldshake_topbar #toolbarlinks #toolbar_options li {
-	float: left;
-	margin-right: 20px;
+float: left;
+margin-right: 20px;
+}
+
+#ldshake_topbar #toolbarlinks #toolbar_options li:last-child {
+    margin-right: 0px;
 }
 
 #ldshake_topbar a {
@@ -109,8 +119,8 @@
 }
 
 #ldshake_topbar_serach {
-	float: left;
-	margin: 4px 0px 0 0;
+	float: right;
+	margin: 4px 25px 0 0;
 }
 
 #ldshake_topbar_search_input {
