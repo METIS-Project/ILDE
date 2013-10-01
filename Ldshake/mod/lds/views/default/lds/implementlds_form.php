@@ -53,7 +53,7 @@
             <?php if(isset($vle->courses)): ?>
             <?php foreach($vle->courses as $key=>$course): ?>
                 <div>
-                    <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" /><span class="course-name"><?php echo $course;?></span>
+                    <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" vle_name="<?php echo htmlentities($vle->item->name) ?>" course_name="<?php echo htmlentities($course) ?>" /><span class="course-name"><?php echo $course;?></span>
                 </div>
             <?php endforeach; ?>
             <?php endif; ?>

@@ -308,10 +308,10 @@ SQL;
 
             $obj->num_viewers = count(lds_contTools::getViewersIds($implementation->guid));
             $obj->num_editors = count(lds_contTools::getEditorsIds($implementation->guid));
-            if($lds->all_can_view == 'yes')
+            if($obj->all_can_view == 'yes')
                 $obj->num_viewers = -1;
 
-            if($lds->all_can_view === null)
+            if($obj->all_can_view === null)
                 $obj->num_viewers = -1;
 
             $obj->num_comments = $implementation->countAnnotations('generic_comment');

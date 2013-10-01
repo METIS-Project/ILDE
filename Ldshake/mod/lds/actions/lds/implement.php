@@ -42,6 +42,8 @@ $lds_id = get_input('lds_id');
 $title = get_input('title');
 $vle_id = get_input('vle_id');
 $course_id = get_input('course_id');
+$vle_name = get_input('vle_name', null);
+$course_name = get_input('course_name', null);
 
 $lds = get_entity($lds_id);
 
@@ -53,6 +55,8 @@ $implementation->container_guid = $lds->guid;
 $implementation->title = $title;
 $implementation->vle_id = $vle_id;
 $implementation->course_id = $course_id;
+$implementation->vle_name = $vle_name;
+$implementation->course_name = $course_name;
 $implementation->lds_id = $lds->guid;
 $implementation->editor_type = 'gluepsrest';
 $implementation->save();

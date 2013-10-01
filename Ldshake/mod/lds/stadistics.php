@@ -75,7 +75,6 @@ function lds_echo_usernames($users) {
 function lds_tracking_viewed() {
     $header = array("username");
 
-
     $data = array();
 
     $ldss = get_entities('object','LdS', 0, "", 9999);
@@ -102,7 +101,6 @@ function lds_tracking_viewed() {
     //getEditorsUsers($lds_id);
 
     lds_echocsv($header, $data,'viewed');
-
 }
 
 function lds_tracking_comments() {
@@ -135,7 +133,6 @@ function lds_tracking_comments() {
     //getEditorsUsers($lds_id);
 
     lds_echocsv($header, $data,'comments');
-
 }
 
 function lds_tracking_implemented() {
@@ -158,7 +155,7 @@ function lds_tracking_implementations() {
 
     $ldss = get_entities('object','LdS_implementation',0,"",9999);
 
-    $header = array("id", "title", "design id", "number of deployments, creator id");
+    $header = array("id", "title", "design id", "number of deployments", "creator id", "vle name", "course name");
 
     $data = array();
 
@@ -170,6 +167,8 @@ function lds_tracking_implementations() {
         $nDeployments = $lds->countAnnotations('deployed_implementation');
         $row[] = $nDeployments;
         $row[] = $lds->owner_guid;
+        $row[] = $lds->vle_name;
+        $row[] = $lds->course_name;
         $data[] = $row;
     }
 
@@ -177,22 +176,22 @@ function lds_tracking_implementations() {
 }
 
 function lds_tracking_deployments() {
-
-    $header = array("id", "implementation id", "user id", 'deployment date');
-
+    $header = array("deployment id", "implementation id", "user id", 'deployment date', "vle name", "course name");
     $data = array();
 
-    $deployments = get_annotations(0, 'object', 'deployed_implementation', "", 0, 9999);
-
-    foreach($deployments as $d) {
-        $row = array();
-        $row[] = $d->id;
-        $row[] = $d->entity_guid;
-        $row[] = $d->owner_guid;
-        $row[] = date('d-m-Y_H:i:s', $d->time_created);
-        $data[] = $row;
+    if($deployments = get_annotations(0, 'object', 'LdS_implementation', 'deployed_implementation', "", 0, 9999)) {
+        foreach($deployments as $d) {
+            $row = array();
+            $imp = get_entity($d->entity_guid);
+            $row[] = $d->id;
+            $row[] = $d->entity_guid;
+            $row[] = $d->owner_guid;
+            $row[] = date('d-m-Y_H:i:s', $d->time_created);
+            $row[] = $imp->vle_name;
+            $row[] = $imp->course_name;
+            $data[] = $row;
+        }
     }
-
     lds_echocsv($header, $data, 'deployments');
 }
 
@@ -638,7 +637,8 @@ function lds_tracking_id_name($type) {
     $header = array("{$type} id", "name");
     if($type == "user")
         $header[] = "username";
-
+    if($type == "lds")
+        $header[] = "tool";
     $data = array();
 
     if($type == "group")
@@ -653,13 +653,37 @@ function lds_tracking_id_name($type) {
         foreach($entities as $entity) {
             $e_data = array();
             $e_data[] = $entity->guid;
-            if($type == "lds")
+            if($type == "lds") {
                 $e_data[] = $entity->title;
+                $editor_subtypes = array(
+                    'design_pattern' => "Design Pattern",
+                    'MDN' => "Design Narrative",
+                    'PC' => "Persona Card",
+                    'FC' => "Factors and Concerns",
+                    'HE' => "Heuristic Evaluation",
+                    'coursemap' => "Course Map",
+                );
+
+                $editor_types = array(
+                    'cld' => "CompendiumLD",
+                    'image' => "Image",
+                    'webcollagerest' => "WebCollage",
+                    'openglm' => "OpenGLM",
+                    'cadmos' => "CADMOS",
+                );
+
+                if($entity->editor_subtype)
+                    $e_data[] = $editor_subtypes[$entity->editor_subtype];
+
+                if($entity->editor_type)
+                    $e_data[] = $editor_types[$entity->editor_type];
+            }
             else
                 $e_data[] = $entity->name;
 
-            if($type == "user")
+            if($type == "user") {
                 $e_data[] = $entity->username;
+            }
             $data[] = $e_data;
         }
     lds_echocsv($header, $data,"id_{$type}");

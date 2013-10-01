@@ -455,7 +455,7 @@ function lds_exec_implementations ($params)
 
     $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0, 'implementable', '1');
     $vars['section'] = 'imp-'.$params[1];
-    $vars['courses'] = lds_contTools::getVLECourses($vle);
+    //$vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
 
     page_draw($vars['title'], $body);
@@ -1069,8 +1069,9 @@ function lds_exec_edit ($params)
 		register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
-	
-	lds_contTools::markLdSAsViewed ($params[1]);
+
+    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
 	$vars['initLdS'] = new stdClass();
@@ -1158,8 +1159,9 @@ function lds_exec_editeditor ($params)
 		register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
-	
-	lds_contTools::markLdSAsViewed ($params[1]);
+
+    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
 	$vars['initLdS'] = new stdClass();
@@ -1453,9 +1455,12 @@ function lds_exec_editglueps($params)
 
     $editLdS = get_entity($params[1]);
 
+    $vars['implementation_helper_id'] = '0';
+
     if($editLdS->getSubType() == 'LdS_implementation_helper'){
         if($helper_implemented = get_entities_from_metadata('helper_id', $editLdS->guid,'object','LdS_implementation',0,1))
             $editLdS = $helper_implemented[0];
+            $vars['implementation_helper_id'] = $editLdS->guid;
     }
 
     if (!$editLdS->canEdit())
@@ -1552,7 +1557,7 @@ function lds_exec_editglueps($params)
     $vars['lds_id'] = $editLdS->lds_id;
 
     $vars['course_id'] = ($editLdS->course_id ? $editLdS->course_id : 0);
-    $vars['implementation_helper_id'] = '0';
+
 
     $user = get_loggedin_user();
     $vars['vle_id'] = $editLdS->vle_id;
@@ -1613,7 +1618,6 @@ function lds_exec_newimplementglueps($params)
 
     $implementation_helper = get_entity($params[1]);
     $lds = get_entity($implementation_helper->lds_id);
-    //$course = get_entity($implementation->course_id);
 
     $vars['referer'] = $CONFIG->url.'pg/lds/';
 
@@ -1863,7 +1867,7 @@ function lds_exec_view ($params)
 
     //TODO permission / exist checks
 
-	lds_contTools::markLdSAsViewed ($id);
+	//lds_contTools::markLdSAsViewed ($id);
 	
 	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
 	$vars['currentDocId'] = $params[3] ?: $vars['ldsDocs'][0]->guid;
@@ -1930,7 +1934,7 @@ function lds_exec_vieweditor ($params)
     create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//TODO permission / exist checks
 
-	lds_contTools::markLdSAsViewed ($id);
+	//lds_contTools::markLdSAsViewed ($id);
 
 	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
 
@@ -2335,6 +2339,15 @@ function lds_exec_tracking ($params)
 {
 
     switch($params[1]) {
+        case 'implemented':
+            lds_tracking_implemented();
+            break;
+        case 'implementations':
+            lds_tracking_implementations();
+                break;
+        case 'deployments':
+            lds_tracking_deployments();
+            break;
         case 'iduser':
             lds_tracking_id_name("user");
             break;

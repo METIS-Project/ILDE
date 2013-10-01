@@ -844,10 +844,12 @@ class OpenglmEditor extends Editor {
             copy($params['file_imsld'], $file->getFilenameOnFilestore());
             $document->upload_filename_imsld = $params['filename_imsld'];
         }
-        else
+        else {
             copy($params['file'], $file->getFilenameOnFilestore());
+            $document->upload_filename_imsld = $params['filename'];
+        }
 
-        $document->ims_ld = $file->guid;
+        $document->file_imsld_guid = $file->guid;
 
         //assign a random string to each directory
         $document->previewDir = rand_str(64);
@@ -876,21 +878,21 @@ class OpenglmEditor extends Editor {
         $document->upload_filename = $params['filename'];
 
         if(isset($params['file_imsld'])) {
-            if(!$document->ims_ld) {
+            if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->ims_ld = Editor::getNewFile($filestorename);
+                $document->$document->file_imsld_guid = Editor::getNewFile($filestorename);
             }
 
             $fullfilepath = Editor::getFullFilePath($document->ims_ld);
             copy($params['file_imsld'], $fullfilepath);
             $document->upload_filename_imsld = $params['filename_imsld'];
         } else {
-            if(!$document->ims_ld) {
+            if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->ims_ld = Editor::getNewFile($filestorename);
+                $document->$document->file_imsld_guid = Editor::getNewFile($filestorename);
             }
 
-            $fullfilepath = Editor::getFullFilePath($document->ims_ld);
+            $fullfilepath = Editor::getFullFilePath($document->file_imsld_guid);
             copy($params['file'], $fullfilepath);
         }
 
@@ -1079,7 +1081,7 @@ class RestEditor extends Editor
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -1259,12 +1261,20 @@ class RestEditor extends Editor
         }
 
         $clone->editorType = $this->_document->editorType;
+
         $clone->save();
 
         //assign a random string to each directory
         $clone->previewDir = rand_str(64);
         $clone->pub_previewDir = rand_str(64);
         $clone->revisionDir = rand_str(64);
+
+        if($this->_document->previewDir) {
+            $src_preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
+            $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$clone->previewDir;
+            mkdir($preview_path);
+            shell_exec("cp -r {$src_preview_path}/. {$preview_path}");
+        }
 
         $clone->rev_last = 0;
         $clone->lds_revision_id = 0;

@@ -87,11 +87,13 @@ else
     $implementation->external_editor = true;
     //$implementation->editor_type = $editor_type;
     $implementation->editor_type = 'gluepsrest';
-    $implementation->title = get_input('title');
-    $implementation->vle_id = $implementation_helper->vle_id;
-    $implementation->course_id = $implementation_helper->course_id;
-    $implementation->lds_id = $implementation_helper->lds_id;
-    $implementation->helper_id = $implementation_helper->guid;
+    $implementation->title          = get_input('title');
+    $implementation->vle_id         = $implementation_helper->vle_id;
+    $implementation->course_id      = $implementation_helper->course_id;
+    $implementation->vle_name       = $implementation_helper->vle_name;
+    $implementation->course_name    = $implementation_helper->course_name;
+    $implementation->lds_id         = $implementation_helper->lds_id;
+    $implementation->helper_id      = $implementation_helper->guid;
     $implementation->save();
 
     $user = get_loggedin_user();

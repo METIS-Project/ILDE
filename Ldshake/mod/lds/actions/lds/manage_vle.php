@@ -57,7 +57,8 @@ $vle->name = $vle_name;
 $vle->vle_url = $vle_url;
 $vle->vle_type = $vle_type;
 $vle->username = $vle_username;
-$vle->password = $vle_password;
+if($vle_password!="000000")
+    $vle->password = $vle_password;
 if($vle_system) $vle->vle_system = $vle_system;
 $vle->save();
 

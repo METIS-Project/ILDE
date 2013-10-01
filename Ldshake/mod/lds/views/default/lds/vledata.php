@@ -75,7 +75,7 @@ extract($vars);
 
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE name')?></span>
-                <?php if($vle->vle_system || $vle->new):?>
+                <?php if(($vle->vle_system || $vle->new) && !$vle_admin):?>
                 <select name="vle_name_select">
                     <option><?php echo T("Select a VLE");?></option>
                     <?php foreach($svlelist as $vvle): ?>
@@ -83,16 +83,16 @@ extract($vars);
                     <?php endforeach; ?>
                 </select>
                 <?php endif;?>
-                <input class="vle_form_input" type="text" <?php if($vle->vle_system || $vle->new): ?> hidden="hidden" <?php endif; ?> name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
+                <input class="vle_form_input" type="text" <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?> hidden="hidden" <?php endif; ?> name="vle_name" value="<?php echo htmlspecialchars($vle->name)?>" />
             </div>
 
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE type')?></span>
-                <input class="vle_form_input <?php if($vle->vle_system || $vle->new): ?>readonly<?php endif; ?>" type="text" <?php if($vle->vle_system || $vle->new): ?>readonly="readonly"<?php endif; ?> name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
+                <input class="vle_form_input <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly<?php endif; ?>" type="text" <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly="readonly"<?php endif; ?> name="vle_type" value="<?php echo htmlspecialchars($vle->vle_type)?>" />
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE url')?></span>
-                <input class="vle_form_input <?php if($vle->vle_system || $vle->new): ?>readonly<?php endif; ?>" type="text" <?php if($vle->vle_system || $vle->new): ?>readonly="readonly"<?php endif; ?> name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
+                <input class="vle_form_input <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly<?php endif; ?>" type="text" <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly="readonly"<?php endif; ?> name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
             </div>
 
             <?php if(!$vle_admin): ?>
@@ -102,7 +102,7 @@ extract($vars);
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE password')?></span>
-                <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
+                <input class="vle_form_input" type="password" name="vle_password" value="<?php echo ($vle->password != '' ? "000000" : '') ?>"/>
             </div>
             <?php endif; ?>
 

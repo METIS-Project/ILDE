@@ -42,11 +42,10 @@ extract($vars);
 </div>
 
 <pre>
-
 <a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number of designs created with each tool</a>
 <a href="<?php echo $url ."pg/lds/tracking/user_tool";?>">Number and list of designs created with each tool by each user</a>
 
-List of <a href="<?php echo $url ."pg/lds/tracking/iduser";?>">users</a>/<a href="<?php echo $url ."pg/lds/tracking/idgroup";?>">groups</a>/<a href="<?php echo $url ."pg/lds/tracking/idlds";?>">LdS</a> with id and name.
+List of <a href="<?php echo $url ."pg/lds/tracking/iduser";?>">users</a>/<a href="<?php echo $url ."pg/lds/tracking/idgroup";?>">groups</a>/<a href="<?php echo $url ."pg/lds/tracking/idlds";?>">LdS synoptic table</a> with id, name and tool.
 
 Produce a LD
 <a href="<?php echo $url ."pg/lds/tracking/created_by_user";?>">Number of designs produced by each user</a>
@@ -70,7 +69,9 @@ List of designs shared with others with editing rights
 Number of private designs (no shared, no view / editing rights for others)
 
 
-<a href="<?php echo $url ."pg/lds/tracking/ldsimplemented";?>">Instantiate (Implement) a LD</a>
+<a href="<?php echo $url ."pg/lds/tracking/ldsimplemented";?>">Instantiated (implemented) learning designs</a>
+<a href="<?php echo $url ."pg/lds/tracking/implementations";?>">Implementations</a>
+<a href="<?php echo $url ."pg/lds/tracking/deployments";?>">Deployments</a>
 Number of designs associated to at least a VLE
 List of designs associated to at least a VLE by implementer
 Number of implementations (design associated to VLEs) for a design

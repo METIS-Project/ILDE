@@ -33,31 +33,6 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-
-$(document).ready(function() {
-    window.addEventListener('message',function(event) {
-        if(event.origin !== 'http://pandora.tel.uva.es') return;
-        var editor_iframe = document.getElementById("lds_editor_iframe");
-        if(event.data.type == 'ldshake_editor_ready') {
-            var m_sectoken = {
-                "type": "ldshake_sectoken",
-                "data": editor_id
-            }
-
-            if(editorType == 'gluepsrest'
-                && $('#lds_edit_guid').val() == '0')
-                save_lds (null,{redirect: false});
-            editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
-        }
-
-        if(event.data.type == 'ldshake_deployed') {
-            register_deployment();
-        }
-    },false);
-
-    $("#lds_editor_iframe").attr("src", document_iframe_url);
-});
-
 function register_deployment() {
     var submitData = {
         guid: $('#lds_edit_guid').val(),
@@ -596,8 +571,6 @@ function loadData ()
 
     });
 
-
-
     initSliders ();
 	initTags ();
 }
@@ -699,6 +672,7 @@ function initCKED ()
         }, editor.element.$);
 
         //$('#cke_lds_edit_body').hide();
+        $("#lds_editor_iframe").attr("src", document_iframe_url);
     }, options);
 
     //And update it in case it is resized
@@ -974,6 +948,30 @@ function inaction_trigger ()
     });
 }
 
+$(document).ready(function() {
+    window.addEventListener('message',function(event) {
+        if(event.origin !== 'http://pandora.tel.uva.es') return;
+        var editor_iframe = document.getElementById("lds_editor_iframe");
+        if(event.data.type == 'ldshake_editor_ready') {
+            var m_sectoken = {
+                "type": "ldshake_sectoken",
+                "data": editor_id
+            }
+
+            if(editorType == 'gluepsrest'
+                && $('#lds_edit_guid').val() == '0')
+                save_lds (null,{redirect: false});
+
+            editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
+        }
+
+        if(event.data.type == 'glueps_deployment') {
+            register_deployment();
+        }
+    },false);
+
+});
+
 $(document).ready(function()
 {
     lds_recovery = Math.floor((Math.random()*100000000000000000)+1);
@@ -994,7 +992,7 @@ $(document).ready(function()
     initCKED ();
     initDocName ();
 
-	//loadData();
+    //loadData();
 	
 	$('#shade,#lds_loading_contents').hide();
 
@@ -1060,7 +1058,6 @@ $(document).ready(function()
             $('#lds_editor_iframe').show();
         });
 
-
         $('#lds_edit_tabs li').removeClass('current');
         $('#lds_edit_tabs li.lds_exetab').addClass('current');
     });
@@ -1074,4 +1071,7 @@ $(document).ready(function()
         if (beforeEditChecksum != calcChecksum ())
             return t9n.confirmExit;
     };
+
+    //$("#lds_editor_iframe").attr("src", document_iframe_url);
+
 });

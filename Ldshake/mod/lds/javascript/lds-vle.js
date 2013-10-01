@@ -38,6 +38,11 @@ $(document).ready(function () {
         $('#vle_delete_flag').val('1');
     });
 
+    $('input[name=vle_password]').focus(function(){
+        if($(this).val() == '000000')
+            $(this).val('');
+    });
+
     $('input[name=vle_submit]').click(function(e) {
         if($('input[name=vle_name]').val().length == 0
             || $('input[name=vle_type]').val().length == 0

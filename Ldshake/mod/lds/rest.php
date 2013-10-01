@@ -34,9 +34,6 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php
 // The authentication token api
 
 function rest_login() {
@@ -158,7 +155,7 @@ function lds_data() {
     if(isset($_FILES['design_imsld']))
         if(!$_FILES['design_imsld']['error']) {
                 $lds_data['doc']['file_imsld'] = $_FILES['design_imsld']['tmp_name'];
-                $lds_data['doc']['filename_imsld'] = $_FILES['design_imsld']['tmp_name'];
+                $lds_data['doc']['filename_imsld'] = $_FILES['design_imsld']['name'];
         }
 
     $lds = LdSFactory::buildLdS($lds_data);

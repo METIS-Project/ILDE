@@ -45,4 +45,6 @@ $course_id = get_input('course_id');
 $implementation = get_entity($guid);
 $implementation->annotate('deployed_implementation',$vle_id.'_'.$course_id,2);
 
-echo 'ok';
+$result = array('result' => true);
+header('Content-Type: application/json; charset=utf-8');
+echo json_encode($result);
