@@ -49,15 +49,20 @@
 			padding:0;
 		}
 		
-		h1#doctitle {
+		#doctitle {
 			margin: 0;
 			padding: 5px;
 			background-color: #e7e8e9;
 			border-bottom: 1px solid #aaa;
 			font-family: Helvetica, Arial, sans-serif;
-			font-size: 16px;
+			font-size: 12px;
 			color: #444;
 		}
+
+        #doctitle > span {
+            font-weight: bold;
+            font-size: 16px;
+        }
 		
 		#doc {
 			padding: 20px;
@@ -111,11 +116,30 @@
 		    vertical-align: middle;
     		display: table-cell;
 		}
+
+        #license {
+            float: right;
+            /*width: 800px;*/
+            font-family: sans-serif;
+        }
+
+        .license_banner {
+            display: none;
+        }
 	
 	</style>	
 </head>
 <body>
-	<h1 id="doctitle"><?php echo $lds->title ?></h1>
+	<div id="doctitle"><span><?php echo $lds->title ?></span>
+        <?php if($lds->license): ?>
+            <div id="license">
+                <?php include('license_banner.php'); ?>
+                <div style="clear:both"></div>
+            </div>
+        <?php endif; ?>
+        <div style="clear:both"></div>
+    </div>
+
 
 <div id="exportcontainer">
 	<?php if ($doc->editorType == 'webcollagerest'): ?>

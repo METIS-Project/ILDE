@@ -1269,7 +1269,7 @@ class RestEditor extends Editor
         $clone->pub_previewDir = rand_str(64);
         $clone->revisionDir = rand_str(64);
 
-        if($this->_document->previewDir) {
+        if(file_exists($CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir)) {
             $src_preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
             $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$clone->previewDir;
             mkdir($preview_path);
@@ -1861,12 +1861,13 @@ class GluepsManager
             return false;
 
         $glueps_url = $CONFIG->glueps_url;
+        $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $get = array(
             'type' => $this->_vle->vle_type,
             'accessLocation' => $this->_vle->vle_url,
             'creduser' => $this->_vle->username,
-            'credsecret' => $this->_vle->password
+            'credsecret' => $vle_password
         );
 
         $uri = "{$glueps_url}courses?"
@@ -1909,12 +1910,13 @@ class GluepsManager
         $password = 'M3t1$project';
         $course = '3';
         */
+        $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $get = array(
             'type' => $this->_vle->vle_type,
             'accessLocation' => $this->_vle->vle_url,
             'creduser' => $this->_vle->username,
-            'credsecret' => $this->_vle->password,
+            'credsecret' => $vle_password,
             'course' => $course_id
         );
 
@@ -1949,13 +1951,16 @@ class GluepsManager
         $course_info = $this->getCourseInfo($course);
         $vle_info->id = $this->_vle->guid;
         $vle_info->name = $this->_vle->name;
+
+        $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
+
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
             'name' => $vle_info->name,
             'type' => $this->_vle->vle_type,
             'creduser' => $this->_vle->username,
-            'credsecret' => $this->_vle->password,
+            'credsecret' => $vle_password,
             'participants' => $course_info->participants
         );
         //unset($vle_info->courses);
@@ -2135,13 +2140,16 @@ class GluepsManager
         $course_info = $this->getCourseInfo($course);
         $vle_info->id = $this->_vle->guid;
         $vle_info->name = $this->_vle->name;
+
+        $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
+
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info,
             'name' => $vle_info->name,
             'type' => $this->_vle->vle_type,
             'creduser' => $this->_vle->username,
-            'credsecret' => $this->_vle->password,
+            'credsecret' => $vle_password,
             'participants' => $course_info->participants
         );
 

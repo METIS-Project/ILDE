@@ -16,6 +16,6 @@
 
 	// Make sure only valid admin users can see this
 		admin_gatekeeper();
-		forward('pg/admin/statistics/')
+		forward('pg/admin/site/')
 		
 ?>

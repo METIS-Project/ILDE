@@ -22,7 +22,8 @@
 		}
 		
 		$form_body = "";
-		foreach(array('sitename','sitedescription', 'siteemail', 'wwwroot','path','dataroot', 'view') as $field) {
+        //foreach(array('sitename','sitedescription', 'siteemail', 'wwwroot','path','dataroot', 'view') as $field) {
+		foreach(array('sitename','sitedescription', 'siteemail') as $field) {
 			$form_body .= "<p>";
 			$form_body .= elgg_echo('installation:' . $field) . "<br />";
 			$warning = elgg_echo('installation:warning:' . $field);
@@ -35,14 +36,16 @@
 		$languages = get_installed_translations();
 		$form_body .= "<p>" . elgg_echo('installation:language') . elgg_view("input/pulldown", array('internalname' => 'language', 'value' => $vars['config']->language, 'options_values' => $languages)) . "</p>";
 		
-		$form_body .= "<p class=\"admin_debug\">" . elgg_echo('installation:debug') . "<br />" .elgg_view("input/checkboxes", array('options' => array(elgg_echo('installation:debug:label')), 'internalname' => 'debug', 'value' => ($vars['config']->debug ? elgg_echo('installation:debug:label') : "") )) . "</p>";
-		
+		//$form_body .= "<p class=\"admin_debug\">" . elgg_echo('installation:debug') . "<br />" .elgg_view("input/checkboxes", array('options' => array(elgg_echo('installation:debug:label')), 'internalname' => 'debug', 'value' => ($vars['config']->debug ? elgg_echo('installation:debug:label') : "") )) . "</p>";
+
+        /*
 		$form_body .= "<p class=\"admin_debug\">" . elgg_echo('installation:disableapi') . "<br />";
 		$on = elgg_echo('installation:disableapi:label');
 		if ((isset($CONFIG->disable_api)) && ($CONFIG->disable_api == true))
 			$on = ($vars['config']->disable_api ?  "" : elgg_echo('installation:disableapi:label'));
 		$form_body .= elgg_view("input/checkboxes", array('options' => array(elgg_echo('installation:disableapi:label')), 'internalname' => 'api', 'value' => $on ));
 		$form_body .= "</p>";
+        */
 
 
         $form_body .= "<p class=\"admin_debug\">" . T("Enable registration") . "<br />";
@@ -53,7 +56,7 @@
         $form_body .= "</p>";
 
 
-		
+		/*
 		$form_body .= "<p class=\"admin_usage\">" . elgg_echo('installation:usage') . "<br />";
 		$on = elgg_echo('installation:usage:label');
 		
@@ -61,7 +64,7 @@
 			$on = ($vars['config']->ping_home!='disabled' ? elgg_echo('installation:usage:label') : "");
 		$form_body .= elgg_view("input/checkboxes", array('options' => array(elgg_echo('installation:usage:label')), 'internalname' => 'usage', 'value' => $on )); 
 		$form_body .= "</p>";
-		
+		*/
 		
 		
 		$form_body .= elgg_view('input/hidden', array('internalname' => 'settings', 'value' => 'go'));

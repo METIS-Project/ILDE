@@ -2053,3 +2053,53 @@ p.MsoListParagraph {
 #metis-about {
     padding: 30px;
 }
+
+
+/** license **/
+div.cc_info_icon {
+    width: 150px;
+    float:left;
+    margin-right: 20px;
+    display: none;
+}
+
+div.cc_info_icon > img {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+div.cc_info_icon > div.cc_icon_title {
+    font-family: sans-serif;
+    font-size: 19px;
+    text-align: center;
+    color: grey;
+}
+
+.license_cc_select_item {
+    border: 2px solid rgba(255,255,255,255);
+    font-size: 18px;
+    padding: 4px;
+}
+
+.license_cc_select_item:hover {
+    border: 2px solid grey;
+    border-radius: 6px;
+    background-color: lightblue;
+    cursor: pointer;
+}
+
+.license_cc_select_item > img {
+    margin-right: 10px;
+}
+
+.license_banner {
+    display: none;
+}
+
+#license_popup {
+    width: 690px;
+    margin-left: -345px;
+    top: 60px;
+    height: 630px;
+}

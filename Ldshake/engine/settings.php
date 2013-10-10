@@ -64,6 +64,7 @@ foreach ($confPaths as $k=>$v)
 	}
 }
 
+$CONFIG->vle_key = $vle_key;
 //echo "<pre>";
 //print_r ($CONFIG);
 //echo "</pre>";

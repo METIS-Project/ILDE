@@ -75,6 +75,66 @@ $(document).ready(function()
         }
     });
 
+    $('#manage_license').click(function (event) {
+
+        $('#license_popup_close').click(function() {
+            $('#license_popup').fadeOut(200);
+        });
+
+        $('.license_cc_select_item[license_id="'+lds_license+'"]').css("background-color","lightgrey");
+        $('.license_cc_select_item[license_id="'+lds_license+'"]').css("border","2px solid grey");
+        $('.license_cc_select_item[license_id="'+lds_license+'"]').css("border-radius","6px");
+
+        var cc_items = [];
+        cc_items[0] = [];
+        cc_items[1] = ['license_item_cc','license_item_cc_by'];
+        cc_items[2] = ['license_item_cc','license_item_cc_by','license_item_cc_nd'];
+        cc_items[3] = ['license_item_cc','license_item_cc_by','license_item_cc_sa'];
+        cc_items[4] = ['license_item_cc','license_item_cc_by','license_item_cc_nc'];
+        cc_items[5] = ['license_item_cc','license_item_cc_by','license_item_cc_nc','license_item_cc_nd'];
+        cc_items[6] = ['license_item_cc','license_item_cc_by','license_item_cc_nc','license_item_cc_sa'];
+
+        for(cc_item in cc_items[lds_license]) {
+            $('#'+cc_items[lds_license][cc_item]).show();
+        }
+
+        $('#license_popup').fadeToggle(200);
+        $('.license_cc_select_item').click(function() {
+            var $item = $(this);
+            var license = $(this).attr("license_id");
+
+            var submitData =
+            {
+                guid: $("input#lds_edit_guid").val(),
+                license_id: license
+            };
+
+            $.post (baseurl + "action/lds/manage_license", submitData, function(data) {
+                if(data.ok) {
+                    $('.cc_info_icon').hide();
+                    lds_license = license;
+                    $('.license_cc_select_item').css("background-color","");
+                    $('.license_cc_select_item').css("border","");
+                    $('.license_cc_select_item').css("border-radius","");
+
+                    $item.css("background-color","lightgrey");
+                    $item.css("border","2px solid grey");
+                    $item.css("border-radius","6px");
+
+                    $('.cc_info_icon').hide();
+
+                    for(cc_item in cc_items[lds_license]) {
+                        $('#'+cc_items[lds_license][cc_item]).show();
+                    }
+
+                    $('.license_banner').hide();
+                    $('.license_banner[license_id="'+license+'"]').css("display", "inline");
+                }
+            });
+
+        });
+    });
+
     $('#duplicate_design').click(function (event) {
         $('#clonelds_popup').fadeToggle(200);
         $('input[name=new_lds_title]')

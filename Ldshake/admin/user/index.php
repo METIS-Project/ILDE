@@ -34,6 +34,10 @@
 		$result = list_entities('user');
 		
 		set_context('admin');
+
+        global $autofeed;
+
+        $autofeed = false;
 			
 	// Display main admin menu
 		page_draw(elgg_echo("admin:user"),

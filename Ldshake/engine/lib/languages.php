@@ -135,10 +135,12 @@
 			foreach ($CONFIG->translations as $k => $v)
 			{
 				$installed[$k] = elgg_echo($k, $k);
-				
+
+                /*
 				$completeness = get_language_completeness($k);
 				if ((isadminloggedin()) && ($completeness<100) && ($k!='en'))
 					$installed[$k] .= " (" . $completeness . "% " . elgg_echo('complete') . ")";
+                */
 			}
 			
 			return $installed;

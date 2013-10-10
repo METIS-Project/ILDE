@@ -35,7 +35,6 @@
  ********************************************************************************/
 
 ?>
-
 <?php extract ($vars) ?>
 <div id="one_column">
 	<div id="content_area_user_title">
@@ -92,7 +91,17 @@
 	</div>
 <?php else: ?>
 	<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
-		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
+
+        <div id="lds_license_wrapper" class="lds_view_tab_actions">
+            <?php include('license_banner.php'); ?>
+            <?php if($lds->license): ?>
+                <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Manage license") ?></a>
+                <?php else: ?>
+                <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Add license") ?></a>
+            <?php endif; ?>
+            <div style="clear:both"></div>
+        </div>
+        <div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
 			<div class="lds_loading" style="margin-top: 4px;"></div>
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<a class="publishbutton rightbutton" href="#" id="lds_action_unpublish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
@@ -121,6 +130,10 @@
             <div style="clear:both"></div>
 		</div>
 	<?php else: ?>
+        <div id="lds_license_wrapper" class="lds_view_tab_actions">
+            <?php include('license_banner.php'); ?>
+            <div style="clear:both"></div>
+        </div>
 		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
 			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
 			<?php echo T("Public link:") ?>
@@ -156,6 +169,7 @@
 
 <?php include ('single_share_form.php') ?>
 <?php include ('clonelds_form.php') ?>
+<?php include ('license_form.php') ?>
 
 <script type="text/javascript">
 	var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
@@ -166,6 +180,7 @@
 	friends['editors'] = <?php echo $editors ?>;
 
 	var groups = <?php echo $groups ?>;
+    var lds_license = <?php echo (($lds->license ? $lds->license : 0 )) ?>;
 
 	//Is the LdS public for all LdShakers? (yes by default)
 	var allCanView = <?php echo $all_can_read ?>;

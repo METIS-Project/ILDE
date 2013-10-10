@@ -2241,4 +2241,32 @@ SQL;
 
         return $listWord;
     }
+
+    public static function encrypt_password($plaintext) {
+        global $CONFIG;
+        $key = pack('H*', $CONFIG->vle_key);
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+        $iv = mcrypt_create_iv($iv_size, MCRYPT_RAND);
+
+        $ciphertext = mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key,
+            $plaintext, MCRYPT_MODE_CBC, $iv);
+
+        $ciphertext = $iv . $ciphertext;
+
+        return base64_encode($ciphertext);
+    }
+
+    public static function decrypt_password($ciphertext) {
+        global $CONFIG;
+        $key = pack('H*', $CONFIG->vle_key);
+        $ciphertext_dec = base64_decode($ciphertext);
+
+        $iv_size = mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC);
+        $iv_dec = substr($ciphertext_dec, 0, $iv_size);
+
+        $ciphertext_dec = substr($ciphertext_dec, $iv_size);
+
+        return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
+            $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec), "\0");
+    }
 }

@@ -41,6 +41,12 @@
  */
 
 define ('LDS_ENTITY_TYPE', 'LdS');
+define ('LDS_LICENSE_CC_BY', '1');
+define ('LDS_LICENSE_CC_BY_ND', '2');
+define ('LDS_LICENSE_CC_BY_SA', '3');
+define ('LDS_LICENSE_CC_BY_NC', '4');
+define ('LDS_LICENSE_CC_BY_NC_ND', '5');
+define ('LDS_LICENSE_CC_BY_NC_NA', '6');
 
 function lds_init()
 {
@@ -87,6 +93,7 @@ function lds_init()
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
     register_action("lds/register_deployment", false, $CONFIG->pluginspath . "lds/actions/lds/register_deployment.php");
     register_action("lds/implement", false, $CONFIG->pluginspath . "lds/actions/lds/implement.php");
+    register_action("lds/manage_license", false, $CONFIG->pluginspath . "lds/actions/lds/manage_license.php");
 
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
     register_action("lds/admin/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/admin/manage_vle.php", true);
@@ -1070,7 +1077,7 @@ function lds_exec_edit ($params)
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
 
-    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+    create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
@@ -1160,7 +1167,7 @@ function lds_exec_editeditor ($params)
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
 
-    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+    create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
@@ -1772,8 +1779,9 @@ function lds_exec_viewext ($params)
 
 	$doc = get_entity($publishedId);
 	$vars['doc'] = $doc;
+    $vars['lds'] = get_entity($doc->lds_guid);
 	if (is_numeric($doc->lds_guid))
-		$vars['title'] = get_entity($doc->lds_guid)->title;
+		$vars['title'] = $vars['lds']->title;
 	else
 		$vars['title'] = $doc->title;
 	
@@ -2223,22 +2231,6 @@ function lds_exec_firststeps ()
 	$body = elgg_view('lds/firststeps',$vars);
 	page_draw(T("Welcome to LdShake!"), $body);
 }
-
-function lds_exec_contact ()
-{
-	$body = <<<HTML
-<br /><br />
-<h3 style="margin-left: 15px;">
-Qualsevol problema tècnic contactar amb Jonathan Chacón "jonathan.chacon@upf.edu"
-<br /><br />
-Qualsevol dubte que tingueu contactar amb Sílvia Lope "slope@xtec.cat"
-</h3>
-HTML;
-
-
-	page_draw(T("Informació de contacte"), $body);
-}
-
 
 function lds_exec_make_expert ($params)
 {

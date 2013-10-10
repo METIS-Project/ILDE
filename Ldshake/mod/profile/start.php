@@ -174,7 +174,7 @@
 		{
 			if (get_context() == 'admin' && isadminloggedin()) {
 				global $CONFIG;
-				add_submenu_item(elgg_echo('profile:edit:default'), $CONFIG->wwwroot . 'pg/defaultprofile/edit/');
+				//add_submenu_item(elgg_echo('profile:edit:default'), $CONFIG->wwwroot . 'pg/defaultprofile/edit/');
 			}
 		}
 		

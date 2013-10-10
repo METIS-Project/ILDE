@@ -64,10 +64,10 @@
 	function admin_pagesetup() {
 		if (get_context() == 'admin') {
 			global $CONFIG;
-			add_submenu_item(elgg_echo('admin:statistics'), $CONFIG->wwwroot . 'pg/admin/statistics/');
+			//add_submenu_item(elgg_echo('admin:statistics'), $CONFIG->wwwroot . 'pg/admin/statistics/');
 			add_submenu_item(elgg_echo('admin:site'), $CONFIG->wwwroot . 'pg/admin/site/');
 			add_submenu_item(elgg_echo('admin:user'), $CONFIG->wwwroot . 'pg/admin/user/');
-			add_submenu_item(elgg_echo('admin:plugins'), $CONFIG->wwwroot . 'pg/admin/plugins/');
+			//add_submenu_item(elgg_echo('admin:plugins'), $CONFIG->wwwroot . 'pg/admin/plugins/');
 		}
 	}
 

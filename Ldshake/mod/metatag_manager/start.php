@@ -6,7 +6,7 @@
 		extend_view("metatags", "metatag_manager/metatags");
 		
 		// extend metatags
-		extend_view("admin/site", "metatag_manager/settings");
+		//extend_view("admin/site", "metatag_manager/settings");
 	}
 	
 	// Default event handlers for plugin functionality
