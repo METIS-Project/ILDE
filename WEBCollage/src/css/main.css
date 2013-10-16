@@ -23,6 +23,7 @@ table.resourceTable td {
 
 table.resourceTable tr:hover {
     background-color: #eee0ee;
+    cursor: pointer;
 }
 
 table.resourceTable th{

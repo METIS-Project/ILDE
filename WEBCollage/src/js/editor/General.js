@@ -61,6 +61,7 @@ var General = {
     openAddLoDialog : function() {
         dijit.byId("LDLearningObjectiveAddName").set("value", "");
         dijit.byId("LDLearningObjectiveAddDescription").set("value", "");
+        dojo.byId("LDLearningObjectiveAddDialogErrorReport").innerHTML = "";
         dijit.byId('LDLearningObjectiveAddDialog').show();
     },
     
@@ -126,9 +127,16 @@ var General = {
      * Añade un objetivo de aprendizaje
      * @param data Objetivo a añadir
      */ 
-    addLearningObjective: function(data){
-        var lo = new LearningObjective(data.name, data.description);
-        LearningDesign.addLO(lo);
+    addLearningObjective: function(){
+        var name = dojo.byId("LDLearningObjectiveAddName").value;
+        var description = dojo.byId("LDLearningObjectiveAddDescription").value;
+        if (name.length == 0){
+            dojo.byId("LDLearningObjectiveAddDialogErrorReport").innerHTML = i18n.get("general.loName.error.empty");
+        }else{
+            var lo = new LearningObjective(name, description);
+            LearningDesign.addLO(lo);
+            General.closeAddLoDialog();
+        }
     },
     
     /**
@@ -171,10 +179,17 @@ var General = {
     /**
      * Refleja los cambios realizados en el objetivo
      */ 
-    finishedEditingLO: function(data){
-        this.editedObject.title = data.name;
-        this.editedObject.description = data.description;
-        ChangeManager.loEdited(this.editedObject);
+    finishedEditingLO: function(){
+        var name = dojo.byId("LDLearningObjectiveEditName").value;
+        var description = dojo.byId("LDLearningObjectiveEditDescription").value;
+        if (name.length == 0){
+            dojo.byId("LDLearningObjectiveEditDialogErrorReport").innerHTML = i18n.get("general.loName.error.empty");
+        }else{
+            this.editedObject.title = name;
+            this.editedObject.description = description;
+            ChangeManager.loEdited(this.editedObject);
+            this.closeEditLO();
+        }
     },
     
     /**

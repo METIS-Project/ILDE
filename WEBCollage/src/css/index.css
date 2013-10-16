@@ -3,6 +3,10 @@ li.ldItem:hover {
     background: #eeeeee;
 }
 
+li.ldItem {
+    margin: 8px 0px;
+}
+
 .ldItemName {
     font-weight: bold;
 }

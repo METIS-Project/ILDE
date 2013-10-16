@@ -29,6 +29,7 @@ dojo.require("dojox.gfx.fx");
 dojo.require("dojox.widget.Toaster");
 dojo.require("dojox.timing._base");
 dojo.require("dojox.xml.DomParser");
+dojo.require("dojox.validate.web");
 
 dojo.require("dojo.fx");
 dojo.require("dojo.fx.easing");

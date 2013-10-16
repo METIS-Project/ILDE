@@ -1,6 +1,6 @@
-﻿grouppattern.fixedsizegroups.title=Tamany de grup fixat
-grouppattern.fixedsizegroups.title.alert=<font color='brown'>Fixed Group Size</font>
-grouppattern.fixedsizegroups.info=The group size is fixed. You want the group number <br/> depends on how many students there are available <br/> for this phase.
+grouppattern.fixedsizegroups.title=Tamany de grup fixat
+grouppattern.fixedsizegroups.title.alert=<font color='brown'>Tamany del grup fixa</font>
+grouppattern.fixedsizegroups.info=El tamany del grup es fixa. El número del grup <br/> depén de quants estudiants estiguin disponibles <br/> per a aquesta fase.
 
 grouppattern.fixedsizegroups.number=Degut a que hi ha ${0}, podem tenir ${1} de tamany ${2}
 grouppattern.fixedsizegroups.students.one=és 1 estudiant

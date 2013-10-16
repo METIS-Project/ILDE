@@ -1,6 +1,6 @@
 grouppattern.expertgroup.title=Grup d'experts
-grouppattern.expertgroup.title.alert=<font color='brown'>Expert Groups</font>
-grouppattern.expertgroup.info=The number of subproblems is fixed. You want the <br/> group number depends on how many subproblems <br/> the Jigsaw has to be solved.
+grouppattern.expertgroup.title.alert=<font color='brown'>Grup d'experts</font>
+grouppattern.expertgroup.info=El número de subproblemes es fixe. El número d'experts <br/> depén de quants subproblemes ha <br/> de resoldre el trencaclosques.
 
 grouppattern.expertgroup.number.alert=El número de subproblemes especificats és ${0}, per tant, ha d'aver-hi ${0} grups.
 grouppattern.expertgroup.nonumber.alert=Ha d'haver 2 grups d'experts com a mínim (cada grup treballarà en un subproblema).

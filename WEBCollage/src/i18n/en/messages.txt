@@ -83,6 +83,7 @@ general.loDescription=Description
 general.editLo=Edit learning objective
 general.deleteLo=Delete learning objective
 general.deleteLo.confirm=Are you sure you want to delete learning objective '${0}'?
+general.loName.error.empty=Please, enter a name for the learning objective
 
 
 flow.flow=Learning activity flow
@@ -130,6 +131,9 @@ resources.newDoc=New document
 resources.editDoc=Edit document
 resources.editDoc.name=Name
 resources.editDoc.link=Link
+resources.editDoc.name.error.empty=Please, enter a name for the document
+resources.editDoc.link.error.empty=Please, enter the link for the document
+resources.editDoc.link.error.notvalid=The link entered is not a valid URL
 resources.newTool=New tool
 resources.editTool=Edit tool
 resources.editTool.name=Name
@@ -593,10 +597,10 @@ disenos.editar=Edit design
 disenos.instanciar=Instantiate design
 disenos.eliminar=Delete design
 disenos.clonar=Clone design
-disenos.editar.info=Click here to edit this design
+disenos.editar.info=Click this option to edit this design
 disenos.instanciar.info=Click here to instantiate the last design version
-disenos.eliminar.info=Click here to delete this design
-disenos.clonar.info=Click here to create a copy of the design
+disenos.eliminar.info=Click this option to delete this design
+disenos.clonar.info=Click this option to create a copy of the design
 
 tab.metodo=Design teaching method
 tab.participantes=Participant management
@@ -681,7 +685,6 @@ participantes.aviso=Warning!!
 participantes.imposibilidadborrar=A LMS installation in use can not be deleted
 participantes.elegirinstancia=Change
 
-
 roles.see=View rol
 activity.see=View activity
 help.activity.see=Click here to view this activity. You can view the title, description, learning objectives and the resources linked to this activity.
@@ -761,6 +764,13 @@ fichero.error=Error uploading file
 export.title=Export
 deployGluePS.title=Deploy in Glue!PS
 deployGluePS.error=Error while Deploying in Glue!PS
+deployingGluePS.title=Deploying in Glue!PS...
+deployingGluePS.wait=The Web Collage design is being deployed in Glue!PS... <br/>Please, wait until the process finishes!
+deployingGluePS.error.imsld=Error while trying to export the script into IMS-LD
+deployingGluePS.error.internal.imsld=Internal error in Web Collage while trying to export the script into IMS-LD
+deployingGluePS.error.design=Error while trying to create the design in Glue!PS
+deployingGluePS.error.deploy=Error while trying to create the deploy in Glue!PS
+deployingGluePS.error.internal.glueps=Internal error in Glue!PS while trying to deploy
 
 registerResult.title=Register new user result
 registerResult.exit=The new user has been successfully registered

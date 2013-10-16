@@ -74,8 +74,8 @@
 					onclick="General.openAddLoDialog();"></button>
 				<div dojoType="dijit.Dialog" id="LDLearningObjectiveAddDialog"
 					title="${general.newLo}"
-					execute="General.addLearningObjective(arguments[0]);"
                                         style="min-width:350px;overflow:auto">
+                                        <div id="LDLearningObjectiveAddDialogErrorReport" class="errorReport"></div>
 					<table cellspacing="10">
 						<tr>
 							<td>${general.loName}</td>
@@ -90,13 +90,13 @@
 						</tr>
 					</table>
                                         <div align="center">
-                                            <button dojoType="dijit.form.Button" label="${common.ok}" type="submit"></button>
+                                            <button dojoType="dijit.form.Button" label="${common.ok}" onclick="General.addLearningObjective();"></button>
                                             <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="General.closeAddLoDialog();"></button>
                                         </div>
 				</div>
 				<div dojoType="dijit.Dialog" id="LDLearningObjectiveEditDialog"
-					title="${general.editLo}"
-					execute="General.finishedEditingLO(arguments[0]);">
+					title="${general.editLo}">
+                                        <div id="LDLearningObjectiveEditDialogErrorReport" class="errorReport"></div>
 					<table cellspacing="10">
 						<tr>
 							<td>${general.loName}</td>
@@ -111,7 +111,7 @@
 						</tr>
 					</table>
                                         <div align="center">
-                                            <button dojoType="dijit.form.Button" label="${common.ok}" type="submit"></button>
+                                            <button dojoType="dijit.form.Button" label="${common.ok}" onclick="General.finishedEditingLO();"></button>
                                             <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="General.closeEditLO();"></button>
                                         </div>
 				</div>

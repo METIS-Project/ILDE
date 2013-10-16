@@ -61,7 +61,6 @@ design.type.private.long=Privat (només tu pots veure o modificar el disseny).
 users.login=Iniciar sessió
 users.register=Registrar nou usuari
 users.logout=Tancar sessió
-
 users.nickname=Nom d'usuari
 users.password=Contrasenya
 users.repeatPassword=Confirma contrasenya
@@ -72,7 +71,6 @@ users.error.differentPassword=Les contraseyes no coincideixen.
 users.error.noPassword=La contrasenya ha de tenir ${0} caràcters com a mínim.
 users.error.userBlank=El nom d'usuari no ha de tenir espais en blanc.
 users.error.noUser=El nom d'usuari ha de tenir al menys ${0} caràcters.
-
 general.general=General
 general.title=Títol
 general.editTitle=Editar títol
@@ -85,6 +83,7 @@ general.loDescription=Descripció
 general.editLo=Editar objectiu d'aprenentatge
 general.deleteLo=Eliminar objectiu d'aprenentatge
 general.deleteLo.confirm=Estàs segur de voler eliminar l'objectiu d'aprenentatge '${0}'?
+general.loName.error.empty=Si us plau, introdueix un nom per a l'objectiu d'aprenentatge
 
 
 flow.flow=Aprenent flux d'activitat
@@ -127,12 +126,14 @@ flow.clfp.add.after=... després d'aquest ${0}
 flow.select.clfp=Escull aquest ${0}
 flow.select.activity=Escull aquesta activitat: '${0}'
 
-
 resources.resources=Recursos
 resources.newDoc=Nou document
 resources.editDoc=Editar document
 resources.editDoc.name=Nom
 resources.editDoc.link=Enllaç
+resources.editDoc.name.error.empty=Si us play, introdueix un nom per al document
+resources.editDoc.link.error.empty=Si us play, introdueix un enllaç per aquest document
+resources.editDoc.link.error.notvalid=Aquest enllaç no és una URL vàlida
 resources.newTool=Nova eina
 resources.editTool=Editar eina
 resources.editTool.name=Nom
@@ -142,7 +143,6 @@ resources.inActivity.docs=Documents
 
 resources.delete=Eliminar recurs
 resources.delete.confirm=Estàs segur que vols eliminar aquest recurs de l'script?
-
 
 resources.tool.description.default=Cap enllaç
 resources.tool.description.ontoolquery=Descripció d'eines
@@ -179,6 +179,7 @@ assessment.edit.whatfor=Ús dels resultats d'avaluació
 assessment.edit.function.remove=Eliminar l'ús dels resultats d'avaluació
 assessment.delete=Eliminar aquesta valoració
 assessment.delete.confirm=Estàs segur que vols eliminar aqusta valoració?
+assessment.selectActivity=Seleciona <i>una activitat</i> per a configurar la valoració!
 
 assessment.edit.los=Objectius d'aprenentatge avaluats
 assessment.edit.source.choose=Escollir activitat d'aprenentatge per avaluar...
@@ -503,7 +504,6 @@ patterns.tutoring.title=Sessions de tutoria
 patterns.tutoring.activity=Assitir a les sessions de tutoria
 patterns.tutoring.assess=Gestionar la sessió de turoria
 
-
 %help
 
 help.assessment.icon.assessment=Aquesta icona representa una tasca d'avaluació (part de l'avaluació '${0}'), que es duu a terme en aquesta fase.
@@ -611,6 +611,8 @@ participantes.clase=Selecció de classe
 participantes.clase.select=-- Escull una classe --
 participantes.participantes=Llista de participant de la classe
 participantes.tipoLMS.select=-- Escull un tipus de LMS --
+participantes.adminLMS=Administrar LMS
+participantes.crearLMS=Crear LMS
 participantes.crearInstalacionLMS=Crear una instal·lació LMS
 participantes.optioneditlms=Editar instal·lació LMS
 participantes.optiondeletelms=Eliminar instal·lació LMS
@@ -625,8 +627,7 @@ participantes.usuariolms=Usuari
 participantes.lmsintallation.edit=Feu clic aquí per a editar l'instal·lació LMS
 participantes.lmsintallation.delete=Feu clic aquí per a eliminar l'instal·lació LMS
 participantes.confirmacioneliminar=Eliminar instal·lació LMS
-
-participantes.lmsglue.select=-- Ecull un glue LMS --
+participantes.lmsglue.select=-- Escull un glue LMS --
 participantes.lmsglue=LMS:
 participantes.fichero=Arxiu
 
@@ -664,6 +665,9 @@ participantes.lmsElegido=Tipus de LMS
 participantes.errorGetParticipants=No s'ha pogut obtenir la llista de participants de la classe
 participantes.numberParticipants=Número de participants de la classe: 
 participantes.errorGetClasses=No s'ha pogut obtenir la llista de classes
+participantes.gestionar_lms=Gestió de LMS
+participantes.mostrarinstanciaslms=Llista d'instàncies de LMS
+participantes.confirmacioneliminar=Esborra l'instalació LMS
 
 participantes.nombre=Nom
 participantes.tipo=Tipus
@@ -671,8 +675,10 @@ participantes.user=Usuari
 
 actualizar.aviso=Alerta
 actualizar.aviso.info=Si us plau, abans de fer clic al botó de selecció, escull una instal·lació i una classe
+actualizar.aviso.fallo=No s'ha pogut obtenir la llista de participants actualizada
 
 participantes.obtenerparticipantes.cambios=Alerta! Els canvis seran detectats en els participants
+participantes.obtenerparticipantesLdshake.cambios=Alerta! La llista de participants del disseny original s'ha actualizat degut als canvis en la composició de la classe
 participantes.editarinstalacion.error=Error inesperat mentre s'editava la instal·lació
 
 participantes.aviso=Alerta!!
@@ -709,7 +715,7 @@ learningflow.asignarparticipantes.help=Feu clic per a assignar usuaris a una ins
 learningflow.asignarprofesores=Assignar professors a una instància de grup
 learningflow.asignarprofesores.help=Feu clic per a assignar professors a una instància de grup
 learningflowGroups.mostrarclfp=Mostrar CLFP associats
-learningflowGroups.mostrarclfp.help=Feu clci aquí per a mostrar els CLFP associats a la instància de grup
+learningflowGroups.mostrarclfp.help=Feu clic aquí per a mostrar els CLFP associats a la instància de grup
 participants.alumnosasignados=Assignació d'estudiants a la instància de grup
 participants.alumnosasignadosgrupo=Estudiants assignats a aquesta instància
 participants.alumnosasignadosgrupotemp=Estudiants temporals
@@ -735,7 +741,6 @@ participants.desasignarprofesores=Rebutjar professor de la instància de grup
 participants.desasignarprofesores.help=Feu clic aquí per a rebutjar al professor de la instància de grup
 participants.desasignartodosprofesores=Rebutjar tots els professors de la instància de grup
 participants.desasignartodosprofesores.help=Feu clic aquí per a rebutjar tots els professors d'aquest grup
-
 nombre.estudiantes=Nom dels estudiants
 
 participants.alumnosasignadosotrasinstancias=Estudiants assignats a altres instàncies
@@ -756,8 +761,17 @@ participantes.uri=URI
 fichero.notSupportedFormat=Format d'arxiu no suportat
 fichero.error=Error al carregar l'arxiu
 
+export.title=Export
 deployGluePS.title=Implementar en Glue!PS
 deployGluePS.error=Error mentre s'implementava en Glue!PS
+deployingGluePS.title=Desplegant a Glue!PS
+deployingGluePS.wait=El disseny de Web Collage s'esta desplegant a Glue!PS... <br/>Si us plau, espera fins que el procés finalitzi!
+deployingGluePS.error.imsld=Error mentres s'exporta el script a IMS-LD
+deployingGluePS.error.internal.imsld=Error intern a Web Collage mentres s'intenta exportar el script a IMS-LD
+deployingGluePS.error.design=Error mentres s'intenta crear el disseny a Glue!PS
+deployingGluePS.error.deploy=Error mentres s'intenta deplegar el disseny a Glue!PS
+deployingGluePS.error.internal.glueps=Error intern a Glue!PS mentres s'intenta deplegar
+
 registerResult.title=Resultat de registrar nou usuari
 registerResult.exit=El nou usuari s'ha registrar correctament
 
@@ -779,6 +793,8 @@ help.groupPattern.documentation=Feu clic aquí per llegir la documentació del p
 groupPattern.updateGroupNumber=Actualitzar el nombre de grups
 groupPattern.updateGroupNumberOK=El nombre de grups és correcte
 groupPattern.disabledGroupNumber=No es pot actualitzar el nombre de grups
+groupPattern.noAditionalConfiguration=Res a configurar
+groupPattern.noAditionalConfiguration.help=El patró no necessita cap configuració adicional
 
 groupPattern.updateGroupComposition=Actualitzar composició del grup
 groupPattern.updateGroupCompositionOK=La composició del grup és correcte
@@ -787,9 +803,17 @@ groupPattern.disabledGroupComposition=No es pot actualitzar la composició del g
 groupPattern.delete=Eliminar aquest patró de grup
 groupPattern.documentation=Llegir la documentació del patró de grup
 groupPattern.emptyGroup=Hi ha grups buits
-groupPattern.notAsigned=Hi ha estudiants sense un grup assignat
+groupPattern.emptyGroup.help=Hauries d'assignar usuaris a cada instancia de grup en aquesta fase
+groupPattern.notAsigned=Hi ha estudiants que no estan assignats a cap grup
+groupPattern.notAsigned.help=Hauries d'assignar cada usuari a algún grup d'aquesta fase.
+groupPattern.noAvailableParticipants=No hi han estudiants diponibles per assignar als grups
+groupPattern.noAvailableParticipants.help=Cada grup en un fase hauria de tenir estudiants assignats.
 groupPattern.notAsignedTeacher=No hi ha professors assignats a la fase
 groupPattern.notAsignedTeacher.help=Hauries d'assignar com a mínim un professor del grup de professors
+groupPattern.noAvailableTeachers=No hi ha professors disponible per assignar a aquesta fase
+groupPattern.noAvailableTeachers.help=Cada fase hauria de tenir un professor assignat
+groupPattern.notAsignedSomeTeachers=Hi ha alguns professors sense assignació a la fase
+groupPattern.notAsignedSomeTeachers.help=Hauries d'assignar cada professor a aquesta fase
 
 groupPattern.updatesNeeded.alert=Es necessitaran ${0} actualitzacions més per a que estigui actualitzat.
 groupPattern.baddependencies=Altres fases han de ser revisader abans que aquesta pugui ser actualitzada.
@@ -797,12 +821,13 @@ groupPattern.baddependencies=Altres fases han de ser revisader abans que aquesta
 groupPattern.management.dialogtitle=Gestió del patró de grup
 groupPattern.managment.newgn=Afegir patró del número de grup
 groupPattern.managment.newpa=Afegir patró d'assignació d'estudiant
+groupPattern.managment.currentgn=Group number patterns
+groupPattern.managment.currentpa=Patrons d'assignació d'estudiants
   
 groupPattern.management.move.down=Moure a sota
 help.groupPattern.management.move.down=Moure a sota
 groupPattern.management.move.up=Moure a munt
 help.groupPattern.management.move.up=Moure a munt
-
 
 groupPattern.management.undelete=Conservar aquest patró
 help.groupPattern.management.undelete=Conservar aquest patró
@@ -813,12 +838,13 @@ groupPattern.general.lessthan=Meny de ${1}: ${0}
 groupPattern.general.morethan=Més de ${1}: ${0}
 
 groupPattern.nopatterns=No hi ha patrons per a configurar-ho. Pots intentar afegir-los!
-
 grouplayer.menu.title=Membres del grup
 grouplayer.menu.itemhelp=Feu clic aquí per a seleccionar aauest participant
 
 groupPattern.manage=Administrar la directiva del grup
 help.groupPattern.manage=Afegir normes per controla el nombre de grups i la distribució dels estudiants
+groupPattern.add=Afegeix un patró de grup
+help.groupPattern.add=Afegeix un patró de grup a la fase
 
 changeTypeToStudent=Canviar a estudiant
 changeTypeToStudent.help=El participant ara és un estudiant

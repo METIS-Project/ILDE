@@ -289,7 +289,7 @@ function IMSLDCreateHiddenResourceFile($content, $filename) {
 function IMSLDCreateHiddenResource($folder, $id, $content) {
     $href = "COLLAGE-hidden-resources/$id.txt";
 
-    $res = '<resource identifier="' .$id . '" type="hiddentext" href="' . $href . '">';
+    $res = '<resource identifier="' .$id . '" type="hiddentext" href="' . str_replace("&", "&amp;", $href) . '">';
     $res .= '<file href="' . $href . '" />';
     $res .= '</resource>';
 
@@ -316,7 +316,7 @@ function IMSLDCreateResources($imsld, $design) {
 
         if ($res->subtype == "doc") {
             $imsld->restable[$res->id] = array("type" => "doc", "id" => $id, "title" => $res->title);
-            $resxml = '<resource identifier="' .$id . '" type="webcontent" href="' . $res->link . '">';
+            $resxml = '<resource identifier="' .$id . '" type="webcontent" href="' . str_replace("&", "&amp;", $res->link) . '">';
             $resxml .= '</resource>';
             $imsld->resources .= $resxml;
         } else {

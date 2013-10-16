@@ -110,6 +110,8 @@ var LDManager = {
             name.innerHTML = ld.title;
             dojo.addClass(name, "ldItemName");
             
+            this.setOnClickDesign(name, ld.docid);
+            
             MenuManager.registerThing(name, {
                 getItems: function(data) {
                     return DesignVersionsInstances.getResourceMenu(data);
@@ -120,6 +122,15 @@ var LDManager = {
                 menuStyle: "default"
             });
         }
+    },
+    
+    /**
+     * Asocia el evento de abrir un diseño al hacer click en su nombre
+     */
+    setOnClickDesign: function(node, docid){
+        dojo.connect(node, "onclick", function() {
+            LDManager.openLD(docid);
+        });  
     },
     
     /**

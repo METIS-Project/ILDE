@@ -27,8 +27,11 @@ var Users = {
         dojo.connect(dojo.byId("DoLogin"), "onclick", Users, "openLoginDialog");
         dojo.connect(dojo.byId("DoLogout"), "onclick", Users, "doLogout");
         //Eventos de LoginDialog
-        dojo.connect(dojo.byId("LoginDialogOk"), "onclick", Users, "doLogin");
+        dojo.connect(dojo.byId("LoginDialogOk"), "onclick", Users, "doLogin");      
         dojo.connect(dojo.byId("LoginDialogCancel"), "onclick", Users, "closeLoginDialog");
+        
+        this.addLoginDialogKeyEvents();
+        this.addRegisterNewUserDialogKeyEvents();
     },
     
     /**
@@ -36,7 +39,7 @@ var Users = {
      */  
     openNewUserDialog: function(){
         this.resetNewUser();
-        dijit.byId("RegisterNewUserDialog").show();
+        dijit.byId("RegisterNewUserDialog").show();      
     },
     
     /**
@@ -151,7 +154,52 @@ var Users = {
      */
     openLoginDialog: function(){
         this.resetLogin();
+        //this.setLoginDialogEvents();
         dijit.byId("LoginDialog").show();
+    },
+    
+    addLoginDialogKeyEvents: function(){
+        dojo.connect(dojo.byId("LoginDialog"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.doLogin();
+            }
+        });
+        dojo.connect(dojo.byId("LoginDialogOk"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.doLogin();
+            }
+        });
+        dojo.connect(dojo.byId("LoginDialogCancel"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.closeLoginDialog();
+            }
+        });  
+    },
+    
+    addRegisterNewUserDialogKeyEvents: function(){
+        dojo.connect(dojo.byId("RegisterNewUserDialog"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.checkNewUserData();
+            }
+        });
+        
+        dojo.connect(dojo.byId("RegisterNewUserDialogOk"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.checkNewUserData();
+            }
+        });  
+        
+        dojo.connect(dojo.byId("RegisterNewUserDialogCancel"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                Users.closeNewUserDialog();
+            }
+        });  
     },
     
     /**
@@ -191,7 +239,6 @@ var Users = {
                 Users.doLoginResult();
             }
         };
-        dijit.byId("LoginDialogPassword").attr("value", "");
         dojo.xhrPost(bindArgs);
     },
     

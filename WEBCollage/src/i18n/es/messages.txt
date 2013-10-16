@@ -84,6 +84,7 @@ general.loDescription=Descripción
 general.editLo=Editar objetivo de aprendizaje
 general.deleteLo=Eliminar objetivo de aprendizaje
 general.deleteLo.confirm=¿Estás seguro de querer eliminar el objetivo de aprendizaje '${0}'?
+general.loName.error.empty=Por favor, indique un nombre para el objetivo de aprendizaje
 
 
 flow.flow=Flujo de aprendizaje
@@ -131,6 +132,9 @@ resources.newDoc=Nuevo documento
 resources.editDoc=Editar recurso
 resources.editDoc.name=Nombre
 resources.editDoc.link=Enlace
+resources.editDoc.name.error.empty=Por favor, indique el nombre del documento
+resources.editDoc.link.error.empty=Por favor, indique el enlace del documento
+resources.editDoc.link.error.notvalid=El enlace indicado no es una URL válida
 resources.newTool=Nueva herramienta
 resources.editTool=Editar herramienta
 resources.editTool.name=Nombre
@@ -599,10 +603,10 @@ disenos.editar=Editar diseño
 disenos.instanciar=Instanciar diseño
 disenos.eliminar=Eliminar diseño
 disenos.clonar=Clonar diseño
-disenos.editar.info=Click aquí para editar este diseño
+disenos.editar.info=Haga click en esta opción para editar este diseño
 disenos.instanciar.info=Click aquí para instanciar la última versión del diseño
-disenos.eliminar.info=Click aquí para eliminar este diseño
-disenos.clonar.info=Click aquí para crear una copia del diseño
+disenos.eliminar.info=Haga click en esta opción para eliminar este diseño
+disenos.clonar.info=Haga click en esta opción para crear una copia del diseño
 
 tab.metodo=Método pedagógico del diseño
 tab.participantes=Gestión de participantes
@@ -767,6 +771,13 @@ fichero.error=Error al subir el fichero
 export.title=Exportar
 deployGluePS.title=Despliegue en Glue!PS
 deployGluePS.error=Error al desplegar en Glue!PS
+deployingGluePS.title=Desplegando en Glue!PS...
+deployingGluePS.wait=El diseño de Web Collage se está desplegando en Glue!PS... <br/>Por favor, espere a que finalice el proceso!
+deployingGluePS.error.imsld=Error al tratar de exportar el script a IMS-LD
+deployingGluePS.error.internal.imsld=Error interno en Web Collage al tratar de exportar el script a IMS-LD
+deployingGluePS.error.design=Error al tratar de crear el diseño en Glue!PS
+deployingGluePS.error.deploy=Error al tratar de crear el despliegue en Glue!PS
+deployingGluePS.error.internal.glueps=Error interno en Glue!PS al tratar de desplegar
 
 registerResult.title=Resultado del registro del usuario
 registerResult.exit=El nuevo usuario ha sido registrado correctamente

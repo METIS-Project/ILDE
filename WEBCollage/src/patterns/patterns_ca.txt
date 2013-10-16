@@ -2,10 +2,10 @@
 	"patterns": [
 		{
                         "name": "test",
-                        "title": "Individual test",
-                        "description": "correct a test or exam answered by the students.",
-			"assessedActivity": "Answer test",
-			"assessmentActivity": "Correct text",
+                        "title": "test individual",
+                        "description": "corregeix un text o un examen contestat pels estudiants.",
+			"assessedActivity": "Test contestat",
+			"assessmentActivity": "Text correcte",
 			"generaltype": "analysis",
                         "actions": {
                             "assessed": "assessedAsTest",
@@ -14,9 +14,9 @@
 		},
 		{
                         "name": "observations",
-                        "title": "Observation of collaborative work",
-                        "description": "observe directly collaborative work as it happens in face-to-face scenarios.",
-			"assessmentActivity": "Observe collaboration",
+                        "title": "Observació de treball col·laboratiu",
+                        "description": "observa directament el treball col·laboratiu mentres aquest es produeix en un escenari cara a cara.",
+			"assessmentActivity": "Obserbar la col·laboració",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsObservation",
@@ -25,9 +25,9 @@
 		},		
 		{
                         "name": "reportassessment",
-                        "title": "Written report review",
-                        "description": "review a report written by the students.",
-			"assessmentActivity": "Review report",
+                        "title": "Revisió d'un informe",
+                        "description": "Revisa un informe escrit pels estudiants.",
+			"assessmentActivity": "Revisió d'un informe",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsReportreview",
@@ -36,10 +36,10 @@
 		},
 		{
                         "name": "oralpresentation",
-                        "title": "Oral presentation",
-                        "description": "assess an oral presentation given by the students.",
-			"assessedActivity": "Perform presentation",
-			"assessmentActivity": "Observe and assess presentation",
+                        "title": "Presentació oral",
+                        "description": "evalua una presentació oral feta pels estudiants.",
+			"assessedActivity": "Fes una presentació",
+			"assessmentActivity": "Observa i evalua una presentació.",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsPresentation",
@@ -48,9 +48,9 @@
 		},
 		{
                         "name": "performance",
-                        "title": "Performance assessment",
-                        "description": "observe and assess a performance activity, requiring certain knowledge or skills.",
-			"assessmentActivity": "Observe and assess performance",
+                        "title": "Valora una presentació",
+                        "description": "observa una evalua una activitat de presentació, requerint certs coneixements o habilitats.",
+			"assessmentActivity": "Observa i evalua la presentació",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsPerformance",
@@ -59,9 +59,9 @@
 		},
 		{
                         "name": "portfolio",
-                        "title": "Portfolio assessment",
-                        "description": "review and assess a portfolio, compiled by the students over a period of time.",
-			"assessmentActivity": "Assess portfolio",
+                        "title": "Valora un catàleg",
+                        "description": "revisa i evalua un catàleg, compilat pels estudiants durant un periode de temps.",
+			"assessmentActivity": "Evalua un catàleg",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsPortfolio",
@@ -70,9 +70,9 @@
 		},
 		{
                         "name": "roledetection",
-                        "title": "Role detection",
-                        "description": "use interaction analysis tools to infer the roles played by the students during collaborative activities.",
-			"assessmentActivity": "Analyze interactions to infer roles",
+                        "title": "Detecció de rols",
+                        "description": "empra una eina d'anàlisis interactiva per inferir els rols que han jugat els estudiants durant les activitats col·laboratives.",
+			"assessmentActivity": "Analitza les interaccions per inferir els rols",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsRoles"
@@ -80,9 +80,9 @@
 		},
 		{
                         "name": "interactionanalisys",
-                        "title": "Interaction analysis",
-                        "description": "use interaction analysis tools to study collaborative work in computer-mediated scenarios.",
-			"assessmentActivity": "Analyze collaborative interactions",
+                        "title": "Anàlisis d'interacció",
+                        "description": "Empra una eina d'anàlisis interactiu per estudiar el treball col·laboratiu mitjançant ordinador.",
+			"assessmentActivity": "Analitza les interaccions col·laboratives",
 			"generaltype": "analysis",
                         "actions": {
                             "assessment": "assessmentAsIA"
@@ -90,8 +90,8 @@
 		},
 		{
                         "name": "rubric",
-                        "title": "Rubrics",
-                        "description": "add a rubric for the assessor, to guide the assess task.",
+                        "title": "Directrius",
+                        "description": "Afegeix una directriu per al evaluador, per guiar la tasca d'evaluació.",
 			"generaltype": "resource",
                         "actions": {
                             "assessment": "assessmentAsRubric"
@@ -99,8 +99,8 @@
 		},
 		{
                         "name": "sharedgrades",
-                        "title": "Shared grades",
-                        "description": "use the assessment to grade students, giving the same grade to all students in each group.",
+                        "title": "Notes compartides",
+                        "description": "Empra l'evaluació per posar una nota als estudiants, assignant la mateixa nota a tots dels estudiants de cada grup.",
 			"generaltype": "general",
                         "actions": {
                             "assessment": "assessmentAsShared",
@@ -109,8 +109,8 @@
 		},
 		{
                         "name": "selfassessment",
-                        "title": "Self-assessment",
-                        "description": "the assessor and the assessee are the same person/group.",
+                        "title": "Autoevaluació",
+                        "description": "l'evaluador i l'evaluat son la mateixa persona/grup.",
 			"generaltype": "general",
                         "actions": {
                             "assessment": "assessmentAsSelf"
@@ -118,8 +118,8 @@
 		},
 		{
                         "name": "anonymous", 
-                        "title": "Anonymous assessment",
-                        "description": "the assessor's identity is hidden, making the assess task anonymous.",
+                        "title": "Evaluació anònima",
+                        "description": "la indentitat de l'evaluador és oculta, realitzant la tasca d'evaluació anònimament.",
                         "generaltype": "general",
                         "actions": {
                             "assessment": "assessmentAsAnonymous"
@@ -127,8 +127,8 @@
 		},
 		{
                         "name": "random",
-                        "title": "Random member assessment",
-                        "description": "the assessment is carried out by one student, chosen randomly, from each group.",
+                        "title": "Evaluació de membres aleatoria",
+                        "description": "l'evaluació es portada a terme per un estudiant, triat aleatoriament, de cada grup.",
 			"generaltype": "general",
                         "actions": {
                             "assessment": "assessmentAsRandom"

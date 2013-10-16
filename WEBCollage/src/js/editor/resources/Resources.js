@@ -41,8 +41,11 @@ var Resources = {
                     data: {
                         res: res
                     },
-                    menuStyle: "default"
+                    menuStyle: "default",
+                    followCursor: true
                 });
+                
+                Resources.addOnclickEvent(row, res);
 
             /* now let's add the related activities
 	 
@@ -55,6 +58,12 @@ var Resources = {
 	 } */
             }
         }		
+    },
+    
+    addOnclickEvent: function(element, resource){
+        dojo.connect(element, "onclick", function(){
+            ResourceManager.edit(resource);
+        });
     },
     
         /**

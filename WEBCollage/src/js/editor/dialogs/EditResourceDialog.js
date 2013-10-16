@@ -80,26 +80,41 @@ var EditDocumentDialog = {
             dijit.byId("LDDocumentResourceLink").setValue("");
             this.dlg.titleNode.innerHTML = i18n.get("resources.newDoc");
         }
+        dojo.byId("LDDocumentResourceEditDialogErrorReport").innerHTML = "";
 
         this.dlg.show();
     },
-    save : function() {
+    save : function(resource) {
+        if(this.task == "new") {
+            LearningDesign.addResource(resource);
+        } else {
+            ChangeManager.resourceEdited(resource);
+        }
+        ResourceManager.setResourceEdited(resource);
+        this.close();
+    },
+    
+    check: function(){
         var resource = this.task == "new" ? new Resource("", "doc") : this.resource;
         resource.title = dijit.byId("LDDocumentResourceEditName").getValue();
         resource.link = dijit.byId("LDDocumentResourceLink").getValue();
 
-        if(resource.title.length > 0 || resource.link.length > 0) {
-            if(this.task == "new") {
-                LearningDesign.addResource(resource);
-            } else {
-                ChangeManager.resourceEdited(resource);
-            }
-            ResourceManager.setResourceEdited(resource);
+        if (resource.title.length == 0){
+            dojo.byId("LDDocumentResourceEditDialogErrorReport").innerHTML = i18n.get("resources.editDoc.name.error.empty");
+        }
+        else if (resource.link.length == 0){
+            dojo.byId("LDDocumentResourceEditDialogErrorReport").innerHTML = i18n.get("resources.editDoc.link.error.empty");
+        }
+        else if (!dojox.validate.web.isUrl(resource.link)){
+            dojo.byId("LDDocumentResourceEditDialogErrorReport").innerHTML = i18n.get("resources.editDoc.link.error.notvalid");
+        }
+        else{
+            this.save(resource);
         }
     },
+    
     ok : function() {
-        this.save();
-        this.close();
+        this.check();
     },
     cancel : function() {
         this.close();

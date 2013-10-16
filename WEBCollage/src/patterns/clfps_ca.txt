@@ -1,24 +1,24 @@
 {
 	"patterns": [
-		{"id": "brainstorming", "name": "Brainstorming", "type": "clfp",
+		{"id": "brainstorming", "name": "Pluja d'idees", "type": "clfp",
 			"cat": ["low", "share", "confidence", "respect", "attention", "several"]
 		},
-		{"id": "pyramid", "name": "Pyramid", "type": "clfp",
+		{"id": "pyramid", "name": "Piràmide", "type": "clfp",
 			"cat": ["medium", "interdependence", "discussion", "consensus"]
 		},
-		{"id": "tps", "name": "Think Pair Share (TPS)", "type": "clfp",
+		{"id": "tps", "name": "Pensa Discuteix Comparteix (TPS)", "type": "clfp",
 			"cat": ["low", "interdependence", "discussion", "attention", "memory", "openended"]
 		},
-		{"id": "jigsaw", "name": "Jigsaw", "type": "clfp",
+		{"id": "jigsaw", "name": "Trencaclosques", "type": "clfp",
 			"cat": ["high", "interdependence", "discussion", "accountability"]
 		},
-		{"id": "tapps", "name": "Think Aloud Pair Problem Solving (TAPPS)", "type": "clfp",
+		{"id": "tapps", "name": "Solució en veu alta de problemes en parella (TAPPS)", "type": "clfp",
 			"cat": ["medium", "discussion", "practice", "analytical", "solve", "problems"]
 		},
-		{"id": "peerreview", "name": "Peer review", "type": "clfp",
+		{"id": "peerreview", "name": "Revisió entre parelles", "type": "clfp",
 			"cat": ["high", "interdependence", "discussion", "accountability", "divisible"]
 		},
-		{"id": "simulation", "name": "Simulation", "type": "clfp",
+		{"id": "simulation", "name": "Simulació", "type": "clfp",
 			"cat": ["medium", "interdependence", "accountability", "simulation"]
 		}
 	]

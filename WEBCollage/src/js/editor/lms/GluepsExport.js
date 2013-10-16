@@ -23,17 +23,18 @@ var GluepsExport = {
                     GluepsExport.createGluePSDesignDeploy(url, title, zipurl, imsldType, user, pass);
                 }
                 else{
-                    GluepsExport.showDeployError();
+                    GluepsExport.showDeployError(i18n.get("deployingGluePS.error.imsld"));
                 }
             },
             error : function(error) {
-                GluepsExport.showDeployError();
+                GluepsExport.showDeployError(i18n.get("deployingGluePS.error.internal.imsld"));
             }
         };
         dojo.xhrGet(bindArgs);
     },
     
     exportImsldPrevious: function() {
+        this.showDeployingDialog();
         var idlms_installation = DesignInstance.data.instObj.id;
         var bindArgs = {
             url: "manager/manageLms.php",
@@ -185,11 +186,20 @@ var GluepsExport = {
             },
             load: function(data){
                 if (data.ok){
+                    GluepsExport.hideDeployingDialog();
                     //window.open("http://www.gsic.uva.es/GLUEPSManager/gui/glueps/index.html?deployId=" + data.deployid, data.deployid);
                     window.open(url + "/gui/glueps/deploy.html?deployId=" + data.deployid, data.deployid);
                 }
                 else{
-                    GluepsExport.showDeployError();
+                    if (data.createDesignError){
+                        GluepsExport.showDeployError(i18n.get("deployingGluePS.error.design"));
+                    }
+                    else if  (data.deployError){
+                        GluepsExport.showDeployError(i18n.get("deployingGluePS.error.deploy"));
+                    }
+                    else{
+                        GluepsExport.showDeployError(i18n.get("deployingGluePS.error.internal.glueps"));
+                    }
                 }
             },
             error : function(error) {
@@ -199,13 +209,36 @@ var GluepsExport = {
         dojo.xhrPost(bindArgs);
     },
     
-    showDeployError: function() {
+    showDeployError: function(info) {
+        GluepsExport.hideDeployingDialog();
         dijit.byId("deployDialog").show();
-        dojo.byId("DeployContent").innerHTML = i18n.get("deployGluePS.error");
+        if (info){
+            dojo.byId("DeployContent").innerHTML = info;
+        }else{
+            //Show a generic error
+            dojo.byId("DeployContent").innerHTML = i18n.get("deployGluePS.error");
+        }
+
     },
     
     close: function() {
         dijit.byId("deployDialog").hide();
+    },
+    
+     /**
+     * Muestra la ventana de desplegando en Glueps
+     */
+    showDeployingDialog : function() {
+        var dlg = dijit.byId("WaitWhileProcessingPane");
+        dlg.setAttribute("title",i18n.get("deployingGluePS.title"));
+        dojo.byId("WaitWhileProcessingPaneContent").innerHTML = i18n.get("deployingGluePS.wait");
+        dlg.show();
+    },
+    /**
+     * Oculta la ventana de cargando diseño
+     */
+    hideDeployingDialog : function() {
+        dijit.byId("WaitWhileProcessingPane").hide();
     }
 }
 

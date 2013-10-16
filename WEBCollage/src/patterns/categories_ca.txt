@@ -1,26 +1,26 @@
 {
 	"actobjs": [
-		{"id": "share", "name": "Foster exchange of ideas", "text": "Encourage students to take risks and share their ideas."},
-		{"id": "confidence", "name": "Support students' self-confidence", "text": "To show students that their knowledge and language skills are valued and accepted."},
-		{"id": "respect", "name": "Promote tolerance and respect", "text": "To teach students to accept and respect individual differences."}
+		{"id": "share", "name": "Promoure l'intercanvi d'idees", "text": "Encoratjar als estudiants a assumir riscos i compartir les seves idees."},
+		{"id": "confidence", "name": "Recolzar la confiança en si mateixos dels estudiants", "text": "Mostrar als estudiants que el seu coneixement i les seves abilitats amb el llenguatge son valorades i acceptades."},
+		{"id": "respect", "name": "Promoure la tolerància i el respecte", "text": "Ensenyar als estudiants a acceptar i respectar les diferències individuals."}
 	],
 	"procobjs": [
-		{"id": "interdependence", "name": "Promote positive interdependence", "text": "To promote the feeling that all the members in a group are needed in order to success or reach a goal."},
-		{"id": "discussion", "name": "Foster discussion", "text": "Encourage students to discuss with the objective of building knowledge."},
-		{"id": "accountability", "name": "Promote individual accountability", "text": "Ensure taht each student contributes with their share of the work."},
-		{"id": "attention", "name": "Focus students' attention", "text": "Focus the students' attention in a particupar topic."},
-		{"id": "memory", "name": "Long-term memory ", "text": "Create the change to formulate answers from long-term memoty knowledge."},
-		{"id": "practice", "name": "Practice concepts", "text": "Let students practice concepts and reach a better comprehension."},
-		{"id": "analytical", "name": "Practice analytical reasoning skills", "text": "Foster analytical reasoning skills."},
-		{"id": "solve", "name": "Promote problem-solving skills", "text": "Practice problem-solving skills."}
+		{"id": "interdependence", "name": "Promoure la independència positiva", "text": "Promoure el sentiment de que tots els membres d'un grup son necessaris per a assolir l'èxit o una fita."},
+		{"id": "discussion", "name": "Promure la discussió", "text": "Encoratja als estudiants  amb l'objectiu d'acumular coneixement."},
+		{"id": "accountability", "name": "Promoure la responsabilitat individual", "text": "Assegurar que cada estudiant contribueix amb la seva part de la feina."},
+		{"id": "attention", "name": "Focalitzar l'atenció de l'estudiant", "text": "Focalitzar l'atenció de l'estudiant en un tema concret."},
+		{"id": "memory", "name": "Memòria a larg termini", "text": "Crear un canvi per formular respostes del conexeiment amb la memoria a llarg termini."},
+		{"id": "practice", "name": "Practica conceptes", "text": "Permet als estudiants practicar conceptar i assolir una millor comprensió."},
+		{"id": "analytical", "name": "Practica abilitats de raonament analític", "text": "Promoure abilitats de raonament analític."},
+		{"id": "solve", "name": "Promoure abilitats per a solucionar problemes", "text": "Practicar habilitats per a solucionar problemes."}
 	],
 	"problems": [
-		{"id": "divisible", "name": "Divisible problem", "text": "Solver a complex problem or task that can be easily divided into several independent sections."},
-		{"id": "consensus", "name": "A problem that requires reaching gradial consensus", "text": "Complex problem, typically with no unique answer, whose solution involves reaching agreement of all participants."},
-		{"id": "simulation", "name": "Problem that requires simulation", "text": "Problem whose solution involves the simulation of a situation in which several roles are involved."},
-		{"id": "several", "name": "Problem with many possible answers", "text": "Problem whose solution is the generation of a large number of answers in a short time."},
-		{"id": "openended", "name": "Open-answer problem", "text": "Open-answer question."},
-		{"id": "problems", "name": "A series of problems", "text": "A series of problems, whose solution requires reasoning skills."}
+		{"id": "divisible", "name": "Problema divisible", "text": "Solucionar un problema complex o una tasca que pot ser dividida fàcilment en diverses seccions independents."},
+		{"id": "consensus", "name": "Un problema que requereix assolir un consens gradual", "text": "Problema complexe, típicament sense resposta única, la solució del qual requereix assolir un acord entre tots els participants."},
+		{"id": "simulation", "name": "Problema que requereix simulació", "text": "Problema enque la solucio implica la simulació d'una situació en que hi han diferents rols involucrats."},
+		{"id": "several", "name": "Problema amb diverses possibles respostes", "text": "Problema en que la solució consisteix en la generació d'un gran número de respostes en un curt espai de temps."},
+		{"id": "openended", "name": "Problema amb resposta oberta", "text": "Problema amb resposta oberta."},
+		{"id": "problems", "name": "Una serie de problemes", "text": "Una serie de problemes, la solució dels quals requereix abilitats de raonament."}
 	]
 }
 

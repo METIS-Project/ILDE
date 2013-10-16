@@ -37,7 +37,25 @@ var ParticipantManagement = {
         dojo.connect(dojo.byId("changeTypeDialogCancel"), "onclick", function(){
             ParticipantManagement.hideChangeTypeConfirm();
         });
-    },  
+        
+        this.addParticipantChangesDialogKeyEvents();
+    }, 
+    
+    addParticipantChangesDialogKeyEvents: function(){
+        
+        dojo.connect(dojo.byId("botonAceptarCambiosAlumnos"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                ParticipantManagement.acceptParticipantChanges();
+            }
+        });
+        dojo.connect(dojo.byId("botonCancelarCambiosAlumnos"),"keydown", function(event){
+            //enter button pressed
+            if (event.keyCode=="13"){
+                ParticipantManagement.hideParticipantComparation();
+            }
+        }); 
+    },
     
     /**
      * Muestra los cambios que se producirán al actualizar la lista de participantes para la instalación y clase actuales

@@ -1,6 +1,6 @@
-﻿grouppattern.fixednumbergroups.title=Número de grup fixat
-grouppattern.fixednumbergroups.title.alert=<font color='brown'>Fixed Group Number</font>
-grouppattern.fixednumbergroups.info=The group number is fixed. You want to set explicitly <br/> how many groups there are in the phase.
+grouppattern.fixednumbergroups.title=Número de grup fixat
+grouppattern.fixednumbergroups.title.alert=<font color='brown'>Número de grup fixa</font>
+grouppattern.fixednumbergroups.info=El número de grup es fixa. Hauries d'especificar <br/> quants grups hi ha a la fase.
 grouppattern.fixednumbergroups.number=El número de grups especificats és ${0}
 grouppattern.fixednumbergroups.unspecified=Número de grup no especificat.
 
@@ -10,4 +10,3 @@ grouppattern.fixednumbergroups.menuitem.unspecified=Estableix el número de grup
 help.grouppattern.fixednumbergroups.menuitem=Això estableix el número de grups que ha d'haver-hi en aquesta fase.
 
 grouppattern.fixednumbergroups.dialog.title=Selecciona el número de grups:
-
