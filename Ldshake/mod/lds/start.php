@@ -79,7 +79,7 @@ function lds_init()
     require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
 
 
-	//Our css stuff
+    //Our css stuff
 	extend_view('css','lds/css');
 	
 	//And our js scripts
@@ -188,103 +188,6 @@ function lds_page_handler ($page)
         return $payload;
     };
 
-    //$e = lds_contTools::getModifiedLdSsByDate(0, time() - 3600*24*10, time());
-
-
-    //$t = lds_contTools::getAllTagsAndFrequencies(0);
-    //$c = get_entities_from_metadata('completeness', '1', 'object', 'LdS', 0, 9999);
-        //$r = LdSAnnotations('object', 'LdS', 'generic_comment', 1, 2, false);
-    //$r = LdSAnnotations('object', 'LdS', 'generic_comment', 1, get_loggedin_userid(), false);
-    //$v = get_annotations($r[0]->guid, 'object', 'LdS', 'generic_comment', '', get_loggedin_userid(), 9999);
-    //$time = time() - 1000000;
-    //$e = get_entities_where('time_updated > '. $time, 'object', 'LdS', 0, '', 9999);
-    /*
-    $vle_info = GluepsManager::getCourses();
-    $course_info = GluepsManager::getCourseInfo();
-    $vle_info->id = '789';
-    $vle_info->name = 'my vle';
-    $wic_vle_data = array(
-        'learningEnvironment' => $vle_info,
-        'course' => $course_info
-    );
-
-    $json_wic_vle_data = json_encode($wic_vle_data);
-
-    */
-
-
-    /*
-
-        $uri = "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=10729";
-        $xml = "some random data";
-        $post = array(
-            "uploadData"=>"test",
-            "randomData"=>$xml,
-            "randomData56"=>"@/etc/pam.conf",
-            "randomData43"=>"@/var/www/ilde/_graphics/ldshake-logo.jpg;type=image/jpeg",
-        );
-
-        $post = array(
-            "uploadData"=>"test",
-            "randomData"=>$xml,
-        );
-
-        $bin ="sdfgt5yerhur6i58z0293tpwt8m43333333ty3487";
-        $bin ='/etc/pam.conf';
-
-        $save_params = array(
-            'url' => "http://web.dev/ilde/services/dummy.php?XDEBUG_SESSION_START=16713",
-            'editor_id' => "345etrd5w54wedtr54",
-            "randomData56"=>"@/etc/pam.conf",
-        );
-    */
-    /*
-    $response = \Httpful\Request::post($uri)
-        ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
-        ->addHeader('Authorization', "rtetdchj")
-        ->body($save_params, 'multipart/form-data')
-        ->sendIt();
-*/
-/*
-    $response = \Httpful\Request::post($uri, $post)
-        ->sendsType(\Httpful\Mime::FORM)
-        ->sendIt();
-*/
-    /*
-    $response = \Httpful\Request::post($uri)
-        ->registerPayloadSerializer('multipart/form-data', $multipart_serializer)
-        ->body($post, 'multipart/form-data')
-        ->expectsJson()
-        ->sendIt();
-    */
-/*
-    $response = \Httpful\Request::post($uri)
-        ->registerPayloadSerializer('application/octet-stream', $multipart_serializer)
-        ->body($bin, 'application/octet-stream')
-        ->sendIt();
-*/
-/*
-    $fd = fopen($bin, 'r');
-
-
-    $ch = curl_init();
-    curl_setopt($ch, CURLOPT_URL, trim($uri));
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    curl_setopt($ch, CURLOPT_PUT, 1);
-    curl_setopt($ch, CURLOPT_INFILE, $fd);
-    curl_setopt($ch, CURLOPT_INFILESIZE, filesize($bin));
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    //curl_setopt($ch, CURLOPT_POSTFIELDS, $bin);
-    curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-GB; rv:1.9.2) Gecko/20100115 Firefox/3.6 (.NET CLR 3.5.30729)");
-    curl_exec($ch);
-    //echo curl_error($ch);
-    curl_close($ch);
-*/
-    //$uri = 'https://github.com/api/v2/xml/user/show/nategood';
-    //$request = Request::get($uri)->send();
-
-    //echo "{$request->body->name} joined GitHub on " . date('M jS', strtotime($request->body->{'created-at'})) ."\n";
 	//Nothing here will be exposed to non-logged users, so go away!
 	//UPDATE: Except for the external view...
 
@@ -308,7 +211,7 @@ function lds_page_handler ($page)
 			$wl->access_id = 2;
             $wl->editor_type = 'doc';
             $wl->editor_subtype = 'doc';
-			$wl->title = "My first LdS";
+			$wl->title = T("My first LdS");
 			$wl->owner_guid = $user->guid;
 			$wl->container_guid = $user->guid;
 			$wl->granularity = '0';
@@ -317,8 +220,8 @@ function lds_page_handler ($page)
 			$wl->save ();
 			
 			$doc = new DocumentObject($wl->guid);
-			$doc->title = "My first LdS";
-			$doc->description = elgg_view('lds/welcome_lds');
+			$doc->title = T("My first LdS");
+			$doc->description = elgg_view('lds/welcome_lds/welcome_lds_'.$CONFIG->language);
 			$doc->owner_guid = $user->guid;
 			$doc->container_guid = $wl->guid;
 			$doc->access_id = 2;
@@ -1957,7 +1860,14 @@ function lds_exec_vieweditor ($params)
             $vars['upload'] = false;
 
     }
-	$vars['editor'] = $editordocument[0]->editorType;
+
+    $vars['glueps'] = get_entities_from_metadata_multi(array(
+            'lds_guid' => $lds->guid,
+            'editorType' => 'gluepsrest'
+        ),
+        'object','LdS_document_editor', 0, 1);
+
+    $vars['editor'] = $editordocument[0]->editorType;
 
 	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
 	$vars['iseXe'] = $params[3] ? false : true;
@@ -2444,6 +2354,8 @@ function lds_exec_admin ($params) {
 
 function lds_admin_vle ($params) {
     admin_gatekeeper();
+
+    set_context("admin_vle");
 
     $vlelist = get_entities('object', 'system_vle', 0, '', 9999);
     if(!$vlelist)

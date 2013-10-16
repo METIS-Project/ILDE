@@ -54,11 +54,20 @@ function rest_login() {
         $password = $result->textContent;
     }
 
-    $token = auth_gettoken($username, $password);
+    if($user = get_user_by_username($username)) {
+        if ($user->password == generate_user_password($user, $password)) {
+            $token = auth_gettoken($username, $password);
 
-    $result = SuccessResult::getInstance(array(
-        'token' => $token)
-    );
+            $result = SuccessResult::getInstance(array(
+                'token' => $token)
+            );
+        }
+        else {
+            $result = ErrorResult::getInstance("Wrong username or password.");
+        }
+    } else {
+        $result = ErrorResult::getInstance("Wrong username or password.");
+    }
 
     return $result;
 }

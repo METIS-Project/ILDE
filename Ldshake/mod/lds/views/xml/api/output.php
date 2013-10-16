@@ -15,5 +15,9 @@
 $result = $vars['result'];
 $export = $result->export();
 
-echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
-echo ldshake_array_to_xml($export->result);
+if($export->status >= SuccessResult::$RESULT_SUCCESS) {
+    echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
+    echo ldshake_array_to_xml($export->result);
+} else {
+    header("HTTP/1.1 401 Unauthorized");
+}

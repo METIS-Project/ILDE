@@ -215,6 +215,9 @@ SQL;
                 $obj->lds = $lds; //The LdS itself
                 $obj->starter = get_entity($lds->owner_guid);
 
+                $editor_types = explode(',', $lds->editor_type);
+                $obj->editor_type = $editor_types[0];
+
                 $revision_type = $lds->external_editor ? 'revised_docs_editor' : 'revised_docs';
                 $latest = $lds->getAnnotations($revision_type, 1, 0, 'desc');
                 $obj->last_contributor = get_entity($latest[0]->owner_guid);
@@ -1433,9 +1436,22 @@ SQL;
             $subtype = get_subtype_id('object', 'LdS');
             $user_id = get_loggedin_userid();
 
+            $metadata_join = "";
+            $metadata_query = "";
+
+            if($m_key && $m_value) {
+                $metadata_key_id = get_metastring_id($m_key);
+                $metadata_value_id = get_metastring_id($m_value);
+
+                $metadata_join = 'JOIN metadata m ON e.guid = m.entity_guid';
+                $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
+            }
+
+            $myfirstlds = mysql_real_escape_string(T("My first LdS"));
+
             $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
-oe.title <> 'My first LdS' OR e.owner_guid = {$user_id}
+SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query} AND (
+oe.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}
 ) order by time_updated desc {$query_limit}
 SQL;
             $entities = get_data($query, "entity_row_to_elggstar");
@@ -2268,5 +2284,17 @@ SQL;
 
         return rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key,
             $ciphertext_dec, MCRYPT_MODE_CBC, $iv_dec), "\0");
+    }
+
+    public static function tool_lang($tool, $lang) {
+        $ilde_tools_lang = array(
+            'webcollagerest' => array('ca','en','es'),
+            'gluepsrest' => array('ca','en','es')
+        );
+
+        if(in_array($lang, $ilde_tools_lang[$tool]))
+            return $lang;
+        else
+            return 'en';
     }
 }

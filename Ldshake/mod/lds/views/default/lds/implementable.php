@@ -84,7 +84,7 @@
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
-                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
+                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->editor_type; ?>-icon-20.png" alt="LdS" /></a>
                             <div class="lds_info">
                                 <a lds_id="<?php echo $item->lds->guid ?>" class="lds_implement_action" href="#"><?php echo T("Implement as") ?></a>
                                 <span class="lds_title_tags implementable">

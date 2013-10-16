@@ -98,6 +98,8 @@ class richTextEditor extends Editor
         $lds->implementable = $this->_lds->implementable;
         $lds->parent = $this->_lds->guid;
         $lds->editor_type = $this->_lds->editor_type;
+        if($this->_lds->editor_subtype)
+            $lds->editor_subtype = $this->_lds->editor_subtype;
 
         //implementation
         $lds->vle_id = $this->_lds->vle_id;
@@ -928,9 +930,11 @@ class RestEditor extends Editor
 
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+        $vars['editor'] = 'webcollagerest';
+        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
 
         $post = array(
-            'lang' => $CONFIG->language,
+            'lang' => $lang,
             'sectoken' => $rand_id,
             'name' => T('Untitled LdS'),
             'ldshake_frame_origin' => $ldshake_frame_origin
@@ -959,10 +963,9 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
         //http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id=456
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['editor'] = 'webcollagerest';
         $vars['editor_label'] = 'WebCollage';
 
         return $vars;
@@ -980,8 +983,11 @@ class RestEditor extends Editor
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
+        $vars['editor'] = 'webcollagerest';
+        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+
         $post = array(
-            'lang' => $CONFIG->language,
+            'lang' => $lang,
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
             'name' => $lds->title,
@@ -996,7 +1002,6 @@ class RestEditor extends Editor
             ->basicAuth('ldshake_default_user','LdS@k$1#')
             ->sendIt();
 
-        $vars['editor'] = 'webcollagerest';
         $vars['editor_label'] = 'WebCollage';
         $doc_url = parse_url($response->raw_body);
         $url_path = explode('/', $doc_url['path'].$doc_url['query']);
@@ -1008,7 +1013,7 @@ class RestEditor extends Editor
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -1043,8 +1048,11 @@ class RestEditor extends Editor
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
+        $vars['editor'] = 'webcollagerest';
+        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+
         $post = array(
-            'lang' => 'en',
+            'lang' => $lang,
             'sectoken' => $rand_id,
             'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
             'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
@@ -1061,7 +1069,6 @@ class RestEditor extends Editor
                 ->basicAuth('ldshake_default_user','LdS@k$1#')
                 ->sendIt();
 
-            $vars['editor'] = 'webcollagerest';
             $vars['editor_label'] = 'WebCollage';
             $doc_url = parse_url($response->raw_body);
             if(!isset($doc_url['scheme']) || !isset($doc_url['host']) || !isset($doc_url['path']))
@@ -1081,7 +1088,7 @@ class RestEditor extends Editor
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$CONFIG->language}";
+        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -2026,14 +2033,14 @@ class GluepsManager
             forward($CONFIG->url);
         }
 
-
         $vars = array();
+        $vars['editor'] = 'gluepsrest';
+        $vars['editor_label'] = 'GLUE!-PS';
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$CONFIG->language}";
-        $vars['editor'] = 'gluepsrest';
-        $vars['editor_label'] = 'GLUE!-PS';
+        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
     }
@@ -2218,9 +2225,11 @@ class GluepsManager
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$CONFIG->language}";
         $vars['editor'] = 'gluepsrest';
         $vars['editor_label'] = 'GLUE!-PS';
+
+        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
     }

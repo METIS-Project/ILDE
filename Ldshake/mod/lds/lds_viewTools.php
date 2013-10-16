@@ -107,7 +107,7 @@ class lds_viewTools
 		global $CONFIG;
 		
 		$editortype = ($lds->external_editor ? 'editor' : '');
-		
+
 		return $CONFIG->url . 'pg/lds/'.$type.$editortype.'/' . $lds->guid . '/';
 	}
 	

@@ -94,7 +94,7 @@
 				<!--<div class="lds_select_spacer"></div>-->
                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
 				<?php endif; ?>
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
+				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->editor_type; ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>

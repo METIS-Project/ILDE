@@ -109,7 +109,7 @@ extract($vars);
             <input type="hidden" name="vle_id" value="<?php echo $vle_id;?>" />
             <input id="vle_delete_flag" type="hidden" name="vle_delete_flag" value="0" />
 
-            <input class="vle_form_submit" type="submit" name="vle_submit" value="<?php echo T('Confirm')?>" />   <?php if(!$vle->new) {?><input id="vle_delete" class="vle_form_submit" type="submit" name="vle_delete" value="<?php echo T('Delete')?>" /><?php }?>
+            <input class="vle_form_submit" type="submit" name="vle<?php if($vle_admin): ?>_admin<?php endif; ?>_submit" value="<?php echo T('Confirm')?>" />   <?php if(!$vle->new) {?><input id="vle_delete" class="vle_form_submit" type="submit" name="vle_delete" value="<?php echo T('Delete')?>" /><?php }?>
 
 
             </form>

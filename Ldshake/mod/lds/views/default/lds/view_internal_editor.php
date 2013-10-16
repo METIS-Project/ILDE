@@ -64,7 +64,15 @@ function encodeURIComponent($str) {
 			<a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this LdS") ?></a>
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
-			<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
+            <?php if ($lds->editor_type == 'gluepsrest'): ?>
+                <?php if (!$glueps): ?>
+                    <a class="leftbutton lds_select_implement_action" lds="<?php echo $lds->guid?>" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit implementation") ?></a>
+                <?php else: ?>
+                        <a class="leftbutton" lds="<?php echo $lds->guid?>" href="<?php echo $url.'pg/lds/editglueps/'.$lds->guid; ?>"><?php echo T("Edit implementation") ?></a>
+                <?php endif; ?>
+            <?php else: ?>
+                <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
+            <?php endif; ?>
 			<!--<a class="leftbutton" id="lds_import_button" href="#"><?php echo T("Import an eXe Learning file") ?></a>-->
 			<?php else: ?>
 			<span><?php echo T("%1 is editing this LdS",lds_contTools::isLockedBy($lds->guid)->name) ?></span>
@@ -117,118 +125,122 @@ function encodeURIComponent($str) {
 		<?php echo elgg_view_comments($lds) ?>
 	</div>
 <?php else: ?>
-	<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
-        <div id="lds_license_wrapper" class="lds_view_tab_actions">
-            <?php include('license_banner.php'); ?>
-            <?php if($lds->license): ?>
-                <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Manage license") ?></a>
-            <?php else: ?>
-                <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Add license") ?></a>
-            <?php endif; ?>
-            <div style="clear:both"></div>
-        </div>
+    <?php if($lds->getSubtype() != 'LdS_implementation'): ?>
+        <?php if ($lds->owner_guid == get_loggedin_userid()): ?>
+            <div id="lds_license_wrapper" class="lds_view_tab_actions">
+                <?php include('license_banner.php'); ?>
+                <?php if($lds->license): ?>
+                    <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Manage license") ?></a>
+                <?php else: ?>
+                    <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Add license") ?></a>
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
 
-		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
-			<div class="lds_loading" style="margin-top: 4px;"></div>
+            <div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
+                <div class="lds_loading" style="margin-top: 4px;"></div>
+                <!--
+                <?php if ($iseXe): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php else: ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php endif; ?>
+                -->
+                <a class="publishbutton rightbutton" href="#" id="lds_action_unpublish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
+                <?php echo T("Public link:") ?>
+                <?php if ($iseXe): ?>
+                <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php echo T("Embed link:") ?>
+                <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}ve/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
+                <?php else: ?>
+                <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+            <div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
+                <div class="lds_loading" style="margin-top: 4px;"></div>
+                <!--
+                <?php if ($iseXe): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php else: ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php endif; ?>
+                -->
+                <a class="publishbutton rightbutton" href="#" id="lds_action_publish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Publish this document") ?></a>
+                <span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
+                <div style="clear:both"></div>
+            </div>
+            <div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
+                <div class="lds_loading" style="margin-top: 4px;"></div>
+                <!--
+                <?php if ($iseXe): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php else: ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php endif; ?>
+                -->
+                <a class="publishbutton rightbutton" href="#" id="lds_action_republish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Republish this document") ?></a>
+                <a class="publishbutton rightbutton" href="#" id="lds_action_unpublish2" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
+                <?php echo T("Public link <strong>(older version published)</strong>:") ?>
+                <?php if ($iseXe): ?>
+                <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php echo T("Embed link:") ?>
+                <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}ve/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
+                <?php else: ?>
+                <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php endif; ?>
+                <div style="clear:both"></div>
+            </div>
+        <?php else: ?>
+            <div id="lds_license_wrapper" class="lds_view_tab_actions">
+                <?php include('license_banner.php'); ?>
+                <div style="clear:both"></div>
+            </div>
+            <div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
             <!--
-			<?php if ($iseXe): ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php else: ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php endif; ?>
-			-->
-			<a class="publishbutton rightbutton" href="#" id="lds_action_unpublish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
-			<?php echo T("Public link:") ?>
-			<?php if ($iseXe): ?>
-			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-            <?php echo T("Embed link:") ?>
-            <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}ve/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
+            <?php if ($iseXe): ?>
+            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
             <?php else: ?>
-			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-			<?php endif; ?>
-			<div style="clear:both"></div>
-		</div>
-		<div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
-			<div class="lds_loading" style="margin-top: 4px;"></div>
-            <!--
-			<?php if ($iseXe): ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php else: ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php endif; ?>
-			-->
-			<a class="publishbutton rightbutton" href="#" id="lds_action_publish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Publish this document") ?></a>
-			<span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
-			<div style="clear:both"></div>
-		</div>
-		<div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
-			<div class="lds_loading" style="margin-top: 4px;"></div>
-            <!--
-			<?php if ($iseXe): ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php else: ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php endif; ?>
-			-->
-			<a class="publishbutton rightbutton" href="#" id="lds_action_republish" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Republish this document") ?></a>
-			<a class="publishbutton rightbutton" href="#" id="lds_action_unpublish2" data-guid="<?php echo $currentDoc->guid ?>"><?php echo T("Unpublish this document") ?></a>
-			<?php echo T("Public link <strong>(older version published)</strong>:") ?>
-			<?php if ($iseXe): ?>
-			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-            <?php echo T("Embed link:") ?>
-            <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}ve/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
-            <?php else: ?>
-			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-			<?php endif; ?>
-			<div style="clear:both"></div>
-		</div>
-	<?php else: ?>
-        <div id="lds_license_wrapper" class="lds_view_tab_actions">
-            <?php include('license_banner.php'); ?>
-            <div style="clear:both"></div>
-        </div>
-		<div id="lds_unpublish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != $currentDocId) echo ' hidden' ?>">
-        <!--
-		<?php if ($iseXe): ?>
-		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-		<?php else: ?>
-		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-		<?php endif; ?>
-		-->
-		<?php echo T("Public link:") ?>
-		<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-            <?php echo T("Embed link:") ?>
-            <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}v/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
-            <div style="clear:both"></div>
-		</div>
-		<div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
-			<span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
-            <!--
-			<?php if ($iseXe): ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php else: ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php endif; ?>
-			-->
-			<div style="clear:both"></div>
-		</div>
-		<div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
-            <!--
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php if ($iseXe): ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php else: ?>
-			<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-			<?php endif; ?>
-			-->
-			<?php echo T("Public link:") ?>
-			<input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
-			<?php echo T("<strong>Warning:</strong> An older version of this document is published.") ?>
-            <?php echo T("Embed link:") ?>
-            <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}v/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
-            <div style="clear:both"></div>
-		</div>
-	<?php endif; ?>
+            <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+            <?php endif; ?>
+            -->
+            <?php echo T("Public link:") ?>
+            <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php echo T("Embed link:") ?>
+                <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}v/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
+                <div style="clear:both"></div>
+            </div>
+            <div id="lds_publish_wrapper" class="lds_view_tab_actions<?php if ($publishedId != -1) echo ' hidden' ?>">
+                <span style="padding-top:4px; display: block;"><?php echo T("This document is not published.") ?></span>
+                <!--
+                <?php if ($iseXe): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php else: ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php endif; ?>
+                -->
+                <div style="clear:both"></div>
+            </div>
+            <div id="lds_republish_wrapper" class="lds_view_tab_actions<?php if ($publishedId == $currentDocId || $publishedId == -1) echo ' hidden' ?>">
+                <!--
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php if ($iseXe): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?docId=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php else: ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+                <?php endif; ?>
+                -->
+                <?php echo T("Public link:") ?>
+                <input class="lds_publish_url autoselect" type="text" readonly="readonly" value="<?php echo $url ?>v/<?php echo lds_contTools::encodeId($currentDoc->guid)?>" />
+                <?php echo T("<strong>Warning:</strong> An older version of this document is published.") ?>
+                <?php echo T("Embed link:") ?>
+                <input class="lds_publish_embed autoselect" type="text" readonly="readonly" value="<?php echo htmlspecialchars('<iframe height="600px" width="100%" frameborder="1" src="' . "{$url}v/" . lds_contTools::encodeId($currentDoc->guid) . '"></iframe>');?>" />
+                <div style="clear:both"></div>
+            </div>
+        <?php endif; ?>
+    <?php else: ?>
+        <br />
+    <?php endif; ?>
         <!--
 	<?php if ($iseXe): ?>
 	<div id="lds_export">
@@ -292,7 +304,18 @@ function encodeURIComponent($str) {
 <?php include ('single_share_form.php') ?>
 <?php include ('clonelds_form.php') ?>
 <?php include ('license_form.php') ?>
+<div id="editimplementation_popup" class="lds_popup">
+    <a class="lds_close_popup" id="editimplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Select the editor that you want to use to edit the implementation") ?></h3>
 
+    <div>
+        <a href="<?php echo $url.'pg/lds/implementeditor/'?>"><span class="editor-name">WebCollage</span></a>
+    </div>
+    <div>
+        <a href="<?php echo $url.'pg/lds/editglueps/'?>"><span class="editor-name">GLUE!-PS</span></a>
+    </div>
+
+</div>
 <div class="clearfloat"></div>
 
 

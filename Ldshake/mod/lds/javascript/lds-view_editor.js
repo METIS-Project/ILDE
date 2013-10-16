@@ -59,6 +59,20 @@ $(document).ready(function()
     $('#image_document_view').load(resizeViewport);
     $('#svg_document_view').load(resizeViewport);
 
+    $(".lds_select_implement_action").click(function (event) {
+        event.preventDefault();
+        window.implement_lds = $(this).attr('lds');
+        $("#editimplementation_popup").fadeToggle(200);
+        $("#editimplementation_popup_close").click(function (){$("#editimplementation_popup").fadeOut(200);});
+    });
+
+    $("#editimplementation_popup a").click(function (event) {
+        event.preventDefault();
+        var editor = $(this).attr('href');
+        window.location = editor+window.implement_lds;
+    });
+
+
     $('#clonelds_submit').click(function (){
         var submitData =
         {

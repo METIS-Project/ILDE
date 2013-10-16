@@ -55,6 +55,16 @@ $(document).ready(function () {
         }
     });
 
+    $('input[name=vle_admin_submit]').click(function(e) {
+        if($('input[name=vle_name]').val().length == 0
+            || $('input[name=vle_type]').val().length == 0
+            || $('input[name=vle_url]').val().length == 0
+            ) {
+            e.preventDefault();
+            $('#vledata_submit_incomplete').show();
+        }
+    });
+
     $('select[name=vle_name_select]').change(function() {
         var selected_id = $(this).val();
         if(svlelist_data[selected_id]) {
