@@ -170,7 +170,7 @@ $(document).ready(function()
 	
 	
 	$('#lds_action_unpublish,#lds_action_unpublish2').click(function (){
-		if (confirm ('Are you sure you want to unpublish this document?\nAll the external links to the document will be broken!'))
+		if (confirm (t9n.unpublishConfirm1 + '\n' + t9n.unpublishConfirm2))
 		{
 			$('.publishbutton').css('visibility','hidden');
 			$('.lds_loading').show();

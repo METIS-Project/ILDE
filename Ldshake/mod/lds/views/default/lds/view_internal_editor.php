@@ -338,6 +338,11 @@ function encodeURIComponent($str) {
 
 	//Is the LdS public for all LdShakers? (yes by default)
 	var allCanView = <?php echo $all_can_read ?>;
+
+    var t9n = {
+        unpublishConfirm1 : "<?php echo T("Are you sure you want to unpublish this document?") ?>",
+        unpublishConfirm2 : "<?php echo T("All the external links to the document will be broken!") ?>",
+    };
 </script>
 
 	<?php echo elgg_view('page_elements/jsarea', $vars); ?>

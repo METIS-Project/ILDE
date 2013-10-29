@@ -37,7 +37,7 @@
 ?>
 
 <div id="license_popup" class="lds_popup">
-    <a class="lds_close_popup" id="license_popup_close" href="#"><?php echo T("Exit") ?></a>
+    <a class="lds_close_popup" id="license_popup_close" href="#"><?php echo T("Done") ?></a>
     <h2><?php echo T("Select your preferred license") ?></h2>
     <input type="hidden" size="60" name="license_type" />
     <br />
@@ -51,9 +51,9 @@
 
     <div style="margin-top: 20px">
         <div id="license_item_cc" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_cc.png" ?>" /></div>
-        <div id="license_item_cc_by" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_by.png" ?>" /><div class="cc_icon_title">Attribution</div>You must attribute the work in the manner specified by the author or licensor.</div>
-        <div id="license_item_cc_nc" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_nc.png" ?>" /><div class="cc_icon_title">Noncommercial</div>The licensor permits others to copy, distribute and transmit the work. In return, licensees may not use the work for commercial purposes — unless they get the licensor's permission.</div>
-        <div id="license_item_cc_nd" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_nd.png" ?>" /><div class="cc_icon_title">No Derivative Works</div>The licensor permits others to copy, distribute and transmit only unaltered copies of the work — not derivative works based on it.</div>
-        <div id="license_item_cc_sa" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_sa.png" ?>" /><div class="cc_icon_title">Share Alike</div>The licensor permits others to distribute derivative works only under the same license or one compatible with the one that governs the licensor's work.</div>
+        <div id="license_item_cc_by" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_by.png" ?>" /><div class="cc_icon_title"><?php echo T("Attribution")?></div><?php echo T("You must attribute the work in the manner specified by the author or licensor.")?></div>
+        <div id="license_item_cc_nc" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_nc.png" ?>" /><div class="cc_icon_title"><?php echo T("Noncommercial")?></div><?php echo T("The licensor permits others to copy, distribute and transmit the work. In return, licensees may not use the work for commercial purposes — unless they get the licensor's permission.")?></div>
+        <div id="license_item_cc_nd" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_nd.png" ?>" /><div class="cc_icon_title"><?php echo T("No Derivative Works")?></div><?php echo T("The licensor permits others to copy, distribute and transmit only unaltered copies of the work — not derivative works based on it.")?></div>
+        <div id="license_item_cc_sa" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_sa.png" ?>" /><div class="cc_icon_title"><?php echo T("Share Alike")?></div><?php echo T("The licensor permits others to distribute derivative works only under the same license or one compatible with the one that governs the licensor's work.")?></div>
     </div>
 </div>

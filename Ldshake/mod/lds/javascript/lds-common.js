@@ -37,7 +37,17 @@ var tooltip_timer_ids = new Array();
 
 function tooltips ()
 {
-	$('.show_tooltip').mouseenter (function ()
+    var height_correction = function () {
+        $('#layout_canvas').css('min-height',
+            window.innerHeight -
+                $('#ldshake_topbar').outerHeight() -
+                $('#layout_footer').outerHeight() -
+                $('#footer_ending').outerHeight());
+    }
+    height_correction();
+    $(window).resize(height_correction);
+
+    $('.show_tooltip').mouseenter (function ()
 	{
 		var myclass = $(this).attr('class').split(' ');
 		for (var i in myclass)
@@ -124,7 +134,7 @@ $(document).ready(function()
 
     $('#lds_delete_button').click (function ()
 	{
-		if (confirm ("Are you sure you want to delete this LdS?\n\n"))
+		if (confirm (t9nc.deleteLdS + '\n\n'))
 		{
 			$(this).css('visibility','hidden');
 			

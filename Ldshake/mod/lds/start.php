@@ -216,6 +216,7 @@ function lds_page_handler ($page)
 			$wl->container_guid = $user->guid;
 			$wl->granularity = '0';
 			$wl->completeness = '0';
+            $wl->all_can_view = "no";
             $wl->welcome = 1;
 			$wl->save ();
 			
@@ -2168,10 +2169,14 @@ function lds_exec_make_newbie ($params)
 	forward('pg/lds/');
 }
 
-function lds_treebuilder($lds_id) {
+function lds_treebuilder($lds_id, $target) {
     $tree = array();
     $lds = get_entity($lds_id);
     $user = get_user($lds->owner_guid);
+    if($target_guid = array_pop($target)) {
+        $tree['target'] = $target_guid;
+    } else
+        $tree['target'] = 0;
     $tree['title'] = $lds->title;
     $tree['name'] = $user->name;
     $tree['username'] = $user->username;
@@ -2182,7 +2187,7 @@ function lds_treebuilder($lds_id) {
         $tree['children'] = array();
 
         foreach($children as $c)
-            $tree['children'][] = lds_treebuilder($c->guid);
+            $tree['children'][] = lds_treebuilder($c->guid, $target);
     }
     return $tree;
 }
@@ -2200,10 +2205,13 @@ function lds_exec_tree ($params)
     $vars['lds'] = $lds;
 
     $i=0;
-    while($lds->parent && ($i++)<2)
+    $target = array();
+    while($lds->parent && ($i++)<2) {
+        $target[] = $lds->guid;
         $lds = get_entity($lds->parent);
+    }
 
-    $tree = lds_treebuilder($lds->guid);
+    $tree = lds_treebuilder($lds->guid, $target);
 
     $tree_json = json_encode($tree);
 

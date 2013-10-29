@@ -2098,8 +2098,8 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 #license_popup {
-    width: 690px;
-    margin-left: -345px;
-    top: 60px;
+    width: 820px;
+    margin-left: -410px;
+    top: 40px;
     height: 630px;
 }

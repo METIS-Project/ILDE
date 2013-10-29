@@ -43,6 +43,7 @@
         <h2><?php echo $lds->title ?></h2>
     </div>
     <div id="lds_view_actions">
+        <a class="rightbutton" id="lds_tree_siblings_button" href="#" style="display:none"><?php echo T("View siblings") ?></a>
     </div>
 <div class="tree">
 </div>

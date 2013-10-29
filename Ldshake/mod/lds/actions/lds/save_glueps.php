@@ -264,7 +264,7 @@ if (is_array($_POST['documents']))
         else
         {
             //Create
-            $docObj = new DocumentObject($lds->guid);
+            $docObj = new DocumentObject($implementation->guid);
             $docObj->doc_recovery = $doc['doc_recovery'];
             $docObj->title = $doc['title'];
             $docObj->description = Utils::normalizeSpace($doc['body']);; //We put it in ths desciption in order to use the objects_entity table of elgg db

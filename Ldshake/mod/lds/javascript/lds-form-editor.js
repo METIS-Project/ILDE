@@ -650,6 +650,7 @@ function initCKED ()
 
         editor.on( 'contentDom', function( evt )
         {
+            /*
             editor.document.on( 'keyup', function(event)
             {
                 //Windows, FF Mac & Webkit Mac
@@ -669,6 +670,7 @@ function initCKED ()
                     return false;
                 }
             });
+            */
         }, editor.element.$);
 
         //$('#cke_lds_edit_body').hide();
@@ -1036,7 +1038,8 @@ $(document).ready(function()
         save_lds (null,{redirect: true});
         return false;
     });
-	
+
+    /*
 	//Save shortcut: Ctrl+S
 	$(document).keyup(function (e)
 	{
@@ -1051,6 +1054,7 @@ $(document).ready(function()
 			return false;
 		}
 	});
+	*/
 
     $('.lds_exetab').click(function () {
 

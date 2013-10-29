@@ -38,6 +38,7 @@ $(document).ready(function()
 
     lds_submit_click = false;
 
+    /*
     var height_correction = function () {
         $('#layout_canvas').css('min-height',
             window.innerHeight -
@@ -46,8 +47,10 @@ $(document).ready(function()
                 $('#footer_ending').outerHeight());
     }
 
+
     height_correction();
     $(window).resize(height_correction);
+    */
 
     $(".lds_select_implement_action").click(function (event) {
         event.preventDefault();

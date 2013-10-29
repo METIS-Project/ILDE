@@ -213,7 +213,7 @@ function lds_tracking_created_by_user() {
         foreach($ldss as $lds) {
             $a_lds_list[] = $lds->guid;
         }
-        $a_lds_string = implode(',',array_keys($a_lds_list));
+        $a_lds_string = implode(',',$a_lds_list);
 
         $data[] = array($user->username, count($ldss), $a_lds_string);
     }

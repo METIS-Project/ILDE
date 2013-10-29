@@ -91,7 +91,7 @@
                 <?php else: ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
                 <?php endif; ?>
-                <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_implementation" value="<?php echo T("Duplicate implementation") ?>" disabled="disabled" />
+                <!--<input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_implementation" value="<?php echo T("Duplicate implementation") ?>" disabled="disabled" />-->
                 <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
             </div>
             <ul id="my_lds_list">

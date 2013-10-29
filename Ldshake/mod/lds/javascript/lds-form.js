@@ -377,6 +377,7 @@ function initCKED ()
 
         editor.on( 'contentDom', function( evt )
         {
+            /*
             editor.document.on( 'keyup', function(event)
             {
                 //Windows, FF Mac & Webkit Mac
@@ -397,6 +398,8 @@ function initCKED ()
                     return false;
                 }
             });
+            */
+
         }, editor.element.$);
     }, options);
 
@@ -806,6 +809,7 @@ $(document).ready(function()
         return false;
     });
 
+    /*
     //Save shortcut: Ctrl+S
     $(document).keyup(function (e)
     {
@@ -821,6 +825,7 @@ $(document).ready(function()
                 return false;
             }
         });
+    */
 
     //Before exit warning.
     //Doesn't really work w/firebug enabled. Will always warn.

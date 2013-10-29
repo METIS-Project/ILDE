@@ -715,7 +715,7 @@ $translations = array (
     'Are you sure you want to delete this message?' => 'Estàs segur de que vols eliminar aquest missatge?',
     'A site where teachers <span style="color:#960001">(LdShakers)</span> co-edit and share Learning design Solutions <span style="color:#960001">(LdS)</span>' => 'Un lloc on professors<span style="color:#960001">(LdShakers)</span> co-editen i comparteixen solucions de dissenys d’aprenentatge (Learning design Solutions o <span style="color:#960001">LdS</span>)',
     'A Study Program has a large grain size, while a picture to be used within an activity has a small grain size.' => 'Un Programa d’Estudis te un tamany de grà gran, mentre que una imatge que s’utilitzarà dins d’una activitat te un tamany de grà petit.',
-    'Author' => 'Autoría',
+    'Author' => 'Autoria',
     'Authored with' => 'Autor amb',
     'Browse LdS' => 'Explorar LdS',
     'Building block (an incomplete chunk)' => 'Construir bloc (una petita quantitat)',
@@ -961,5 +961,33 @@ $translations = array (
     'Your VLE configuration is working properly, these are the available courses' => 'La teva configuració  de VLE està funcionant adequadament, aquests són els cursos disponibles',
     'Your VLEs' => 'Els teus VLEs',
 
+    'Are you sure you want to unpublish this document?' => 'Estás segur que vols despublicar aquest document?',
+    'All the external links to the document will be broken!' => 'Tot els ellaços externs al document no funcionarán!',
+    'Are you sure you want to delete this LdS?' => 'Estás segur que vols esborrar aquest LdS?',
+    'Add license' => 'Afegeix una llicència',
+    'Manage license' => 'Administra la llicència',
+    'Select your preferred license' => 'Selecciona la llicéncia desitjada',
 
+    'No license' => 'Sense llicència',
+    'Attribution' => 'Reconeixement',
+    'Noncommercial' => 'No comercial',
+    'No Derivative Works' => 'Sense obres derivades',
+    'Share Alike' => 'Compartir Igual',
+
+    'You must attribute the work in the manner specified by the author or licensor.' => 'El llicenciador us permet copiar, distribuir i comunicar públicament l\'obra. A canvi, heu de reconèixer i citar l\'autor original.',
+    'The licensor permits others to copy, distribute and transmit the work. In return, licensees may not use the work for commercial purposes — unless they get the licensor\'s permission.' => 'El llicenciador us permet copiar, distribuir i comunicar públicament l\'obra. A canvi, no podeu utilitzar l\'obra per a finalitats comercials -- excepte si en rebeu un permís exprés.',
+    'The licensor permits others to copy, distribute and transmit only unaltered copies of the work — not derivative works based on it.' => 'El llicenciador us permet copiar, distribuir i comunicar públicament només còpies inalterades de l\'obra original -- no obres derivades que se\'n puguin generar.',
+    'The licensor permits others to distribute derivative works only under the same license or one compatible with the one that governs the licensor\'s work.' => 'El llicenciador us permet distribuir obres derivades només amb una llicència idèntica a la qual està subjecta aquesta obra.',
+
+    'Creative Commons Attribution 3.0 Unported' => 'Creative Commons Reconeixement 3.0 No adaptada',
+    'Creative Commons Attribution-NoDerivs 3.0 Unported' => 'Creative Commons Reconeixement-SenseObraDerivada 3.0 No adaptada',
+    'Creative Commons Attribution-ShareAlike 3.0 Unported' => 'Creative Commons Reconeixement-CompartirIgual 3.0 No adaptada',
+    'Creative Commons Attribution-NonCommercial 3.0 Unported' => 'Creative Commons Reconeixement-NoComercial 3.0 No adaptada',
+    'Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported' => 'Creative Commons Reconeixement-NoComercial-SenseObraDerivada 3.0 No adaptada',
+    'Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported' => 'Creative Commons Reconeixement-NoComercial-CompartirIgual 3.0 No adaptada',
+
+    'License' => 'LLicència',
+    'This work is licensed under a %1 license.' => 'Aquesta obra està subjecta a una llicència de %1.',
+    'There is no license' => 'No hi ha cap llicència assignada',
+    'My first LdS' => 'El meu primer LdS',
 );
