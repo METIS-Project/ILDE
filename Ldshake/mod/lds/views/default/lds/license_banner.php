@@ -35,6 +35,10 @@
  ********************************************************************************/
 
 ?>
+<?php if(!$lds) {
+    extract($vars);
+} ?>
+
 <div class="license_banner" license_id="<?php echo LDS_LICENSE_CC_BY ?>" <?php if($lds->license == LDS_LICENSE_CC_BY):?>style="display:inline"<?php endif;?>><a rel="license" href="http://creativecommons.org/licenses/by/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/80x15.png" /></a> <?php echo T("This work is licensed under a %1 license.",'<a rel="license" href="http://creativecommons.org/licenses/by/3.0/">'.T("Creative Commons Attribution 3.0 Unported"))?></a></div>
 <div class="license_banner" license_id="<?php echo LDS_LICENSE_CC_BY_ND ?>" <?php if($lds->license == LDS_LICENSE_CC_BY_ND):?>style="display:inline"<?php endif;?>><a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nd/3.0/80x15.png" /></a> <?php echo T("This work is licensed under a %1 license.",'<a rel="license" href="http://creativecommons.org/licenses/by-nd/3.0/">'.T("Creative Commons Attribution-NoDerivs 3.0 Unported"))?></a></div>
 <div class="license_banner" license_id="<?php echo LDS_LICENSE_CC_BY_SA ?>" <?php if($lds->license == LDS_LICENSE_CC_BY_SA):?>style="display:inline"<?php endif;?>><a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/80x15.png" /></a> <?php echo T("This work is licensed under a %1 license.",'<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/">'.T("Creative Commons Attribution-ShareAlike 3.0 Unported"))?></a></div>

@@ -42,6 +42,12 @@ global $CONFIG;
 
 $doc_guid = get_input ('docId');
 $doc = get_entity ($doc_guid);
+$license = "";
+
+$lds=get_entity($doc->lds_guid);
+if($lds->license) {
+    $license = elgg_view("lds/license_banner", array("lds"=>$lds));
+}
 
 //Wrap the contents into a utf-8 html string. This will allow accents and other alphabets to be displayed correctly
 //Also add some basic styling to resemble the view in the web (line height)
@@ -378,10 +384,15 @@ $contents = <<<EOD
             width: 100%;
         }
 
+        .license_banner {
+            display: none;
+        }
+
 		</style>
 	</head>
 	<body>
 		{$doc->description}
+        {$license}
 	</body>
 </html>
 EOD;

@@ -25,12 +25,18 @@ var svg = d3.select(".tree").append("svg")
 var maxDepth = 3,
     minDepth = 0;
 
+var scaleFactor = 1.0;
 var zoom = 1.0;
 var zoomX = width / 2;
 var zoomY = height / 2;
 var advanceX = 0.0;
 var advanceY = 0.0;
-
+var panX = 0;
+var panY = 0;
+var panXLast = 0;
+var panYLast = 0;
+var treeWidth;
+var treeXpos;
 
 var exclusivemode = false;
 /*
@@ -132,7 +138,77 @@ update(root);
 
 d3.select(self.frameElement).style("height", height+"px");
 
-function update(source) {
+$("svg")
+    .get(0).addEventListener("mousewheel",function(e){
+        //console.log(e.wheelDelta);
+        var zoomBoxX = $("svg").get(0).getBoundingClientRect().left;
+        var zoomBoxY = $("svg").get(0).getBoundingClientRect().top;
+        var zoomBoxWidth = $("svg").get(0).getBoundingClientRect().width;
+        var zoomBoxHeight = $("svg").get(0).getBoundingClientRect().height;
+        var tree_mouseX = e.clientX - zoomBoxX;
+        var tree_mouseY = e.clientY - zoomBoxY;
+        var preZoom = zoom;
+
+        var tree_mouseXDiff = (tree_mouseX - zoomBoxWidth/2)/(scaleFactor*zoom) + advanceX/zoom;
+        var tree_mouseYDiff = tree_mouseY/(scaleFactor*zoom) + advanceY/zoom;
+
+        zoom += e.wheelDelta*0.0002;
+
+        var zoomDiff = (zoom - preZoom);
+        advanceX += tree_mouseXDiff*zoomDiff;
+        advanceY += tree_mouseYDiff*zoomDiff;
+
+        d3
+            .select("#g_duplicate_tree")
+            .attr("transform", "scale("+(zoom*scaleFactor)+") translate(" + (-panX + margin.left + (width)/(2*zoom*scaleFactor) - treeWidth/2 + treeXpos - advanceX/zoom) + "," + (-advanceY/zoom - panY) + ")");
+    }, false);
+
+$("svg").bind("mousedown", function(e){
+    panXLast = 0;
+    panYLast = 0;
+    console.log("down");
+});
+
+
+$("svg").bind("mousemove", function(e){
+    var button = 0;
+    console.log("X: "+e.pageX+" Y: "+e.pageY+" buttons: "+ e.button);
+    //if(event)
+//        button += event.button;
+//    else
+        button += e.which;
+
+    if(button){
+        console.log("button pressed");
+        if(panXLast != 0 && panYLast != 0){
+            panX += panXLast - e.pageX;
+            panY += panYLast - e.pageY;
+
+            panXLast = e.pageX;
+            panYLast = e.pageY;
+
+            d3
+                .select("#g_duplicate_tree")
+                .attr("transform", "scale("+(zoom*scaleFactor)+") translate(" + (-panX + margin.left + (width)/(2*zoom*scaleFactor) - treeWidth/2 + treeXpos - advanceX/zoom) + "," + (-advanceY/zoom - panY) + ")");
+
+        } else {
+            panXLast = e.pageX;
+            panYLast = e.pageY;
+        }
+        console.log("X: "+e.pageX+" Y: "+e.pageY+" buttons: "+ e.which);
+        //console.log("X: "+panX+" Y: "+panY);
+        //console.log("Xl: "+panXLast+" Yl: "+panYLast);
+    }
+});
+
+$("html").bind("mousedown", function(e){
+    console.log("X: "+e.pageX+" Y: "+e.pageY+" buttons: "+ e.button);
+
+});
+
+//$("html").addClass("htmlnonselect");
+
+    function update(source) {
 
     //tree.separation(function(a,b) {return 4});
 
@@ -197,11 +273,10 @@ function update(source) {
             min_x = d.x;
     });
 
-    var treeWidth = max_x + Math.abs(min_x);
-    var treeXpos = Math.abs(min_x);
+    treeWidth = max_x + Math.abs(min_x);
+    treeXpos = Math.abs(min_x);
     var scaleFactorX = 1,
-        scaleFactorY = 1,
-        scaleFactor = 1;
+        scaleFactorY = 1;
 
     if((max_depth+1)*nodeHeightSeparation > height)
         scaleFactorY = height/((max_depth+1)*nodeHeightSeparation);
@@ -215,37 +290,10 @@ function update(source) {
         .transition()
         .duration(duration)
         //.attr("transform", "scale(" + scaleFactor + ") translate(" + (margin.left + width/(2*scaleFactor) - treeWidth/2 + treeXpos) + "," + (70 - minDepth * 200) + ")");
-        .attr("transform", "scale(" + scaleFactor + ") translate(" + (margin.left + width/(2*scaleFactor) - treeWidth/2 + treeXpos) + "," + (0) + ")");
+        //.attr("transform", "scale(" + scaleFactor + ") translate(" + (margin.left + width/(2*scaleFactor) - treeWidth/2 + treeXpos) + "," + (0) + ")");
+        .attr("transform", "scale("+(zoom*scaleFactor)+") translate(" + (-panX + margin.left + (width)/(2*zoom*scaleFactor) - treeWidth/2 + treeXpos - advanceX/zoom) + "," + (-advanceY/zoom - panY) + ")");
 
     var zoomBox = "svg";
-    $(zoomBox)
-        .get(0).addEventListener("mousewheel",function(e){
-            //console.log(e.wheelDelta);
-            var zoomBoxX = $(zoomBox).get(0).getBoundingClientRect().left;
-            var zoomBoxY = $(zoomBox).get(0).getBoundingClientRect().top;
-            var zoomBoxWidth = $(zoomBox).get(0).getBoundingClientRect().width;
-            var zoomBoxHeight = $(zoomBox).get(0).getBoundingClientRect().height;
-            var tree_mouseX = e.clientX - zoomBoxX;
-            var tree_mouseY = e.clientY - zoomBoxY;
-            var preZoom = zoom;
-
-            var tree_mouseXDiff = tree_mouseX - zoomBoxWidth/2;
-            //var tree_mouseYDiff = tree_mouseY - zoomBoxHeight/2;
-            //var tree_mouseYDiff = tree_mouseY - zoomBoxHeight/2;
-
-            //console.log(tree_mouseYDiff);
-
-            zoom += e.wheelDelta*0.0002;
-
-            var zoomDiff = zoom - preZoom;
-            advanceX += tree_mouseXDiff*zoomDiff;
-            advanceY += tree_mouseY*zoomDiff;
-            console.log(advanceY);
-
-            //d3.select("#g_duplicate_tree").attr("transform", "scale("+(zoom*scaleFactor)+") translate(" + (margin.left + (width+margin.left+margin.right)/(2*zoom*scaleFactor) - treeWidth/2 + treeXpos - advanceX) + "," + (70 - minDepth * 200 - advanceY) + ")");
-            d3.select("#g_duplicate_tree").attr("transform", "scale("+(zoom*scaleFactor)+") translate(" + (margin.left + (width+margin.left+margin.right)/(2*zoom*scaleFactor) - treeWidth/2 + treeXpos - advanceX) + "," + (-advanceY) + ")");
-        }, false);
-
 
 
     //    .bind("mousewheel",function(event,delta){
@@ -266,36 +314,16 @@ function update(source) {
         .attr("transform", function(d) { return "translate(" + (source.x0 - nodeWidth/2) + "," + (source.y0 - nodeHeight/2) + ")"; })
         ;//.on("click", click);
 
-
-
-
-    /*
-    var nodeFilter = nodeEnter
-        .filter(function(d, i) {
-            return d.depth == 1;
-        });
-        */
-
-    /*
-    nodeEnter.append("text")
-        .attr("x", function(d) { return d.children || d._children ? -10 : 10; })
-        .attr("dy", ".35em")
-        .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-        .text(function(d) { return d.name; })
-        .style("fill-opacity", 1e-6)
-        .style("font-size", "12px")
-        .style("font-weight", function(d) { return (d.lds_guid == window.lds_guid) ? "bold" : "normal"; });
-        */
-
     if ( navigator.userAgent.indexOf("MSIE")>0 || navigator.userAgent.indexOf("Gecko")>0 )
     {
         var box = nodeEnter.append("g");
 
         box.append("rect").attr("width",nodeWidth).attr("height",nodeHeight).
             attr("rx",3).attr("ry",3).
-            attr("fill", "#739c00").
+            attr("fill", function(d){return d.lds_guid != lds_guid ? "#739c00":"#EEE626";}).
             attr("stroke", "olive").
-            attr("stroke-width", "2");
+            attr("stroke-width", "2").
+            on("click", tree_popup_show);
 
         box.append("rect").attr("width",nodeWidth-10).attr("height",30).
             attr("x",5).attr("y",5).
@@ -334,7 +362,7 @@ function update(source) {
             .style("font-size", "14px")
             .style("font-weight", "bold")
             .style("margin-left", "4px")
-            .attr("fill", "#EBEBEB")
+            .attr("fill", function(d){return d.lds_guid != lds_guid ? "#EBEBEB":"#666";})
             .on("click", function(d){
                 window.location = baseurl + 'pg/ldshakers/' + d.username;
             });
@@ -352,7 +380,7 @@ function update(source) {
                             //.style("box-sizing", "border-box")
                             .style("border-radius", "3px")
                             .style("padding", "5px")
-                            .style("background-color", "#739c00")
+                            .style("background-color", function(d){return d.lds_guid != lds_guid ? "#739c00":"#EEE626";})
                             .style("border", "2px solid olive");
 
             box.append("div")   .text(function(d) {return d.title.substring(0,12)})
@@ -407,35 +435,6 @@ function update(source) {
 
         UserBox.append("div")   .style("clear", "both");
 
-
-
-        /*
-        var parentIcon = nodeEnter.append("g")
-            //.attr("class", "node")
-            .attr("transform", function(d) { return "translate(" + nodeWidth/2 + ", 0)"; })
-            .on("click", click);
-
-        parentIcon.append("circle")
-            .attr("r", 1e-6)
-            .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
-
-    */
-        /*
-        parentIcon
-            .append("foreignObject").attr("width","20").attr("height","20").attr("transform", "translate(-10,-12)")
-            .append("xhtml:body").style("width", "20px").style("height", "20px")
-            .style("display", "table")
-            .style("overflow", "hidden")
-            .style("background-color", "rgba(0, 0, 0, 0)")
-            .append("div")
-            .style("width", "100%").style("height", "100%")
-            .style("display", "table-cell")
-            .style("text-align","center")
-            .style("vertical-align","middle")
-            .style("font-size","17px")
-            .style("font-weight","bold")
-            .text("+");
-            */
     }
 
     node
@@ -443,7 +442,6 @@ function update(source) {
             return d.lds_guid == lds_guid;
         })
         .append("text").attr("transform", function(d) { return "translate(" + (-22) + ", "+(nodeHeight/2 + 7)+")"; })
-        .text("<<")
         .style("font-size", "15px")
         .style("font-weight", "bold")
         .on("click", function(e){
@@ -457,7 +455,6 @@ function update(source) {
             return d.lds_guid == lds_guid;
         })
         .append("text").attr("transform", function(d) { return "translate(" + (nodeWidth + 5) + ", "+(nodeHeight/2 + 7)+")"; })
-        .text(">>")
         .style("font-size", "15px")
         .style("font-weight", "bold")
         .on("click", function(e){
@@ -471,6 +468,7 @@ function update(source) {
         .filter(function (d) {
             return d.children || d._children;
         })
+        .attr("class", "nodeState")
         .attr("transform", function(d) { return "translate(" + nodeWidth/2 + ", " + nodeHeight + ")"; })
         .on("click", click);
 
@@ -478,40 +476,7 @@ function update(source) {
         .attr("r", 10)
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; });
 
-
-    childIcon.filter(function (d) {
-            return d.children || d._children;
-        })
-        .append("text").text("")
-        .attr("class","state")
-        .attr("x",-5).attr("y",6)
-        .style("margin-left", "4px")
-        .style("color", "black")
-        .style("cursor", "pointer")
-        .style("font-size","17px")
-        .style("font-weight","bold");
-
-    /*
-    childIcon
-        .append("foreignObject").attr("width","20").attr("height","20").attr("transform", "translate(-10,-12)")
-        .append("xhtml:body").style("width", "20px").style("height", "20px")
-        .style("display", "table")
-        .style("overflow", "hidden")
-        .style("background-color", "rgba(0, 0, 0, 0)")
-        .append("div")
-        .attr("class","expand")
-        .style("width", "100%").style("height", "100%")
-        .style("display", "table-cell")
-        .style("text-align","center")
-        .style("vertical-align","middle")
-        .style("font-size","17px")
-        .style("font-weight","bold")
-        .text("+");
-        */
-
-
     // Transition nodes to their new position.
-
     var nodeUpdate = node.transition()
         .duration(duration)
         .attr("transform", function(d) {
@@ -527,45 +492,51 @@ function update(source) {
         .style("fill", function(d) { return d._children ? "lightsteelblue" : "#fff"; })
         ;
 
-    nodeUpdate.select("text.state")
-        .filter(function (d) {
-            return d.children || d._children;
-        })
+    //update the node state
+    node
+        .selectAll("g.nodeState line")
+        .remove();
+
+    node
+        .selectAll("g.nodeState")
         .filter(function (d) {
             return d.children != null;
         })
-        .text("-")
-        .attr("x",-3).attr("y",4);
+        .append("line")
+        .attr("x1",-2.5).attr("y1",0)
+        .attr("x2",2.5).attr("y2",0)
+        .attr("style","stroke:rgb(0,0,0);stroke-width:2");
 
-    nodeUpdate.select("text.state")
+    //nodeUpdate.select("text.state")
+    var expand_buttons = node
+        .selectAll("g.nodeState")
         .filter(function (d) {
-            return d.children || d._children;
+            return d._children;
         })
         .filter(function (d) {
             return d.children == null;
-        })
-        .text("+")
-        .attr("x",-5).attr("y",6);
+        });
 
+    expand_buttons
+        .append("line")
+        .attr("x1",-3.5).attr("y1",0)
+        .attr("x2",3.5).attr("y2",0)
+        .attr("style","stroke:rgb(0,0,0);stroke-width:2");
+
+    expand_buttons
+        .append("line")
+        .attr("x1",0).attr("y1",-3.5)
+        .attr("x2",0).attr("y2",3.5)
+        .attr("style","stroke:rgb(0,0,0);stroke-width:2");
 
     nodeUpdate.select("text")
         .style("fill-opacity", 1);
 
     // Transition exiting nodes to the parent's new position.
-
     var nodeExit = node.exit().transition()
         .duration(duration)
         .attr("transform", function(d) { return "translate(" + (source.x - nodeWidth/2) + "," + (source.y  - nodeHeight/2) + ")"; })
         .remove();
-
-    /*
-    nodeExit.select("circle")
-        .attr("r", 1e-6);
-
-    nodeExit.select("text")
-        .style("fill-opacity", 1e-6);
-
-        */
 
     // Update the links…
     var link = svg.selectAll("path.link")
@@ -648,9 +619,181 @@ function update(source) {
 
 }
 
+function tree_popup_show(d){
+    console.log(this);
+    var popup_id = d.lds_guid;
+    var popup_id_selector = "#tree_info_popup_shell_"+ popup_id + " ";
+    var $popup, $popup_move;
+    var node = this.getBoundingClientRect();
+    var X = this.getBoundingClientRect().left;
+    var Y = this.getBoundingClientRect().top;
+    var height = this.getBoundingClientRect().height - 32;
+    var width = this.getBoundingClientRect().width - 32;
+    var popup_width = 600;
+    var popup_height = 400;
+    var fadein_timing = 1;
+    var popupX = X-100,
+        popupY = Y+100;
+
+    var transition_settings = "width "+fadein_timing+"s, height "+fadein_timing+"s, opacity "+fadein_timing+"s, top "+fadein_timing+"s, left "+fadein_timing+"s";
+
+    $("#tree_lds_popup")
+        //.empty()
+        .append(tree_lds_box.html);
+
+    $popup = $("#tree_info_popup_shell_empty")
+        .attr("id", "tree_info_popup_shell_"+ popup_id);
+
+    $popup_move = $("#tree_info_popup_move_empty")
+        .attr("id", "tree_info_popup_move_"+ popup_id);
+
+
+
+
+    //$popup = $(popup_id_selector);
+    //$popup_move= $(popup_id_selector + ".tree_info_popup_move");
+    //$popup_move.show();
+
+    $.post(
+        baseurl+'action/lds/tree_lds_view',
+        {
+            guid: d.lds_guid,
+            ref_id: lds_guid
+        },
+        function(data) {
+            var $interal_viewer;
+            var maximized= 0,
+                minimized=0;
+            var tree_popup_zoom_level = 100*popup_width/957;
+
+            $popup.show();
+            $(popup_id_selector+"#tree_info_popup").html(data.html);
+            $interal_viewer = $(popup_id_selector+"#internal_iviewer")
+
+            var popup_iframe_zoom = function() {
+                var iframe_tree_contents= $(popup_id_selector+"#internal_iviewer").contents().contents();
+                $(iframe_tree_contents).css("zoom",tree_popup_zoom_level+"%");
+                $interal_viewer.css("transition","opacity 1s");
+                $interal_viewer.css("opacity","1.0");
+            }
+
+            $interal_viewer.load(function() {
+                var iframe_tree_contents= $(popup_id_selector+"#internal_iviewer").contents().contents();
+                $(iframe_tree_contents).css("zoom",tree_popup_zoom_level+"%");
+                $interal_viewer.css("transition","opacity 1s");
+                $interal_viewer.css("opacity","1.0");
+            });
+
+            var tree_popup_zoom_level = 100*popup_width/957;
+            $(popup_id_selector + "#tree_info_popup > *").css("zoom",tree_popup_zoom_level+"%");
+            $(popup_id_selector + "#tree_info_popup > *").css("zoom","-webkit-user-select: none;");
+
+            var popupXlast = 0;
+            var popupYlast = 0;
+
+            $(popup_id_selector + ".tree_info_popup_control_button.move").bind("mousedown", function(e){
+                popupXlast = e.pageX;
+                popupYlast = e.pageY;
+                $popup_move.show();
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button.maximize").click(function(e){
+                var $tree = $(".tree");
+                var tree_offset= $tree.offset();
+                $popup.css("transition",transition_settings);
+
+                if(!maximized) {
+                    $popup.css("top",tree_offset.top+"px");
+                    $popup.css("left",tree_offset.left+"px");
+                    $popup.css("width",$tree.outerWidth()+"px");
+                    $popup.css("height",$tree.outerHeight()+"px");
+                } else {
+                    $popup.css("top",popupY+"px");
+                    $popup.css("left",popupX+"px");
+                    $popup.css("width",popup_width+"px");
+                    $popup.css("height",popup_height+"px");
+                }
+
+                maximized = !maximized;
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button.minimize").click(function(e){
+                var $tree = $(".tree");
+                var tree_offset= $tree.offset();
+                $popup.css("transition",transition_settings);
+
+                if(!minimized) {
+                    $popup.css("top",popupY+"px");
+                    $popup.css("left",popupX+"px");
+                    $popup.css("width",popup_width*0.75+"px");
+                    $popup.css("height",popup_height*0.75+"px");
+                } else {
+                    $popup.css("top",popupY+"px");
+                    $popup.css("left",popupX+"px");
+                    $popup.css("width",popup_width+"px");
+                    $popup.css("height",popup_height+"px");
+                }
+
+                maximized = !maximized;
+            });
+
+            $popup_move.bind("mousemove", function(e){
+                //e.stopPropagation();
+                var button = 0;
+
+                button += e.which;
+
+                if(button && popupXlast && popupYlast){
+                    popupX -= popupXlast - e.pageX;
+                    popupY -= popupYlast - e.pageY;
+
+                    popupXlast = e.pageX;
+                    popupYlast = e.pageY;
+
+                    $popup.css("transition","all 0s");
+                    $popup.css("left",popupX+"px");
+                    $popup_move.css("left",popupX+"px");
+                    $popup.css("top",popupY+"px");
+                    $popup_move.css("top",popupY+"px");
+
+                    //console.log("X: "+e.pageX+" Y: "+e.pageY+" buttons: "+ e.which);
+                    //console.log("X: "+panX+" Y: "+panY);
+                    //console.log("Xl: "+panXLast+" Yl: "+panYLast);
+                }
+                if(!button) {
+                    $popup_move.hide();
+                }
+            });
+
+        });
+
+    $popup.css("width",width+"px");
+    $popup.css("height",height+"px");
+    $popup.css("top",Y+"px");
+    $popup_move.css("top",Y+"px");
+    $popup.css("left",X+"px");
+    $popup_move.css("left",X+"px");
+    $popup.css("opacity",0.4);
+
+    $popup.show();
+    $popup.css("transition",transition_settings);
+    $popup.css("width",popup_width+"px");
+    $popup.css("height",popup_height+"px");
+    $popup.css("top",popupY+"px");
+    $popup_move.css("top",popupY+"px");
+    $popup.css("left",popupX+"px");
+    $popup_move.css("left",popupX+"px");
+    $popup.css("opacity",1.0);
+
+    //$popup.hide();
+
+
+    console.log(node);
+    console.log(d);
+}
+
 // Toggle children on click.
 function click(d) {
-    //window.location = baseurl + 'pg/lds/view/' + d.lds_guid;
 
     if (d.children) {
         d._children = d.children;
@@ -669,7 +812,6 @@ function click(d) {
         if(maxDepth < d.depth + 1)
             maxDepth = d.depth + 1;
     }
-
     update(d);
 
 }

@@ -138,6 +138,7 @@ if($url == "http://ilde.upf.edu/") {
 if($url == "http://ilde.upf.edu/agora/") {
     /*AGORA*/if(!strcmp("$patternsname","Jigsaw")) {$lhref="{$url}pg/lds/view/689/";$t_text = "If groups of students face resolution of a complex problem/task that can be easily divided into sections or independent sub-problems, an adequate collaborative learning flow may be planned.";}
     /*AGORA*/if(!strcmp("$patternsname","Design narrative")) {$lhref="{$url}pg/lds/view/772/";$t_text = "At the UVA team, teacher workshops were held to promote learning design and implementation of collaborative learning activities. Following the most widely used format and technologies at our institution, the idea was to teach/practice design for blended learning (i.e. combining face-to-face and online activities) courses, and using Moodle VLEs as the main technological support (alongside other web tools). ";}
+    /*AGORA*/if(!strcmp("$patternsname","Tps")) {$lhref="{$url}pg/lds/view/749/";$t_text = "Si grupos de estudiantes se enfrentan a la resolución de cuestiones de respuesta abierta, el flujo de aprendizaje colaborativo adecuado debe ser planeado.";}
 
     if(!strcmp("$patternsname","Controlled Group Formation")) {$lhref="{$url}pg/lds/view/645/";$t_text = "How can a group of students be formed when they are asked to work on an assignment to collaborative build knowledge?";}
     if(!strcmp("$patternsname","Free G F")) {$lhref="{$url}pg/lds/view/677/";$t_text = "How can a group of students be formed when they are asked to work on a large demanding assignment?";}
@@ -160,7 +161,7 @@ if($url == "http://ilde.upf.edu/agora/") {
     if(!strcmp("$patternsname","Structuredspace For Group Tasks")) {$lhref="{$url}pg/lds/view/717/";$t_text = "Sometimes students require an online space that facilitates their collaboration.";}
 }
 
-if($url == "http://ilde.upf.edu/ou/" || $url == "http://ilde.upf.edu/uoc/") {
+if($url == "http://ilde.upf.edu/ou/" || $url == "http://ilde.upf.edu/uoc/" || $url == "http://ldshake2.upf.edu/msf/") {
    /*OU*/if(!strcmp("$patternsname","Jigsaw")) {$lhref="{$url}pg/lds/view/767/";$t_text = "If groups of students face resolution of a complex problem/task that can be easily divided into sections or independent sub-problems, an adequate collaborative learning flow may be planned.";}
    /*OU*/if(!strcmp("$patternsname","Design narrative")) {$lhref="{$url}pg/lds/view/763/";$t_text = "At the UVA team, teacher workshops were held to promote learning design and implementation of collaborative learning activities. Following the most widely used format and technologies at our institution, the idea was to teach/practice design for blended learning (i.e. combining face-to-face and online activities) courses, and using Moodle VLEs as the main technological support (alongside other web tools). ";}
 
@@ -193,6 +194,13 @@ if($url == "http://ilde.upf.edu/uoc/") {
     /*UOC*/if(!strcmp("$patternsname","Design narrative")) {$lhref="{$url}pg/lds/view/772/";$t_text = "At the UVA team, teacher workshops were held to promote learning design and implementation of collaborative learning activities. Following the most widely used format and technologies at our institution, the idea was to teach/practice design for blended learning (i.e. combining face-to-face and online activities) courses, and using Moodle VLEs as the main technological support (alongside other web tools). ";}
     /*UOC*/if(!strcmp("$patternsname","Enriching Discussion By Generating Cognitive Conflicts")) {$lhref="{$url}pg/lds/view/780/";$t_text = "Sometimes students are reluctant to challenge each other’s different views on a particular subject or the results from a particular activity during a discussion.";}
     /*UOC*/if(!strcmp("$patternsname","Controlled G F")) {$lhref="{$url}pg/lds/view/784/";$t_text = "How can a group of students be formed when they are asked to work on an assignment to collaborative build knowledge?";}
+}
+
+if($url == "http://ldshake2.upf.edu/msf/") {
+    /*msf*/if(!strcmp("$patternsname","Jigsaw")) {$lhref="{$url}pg/lds/view/796/";$t_text = "If groups of students face resolution of a complex problem/task that can be easily divided into sections or independent sub-problems, an adequate collaborative learning flow may be planned.";}
+    /*msf*/if(!strcmp("$patternsname","Design narrative")) {$lhref="{$url}pg/lds/view/800/";$t_text = "At the UVA team, teacher workshops were held to promote learning design and implementation of collaborative learning activities. Following the most widely used format and technologies at our institution, the idea was to teach/practice design for blended learning (i.e. combining face-to-face and online activities) courses, and using Moodle VLEs as the main technological support (alongside other web tools). ";}
+    /*msf*/if(!strcmp("$patternsname","Enriching Discussion By Generating Cognitive Conflicts")) {$lhref="{$url}pg/lds/view/804/";$t_text = "Sometimes students are reluctant to challenge each other’s different views on a particular subject or the results from a particular activity during a discussion.";}
+    /*msf*/if(!strcmp("$patternsname","Controlled G F")) {$lhref="{$url}pg/lds/view/808/";$t_text = "How can a group of students be formed when they are asked to work on an assignment to collaborative build knowledge?";}
 }
 
 if($url == "http://ilde.upf.edu/kek/") {

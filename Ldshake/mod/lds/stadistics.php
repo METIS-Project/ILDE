@@ -234,11 +234,11 @@ $users = get_entities('user','', 0, "", 9999);
         $lds_header = array();
         if($ldss)
             foreach($ldss as $lds) {
-                $lds_header[] = $lds->guig . ' (' . $lds->title . ') shared number';
-                $lds_header[] = $lds->guig . ' (' . $lds->title . ') shared list';
+                $lds_header[] = $lds->guid . ' (' . $lds->title . ') shared number';
+                $lds_header[] = $lds->guid . ' (' . $lds->title . ') shared list';
 
-                $lds_header[] = $lds->guig . ' (' . $lds->title . ') edit number';
-                $lds_header[] = $lds->guig . ' (' . $lds->title . ') edit list';
+                $lds_header[] = $lds->guid . ' (' . $lds->title . ') edit number';
+                $lds_header[] = $lds->guid . ' (' . $lds->title . ') edit list';
 
                 if($lds->owner_guid == $user->guid){
                     $a_users = lds_contTools::getViewAccessUsers($lds->guid);

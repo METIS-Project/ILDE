@@ -120,6 +120,7 @@ function lds_init()
 	register_action("lds/deferred_send", false, $CONFIG->pluginspath . "lds/actions/lds/deferred_send.php");
 	register_action("lds/import_editor_file", false, $CONFIG->pluginspath . "lds/actions/lds/import_editor_file.php");
     register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
+    register_action("lds/tree_lds_view", false, $CONFIG->pluginspath . "lds/actions/lds/tree_lds_view.php");
 
     if (get_context() == 'admin')
         add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
@@ -2303,6 +2304,10 @@ function lds_exec_tracking ($params)
         case 'created_by_user':
             lds_tracking_created_by_user();
             break;
+        case 'user_tool':
+            lds_tracking_user_tool();
+            break;
+
     }
 
     //lds_csv_private();

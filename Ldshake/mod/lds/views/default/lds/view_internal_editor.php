@@ -64,6 +64,10 @@ function encodeURIComponent($str) {
 			<a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this LdS") ?></a>
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
+
+            <?php if($currentDoc->file_imsld_guid): ?>
+                <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_imsld_guid . "&title=" . encodeURIComponent($lds->title."(ims-lds).zip") ?>"><?php echo T("Download IMS-LD file") ?></a>
+            <?php endif; ?>
             <?php if ($lds->editor_type == 'gluepsrest'): ?>
                 <?php if (!$glueps): ?>
                     <a class="leftbutton lds_select_implement_action" lds="<?php echo $lds->guid?>" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit implementation") ?></a>
@@ -98,15 +102,17 @@ function encodeURIComponent($str) {
 	<ul id="lds_view_tabs" class="content">
 		<?php if (is_array($ldsDocs)): ?>
 			<?php foreach ($ldsDocs as $doc): ?>
-			<?php if ($doc->guid == $currentDocId): ?>
-				<li class="activetab"><?php echo $doc->title ?></li>
-            <?php else: ?>
-				<li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $doc->title ?></a></li><?php endif; ?>
+                <?php if ($doc->guid == $currentDocId): ?>
+                    <li class="activetab"><?php echo $doc->title ?></li>
+                <?php else: ?>
+                    <li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $doc->title ?></a></li>
+                <?php endif; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
 		<?php if ($iseXe): ?>
 			<li class="activetab"><?php echo $lds->title ?></li><?php else: ?>
-			<li><a href="<?php echo lds_viewTools::url_for($lds, 'view') ?>"><?php echo $lds->title ?></a></li><?php endif; ?>
+			<li><a href="<?php echo lds_viewTools::url_for($lds, 'view') ?>"><?php echo $lds->title ?></a></li>
+        <?php endif; ?>
 	</ul>
 </div>
 
@@ -262,7 +268,7 @@ function encodeURIComponent($str) {
             </div>
         <?php endif; ?>
     <?php endif; ?>
-	
+
 <div id="payload" style="width: 100%;">
     <?php if ($currentDoc->getSubtype() == 'LdS_document_editor'): ?>
         <script>

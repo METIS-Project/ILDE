@@ -159,7 +159,6 @@
 	<?php endif; ?>
 
 	<iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>">
-
 	</iframe>
 <?php endif; ?>
 </div>

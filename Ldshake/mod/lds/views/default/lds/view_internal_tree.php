@@ -35,51 +35,40 @@
  ********************************************************************************/
 
 ?>
-
 <?php extract ($vars) ?>
-
-<div id="one_column" style="padding-bottom:0 !important">
-    <div id="content_area_user_title">
-        <h2><?php echo $lds->title ?></h2>
-    </div>
-    <div id="lds_view_actions">
-        <a class="rightbutton" id="lds_tree_siblings_button" href="#" style="display:none"><?php echo T("View siblings") ?></a>
-    </div>
-<div class="tree">
-</div>
-<div id="tree_lds_popup">
+<div id="content_area_user_title" style="margin-bottom:10px">
+    <h2><?php echo $lds->title ?></h2>
 </div>
 
-    <?php
-$tree_lds_box = <<<HTML
-    <div id="tree_info_popup_shell_empty" class="tooltip_bl_body" style="position:absolute;height:300px;width:400px;background-color: #FFF;overflow:hidden;display:none">
-        <div class="tree_info_popup_control">
-            <div class="tree_info_popup_control_button move"></div>
-            <div class="tree_info_popup_control_button maximize"></div>
-            <div class="tree_info_popup_control_button minimize"></div>
+<div style="margin-bottom:10px">
+<?php echo lds_viewTools::all_tag_display ($lds); ?>
+</div>
+
+
+<?php if ($currentDoc->getSubtype() == 'LdS_document_editor'): ?>
+    <script>
+        image = <?php echo ($editor == 'cld' || $editor == 'image') ? 'true':'false';?>;
+    </script>
+    <?php if ($editor == 'exe'): ?>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;"></iframe>
+    <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
+        <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+    <?php else:?>
+        <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
+            <?php echo $currentDoc->description ?>
         </div>
-        <div id="tree_info_popup" style="width:100%;height:100%"></div>
-    </div>
-    <div id="tree_info_popup_move_empty" class="tree_info_popup_move"></div>
-HTML;
-    ?>
-<!--    <div id="tree_info_popup" style="position:absolute;top:200px;left:300px;height:300px;width:400px;background-color: #FFF;overflow:hidden">
-    </div>
--->
-<script type="text/javascript">
-    var d3_data = <?php echo $tree;?>;
-    var lds_guid = <?php echo $lds->guid;?>;
-
-    var tree_popup_iframe_content = function() {
-        var tree_popup_zoom_level = 100*$("#tree_info_popup").outerWidth()/957;
-        var iframe_tree_contents= $("#internal_iviewer").contents().contents();
-        $(iframe_tree_contents).css("zoom",tree_popup_zoom_level+"%");
-        $("#internal_iviewer").css("transition","opacity 0.5s");
-        $("#internal_iviewer").css("opacity","1.0");
-    }
-
-    var tree_lds_box = <?php echo json_encode(array("html" => $tree_lds_box));?>;
+    <?php endif; ?>
+<?php else:?>
+    <script>
+        image = false;
+    </script>
+    <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;">
+    </iframe>
+<?php endif; ?>
 
 
-</script>
-</div>
+<!-- Hidden stuff -->
+<div id="shade"></div>
+

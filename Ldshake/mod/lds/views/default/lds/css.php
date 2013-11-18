@@ -2017,23 +2017,82 @@ p.MsoListParagraph {
 .tree .node .title,
 .tree .node .expand,
 .tree .node .username{
-    cursor: pointer;
+
 }
+
+/*
+.tree:active {
+    cursor: move;
+}
+*/
+
+.htmlnonselect:active {
+    cursor: default;
+    -webkit-user-select: none;
+}
+
+/*
+*:active,
+*:hover {
+cursor: pointer;
+-webkit-user-select: none;
+}
+*/
 
 .tree .node circle {
     fill: #fff;
     stroke: steelblue;
     stroke-width: 1.5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
 }
 
 .tree .node text {
     font: 10px sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+
 }
 
 .tree .link {
     fill: none;
     stroke: #666;
     stroke-width: 1.5px;
+}
+
+.tree_info_popup_control {
+    float: right;
+    width: 120px;
+    background-color: #458225;
+    margin-top: -10px;
+    margin-right: -10px;
+    height: 27px;
+    border-bottom-left-radius: 9px;
+}
+
+.tree_info_popup_control_button {
+    width: 28px;
+    height: 20px;
+    background: #FFF;
+    float: right;
+    margin-right: 8px;
+}
+
+.tree_info_popup_move {
+    display:none;
+    position: absolute;
+    margin-left: 300px;
+    margin-top: -200px;
+    width: 500px;
+    height: 500px;
+    z-index: 9999;
+background-color: rgba(0,0,0,0);
+}
+
+.tree_info_popup * {
+    -webkit-user-select: none;
 }
 
 /***** image viewer *****/
