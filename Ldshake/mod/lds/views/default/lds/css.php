@@ -647,7 +647,7 @@
 }
 
 ins {
-	background-color: #cfc;
+	background-color: #6FFD6F;
 	display: inline-block;
 	text-decoration: none;
 }
@@ -2020,6 +2020,26 @@ p.MsoListParagraph {
 
 }
 
+.tree-node-box:hover {
+    stroke: #F3AF1D;
+}
+
+.node .nodeState > circle.has-children {
+    fill: lightsteelblue;
+}
+
+.node .nodeState > circle.no-children {
+    fill: #fff;
+}
+
+.node .nodeState > circle:hover {
+    fill: #D6A5E2;
+}
+
+a.tree-box-title {
+    color: black;
+}
+
 /*
 .tree:active {
     cursor: move;
@@ -2038,6 +2058,11 @@ cursor: pointer;
 -webkit-user-select: none;
 }
 */
+
+.tree {
+    overflow:hidden;
+    width: 960px;
+}
 
 .tree .node circle {
     fill: #fff;
@@ -2064,7 +2089,7 @@ cursor: pointer;
 
 .tree_info_popup_control {
     float: right;
-    width: 120px;
+    width: 182px;
     background-color: #458225;
     margin-top: -10px;
     margin-right: -10px;
@@ -2075,24 +2100,39 @@ cursor: pointer;
 .tree_info_popup_control_button {
     width: 28px;
     height: 20px;
-    background: #FFF;
+    background: #86CC89;
     float: right;
     margin-right: 8px;
+    border-radius: 4px;
+}
+
+.tree_info_popup_control_button:hover {
+    background: #C4D166;
 }
 
 .tree_info_popup_move {
     display:none;
     position: absolute;
-    margin-left: 300px;
+    margin-left: 100px;
     margin-top: -200px;
-    width: 500px;
+    width: 600px;
     height: 500px;
     z-index: 9999;
 background-color: rgba(0,0,0,0);
+cursor: move;
 }
 
-.tree_info_popup * {
+#tree_lds_popup * {
     -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+/*rect.svg-tree-box-title:hover {
+    stroke: #006180;
+}
+*/
+.svg-box-username:hover {
+    fill: #B2C4B1;
 }
 
 /***** image viewer *****/

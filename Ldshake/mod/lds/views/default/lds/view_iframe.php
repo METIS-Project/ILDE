@@ -387,12 +387,34 @@
             width: 100%;
         }
 
+        ins {
+            background-color: #49FC49;
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        ins img, del img {
+            /*padding: 5px;*/
+            opacity: 0.5;
+            filter:alpha(opacity=50);
+        }
+
+        del {
+            background-color: #FC5959;
+            display: inline-block;
+            text-decoration: none;
+        }
     </style>
     <?php /*echo elgg_view('page_elements/analytics', $vars)*/ ?>
 </head>
 <body>
 <div id="doc">
-    <?php echo $doc->description ?>
+    <?php
+    if($diff)
+        echo $diff;
+    else
+        echo $doc->description;
+    ?>
 </div>
 </body>
 </html>

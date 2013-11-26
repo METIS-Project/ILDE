@@ -1655,7 +1655,7 @@ SQL;
         $subtype = $entity->subtype;
 
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND e.guid = {$lds_id} AND (
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.guid = {$lds_id} AND (
 	(e.owner_guid = {$user_id})
 	OR
 	(

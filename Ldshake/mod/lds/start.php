@@ -357,6 +357,23 @@ function lds_exec_implementations ($params)
         $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
         $vars['editor_filter'] = $params[1];
     }
+    elseif ($params[1] == 'trashed')
+    {
+        //We need to see all the entities, including the deleted ones.
+        $access_status = access_get_show_hidden_status();
+        access_show_hidden_entities(true);
+
+        $offset = get_input('offset') ?: '0';
+
+        //TODO take the owner into account
+        $vars['list'] = get_entities_where('enabled = "no"', 'object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['count'] = get_entities_where('enabled = "no"', 'object', 'LdS_implementation', get_loggedin_userid(), '', 0, $offset, true);
+        $vars['list'] = lds_contTools::enrichImplementation($vars['list']);
+        $vars['title'] = T("My trashed LdS");
+        $vars['section'] = "imp-{$params[1]}";
+
+        access_show_hidden_entities($access_status);
+    }
     else
     {
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
@@ -1663,6 +1680,25 @@ function lds_exec_view_iframe ($params)
     else
         $vars['title'] = $doc->title;
 
+
+    if($params[2]){
+        $vars['ref_doc'] = get_entity($params[2]);
+        $aname = $CONFIG->tmppath.'guid'.$vars['ref_doc']->guid.'_'.get_loggedin_userid().'.html';
+        $bname = $CONFIG->tmppath.'guid'.$vars['doc']->guid.'_'.get_loggedin_userid().'.html';
+
+        file_put_contents($aname, $vars['ref_doc']->description);
+        file_put_contents($bname, $vars['doc']->description);
+
+        $output = array();
+
+        exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py $aname $bname", $output);
+
+        $vars['diff'] = implode('', $output);
+
+        unlink($aname);
+        unlink($bname);
+    }
+
     echo elgg_view('lds/view_iframe',$vars);
 }
 
@@ -2181,14 +2217,17 @@ function lds_treebuilder($lds_id, $target) {
     $tree['title'] = $lds->title;
     $tree['name'] = $user->name;
     $tree['username'] = $user->username;
+    $tree['enabled'] = $lds->isEnabled();
     $tree['lds_guid'] = $lds->guid;
     $tree['owner_icon'] = $user->getIcon('small');
     $tree['tags_html'] = lds_viewTools::all_tag_display ($lds);
     if($children = get_entities_from_metadata('parent', $lds->guid, 'object', 'LdS', 0 , 9999)) {
         $tree['children'] = array();
 
-        foreach($children as $c)
-            $tree['children'][] = lds_treebuilder($c->guid, $target);
+        foreach($children as $c) {
+            if($c->isEnabled() || get_entities_from_metadata('parent', $c->guid, 'object', 'LdS', 0 , 9999))
+                $tree['children'][] = lds_treebuilder($c->guid, $target);
+        }
     }
     return $tree;
 }

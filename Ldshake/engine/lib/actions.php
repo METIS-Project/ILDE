@@ -28,7 +28,9 @@
         function action($action, $forwarder = "") {
             
             global $CONFIG;
-            
+
+            $headers=getallheaders();
+            $ajax=($headers['X-Requested-With'] == 'XMLHttpRequest') ? true: false;
 	        $query = parse_url($_SERVER['REQUEST_URI']);
 			if (isset($query['query'])) {
 				$query = $query['query'];
@@ -57,7 +59,7 @@
             		(isadminloggedin()) ||
             		(!$CONFIG->actions[$action]['admin'])
             	) {
-	                if ($CONFIG->actions[$action]['public'] || $_SESSION['id'] != -1) {
+	                if ($CONFIG->actions[$action]['public'] || !!$_SESSION['id']) {
 	                	
 	                	// Trigger action event TODO: This is only called before the primary action is called. We need to rethink actions for 1.5
 	                	$event_result = true;
@@ -75,13 +77,16 @@
 							/// LdShake change ///
 	                	}
 	                } else {
-	                    register_error(elgg_echo('actionloggedout'));
+	                    if(!$ajax)
+                            register_error(elgg_echo('actionloggedout'));
+                        else
+                            header('HTTP/1.1 401 Unauthorized');
 	                }
             	}
             } else {
             	register_error(sprintf(elgg_echo('actionundefined'),$action));
             }
-		if(!ob_get_length())
+		if(!ob_get_length() && !$ajax)
 		    forward($CONFIG->url . $forwarder);
             
         }

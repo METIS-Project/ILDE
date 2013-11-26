@@ -54,9 +54,35 @@
 $tree_lds_box = <<<HTML
     <div id="tree_info_popup_shell_empty" class="tooltip_bl_body" style="position:absolute;height:300px;width:400px;background-color: #FFF;overflow:hidden;display:none">
         <div class="tree_info_popup_control">
-            <div class="tree_info_popup_control_button move"></div>
-            <div class="tree_info_popup_control_button maximize"></div>
-            <div class="tree_info_popup_control_button minimize"></div>
+
+            <!--
+            <div class="tree_info_popup_control_button move">
+                <svg width="28px" height="20px"><g>
+                    <line x1="8.0" y1="10" x2="20" y2="10" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="14" y1="4" x2="14" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
+            -->
+            <div class="tree_info_popup_control_button close">
+                <svg width="28px" height="20px"><g>
+                    <line x1="10" y1="6" x2="18" y2="14" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="10" y1="14" x2="18" y2="6" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
+            <div class="tree_info_popup_control_button maximize">
+                <svg width="28px" height="20px"><g><rect rx="3" ry="3" x="4" y="4" width="20" height="12" style="stroke:#FFF;stroke-width:2;fill:transparent"></rect></g></svg>
+            </div>
+            <div class="tree_info_popup_control_button minimize">
+                <svg width="28px" height="20px"><g><line x1="4.0" y1="16" x2="24" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line></g></svg>
+            </div>
+            <div class="tree_info_popup_control_button diff">
+                <svg width="28px" height="20px"><g>
+                    <line x1="4.0" y1="4" x2="24" y2="4" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="8" x2="24" y2="8" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="12" x2="24" y2="12" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="16" x2="24" y2="16" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
         </div>
         <div id="tree_info_popup" style="width:100%;height:100%"></div>
     </div>

@@ -35,14 +35,19 @@
  ********************************************************************************/
 
 $id = get_input('guid');
-$ref_id = get_input('ref_guid');
+$ref_id = get_input('ref_id');
 $vars['lds'] = get_entity($id);
+$vars['ref_lds'] = get_entity($ref_id);
+
+global $CONFIG;
 
 //TODO permission / exist checks
 
 $vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
+$vars['ref_ldsDocs'] = lds_contTools::getLdsDocuments($ref_id);
 
 $editordocument = get_entities_from_metadata('lds_guid',$vars['lds']->guid,'object','LdS_document_editor', 0, 100);
+//$ref_editordocument = get_entities_from_metadata('lds_guid',$vars['ref_lds']->guid,'object','LdS_document_editor', 0, 100);
 
 switch($editordocument[0]->editorType) {
     case 'cld':
@@ -63,7 +68,9 @@ if($vars['lds']->external_editor) {
     $vars['currentDoc'] = $editordocument[0];
 } else {
     $vars['currentDocId'] = $params[3] ?: $vars['ldsDocs'][0]->guid;
+    $vars['ref_currentDocId'] = $params[3] ?: $vars['ref_ldsDocs'][0]->guid;
     $vars['currentDoc'] = get_entity($vars['currentDocId']);
+    $vars['ref_currentDoc'] = get_entity($vars['ref_currentDocId']);
 }
 
 $vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
@@ -94,5 +101,6 @@ $vars['starter'] = get_user($vars['lds']->owner_guid);
 $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
 $tree_html = elgg_view('lds/view_internal_tree',$vars);
+
 header('Content-Type: application/json; charset=utf-8');
-echo json_encode(array("html" => $tree_html));
+echo json_encode(array("html" => $tree_html,"ref_doc" => $vars['ref_currentDoc']->guid,"doc" => $vars['currentDoc']->guid));

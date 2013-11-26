@@ -86,7 +86,7 @@
         <form method="post" action="#">
             <div id="my_lds_list_header">
                 <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
-                <?php if ($section != 'trashed'): ?>
+                <?php if ($section != 'imp-trashed'): ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected implementations") ?>" />
                 <?php else: ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />

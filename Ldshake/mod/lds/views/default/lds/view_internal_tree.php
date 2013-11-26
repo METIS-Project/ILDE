@@ -37,7 +37,7 @@
 ?>
 <?php extract ($vars) ?>
 <div id="content_area_user_title" style="margin-bottom:10px">
-    <h2><?php echo $lds->title ?></h2>
+    <h2><a class="tree-box-title" href="<?php echo $url."pg/lds/view/".$lds->guid ?>"><?php echo $lds->title ?></a></h2>
 </div>
 
 <div style="margin-bottom:10px">
@@ -52,7 +52,7 @@
     <?php if ($editor == 'exe'): ?>
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
-        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;"></iframe>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;"></iframe>
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
     <?php else:?>
@@ -64,7 +64,7 @@
     <script>
         image = false;
     </script>
-    <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;">
+    <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;">
     </iframe>
 <?php endif; ?>
 
