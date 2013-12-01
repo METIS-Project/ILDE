@@ -407,12 +407,18 @@ $("html").bind("mousedown", function(e){
         box.append("rect").attr("width",nodeWidth).attr("height",nodeHeight).
             attr("class", "tree-node-box").
             attr("rx",3).attr("ry",3).
-            attr("fill", function(d){return d.lds_guid != lds_guid ? "#739c00":"#EEE626";}).
+            attr("fill", function(d){
+                if(d.enabled)
+                    return d.lds_guid != lds_guid ? "#739c00":"#EEE626";
+                else
+                    return "#82A38E";
+            }).
             attr("stroke", "olive").
             attr("stroke-width", "2").
             filter(function (d) {
                 return d.enabled;
             }).
+            classed("enabled", true).
             style("cursor" ,"pointer").
             on("click", tree_popup_show);
 

@@ -74,6 +74,12 @@ function encodeURIComponent($str) {
                 <?php else: ?>
                         <a class="leftbutton" lds="<?php echo $lds->guid?>" href="<?php echo $url.'pg/lds/editglueps/'.$lds->guid; ?>"><?php echo T("Edit implementation") ?></a>
                 <?php endif; ?>
+                <?php if (isadminloggedin()): ?>
+                    <a class="leftbutton" href="<?php echo "{$url}pg/lds/vle/{$lds->vle_id}" ?>"><?php echo T("View VLE")." cid:".$lds->course_id ?></a>
+                    <?php if ($currentDoc->editorType == 'gluepsrest' || $currentDoc->editorType == 'webcollagerest'): ?>
+                        <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title."(impl).json") ?>"><?php echo T("Download impl file") ?></a>
+                    <?php endif; ?>
+                <?php endif; ?>
             <?php else: ?>
                 <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
             <?php endif; ?>
@@ -83,7 +89,9 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
-        <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
+        <?php if ($lds->editor_type != 'gluepsrest'): ?>
+            <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
+        <?php endif; ?>
         <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 

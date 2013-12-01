@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title><?php echo T("LdShake: Learning Desgin Solutions") ?></title>
+	<title><?php echo T("LdShake: Learning Design Solutions") ?></title>
 	<link rel="icon" type="image/png" href="<?php echo $url ?>_graphics/favicon.ico" />
 	<?php echo elgg_view('page_elements/analytics');?>
 	<style>

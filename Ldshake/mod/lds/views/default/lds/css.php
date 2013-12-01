@@ -1032,7 +1032,7 @@ del {
 
 #lds_single_share_popup {
 	width: 500px;
-	top: 100px;
+	top: 150px;
 	left: 50%;
 	margin-left: -260px;
 }
@@ -2020,7 +2020,7 @@ p.MsoListParagraph {
 
 }
 
-.tree-node-box:hover {
+.tree-node-box.enabled:hover {
     stroke: #F3AF1D;
 }
 

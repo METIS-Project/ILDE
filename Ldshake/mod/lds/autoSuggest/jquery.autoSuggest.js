@@ -207,20 +207,25 @@
 								input.val("");
 							}
 						case 13: // return
-                            $(this).blur();
-                            e.preventDefault();
-                            $(this).focus();
-                            /*
+                            //$(this).blur();
+                            //e.preventDefault();
+                            //$(this).focus();
 							tab_press = false;
 							var active = $("li.active:first", results_holder);
 							if(active.length > 0){
+                                $(this).val("");
 								active.click();
 								results_holder.hide();
-							}
+							} else {
+                                $(this).blur();
+                                e.preventDefault();
+                                $(this).click();
+                            }
+
 							if(opts.neverSubmit || active.length > 0){
 								e.preventDefault();
 							}
-							*/
+
 							break;
 						default:
 							if(opts.showResultList){
