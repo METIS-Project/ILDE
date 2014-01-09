@@ -950,6 +950,7 @@ function inaction_trigger ()
     });
 }
 
+/*editor iframe information exchange*/
 $(document).ready(function() {
     window.addEventListener('message',function(event) {
         if(event.origin !== 'http://pandora.tel.uva.es') return;

@@ -134,6 +134,13 @@ function lds_data() {
     $queryResult = $xpathvar->query('//lds/tags');
     $elemtags = $queryResult->item(0);
 
+    $queryResult = $xpathvar->query('//lds/description');
+    $description = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
+
+    $queryResult = $xpathvar->query('//lds/license');
+    $license = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
+
+
     $tags = array('tag' => array());
     foreach($elemtags->childNodes as $tagnode) {
         if($tagnode instanceof DOMElement) {
@@ -158,7 +165,9 @@ function lds_data() {
         'doc' =>    array(
             'file' => $_FILES['design']['tmp_name'],
             'filename' => $_FILES['design']['name']
-        )
+        ),
+        'description' => $description,
+        'license' => $license
     );
 
     if(isset($_FILES['design_imsld']))
@@ -174,15 +183,23 @@ function lds_data() {
     $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
     $revision = $revision[0]->id;
 
+    $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document', 0, 1);
+    if($documents)
+        $description = $documents[0]->description;
+    else
+        $description = '';
+
+    $license = $lds->license ? $lds->license : 0;
     $result = array(
         'lds' => array(
             'id' => $id,
             'type' => $type,
             'title' => $title,
             'revision' => $revision,
-            'tags' => $tags
+            'tags' => $tags,
+            'description' => $description,
+            'license' => $license
     ));
-
 
     $result = SuccessResult::getInstance($result);
 
@@ -193,18 +210,18 @@ expose_function("newlds", "lds_data", array(), elgg_echo('ldsdata'), "POST", tru
 function lds_query() {
     global $API_QUERY;
 
-    $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 0, 0);
+    $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 3, 0);
 
     $ldss = array();
     $lds = array();
     foreach($entities as $e) {
-
         if(!($revision = $e->getAnnotations('revised_docs_editor', 1, 0, 'desc')))
             $revision = $e->getAnnotations('revised_docs', 1, 0, 'desc');
         $revision = $revision[0]->id;
 
         $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
         $tags = array();
+
         foreach ($tagtypes as $type)
         {
             $tag = array();
@@ -219,14 +236,23 @@ function lds_query() {
             $tags['tag'][] = $tag;
         }
 
+        $documents = get_entities_from_metadata('lds_guid',$e->guid,'object','LdS_document', 0, 1);
+        if($documents)
+            $description = $documents[0]->description;
+        else
+            $description = '';
+
+        $license = $e->license ? $e->license : 0;
+
         $lds[] = array(
             'id' => $e->guid,
             'type' => $e->editor_type,
             'title' => $e->title,
             'revision' => $revision,
-            'tags' => $tags
+            'tags' => $tags,
+            'description' => $description,
+            'license' => $license
         );
-
     }
 
     $result = array(
@@ -241,7 +267,7 @@ expose_function("ldseditorlist", "lds_query", array(), elgg_echo('ldsdata'), "GE
 function lds_view() {
     global $API_QUERY;
 
-    $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 50, 0);
+    $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0);
 
     $ldss = array();
     $lds = array();
@@ -267,12 +293,22 @@ function lds_view() {
             $tags['tag'][] = $tag;
         }
 
+        $documents = get_entities_from_metadata('lds_guid',$e->guid,'object','LdS_document', 0, 1);
+        if($documents)
+            $description = $documents[0]->description;
+        else
+            $description = '';
+
+        $license = $e->license ? $e->license : 0;
+
         $lds[] = array(
             'id' => $e->guid,
             'type' => $e->editor_type,
             'title' => $e->title,
             'revision' => $revision,
-            'tags' => $tags
+            'tags' => $tags,
+            'description' => $description,
+            'license' => $license,
         );
     }
 
@@ -330,6 +366,12 @@ function lds_update($params) {
     $queryResult = $xpathvar->query('//lds/tags');
     $elemtags = $queryResult->item(0);
 
+    $queryResult = $xpathvar->query('//lds/description');
+    $description = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
+
+    $queryResult = $xpathvar->query('//lds/license');
+    $license = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
+
     $tags = array('tag' => array());
     foreach($elemtags->childNodes as $tagnode) {
         if($tagnode instanceof DOMElement) {
@@ -354,7 +396,10 @@ function lds_update($params) {
         'doc' =>    array(
             'file' => $_FILES['design']['tmp_name'],
             'filename' => $_FILES['design']['name']
-        ));
+        ),
+        'description' => $description,
+        'license' => $license,
+    );
 
     if(isset($_FILES['design_imsld']))
         if(!$_FILES['design_imsld']['error']) {
@@ -384,12 +429,22 @@ function lds_update($params) {
         $tags['tag'][] = $tag;
     }
 
+    $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document', 0, 1);
+    if($documents)
+        $description = $documents[0]->description;
+    else
+        $description = '';
+
+    $license = $lds->license ? $lds->license : 0;
+
     $result = array('lds' => array(
         'id' => $id,
         'type' => $type,
         'title' => $title,
         'revision' => $revision->id,
         'tags' => $tags,
+        'description' => $description,
+        'license' => $license,
     ));
 
 
@@ -423,12 +478,22 @@ function lds_view_properties($lds_id) {
         $tags['tag'][] = $tag;
     }
 
+    $documents = get_entities_from_metadata('lds_guid',$e->guid,'object','LdS_document', 0, 1);
+    if($documents)
+        $description = $documents[0]->description;
+    else
+        $description = '';
+
+    $license = $e->license ? $e->license : 0;
+
     $lds = array(
         'id' => $e->guid,
         'type' => $e->editor_type,
         'title' => $e->title,
         'revision' => $revision,
-        'tags' => $tags
+        'tags' => $tags,
+        'description' => $description,
+        'license' => $license,
     );
 
     $result = array(

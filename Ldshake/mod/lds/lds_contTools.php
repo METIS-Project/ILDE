@@ -204,13 +204,16 @@ SQL;
 		$richList = array();
 		foreach ($list as $lds)
 		{
+            $obj = new stdClass();
             if($lds->getSubtype() != 'LdS') {
-                $implementation = $lds;
-                $lds = get_entity($lds->container_guid);
+                //$implementation = $lds;
+                //$lds = get_entity($lds->container_guid);
+                $obj->design = get_entity($lds->lds_guid);
+                $obj->implementation = true;
             }
             if($lds) {
-                $obj = new stdClass();
-                $obj->implementation = $implementation;
+                //$obj = new stdClass();
+                //$obj->implementation = $implementation;
                 $lds->title = ($lds->title == '') ? T('Untitled LdS') : $lds->title;
                 $obj->lds = $lds; //The LdS itself
                 $obj->starter = get_entity($lds->owner_guid);
@@ -311,10 +314,10 @@ SQL;
 
             $obj->num_viewers = count(lds_contTools::getViewersIds($implementation->guid));
             $obj->num_editors = count(lds_contTools::getEditorsIds($implementation->guid));
-            if($obj->all_can_view == 'yes')
+            if($implementation->all_can_view == 'yes')
                 $obj->num_viewers = -1;
 
-            if($obj->all_can_view === null)
+            if($implementation->all_can_view === null)
                 $obj->num_viewers = -1;
 
             $obj->num_comments = $implementation->countAnnotations('generic_comment');

@@ -25,6 +25,11 @@ if (isset($forcedEnv)) {
 	$CONFIG->currentEnv = $forcedEnv;
 }
 
+//ILDE debug mode
+if (isset($debug)) {
+    $CONFIG->debug = $debug;
+}
+
 //Let's loop through all the options. We'll check for the environment sentitive ones.
 foreach ($confOptions as $k=>$v)
 {

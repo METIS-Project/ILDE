@@ -65,7 +65,7 @@ class ldshake_tools {
             $queryResult = $xpathvar->query('//lds/menu');
             $menu = $queryResult->item(0)->nodeValue;
 
-            $queryResult = $xpathvar->query('//lds/setings');
+            $queryResult = $xpathvar->query('//lds/settings');
             $settings = $queryResult->item(0)->nodeValue;
 
             foreach($settings->childNodes as $setting_node) {

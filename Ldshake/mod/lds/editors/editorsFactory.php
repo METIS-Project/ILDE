@@ -755,9 +755,16 @@ class LdSFactory
             }
         }
 
+        if($ldsparams['license'] !== null)
+            $lds->license = $ldsparams['license'];
+        else
+            $lds->license = 0;
+
         $lds->save();
         //lds_contTools::markLdSAsViewed ($lds->guid);
-        create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+        create_annotation($lds->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+        $revision = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
+        $revision = $revision[0];
 
         $build = array(
             'lds' => $lds,
@@ -771,6 +778,17 @@ class LdSFactory
         }
 
         OpenglmEditor::buildDocument($build);
+
+        $docObj = new DocumentObject($lds->guid);
+        $docObj->title = T('Support document');
+
+        if($ldsparams['description'] !== null)
+            $docObj->description = $ldsparams['description'];
+        else
+            $docObj->description = "";
+
+        $docObj->lds_revision_id = $revision->id;
+        $docObj->save();
 
         return $lds;
 
@@ -802,9 +820,14 @@ class LdSFactory
             }
         }
 
+        if($ldsparams['license'] !== null)
+            $lds->license = $ldsparams['license'];
+
         $lds->save();
         //lds_contTools::markLdSAsViewed ($lds->guid);
         create_annotation($lds->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
+        $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
+        $revision = $revision[0];
 
         $update = array(
             'lds' => $lds,
@@ -819,8 +842,16 @@ class LdSFactory
 
         OpenglmEditor::updateDocument($update);
 
-        return $lds;
+        if($ldsparams['description'] !== null) {
+            if($documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document', 0, 1)) {
+                $docObj = $documents[0];
+                $docObj->description = $ldsparams['description'];
+                $docObj->lds_revision_id = $revision->id;
+                $docObj->save();
+            }
+        }
 
+        return $lds;
     }
 }
 

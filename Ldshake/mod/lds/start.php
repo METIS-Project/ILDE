@@ -2352,6 +2352,14 @@ function lds_exec_tracking ($params)
     //lds_csv_private();
 }
 
+//external repository search
+///PFC maria
+function lds_exec_repository ($params)
+{
+    $body = elgg_view('lds/repository_search');
+    page_draw("", $body);
+}
+
 function lds_exec_404 ($view = '')
 {
 	header("HTTP/1.0 404 Not Found");

@@ -288,6 +288,9 @@ function encodeURIComponent($str) {
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+        <?php elseif ($editor == 'openglm' && is_array($ldsDocs) && count($ldsDocs) > 0): ?>
+            <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $ldsDocs[0]->guid ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
+            </iframe>
         <?php else:?>
             <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
                 <?php echo $currentDoc->description ?>
