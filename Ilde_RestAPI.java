@@ -7,7 +7,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
-import java.io.StringReader;
+//import java.io.StringReader;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 
@@ -38,10 +38,10 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import org.w3c.dom.bootstrap.DOMImplementationRegistry;
-import org.w3c.dom.ls.DOMImplementationLS;
-import org.w3c.dom.ls.LSSerializer;
-import org.xml.sax.InputSource;
+//import org.w3c.dom.bootstrap.DOMImplementationRegistry;
+//import org.w3c.dom.ls.DOMImplementationLS;
+//import org.w3c.dom.ls.LSSerializer;
+//import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
@@ -96,7 +96,6 @@ public class Ilde_RestAPI {
 			//System.out.println(xmlDocument);	
 			HttpResponse response = httpClient.execute(postRequest);
 			////System.err.println("Login Request Sent Successfully");
-
 			//System.out.print("Response from "+url+" \n"+response.getStatusLine()+"\n");
 			
 			responseStatus=response.getStatusLine().toString();
@@ -117,7 +116,6 @@ public class Ilde_RestAPI {
 			{
 				//JOptionPane.showMessageDialog(null, responseStatus, "Failed to Login ILDE..", JOptionPane.ERROR_MESSAGE);
 			}
-			
 		}
 		
 		catch( Throwable t )
@@ -206,13 +204,9 @@ public class Ilde_RestAPI {
 			{
 				////System.err.println("Response XML Document");
 				File f_propertiesXML = new File(responceXML);
-				//FileWriter fw_propertiesXML = new FileWriter(f_propertiesXML);
-                //BufferedWriter bw_propertiesXML = new BufferedWriter(fw_propertiesXML);
-                
+			
                 FileOutputStream fop = new FileOutputStream(f_propertiesXML);
                 OutputStreamWriter bufferedWriter = new OutputStreamWriter( fop, "UTF8");
-                
-				//String inputLine ;
 				
 				StringBuffer sb = new StringBuffer();
 				String aux = "";
@@ -221,19 +215,11 @@ public class Ilde_RestAPI {
 				while ((aux = responseInput.readLine()) != null) 
 				{
 					sb.append(aux);
-					
-					//bw_propertiesXML.write(inputLine);
-					//bw_propertiesXML.newLine();
 					//System.out.println(inputLine);
 					//JOptionPane.showMessageDialog(null, inputLine, "New LdS Upload Responce XML", JOptionPane.ERROR_MESSAGE);
 				}
 				responseInput.close();  
-				
 				bufferedWriter.write(encodeXMLEscapeChar(sb));
-				
-				//bw_propertiesXML.close();
-				//fw_propertiesXML.close();
-				
 				bufferedWriter.close();
 				fop.close();
 				
@@ -339,14 +325,18 @@ public class Ilde_RestAPI {
 		 
 				System.out.println("Done");
 		 
-			   } catch (ParserConfigurationException pce) {
-				pce.printStackTrace();
-			   } catch (TransformerException tfe) {
-				tfe.printStackTrace();
-			   } catch (IOException ioe) {
-				ioe.printStackTrace();
-			   } catch (SAXException sae) {
-				sae.printStackTrace();
+			   } catch (ParserConfigurationException pce) 
+			   {
+				   pce.printStackTrace();
+			   } catch (TransformerException tfe) 
+			   {
+				   tfe.printStackTrace();
+			   } catch (IOException ioe) 
+			   {
+				   ioe.printStackTrace();
+			   } catch (SAXException sae) 
+			   {
+				   sae.printStackTrace();
 			   }
 		}
 		return null;
@@ -405,15 +395,9 @@ public class Ilde_RestAPI {
 			{
 				//System.err.println("Response XML Document");
 				File f_propertiesXML = new File(ldslistXSD);
-				//FileWriter fw_propertiesXML = new FileWriter(f_propertiesXML);
-                //BufferedWriter bw_propertiesXML = new BufferedWriter(fw_propertiesXML );
-                
                 
                 FileOutputStream fop = new FileOutputStream(f_propertiesXML);
                 OutputStreamWriter bufferedWriter = new OutputStreamWriter( fop, "UTF8");
-                
-                
-				//String inputLine ;
 				
 				responseInput = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 				//System.out.println(response.getEntity().getContent().toString());
@@ -421,25 +405,19 @@ public class Ilde_RestAPI {
 				
 				StringBuffer sb = new StringBuffer();
 				String aux = "";
-				//int i =0;
+				
 				while ((aux = responseInput.readLine()) != null) 
 				{
-						
-					countLDS+=aux.split("<lds><id>").length-1;
-					
+					countLDS+=aux.split("<lds><id>").length-1;				
 					sb.append(aux);
 				}
 				responseInput.close(); 
 				
 				bufferedWriter.write(encodeXMLEscapeChar(sb));
-				//bw_propertiesXML.write(sb.toString());
 				//System.out.println("************** Total LdS Recived : "+countLDS+" ****************");
 				
 				bufferedWriter.close();
 				fop.close();
-				
-				//bw_propertiesXML.close();
-				//fw_propertiesXML.close();
 			}
 		}
 		catch( Throwable t )
@@ -454,15 +432,14 @@ public class Ilde_RestAPI {
 		return responseStr;
 	}
 	
-	public String formatXML(String xml) {
+	/*public String formatXML(String xml) {
 
         try {
             final InputSource src = new InputSource(new StringReader(xml));
             final Node document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(src).getDocumentElement();
             final Boolean keepDeclaration = Boolean.valueOf(xml.startsWith("<?xml"));
 
-        //May need this: System.setProperty(DOMImplementationRegistry.PROPERTY,"com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
-
+            //May need this: System.setProperty(DOMImplementationRegistry.PROPERTY,"com.sun.org.apache.xerces.internal.dom.DOMImplementationSourceImpl");
 
             final DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
             final DOMImplementationLS impl = (DOMImplementationLS) registry.getDOMImplementation("LS");
@@ -472,10 +449,11 @@ public class Ilde_RestAPI {
             writer.getDomConfig().setParameter("xml-declaration", keepDeclaration); // Set this to true if the declaration is needed to be outputted.
 
             return writer.writeToString(document);
-        } catch (Exception e) {
+        } catch (Exception e) 
+        {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 	
 	public String encodeXMLEscapeChar(StringBuffer content)
 	{
@@ -502,21 +480,16 @@ public class Ilde_RestAPI {
 				//System.out.println(i+" : "+fileContent.substring(i, i+6));
 			if(!content.substring(i, i+5).equals("&apos;"))
 			{
-				
 				//System.out.println(fileContent.substring(0, i)+"&amp;"+fileContent.substring(i+1, fileContent.length()));
-				
-					//System.out.println(i+" : "+content.substring(i, i));
+				//System.out.println(i+" : "+content.substring(i, i));
 				content.deleteCharAt(i);
 				content.insert(i, "&amp;");
 				
-				//content.replace(i, i+1, "&amp;");//=fileContent.substring(0, i)+"&amp;"+fileContent.substring(i+1, fileContent.length());
-				
-				
+				//content.replace(i, i+1, "&amp;");//=fileContent.substring(0, i)+"&amp;"+fileContent.substring(i+1, fileContent.length());	
 			}
 			//System.out.println("String After : "+content);
 			//System.out.println("Size After : "+content.length());
 			//System.out.println("\n\n");
-			
 		}
 		return content.toString();
 	}
@@ -586,7 +559,6 @@ public class Ilde_RestAPI {
 			try
 			{
 				//StringBody comment = new StringBody("Filename: " + fileName);
-				
 				MultipartEntity requestEntity = new MultipartEntity( HttpMultipartMode.BROWSER_COMPATIBLE );
 				FileBody fb_binFile = new FileBody(new File(binFile));
 				requestEntity.addPart("design", fb_binFile);
@@ -685,8 +657,6 @@ public class Ilde_RestAPI {
 			
 				InputStream ip = entity.getContent();
 				
-				
-			
 				FileOutputStream fos = new FileOutputStream(file);
 				int zeichen =0;
 				while((zeichen = ip.read())>=0)
@@ -736,36 +706,27 @@ public class Ilde_RestAPI {
 			
 			try
 			{
-				
 				httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 				
-				String url="http://ilde.upf.edu/services/rest/lds/"+ldS_ID+"/properties";
-				
+				String url="http://ilde.upf.edu/services/rest/lds/"+ldS_ID+"/properties";	
 				//JOptionPane.showMessageDialog(null, url, "URL", JOptionPane.ERROR_MESSAGE);
 				
 				HttpGet getRequest = new HttpGet(url);
-			
-				//FileBody fb_propertiesXSD = new FileBody(new File(propertiesXML));
 			 
 				getRequest.addHeader("Authorization", "ldshake "+loginToken);
 				HttpResponse response = httpClient.execute(getRequest);
 			
-			////System.err.println("Sent Successfully");
-			////System.err.print("\n<<Response from  "+url+">>\nStatus : ");
-			//System.out.print(""+response.getStatusLine()+"\n"); 
+				////System.err.println("Sent Successfully");
+				////System.err.print("\n<<Response from  "+url+">>\nStatus : ");
+				//System.out.print(""+response.getStatusLine()+"\n"); 
 				responseStr=response.getStatusLine().toString();
 			
 				if(responseStr.equals("HTTP/1.1 200 OK"))
 				{
-				////System.err.println("Response XML Document");
 					File f_propertiesXML = new File(propertiesXML);
-				//FileWriter fw_propertiesXML = new FileWriter(f_propertiesXML);
-                //BufferedWriter bw_propertiesXML = new BufferedWriter(fw_propertiesXML);
                 
 					FileOutputStream fop = new FileOutputStream(f_propertiesXML);
 					OutputStreamWriter bufferedWriter = new OutputStreamWriter( fop, "UTF8");
-                
-				//String inputLine ;
 				
 					StringBuffer sb = new StringBuffer();
 					String aux = "";
@@ -775,25 +736,16 @@ public class Ilde_RestAPI {
 					while ((aux = responseInput.readLine()) != null) 
 					{
 						sb.append(aux);
-					
-					//bw_propertiesXML.write(inputLine);
-					//bw_propertiesXML.newLine();
-					//System.out.println(inputLine);
-					//JOptionPane.showMessageDialog(null, inputLine, "New LdS Upload Responce XML", JOptionPane.ERROR_MESSAGE);
+						//System.out.println(inputLine);
+						//JOptionPane.showMessageDialog(null, inputLine, "New LdS Upload Responce XML", JOptionPane.ERROR_MESSAGE);
 					}
 					responseInput.close();  
 				
 					//JOptionPane.showMessageDialog(null, sb, "XML String", JOptionPane.ERROR_MESSAGE);
 					bufferedWriter.write(encodeXMLEscapeChar(sb));
 				
-				//bw_propertiesXML.close();
-				//fw_propertiesXML.close();
-				
 					bufferedWriter.close();
 					fop.close();
-				
-				//id = getIDFromXML(responceXML);
-				//setIDinXML(propertiesXML, id);
 				}
 				else
 				{
@@ -875,12 +827,10 @@ public class Ilde_RestAPI {
 	{
 		String responseStr="";
 		
-		
-		
 		HttpClient httpClient = new DefaultHttpClient();
 		httpClient.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
 		String url="http://ilde.upf.edu/services/rest/logout"; 
-		HttpGet getRequest   = new HttpGet( url );
+		HttpGet getRequest = new HttpGet( url );
 		
 		try
 		{
@@ -888,7 +838,6 @@ public class Ilde_RestAPI {
 			getRequest.addHeader("Authorization", "ldshake "+loginToken);
 			HttpResponse response = httpClient.execute(getRequest);
 			////System.err.println("\nLogout Request Sent Successfully");
-
 			////System.err.print("<<Response from  "+url+">>\nStatus : ");
 			////System.out.print(""+response.getStatusLine()+"\n");
 			responseStr=response.getStatusLine().toString();
@@ -910,5 +859,4 @@ public class Ilde_RestAPI {
 	public String getToken(){
 		return loginToken;
 	}
-
 }
