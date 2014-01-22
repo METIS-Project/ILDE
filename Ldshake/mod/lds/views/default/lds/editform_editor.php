@@ -227,6 +227,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var document_iframe_url = "<?php echo $document_iframe_url ?>";
         var implementation = false;
         var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
+        var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
 
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;

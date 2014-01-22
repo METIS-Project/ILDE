@@ -720,20 +720,20 @@ function initDocName ()
         {
             if ($.trim($(this).val()).length > 0)
             {
-                if(!upload && editorType != 'webcollagerest' && editorType != 'gluepsrest') {
+                if(!upload && !restapi && editorType != 'gluepsrest') {
                     documents[0].title = $(this).val();
                     $affectedTab.text(documents[0].title);
                 }
-                if(editorType == 'webcollagerest')
+                if(restapi)
                     postMessageWicChangeTitle($(this).val());
             }
             else
             {
-                if(!upload && editorType != 'webcollagerest' && editorType != 'gluepsrest') {
+                if(!upload && !restapi && editorType != 'gluepsrest') {
                     documents[0].title = t9n.untitledDoc;
                     $affectedTab.text(documents[0].title);
                 }
-                if(editorType == 'webcollagerest')
+                if(restapi)
                     postMessageWicChangeTitle(t9n.untitledDoc);
             }
         }

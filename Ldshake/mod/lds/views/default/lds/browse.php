@@ -56,7 +56,7 @@
             </ul>
             <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></h3></a>
             <br />
-            <h3><a href="<?php echo $url.'pg/lds/repository'?>" style="color:black;"><?php echo T("Search repositories") ?></h3></a>
+            <h3><a href="<?php echo $url.'pg/lds/repository'?>" style="color:black;"><?php echo T("External repositories") ?></h3></a>
             <br />
 
             <?php

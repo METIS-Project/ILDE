@@ -140,6 +140,8 @@ function lds_data() {
     $queryResult = $xpathvar->query('//lds/license');
     $license = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
 
+    $queryResult = $xpathvar->query('//lds/parent');
+    $parent = $queryResult->length ? $queryResult->item(0)->nodeValue : null;
 
     $tags = array('tag' => array());
     foreach($elemtags->childNodes as $tagnode) {
@@ -167,7 +169,8 @@ function lds_data() {
             'filename' => $_FILES['design']['name']
         ),
         'description' => $description,
-        'license' => $license
+        'license' => $license,
+        'parent' => $parent
     );
 
     if(isset($_FILES['design_imsld']))
@@ -177,7 +180,6 @@ function lds_data() {
         }
 
     $lds = LdSFactory::buildLdS($lds_data);
-
 
     $id = $lds->guid;
     $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
@@ -190,6 +192,7 @@ function lds_data() {
         $description = '';
 
     $license = $lds->license ? $lds->license : 0;
+    $parent = $lds->parent ? $lds->parent : 0;
     $result = array(
         'lds' => array(
             'id' => $id,
@@ -198,7 +201,8 @@ function lds_data() {
             'revision' => $revision,
             'tags' => $tags,
             'description' => $description,
-            'license' => $license
+            'license' => $license,
+            'parent' => $parent
     ));
 
     $result = SuccessResult::getInstance($result);
@@ -243,6 +247,7 @@ function lds_query() {
             $description = '';
 
         $license = $e->license ? $e->license : 0;
+        $parent = $e->parent ? $e->parent : 0;
 
         $lds[] = array(
             'id' => $e->guid,
@@ -251,7 +256,8 @@ function lds_query() {
             'revision' => $revision,
             'tags' => $tags,
             'description' => $description,
-            'license' => $license
+            'license' => $license,
+            'parent' => $parent
         );
     }
 
@@ -300,6 +306,7 @@ function lds_view() {
             $description = '';
 
         $license = $e->license ? $e->license : 0;
+        $parent = $e->parent ? $e->parent : 0;
 
         $lds[] = array(
             'id' => $e->guid,
@@ -309,6 +316,7 @@ function lds_view() {
             'tags' => $tags,
             'description' => $description,
             'license' => $license,
+            'parent' => $parent
         );
     }
 
@@ -436,6 +444,7 @@ function lds_update($params) {
         $description = '';
 
     $license = $lds->license ? $lds->license : 0;
+    $parent = $lds->parent ? $lds->parent : 0;
 
     $result = array('lds' => array(
         'id' => $id,
@@ -445,8 +454,8 @@ function lds_update($params) {
         'tags' => $tags,
         'description' => $description,
         'license' => $license,
+        'parent' => $parent
     ));
-
 
     $result = SuccessResult::getInstance($result);
 
@@ -485,6 +494,7 @@ function lds_view_properties($lds_id) {
         $description = '';
 
     $license = $e->license ? $e->license : 0;
+    $parent = $e->parent ? $e->parent : 0;
 
     $lds = array(
         'id' => $e->guid,
@@ -494,6 +504,7 @@ function lds_view_properties($lds_id) {
         'tags' => $tags,
         'description' => $description,
         'license' => $license,
+        'parent' => $parent
     );
 
     $result = array(

@@ -34,45 +34,23 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
+global $CONFIG;
+$user = get_loggedin_user();
+if($editor_id = get_loggedin_user()->editor) {
+    $editor = get_entity($editor_id);
+} else {
+    $editor = new ElggObject();
+}
 
-<div id="lds_single_share_popup" class="lds_popup">
-	<a class="close_popup<?php if ($am_i_starter || isadminloggedin()) echo ' edit' ?>" id="lds_single_share_popup_close" href="#"><?php echo T("Done") ?></a>
-	<h3><?php echo T("LdS Sharing options") ?></h3>
-	<ul id="added_contacts">
-		<li>
-			<img src="<?php echo $starter->getIcon('small') ?>" />
-			<span class="contactinfo" data-guid="<?php echo $starter->guid ?>"><?php echo $starter->name ?></span>
-			<span class="static_label"><?php echo T("Starter") ?></span>
-		</li>
-		<?php if (!$am_i_starter): ?>
-		<li>
-			<img src="<?php echo get_loggedin_user()->getIcon('small') ?>" />
-			<span class="contactinfo" data-guid="<?php echo get_loggedin_userid() ?>"><?php echo get_loggedin_user()->name ?></span>
-			<span class="static_label"><?php echo T("Can edit") ?></span>		
-		</li>
-		<?php endif; ?>
-	</ul>
-	
-	<?php if ($am_i_starter || isadminloggedin()): ?>
-	<div class="sharing_field" id="read_all_wrapper">
-		<input type="checkbox" name="read_all" id="read_all" checked="checked" />
-		<span><?php echo T("Allow all LdShakers to view this LdS") ?></span>
-	</div>
-	
-	<div class="sharing_field">
-		<div class="floated-field" style="margin-right:18px;visibility:hidden;" id="add_viewer_wrapper">
-			<div><?php echo T("Add viewer (LdShaker or group):") ?></div>
-			<input type="text" name="viewers" class="usersuggestbox" id="viewers" autocomplete="off" />
-		</div>
-		<div class="floated-field">
-			<div><?php echo T("Add editor (LdShaker or group):") ?></div>
-			<input type="text" name="editors" class="usersuggestbox" id="editors" autocomplete="off" />
-		</div>
-	</div>
-	<?php endif; ?>
-	
-	<!-- Copys for the JS-generated elements -->
-	<input type="hidden" id="copy_editors" value="<?php echo T("Can edit") ?>" />
-	<input type="hidden" id="copy_viewers" value="<?php echo T("Can view") ?>" />
-</div>
+$editor->name = get_input('name');
+$editor->internalname = get_input('internalname');
+$editor->resturl = get_input('resturl');
+$editor->restpass = get_input('restpass');
+$editor->guiurl = get_input('guiurl');
+$editor->imsld = in_array('imsld', get_input('options'));
+$editor->preview = in_array('preview', get_input('options'));
+$editor_id = $editor->save();
+$user->editor = $editor_id;
+$user->save();
+
+forward($CONFIG->url.'pg/lds/debug/');

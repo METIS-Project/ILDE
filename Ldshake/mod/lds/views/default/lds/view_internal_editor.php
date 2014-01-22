@@ -76,7 +76,7 @@ function encodeURIComponent($str) {
                 <?php endif; ?>
                 <?php if (isadminloggedin()): ?>
                     <a class="leftbutton" href="<?php echo "{$url}pg/lds/vle/{$lds->vle_id}" ?>"><?php echo T("View VLE")." cid:".$lds->course_id ?></a>
-                    <?php if ($currentDoc->editorType == 'gluepsrest' || $currentDoc->editorType == 'webcollagerest'): ?>
+                    <?php if ($currentDoc->editorType == 'gluepsrest' || RestEditor::rest_enabled($currentDoc->editorType)): ?>
                         <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title."(impl).json") ?>"><?php echo T("Download impl file") ?></a>
                     <?php endif; ?>
                 <?php endif; ?>
@@ -284,7 +284,7 @@ function encodeURIComponent($str) {
         </script>
         <?php if ($editor == 'exe'): ?>
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
-        <?php elseif ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+        <?php elseif (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>

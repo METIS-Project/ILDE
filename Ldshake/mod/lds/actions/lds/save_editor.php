@@ -39,6 +39,8 @@
 require_once __DIR__.'/../../lds_contTools.php';
 include_once(__DIR__.'/../../rand.php');
 
+global $CONFIG;
+
 //The object we'll return (jsonencoded) to the form.
 $resultIds = new stdClass();
 $resultIds->docs = array ();
@@ -93,7 +95,7 @@ else
 	$isNew = true;
 }
 
-
+try {
 $lds->title = get_input('title');
 $lds->granularity = get_input('granularity');
 $lds->completeness = get_input('completeness');
@@ -103,7 +105,6 @@ $lds->completeness = get_input('completeness');
 if (get_input('guid') == 0)
 {
 	$lds->access_id = 2;
-	//$lds->write_access_id = 0;
 }
 
 //Now the tags. We'll delete the existing ones to save them again
@@ -138,9 +139,6 @@ if($editordocument[0]->lds_revision_id != $revision->id)
 //create a new revision if htis is the first save in this session
 if(get_input('guid') > 0 && get_input('revision') == 0)
 	DocumentEditorRevisionObject::createRevisionFromDocumentEditor($editordocument[0]);
-//else
-//    $lds->lds_recovery = 0;
-
 
 $save_params = array(
     'url' => $document_url,
@@ -149,7 +147,12 @@ $save_params = array(
 
 //save the contents and join the resultsIds
 $editor = editorsFactory::getInstance($document_editor);
-list($document_editor, $resultIds_add) = $editor->saveDocument($save_params);
+if($save_Result = $editor->saveDocument($save_params)) {
+    list($document_editor, $resultIds_add) = $save_Result;
+} else {
+    throw new Exception("Save failed");
+}
+
 $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
 	
 $editordocument[0]->lds_revision_id = $revision->id;
@@ -158,9 +161,7 @@ $editordocument[0]->save();
 $resultIds->saved = 1;
 
 $lds->save();
-//lds_contTools::markLdSAsViewed ($lds->guid);
 $resultIds->LdS = $lds->guid;
-
 
 $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
 
@@ -173,7 +174,6 @@ if (is_array($_POST['documents']))
                 array(
                     'lds_guid'=>$lds->guid,
                     'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1)) {
-                //$recovered_documents = array_merge($recovered_documents, $recovered_document);
                 $recovered_documents[$doc['doc_recovery']]=$recovered_document[0]->guid;
             }
         }
@@ -185,13 +185,6 @@ $docIds = array();
 if (is_array($documents))
     foreach ($documents as $doc)
         $docIds[] = $doc->guid;
-/*
-if (is_array($recovered_documents))
-    foreach ($recovered_documents as $doc)
-        $docIds[] = $doc->guid;
-
-$docIds = array_unique($docIds);
-*/
 
 //And now we save each document
 if (is_array($_POST['documents']))
@@ -276,6 +269,7 @@ if ($isNew) {
     $lds->notify = 1;
     $lds->save();
 }
+
 /*
 header('HTTP/1.1 200 OK');
 header('Cache-Control: no-cache, must-revalidate');
@@ -287,5 +281,12 @@ $resultIds->requestCompleted = true;
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultIds);
 
+} catch (Exception $e) {
+    if($CONFIG->debug) {
+        register_error("Save error");
+        $lds->disable();
+    }
+    header('HTTP/1.1 500 Internal Server Error');
+}
 
 

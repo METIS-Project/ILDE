@@ -1,6 +1,7 @@
 <script type="text/javascript">
 var baseurl = '<?php echo $vars['url'] ?>';
 var language = '<?php echo $vars['config']->language ?>';
+var isadminloggedin = <?php echo (isadminloggedin() ? 'true' : 'false') ?>;
 var t9nc = {
     deleteLdS : "<?php echo T("Are you sure you want to delete this LdS?") ?>"
 };

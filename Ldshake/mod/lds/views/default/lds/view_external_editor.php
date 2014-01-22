@@ -142,7 +142,7 @@
 
 
 <div id="exportcontainer">
-	<?php if ($doc->editorType == 'webcollagerest'): ?>
+	<?php if ($doc->file_imsld_guid): ?>
         <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/imsld">Save as IMS-LD</a>
         <!--<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/webZip">Save as zipped web page</a>-->
     <?php else: ?>
@@ -154,7 +154,7 @@
     $editor = $doc->editorType;
     $currentDoc = $doc;
     ?>
-    <?php if ($editor == 'webcollagerest' && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+    <?php if (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
     <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>

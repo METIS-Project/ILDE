@@ -57,7 +57,7 @@ function lds_init()
         return $payload;
     };
 
-    $CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
+    //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
     //$CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/ldshake/router.php?_route_=ldsdoc/";
     $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
@@ -97,6 +97,8 @@ function lds_init()
 
     register_action("lds/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/manage_vle.php");
     register_action("lds/admin/manage_vle", false, $CONFIG->pluginspath . "lds/actions/lds/admin/manage_vle.php", true);
+
+    register_action("lds/debug/manage_debug", false, $CONFIG->pluginspath . "lds/actions/lds/debug/manage_debug.php");
 
     register_action("lds/pre_upload", false, $CONFIG->pluginspath . "lds/actions/lds/pre_upload.php");
 
@@ -843,7 +845,11 @@ function lds_exec_neweditor ($params)
 	//Make an editor object according to the parameters received and create a new session
 	$editor = editorsFactory::getTempInstance($params[1]);
 	$vars = $editor->newEditor();
-	
+    if(!$vars) {
+        register_error("New document error");
+        forward($CONFIG->url . 'pg/lds/');
+    }
+
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
 	$vars['referer'] = $CONFIG->url.'pg/lds/';
 	
@@ -1169,11 +1175,18 @@ function lds_exec_editeditor ($params)
 	//make an editor object with the document that we want to edit
 	$editor = EditorsFactory::getInstance($editordocument[0]);
 	$vars_editor = $editor->editDocument();
+
+    if(!$vars_editor) {
+        register_error("Edit document error");
+        forward($CONFIG->url . 'pg/lds/');
+    }
+
 	$vars = $vars + $vars_editor;
 	
 	echo elgg_view('lds/editform_editor',$vars);
 }
 
+/* editors supporting implementation */
 function lds_exec_implementeditor($params)
 {
     global $CONFIG;
@@ -1205,24 +1218,6 @@ function lds_exec_implementeditor($params)
             register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
-
-    //lds_contTools::markLdSAsViewed ($params[1]);
-
-    /*
-    if($editLdS->getSubtype() == 'LdS') {
-        $implementation_helper = get_entity($params[2]);
-        $vars['implementation_helper_id'] = $implementation_helper->guid;
-        $vars['lds_id'] = $editLdS->guid;
-        $vars['course_id'] = $implementation_helper->course_id;
-        $vars['vle_id'] = $implementation_helper->vle_id;
-        $vars['initLdS']->title = $implementation_helper->title;
-    } else {
-        $vars['implementation_helper_id'] = 0;
-        $vars['lds_id'] = $editLdS->lds_id;
-        $vars['course_id'] = $editLdS->course_id;
-        $vars['vle_id'] = $editLdS->vle_id;
-    }
-    */
 
     //Pass the LdS properties to the form
     if($editLdS->getSubtype() == 'LdS_implementation') {
@@ -1339,17 +1334,8 @@ function lds_exec_implementeditor($params)
 
     $vars['implementation'] = true;
 
-
-
     //make an editor object with the document that we want to edit
     $editor = EditorsFactory::getInstance($editordocument[0]);
-
-    /*
-    if(!($vle = $editLdS->vle)) {
-        $owner = get_entity($vars['vle_id']);
-        $vle = $owner->vle;
-    }
-    */
 
     $user = get_loggedin_user();
 
@@ -2173,7 +2159,6 @@ function lds_exec_viewrevisioneditor ($params)
 	page_draw($lds->title. ': '. T("Revision"). ' - ' . date('j M Y H:i', $revDate), $body);
 }
 
-
 function lds_exec_firststeps ()
 {
 	$body = elgg_view('lds/firststeps',$vars);
@@ -2353,7 +2338,6 @@ function lds_exec_tracking ($params)
 }
 
 //external repository search
-///PFC maria
 function lds_exec_repository ($params)
 {
     $body = elgg_view('lds/repository_search');
@@ -2451,4 +2435,23 @@ function lds_admin_vle ($params) {
 
     $body = elgg_view('lds/vledata',$vars);
     page_draw('VLE', $body);
+}
+
+function lds_exec_debug($params) {
+    global $CONFIG;
+
+    if(!$CONFIG->debug)
+        forward();
+
+    set_context("debug");
+
+    if($editor_id = get_loggedin_user()->editor) {
+        $editor = get_entity($editor_id);
+    } else {
+        $editor = new ElggObject();
+    }
+
+    $form_body = elgg_view('lds/debug/debug_settings', array('editor' => $editor));
+    $body = elgg_view('input/form', array('action' => "{$CONFIG->url}action/lds/debug/manage_debug", 'body' => $form_body));
+    page_draw('Debug', $body);
 }

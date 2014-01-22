@@ -2202,3 +2202,18 @@ div.cc_info_icon > div.cc_icon_title {
     top: 40px;
     height: 630px;
 }
+
+
+/*** repository search ***/
+.repository-links-title {
+    font-size: 20px;
+}
+
+#repository-links {
+    padding: 20px;
+}
+
+/*** debug settings ***/
+.debug_settings {
+    padding: 20px;
+}

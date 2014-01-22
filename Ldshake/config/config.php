@@ -40,7 +40,8 @@ $defaultLang = array (
 
 $debug = true;
 
-$vle_key = "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF";
+$vle_key = "92EB2B8ED34885A22685FE2CB8739153";
+
 /**
  * List of environments, containing the regular expression of the server name that defines them.
  */

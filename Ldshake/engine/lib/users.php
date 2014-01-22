@@ -902,7 +902,7 @@
 				//remove_metadata($user_guid, 'conf_code');
 				remove_private_setting($user_guid, 'passwd_conf_code');
 				
-				$email = sprintf(elgg_echo('email:resetpassword:body'), $user->name, $password);
+				$email = sprintf(elgg_echo('email:resetpassword:body'), $user->name, $password, $user->username);
 				
 				return notify_user($user->guid, $CONFIG->site->guid, elgg_echo('email:resetpassword:subject'), $email, NULL, 'email');
 			}

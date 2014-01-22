@@ -39,7 +39,7 @@
  * LdShake top toolbar
  * 
  */
-
+global $CONFIG;
 if (isloggedin()) :
 ?>
 
@@ -98,6 +98,15 @@ if (isloggedin()) :
 				</ul>
 				<div id="toolbar_lds_types" class="menu">
                     <ul>
+                        <?php
+                        if($CONFIG->debug && get_loggedin_user()->editor):
+                            if($editor = get_entity(get_loggedin_user()->editor)):
+                        ?>
+                        <li id="tb_new_option_debug" class="menu_option menu_suboption"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/<?php echo $editor->internalname?>/"><?php echo $editor->name ?></a></li>
+                        <?php
+                            endif;
+                        endif;
+                        ?>
                         <li id="tb_new_option_conceptualize" class="menu_option menu_suboption"><?php echo T("Conceptualize") ?></li>
                         <li id="tb_new_option_author" class="menu_option menu_suboption"><?php echo T("Author") ?></li>
                         <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>

@@ -680,7 +680,7 @@ class EditorsFactory
 			return new WebCollageEditor($document);
 		if($document->editorType == 'exe')
 			return new exeLearningEditor($document);
-        if($document->editorType == 'webcollagerest')
+        if(RestEditor::rest_enabled($document->editorType))
             return new RestEditor($document);
         if($document->editorType == 'openglm')
             return new UploadEditor($document);
@@ -702,7 +702,7 @@ class EditorsFactory
             return new WebCollageEditor($document);
         if($document->editorType == 'exe')
             return new exeLearningEditor($document);
-        if($document->editorType == 'webcollagerest')
+        if(RestEditor::rest_enabled($document->editorType))
             return new RestEditor($document);
     }
 
@@ -712,8 +712,8 @@ class EditorsFactory
 			return new WebCollageEditor(null);
 		if($editorType == 'exe')
 			return new exeLearningEditor(null);
-        if($editorType == 'webcollagerest')
-            return new RestEditor(null);
+        if(RestEditor::rest_enabled($editorType))
+            return new RestEditor(null, $editorType);
         if($editorType == 'openglm')
             return new UploadEditor(null, $editorType);
         if($editorType == 'cadmos')
@@ -759,6 +759,9 @@ class LdSFactory
             $lds->license = $ldsparams['license'];
         else
             $lds->license = 0;
+
+        if($ldsparams['parent'] !== null)
+            $lds->parent = $ldsparams['parent'];
 
         $lds->save();
         //lds_contTools::markLdSAsViewed ($lds->guid);
@@ -940,7 +943,34 @@ class OpenglmEditor extends Editor {
 class RestEditor extends Editor
 {
     public $document_url;
+    private $_editorType;
     private $_rest_id;
+
+    /*also useful to check if a given editor supports the REST api*/
+    public static function rest_enabled($editor_type) {
+        global $CONFIG;
+
+        if(!$CONFIG->rest_editor_list) {
+            if($user_editor = get_entity(get_loggedin_user()->editor)) {
+                $CONFIG->rest_editor_list[$user_editor->name_id] = array(
+                    'name' => $user_editor->name,
+                    'url_rest' => $user_editor->url_guest,
+                    'url_gui' => $user_editor->url_gui,
+                );
+            }
+
+            $CONFIG->rest_editor_list['webcollagerest'] = array(
+                'name' => 'WebCollage',
+                'url_rest' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/",
+                'url_gui' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php",
+                'preview' => true,
+                'imsld' => true,
+                'password' => 'LdS@k$1#'
+            );
+        }
+
+        return $CONFIG->rest_editor_list[$editor_type];
+    }
 
     public function getDocumentId()
     {
@@ -952,16 +982,16 @@ class RestEditor extends Editor
     {
         global $CONFIG;
         $user = get_loggedin_user();
-        $rand_id = rand_str(64);//mt_rand(1000000,5000000);
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
-
-        //copy($CONFIG->path.'vendors/exelearning/sample.elp', $filename_editor);
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
+        $rand_id = rand_str(64);
+        $editorType = $this->_editorType;
 
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
-        $vars['editor'] = 'webcollagerest';
+
+        $vars['editor'] = $editorType;
+        $vars['editor_label'] = $CONFIG->rest_editor_list[$editorType]['name'];
+        $vars['restapi'] = true;
+
         $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
 
         $post = array(
@@ -971,17 +1001,23 @@ class RestEditor extends Editor
             'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
-        //$uri = "http://pandora.tel.uva.es/~wic/wic2Ldshake/ldshake/router.php?_route_=ldsdoc/";
+        $uri = "{$CONFIG->rest_editor_list[$editorType]['url_rest']}ldshake/ldsdoc/";
+
+        try {
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$editorType]['password'])
             ->sendIt();
 
-        //$this->_document->url = $response;
-        //$this->_document->save();
+        if($response->code > 299)
+            throw new Exception("Error code {$response->code}");
+
+        } catch (Exception $e) {
+            register_error(htmlentities($e->getMessage()));
+            return false;
+            forward($CONFIG->url . 'pg/lds/');
+        }
 
         $vars['editor_id'] = $rand_id;
         //http://appserver.ldshake.edu/designapp/?document_id=value&sectoken=value
@@ -993,11 +1029,8 @@ class RestEditor extends Editor
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
-        //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
-        //http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id=456
+        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$editorType]['url_gui']}?document_id={$doc_id}&lang={$lang}";
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['editor_label'] = 'WebCollage';
 
         return $vars;
     }
@@ -1014,7 +1047,10 @@ class RestEditor extends Editor
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
-        $vars['editor'] = 'webcollagerest';
+        $vars['editor'] = $this->_document->editorType;
+        $vars['editor_label'] = $CONFIG->rest_editor_list[$this->_document->editorType]['name'];
+        $vars['restapi'] = true;
+
         $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
 
         $post = array(
@@ -1025,15 +1061,26 @@ class RestEditor extends Editor
             'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        //$uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/";
+
+        try {
+
         $response = \Httpful\Request::post($uri)
             ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
             ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
+            ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
             ->sendIt();
 
-        $vars['editor_label'] = 'WebCollage';
+        if($response->code > 299)
+            throw new Exception("Error code {$response->code}");
+
+        } catch (Exception $e) {
+            register_error(htmlentities($e->getMessage()));
+            return false;
+            forward($CONFIG->url . 'pg/lds/');
+        }
+
         $doc_url = parse_url($response->raw_body);
         $url_path = explode('/', $doc_url['path'].$doc_url['query']);
         $url_path_filtered = array();
@@ -1043,8 +1090,7 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
-        //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
+        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_gui']}?document_id={$doc_id}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -1080,6 +1126,8 @@ class RestEditor extends Editor
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
         $vars['editor'] = 'webcollagerest';
+        $vars['restapi'] = true;
+
         $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
 
         $post = array(
@@ -1091,7 +1139,6 @@ class RestEditor extends Editor
             'ldshake_frame_origin' => $ldshake_frame_origin,
         );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
         try {
             $response = \Httpful\Request::post($uri)
@@ -1208,11 +1255,22 @@ class RestEditor extends Editor
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}";
+        $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}";
+
+        try {
         $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->addHeader('Accept', 'application/json; charset=UTF-8')
+            ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+            //->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
+
+            if($response->code > 299)
+                throw new Exception("Error code {$response->code}");
+
+        } catch (Exception $e) {
+            register_error(htmlentities($e->getMessage()));
+            return false;
+            forward($CONFIG->url . 'pg/lds/');
+        }
 
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
@@ -1222,42 +1280,67 @@ class RestEditor extends Editor
         $this->_document->file_guid = $file->guid;
         $this->_document->save();
 
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['imsld']) {
+            $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}".'.imsld';
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'.imsld';
-        $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->addHeader('Accept', 'application/json; charset=UTF-8')
-            ->sendIt();
+            try {
+            $response = \Httpful\Request::get($uri)
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+                //->addHeader('Accept', 'application/json; charset=UTF-8')
+                ->sendIt();
 
-        //create a new file to store the document
-        $rand_id = mt_rand(400,9000000);
-        $filestorename = (string)$rand_id.'.zip';
-        $file = $this->getNewFile($filestorename);
-        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
-        $this->_document->file_imsld_guid = $file->guid;
-        $this->_document->save();
+                if($response->code > 299)
+                    throw new Exception("Error code {$response->code}");
+
+            } catch (Exception $e) {
+                register_error(htmlentities($e->getMessage()));
+                return false;
+                forward($CONFIG->url . 'pg/lds/');
+            }
+
+            //create a new file to store the document
+            $rand_id = mt_rand(400,9000000);
+            $filestorename = (string)$rand_id.'.zip';
+            $file = $this->getNewFile($filestorename);
+            file_put_contents($file->getFilenameOnFilestore(), $response->raw_body);
+            $this->_document->file_imsld_guid = $file->guid;
+            $this->_document->save();
+        }
 
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
         $this->_document->pub_previewDir = rand_str(64);
         $this->_document->revisionDir = rand_str(64);
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'/summary';
-        $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->sendIt();
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['preview']) {
+            $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}".'/summary';
 
-        $putData = tmpfile();
-        fwrite($putData, $response->raw_body);
-        fseek($putData, 0);
-        $m_fd = stream_get_meta_data($putData);
+            try {
+            $response = \Httpful\Request::get($uri)
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+                ->sendIt();
 
-        $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
-        mkdir($preview_path);
-        $zip = new ZipArchive();
-        $zip->open($m_fd['uri']);
-        $zip->extractTo($preview_path);
-        $zip->close();
+                if($response->code > 299)
+                    throw new Exception("Error code {$response->code}");
+
+            } catch (Exception $e) {
+                register_error(htmlentities($e->getMessage()));
+                return false;
+                forward($CONFIG->url . 'pg/lds/');
+            }
+
+            $putData = tmpfile();
+            fwrite($putData, $response->raw_body);
+            fseek($putData, 0);
+            $m_fd = stream_get_meta_data($putData);
+
+            $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+            mkdir($preview_path);
+            $zip = new ZipArchive();
+            $zip->open($m_fd['uri']);
+            $zip->extractTo($preview_path);
+            $zip->close();
+        }
 
         $this->_document->rev_last = 0;
         $this->_document->lds_revision_id = 0;
@@ -1332,9 +1415,9 @@ class RestEditor extends Editor
     public function saveDocument($params=null)
     {
         if($this->_document->file_guid)
-            $this->saveExistingDocument($params);
+            return $this->saveExistingDocument($params);
         else
-            $this->saveNewDocument($params);
+            return $this->saveNewDocument($params);
     }
 
     //update the previous contents
@@ -1352,52 +1435,87 @@ class RestEditor extends Editor
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}";
+        $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}";
+
+        try {
         $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->addHeader('Accept', 'application/json; charset=UTF-8')
+            ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+            //->addHeader('Accept', 'application/json; charset=UTF-8')
             ->sendIt();
+
+            if($response->code > 299)
+                throw new Exception("Error code {$response->code}");
+
+        } catch (Exception $e) {
+            register_error(htmlentities($e->getMessage()));
+            return false;
+            forward($CONFIG->url . 'pg/lds/');
+        }
 
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
         file_put_contents($this->getFullFilePath($this->_document->file_guid), $response->raw_body);
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'.imsld';
-        $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->addHeader('Accept', 'application/json; charset=UTF-8')
-            ->sendIt();
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['imsld']) {
+            $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}".'.imsld';
 
-        //create a new file to store the document
-        if(!$this->_document->file_imsld_guid) {
-            $rand_id = mt_rand(400,9000000);
-            $filestorename = (string)$rand_id.'.zip';
-            $file = $this->getNewFile($filestorename);
-            $this->_document->file_imsld_guid = $file->guid;
+            try {
+            $response = \Httpful\Request::get($uri)
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+                //->addHeader('Accept', 'application/json; charset=UTF-8')
+                ->sendIt();
+
+                if($response->code > 299)
+                    throw new Exception("Error code {$response->code}");
+
+            } catch (Exception $e) {
+                register_error(htmlentities($e->getMessage()));
+                return false;
+                forward($CONFIG->url . 'pg/lds/');
+            }
+
+            //create a new file to store the document
+            if(!$this->_document->file_imsld_guid) {
+                $rand_id = mt_rand(400,9000000);
+                $filestorename = (string)$rand_id.'.zip';
+                $file = $this->getNewFile($filestorename);
+                $this->_document->file_imsld_guid = $file->guid;
+            }
+            file_put_contents($this->getFullFilePath($this->_document->file_imsld_guid), $response->raw_body);
         }
-        file_put_contents($this->getFullFilePath($this->_document->file_imsld_guid), $response->raw_body);
-
 
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
 
+        //preview
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['preview']) {
+            $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}".'/summary';
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/{$doc_id}".'/summary';
-        $response = \Httpful\Request::get($uri)
-            ->basicAuth('ldshake_default_user','LdS@k$1#')
-            ->sendIt();
+            try {
+            $response = \Httpful\Request::get($uri)
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+                ->sendIt();
+                if($response->code > 299)
+                    throw new Exception("Error code {$response->code}");
 
-        $putData = tmpfile();
-        fwrite($putData, $response->raw_body);
-        fseek($putData, 0);
-        $m_fd = stream_get_meta_data($putData);
+            } catch (Exception $e) {
+                register_error(htmlentities($e->getMessage()));
+                return false;
+                forward($CONFIG->url . 'pg/lds/');
+            }
 
-        $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
-        mkdir($preview_path);
-        $zip = new ZipArchive();
-        $zip->open($m_fd['uri']);
-        $zip->extractTo($preview_path);
-        $zip->close();
+            $putData = tmpfile();
+            fwrite($putData, $response->raw_body);
+            fseek($putData, 0);
+            $m_fd = stream_get_meta_data($putData);
+
+            $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
+            mkdir($preview_path);
+            $zip = new ZipArchive();
+            $zip->open($m_fd['uri']);
+            $zip->extractTo($preview_path);
+            $zip->close();
+        }
 
         /*
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
@@ -1438,9 +1556,14 @@ class RestEditor extends Editor
         return array($this->_document, $resultIds);
     }
 
-    public function __construct($document=null)
+    public function __construct($document=null, $editorType = 'webcollagerest')
     {
         $this->_document = $document;
+
+        if($document)
+            $this->_editorType = $document->editorType;
+        else
+            $this->_editorType = $editorType;
     }
 }
 
@@ -1574,8 +1697,9 @@ class UploadEditor extends Editor
                 ->basicAuth('ldshake_default_user','LdS@k$1#')
                 ->sendIt();
 
-            $vars['editor'] = 'webcollagerest';
-            $vars['editor_label'] = 'WebCollage';
+            $vars['restapi'] = !!RestEditor::rest_enabled($this->_document->editorType);
+            $vars['editor'] = $this->_document->editorType;
+            $vars['editor_label'] = $CONFIG->rest_editor_list[$this->_document->editorType]->name;
             $doc_url = parse_url($response->raw_body);
             $url_path = explode('/', $doc_url['path'].$doc_url['query']);
             $url_path_filtered = array();
@@ -2154,7 +2278,7 @@ class GluepsManager
         $design = get_entity($lds->lds_id);
         $editordocument = get_entities_from_metadata_multi(array(
                 'lds_guid' => $lds->guid,
-                'editorType' => $design->editor_type//'webcollagerest'
+                'editorType' => $design->editor_type
             ),
             'object','LdS_document_editor', 0, 100);
 
@@ -2296,41 +2420,42 @@ class GluepsManager
     }
 */
 
-    public function deployDocument() {
-        global $CONFIG;
+//    public function deployDocument() {
+//        global $CONFIG;
+//
+//        $load_vars = $this->loadDocument();
+//
+//        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
+//        $design_contents = file_get_contents($filename_lds);
+//        $rand_id = mt_rand(400,5000000);
+//        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
+//
+//        /*
+//        $post = array(
+//            'lang' => 'en',
+//            'sectoken' => $rand_id,
+//            'document' => "@{$filename_lds}"
+//        );
+//        */
+//
+//        $uri = "{$CONFIG->glueps_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
+//        $uri = "{$load_vars['document_url']}/static";
+//        $response = \Httpful\Request::put($uri, $design_contents)
+//            ->sendIt();
+//
+//        //copy($filename_lds, $filename_editor);
+//
+//        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
+//        //unlink($filename_editor);
+//        $vars['editor'] = 'webcollagerest';
+//        $vars['editor_label'] = 'WebCollage';
+//        $vars['document_url'] = $response->raw_body;
+//        $vars['editor_id'] = $rand_id;
+//
+//        return $vars;
+//    }
 
-        $load_vars = $this->loadDocument();
-
-        $filename_lds = $this->getFullFilePath($this->_document->file_guid);
-        $design_contents = file_get_contents($filename_lds);
-        $rand_id = mt_rand(400,5000000);
-        //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
-
-        /*
-        $post = array(
-            'lang' => 'en',
-            'sectoken' => $rand_id,
-            'document' => "@{$filename_lds}"
-        );
-        */
-
-        $uri = "{$CONFIG->glueps_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$load_vars['document_url']}/static";
-        $response = \Httpful\Request::put($uri, $design_contents)
-            ->sendIt();
-
-        //copy($filename_lds, $filename_editor);
-
-        //file('http://127.0.0.1/exelearning/?load='.$rand_id);
-        //unlink($filename_editor);
-        $vars['editor'] = 'webcollagerest';
-        $vars['editor_label'] = 'WebCollage';
-        $vars['document_url'] = $response->raw_body;
-        $vars['editor_id'] = $rand_id;
-
-        return $vars;
-    }
-
+    /*
     public function getVle() {
         global $CONFIG;
         $filename_lds = $this->getFullFilePath($this->_document->file_guid);
@@ -2361,6 +2486,7 @@ class GluepsManager
 
         return $vars;
     }
+    */
 
 
     public function saveNewDocument($params = null)

@@ -118,7 +118,7 @@ function initContactList (type)
 	{
 		var contact = friends[type][i];
 		
-		if (am_i_starter)
+		if (am_i_starter || isadminloggedin)
 		{
 			var licontents =
 				'<img src="' + contact.pic + '" />' +

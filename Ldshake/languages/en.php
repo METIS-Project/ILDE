@@ -765,7 +765,8 @@ You cannot reply to this email.",
 			'email:resetpassword:subject' => "Password reset!",
 			'email:resetpassword:body' => "Hi %s,
 			
-Your password has been reset to: %s",
+Your password has been reset to: %s
+Your login username is: %s",
 	
 	
 			'email:resetreq:subject' => "Request for new password.",
