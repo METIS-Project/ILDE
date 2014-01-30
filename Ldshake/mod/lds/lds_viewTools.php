@@ -131,4 +131,11 @@ class lds_viewTools
                 return $CONFIG->url . 'pg/lds/query/';
 		}
 	}
+
+    public static function iconSupport ($type)
+    {
+        $supported = array("doc",'webcollagerest','glueps','openglm','cadmos');
+
+        return in_array($type, $supported);
+    }
 }

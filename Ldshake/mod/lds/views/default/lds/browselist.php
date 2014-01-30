@@ -65,7 +65,7 @@
 			</div>
 		</div>
 		<div class="lds_icon">
-			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo $item->editor_type; ?>-icon-64.png" /></a>
+			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->editor_type) ? $item->editor_type : 'doc'); ?>-icon-64.png" /></a>
 			<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?>
 			<br />
 			<div class="lds_sticker mine"><?php echo T("Mine") ?></div>

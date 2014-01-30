@@ -92,6 +92,14 @@ extract($vars);
                 <span class="vle_form_label"><?php echo T('VLE password')?></span>
                 <input class="vle_form_input" type="password" name="vle_password" value="<?php echo htmlspecialchars($vle->password)?>" />
             </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE version')?></span>
+                <input class="vle_form_input" type="text" name="vle_version" value="<?php echo htmlspecialchars($vle->version)?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE wstoken')?></span>
+                <input class="vle_form_input" type="text" name="vle_wstoken" value="<?php echo htmlspecialchars($vle->wstoken)?>" />
+            </div>
 
             <input type="hidden" name="vle_id" value="<?php echo $vle_id;?>" />
             <input id="vle_delete_flag" type="hidden" name="vle_delete_flag" value="0" />

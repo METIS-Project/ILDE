@@ -36,6 +36,7 @@
 
 global $CONFIG;
 $vle_id = (int)get_input('vle_id');
+$vle_admin_id = (int)get_input('vle_name_select');
 $vle_type = get_input('vle_type');
 $vle_name = get_input('vle_name');
 $vle_url = get_input('vle_url');
@@ -54,6 +55,7 @@ if($vle_id) {
     $vle->owner_guid = get_loggedin_userid();
 }
 $vle->name = $vle_name;
+$vle->admin_id = $vle_admin_id;
 $vle->vle_url = $vle_url;
 $vle->vle_type = $vle_type;
 $vle->username = $vle_username;
@@ -61,10 +63,6 @@ if($vle_password!="000000") {
     $vle->password = lds_contTools::encrypt_password($vle_password);
     $vle->encrypted = 1;
 }
-
-//$cr_pass = lds_contTools::encrypt_password($vle_password);
-//$de_pass = lds_contTools::decrypt_password($cr_pass);
-
 
 if($vle_system) $vle->vle_system = $vle_system;
 $vle->save();

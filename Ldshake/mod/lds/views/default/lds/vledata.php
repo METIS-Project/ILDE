@@ -95,6 +95,17 @@ extract($vars);
                 <input class="vle_form_input <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly<?php endif; ?>" type="text" <?php if(($vle->vle_system || $vle->new) && !$vle_admin): ?>readonly="readonly"<?php endif; ?> name="vle_url" value="<?php echo htmlspecialchars($vle->vle_url)?>" />
             </div>
 
+            <?php if($vle_admin): ?>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE version')?></span>
+                <input class="vle_form_input" type="text" name="vle_version" value="<?php echo htmlspecialchars($vle->version)?>" />
+            </div>
+            <div class="lds_form_block">
+                <span class="vle_form_label"><?php echo T('VLE wstoken')?></span>
+                <input class="vle_form_input" type="text" name="vle_wstoken" value="<?php echo htmlspecialchars($vle->wstoken)?>" />
+            </div>
+            <?php endif; ?>
+
             <?php if(!$vle_admin): ?>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE username')?></span>

@@ -2295,6 +2295,9 @@ SQL;
             'gluepsrest' => array('ca','en','es')
         );
 
+        if(!$ilde_tools_lang[$tool])
+            return 'en';
+
         if(in_array($lang, $ilde_tools_lang[$tool]))
             return $lang;
         else

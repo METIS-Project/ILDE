@@ -40,6 +40,8 @@ $vle_id = (int)get_input('vle_id');
 $vle_type = get_input('vle_type');
 $vle_name = get_input('vle_name');
 $vle_url = get_input('vle_url');
+$vle_version = get_input('vle_version');
+$vle_wstoken = get_input('vle_wstoken');
 //$vle_username = get_input('vle_username');
 //$vle_password = get_input('vle_password');
 $vle_delete = (int)get_input('vle_delete_flag', 0);
@@ -54,6 +56,8 @@ if($vle_id) {
     $vle->owner_guid = get_loggedin_userid();
 }
 $vle->name = $vle_name;
+$vle->vle_version = $vle_version;
+$vle->vle_wstoken = $vle_wstoken;
 $vle->vle_url = $vle_url;
 $vle->vle_type = $vle_type;
 $vle->username = "";

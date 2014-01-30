@@ -952,10 +952,14 @@ class RestEditor extends Editor
 
         if(!$CONFIG->rest_editor_list) {
             if($user_editor = get_entity(get_loggedin_user()->editor)) {
-                $CONFIG->rest_editor_list[$user_editor->name_id] = array(
+                $CONFIG->rest_editor_list[$user_editor->internalname] = array(
                     'name' => $user_editor->name,
-                    'url_rest' => $user_editor->url_guest,
-                    'url_gui' => $user_editor->url_gui,
+                    'url_rest' => $user_editor->resturl,
+                    'url_gui' => $user_editor->guiurl,
+                    'password' => $user_editor->restpass,
+                    'imsld' => $user_editor->imsld,
+                    'preview' => $user_editor->preview,
+                    'icon' => false
                 );
             }
 
@@ -965,7 +969,8 @@ class RestEditor extends Editor
                 'url_gui' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php",
                 'preview' => true,
                 'imsld' => true,
-                'password' => 'LdS@k$1#'
+                'password' => 'LdS@k$1#',
+                'icon' => true
             );
         }
 
@@ -1001,6 +1006,7 @@ class RestEditor extends Editor
             'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
+        //$uri = "http://web.dev/ilde/services/dummy?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->rest_editor_list[$editorType]['url_rest']}ldshake/ldsdoc/";
 
         try {
@@ -1104,8 +1110,15 @@ class RestEditor extends Editor
         $gluepsm = new GluepsManager($vle);
         $vle_info = $gluepsm->getVleInfo();
         $course_info = $gluepsm->getCourseInfo($params['course_id']);
+
         $vle_info->id = $vle->guid;
         $vle_info->name = $vle->name;
+        if($vle->admin_id) {
+            $admin_vle = get_entity($vle->admin_id);
+            $vle_info->version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $vle_info->wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
+
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info
@@ -1665,6 +1678,13 @@ class UploadEditor extends Editor
         $course_info = $gluepsm->getCourseInfo($params['course_id']);
         $vle_info->id = $vle->guid;
         $vle_info->name = $vle->name;
+
+        if($this->_vle->admin_id) {
+            $admin_vle = get_entity($this->_vle->admin_id);
+            $vle_info->version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $vle_info->wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
+
         $wic_vle_data = array(
             'learningEnvironment' => $vle_info,
             'course' => $course_info
@@ -2025,18 +2045,31 @@ class GluepsManager
         $glueps_url = $CONFIG->glueps_url;
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
+        $version='';
+        $wstoken='';
+
+        if($this->_vle->admin_id) {
+            $admin_vle = get_entity($this->_vle->admin_id);
+            $version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
+
         $get = array(
             'type' => $this->_vle->vle_type,
             'accessLocation' => $this->_vle->vle_url,
             'creduser' => $this->_vle->username,
-            'credsecret' => $vle_password
+            'credsecret' => $vle_password,
+            'version' => $version,
+            'wstoken' => $wstoken
         );
 
         $uri = "{$glueps_url}courses?"
             ."type=".urlencode($get['type'])."&"
             ."accessLocation=".urlencode($get['accessLocation'])."&"
             ."creduser=".urlencode($get['creduser'])."&"
-            ."credsecret=".urlencode($get['credsecret']);
+            ."credsecret=".urlencode($get['credsecret'])."&"
+            ."version=".urlencode($get['version'])."&"
+            ."wstoken=".urlencode($get['wstoken']);
 
         try {
             $response = \Httpful\Request::get($uri)
@@ -2065,21 +2098,25 @@ class GluepsManager
     public function getCourseInfo($course_id) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
-        /*
-        $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
-        $type = 'Moodle';
-        $username = 'metis';
-        $password = 'M3t1$project';
-        $course = '3';
-        */
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
+
+        $version='';
+        $wstoken='';
+
+        if($this->_vle->admin_id) {
+            $admin_vle = get_entity($this->_vle->admin_id);
+            $version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
 
         $get = array(
             'type' => $this->_vle->vle_type,
             'accessLocation' => $this->_vle->vle_url,
             'creduser' => $this->_vle->username,
             'credsecret' => $vle_password,
-            'course' => $course_id
+            'course' => $course_id,
+            'version' => $version,
+            'wstoken' => $wstoken
         );
 
         $uri = "{$url}courses?"
@@ -2087,7 +2124,9 @@ class GluepsManager
             ."accessLocation=".urlencode($get['accessLocation'])."&"
             ."creduser=".urlencode($get['creduser'])."&"
             ."credsecret=".urlencode($get['credsecret'])."&"
-            ."course=".urlencode($get['course']);
+            ."course=".urlencode($get['course'])."&"
+            ."version=".urlencode($get['version'])."&"
+            ."wstoken=".urlencode($get['wstoken']);
 
         $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
@@ -2114,6 +2153,12 @@ class GluepsManager
         $vle_info->id = $this->_vle->guid;
         $vle_info->name = $this->_vle->name;
 
+        if($this->_vle->admin_id) {
+            $admin_vle = get_entity($this->_vle->admin_id);
+            $vle_info->version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $vle_info->wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
+
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $wic_vle_data = array(
@@ -2123,7 +2168,7 @@ class GluepsManager
             'type' => $this->_vle->vle_type,
             'creduser' => $this->_vle->username,
             'credsecret' => $vle_password,
-            'participants' => $course_info->participants
+            'participants' => $course_info->participants,
         );
         //unset($vle_info->courses);
         //$vle_info->course = $course_info;
@@ -2302,6 +2347,12 @@ class GluepsManager
         $course_info = $this->getCourseInfo($course);
         $vle_info->id = $this->_vle->guid;
         $vle_info->name = $this->_vle->name;
+
+        if($this_->_vle->admin_id) {
+            $admin_vle = get_entity($this_->_vle->admin_id);
+            $vle_info->version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
+            $vle_info->wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
+        }
 
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
