@@ -42,6 +42,13 @@ $debug = true;
 
 $vle_key = "92EB2B8ED34885A22685FE2CB8739153";
 
+$google_drive = array(
+    'client_id' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7.apps.googleusercontent.com',
+    'service_account_name' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7@developer.gserviceaccount.com',
+    'key_file_location' => '/var/www/0f2dd252fa9986159f0f4377b3ad852c05874328-privatekey.p12',
+    'application_name' => 'ilde-docs',
+);
+
 /**
  * List of environments, containing the regular expression of the server name that defines them.
  */

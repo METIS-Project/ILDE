@@ -50,6 +50,8 @@ $isNew = false;
 
 $lds_recovery = get_input('lds_recovery', "0");
 $editor_type = get_input('editorType');
+$google_docs_support_id = get_input('google_docs_support_id', false);
+$google_docs_support_title = get_input('google_docs_support_title', false);
 $docSession = get_input('editor_id');
 $document_url = get_input('document_url');
 $is_implementation = get_input('is_implementation');
@@ -71,8 +73,15 @@ if (get_input('guid') > 0 && !$new_imp)
 {
 	//We're editing. Fetch it from the DB
 	$lds = get_entity(get_input('guid'));
-	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
-	$document_editor = $editordocument[0];
+	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 2);
+    if(!$editordocument[0]->support){
+	    $document_editor = $editordocument[0];
+	    $document_editor_support = $editordocument[1];
+    }
+    else {
+        $document_editor_support = $editordocument[0];
+        $document_editor = $editordocument[1];
+    }
 }
 else
 {
@@ -92,6 +101,16 @@ else
 	$document_editor->lds_guid = $lds->guid;
 	$document_editor->lds_revision_id = 0;
 	$document_editor->save();
+
+    //google docs support document
+    if($editor_type == 'google_docs') {
+        $document_editor_support = new DocumentEditorObject($lds->guid, 0);
+        $document_editor_support->editorType = $editor_type;
+        $document_editor_support->support = true;
+        $document_editor_support->lds_guid = $lds->guid;
+        $document_editor_support->lds_revision_id = 0;
+        $document_editor_support->save();
+    }
 	$isNew = true;
 }
 
@@ -125,143 +144,163 @@ if (get_input('revision') == 0)
 }
 
 //We get the revision id to send it back to the form
-$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
+//$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
 $revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
 $revision = $revision[0];
 $resultIds->revision = $revision->id;
 
 //check  if this is the first revision ever
-if($editordocument[0]->lds_revision_id != $revision->id)
+if($document_editor->lds_revision_id != $revision->id)
 {
-	$editordocument[0]->rev_last = $editordocument[0]->lds_revision_id;
+    $document_editor->rev_last = $document_editor->lds_revision_id;
 }
 
 //create a new revision if htis is the first save in this session
 if(get_input('guid') > 0 && get_input('revision') == 0)
-	DocumentEditorRevisionObject::createRevisionFromDocumentEditor($editordocument[0]);
+	DocumentEditorRevisionObject::createRevisionFromDocumentEditor($document_editor);
 
 $save_params = array(
     'url' => $document_url,
+    'title' => $lds->title,
     'editor_id' => $docSession
 );
 
 //save the contents and join the resultsIds
 $editor = editorsFactory::getInstance($document_editor);
-if($save_Result = $editor->saveDocument($save_params)) {
-    list($document_editor, $resultIds_add) = $save_Result;
+if($save_result = $editor->saveDocument($save_params)) {
+    list($document_editor, $resultIds_add) = $save_result;
 } else {
     throw new Exception("Save failed");
 }
 
+//google_docs_support
+if($editor_type == 'google_docs') {
+    $save_params_support = array(
+        'title' => $google_docs_support_title,
+        'editor_id' => $google_docs_support_id,
+    );
+
+//save the contents and join the resultsIds
+    $editor_support = editorsFactory::getInstance($document_editor_support);
+    if($save_result_support = $editor_support->saveDocument($save_params_support)) {
+        list($document_editor_support, $resultIds_add_support) = $save_result_support;
+    } else {
+        throw new Exception("Save failed");
+    }
+}
+
+
 $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
-	
-$editordocument[0]->lds_revision_id = $revision->id;
-$editordocument[0]->save();
+
+$document_editor->lds_revision_id = $revision->id;
+$document_editor->save();
 
 $resultIds->saved = 1;
 
 $lds->save();
 $resultIds->LdS = $lds->guid;
 
-$documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
+if($editor_type == 'google_docs') {
+    $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
 
-$recovered_documents = array();
-if (is_array($_POST['documents']))
-{
-    foreach ($_POST['documents'] as $doc) {
-        if((int)$doc['guid'] == 0) {
-            if($recovered_document = get_entities_from_metadata_multi(
-                array(
-                    'lds_guid'=>$lds->guid,
-                    'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1)) {
-                $recovered_documents[$doc['doc_recovery']]=$recovered_document[0]->guid;
+    $recovered_documents = array();
+    if (is_array($_POST['documents']))
+    {
+        foreach ($_POST['documents'] as $doc) {
+            if((int)$doc['guid'] == 0) {
+                if($recovered_document = get_entities_from_metadata_multi(
+                    array(
+                        'lds_guid'=>$lds->guid,
+                        'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1)) {
+                    $recovered_documents[$doc['doc_recovery']]=$recovered_document[0]->guid;
+                }
             }
         }
     }
-}
 
-//Here we have the document ids of the LDS.
-$docIds = array();
-if (is_array($documents))
-    foreach ($documents as $doc)
-        $docIds[] = $doc->guid;
+    //Here we have the document ids of the LDS.
+    $docIds = array();
+    if (is_array($documents))
+        foreach ($documents as $doc)
+            $docIds[] = $doc->guid;
 
-//And now we save each document
-if (is_array($_POST['documents']))
-{
-    foreach ($_POST['documents'] as $doc)
+    //And now we save each document
+    if (is_array($_POST['documents']))
     {
-        //The submitted doc exists in the db
-        if (in_array($doc['guid'], $docIds) || isset($recovered_documents[$doc['doc_recovery']]))
+        foreach ($_POST['documents'] as $doc)
         {
-            //Edit
-            if(isset($recovered_documents[$doc['doc_recovery']])){
-                $docs_recovered = get_entities_from_metadata_multi(
-                    array(
-                        'lds_guid'=>$lds->guid,
-                        'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1);
-                $docObj = $docs_recovered[0];
-
-            } else {
-                $docObj = get_entity($doc['guid']);
-            }
-
-            //First we check if we modified the body of the document
-            if ($docObj->description != Utils::normalizeSpace($doc['body']) || $docObj->title!= trim($doc['title']))
+            //The submitted doc exists in the db
+            if (in_array($doc['guid'], $docIds) || isset($recovered_documents[$doc['doc_recovery']]))
             {
-                //Wasn't modified yet in previous saves of this form, so we create a revision
-                if ($doc['modified'] == '0')
-                    DocumentRevisionObject::createRevisionFromDocument($docObj);
+                //Edit
+                if(isset($recovered_documents[$doc['doc_recovery']])){
+                    $docs_recovered = get_entities_from_metadata_multi(
+                        array(
+                            'lds_guid'=>$lds->guid,
+                            'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1);
+                    $docObj = $docs_recovered[0];
 
-                $docObj->title = trim($doc['title']);
-                $docObj->description = Utils::normalizeSpace($doc['body']); //We put it in the desciption in order to use the objects_entity table of elgg db
+                } else {
+                    $docObj = get_entity($doc['guid']);
+                }
+
+                //First we check if we modified the body of the document
+                if ($docObj->description != Utils::normalizeSpace($doc['body']) || $docObj->title!= trim($doc['title']))
+                {
+                    //Wasn't modified yet in previous saves of this form, so we create a revision
+                    if ($doc['modified'] == '0')
+                        DocumentRevisionObject::createRevisionFromDocument($docObj);
+
+                    $docObj->title = trim($doc['title']);
+                    $docObj->description = Utils::normalizeSpace($doc['body']); //We put it in the desciption in order to use the objects_entity table of elgg db
+                    $docObj->lds_revision_id = $revision->id;
+
+                    $docObj->save();
+
+                    $resultIds->docs[] = (object) array ('id'=>$docObj->guid, 'modified' => '1');
+                }
+                else
+                {
+                    $resultIds->docs[] = (object) array ('id'=>$docObj->guid, 'modified' => '0');
+                }
+            }
+            //The submitted doc doesn't exist in the db
+            else
+            {
+                //Create
+                $docObj = new DocumentObject($lds->guid);
+                $docObj->doc_recovery = $doc['doc_recovery'];
+                $docObj->title = $doc['title'];
+                $docObj->description = Utils::normalizeSpace($doc['body']);; //We put it in ths desciption in order to use the objects_entity table of elgg db
                 $docObj->lds_revision_id = $revision->id;
-
                 $docObj->save();
 
                 $resultIds->docs[] = (object) array ('id'=>$docObj->guid, 'modified' => '1');
             }
-            else
+
+            //Remove the item from docIds (marking it as "done")
+            unset($docIds[array_search($docObj->guid, $docIds)]);
+        }
+
+        //For the rest of the docIds, we'll disable them (if they were in the array it means that ths user has removed them in the form)
+        if (count ($docIds))
+        {
+            foreach ($docIds as $docId)
             {
-                $resultIds->docs[] = (object) array ('id'=>$docObj->guid, 'modified' => '0');
+                $docObj = get_entity ($docId);
+
+                //If we didn't create the document in this very same revision, we'll create a revision of it
+                if ($docObj->lds_revision_id != $revision->id)
+                    DocumentRevisionObject::createRevisionFromDocument($docObj);
+
+                $docObj->deleted = '1';
+                $docObj->save();
+                $docObj->disable();
             }
+
+            $deletedDocs = array_filter(array_merge($deletedDocs, $docIds));
+            update_annotation($revision->id, 'revised_docs', implode(',', $deletedDocs), 'text', get_loggedin_userid(), 1);
         }
-        //The submitted doc doesn't exist in the db
-        else
-        {
-            //Create
-            $docObj = new DocumentObject($lds->guid);
-            $docObj->doc_recovery = $doc['doc_recovery'];
-            $docObj->title = $doc['title'];
-            $docObj->description = Utils::normalizeSpace($doc['body']);; //We put it in ths desciption in order to use the objects_entity table of elgg db
-            $docObj->lds_revision_id = $revision->id;
-            $docObj->save();
-
-            $resultIds->docs[] = (object) array ('id'=>$docObj->guid, 'modified' => '1');
-        }
-
-        //Remove the item from docIds (marking it as "done")
-        unset($docIds[array_search($docObj->guid, $docIds)]);
-    }
-
-    //For the rest of the docIds, we'll disable them (if they were in the array it means that ths user has removed them in the form)
-    if (count ($docIds))
-    {
-        foreach ($docIds as $docId)
-        {
-            $docObj = get_entity ($docId);
-
-            //If we didn't create the document in this very same revision, we'll create a revision of it
-            if ($docObj->lds_revision_id != $revision->id)
-                DocumentRevisionObject::createRevisionFromDocument($docObj);
-
-            $docObj->deleted = '1';
-            $docObj->save();
-            $docObj->disable();
-        }
-
-        $deletedDocs = array_filter(array_merge($deletedDocs, $docIds));
-        update_annotation($revision->id, 'revised_docs', implode(',', $deletedDocs), 'text', get_loggedin_userid(), 1);
     }
 }
 

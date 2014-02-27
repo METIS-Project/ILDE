@@ -214,7 +214,24 @@ expose_function("newlds", "lds_data", array(), elgg_echo('ldsdata'), "POST", tru
 function lds_query() {
     global $API_QUERY;
 
-    $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 3, 0);
+    $limit = get_input("limit", 20);
+    $offset = get_input("offset", 0);
+    $query = get_input("query", false);
+    $type = get_input("type", false);
+
+    if(strlen($type)) {
+        $editor_type_key = 'editor_type';
+        $editor_type_value = $type;
+    } else {
+        $editor_type_key = null;
+        $editor_type_value = null;
+    }
+
+    if(strlen($query)) {
+        $entities = lds_contTools::searchLdS($query, $limit, $offset);
+    } else {
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
+    }
 
     $ldss = array();
     $lds = array();

@@ -69,6 +69,8 @@ var ajax_retry_max = 3;
 
 var saving_started = false;
 var ajax_timeout = 30;
+if(ilde_debug)
+    ajax_timeout = 19999;
 
 //Saves the current document tab, the one that we are editing
 var currentTab = 0;
@@ -353,7 +355,8 @@ function ajax_submit (save_seq, redirect)
 			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
 		};
 	} else {
-        documents[currentTab].body = editor.getData();
+        if(!google_docs)
+            documents[currentTab].body = editor.getData();
 
         if(implementation) {
             save_url = "action/lds/save_glueps";
@@ -393,6 +396,10 @@ function ajax_submit (save_seq, redirect)
                 documents: documents,
                 document_url: document_url
             };
+            if(google_docs) {
+                submitData['google_docs_support_id'] = google_docs_support_id;
+                submitData['google_docs_support_title'] = t9n.supportTitle;
+            }
         }
 	}
 
@@ -541,16 +548,8 @@ function initTags ()
 	});
 }
 
-//Initial data loading
-function loadData ()
+function loadCKData ()
 {
-	$('#lds_edit_title').val(initLdS.title);
-	$('#granularity_input').val(initLdS.granularity);
-	$('#completeness_input').val(initLdS.completeness);
-	$('#lds_edit_guid').val(initLdS.guid);
-	
-	generateTagList ('init');
-
     //Build the tabs
     for (var i in documents)
         $('#lds_edit_tabs li.lds_newtab').before ('<li class="lds_tab"><span class="lds_tab_title">' + documents[i].title + '</span> <span class="lds_tab_options">▲</span></li>');
@@ -570,6 +569,17 @@ function loadData ()
         });
 
     });
+}
+//Initial data loading
+function loadData ()
+{
+	$('#lds_edit_title').val(initLdS.title);
+	$('#granularity_input').val(initLdS.granularity);
+	$('#completeness_input').val(initLdS.completeness);
+	$('#lds_edit_guid').val(initLdS.guid);
+	
+	generateTagList ('init');
+
 
     initSliders ();
 	initTags ();
@@ -638,7 +648,7 @@ function initCKED ()
     {
         editor = this;
         resizeCK();
-        loadData ();
+        loadCKData ();
 
         //Concurrence control
         ping_editing();
@@ -698,6 +708,7 @@ function resizeEditorFrame ()
     var wHeight = $(window).height() - $('#lds_edit_contents').offset().top - 50;
     wHeight = Math.max (wHeight, 300);
     $('#lds_editor_iframe').height(wHeight);
+    $('#lds_support_editor_iframe').height(wHeight);
     $('#lds_edit_contents').height(wHeight);
     $('#rich_text_box').height(wHeight);
 
@@ -711,7 +722,10 @@ function initDocName ()
         //the LdS title will be the document title as well.
         //changeDocTitle = (documents[0].title == t9n.untitledDoc);
         changeDocTitle = true;
-        $affectedTab = $('#lds_edit_tabs li.lds_tab:eq(0)').find('.lds_tab_title');
+        if(google_docs)
+            $affectedTab = $('.lds_exetab');
+        else
+            $affectedTab = $('#lds_edit_tabs li.lds_tab:eq(0)').find('.lds_tab_title');
     });
 
     $('#lds_edit_title').keyup (function()
@@ -721,8 +735,8 @@ function initDocName ()
             if ($.trim($(this).val()).length > 0)
             {
                 if(!upload && !restapi && editorType != 'gluepsrest') {
-                    documents[0].title = $(this).val();
-                    $affectedTab.text(documents[0].title);
+                    if(!google_docs) documents[0].title = $(this).val();
+                    $affectedTab.text($(this).val());
                 }
                 if(restapi)
                     postMessageWicChangeTitle($(this).val());
@@ -730,8 +744,8 @@ function initDocName ()
             else
             {
                 if(!upload && !restapi && editorType != 'gluepsrest') {
-                    documents[0].title = t9n.untitledDoc;
-                    $affectedTab.text(documents[0].title);
+                    if(!google_docs) documents[0].title = t9n.untitledDoc;
+                    $affectedTab.text(t9n.untitledDoc);
                 }
                 if(restapi)
                     postMessageWicChangeTitle(t9n.untitledDoc);
@@ -744,7 +758,7 @@ function initDocName ()
                 "type": "ldshake_name",
                 "data": title
             }
-            win.postMessage(m_title, "http://pandora.tel.uva.es");
+            win.postMessage(m_title, restapi_remote_domain);
         }
     });
 
@@ -801,11 +815,13 @@ function tabs()
         //What tab have we clicked?
         pos = $(this).prevAll('li.lds_tab').length;
 
-        //First, get the editor data and put it into the array.
-        documents[currentTab].body = editor.getData();
+        if(!google_docs) {
+            //First, get the editor data and put it into the array.
+            documents[currentTab].body = editor.getData();
 
-        //Then put the clicked document data into the editor
-        editor.setData (documents[pos].body);
+            //Then put the clicked document data into the editor
+            editor.setData (documents[pos].body);
+        }
 
         //Finally set the current tab
         currentTab = pos;
@@ -815,7 +831,8 @@ function tabs()
         $(this).addClass('current');
     });
 
-    //New tab
+    //New tab button
+    if(!google_docs)
     $('#lds_edit_tabs li.lds_newtab').click (function ()
     {
         var tabTitle = prompt (t9n.newDocTitle);
@@ -913,19 +930,38 @@ function tabs()
                 currentTab = (currentTabMenu == 0) ? 0 : currentTabMenu - 1;
                 $('#lds_edit_tabs li').removeClass('current');
                 $('#lds_edit_tabs li:eq(' + currentTab + ')').addClass('current');
-                editor.setData(documents[currentTab].body);
+
+                if(!google_docs)
+                    editor.setData(documents[currentTab].body);
             }
             else
             {
                 documents = new Array ();
                 documents.push ({guid:'0',title:t9n.untitledDoc,body:''});
                 $('#lds_edit_tabs li:eq(0) .lds_tab_title').text (t9n.untitledDoc);
-                editor.setData('');
+
+                if(!google_docs)
+                    editor.setData('');
             }
         }
 
         return false;
     });
+
+    //set up google docs support tab
+    if(google_docs) {
+        $('#lds_edit_tabs li.lds_exetab').before ('<li class="lds_tab lds_tab_google_support"><span class="lds_tab_title">' + t9n.supportTitle + '</span> <span class="lds_tab_options">▲</span></li>');
+        currentTab = documents.length - 1;
+        $('#lds_edit_tabs li').removeClass('current');
+        //$('#lds_edit_tabs li:eq(' + currentTab + ')').addClass('current');
+
+        $('.lds_tab_google_support').click(function () {
+            $('#lds_editor_iframe').fadeOut(200, function() {
+                $('#rich_text_box').show(200,function() {});
+            });
+        });
+    }
+
 }
 
 function inaction_trigger ()
@@ -953,7 +989,7 @@ function inaction_trigger ()
 /*editor iframe information exchange*/
 $(document).ready(function() {
     window.addEventListener('message',function(event) {
-        if(event.origin !== 'http://pandora.tel.uva.es') return;
+        if(event.origin !== restapi_remote_domain) return;
         var editor_iframe = document.getElementById("lds_editor_iframe");
         if(event.data.type == 'ldshake_editor_ready') {
             var m_sectoken = {
@@ -965,7 +1001,7 @@ $(document).ready(function() {
                 && $('#lds_edit_guid').val() == '0')
                 save_lds (null,{redirect: false});
 
-            editor_iframe.contentWindow.postMessage(m_sectoken,"http://pandora.tel.uva.es");
+            editor_iframe.contentWindow.postMessage(m_sectoken,restapi_remote_domain);
         }
 
         if(event.data.type == 'glueps_deployment') {
@@ -995,7 +1031,7 @@ $(document).ready(function()
     initCKED ();
     initDocName ();
 
-    //loadData();
+    loadData();
 	
 	$('#shade,#lds_loading_contents').hide();
 

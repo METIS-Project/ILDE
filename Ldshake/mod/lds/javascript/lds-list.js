@@ -281,4 +281,16 @@ $(document).ready(function()
 		
 		return false;
 	});
+
+    $('a.lds-browse-show-tags').click(function(e){
+        e.preventDefault();
+        var tagclass = $(this).attr('category');
+        $('ul.'+tagclass+' li.lds-browse-non-used-tags').toggleClass('lds-browse-non-used-tags-hide');
+
+        if($('ul.'+tagclass+' li.lds-browse-non-used-tags').hasClass('lds-browse-non-used-tags-hide'))
+            $(this).text(t9n.showTags);
+        else
+            $(this).text(t9n.hideTags);
+
+    });
 });

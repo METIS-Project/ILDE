@@ -61,27 +61,46 @@
 
             <?php
 			if (is_array($tags)):
-			foreach ($tags as $classname=>$tagclass):
-			?>
-			<?php if ($classname == 'tags'): ?>
-			<h3><?php echo T("Free tags") ?></h3>
-			<?php elseif ($classname == 'discipline'): ?>
-			<h3><?php echo T("Discipline") ?></h3>
-			<?php elseif ($classname == 'pedagogical_approach'): ?>
-			<h3><?php echo T("Pedagogical approach") ?></h3>
-			<?php endif; ?>			
-			<ul class="tag_selector">
-				<?php foreach ($tagclass as $k=>$v): ?>
-				<li>
-					<span class="freq"><?php echo $v ?></span>
-					<a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($k) ?>"><?php echo $k ?></a>
-				</li>
-				<?php endforeach; ?>
-			</ul>
-			<?php
-			endforeach;
-			endif;
-			?>
+                foreach ($tags as $classname=>$tagclass):
+                ?>
+                    <?php if ($classname == 'tags'): ?>
+                    <h3><?php echo T("Free tags") ?></h3>
+                    <?php elseif ($classname == 'discipline'): ?>
+                    <h3><?php echo T("Discipline") ?></h3>
+                    <?php elseif ($classname == 'pedagogical_approach'): ?>
+                    <h3><?php echo T("Pedagogical approach") ?></h3>
+                    <?php endif; ?>
+                    <ul class="tag_selector <?php echo $classname?>">
+                        <?php
+                        $tag_offset = 0;
+                        $tag_length = 10;
+                        $used_tags = array_slice($tagclass, $tag_offset, $tag_length, true);
+                        ?>
+
+                        <?php foreach ($used_tags as $k=>$v): ?>
+                            <li>
+                                <span class="freq"><?php echo $v ?></span>
+                                <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($k) ?>"><?php echo $k ?></a>
+                            </li>
+                        <?php endforeach; ?>
+
+                        <?php
+                        $non_used_tags = array_slice($tagclass, $tag_length, 99, true);
+                        ?>
+                        <?php if(count($tagclass) >= $tag_length): ?>
+                            <?php foreach ($non_used_tags as $k=>$v): ?>
+                                <li class="lds-browse-non-used-tags lds-browse-non-used-tags-hide">
+                                    <span class="freq"><?php echo $v ?></span>
+                                    <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($k) ?>"><?php echo $k ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        <li>
+                            <a class="lds-browse-show-tags <?php echo $classname ?>" category="<?php echo $classname ?>"><?php echo T('Show more tags') ?></a>
+                        </li>
+                        <?php endif; ?>
+                    </ul>
+                <?php endforeach; ?>
+            <?php endif; ?>
 		</div>
 	</div>
 	<div id="owner_block_bottom"></div>
@@ -114,3 +133,11 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    var t9n = {
+        showTags : "<?php echo T('Show more tags') ?>",
+        hideTags : "<?php echo T('Show less tags') ?>"
+
+    }
+</script>

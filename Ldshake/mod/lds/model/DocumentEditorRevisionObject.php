@@ -54,10 +54,10 @@ class DocumentEditorRevisionObject extends ElggObject
 
 	public static function createRevisionFromDocumentEditor ($document)
 	{
-        /*
 		$revision = new DocumentEditorRevisionObject($document->guid);
 		$editor = EditorsFactory::getInstance($document);
-		
+
+        /*
 		$readfile = $editor->getFullFilePath($document->file_guid);
 		$filestorename = 'rev_'.$document->guid.'_'.$document->lds_revision_id;
 		$file = $editor->getNewFile($filestorename);
@@ -69,19 +69,21 @@ class DocumentEditorRevisionObject extends ElggObject
 		$file = $editor->getNewFile($filestorename);
 		copy($readfile, $file->getFilenameOnFilestore());
 		$revision->file_imsld_guid = $file->guid;
+        */
 
 
 		$revision->editorType = $document->editorType;
 		$revision->lds_revision_id = $document->lds_revision_id;
 		$revision->lds_guid = $document->lds_guid;
         $revision->container_guid = $document->lds_guid;
-		$revision->previewDir = $document->revisionDir.'_'.$revision->lds_revision_id;
+		//$revision->previewDir = $document->revisionDir.'_'.$revision->lds_revision_id;
 		$revision->id = $document->revisionDir.'_'.lds_revision_id;
+        $revision->description = $document->description;
 		
-		$editor->revisionPreview($revision);
+		//$editor->revisionPreview($revision);
 		
 		//If the document from which we crate the revision is published, the revision will be marked as published
-		//and the document itserl will be unmarked (so the published version stays the same until a republish happens)
+		//and the document itself will be unmarked (so the published version stays the same until a republish happens)
 		$revision->published = $document->published;
 		if($revision->published)
 		{
@@ -90,8 +92,8 @@ class DocumentEditorRevisionObject extends ElggObject
 		
 		$document->published = '0';
 		
-		$revision->save ();
-        */
+		$revision->save();
+
 	}
 }
  

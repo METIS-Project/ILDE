@@ -37,6 +37,7 @@
 ?>
 
 <?php
+global $CONFIG;
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
@@ -97,7 +98,11 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <?php else: ?>
                 <div id="rich_text_box" style="display: block;">
                 <?php endif; ?>
-                <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
+                <?php if($editor == 'google_docs'): ?>
+                    <iframe id="lds_support_editor_iframe" src="<?php echo htmlentities($support_editor['document_iframe_url']);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
+                <?php else: ?>
+                    <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
+                <?php endif; ?>
 				</div>
                 <!--
                 <?php if ($editor == 'exe'): ?>
@@ -107,18 +112,27 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
 				<?php endif; ?>
 				-->
-                <?php if(!isset($upload)): ?>
+                <?php if($restapi): ?>
                 <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php endif; ?>
 
-			</div>
+                <?php if($editor == 'google_docs'): ?>
+                    <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
+                <?php endif; ?>
+
+
+                </div>
             <div id="lds_edit_tabs" class="scrollable">
                 <?php /** Botonets de scroll **/ ?>
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
-                    <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
+                    <?php if($editor != 'google_docs'):?><li class="lds_newtab">+ <?php echo T("Add document") ?></li><?php endif;?>
                     <?php if(!isset($upload)): ?>
-                    <li class="lds_exetab"> <?php echo $editor_label ?></li>
+                        <?php if($editor != 'google_docs'):?>
+                            <li class="lds_exetab"> <?php echo $editor_label ?></li>
+                        <?php else: ?>
+                            <li class="lds_exetab"> <?php echo $lds_title ?></li>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </ul>
             </div>
@@ -202,6 +216,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 </div><!-- /#page_container -->
 	<script type="text/javascript">
         var t9n = {
+            supportTitle: "<?php echo T("Support Document") ?>",
             suggestEnterTags : "<?php echo T("Enter tags here") ?>",
             newDocTitle : "<?php echo T("Please write the new document's title:") ?>",
             newDocTitleEmpty : "<?php echo T("Oops! The document title cannot be empty.") ?>",
@@ -228,6 +243,14 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var implementation = false;
         var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
         var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
+        <?php if($vars['restapi']): ?>
+        var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";
+        <?php endif; ?>
+        var google_docs = <?php echo (($editor == 'google_docs') ? 'true' : 'false')?>;
+        <?php if($editor == 'google_docs'): ?>
+        var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
+        <?php endif; ?>
+        var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
 
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;

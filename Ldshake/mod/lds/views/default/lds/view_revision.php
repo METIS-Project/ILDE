@@ -63,8 +63,12 @@
 		<a href="<?php echo $reviser->getUrl() ?>"><img src="<?php echo $reviser->getIcon('tiny') ?>" /></a> <?php echo T("Revised by %1 on %2", '<a href="'.$reviser->getUrl().'">'.$reviser->name.'</a>', date('j M Y H:i', $revDate)) ?>
 		<?php if (!is_null($prevId)) : ?><span id="previous_revision_details">– <a href="<?php echo $prevReviser->getUrl() ?>"><img src="<?php echo $prevReviser->getIcon('tiny') ?>" /></a> <?php echo T("Comparing with previous revision by %1 on %2", '<a href="'.$prevReviser->getUrl().'">'.$prevReviser->name.'</a>', date('j M Y H:i', $prevRevision->time_created)) ?></span><?php endif; ?>
 	</div>
+    <?php if(!$google_docs): ?>
 	<div id="the_lds">
 		<div id="revision_wrapper"><?php echo $revision->description ?></div>
 		<div id="diff_wrapper"><?php echo $diff ?></div>
 	</div>
+    <?php else: ?>
+        <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $revision->guid ?>" height="550px" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
+    <?php endif; ?>
 </div>

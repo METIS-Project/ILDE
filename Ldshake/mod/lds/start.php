@@ -384,7 +384,7 @@ function lds_exec_implementations ($params)
         $vars['title'] = T("All my LdS > Implementations");
     }
 
-    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0, 'implementable', '1');
+    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'implementable', '1');
     $vars['section'] = 'imp-'.$params[1];
     //$vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
@@ -397,7 +397,7 @@ function lds_exec_search ($params) {
     $offset = (int)get_input('offset', 0);
 	
 	$vars['query'] = $query;
-	$vars['list'] = lds_contTools::searchLdS($query, $offset);
+	$vars['list'] = lds_contTools::searchLdS($query, 11, $offset);
     $vars['count'] = count ($vars['list']) + $offset;
     //$vars['list'] = array_slice($vars['list'], $offset, 10);
 
@@ -587,9 +587,7 @@ function lds_exec_browse ($params)
 	$order = get_input('order') ?: 'newest';
 	$offset = get_input('offset') ?: '0';
 
-
-	//$vars['tags'] = lds_contTools::getBrowseTagsAndFrequencies (get_loggedin_userid());
-	$vars['tags'] = lds_contTools::getAllTagsAndFrequencies (get_loggedin_userid());
+	$vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
 
     $tools = array();
 
@@ -610,8 +608,7 @@ function lds_exec_browse ($params)
         'image' => 'Image',
     );
 
-
-    $tools['editor_subtype'] =
+    //$tools['editor_subtype'] =
 
 	$vars['filtering'] = false;
 	//If there is some filtering by tag
@@ -622,13 +619,7 @@ function lds_exec_browse ($params)
 
         $title = T("LdS tagged %1",$vars['tagv']);
         //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
-        //$vars['list'] = lds_contTools::getBrowseLdsList('time_updated DESC', 10, $offset, $vars['tagk'], $vars['tagv']);
-        //$vars['count'] = lds_contTools::getBrowseLdsList('time_updated DESC', 10, $offset, $vars['tagk'], $vars['tagv'], true);
-
-        //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 10, $offset, '');
-        //$vars['list'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 9999, 0, '');
         $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, $vars['tagk'], $vars['tagv']);
-        //$vars['count'] = get_entities_from_metadata($vars['tagk'], $vars['tagv'], 'object', LDS_ENTITY_TYPE, 0, 0, 0, '', 0, true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
     }
@@ -733,18 +724,6 @@ function lds_exec_new ($params)
                 break;
         }
     }
-/*
-    if(count($params) == 3) {
-        switch($params[1]) {
-            case 'template':
-                require_once __DIR__.'/templates/templates.php';
-                if($params[2] == 'design_pattern') {
-                    $vars['initDocuments'][1]->body = ldshake_get_template('DPS');
-                }
-                break;
-        }
-    }
-*/
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
 	
@@ -842,9 +821,28 @@ function lds_exec_neweditor ($params)
 {
 	global $CONFIG;
 
+    $template_html = null;
+
+    switch($params[2]) {
+        case 'template':
+            require_once __DIR__.'/templates/templates.php';
+            $templates = ldshake_get_template($params[3]);
+            $template = $templates[0];
+
+            $template_doc = new ElggObject();
+            $template_doc->description = $template;
+            $template_vars = array(
+                'doc' => $template_doc,
+                'title' => $params[3]
+            );
+
+            $template_html = elgg_view('lds/view_iframe', $template_vars);
+        break;
+    }
+
 	//Make an editor object according to the parameters received and create a new session
 	$editor = editorsFactory::getTempInstance($params[1]);
-	$vars = $editor->newEditor();
+	$vars = $editor->newEditor($template_html);
     if(!$vars) {
         register_error("New document error");
         forward($CONFIG->url . 'pg/lds/');
@@ -864,13 +862,29 @@ function lds_exec_neweditor ($params)
 	$vars['initLdS']->guid = '0';
 
     //And a support doc!
-    $vars['initDocuments'][0] = new stdClass();
-    $vars['initDocuments'][0]->title = T("Support Document");
-    $vars['initDocuments'][0]->guid = '0';
-    $vars['initDocuments'][0]->modified = '0';
-    $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
+    if($params[1] != 'google_docs') {
+        $vars['initDocuments'][0] = new stdClass();
+        $vars['initDocuments'][0]->title = T("Support Document");
+        $vars['initDocuments'][0]->guid = '0';
+        $vars['initDocuments'][0]->modified = '0';
+        $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
 
-    $vars['initDocuments'] = json_encode($vars['initDocuments']);
+        $vars['initDocuments'] = json_encode($vars['initDocuments']);
+    } else {
+        $vars['supportGoogleDoc'];
+
+        $support_vars = array(
+            'doc' => T("Write here any support notes for this LdS..."),
+            'title' => T("Support Document")
+        );
+
+        $support_html = elgg_view('lds/view_iframe', $support_vars);
+        $support_editor = editorsFactory::getTempInstance($params[1]);
+        $support_vars = $support_editor->newEditor($support_html);
+        $vars['support_editor'] = $support_vars;
+        $vars['initDocuments'] = json_encode(array());
+        $vars['lds_title'] = T('Untitled LdS');
+    }
 
 	$vars['all_can_read'] = 'true';
 	$vars['initLdS'] = json_encode($vars['initLdS']);
@@ -1087,7 +1101,7 @@ function lds_exec_editeditor ($params)
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
 	
-	if ($user = lds_contTools::isLockedBy($params[1]))
+	if ($user = lds_contTools::isLockedBy($params[1]) && !lds_contTools::isSyncLdS($editLdS))
 	{
 		$fstword = explode(' ',$user->name);
 		$fstword = $fstword[0];
@@ -1096,7 +1110,6 @@ function lds_exec_editeditor ($params)
 	}
 
     create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
-	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
 	$vars['initLdS'] = new stdClass();
@@ -1148,7 +1161,8 @@ function lds_exec_editeditor ($params)
 	//$vars['all_can_read'] = ($editLdS->access_id == '1') ? 'true':'false';
     $vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
 	$vars['initLdS'] = json_encode($vars['initLdS']);
-	$vars['tags'] = json_encode(lds_contTools::getMyTags ()); 
+	$vars['tags'] = json_encode(lds_contTools::getMyTags ());
+    $vars['lds_title'] = $editLdS->title;
 	
 	//These are all my friends
     /*
@@ -1170,11 +1184,26 @@ function lds_exec_editeditor ($params)
 	$vars['title'] = T("Edit LdS");
 	
 	//We're editing. Fetch it from the DB
-	$editordocument = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
+	$editordocument_query = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
+
+    if($editLdS->editor_type == 'google_docs') {
+        if(!$editordocument_query[0]->support){
+            $editordocument = array($editordocument_query[0], $editordocument_query[1]);
+        }
+        else {
+            $editordocument = array($editordocument_query[1], $editordocument_query[0]);
+        }
+    } else
+        $editordocument = array($editordocument_query[0]);
 
 	//make an editor object with the document that we want to edit
 	$editor = EditorsFactory::getInstance($editordocument[0]);
 	$vars_editor = $editor->editDocument();
+
+    if($editLdS->editor_type == 'google_docs') {
+        $editor_support = EditorsFactory::getInstance($editordocument[1]);
+        $vars['support_editor'] = $editor_support->editDocument();
+    }
 
     if(!$vars_editor) {
         register_error("Edit document error");
@@ -1617,19 +1646,16 @@ function lds_exec_history ($params)
 			'enabled' => $doc->enabled,
 		);
 	$vars['docList'] = $docList;
-	//dprint($vars['docList']);
 	$vars['JSONdocList'] = json_encode($docList);
 
 	//TODO permission / exist checks
 	$vars['history'] = array_reverse(lds_contTools::getRevisionList($vars['lds']));
-	//dprint($vars['history']);
 	$vars['numRevisions'] = count($vars['history']);
 	$vars['JSONhistory'] = lds_contTools::getJSONRevisionList($vars['history']);
 	
 	$vars['title'] = T("LdS History");
 	
 	echo elgg_view('lds/history',$vars);
-	//page_draw('LdS History', $body);
 	
 	access_show_hidden_entities($access_status);
 }
@@ -1661,6 +1687,7 @@ function lds_exec_view_iframe ($params)
 
     $doc = get_entity($params[1]);
     $vars['doc'] = $doc;
+
     if (is_numeric($doc->document_guid))
         $vars['title'] = get_entity($doc->document_guid)->title;
     else
@@ -1685,7 +1712,10 @@ function lds_exec_view_iframe ($params)
         unlink($bname);
     }
 
-    echo elgg_view('lds/view_iframe',$vars);
+    if($doc->editorType == "google_docs")
+        echo $doc->description;
+    else
+        echo elgg_view('lds/view_iframe',$vars);
 }
 
 function lds_exec_viewext ($params)
@@ -1783,7 +1813,7 @@ function lds_exec_viewexteditor ($params)
 		}
 	}
 
-	echo elgg_view('lds/view_external_editor',$vars); 
+    echo elgg_view('lds/view_external_editor',$vars);
 }
 
 
@@ -1869,9 +1899,20 @@ function lds_exec_vieweditor ($params)
     create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//TODO permission / exist checks
 
-	//lds_contTools::markLdSAsViewed ($id);
+	$editordocument_query = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
 
-	$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
+    $doc = false;
+
+    if(isset($params[2]))
+        if($params[2] == 'doc')
+            $doc = true;
+
+    if(!$editordocument_query[0]->support && !$doc){
+        $editordocument = array($editordocument_query[0], $editordocument_query[1]);
+    }
+    else {
+        $editordocument = array($editordocument_query[1], $editordocument_query[0]);
+    }
 
     switch($editordocument[0]->editorType) {
         case 'cld':
@@ -1893,7 +1934,11 @@ function lds_exec_vieweditor ($params)
 
     $vars['editor'] = $editordocument[0]->editorType;
 
-	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
+    if($vars['editor'] == 'google_docs')
+        $vars['ldsDocs'] = $editordocument;
+    else
+	    $vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
+
 	$vars['iseXe'] = $params[3] ? false : true;
 
 	if($vars['iseXe']) {
@@ -1908,25 +1953,11 @@ function lds_exec_vieweditor ($params)
 		$vars['publishedId'] = lds_contTools::getPublishedId($vars['currentDocId']);
 	}
 
-
-
-	
 	$vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
 
-    /*
-	//These are all my friends
-	$friends = lds_contTools::getFriendsArray(get_loggedin_userid());
-	$arrays = lds_contTools::buildFriendArrays($friends, $vars['lds']->access_id, $vars['lds']->write_access_id);
-
-	$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
-	$vars['viewers'] = json_encode($arrays['viewers']);
-	$vars['editors'] = json_encode($arrays['editors']);
-	$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
-    */
     //These are all my friends
     $arrays = lds_contTools::buildObjectsArray($vars['lds']);
     $vars['jsonfriends'] = json_encode($arrays['available']);
-    //$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
     $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
@@ -1935,13 +1966,8 @@ function lds_exec_vieweditor ($params)
 	
 	$vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
 	
-	//$vars['all_can_read'] = ($vars['lds']->access_id == '1') ? 'true':'false';
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
-
-    //$body = elgg_view('lds/view_internal_editor',$vars);
-	//page_draw($vars['lds']->title, $body);
-	
 	echo elgg_view('lds/view_internal_editor',$vars);
 }
 
@@ -2060,7 +2086,7 @@ function lds_exec_viewrevision ($params)
 		$nextId = null;
 		$prevId = $revisions[count($revisions) - 1]->guid;
 	}
-	
+
 	//Now we create a diff string if the previous version is available
 	if (!is_null($prevId))
 	{
@@ -2153,9 +2179,31 @@ function lds_exec_viewrevisioneditor ($params)
 	$vars['reviser'] = get_user($revision->owner_guid);
 	$vars['document'] = $document;
 	$vars['lds'] = $lds;
-	$vars['diff'] = $diff;
-	
-	$body = elgg_view('lds/view_revision_editor',$vars);
+
+    if(lds_viewTools::detailedHistorySupport($lds)) {
+        //Now we create a diff string if the previous version is available
+        if (!is_null($prevId))
+        {
+            $aname = $CONFIG->tmppath.'rev'.$prevId.'.html';
+            $bname = $CONFIG->tmppath.'rev'.$revision->guid.'.html';
+
+            file_put_contents($aname, get_entity($prevId)->description);
+            file_put_contents($bname, $revision->description);
+
+            $output = array();
+            exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py $aname $bname", $output);
+            $diff = implode('', $output);
+
+            unlink($aname);
+            unlink($bname);
+        }
+        $vars['diff'] = $diff;
+        $vars['google_docs'] = true;
+        $body = elgg_view('lds/view_revision',$vars);
+    } else {
+        $body = elgg_view('lds/view_revision_editor',$vars);
+    }
+
 	page_draw($lds->title. ': '. T("Revision"). ' - ' . date('j M Y H:i', $revDate), $body);
 }
 

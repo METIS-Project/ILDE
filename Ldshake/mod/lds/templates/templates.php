@@ -1,5 +1,7 @@
 <?php
 function ldshake_get_template($template){
+    global $CONFIG;
+
     $templates = array(
         'MWD' => array('MWD'),
         'MDN' => array('mdn'),
@@ -18,7 +20,12 @@ function ldshake_get_template($template){
     if(isset($templates[$template])) {
         $doc = array();
         foreach($templates[$template] as $file) {
-            $filename = __DIR__.'/'.$file.'.txt';
+
+            if(file_exists(__DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt'))
+                $filename = __DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt';
+            else
+                $filename = __DIR__.'/'.$file.'.txt';
+
             if($text = file_get_contents($filename))
                 $doc[] = $text;
         }

@@ -401,6 +401,14 @@ EOD;
 $inname = "{$CONFIG->tmppath}HTM_{$doc_guid}.html";
 $outname = "{$CONFIG->tmppath}PDF_{$doc_guid}.pdf";
 
+if($doc->editorType == 'google_docs') {
+    $contents = $doc->description;
+    if($lds->license) {
+        $contents = str_replace('</body>', '<br />'.$license.'</body>', $contents);
+        $contents = str_replace('</style>', ' .license_banner{display: none;margin-top:20px;}'.'</style>', $contents);
+    }
+}
+
 //Save the document data to the file
 $handle = fopen($inname, "w");
 fwrite($handle, $contents);

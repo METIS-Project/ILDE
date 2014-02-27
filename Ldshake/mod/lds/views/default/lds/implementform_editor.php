@@ -218,6 +218,16 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     friends['viewers'] = <?php echo $viewers ?>;
     friends['editors'] = <?php echo $editors ?>;
 
+    var google_docs = <?php echo (($editor == 'google_docs') ? 'true' : 'false')?>;
+    <?php if($editor == 'google_docs'): ?>
+    var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
+    <?php endif; ?>
+    var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
+
+    <?php if($vars['restapi'] || $editor == 'gluepsrest'): ?>
+    var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";
+    <?php endif; ?>
+
     //Is the LdS public for all LdShakers? (yes by default)
     var allCanView = <?php echo $all_can_read ?>;
 </script>

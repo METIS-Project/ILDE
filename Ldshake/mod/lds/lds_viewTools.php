@@ -138,4 +138,11 @@ class lds_viewTools
 
         return in_array($type, $supported);
     }
+
+    public static function detailedHistorySupport($lds)
+    {
+        $supported = array("google_docs");
+
+        return in_array($lds->editor_type, $supported);
+    }
 }

@@ -1291,6 +1291,14 @@ a.rightbutton:active {
 	border-radius: 3px;
 }
 
+#left_filters .tag_selector li.lds-browse-non-used-tags-hide {
+    display: none;
+}
+
+.lds-browse-show-tags {
+    cursor: pointer;
+}
+
 .lds_tag.discipline,.lds_small_tag.discipline {
 	background-color: #090;
 	color: #fff;

@@ -57,7 +57,9 @@ function encodeURIComponent($str) {
 	<div id="lds_view_actions">
 		<input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
 		<input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
-		<!--<a class="rightbutton" href="<?php echo $url ?>action/lds/pdf_export_editor?id=<?php echo $lds->guid ?>"><?php echo T("Save as PDF") ?></a>-->
+        <?php if ($lds->editor_type == 'google_docs'): ?>
+        <a class="rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+        <?php endif; ?>
 		<?php if ($lds->canEdit()): ?>
 			<?php if (!lds_contTools::isLockedBy($lds->guid)): ?>
 			<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
@@ -110,11 +112,13 @@ function encodeURIComponent($str) {
 	<ul id="lds_view_tabs" class="content">
 		<?php if (is_array($ldsDocs)): ?>
 			<?php foreach ($ldsDocs as $doc): ?>
+            <?php if (($doc->guid != $currentDocId || !$iseXe) && ($doc->support && $doc->editorType == 'google_docs')): ?>
                 <?php if ($doc->guid == $currentDocId): ?>
                     <li class="activetab"><?php echo $doc->title ?></li>
                 <?php else: ?>
                     <li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $doc->title ?></a></li>
                 <?php endif; ?>
+            <?php endif; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
 		<?php if ($iseXe): ?>
@@ -288,6 +292,11 @@ function encodeURIComponent($str) {
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+        <?php elseif ($editor  == 'google_docs' && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
+            <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+        <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
+            <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+
         <?php elseif ($editor == 'openglm' && is_array($ldsDocs) && count($ldsDocs) > 0): ?>
             <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $ldsDocs[0]->guid ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
             </iframe>

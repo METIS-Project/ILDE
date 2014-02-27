@@ -49,7 +49,7 @@ class lds_contTools
 	 */
 
 
-    public static function searchLdS($query, $offset = 0, $user_id = 0) {
+    public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
         if(!$user_id)
@@ -68,6 +68,20 @@ class lds_contTools
             $mw = "md.name_id='{$mk_id}' AND  md.value_id='{$mv_id}' AND";
         }
 */
+
+        $metadata_join = "";
+        $metadata_query = "";
+
+        if($m_key && $m_value) {
+            $metadata_key_id = get_metastring_id($m_key);
+            $metadata_value_id = get_metastring_id($m_value);
+
+            if($metadata_key_id && $metadata_value_id) {
+                $metadata_join = 'JOIN metadata mt ON e.guid = mt.entity_guid';
+                $metadata_query = "AND mt.name_id = '{$metadata_key_id}' AND mt.value_id = '{$metadata_value_id}'";
+            }
+        }
+
         $tp_k = get_metastring_id("pedagogical_approach");
         $td_k = get_metastring_id("discipline");
         $tt_k = get_metastring_id("tags");
@@ -82,6 +96,8 @@ class lds_contTools
         $acv_v = get_metastring_id("yes");
 
         $query = mysql_real_escape_string($query);
+        $offset = mysql_real_escape_string($offset);
+        $limit = mysql_real_escape_string($limit);
 
         $query = <<<SQL
 SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
@@ -116,7 +132,7 @@ SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG-
 	  (o.title LIKE '%{$query}%' OR do.title LIKE '%{$query}%' OR do.description LIKE '%{$query}%')
 	  {$tags_query}
 	)
-	 order by e.time_updated desc limit {$offset},11
+	 order by e.time_updated desc limit {$offset},{$limit}
 SQL;
 
         if($entities = get_data($query, "entity_row_to_elggstar"))
@@ -188,7 +204,19 @@ SQL;
             $user->save();
         }
 	}
-	
+
+
+    /**
+     * Determines if an LdS supports syncronous edition.
+     *
+     */
+    public static function isSyncLdS ($lds){
+        if($lds->editor_type == 'google_docs')
+            return true;
+
+        return false;
+}
+
 	/**
 	 * Generates a list of RichLdS objects, containing some useful data for the view.
 	 * 
@@ -241,8 +269,14 @@ SQL;
                 $obj->num_comments = $lds->countAnnotations('generic_comment');
                 $obj->num_documents = get_entities_from_metadata ('lds_guid',$lds->guid,'object','LdS_document', 0, 10000, 0, '', 0, true);
 
-                $obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid());
-                $obj->locked_by = get_user($lds->editing_by);
+                if(self::isSyncLdS($lds)) {
+                    $obj->locked = false;
+                    $obj->sync = true;
+                } else {
+                    $obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid());
+                    $obj->locked_by = get_user($lds->editing_by);
+                    $obj->sync = false;
+                }
 
                 //Add an is_new flag if the user hasn't seen it.
                 $seenLds = get_user(get_loggedin_userid())->seen_lds;
@@ -367,7 +401,6 @@ SQL;
 	
 	public static function getLdsDocuments ($lds_guid)
 	{
-		//Shitty limits.
 		$arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document', 0, 10000);
 		if(is_array($arr))
 			Utils::osort($arr, 'guid');
@@ -1508,16 +1541,16 @@ SQL;
 
     }
 
-    public static function getUserViewableLdSs($user_id, $count = false, $limit = 0, $offset = 0, $mk = null, $mv = null) {
+    public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
         global $CONFIG;
 
         if(isadminloggedin()) {
             if($mk && $mv) {
-                $query_limit = ($limit == 0) ? '' : "9999";
+                //$query_limit = ($limit == 0) ? '' : "9999";
                 if($count)
-                    return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $query_limit, $offset, '', 0, true);
+                    return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $limit, $offset, '', 0, true);
 
-                return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $query_limit, $offset, '', 0);
+                return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $limit, $offset, '', 0);
             }
 
             $query_limit = ($limit == 0) ? '' : "9999";
@@ -1942,6 +1975,7 @@ SQL;
 	
 	public static function getAllTagsAndFrequencies ($userId)
 	{
+        global $CONFIG;
 		$fields = array ('tags', 'discipline', 'pedagogical_approach');
 		
 		//$lds = get_entities('object','LdS',0,'',100000,0);
@@ -1965,7 +1999,7 @@ SQL;
 		
 		if (count($ids) && count($fieldids))
 		{
-			$sql = "SELECT DISTINCT entity_guid, k.string AS k, v.string AS v FROM {$CONFIG->dbprefix}metadata m LEFT JOIN {$CONFIG->dbprefix}metastrings k ON m.name_id = k.id LEFT JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE entity_guid IN (".implode(',',$ids).") AND m.name_id IN (".implode(',', $fieldids).")";
+			$sql = "SELECT DISTINCT entity_guid, time_created, k.string AS k, v.string AS v FROM {$CONFIG->dbprefix}metadata m LEFT JOIN {$CONFIG->dbprefix}metastrings k ON m.name_id = k.id LEFT JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE entity_guid IN (".implode(',',$ids).") AND m.name_id IN (".implode(',', $fieldids).")";
 			$res = execute_query ($sql, get_db_link('read'));
 			while ($row = mysql_fetch_object($res)) {
 				if (isset ($tags[$row->k][$row->v]))
@@ -1985,6 +2019,63 @@ SQL;
 			return false;
 		}
 	}
+
+    public static function getAllTagsAndFrequenciesUsage ($userId)
+    {
+        global $CONFIG;
+        $fields = array ('tags', 'discipline', 'pedagogical_approach');
+
+        //$lds = get_entities('object','LdS',0,'',100000,0);
+        $lds = self::getUserViewableLdSs(get_loggedin_userid());
+
+        if (!is_array($lds)) return false;
+
+        $ids = array ();
+        foreach ($lds as $item)
+            $ids[] = $item->guid;
+
+        $tags = array();
+        $fieldids = array();
+        foreach ($fields as $field)
+        {
+            $fieldids[] = get_metastring_id($field);
+            $tags[$field] = array();
+        }
+
+        $fieldids = array_filter($fieldids);
+
+        if (count($ids) && count($fieldids))
+        {
+            $sql = "SELECT DISTINCT entity_guid, time_created, k.string AS k, v.string AS v FROM {$CONFIG->dbprefix}metadata m LEFT JOIN {$CONFIG->dbprefix}metastrings k ON m.name_id = k.id LEFT JOIN {$CONFIG->dbprefix}metastrings v ON m.value_id = v.id WHERE entity_guid IN (".implode(',',$ids).") AND m.name_id IN (".implode(',', $fieldids).")";
+            $res = execute_query ($sql, get_db_link('read'));
+            while ($row = mysql_fetch_object($res)) {
+                if (!isset ($tags[$row->k][$row->v]))
+                    $tags[$row->k][$row->v] = array();
+
+                if (!isset ($tags[$row->k][$row->v]['count']))
+                    $tags[$row->k][$row->v]['count'] = 0;
+
+                if (!isset ($tags[$row->k][$row->v]['time_created']))
+                    $tags[$row->k][$row->v]['time_created'] = 0;
+
+                $tags[$row->k][$row->v]['count']++;
+
+                if($row->time_created > $tags[$row->k][$row->v]['time_created'])
+                    $tags[$row->k][$row->v]['time_created'] = $row->time_created;
+            }
+
+            foreach ($tags as &$tagclass) {
+                uasort($tagclass, 'ldshake_tags_cmp');
+                foreach ($tagclass as &$tag_value)
+                    $tag_value = $tag_value['count'];
+            }
+            return $tags;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     public static function build_notification($notification, $guid_list)
     {
@@ -2303,4 +2394,11 @@ SQL;
         else
             return 'en';
     }
+}
+
+function ldshake_tags_cmp($a, $b) {
+   $a_score = $a['count'] - (time() - $a['time_created'])*5.79E-7;
+   $b_score = $b['count'] - (time() - $b['time_created'])*5.79E-7;
+
+   return ($b_score - $a_score);
 }
