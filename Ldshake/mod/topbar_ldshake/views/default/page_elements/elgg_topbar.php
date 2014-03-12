@@ -110,6 +110,8 @@ if (isloggedin()) :
                         <li id="tb_new_option_conceptualize" class="menu_option menu_suboption"><?php echo T("Conceptualize") ?></li>
                         <li id="tb_new_option_author" class="menu_option menu_suboption"><?php echo T("Author") ?></li>
                         <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>
+                        <!-- @Jon: I added my new option designProject -->
+                        <li id="tb_new_option_designProject" class="menu_option menu_suboption" ><?php echo T("Design Project") ?></li>
                     </ul>
 			    </div>
                 <div id="new_menu_author" class="menu level2">
@@ -140,7 +142,13 @@ if (isloggedin()) :
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("For other conceptualizations") ?></a></li>
                     </ul>
                 </div>
-
+                <!-- @Jon: I added the two options inside LdProjects designProject -->
+                <div id="new_menu_designProject" class="menu level2">
+                    <ul>
+                        <li id="tb_designProject_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/ldprojects/new/"><?php echo T("Create New Workflow Design") ?></a></li>
+                        <li id="tb_designProject_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/ldprojects/new/"><?php echo T("New Design Project Using 7Cs") ?></a></li>
+                    </ul>
+                </div>
             </div>
 		</div>
 	</div>

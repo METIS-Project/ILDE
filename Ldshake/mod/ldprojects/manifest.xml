@@ -2,7 +2,7 @@
 <plugin_manifest>
         <field key="author" value="(alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.." />
         <field key="version" value="1.0" />
-        <field key="description" value="LdShake user and group management" />
+        <field key="description" value="LdShake LdProjects management" />
         <field key="website" value="http://ldshake.upf.edu/" />
         <field key="copyright" value="Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona." />
 </plugin_manifest>

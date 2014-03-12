@@ -33,59 +33,16 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
-
-/**
- * Set of helper functions for the views of the LdShakers module 
- *
- */
-
-class ldshakers_viewTools
-{	
-	public static function pagination ($count, $elementsPerPage = 25)
-	{
-		$params = array(
-			'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
-			'offset' => get_input('offset') ?: 0,
-			'count' => $count,
-			'limit' => $elementsPerPage
-		);
-		
-		return elgg_view('navigation/pagination', $params);
-	}
+?>
+<?php extract ($vars) ?>
+<div id="one_column">
+	<div id="content_area_user_title">
+		<h2>Page not found</h2>
+	</div>
 	
-	public static function getUrl ($type = '')
-	{
-		global $CONFIG;
-		
-		switch ($type)
-		{
-			case '':
-				return $CONFIG->url . 'pg/ldshakers/';
-		}
-	}
-	
-	public static function urlFor ($item, $type)
-	{
-		global $CONFIG;
-		
-		switch ($type)
-		{
-			case 'group':
-				return $CONFIG->url . 'pg/ldshakers/group/'.$item->id.'/' ;
-			case 'user':
-				return $CONFIG->url . 'pg/ldshakers/'.$item->username.'/' ;
-		}
-	}
-	
-	public static function getGroupList ($userId)
-	{
-		$groups = ldshakers_contTools::getGroupsUserIsMember($userId);
-		
-		$str = '';
-		foreach ($groups as $g)
-		{
-			$str .= '<a href="'.self::urlFor($g, 'group').'">'.$g->name.'</a> ';
-		}
-		return $str;
-	}
-}
+	<div id="error_wrapper">
+		<p>
+			Oops! We couldn't find the page you requested. Jon
+		</p>
+	</div>
+</div>

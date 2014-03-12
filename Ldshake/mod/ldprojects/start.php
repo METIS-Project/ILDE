@@ -33,59 +33,81 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
-
 /**
- * Set of helper functions for the views of the LdShakers module 
- *
+ * 
+ * Ldprojects controller
  */
 
-class ldshakers_viewTools
+
+function ldprojects_init()
 {	
-	public static function pagination ($count, $elementsPerPage = 25)
-	{
-		$params = array(
-			'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
-			'offset' => get_input('offset') ?: 0,
-			'count' => $count,
-			'limit' => $elementsPerPage
-		);
-		
-		return elgg_view('navigation/pagination', $params);
-	}
+	global $CONFIG;
+
+	//Our css stuff
+	extend_view('css','ldprojects/css');
 	
-	public static function getUrl ($type = '')
+	//We want the /ldprojects/whatever urls to be ours
+	register_page_handler('ldprojects','ldprojects_page_handler');
+
+	//LdShakers actions:
+	//register_action("ldprojects/addgroup", false, $CONFIG->pluginspath . "ldprojects/actions/ldprojects/addgroup.php");
+
+    //Adding our JS to the view
+    extend_view('page_elements/jsarea', 'ldprojects/js');
+
+}
+
+register_elgg_event_handler('init','system','ldprojects_init');
+
+register_plugin_hook('permissions_check', 'group', 'ldprojects_write_permission_check');
+
+function ldprojects_write_permission_check($hook, $entity_type, $returnvalue, $params)
+{
+    $entity = $params['entity'];
+    if($entity->type == 'group') {
+        if(isadminloggedin())
+            return true;
+
+        if($entity->owner_guid == get_loggedin_userid())
+            return true;
+    }
+
+}
+
+function ldprojects_page_handler ($page)
+{
+
+	 //Nothing here will be exposed to non-logged users, so go away!
+	gatekeeper();
+
+	//Special case: my lds's url is short: doesn't have an explicit section, so we add it automatically
+	if ($page[0] == '')
+		array_unshift($page, 'main');
+
+	//Sub_controller dispatcher
+	if (function_exists("ldprojects_exec_{$page[0]}"))
 	{
-		global $CONFIG;
-		
-		switch ($type)
-		{
-			case '':
-				return $CONFIG->url . 'pg/ldshakers/';
-		}
+		set_context("ldprojects_exec_{$page[0]}");
+		call_user_func("ldprojects_exec_{$page[0]}", $page);
 	}
-	
-	public static function urlFor ($item, $type)
-	{
-		global $CONFIG;
-		
-		switch ($type)
-		{
-			case 'group':
-				return $CONFIG->url . 'pg/ldshakers/group/'.$item->id.'/' ;
-			case 'user':
-				return $CONFIG->url . 'pg/ldshakers/'.$item->username.'/' ;
-		}
-	}
-	
-	public static function getGroupList ($userId)
-	{
-		$groups = ldshakers_contTools::getGroupsUserIsMember($userId);
-		
-		$str = '';
-		foreach ($groups as $g)
-		{
-			$str .= '<a href="'.self::urlFor($g, 'group').'">'.$g->name.'</a> ';
-		}
-		return $str;
-	}
+	else
+		ldprojects_exec_404();
+}
+
+function ldprojects_exec_main ($params)
+{
+
+}
+
+
+function ldprojects_exec_new ($params)
+{
+    echo elgg_view('ldprojects/ldsproject_editor',$vars);
+}
+
+function ldprojects_exec_404 ()
+{
+	header("HTTP/1.0 404 Not Found");
+	$body = elgg_view("ldprojects/404",$vars);
+	page_draw('Not found', $body);
 }
