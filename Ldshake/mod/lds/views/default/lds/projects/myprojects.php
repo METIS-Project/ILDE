@@ -40,28 +40,27 @@
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
         <?php if($section != 'off'): ?>
-            <ul id="lds_side_sections_prj">
-                <li><a<?php if ($section == 'prj') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations' ?>"><?php echo T("All my projects") ?></a></li>
-                <li><a<?php if ($section == 'prj-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-                <li><a<?php if ($section == 'prj-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-                <li><a<?php if ($section == 'prj-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
-            </ul>
+        <ul id="lds_side_sections_prj">
+            <li><a<?php if ($section == 'prj') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations' ?>"><?php echo T("All my projects") ?></a></li>
+            <li><a<?php if ($section == 'prj-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'prj-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'prj-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
+        </ul>
 
-            <ul id="lds_side_sections">
-                <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
-                <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
-                <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
-                <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
-            </ul>
+		<ul id="lds_side_sections">
+			<li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
+			<li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
+			<li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
+			<li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+		</ul>
 
-            <ul id="lds_side_sections_imp">
-                <li><a<?php if ($section == 'imp') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
-                <li><a<?php if ($section == 'imp-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-                <li><a<?php if ($section == 'imp-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-                <li><a<?php if ($section == 'imp-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
-            </ul>
+        <ul id="lds_side_sections_imp">
+            <li><a<?php if ($section == 'imp') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
+            <li><a<?php if ($section == 'imp-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+            <li><a<?php if ($section == 'imp-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+            <li><a<?php if ($section == 'imp-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
+        </ul>
         <?php endif; ?>
-
     </div>
 	<div id="owner_block_bottom"></div>
 </div>
@@ -86,12 +85,15 @@
 		<div id="my_lds_list_header">
 			<input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
 			<?php if ($section != 'trashed'): ?>
-			<input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected LdS") ?>" />
+			<input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
 			<?php else: ?>
 			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
 			<?php endif; ?>
+            <!--
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
             <input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" />
+            <input type="button" style="border-color:#999; margin:5px 0;" id="implement_project" value="<?php echo T("Implement project") ?>" disabled="disabled" />
+            -->
 		</div>
 		<ul id="my_lds_list">
 			<?php foreach($list as $item): ?>
@@ -150,4 +152,4 @@
 	</div>
 </div>
 
-<?php include ('clonelds_form.php') ?>
+<?php include (__DIR__.'/../clonelds_form.php') ?>

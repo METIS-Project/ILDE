@@ -124,6 +124,10 @@ function lds_init()
     register_action("lds/display_image", false, $CONFIG->pluginspath . "lds/actions/lds/display_image.php");
     register_action("lds/tree_lds_view", false, $CONFIG->pluginspath . "lds/actions/lds/tree_lds_view.php");
 
+    //projects
+    register_action("lds/projects/save", false, $CONFIG->pluginspath . "lds/actions/lds/projects/save.php");
+    register_action("lds/projects/implement", false, $CONFIG->pluginspath . "lds/actions/lds/projects/implement.php");
+
     if (get_context() == 'admin')
         add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
 
@@ -2043,7 +2047,8 @@ function lds_exec_viewrevision ($params)
 	//TODO access policies
 	$revision = get_entity ($params[1]);
 
-	if ($revision->subtype == get_subtype_id('object', 'LdS_document_revision'))
+	if ($revision->subtype == get_subtype_id('object', 'LdS_document_revision')
+        || $revision->subtype == get_subtype_id('object', 'LdS_document_editor_revision'))
 	{
 		$document = get_entity ($revision->document_guid);
 		$revDate = $revision->time_created;
@@ -2055,11 +2060,15 @@ function lds_exec_viewrevision ($params)
 	}
 	$lds = get_entity ($document->lds_guid);
 
+    $external = '';
+    if($lds->external_editor)
+        $external = '_editor';
+
 	//Get all the revisions of this document
-	$revisions = get_entities_from_metadata('document_guid',$document->guid,'object','LdS_document_revision',0,10000,0,'time_created');
+	$revisions = get_entities_from_metadata('document_guid',$document->guid,'object','LdS_document'.$external.'_revision',0,10000,0,'time_created');
 	
 	//And get the link to the next one and the previons one
-	if ($revision->subtype == get_subtype_id('object', 'LdS_document_revision'))
+	if ($revision->subtype == get_subtype_id('object', 'LdS_document'.$external.'_revision'))
 	{
 		$prevId = $nextId = null;
 		if (is_array ($revisions))
@@ -2502,4 +2511,225 @@ function lds_exec_debug($params) {
     $form_body = elgg_view('lds/debug/debug_settings', array('editor' => $editor));
     $body = elgg_view('input/form', array('action' => "{$CONFIG->url}action/lds/debug/manage_debug", 'body' => $form_body));
     page_draw('Debug', $body);
+}
+
+function lds_exec_projects ($params)
+{
+    $offset = get_input('offset') ?: '0';
+    set_context("lds_exec_main");
+
+    if ($params[1] == 'created-by-me')
+    {
+        $vars['count'] = get_entities('object', 'LdSProject', get_loggedin_userid(), '', 50, $offset, true);
+        $entities = get_entities('object', 'LdSProject', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("LdS created by me");
+    }
+    elseif ($params[1] == 'shared-with-me')
+    {
+        $vars['count'] = lds_contTools::getUserSharedLdSWithMe(get_loggedin_userid(), true);
+        $entities = lds_contTools::getUserSharedLdSWithMe(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("LdS shared with me");
+    }
+    elseif ($params[1] == 'created-with')
+    {
+        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[2]);
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[2]);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("Created with").$params[2];
+        $vars['editor_filter'] = $params[2];
+    }
+    else
+    {
+        $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
+        $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("All my Project designs");
+    }
+
+    $vars['list_type'] = T('projects');
+    $vars['section'] = 'off';
+    $body = elgg_view('lds/projects/myprojects',$vars);
+
+    page_draw($vars['title'], $body);
+}
+
+function lds_exec_projects_implementations ($params)
+{
+    $offset = get_input('offset') ?: '0';
+    set_context("lds_exec_main");
+
+    if ($params[1] == 'created-by-me')
+    {
+        $vars['count'] = get_entities('object', 'LdSProject', get_loggedin_userid(), '', 50, $offset, true);
+        $entities = get_entities('object', 'LdSProject', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("LdS created by me");
+    }
+    elseif ($params[1] == 'shared-with-me')
+    {
+        $vars['count'] = lds_contTools::getUserSharedObjectsWithMe('object', 'LdSProject_implementation', get_loggedin_userid(), true);
+        $entities = lds_contTools::getUserSharedObjectsWithMe('object', 'LdSProject_implementation', get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("LdS shared with me");
+    }
+    elseif ($params[1] == 'created-with')
+    {
+        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[2]);
+        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[2]);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("Created with").$params[2];
+        $vars['editor_filter'] = $params[2];
+    }
+    else
+    {
+        $vars['count'] = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), true);
+        $entities = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['title'] = T("All my Project designs");
+    }
+
+    $vars['list_type'] = T('project');
+    $vars['section'] = 'prj'.$params[1];
+    $body = elgg_view('lds/projects/myprojects',$vars);
+
+    page_draw($vars['title'], $body);
+}
+
+function lds_exec_project_implementation ($params)
+{
+    $offset = get_input('offset') ?: '0';
+    set_context("lds_exec_main");
+    $project_implementation = get_entity($params[1]);
+
+    $vars['count'] = lds_contTools::getUserEditableLdSs($project_implementation->owner_guid, true,0,0, 'project_design', $params[1]);
+    $entities = lds_contTools::getUserEditableLdSs($project_implementation->owner_guid, false, 50, $offset, 'project_design', $params[1]);
+    $vars['list'] = lds_contTools::enrichLdS($entities);
+    $vars['title'] = $project_implementation->title;
+
+    $vars['list_type'] = T('LdS');
+    $vars['section'] = 'off';
+    $body = elgg_view('lds/projects/myprojects',$vars);
+
+    page_draw($vars['title'], $body);
+}
+
+function lds_exec_new_project ($params)
+{
+    global $CONFIG;
+
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
+
+    //Create an empty LdS object to initialize the form
+    $vars['initLdS'] = new stdClass();
+    $vars['initLdS']->title = T("Untitled Project Design");
+    $vars['initLdS']->granularity = '0';
+    $vars['initLdS']->completeness = '0';
+    $vars['initLdS']->tags = '';
+    $vars['initLdS']->discipline = '';
+    $vars['initLdS']->pedagogical_approach = '';
+    $vars['initLdS']->guid = '0';
+
+    $vars['am_i_starter'] = true;
+
+    $vars['all_can_read'] = 'true';
+
+    $vars['initLdS'] = json_encode($vars['initLdS']);
+
+    $vars['editor_type'] = 'project_design';
+
+    $vars['tags'] = json_encode(lds_contTools::getMyTags ());
+
+    $available = lds_contTools::getAvailableUsers(null);
+
+    $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
+    $vars['viewers'] = json_encode(array());
+    $vars['editors'] = json_encode(array());
+    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+
+    $vars['starter'] = get_loggedin_user();
+
+    $vars['title'] = T("New LdS Project Design");
+
+    echo elgg_view('lds/projects/editform_editor',$vars);
+}
+
+function lds_exec_edit_project ($params)
+{
+    global $CONFIG;
+
+    set_context("lds_exec_new_project");
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    //if (preg_match('/(new|edit)/',$_SERVER['HTTP_REFERER']))
+    $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
+    //else
+    //	$vars['referer'] = $_SERVER['HTTP_REFERER'];
+
+    $editLdS = get_entity($params[1]);
+
+    if (!$editLdS->canEdit())
+    {
+        register_error("You don't have permissions to edit this LdS.");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+        return '';
+    }
+
+    if ($user = lds_contTools::isLockedBy($params[1]))
+    {
+        $fstword = explode(' ',$user->name);
+        $fstword = $fstword[0];
+        register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
+        header("Location: " . $_SERVER['HTTP_REFERER']);
+    }
+
+    create_annotation($editLdS->guid, 'viewed_lds_design', '1', 'text', get_loggedin_userid(), 2);
+    //lds_contTools::markLdSAsViewed ($params[1]);
+
+    //Pass the LdS properties to the form
+    $vars['initLdS'] = new stdClass();
+    $vars['initLdS']->title = $editLdS->title;
+    $vars['initLdS']->granularity = $editLdS->granularity;
+    $vars['initLdS']->completeness = $editLdS->completeness;
+
+    $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+    foreach ($tagtypes as $type)
+    {
+        if (is_array($editLdS->$type))
+            $vars['initLdS']->$type = implode(',',$editLdS->$type);
+        elseif (is_string($editLdS->$type) && strlen($editLdS->$type))
+            $vars['initLdS']->$type = $editLdS->$type;
+        else
+            $vars['initLdS']->$type = '';
+    }
+
+    $vars['initLdS']->guid = $params[1];
+    $vars['am_i_starter'] = (get_loggedin_userid() == $editLdS->owner_guid);
+
+    //in_array("all_can_view", in_array("all_can_view", metadata_array_to_values(get_metadata_for_entity($editLdS))););
+    //$metadata = metadata_array_to_values(get_metadata_for_entity($editLdS));
+    ///$value = $editLdS->all_can_view;
+
+    $vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
+
+    $vars['initLdS'] = json_encode($vars['initLdS']);
+
+    //For each of the documents that this LdS has...
+
+    $vars['jsondata'] = $editLdS->description;
+    $vars['tags'] = json_encode(lds_contTools::getMyTags ());
+
+    //These are all my friends
+    $arrays = lds_contTools::buildObjectsArray($editLdS);
+    $vars['jsonfriends'] = json_encode($arrays['available']);
+    $vars['viewers'] = json_encode($arrays['viewers']);
+    $vars['editors'] = json_encode($arrays['editors']);
+    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['starter'] = get_user($editLdS->owner_guid);
+
+    $vars['title'] = T("Edit Project");
+    $vars['editor_type'] = $editLdS->editor_type;
+
+    echo elgg_view('lds/projects/editform_editor',$vars);
 }

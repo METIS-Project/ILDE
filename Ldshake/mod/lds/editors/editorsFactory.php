@@ -1296,7 +1296,7 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
-        $url_path = explode('/', $params['url']);
+        $url_path = explode('/', $params['document_url']);
         $url_path_filtered = array();
         foreach ($url_path as $up)
             if(strlen($up))
@@ -1476,7 +1476,7 @@ class RestEditor extends Editor
         $resultIds = new stdClass();
         $docSession = $params['editor_id'];
 
-        $url_path = explode('/', $params['url']);
+        $url_path = explode('/', $params['document_url']);
         $url_path_filtered = array();
         foreach ($url_path as $up)
             if(strlen($up))
@@ -1970,8 +1970,8 @@ class GoogleEditor extends Editor
             return false;
         }
 
-        $this->_document->rev_last = 0;
-        $this->_document->lds_revision_id = 0;
+        //$this->_document->rev_last = 0;
+        //$this->_document->lds_revision_id = 0;
 
         $resultIds->guid = $this->_document->lds_guid;
         $resultIds->file_guid = $this->_document->file_guid;
@@ -2415,11 +2415,6 @@ class UploadEditor extends Editor
     {
         global $CONFIG;
 
-        //save the contents
-        $docSession = $params['editor_id'];
-
-        $doc_file = get_entity($docSession);
-
         $resultIds = new stdClass();
         $user = get_loggedin_user();
 
@@ -2427,21 +2422,31 @@ class UploadEditor extends Editor
         $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        $file_origin = Editor::getFullFilePath($docSession);
-        copy($file_origin, $file->getFilenameOnFilestore());
         $this->_document->file_guid = $file->guid;
-        $this->_document->upload_filename = $doc_file->upload_filename;
-        $this->_document->save();
 
+        //save the contents
+        if($docSession = $params['editor_id']) {
+            $doc_file = get_entity($docSession);
+            $this->_document->upload_filename = $doc_file->upload_filename;
+            $file_origin = Editor::getFullFilePath($docSession);
+            copy($file_origin, $file->getFilenameOnFilestore());
+        }
+
+        $this->_document->save();
 
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id.'.zip';
         $file = $this->getNewFile($filestorename);
-        $file_origin = Editor::getFullFilePath($docSession);
-        copy($file_origin, $file->getFilenameOnFilestore());
+
+        if($docSession) {
+            $file_origin = Editor::getFullFilePath($docSession);
+            copy($file_origin, $file->getFilenameOnFilestore());
+            $this->_document->upload_filename_imsld = $doc_file->upload_filename;
+        }
+
         $this->_document->file_imsld_guid = $file->guid;
-        $this->_document->upload_filename_imsld = $doc_file->upload_filename;
+
         $this->_document->save();
 
 
@@ -2469,9 +2474,9 @@ class UploadEditor extends Editor
     public function saveDocument($params=null)
     {
         if($this->_document->file_guid)
-            $this->saveExistingDocument($params);
+            return $this->saveExistingDocument($params);
         else
-            $this->saveNewDocument($params);
+            return $this->saveNewDocument($params);
     }
 
     //update the previous contents
@@ -2889,7 +2894,7 @@ class GluepsManager
         global $CONFIG;
         $url = $CONFIG->glueps_url;
 
-        $uri = "{$params['url']}";
+        $uri = "{$params['document_url']}";
 
         $response = \Httpful\Request::get($uri)
             //->addHeader('Accept', 'application/json')

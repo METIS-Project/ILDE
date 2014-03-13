@@ -37,14 +37,13 @@
 ?>
 
 <?php
-global $CONFIG;
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
 <div id="layout_canvas">
 	<div id="one_column" style="padding-bottom:0 !important">
-		<div id="lds_edit_form" action="<?php echo $url ?>" method="post">
+		<form id="lds_edit_form" action="<?php echo $url ?>" method="post">
 			<input type="hidden" id="lds_edit_guid" name="guid" value="0" />
 			<input type="hidden" id="lds_edit_revision" name="revision" value="0" />
 			<input type="hidden" id="lds_edit_referer" name="referer" value="<?php echo $referer ?>" />
@@ -64,7 +63,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<div id="lds_edit_buttons">
 					<input type="button" id="lds_share_button" name="action" value="<?php echo T("Share...") ?>" tabindex="3" />
 					<input type="submit" id="lds_edit_save" name="action" value="<?php echo T("Save") ?>" tabindex="4" />
-					<input type="submit" id="lds_edit_save_exit_editor" name="action" value="<?php echo T("Save & Exit") ?>" tabindex="5" />
+					<input type="submit" id="lds_edit_save_exit" name="action" value="<?php echo T("Save & Exit") ?>" tabindex="5" />
 					<?php echo T("or") ?> <a id="lds_edit_exit" href="<?php echo $referer ?>" tabindex="6"><?php echo T("Cancel") ?></a>
 				</div>
 				<div style="clear: both"></div>
@@ -83,66 +82,23 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 						<?php echo T("Tags") ?>: <span class="tooltip"><?php echo T("Click here to add tags to the LdS") ?></span><span id="lds_edit_tags_list"></span>
 					</div>
 				</div>
-                <?php if(isset($upload)):?>
-                <form id="file_upload_form" name="file_upload_name" target="upload_result_name" action="<?php echo $url.'action/lds/pre_upload' ?>" method="POST" enctype="multipart/form-data" >
-                    <div style="clear:both"></div>
-                    <input name="file" id="file_input" size="50" type="file" /> <span id="form_file_input_empty" style="display:none;color:red"><?php echo T("You must select a file!");?></span>
-                </form>
-                    <div style="padding:5px;color:grey"><?php echo $upload_link;?></div>
-                <?php endif; ?>
-
-            </div>
+			</div>
 			<div id="lds_edit_contents">
-                <?php if(!isset($upload)): ?>
-                <div id="rich_text_box" style="display: none;">
-                <?php else: ?>
-                <div id="rich_text_box" style="display: block;">
-                <?php endif; ?>
-                <?php if($editor == 'google_docs'): ?>
-                    <iframe id="lds_support_editor_iframe" alt_src="<?php echo htmlentities($support_editor['document_iframe_url']);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php else: ?>
-                    <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
-                <?php endif; ?>
-				</div>
-                <!--
-                <?php if ($editor == 'exe'): ?>
-					<iframe id="lds_editor_iframe" src="/exelearning/<?php echo $editor_id ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
-				<?php else: ?>
-				<?php echo $CONFIG->root ?>
-					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
-				<?php endif; ?>
-				-->
-                <?php if($restapi): ?>
-                <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php endif; ?>
-
-                <?php if($editor == 'google_docs'): ?>
-                    <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php endif; ?>
-
-
-                </div>
-            <div id="lds_edit_tabs" class="scrollable">
-                <?php /** Botonets de scroll **/ ?>
-                <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
-                <ul id="lds_edit_tabs_scrolling" class="content">
-                    <?php if($editor != 'google_docs'):?><li class="lds_newtab">+ <?php echo T("Add document") ?></li><?php endif;?>
-                    <?php if(!isset($upload)): ?>
-                        <?php if($editor != 'google_docs'):?>
-                            <li class="lds_exetab"> <?php echo $editor_label ?></li>
-                        <?php else: ?>
-                            <li class="lds_exetab"> <?php echo $lds_title ?></li>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-			<br>
-
-            <!-- Hidden stuff -->
+				<textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
+			</div>
+			<div id="lds_edit_tabs" class="scrollable">
+			<?php /** Botonets de scroll **/ ?>
+			<div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
+				<ul id="lds_edit_tabs_scrolling" class="content">
+					<li class="lds_newtab">+ <?php echo T("Add document") ?></li>
+				</ul>
+			</div>
+			
+			<!-- Hidden stuff -->
 			<div id="shade" style="display:block;"></div>
 			
-			<div id="lds_loading_contents"><?php echo T("Loading...") ?></div>
-						
+			<div id="lds_loading_contents"><?php echo T("Loading…") ?></div>
+			
 			<div id="lds_edit_tags_popup">
 				<a id="lds_edit_tags_popup_close" href="#"><?php echo T("Done") ?></a>
 				<div id="lds_edit_tags_popup_header"><?php echo T("Edit LdS tags") ?></div>
@@ -160,7 +116,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
 			</div>
 			
-						<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
+			<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
 				<div class="tooltip_bl_stem"></div>
 				<div class="tooltip_bl_body">
 					<h4><?php echo T("Granularity") ?></h4>
@@ -204,57 +160,44 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 			</div>
 			
 			<?php include ('single_share_form.php') ?>
-		</div>
+		</form>
 	</div>
 
-    <iframe id="upload_result" name="upload_result_name"></iframe>
+    <div id="lds_edit_tabs_popup">
+		<ul>
+			<li><a href="#" id="lds_edit_rename_tab"><?php echo T("Rename this document") ?></a></li>
+			<li><a href="#" id="lds_edit_delete_tab"><?php echo T("Delete this document") ?></a></li>
+		</ul>
+	</div>
 
 </div>
-
 <div class="clearfloat"></div>
 </div><!-- /#page_wrapper -->
 </div><!-- /#page_container -->
 	<script type="text/javascript">
-        var t9n = {
-            supportTitle: "<?php echo T("Support Document") ?>",
-            suggestEnterTags : "<?php echo T("Enter tags here") ?>",
-            newDocTitle : "<?php echo T("Please write the new document's title:") ?>",
-            newDocTitleEmpty : "<?php echo T("Oops! The document title cannot be empty.") ?>",
-            newDocTitleRepeated : "<?php echo T("Oops! There is already one document with this title in the LdS.") ?>",
-            docSetTitle : "<?php echo T("Please write a new title for the document:") ?>",
-            docConfirmDelete : "<?php echo T("Are you sure you want to delete the following document?") ?>",
-            untitledDoc : "<?php echo T("Untitled Document") ?>",
+		var t9n = {
+			suggestEnterTags : "<?php echo T("Enter tags here") ?>",
+			newDocTitle : "<?php echo T("Please write the new document's title:") ?>",
+			newDocTitleEmpty : "<?php echo T("Oops! The document title cannot be empty.") ?>",
+			newDocTitleRepeated : "<?php echo T("Oops! There is already one document with this title in the LdS.") ?>",
+			docSetTitle : "<?php echo T("Please write a new title for the document:") ?>",
+			docConfirmDelete : "<?php echo T("Are you sure you want to delete the following document?") ?>",
+			untitledDoc : "<?php echo T("Untitled Document") ?>",
             untitledLdS : "<?php echo T("Untitled LdS") ?>",
-            confirmExit : "<?php echo T("You have unsaved data. Are you sure you want to leave the editor?") ?>"
-        };
-
+			confirmExit : "<?php echo T("You have unsaved data. Are you sure you want to leave the editor?") ?>"
+		};
 		var initLdS = <?php echo $initLdS ?>;
         var new_lds = (initLdS.guid == '0') ? true : false;
-		var documents = "2";
-		var editorType = '<?php echo $editor ?>';
+		var documents = <?php echo $initDocuments ?>;
 		var mytags = <?php echo $tags ?>;
+        var editor_type = '<?php echo $editor_type ?>';
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();
-		var editor_id = "<?php echo $editor_id ?>";
-		var groups = <?php echo $groups ?>;
-        var documents = <?php echo $initDocuments ?>;
-        var document_url = "<?php echo $document_url ?>";
-        var document_iframe_url = "<?php echo $document_iframe_url ?>";
-        var implementation = false;
-        var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
-        var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
-        <?php if($vars['restapi']): ?>
-        var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";
-        <?php endif; ?>
-        var google_docs = <?php echo (($editor == 'google_docs') ? 'true' : 'false')?>;
-        <?php if($editor == 'google_docs'): ?>
-        var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
-        <?php endif; ?>
-        var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
-
-        friends['available'] = <?php echo $jsonfriends ?>;
+		friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;
 		friends['editors'] = <?php echo $editors ?>;
+
+		var groups = <?php echo $groups ?>;
 
 		//Is the LdS public for all LdShakers? (yes by default)
 		var allCanView = <?php echo $all_can_read ?>;

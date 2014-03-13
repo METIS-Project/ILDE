@@ -100,7 +100,7 @@ class lds_contTools
         $limit = mysql_real_escape_string($limit);
 
         $query = <<<SQL
-SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
 	(e.owner_guid = {$user_id})
 	OR
 	(
@@ -131,7 +131,7 @@ SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG-
 ) AND (
 	  (o.title LIKE '%{$query}%' OR do.title LIKE '%{$query}%' OR do.description LIKE '%{$query}%')
 	  {$tags_query}
-	)
+	) {$metadata_query}
 	 order by e.time_updated desc limit {$offset},{$limit}
 SQL;
 
@@ -401,7 +401,10 @@ SQL;
 	
 	public static function getLdsDocuments ($lds_guid)
 	{
-		$arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document', 0, 10000);
+		if(!($arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document', 0, 10000))) {
+            $arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document_editor', 0, 100);
+        }
+
 		if(is_array($arr))
 			Utils::osort($arr, 'guid');
 		
@@ -414,7 +417,12 @@ SQL;
 	public static function getRevisionList ($lds)
 	{	
 		//Cutre això del limit, però què hi farem :(
-		$revisions = $lds->getAnnotations('revised_docs', 10000, 0, 'asc');
+
+        $external = '';
+        if($lds->external_editor)
+            $external = '_editor';
+
+		$revisions = $lds->getAnnotations('revised_docs'.$external, 10000, 0, 'asc');
 		$history = array();
 		$revNum = 1;
 		if (is_array($revisions))
@@ -428,7 +436,7 @@ SQL;
 				$obj->deleted_documents = explode (',', $rev->value);
 				
 				//IDEM! Limits suck.
-				$documents = get_entities_from_metadata('lds_revision_id', $rev->id, 'object', 'LdS_document_revision', '', 10000);
+				$documents = get_entities_from_metadata('lds_revision_id', $rev->id, 'object', 'LdS_document'.$external.'_revision', '', 10000);
 				$obj->revised_documents = $documents;
 				
 				$history[] = $obj;
@@ -1316,13 +1324,17 @@ SQL;
     }
 
     public static function getUserSharedLdSWithMe($user_id, $count = false, $limit = 0, $offset = 0) {
+        return getUserSharedObjectsWithMe('object', 'LdS', $user_id, $count, $limit, $offset);
+    }
+
+    public static function getUserSharedObjectsWithMe($type, $subtype, $user_id, $count = false, $limit = 0, $offset = 0) {
         global $CONFIG;
 
         $query_limit = ($limit == 0) ? '' : "limit {$offset}, {$limit}";
-        $subtype = get_subtype_id('object', 'LdS');
+        $subtype = get_subtype_id($type, $subtype);
 
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = {$type} AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
 	(
 		e.guid IN (
 			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
@@ -1458,6 +1470,19 @@ SQL;
     }
 
     public static function getUserEditableLdSs($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+        return self::getUserEditableEntities('object', 'LdS', $user_id, $count, $limit, $offset, $m_key, $m_value);
+    }
+
+    public static function getUserEditableProjects($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+        return self::getUserEditableEntities('object', 'LdSProject', $user_id, $count, $limit, $offset, $m_key, $m_value);
+    }
+
+    public static function getUserEditableProjectImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+        return self::getUserEditableEntities('object', 'LdSProject_implementation', $user_id, $count, $limit, $offset, $m_key, $m_value);
+    }
+
+
+    public static function getUserEditableEntities($type = 'object', $subtype = 'LdS', $user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
         if(isadminloggedin()) {
@@ -1469,7 +1494,7 @@ SQL;
             return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
             */
             $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-            $subtype = get_subtype_id('object', 'LdS');
+            $subtype = get_subtype_id($type, $subtype);
             $user_id = get_loggedin_userid();
 
             $metadata_join = "";
@@ -1499,7 +1524,7 @@ SQL;
         }
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-        $subtype = get_subtype_id('object', 'LdS');
+        $subtype = get_subtype_id('object', $subtype);
 
         $metadata_join = "";
         $metadata_query = "";
@@ -1542,26 +1567,30 @@ SQL;
     }
 
     public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
+        return self::getUserViewableObjects('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv);
+    }
+
+    public static function getUserViewableObjects($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
         global $CONFIG;
 
         if(isadminloggedin()) {
             if($mk && $mv) {
                 //$query_limit = ($limit == 0) ? '' : "9999";
                 if($count)
-                    return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $limit, $offset, '', 0, true);
+                    return get_entities_from_metadata($mk, $mv, $type, $subtype, 0, $limit, $offset, '', 0, true);
 
-                return get_entities_from_metadata($mk, $mv, 'object', 'LdS', 0, $limit, $offset, '', 0);
+                return get_entities_from_metadata($mk, $mv, $type, $subtype, 0, $limit, $offset, '', 0);
             }
 
             $query_limit = ($limit == 0) ? '' : "9999";
             if($count)
-                return get_entities('object', 'LdS', 0, '', $query_limit, $offset, true);
+                return get_entities($type, $subtype, 0, '', $query_limit, $offset, true);
 
-            return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
+            return get_entities($type, $subtype, 0, '', $query_limit, $offset);
         }
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-        $subtype = get_subtype_id('object', 'LdS');
+        $subtype = get_subtype_id($type, $subtype);
 
         //$mj = '';
         $mw = '';

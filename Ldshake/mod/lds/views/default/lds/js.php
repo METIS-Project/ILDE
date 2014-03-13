@@ -37,7 +37,7 @@
 ?>
 
 <?php
-if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'):
+if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'  || get_context() == 'lds_exec_new_project'):
 ?>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/autoSuggest/jquery.autoSuggest.js<?php echo "?q=".rand(1,9999); ?>"></script>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor/ckeditor.js<?php echo "?q=0001"; ?>"></script>
@@ -47,7 +47,7 @@ if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_c
 endif;
 if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit'):
 	echo Utils::getJsDeclaration('lds', 'lds-form');
-elseif (get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'):
+elseif (get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload' || get_context() == 'lds_exec_new_project'):
 	echo Utils::getJsDeclaration('lds', 'lds-form-editor');
 endif;
 if (get_context() == 'lds_exec_main' || get_context() == 'lds_exec_browse' || get_context() == 'lds_exec_trashed' || get_context() == 'lds_exec_implementable' || get_context() == 'lds_exec_implementations' || get_context() == 'lds_exec_about' || get_context() == 'lds_exec_help'):
@@ -56,6 +56,11 @@ endif;
 if (get_context() == 'lds_exec_history'):
 	echo Utils::getJsDeclaration('lds', 'lds-history');
 endif;
+
+if (get_context() == 'lds_exec_new_project' || get_context() == 'lds_exec_edit_project'):
+    echo Utils::getJsDeclaration('lds', 'ldprojects-common');
+endif;
+
 if (get_context() == 'lds_exec_viewrevision' || get_context() == 'lds_exec_viewrevisioneditor'):
 	echo Utils::getJsDeclaration('lds', 'lds-revision');
 endif;

@@ -113,6 +113,7 @@ if (isloggedin()) :
                         <li id="tb_new_option_conceptualize" class="menu_option menu_suboption"><?php echo T("Conceptualize") ?></li>
                         <li id="tb_new_option_author" class="menu_option menu_suboption"><?php echo T("Author") ?></li>
                         <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>
+                        <li id="tb_new_option_project" class="menu_option menu_suboption" ><?php echo T("Project") ?></li>
                     </ul>
 			    </div>
                 <div id="new_menu_author" class="menu level2">
@@ -145,12 +146,28 @@ if (isloggedin()) :
                     </ul>
                 </div>
 
+                <div id="new_menu_project" class="menu level2">
+                    <ul>
+                        <li id="tb_newlds_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Project Workflow") ?></a></li>
+                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Manage projects designs") ?></a></li>
+                        <?php
+                        $projects = lds_contTools::getUserViewableObjects('object', 'LdSProject', get_loggedin_userid(), false, 10);//lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 10);
+                        if($projects)foreach($projects as $project): ?>
+                        <li class="menu_option"><a class="new_project_menu_item" href="<?php echo $vars['url']; ?>pg/lds/new/projects/implement/" project_guid="<?php echo $project->guid;?>"><?php echo $project->title ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+
+
             </div>
 		</div>
 	</div>
 </div>
 
 <div style="clear:both;"></div>
+
+    <?php include_once(__DIR__.'/../projects/new_projectimplementation_form.php');    ?>
+
 
 <?php
 endif;

@@ -42,6 +42,15 @@ extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
+<style>
+    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; }
+    .draggable, .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+    .ui-widget-content {background-image: none; background-color: lightskyblue; }
+    #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: #ff0000; border-width:5px; }
+    #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; }
+
+</style>
+
 <div id="layout_canvas">
 	<div id="one_column" style="padding-bottom:0 !important">
 		<div id="lds_edit_form" action="<?php echo $url ?>" method="post">
@@ -83,58 +92,72 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 						<?php echo T("Tags") ?>: <span class="tooltip"><?php echo T("Click here to add tags to the LdS") ?></span><span id="lds_edit_tags_list"></span>
 					</div>
 				</div>
-                <?php if(isset($upload)):?>
-                <form id="file_upload_form" name="file_upload_name" target="upload_result_name" action="<?php echo $url.'action/lds/pre_upload' ?>" method="POST" enctype="multipart/form-data" >
-                    <div style="clear:both"></div>
-                    <input name="file" id="file_input" size="50" type="file" /> <span id="form_file_input_empty" style="display:none;color:red"><?php echo T("You must select a file!");?></span>
-                </form>
-                    <div style="padding:5px;color:grey"><?php echo $upload_link;?></div>
-                <?php endif; ?>
-
             </div>
 			<div id="lds_edit_contents">
-                <?php if(!isset($upload)): ?>
-                <div id="rich_text_box" style="display: none;">
-                <?php else: ?>
-                <div id="rich_text_box" style="display: block;">
-                <?php endif; ?>
-                <?php if($editor == 'google_docs'): ?>
-                    <iframe id="lds_support_editor_iframe" alt_src="<?php echo htmlentities($support_editor['document_iframe_url']);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php else: ?>
-                    <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
-                <?php endif; ?>
-				</div>
-                <!--
-                <?php if ($editor == 'exe'): ?>
-					<iframe id="lds_editor_iframe" src="/exelearning/<?php echo $editor_id ?>" width="958" height="616" style="border: 1px solid grey;"></iframe>
-				<?php else: ?>
-				<?php echo $CONFIG->root ?>
-					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
-				<?php endif; ?>
-				-->
-                <?php if($restapi): ?>
-                <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php endif; ?>
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#ldproject_conceptualize_grid">Conceptualize</a></li>
+                        <li><a href="#ldproject_author_grid">Author</a></li>
+                        <!-- <li><a href="#ldproject_implement_grid">Implement</a></li> -->
+                    </ul>
 
-                <?php if($editor == 'google_docs'): ?>
-                    <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
-                <?php endif; ?>
-
-
+                    <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
+                        <div id="two_column" style="padding-bottom:0 !important">
+                            <div id="droppable_conteptualize" class="ui-widget-header" type="conceptualize">
+                                <p>Project Design Conceptualize </p>
+                            </div>
+                            <div id="ldproject_toolBar" class="ui-widget-header"><p>
+                                <div class="draggable ui-widget-content" toolName="Design Pattern" tooltype='doc' subtype="design_pattern">
+                                    Design Pattern
+                                </div>
+                                <div class="draggable ui-widget-content" toolName="CourseMap" tooltype='doc' subtype="coursemap">
+                                    CourseMap
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="Design Narrative" tooltype='doc' subtype="MDN">
+                                    Design Narrative
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="Persona Card" tooltype='doc' subtype="PC">
+                                    Persona Card
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="Factors and Concerns" tooltype='doc' subtype="FC">
+                                    Factors And Concerns
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="Heuristic Evaluation" tooltype='doc' subtype="HE">
+                                    Heuristic Evaluation
+                                </div>
+                                <div class="draggable ui-widget-content" toolName="CompendiumLD" tooltype="cld">
+                                    CompendiumLD
+                                </div>
+                                <div class="draggable ui-widget-content" toolName="Image" tooltype="image">
+                                    Image
+                                </div>
+                                </p></div>
+                        </div>
+                    </div>
+                    <div id="ldproject_author_grid"> <!-- This will act as design container -->
+                        <div id="two_column" style="padding-bottom:0 !important">
+                            <div id="droppable_author" class="ui-widget-header" type="author">
+                                <p>Project Design Author</p>
+                            </div>
+                            <div id="ldproject_toolBar">
+                                <div class="draggable ui-widget-content" toolName="WebCollage" tooltype="webcollagerest">
+                                    WebCollage
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="OpenGLM" tooltype="openglm">
+                                    OpenGLM
+                                </div>
+                                <div class="draggable ui-widget-content"  toolName="CADMOS" tooltype="cadmos">
+                                    CADMOS
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div id="ldproject_implement_grid">
+                        <div id="droppable_implement" class="ui-widget-header" type="implement">
+                            <p>Project Design Impl</p>
+                        </div>
+                    </div> -->
                 </div>
-            <div id="lds_edit_tabs" class="scrollable">
-                <?php /** Botonets de scroll **/ ?>
-                <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
-                <ul id="lds_edit_tabs_scrolling" class="content">
-                    <?php if($editor != 'google_docs'):?><li class="lds_newtab">+ <?php echo T("Add document") ?></li><?php endif;?>
-                    <?php if(!isset($upload)): ?>
-                        <?php if($editor != 'google_docs'):?>
-                            <li class="lds_exetab"> <?php echo $editor_label ?></li>
-                        <?php else: ?>
-                            <li class="lds_exetab"> <?php echo $lds_title ?></li>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </ul>
             </div>
 			<br>
 
@@ -160,7 +183,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
 			</div>
 			
-						<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
+			<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
 				<div class="tooltip_bl_stem"></div>
 				<div class="tooltip_bl_body">
 					<h4><?php echo T("Granularity") ?></h4>
@@ -203,7 +226,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
 			</div>
 			
-			<?php include ('single_share_form.php') ?>
+			<?php include (__DIR__.'/../single_share_form.php') ?>
 		</div>
 	</div>
 
@@ -231,15 +254,15 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var initLdS = <?php echo $initLdS ?>;
         var new_lds = (initLdS.guid == '0') ? true : false;
 		var documents = "2";
-		var editorType = '<?php echo $editor ?>';
+		var editorType = '<?php echo $editor_type ?>';
 		var mytags = <?php echo $tags ?>;
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();
-		var editor_id = "<?php echo $editor_id ?>";
+		//var editor_id = "<?php echo $editor_id ?>";
 		var groups = <?php echo $groups ?>;
-        var documents = <?php echo $initDocuments ?>;
-        var document_url = "<?php echo $document_url ?>";
-        var document_iframe_url = "<?php echo $document_iframe_url ?>";
+        //var documents = <?php echo $initDocuments ?>;
+        //var document_url = "<?php echo $document_url ?>";
+        //var document_iframe_url = "<?php echo $document_iframe_url ?>";
         var implementation = false;
         var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
         var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
@@ -251,6 +274,21 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
         <?php endif; ?>
         var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
+
+        /*var JSONData = <?php echo json_encode(array(
+"items" => array(
+array(
+"editor_type" => "doc",
+"editor_subtype" => "PC"
+),
+array(
+"editor_type" => "webcollagerest",
+),
+
+)
+        ));?>;
+        */
+        var ldproject = [];
 
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;

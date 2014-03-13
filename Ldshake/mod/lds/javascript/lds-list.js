@@ -108,6 +108,7 @@ $(document).ready(function()
             $("#view_design").attr('disabled','disabled');
         }
         else {
+            //$("#implement_project").removeAttr('disabled');
             $("#duplicate_design").removeAttr('disabled');
             $("#implementations_by_design").removeAttr('disabled');
             $("#duplicate_implementation").removeAttr('disabled');

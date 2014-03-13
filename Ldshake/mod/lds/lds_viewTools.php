@@ -108,7 +108,16 @@ class lds_viewTools
 		
 		$editortype = ($lds->external_editor ? 'editor' : '');
 
-		return $CONFIG->url . 'pg/lds/'.$type.$editortype.'/' . $lds->guid . '/';
+        $folder = $type.$editortype;
+
+        if($lds->getSubtype() == 'LdSProject_implementation' || $lds->getSubtype() == 'LdSProject')
+            if($type == 'edit') {
+                $folder = 'edit_project';
+            } else {
+                $folder = 'project_implementation';
+            }
+
+		return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';
 	}
 	
 	public static function getUrl ($type = 'list')
@@ -134,7 +143,7 @@ class lds_viewTools
 
     public static function iconSupport ($type)
     {
-        $supported = array("doc",'webcollagerest','glueps','openglm','cadmos');
+        $supported = array("doc",'webcollagerest','glueps','openglm','cadmos','project_design');
 
         return in_array($type, $supported);
     }

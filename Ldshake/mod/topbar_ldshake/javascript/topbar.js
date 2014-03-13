@@ -1,5 +1,48 @@
 $(document).ready(function()
 {
+    //new project implementation
+
+    $('.new_project_menu_item').click(function (event) {
+        event.preventDefault();
+        //event.stopPropagation();
+
+        lds_newprojectimplementation_guid = $(this).attr("project_guid");
+
+        $('#implement_project_popup_close').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#implement_project').fadeOut(200);
+        });
+        $('#implement_project').fadeToggle(200);
+        $('input[name=new_projectimplementation_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    e.preventDefault();
+                    $('#projectimplementation_submit').click();
+                }
+            })
+            .focus();
+    });
+
+    $("#projectimplementation_submit").click(function (event) {
+        var submitData =
+        {
+            guid: lds_newprojectimplementation_guid,
+            title: $('input[name=new_projectimplementation_title]').val()
+        };
+
+        if(submitData.title.length == 0)
+            $('#projectimplementation_submit_incomplete').show();
+        else {
+            if(!lds_submit_click) {
+                lds_submit_click = true;
+                $.post (baseurl + "action/lds/projects/implement", submitData, function(data) {
+                    window.location = baseurl + 'pg/lds/project_implementation/'+data;
+                });
+            }
+        }
+    });
+
 	//Search input placeholder (remove when HTML5 works in IE!)
 	/*
 	$('#ldshake_topbar_search_input')
@@ -46,128 +89,52 @@ $(document).ready(function()
             .css('color', '');
     });
 
-    $('#tb_new_option_author').mouseenter(function (e)
-    {
-        var menuOffsetX = $(e.target.parentElement.parentElement).position().left;
-        var menuOffsetY = $(e.target.parentElement.parentElement).position().top;
-        $('#new_menu_author').css('top', $(e.target).position().top + menuOffsetY + 5);
-        $('#new_menu_author').css('left', $(e.target).outerWidth() + menuOffsetX - 5);
+    var menu_names = ["conceptualize", "author", "implement", "project"];
 
-        $('#new_menu_author').fadeIn(200);
-    });
+    for(var i=0; i<menu_names.length; i++) {
+        (function(index) {
+            var menu_name = menu_names[i];
+            $('#tb_new_option_'+menu_name).mouseenter(function (e)
+            {
+                var menuOffsetX = $(e.target.parentElement.parentElement).position().left;
+                var menuOffsetY = $(e.target.parentElement.parentElement).position().top;
+                var $target = $(e.target);
 
-    $('#tb_new_option_author').mouseleave(function (e)
-    {
-        $nm = $('#new_menu_author');
+                $('#new_menu_'+menu_name)
+                    .css('top', $target.position().top + menuOffsetY + 5)
+                    .css('left', $target.outerWidth() + menuOffsetX - 5)
+                    .fadeIn(200);
+            }).mouseleave(function (e)
+                {
+                    var $nm = $('#new_menu_'+menu_name);
 
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());
+                    var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
+                    var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());
 
-        if(!evalX || !evalY) {
-            $('#new_menu_author').fadeOut(200);
-        } else {
-            $(this)
-                .css('background-color', 'rgb(56, 99, 47)')
-                .css('color', '#fff');
-        }
-    });
+                    if(!evalX || !evalY) {
+                        $nm.fadeOut(200);
+                    } else {
+                        $(this)
+                            .css('background-color', 'rgb(56, 99, 47)')
+                            .css('color', '#fff');
+                    }
+                });
 
-    $('#new_menu_author').mouseleave(function (e)
-    {
-        $nm = $('#tb_new_option_author')
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
-        //var evalY = (e.pageX >= $nm.offset().left && e.pageX < $(this).offset().left);
+            $('#new_menu_'+menu_name).mouseleave(function (e)
+            {
+                var $nm = $('#tb_new_option_'+menu_name);
+                var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
+                var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
 
-        if(!evalX || !evalY) {
-            $(this).fadeOut(200);
-            $('#tb_new_option_author')
-                .css('background-color', '')
-                .css('color', '');
-        }
-    });
-
-    $('#tb_new_option_implement').mouseenter(function (e)
-    {
-        var menuOffsetX = $(e.target.parentElement.parentElement).position().left;
-        var menuOffsetY = $(e.target.parentElement.parentElement).position().top;
-        $('#new_menu_implement').css('top', $(e.target).position().top + menuOffsetY + 5);
-        $('#new_menu_implement').css('left', $(e.target).outerWidth() + menuOffsetX - 5);
-
-        $('#new_menu_implement').fadeIn(200);
-    });
-
-    $('#tb_new_option_implement').mouseleave(function (e)
-    {
-        $nm = $('#new_menu_implement')
-
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());
-
-        if(!evalX || !evalY) {
-            $('#new_menu_implement').fadeOut(200);
-        } else {
-            $(this)
-                .css('background-color', 'rgb(56, 99, 47)')
-                .css('color', '#fff');
-        }
-    });
-
-    $('#new_menu_implement').mouseleave(function (e)
-    {
-        $nm = $('#tb_new_option_implement');
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
-
-        if(!evalX || !evalY) {
-            $(this).fadeOut(200);
-            $('#tb_new_option_implement')
-                .css('background-color', '')
-                .css('color', '');
-        }
-    });
-
-    $('#tb_new_option_conceptualize').mouseenter(function (e)
-    {
-        var menuOffsetX = $(e.target.parentElement.parentElement).position().left;
-        var menuOffsetY = $(e.target.parentElement.parentElement).position().top;
-        $('#new_menu_conceptualize').css('top', $(e.target).position().top + menuOffsetY + 5);
-        $('#new_menu_conceptualize').css('left', $(e.target).outerWidth() + menuOffsetX - 5);
-
-        $('#new_menu_conceptualize').fadeIn(200);
-    }).mouseleave(function (e)
-    {
-        var $nm = $('#new_menu_conceptualize');
-
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left - 1 && e.pageX <= $nm.offset().left + $nm.outerWidth());
-
-        if(!evalX || !evalY) {
-            $nm.fadeOut(200);
-        } else {
-            $(this)
-                .css('background-color', 'rgb(56, 99, 47)')
-                .css('color', '#fff');
-        }
-    });
-
-    $('#new_menu_conceptualize').mouseleave(function (e)
-    {
-        var $nm = $('#tb_new_option_conceptualize');
-        var evalX = (e.pageY >= $nm.offset().top && e.pageY <= $nm.offset().top + $nm.outerHeight());
-        var evalY = (e.pageX >= $nm.offset().left && e.pageX <= $nm.offset().left + $nm.outerWidth());
-
-        if(!evalX || !evalY) {
-            $(this).fadeOut(200);
-            $nm
-                .css('background-color', '')
-                .css('color', '');
-        }
-    });
-
-	$('#toolbar_lds_types').click (function (e) {
-		e.stopPropagation();
-	});
+                if(!evalX || !evalY) {
+                    $(this).fadeOut(200);
+                    $nm
+                        .css('background-color', '')
+                        .css('color', '');
+                }
+            });
+        })(i)
+    }
 	
 	$('body').click(function() {
 		$('#toolbar_lds_types').fadeOut(200);

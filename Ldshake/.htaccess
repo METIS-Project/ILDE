@@ -101,7 +101,8 @@ RewriteEngine on
 # of 404 errors beyond the front page, you could instead try:
 #
 #RewriteBase /
-
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php [L,QSA]
 #Homemade by Pau
 RewriteRule ^v\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewext/$1/
 RewriteRule ^ve\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewexteditor/$1/

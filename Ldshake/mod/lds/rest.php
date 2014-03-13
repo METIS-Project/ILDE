@@ -228,7 +228,7 @@ function lds_query() {
     }
 
     if(strlen($query)) {
-        $entities = lds_contTools::searchLdS($query, $limit, $offset);
+        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value);
     } else {
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
     }

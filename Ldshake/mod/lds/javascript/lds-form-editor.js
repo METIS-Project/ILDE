@@ -354,7 +354,26 @@ function ajax_submit (save_seq, redirect)
 			editorType: editorType,
 			summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
 		};
-	} else {
+	} else if(editorType == 'project_design')
+    {
+        save_url = "action/lds/projects/save";
+
+        submitData =
+        {
+            guid: $('#lds_edit_guid').val(),
+            revision: $('#lds_edit_revision').val(),
+            title: $('#lds_edit_title').val(),
+            discipline: $('#as-values-discipline').val(),
+            pedagogical_approach: $('#as-values-pedagogical_approach').val(),
+            tags: $('#as-values-tags').val(),
+            completeness: $('#completeness_input').val(),
+            granularity: $('#granularity_input').val(),
+//            editor_id: editor_id,
+            editorType: editorType,
+            JSONData: JSON.stringify(ldproject)
+//            summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
+        };
+    } else {
         if(!google_docs)
             documents[currentTab].body = editor.getData();
 
@@ -956,6 +975,9 @@ function tabs()
         //$('#lds_edit_tabs li:eq(' + currentTab + ')').addClass('current');
 
         $('.lds_tab_google_support').click(function () {
+            var $google_support = $('#lds_support_editor_iframe');
+            $google_support.attr('src', $google_support.attr('alt_src'));
+
             $('#lds_editor_iframe').fadeOut(200, function() {
                 $('#rich_text_box').show(200,function() {});
             });
@@ -1028,7 +1050,9 @@ $(document).ready(function()
     //active();
 	//check_activity();
 
-    initCKED ();
+    if($.fn.ckeditor)
+        initCKED ();
+
     initDocName ();
 
     loadData();

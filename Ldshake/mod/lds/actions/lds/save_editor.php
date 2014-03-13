@@ -145,22 +145,36 @@ if (get_input('revision') == 0)
 
 //We get the revision id to send it back to the form
 //$editordocument = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
-$revision = $lds->getAnnotations('revised_docs_editor', 1, 0, 'desc');
-$revision = $revision[0];
+$revisions = $lds->getAnnotations('revised_docs_editor', 2, 0, 'desc');
+$revision = $revisions[0];
 $resultIds->revision = $revision->id;
+
+
+//create a new revision if is the first save in this session
+if(get_input('guid') > 0 && get_input('revision') == 0 && count($revisions) > 1) {
+    DocumentEditorRevisionObject::createRevisionFromDocumentEditor($document_editor);
+
+    if(isset($document_editor_support))
+        DocumentEditorRevisionObject::createRevisionFromDocumentEditor($document_editor_support);
+}
 
 //check  if this is the first revision ever
 if($document_editor->lds_revision_id != $revision->id)
 {
     $document_editor->rev_last = $document_editor->lds_revision_id;
 }
+$document_editor->lds_revision_id = $revision->id;
 
-//create a new revision if htis is the first save in this session
-if(get_input('guid') > 0 && get_input('revision') == 0)
-	DocumentEditorRevisionObject::createRevisionFromDocumentEditor($document_editor);
+if(isset($document_editor_support)) {
+    if($document_editor_support->lds_revision_id != $revision->id)
+    {
+        $document_editor_support->rev_last = $document_editor_support->lds_revision_id;
+    }
+    $document_editor_support->lds_revision_id = $revision->id;
+}
 
 $save_params = array(
-    'url' => $document_url,
+    'document_url' => $document_url,
     'title' => $lds->title,
     'editor_id' => $docSession
 );
@@ -192,18 +206,19 @@ if($editor_type == 'google_docs') {
 
 $resultIds = (object)((array)$resultIds + (array)$resultIds_add);
 
-$document_editor->lds_revision_id = $revision->id;
 $document_editor->save();
+if(isset($document_support_editor))
+    $document_support_editor->save();
 
 $resultIds->saved = 1;
 
 $lds->save();
 $resultIds->LdS = $lds->guid;
 
-if($editor_type == 'google_docs') {
+if($editor_type != 'google_docs') {
     $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
-
     $recovered_documents = array();
+
     if (is_array($_POST['documents']))
     {
         foreach ($_POST['documents'] as $doc) {
@@ -239,7 +254,6 @@ if($editor_type == 'google_docs') {
                             'lds_guid'=>$lds->guid,
                             'doc_recovery'=>$doc['doc_recovery']),'object','LdS_document',0,1);
                     $docObj = $docs_recovered[0];
-
                 } else {
                     $docObj = get_entity($doc['guid']);
                 }

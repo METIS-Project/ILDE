@@ -78,8 +78,9 @@ class DocumentEditorRevisionObject extends ElggObject
         $revision->container_guid = $document->lds_guid;
 		//$revision->previewDir = $document->revisionDir.'_'.$revision->lds_revision_id;
 		$revision->id = $document->revisionDir.'_'.lds_revision_id;
+        $revision->title = $document->title;
         $revision->description = $document->description;
-		
+
 		//$editor->revisionPreview($revision);
 		
 		//If the document from which we crate the revision is published, the revision will be marked as published

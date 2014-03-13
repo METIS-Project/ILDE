@@ -6,6 +6,7 @@ function ldshake_get_template($template){
         'MWD' => array('MWD'),
         'MDN' => array('mdn'),
         'EP' => array('EP'),
+        'coursemap' => array('coursemap'),
         'design_pattern' => array('DP','DPS'),
         'DPS' => array('DPS'),
         'PC' => array('PC','yishay'),
