@@ -33,7 +33,6 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-
 $(function() {
     $( ".draggable, #draggable-nonvalid" ).draggable();
     $( "#droppable_conteptualize, #droppable_author, #ldproject_toolBar" ).droppable({
@@ -43,7 +42,7 @@ $(function() {
         drop: function( event, ui ) { //dropEvent
             console.log(this); //cómo el syste.out de java
 
-            if( !$(event.srcElement).attr("tooltype_added")  )
+            if( !$(event.srcElement).attr("tooltype_added") || $(event.srcElement).attr("tooltype_added") == "false"  )
             {
                 $(event.srcElement).attr("tooltype_added", "true");
                 var tool = new Object();
@@ -52,23 +51,22 @@ $(function() {
                 var subtype =$(event.srcElement).attr("subtype");
                 if (subtype)
                     tool.editor_subtype=subtype;
-
                 ldproject.push(tool);
             }
 
-           if( this.id == "ldproject_toolBar" )
+            if( this.id == "ldproject_toolBar" )
             {
-               var arrayLength = ldproject.length;
-               for (var i=0; i < arrayLength; i++)
-               {
-                   tool = ldproject[i];
-                   if(tool.toolName ==  $(event.srcElement).attr("toolname") )
-                   {
-                       ldproject.splice(i, 1 );
-                       $(event.srcElement).attr("tooltype_added", "false");
+                var arrayLength = ldproject.length;
+                for (var i=0; i < arrayLength; i++)
+                {
+                    tool = ldproject[i];
+                    if(tool.toolName ==  $(event.srcElement).attr("toolname") )
+                    {
+                        ldproject.splice(i, 1);
+                        $(event.srcElement).attr("tooltype_added", "false");
 
-                   }
-               }
+                    }
+                }
 
             }
 
@@ -79,6 +77,3 @@ $(function() {
 $(function() {
     $( "#tabs" ).tabs();
 })
-
-
-

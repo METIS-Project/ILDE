@@ -108,7 +108,7 @@
                                 <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
                                 <!--<div class="lds_select_spacer"></div>-->
                             <?php endif; ?>
-                            <!--<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>-->
+                            <!--<a href="<?php /*echo lds_viewTools::url_for($item->lds, 'view')*/ ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>-->
                             <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
                             <div class="lds_info">
                                 <span class="lds_title_tags">

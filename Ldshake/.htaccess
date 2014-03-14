@@ -101,6 +101,8 @@ RewriteEngine on
 # of 404 errors beyond the front page, you could instead try:
 #
 #RewriteBase /
+RewriteRule ^services/rest/(.*)$ services/rest.php/$1 [L,QSA]
+
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L,QSA]
 #Homemade by Pau
@@ -120,8 +122,6 @@ RewriteRule ^\_css\/css\.css$ _css/css.php
 
 RewriteRule ^pg\/([A-Za-z\_\-]+)\/(.*)$ engine/handlers/pagehandler.php?handler=$1&page=$2
 RewriteRule ^pg\/([A-Za-z\_\-]+)$ engine/handlers/pagehandler.php?handler=$1
-
-RewriteRule ^services/rest/(.*)$ services/rest.php/$1
 
 RewriteRule xml-rpc.php engine/handlers/xml-rpc_handler.php
 RewriteRule mt/mt-xmlrpc.cgi engine/handlers/xml-rpc_handler.php

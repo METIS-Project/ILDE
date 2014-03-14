@@ -94,6 +94,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
             </div>
 			<div id="lds_edit_contents">
+
                 <div id="tabs">
                     <ul>
                         <li><a href="#ldproject_conceptualize_grid">Conceptualize</a></li>
@@ -113,22 +114,22 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                                 <div class="draggable ui-widget-content" toolName="CourseMap" tooltype='doc' subtype="coursemap">
                                     CourseMap
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="Design Narrative" tooltype='doc' subtype="MDN">
+                                <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype='doc' subtype="MDN">
                                     Design Narrative
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="Persona Card" tooltype='doc' subtype="PC">
+                                <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype='doc' subtype="PC">
                                     Persona Card
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="Factors and Concerns" tooltype='doc' subtype="FC">
+                                <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype='doc' subtype="FC">
                                     Factors And Concerns
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="Heuristic Evaluation" tooltype='doc' subtype="HE">
+                                <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype='doc' subtype="HE">
                                     Heuristic Evaluation
                                 </div>
-                                <div class="draggable ui-widget-content" toolName="CompendiumLD" tooltype="cld">
+                                <div class="draggable ui-widget-content" toolname="CompendiumLD" tooltype="cld">
                                     CompendiumLD
                                 </div>
-                                <div class="draggable ui-widget-content" toolName="Image" tooltype="image">
+                                <div class="draggable ui-widget-content" toolname="Image" tooltype="image">
                                     Image
                                 </div>
                                 </p></div>
@@ -143,10 +144,10 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                                 <div class="draggable ui-widget-content" toolName="WebCollage" tooltype="webcollagerest">
                                     WebCollage
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="OpenGLM" tooltype="openglm">
+                                <div class="draggable ui-widget-content"  toolname="OpenGLM" tooltype="openglm">
                                     OpenGLM
                                 </div>
-                                <div class="draggable ui-widget-content"  toolName="CADMOS" tooltype="cadmos">
+                                <div class="draggable ui-widget-content"  toolname="CADMOS" tooltype="cadmos">
                                     CADMOS
                                 </div>
                             </div>
@@ -158,6 +159,8 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                         </div>
                     </div> -->
                 </div>
+
+
             </div>
 			<br>
 

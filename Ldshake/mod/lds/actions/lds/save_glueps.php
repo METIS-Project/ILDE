@@ -161,7 +161,7 @@ if(get_input('guid') > 0 && get_input('revision') == 0)
 
 
 $save_params = array(
-    'url' => $document_url,
+    'document_url' => $document_url,
     'editor_id' => $docSession,
 );
 

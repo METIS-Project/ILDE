@@ -1324,7 +1324,7 @@ SQL;
     }
 
     public static function getUserSharedLdSWithMe($user_id, $count = false, $limit = 0, $offset = 0) {
-        return getUserSharedObjectsWithMe('object', 'LdS', $user_id, $count, $limit, $offset);
+        return self::getUserSharedObjectsWithMe('object', 'LdS', $user_id, $count, $limit, $offset);
     }
 
     public static function getUserSharedObjectsWithMe($type, $subtype, $user_id, $count = false, $limit = 0, $offset = 0) {
