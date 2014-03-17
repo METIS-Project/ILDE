@@ -2023,7 +2023,7 @@ class GoogleEditor extends Editor
         $clone->pub_previewDir = rand_str(64);
         $clone->revisionDir = rand_str(64);
 
-        if(file_exists($CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir)) {
+        if(file_exists($CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir . '/index.html')) {
             $src_preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
             $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$clone->previewDir;
             mkdir($preview_path);
@@ -2039,11 +2039,14 @@ class GoogleEditor extends Editor
         $copiedFile->setTitle($lds_entity->title);
 
         try {
-            $copiedFile = $service->files->copy($this->_document->description, $copiedFile);
+            $copiedFile = $service->files->copy($this->_document->drive_id, $copiedFile);
         } catch (Exception $e) {
             return false;
         }
-        $clone->description = $copiedFile->id;
+        $clone->drive_id = $copiedFile->id;
+        $clone->support = $this->_document->support;
+        $clone->description = $this->_document->description;
+        $clone->title = $this->_document->title;
         $clone->save();
 
         $value = 'me';

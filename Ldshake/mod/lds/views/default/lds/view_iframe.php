@@ -34,10 +34,8 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php extract ($vars) ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+extract ($vars);
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -360,6 +358,7 @@
             margin:62.35pt 62.35pt 62.35pt 62.35pt;}
         div.WordSection1
         {page:WordSection1;}
+
         @page WordSection2
         {size:595.3pt 841.9pt;
             margin:72.0pt 90.0pt 72.0pt 90.0pt;}
@@ -407,9 +406,7 @@
     </style>
     <?php /*echo elgg_view('page_elements/analytics', $vars)*/ ?>
 </head>
-<body>
-<div id="doc">
-    <?php
+<body><div id="doc"><?php
     if($diff)
         echo $diff;
     else

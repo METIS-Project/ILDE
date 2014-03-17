@@ -42,12 +42,14 @@ extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
+
 <style>
-    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; }
-    .draggable, .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-    .ui-widget-content {background-image: none; background-color: lightskyblue; }
-    #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: #ff0000; border-width:5px; }
-    #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; }
+    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none;}
+    #lds_edit_contents .draggable, #lds_edit_contents .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important;}
+    #lds_edit_contents .ui-widget-content {background-image: none; }
+    #lds_edit_contents #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
+    #lds_edit_contents #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; border-color: black}
+    #lds_edit_contents .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
 
 </style>
 
@@ -108,22 +110,22 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                                 <p>Project Design Conceptualize </p>
                             </div>
                             <div id="ldproject_toolBar" class="ui-widget-header"><p>
-                                <div class="draggable ui-widget-content" toolName="Design Pattern" tooltype='doc' subtype="design_pattern">
+                                <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' tooltype="design_pattern">
                                     Design Pattern
                                 </div>
-                                <div class="draggable ui-widget-content" toolName="CourseMap" tooltype='doc' subtype="coursemap">
+                                <div class="draggable ui-widget-content" toolname="CourseMap" tooltype="doc" subtype="coursemap">
                                     CourseMap
                                 </div>
-                                <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype='doc' subtype="MDN">
+                                <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype="doc" subtype="MDN">
                                     Design Narrative
                                 </div>
-                                <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype='doc' subtype="PC">
+                                <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype="doc" subtype="PC">
                                     Persona Card
                                 </div>
-                                <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype='doc' subtype="FC">
+                                <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype="doc" subtype="FC">
                                     Factors And Concerns
                                 </div>
-                                <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype='doc' subtype="HE">
+                                <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype="doc" subtype="HE">
                                     Heuristic Evaluation
                                 </div>
                                 <div class="draggable ui-widget-content" toolname="CompendiumLD" tooltype="cld">
@@ -141,7 +143,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                                 <p>Project Design Author</p>
                             </div>
                             <div id="ldproject_toolBar">
-                                <div class="draggable ui-widget-content" toolName="WebCollage" tooltype="webcollagerest">
+                                <div class="draggable ui-widget-content" toolname="WebCollage" tooltype="webcollagerest">
                                     WebCollage
                                 </div>
                                 <div class="draggable ui-widget-content"  toolname="OpenGLM" tooltype="openglm">

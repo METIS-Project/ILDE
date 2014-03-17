@@ -53,7 +53,7 @@
 		<?php else: ?>
 			<span><?php echo T("You are in the last revision") ?></span>
 		<?php endif; ?>
-		<?php if (!is_null($prevId)) : ?>
+		<?php if (!is_null($prevId) && !$lds->external_editor) : ?>
 			|
 			<input type="checkbox" id="lds-rev-toggle-diff"> <?php echo T("View changes from previous revision") ?>
 		<?php endif; ?>

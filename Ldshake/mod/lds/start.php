@@ -1631,7 +1631,7 @@ function lds_exec_newimplementglueps($params)
 function lds_exec_history ($params)
 {
 	$vars['lds'] = get_entity($params[1]);
-	
+
 	//We need to see all the entities, including the deleted ones.
 	$access_status = access_get_show_hidden_status();
 	access_show_hidden_entities(true);
@@ -2046,6 +2046,9 @@ function lds_exec_viewrevision ($params)
 	
 	//TODO access policies
 	$revision = get_entity ($params[1]);
+
+    if($revision->editorType == 'google_docs' || $revision->editor_type == 'google_docs')
+        return lds_exec_viewrevisioneditor($params);
 
 	if ($revision->subtype == get_subtype_id('object', 'LdS_document_revision')
         || $revision->subtype == get_subtype_id('object', 'LdS_document_editor_revision'))

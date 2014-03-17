@@ -110,12 +110,17 @@ class lds_viewTools
 
         $folder = $type.$editortype;
 
-        if($lds->getSubtype() == 'LdSProject_implementation' || $lds->getSubtype() == 'LdSProject')
+        if($lds->getSubtype() == 'LdSProject_implementation' || $lds->getSubtype() == 'LdSProject') {
             if($type == 'edit') {
                 $folder = 'edit_project';
-            } else {
+            } elseif($type == 'view') {
                 $folder = 'project_implementation';
             }
+        }
+
+        //Google Docs history
+        if($type == 'history' && $lds->editor_type == 'google_docs')
+            $folder = 'history';
 
 		return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';
 	}
