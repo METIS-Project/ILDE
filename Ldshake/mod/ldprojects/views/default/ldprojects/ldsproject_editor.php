@@ -43,20 +43,22 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
 
 <style>
-    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; }
-    .draggable, .draggable-nonvalid { width: 100px; height: 100px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-    .ui-widget-content {background-image: none; background-color: lightskyblue; }
-    #ldproject_toolBar { border-style:solid; border-color: #ff0000; border-width:5px; }
-    #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important;}
+    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none;}
+    .draggable, .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important;}
+    .ui-widget-content {background-image: none; }
+    #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
+    #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; border-color: black}
+    .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
+
 </style>
 
 <div class="clearfloat"></div>
 <div id="layout_canvas">
-    <div id="tabs">
+    <div id="tabs" >
         <ul>
             <li><a href="#ldproject_conceptualize_grid">Conceptualize</a></li>
             <li><a href="#ldproject_author_grid">Author</a></li>
-            <li><a href="#ldproject_implement_grid">Implement</a></li>
+           <!-- <li><a href="#ldproject_implement_grid">Implement</a></li> -->
         </ul>
 
         <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
@@ -64,30 +66,30 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div id="droppable_conteptualize" class="ui-widget-header" type="conceptualize">
                     <p>Project Design Conceptualize </p>
                 </div>
-                <div id="ldproject_toolBar"><p>
-                    <div class="draggable ui-widget-content" tooltype="coursemap">
-                        <p>CourseMap</p>
+                <div id="ldproject_toolBar" class="ui-widget-header"><p>
+                    <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' tooltype="design_pattern">
+                        Design Pattern
                     </div>
-                    <div class="draggable ui-widget-content" tooltype='doc' tooltype="design_pattern">
-                        <p>Design Pattern</p>
+                    <div class="draggable ui-widget-content" toolname="CourseMap" tooltype="doc" subtype="coursemap">
+                        CourseMap
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='doc' subtype="MDN">
-                        <p>Design Narrative</p>
+                    <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype="doc" subtype="MDN">
+                        Design Narrative
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='doc' subtype="PC">
-                        <p>Persona Card</p>
+                    <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype="doc" subtype="PC">
+                        Persona Card
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='doc' subtype="FC">
-                        <p>Factor And Concerns</p>
+                    <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype="doc" subtype="FC">
+                        Factors And Concerns
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='doc' subtype="HE">
-                        <p>Heuristic Evaluation</p>
+                    <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype="doc" subtype="HE">
+                        Heuristic Evaluation
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='upload' subtype="cld">
-                        <p>CompendiumLD</p>
+                    <div class="draggable ui-widget-content" toolname="CompendiumLD" tooltype="cld">
+                        CompendiumLD
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='upload' subtype="image">
-                        <p>Image</p>
+                    <div class="draggable ui-widget-content" toolname="Image" tooltype="image">
+                        Image
                     </div>
                 </p></div>
             </div>
@@ -98,23 +100,23 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                     <p>Project Design Author</p>
                 </div>
                 <div id="ldproject_toolBar">
-                    <div class="draggable ui-widget-content" tooltype="webcollage">
-                        <p>CourseMap</p>
+                    <div class="draggable ui-widget-content" toolname="WebCollage" tooltype="webcollage">
+                        WebCollage
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='upload' subtype="openglm">
-                        <p>OpenGLM</p>
+                    <div class="draggable ui-widget-content"  toolname="OpenGLM" tooltype="openglm">
+                        OpenGLM
                     </div>
-                    <div class="draggable ui-widget-content"  tooltype='upload' subtype="cadmos">
-                        <p>CADMOS</p>
+                    <div class="draggable ui-widget-content"  toolname="CADMOS" tooltype="cadmos">
+                        CADMOS
                     </div>
                 </div>
             </div>
         </div>
-        <div id="ldproject_implement_grid"> <!-- This will act as design container -->
+        <!-- <div id="ldproject_implement_grid">
             <div id="droppable_implement" class="ui-widget-header" type="implement">
                 <p>Project Design Impl</p>
             </div>
-        </div>
+        </div> -->
     </div>
 </div> <!-- Layout Canvas ->
 
