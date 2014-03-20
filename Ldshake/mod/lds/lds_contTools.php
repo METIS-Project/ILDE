@@ -43,13 +43,63 @@ include_once __DIR__.'/Java.inc';
 
 class lds_contTools
 {
-	/**
+    private static function buildPermissionsQuery($user_id, $writable_only = true) {
+        global $CONFIG;
+
+        $acv_query = "";
+        $group_permission = "'lds_editor_group', 'lds_viewer_group'";
+        $user_permission = "'lds_editor', 'lds_viewer'";
+
+        if($writable_only == false) {
+            $group_permission = "'lds_editor_group'";
+            $user_permission = "'lds_editor'";
+
+            $acv_k = get_metastring_id("all_can_view");
+            $acv_v = get_metastring_id("yes");
+            $acv_query = <<<SQL
+    OR
+	(
+		m.name_id = '{$acv_k}' AND m.value_id = '{$acv_v}'
+	)
+    OR
+    (
+        e.guid NOT IN (
+            SELECT DISTINCT acvm.entity_guid FROM metadata acvm WHERE acvm.name_id = '{$acv_k}'
+        )
+        AND
+        e.access_id < 3 AND e.access_id > 0
+    )
+SQL;
+        }
+
+        $query = <<<SQL
+	(e.owner_guid = {$user_id})
+	{$acv_query}
+	OR
+	(
+		e.guid IN (
+			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship IN ({$group_permission}) AND rg.guid_one IN (
+				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+			)
+		)
+	)
+	OR
+	(
+		e.guid IN (
+			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ({$user_permission}) AND ru.guid_one = {$user_id}
+		)
+	)
+SQL;
+
+        return $query;
+    }
+        /**
 	 * Performs a full-text search in the LdS (title for all and description for the plain text ones). 
 	 * @param unknown_type $query
 	 */
 
 
-    public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null) {
+    public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null, $enrich = true, $writable_only = false) {
         global $CONFIG;
 
         if(!$user_id)
@@ -92,42 +142,15 @@ class lds_contTools
         else
             $tags_query = "";
 
-        $acv_k = get_metastring_id("all_can_view");
-        $acv_v = get_metastring_id("yes");
-
         $query = mysql_real_escape_string($query);
-        $offset = mysql_real_escape_string($offset);
-        $limit = mysql_real_escape_string($limit);
+        $offset = mysql_real_escape_string((int)$offset);
+        $limit = mysql_real_escape_string((int)$limit);
+
+        $permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
 
         $query = <<<SQL
 SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
-	(e.owner_guid = {$user_id})
-	OR
-	(
-		m.name_id = '{$acv_k}' AND m.value_id = '{$acv_v}'
-	)
-	OR
-	(
-		e.guid NOT IN (
-		    SELECT DISTINCT acvm.entity_guid FROM metadata acvm WHERE acvm.name_id = '{$acv_k}'
-		)
-		AND
-		e.access_id < 3 AND e.access_id > 0
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship IN ('lds_editor_group', 'lds_viewer_group') AND rg.guid_one IN (
-				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
-			)
-		)
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ('lds_editor', 'lds_viewer') AND ru.guid_one = {$user_id}
-		)
-	)
+	{$permissions_query}
 ) AND (
 	  (o.title LIKE '%{$query}%' OR do.title LIKE '%{$query}%' OR do.description LIKE '%{$query}%')
 	  {$tags_query}
@@ -135,8 +158,12 @@ SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG-
 	 order by e.time_updated desc limit {$offset},{$limit}
 SQL;
 
-        if($entities = get_data($query, "entity_row_to_elggstar"))
-            return self::enrichLdS($entities);
+        if($entities = get_data($query, "entity_row_to_elggstar")) {
+            if ($enrich)
+                return self::enrichLdS($entities);
+            else
+                return $entities;
+        }
 
         return false;
     }
@@ -1485,6 +1512,10 @@ SQL;
     public static function getUserEditableEntities($type = 'object', $subtype = 'LdS', $user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
+        $offset = mysql_real_escape_string((int)$offset);
+        $limit = mysql_real_escape_string((int)$limit);
+        $type = mysql_real_escape_string($type);
+
         if(isadminloggedin()) {
             /*
             $query_limit = ($limit == 0) ? '' : "9999";
@@ -1524,7 +1555,7 @@ SQL;
         }
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-        $subtype = get_subtype_id('object', $subtype);
+        $subtype = get_subtype_id($type, $subtype);
 
         $metadata_join = "";
         $metadata_query = "";
@@ -1538,7 +1569,7 @@ SQL;
         }
 
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
+SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
 AND (
 	(e.owner_guid = {$user_id})
 	OR
@@ -1572,6 +1603,9 @@ SQL;
 
     public static function getUserViewableObjects($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
         global $CONFIG;
+
+        $offset = mysql_real_escape_string((int)$offset);
+        $limit = mysql_real_escape_string((int)$limit);
 
         if(isadminloggedin()) {
             if($mk && $mv) {

@@ -214,7 +214,7 @@ expose_function("newlds", "lds_data", array(), elgg_echo('ldsdata'), "POST", tru
 function lds_query() {
     global $API_QUERY;
 
-    $limit = get_input("limit", 20);
+    $limit = get_input("limit", 999);
     $offset = get_input("offset", 0);
     $query = get_input("query", false);
     $type = get_input("type", false);
@@ -228,7 +228,7 @@ function lds_query() {
     }
 
     if(strlen($query)) {
-        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value);
+        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value, false, true);
     } else {
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
     }
@@ -290,7 +290,25 @@ expose_function("ldseditorlist", "lds_query", array(), elgg_echo('ldsdata'), "GE
 function lds_view() {
     global $API_QUERY;
 
-    $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0);
+    $limit = get_input("limit", 999);
+    $offset = get_input("offset", 0);
+    $query = get_input("query", false);
+    $type = get_input("type", false);
+
+    if(strlen($type)) {
+        $editor_type_key = 'editor_type';
+        $editor_type_value = $type;
+    } else {
+        $editor_type_key = null;
+        $editor_type_value = null;
+    }
+
+    if(strlen($query)) {
+        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value, false);
+    } else {
+        $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
+    }
+    //$entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
 
     $ldss = array();
     $lds = array();
