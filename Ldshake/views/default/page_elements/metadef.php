@@ -28,7 +28,7 @@
 		} else {
 			$title = $vars['title'] . ' - LdShake';
 		}
-		
+/*
 		global $autofeed;
 		if (isset($autofeed) && $autofeed == true) {
 			$url = $url2 = full_url();
@@ -51,40 +51,46 @@ END;
 		} else {
 			$feedref = "";
 		}
-		
-?>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title><?php echo $title; ?></title>
-	
+*/
+?><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<title><?php echo $title; ?></title>
 <?php
 
 	global $pickerinuse;
 	if (isset($pickerinuse) && $pickerinuse == true) {
 
 ?>
-	
 	<!-- only needed on pages where we have friends collections and/or the friends picker-->
 	<script type="text/javascript" src="<?php echo $vars['url']; ?>vendors/jquery/jquery-easing.1.2.pack.js"></script>
 	<script type="text/javascript" src="<?php echo $vars['url']; ?>vendors/jquery/jquery-easing-compatibility.1.2.pack.js"></script>
 	<script type="text/javascript" src="<?php echo $vars['url']; ?>pg/js/friendsPickerv1.js"></script>
-	
 <?php
-
 	}
 
+    $css_source = array(
+        '/mod/lds/views/default/lds/css.php',
+        '/mod/lds/views/default/lds/css.php',
+        '/mod/ldshakers/views/default/ldshakers/css.php',
+        '/mod/topbar_ldshake/views/default/topbar_ldshake/css.php',
+        '/views/default/css.php'
+    );
+
+    $ldshake_dir = dirname(__FILE__).'/../../..';
+
+    $cs_modified_string = '';
+    foreach($css_source as $cs) {
+        $cs_modified = filemtime($ldshake_dir . $cs);
+        $cs_modified_string .= "{$cs_modified}";
+    }
 	//Pau: We append a checksum of the generated css file in order to break all clients' caches.
 	?>
-	<!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?hash=<?php /*printf("%u", crc32(elgg_view("css")));*/?>" type="text/css" />-->
+	<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.php?hash=<?php echo crc32($cs_modified_string);?>" type="text/css" />
     <!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?q=0001" type="text/css" />-->
-    <style type="text/css">
-        <?php echo elgg_view("css"); ?>
-    </style>
     <link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>vendors/jquery/css/ui-lightness/jquery-ui-1.8.6.custom.css" type="text/css" />
     <link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />
-	
-<?php 
+<?php
 
 		echo $feedref;
 		//echo elgg_view('metatags',$vars); //Pau... i removed it :S 

@@ -7,7 +7,7 @@
 
 
  */
-
+/*
 define ('CACHE_CSS', 1);
 
 if (!file_exists ('compiled.css') || !CACHE_CSS)
@@ -18,6 +18,10 @@ if (!file_exists ('compiled.css') || !CACHE_CSS)
 	//file_put_contents('compiled.css', $default_css);
 }
 else $default_css = file_get_contents('compiled.css');
+*/
+
+require_once(dirname(dirname(__FILE__)) . "/engine/start.php");
+$default_css = elgg_view("css");
 
 header("Content-type: text/css", true);
 header('Expires: ' . date('r',time() + 864000), true);

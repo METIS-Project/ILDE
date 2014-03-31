@@ -38,7 +38,7 @@ $defaultLang = array (
     'prod' =>		'en'
 );
 
-$debug = true;
+$debug = false;
 
 $vle_key = "92EB2B8ED34885A22685FE2CB8739153";
 
@@ -53,7 +53,7 @@ $google_drive = array(
  * List of environments, containing the regular expression of the server name that defines them.
  */
 $envUrls = array (
-	'devel' =>		'^localhost|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11|^95\.23\.158\.182',
+	'devel' =>		'^ilde|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11|^95\.23\.158\.182',
 	'staging' =>	'^ldshake3\.upf\.edu',
 	'prod' =>		'^ldshake\.upf\.edu'
 );
@@ -67,12 +67,12 @@ $confOptions = array (
 	 * Basic DB connection options
 	 */
 	'dbhost' =>		array (
-						'devel' =>		'localhost',
+						'devel' =>		'usrv',
 						'staging' =>	'localhost',
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-                        'devel' =>		'ldshake_perf',
+                        'devel' =>		'metis_perf',
 						//'devel' =>		'metis_patterns',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'
