@@ -1854,8 +1854,6 @@ SQL;
 
         $e_base = "";
         if($enrich) {
-            //$rich_query = self::buildRichQuery($user_id);
-            $e_base = "JOIN e_base eb ON eb.guid = e.guid";
             $callback = "ldshake_richlds";
         }
 
@@ -1923,7 +1921,6 @@ SQL;
                 $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
             }
         }
-
 
 $query = <<<SQL
 SELECT {$count_query} FROM {$CONFIG->dbprefix}entities e

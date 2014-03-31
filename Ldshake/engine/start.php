@@ -148,7 +148,7 @@
 				if (!@include_once($file))
 					throw new InstallationException("Could not load {$file}");
 			}
-			
+
 		// Set default config
 			set_default_config();
 		
@@ -172,14 +172,14 @@
 			// Determine light mode
 			$lm = strtolower(get_input('lightmode'));
 			if ($lm == 'true') $lightmode = true;
-			
+
 			// Load plugins, if we're not in light mode
 			if (($installed) && ($db_installed) && ($sanitised) && (!$lightmode)) {
 				load_plugins();
-				
+
 				trigger_elgg_event('plugins_boot', 'system');
 			}
-			
+
 		// Forward if we haven't been installed
 			if ((!$installed || !$db_installed) && !substr_count($_SERVER["PHP_SELF"],"install.php") && !substr_count($_SERVER["PHP_SELF"],"css.php") && !substr_count($_SERVER["PHP_SELF"],"action_handler.php")) {
 					header("Location: install.php");

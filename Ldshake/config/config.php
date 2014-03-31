@@ -102,31 +102,30 @@ $confOptions = array (
 	 * NOTE: They will be loaded in the order they are listed here!
 	 */
 	'enabled_plugins' => array (
-		'debug',
 		't9n',
 		'about',
 		/*'apiadmin',*/
 		/*'blog',*/
-		'diagnostics',
+		/*'diagnostics',*/
 		'friends',
         'groups',
 		/*'help',*/
-		'logbrowser',
-		'messageboard',
+		/*'logbrowser',*/
+		/*'messageboard',*/
 		'messages',
-		'metatag_manager',
+		/*'metatag_manager',*/
 		/*'pages',*/
 		/*'photo_cumulus',*/
 		'profile',
-		'river',
-		'role',
+		/*'river',*/
+		/*'role',*/
 		/*'status',*/
-		/*'tagcloud',
-		'tag_cumulus',*/
+		/*'tagcloud',*/
+		/*'tag_cumulus',*/
 		'uservalidationbyemail',
 		/*'walltowall',*/
 		'phpmailer',
-		'contacts',
+		/*'contacts',*/
 		'wholeworldfriends',
 		/*'wizardUoL',*/
 		'topbar_ldshake',

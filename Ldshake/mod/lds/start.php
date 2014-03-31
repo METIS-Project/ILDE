@@ -87,7 +87,8 @@ function lds_init()
 	
 	//We want the /lds/whatever urls to be ours
 	register_page_handler('lds','lds_page_handler');
-	
+
+
 	//LdS actions:
     register_action("lds/clone", false, $CONFIG->pluginspath . "lds/actions/lds/clonelds.php");
     register_action("lds/cloneimplementation", false, $CONFIG->pluginspath . "lds/actions/lds/cloneimplementation.php");
