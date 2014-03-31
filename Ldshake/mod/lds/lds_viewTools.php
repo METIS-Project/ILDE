@@ -110,6 +110,7 @@ class lds_viewTools
 
         $folder = $type.$editortype;
 
+        /*
         if($lds->getSubtype() == 'LdSProject_implementation' || $lds->getSubtype() == 'LdSProject') {
             if($type == 'edit') {
                 $folder = 'edit_project';
@@ -117,6 +118,7 @@ class lds_viewTools
                 $folder = 'project_implementation';
             }
         }
+        */
 
         //Google Docs history
         if($type == 'history' && $lds->editor_type == 'google_docs')

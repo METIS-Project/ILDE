@@ -42,15 +42,16 @@
 	<?php foreach($vars['list'] as $item): ?>
 	<li class="lds_list_element">
 		<div class="lds_actions">
-			<?php if ($item->locked): ?>
+			<?php if ($item->locked):
+                $can_edit = can_edit_entity($item->lds->guid,get_loggedin_userid()) ; ?>
 				<div>
 					<?php $fstword = explode(' ',$item->locked_by->name); $fstword = $fstword[0]; ?>
 					<?php echo T("%1 is editing.", $item->locked_by->name) ?>
 				</div>
 			<?php else: ?>
-				<?php if ($item->lds->canEdit() || $item->lds->owner_guid == get_loggedin_userid()): ?>
+				<?php if ($can_edit): ?>
 				<div>
-					<?php if ($item->lds->canEdit()): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
+					<?php if ($can_edit): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
 					<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid ?>"><?php echo T("Delete") ?></a><?php endif; ?>
 					<div class="lds_loading"></div>
 				</div>
@@ -65,11 +66,11 @@
 			</div>
 		</div>
 		<div class="lds_icon">
-			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->editor_type) ? $item->editor_type : 'doc'); ?>-icon-64.png" /></a>
+			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-64.png" /></a>
 			<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?>
 			<br />
 			<div class="lds_sticker mine"><?php echo T("Mine") ?></div>
-			<?php elseif ($item->lds->canEdit()): ?>
+			<?php elseif ($can_edit): ?>
 			<br />
 			<div class="lds_sticker canedit"><?php echo T("Can edit") ?></div>
 			<?php endif; ?>

@@ -72,7 +72,7 @@ $confOptions = array (
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-                        'devel' =>		'ldshake_trunk',
+                        'devel' =>		'ldshake_perf',
 						//'devel' =>		'metis_patterns',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'

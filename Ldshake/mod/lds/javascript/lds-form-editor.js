@@ -72,6 +72,8 @@ var ajax_timeout = 30;
 if(ilde_debug)
     ajax_timeout = 19999;
 
+var editor = null;
+
 //Saves the current document tab, the one that we are editing
 var currentTab = 0;
 
@@ -524,7 +526,7 @@ function initSliders ()
 	$('#completeness_slider').slider({
 			value:$('#completeness_input').val(),
 			min: 0,
-			max: 8,
+			max: 5,
 			step: 1,
 			slide: function (event, ui) {
 				$('#completeness_input').val( ui.value );
@@ -705,13 +707,6 @@ function initCKED ()
         //$('#cke_lds_edit_body').hide();
         $("#lds_editor_iframe").attr("src", document_iframe_url);
     }, options);
-
-    //And update it in case it is resized
-    $(window).resize (function ()
-    {
-        if (editor !== null) resizeCK();
-        resizeEditorFrame();
-    });
 }
 
 //Set editor height, depending on our browser
@@ -1010,28 +1005,30 @@ function inaction_trigger ()
 
 /*editor iframe information exchange*/
 $(document).ready(function() {
-    window.addEventListener('message',function(event) {
-        if(event.origin !== restapi_remote_domain) return;
-        var editor_iframe = document.getElementById("lds_editor_iframe");
-        if(event.data.type == 'ldshake_editor_ready') {
-            var m_sectoken = {
-                "type": "ldshake_sectoken",
-                "data": editor_id
+    if(restapi) {
+        window.addEventListener('message',function(event) {
+            if(event.origin !== restapi_remote_domain) return;
+            var editor_iframe = document.getElementById("lds_editor_iframe");
+            if(event.data.type == 'ldshake_editor_ready') {
+                var m_sectoken = {
+                    "type": "ldshake_sectoken",
+                    "data": editor_id
+                }
+
+                if(editorType == 'gluepsrest'
+                    && $('#lds_edit_guid').val() == '0')
+                    save_lds (null,{redirect: false});
+
+                editor_iframe.contentWindow.postMessage(m_sectoken,restapi_remote_domain);
             }
 
-            if(editorType == 'gluepsrest'
-                && $('#lds_edit_guid').val() == '0')
-                save_lds (null,{redirect: false});
-
-            editor_iframe.contentWindow.postMessage(m_sectoken,restapi_remote_domain);
-        }
-
-        if(event.data.type == 'glueps_deployment') {
-            register_deployment();
-        }
-    },false);
-
+            if(event.data.type == 'glueps_deployment') {
+                register_deployment();
+            }
+        },false);
+    }
 });
+
 
 $(document).ready(function()
 {
@@ -1052,6 +1049,14 @@ $(document).ready(function()
 
     if($.fn.ckeditor)
         initCKED ();
+
+    //And update it in case it is resized
+    $(window).resize (function ()
+    {
+        if (editor !== null)
+            resizeCK();
+        resizeEditorFrame();
+    });
 
     initDocName ();
 

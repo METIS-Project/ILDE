@@ -49,7 +49,7 @@
     <div class="license_cc_select_item" license_id="<?php echo LDS_LICENSE_CC_BY_NC_ND ?>"><img src="<?php echo $url."mod/lds/images/license/cc/by_nc_nd_88x31.png" ?>" /><?php echo T("Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported")?></div>
     <div class="license_cc_select_item" license_id="<?php echo LDS_LICENSE_CC_BY_NC_NA ?>"><img src="<?php echo $url."mod/lds/images/license/cc/by_nc_na_88x31.png" ?>" /><?php echo T("Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported")?></div>
 
-    <div style="margin-top: 20px">
+    <div style="margin-top: 10px">
         <div id="license_item_cc" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_cc.png" ?>" /></div>
         <div id="license_item_cc_by" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_by.png" ?>" /><div class="cc_icon_title"><?php echo T("Attribution")?></div><?php echo T("You must attribute the work in the manner specified by the author or licensor.")?></div>
         <div id="license_item_cc_nc" class="cc_info_icon"><img src="<?php echo $url."mod/lds/images/license/cc/chooser_nc.png" ?>" /><div class="cc_icon_title"><?php echo T("Noncommercial")?></div><?php echo T("The licensor permits others to copy, distribute and transmit the work. In return, licensees may not use the work for commercial purposes — unless they get the licensor's permission.")?></div>

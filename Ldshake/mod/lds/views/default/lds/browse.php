@@ -77,10 +77,10 @@
                         $used_tags = array_slice($tagclass, $tag_offset, $tag_length, true);
                         ?>
 
-                        <?php foreach ($used_tags as $k=>$v): ?>
+                        <?php foreach ($used_tags as $u_t): ?>
                             <li>
-                                <span class="freq"><?php echo $v ?></span>
-                                <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($k) ?>"><?php echo $k ?></a>
+                                <span class="freq"><?php echo $u_t->frequency ?></span>
+                                <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($u_t->tag) ?>"><?php echo $u_t->tag ?></a>
                             </li>
                         <?php endforeach; ?>
 
@@ -88,10 +88,10 @@
                         $non_used_tags = array_slice($tagclass, $tag_length, 99, true);
                         ?>
                         <?php if(count($tagclass) >= $tag_length): ?>
-                            <?php foreach ($non_used_tags as $k=>$v): ?>
+                            <?php foreach ($non_used_tags as $u_t): ?>
                                 <li class="lds-browse-non-used-tags lds-browse-non-used-tags-hide">
-                                    <span class="freq"><?php echo $v ?></span>
-                                    <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($k) ?>"><?php echo $k ?></a>
+                                    <span class="freq"><?php echo $u_t->frequency ?></span>
+                                    <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($u_t->tag) ?>"><?php echo $u_t->tag ?></a>
                                 </li>
                             <?php endforeach; ?>
                         <li>
@@ -138,6 +138,5 @@
     var t9n = {
         showTags : "<?php echo T('Show more tags') ?>",
         hideTags : "<?php echo T('Show less tags') ?>"
-
     }
 </script>

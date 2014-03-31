@@ -223,7 +223,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
     <?php endif; ?>
     var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
-
+    var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
     <?php if($vars['restapi'] || $editor == 'gluepsrest'): ?>
     var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";
     <?php endif; ?>

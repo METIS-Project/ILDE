@@ -11,6 +11,8 @@
 	 * @link http://elgg.org/
 	 */
 
+
+$start_time = microtime(true);
 	// Load Elgg engine
 		require_once("../start.php");
 

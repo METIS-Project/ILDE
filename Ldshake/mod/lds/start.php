@@ -181,6 +181,9 @@ function lds_page_handler ($page)
 {
     global $CONFIG;
 
+    global $start_time;
+    echo microtime(true) - $start_time.' start1<br />';
+
     $user = get_loggedin_userid();
 
     $last_visit = isset($_SESSION['last_visit']) ? $_SESSION['last_visit'] : 0;
@@ -249,6 +252,8 @@ function lds_page_handler ($page)
 
 function lds_exec_main ($params)
 {
+    global $start_time;
+    echo microtime(true) - $start_time.' start2<br />';
     $offset = get_input('offset') ?: '0';
 
     if ($params[1] == 'created-by-me')
@@ -275,16 +280,32 @@ function lds_exec_main ($params)
     }
     else
     {
-        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true);
-        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $time = microtime(true);
+        $vars['count'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), true);
+        echo microtime(true) - $time.' bc<br />';
+        $time = microtime(true);
+        //$entities = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset);
+        $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset, null, null, "time", true);
+        echo microtime(true) - $time.' be<br />';
+        //$time = microtime(true);
+        //$vars['list'] = lds_contTools::enrichLdS($entities);
+        //echo microtime(true) - $time.' el<br />';
+
         $vars['title'] = T("All my LdS");
     }
 
     $vars['section'] = $params[1];
+    $time = microtime(true);
+
+    echo microtime(true) - $start_time.' start25<br />';
     $body = elgg_view('lds/mylds',$vars);
+    //echo microtime(true) - $time.' r<br />';
+
+    echo microtime(true) - $start_time.' start3<br />';
+    $offset = get_input('offset') ?: '0';
 
     page_draw($vars['title'], $body);
+    echo microtime(true) - $start_time.' start4<br />';
 }
 
 function lds_exec_implementable ($params)
@@ -401,7 +422,9 @@ function lds_exec_search ($params) {
     $offset = (int)get_input('offset', 0);
 	
 	$vars['query'] = $query;
-	$vars['list'] = lds_contTools::searchLdS($query, 11, $offset);
+    $vars['list'] = false;
+    if($list = lds_contTools::searchLdS($query, 11, $offset))
+	    $vars['list'] = lds_contTools::enrichLdS($list);
     $vars['count'] = count ($vars['list']) + $offset;
     //$vars['list'] = array_slice($vars['list'], $offset, 10);
 
@@ -586,12 +609,81 @@ function lds_exec_viewtrashed ($params)
 	access_show_hidden_entities($access_status);
 }
 
+function lds_exec_browse_test ($params)
+{
+    $order = get_input('order') ?: 'newest';
+    $offset = get_input('offset') ?: '0';
+
+    //$vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+
+    $tools = array();
+
+    $vars['editor_subtype'] = array(
+        'design_pattern' => 'Design Pattern',
+        'MDN' => 'Design Narrative',
+        'PC' => 'Persona Card',
+        'FC' => 'Factors and Concerns',
+        'HE' => 'Heuristic Evaluation',
+        'coursemap' => 'Course Map',
+    );
+
+    $vars['editor_type'] = array(
+        'cld' => 'CompendiumLD',
+        'webcollagerest' => 'WebCollage',
+        'openglm' => 'OpenGLM',
+        'cadmos' => 'CADMOS',
+        'image' => 'Image',
+    );
+
+    //$tools['editor_subtype'] =
+
+    $vars['filtering'] = false;
+    //If there is some filtering by tag
+    if (get_input('tagk') && get_input('tagv'))
+    {
+        $vars['tagk'] = urldecode(get_input('tagk'));
+        $vars['tagv'] = urldecode(get_input('tagv'));
+
+        $title = T("LdS tagged %1",$vars['tagv']);
+        //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], "title");
+        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
+        $vars['filtering'] = true;
+    }
+    //It's just a whole list
+    else
+    {
+        $title = T("Browse LdS");
+
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, "title");
+        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
+    }
+
+    if(!is_array($vars['list'])) {
+        $vars['list'] = array();
+    }
+
+    //$vars['list'] = lds_contTools::enrichLdS($vars['list']);
+
+    //$body = elgg_view('lds/browse',$vars);
+    //page_draw($title, $body);
+}
+
 function lds_exec_browse ($params)
 {
+    global $start_time;
 	$order = get_input('order') ?: 'newest';
 	$offset = get_input('offset') ?: '0';
 
-	$vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+    $time = microtime(true);
+    $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+    echo microtime(true) - $time.' tf<br />';
+
+    /*
+    $time = microtime(true);
+    $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+    echo microtime(true) - $time.' tfl<br />';
+    */
 
     $tools = array();
 
@@ -623,7 +715,7 @@ function lds_exec_browse ($params)
 
         $title = T("LdS tagged %1",$vars['tagv']);
         //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, $vars['tagk'], $vars['tagv']);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], "title",true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
     }
@@ -632,22 +724,29 @@ function lds_exec_browse ($params)
     {
         $title = T("Browse LdS");
 
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 0, 0);
-        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0);
+        $time = microtime(true);
+        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
+        echo microtime(true) - $time.' bc<br />';
+        $time = microtime(true);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, "title", true);
+        echo microtime(true) - $time.' be<br />';
     }
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
     }
 
+    //$vars['list'] = lds_contTools::enrichLdS($vars['list']);
 
-    Utils::osort($vars['list'], array('title' => true));
-    $vars['list'] = array_slice($vars['list'], $offset, 10);
-
-    $vars['list'] = lds_contTools::enrichLdS($vars['list']);
-
+    $time = microtime(true);
     $body = elgg_view('lds/browse',$vars);
+    echo microtime(true) - $time.' start3<br />';
+
+    $time = microtime(true);
     page_draw($title, $body);
+    echo microtime(true) - $time.' start4<br />';
+    echo microtime(true) - $start_time.' start_finish<br />';
+
 }
 
 function lds_exec_new ($params)
@@ -1326,8 +1425,6 @@ function lds_exec_implementeditor($params)
         $vars['initDocuments'][0]->modified = '0';
         $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this implementation...").'</p>';
     }
-
-
 
     Utils::osort($vars['initDocuments'], 'guid');
     $vars['initDocuments'] = json_encode($vars['initDocuments']);

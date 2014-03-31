@@ -55,6 +55,13 @@
         $form_body .= elgg_view("input/checkboxes", array('options' => array(T('Enable registration')), 'internalname' => 'disable_registration', 'value' => $on ));
         $form_body .= "</p>";
 
+        $form_body .= "<p class=\"admin_debug\">" . T("Enable projects") . "<br />";
+        $on = T('Enable projects');
+        if ((isset($CONFIG->disable_projects)) && ($CONFIG->disable_projects == true))
+            $on = ($vars['config']->disable_projects ?  "" : T('Enable projects'));
+        $form_body .= elgg_view("input/checkboxes", array('options' => array(T('Enable projects')), 'internalname' => 'disable_projects', 'value' => $on ));
+        $form_body .= "</p>";
+
 
 		/*
 		$form_body .= "<p class=\"admin_usage\">" . elgg_echo('installation:usage') . "<br />";

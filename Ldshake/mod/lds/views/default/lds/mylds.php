@@ -103,7 +103,7 @@
 				<!--<div class="lds_select_spacer"></div>-->
                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
 				<?php endif; ?>
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->editor_type) ? $item->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
+				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>
@@ -116,7 +116,7 @@
 					<?php if ($item->locked): ?>
 					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
 					<?php endif; ?>
-					<span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+					<span class="lds_date"><?php echo friendly_time($item->last_contribution_at, false, true) ?></span>
                     <div class="clearfloat"></div>
 				</div>
 			</li>

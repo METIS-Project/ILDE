@@ -2858,6 +2858,7 @@ class GluepsManager
         else
             $gui_frame_origin = $url_gui_parsed['scheme'].'://'.$url_gui_parsed['host'];
 
+        $vars['restapi'] = true;
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
         $vars['editor_id'] = $sectoken;
@@ -2939,6 +2940,7 @@ class GluepsManager
         else
             $gui_frame_origin = $url_gui_parsed['scheme'].'://'.$url_gui_parsed['host'];
 
+        $vars['restapi'] = true;
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
         $vars['editor'] = 'webcollagerest';
@@ -3075,6 +3077,7 @@ class GluepsManager
         else
             $gui_frame_origin = $url_gui_parsed['scheme'].'://'.$url_gui_parsed['host'];
 
+        $vars['restapi'] = true;
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
         $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);

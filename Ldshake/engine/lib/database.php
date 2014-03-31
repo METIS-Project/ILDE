@@ -66,7 +66,7 @@
 				/// LdShake change ///
 		        	
 		    // Set up cache
-		    	if (!$DB_QUERY_CACHE) 
+		    	if (!$DB_QUERY_CACHE)
 		    		$DB_QUERY_CACHE = new ElggStaticVariableCache('db_query_cache'); //array();
 		    		//$DB_QUERY_CACHE = select_default_memcache('db_query_cache'); //array();
 		    		
@@ -198,7 +198,7 @@
             $CONFIG->executedQueries[] = $query;
 			/// LdShake change ///
             
-        	//if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
+        	if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
             $DB_PROFILE[] = $query;
             	
             $result = mysql_query($query, $dblink);
@@ -206,7 +206,9 @@
             	
             if (mysql_errno($dblink))
 				throw new DatabaseException(mysql_error($dblink) . " QUERY: " . $query);
-				
+
+            //$DB_QUERY_CACHE[$query] = $result;
+
 			return $result;
 				
 		}

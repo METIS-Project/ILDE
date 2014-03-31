@@ -40,55 +40,332 @@
  */
 
 include_once __DIR__.'/Java.inc';
+//include_once __DIR__.'/query_repository.php';
+
+function ldshake_query_callback($row) {
+    $row->time_created = (int)$row->time_created;
+    $row->frequency = (int)$row->frequency;
+    return $row;
+}
+
+function ldshake_tag_relevance_query($user_id) {
+    global $CONFIG;
+
+    $tag_id["discipline"] = get_metastring_id("discipline");
+    $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
+    $tag_id["tags"] = get_metastring_id("tags");
+
+    $query['join'] = <<<SQL
+LEFT JOIN metadata mf ON e.guid = mf.entity_guid
+LEFT JOIN metastrings ms ON ms.id = mf.value_id
+LEFT JOIN metastrings msc ON mf.name_id = msc.id
+SQL;
+
+    $query['select'] = <<<SQL
+COUNT(DISTINCT mf.entity_guid) AS frequency,
+ms.string AS tag,
+MAX(mf.time_created) AS time_created,
+msc.string AS category
+SQL;
+
+    $query['where'] = "mf.name_id IN ({$tag_id["discipline"]}, {$tag_id["pedagogical_approach"]}, {$tag_id["tags"]})";
+
+    $query['group_by'] = "mf.name_id, mf.value_id";
+
+    return $query;
+}
+
+function ldshake_richlds_order($row) {
+    return $row->guid;
+}
+
+function ldshake_richlds($row) {
+    $obj = new stdClass();
+
+    $obj->lds = new stdClass();
+    $obj->lds->guid = (int)$row->guid;
+    $obj->lds->editor_type = $row->editor_type;
+    $obj->lds->title = $row->title;
+    $obj->lds->owner_guid = (int)$row->owner_guid;
+    $obj->lds->time_created = (int)$row->time_created;
+
+    $obj->starter = new stdClass();
+    $obj->starter->name = $row->creator_name;
+    $obj->starter->username = $row->creator_username;
+
+    $obj->last_contributor = new stdClass();
+    $obj->last_contributor->name = $row->last_editor_name;
+    $obj->last_contributor->username = $row->last_editor_username;
+    $obj->last_contribution_at = (int)$row->last_edited_time;
+    $obj->num_contributions = (int)$row->num_contributions;
+
+    $obj->num_viewers = $row->all_can_view ? -1 : (int)$row->viewer_count;
+    $obj->num_editors = (int)$row->editor_count;
+    $obj->all_can_view = $row->all_can_view;
+
+    if(lds_contTools::isSyncLdS($obj->lds)) {
+        $obj->locked = false;
+        $obj->sync = true;
+    } else {
+        if($obj->locked = ($row->editing_tstamp > time() - 60 && $row->editing_by != get_loggedin_userid()))
+            $obj->locked_by = get_user((int)$row->editing_by);
+        $obj->sync = false;
+    }
+
+    $isnew = true;
+    if((int)$row->last_edited_time && (int)$row->last_edited_time - 15 < (int)$row->last_viewed_time){
+        $isnew = false;
+    }
+
+    //tags
+    $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+    foreach ($tagtypes as $type) {
+        if($row->$type)
+            $obj->lds->$type = explode(',', $row->$type);
+    }
+
+    $obj->new = $isnew;
+
+    return $obj;
+}
 
 class lds_contTools
 {
+
+    private static function buildRichQuery($user_id, $elements) {
+        global $CONFIG;
+
+        $viewed_string_id = get_metastring_id("viewed_LdS");
+
+        $editor_type_id = get_metastring_id("editor_type");
+
+        $edited_string_id = get_metastring_id("revised_docs");
+        $editeded_string_id = get_metastring_id("revised_docs_editor");
+
+        $acv_k = get_metastring_id("all_can_view");
+        $acv_v = get_metastring_id("yes");
+
+        $ts = get_metastring_id("editing_tstamp");
+        $editing_by = get_metastring_id("editing_by");
+
+        $tag_id["discipline"] = get_metastring_id("discipline");
+        $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
+        $tag_id["tags"] = get_metastring_id("tags");
+
+        $query['pre'] = array();
+
+        $query['join'] = <<<SQL
+{$CONFIG->dbprefix}entities e
+JOIN objects_entity oer ON e.guid = oer.guid
+JOIN users_entity u ON e.owner_guid = u.guid
+LEFT JOIN (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$viewed_string_id} AND a.owner_guid = {$user_id} GROUP BY a.entity_guid) AS lv ON e.guid = lv.entity_guid
+LEFT JOIN (SELECT ed.entity_guid, MAX(ed.time_created) as last_edited_time, ed.owner_guid as last_editor_guid, COUNT(ed.entity_guid) AS num_contributions FROM annotations ed WHERE ed.entity_guid IN ({$elements}) AND ed.name_id IN ({$edited_string_id},{$editeded_string_id}) GROUP BY ed.entity_guid) AS ed ON e.guid = ed.entity_guid
+LEFT JOIN users_entity ue ON ed.last_editor_guid = ue.guid
+LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two) AS ec ON e.guid = ec.lds_guid
+LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS viewer_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_viewer','lds_viewer_group') GROUP BY ru.guid_two) AS vc ON e.guid = vc.lds_guid
+LEFT JOIN (SELECT entity_guid, string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.entity_guid IN ({$elements}) AND met.name_id = {$editor_type_id}) AS met ON e.guid = met.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$acv_k} AND m.value_id = {$acv_v}) AS iavc ON e.guid = iavc.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["discipline"]} GROUP BY m.entity_guid) AS t_discipline ON e.guid = t_discipline.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["pedagogical_approach"]} GROUP BY m.entity_guid) AS t_pedagogic ON e.guid = t_pedagogic.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["tags"]} GROUP BY m.entity_guid) AS t_tags ON e.guid = t_tags.entity_guid
+LEFT JOIN (SELECT entity_guid, string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$ts}) AS editing_tstamp ON e.guid = editing_tstamp.entity_guid
+LEFT JOIN (SELECT entity_guid, string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$editing_by}) AS editing_by ON e.guid = editing_by.entity_guid
+SQL;
+
+        $query['select'] = <<<SQL
+e.guid,
+e.time_created,
+e.time_updated,
+oer.title,
+e.owner_guid,
+e.time_created,
+u.name as creator_name,
+u.username as creator_username,
+lv.last_viewed_time,
+ue.name as last_editor_name,
+ue.username as last_editor_username,
+ed.last_edited_time as last_edited_time,
+ed.num_contributions as num_contributions,
+ec.editor_count,
+vc.viewer_count,
+iavc.entity_guid as all_can_view,
+met.string as editor_type,
+t_discipline.string as discipline,
+t_pedagogic.string as pedagogical_approach,
+t_tags.string as tags,
+editing_tstamp.editing_tstamp as editing_tstamp,
+editing_by.editing_by as editing_by
+SQL;
+
+        $query['where'] = "e.guid IN({$elements})";
+
+        return $query;
+    }
+
     private static function buildPermissionsQuery($user_id, $writable_only = true) {
         global $CONFIG;
+
+        if(!$user_id)
+            $user_id = get_loggedin_userid();
+
+        if(!($user = get_user($user_id)))
+            throw new InvalidParameterException(elgg_echo('InvalidParameterException:UnrecognisedValue'));
+
+        if($user->admin) {
+            $myfirstlds = mysql_real_escape_string(T("My first LdS"));
+
+            $query['join'] = "JOIN objects_entity oep ON e.guid = oep.guid";
+            $query['permission'] = "oep.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}";
+
+            return $query;
+        }
 
         $acv_query = "";
         $group_permission = "'lds_editor_group', 'lds_viewer_group'";
         $user_permission = "'lds_editor', 'lds_viewer'";
 
-        if($writable_only == false) {
+        $acv_k = get_metastring_id("all_can_view");
+        $acv_v = get_metastring_id("yes");
+
+        $query['pre'] = array();
+        $query['join'] = "";
+        $query['permission'] = "";
+
+        if($writable_only) {
             $group_permission = "'lds_editor_group'";
             $user_permission = "'lds_editor'";
+        }
 
-            $acv_k = get_metastring_id("all_can_view");
-            $acv_v = get_metastring_id("yes");
-            $acv_query = <<<SQL
-    OR
-	(
-		m.name_id = '{$acv_k}' AND m.value_id = '{$acv_v}'
-	)
-    OR
-    (
-        e.guid NOT IN (
-            SELECT DISTINCT acvm.entity_guid FROM metadata acvm WHERE acvm.name_id = '{$acv_k}'
-        )
-        AND
-        e.access_id < 3 AND e.access_id > 0
-    )
+        if($writable_only == false) {
+            /*
+            $query['pre'] = array(
+                <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS lavc(INDEX(entity_guid)) AS
+(SELECT entity_guid FROM metadata acvm WHERE acvm.name_id = {$acv_k})
+SQL
+            ,
+                <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS mavc(INDEX(entity_guid)) AS
+(SELECT entity_guid FROM metadata m WHERE m.name_id = {$acv_k} AND m.value_id = {$acv_v})
+SQL
+            ,
+                <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS legacy_acv(INDEX(legacy_acv_guid)) AS
+(SELECT acve.guid as legacy_acv_guid FROM entities acve LEFT JOIN lavc ON acve.guid = lavc.entity_guid
+WHERE acve.type = 'object' AND acve.subtype = 21 AND acve.enabled = 'yes'
+AND acve.access_id < 3 AND acve.access_id > 0 AND lavc.entity_guid IS NULL)
+SQL
+            );
+
+            $query['join'] = <<<SQL
+LEFT JOIN mavc ON e.guid = mavc.entity_guid
+LEFT JOIN legacy_acv ON e.guid = legacy_acv.legacy_acv_guid
+SQL;
+
+            $query['permission'] = <<<SQL
+(
+    mavc.entity_guid IS NOT NULL
+)
+OR
+(
+    legacy_acv.legacy_acv_guid IS NOT NULL
+)
+OR
+SQL;
+            */
+
+            $query['join'] = <<<SQL
+LEFT JOIN metadata mavc ON e.guid = mavc.entity_guid
+
+SQL;
+
+            $query['permission'] = <<<SQL
+(
+    mavc.name_id = {$acv_k} AND mavc.value_id = {$acv_v}
+)
+
+OR
 SQL;
         }
 
-        $query = <<<SQL
-	(e.owner_guid = {$user_id})
-	{$acv_query}
-	OR
-	(
-		e.guid IN (
-			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship IN ({$group_permission}) AND rg.guid_one IN (
-				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
-			)
-		)
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ({$user_permission}) AND ru.guid_one = {$user_id}
-		)
-	)
+/*
+        $user_group = get_data("SELECT rug.guid_two as guid FROM entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}","ldshake_richlds_order");
+        $user_group = implode(',', $user_group);
+
+        $group_permissions = get_data("SELECT rg.guid_two as guid FROM entity_relationships rg WHERE rg.guid_one IN ({$user_group}) AND rg.relationship IN ({$group_permission})","ldshake_richlds_order");
+        $group_permissions = implode(',', $group_permissions);
+
+        $user_permissions = get_data("SELECT ru.guid_two as guid FROM entity_relationships ru WHERE ru.relationship IN ({$user_permission}) AND ru.guid_one = {$user_id}","ldshake_richlds_order");
+        $user_permissions = implode(',', $user_permissions);
+*/
+        $group_permissions = "LEFT JOIN(
+        (SELECT rg.guid_two as guid FROM entity_relationships rg JOIN (
+        SELECT rug.guid_two as guid FROM entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+        ) AS up ON up.guid = rg.guid_one WHERE rg.relationship IN ({$group_permission})
+        ) UNION (
+        SELECT ru.guid_two as guid FROM entity_relationships ru WHERE ru.relationship IN ({$user_permission}) AND ru.guid_one = {$user_id}
+        )) AS pm ON e.guid = pm.guid";
+
+        $query['join'] .= " $group_permissions";
+        /*
+        $query['pre'][] = <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS user_group(INDEX(group_guid)) AS
+(SELECT rug.guid_two as group_guid FROM entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id})
+SQL;
+
+        $query['pre'][] = <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS group_permissions(INDEX(lds_guid)) AS
+(SELECT rg.guid_two as lds_guid FROM entity_relationships rg JOIN user_group ON user_group.group_guid = rg.guid_one
+WHERE rg.relationship IN ({$group_permission}))
+SQL;
+
+        $query['pre'][] = <<<SQL
+CREATE TEMPORARY TABLE IF NOT EXISTS user_permissions(INDEX(lds_guid)) AS
+(SELECT ru.guid_two as lds_guid FROM entity_relationships ru WHERE ru.relationship IN ({$user_permission}) AND ru.guid_one = {$user_id})
+SQL;
+
+        $query['join'] = <<<SQL
+{$query['join']}
+LEFT JOIN user_permissions ON user_permissions.lds_guid = e.guid
+LEFT JOIN group_permissions ON e.guid = group_permissions.lds_guid
+SQL;
+*/
+        /*
+        $query['permission'] = <<<SQL
+{$query['permission']}
+(
+e.owner_guid = {$user_id}
+)
+OR
+(
+    user_permissions.lds_guid IS NOT NULL
+)
+OR
+(
+    group_permissions.lds_guid IS NOT NULL
+)
+SQL;
+        */
+/*        $query['permission'] = <<<SQL
+{$query['permission']}
+(
+e.owner_guid = {$user_id}
+)
+OR
+(
+    e.guid IN ({$group_permissions},{$user_permissions})
+)
+SQL;
+*/
+        $query['permission'] = <<<SQL
+{$query['permission']}
+(
+e.owner_guid = {$user_id}
+)
+OR
+(
+    pm.guid IS NOT NULL
+)
 SQL;
 
         return $query;
@@ -98,26 +375,17 @@ SQL;
 	 * @param unknown_type $query
 	 */
 
-
     public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null, $enrich = true, $writable_only = false) {
+        return self::getUserEntities('object', 'LdS', $user_id, false, $limit, $offset, $m_key, $m_value, "time", $writable_only, $query);
+    }
+
+    public static function searchLdS_deprecated($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null, $enrich = true, $writable_only = false) {
         global $CONFIG;
 
         if(!$user_id)
             $user_id = get_loggedin_userid();
 
         $subtype = get_subtype_id('object', 'LdS');
-
-        //$mj = '';
-        $mw = '';
-/*
-        if($mk && $mv) {
-            $mk_id = get_metastring_id($mk);
-            $mv_id = get_metastring_id($mv);
-
-            //$mj = "JOIN metadata m ON e.guid = m.entity_guid";
-            $mw = "md.name_id='{$mk_id}' AND  md.value_id='{$mv_id}' AND";
-        }
-*/
 
         $metadata_join = "";
         $metadata_query = "";
@@ -129,6 +397,8 @@ SQL;
             if($metadata_key_id && $metadata_value_id) {
                 $metadata_join = 'JOIN metadata mt ON e.guid = mt.entity_guid';
                 $metadata_query = "AND mt.name_id = '{$metadata_key_id}' AND mt.value_id = '{$metadata_value_id}'";
+                //$metadata_join = '';
+                //$metadata_query = "e.guid IN (SELECT DISTINCT m.entity_guid FROM metadata m WHERE m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}')";
             }
         }
 
@@ -149,8 +419,8 @@ SQL;
         $permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
 
         $query = <<<SQL
-SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
-	{$permissions_query}
+SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m ON e.guid = m.entity_guid JOIN {$CONFIG->dbprefix}metadata md ON e.guid = md.entity_guid JOIN {$CONFIG->dbprefix}objects_entity o ON e.guid = o.guid  JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid {$metadata_join} {$permissions_query['join']} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
+	{$permissions_query['permission']}
 ) AND (
 	  (o.title LIKE '%{$query}%' OR do.title LIKE '%{$query}%' OR do.description LIKE '%{$query}%')
 	  {$tags_query}
@@ -260,58 +530,50 @@ SQL;
 		foreach ($list as $lds)
 		{
             $obj = new stdClass();
-            if($lds->getSubtype() != 'LdS') {
-                //$implementation = $lds;
-                //$lds = get_entity($lds->container_guid);
-                $obj->design = get_entity($lds->lds_guid);
-                $obj->implementation = true;
-            }
-            if($lds) {
-                //$obj = new stdClass();
-                //$obj->implementation = $implementation;
-                $lds->title = ($lds->title == '') ? T('Untitled LdS') : $lds->title;
-                $obj->lds = $lds; //The LdS itself
-                $obj->starter = get_entity($lds->owner_guid);
 
+            if($lds) {
+                $obj = new stdClass();
+                //$obj->implementation = $implementation;
+
+                if(($obj->title = $lds->title) == '')
+                    $obj->title = T('Untitled LdS');
+
+                $obj->lds = $lds; //The LdS itself
+                $obj->starter = get_user($lds->owner_guid);
+
+                //profile
                 $editor_types = explode(',', $lds->editor_type);
                 $obj->editor_type = $editor_types[0];
 
                 $revision_type = $lds->external_editor ? 'revised_docs_editor' : 'revised_docs';
                 $latest = $lds->getAnnotations($revision_type, 1, 0, 'desc');
-                $obj->last_contributor = get_entity($latest[0]->owner_guid);
+                $obj->last_contributor = get_user($latest[0]->owner_guid);
                 $obj->last_contribution_at = $latest[0]->time_created;
-                $obj->num_contributions = $lds->countAnnotations($revision_type);
 
-                //$obj->num_editors = count(get_members_of_access_collection($lds->write_access_id,true));
-                //$obj->num_viewers = ($lds->access_id == 1) ? -1 : count(get_members_of_access_collection($lds->access_id,true));
 
-                $obj->num_viewers = count(lds_contTools::getViewersIds($lds->guid));
                 $obj->num_editors = count(lds_contTools::getEditorsIds($lds->guid));
-                if($lds->all_can_view == 'yes')
+                if($lds->all_can_view == 'yes' || ($lds->all_can_view === null && $lds->access_id < 3 && $lds->access_id > 0)) {
                     $obj->num_viewers = -1;
+                } else {
+                    $obj->num_viewers = count(lds_contTools::getViewersIds($lds->guid));
+                }
 
-                if($lds->all_can_view === null && $lds->access_id < 3 && $lds->access_id > 0)
-                    $obj->num_viewers = -1;
 
                 $obj->num_comments = $lds->countAnnotations('generic_comment');
                 $obj->num_documents = get_entities_from_metadata ('lds_guid',$lds->guid,'object','LdS_document', 0, 10000, 0, '', 0, true);
+                $obj->num_contributions = $lds->countAnnotations($revision_type);
+
 
                 if(self::isSyncLdS($lds)) {
                     $obj->locked = false;
                     $obj->sync = true;
                 } else {
-                    $obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid());
-                    $obj->locked_by = get_user($lds->editing_by);
+                    if($obj->locked = ($lds->editing_tstamp > time() - 60 && $lds->editing_by != get_loggedin_userid()))
+                        $obj->locked_by = get_user($lds->editing_by);
                     $obj->sync = false;
                 }
 
-                //Add an is_new flag if the user hasn't seen it.
-                $seenLds = get_user(get_loggedin_userid())->seen_lds;
-                if (is_null($seenLds)) $seenLds = array();
-                if (is_string($seenLds)) $seenLds = array($seenLds);
-
                 $isnew = true;
-
 
                 if($last_viewed = get_annotations($lds->guid, 'object','LdS','viewed_LdS','',get_loggedin_userid(), 1,"","time_created desc")) {
                     $last_viewed = $last_viewed[0]->time_created;
@@ -324,18 +586,6 @@ SQL;
                 } elseif($lds->time_updated - 15 < $last_viewed){
                     $isnew = false;
                 }
-
-                /*
-                foreach ($seenLds as $sl)
-                {
-                    $sl = explode(':',$sl);
-                    if ($sl[0] == $lds->guid && $sl[1] >= $lds->time_updated - 5)
-                    {
-                        $isnew = false;
-                        break;
-                    }
-                }
-                */
 
                 $obj->new = $isnew;
 
@@ -1361,7 +1611,7 @@ SQL;
         $subtype = get_subtype_id($type, $subtype);
 
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = {$type} AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
+SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = '{$type}' AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
 	(
 		e.guid IN (
 			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
@@ -1509,50 +1759,15 @@ SQL;
     }
 
 
-    public static function getUserEditableEntities($type = 'object', $subtype = 'LdS', $user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+    public static function getUserEditableEntities($type = 'object', $subtype = 'LdS', $user_id = 0, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
         $offset = mysql_real_escape_string((int)$offset);
         $limit = mysql_real_escape_string((int)$limit);
         $type = mysql_real_escape_string($type);
 
-        if(isadminloggedin()) {
-            /*
-            $query_limit = ($limit == 0) ? '' : "9999";
-            if($count)
-                return get_entities('object', 'LdS', 0, '', $query_limit, $offset, true);
-
-            return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
-            */
-            $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-            $subtype = get_subtype_id($type, $subtype);
+        if(!$user_id)
             $user_id = get_loggedin_userid();
-
-            $metadata_join = "";
-            $metadata_query = "";
-
-            if($m_key && $m_value) {
-                $metadata_key_id = get_metastring_id($m_key);
-                $metadata_value_id = get_metastring_id($m_value);
-
-                $metadata_join = 'JOIN metadata m ON e.guid = m.entity_guid';
-                $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
-            }
-
-            $myfirstlds = mysql_real_escape_string(T("My first LdS"));
-
-            $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid {$metadata_join} WHERE e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query} AND (
-oe.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}
-) order by time_updated desc {$query_limit}
-SQL;
-            $entities = get_data($query, "entity_row_to_elggstar");
-
-            if($count)
-                return count($entities);
-
-            return $entities;
-        }
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id($type, $subtype);
@@ -1568,117 +1783,351 @@ SQL;
             $metadata_query = "AND m.name_id = '{$metadata_key_id}' AND m.value_id = '{$metadata_value_id}'";
         }
 
+        if ($count) {
+            $count_query = "count(distinct e.guid) as total";
+        } else {
+            $count_query = "e.*";
+        }
+
+        $permissions_query = self::buildPermissionsQuery($user_id, true);
+
         $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e {$metadata_join} WHERE e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes' {$metadata_query}
-AND (
-	(e.owner_guid = {$user_id})
-	OR
-	(
-		e.guid IN (
-			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
-				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
-			)
-		)
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
-		)
-	)
-) order by time_updated desc {$query_limit}
+SELECT {$count_query} from {$CONFIG->dbprefix}entities e {$metadata_join} {$permissions_query['join']}
+WHERE e.type = '{$type}' AND e.subtype = {$subtype} AND e.enabled = 'yes' {$metadata_query}
+AND ({$permissions_query['permission']})
+order by time_updated desc {$query_limit}
 SQL;
-        $entities = get_data($query, "entity_row_to_elggstar");
 
-        if($count)
-            return count($entities);
-
-        return $entities;
-
+        if($count) {
+            $row = get_data_row($query);
+            return $row->total;
+        } else {
+            $entities = get_data($query, "entity_row_to_elggstar");
+            return $entities;
+        }
     }
 
-    public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
-        return self::getUserViewableObjects('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv);
+    public static function getUserTagFrequency() {
+        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, null, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_relevance_query", "callback" => "ldshake_query_callback"));
     }
 
-    public static function getUserViewableObjects($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null) {
+    public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null) {
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom = null);
+    }
+
+    public static function getUserEditableLdS($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null) {
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom);
+    }
+
+    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null) {
         global $CONFIG;
 
+        if($count) $enrich = false;
         $offset = mysql_real_escape_string((int)$offset);
         $limit = mysql_real_escape_string((int)$limit);
-
-        if(isadminloggedin()) {
-            if($mk && $mv) {
-                //$query_limit = ($limit == 0) ? '' : "9999";
-                if($count)
-                    return get_entities_from_metadata($mk, $mv, $type, $subtype, 0, $limit, $offset, '', 0, true);
-
-                return get_entities_from_metadata($mk, $mv, $type, $subtype, 0, $limit, $offset, '', 0);
-            }
-
-            $query_limit = ($limit == 0) ? '' : "9999";
-            if($count)
-                return get_entities($type, $subtype, 0, '', $query_limit, $offset, true);
-
-            return get_entities($type, $subtype, 0, '', $query_limit, $offset);
-        }
+        $type = mysql_real_escape_string($type);
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id($type, $subtype);
 
-        //$mj = '';
+        $callback = "entity_row_to_elggstar";
+        $custom_select = "";
+        $custom_join = "";
+        $custom_where = "";
+
+        $mj = '';
         $mw = '';
 
         if($mk && $mv) {
             $mk_id = get_metastring_id($mk);
             $mv_id = get_metastring_id($mv);
 
-            //$mj = "JOIN metadata m ON e.guid = m.entity_guid";
-            $mw = "md.name_id='{$mk_id}' AND  md.value_id='{$mv_id}' AND";
+            $mj = "JOIN metadata md ON e.guid = md.entity_guid";
+            $mw = "md.name_id = {$mk_id} AND md.value_id = {$mv_id} AND";
         }
 
-        $acv_k = get_metastring_id("all_can_view");
-        $acv_v = get_metastring_id("yes");
+        $permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
 
-        $query = <<<SQL
-SELECT DISTINCT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN metadata m ON e.guid = m.entity_guid JOIN metadata md ON e.guid = md.entity_guid WHERE {$mw} e.type = 'object' AND e.subtype = $subtype AND e.enabled = 'yes' AND (
-	(e.owner_guid = {$user_id})
-	OR
-	(
-		m.name_id = '{$acv_k}' AND m.value_id = '{$acv_v}'
-	)
-	OR
-	(
-		e.guid NOT IN (
-		    SELECT DISTINCT acvm.entity_guid FROM metadata acvm WHERE acvm.name_id = '{$acv_k}'
-		)
-		AND
-		e.access_id < 3 AND e.access_id > 0
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship IN ('lds_editor_group', 'lds_viewer_group') AND rg.guid_one IN (
-				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
-			)
-		)
-	)
-	OR
-	(
-		e.guid IN (
-			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ('lds_editor', 'lds_viewer') AND ru.guid_one = {$user_id}
-		)
-	)
-) order by e.time_created asc {$query_limit}
+        $rich_query['columns'] = '';
+        $rich_query['join'] = '';
+        $rich_query['pre'] = array();
+
+        $e_base = "";
+        if($enrich) {
+            //$rich_query = self::buildRichQuery($user_id);
+            $e_base = "JOIN e_base eb ON eb.guid = e.guid";
+            $callback = "ldshake_richlds";
+        }
+
+        if ($count) {
+            $count_query = "count(distinct e.guid) as total";
+        } else {
+            $count_query = "DISTINCT e.guid, e.type";
+        }
+
+        $order_query['join'] = "";
+        $order_query['query'] = "";
+
+        if($order == "title") {
+            $order_query['join'] = "JOIN objects_entity oeo ON e.guid = oeo.guid";
+            $order_query['by'] = "order by oeo.title";
+        } elseif($order == "time") {
+            if(!$count) {
+            $order_query['join'] = "";
+            $order_query['by'] = "order by e.time_created desc";
+            }
+        } else {
+            $order_query['join'] = "";
+            $order_query['by'] = "";
+        }
+
+        $search_query['join'] = "";
+        $search_query['query'] = "";
+        if(is_string($search)) {
+            $tp_k = get_metastring_id("pedagogical_approach");
+            $td_k = get_metastring_id("discipline");
+            $tt_k = get_metastring_id("tags");
+            $t_v = get_metastring_id($search);
+
+            if($t_v)
+                $tags_query = "OR ( mt.name_id IN ($tp_k,$td_k,$tt_k) AND mt.value_id = '{$t_v}' )";
+            else
+                $tags_query = "";
+
+            $search = mysql_real_escape_string($search);
+            $order_query['join'] = "JOIN objects_entity oeo ON e.guid = oeo.guid";
+            $search_query['join'] = "JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid JOIN metadata mt ON e.guid = mt.entity_guid";
+            $search_query['query'] = <<<SQL
+(
+(oeo.title LIKE '%{$search}%' OR do.title LIKE '%{$search}%' OR do.description LIKE '%{$search}%')
+{$tags_query}
+) AND
+SQL;
+        }
+
+        $custom_join = '';
+        $custom_where = '';
+        $custom_group_by = '';
+        if($custom) {
+            if(isset($custom['callback']))
+                $callback = $custom['callback'];
+
+            if($query_limit == '') {
+                $build_callback = $custom['build_callback'];
+                $custom_query = $build_callback($user_id);
+
+                $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
+                $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
+                $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
+                $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';
+                $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
+            }
+        }
+
+
+$query = <<<SQL
+SELECT {$count_query} FROM {$CONFIG->dbprefix}entities e
+{$custom_join}
+{$mj}
+{$search_query['join']}
+{$permissions_query['join']}
+{$order_query['join']}
+WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes'
+AND ({$permissions_query['permission']})
+{$custom_where}
+{$custom_group_by}
+{$order_query['by']}
+{$query_limit}
+SQL;
+        if($enrich) {
+            $query_base = <<<SQL
+SELECT DISTINCT e.guid FROM {$CONFIG->dbprefix}entities e
+{$mj}
+{$search_query['join']}
+{$permissions_query['join']}
+{$order_query['join']}
+WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes'
+AND ({$permissions_query['permission']})
+{$order_query['by']} {$query_limit}
 SQL;
 
-        $entities = get_data($query, "entity_row_to_elggstar");
+            $result_order = get_data("{$query_base}", "ldshake_richlds_order");
+            $result_order_string = implode(',', $result_order);
 
-        if($count)
-            return count($entities);
+            if($enrich) {
+                $custom_query = self::buildRichQuery($user_id, $result_order_string);
+            }
+            else {
+                $build_callback = $custom['build_callback'];
+                $custom_query = $build_callback($user_id, $result_order_string);
+            }
 
-        return $entities;
+            $custom_order = isset($custom['order']) ? $custom['order'] : $order_query;
+            $custom_where = isset($custom_query['where']) ? 'WHERE '.$custom_query['where'] : '';
+            $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
 
+            $query = <<<SQL
+SELECT {$custom_query['select']} FROM
+{$custom_query['join']}
+{$custom_order['join']}
+{$custom_where}
+{$custom_group_by}
+{$custom_order['by']}
+SQL;
+
+
+            $time = microtime(true);
+            //0.005
+            //get_data("$query_base");
+            //echo microtime(true) - $time.' b2<br />';
+
+
+            $time = microtime(true);
+            //update_data("select * from entities limit 0,50");
+            //get_data("SELECT e.guid FROM e_base e LEFT JOIN (SELECT guid FROM e_base_full e WHERE e.name_id = 2065 AND e.value_id = 2066) AS rf ON e.guid = rf.guid");
+            //get_data("SELECT e.guid FROM e_base e LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf ON e.guid = rf.entity_guid");
+
+            //0.0005
+            //get_data("SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066");
+            //0.004
+            //get_data("SELECT entity_guid FROM metadata m JOIN e_base e ON e.guid = m.entity_guid WHERE m.name_id = 2065 AND m.value_id = 2066");
+            //0.0037
+            //get_data("SELECT entity_guid FROM  e_base e JOIN metadata m ON e.guid = m.entity_guid WHERE m.name_id = 2065 AND m.value_id = 2066");
+
+            //get_data("SELECT entity_guid FROM e_base e JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS m ON e.guid = m.entity_guid");
+
+            //0.0022
+            //get_data("SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM annotations a WHERE a.entity_guid IN ({$result_order_string}) AND a.name_id = 8393 AND a.owner_guid = 637 GROUP BY a.entity_guid");
+            //0.0022
+            //get_data("SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM e_base e JOIN annotations a ON e.guid = a.entity_guid WHERE a.name_id = 8393 AND a.owner_guid = 637 GROUP BY a.entity_guid");
+
+            //0.002
+            //update_data("SELECT ed.entity_guid, MAX(ed.time_created) as last_edited_time, ed.owner_guid as last_editor_guid, COUNT(ed.entity_guid) AS num_contributions FROM e_base e LEFT JOIN annotations ed ON e.guid = ed.entity_guid WHERE ed.name_id IN (2233,2047) GROUP BY ed.entity_guid");
+            //0.002
+            //update_data("SELECT ed.entity_guid, MAX(ed.time_created) as last_edited_time, ed.owner_guid as last_editor_guid, COUNT(ed.entity_guid) AS num_contributions FROM annotations ed WHERE ed.entity_guid IN ({$result_order_string}) AND ed.name_id IN (2233,2047) GROUP BY ed.entity_guid");
+
+            //0.0002
+            //update_data("SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM entity_relationships ru WHERE ru.guid_two IN ({$result_order_string}) AND ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two");
+            //0.0025
+            //update_data("SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM e_base e JOIN entity_relationships ru ON e.guid = ru.guid_two WHERE ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two");
+
+
+            //update_data("SELECT entity_guid, string FROM e_base e JOIN metadata met  ON e.guid = met.entity_guid JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = 2037");
+
+            //0.027
+            /*
+            update_data("
+            (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM annotations a WHERE a.entity_guid IN ({$result_order_string}) AND a.name_id = 8393 AND a.owner_guid = 637 GROUP BY a.entity_guid)
+            UNION (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM annotations a WHERE a.entity_guid IN ({$result_order_string}) AND a.name_id = 8393 AND a.owner_guid = 637 GROUP BY a.entity_guid)
+            UNION (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM entity_relationships ru WHERE ru.guid_two IN ({$result_order_string}) AND ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+            UNION (SELECT entity_guid, name_id FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)
+
+            ");*/
+
+            //0.008
+            //update_data("CREATE TEMPORARY TABLE IF NOT EXISTS e_base_fullt(SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066)");
+
+            //0.003
+            //update_data("SELECT e.guid FROM e_base e LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf ON e.guid = rf.entity_guid");
+
+            //0.024
+            /*update_data("SELECT e.guid FROM e_base e
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf ON e.guid = rf.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf2 ON e.guid = rf2.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf3 ON e.guid = rf3.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf4 ON e.guid = rf4.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf5 ON e.guid = rf5.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf6 ON e.guid = rf6.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf7 ON e.guid = rf7.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf8 ON e.guid = rf8.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf9 ON e.guid = rf9.entity_guid
+
+            ");*/
+
+            //0.004
+            /*update_data("SELECT e.guid FROM e_base e
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf ON e.guid = rf.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf2 ON e.guid = rf2.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf3 ON e.guid = rf3.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf4 ON e.guid = rf4.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf5 ON e.guid = rf5.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf6 ON e.guid = rf6.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf7 ON e.guid = rf7.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf8 ON e.guid = rf8.entity_guid
+            LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid limit 0,50) AS rf9 ON e.guid = rf9.entity_guid
+
+            ");
+            */
+
+            //0.030
+            /*get_data("SELECT e.guid FROM {$CONFIG->dbprefix}entities e
+{$mj}
+{$search_query['join']}
+{$permissions_query['join']}
+{$order_query['join']}
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf ON e.guid = rf.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf2 ON e.guid = rf2.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf3 ON e.guid = rf3.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf4 ON e.guid = rf4.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf5 ON e.guid = rf5.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf6 ON e.guid = rf6.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf7 ON e.guid = rf7.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf8 ON e.guid = rf8.entity_guid
+LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$result_order_string}) AND m.name_id = 2065 AND m.value_id = 2066) AS rf9 ON e.guid = rf9.entity_guid
+WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes'
+AND ({$permissions_query['permission']})
+{$order_query['query']} {$query_limit}
+");*/
+
+            //get_data("SELECT entity_guid FROM metadata m limit 0,50");
+
+            //update_data("SELECT e.guid FROM e_base e JOIN (SELECT entity_guid FROM metadata m WHERE m.name_id = 2065 AND m.value_id = 2066) AS rf ON e.guid = rf.entity_guid");
+            //get_data("SELECT guid FROM e_base_full e WHERE e.name_id = 2065 AND e.value_id = 2066");
+            //get_data("SELECT entity_guid FROM metadata e WHERE e.name_id = 2065 AND e.value_id = 2066");
+            //echo microtime(true) - $time.' m<br />';
+            //echo $pre_query.'<br />';
+        }
+
+        $query_type = $writable_only ? "writable_only" : "viewable";
+        //$pre_query = implode(";\n",$permissions_query['pre']).";\n";
+        if(!$CONFIG->pre_query[$query_type]) {
+            foreach($permissions_query['pre'] as $pre_query) {
+                $time = microtime(true);
+                update_data($pre_query);
+                echo microtime(true) - $time.' p<br />';
+            }
+            $CONFIG->pre_query[$query_type] = true;
+        }
+
+        if(!$CONFIG->pre_query['enrich'] && $enrich) {
+            foreach($rich_query['pre'] as $pre_query) {
+                $time = microtime(true);
+                update_data($pre_query);
+                //echo microtime(true) - $time.' p<br />';
+                //echo $pre_query.'<br />';
+            }
+            $CONFIG->pre_query['enrich'] = true;
+        }
+
+
+        if($count) {
+            $time = microtime(true);
+            $row = get_data_row($query);
+            echo microtime(true) - $time.' c<br />';
+            return $row->total;
+        } else {
+            $time = microtime(true);
+            $entities = get_data($query, $callback);
+            echo microtime(true) - $time.' e<br />';
+            return $entities;
+        }
     }
 
     public static function getUsersEditedDesign($lds_id, $count = false) {
@@ -2088,6 +2537,22 @@ SQL;
         global $CONFIG;
         $fields = array ('tags', 'discipline', 'pedagogical_approach');
 
+        $tags = lds_contTools::getUserTagFrequency();
+
+        foreach($fields as $f)
+            $category[$f] = array();
+
+        foreach($tags as $tag) {
+            $tag_category = $tag->category;
+            $category[$tag_category][] = $tag;
+        }
+
+        foreach ($category as &$c) {
+            uasort($c, 'ldshake_tags_cmp');
+        }
+
+        return $category;
+
         //$lds = get_entities('object','LdS',0,'',100000,0);
         $lds = self::getUserViewableLdSs(get_loggedin_userid());
 
@@ -2101,8 +2566,10 @@ SQL;
         $fieldids = array();
         foreach ($fields as $field)
         {
-            $fieldids[] = get_metastring_id($field);
-            $tags[$field] = array();
+            uasort($tagclass, 'ldshake_tags_cmp');
+            foreach ($tagclass as &$tag_value)
+                $tag_value = $tag_value['count'];
+
         }
 
         $fieldids = array_filter($fieldids);
@@ -2460,8 +2927,8 @@ SQL;
 }
 
 function ldshake_tags_cmp($a, $b) {
-   $a_score = $a['count'] - (time() - $a['time_created'])*5.79E-7;
-   $b_score = $b['count'] - (time() - $b['time_created'])*5.79E-7;
+   $a_score = $a->frequency - (time() - $a->time_created)*5.79E-7;
+   $b_score = $b->frequency - (time() - $b->time_created)*5.79E-7;
 
    return ($b_score - $a_score);
 }
