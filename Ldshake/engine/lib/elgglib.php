@@ -336,8 +336,8 @@
 		    foreach($viewlist as $priority => $view) {
 		    	
 		    	$view_location = elgg_get_view_location($view);
-		    	
-		    			    	
+
+
 			    if (file_exists($view_location . "{$viewtype}/{$view}.php") && !include($view_location . "{$viewtype}/{$view}.php")) {
 			        $success = false;
 			        
@@ -1621,7 +1621,7 @@
 	 * @param array $vars An array that points to the active symbol table at the point that the error occurred
 	 */
 		function __elgg_php_error_handler($errno, $errmsg, $filename, $linenum, $vars)
-		{			
+		{
 			$error = date("Y-m-d H:i:s (T)") . ": \"" . $errmsg . "\" in file " . $filename . " (line " . $linenum . ")";
 			
 			switch ($errno) {
@@ -1646,7 +1646,7 @@
 					}
 					// register_error("DEBUG: " . $error);
 			}
-			
+
 			return true;
 		}
 		

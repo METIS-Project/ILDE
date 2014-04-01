@@ -53,12 +53,12 @@
 			echo "Error in installation: could not load the input library.";
 			exit;
 		}
-		
+/*
 		if (!@include_once(dirname(__FILE__) . "/lib/install.php")) {		// Installation library
 			echo "Error in installation: could not load the installation library.";
 			exit;
 		}
-		
+*/
 		if (!@include_once(dirname(__FILE__) . "/lib/cache.php")) {		// Installation library
 			echo "Error in installation: could not load the cache library.";
 			exit;

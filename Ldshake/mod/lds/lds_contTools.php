@@ -1949,6 +1949,11 @@ AND ({$permissions_query['permission']})
 {$query_limit}
 SQL;
         if($enrich) {
+            $query_size = 300;
+            $query_start = (floor((int)$offset / $query_size)) * $query_size;
+            $query_limit = "LIMIT {$query_start},{$limit}";
+            //$query_end = (int)$offset < 150 ? 0 : (int)$offset - 150;
+
             $query_base = <<<SQL
 SELECT DISTINCT e.guid FROM {$CONFIG->dbprefix}entities e
 {$mj}
@@ -1959,8 +1964,66 @@ WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype
 AND ({$permissions_query['permission']})
 {$order_query['by']} {$query_limit}
 SQL;
-
+echo '<pre>'.$query_base.'</pre>'.'<br>';
+            $time = microtime(true);
             $result_order = get_data("{$query_base}", "ldshake_richlds_order");
+            echo microtime(true) - $time.' ce<br />';
+
+            $slice_start = (int)$offset - $query_start;
+            $slice_end = $slice_start + $limit;
+
+            if(!$result_order)
+                return array();
+
+            if(sizeof($result_order) - 1 < $slice_end)
+                $slice_end = sizeof($result_order) - 1;
+
+            $result_order = array_slice($result_order, $slice_start, $slice_end);
+
+            /*
+
+            $refreshButtonPressed = isset($_SERVER['HTTP_CACHE_CONTROL']) &&
+                            $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
+            $wro = $writable_only ? 'wro' : '';
+            $query_string = crc32("{$type}_{$subtype}_{$user_id}_{$mk}_{$mv}_{$order}_{$wro}_{$search}hkkk");
+            $query_start = (int)$offset;
+
+            if(isset($_SESSION['cache']['query_guid'][$query_string])
+                && $_SESSION['cache']['query_guid'][$query_string]['start'] <= $query_start
+                && $_SESSION['cache']['query_guid'][$query_string]['end'] >= $query_start + (int)$limit) {
+                //guids cache hit
+                echo 'hit<br>';
+                $cached_ids = $_SESSION['cache']['query_guid'][$query_string];
+                $slice_start = $query_start - $cached_ids['start'];
+                $slice_size = (int)$limit;
+                if(sizeof($cached_ids['guids']) < $slice_size)
+                    $slice_size = sizeof($cached_ids['guids']) - 1 - $slice_start;
+
+                $result_order = array_slice($cached_ids['guids'], $slice_start, $slice_size);
+            } else {
+                $query_limit = "LIMIT $offset, 300";
+
+                $query_base = <<<SQL
+SELECT DISTINCT e.guid FROM {$CONFIG->dbprefix}entities e
+{$mj}
+{$search_query['join']}
+{$permissions_query['join']}
+{$order_query['join']}
+WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes'
+AND ({$permissions_query['permission']})
+{$order_query['by']} {$query_limit}
+SQL;
+//echo '<pre>'.$query_base.'</pre>'.'<br>';
+            $time = microtime(true);
+            $result_order = get_data("{$query_base}", "ldshake_richlds_order");
+            echo microtime(true) - $time.' ce<br />';
+                $_SESSION['cache']['query_guid'][$query_string] = array(
+                  'start' => (int)$offset,
+                  'end' => (int)$offset+300,
+                  'guids' => $result_order
+                );
+            }*/
+
             $result_order_string = implode(',', $result_order);
 
             if($enrich) {
@@ -2129,7 +2192,7 @@ AND ({$permissions_query['permission']})
         if($count) {
             $time = microtime(true);
             $row = get_data_row($query);
-            echo microtime(true) - $time.' c<br />';
+            echo microtime(true) - $time.' c<br />'.'<br>';
             return $row->total;
         } else {
             $time = microtime(true);

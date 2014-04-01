@@ -276,7 +276,7 @@
             		
             	if ($cached_query === -1)
             		return array(); // Last time this query returned nothing, so return an empty array
-            		
+
             	return $cached_query;
             }
             
