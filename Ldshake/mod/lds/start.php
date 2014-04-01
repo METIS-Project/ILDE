@@ -424,9 +424,11 @@ function lds_exec_search ($params) {
 	
 	$vars['query'] = $query;
     $vars['list'] = false;
-    if($list = lds_contTools::searchLdS($query, 11, $offset))
-	    $vars['list'] = lds_contTools::enrichLdS($list);
+    //if($list = lds_contTools::searchLdS($query, 11, $offset))
+	//    $vars['list'] = lds_contTools::enrichLdS($list);
+    $vars['list'] = lds_contTools::searchLdS($query, 11, $offset, get_loggedin_userid(), false, null, null, true);
     $vars['count'] = count ($vars['list']) + $offset;
+    //$vars['count'] = lds_contTools::searchLdS($query, 0, 0, get_loggedin_userid(), true);
     //$vars['list'] = array_slice($vars['list'], $offset, 10);
 
 	$body = elgg_view('lds/search',$vars);

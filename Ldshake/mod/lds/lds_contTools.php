@@ -88,6 +88,7 @@ function ldshake_richlds($row) {
     $obj->lds->title = $row->title;
     $obj->lds->owner_guid = (int)$row->owner_guid;
     $obj->lds->time_created = (int)$row->time_created;
+    $obj->lds->time_updated = (int)$row->time_updated;
 
     $obj->starter = new stdClass();
     $obj->starter->name = $row->creator_name;
@@ -96,8 +97,10 @@ function ldshake_richlds($row) {
     $obj->last_contributor = new stdClass();
     $obj->last_contributor->name = $row->last_editor_name;
     $obj->last_contributor->username = $row->last_editor_username;
-    $obj->last_contribution_at = (int)$row->last_edited_time;
+    $obj->last_contribution_at = $row->last_edited_time ? (int)$row->last_edited_time : (int)$row->time_updated;
     $obj->num_contributions = (int)$row->num_contributions;
+    $obj->num_comments = (int)$row->num_comments;
+    $obj->num_documents = (int)$row->num_documents;
 
     $obj->num_viewers = $row->all_can_view ? -1 : (int)$row->viewer_count;
     $obj->num_editors = (int)$row->editor_count;
@@ -141,6 +144,10 @@ class lds_contTools
 
         $edited_string_id = get_metastring_id("revised_docs");
         $editeded_string_id = get_metastring_id("revised_docs_editor");
+        $generic_comment_id = get_metastring_id("generic_comment");
+
+        $document_subtype_id = get_subtype_id('object', 'LdS_document');
+        $document_editor_subtype_id = get_subtype_id('object', 'LdS_document_editor');
 
         $acv_k = get_metastring_id("all_can_view");
         $acv_v = get_metastring_id("yes");
@@ -158,22 +165,25 @@ class lds_contTools
 {$CONFIG->dbprefix}entities e
 JOIN objects_entity oer ON e.guid = oer.guid
 JOIN users_entity u ON e.owner_guid = u.guid
-LEFT JOIN (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$viewed_string_id} AND a.owner_guid = {$user_id} GROUP BY a.entity_guid) AS lv ON e.guid = lv.entity_guid
-LEFT JOIN (SELECT ed.entity_guid, MAX(ed.time_created) as last_edited_time, ed.owner_guid as last_editor_guid, COUNT(ed.entity_guid) AS num_contributions FROM annotations ed WHERE ed.entity_guid IN ({$elements}) AND ed.name_id IN ({$edited_string_id},{$editeded_string_id}) GROUP BY ed.entity_guid) AS ed ON e.guid = ed.entity_guid
+LEFT JOIN (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM {$CONFIG->dbprefix}annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$viewed_string_id} AND a.owner_guid = {$user_id} GROUP BY a.entity_guid) AS lv ON e.guid = lv.entity_guid
+LEFT JOIN (SELECT a.entity_guid, COUNT(DISTINCT a.id) as num_comments FROM {$CONFIG->dbprefix}annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$generic_comment_id} GROUP BY a.entity_guid) AS cn ON e.guid = cn.entity_guid
+LEFT JOIN (SELECT e.container_guid, COUNT(DISTINCT e.guid) as num_documents FROM {$CONFIG->dbprefix}entities e WHERE e.container_guid IN ({$elements}) AND e.type = 'object' AND e.subtype IN ({$document_subtype_id},{$document_editor_subtype_id}) GROUP BY e.container_guid) AS cd ON e.guid = cd.container_guid
+LEFT JOIN (SELECT ed.entity_guid, MAX(ed.time_created) as last_edited_time, ed.owner_guid as last_editor_guid, COUNT(ed.entity_guid) AS num_contributions FROM {$CONFIG->dbprefix}annotations ed WHERE ed.entity_guid IN ({$elements}) AND ed.name_id IN ({$edited_string_id},{$editeded_string_id}) GROUP BY ed.entity_guid) AS ed ON e.guid = ed.entity_guid
 LEFT JOIN users_entity ue ON ed.last_editor_guid = ue.guid
-LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two) AS ec ON e.guid = ec.lds_guid
-LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS viewer_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_viewer','lds_viewer_group') GROUP BY ru.guid_two) AS vc ON e.guid = vc.lds_guid
-LEFT JOIN (SELECT entity_guid, string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.entity_guid IN ({$elements}) AND met.name_id = {$editor_type_id}) AS met ON e.guid = met.entity_guid
-LEFT JOIN (SELECT entity_guid FROM metadata m WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$acv_k} AND m.value_id = {$acv_v}) AS iavc ON e.guid = iavc.entity_guid
-LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["discipline"]} GROUP BY m.entity_guid) AS t_discipline ON e.guid = t_discipline.entity_guid
-LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["pedagogical_approach"]} GROUP BY m.entity_guid) AS t_pedagogic ON e.guid = t_pedagogic.entity_guid
-LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["tags"]} GROUP BY m.entity_guid) AS t_tags ON e.guid = t_tags.entity_guid
-LEFT JOIN (SELECT entity_guid, string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$ts}) AS editing_tstamp ON e.guid = editing_tstamp.entity_guid
-LEFT JOIN (SELECT entity_guid, string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$editing_by}) AS editing_by ON e.guid = editing_by.entity_guid
+LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS editor_count FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ('lds_editor','lds_editor_group') GROUP BY ru.guid_two) AS ec ON e.guid = ec.lds_guid
+LEFT JOIN (SELECT ru.guid_two as lds_guid, COUNT(ru.guid_one) AS viewer_count FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship IN ('lds_viewer','lds_viewer_group') GROUP BY ru.guid_two) AS vc ON e.guid = vc.lds_guid
+LEFT JOIN (SELECT entity_guid, string FROM {$CONFIG->dbprefix}metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.entity_guid IN ({$elements}) AND met.name_id = {$editor_type_id}) AS met ON e.guid = met.entity_guid
+LEFT JOIN (SELECT entity_guid FROM {$CONFIG->dbprefix}metadata m WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$acv_k} AND m.value_id = {$acv_v}) AS iavc ON e.guid = iavc.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["discipline"]} GROUP BY m.entity_guid) AS t_discipline ON e.guid = t_discipline.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["pedagogical_approach"]} GROUP BY m.entity_guid) AS t_pedagogic ON e.guid = t_pedagogic.entity_guid
+LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["tags"]} GROUP BY m.entity_guid) AS t_tags ON e.guid = t_tags.entity_guid
+LEFT JOIN (SELECT entity_guid, string AS editing_tstamp FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$ts}) AS editing_tstamp ON e.guid = editing_tstamp.entity_guid
+LEFT JOIN (SELECT entity_guid, string AS editing_by FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$editing_by}) AS editing_by ON e.guid = editing_by.entity_guid
 SQL;
 
         $query['select'] = <<<SQL
 e.guid,
+e.subtype,
 e.time_created,
 e.time_updated,
 oer.title,
@@ -186,6 +196,8 @@ ue.name as last_editor_name,
 ue.username as last_editor_username,
 ed.last_edited_time as last_edited_time,
 ed.num_contributions as num_contributions,
+cn.num_comments,
+cd.num_documents,
 ec.editor_count,
 vc.viewer_count,
 iavc.entity_guid as all_can_view,
@@ -375,8 +387,8 @@ SQL;
 	 * @param unknown_type $query
 	 */
 
-    public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null, $enrich = true, $writable_only = false) {
-        return self::getUserEntities('object', 'LdS', $user_id, false, $limit, $offset, $m_key, $m_value, "time", $writable_only, $query);
+    public static function searchLdS($query, $limit = 11, $offset = 0, $user_id = 0, $count = false, $m_key = null, $m_value = null, $enrich = false, $writable_only = false) {
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $m_key, $m_value, "time", $writable_only, $query, $enrich);
     }
 
     public static function searchLdS_deprecated($query, $limit = 11, $offset = 0, $user_id = 0, $m_key = null, $m_value = null, $enrich = true, $writable_only = false) {
@@ -1929,7 +1941,7 @@ SELECT {$count_query} FROM {$CONFIG->dbprefix}entities e
 {$search_query['join']}
 {$permissions_query['join']}
 {$order_query['join']}
-WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype AND e.enabled = 'yes'
+WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = {$subtype} AND e.enabled = 'yes'
 AND ({$permissions_query['permission']})
 {$custom_where}
 {$custom_group_by}
