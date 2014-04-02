@@ -1951,7 +1951,7 @@ SQL;
         if($enrich) {
             $query_size = 300;
             $query_start = (floor((int)$offset / $query_size)) * $query_size;
-            $query_limit = "LIMIT {$query_start},{$limit}";
+            $query_limit = "LIMIT {$query_start},{$query_size}";
             //$query_end = (int)$offset < 150 ? 0 : (int)$offset - 150;
 
             $query_base = <<<SQL
