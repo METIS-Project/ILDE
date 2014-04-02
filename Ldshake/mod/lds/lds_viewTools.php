@@ -71,12 +71,13 @@ class lds_viewTools
 	public static function all_tag_display ($lds)
 	{
 		$tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
-		
+
 		//We build an array of all the tags of the LdS
 		$arr = array();
 		foreach ($tagtypes as $type)
 		{
 			$tags = $lds->$type;
+
 			if (is_string($tags) && strlen($tags)) $tags = array($tags);
 			
 			if (is_array($tags))
@@ -88,7 +89,8 @@ class lds_viewTools
 					$t->tag = $tag;
 					$arr[] = $t;
 				}
-			} 
+			}
+
 		}
 
 		//Order them by name
@@ -98,7 +100,7 @@ class lds_viewTools
 		$str = '';
 		foreach ($arr as $tag)
 			$str .= '<span class="lds_small_tag '.$tag->type.'">'.$tag->tag.'</span>';
-		
+
 		return $str;
 	}
 	
@@ -110,15 +112,14 @@ class lds_viewTools
 
         $folder = $type.$editortype;
 
-        /*
-        if($lds->getSubtype() == 'LdSProject_implementation' || $lds->getSubtype() == 'LdSProject') {
+        $subtype = is_string($lds->subtype) ? $lds->subtype : $lds->getSubtype();
+        if($subtype == 'LdSProject_implementation' || $subtype == 'LdSProject') {
             if($type == 'edit') {
                 $folder = 'edit_project';
             } elseif($type == 'view') {
                 $folder = 'project_implementation';
             }
         }
-        */
 
         //Google Docs history
         if($type == 'history' && $lds->editor_type == 'google_docs')

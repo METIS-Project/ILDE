@@ -84,11 +84,13 @@ function ldshake_richlds($row) {
 
     $obj->lds = new stdClass();
     $obj->lds->guid = (int)$row->guid;
+    $obj->lds->subtype = $row->subtype;
     $obj->lds->editor_type = $row->editor_type;
     $obj->lds->title = $row->title;
     $obj->lds->owner_guid = (int)$row->owner_guid;
     $obj->lds->time_created = (int)$row->time_created;
     $obj->lds->time_updated = (int)$row->time_updated;
+    $obj->lds->external_editor = $row->external_editor;
 
     $obj->starter = new stdClass();
     $obj->starter->name = $row->creator_name;
@@ -119,15 +121,18 @@ function ldshake_richlds($row) {
     if((int)$row->last_edited_time && (int)$row->last_edited_time - 15 < (int)$row->last_viewed_time){
         $isnew = false;
     }
+    $obj->new = $isnew;
 
     //tags
     $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
     foreach ($tagtypes as $type) {
         if($row->$type)
             $obj->lds->$type = explode(',', $row->$type);
+        else
+            $obj->lds->$type = array();
     }
 
-    $obj->new = $isnew;
+
 
     return $obj;
 }
@@ -154,6 +159,7 @@ class lds_contTools
 
         $ts = get_metastring_id("editing_tstamp");
         $editing_by = get_metastring_id("editing_by");
+        $external_editor = get_metastring_id("external_editor");
 
         $tag_id["discipline"] = get_metastring_id("discipline");
         $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
@@ -165,6 +171,7 @@ class lds_contTools
 {$CONFIG->dbprefix}entities e
 JOIN objects_entity oer ON e.guid = oer.guid
 JOIN users_entity u ON e.owner_guid = u.guid
+LEFT JOIN (SELECT e.guid, es.subtype FROM {$CONFIG->dbprefix}entities e JOIN entity_subtypes es WHERE e.guid IN ({$elements}) AND es.id = e.subtype) AS sbtp ON e.guid = sbtp.guid
 LEFT JOIN (SELECT a.entity_guid, MAX(a.time_created) as last_viewed_time FROM {$CONFIG->dbprefix}annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$viewed_string_id} AND a.owner_guid = {$user_id} GROUP BY a.entity_guid) AS lv ON e.guid = lv.entity_guid
 LEFT JOIN (SELECT a.entity_guid, COUNT(DISTINCT a.id) as num_comments FROM {$CONFIG->dbprefix}annotations a WHERE a.entity_guid IN ({$elements}) AND a.name_id = {$generic_comment_id} GROUP BY a.entity_guid) AS cn ON e.guid = cn.entity_guid
 LEFT JOIN (SELECT e.container_guid, COUNT(DISTINCT e.guid) as num_documents FROM {$CONFIG->dbprefix}entities e WHERE e.container_guid IN ({$elements}) AND e.type = 'object' AND e.subtype IN ({$document_subtype_id},{$document_editor_subtype_id}) GROUP BY e.container_guid) AS cd ON e.guid = cd.container_guid
@@ -179,16 +186,18 @@ LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM
 LEFT JOIN (SELECT entity_guid, GROUP_CONCAT(string SEPARATOR ',') AS string FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$tag_id["tags"]} GROUP BY m.entity_guid) AS t_tags ON e.guid = t_tags.entity_guid
 LEFT JOIN (SELECT entity_guid, string AS editing_tstamp FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$ts}) AS editing_tstamp ON e.guid = editing_tstamp.entity_guid
 LEFT JOIN (SELECT entity_guid, string AS editing_by FROM {$CONFIG->dbprefix}metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$editing_by}) AS editing_by ON e.guid = editing_by.entity_guid
+LEFT JOIN (SELECT entity_guid, m.value_id AS external_editor FROM {$CONFIG->dbprefix}metadata m WHERE m.entity_guid IN ({$elements}) AND m.name_id = {$external_editor}) AS ex ON e.guid = ex.entity_guid
 SQL;
 
         $query['select'] = <<<SQL
 e.guid,
-e.subtype,
+sbtp.subtype,
 e.time_created,
 e.time_updated,
 oer.title,
 e.owner_guid,
 e.time_created,
+ex.external_editor,
 u.name as creator_name,
 u.username as creator_username,
 lv.last_viewed_time,
@@ -1964,21 +1973,21 @@ WHERE {$search_query['query']} {$mw} e.type = '{$type}' AND e.subtype = $subtype
 AND ({$permissions_query['permission']})
 {$order_query['by']} {$query_limit}
 SQL;
-echo '<pre>'.$query_base.'</pre>'.'<br>';
+//echo '<pre>'.$query_base.'</pre>'.'<br>';
             $time = microtime(true);
             $result_order = get_data("{$query_base}", "ldshake_richlds_order");
             echo microtime(true) - $time.' ce<br />';
 
             $slice_start = (int)$offset - $query_start;
-            $slice_end = $slice_start + $limit;
+            $slice_size = $limit;
 
             if(!$result_order)
                 return array();
 
-            if(sizeof($result_order) - 1 < $slice_end)
+            if(sizeof($result_order) - 1 < $slice_start + $slice_size)
                 $slice_end = sizeof($result_order) - 1;
 
-            $result_order = array_slice($result_order, $slice_start, $slice_end);
+            $result_order = array_slice($result_order, $slice_start, $slice_size);
 
             /*
 

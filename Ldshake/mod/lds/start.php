@@ -187,13 +187,16 @@ function lds_page_handler ($page)
 
     $user = get_loggedin_userid();
 
+    /*
     $last_visit = isset($_SESSION['last_visit']) ? $_SESSION['last_visit'] : 0;
     $_SESSION['last_visit'] = time();
+
 
     if($last_visit - time() > 600)
         $CONFIG->site->annotate('unique_visit','1',2, $user);
 
     $CONFIG->site->annotate('page_visit','1',2, $user);
+    */
 
     $multipart_serializer = function($payload = array()) {
         return $payload;
@@ -300,9 +303,9 @@ function lds_exec_main ($params)
 
     echo microtime(true) - $start_time.' start25<br />';
     $body = elgg_view('lds/mylds',$vars);
-    //echo microtime(true) - $time.' r<br />';
-
     echo microtime(true) - $start_time.' start3<br />';
+
+    //echo microtime(true) - $time.' brl<br />';
     $offset = get_input('offset') ?: '0';
 
     page_draw($vars['title'], $body);
