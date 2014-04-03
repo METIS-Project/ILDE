@@ -36,16 +36,21 @@
 
 ?>
 
-<?php extract($vars) ?>
+<?php extract($vars);
+global $CONFIG;
+$disable_projects = $CONFIG->disable_projects;
+?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
         <?php if($section != 'off'): ?>
+            <?php if(!$disable_projects):?>
             <ul id="lds_side_sections_prj">
                 <li><a<?php if ($section == 'prj') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations' ?>"><?php echo T("All my projects") ?></a></li>
                 <li><a<?php if ($section == 'prj-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
                 <li><a<?php if ($section == 'prj-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
                 <li><a<?php if ($section == 'prj-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
             </ul>
+            <?php endif; ?>
 
             <ul id="lds_side_sections">
                 <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>

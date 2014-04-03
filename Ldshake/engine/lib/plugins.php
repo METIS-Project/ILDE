@@ -216,10 +216,17 @@
 		 */
 		function load_plugins() {
 
-			global $CONFIG;
+			global $CONFIG, $plugin_handler;
 			if (!empty($CONFIG->pluginspath)) {
 				/// LdShake change ///
-				foreach ($CONFIG->enabled_plugins as $mod)
+                if(isset($CONFIG->needed_dependency[$plugin_handler])) {
+                    $required_plugins = $CONFIG->needed_dependency[$plugin_handler];
+                    echo 'hit';
+                } else {
+                    $required_plugins = $CONFIG->enabled_plugins;
+                }
+
+				foreach ($required_plugins as $mod)
 				{
 					if (file_exists($CONFIG->pluginspath . $mod)) {
 						//Removed yet another stupid @ sign from include in the next line. :(((((

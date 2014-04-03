@@ -1961,7 +1961,8 @@ SQL;
 (
 (op.subtype_id = {$l_doc} AND MATCH(do.title,do.description) AGAINST('{$search}'))
 OR
-(e.subtype_id = {$l_ds} AND MATCH(e.title) AGAINST('{$search}'))
+(e.subtype_id = {$l_ds} AND (MATCH(e.title) AGAINST('{$search}'))
+OR(MATCH(e.tags,e.discipline,e.pedagogical_approach) AGAINST('+{$search}' IN BOOLEAN MODE)))
 ) AND
 SQL;
         }

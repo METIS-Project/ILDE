@@ -14,6 +14,7 @@
 
 $start_time = microtime(true);
 	// Load Elgg engine
+        $plugin_handler = $_GET['handler'];
 		require_once("../start.php");
 
 	// Get input 
