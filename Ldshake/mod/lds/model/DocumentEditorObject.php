@@ -51,12 +51,12 @@ class DocumentEditorObject extends ElggObject {
  
   // more customizations here
 }
- 
+
 function DocumentEditorObject_init() {
    register_entity_type('object', 'LdS_document_editor');
    // This operation only affects the db on the first call for this subtype
    // If you change the class name, you'll have to hand-edit the db
    add_subtype('object', 'LdS_document_editor', 'DocumentEditorObject');
 }
- 
+
 register_elgg_event_handler('init', 'system', 'DocumentEditorObject_init');

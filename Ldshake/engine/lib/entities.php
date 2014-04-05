@@ -2318,7 +2318,7 @@
 	 * @return true|false Depending on success
 	 */
 	function register_entity_type($type, $subtype) {
-		
+
 		global $CONFIG;
 		
 		$type = strtolower($type);
@@ -2328,7 +2328,7 @@
 		$CONFIG->registered_entities[$type][] = $subtype;
 		
 		return true;
-		
+
 	}
 	
 	/**

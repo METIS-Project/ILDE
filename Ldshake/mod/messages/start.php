@@ -20,12 +20,17 @@
 	 * @param unknown_type $object_type
 	 * @param unknown_type $object
 	 */
-	 
+
+        function lds_messages_init() {
+            extend_view('elgg_topbar/extend','messages/topbar');
+            extend_view('css','messages/css');
+        }
+
 	    function messages_init() {
     	    
     	    // Load system configuration
 				global $CONFIG;
-				
+
 			// Load the language file
 				register_translations($CONFIG->pluginspath . "messages/languages/");
 				
@@ -58,8 +63,8 @@
 			  //  add_widget_type('messages',elgg_echo("messages:recent"),elgg_echo("messages:widget:description"));
 			    
 			// Override metadata permissions
-			    register_plugin_hook('permissions_check:metadata','object','messages_can_edit_metadata');
-			    
+			    //register_plugin_hook('permissions_check:metadata','object','messages_can_edit_metadata');
+
 		}
 		
 		/**

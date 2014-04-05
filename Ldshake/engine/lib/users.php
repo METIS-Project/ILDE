@@ -1332,24 +1332,28 @@
 			global $CONFIG;
 		
 		// Set up menu for logged in users
+        /*
 			if (isloggedin()) {
 				$user = get_loggedin_user();
 				add_menu(elgg_echo('friends'), $CONFIG->wwwroot . "pg/friends/" . $user->username);
 			}
-		
+*/
+        /*
 		register_page_handler('friends','friends_page_handler');
 		register_page_handler('friendsof','friends_of_page_handler');
 		register_page_handler('collections','collections_page_handler');
 		register_page_handler('dashboard','dashboard_page_handler');
+        */
 		register_action("register",true);
    		register_action("useradd",true);
+        /*
 		register_action("friends/add");
    		register_action("friends/remove");
 		register_action('friends/addcollection');
 		register_action('friends/deletecollection');
         register_action('friends/editcollection');
         register_action("user/spotlight");
-
+*/
 		register_action("usersettings/save");
 		
 		register_action("user/passwordreset");

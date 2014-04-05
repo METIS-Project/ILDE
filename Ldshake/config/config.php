@@ -132,7 +132,16 @@ $confOptions = array (
 		'lds',
 		'ldshakers'
 	),
-	
+
+    "needed_dependency" => array (
+        'lds' => array(
+        't9n',
+        'messages',
+        'profile',
+        'topbar_ldshake',
+        'lds')
+    ),
+
 	/**
 	 * Base number for id 'obfuscation', esp. for the LdS document viewer. 13330 = aaa in thirtysixecimal (base 36)
 	 * This base covers all alphanumeric characters: 0123456789abcdefghijklmnopqrstuvwxyz

@@ -75,7 +75,7 @@
 			$long = (int)$return['long'];
 			
 			// Put into cache at the end of the page since we don't really care that much
-			execute_delayed_write_query("INSERT DELAYED INTO {$CONFIG->dbprefix}geocode_cache (lat, long) VALUES ({$lat}, {$long}) ON DUPLICATE KEY UPDATE lat={$lat} long={$long}");
+			execute_delayed_write_query("INSERT INTO {$CONFIG->dbprefix}geocode_cache (lat, long) VALUES ({$lat}, {$long}) ON DUPLICATE KEY UPDATE lat={$lat} long={$long}");
 		}
 		
 		return $return;

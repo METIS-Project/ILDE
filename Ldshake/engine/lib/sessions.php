@@ -13,7 +13,7 @@
 	 */
 
 	/** Elgg magic session */
-	global $SESSION;
+	//global $SESSION;
 
 	/**
 	 * Magic session class.
@@ -97,9 +97,9 @@
 	 */
 		function get_loggedin_user()
 		{
-			global $SESSION;
+			//global $SESSION;
 			
-			return $SESSION['user'];
+			return $_SESSION['user'];
 		}
 		
 	/**
@@ -110,6 +110,9 @@
 	 */
 		function get_loggedin_userid()
 		{
+            if(isset($_SESSION['guid']))
+                return $_SESSION['guid'];
+
 			$user = get_loggedin_user();
 			if ($user)
 				return $user->guid;
@@ -125,7 +128,9 @@
 		function isloggedin() {
 						
 			if (!is_installed()) return false; 
-			
+			if(isset($_SESSION['guid']) && $_SESSION['guid'] > 0)
+                return true;
+
 			$user = get_loggedin_user();
 			
 			if ((isset($user)) && ($user->guid > 0))
@@ -143,14 +148,23 @@
 	 */
 		function isadminloggedin()
 		{
-			if (!is_installed()) return false; 
-			
-			$user = get_loggedin_user();
-			
-			if ((isloggedin()) && (($user->admin || $user->siteadmin)))
-				return true;
-				
-			return false;
+            //if (!is_installed()) return false;
+
+            if(isset($_SESSION['is_admin'])) {
+                return $_SESSION['is_admin'];
+            }
+            else {
+                $user = get_loggedin_user();
+
+                if ((isloggedin()) && (($user->admin || $user->siteadmin))) {
+                    $_SESSION['is_admin'] = true;
+                    return true;
+                } else {
+                    $_SESSION['is_admin'] = false;
+                }
+            }
+
+            return false;
 		}
 		
 	/**
@@ -305,11 +319,12 @@
 			
 			// Use database for sessions
 			$DB_PREFIX = $CONFIG->dbprefix; // HACK to allow access to prefix after object distruction
-			session_set_save_handler("__elgg_session_open", "__elgg_session_close", "__elgg_session_read", "__elgg_session_write", "__elgg_session_destroy", "__elgg_session_gc");
+			//session_set_save_handler("__elgg_session_open", "__elgg_session_close", "__elgg_session_read", "__elgg_session_write", "__elgg_session_destroy", "__elgg_session_gc");
 				
-			session_name('Elgg');
+			session_name('LdShake');
 	        session_start();
-	        
+
+            /*
 	        // Do some sanity checking by generating a fingerprint (makes some XSS attacks harder)
 	        if (isset($_SESSION['__elgg_fingerprint']))
 			{
@@ -323,7 +338,7 @@
 			{
 			    $_SESSION['__elgg_fingerprint'] = get_session_fingerprint();
 			}
-			
+			*/
 			// Generate a simple token (private from potentially public session id)
 			if (!isset($_SESSION['__elgg_session'])) $_SESSION['__elgg_session'] = md5(microtime().rand());
 	        
@@ -344,7 +359,7 @@
 	                unset($_SESSION['guid']);//$_SESSION['guid'] = 0;
 	                unset($_SESSION['code']);//$_SESSION['code'] = "";
 	            }
-	        } else {
+	        }/* else {
 	            if (!empty($_SESSION['code'])) {
 	                $code = md5($_SESSION['code']);
 	                if ($user = get_user_by_code($code)) {
@@ -363,7 +378,7 @@
 	                unset($_SESSION['guid']);//$_SESSION['guid'] = 0;
 	                unset($_SESSION['code']);//$_SESSION['code'] = "";
 	            }
-	        }
+	        }*/
 	        if ($_SESSION['id'] > 0) {
 	            set_last_action($_SESSION['id']);
 	        }
@@ -375,8 +390,8 @@
     		register_pam_handler('pam_auth_userpass');
     		
     		// Initialise the magic session
-    		global $SESSION;
-    		$SESSION = new ElggSession();
+    		//global $SESSION;
+    		//$SESSION = new ElggSession();
     		
     		return true;
 	        

@@ -64,22 +64,27 @@ function lds_init()
 
     //Load the model classes
 	//TODO could include the whole directory...
+    $time = microtime(true);
+
 	require_once __DIR__.'/model/LdSObject.php';
 	require_once __DIR__.'/model/DocumentObject.php';
 	require_once __DIR__.'/model/DocumentEditorObject.php';
 	require_once __DIR__.'/model/DocumentRevisionObject.php';
 	require_once __DIR__.'/model/DocumentEditorRevisionObject.php';
+
 	require_once __DIR__.'/model/DeferredNotification.php';
-    require_once __DIR__.'/model/ImplementationObject.php';
+//    require_once __DIR__.'/model/ImplementationObject.php';
+
 
 	require_once __DIR__.'/editors/editorsFactory.php';
-    require_once __DIR__.'/stadistics.php';
+    //require_once __DIR__.'/stadistics.php';
 
-    require_once __DIR__.'/rest.php';
-    require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
-
+    //require_once __DIR__.'/rest.php';
+    //require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
 
     //Our css stuff
+
+
 	extend_view('css','lds/css');
 	
 	//And our js scripts
@@ -132,9 +137,12 @@ function lds_init()
     if (get_context() == 'admin')
         add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
 
+    require_once __DIR__.'/lds_viewTools.php';
+
 	//Include the helper functions
-	require_once __DIR__.'/lds_contTools.php';
-	require_once __DIR__.'/lds_viewTools.php';
+    require_once __DIR__.'/lds_contTools.php';
+
+    echo microtime(true) - $time.' l2<br />';
 }
 
 register_elgg_event_handler('init','system','lds_init');
@@ -185,7 +193,7 @@ function lds_page_handler ($page)
     global $start_time;
     echo microtime(true) - $start_time.' start1<br />';
 
-    $user = get_loggedin_userid();
+    //$user = get_loggedin_userid();
 
     /*
     $last_visit = isset($_SESSION['last_visit']) ? $_SESSION['last_visit'] : 0;
@@ -197,16 +205,18 @@ function lds_page_handler ($page)
 
     $CONFIG->site->annotate('page_visit','1',2, $user);
     */
-
+/*
     $multipart_serializer = function($payload = array()) {
         return $payload;
     };
-
+*/
 	//Nothing here will be exposed to non-logged users, so go away!
 	//UPDATE: Except for the external view...
 
+
 	if ($page[0] != 'viewext' && $page[0] != 'viewexteditor' && $page[0] != 'imgdisplay')
 		gatekeeper();
+
 	
 	//Special case: my lds's url is short: doesn't have an explicit section, so we add it automatically
 	if ($page[0] == '' || $page[0] == 'created-by-me' || $page[0] == 'shared-with-me' || $page[0] == 'created-with')
@@ -216,7 +226,9 @@ function lds_page_handler ($page)
 	if (function_exists("lds_exec_{$page[0]}"))
 	{
 		//If the user is new, we'll create an LdS for her
-		$user = get_loggedin_user();
+
+        //$user = get_loggedin_user();
+/*
 		if ($user->isnew == '1')
 		{
 			//Pau: Add a welcome LdS
@@ -246,7 +258,7 @@ function lds_page_handler ($page)
 			$user->isnew = '0';
 			$user->save();
 		}
-		
+		*/
 		set_context("lds_exec_{$page[0]}");
 		call_user_func("lds_exec_{$page[0]}", $page);
 	}
@@ -299,7 +311,7 @@ function lds_exec_main ($params)
     }
 
     $vars['section'] = $params[1];
-    $time = microtime(true);
+
 
     echo microtime(true) - $start_time.' start25<br />';
     $body = elgg_view('lds/mylds',$vars);
@@ -308,7 +320,9 @@ function lds_exec_main ($params)
     //echo microtime(true) - $time.' brl<br />';
     $offset = get_input('offset') ?: '0';
 
+    $time = microtime(true);
     page_draw($vars['title'], $body);
+    echo microtime(true) - $time.' draw<br />';
     echo microtime(true) - $start_time.' start4<br />';
 }
 

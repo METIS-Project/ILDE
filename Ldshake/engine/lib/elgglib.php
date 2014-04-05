@@ -903,7 +903,7 @@
 			ksort($CONFIG->views->extensions[$view]);
 			
 		}
-		
+
 	/**
 	 * Set an alternative base location for a view (as opposed to the default of $CONFIG->viewpath)
 	 *
@@ -976,7 +976,7 @@
 												'title' => $title,
 												'body' => $body,
 												'sidebar' => $sidebar,
-												'sysmessages' => system_messages(null,"")
+												'sysmessages' => array()//system_messages(null,"")
 											  )
 										);
 			
@@ -1406,7 +1406,7 @@
 		function events($event = "", $object_type = "", $function = "", $priority = 500, $call = false, $object = null) {
 			
 			global $CONFIG;
-			
+
 			if (!isset($CONFIG->events)) {
 				$CONFIG->events = array();
 			} else if (!isset($CONFIG->events[$event]) && !empty($event)) {
@@ -1414,7 +1414,7 @@
 			} else if (!isset($CONFIG->events[$event][$object_type]) && !empty($event) && !empty($object_type)) {
 				$CONFIG->events[$event][$object_type] = array();
 			}
-			
+
 			if (!$call) {
 
 				if (!empty($event) && !empty($object_type) && is_callable($function)) {
@@ -1544,7 +1544,7 @@
 			}
 			
 		}
-		
+
 	/**
 	 * Triggers a plugin hook, with various parameters as an array. For example, if you're 
 	 *
@@ -2143,12 +2143,12 @@
 			register_action('comments/add');
 			register_action('comments/delete');
 		// Menu
-			global $CONFIG;
-			add_menu(elgg_echo('content:latest'), $CONFIG->wwwroot . 'dashboard/latest.php');
+			//global $CONFIG;
+			//add_menu(elgg_echo('content:latest'), $CONFIG->wwwroot . 'dashboard/latest.php');
 		// Page handler for JS
 			register_page_handler('js','js_page_handler');
 	}
-	
+
 	register_elgg_event_handler('init','system','elgg_init');
-	
+
 ?>

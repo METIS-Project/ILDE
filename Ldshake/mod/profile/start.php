@@ -14,6 +14,11 @@
 	 * Profile init function; sets up the profile functions
 	 *
 	 */
+        function lds_profile_init() {
+            register_metadata_as_independent('user');
+            register_plugin_hook('entity:icon:url', 'user', 'profile_usericon_hook');
+        }
+
 		function profile_init() {
 			
 			// Get config
@@ -66,10 +71,12 @@
 				}
 
 			// Extend context menu with admin links
+
 			if (isadminloggedin())
 			{
 	   			 extend_view('profile/menu/links','profile/menu/adminwrapper',10000);
 			}
+
 			
 			extend_view('page_elements/jsarea', 'profile/footerjs');
 			

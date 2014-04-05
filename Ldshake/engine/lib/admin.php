@@ -37,6 +37,13 @@
 	/**
 	 * Initialise the admin page.
 	 */
+    function lds_admin_init() {
+        if (isadminloggedin()) {
+            global $is_admin;
+            $is_admin = true;
+        }
+    }
+
 	function admin_init()
 	{
 		// Add plugin main menu option (last)
@@ -53,12 +60,12 @@
 		
 		// Register some actions
 		register_action('admin/site/update_basic', false, "", true); // Register basic site admin action
-		
+
 		if (isadminloggedin()) {
 			global $is_admin;
 			$is_admin = true;
 		}
-		
+
 	}
 	
 	function admin_pagesetup() {

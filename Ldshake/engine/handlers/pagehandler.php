@@ -10,10 +10,9 @@
 	 * @copyright Curverider Ltd 2008
 	 * @link http://elgg.org/
 	 */
-
-
 $start_time = microtime(true);
 	// Load Elgg engine
+
         $plugin_handler = $_GET['handler'];
 		require_once("../start.php");
 

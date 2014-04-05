@@ -23,17 +23,16 @@
 	/**
 	 * Load important prerequisites
 	 */
-		
-		if (!@include_once(dirname(__FILE__) . "/lib/exceptions.php")) {		// Exceptions 
+		if (!@include_once(dirname(__FILE__) . "/lib/exceptions.php")) {		// Exceptions
 			echo "Error in installation: could not load the Exceptions library.";
 			exit;
 		}
-		
+
 		if (!@include_once(dirname(__FILE__) . "/lib/elgglib.php")) {		// Main Elgg library
 			echo "Elgg could not load its main library.";
 			exit;
 		}
-		
+
 		if (!@include_once(dirname(__FILE__) . "/lib/system_log.php")) {		// Logging library
 			echo "Error in installation: could not load the System Log library.";
 			exit;
@@ -127,7 +126,7 @@
 				
 
 		// We don't want to load or reload these files
-	
+	/*
 			$file_exceptions = array(
 										'.','..',
 										'.DS_Store',
@@ -141,7 +140,47 @@
 	
 			$files = get_library_files(dirname(__FILE__) . "/lib",$file_exceptions);
 			asort($files);
-	
+            */
+            $files = array (
+                20 => '/var/www/engine/lib/Utils.php',
+                30 => '/var/www/engine/lib/access.php',
+                10 => '/var/www/engine/lib/admin.php',
+                27 => '/var/www/engine/lib/annotations.php',
+                7 => '/var/www/engine/lib/api.php',
+                35 => '/var/www/engine/lib/cache.php',
+                36 => '/var/www/engine/lib/calendar.php',
+                8 => '/var/www/engine/lib/configuration.php',
+                15 => '/var/www/engine/lib/cron.php',
+                32 => '/var/www/engine/lib/entities.php',
+                3 => '/var/www/engine/lib/export.php',
+                16 => '/var/www/engine/lib/extender.php',
+                26 => '/var/www/engine/lib/filestore.php',
+                6 => '/var/www/engine/lib/group.php',
+                24 => '/var/www/engine/lib/input.php',
+                0 => '/var/www/engine/lib/install.php',
+                23 => '/var/www/engine/lib/location.php',
+                25 => '/var/www/engine/lib/memcache.php',
+                21 => '/var/www/engine/lib/metadata.php',
+                22 => '/var/www/engine/lib/metastrings.php',
+                11 => '/var/www/engine/lib/notification.php',
+                19 => '/var/www/engine/lib/objects.php',
+                28 => '/var/www/engine/lib/pagehandler.php',
+                9 => '/var/www/engine/lib/pageowner.php',
+                17 => '/var/www/engine/lib/pam.php',
+                33 => '/var/www/engine/lib/plugins.php',
+                29 => '/var/www/engine/lib/query.php',
+                31 => '/var/www/engine/lib/relationships.php',
+                5 => '/var/www/engine/lib/sites.php',
+                1 => '/var/www/engine/lib/statistics.php',
+                12 => '/var/www/engine/lib/system_log.php',
+                4 => '/var/www/engine/lib/tags.php',
+                13 => '/var/www/engine/lib/users.php',
+                34 => '/var/www/engine/lib/usersettings.php',
+                14 => '/var/www/engine/lib/version.php',
+                18 => '/var/www/engine/lib/widgets.php',
+                2 => '/var/www/engine/lib/xml.php',
+            );
+
 		// Include them
 			foreach($files as $file) {
 				if (isset($CONFIG->debug) && $CONFIG->debug) error_log("Loading $file..."); 
@@ -159,34 +198,60 @@
 		}
 		
 		// Autodetect some default configuration settings
-			set_default_config();
-	
-		// Trigger events
-			trigger_elgg_event('boot', 'system');
-			
+			//set_default_config();
+$time=microtime(true);
+
+// Trigger events
+			//trigger_elgg_event('boot', 'system');
+
+$boot = array (
+    0 => 'init_db',
+    1 => 'session_init',
+    2 => 'sites_init',
+    10 => 'configuration_init',
+    500 => 'install_init',
+);
+/*
+$boot = array (
+    0 => 'init_db',
+    1 => 'session_init',
+
+);*/
+
+foreach($boot as $b) {
+    $time=microtime(true);
+    $b('boot', 'system', 'null');
+    echo microtime(true) - $time.' '.$b.'<br />';
+}
+
 		// Load plugins
-		
+
+//exit;
 			$installed = is_installed();
-			$db_installed = is_db_installed();
-			
+			//$db_installed = is_db_installed();
+			$db_installed = true;
+
 			// Determine light mode
 			$lm = strtolower(get_input('lightmode'));
 			if ($lm == 'true') $lightmode = true;
-
+$time = microtime(true);
 			// Load plugins, if we're not in light mode
 			if (($installed) && ($db_installed) && ($sanitised) && (!$lightmode)) {
 				load_plugins();
 
-				trigger_elgg_event('plugins_boot', 'system');
+				//trigger_elgg_event('plugins_boot', 'system');
 			}
 
 		// Forward if we haven't been installed
+/*
 			if ((!$installed || !$db_installed) && !substr_count($_SERVER["PHP_SELF"],"install.php") && !substr_count($_SERVER["PHP_SELF"],"css.php") && !substr_count($_SERVER["PHP_SELF"],"action_handler.php")) {
 					header("Location: install.php");
 					exit;
 			}
-			
+*/
+
 		// Trigger events
+/*
 			if (!substr_count($_SERVER["PHP_SELF"],"install.php") &&
 				!substr_count($_SERVER["PHP_SELF"],"setup.php") &&
 				!$lightmode
@@ -197,8 +262,74 @@
 					//forward("setup.php");
 				//}
 			}
+*/
+/*UNIVERSAL
+$CONFIG->events['init']['system'] = array (
+    0 => 'notification_init',
+    1 => 'users_init',
+    2 => 'profile_init',
+//    100 => 'export_init',
+    101 => 'filestore_init',
+    500 => 'elgg_init',
+    501 => 'input_init',
+    502 => 'actions_init',
+    503 => 'admin_init',
+//    504 => 'api_init',
+//    505 => 'cron_init',
+    //506 => 'entities_init',
+    507 => 'group_init',
+//    508 => 'plugin_init',
+//    509 => 'statistics_init',
+    510 => 'usersettings_init',
+//    511 => 'widgets_init',
+    512 => 't9n_init',
+    513 => 'messages_init',
+    514 => 'topbar_ldshake_init',
+    515 => 'lds_init',
+    9999 => 'access_init',
+//    10000 => 'profile_fields_setup',
+);
+*/
+//LDS
+$CONFIG->events['init']['system'] = array (
+//    0 => 'notification_init',
+    1 => 'users_init',
+//    2 => 'lds_profile_init',
+//    100 => 'export_init',
+    101 => 'filestore_init',
+    500 => 'elgg_init',
+//    501 => 'input_init',
+//    502 => 'actions_init',
+    503 => 'lds_admin_init',
+//    504 => 'api_init',
+//    505 => 'cron_init',
+//    506 => 'entities_init',
+//    507 => 'group_init',
+//    508 => 'plugin_init',
+//    509 => 'statistics_init',
+//    510 => 'usersettings_init',
+//    511 => 'widgets_init',
+    512 => 't9n_init',
+    513 => 'lds_messages_init',
+    514 => 'topbar_ldshake_init',
+    515 => 'lds_init',
+    9999 => 'access_init',
+//    10000 => 'profile_fields_setup',
+);
+trigger_elgg_event('init', 'system');
 
-			
+$CONFIG->registered_entities =
+    array (
+    'user' =>
+    array (
+        0 => '',
+    ),
+    'group' =>
+    array (
+        0 => '',
+    ),
+);
+
 		// System booted, return to normal view
 			set_input('view', $oldview);
 ?>

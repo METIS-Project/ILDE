@@ -61,8 +61,9 @@
 		        	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:NoConnect'), $CONFIG->dbname));
 				/// LdShake change ///
 		        //We'll speak in UTF-8 with the DB
-				mysql_query ('SET NAMES utf8');
-				mysql_query ('SET CHARACTER SET utf8');
+                mysql_set_charset('utf8', $dblink[$dblinkname]);
+				//mysql_query ('SET NAMES utf8');
+				//mysql_query ('SET CHARACTER SET utf8');
 				/// LdShake change ///
 		        	
 		    // Set up cache
@@ -145,7 +146,7 @@
 	 */
 		function init_db($event, $object_type, $object = null) {
 			register_shutdown_function('db_delayedexecution_shutdown_hook');
-			register_shutdown_function('db_profiling_shutdown_hook');
+			//register_shutdown_function('db_profiling_shutdown_hook');
 			setup_db_connections();
 			return true;
 		}

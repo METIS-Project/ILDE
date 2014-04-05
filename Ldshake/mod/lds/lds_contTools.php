@@ -39,7 +39,7 @@
  * Set of helper functions for the LdS module 
  */
 
-include_once __DIR__.'/Java.inc';
+//include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
 function buildRichQuery($user_id, $elements) {
@@ -62,10 +62,10 @@ function buildPermissionsQuery($user_id, $writable_only = true) {
     if(!$user_id)
         $user_id = get_loggedin_userid();
 
-    if(!($user = get_user($user_id)))
+    if(!($user_id))
         throw new InvalidParameterException(elgg_echo('InvalidParameterException:UnrecognisedValue'));
 
-    if($user->admin) {
+    if(isadminloggedin()) {
         $myfirstlds = mysql_real_escape_string(T("My first LdS"));
 
         $query['join'] = "JOIN objects_entity oep ON e.guid = oep.guid";
@@ -124,35 +124,29 @@ SQL;
     return $query;
 }
 
-function ldshake_query_callback($row) {
+function ldshake_tag_callback($row) {
     $row->time_created = (int)$row->time_created;
     $row->frequency = (int)$row->frequency;
     return $row;
 }
 
-function ldshake_tag_relevance_query($user_id) {
+function ldshake_tag_latest_query($user_id, $category) {
     global $CONFIG;
 
-    $tag_id["discipline"] = get_metastring_id("discipline");
-    $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
-    $tag_id["tags"] = get_metastring_id("tags");
+    $category_id = get_metastring_id($category);
 
     $query['join'] = <<<SQL
 LEFT JOIN metadata mf ON e.guid = mf.entity_guid
-LEFT JOIN metastrings ms ON ms.id = mf.value_id
-LEFT JOIN metastrings msc ON mf.name_id = msc.id
 SQL;
 
     $query['select'] = <<<SQL
-COUNT(DISTINCT mf.entity_guid) AS frequency,
-ms.string AS tag,
-MAX(mf.time_created) AS time_created,
-msc.string AS category
+distinct mf.value_id as guid
 SQL;
 
-    $query['where'] = "mf.name_id IN ({$tag_id["discipline"]}, {$tag_id["pedagogical_approach"]}, {$tag_id["tags"]})";
+    $query['where'] = "mf.name_id = {$category_id}";
 
-    $query['group_by'] = "mf.name_id, mf.value_id";
+    //$query['group_by'] = "mf.value_id";
+    $query['order']['by'] = "order by mf.time_created desc";
 
     return $query;
 }
@@ -161,6 +155,47 @@ SQL;
 function ldshake_tag_relevance_query($user_id) {
     global $CONFIG;
 
+    $fields = array ('tags', 'discipline', 'pedagogical_approach');
+    $tags = array();
+    foreach($fields as $category) {
+        $tags[$category] = lds_contTools::getUserEntities('object', 'LdS', $user_id, false, 40, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_latest_query", "callback" => "ldshake_guid_query", "params" => $category));
+        $tags[$category] = implode(',', $tags[$category]);
+    }
+
+    $tag_id["discipline"] = get_metastring_id("discipline");
+    $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
+    $tag_id["tags"] = get_metastring_id("tags");
+
+    $query['join'] = <<<SQL
+LEFT JOIN metadata mf ON e.guid = mf.entity_guid
+LEFT JOIN metastrings ms ON ms.id = mf.value_id
+LEFT JOIN metastrings msc ON mf.name_id = msc.id
+SQL;
+
+    $query['select'] = <<<SQL
+COUNT(DISTINCT mf.entity_guid) AS frequency,
+ms.string AS tag,
+MAX(mf.time_created) AS time_created,
+msc.string AS category
+SQL;
+
+    $query['where'] = <<<SQL
+    (mf.name_id = {$tag_id["tags"]} AND mf.value_id IN ({$tags["tags"]}))
+    OR
+    (mf.name_id = {$tag_id["discipline"]} AND mf.value_id IN ({$tags["discipline"]}))
+    OR
+    (mf.name_id = {$tag_id["pedagogical_approach"]} AND mf.value_id IN ({$tags["pedagogical_approach"]}))
+SQL;
+
+    $query['group_by'] = "mf.name_id, mf.value_id";
+
+    return $query;
+}
+*/
+
+function ldshake_tag_relevance_query($user_id) {
+    global $CONFIG;
+
     $tag_id["discipline"] = get_metastring_id("discipline");
     $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
     $tag_id["tags"] = get_metastring_id("tags");
@@ -184,7 +219,11 @@ SQL;
 
     return $query;
 }
-*/
+
+function ldshake_guid_query($row) {
+    return $row->guid;
+}
+
 function ldshake_richlds_order($row) {
     return $row->guid;
 }
@@ -1840,8 +1879,8 @@ SQL;
         }
     }
 
-    public static function getUserTagFrequency() {
-        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, null, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_relevance_query", "callback" => "ldshake_query_callback"));
+    public static function getUserTagFrequency($category) {
+        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 0, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_relevance_query", "callback" => "ldshake_tag_callback", "params" => $category));
     }
 
     public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null) {
@@ -1864,9 +1903,6 @@ SQL;
         $subtype = get_subtype_id($type, $subtype);
 
         $callback = "entity_row_to_elggstar";
-        $custom_select = "";
-        $custom_join = "";
-        $custom_where = "";
 
         $mj = '';
         $mw = '';
@@ -1974,16 +2010,15 @@ SQL;
             if(isset($custom['callback']))
                 $callback = $custom['callback'];
 
-            if($query_limit == '') {
                 $build_callback = $custom['build_callback'];
-                $custom_query = $build_callback($user_id);
+                $custom_query = $build_callback($user_id, $custom['params']);
 
                 $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
                 $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
                 $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
                 $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';
                 $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
-            }
+
         }
 
 $query = <<<SQL
@@ -2134,7 +2169,7 @@ SQL;
         } else {
             $time = microtime(true);
             $entities = get_data($query, $callback);
-            //echo '<pre>'.$query.'</pre>'.'<br>';
+            echo '<pre>'.$query.'</pre>'.'<br>';
             echo microtime(true) - $time.' e<br />';
             return $entities;
         }
@@ -2547,7 +2582,7 @@ SQL;
         global $CONFIG;
         $fields = array ('tags', 'discipline', 'pedagogical_approach');
 
-        $tags = lds_contTools::getUserTagFrequency();
+        $tags = lds_contTools::getUserTagFrequency('tags');
 
         foreach($fields as $f)
             $category[$f] = array();

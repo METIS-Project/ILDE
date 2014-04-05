@@ -283,6 +283,7 @@
 		
 		
 		// Register some APIs
+        /*
 		expose_function('user.notification.get', 'get_user_notification_settings', array(
 			'user_guid' => array ('type' => 'int')
 		), elgg_echo('user.notification.get'));
@@ -292,6 +293,7 @@
 			'method' => array ('type' => 'string'),
 			'value' => array ('type' => 'bool')
 		), elgg_echo('user.notification.set'));
+        */
 		
 	}
 	

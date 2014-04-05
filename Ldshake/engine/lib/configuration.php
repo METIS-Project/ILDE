@@ -102,17 +102,27 @@
 			
 			if ($site_guid == 0)
 				$site_guid = (int) $CONFIG->site_id;
-				
-			if ($result = get_data("SELECT * from {$CONFIG->dbprefix}config where site_guid = {$site_guid}")) {
-				foreach ($result as $r)
-				{	
-					$name = $r->name;
-					$value = $r->value;
-					$CONFIG->$name = unserialize($value);
-				}
-				
-				return true;
-			}
+
+            if(isset($_SESSION['site_config']) && is_array($_SESSION['site_config'])) {
+                foreach ($_SESSION['site_config'] as $r)
+                {
+                    $name = $r->name;
+                    $value = $r->value;
+                    $CONFIG->$name = unserialize($_SESSION[$value]);
+                }
+                return true;
+            } else {
+                if ($result = get_data("SELECT * from {$CONFIG->dbprefix}config where site_guid = {$site_guid}")) {
+                    foreach ($result as $r)
+                    {
+                        $name = $r->name;
+                        $value = $r->value;
+                        $CONFIG->$name = unserialize($value);
+                    }
+                    $_SESSION['site_config'] = $result;
+                    return true;
+                }
+            }
 			return false;
 		}
 
@@ -157,7 +167,7 @@
 				$CONFIG->url = $CONFIG->wwwroot;
 			
 			if (empty($CONFIG->sitename))
-				$CONFIG->sitename = "New Elgg site";
+				$CONFIG->sitename = "LdShake";
 				
 			if (empty($CONFIG->language))
 				$CONFIG->language = "en";
@@ -173,7 +183,7 @@
 			
 			global $CONFIG;
 			
-			if (!is_installed() || !is_db_installed()) return false;
+			//if (!is_installed() || !is_db_installed()) return false;
 			
 			/// LdShake change ///
 			//Auto-detect path
@@ -185,9 +195,20 @@
 			//	$CONFIG->dataroot = $dataroot;
 			if (isset($CONFIG->site) && ($CONFIG->site instanceof ElggSite)) {
 				//$CONFIG->wwwroot = $CONFIG->site->url;
-				$CONFIG->sitename = $CONFIG->site->name;
-				$CONFIG->sitedescription = $CONFIG->site->description;
-				$CONFIG->siteemail = $CONFIG->site->email;
+                if(isset($_SESSION['site_configured'])){
+                    $CONFIG->sitename = $_SESSION['sitename'];
+                    $CONFIG->sitedescription = $_SESSION['sitedescription'];
+                    $CONFIG->siteemail = $_SESSION['siteemail'];
+                } else {
+                    $CONFIG->sitename = $CONFIG->site->name;
+                    $CONFIG->sitedescription = $CONFIG->site->description;
+                    $CONFIG->siteemail = $CONFIG->site->email;
+
+                    $_SESSION['site_configured'] = true;
+                    $_SESSION['sitename'] = $CONFIG->sitename;
+                    $_SESSION['sitedescription'] = $CONFIG->sitedescription;
+                    $_SESSION['siteemail'] = $CONFIG->siteemail;
+                }
 			}
 			$CONFIG->url = $CONFIG->wwwroot;
 			/// LdShake change ///

@@ -102,7 +102,7 @@
         
         function register_action($action, $public = false, $filename = "", $admin_only = false) {
             global $CONFIG;            
-            
+
             if (!isset($CONFIG->actions)) {
                 $CONFIG->actions = array();
             }
@@ -115,6 +115,7 @@
             }
             
             $CONFIG->actions[$action] = array('file' => $filename, 'public' => $public, 'admin' => $admin_only);
+
             return true;
         }
 

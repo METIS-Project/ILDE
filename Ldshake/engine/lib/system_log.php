@@ -220,7 +220,7 @@
 			
 			// Create log if we haven't already created it
 			if (!isset($logcache[$time][$object_id][$event])) {
-				if (insert_data("INSERT DELAYED into {$CONFIG->dbprefix}system_log (object_id, object_class, object_type, object_subtype, event, performed_by_guid, owner_guid, access_id, enabled, time_created) VALUES ('$object_id','$object_class','$object_type', '$object_subtype', '$event',$performed_by, $owner_guid, $access_id, '$enabled', '$time')")) {
+				if (insert_data("INSERT into {$CONFIG->dbprefix}system_log (object_id, object_class, object_type, object_subtype, event, performed_by_guid, owner_guid, access_id, enabled, time_created) VALUES ('$object_id','$object_class','$object_type', '$object_subtype', '$event',$performed_by, $owner_guid, $access_id, '$enabled', '$time')")) {
 					$logcache[$time][$object_id][$event] = true;
 					return true;
 				}
@@ -277,6 +277,8 @@
 	}
 	
 	/** Register event to listen to all events **/
-	register_elgg_event_handler('all','all','system_log_listener', 400);
+
+if($plugin_handler != 'lds')
+    register_elgg_event_handler('all','all','system_log_listener', 400);
 	
 ?>

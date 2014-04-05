@@ -596,18 +596,31 @@
 			global $CONFIG;
 			
 			if (!is_installed() || !is_db_installed()) return false;
-			
-			$site = trigger_plugin_hook("siteid","system");
+
+            $site = null;
+			//$site = trigger_plugin_hook("siteid","system");
 			if ($site === null || $site === false) {
-				$CONFIG->site_id = (int) datalist_get('default_site');
+                if(isset($_SESSION['site_id'])) {
+                    $CONFIG->site_id = $_SESSION['site_id'];
+                } else {
+				    $CONFIG->site_id = (int) datalist_get('default_site');
+                    $_SESSION['site_id'] = $CONFIG->site_id;
+                }
+
 			} else {
 				$CONFIG->site_id = $site;
 			}
 			$CONFIG->site_guid = $CONFIG->site_id;
-			$CONFIG->site = get_entity($CONFIG->site_guid);
+
+            if(isset($_SESSION['site'])) {
+                $CONFIG->site = $_SESSION['site'];
+            } else {
+                $CONFIG->site = get_entity($CONFIG->site_guid);
+                $_SESSION['site'] = $CONFIG->site;
+            }
+			//$CONFIG->site = get_entity($CONFIG->site_guid);
 			
 			return true;
-			
 		}
 		
 	// Register event handlers

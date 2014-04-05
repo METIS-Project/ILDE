@@ -65,7 +65,32 @@
 				return $CONFIG->db_installed;
 			}
 			
-			$tables = get_db_tables();
+			//$tables = get_db_tables();
+            $tables = array (
+                0 => 'access_collection_membership',
+                1 => 'access_collections',
+                2 => 'annotations',
+                3 => 'api_users',
+                4 => 'config',
+                5 => 'datalists',
+                6 => 'entities',
+                7 => 'entity_relationships',
+                8 => 'entity_subtypes',
+                9 => 'geocode_cache',
+                10 => 'groups_entity',
+                11 => 'hmac_cache',
+                12 => 'metadata',
+                13 => 'metastrings',
+                14 => 'objects_entity',
+                15 => 'objects_property',
+                16 => 'private_settings',
+                17 => 'sites_entity',
+                18 => 'system_log',
+                19 => 'users_apisessions',
+                20 => 'users_entity',
+                21 => 'users_sessions',
+            );
+
 			if (!$tables) {
 				return false;
 			}
@@ -82,10 +107,12 @@
 	 * @return true|false Whether or not the rest of the installation has been followed through with
 	 */
 		function is_installed() {
-			
-			global $CONFIG;
-			return datalist_get('installed');
-			
+
+            if(isset($_SESSION['installed']))
+                return $_SESSION['installed'];
+
+            $_SESSION['installed'] = datalist_get('installed');
+			return $_SESSION['installed'];
 		}
 		
 		/**

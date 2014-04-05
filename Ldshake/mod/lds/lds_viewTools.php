@@ -41,7 +41,8 @@
  */
 
 class lds_viewTools
-{	
+{
+
 	public static function pagination ($count, $elementsPerPage = 10)
 	{
 		$params = array(
@@ -67,7 +68,7 @@ class lds_viewTools
 		
 		return $tagstring;
 	}
-	
+
 	public static function all_tag_display ($lds)
 	{
 		$tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
@@ -103,7 +104,7 @@ class lds_viewTools
 
 		return $str;
 	}
-	
+
 	public static function url_for ($lds, $type = 'view')
 	{
 		global $CONFIG;
@@ -163,3 +164,125 @@ class lds_viewTools
         return in_array($lds->editor_type, $supported);
     }
 }
+
+/*
+  function pagination ($count, $elementsPerPage = 10)
+{
+    $params = array(
+        'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
+        'offset' => get_input('offset') ?: 0,
+        'count' => $count,
+        'limit' => $elementsPerPage
+    );
+
+    return elgg_view('navigation/pagination', $params);
+}
+	
+	  function tag_display ($tags, $class)
+{
+    $tags = $tags->$class;
+    //debug_print($tags);
+    if (is_string($tags) && strlen($tags)) $tags = array($tags);
+
+    $tagstring = '';
+    if (is_array($tags) && count($tags))
+        foreach($tags as $tag)
+            $tagstring .= '<a href="'.self::getUrl().'?tagk='.$class.'&tagv='.urlencode($tag).'" class="lds_tag '.$class.'">'.$tag.'</a> ';
+
+    return $tagstring;
+}
+
+	  function all_tag_display ($lds)
+{
+    $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+
+    //We build an array of all the tags of the LdS
+    $arr = array();
+    foreach ($tagtypes as $type)
+    {
+        $tags = $lds->$type;
+
+        if (is_string($tags) && strlen($tags)) $tags = array($tags);
+
+        if (is_array($tags))
+        {
+            foreach ($tags as $tag)
+            {
+                $t = new stdClass();
+                $t->type = $type;
+                $t->tag = $tag;
+                $arr[] = $t;
+            }
+        }
+
+    }
+
+    //Order them by name
+    Utils::osort($arr, 'tag');
+
+    //Print them
+    $str = '';
+    foreach ($arr as $tag)
+        $str .= '<span class="lds_small_tag '.$tag->type.'">'.$tag->tag.'</span>';
+
+    return $str;
+}
+
+	  function url_for ($lds, $type = 'view')
+{
+    global $CONFIG;
+
+    $editortype = ($lds->external_editor ? 'editor' : '');
+
+    $folder = $type.$editortype;
+
+    $subtype = is_string($lds->subtype) ? $lds->subtype : $lds->getSubtype();
+    if($subtype == 'LdSProject_implementation' || $subtype == 'LdSProject') {
+        if($type == 'edit') {
+            $folder = 'edit_project';
+        } elseif($type == 'view') {
+            $folder = 'project_implementation';
+        }
+    }
+
+    //Google Docs history
+    if($type == 'history' && $lds->editor_type == 'google_docs')
+        $folder = 'history';
+
+    return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';
+}
+	
+	  function getUrl ($type = 'list')
+{
+    global $CONFIG;
+
+    switch ($type)
+    {
+        case 'mine':
+            return $CONFIG->url . 'pg/lds/';
+        case 'trashed':
+            return $CONFIG->url . 'pg/lds/trashed/';
+        case 'created-by-me':
+            return $CONFIG->url . 'pg/lds/created-by-me/';
+        case 'shared-with-me':
+            return $CONFIG->url . 'pg/lds/shared-with-me/';
+        case 'list':
+            return $CONFIG->url . 'pg/lds/browse/';
+        case 'patterns':
+            return $CONFIG->url . 'pg/lds/query/';
+    }
+}
+
+      function iconSupport ($type)
+{
+    $supported = array("doc",'webcollagerest','glueps','openglm','cadmos','project_design');
+
+    return in_array($type, $supported);
+}
+
+      function detailedHistorySupport($lds)
+{
+    $supported = array("google_docs");
+
+    return in_array($lds->editor_type, $supported);
+}*/

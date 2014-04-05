@@ -232,6 +232,7 @@
 						//Removed yet another stupid @ sign from include in the next line. :(((((
 						if (!include($CONFIG->pluginspath . $mod . "/start.php"))
 							throw new PluginException(sprintf(elgg_echo('PluginException:MisconfiguredPlugin'), $mod));
+                        /*
 						if (is_dir($CONFIG->pluginspath . $mod . "/views")) {
 							if ($handle = opendir($CONFIG->pluginspath . $mod . "/views")) {
 								while ($viewtype = readdir($handle)) {
@@ -244,8 +245,199 @@
 						if (is_dir($CONFIG->pluginspath . $mod . "/languages")) {
 							register_translations($CONFIG->pluginspath . $mod . "/languages/");
 						}
+                        */
 					}
 				}
+
+                //echo "<pre>\n";echo htmlentities(var_export($CONFIG->views)).'</pre>'.'<br />';
+                $CONFIG->views = (object)array(
+                    'locations' =>
+                    array (
+                        'default' =>
+                        array (
+                            'about/contents' => '/var/www/mod/about/views/',
+                            'about/css' => '/var/www/mod/about/views/',
+                            'widgets/friends/view' => '/var/www/mod/friends/views/',
+                            'widgets/friends/edit' => '/var/www/mod/friends/views/',
+                            'forum/topicposts' => '/var/www/mod/groups/views/',
+                            'forum/viewposts' => '/var/www/mod/groups/views/',
+                            'forum/topics' => '/var/www/mod/groups/views/',
+                            'groups/icon' => '/var/www/mod/groups/views/',
+                            'groups/groupprofile' => '/var/www/mod/groups/views/',
+                            'groups/profileitems' => '/var/www/mod/groups/views/',
+                            'groups/groupgallery' => '/var/www/mod/groups/views/',
+                            'groups/members' => '/var/www/mod/groups/views/',
+                            'groups/css' => '/var/www/mod/groups/views/',
+                            'groups/forum_latest' => '/var/www/mod/groups/views/',
+                            'groups/grouplisting' => '/var/www/mod/groups/views/',
+                            'group/group' => '/var/www/mod/groups/views/',
+                            'sharing/invite' => '/var/www/mod/groups/views/',
+                            'icon/group/default/medium' => '/var/www/mod/groups/views/',
+                            'icon/group/default/tiny' => '/var/www/mod/groups/views/',
+                            'icon/group/default/large' => '/var/www/mod/groups/views/',
+                            'icon/group/default/small' => '/var/www/mod/groups/views/',
+                            'river/relationship/member/create' => '/var/www/mod/groups/views/',
+                            'widgets/group_members_widget/view' => '/var/www/mod/groups/views/',
+                            'widgets/group_members_widget/edit' => '/var/www/mod/groups/views/',
+                            'widgets/a_users_groups/view' => '/var/www/mod/groups/views/',
+                            'widgets/a_users_groups/edit' => '/var/www/mod/groups/views/',
+                            'widgets/group_entities_widget/view' => '/var/www/mod/groups/views/',
+                            'widgets/group_entities_widget/edit' => '/var/www/mod/groups/views/',
+                            'forms/groups/edit' => '/var/www/mod/groups/views/',
+                            'forms/groups/invite' => '/var/www/mod/groups/views/',
+                            'forms/forums/edittopic' => '/var/www/mod/groups/views/',
+                            'forms/forums/addpost' => '/var/www/mod/groups/views/',
+                            'forms/forums/addtopic' => '/var/www/mod/groups/views/',
+                            'object/groupforumtopic' => '/var/www/mod/groups/views/',
+                            'messages/menu' => '/var/www/mod/messages/views/',
+                            'messages/messages' => '/var/www/mod/messages/views/',
+                            'messages/css.bak' => '/var/www/mod/messages/views/',
+                            'messages/topbar' => '/var/www/mod/messages/views/',
+                            'messages/css' => '/var/www/mod/messages/views/',
+                            'messages/view.bak' => '/var/www/mod/messages/views/',
+                            'messages/view' => '/var/www/mod/messages/views/',
+                            'messages/js' => '/var/www/mod/messages/views/',
+                            'messages/messages.bak' => '/var/www/mod/messages/views/',
+                            'messages/forms/message.bak' => '/var/www/mod/messages/views/',
+                            'messages/forms/reply.bak' => '/var/www/mod/messages/views/',
+                            'messages/forms/reply' => '/var/www/mod/messages/views/',
+                            'messages/forms/message' => '/var/www/mod/messages/views/',
+                            'widgets/messages/view' => '/var/www/mod/messages/views/',
+                            'widgets/messages/edit' => '/var/www/mod/messages/views/',
+                            'object/messages' => '/var/www/mod/messages/views/',
+                            'icon/user/default/master' => '/var/www/mod/profile/views/',
+                            'icon/user/default/medium' => '/var/www/mod/profile/views/',
+                            'icon/user/default/tiny' => '/var/www/mod/profile/views/',
+                            'icon/user/default/topbar' => '/var/www/mod/profile/views/',
+                            'icon/user/default/large' => '/var/www/mod/profile/views/',
+                            'icon/user/default/small' => '/var/www/mod/profile/views/',
+                            'profile/editicon.bak' => '/var/www/mod/profile/views/',
+                            'profile/editicon' => '/var/www/mod/profile/views/',
+                            'profile/icon' => '/var/www/mod/profile/views/',
+                            'profile/javascript' => '/var/www/mod/profile/views/',
+                            'profile/editdefaultprofile' => '/var/www/mod/profile/views/',
+                            'profile/gallery' => '/var/www/mod/profile/views/',
+                            'profile/submenu.bak' => '/var/www/mod/profile/views/',
+                            'profile/listing' => '/var/www/mod/profile/views/',
+                            'profile/submenu' => '/var/www/mod/profile/views/',
+                            'profile/metatags' => '/var/www/mod/profile/views/',
+                            'profile/css' => '/var/www/mod/profile/views/',
+                            'profile/menu/adminwrapper' => '/var/www/mod/profile/views/',
+                            'profile/menu/links' => '/var/www/mod/profile/views/',
+                            'profile/menu/linksownpage' => '/var/www/mod/profile/views/',
+                            'profile/menu/actions' => '/var/www/mod/profile/views/',
+                            'profile/menu/adminlinks' => '/var/www/mod/profile/views/',
+                            'profile/hoverover' => '/var/www/mod/profile/views/',
+                            'profile/userdetails' => '/var/www/mod/profile/views/',
+                            'profile/listing.bak' => '/var/www/mod/profile/views/',
+                            'profile/profilelinks' => '/var/www/mod/profile/views/',
+                            'profile/footerjs' => '/var/www/mod/profile/views/',
+                            'profile/edit' => '/var/www/mod/profile/views/',
+                            'river/user/default/profileiconupdate' => '/var/www/mod/profile/views/',
+                            'river/user/default/profileupdate' => '/var/www/mod/profile/views/',
+                            'settings/phpmailer/edit' => '/var/www/mod/phpmailer/views/',
+                            'projects/new_projectimplementation_form' => '/var/www/mod/topbar_ldshake/views/',
+                            'topbar_ldshake/css' => '/var/www/mod/topbar_ldshake/views/',
+                            'topbar_ldshake/footerjs' => '/var/www/mod/topbar_ldshake/views/',
+                            'page_elements/elgg_topbar' => '/var/www/mod/topbar_ldshake/views/',
+                            'lds/projects/editform' => '/var/www/mod/lds/views/',
+                            'lds/projects/myprojects' => '/var/www/mod/lds/views/',
+                            'lds/projects/view_internal' => '/var/www/mod/lds/views/',
+                            'lds/projects/editform_editor' => '/var/www/mod/lds/views/',
+                            'lds/view_external' => '/var/www/mod/lds/views/',
+                            'lds/404' => '/var/www/mod/lds/views/',
+                            'lds/firststeps' => '/var/www/mod/lds/views/',
+                            'lds/implementlds_form' => '/var/www/mod/lds/views/',
+                            'lds/admin/vle' => '/var/www/mod/lds/views/',
+                            'lds/about.en' => '/var/www/mod/lds/views/',
+                            'lds/tree' => '/var/www/mod/lds/views/',
+                            'lds/welcome_lds/welcome_lds_en' => '/var/www/mod/lds/views/',
+                            'lds/welcome_lds/welcome_lds_ca' => '/var/www/mod/lds/views/',
+                            'lds/welcome_lds/welcome_lds_el' => '/var/www/mod/lds/views/',
+                            'lds/viewtrashed' => '/var/www/mod/lds/views/',
+                            'lds/clonelds_form' => '/var/www/mod/lds/views/',
+                            'lds/404public' => '/var/www/mod/lds/views/',
+                            'lds/implementform_editor' => '/var/www/mod/lds/views/',
+                            'lds/editform' => '/var/www/mod/lds/views/',
+                            'lds/view_revision' => '/var/www/mod/lds/views/',
+                            'lds/help.en' => '/var/www/mod/lds/views/',
+                            'lds/wordnetlist' => '/var/www/mod/lds/views/',
+                            'lds/vledata' => '/var/www/mod/lds/views/',
+                            'lds/browse' => '/var/www/mod/lds/views/',
+                            'lds/css' => '/var/www/mod/lds/views/',
+                            'lds/search' => '/var/www/mod/lds/views/',
+                            'lds/view_external_editor' => '/var/www/mod/lds/views/',
+                            'lds/aver2' => '/var/www/mod/lds/views/',
+                            'lds/aver' => '/var/www/mod/lds/views/',
+                            'lds/license_form' => '/var/www/mod/lds/views/',
+                            'lds/implementable' => '/var/www/mod/lds/views/',
+                            'lds/vledatacomplete' => '/var/www/mod/lds/views/',
+                            'lds/tracking' => '/var/www/mod/lds/views/',
+                            'lds/license_banner' => '/var/www/mod/lds/views/',
+                            'lds/view_internal_editor' => '/var/www/mod/lds/views/',
+                            'lds/mylds' => '/var/www/mod/lds/views/',
+                            'lds/view_internal' => '/var/www/mod/lds/views/',
+                            'lds/view_revision_editor' => '/var/www/mod/lds/views/',
+                            'lds/view_iframe' => '/var/www/mod/lds/views/',
+                            'lds/debug/debug_settings' => '/var/www/mod/lds/views/',
+                            'lds/querylist' => '/var/www/mod/lds/views/',
+                            'lds/query' => '/var/www/mod/lds/views/',
+                            'lds/browselist' => '/var/www/mod/lds/views/',
+                            'lds/editform_editor' => '/var/www/mod/lds/views/',
+                            'lds/js' => '/var/www/mod/lds/views/',
+                            'lds/single_share_form' => '/var/www/mod/lds/views/',
+                            'lds/patterns' => '/var/www/mod/lds/views/',
+                            'lds/implementations' => '/var/www/mod/lds/views/',
+                            'lds/history_editor' => '/var/www/mod/lds/views/',
+                            'lds/history' => '/var/www/mod/lds/views/',
+                            'lds/view_internal_tree' => '/var/www/mod/lds/views/',
+                            'lds/repository_search' => '/var/www/mod/lds/views/',
+                            'lds/editor_type/cld' => '/var/www/mod/lds/views/',
+                            'ldshakers/404' => '/var/www/mod/ldshakers/views/',
+                            'ldshakers/css' => '/var/www/mod/ldshakers/views/',
+                            'ldshakers/profile' => '/var/www/mod/ldshakers/views/',
+                            'ldshakers/ldshakers' => '/var/www/mod/ldshakers/views/',
+                            'ldshakers/js' => '/var/www/mod/ldshakers/views/',
+                        ),
+                        'rss' =>
+                        array (
+                            'forum/viewposts' => '/var/www/mod/groups/views/',
+                            'forum/topics' => '/var/www/mod/groups/views/',
+                            'groups/profileitems' => '/var/www/mod/groups/views/',
+                        ),
+                        'status' =>
+                        array (
+                            'api/output' => '/var/www/mod/lds/views/',
+                        ),
+                        'xml' =>
+                        array (
+                            'api/output' => '/var/www/mod/lds/views/',
+                        ),
+                        'binary' =>
+                        array (
+                            'api/output' => '/var/www/mod/lds/views/',
+                        ),
+                    ),
+                );
+
+
+	add_translation("en",$english);
+
+
+//                include("/var/www/languages/en.php");
+/*                @include("/var/www/languages/el.php");
+                @include("/var/www/languages/ca.php");
+*/
+/*                @include("/var/www/mod/about/languages/en.php");
+                @include("/var/www/mod/friends/languages/en.php");
+                @include("/var/www/mod/groups/languages/en.php");
+                @include("/var/www/mod/messages/languages/en.php");
+                @include("/var/www/mod/uservalidationbyemail/languages/en.php");
+                @include("/var/www/mod/phpmailer/languages/en.php");
+                @include("/var/www/mod/lds/languages/en.php");
+                @include("/var/www/mod/friends/languages/en.php");
+                @include("/var/www/mod/messages/languages/en.php");
+*/
 				/// LdShake change ///
 				//Old code (elgg original)
 //				$plugins = get_plugin_list();
@@ -670,7 +862,7 @@
 		function plugin_init()
 		{
 			// Now run this stuff, but only once
-			run_function_once("plugin_run_once");
+			//run_function_once("plugin_run_once");
 			
 			// Register some actions
 			register_action("plugins/settings/save", false, "", true);
