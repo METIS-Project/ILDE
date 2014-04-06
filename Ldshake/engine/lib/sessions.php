@@ -239,8 +239,10 @@
             
             $_SESSION['code'] = $code;
             
-            if (($persistent))
+            if (($persistent)) {
 				setcookie("elggperm", $code, (time()+(86400 * 30)),"/");
+                session_set_cookie_params(time()+(86400 * 30));
+            }
          
             if (!$user->save() || !trigger_elgg_event('login','user',$user)) {
             	unset($_SESSION['username']);
@@ -254,7 +256,7 @@
             }
             
             // Users privilege has been elevated, so change the session id (help prevent session hijacking)
-	        session_regenerate_id(); 
+	        session_regenerate_id();
 
 	        // Update statistics
 	        set_last_login($_SESSION['guid']);

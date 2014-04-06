@@ -66,7 +66,7 @@ function buildPermissionsQuery($user_id, $writable_only = true) {
         throw new InvalidParameterException(elgg_echo('InvalidParameterException:UnrecognisedValue'));
 
     if(isadminloggedin()) {
-        $myfirstlds = mysql_real_escape_string(T("My first LdS"));
+        $myfirstlds = sanitise_string(T("My first LdS"));
 
         $query['join'] = "JOIN objects_entity oep ON e.guid = oep.guid";
         $query['permission'] = "oep.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}";
@@ -380,7 +380,7 @@ SQL;
             throw new InvalidParameterException(elgg_echo('InvalidParameterException:UnrecognisedValue'));
 
         if($user->admin) {
-            $myfirstlds = mysql_real_escape_string(T("My first LdS"));
+            $myfirstlds = sanitise_string(T("My first LdS"));
 
             $query['join'] = "JOIN objects_entity oep ON e.guid = oep.guid";
             $query['permission'] = "oep.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}";
@@ -484,9 +484,9 @@ SQL;
         else
             $tags_query = "";
 
-        $query = mysql_real_escape_string($query);
-        $offset = mysql_real_escape_string((int)$offset);
-        $limit = mysql_real_escape_string((int)$limit);
+        $query = sanitise_string($query);
+        $offset = sanitise_string((int)$offset);
+        $limit = sanitise_string((int)$limit);
 
         $permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
 
@@ -510,15 +510,17 @@ SQL;
         return false;
     }
 
+    /*
 	public static function searchLdS_old ($query) {
         global $CONFIG;
 		$query = addslashes($query);
 		
 		$sql = "SELECT guid FROM {$CONFIG->dbprefix}objects_entity WHERE MATCH (title,description) AGAINST ('$query')";
 		$res = execute_query ($sql, get_db_link('read'));
-		while ($row = mysql_fetch_object($res)) {
-			$ids[] = $row->guid;
-		}
+		//while ($row = mysql_fetch_object($res)) {
+		///	$ids[] = $row->guid;
+		//}
+        $ids = get_data($sql, "ldshake_guid_query");
 		
 		//Fast fast fast! Only the first 50 results
 		$i = 0;
@@ -546,7 +548,7 @@ SQL;
 			return false;
 		}
 	}
-	
+	*/
 	/**
 	 * Marks an LdS as viewed for the logged user.
 	 * THis data is stored in teh user's metadata.
@@ -1524,14 +1526,16 @@ SQL;
 
     public static function getTotalViewersIds($lds_id)
     {
+        global $CONFIG;
         $query = "SELECT r.guid_one AS guid FROM {$CONFIG->dbprefix}entity_relationships r ";
         $query .= " WHERE r.guid_two = {$lds_id} AND r.relationship IN ('lds_viewer', 'lds_editor', 'lds_viewer_group', 'lds_editor_group')";
 
-        $guids = array();
-        $result = execute_query ($query, get_db_link('read'));
-        while($row = mysql_fetch_object($result)) {
-            $guids[] = $row->guid;
-        }
+        //$guids = array();
+        $guids = get_data($query, "ldshake_guid_query");
+        //$result = execute_query ($query, get_db_link('read'));
+        //while($row = mysql_fetch_object($result)) {
+        //    $guids[] = $row->guid;
+        ///}
 
         return $guids;
     }
@@ -1542,10 +1546,11 @@ SQL;
         $query .= " WHERE r.guid_two = {$lds_id} AND r.relationship IN ('lds_editor', 'lds_editor_group')";
 
         $guids = array();
-        $result = execute_query ($query, get_db_link('read'));
-        while($row = mysql_fetch_object($result)) {
-            $guids[] = $row->guid;
-        }
+        //$result = execute_query ($query, get_db_link('read'));
+        //while($row = mysql_fetch_object($result)) {
+        //    $guids[] = $row->guid;
+        //}
+        $guids = get_data($query, "ldshake_guid_query");
 
         return $guids;
     }
@@ -1555,11 +1560,12 @@ SQL;
         $query = "SELECT r.guid_one AS guid FROM {$CONFIG->dbprefix}entity_relationships r ";
         $query .= " WHERE r.guid_two = {$lds_id} AND r.relationship IN ('lds_viewer', 'lds_viewer_group')";
 
-        $guids = array();
-        $result = execute_query ($query, get_db_link('read'));
-        while($row = mysql_fetch_object($result)) {
-            $guids[] = $row->guid;
-        }
+        //$guids = array();
+        //$result = execute_query ($query, get_db_link('read'));
+        //while($row = mysql_fetch_object($result)) {
+        //    $guids[] = $row->guid;
+        //}
+        $guids = get_data($query, "ldshake_guid_query");
 
         return $guids;
     }
@@ -1834,9 +1840,9 @@ SQL;
     public static function getUserEditableEntities($type = 'object', $subtype = 'LdS', $user_id = 0, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         global $CONFIG;
 
-        $offset = mysql_real_escape_string((int)$offset);
-        $limit = mysql_real_escape_string((int)$limit);
-        $type = mysql_real_escape_string($type);
+        $offset = sanitise_string((int)$offset);
+        $limit = sanitise_string((int)$limit);
+        $type = sanitise_string($type);
 
         if(!$user_id)
             $user_id = get_loggedin_userid();
@@ -1895,9 +1901,9 @@ SQL;
         global $CONFIG;
 
         if($count) $enrich = false;
-        $offset = mysql_real_escape_string((int)$offset);
-        $limit = mysql_real_escape_string((int)$limit);
-        $type = mysql_real_escape_string($type);
+        $offset = sanitise_string((int)$offset);
+        $limit = sanitise_string((int)$limit);
+        $type = sanitise_string($type);
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id($type, $subtype);
@@ -1964,7 +1970,7 @@ SQL;
             else
                 $tags_query = "";
 
-            $search = mysql_real_escape_string($search);
+            $search = sanitise_string($search);
             $order_query['join'] = "JOIN objects_entity oeo ON e.guid = oeo.guid";
             $search_query['join'] = "JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid JOIN metadata mt ON e.guid = mt.entity_guid";
             $search_query['query'] = <<<SQL
@@ -1990,7 +1996,7 @@ SQL;
             else
                 $tags_query = "";
 
-            $search = mysql_real_escape_string($search);
+            $search = sanitise_string($search);
             //$order_query['join'] = "LEFT JOIN objects_entity oeo ON e.guid = oeo.guid";
             $search_query['join'] = "LEFT JOIN objects_property op ON op.container_guid = e.guid LEFT JOIN {$CONFIG->dbprefix}objects_entity do ON op.guid = do.guid";// JOIN metadata mt ON e.guid = mt.entity_guid";
             $search_query['query'] = <<<SQL
@@ -2163,13 +2169,13 @@ SQL;
         if($count) {
             $time = microtime(true);
             $row = get_data_row($query);
-            echo '<pre>'.$query.'</pre>'.'<br>';
+            //echo '<pre>'.$query.'</pre>'.'<br>';
             echo microtime(true) - $time.' c<br />'.'<br>';
             return $row->total;
         } else {
             $time = microtime(true);
             $entities = get_data($query, $callback);
-            echo '<pre>'.$query.'</pre>'.'<br>';
+            //echo '<pre>'.$query.'</pre>'.'<br>';
             echo microtime(true) - $time.' e<br />';
             return $entities;
         }
@@ -2487,6 +2493,7 @@ SQL;
 	 * Returns all the tags of the LdS I see in the browse section
 	 * Use if if we filter out the LdS I can edit
 	 */
+    /*
 	public static function getBrowseTagsAndFrequencies ($userId)
 	{
 		$fields = array ('tags', 'discipline', 'pedagogical_approach');
@@ -2576,7 +2583,7 @@ SQL;
 			return false;
 		}
 	}
-
+*/
     public static function getAllTagsAndFrequenciesUsage ($userId)
     {
         global $CONFIG;
@@ -2597,7 +2604,7 @@ SQL;
         }
 
         return $category;
-
+/*
         //$lds = get_entities('object','LdS',0,'',100000,0);
         $lds = self::getUserViewableLdSs(get_loggedin_userid());
 
@@ -2650,6 +2657,7 @@ SQL;
         {
             return false;
         }
+*/
     }
 
     public static function build_notification($notification, $guid_list)

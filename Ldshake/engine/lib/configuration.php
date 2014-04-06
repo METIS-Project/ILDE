@@ -28,7 +28,7 @@
 		{
 			global $CONFIG;
 			
-			$name = mysql_real_escape_string($name);
+			$name = sanitise_string($name);
 			$site_guid = (int) $site_guid;
 			if ($site_guid == 0)
 				$site_guid = (int) $CONFIG->site_id;
@@ -51,8 +51,8 @@
 			// Unset existing
 			unset_config($name,$site_guid);
 			
-			$name = mysql_real_escape_string($name);
-			$value = mysql_real_escape_string($value);
+			$name = sanitise_string($name);
+			$value = sanitise_string($value);
 			$site_guid = (int) $site_guid;
 			if ($site_guid == 0)
 				$site_guid = (int) $CONFIG->site_id;
@@ -75,7 +75,7 @@
 			global $CONFIG;
 			if (isset($CONFIG->$name))
 				return $CONFIG->$name;
-			$name = mysql_real_escape_string($name);
+			$name = sanitise_string($name);
 			$site_guid = (int) $site_guid;
 			if ($site_guid == 0)
 				$site_guid = (int) $CONFIG->site_id;

@@ -50,7 +50,7 @@ define ('LDS_LICENSE_CC_BY_NC_NA', '6');
 
 function lds_init()
 {
-	global $CONFIG;
+	global $CONFIG, $rest_services;
 
 	///REST setup
     $CONFIG->rest_serializer = function($payload = array()) {
@@ -77,6 +77,12 @@ function lds_init()
 
 
 	require_once __DIR__.'/editors/editorsFactory.php';
+
+    if($rest_services) {
+        require_once __DIR__.'/rest.php';
+        require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
+    }
+
     //require_once __DIR__.'/stadistics.php';
 
     //require_once __DIR__.'/rest.php';
@@ -142,7 +148,7 @@ function lds_init()
 	//Include the helper functions
     require_once __DIR__.'/lds_contTools.php';
 
-    echo microtime(true) - $time.' l2<br />';
+    //echo microtime(true) - $time.' l2<br />';
 }
 
 register_elgg_event_handler('init','system','lds_init');
@@ -2430,6 +2436,8 @@ function lds_exec_tree ($params)
 function lds_exec_datatracking ($params) {
     global $CONFIG;
 
+    require_once __DIR__.'/stadistics.php';
+
     $vars['nUsers'] = get_entities('user','',0,'',9999, 0, true);
     $vars['nGroups'] = get_entities('group','',0,'',9999, 0, true);
 
@@ -2536,6 +2544,7 @@ function lds_exec_patterns ($params)
 }
 
 function lds_exec_query ($params) {
+    include_once __DIR__.'/Java.inc';
     $query = urldecode(get_input('q'));
     $vars['query'] = $query;
 

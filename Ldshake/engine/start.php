@@ -221,7 +221,7 @@ $boot = array (
 foreach($boot as $b) {
     $time=microtime(true);
     $b('boot', 'system', 'null');
-    echo microtime(true) - $time.' '.$b.'<br />';
+    //echo microtime(true) - $time.' '.$b.'<br />';
 }
 
 		// Load plugins
@@ -290,32 +290,21 @@ $CONFIG->events['init']['system'] = array (
 //    10000 => 'profile_fields_setup',
 );
 */
+
 //LDS
-$CONFIG->events['init']['system'] = array (
-//    0 => 'notification_init',
-    1 => 'users_init',
-//    2 => 'lds_profile_init',
-//    100 => 'export_init',
-    101 => 'filestore_init',
-    500 => 'elgg_init',
-//    501 => 'input_init',
-//    502 => 'actions_init',
-    503 => 'lds_admin_init',
-//    504 => 'api_init',
-//    505 => 'cron_init',
-//    506 => 'entities_init',
-//    507 => 'group_init',
-//    508 => 'plugin_init',
-//    509 => 'statistics_init',
-//    510 => 'usersettings_init',
-//    511 => 'widgets_init',
-    512 => 't9n_init',
-    513 => 'lds_messages_init',
-    514 => 'topbar_ldshake_init',
-    515 => 'lds_init',
-    9999 => 'access_init',
-//    10000 => 'profile_fields_setup',
-);
+if($plugin_handler == 'lds') {
+    $CONFIG->events['init']['system'] = array (
+        1 => 'users_init',
+        101 => 'filestore_init',
+        500 => 'elgg_init',
+        503 => 'lds_admin_init',
+        512 => 't9n_init',
+        513 => 'lds_messages_init',
+        514 => 'topbar_ldshake_init',
+        515 => 'lds_init',
+        9999 => 'access_init',
+    );
+}
 trigger_elgg_event('init', 'system');
 
 $CONFIG->registered_entities =

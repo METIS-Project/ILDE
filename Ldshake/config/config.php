@@ -40,13 +40,13 @@ $defaultLang = array (
 
 $debug = false;
 
-$vle_key = "92EB2B8ED34885A22685FE2CB8739153";
+$vle_key = "";
 
 $google_drive = array(
-    'client_id' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7.apps.googleusercontent.com',
-    'service_account_name' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7@developer.gserviceaccount.com',
-    'key_file_location' => '/var/www/0f2dd252fa9986159f0f4377b3ad852c05874328-privatekey.p12',
-    'application_name' => 'ilde-docs',
+    'client_id' => '',
+    'service_account_name' => '',
+    'key_file_location' => '',
+    'application_name' => '',
 );
 
 /**
@@ -67,13 +67,12 @@ $confOptions = array (
 	 * Basic DB connection options
 	 */
 	'dbhost' =>		array (
-						'devel' =>		'usrv',
+						'devel' =>		'localhost',
 						'staging' =>	'localhost',
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-                        'devel' =>		'metis_perf',
-						//'devel' =>		'metis_patterns',
+                        'devel' =>		'ldshake',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'
 					),
@@ -83,7 +82,7 @@ $confOptions = array (
 						'prod' =>		'user'
 					),
 	'dbpass' =>		array (
-						'devel' =>		'a7',
+						'devel' =>		'pass',
 						'staging' =>	'pass',
 						'prod' =>		'pass'
 					),

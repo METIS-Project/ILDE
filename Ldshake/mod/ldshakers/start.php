@@ -112,7 +112,7 @@ function ldshakers_exec_main ($params)
 	$ldshakers = get_loggedin_user()->getFriends('', 50, $offset);
     $ldshakers[] = get_loggedin_user();
 	$vars['count'] = count(get_loggedin_user()->getFriends('',10000,0)) + 1;
-	@Utils::osort($ldshakers, name);
+	@Utils::osort($ldshakers, "name");
 	
 	$vars['ldshakers'] = $ldshakers;
 	

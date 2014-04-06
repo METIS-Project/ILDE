@@ -54,14 +54,26 @@
 					$dbname = $CONFIG->dbname;
 		        }
 
+            if (!$dblink[$dblinkname] = mysqli_init())
+                throw new DatabaseException("Error configuring database link");
+
+            if(!mysqli_options($dblink[$dblinkname], MYSQLI_OPT_CONNECT_TIMEOUT, 30))
+                throw new DatabaseException("Error configuring database link");
+
 		    // Connect to database
-		        if (!$dblink[$dblinkname] = mysql_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true))
-		        	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:WrongCredentials'), $CONFIG->dbuser, $CONFIG->dbhost, $CONFIG->debug ? $CONFIG->dbpass : "****"));
-		        if (!mysql_select_db($CONFIG->dbname, $dblink[$dblinkname]))
-		        	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:NoConnect'), $CONFIG->dbname));
+            if (!mysqli_real_connect($dblink[$dblinkname], $CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, $CONFIG->dbname))
+                throw new DatabaseException(sprintf(elgg_echo('DatabaseException:WrongCredentials'), $CONFIG->dbuser, $CONFIG->dbhost, "****"));
+
+            if(!mysqli_set_charset($dblink[$dblinkname], "utf8"))
+                throw new DatabaseException("Error configuring database link");
+
+               //if (!$dblink[$dblinkname] = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true))
+		        //	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:WrongCredentials'), $CONFIG->dbuser, $CONFIG->dbhost, $CONFIG->debug ? $CONFIG->dbpass : "****"));
+		        //if (!mysql_select_db($CONFIG->dbname, $dblink[$dblinkname]))
+		        //	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:NoConnect'), $CONFIG->dbname));
 				/// LdShake change ///
 		        //We'll speak in UTF-8 with the DB
-                mysql_set_charset('utf8', $dblink[$dblinkname]);
+                //mysql_set_charset('utf8', $dblink[$dblinkname]);
 				//mysql_query ('SET NAMES utf8');
 				//mysql_query ('SET CHARACTER SET utf8');
 				/// LdShake change ///
@@ -175,7 +187,7 @@
 		function explain_query($query, $link)
 		{
 			if ($result = execute_query("explain " . $query, $link)) {
-                return mysql_fetch_object($result);
+                return mysqli_fetch_object($result);
             }
             
             return false;
@@ -202,11 +214,11 @@
         	if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
             $DB_PROFILE[] = $query;
             	
-            $result = mysql_query($query, $dblink);
+            $result = mysqli_query($dblink, $query);
             $DB_QUERY_CACHE[$query] = -1; // Set initial cache to -1
             	
-            if (mysql_errno($dblink))
-				throw new DatabaseException(mysql_error($dblink) . " QUERY: " . $query);
+            if (mysqli_errno($dblink))
+				throw new DatabaseException(mysqli_error($dblink) . " QUERY: " . $query);
 
             //$DB_QUERY_CACHE[$query] = $result;
 
@@ -218,7 +230,7 @@
 		 * Queue a query for execution after all output has been sent to the user.
 		 *
 		 * You can specify a handler function if you care about the result. This function will accept
-		 * the raw result from mysql_query();
+		 * the raw result from mysqli_query();
 		 *  
 		 * @param string $query The query to execute
 		 * @param resource $dblink The database link to use
@@ -286,7 +298,7 @@
             $resultarray = array();
             
             if ($result = execute_query("$query", $dblink)) {
-                while ($row = mysql_fetch_object($result)) {
+                while ($row = mysqli_fetch_object($result)) {
                 	if (!empty($callback) && is_callable($callback)) {
                 		$row = $callback($row);
                 	}
@@ -336,7 +348,7 @@
             
             if ($result = execute_query("$query", $dblink)) {
             	           
-            	$row = mysql_fetch_object($result);
+            	$row = mysqli_fetch_object($result);
             	
             	// Cache result (even if query returned no data
             	if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
@@ -371,7 +383,7 @@
             	error_log("Query cache invalidated");
             
             if (execute_query("$query", $dblink)) 
-                return mysql_insert_id($dblink);
+                return mysqli_insert_id($dblink);
                 
                 
 			return false;
@@ -421,7 +433,7 @@
             	error_log("Query cache invalidated");
             
             if (execute_query("$query", $dblink)) 
-                return mysql_affected_rows();
+                return mysqli_affected_rows($dblink);
         
 			return false;      
         }
@@ -482,7 +494,7 @@
 	 * @return string Database error message
 	 */
         function get_db_error($dblink) {
-        	return mysql_error($dblink);
+        	return mysqli_error($dblink);
         }
         
 	/**
@@ -578,7 +590,8 @@
          */
         function db_check_version()
         {
-        	$version = mysql_get_server_info();
+            $dblink = get_db_link("read");
+        	$version = mysqli_get_server_info($dblink);
         	
         	$points = explode('.', $version);
         	
@@ -608,7 +621,8 @@
 	 * @return string Sanitised string
 	 */
         function sanitise_string($string) {
-        	return mysql_real_escape_string(trim($string));
+            $dblink = get_db_link("read");
+        	return mysqli_escape_string($dblink,$string);
         }
         
 	/**

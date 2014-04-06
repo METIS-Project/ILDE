@@ -503,7 +503,7 @@
 															
 													$serialised_parameters .= "," . (bool)trim($parameters[$key]); 
 													break;
-										case 'string': $serialised_parameters .= ",'" .  (string)mysql_real_escape_string(trim($parameters[$key])) . "'"; 
+										case 'string': $serialised_parameters .= ",'" .  (string)sanitise_string(trim($parameters[$key])) . "'";
 													break;
 										case 'float': $serialised_parameters .= "," . (float)trim($parameters[$key]); 
 													break;

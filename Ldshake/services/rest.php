@@ -14,6 +14,7 @@
 	/**
 	 *  Start the Elgg engine
 	 */
+    $rest_services = true;
 	require_once("../engine/start.php");
 	global $CONFIG;
 

@@ -121,7 +121,7 @@ $disable_projects = $CONFIG->disable_projects;
 					<?php if ($item->locked): ?>
 					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
 					<?php endif; ?>
-                    <span class="lds_date" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
+                    <span class="lds_date timeago_timestamp" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
                     <div class="clearfloat"></div>
 				</div>
 			</li>
@@ -135,7 +135,7 @@ $disable_projects = $CONFIG->disable_projects;
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
 					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-                    <span class="lds_date" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
+                    <span class="lds_date timeago_timestamp" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
                     <div class="clearfloat"></div>
                 </div>
             </li>

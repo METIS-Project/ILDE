@@ -86,7 +86,6 @@ END;
 	//Pau: We append a checksum of the generated css file in order to break all clients' caches.
 	?>
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.php?hash=<?php echo crc32($cs_modified_string);?>" type="text/css" />
-    <!--<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.css?q=0001" type="text/css" />-->
     <link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>vendors/jquery/css/ui-lightness/jquery-ui-1.8.6.custom.css" type="text/css" />
     <link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />

@@ -19,6 +19,7 @@ foreach ($envUrls as $env => $url)
 
 //There we have the current environment: devel, staging or prod
 $CONFIG->currentEnv = $currentEnv;
+$CONFIG->currentEnv = 'devel';
 
 //However, we can force an environment
 if (isset($forcedEnv)) {

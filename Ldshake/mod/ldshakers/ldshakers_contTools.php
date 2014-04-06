@@ -136,9 +136,10 @@ SQL;
 		
 		return $arr;
 	}
-	
+
 	public static function getGroupsUserIsMember ($userId)
 	{
+        /*
 		$query = "SELECT am.access_collection_id FROM {$CONFIG->dbprefix}access_collection_membership am ";
 		$query .= " LEFT JOIN {$CONFIG->dbprefix}access_collections ag ON ag.id = am.access_collection_id ";
 		$query .= " WHERE am.user_guid = {$userId} AND ag.owner_guid = " . get_loggedin_userid();
@@ -147,8 +148,9 @@ SQL;
 		$res = execute_query ($query, get_db_link('read'));
 		while ($row = mysql_fetch_object($res))
 			$groups[] = get_access_collection($row->access_collection_id);
-		
-		Utils::osort($groups, name);
+		*/
+        $groups = get_users_membership($userId);
+		Utils::osort($groups, "name");
 				
 		return $groups;
 	}
