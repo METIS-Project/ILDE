@@ -213,7 +213,7 @@
 			$CONFIG->url = $CONFIG->wwwroot;
 			/// LdShake change ///
 			// Load default settings from database
-			get_all_config();
+			get_all_config(1);
 			
 			return true;
 			
@@ -223,6 +223,6 @@
 	 * Register config_init
 	 */
 
-		register_elgg_event_handler('boot','system','configuration_init',10);
+		//register_elgg_event_handler('boot','system','configuration_init',10);
 		
 ?>

@@ -159,7 +159,7 @@
 		function init_db($event, $object_type, $object = null) {
 			register_shutdown_function('db_delayedexecution_shutdown_hook');
 			//register_shutdown_function('db_profiling_shutdown_hook');
-			setup_db_connections();
+			//setup_db_connections();
 			return true;
 		}
 		

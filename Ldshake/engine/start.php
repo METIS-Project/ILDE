@@ -18,52 +18,48 @@
 
 	/// LdShake change ///
 	mb_internal_encoding("UTF-8");
+    $engine_dir = dirname(__FILE__);
 	/// LdShake change ///
 
 	/**
 	 * Load important prerequisites
 	 */
-		if (!@include_once(dirname(__FILE__) . "/lib/exceptions.php")) {		// Exceptions
+		if (!@include_once("{$engine_dir}/lib/exceptions.php")) {		// Exceptions
 			echo "Error in installation: could not load the Exceptions library.";
 			exit;
 		}
 
-		if (!@include_once(dirname(__FILE__) . "/lib/elgglib.php")) {		// Main Elgg library
+		if (!@include_once("{$engine_dir}/lib/elgglib.php")) {		// Main Elgg library
 			echo "Elgg could not load its main library.";
 			exit;
 		}
 
-		if (!@include_once(dirname(__FILE__) . "/lib/system_log.php")) {		// Logging library
+		if (!@include_once("{$engine_dir}/lib/system_log.php")) {		// Logging library
 			echo "Error in installation: could not load the System Log library.";
 			exit;
 		}
 	
-		if (!@include_once(dirname(__FILE__) . "/lib/export.php")) {		// Export library
+		if (!@include_once("{$engine_dir}/lib/export.php")) {		// Export library
 			echo "Error in installation: could not load the Export library.";
 			exit;
 		}
 		
-		if (!@include_once(dirname(__FILE__) . "/lib/languages.php")) {		// Languages library
-			echo "Error in installation: could not load the languages library.";
-			exit;
-		}
-		
-		if (!@include_once(dirname(__FILE__) . "/lib/input.php")) {		// Input library
+		if (!@include_once("{$engine_dir}/lib/input.php")) {		// Input library
 			echo "Error in installation: could not load the input library.";
 			exit;
 		}
 /*
-		if (!@include_once(dirname(__FILE__) . "/lib/install.php")) {		// Installation library
+		if (!@include_once("{$engine_dir}/lib/install.php")) {		// Installation library
 			echo "Error in installation: could not load the installation library.";
 			exit;
 		}
 */
-		if (!@include_once(dirname(__FILE__) . "/lib/cache.php")) {		// Installation library
+		if (!@include_once("{$engine_dir}/lib/cache.php")) {		// Installation library
 			echo "Error in installation: could not load the cache library.";
 			exit;
 		}
 		
-		if (!@include_once(dirname(__FILE__) . "/lib/sessions.php")) {
+		if (!@include_once("{$engine_dir}/lib/sessions.php")) {
 			echo ("Error in installation: Elgg could not load the Sessions library");
 			exit;
 		}
@@ -104,14 +100,14 @@
 		 * Load the system settings
 		 */
 			
-			if (!@include_once(dirname(__FILE__) . "/settings.php"))  		// Global settings
+			if (!@include_once("{$engine_dir}/settings.php"))  		// Global settings
 				throw new InstallationException("Elgg could not load the settings file.");
 				
 		/**
 		 * Load and initialise the database
 		 */
 	
-			if (!@include_once(dirname(__FILE__) . "/lib/database.php"))	// Database connection
+			if (!@include_once("{$engine_dir}/lib/database.php"))	// Database connection
 				throw new InstallationException("Elgg could not load the main Elgg database library.");
 				
 		/**
@@ -119,12 +115,20 @@
 		 * except for a few exceptions
 		 */
 			
-			if (!@include_once(dirname(__FILE__) . "/lib/actions.php")) {
+			if (!@include_once("{$engine_dir}/lib/actions.php")) {
 				throw new InstallationException("Elgg could not load the Actions library");
-			}	
+			}
 
-				
+            if (!@include_once("{$engine_dir}/lib/configuration.php")) {
+                throw new InstallationException("Elgg could not load the Configuration library");
+            }
 
+            setup_db_connections();
+            configuration_init();
+
+            if (!@include_once("{$engine_dir}/lib/languages.php")) {
+                throw new InstallationException("Elgg could not load the Languages library");
+            }
 		// We don't want to load or reload these files
 	/*
 			$file_exceptions = array(
@@ -138,47 +142,48 @@
 	
 		// Get the list of files to include, and alphabetically sort them
 	
-			$files = get_library_files(dirname(__FILE__) . "/lib",$file_exceptions);
+			$files = get_library_files("{$engine_dir}/lib",$file_exceptions);
 			asort($files);
             */
             $files = array (
-                20 => '/var/www/engine/lib/Utils.php',
-                30 => '/var/www/engine/lib/access.php',
-                10 => '/var/www/engine/lib/admin.php',
-                27 => '/var/www/engine/lib/annotations.php',
-                7 => '/var/www/engine/lib/api.php',
-                35 => '/var/www/engine/lib/cache.php',
-                36 => '/var/www/engine/lib/calendar.php',
-                8 => '/var/www/engine/lib/configuration.php',
-                15 => '/var/www/engine/lib/cron.php',
-                32 => '/var/www/engine/lib/entities.php',
-                3 => '/var/www/engine/lib/export.php',
-                16 => '/var/www/engine/lib/extender.php',
-                26 => '/var/www/engine/lib/filestore.php',
-                6 => '/var/www/engine/lib/group.php',
-                24 => '/var/www/engine/lib/input.php',
-                0 => '/var/www/engine/lib/install.php',
-                23 => '/var/www/engine/lib/location.php',
-                25 => '/var/www/engine/lib/memcache.php',
-                21 => '/var/www/engine/lib/metadata.php',
-                22 => '/var/www/engine/lib/metastrings.php',
-                11 => '/var/www/engine/lib/notification.php',
-                19 => '/var/www/engine/lib/objects.php',
-                28 => '/var/www/engine/lib/pagehandler.php',
-                9 => '/var/www/engine/lib/pageowner.php',
-                17 => '/var/www/engine/lib/pam.php',
-                33 => '/var/www/engine/lib/plugins.php',
-                29 => '/var/www/engine/lib/query.php',
-                31 => '/var/www/engine/lib/relationships.php',
-                5 => '/var/www/engine/lib/sites.php',
-                1 => '/var/www/engine/lib/statistics.php',
-                12 => '/var/www/engine/lib/system_log.php',
-                4 => '/var/www/engine/lib/tags.php',
-                13 => '/var/www/engine/lib/users.php',
-                34 => '/var/www/engine/lib/usersettings.php',
-                14 => '/var/www/engine/lib/version.php',
-                18 => '/var/www/engine/lib/widgets.php',
-                2 => '/var/www/engine/lib/xml.php',
+                //8 => "{$engine_dir}/lib/configuration.php",
+                //90 => "{$engine_dir}/lib/languages.php",
+                20 => "{$engine_dir}/lib/Utils.php",
+                30 => "{$engine_dir}/lib/access.php",
+                10 => "{$engine_dir}/lib/admin.php",
+                27 => "{$engine_dir}/lib/annotations.php",
+                7 => "{$engine_dir}/lib/api.php",
+                35 => "{$engine_dir}/lib/cache.php",
+                36 => "{$engine_dir}/lib/calendar.php",
+                15 => "{$engine_dir}/lib/cron.php",
+                32 => "{$engine_dir}/lib/entities.php",
+                3 => "{$engine_dir}/lib/export.php",
+                16 => "{$engine_dir}/lib/extender.php",
+                26 => "{$engine_dir}/lib/filestore.php",
+                6 => "{$engine_dir}/lib/group.php",
+                24 => "{$engine_dir}/lib/input.php",
+                0 => "{$engine_dir}/lib/install.php",
+                23 => "{$engine_dir}/lib/location.php",
+                25 => "{$engine_dir}/lib/memcache.php",
+                21 => "{$engine_dir}/lib/metadata.php",
+                22 => "{$engine_dir}/lib/metastrings.php",
+                11 => "{$engine_dir}/lib/notification.php",
+                19 => "{$engine_dir}/lib/objects.php",
+                28 => "{$engine_dir}/lib/pagehandler.php",
+                9 => "{$engine_dir}/lib/pageowner.php",
+                17 => "{$engine_dir}/lib/pam.php",
+                33 => "{$engine_dir}/lib/plugins.php",
+                29 => "{$engine_dir}/lib/query.php",
+                31 => "{$engine_dir}/lib/relationships.php",
+                5 => "{$engine_dir}/lib/sites.php",
+                1 => "{$engine_dir}/lib/statistics.php",
+                12 => "{$engine_dir}/lib/system_log.php",
+                4 => "{$engine_dir}/lib/tags.php",
+                13 => "{$engine_dir}/lib/users.php",
+                34 => "{$engine_dir}/lib/usersettings.php",
+                14 => "{$engine_dir}/lib/version.php",
+                18 => "{$engine_dir}/lib/widgets.php",
+                2 => "{$engine_dir}/lib/xml.php",
             );
 
 		// Include them

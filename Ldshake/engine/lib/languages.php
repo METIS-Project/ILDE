@@ -111,7 +111,13 @@
 			global $CONFIG;
 			
 			if (isset($CONFIG->debug) && $CONFIG->debug == true) error_log("Translations loaded from : $path");
-			
+
+            if(!include($path . $CONFIG->language.'.php')) {
+                if(!include($path . 'en'.'.php'))
+                    throw new InstallationException("Elgg could not load the language file");
+            }
+
+            /*
 			if ($handle = opendir($path)) {
 				while ($language = readdir($handle)) {
 					if (!in_array($language,array('.','..','.svn','CVS', '.DS_Store', 'Thumbs.db',)) && !is_dir($path . $language)) {
@@ -121,6 +127,7 @@
 			}
 			else
 				error_log("Missing translation path $path");
+            */
 		}
 		
 	/**
