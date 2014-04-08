@@ -779,8 +779,6 @@ function lds_exec_new ($params)
 {
 	global $CONFIG;
 
-    require_once __DIR__.'/patterns/coursemap.php';
-
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
 	$vars['referer'] = $CONFIG->url.'pg/lds/';
 	
@@ -808,12 +806,6 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][0]->guid = '0';
 	$vars['initDocuments'][0]->modified = '0';
 	$vars['initDocuments'][0]->body = '';
-    if(isset($params[1])) {
-        require_once __DIR__.'/templates/templates.php';
-        $body = ldshake_get_template($params[1]);
-    }
-
-
 
 	//And a support doc!
 	$vars['initDocuments'][1] = new stdClass();
@@ -827,23 +819,18 @@ function lds_exec_new ($params)
 
     if(count($params) == 3) {
         switch($params[1]) {
-            case 'pattern':
-                $vars['initDocuments'][0]->body = get_coursemap_pattern();
-                $vars['editor_type'] = $params[2];
-                $vars['editor_subtype'] = $params[2];
-                break;
             case 'template':
                 require_once __DIR__.'/templates/templates.php';
-                $templates = ldshake_get_template($params[2]);
-                $i=0;
-                foreach($templates as $template) {
-                    $vars['initDocuments'][$i++]->body = $template;
+                if($templates = ldshake_get_template($params[2])) {
+                    $i=0;
+                    foreach($templates as $template) {
+                        $vars['initDocuments'][$i++]->body = $template;
+                    }
+                    $vars['editor_subtype'] = $params[2];
+                } else {
+                    forward();
                 }
-                $vars['editor_subtype'] = $params[2];
 
-                //$vars['initDocuments'][0]->body = ldshake_get_template($params[2]);
-
-                //$vars['editor_type'] = $params[2];
                 break;
             case 'upload':
                 $vars['initDocuments'][0]->body = '';
@@ -855,22 +842,31 @@ function lds_exec_new ($params)
     }
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
-	
-	$vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
+    $time = microtime(true);
+	$vars['tags'] = json_encode(lds_contTools::getMyTags());
+    echo microtime(true) - $time." f<br>";
+    $time = microtime(true);
     $available = lds_contTools::getAvailableUsers(null);
+    echo microtime(true) - $time." u<br>";
 
+    $time = microtime(true);
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
+    echo microtime(true) - $time." fo<br>";
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['starter'] = get_loggedin_user();
 
     $vars['title'] = T("New LdS");
 
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
+    $time = microtime(true);
     echo elgg_view('lds/editform',$vars);
+    echo microtime(true) - $time." form<br>";
+    global $start_time;
+    echo microtime(true) - $start_time." start4<br>";
 }
 
 function lds_exec_upload ($params)

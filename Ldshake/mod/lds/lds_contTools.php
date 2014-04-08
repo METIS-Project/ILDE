@@ -41,6 +41,17 @@
 
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
+function ldshake_dummy_callback($row) {
+    return $row;
+}
+
+function ldshake_available_users_callback($row) {
+    global $CONFIG;
+
+    $row->pic = $CONFIG->url.'pg/icon/'.$row->username.'/small';
+
+    return $row;
+}
 
 function buildRichQuery($user_id, $elements) {
     global $CONFIG;
@@ -192,6 +203,32 @@ SQL;
     return $query;
 }
 */
+
+function ldshake_user_available_tags_query($user_id, $category) {
+    global $CONFIG;
+
+    $tag_id = get_metastring_id("$category");
+    //$tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
+    //$tag_id["tags"] = get_metastring_id("tags");
+
+    $query['join'] = <<<SQL
+LEFT JOIN metadata mf ON e.guid = mf.entity_guid
+LEFT JOIN metastrings ms ON ms.id = mf.value_id
+SQL;
+
+    $query['select'] = <<<SQL
+DISTINCT
+ms.string value
+SQL;
+
+    $query['where'] = "mf.name_id = {$tag_id}";
+
+    //$query['group_by'] = "";
+
+    $query['order']['by'] = "ORDER BY ms.string";
+
+    return $query;
+}
 
 function ldshake_tag_relevance_query($user_id) {
     global $CONFIG;
@@ -879,7 +916,15 @@ SQL;
 	public static function getMyTags ()
 	{
 		$fields = array ('tags', 'discipline', 'pedagogical_approach');
-		
+
+        $returnObj = new stdClass();
+
+        foreach ($fields as $f) {
+            $time = microtime(true);
+            $returnObj->$f = lds_contTools::getUserTagsAvailable($f);
+            echo microtime(true) - $time.' tl<br />'.'<br>';
+        }
+        /*
 		$returnObj = new stdClass();
 		$aux = array();
 		foreach ($fields as $field)
@@ -906,7 +951,7 @@ SQL;
 			
 			sort($returnObj->$field);
 		}
-		
+		*/
 		return $returnObj;
 	}  
 	
@@ -964,7 +1009,34 @@ SQL;
 		
 		return -1;
 	}
-	
+
+    /**
+     * Builds a minimal array og groups and members for a specified user, to be serialized w/json.
+     * @param unknown_type $groups
+     */
+    public static function buildMinimalUserGroups ($userId)
+    {
+        //$groups = self::getUserGroups ($userId, true);
+        $groups = get_users_membership($userId);
+
+        $arr = array();
+
+        if (is_array($groups))
+        {
+            foreach ($groups as $g)
+            {
+                $o = new stdClass();
+                $o->guid = $g->guid;
+                $o->name = $g->name;
+                $o->pic = $g->getIcon('small');
+
+                $arr[] = $o;
+            }
+        }
+
+        return $arr;
+    }
+
 	/**
 	 * Shortcut for counting 
 	 */
@@ -1650,11 +1722,20 @@ SQL;
         if(!$lds) {
             $user_id = get_loggedin_userid();
             $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE (
-	e.type IN ('user', 'group') AND e.enabled = 'yes' AND e.guid <> {$user_id}
+(SELECT e.guid, e.type, ue.name, ue.username from {$CONFIG->dbprefix}entities e
+LEFT JOIN users_entity ue ON ue.guid = e.guid
+LEFT JOIN groups_entity ge ON ge.guid = e.guid
+WHERE (
+	e.type = 'user' AND e.enabled = 'yes' AND e.guid <> {$user_id}
+)) UNION (
+SELECT e.guid, e.type, ge.name, '' AS username from {$CONFIG->dbprefix}entities e
+LEFT JOIN groups_entity ge ON ge.guid = e.guid
+WHERE (
+	e.type = 'group' AND e.enabled = 'yes'
+)
 )
 SQL;
-            $entities = get_data($query, "entity_row_to_elggstar");
+            $entities = get_data($query, "ldshake_available_users_callback");
 
             return $entities;
         }
@@ -1883,6 +1964,10 @@ SQL;
             $entities = get_data($query, "entity_row_to_elggstar");
             return $entities;
         }
+    }
+
+    public static function getUserTagsAvailable($category) {
+        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 0, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_user_available_tags_query", "callback" => "ldshake_dummy_callback", "params" => $category));
     }
 
     public static function getUserTagFrequency($category) {
@@ -2474,6 +2559,7 @@ SQL;
     }
 
     public static function entitiesToObjects($entities)	{
+        return $entities;
         $object_list = array();
 
         if($entities) {

@@ -85,58 +85,10 @@ SQL;
             }
         }
 
-        /*
-		$groups = get_user_access_collections($userId);
-		
-		if (is_array($groups))
-		{
-			foreach ($groups as $g)
-			{
-				$n = get_members_of_access_collection($g->id, true);
-				if ($n)
-				{
-					$g->nMembers = count($n);
-					
-					if ($alsoIncludeMembers)
-						$g->members = get_members_of_access_collection($g->id);
-				}
-				else 
-					$g->nMembers = 0;
-			}
-			Utils::osort($groups, 'name');
-		}
-        */
-		
+
 		return $groups_list;
 	}
 	
-	/**
-	 * Builds a minimal array og groups and members for a specified user, to be serialized w/json.
-	 * @param unknown_type $groups
-	 */
-	public static function buildMinimalUserGroups ($userId)
-	{
-		//$groups = self::getUserGroups ($userId, true);
-		$groups = get_users_membership($userId);
-		
-		$arr = array();
-		
-		if (is_array($groups))
-		{
-			foreach ($groups as $g)
-			{
-                $o = new stdClass();
-                $o->guid = $g->guid;
-                $o->name = $g->name;
-                $o->pic = $g->getIcon('small');
-
-                $arr[] = $o;
-			}
-		}
-		
-		return $arr;
-	}
-
 	public static function getGroupsUserIsMember ($userId)
 	{
         /*

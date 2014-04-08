@@ -300,6 +300,7 @@ $CONFIG->events['init']['system'] = array (
 if($plugin_handler == 'lds') {
     $CONFIG->events['init']['system'] = array (
         1 => 'users_init',
+        2 => 'lds_profile_init',
         101 => 'filestore_init',
         500 => 'elgg_init',
         503 => 'lds_admin_init',
