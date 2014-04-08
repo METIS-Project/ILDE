@@ -48,8 +48,6 @@ function ldshake_dummy_callback($row) {
 function ldshake_available_users_callback($row) {
     global $CONFIG;
 
-    $row->pic = $CONFIG->url.'pg/icon/'.$row->username.'/small';
-
     return $row;
 }
 
@@ -922,7 +920,7 @@ SQL;
         foreach ($fields as $f) {
             $time = microtime(true);
             $returnObj->$f = lds_contTools::getUserTagsAvailable($f);
-            echo microtime(true) - $time.' tl<br />'.'<br>';
+            //echo microtime(true) - $time.' tl<br />'.'<br>';
         }
         /*
 		$returnObj = new stdClass();
@@ -1718,28 +1716,23 @@ SQL;
     public static function getAvailableUsers($lds = null)
     {
         global $CONFIG;
-
-        if(!$lds) {
+        $url = sanitise_string($CONFIG->url);
+//$CONFIG->url.'pg/icon/'.$row->username.'/small';
+ //       if(!$lds) {
             $user_id = get_loggedin_userid();
             $query = <<<SQL
-(SELECT e.guid, e.type, ue.name, ue.username from {$CONFIG->dbprefix}entities e
+SELECT e.guid, e.type, ue.name, ue.username, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
 LEFT JOIN users_entity ue ON ue.guid = e.guid
-LEFT JOIN groups_entity ge ON ge.guid = e.guid
 WHERE (
 	e.type = 'user' AND e.enabled = 'yes' AND e.guid <> {$user_id}
-)) UNION (
-SELECT e.guid, e.type, ge.name, '' AS username from {$CONFIG->dbprefix}entities e
-LEFT JOIN groups_entity ge ON ge.guid = e.guid
-WHERE (
-	e.type = 'group' AND e.enabled = 'yes'
-)
 )
 SQL;
+        //echo '<pre>'.$query.'</pre><br />';
             $entities = get_data($query, "ldshake_available_users_callback");
 
             return $entities;
-        }
-
+//        }
+/*
         $query = <<<SQL
 SELECT * from {$CONFIG->dbprefix}entities e WHERE (
 	e.type IN ('user', 'group') AND e.enabled = 'yes' AND e.guid <> {$lds->owner_guid}
@@ -1757,6 +1750,7 @@ SQL;
         $entities = get_data($query, "entity_row_to_elggstar");
 
         return $entities;
+*/
     }
 
     public static function getUserSharedLdSWithMe($user_id, $count = false, $limit = 0, $offset = 0) {
@@ -2244,8 +2238,8 @@ SQL;
             foreach($rich_query['pre'] as $pre_query) {
                 $time = microtime(true);
                 update_data($pre_query);
-                //echo microtime(true) - $time.' p<br />';
-                //echo $pre_query.'<br />';
+                echo microtime(true) - $time.' p<br />';
+                echo $pre_query.'<br />';
             }
             $CONFIG->pre_query['enrich'] = true;
         }

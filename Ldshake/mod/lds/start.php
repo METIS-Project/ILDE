@@ -194,10 +194,25 @@ SQL;
 
 function lds_page_handler ($page)
 {
-    global $CONFIG;
+    global $CONFIG, $ldshake_jscache_break;
 
     global $start_time;
     echo microtime(true) - $start_time.' start1<br />';
+
+    $ldshake_dir = dirname(__FILE__);
+    $js_source = array(
+        '/ckeditor/contents.css',
+        '/autoSuggest/jquery.autoSuggest.js',
+    );
+
+    $js_modified_string = '';
+    foreach($js_source as $js) {
+        $js_modified = filemtime($ldshake_dir . $js);
+        $js_modified_string .= "{$js_modified}";
+    }
+    $ldshake_jscache_break["lds"] = crc32($js_modified_string);
+
+
 
     //$user = get_loggedin_userid();
 
@@ -845,10 +860,10 @@ function lds_exec_new ($params)
 
     $time = microtime(true);
 	$vars['tags'] = json_encode(lds_contTools::getMyTags());
-    echo microtime(true) - $time." f<br>";
+    //echo microtime(true) - $time." f<br>";
     $time = microtime(true);
     $available = lds_contTools::getAvailableUsers(null);
-    echo microtime(true) - $time." u<br>";
+    //echo microtime(true) - $time." u<br>";
 
     $time = microtime(true);
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
@@ -1199,7 +1214,7 @@ function lds_exec_edit ($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
     $vars['starter'] = get_user($editLdS->owner_guid);
 
     $vars['title'] = T("Edit LdS");
