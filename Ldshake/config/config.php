@@ -40,20 +40,20 @@ $defaultLang = array (
 
 $debug = false;
 
-$vle_key = "";
+$vle_key = "92EB2B8ED34885A22685FE2CB8739153";
 
 $google_drive = array(
-    'client_id' => '',
-    'service_account_name' => '',
-    'key_file_location' => '',
-    'application_name' => '',
+    'client_id' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7.apps.googleusercontent.com',
+    'service_account_name' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7@developer.gserviceaccount.com',
+    'key_file_location' => '/var/www/0f2dd252fa9986159f0f4377b3ad852c05874328-privatekey.p12',
+    'application_name' => 'ilde-docs',
 );
 
 /**
  * List of environments, containing the regular expression of the server name that defines them.
  */
 $envUrls = array (
-	'devel' =>		'^ilde|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11|^95\.23\.158\.182',
+	'devel' =>		'^localhost|^127\.0\.0\.1,|^web\.dev|^192\.168\.137\.11|^95\.23\.158\.182',
 	'staging' =>	'^ldshake3\.upf\.edu',
 	'prod' =>		'^ldshake\.upf\.edu'
 );
@@ -72,7 +72,8 @@ $confOptions = array (
 						'prod' =>		'localhost'
 					),
 	'dbname' =>		array (
-                        'devel' =>		'ldshake',
+                        'devel' =>		'ldshake_perf',
+						//'devel' =>		'metis_patterns',
 						'staging' =>	'ldshake',
 						'prod' =>		'ldshake'
 					),
@@ -82,7 +83,7 @@ $confOptions = array (
 						'prod' =>		'user'
 					),
 	'dbpass' =>		array (
-						'devel' =>		'pass',
+						'devel' =>		'a7',
 						'staging' =>	'pass',
 						'prod' =>		'pass'
 					),
@@ -132,15 +133,16 @@ $confOptions = array (
 		'ldshakers'
 	),
 
-    "needed_dependency" => array (
+    'needed_dependency' => array(
         'lds' => array(
-        't9n',
-        'messages',
-        'profile',
-        'topbar_ldshake',
-        'lds')
+            't9n',
+            'messages',
+            'profile',
+            'topbar_ldshake',
+            'lds',
+        )
     ),
-
+	
 	/**
 	 * Base number for id 'obfuscation', esp. for the LdS document viewer. 13330 = aaa in thirtysixecimal (base 36)
 	 * This base covers all alphanumeric characters: 0123456789abcdefghijklmnopqrstuvwxyz

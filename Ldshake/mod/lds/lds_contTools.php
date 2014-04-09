@@ -1013,7 +1013,22 @@ SQL;
      * @param unknown_type $groups
      */
     public static function buildMinimalUserGroups ($userId)
-    {
+    {/*
+        global $CONFIG;
+        $url = sanitise_string($CONFIG->url);
+
+        $query = <<<SQL
+SELECT e.guid, ge.name, CONCAT('{$url}pg/icon/',e.guid,'/small') AS pic from entities e
+LEFT JOIN groups_entity ge ON ge.guid = e.guid
+WHERE (
+    e.type = 'group' AND e.enabled = 'yes'
+)
+SQL;
+        //echo '<pre>'.$query.'</pre><br />';
+        $entities = get_data($query, "ldshake_dummy_callback");
+
+        return $entities;
+        */
         //$groups = self::getUserGroups ($userId, true);
         $groups = get_users_membership($userId);
 
@@ -1717,40 +1732,36 @@ SQL;
     {
         global $CONFIG;
         $url = sanitise_string($CONFIG->url);
-//$CONFIG->url.'pg/icon/'.$row->username.'/small';
- //       if(!$lds) {
-            $user_id = get_loggedin_userid();
+        $user_id = get_loggedin_userid();
+
+        if(!$lds)
+            $lds_guid = 0;
+        else
+            $lds_guid = $lds->guid;
+
             $query = <<<SQL
-SELECT e.guid, e.type, ue.name, ue.username, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
+(SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN (
+SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer', 'lds_editor')
+) AS nu ON nu.guid = e.guid
 LEFT JOIN users_entity ue ON ue.guid = e.guid
 WHERE (
-	e.type = 'user' AND e.enabled = 'yes' AND e.guid <> {$user_id}
+	e.type = 'user' AND e.enabled = 'yes' AND e.guid <> {$user_id} AND nu.guid IS NULL
+)
+) UNION (
+SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/groupicon/',e.guid,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN (
+SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer_group', 'lds_editor_group')
+) AS nu ON nu.guid = e.guid
+LEFT JOIN groups_entity ue ON ue.guid = e.guid
+WHERE (
+	e.type = 'group' AND e.enabled = 'yes' AND nu.guid IS NULL
+)
 )
 SQL;
-        //echo '<pre>'.$query.'</pre><br />';
             $entities = get_data($query, "ldshake_available_users_callback");
 
             return $entities;
-//        }
-/*
-        $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e WHERE (
-	e.type IN ('user', 'group') AND e.enabled = 'yes' AND e.guid <> {$lds->owner_guid}
-	AND (
-		NOT EXISTS (SELECT * FROM {$CONFIG->dbprefix}entity_relationships r WHERE e.guid = r.guid_one AND r.guid_two = {$lds->guid} AND r.relationship IN ('lds_viewer', 'lds_editor', 'lds_viewer_group', 'lds_editor_group')))
-    AND (
-        NOT EXISTS (SELECT * FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = e.guid AND rug.guid_two IN (
-        	SELECT rg.guid_one FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.guid_two = {$lds->guid} AND (rg.relationship IN ('lds_viewer_group', 'lds_editor_group'))
-        	)
-		)
-	)
-)
-SQL;
-
-        $entities = get_data($query, "entity_row_to_elggstar");
-
-        return $entities;
-*/
     }
 
     public static function getUserSharedLdSWithMe($user_id, $count = false, $limit = 0, $offset = 0) {

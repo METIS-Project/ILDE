@@ -33,7 +33,7 @@
 	}
 	
 	if (!$success) {
-		$contents = @file_get_contents($CONFIG->pluginspath . "groups/graphics/default{$size}.jpg");
+		$contents = @file_get_contents($CONFIG->pluginspath . "groups/graphics/default{$size}.gif");
 	}
 	
 	header("Content-type: image/jpeg");

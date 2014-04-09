@@ -860,17 +860,17 @@ function lds_exec_new ($params)
 
     $time = microtime(true);
 	$vars['tags'] = json_encode(lds_contTools::getMyTags());
-    //echo microtime(true) - $time." f<br>";
+    echo microtime(true) - $time." f<br>";
     $time = microtime(true);
     $available = lds_contTools::getAvailableUsers(null);
-    //echo microtime(true) - $time." u<br>";
+    echo microtime(true) - $time." u<br>";
 
     $time = microtime(true);
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     echo microtime(true) - $time." fo<br>";
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
 
     $vars['starter'] = get_loggedin_user();
 
