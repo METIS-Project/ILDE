@@ -2149,7 +2149,7 @@ AND ({$permissions_query['permission']})
 {$order_query['by']}
 {$query_limit}
 SQL;
-//echo '<pre>'.$query_base.'</pre>'.'<br>';
+echo '<pre>'.$query_base.'</pre>'.'<br>';
             $time = microtime(true);
             $result_order = get_data("{$query_base}", "ldshake_richlds_order");
             echo microtime(true) - $time.' ce<br />';

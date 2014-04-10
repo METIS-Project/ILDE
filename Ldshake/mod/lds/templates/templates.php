@@ -4,6 +4,7 @@ function ldshake_get_template($template){
 
     $templates = array(
         'MWD' => array('MWD'),
+        'kek_p1' => array('kek_p1'),
         'MDN' => array('mdn'),
         'EP' => array('EP'),
         'coursemap' => array('coursemap'),

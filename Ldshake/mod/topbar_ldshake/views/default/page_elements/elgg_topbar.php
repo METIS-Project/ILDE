@@ -132,6 +132,9 @@ if (isloggedin()) :
                 </div>
                 <div id="new_menu_conceptualize" class="menu level2">
                     <ul>
+                        <?php if($vars['url'] == "http://ilde.upf.edu/kek/"):?>
+                            <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/kek_p1"><?php echo T("Πρότυπο Διδακτικού Σεναρίου") ?></a></li>
+                        <?php endif; ?>
                         <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/pattern/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/design_pattern"><?php echo T("Design Pattern") ?></a></li>
                         <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/MDN"><?php echo T("Design Narrative") ?></a></li>
