@@ -85,6 +85,8 @@ DirectoryIndex index.php
 	FileETag MTime Size
 </FilesMatch>
 
+AddCharset UTF-8 .js
+
 <IfModule mod_rewrite.c>
 
 RewriteEngine on

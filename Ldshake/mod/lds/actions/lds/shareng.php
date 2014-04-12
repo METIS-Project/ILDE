@@ -83,7 +83,6 @@ if ($allCanView != '0') {
     */
     $lds->all_can_view = "no";
 }
-$lds->save();
 
 //Set write access
 $writeAccessIds = array_filter(explode(',',"$editors"));
@@ -129,9 +128,9 @@ if($lds->notify == '1') {
     $dn->lds_url = lds_viewTools::url_for($lds);
     $dn->sender_url = ldshakers_viewTools::urlFor($_SESSION['user'], 'user');
     $dn->save();
-
-    $lds->save();
 }
+
+$lds->save();
 
 $result = new StdClass();
 $result->result = "ok";

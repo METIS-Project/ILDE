@@ -308,7 +308,13 @@ if($plugin_handler == 'lds') {
         513 => 'lds_messages_init',
         514 => 'topbar_ldshake_init',
         515 => 'lds_init',
-        9999 => 'access_init',
+/*        516 => 'LdSObject_init',
+        517 => 'DocumentObject_init',
+        518 => 'DocumentEditorObject_init',
+        519 => 'DocumentRevisionObject_init',
+        520 => 'DocumentEditorRevisionObject_init',
+        521 => 'DeferredNotification_init',
+*/        9999 => 'access_init',
     );
 }
 trigger_elgg_event('init', 'system');

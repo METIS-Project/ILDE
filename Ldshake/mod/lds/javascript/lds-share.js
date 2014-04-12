@@ -201,7 +201,7 @@ function saveSharingOptions (callback)
 		};
 		
 		$('#lds_edit_buttons').addClass('busy');
-		$.post (baseurl + "action/lds/share", submitData, function (data)
+		$.post (baseurl + "action/lds/shareng", submitData, function (data)
 		{
 			$('#lds_edit_buttons').removeClass('busy');
 			

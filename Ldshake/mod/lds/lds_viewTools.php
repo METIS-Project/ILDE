@@ -47,7 +47,7 @@ class lds_viewTools
 	{
 		$params = array(
 			'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
-			'offset' => get_input('offset') ?: 0,
+			'offset' => get_input('offset', 0),
 			'count' => $count,
 			'limit' => $elementsPerPage
 		);
@@ -113,7 +113,8 @@ class lds_viewTools
 
         $folder = $type.$editortype;
 
-        $subtype = is_string($lds->subtype) ? $lds->subtype : $lds->getSubtype();
+        //$subtype = is_string($lds->subtype) ? $lds->subtype : $lds->getSubtype();
+        $subtype = get_subtype_from_id($lds->subtype);
         if($subtype == 'LdSProject_implementation' || $subtype == 'LdSProject') {
             if($type == 'edit') {
                 $folder = 'edit_project';

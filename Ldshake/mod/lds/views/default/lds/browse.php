@@ -123,6 +123,12 @@
 		<div class="paging">
 			<?php echo lds_viewTools::pagination($count) ?>
 		</div>
+        <?php
+        if($order == "time")
+            echo '<a href="'.lds_viewTools::getUrl()."?order=title&tagk={$tagk}&tagv={$tagv}".'">'.T("sort by title").'</a>';
+        else
+            echo '<a href="'.lds_viewTools::getUrl()."?order=time&tagk={$tagk}&tagv={$tagv}".'">'.T("sort by time").'</a>';
+        ?>
 	</div>
 	
 	<?php echo elgg_view('lds/browselist', $vars) ?>

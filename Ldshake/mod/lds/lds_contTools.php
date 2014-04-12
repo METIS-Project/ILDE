@@ -54,11 +54,17 @@ function ldshake_available_users_callback($row) {
 function buildRichQuery($user_id, $elements) {
     global $CONFIG;
 
+    $viewed_id = get_metastring_id('viewed_lds');
+
     $query['pre'] = array();
     $query['join'] = <<<SQL
 SQL;
     $query['select'] = <<<SQL
-e.*
+e.*,
+(
+SELECT a.time_created FROM annotations a WHERE a.name_id = {$viewed_id} AND a.owner_guid = {$user_id} and a.entity_guid = e.guid order by id desc limit 1
+) AS user_last_viewed_time
+
 SQL;
     $query['where'] = "e.guid IN({$elements})";
 
@@ -269,6 +275,7 @@ function ldshake_richlds($row) {
     $obj->lds = new stdClass();
     $obj->lds->guid = (int)$row->guid;
     $obj->lds->subtype = $row->subtype;
+    $obj->lds->subtype_string = $row->subtype_string;
     $obj->lds->editor_type = $row->editor_type;
     $obj->lds->title = $row->title;
     $obj->lds->owner_guid = (int)$row->owner_guid;
@@ -302,7 +309,7 @@ function ldshake_richlds($row) {
     }
 
     $isnew = true;
-    if((int)$row->last_edited_time && (int)$row->last_edited_time - 15 < (int)$row->last_viewed_time){
+    if((int)$row->last_edited_time && (int)$row->last_edited_time - 15 < (int)$row->user_last_viewed_time){
         $isnew = false;
     }
     $obj->new = $isnew;
@@ -1621,7 +1628,8 @@ SQL;
         //while($row = mysql_fetch_object($result)) {
         //    $guids[] = $row->guid;
         ///}
-
+        if(!$guids)
+            $guids = array();
         return $guids;
     }
 
@@ -1636,7 +1644,8 @@ SQL;
         //    $guids[] = $row->guid;
         //}
         $guids = get_data($query, "ldshake_guid_query");
-
+        if(!$guids)
+            $guids = array();
         return $guids;
     }
 
@@ -1651,32 +1660,82 @@ SQL;
         //    $guids[] = $row->guid;
         //}
         $guids = get_data($query, "ldshake_guid_query");
-
+        if(!$guids)
+            $guids = array();
         return $guids;
     }
 
-    public static function getEditorsUsers($lds_id)
+    public static function getEditorsUsers($lds_guid)
     {
         global $CONFIG;
+        $url = sanitise_string($CONFIG->url);
+        $user_id = get_loggedin_userid();
 
-        $query = "SELECT * from {$CONFIG->dbprefix}entities e WHERE e.guid IN";
-        $query .= "(SELECT r.guid_one AS guid FROM {$CONFIG->dbprefix}entity_relationships r ";
-        $query .= " WHERE r.guid_two = {$lds_id} AND r.relationship IN ('lds_editor', 'lds_editor_group'))";
+        $query = <<<SQL
+(SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN users_entity ue ON ue.guid = e.guid
+WHERE (
+	e.type = 'user'
+	AND e.enabled = 'yes'
+	AND e.guid <> {$user_id}
+	AND e.guid IN(
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_editor')
+	)
+)
+) UNION (
+SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/groupicon/',e.guid,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN groups_entity ue ON ue.guid = e.guid
+WHERE (
+	e.type = 'group'
+	AND e.enabled = 'yes'
+	AND e.guid IN (
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_editor_group')
+	)
+)
+)
+SQL;
 
-        $entities = get_data($query, "entity_row_to_elggstar");
+        $entities = get_data($query);
+        if(!$entities)
+            $entities = array();
 
         return $entities;
     }
 
-    public static function getViewersUsers($lds_id)
+    public static function getViewersUsers($lds_guid)
     {
         global $CONFIG;
+        $url = sanitise_string($CONFIG->url);
+        $user_id = get_loggedin_userid();
 
-        $query = "SELECT * from {$CONFIG->dbprefix}entities e WHERE e.guid IN";
-        $query .= "(SELECT r.guid_one AS guid FROM {$CONFIG->dbprefix}entity_relationships r ";
-        $query .= " WHERE r.guid_two = {$lds_id} AND r.relationship IN ('lds_viewer', 'lds_viewer_group'))";
+        $query = <<<SQL
+        (SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN users_entity ue ON ue.guid = e.guid
+WHERE (
+	e.type = 'user'
+	AND e.enabled = 'yes'
+	AND e.guid <> {$user_id}
+	AND e.guid IN(
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer')
+	)
+)
+) UNION (
+SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/groupicon/',e.guid,'/small') AS pic from {$CONFIG->dbprefix}entities e
+LEFT JOIN groups_entity ue ON ue.guid = e.guid
+WHERE (
+	e.type = 'group'
+	AND e.enabled = 'yes'
+	AND e.guid IN (
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer_group')
+	)
+)
+)
+SQL;
 
-        $entities = get_data($query, "entity_row_to_elggstar");
+        $entities = get_data($query);
+
+        if(!$entities)
+            $entities = array();
 
         return $entities;
     }
@@ -1741,21 +1800,24 @@ SQL;
 
             $query = <<<SQL
 (SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/icon/',ue.username,'/small') AS pic from {$CONFIG->dbprefix}entities e
-LEFT JOIN (
-SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer', 'lds_editor')
-) AS nu ON nu.guid = e.guid
 LEFT JOIN users_entity ue ON ue.guid = e.guid
 WHERE (
-	e.type = 'user' AND e.enabled = 'yes' AND e.guid <> {$user_id} AND nu.guid IS NULL
+	e.type = 'user'
+	AND e.enabled = 'yes'
+	AND e.guid <> {$user_id}
+	AND e.guid NOT IN(
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer', 'lds_editor')
+	)
 )
 ) UNION (
 SELECT e.guid, e.type, ue.name, CONCAT('{$url}pg/groupicon/',e.guid,'/small') AS pic from {$CONFIG->dbprefix}entities e
-LEFT JOIN (
-SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer_group', 'lds_editor_group')
-) AS nu ON nu.guid = e.guid
 LEFT JOIN groups_entity ue ON ue.guid = e.guid
 WHERE (
-	e.type = 'group' AND e.enabled = 'yes' AND nu.guid IS NULL
+	e.type = 'group'
+	AND e.enabled = 'yes'
+	AND e.guid NOT IN (
+	SELECT r.guid_one as guid FROM {$CONFIG->dbprefix}entity_relationships r WHERE r.guid_two = {$lds_guid} AND r.relationship IN ('lds_viewer_group', 'lds_editor_group')
+	)
 )
 )
 SQL;
@@ -2026,7 +2088,7 @@ SQL;
         if ($count) {
             $count_query = "COUNT(*) as total";
         } else {
-            $count_query = "DISTINCT e.guid";
+            $count_query = "DISTINCT e.guid, 'object' AS type";
         }
 
         $order_query['join'] = "";
@@ -2038,7 +2100,7 @@ SQL;
         } elseif($order == "time") {
             if(!$count) {
             $order_query['join'] = "";
-            $order_query['by'] = "order by e.time_created desc";
+            $order_query['by'] = "ORDER BY e.last_edited_time DESC";
             }
         } else {
             $order_query['join'] = "";
@@ -2091,9 +2153,9 @@ SQL;
             $search_query['join'] = "LEFT JOIN objects_property op ON op.container_guid = e.guid LEFT JOIN {$CONFIG->dbprefix}objects_entity do ON op.guid = do.guid";// JOIN metadata mt ON e.guid = mt.entity_guid";
             $search_query['query'] = <<<SQL
 (
-(op.subtype_id = {$l_doc} AND MATCH(do.title,do.description) AGAINST('{$search}'))
+(op.subtype = {$l_doc} AND MATCH(do.title,do.description) AGAINST('{$search}'))
 OR
-(e.subtype_id = {$l_ds} AND (MATCH(e.title) AGAINST('{$search}'))
+(e.subtype = {$l_ds} AND (MATCH(e.title) AGAINST('{$search}'))
 OR(MATCH(e.tags,e.discipline,e.pedagogical_approach) AGAINST('+{$search}' IN BOOLEAN MODE)))
 ) AND
 SQL;
@@ -2124,7 +2186,7 @@ SELECT {$count_query} FROM {$CONFIG->dbprefix}objects_property e
 {$mj}
 {$search_query['join']}
 {$permissions_query['join']}
-WHERE {$search_query['query']} {$mw} e.subtype_id = {$subtype}
+WHERE {$search_query['query']} {$mw} e.subtype = {$subtype}
 AND ({$permissions_query['permission']})
 {$custom_where}
 {$custom_group_by}
@@ -2143,9 +2205,8 @@ SELECT e.guid FROM {$CONFIG->dbprefix}objects_property e
 {$mj}
 {$search_query['join']}
 {$permissions_query['join']}
-WHERE {$search_query['query']} e.subtype_id = {$subtype}
+WHERE {$search_query['query']} {$mw} e.subtype = {$subtype}
 AND ({$permissions_query['permission']})
-{$mw}
 {$order_query['by']}
 {$query_limit}
 SQL;
@@ -2250,7 +2311,7 @@ SQL;
                 $time = microtime(true);
                 update_data($pre_query);
                 echo microtime(true) - $time.' p<br />';
-                echo $pre_query.'<br />';
+                //echo $pre_query.'<br />';
             }
             $CONFIG->pre_query['enrich'] = true;
         }

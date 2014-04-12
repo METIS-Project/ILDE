@@ -67,17 +67,6 @@
             if(!mysqli_set_charset($dblink[$dblinkname], "utf8"))
                 throw new DatabaseException("Error configuring database link");
 
-               //if (!$dblink[$dblinkname] = mysqli_connect($CONFIG->dbhost, $CONFIG->dbuser, $CONFIG->dbpass, true))
-		        //	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:WrongCredentials'), $CONFIG->dbuser, $CONFIG->dbhost, $CONFIG->debug ? $CONFIG->dbpass : "****"));
-		        //if (!mysql_select_db($CONFIG->dbname, $dblink[$dblinkname]))
-		        //	throw new DatabaseException(sprintf(elgg_echo('DatabaseException:NoConnect'), $CONFIG->dbname));
-				/// LdShake change ///
-		        //We'll speak in UTF-8 with the DB
-                //mysql_set_charset('utf8', $dblink[$dblinkname]);
-				//mysql_query ('SET NAMES utf8');
-				//mysql_query ('SET CHARACTER SET utf8');
-				/// LdShake change ///
-		        	
 		    // Set up cache
 		    	if (!$DB_QUERY_CACHE)
 		    		$DB_QUERY_CACHE = new ElggStaticVariableCache('db_query_cache'); //array();

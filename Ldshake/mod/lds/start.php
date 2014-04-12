@@ -71,7 +71,6 @@ function lds_init()
 	require_once __DIR__.'/model/DocumentEditorObject.php';
 	require_once __DIR__.'/model/DocumentRevisionObject.php';
 	require_once __DIR__.'/model/DocumentEditorRevisionObject.php';
-
 	require_once __DIR__.'/model/DeferredNotification.php';
 //    require_once __DIR__.'/model/ImplementationObject.php';
 
@@ -713,9 +712,10 @@ function lds_exec_browse_test ($params)
 function lds_exec_browse ($params)
 {
     global $start_time;
-	$order = get_input('order') ?: 'newest';
+	$order = get_input('order', 'time');
 	$offset = get_input('offset') ?: '0';
 
+    $vars['order'] = $order;
     $time = microtime(true);
     $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
     echo microtime(true) - $time.' tf<br />';
@@ -756,7 +756,7 @@ function lds_exec_browse ($params)
 
         $title = T("LdS tagged %1",$vars['tagv']);
         //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], "title",true);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], $order, true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
     }
@@ -769,7 +769,7 @@ function lds_exec_browse ($params)
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
         echo microtime(true) - $time.' bc<br />';
         $time = microtime(true);
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, "title", true);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true);
         echo microtime(true) - $time.' be<br />';
     }
 
@@ -933,7 +933,7 @@ function lds_exec_upload ($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['starter'] = get_loggedin_user();
 
@@ -1034,7 +1034,7 @@ function lds_exec_neweditor ($params)
 	$vars['jsonfriends'] = json_encode(lds_contTools::getFriendsArray(get_loggedin_userid()));
 	$vars['viewers'] = json_encode(array());
 	$vars['editors'] = json_encode(array());
-	$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+	$vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 	*/
 
     $available = lds_contTools::getAvailableUsers(null);
@@ -1042,7 +1042,7 @@ function lds_exec_neweditor ($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
 	$vars['starter'] = get_loggedin_user();
 	
@@ -1159,7 +1159,7 @@ function lds_exec_edit ($params)
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
 
-    create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+    //create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//lds_contTools::markLdSAsViewed ($params[1]);
 
 	//Pass the LdS properties to the form
@@ -1181,10 +1181,6 @@ function lds_exec_edit ($params)
 	
 	$vars['initLdS']->guid = $params[1];
 	$vars['am_i_starter'] = (get_loggedin_userid() == $editLdS->owner_guid);
-
-    //in_array("all_can_view", in_array("all_can_view", metadata_array_to_values(get_metadata_for_entity($editLdS))););
-    //$metadata = metadata_array_to_values(get_metadata_for_entity($editLdS));
-    ///$value = $editLdS->all_can_view;
 
 	$vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
 	
@@ -1249,7 +1245,7 @@ function lds_exec_editeditor ($params)
 		header("Location: " . $_SERVER['HTTP_REFERER']);
 	}
 
-    create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+    //create_annotation($editLdS->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 
 	//Pass the LdS properties to the form
 	$vars['initLdS'] = new stdClass();
@@ -1312,14 +1308,14 @@ function lds_exec_editeditor ($params)
 	$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
 	$vars['viewers'] = json_encode($arrays['viewers']);
 	$vars['editors'] = json_encode($arrays['editors']);
-	$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+	$vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
     */
     //These are all my friends
     $arrays = lds_contTools::buildObjectsArray($editLdS);
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
 	$vars['title'] = T("Edit LdS");
 	
@@ -1478,14 +1474,14 @@ function lds_exec_implementeditor($params)
         $vars['jsonfriends'] = json_encode($arrays['available']);
         $vars['viewers'] = json_encode($arrays['viewers']);
         $vars['editors'] = json_encode($arrays['editors']);
-        $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+        $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
     } else {
         $available = lds_contTools::getAvailableUsers(null);
         $vars['starter'] = get_user(get_loggedin_userid());
         $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
         $vars['viewers'] = json_encode(array());
         $vars['editors'] = json_encode(array());
-        $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+        $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
         $vars['am_i_starter'] = true;
     }
 
@@ -1621,7 +1617,7 @@ function lds_exec_editglueps($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['title'] = T("Edit implementation");
 
@@ -1731,7 +1727,7 @@ function lds_exec_newimplementglueps($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['starter'] = get_loggedin_user();
 
@@ -1970,8 +1966,6 @@ function lds_exec_view ($params)
 
     //TODO permission / exist checks
 
-	//lds_contTools::markLdSAsViewed ($id);
-	
 	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
 	$vars['currentDocId'] = $params[3] ?: $vars['ldsDocs'][0]->guid;
 	$vars['currentDoc'] = get_entity($vars['currentDocId']);
@@ -1979,7 +1973,7 @@ function lds_exec_view ($params)
 	$vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
     $vars['starter'] = get_user($vars['lds']->owner_guid);
 
-	//Securuty: we won't show a document unless it's part of this LdS
+	//Security: we won't show a document unless it's part of this LdS
 	if ($vars['currentDoc']->lds_guid != $id)
 	{
 		lds_exec_404();
@@ -1991,31 +1985,14 @@ function lds_exec_view ($params)
 	
 	$vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
 	
-	//These are all my friends
-    $arrays = lds_contTools::buildObjectsArray($vars['lds']);
-    $vars['jsonfriends'] = json_encode($arrays['available']);
-    //$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
-    $vars['viewers'] = json_encode($arrays['viewers']);
-    $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
-
-    //These are all my friends
-    /*
-    $arrays = lds_contTools::buildObjectsArray($editLdS);
-    $vars['jsonfriends'] = json_encode($arrays['available']);
-    $vars['viewers'] = json_encode($arrays['viewers']);
-    $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
-	*/
     //These are all my friends
     $arrays = lds_contTools::buildObjectsArray($vars['lds']);
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
     $vars['starter'] = get_user($vars['lds']->owner_guid);
 
-    //$vars['all_can_read'] = $vars['lds']->all_can_read;
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
 	$body = elgg_view('lds/view_internal',$vars);
@@ -2098,7 +2075,7 @@ function lds_exec_vieweditor ($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 	
 	$vars['starter'] = get_user($vars['lds']->owner_guid);
 	
@@ -2127,7 +2104,7 @@ function lds_exec_info ($params)
 	$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
 	$vars['viewers'] = json_encode($arrays['viewers']);
 	$vars['editors'] = json_encode($arrays['editors']);
-	$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+	$vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
     */
 
     //These are all my friends
@@ -2136,7 +2113,7 @@ function lds_exec_info ($params)
     //$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['starter'] = get_user($vars['lds']->owner_guid);
 	
@@ -2787,7 +2764,7 @@ function lds_exec_new_project ($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
 
     $vars['starter'] = get_loggedin_user();
 
@@ -2865,7 +2842,7 @@ function lds_exec_edit_project ($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
     $vars['starter'] = get_user($editLdS->owner_guid);
 
     $vars['title'] = T("Edit Project");

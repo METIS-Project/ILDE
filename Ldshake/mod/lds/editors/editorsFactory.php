@@ -741,6 +741,7 @@ class LdSFactory
         $lds->external_editor = true;
         $lds->editor_type = $ldsparams['type'];
         $lds->implementable = 1;
+        $lds->all_can_view = "no";
 
         $lds->title = $ldsparams['title'];
         $lds->granularity = 0;
