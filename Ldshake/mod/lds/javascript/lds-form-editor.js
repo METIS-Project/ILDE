@@ -679,9 +679,10 @@ function initCKED ()
         //Stopped loading:
         $('#shade,#lds_loading_contents').hide();
 
+/*
         editor.on( 'contentDom', function( evt )
         {
-            /*
+
             editor.document.on( 'keyup', function(event)
             {
                 //Windows, FF Mac & Webkit Mac
@@ -701,9 +702,9 @@ function initCKED ()
                     return false;
                 }
             });
-            */
-        }, editor.element.$);
 
+        }, editor.element.$);
+*/
         //$('#cke_lds_edit_body').hide();
         $("#lds_editor_iframe").attr("src", document_iframe_url);
     }, options);

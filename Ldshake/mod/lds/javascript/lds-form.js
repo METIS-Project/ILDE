@@ -361,20 +361,20 @@ function initCKED ()
 {
     var options = {filebrowserUploadUrl: baseurl + 'actions/lds/upload'};
 
-    $editor = $('#lds_edit_body').ckeditor(function ()
+    $('#lds_edit_body').ckeditor(function (ckedom)
     {
-        /*
+        //$editor = $(ckedom).ckeditor();
         editor = this;
-        editor.dataProcessor = null;
+
+        //editor.dataProcessor = null;
         resizeCK();
-        loadData ();
+        loadData();
 
         //Concurrence control
         ping_editing();
         //inaction_trigger();
 
         //Stopped loading:
-        */
         $('#shade,#lds_loading_contents').hide();
 /*
         editor.on( 'contentDom', function( evt )
@@ -400,8 +400,6 @@ function initCKED ()
                     return false;
                 }
             });
-            */
-/*
         }, editor.element.$);
   */
     }, options);

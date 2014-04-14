@@ -215,24 +215,28 @@
                 'translations' => &$CONFIG->translations,
             );
 
-            $data = array();
             $result = true;
-            foreach($wvars as $kvar => &$var) {
-                $key = crc32((int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
+            $tsblock = (int)floor($time/60);
 
-                if($md = shmop_open($key, 'a', 0, 0)) {
-                    $size = shmop_size($md);
-                    $jdata = shmop_read($md, 0, $size);
-                    shmop_close($md);
-                    $data[$kvar] = unserialize($jdata);
-                } else {
+            //no cache data stored
+            if($CONFIG->plugin_cache < $tsblock)
+                return false;
+
+            $option = 'plugin';
+            $key = crc32($tsblock.'_'.$option.'_'.$CONFIG->url);
+
+            if($md = shmop_open($key, 'a', 0, 0)) {
+                $size = shmop_size($md);
+                if($sdata = shmop_read($md, 0, $size)) {
+                    $data = unserialize($sdata);
+
+                    foreach($wvars as $kvar => &$var) {
+                        $var = $data[$kvar];
+                    }
+                }
+                shmop_close($md);
+            } else {
                     $result = false;
-                }
-            }
-            if($result) {
-                foreach($wvars as $kvar => &$var) {
-                    $var = $data[$kvar];
-                }
             }
 
             return $result;
@@ -247,27 +251,33 @@
                 'translations' => $CONFIG->translations,
             );
 
-            foreach($wvars as $kvar => $var) {
-                $jviews = serialize($var);
-                //$key = '0x'.hash("crc32b",(int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
-                $key = crc32((int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
+            $option = 'plugin';
+            $tsblock = (int)floor($time/60);
+            $key = crc32($tsblock.'_'.$option.'_'.$CONFIG->url);
 
-                if($md = shmop_open($key, 'n', 0664, strlen($jviews))) {
-                    shmop_write($md, $jviews, 0);
+            //adquire lock
+            if(insert_data("INSERT IGNORE INTO data_cache (`key`,`type`) VALUES ({$key}, '{$option}')")) {
+                foreach($wvars as $kvar => $var) {
+                    $vars[$kvar] = $var;
+                }
+
+                $svars = serialize($vars);
+
+                if($md = shmop_open($key, 'n', 0664, strlen($svars))) {
+                    shmop_write($md, $svars, 0);
                     shmop_close($md);
 
-                    $query = "INSERT INTO data_cache (`key`, `timestamp`, `type`) VALUES ('{$key}', {$time}, '{$kvar}')";
-                    insert_data($query);
+                    $stsblock = serialize($tsblock);
+                    insert_data("UPDATE config SET `value` = '{$stsblock}' WHERE name = '{$option}_cache'");
 
-                    $query = "SELECT `id`, `key` FROM data_cache WHERE `type` = '{$kvar}' ORDER BY `id` DESC LIMIT 2,10";
-
+                    //GC
+                    $query = "SELECT `id`, `key` FROM data_cache WHERE `type` = '{$option}' ORDER BY `id` DESC LIMIT 2,10";
                     if($result = get_data($query)) {
                         foreach($result as $r) {
                             $key = (int)$r->key;
                             if($del_md = shmop_open($key, 'w', 0, 0)) {
                                 $query = "DELETE FROM data_cache WHERE `id` = {$r->id}";
                                 delete_data($query);
-
                                 shmop_delete ($del_md);
                                 shmop_close($del_md);
                             }
