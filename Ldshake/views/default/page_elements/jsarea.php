@@ -22,7 +22,7 @@ var ldshake_cache = <?php echo json_encode($ldshake_jscache_break) ?>;
         var lds_date    = moment.unix(timestamp);
         var date;
 
-        if(now.diff(lds_date, 'days') < 3)
+        if(now.diff(lds_date, 'days') < 7)
             date = lds_date.fromNow();
         else {
             var format;

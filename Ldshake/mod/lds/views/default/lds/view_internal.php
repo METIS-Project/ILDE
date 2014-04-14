@@ -158,8 +158,9 @@
 		</div>
 	<?php endif; ?>
 
-	<iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>">
-	</iframe>
+    <div id="the_lds_wrapper">
+        <iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>"></iframe>
+    </div>
 <?php endif; ?>
 </div>
 

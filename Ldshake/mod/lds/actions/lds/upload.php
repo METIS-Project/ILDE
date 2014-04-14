@@ -60,7 +60,7 @@ $result = $file->save();
 if ($result)
 {
 	//903 is the width of al LdS both in the edit form and in the view page.
-	$master = get_resized_image_from_existing_file($file->getFilenameOnFilestore(),903,550);
+	$master = get_resized_image_from_existing_file($file->getFilenameOnFilestore(),902,550);
 
 	if ($master !== false)
 	{

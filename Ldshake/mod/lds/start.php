@@ -293,7 +293,7 @@ function lds_page_handler ($page)
 
 function lds_exec_main ($params)
 {
-    global $start_time;
+    global $ldshake_css, $start_time;
     //echo microtime(true) - $start_time.' start2<br />';
     $offset = get_input('offset') ?: '0';
 
@@ -333,6 +333,8 @@ function lds_exec_main ($params)
 
         $vars['title'] = T("All my LdS");
     }
+
+    $ldshake_css['#layout_canvas']['min-height'] = $vars['count'] * 28;
 
     $vars['section'] = $params[1];
 
@@ -715,7 +717,7 @@ function lds_exec_browse_test ($params)
 
 function lds_exec_browse ($params)
 {
-    global $start_time;
+    global $ldshake_css, $start_time;
 	$order = get_input('order', 'time');
 	$offset = get_input('offset') ?: '0';
 
@@ -781,7 +783,8 @@ function lds_exec_browse ($params)
         $vars['list'] = array();
     }
 
-    //$vars['list'] = lds_contTools::enrichLdS($vars['list']);
+    $ldshake_css['#layout_canvas']['min-height'] = $vars['count'] * 137;
+
 
     //$time = microtime(true);
     $body = elgg_view('lds/browse',$vars);

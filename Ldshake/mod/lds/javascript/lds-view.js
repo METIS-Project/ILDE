@@ -47,7 +47,7 @@ $(document).ready(function()
         h = Math.max(h-2-20, $('#the_lds').contents().find('body').height());
         $('#the_lds').height(h);
         //$('#the_lds').height($('#the_lds').contents().find('body').height());
-        $('#the_lds').width($('#one_column').width()-2);
+        //$('#the_lds').width($('#one_column').width()-2);
     }
 
     resizeViewport();
