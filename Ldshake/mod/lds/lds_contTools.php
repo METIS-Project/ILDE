@@ -45,6 +45,10 @@ function ldshake_dummy_callback($row) {
     return $row;
 }
 
+function ldshake_guid_callback($row) {
+    return $row->guid;
+}
+
 function ldshake_available_users_callback($row) {
     global $CONFIG;
 
@@ -2074,11 +2078,11 @@ SQL;
         return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom = null);
     }
 
-    public static function getUserEditableLdS($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null) {
-        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom);
+    public static function getUserEditableLdS($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $guid_only = false) {
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom, $guid_only);
     }
 
-    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null) {
+    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false) {
         global $CONFIG;
 
         if($count) $enrich = false;
@@ -2098,8 +2102,12 @@ SQL;
             $mk_id = get_metastring_id($mk);
             $mv_id = get_metastring_id($mv);
 
-            $mj = "JOIN metadata md ON e.guid = md.entity_guid";
-            $mw = "md.name_id = {$mk_id} AND md.value_id = {$mv_id} AND";
+            if($mk_id && $mv_id) {
+                $mj = "JOIN metadata md ON e.guid = md.entity_guid";
+                $mw = "md.name_id = {$mk_id} AND md.value_id = {$mv_id} AND";
+            } else {
+                return false;
+            }
         }
 
         //$permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
@@ -2112,6 +2120,10 @@ SQL;
         $e_base = "";
         if($enrich) {
             $callback = "ldshake_richlds";
+        }
+
+        if($guid_only) {
+            $callback = "ldshake_guid_callback";
         }
 
         if ($count) {

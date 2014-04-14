@@ -43,7 +43,7 @@ $title = get_input('title');
 
 $project_design_reference = get_entity($project_design_id);
 
-$project_design_implementation = new ElggObject();
+$project_design_implementation = new LdS();
 $project_design_implementation->access_id = 2;
 $project_design_implementation->subtype = 'LdSProject_implementation';
 $project_design_implementation->title = $title;

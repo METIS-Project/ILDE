@@ -80,7 +80,7 @@ else
 {
     $implementation_helper = get_entity(get_input('implementation_helper_id'));
     //We're creating it from scratch. Construct a new obj.
-    $implementation = new LdSObject();
+    $implementation = new LdS();
     $lds->lds_recovery = $lds_recovery;
     $implementation->subtype = 'LdS_implementation';
     $implementation->owner_guid = get_loggedin_userid();

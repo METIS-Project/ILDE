@@ -2434,6 +2434,10 @@ class UploadEditor extends Editor
             $this->_document->upload_filename = $doc_file->upload_filename;
             $file_origin = Editor::getFullFilePath($docSession);
             copy($file_origin, $file->getFilenameOnFilestore());
+        } elseif(isset($CONFIG->editor_templates[$this->_document->editorType])) {
+            $this->_document->upload_filename = $CONFIG->editor_templates[$this->_document->editorType]['filename'];
+            $file_origin = $CONFIG->path.$CONFIG->editor_templates[$this->_document->editorType]['path'];
+            copy($file_origin, $file->getFilenameOnFilestore());
         }
 
         $this->_document->save();
@@ -2441,18 +2445,22 @@ class UploadEditor extends Editor
         //create a new file to store the document
         $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id.'.zip';
-        $file = $this->getNewFile($filestorename);
 
         if($docSession) {
+            $file = $this->getNewFile($filestorename);
             $file_origin = Editor::getFullFilePath($docSession);
             copy($file_origin, $file->getFilenameOnFilestore());
             $this->_document->upload_filename_imsld = $doc_file->upload_filename;
+            $this->_document->file_imsld_guid = $file->guid;
+        } elseif(isset($CONFIG->editor_templates[$this->_document->editorType]['imsld'])) {
+            $file = $this->getNewFile($filestorename);
+            $this->_document->upload_filename_imsld = $CONFIG->editor_templates[$this->_document->editorType]['imsld']['filename'];
+            $file_origin = $CONFIG->path.$CONFIG->editor_templates[$this->_document->editorType]['imsld']['path'];
+            copy($file_origin, $file->getFilenameOnFilestore());
+            $this->_document->file_imsld_guid = $file->guid;
         }
 
-        $this->_document->file_imsld_guid = $file->guid;
-
         $this->_document->save();
-
 
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
@@ -2572,7 +2580,7 @@ class GluepsManager
     }
 
     public function cloneImplementation($title = null) {
-        $implementation = new ElggObject();
+        $implementation = new LdS();
         $implementation->subtype = 'LdS_implementation';
         $implementation->access_id = $this->_implementation->access_id;
         $implementation->container_guid = $this->_implementation->container_guid;

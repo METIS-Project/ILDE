@@ -63,11 +63,11 @@
             else
                 set_config('disable_registration', 'disabled', $site->getGUID());
 
-            projects = get_input('disable_projects');
-            if ($registration)
-                unset_config('disable_registration', $site->getGUID());
+            $projects = get_input('disable_projects');
+            if ($projects)
+                unset_config('disable_projects', $site->getGUID());
             else
-                set_config('disable_registration', 'disabled', $site->getGUID());
+                set_config('disable_projects', 'disabled', $site->getGUID());
 
 
 			// Now ping home

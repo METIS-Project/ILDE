@@ -59,7 +59,7 @@ if (get_input('guid') > 0)
 else
 {
 	//We're creating it from scratch. Construct a new obj.
-	$project_design = new ElggObject();
+	$project_design = new LdS();
     $project_design->subtype = 'LdSProject';
     $project_design->access_id = 2;
     $project_design->lds_recovery = $lds_recovery;
@@ -104,15 +104,14 @@ $resultIds->requestCompleted = true;
 $preserved_lds = array();
 $items_to_implement = array();
 $pg_data = json_decode($project_design->description, true);
-$lds_list = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, "project_design", $project_design->guid, null, false);
+$lds_list = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, "project_design", $project_design->guid, null, false, null, true);
 
 
 if($project_design->getSubtype() == 'LdSProject_implementation') {
-    foreach($pd_data as &$item) {
+    foreach($pg_data as &$item) {
         if(isset($item['guid'])) {
             $preserved_lds[] = $item['guid'];
         } else {
-            /*
             if($item['editor_type'] == 'doc') {
                 $lds = new LdSObject();
                 $lds->project_design = $project_design->guid;
@@ -174,21 +173,22 @@ if($project_design->getSubtype() == 'LdSProject_implementation') {
                     throw new Exception("Save failed");
                 }
             }
-            */
+
         }
     }
 
     $delete_lds = array_diff($lds_list, $preserved_lds);
 
-    /*
     foreach($delete_lds as $d) {
         if($lds_result = get_entity($d))
             $lds_result->disable();
-    }*/
+    }
 
     $project_design->description = json_encode($pd_data);
     $project_design->save();
 }
+
+$resultIds->JSONData = $project_design->description;
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultIds);

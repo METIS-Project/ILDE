@@ -61,6 +61,11 @@ function lds_init()
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
     $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
 
+    $CONFIG->editor_templates["openglm"]["filename"] = "openglm_file.glm";
+    $CONFIG->editor_templates["openglm"]["path"] = "vendors/openglm/EmptyOpenGLM.zip";
+    $CONFIG->editor_templates["openglm"]["imsld"]["filename"] = "openglm_file.zip";
+    $CONFIG->editor_templates["openglm"]["imsld"]["path"] = "vendors/openglm/EmptyOpenGLM.zip";
+
     //Load the model classes
 	//TODO could include the whole directory...
     $time = microtime(true);
@@ -73,7 +78,6 @@ function lds_init()
 	require_once __DIR__.'/model/DocumentEditorRevisionObject.php';
 	require_once __DIR__.'/model/DeferredNotification.php';
 //    require_once __DIR__.'/model/ImplementationObject.php';
-
 
 	require_once __DIR__.'/editors/editorsFactory.php';
 

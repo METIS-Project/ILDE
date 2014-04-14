@@ -34,9 +34,7 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php
+?><?php
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
