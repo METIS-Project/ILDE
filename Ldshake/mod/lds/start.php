@@ -892,9 +892,6 @@ function lds_exec_upload ($params)
 {
     global $CONFIG;
 
-    require_once __DIR__.'/patterns/coursemap.php';
-
-
     $editor = editorsFactory::getTempInstance($params[1]);
     $vars = $editor->newEditor();
 
