@@ -54,9 +54,9 @@
                 <?php endforeach; ?>
 
             </ul>
-            <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></h3></a>
+            <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></a></h3>
             <br />
-            <h3><a href="<?php echo $url.'pg/lds/repository'?>" style="color:black;"><?php echo T("External repositories") ?></h3></a>
+            <h3><a href="<?php echo $url.'pg/lds/repository'?>" style="color:black;"><?php echo T("External repositories") ?></a></h3>
             <br />
 
             <?php

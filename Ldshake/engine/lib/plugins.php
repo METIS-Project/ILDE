@@ -205,7 +205,78 @@
 			return false;
 			
 		}
-		
+
+        function rcache_plugin_config() {
+            global $CONFIG;
+
+            $time = time();
+            $wvars = array(
+                'views' => &$CONFIG->views,
+                'translations' => &$CONFIG->translations,
+            );
+
+            $data = array();
+            $result = true;
+            foreach($wvars as $kvar => &$var) {
+                $key = crc32((int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
+
+                if($md = shmop_open($key, 'a', 0, 0)) {
+                    $size = shmop_size($md);
+                    $jdata = shmop_read($md, 0, $size);
+                    shmop_close($md);
+                    $data[$kvar] = unserialize($jdata);
+                } else {
+                    $result = false;
+                }
+            }
+            if($result) {
+                foreach($wvars as $kvar => &$var) {
+                    $var = $data[$kvar];
+                }
+            }
+
+            return $result;
+        }
+
+        function wcache_plugin_config() {
+            global $CONFIG;
+
+            $time = time();
+            $wvars = array(
+                'views' => $CONFIG->views,
+                'translations' => $CONFIG->translations,
+            );
+
+            foreach($wvars as $kvar => $var) {
+                $jviews = serialize($var);
+                //$key = '0x'.hash("crc32b",(int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
+                $key = crc32((int)floor($time/60).'_'.$kvar.'_'.$CONFIG->url);
+
+                if($md = shmop_open($key, 'n', 0664, strlen($jviews))) {
+                    shmop_write($md, $jviews, 0);
+                    shmop_close($md);
+
+                    $query = "INSERT INTO data_cache (`key`, `timestamp`, `type`) VALUES ('{$key}', {$time}, '{$kvar}')";
+                    insert_data($query);
+
+                    $query = "SELECT `id`, `key` FROM data_cache WHERE `type` = '{$kvar}' ORDER BY `id` DESC LIMIT 2,10";
+
+                    if($result = get_data($query)) {
+                        foreach($result as $r) {
+                            $key = (int)$r->key;
+                            if($del_md = shmop_open($key, 'w', 0, 0)) {
+                                $query = "DELETE FROM data_cache WHERE `id` = {$r->id}";
+                                delete_data($query);
+
+                                shmop_delete ($del_md);
+                                shmop_close($del_md);
+                            }
+                        }
+                    }
+
+                }
+            }
+        }
 
 		/**
 		 * For now, loads plugins directly
@@ -231,213 +302,29 @@
 						//Removed yet another stupid @ sign from include in the next line. :(((((
 						if (!include($CONFIG->pluginspath . $mod . "/start.php"))
 							throw new PluginException(sprintf(elgg_echo('PluginException:MisconfiguredPlugin'), $mod));
-                        /*
-						if (is_dir($CONFIG->pluginspath . $mod . "/views")) {
-							if ($handle = opendir($CONFIG->pluginspath . $mod . "/views")) {
-								while ($viewtype = readdir($handle)) {
-									if (!in_array($viewtype,array('.','..','.svn','CVS')) && is_dir($CONFIG->pluginspath . $mod . "/views/" . $viewtype)) {
-										autoregister_views("",$CONFIG->pluginspath . $mod . "/views/" . $viewtype,$CONFIG->pluginspath . $mod . "/views/", $viewtype);
-									}
-								}
-							}
-						}
-						if (is_dir($CONFIG->pluginspath . $mod . "/languages")) {
-							register_translations($CONFIG->pluginspath . $mod . "/languages/");
-						}
-                        */
-					}
-				}
+                    }
+                }
 
-                $plugins_path = $CONFIG->pluginspath;
-                //echo "<pre>\n";echo htmlentities(var_export($CONFIG->views)).'</pre>'.'<br />';
-                $CONFIG->views = (object)array(
-                    'locations' =>
-                    array (
-                        'default' =>
-                        array (
-                            'about/contents' => "{$plugins_path}about/views/",
-                            'about/css' => "{$plugins_path}about/views/",
-                            'widgets/friends/view' => "{$plugins_path}friends/views/",
-                            'widgets/friends/edit' => "{$plugins_path}friends/views/",
-                            'forum/topicposts' => "{$plugins_path}groups/views/",
-                            'forum/viewposts' => "{$plugins_path}groups/views/",
-                            'forum/topics' => "{$plugins_path}groups/views/",
-                            'groups/icon' => "{$plugins_path}groups/views/",
-                            'groups/groupprofile' => "{$plugins_path}groups/views/",
-                            'groups/profileitems' => "{$plugins_path}groups/views/",
-                            'groups/groupgallery' => "{$plugins_path}groups/views/",
-                            'groups/members' => "{$plugins_path}groups/views/",
-                            'groups/css' => "{$plugins_path}groups/views/",
-                            'groups/forum_latest' => "{$plugins_path}groups/views/",
-                            'groups/grouplisting' => "{$plugins_path}groups/views/",
-                            'group/group' => "{$plugins_path}groups/views/",
-                            'sharing/invite' => "{$plugins_path}groups/views/",
-                            'icon/group/default/medium' => "{$plugins_path}groups/views/",
-                            'icon/group/default/tiny' => "{$plugins_path}groups/views/",
-                            'icon/group/default/large' => "{$plugins_path}groups/views/",
-                            'icon/group/default/small' => "{$plugins_path}groups/views/",
-                            'river/relationship/member/create' => "{$plugins_path}groups/views/",
-                            'widgets/group_members_widget/view' => "{$plugins_path}groups/views/",
-                            'widgets/group_members_widget/edit' => "{$plugins_path}groups/views/",
-                            'widgets/a_users_groups/view' => "{$plugins_path}groups/views/",
-                            'widgets/a_users_groups/edit' => "{$plugins_path}groups/views/",
-                            'widgets/group_entities_widget/view' => "{$plugins_path}groups/views/",
-                            'widgets/group_entities_widget/edit' => "{$plugins_path}groups/views/",
-                            'forms/groups/edit' => "{$plugins_path}groups/views/",
-                            'forms/groups/invite' => "{$plugins_path}groups/views/",
-                            'forms/forums/edittopic' => "{$plugins_path}groups/views/",
-                            'forms/forums/addpost' => "{$plugins_path}groups/views/",
-                            'forms/forums/addtopic' => "{$plugins_path}groups/views/",
-                            'object/groupforumtopic' => "{$plugins_path}groups/views/",
-                            'messages/menu' => "{$plugins_path}messages/views/",
-                            'messages/messages' => "{$plugins_path}messages/views/",
-                            'messages/css.bak' => "{$plugins_path}messages/views/",
-                            'messages/topbar' => "{$plugins_path}messages/views/",
-                            'messages/css' => "{$plugins_path}messages/views/",
-                            'messages/view.bak' => "{$plugins_path}messages/views/",
-                            'messages/view' => "{$plugins_path}messages/views/",
-                            'messages/js' => "{$plugins_path}messages/views/",
-                            'messages/messages.bak' => "{$plugins_path}messages/views/",
-                            'messages/forms/message.bak' => "{$plugins_path}messages/views/",
-                            'messages/forms/reply.bak' => "{$plugins_path}messages/views/",
-                            'messages/forms/reply' => "{$plugins_path}messages/views/",
-                            'messages/forms/message' => "{$plugins_path}messages/views/",
-                            'widgets/messages/view' => "{$plugins_path}messages/views/",
-                            'widgets/messages/edit' => "{$plugins_path}messages/views/",
-                            'object/messages' => "{$plugins_path}messages/views/",
-                            'icon/user/default/master' => "{$plugins_path}profile/views/",
-                            'icon/user/default/medium' => "{$plugins_path}profile/views/",
-                            'icon/user/default/tiny' => "{$plugins_path}profile/views/",
-                            'icon/user/default/topbar' => "{$plugins_path}profile/views/",
-                            'icon/user/default/large' => "{$plugins_path}profile/views/",
-                            'icon/user/default/small' => "{$plugins_path}profile/views/",
-                            'profile/editicon.bak' => "{$plugins_path}profile/views/",
-                            'profile/editicon' => "{$plugins_path}profile/views/",
-                            'profile/icon' => "{$plugins_path}profile/views/",
-                            'profile/javascript' => "{$plugins_path}profile/views/",
-                            'profile/editdefaultprofile' => "{$plugins_path}profile/views/",
-                            'profile/gallery' => "{$plugins_path}profile/views/",
-                            'profile/submenu.bak' => "{$plugins_path}profile/views/",
-                            'profile/listing' => "{$plugins_path}profile/views/",
-                            'profile/submenu' => "{$plugins_path}profile/views/",
-                            'profile/metatags' => "{$plugins_path}profile/views/",
-                            'profile/css' => "{$plugins_path}profile/views/",
-                            'profile/menu/adminwrapper' => "{$plugins_path}profile/views/",
-                            'profile/menu/links' => "{$plugins_path}profile/views/",
-                            'profile/menu/linksownpage' => "{$plugins_path}profile/views/",
-                            'profile/menu/actions' => "{$plugins_path}profile/views/",
-                            'profile/menu/adminlinks' => "{$plugins_path}profile/views/",
-                            'profile/hoverover' => "{$plugins_path}profile/views/",
-                            'profile/userdetails' => "{$plugins_path}profile/views/",
-                            'profile/listing.bak' => "{$plugins_path}profile/views/",
-                            'profile/profilelinks' => "{$plugins_path}profile/views/",
-                            'profile/footerjs' => "{$plugins_path}profile/views/",
-                            'profile/edit' => "{$plugins_path}profile/views/",
-                            'river/user/default/profileiconupdate' => "{$plugins_path}profile/views/",
-                            'river/user/default/profileupdate' => "{$plugins_path}profile/views/",
-                            'settings/phpmailer/edit' => "{$plugins_path}phpmailer/views/",
-                            'projects/new_projectimplementation_form' => "{$plugins_path}topbar_ldshake/views/",
-                            'topbar_ldshake/css' => "{$plugins_path}topbar_ldshake/views/",
-                            'topbar_ldshake/footerjs' => "{$plugins_path}topbar_ldshake/views/",
-                            'page_elements/elgg_topbar' => "{$plugins_path}topbar_ldshake/views/",
-                            'lds/projects/editform' => "{$plugins_path}lds/views/",
-                            'lds/projects/myprojects' => "{$plugins_path}lds/views/",
-                            'lds/projects/view_internal' => "{$plugins_path}lds/views/",
-                            'lds/projects/editform_editor' => "{$plugins_path}lds/views/",
-                            'lds/view_external' => "{$plugins_path}lds/views/",
-                            'lds/404' => "{$plugins_path}lds/views/",
-                            'lds/firststeps' => "{$plugins_path}lds/views/",
-                            'lds/implementlds_form' => "{$plugins_path}lds/views/",
-                            'lds/admin/vle' => "{$plugins_path}lds/views/",
-                            'lds/about.en' => "{$plugins_path}lds/views/",
-                            'lds/tree' => "{$plugins_path}lds/views/",
-                            'lds/welcome_lds/welcome_lds_en' => "{$plugins_path}lds/views/",
-                            'lds/welcome_lds/welcome_lds_ca' => "{$plugins_path}lds/views/",
-                            'lds/welcome_lds/welcome_lds_el' => "{$plugins_path}lds/views/",
-                            'lds/viewtrashed' => "{$plugins_path}lds/views/",
-                            'lds/clonelds_form' => "{$plugins_path}lds/views/",
-                            'lds/404public' => "{$plugins_path}lds/views/",
-                            'lds/implementform_editor' => "{$plugins_path}lds/views/",
-                            'lds/editform' => "{$plugins_path}lds/views/",
-                            'lds/view_revision' => "{$plugins_path}lds/views/",
-                            'lds/help.en' => "{$plugins_path}lds/views/",
-                            'lds/wordnetlist' => "{$plugins_path}lds/views/",
-                            'lds/vledata' => "{$plugins_path}lds/views/",
-                            'lds/browse' => "{$plugins_path}lds/views/",
-                            'lds/css' => "{$plugins_path}lds/views/",
-                            'lds/search' => "{$plugins_path}lds/views/",
-                            'lds/view_external_editor' => "{$plugins_path}lds/views/",
-                            'lds/aver2' => "{$plugins_path}lds/views/",
-                            'lds/aver' => "{$plugins_path}lds/views/",
-                            'lds/license_form' => "{$plugins_path}lds/views/",
-                            'lds/implementable' => "{$plugins_path}lds/views/",
-                            'lds/vledatacomplete' => "{$plugins_path}lds/views/",
-                            'lds/tracking' => "{$plugins_path}lds/views/",
-                            'lds/license_banner' => "{$plugins_path}lds/views/",
-                            'lds/view_internal_editor' => "{$plugins_path}lds/views/",
-                            'lds/mylds' => "{$plugins_path}lds/views/",
-                            'lds/view_internal' => "{$plugins_path}lds/views/",
-                            'lds/view_revision_editor' => "{$plugins_path}lds/views/",
-                            'lds/view_iframe' => "{$plugins_path}lds/views/",
-                            'lds/debug/debug_settings' => "{$plugins_path}lds/views/",
-                            'lds/querylist' => "{$plugins_path}lds/views/",
-                            'lds/query' => "{$plugins_path}lds/views/",
-                            'lds/browselist' => "{$plugins_path}lds/views/",
-                            'lds/editform_editor' => "{$plugins_path}lds/views/",
-                            'lds/js' => "{$plugins_path}lds/views/",
-                            'lds/single_share_form' => "{$plugins_path}lds/views/",
-                            'lds/patterns' => "{$plugins_path}lds/views/",
-                            'lds/implementations' => "{$plugins_path}lds/views/",
-                            'lds/history_editor' => "{$plugins_path}lds/views/",
-                            'lds/history' => "{$plugins_path}lds/views/",
-                            'lds/view_internal_tree' => "{$plugins_path}lds/views/",
-                            'lds/repository_search' => "{$plugins_path}lds/views/",
-                            'lds/editor_type/cld' => "{$plugins_path}lds/views/",
-                            'ldshakers/404' => "{$plugins_path}ldshakers/views/",
-                            'ldshakers/css' => "{$plugins_path}ldshakers/views/",
-                            'ldshakers/profile' => "{$plugins_path}ldshakers/views/",
-                            'ldshakers/ldshakers' => "{$plugins_path}ldshakers/views/",
-                            'ldshakers/js' => "{$plugins_path}ldshakers/views/",
-                        ),
-                        'rss' =>
-                        array (
-                            'forum/viewposts' => "{$plugins_path}groups/views/",
-                            'forum/topics' => "{$plugins_path}groups/views/",
-                            'groups/profileitems' => "{$plugins_path}groups/views/",
-                        ),
-                        'status' =>
-                        array (
-                            'api/output' => "{$plugins_path}lds/views/",
-                        ),
-                        'xml' =>
-                        array (
-                            'api/output' => "{$plugins_path}lds/views/",
-                        ),
-                        'binary' =>
-                        array (
-                            'api/output' => "{$plugins_path}lds/views/",
-                        ),
-                    ),
-                );
+                if(!rcache_plugin_config()) {
+                    foreach ($CONFIG->enabled_plugins as $mod) {
+                        if (is_dir($CONFIG->pluginspath . $mod . "/views")) {
+                            if ($handle = opendir($CONFIG->pluginspath . $mod . "/views")) {
+                                while ($viewtype = readdir($handle)) {
+                                    if (!in_array($viewtype,array('.','..','.svn','CVS')) && is_dir($CONFIG->pluginspath . $mod . "/views/" . $viewtype)) {
+                                        autoregister_views("",$CONFIG->pluginspath . $mod . "/views/" . $viewtype,$CONFIG->pluginspath . $mod . "/views/", $viewtype);
+                                    }
+                                }
+                            }
+                        }
+
+                        if (is_dir($CONFIG->pluginspath . $mod . "/languages")) {
+                            register_translations($CONFIG->pluginspath . $mod . "/languages/");
+                        }
+                    }
+                    wcache_plugin_config();
+                }
 
 
-	//add_translation("en",$english);
-
-
-//                include("/var/www/languages/en.php");
-/*                @include("/var/www/languages/el.php");
-                @include("/var/www/languages/ca.php");
-*/
-/*                @include("/var/www/mod/about/languages/en.php");
-                @include("/var/www/mod/friends/languages/en.php");
-                @include("/var/www/mod/groups/languages/en.php");
-                @include("/var/www/mod/messages/languages/en.php");
-                @include("/var/www/mod/uservalidationbyemail/languages/en.php");
-                @include("/var/www/mod/phpmailer/languages/en.php");
-                @include("/var/www/mod/lds/languages/en.php");
-                @include("/var/www/mod/friends/languages/en.php");
-                @include("/var/www/mod/messages/languages/en.php");
-*/
 				/// LdShake change ///
 				//Old code (elgg original)
 //				$plugins = get_plugin_list();

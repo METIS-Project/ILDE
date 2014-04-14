@@ -148,15 +148,13 @@
 	 */
 		function isadminloggedin()
 		{
-            //if (!is_installed()) return false;
-
             if(isset($_SESSION['is_admin'])) {
                 return $_SESSION['is_admin'];
             }
-            else {
+            elseif(isloggedin()){
                 $user = get_loggedin_user();
 
-                if ((isloggedin()) && (($user->admin || $user->siteadmin))) {
+                if ($user->admin || $user->siteadmin) {
                     $_SESSION['is_admin'] = true;
                     return true;
                 } else {
@@ -260,7 +258,7 @@
 
 	        // Update statistics
 	        set_last_login($_SESSION['guid']);
-	        
+
 			return true;
 				
 		}
@@ -316,8 +314,6 @@
 		function session_init($event, $object_type, $object) {
 			
 			global $DB_PREFIX, $CONFIG;
-			
-			if (!is_db_installed()) return false;
 			
 			// Use database for sessions
 			$DB_PREFIX = $CONFIG->dbprefix; // HACK to allow access to prefix after object distruction
@@ -382,15 +378,15 @@
 	            }
 	        }*/
 	        if ($_SESSION['id'] > 0) {
-	            set_last_action($_SESSION['id']);
+                set_last_action_session($_SESSION['id']);
 	        }
-	        
-	        register_action("login",true);
-    		register_action("logout");
-    		
-    		// Register a default PAM handler
-    		register_pam_handler('pam_auth_userpass');
-    		
+
+            register_action("login",true);
+            register_action("logout");
+
+            // Register a default PAM handler
+            register_pam_handler('pam_auth_userpass');
+
     		// Initialise the magic session
     		//global $SESSION;
     		//$SESSION = new ElggSession();
@@ -398,6 +394,16 @@
     		return true;
 	        
 		}
+
+    function set_last_action_session($user_guid) {
+
+        $user_guid = (int) $user_guid;
+        global $CONFIG;
+        $time = time();
+
+        execute_delayed_write_query("UPDATE {$CONFIG->dbprefix}users_entity set prev_last_action = last_action, last_action = {$time} where guid = {$user_guid}");
+
+    }
 		
 	/**
 	 * Used at the top of a page to mark it as logged in users only.

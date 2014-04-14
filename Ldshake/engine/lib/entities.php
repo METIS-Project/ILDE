@@ -2296,7 +2296,7 @@
 			$size = $params['size'];
 			
 			$url = "views/$viewtype/graphics/icons/$type/$subtype/$size.png";
-			
+
 			if (!@getimagesize($CONFIG->path . $url))
 				$url = "views/$viewtype/graphics/icons/$type/default/$size.png";
 			

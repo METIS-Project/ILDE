@@ -40,33 +40,12 @@
 <?php if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
 <ul id="lds_list">
 	<?php foreach($vars['list'] as $item): ?>
+    <?php
+        $can_edit = $item->lds->can_edit;
+        ?>
 	<li class="lds_list_element">
-		<div class="lds_actions">
-			<?php if ($item->locked):
-                $can_edit = can_edit_entity($item->lds->guid,get_loggedin_userid()) ; ?>
-				<div>
-					<?php $fstword = explode(' ',$item->locked_by->name); $fstword = $fstword[0]; ?>
-					<?php echo T("%1 is editing.", $item->locked_by->name) ?>
-				</div>
-			<?php else: ?>
-				<?php if ($can_edit): ?>
-				<div>
-					<?php if ($can_edit): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
-					<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid ?>"><?php echo T("Delete") ?></a><?php endif; ?>
-					<div class="lds_loading"></div>
-				</div>
-				<?php endif; ?>
-			<?php endif; ?>
-			<div class="indicators">
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'history') ?>" title="<?php echo T("View LdS history") ?>"><?php echo T("%1 revisions", $item->num_contributions) ?></a>
-				<br />
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'info') ?>" title="<?php echo T("View LdS info and comments") ?>"><?php echo T("%1 comments", $item->num_comments) ?></a>
-				<br />
-				<?php echo T("%1 documents", $item->num_documents) ?>
-			</div>
-		</div>
 		<div class="lds_icon">
-			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-64.png" /></a>
+			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img width="64" height="64" src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-64.png" /></a>
 			<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?>
 			<br />
 			<div class="lds_sticker mine"><?php echo T("Mine") ?></div>
@@ -76,7 +55,32 @@
 			<?php endif; ?>
 		</div>
 		<div class="lds_info">
-			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_title"><?php echo $item->lds->title ?></a>
+
+            <div class="lds_actions">
+                <?php if ($item->locked): ?>
+                    <div>
+                        <?php $fstword = explode(' ',$item->locked_by->name); $fstword = $fstword[0]; ?>
+                        <?php echo T("%1 is editing.", $item->locked_by->name) ?>
+                    </div>
+                <?php else: ?>
+                    <?php if ($can_edit): ?>
+                        <div>
+                            <?php if ($can_edit): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
+                            <?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid ?>"><?php echo T("Delete") ?></a><?php endif; ?>
+                            <div class="lds_loading"></div>
+                        </div>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <div class="indicators">
+                    <a href="<?php echo lds_viewTools::url_for($item->lds, 'history') ?>" title="<?php echo T("View LdS history") ?>"><?php echo T("%1 revisions", $item->num_contributions) ?></a>
+                    <br />
+                    <a href="<?php echo lds_viewTools::url_for($item->lds, 'info') ?>" title="<?php echo T("View LdS info and comments") ?>"><?php echo T("%1 comments", $item->num_comments) ?></a>
+                    <br />
+                    <?php echo T("%1 documents", $item->num_documents) ?>
+                </div>
+            </div>
+
+            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_title"><?php echo $item->lds->title ?></a>
 			<ul class="tagarea">
 				<li><?php echo T("Discipline") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'discipline') ?></li>
 				<li><?php echo T("Pedag. approach") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'pedagogical_approach') ?></li>

@@ -108,7 +108,7 @@ $disable_projects = $CONFIG->disable_projects;
 				<!--<div class="lds_select_spacer"></div>-->
                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
 				<?php endif; ?>
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
+				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img width="20" height="20" src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>
@@ -128,7 +128,7 @@ $disable_projects = $CONFIG->disable_projects;
 			<?php else: ?>
 			<li class="lds_list_element">
 				<input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
+				<a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img width="20" height="20" src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
 				<div class="lds_info">
 					<span class="lds_title_tags">
 						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>

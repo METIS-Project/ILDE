@@ -99,7 +99,7 @@
                 }
                 ?>
 
-                <img class="profilepic" src="<?php echo $user->getIcon('small'); ?>" />
+                <img class="profilepic" width="40" height="40" src="<?php echo $CONFIG->url.'pg/icon/'.$user->username.'/small';//getIcon('small'); ?>" />
 				<a class="ldshakers_user_name" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><?php echo $user->name ?></a>
 				<div style="clear:both"></div>
 			</li>

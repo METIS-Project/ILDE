@@ -42,7 +42,6 @@
 function t9n_init() {	
 	global $CONFIG;
 	
-	//$CONFIG->currentLang = 'en';
 	include_once "data/{$CONFIG->language}.php";
 	
 	$CONFIG->t9n = $translations;

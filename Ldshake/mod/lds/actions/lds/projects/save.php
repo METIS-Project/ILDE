@@ -61,14 +61,10 @@ else
 	//We're creating it from scratch. Construct a new obj.
 	$project_design = new ElggObject();
     $project_design->subtype = 'LdSProject';
+    $project_design->access_id = 2;
     $project_design->lds_recovery = $lds_recovery;
 	$project_design->owner_guid = get_loggedin_userid();
 
-    //$editor_types = explode(',', get_input('editor_type'));
-    //$editor_type = $editor_types[0];
-    //$editor_subtype = $editor_types[1];
-    //$project_design->editor_type = $editor_type;
-    //$project_design->editor_subtype = $editor_subtype;
 	$isNew = true;
 } 
 
@@ -78,12 +74,6 @@ $project_design->completeness = get_input('completeness');
 $project_design->description = get_input('JSONData', null, false);
 $project_design->editor_type = get_input('editorType');
 
-//If we save it for the first time, we're going to put some default value, which will be
-//modified by an ajax call to share.php
-if (get_input('guid') == 0)
-{
-	$project_design->access_id = 2;
-}
 
 //Now the tags. We'll delete the existing ones to save them again
 $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
@@ -101,23 +91,104 @@ $resultIds->LdS = $project_design->guid;
 if (get_input('revision') == 0)
 {
 	//We save for the first time in this edition session. So we create a revision.
-	create_annotation($project_design->guid, 'revised_project_design', '', 'text', get_loggedin_userid(), 1);
+	create_annotation($project_design->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
 } else {
     $project_design->lds_recovery = 0;
 }
 //We get the revision id to send it back to the form
-$revision = $project_design->getAnnotations('revised_project_design', 1, 0, 'desc');
+$revision = $project_design->getAnnotations('revised_docs', 1, 0, 'desc');
 $revision = $revision[0];
 $resultIds->revision = $revision->id;
+$resultIds->requestCompleted = true;
 
-/*
-if ($isNew) {
-    $project_design->notify = 1;
+$preserved_lds = array();
+$items_to_implement = array();
+$pg_data = json_decode($project_design->description, true);
+$lds_list = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, "project_design", $project_design->guid, null, false);
+
+
+if($project_design->getSubtype() == 'LdSProject_implementation') {
+    foreach($pd_data as &$item) {
+        if(isset($item['guid'])) {
+            $preserved_lds[] = $item['guid'];
+        } else {
+            /*
+            if($item['editor_type'] == 'doc') {
+                $lds = new LdSObject();
+                $lds->project_design = $project_design->guid;
+                $lds->owner_guid = get_loggedin_userid();
+                $lds->access_id = 2;
+                $lds->all_can_view = "no";
+                $lds->title = "{$item['toolName']} ($title)";
+                $lds->editor_type = $item['editor_type'];
+                $item['guid'] = $lds->save();
+
+                $initDocuments = array();
+                $initDocuments[] = '';
+
+                if(isset($item['editor_subtype'])) {
+                    require_once __DIR__.'/../../../templates/templates.php';
+                    $lds->editor_subtype = $item['editor_subtype'];
+                    $templates = ldshake_get_template($lds->editor_subtype);
+                    $i=0;
+                    foreach($templates as $template) {
+                        $initDocuments[$i++] = $template;
+                    }
+                    $lds->save();
+                }
+
+                foreach($initDocuments as $initDocument) {
+                    $docObj = new DocumentObject($lds->guid);
+                    $docObj->title = 'default title';
+                    $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
+                    $docObj->save();
+                }
+            } else {
+                $lds = new LdSObject();
+                $lds->title = "{$item['toolName']} ($title)";
+                $lds->project_design = $project_design->guid;
+                $lds->owner_guid = get_loggedin_userid();
+                $lds->access_id = 2;
+                $lds->all_can_view = "no";
+                $lds->editor_type = $item['editor_type'];
+                $lds->external_editor = true;
+                $item['guid'] = $lds->save();
+
+                $docObj = new DocumentObject($lds->guid);
+                $docObj->title = T('Support Document');
+                $docObj->description = 'Write support notes here...'; //We put it in ths desciption in order to use the objects_entity table of elgg db
+                $docObj->save();
+
+                $document_editor = new DocumentEditorObject($lds->guid, 0);
+                $document_editor->editorType = $lds->editor_type;
+                $document_editor->lds_guid = $lds->guid;
+                $document_editor->lds_revision_id = 0;
+                $document_editor->save();
+
+                $editor = editorsFactory::getInstance($document_editor);
+                $editor_vars = $editor->newEditor();
+
+                if($save_result = $editor->saveDocument($editor_vars)) {
+                    list($document_editor, $resultIds_add) = $save_result;
+                } else {
+                    throw new Exception("Save failed");
+                }
+            }
+            */
+        }
+    }
+
+    $delete_lds = array_diff($lds_list, $preserved_lds);
+
+    /*
+    foreach($delete_lds as $d) {
+        if($lds_result = get_entity($d))
+            $lds_result->disable();
+    }*/
+
+    $project_design->description = json_encode($pd_data);
     $project_design->save();
 }
-*/
-
-$resultIds->requestCompleted = true;
 
 header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultIds);

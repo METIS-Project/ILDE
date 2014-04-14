@@ -1,10 +1,9 @@
-<?php extract ($vars) ?>
-<!DOCTYPE html>
+<?php extract ($vars) ?><!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<title><?php echo T("LdShake: Learning Design Solutions") ?></title>
+	<title><?php echo $site->name.': '.$site->description ?></title>
 	<link rel="icon" type="image/png" href="<?php echo $url ?>_graphics/favicon.ico" />
 	<?php echo elgg_view('page_elements/analytics');?>
 	<style>

@@ -34,9 +34,7 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php
+?><?php
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
@@ -222,7 +220,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     <?php if($editor == 'google_docs'): ?>
     var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
     <?php endif; ?>
-    var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
+    var ilde_debug = <?php echo ($CONFIG->editor_debug ? 'true' : 'false')?>;
     var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
     <?php if($vars['restapi'] || $editor == 'gluepsrest'): ?>
     var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";

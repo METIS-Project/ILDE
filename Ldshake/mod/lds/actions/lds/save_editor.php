@@ -335,7 +335,7 @@ header('Content-Type: application/json; charset=utf-8');
 echo json_encode($resultIds);
 
 } catch (Exception $e) {
-    if($CONFIG->debug) {
+    if($CONFIG->editor_debug) {
         register_error("Save error");
         $lds->disable();
     }

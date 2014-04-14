@@ -34,9 +34,7 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php
+?><?php
 global $CONFIG;
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
@@ -263,11 +261,8 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 		var mytags = <?php echo $tags ?>;
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();
-		//var editor_id = "<?php echo $editor_id ?>";
 		var groups = <?php echo $groups ?>;
-        //var documents = <?php echo $initDocuments ?>;
-        //var document_url = "<?php echo $document_url ?>";
-        //var document_iframe_url = "<?php echo $document_iframe_url ?>";
+
         var implementation = false;
         var upload = <?php echo (isset($upload) ? 'true' : 'false')?>;
         var restapi = <?php echo ($vars['restapi'] ? 'true' : 'false')?>;
@@ -278,22 +273,11 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         <?php if($editor == 'google_docs'): ?>
         var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
         <?php endif; ?>
-        var ilde_debug = <?php echo ($CONFIG->debug ? 'true' : 'false')?>;
+        var ilde_debug = <?php echo ($CONFIG->editor_debug ? 'true' : 'false')?>;
 
-        /*var JSONData = <?php echo json_encode(array(
-"items" => array(
-array(
-"editor_type" => "doc",
-"editor_subtype" => "PC"
-),
-array(
-"editor_type" => "webcollagerest",
-),
-
-)
-        ));?>;
-        */
-        var ldproject = [];
+        var ldproject_view_only = true;
+        var ldproject = <?php echo $jsondata ?>;
+        var lds_list = <?php echo json_encode($list, true) ?>;
 
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;

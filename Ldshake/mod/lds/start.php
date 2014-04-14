@@ -59,13 +59,13 @@ function lds_init()
 
     //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
-    //$CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/ldshake/router.php?_route_=ldsdoc/";
     $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
 
     //Load the model classes
 	//TODO could include the whole directory...
     $time = microtime(true);
 
+	require_once __DIR__.'/model/LdS.php';
 	require_once __DIR__.'/model/LdSObject.php';
 	require_once __DIR__.'/model/DocumentObject.php';
 	require_once __DIR__.'/model/DocumentEditorObject.php';
@@ -79,7 +79,7 @@ function lds_init()
 
     if($rest_services) {
         require_once __DIR__.'/rest.php';
-        require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
+        require_once(__DIR__ . '/../../vendors/httpful/bootstrap.php');
     }
 
     //require_once __DIR__.'/stadistics.php';
@@ -88,8 +88,6 @@ function lds_init()
     //require(__DIR__ . '/../../vendors/httpful/bootstrap.php');
 
     //Our css stuff
-
-
 	extend_view('css','lds/css');
 	
 	//And our js scripts
@@ -146,8 +144,6 @@ function lds_init()
 
 	//Include the helper functions
     require_once __DIR__.'/lds_contTools.php';
-
-    //echo microtime(true) - $time.' l2<br />';
 }
 
 register_elgg_event_handler('init','system','lds_init');
@@ -156,10 +152,15 @@ register_plugin_hook('permissions_check', 'object', 'lds_write_permission_check'
 
 function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
 {
+    //$time=microtime(true);
     $subtype = $params['entity']->getSubtype();
 
     if ($subtype == 'LdS' || $subtype == 'LdS_implementation') {
-        return lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
+
+        $result = lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
+        //echo microtime(true)-$time.' pf<br>';
+        return $result;
+
     }
 }
 
@@ -196,7 +197,7 @@ function lds_page_handler ($page)
     global $CONFIG, $ldshake_jscache_break;
 
     global $start_time;
-    echo microtime(true) - $start_time.' start1<br />';
+    //echo microtime(true) - $start_time.' start1<br />';
 
     $ldshake_dir = dirname(__FILE__);
     $js_source = array(
@@ -209,7 +210,7 @@ function lds_page_handler ($page)
         $js_modified = filemtime($ldshake_dir . $js);
         $js_modified_string .= "{$js_modified}";
     }
-    $ldshake_jscache_break["lds"] = crc32($js_modified_string);
+    $ldshake_jscache_break["lds"] = hash("crc32b", $js_modified_string);
 
 
 
@@ -289,7 +290,7 @@ function lds_page_handler ($page)
 function lds_exec_main ($params)
 {
     global $start_time;
-    echo microtime(true) - $start_time.' start2<br />';
+    //echo microtime(true) - $start_time.' start2<br />';
     $offset = get_input('offset') ?: '0';
 
     if ($params[1] == 'created-by-me')
@@ -316,13 +317,12 @@ function lds_exec_main ($params)
     }
     else
     {
-        $time = microtime(true);
+        //$time = microtime(true);
         $vars['count'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), true);
-        echo microtime(true) - $time.' bc<br />';
-        $time = microtime(true);
-        //$entities = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset);
+        //echo microtime(true) - $time.' bc<br />';
+        //$time = microtime(true);
         $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset, null, null, "time", true);
-        echo microtime(true) - $time.' be<br />';
+        //echo microtime(true) - $time.' be<br />';
         //$time = microtime(true);
         //$vars['list'] = lds_contTools::enrichLdS($entities);
         //echo microtime(true) - $time.' el<br />';
@@ -333,17 +333,17 @@ function lds_exec_main ($params)
     $vars['section'] = $params[1];
 
 
-    echo microtime(true) - $start_time.' start25<br />';
+    //echo microtime(true) - $start_time.' start25<br />';
     $body = elgg_view('lds/mylds',$vars);
-    echo microtime(true) - $start_time.' start3<br />';
+    //echo microtime(true) - $start_time.' start3<br />';
 
     //echo microtime(true) - $time.' brl<br />';
     $offset = get_input('offset') ?: '0';
 
     $time = microtime(true);
     page_draw($vars['title'], $body);
-    echo microtime(true) - $time.' draw<br />';
-    echo microtime(true) - $start_time.' start4<br />';
+    //echo microtime(true) - $time.' draw<br />';
+    //echo microtime(true) - $start_time.' start4<br />';
 }
 
 function lds_exec_implementable ($params)
@@ -718,7 +718,7 @@ function lds_exec_browse ($params)
     $vars['order'] = $order;
     $time = microtime(true);
     $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
-    echo microtime(true) - $time.' tf<br />';
+    //echo microtime(true) - $time.' tf<br />';
 
     /*
     $time = microtime(true);
@@ -765,12 +765,12 @@ function lds_exec_browse ($params)
     {
         $title = T("Browse LdS");
 
-        $time = microtime(true);
+        //$time = microtime(true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
-        echo microtime(true) - $time.' bc<br />';
-        $time = microtime(true);
+        //echo microtime(true) - $time.' bc<br />';
+        //$time = microtime(true);
         $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true);
-        echo microtime(true) - $time.' be<br />';
+        //echo microtime(true) - $time.' be<br />';
     }
 
     if(!is_array($vars['list'])) {
@@ -779,14 +779,14 @@ function lds_exec_browse ($params)
 
     //$vars['list'] = lds_contTools::enrichLdS($vars['list']);
 
-    $time = microtime(true);
+    //$time = microtime(true);
     $body = elgg_view('lds/browse',$vars);
-    echo microtime(true) - $time.' start3<br />';
+    //echo microtime(true) - $time.' start3<br />';
 
-    $time = microtime(true);
+    //$time = microtime(true);
     page_draw($title, $body);
-    echo microtime(true) - $time.' start4<br />';
-    echo microtime(true) - $start_time.' start_finish<br />';
+    //echo microtime(true) - $time.' start4<br />';
+    //echo microtime(true) - $start_time.' start_finish<br />';
 
 }
 
@@ -858,16 +858,16 @@ function lds_exec_new ($params)
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
 
-    $time = microtime(true);
+    //$time = microtime(true);
 	$vars['tags'] = json_encode(lds_contTools::getMyTags());
-    echo microtime(true) - $time." f<br>";
-    $time = microtime(true);
+    //echo microtime(true) - $time." f<br>";
+    //$time = microtime(true);
     $available = lds_contTools::getAvailableUsers(null);
-    echo microtime(true) - $time." u<br>";
+    //echo microtime(true) - $time." u<br>";
 
-    $time = microtime(true);
+    //$time = microtime(true);
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
-    echo microtime(true) - $time." fo<br>";
+    //echo microtime(true) - $time." fo<br>";
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
     $vars['groups'] = json_encode(array());
@@ -877,11 +877,11 @@ function lds_exec_new ($params)
     $vars['title'] = T("New LdS");
 
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
-    $time = microtime(true);
+    //$time = microtime(true);
     echo elgg_view('lds/editform',$vars);
-    echo microtime(true) - $time." form<br>";
+    //echo microtime(true) - $time." form<br>";
     global $start_time;
-    echo microtime(true) - $start_time." start4<br>";
+    //echo microtime(true) - $start_time." start4<br>";
 }
 
 function lds_exec_upload ($params)
@@ -1357,10 +1357,7 @@ function lds_exec_implementeditor($params)
     global $CONFIG;
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    //if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
-        $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
-    //else
-    //    $vars['referer'] = $_SERVER['HTTP_REFERER'];
+    $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
 
     $editLdS = get_entity($params[1]);
     if($lds = get_entity($editLdS->lds_id))
@@ -2614,7 +2611,7 @@ function lds_admin_vle ($params) {
 function lds_exec_debug($params) {
     global $CONFIG;
 
-    if(!$CONFIG->debug)
+    if(!$CONFIG->editor_debug)
         forward();
 
     set_context("debug");
@@ -2720,10 +2717,10 @@ function lds_exec_project_implementation ($params)
     set_context("lds_exec_main");
     $project_implementation = get_entity($params[1]);
 
-    $vars['count'] = lds_contTools::getUserEditableLdSs($project_implementation->owner_guid, true,0,0, 'project_design', $params[1]);
-    $entities = lds_contTools::getUserEditableLdSs($project_implementation->owner_guid, false, 50, $offset, 'project_design', $params[1]);
-    $vars['list'] = lds_contTools::enrichLdS($entities);
+    $vars['count'] = lds_contTools::getUserEditableLdS($project_implementation->owner_guid, true,0,0, 'project_design', $params[1]);
+    $vars['list'] = lds_contTools::getUserEditableLdS($project_implementation->owner_guid, false, 50, $offset, 'project_design', $params[1], 'time', true);
     $vars['title'] = $project_implementation->title;
+    $vars['jsondata'] = $project_implementation->jsondata;
 
     $vars['list_type'] = T('LdS');
     $vars['section'] = 'off';
@@ -2756,6 +2753,7 @@ function lds_exec_new_project ($params)
     $vars['initLdS'] = json_encode($vars['initLdS']);
 
     $vars['editor_type'] = 'project_design';
+    $vars['jsondata'] = json_encode(array(), true);
 
     $vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
@@ -2764,11 +2762,13 @@ function lds_exec_new_project ($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
 
     $vars['starter'] = get_loggedin_user();
 
     $vars['title'] = T("New LdS Project Design");
+
+    $vars['list'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
 
     echo elgg_view('lds/projects/editform_editor',$vars);
 }
@@ -2779,10 +2779,7 @@ function lds_exec_edit_project ($params)
 
     set_context("lds_exec_new_project");
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    //if (preg_match('/(new|edit)/',$_SERVER['HTTP_REFERER']))
     $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
-    //else
-    //	$vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
 
@@ -2800,9 +2797,6 @@ function lds_exec_edit_project ($params)
         register_error("{$user->name} is editing this LdS. You cannot edit it until {$fstword} finishes.");
         header("Location: " . $_SERVER['HTTP_REFERER']);
     }
-
-    create_annotation($editLdS->guid, 'viewed_lds_design', '1', 'text', get_loggedin_userid(), 2);
-    //lds_contTools::markLdSAsViewed ($params[1]);
 
     //Pass the LdS properties to the form
     $vars['initLdS'] = new stdClass();
@@ -2824,17 +2818,13 @@ function lds_exec_edit_project ($params)
     $vars['initLdS']->guid = $params[1];
     $vars['am_i_starter'] = (get_loggedin_userid() == $editLdS->owner_guid);
 
-    //in_array("all_can_view", in_array("all_can_view", metadata_array_to_values(get_metadata_for_entity($editLdS))););
-    //$metadata = metadata_array_to_values(get_metadata_for_entity($editLdS));
-    ///$value = $editLdS->all_can_view;
-
     $vars['all_can_read'] = ($editLdS->all_can_view == 'yes' || ($editLdS->all_can_view === null && $editLdS->access_id < 3 && $editLdS->access_id > 0)) ? 'true' : 'false';
 
     $vars['initLdS'] = json_encode($vars['initLdS']);
 
-    //For each of the documents that this LdS has...
-
     $vars['jsondata'] = $editLdS->description;
+    $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 500, 0, null, null, "time", true);
+
     $vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
     //These are all my friends
@@ -2842,7 +2832,7 @@ function lds_exec_edit_project ($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
     $vars['starter'] = get_user($editLdS->owner_guid);
 
     $vars['title'] = T("Edit Project");

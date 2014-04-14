@@ -54,7 +54,7 @@ if (isloggedin()) :
                 </a>
 
                 <ul id="ldshake_topbar_user_menu">
-                    <?php if($CONFIG->debug): ?>
+                    <?php if($CONFIG->editor_debug): ?>
                         <li><a href="<?php echo $vars['url']; ?>pg/lds/debug/"><?php echo T("Developer settings") ?></a></li>
                     <?php endif; ?>
                     <li><a href="<?php echo $vars['url']; ?>pg/settings/"><?php echo T("Account settings") ?></a></li>
@@ -65,22 +65,18 @@ if (isloggedin()) :
                 </ul>
             </div>
             <div id="ldshake_topbar_avatar">
-                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $vars['username'] ?>/"><img class="user_mini_avatar" src="<?php echo $_SESSION['user']->getIcon('tiny'); ?>" alt="<?php echo $vars['name'] ?>"/></a>
+                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $vars['username'] ?>/"><img height="25" width="25" class="user_mini_avatar" src="<?php echo $vars['url'].'pg/icon/'.$vars['username'].'/tiny'; ?>" alt="<?php echo $vars['name'] ?>"/></a>
             </div>
             <div id="ldshake_topbar_serach">
                 <form id="searchform" action="<?php echo $vars['url']; ?>pg/lds/search/" method="get">
-                    <span id="ldshake_topbar_search_submit"><a href="#"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/search.png" /></a></span>
+                    <span id="ldshake_topbar_search_submit"><a href="#"><img width="19" height="16" src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/search.png" /></a></span>
                     <input type="text" size="21" name="q" placeholder="<?php echo T('Search %1', 'LdS')?>" id="ldshake_topbar_search_input" />
                 </form>
             </div>
         </div>
 		<div id="ldshake_topbar_container_left">
 			<div id="ldshake_topbar_logo">
-				<?php if ($vars['$user']->isExpert): ?>
-				<a href="<?php echo $vars['url']; ?>pg/lds/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
-				<?php else:	?>
-				<a href="<?php echo $vars['url']; ?>pg/lds/firststeps/"><img src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
-				<?php endif; ?>
+				<a href="<?php echo $vars['url']; ?>pg/lds/"><img width="54" height="34" src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
 			</div>
 			<div id="toolbarlinks">
 				<ul id="toolbar_options">
@@ -100,7 +96,7 @@ if (isloggedin()) :
 				<div id="toolbar_lds_types" class="menu">
                     <ul>
                         <?php
-                        if($CONFIG->debug)
+                        if($CONFIG->editor_debug)
                           if(get_loggedin_user()->editor):
                             if($editor = get_entity(get_loggedin_user()->editor)):
                         ?>
@@ -117,7 +113,6 @@ if (isloggedin()) :
 			    </div>
                 <div id="new_menu_author" class="menu level2">
                     <ul>
-                        <!--<li id="tb_newlds_basic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Rich Text") ?></a></li>-->
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/openglm"><?php echo T("OpenGLM (upload)") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cadmos"><?php echo T("CADMOS (upload)") ?></a></li>
@@ -154,15 +149,13 @@ if (isloggedin()) :
                         <li id="tb_newlds_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Project Workflow") ?></a></li>
                         <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Manage projects designs") ?></a></li>
                         <?php
-                        $projects = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 15);//lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 10);
+                        $projects = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 15);
                         if($projects)foreach($projects as $project): ?>
                         <li class="menu_option"><a class="new_project_menu_item" href="<?php echo $vars['url']; ?>pg/lds/new/projects/implement/" project_guid="<?php echo $project->guid;?>"><?php echo $project->title ?></a></li>
                         <?php endforeach; ?>
                     </ul>
                 </div>
                 <?php endif; ?>
-
-
             </div>
 		</div>
 	</div>

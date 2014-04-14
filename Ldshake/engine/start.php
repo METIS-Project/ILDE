@@ -204,7 +204,7 @@
 		
 		// Autodetect some default configuration settings
 			//set_default_config();
-$time=microtime(true);
+//$time=microtime(true);
 
 // Trigger events
 			//trigger_elgg_event('boot', 'system');
@@ -213,18 +213,12 @@ $boot = array (
     0 => 'init_db',
     1 => 'session_init',
     2 => 'sites_init',
-    10 => 'configuration_init',
+//    10 => 'configuration_init',
     500 => 'install_init',
 );
-/*
-$boot = array (
-    0 => 'init_db',
-    1 => 'session_init',
-
-);*/
 
 foreach($boot as $b) {
-    $time=microtime(true);
+    //$time=microtime(true);
     $b('boot', 'system', 'null');
     //echo microtime(true) - $time.' '.$b.'<br />';
 }

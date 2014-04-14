@@ -51,7 +51,7 @@ function ldshake_available_users_callback($row) {
     return $row;
 }
 
-function buildRichQuery($user_id, $elements) {
+function buildRichQuery($user_id, $elements, $can_edit = false) {
     global $CONFIG;
 
     $viewed_id = get_metastring_id('viewed_lds');
@@ -64,8 +64,34 @@ e.*,
 (
 SELECT a.time_created FROM annotations a WHERE a.name_id = {$viewed_id} AND a.owner_guid = {$user_id} and a.entity_guid = e.guid order by id desc limit 1
 ) AS user_last_viewed_time
-
 SQL;
+
+    if($can_edit) {
+        if(isadminloggedin()) {
+            $query['select'] .= <<<SQL
+,
+1 AS can_edit
+SQL;
+        } else {
+            $query['select'] .= <<<SQL
+,
+e.owner_guid = {$user_id} OR eshared.guid IS NOT NULL
+AS can_edit
+SQL;
+
+            $query['join'] .= <<<SQL
+NATURAL LEFT JOIN (
+(SELECT rg.guid_two as guid FROM entity_relationships rg JOIN (
+        SELECT rug.guid_two as guid FROM entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
+        ) AS up ON up.guid = rg.guid_one WHERE rg.relationship = 'lds_editor_group'
+        ) UNION (
+        SELECT ru.guid_two as guid FROM entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
+        )
+) AS eshared
+SQL;
+        }
+    }
+
     $query['where'] = "e.guid IN({$elements})";
 
     return $query;
@@ -83,8 +109,8 @@ function buildPermissionsQuery($user_id, $writable_only = true) {
     if(isadminloggedin()) {
         $myfirstlds = sanitise_string(T("My first LdS"));
 
-        $query['join'] = "JOIN objects_entity oep ON e.guid = oep.guid";
-        $query['permission'] = "oep.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}";
+        $query['join'] = "";
+        $query['permission'] = "e.title <> '{$myfirstlds}' OR e.owner_guid = {$user_id}";
 
         return $query;
     }
@@ -282,6 +308,9 @@ function ldshake_richlds($row) {
     $obj->lds->time_created = (int)$row->time_created;
     $obj->lds->time_updated = (int)$row->time_updated;
     $obj->lds->external_editor = $row->external_editor;
+
+    if(isset($row->can_edit))
+        $obj->lds->can_edit = $row->can_edit;
 
     $obj->starter = new stdClass();
     $obj->starter->name = $row->creator_name;
@@ -1977,11 +2006,11 @@ SQL;
     }
 
     public static function getUserEditableProjects($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
-        return self::getUserEditableEntities('object', 'LdSProject', $user_id, $count, $limit, $offset, $m_key, $m_value);
+        return self::getUserEntities('object', 'LdSProject', $user_id, $count, $limit, $offset, $m_key, $m_value, 'time', true);
     }
 
     public static function getUserEditableProjectImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
-        return self::getUserEditableEntities('object', 'LdSProject_implementation', $user_id, $count, $limit, $offset, $m_key, $m_value);
+        return self::getUserEntities('object', 'LdSProject_implementation', $user_id, $count, $limit, $offset, $m_key, $m_value, 'time', true);
     }
 
 
@@ -2210,10 +2239,10 @@ AND ({$permissions_query['permission']})
 {$order_query['by']}
 {$query_limit}
 SQL;
-echo '<pre>'.$query_base.'</pre>'.'<br>';
+//echo '<pre>'.$query_base.'</pre>'.'<br>';
             $time = microtime(true);
             $result_order = get_data("{$query_base}", "ldshake_richlds_order");
-            echo microtime(true) - $time.' ce<br />';
+            //echo microtime(true) - $time.' ce<br />';
 
             $slice_start = (int)$offset - $query_start;
             $slice_size = $limit;
@@ -2231,7 +2260,7 @@ echo '<pre>'.$query_base.'</pre>'.'<br>';
             $refreshButtonPressed = isset($_SERVER['HTTP_CACHE_CONTROL']) &&
                             $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0';
             $wro = $writable_only ? 'wro' : '';
-            $query_string = crc32("{$type}_{$subtype}_{$user_id}_{$mk}_{$mv}_{$order}_{$wro}_{$search}hkkk");
+            $query_string = hash("crc32b", "{$type}_{$subtype}_{$user_id}_{$mk}_{$mv}_{$order}_{$wro}_{$search}hkkk");
             $query_start = (int)$offset;
 
             if(isset($_SESSION['cache']['query_guid'][$query_string])
@@ -2273,7 +2302,7 @@ SQL;
             $result_order_string = implode(',', $result_order);
 
             if($enrich) {
-                $custom_query = buildRichQuery($user_id, $result_order_string);
+                $custom_query = buildRichQuery($user_id, $result_order_string, !$writable_only);
             }
             else {
                 $build_callback = $custom['build_callback'];
@@ -2301,7 +2330,7 @@ SQL;
             foreach($permissions_query['pre'] as $pre_query) {
                 $time = microtime(true);
                 update_data($pre_query);
-                echo microtime(true) - $time.' p<br />';
+                //echo microtime(true) - $time.' p<br />';
             }
             $CONFIG->pre_query[$query_type] = true;
         }
@@ -2310,7 +2339,7 @@ SQL;
             foreach($rich_query['pre'] as $pre_query) {
                 $time = microtime(true);
                 update_data($pre_query);
-                echo microtime(true) - $time.' p<br />';
+                //echo microtime(true) - $time.' p<br />';
                 //echo $pre_query.'<br />';
             }
             $CONFIG->pre_query['enrich'] = true;
@@ -2321,13 +2350,13 @@ SQL;
             $time = microtime(true);
             $row = get_data_row($query);
             //echo '<pre>'.$query.'</pre>'.'<br>';
-            echo microtime(true) - $time.' c<br />'.'<br>';
+            //echo microtime(true) - $time.' c<br />'.'<br>';
             return $row->total;
         } else {
             $time = microtime(true);
             $entities = get_data($query, $callback);
             //echo '<pre>'.$query.'</pre>'.'<br>';
-            echo microtime(true) - $time.' e<br />';
+            //echo microtime(true) - $time.' e<br />';
             return $entities;
         }
     }

@@ -60,6 +60,7 @@ else
 {
 	//We're creating it from scratch. Construct a new obj.
 	$lds = new LdSObject();
+    $lds->access_id = 2;
     $lds->lds_recovery = $lds_recovery;
 	$lds->owner_guid = get_loggedin_userid();
 
@@ -75,26 +76,16 @@ $lds->title = get_input('title');
 $lds->granularity = get_input('granularity');
 $lds->completeness = get_input('completeness');
 
-//If we save it for the first time, we're going to put some default value, which will be
-//modified by an ajax call to share.php
-if (get_input('guid') == 0)
-{
-	$lds->access_id = 1;
-	//$lds->write_access_id = 0;
-}
-
 //Now the tags. We'll delete the existing ones to save them again
 $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
 foreach ($tagFields as $field)
 {
-	//if (get_input('guid') > 0) remove_metadata(get_input('guid'), $field);
 	$newTags = explode(',', get_input($field));
 	foreach ($newTags as $k=>$v) if(empty($v)) unset($newTags[$k]);
 	$lds->$field = $newTags;
 }
 
 $lds->save();
-//lds_contTools::markLdSAsViewed ($lds->guid);
 $resultIds->LdS = $lds->guid;
 
 //We now determine if we already saved in the same edition session or not, in order to create a new revision.

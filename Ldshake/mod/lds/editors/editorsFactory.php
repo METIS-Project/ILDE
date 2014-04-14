@@ -993,7 +993,6 @@ class RestEditor extends Editor
     public function newEditor()
     {
         global $CONFIG;
-        $user = get_loggedin_user();
         $rand_id = rand_str(64);
         $editorType = $this->_editorType;
 
@@ -1607,6 +1606,7 @@ class RestEditor extends Editor
 
     public function __construct($document=null, $editorType = 'webcollagerest')
     {
+        require_once(__DIR__ . '/../../../vendors/httpful/bootstrap.php');
         $this->_document = $document;
 
         if($document)
@@ -2542,6 +2542,8 @@ class UploadEditor extends Editor
 
     public function __construct($document=null, $editorType = null)
     {
+        require_once(__DIR__ . '/../../../vendors/httpful/bootstrap.php');
+
         $this->_document = $document;
         $this->_editorType = $editorType;
     }
@@ -2559,6 +2561,7 @@ class GluepsManager
 
     public function __construct($vle = null, $implementation=null, $glueps_document=null)
     {
+        require_once(__DIR__ . '/../../../vendors/httpful/bootstrap.php');
         $this->_implementation = $implementation;
         $this->_document = $glueps_document;
         $this->_vle = $vle;

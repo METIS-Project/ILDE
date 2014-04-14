@@ -101,8 +101,8 @@ SQL;
 		while ($row = mysql_fetch_object($res))
 			$groups[] = get_access_collection($row->access_collection_id);
 		*/
-        $groups = get_users_membership($userId);
-		Utils::osort($groups, "name");
+        if($groups = get_users_membership($userId))
+		    Utils::osort($groups, "name");
 				
 		return $groups;
 	}

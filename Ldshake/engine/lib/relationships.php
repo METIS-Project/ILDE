@@ -62,7 +62,7 @@
 		 * @param string $name
 		 * @return mixed
 		 */
-		protected function __get($name) {
+		public function __get($name) {
 			if (isset($this->attributes[$name])) 
 				return $this->attributes[$name];
 	
@@ -76,7 +76,7 @@
 		 * @param mixed $value
 		 * @return mixed
 		 */
-		protected function __set($name, $value) {
+		public function __set($name, $value) {
 			$this->attributes[$name] = $value;
 			return true;
 		}

@@ -283,7 +283,7 @@
 #lds_list .lds_list_element .lds_info {
 	padding-top: 5px;
 	float: left;
-	width: 540px;
+	width: 650px;
 	magin-right: 10px;
 }
 

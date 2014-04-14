@@ -16,9 +16,23 @@ var ldshake_cache = <?php echo json_encode($ldshake_jscache_break) ?>;
 <script type="text/javascript">
 //Unix time to language
     $(".timeago_timestamp").each(function() {
-        var $e = $(this);
-        var timestamp = parseInt($e.attr("timestamp"));
-        var date = moment.unix(timestamp).fromNow();
+        var $e          = $(this);
+        var timestamp   = parseInt($e.attr("timestamp"));
+        var now         = moment();
+        var lds_date    = moment.unix(timestamp);
+        var date;
+
+        if(now.diff(lds_date, 'days') < 3)
+            date = lds_date.fromNow();
+        else {
+            var format;
+            if(now.isSame(lds_date, 'year'))
+                format = "D MMM";
+            else
+                format = "D MMM YY";
+
+            date = lds_date.format(format);
+        }
         $e.text(date);
     });
 </script>

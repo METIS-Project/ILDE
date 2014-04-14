@@ -108,7 +108,7 @@
                 {
                     $name = $r->name;
                     $value = $r->value;
-                    $CONFIG->$name = unserialize($_SESSION[$value]);
+                    $CONFIG->$name = unserialize($value);
                 }
                 return true;
             } else {

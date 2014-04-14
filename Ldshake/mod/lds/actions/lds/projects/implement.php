@@ -43,8 +43,6 @@ $title = get_input('title');
 
 $project_design_reference = get_entity($project_design_id);
 
-//$project_design = $project_design_reference->clone();
-
 $project_design_implementation = new ElggObject();
 $project_design_implementation->access_id = 2;
 $project_design_implementation->subtype = 'LdSProject_implementation';
@@ -56,8 +54,7 @@ $project_design_implementation->save();
 
 $pd_data = json_decode($project_design_reference->description, true);
 
-foreach($pd_data as $item) {
-    //foreach($item->lds as $lds_item) {
+foreach($pd_data as &$item) {
     if($item['editor_type'] == 'doc') {
         $lds = new LdSObject();
         $lds->project_design = $project_design_implementation->guid;
@@ -66,8 +63,7 @@ foreach($pd_data as $item) {
         $lds->all_can_view = "no";
         $lds->title = "{$item['toolName']} ($title)";
         $lds->editor_type = $item['editor_type'];
-        $lds->save();
-        //$lds->editor_subtype = $editor_subtype;
+        $item['guid'] = $lds->save();
 
         $initDocuments = array();
         $initDocuments[] = '';
@@ -93,7 +89,6 @@ foreach($pd_data as $item) {
         }
 
     } else {
-
         $lds = new LdSObject();
         $lds->title = "{$item['toolName']} ($title)";
         $lds->project_design = $project_design_implementation->guid;
@@ -102,8 +97,7 @@ foreach($pd_data as $item) {
         $lds->all_can_view = "no";
         $lds->editor_type = $item['editor_type'];
         $lds->external_editor = true;
-        $lds->save();
-        //$lds->editor_subtype = $editor_subtype;
+        $item['guid'] = $lds->save();
 
         $docObj = new DocumentObject($lds->guid);
         $docObj->title = T('Support Document');
@@ -125,7 +119,9 @@ foreach($pd_data as $item) {
             throw new Exception("Save failed");
         }
     }
-    //}
 }
+
+$project_design_implementation->description = json_encode($pd_data);
+$project_design_implementation->save();
 
 echo $project_design_implementation->guid;

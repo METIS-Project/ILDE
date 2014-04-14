@@ -72,6 +72,4 @@ foreach ($confPaths as $k=>$v)
 
 $CONFIG->vle_key = $vle_key;
 $CONFIG->google_drive = $google_drive;
-//echo "<pre>";
-//print_r ($CONFIG);
-//echo "</pre>";
+$CONFIG->editor_debug = $editor_debug;

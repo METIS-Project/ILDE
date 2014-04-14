@@ -79,13 +79,13 @@ class ldshakers_viewTools
 	
 	public static function getGroupList ($userId)
 	{
-		$groups = ldshakers_contTools::getGroupsUserIsMember($userId);
-		
-		$str = '';
-		foreach ($groups as $g)
-		{
-			$str .= '<a href="'.self::urlFor($g, 'group').'">'.$g->name.'</a> ';
-		}
+        $str = '';
+		if($groups = ldshakers_contTools::getGroupsUserIsMember($userId)) {
+            foreach ($groups as $g)
+            {
+                $str .= '<a href="'.self::urlFor($g, 'group').'">'.$g->name.'</a> ';
+            }
+        }
 		return $str;
 	}
 }
