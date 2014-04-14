@@ -361,8 +361,9 @@ function initCKED ()
 {
     var options = {filebrowserUploadUrl: baseurl + 'actions/lds/upload'};
 
-    $('#lds_edit_body').ckeditor(function ()
+    $editor = $('#lds_edit_body').ckeditor(function ()
     {
+        /*
         editor = this;
         editor.dataProcessor = null;
         resizeCK();
@@ -373,8 +374,9 @@ function initCKED ()
         //inaction_trigger();
 
         //Stopped loading:
+        */
         $('#shade,#lds_loading_contents').hide();
-
+/*
         editor.on( 'contentDom', function( evt )
         {
             /*
@@ -399,8 +401,9 @@ function initCKED ()
                 }
             });
             */
-
+/*
         }, editor.element.$);
+  */
     }, options);
 
     //And update it in case it is resized
