@@ -41,7 +41,7 @@ global $ldshake_jscache_break;
 if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'  || get_context() == 'lds_exec_new_project'):
 ?>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/autoSuggest/jquery.autoSuggest.js<?php echo "?q=".$ldshake_jscache_break["lds"]; ?>"></script>
-	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor4/ckeditor.js<?php echo "?q=0001"; ?>"></script>
+	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor4/ckeditor.js<?php echo "?q=".$ldshake_jscache_break["lds"]; ?>"></script>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/ckeditor4/adapters/jquery.js"></script>
 	<?php
 	echo Utils::getJsDeclaration('lds', 'lds-share');

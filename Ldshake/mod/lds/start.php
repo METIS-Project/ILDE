@@ -205,7 +205,7 @@ function lds_page_handler ($page)
 
     $ldshake_dir = dirname(__FILE__);
     $js_source = array(
-        '/ckeditor/contents.css',
+        '/ckeditor4/contents.css',
         '/autoSuggest/jquery.autoSuggest.js',
     );
 

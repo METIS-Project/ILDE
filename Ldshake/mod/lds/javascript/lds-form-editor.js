@@ -663,7 +663,10 @@ function free_lds ()
 
 function initCKED ()
 {
-    var options = {filebrowserUploadUrl: baseurl + 'actions/lds/upload'};
+    var options = {
+        filebrowserUploadUrl: baseurl + 'actions/lds/upload',
+        customConfig: baseurl+'mod/lds/ckeditor4/config.js?t='+ldshake_cache.lds
+    };
 
     $('#lds_edit_body').ckeditor(function ()
     {
