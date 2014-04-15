@@ -55,6 +55,20 @@ $project_design_implementation->save();
 $pd_data = json_decode($project_design_reference->description, true);
 
 foreach($pd_data as &$item) {
+    if(isset($item['guid'])) {
+        if($lds = get_entity($item['guid'])) {
+            if($item['creation'] == "existent") {
+                add_entity_relationship($lds->guid, 'lds_project_existent', $project_design_implementation->guid);
+            } else {
+                $ldsm = new richTextEditor(null, $lds);
+                $cloned_lds = $ldsm->cloneLdS("{$item['toolName']} ($title)");
+                $item['original_guid'] = $item['guid'];
+                $item['guid'] = $cloned_lds->guid;
+                add_entity_relationship($lds->guid, 'lds_project_n_e', $project_design_implementation->guid);
+            }
+        }
+    }
+
     if($item['editor_type'] == 'doc') {
         $lds = new LdSObject();
         $lds->project_design = $project_design_implementation->guid;
@@ -64,6 +78,7 @@ foreach($pd_data as &$item) {
         $lds->title = "{$item['toolName']} ($title)";
         $lds->editor_type = $item['editor_type'];
         $item['guid'] = $lds->save();
+        add_entity_relationship($lds->guid, 'lds_project_new', $project_design_implementation->guid);
 
         $initDocuments = array();
         $initDocuments[] = '';
@@ -78,6 +93,8 @@ foreach($pd_data as &$item) {
             }
             $lds->save();
         }
+
+
 
         foreach($initDocuments as $initDocument) {
             $docObj = new DocumentObject($lds->guid);
