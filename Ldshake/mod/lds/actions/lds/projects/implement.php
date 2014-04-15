@@ -53,87 +53,87 @@ $project_design_implementation->project_design_reference = $project_design_refer
 $project_design_implementation->save();
 
 $pd_data = json_decode($project_design_reference->description, true);
+$pd_guid = $project_design_implementation->guid;
 
 foreach($pd_data as &$item) {
     if(isset($item['guid'])) {
         if($lds = get_entity($item['guid'])) {
             if($item['creation'] == "existent") {
-                add_entity_relationship($lds->guid, 'lds_project_existent', $project_design_implementation->guid);
+                add_entity_relationship($lds->guid, 'lds_project_existent', $pd_guid);
             } else {
                 $ldsm = new richTextEditor(null, $lds);
                 $cloned_lds = $ldsm->cloneLdS("{$item['toolName']} ($title)");
                 $item['original_guid'] = $item['guid'];
                 $item['guid'] = $cloned_lds->guid;
-                add_entity_relationship($lds->guid, 'lds_project_n_e', $project_design_implementation->guid);
+                add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
             }
         }
-    }
-
-    if($item['editor_type'] == 'doc') {
-        $lds = new LdSObject();
-        $lds->project_design = $project_design_implementation->guid;
-        $lds->owner_guid = get_loggedin_userid();
-        $lds->access_id = 2;
-        $lds->all_can_view = "no";
-        $lds->title = "{$item['toolName']} ($title)";
-        $lds->editor_type = $item['editor_type'];
-        $item['guid'] = $lds->save();
-        add_entity_relationship($lds->guid, 'lds_project_new', $project_design_implementation->guid);
-
-        $initDocuments = array();
-        $initDocuments[] = '';
-
-        if(isset($item['editor_subtype'])) {
-            require_once __DIR__.'/../../../templates/templates.php';
-            $lds->editor_subtype = $item['editor_subtype'];
-            $templates = ldshake_get_template($lds->editor_subtype);
-            $i=0;
-            foreach($templates as $template) {
-                $initDocuments[$i++] = $template;
-            }
-            $lds->save();
-        }
-
-
-
-        foreach($initDocuments as $initDocument) {
-            $docObj = new DocumentObject($lds->guid);
-            //$docObj->doc_recovery = $doc['doc_recovery'];
-            $docObj->title = 'default title';
-            $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
-            //$docObj->lds_revision_id = $revision->id;
-            $docObj->save();
-        }
-
     } else {
-        $lds = new LdSObject();
-        $lds->title = "{$item['toolName']} ($title)";
-        $lds->project_design = $project_design_implementation->guid;
-        $lds->owner_guid = get_loggedin_userid();
-        $lds->access_id = 2;
-        $lds->all_can_view = "no";
-        $lds->editor_type = $item['editor_type'];
-        $lds->external_editor = true;
-        $item['guid'] = $lds->save();
+        if($item['editor_type'] == 'doc') {
+            $lds = new LdSObject();
+            $lds->project_design = $pd_guid;
+            $lds->owner_guid = get_loggedin_userid();
+            $lds->access_id = 2;
+            $lds->all_can_view = "no";
+            $lds->title = "{$item['toolName']} ($title)";
+            $lds->editor_type = $item['editor_type'];
+            $item['guid'] = $lds->save();
+            add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
 
-        $docObj = new DocumentObject($lds->guid);
-        $docObj->title = T('Support Document');
-        $docObj->description = 'Write support notes here...'; //We put it in ths desciption in order to use the objects_entity table of elgg db
-        $docObj->save();
+            $initDocuments = array();
+            $initDocuments[] = '';
 
-        $document_editor = new DocumentEditorObject($lds->guid, 0);
-        $document_editor->editorType = $lds->editor_type;
-        $document_editor->lds_guid = $lds->guid;
-        $document_editor->lds_revision_id = 0;
-        $document_editor->save();
+            if(isset($item['editor_subtype'])) {
+                require_once __DIR__.'/../../../templates/templates.php';
+                $lds->editor_subtype = $item['editor_subtype'];
+                $templates = ldshake_get_template($lds->editor_subtype);
+                $i=0;
+                foreach($templates as $template) {
+                    $initDocuments[$i++] = $template;
+                }
+                $lds->save();
+            }
 
-        $editor = editorsFactory::getInstance($document_editor);
-        $editor_vars = $editor->newEditor();
+            foreach($initDocuments as $initDocument) {
+                $docObj = new DocumentObject($lds->guid);
+                //$docObj->doc_recovery = $doc['doc_recovery'];
+                $docObj->title = 'default title';
+                $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
+                //$docObj->lds_revision_id = $revision->id;
+                $docObj->save();
+            }
 
-        if($save_result = $editor->saveDocument($editor_vars)) {
-            list($document_editor, $resultIds_add) = $save_result;
         } else {
-            throw new Exception("Save failed");
+            $lds = new LdSObject();
+            $lds->title = "{$item['toolName']} ($title)";
+            $lds->project_design = $pd_guid;
+            $lds->owner_guid = get_loggedin_userid();
+            $lds->access_id = 2;
+            $lds->all_can_view = "no";
+            $lds->editor_type = $item['editor_type'];
+            $lds->external_editor = true;
+            $item['guid'] = $lds->save();
+            add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+
+            $docObj = new DocumentObject($lds->guid);
+            $docObj->title = T('Support Document');
+            $docObj->description = 'Write support notes here...'; //We put it in ths desciption in order to use the objects_entity table of elgg db
+            $docObj->save();
+
+            $document_editor = new DocumentEditorObject($lds->guid, 0);
+            $document_editor->editorType = $lds->editor_type;
+            $document_editor->lds_guid = $lds->guid;
+            $document_editor->lds_revision_id = 0;
+            $document_editor->save();
+
+            $editor = editorsFactory::getInstance($document_editor);
+            $editor_vars = $editor->newEditor();
+
+            if($save_result = $editor->saveDocument($editor_vars)) {
+                list($document_editor, $resultIds_add) = $save_result;
+            } else {
+                throw new Exception("Save failed");
+            }
         }
     }
 }

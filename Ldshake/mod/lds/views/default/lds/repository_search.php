@@ -1,3 +1,5 @@
+<iframe src="http://www.rjid.com/open/pedagogy/html/pedagogy_profile_1_2.html" style="width: 600px; height: 600px;"></iframe>
+
 <div id="repository-links">
 <span class="repository-links-title">Links to external repositories</span>
 <br />

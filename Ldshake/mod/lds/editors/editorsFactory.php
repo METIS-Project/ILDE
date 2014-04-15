@@ -923,7 +923,7 @@ class OpenglmEditor extends Editor {
         if(isset($params['file_imsld'])) {
             if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->$document->file_imsld_guid = Editor::getNewFile($filestorename);
+                $document->file_imsld_guid = Editor::getNewFile($filestorename);
             }
 
             $fullfilepath = Editor::getFullFilePath($document->ims_ld);
@@ -932,11 +932,12 @@ class OpenglmEditor extends Editor {
         } else {
             if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->$document->file_imsld_guid = Editor::getNewFile($filestorename);
+                $document->file_imsld_guid = Editor::getNewFile($filestorename);
             }
 
             $fullfilepath = Editor::getFullFilePath($document->file_imsld_guid);
             copy($params['file'], $fullfilepath);
+            $document->upload_filename_imsld = $params['filename'];
         }
 
         //TODO: update revision data

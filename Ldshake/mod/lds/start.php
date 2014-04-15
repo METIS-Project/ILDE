@@ -2720,9 +2720,10 @@ function lds_exec_project_implementation ($params)
     $offset = get_input('offset') ?: '0';
     set_context("lds_exec_main");
     $project_implementation = get_entity($params[1]);
+    //TODO:check privileges
 
-    $vars['count'] = lds_contTools::getUserEditableLdS($project_implementation->owner_guid, true,0,0, 'project_design', $params[1]);
-    $vars['list'] = lds_contTools::getUserEditableLdS($project_implementation->owner_guid, false, 50, $offset, 'project_design', $params[1], 'time', true);
+    /*$vars['count'] = $lds_list = lds_contTools::getProjectLdSList($pd_guid, true);*/
+    $vars['list'] = $lds_list = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true);
     $vars['title'] = $project_implementation->title;
     $vars['jsondata'] = $project_implementation->jsondata;
 
@@ -2773,6 +2774,8 @@ function lds_exec_new_project ($params)
     $vars['title'] = T("New LdS Project Design");
 
     $vars['list'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+
+    $vars['vle_data'] = array();
 
     echo elgg_view('lds/projects/editform_editor',$vars);
 }
@@ -2841,6 +2844,18 @@ function lds_exec_edit_project ($params)
 
     $vars['title'] = T("Edit Project");
     $vars['editor_type'] = $editLdS->editor_type;
+
+    $vle_data = array();
+    if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
+        foreach($vles as $vle) {
+            $gluepsm = new GluepsManager($vle);
+            if($vle_info = $gluepsm->getVleInfo())
+                $vle_info->item = $vle;
+            $vle_data[$vle->guid] = $vle_info;
+        }
+    }
+
+    $vars['vle_list'] = $vle_data;
 
     echo elgg_view('lds/projects/editform_editor',$vars);
 }

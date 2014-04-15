@@ -87,7 +87,7 @@ END;
 	?>
 	<link rel="stylesheet" href="<?php echo $vars['url']; ?>_css/css.php?hash=<?php echo hash("crc32b", $cs_modified_string);?>" type="text/css" />
     <link rel="stylesheet" href="<?php echo $vars['url']; ?>mod/lds/autoSuggest/autoSuggest.css" type="text/css" />
-	<link rel="stylesheet" href="<?php echo $vars['url']; ?>vendors/jquery/css/ui-lightness/jquery-ui-1.8.6.custom.css" type="text/css" />
+    <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/ui-lightness/jquery-ui.css" />
     <!--Dynamic CSS-->
     <style>
 <?php global $ldshake_css;?>

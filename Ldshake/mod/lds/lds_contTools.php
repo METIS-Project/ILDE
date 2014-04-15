@@ -2002,7 +2002,6 @@ SQL;
             return count($entities);
 
         return $entities;
-
     }
 
     public static function getUserEditableLdSs($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
@@ -2064,6 +2063,34 @@ SQL;
             $entities = get_data($query, "entity_row_to_elggstar");
             return $entities;
         }
+    }
+
+    public static function getProjectLdSList($pd_guid, $only_exclusive = false, $guid_only = false, $enrich = false) {
+        global $CONFIG;
+
+        $callback = "entity_row_to_elggstar";
+
+        if($enrich)
+            $callback = "ldshake_richlds";
+
+        if($guid_only)
+            $callback = "ldshake_guid_callback";
+
+        $rel = "'lds_project_existent','lds_project_nfe','lds_project_new'";
+        if($only_exclusive)
+            $rel = "'lds_project_nfe','lds_project_new'";
+
+        $query = <<<SQL
+SELECT *, 'object' as type FROM objects_property e WHERE guid IN (
+			SELECT DISTINCT rg.guid_one FROM entity_relationships rg WHERE
+			rg.relationship IN ({$rel})
+			AND rg.guid_two = {$pd_guid}
+		)
+SQL;
+
+        $entities = get_data($query, $callback);
+
+        return $entities;
     }
 
     public static function getUserTagsAvailable($category) {
@@ -2338,6 +2365,7 @@ SQL;
 
         $query_type = $writable_only ? "writable_only" : "viewable";
         //$pre_query = implode(";\n",$permissions_query['pre']).";\n";
+        /*
         if(!$CONFIG->pre_query[$query_type]) {
             foreach($permissions_query['pre'] as $pre_query) {
                 $time = microtime(true);
@@ -2356,7 +2384,7 @@ SQL;
             }
             $CONFIG->pre_query['enrich'] = true;
         }
-
+*/
 
         if($count) {
             $time = microtime(true);

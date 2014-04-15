@@ -42,9 +42,19 @@ if (is_numeric($lds))
 	{
 		if ($lds->canEdit())
 		{
-			$lds->deleted = '1';
-			$lds->save_ktu();
-			$lds->disable();
+            if($lds->getSubtype() == 'LdSProject_implementation') {
+                if($project_list = lds_contTools::getProjectLdSList($lds->guid, true)) {
+                    foreach($project_list as $fpl) {
+                        $fpl->deleted = '1';
+                        $fpl->save_ktu();
+                        $fpl->disable();
+                    }
+                }
+            }
+
+            $lds->deleted = '1';
+            $lds->save_ktu();
+            $lds->disable();
 			
 			echo 'ok';
 		}
@@ -67,10 +77,20 @@ else
 				{
 					if ($lds->canEdit())
 					{
-						$lds->deleted = '1';
-						$lds->save_ktu();
-						$lds->disable();
-						
+                        if($lds->getSubtype() == 'LdSProject_implementation') {
+                            if($project_list = lds_contTools::getProjectLdSList($lds->guid, true)) {
+                                foreach($project_list as $fpl) {
+                                    $fpl->deleted = '1';
+                                    $fpl->save_ktu();
+                                    $fpl->disable();
+                                }
+                            }
+                        }
+
+                        $lds->deleted = '1';
+                        $lds->save_ktu();
+                        $lds->disable();
+
 						echo 'ok';
 					}
 					else $numerrors++;

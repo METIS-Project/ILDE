@@ -278,6 +278,8 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var ldproject_view_only = true;
         var ldproject = <?php echo $jsondata ?>;
         var lds_list = <?php echo json_encode($list, true) ?>;
+        var vle_list = <?php echo json_encode($vle_list, true) ?>;
+
 
         friends['available'] = <?php echo $jsonfriends ?>;
 		friends['viewers'] = <?php echo $viewers ?>;

@@ -1295,6 +1295,13 @@ a.rightbutton:active {
 	border-radius: 3px;
 }
 
+.lds_order_by {
+    float: right;
+    color: #930;
+    margin: 10px 20px 20px 5px;
+    font-size: 8pt;
+}
+
 #left_filters .tag_selector li.lds-browse-non-used-tags-hide {
     display: none;
 }
