@@ -2663,7 +2663,7 @@ function lds_exec_projects ($params)
         $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my Project designs");
+        $vars['title'] = T("All my project designs");
     }
 
     $vars['list_type'] = T('projects');
@@ -2680,25 +2680,34 @@ function lds_exec_projects_implementations ($params)
 
     if ($params[1] == 'created-by-me')
     {
-        $vars['count'] = get_entities('object', 'LdSProject', get_loggedin_userid(), '', 50, $offset, true);
-        $entities = get_entities('object', 'LdSProject', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['count'] = get_entities('object', 'LdSProject_implementation', get_loggedin_userid(), '', 50, $offset, true);
+        $entities = get_entities('object', 'LdSProject_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("LdS created by me");
+        $vars['title'] = T("LdS projects created by me");
     }
     elseif ($params[1] == 'shared-with-me')
     {
         $vars['count'] = lds_contTools::getUserSharedObjectsWithMe('object', 'LdSProject_implementation', get_loggedin_userid(), true);
         $entities = lds_contTools::getUserSharedObjectsWithMe('object', 'LdSProject_implementation', get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("LdS shared with me");
+        $vars['title'] = T("LdS projects shared with me");
     }
-    elseif ($params[1] == 'created-with')
+    elseif ($params[1] == 'trashed')
     {
-        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[2]);
-        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[2]);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("Created with").$params[2];
-        $vars['editor_filter'] = $params[2];
+        //We need to see all the entities, including the deleted ones.
+        $access_status = access_get_show_hidden_status();
+        access_show_hidden_entities(true);
+
+        $offset = get_input('offset') ?: '0';
+
+        //TODO take the owner into account
+        $vars['list'] = get_entities_where('enabled = "no"', 'object', 'LdSProject_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['count'] = get_entities_where('enabled = "no"', 'object', 'LdSProject_implementation', get_loggedin_userid(), '', 0, $offset, true);
+        $vars['list'] = lds_contTools::enrichLdS($vars['list']);
+        $vars['title'] = T("My trashed LdS projects");
+        $vars['section'] = "imp-{$params[1]}";
+
+        access_show_hidden_entities($access_status);
     }
     else
     {
@@ -2709,7 +2718,7 @@ function lds_exec_projects_implementations ($params)
     }
 
     $vars['list_type'] = T('project');
-    $vars['section'] = 'prj'.$params[1];
+    $vars['section'] = 'prj-'.$params[1];
     $body = elgg_view('lds/projects/myprojects',$vars);
 
     page_draw($vars['title'], $body);
@@ -2775,7 +2784,7 @@ function lds_exec_new_project ($params)
 
     $vars['list'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
 
-    $vars['vle_data'] = array();
+    $vars['vle_list'] = array();
 
     echo elgg_view('lds/projects/editform_editor',$vars);
 }
@@ -2846,6 +2855,7 @@ function lds_exec_edit_project ($params)
     $vars['editor_type'] = $editLdS->editor_type;
 
     $vle_data = array();
+    /*
     if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
         foreach($vles as $vle) {
             $gluepsm = new GluepsManager($vle);
@@ -2853,7 +2863,7 @@ function lds_exec_edit_project ($params)
                 $vle_info->item = $vle;
             $vle_data[$vle->guid] = $vle_info;
         }
-    }
+    }*/
 
     $vars['vle_list'] = $vle_data;
 

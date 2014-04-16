@@ -48,7 +48,6 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     #lds_edit_contents #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
     #lds_edit_contents #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; border-color: black}
     #lds_edit_contents .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
-
 </style>
 
 <div id="layout_canvas">

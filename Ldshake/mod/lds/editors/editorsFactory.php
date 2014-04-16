@@ -926,7 +926,7 @@ class OpenglmEditor extends Editor {
                 $document->file_imsld_guid = Editor::getNewFile($filestorename);
             }
 
-            $fullfilepath = Editor::getFullFilePath($document->ims_ld);
+            $fullfilepath = Editor::getFullFilePath($document->file_imsld_guid);
             copy($params['file_imsld'], $fullfilepath);
             $document->upload_filename_imsld = $params['filename_imsld'];
         } else {

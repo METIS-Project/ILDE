@@ -695,9 +695,13 @@ SQL;
                 $obj->editor_type = $editor_types[0];
 
                 $revision_type = $lds->external_editor ? 'revised_docs_editor' : 'revised_docs';
-                $latest = $lds->getAnnotations($revision_type, 1, 0, 'desc');
-                $obj->last_contributor = get_user($latest[0]->owner_guid);
-                $obj->last_contribution_at = $latest[0]->time_created;
+                if($latest = $lds->getAnnotations($revision_type, 1, 0, 'desc')) {
+                    $obj->last_contributor = get_user($latest[0]->owner_guid);
+                    $obj->last_contribution_at = $latest[0]->time_created;
+                } else {
+                    $obj->last_contributor = $obj->starter;
+                    $obj->last_contribution_at = $lds->time_created;
+                }
 
 
                 $obj->num_editors = count(lds_contTools::getEditorsIds($lds->guid));
