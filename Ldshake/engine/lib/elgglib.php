@@ -976,7 +976,7 @@
 												'title' => $title,
 												'body' => $body,
 												'sidebar' => $sidebar,
-												'sysmessages' => array()//system_messages(null,"")
+												'sysmessages' => system_messages(null,"")
 											  )
 										);
 			

@@ -376,6 +376,13 @@
 					// Update succeeded, continue
 					$entity = get_entity($guid);
 					if (trigger_elgg_event('update',$entity->type,$entity)) {
+                        //update current session variable
+                        if(isset($_SESSION['guid']) && $_SESSION['guid'] == $guid) {
+                            $_SESSION['user'] = $entity;
+                            $_SESSION['name'] = $name;
+                            $_SESSION['username'] = $username;
+                            $_SESSION['code'] = $code;
+                        }
 						return $guid;
 					} else {
 						$entity->delete();
