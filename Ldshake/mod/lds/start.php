@@ -200,12 +200,12 @@ function lds_page_handler ($page)
 {
     global $CONFIG, $ldshake_jscache_break;
 
-    global $start_time;
-    //echo microtime(true) - $start_time.' start1<br />';
+    //global $start_time;
 
     $ldshake_dir = dirname(__FILE__);
     $js_source = array(
         '/ckeditor4/contents.css',
+        '/ckeditor4/config.js',
         '/autoSuggest/jquery.autoSuggest.js',
     );
 
@@ -216,20 +216,6 @@ function lds_page_handler ($page)
     }
     $ldshake_jscache_break["lds"] = hash("crc32b", $js_modified_string);
 
-
-
-    //$user = get_loggedin_userid();
-
-    /*
-    $last_visit = isset($_SESSION['last_visit']) ? $_SESSION['last_visit'] : 0;
-    $_SESSION['last_visit'] = time();
-
-
-    if($last_visit - time() > 600)
-        $CONFIG->site->annotate('unique_visit','1',2, $user);
-
-    $CONFIG->site->annotate('page_visit','1',2, $user);
-    */
 /*
     $multipart_serializer = function($payload = array()) {
         return $payload;

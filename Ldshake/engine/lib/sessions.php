@@ -318,9 +318,11 @@
 			// Use database for sessions
 			$DB_PREFIX = $CONFIG->dbprefix; // HACK to allow access to prefix after object distruction
 			//session_set_save_handler("__elgg_session_open", "__elgg_session_close", "__elgg_session_read", "__elgg_session_write", "__elgg_session_destroy", "__elgg_session_gc");
-				
+
+            register_shutdown_function('session_delayedexecution_save');
 			session_name('LdShake');
 	        session_start();
+            session_write_close();
 
             /*
 	        // Do some sanity checking by generating a fingerprint (makes some XSS attacks harder)
@@ -394,6 +396,16 @@
     		return true;
 	        
 		}
+
+    function session_delayedexecution_save() {
+        if(!isset($_SESSION))
+            return;
+
+        $save_session = $_SESSION;
+        session_start();
+        $_SESSION = $save_session;
+        session_write_close();
+    }
 
     function set_last_action_session($user_guid) {
 
