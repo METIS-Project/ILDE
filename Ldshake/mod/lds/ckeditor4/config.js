@@ -53,7 +53,7 @@ CKEDITOR.editorConfig = function( config ) {
             ['Cut','Copy','Paste','PasteText','PasteFromWord'],
             ['Undo','Redo','-','Find','Replace','-','SelectAll','RemoveFormat'],
             ['BidiLtr', 'BidiRtl'],
-            ['Link','Unlink','Anchor'],
+            ['Link','Unlink'/*,'Anchor'*/],
             ['Image','MediaEmbed','Table','HorizontalRule','PageBreak'],
             ['Maximize', 'ShowBlocks'],
             '/',

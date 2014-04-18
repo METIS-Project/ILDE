@@ -110,10 +110,11 @@
 	<div id="content_area_user_title">
 		<?php if ($filtering): ?>
             <?php
-            if(isset($editor_type[$tagv])) $tagv = $editor_type[$tagv];
-            if(isset($editor_subtype[$tagv])) $tagv = $editor_subtype[$tagv];
+            $tagv_label = $tagv;
+            if(isset($editor_type[$tagv])) $tagv_label = $editor_type[$tagv];
+            if(isset($editor_subtype[$tagv])) $tagv_label = $editor_subtype[$tagv];
             ?>
-		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo T("All LdS") ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
+		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo T("All LdS") ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv_label ?></span></h2>
 		<?php else: ?>
 		<h2><?php echo T("All LdS") ?></h2>
 		<?php endif; ?>
