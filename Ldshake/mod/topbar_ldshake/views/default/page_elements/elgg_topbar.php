@@ -65,7 +65,7 @@ if (isloggedin()) :
                 </ul>
             </div>
             <div id="ldshake_topbar_avatar">
-                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $vars['username'] ?>/"><img height="25" width="25" class="user_mini_avatar" src="<?php echo $vars['url'].'pg/icon/'.$vars['username'].'/tiny'; ?>" alt="<?php echo $vars['name'] ?>"/></a>
+                <a href="<?php echo $vars['url']. 'pg/ldshakers/' . $vars['username'] ?>/"><img height="25" width="25" class="user_mini_avatar" src="<?php echo $vars['url'].'pg/icon/'.$vars['username'].'/tiny?t='.hash("crc32b",$vars['user']->time_updated); ?>" alt="<?php echo $vars['name'] ?>"/></a>
             </div>
             <div id="ldshake_topbar_serach">
                 <form id="searchform" action="<?php echo $vars['url']; ?>pg/lds/search/" method="get">

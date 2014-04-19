@@ -398,6 +398,7 @@
 		}
 
     function session_delayedexecution_save() {
+        flush(); //Avoid overwriting headers;
         if(!isset($_SESSION))
             return;
 

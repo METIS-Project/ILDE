@@ -202,6 +202,9 @@ function lds_page_handler ($page)
 
     //global $start_time;
 
+    //sleep(10);
+
+
     $ldshake_dir = dirname(__FILE__);
     $js_source = array(
         '/ckeditor4/contents.css',

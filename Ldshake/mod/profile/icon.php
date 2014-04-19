@@ -42,12 +42,10 @@
 			$contents = @file_get_contents($CONFIG->pluginspath . "profile/graphics/default{$size}.jpg");
 			
 		}
-		
-		header("Content-type: image/jpeg");
-		header('Expires: ' . date('r',time() + 864000));
-		header("Pragma: public");
-		header("Cache-Control: public");
-		header("Content-Length: " . strlen($contents));
-		echo $contents;
 
-?>
+		header("Content-type: image/jpeg", true);
+		header('Expires: ' . date('r',time() + 864000), true);
+		header("Pragma: public", true);
+		header("Cache-Control: public", true);
+		header("Content-Length: " . strlen($contents), true);
+		echo $contents;
