@@ -980,6 +980,18 @@ class RestEditor extends Editor
                 'password' => 'LdS@k$1#',
                 'icon' => true
             );
+
+            $CONFIG->rest_editor_list['exelearningrest'] = array(
+                'name' => 'eXeLearning',
+                'url_rest' => "http://ldshake2.upf.edu:51235/",
+                'url_gui' => "http://ldshake2.upf.edu:51235/ldshakegui/",
+//                'url_rest' => "http://ilde:51235/",
+//                'url_gui' => "http://ilde:51235/ldshakegui/",
+                'preview' => true,
+                'imsld' => false,
+                'password' => 'LdS@k$1#',
+                'icon' => false
+            );
         }
 
         return $CONFIG->rest_editor_list[$editor_type];
@@ -999,6 +1011,8 @@ class RestEditor extends Editor
 
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
+        if(isset($ldshake_url['port']))
+            $ldshake_frame_origin .= ':'. $ldshake_url['port'];
 
         $url_gui_parsed = parse_url($CONFIG->rest_editor_list[$editorType]['url_gui']);
 
@@ -1051,7 +1065,7 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
         $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$editorType]['url_gui']}?document_id={$doc_id}&lang={$lang}";
-        $vars['document_url'] = "{$response->raw_body}";
+        //$vars['document_url'] = "{$response->raw_body}";
 
         $gui_url = parse_url($response->raw_body);
 
@@ -1378,17 +1392,17 @@ class RestEditor extends Editor
                 forward($CONFIG->url . 'pg/lds/');
             }
 
-            $putData = tmpfile();
-            fwrite($putData, $response->raw_body);
-            fseek($putData, 0);
-            $m_fd = stream_get_meta_data($putData);
-
+            $zip_file = $CONFIG->tmppath . $this->_document->guid . time() . '.zip';
+            file_put_contents($zip_file, $response->raw_body, FILE_BINARY);
             $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
             mkdir($preview_path);
+
             $zip = new ZipArchive();
-            $zip->open($m_fd['uri']);
-            $zip->extractTo($preview_path);
-            $zip->close();
+            if($zip->open($zip_file)) {
+                $zres = $zip->extractTo($preview_path);
+                $zip->close();
+            }
+            unlink($zip_file);
         }
 
         $this->_document->rev_last = 0;
@@ -1553,17 +1567,17 @@ class RestEditor extends Editor
                 forward($CONFIG->url . 'pg/lds/');
             }
 
-            $putData = tmpfile();
-            fwrite($putData, $response->raw_body);
-            fseek($putData, 0);
-            $m_fd = stream_get_meta_data($putData);
-
-            $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
+            $zip_file = $CONFIG->tmppath . $this->_document->guid . time() . '.zip';
+            file_put_contents($zip_file, $response->raw_body, FILE_BINARY);
+            $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
             mkdir($preview_path);
+
             $zip = new ZipArchive();
-            $zip->open($m_fd['uri']);
-            $zip->extractTo($preview_path);
-            $zip->close();
+            if($zip->open($zip_file)) {
+                $zres = $zip->extractTo($preview_path);
+                $zip->close();
+            }
+            unlink($zip_file);
         }
 
         /*

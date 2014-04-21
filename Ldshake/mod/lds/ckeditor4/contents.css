@@ -15,11 +15,7 @@ body
 
     /* Remove the background color to make it transparent */
     background-color: #fff;
-
     margin: 8px;
-
-    /* PAU: This padding is just for the editor, it feels more comfortable to the user to have space at the bottom. */
-    padding-bottom: 100px;
 }
 
 .marker

@@ -230,7 +230,8 @@
             $_SESSION['id'] = $_SESSION['guid'];
             $_SESSION['username'] = $user->username;
             $_SESSION['name'] = $user->name;
-                     
+            $_SESSION['is_admin'] = $user->admin;
+
             $code = (md5($user->name . $user->username . time() . rand()));
 
             $user->code = md5($code);
@@ -249,6 +250,7 @@
 	            unset($_SESSION['guid']);
 	            unset($_SESSION['id']);
 	            unset($_SESSION['user']);
+	            unset($_SESSION['is_admin']);
 	            setcookie("elggperm", "", (time()-(86400 * 30)),"/");
             	return false;
             }
@@ -283,7 +285,8 @@
             unset($_SESSION['guid']);
             unset($_SESSION['id']);
             unset($_SESSION['user']);
-            
+            unset($_SESSION['is_admin']);
+
             setcookie("elggperm", "", (time()-(86400 * 30)),"/");
             
             session_destroy();
@@ -348,6 +351,7 @@
 	                $code = md5($code);
 	                unset($_SESSION['guid']);//$_SESSION['guid'] = 0;
 	                unset($_SESSION['id']);//$_SESSION['id'] = 0;
+	                unset($_SESSION['is_admin']);//$_SESSION['id'] = 0;
 	                if ($user = get_user_by_code($code)) {
                     	$_SESSION['user'] = $user;
                         $_SESSION['id'] = $user->getGUID();
@@ -358,6 +362,7 @@
 	            	unset($_SESSION['id']); //$_SESSION['id'] = 0;
 	                unset($_SESSION['guid']);//$_SESSION['guid'] = 0;
 	                unset($_SESSION['code']);//$_SESSION['code'] = "";
+	                unset($_SESSION['is_admin']);//$_SESSION['code'] = "";
 	            }
 	        }/* else {
 	            if (!empty($_SESSION['code'])) {

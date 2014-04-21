@@ -1012,7 +1012,7 @@ $(document).ready(function() {
     if(restapi) {
         window.addEventListener('message',function(event) {
             if(event.origin !== restapi_remote_domain) return;
-            var editor_iframe = document.getElementById("lds_editor_iframe");
+            var editor_iframe = document.querySelector("#lds_editor_iframe[auth=messaging]");
             if(event.data.type == 'ldshake_editor_ready') {
                 var m_sectoken = {
                     "type": "ldshake_sectoken",

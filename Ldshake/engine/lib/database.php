@@ -147,11 +147,17 @@
 	 */
 		function init_db($event, $object_type, $object = null) {
 			register_shutdown_function('db_delayedexecution_shutdown_hook');
+            register_shutdown_function('db_closelink__hook');
 			//register_shutdown_function('db_profiling_shutdown_hook');
 			//setup_db_connections();
 			return true;
 		}
-		
+
+    function db_closelink__hook() {
+        $dblink = get_db_link("readwrite");
+        mysqli_close($dblink);
+    }
+
 	/**
 	 * Gets the appropriate db link for the operation mode requested
 	 *

@@ -111,7 +111,11 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<?php endif; ?>
 				-->
                 <?php if($restapi): ?>
-                <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
+                    <?php if ($editor == 'webcollagerest'): ?>
+                    <iframe id="lds_editor_iframe" auth="messaging" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
+                    <?php else: ?>
+                    <iframe id="lds_editor_iframe" auth="url" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
+                    <?php endif; ?>
                 <?php endif; ?>
 
                 <?php if($editor == 'google_docs'): ?>
