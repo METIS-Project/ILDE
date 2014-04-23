@@ -14,8 +14,16 @@
 	/**
 	 *  Start the Elgg engine
 	 */
+    global $rest_services;
     $rest_services = true;
 	require_once("../engine/start.php");
+
+    require_once __DIR__.'/../mod/lds/rest.php';
+    require_once __DIR__ . '/../vendors/httpful/bootstrap.php';
+
+    header_remove("Cookie");
+    header_remove("Set-Cookie");
+
 	global $CONFIG;
 
 	// Register the error handler

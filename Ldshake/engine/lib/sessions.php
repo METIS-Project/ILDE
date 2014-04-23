@@ -316,7 +316,7 @@
 	 */
 		function session_init($event, $object_type, $object) {
 			
-			global $DB_PREFIX, $CONFIG;
+			global $DB_PREFIX, $CONFIG, $rest_services;
 			
 			// Use database for sessions
 			$DB_PREFIX = $CONFIG->dbprefix; // HACK to allow access to prefix after object distruction
@@ -384,7 +384,19 @@
 	                unset($_SESSION['code']);//$_SESSION['code'] = "";
 	            }
 	        }*/
+
+            if($rest_services) {
+                unset($_SESSION['username']);
+                unset($_SESSION['name']);
+                unset($_SESSION['code']);
+                unset($_SESSION['guid']);
+                unset($_SESSION['id']);
+                unset($_SESSION['user']);
+                unset($_SESSION['is_admin']);
+            }
+
 	        if ($_SESSION['id'] > 0) {
+                $_SESSION['user'] = get_user($_SESSION['id']);
                 set_last_action_session($_SESSION['id']);
 	        }
 

@@ -145,7 +145,6 @@ $(document).ready(function()
 		$('#ldshake_topbar_user_options').removeClass('menu_active');
 	});
 
-	
 	//Submit search form when clicked the icon
 
 	$('#ldshake_topbar_search_submit').click (function ()

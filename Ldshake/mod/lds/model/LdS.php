@@ -58,6 +58,31 @@ class LdS extends ElggObject
     private function create_properties() {
         $guid = self::getGUID();
 
+        $tag_id["discipline"] = get_metastring_id("discipline");
+        $tag_id["pedagogical_approach"] = get_metastring_id("pedagogical_approach");
+        $tag_id["tags"] = get_metastring_id("tags");
+
+        $ms_string = array(
+            'editing_by',
+            'editing_tstamp',
+            'editor_type',
+            'all_can_view',
+            'yes',
+            'generic_comment',
+            'revised_docs',
+            'revised_docs_editor',
+            'viewed_lds',
+            'external_editor'
+        );
+        $ms_id = array();
+
+        foreach($ms_string as $fms) {
+            $ms_id[$fms] = get_metastring_id("$fms");
+        }
+
+        $doc_id = get_subtype_id("object", "LdS_document");
+        $doceditor_id = get_subtype_id("object", "LdS_document_editor");
+
         $query = <<<SQL
 INSERT INTO objects_property SET
   `guid` = {$guid},
@@ -68,27 +93,28 @@ INSERT INTO objects_property SET
   `title` = (SELECT o.title FROM objects_entity o WHERE o.guid = {$guid}),
   `owner_guid` = (SELECT e.owner_guid FROM entities e WHERE e.guid = {$guid}),
   `container_guid` = (SELECT e.container_guid FROM entities e WHERE e.guid = {$guid}),
-  `external_editor` = (SELECT m.value_id FROM metadata m WHERE m.name_id = 2036 AND m.entity_guid = {$guid}) IS NOT NULL,
+  `external_editor` = (SELECT m.value_id FROM metadata m WHERE m.name_id = {$ms_id["external_editor"]} AND m.entity_guid = {$guid}) IS NOT NULL,
   `creator_name` = (SELECT u.name FROM entities e, users_entity u WHERE e.guid = {$guid} AND u.guid = e.owner_guid),
   `creator_username` = (SELECT u.username FROM entities e, users_entity u WHERE e.guid = {$guid} AND u.guid = e.owner_guid),
-  `last_viewed_time` = (SELECT a.time_created FROM annotations a WHERE a.name_id = 8393 AND a.entity_guid = {$guid} ORDER by id DESC LIMIT 1),
-  `last_editor_name` = (SELECT u.name FROM annotations ed, users_entity u WHERE ed.name_id IN (2233,2047) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
-  `last_editor_username` = (SELECT u.username FROM annotations ed, users_entity u WHERE ed.name_id IN (2233,2047) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
-  `last_edited_time` = (SELECT IFNULL(ed.time_created, e.time_created) FROM entities e LEFT JOIN (SELECT ed.time_created, ed.entity_guid FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN (2233,2047) OR ed.name_id IS NULL) AND e.guid = {$guid} ORDER BY id DESC LIMIT 1) AS ed ON e.guid = ed.entity_guid WHERE e.guid = {$guid}),
-  `num_contributions` = (SELECT COUNT(ed.entity_guid) FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN (2233,2047) OR ed.name_id IS NULL) AND e.guid = {$guid}),
-  `num_comments` = (SELECT COUNT(DISTINCT a.id) FROM annotations a WHERE a.name_id = 3141 AND a.entity_guid = {$guid} GROUP BY a.entity_guid),
-  `num_documents` = (SELECT COUNT(DISTINCT e.guid) FROM entities e WHERE e.type = 'object' AND e.subtype IN (22,25) AND e.container_guid = {$guid}),
+  `last_viewed_time` = (SELECT a.time_created FROM annotations a WHERE a.name_id = {$ms_id["viewed_lds"]} AND a.entity_guid = {$guid} ORDER by id DESC LIMIT 1),
+  `last_editor_name` = (SELECT u.name FROM annotations ed, users_entity u WHERE ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
+  `last_editor_username` = (SELECT u.username FROM annotations ed, users_entity u WHERE ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
+  `last_edited_time` = (SELECT IFNULL(ed.time_created, e.time_created) FROM entities e LEFT JOIN (SELECT ed.time_created, ed.entity_guid FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) OR ed.name_id IS NULL) AND e.guid = {$guid} ORDER BY id DESC LIMIT 1) AS ed ON e.guid = ed.entity_guid WHERE e.guid = {$guid}),
+  `num_contributions` = (SELECT COUNT(ed.entity_guid) FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) OR ed.name_id IS NULL) AND e.guid = {$guid}),
+  `num_comments` = (SELECT COUNT(DISTINCT a.id) FROM annotations a WHERE a.name_id = {$ms_id["generic_comment"]} AND a.entity_guid = {$guid} GROUP BY a.entity_guid),
+  `num_documents` = (SELECT COUNT(DISTINCT e.guid) FROM entities e WHERE e.type = 'object' AND e.subtype IN ({$doc_id},{$doceditor_id}) AND e.container_guid = {$guid}),
   `editor_count` = (SELECT COUNT(ru.guid_one) FROM entity_relationships ru WHERE ru.relationship IN ('lds_editor','lds_editor_group') AND ru.guid_two = {$guid}),
   `viewer_count` = (SELECT COUNT(ru.guid_one) AS viewer_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_viewer','lds_viewer_group')  AND ru.guid_two = {$guid}),
-  `all_can_view` = (SELECT entity_guid FROM metadata m WHERE m.name_id = 2065 AND m.value_id = 2066 AND m.entity_guid = {$guid}) IS NOT NULL,
-  `editor_type` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = 2037 AND met.entity_guid = {$guid}),
-  `editor_type_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = 2037 AND met.entity_guid = {$guid}),
-  `discipline` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3081 AND m.entity_guid = {$guid}),
-  `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3082 AND m.entity_guid = {$guid}),
-  `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3383 AND m.entity_guid = {$guid}),
-  `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 2133 AND m.entity_guid = {$guid})) AS UNSIGNED),
-  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 10173 AND entity_guid = {$guid} LIMIT 1)
+  `all_can_view` = (SELECT entity_guid FROM metadata m WHERE m.name_id = {$ms_id["all_can_view"]} AND m.value_id = {$ms_id["yes"]} AND m.entity_guid = {$guid}) IS NOT NULL,
+  `editor_type` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_type"]} AND met.entity_guid = {$guid}),
+  `editor_type_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_type"]} AND met.entity_guid = {$guid}),
+  `discipline` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["discipline"]} AND m.entity_guid = {$guid}),
+  `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["pedagogical_approach"]} AND m.entity_guid = {$guid}),
+  `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["tags"]} AND m.entity_guid = {$guid}),
+  `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_tstamp"]} AND m.entity_guid = {$guid})) AS UNSIGNED),
+  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1)
 ON DUPLICATE KEY UPDATE
+  `guid` = {$guid},
   `subtype` = (SELECT e.subtype FROM entities e WHERE e.guid = {$guid}),
   `subtype_string` = (SELECT es.subtype FROM entities e JOIN entity_subtypes es WHERE es.id = e.subtype AND e.guid = {$guid}),
   `time_created` = (SELECT e.time_created FROM entities e WHERE e.guid = {$guid}),
@@ -96,29 +122,29 @@ ON DUPLICATE KEY UPDATE
   `title` = (SELECT o.title FROM objects_entity o WHERE o.guid = {$guid}),
   `owner_guid` = (SELECT e.owner_guid FROM entities e WHERE e.guid = {$guid}),
   `container_guid` = (SELECT e.container_guid FROM entities e WHERE e.guid = {$guid}),
-  `external_editor` = (SELECT m.value_id FROM metadata m WHERE m.name_id = 2036 AND m.entity_guid = {$guid}) IS NOT NULL,
+  `external_editor` = (SELECT m.value_id FROM metadata m WHERE m.name_id = {$ms_id["external_editor"]} AND m.entity_guid = {$guid}) IS NOT NULL,
   `creator_name` = (SELECT u.name FROM entities e, users_entity u WHERE e.guid = {$guid} AND u.guid = e.owner_guid),
   `creator_username` = (SELECT u.username FROM entities e, users_entity u WHERE e.guid = {$guid} AND u.guid = e.owner_guid),
-  `last_viewed_time` = (SELECT a.time_created FROM annotations a WHERE a.name_id = 8393 AND a.entity_guid = {$guid} ORDER by id DESC LIMIT 1),
-  `last_editor_name` = (SELECT IFNULL(ed.time_created, e.time_created) FROM entities e LEFT JOIN (SELECT ed.time_created, ed.entity_guid FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN (2233,2047) OR ed.name_id IS NULL) AND e.guid = {$guid} ORDER BY id DESC LIMIT 1) AS ed ON e.guid = ed.entity_guid WHERE e.guid = {$guid}),
-  `last_editor_username` = (SELECT u.username FROM annotations ed, users_entity u WHERE ed.name_id IN (2233,2047) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
-  `last_edited_time` = (SELECT IFNULL(ed.time_created, e.time_created) FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN (2233,2047) OR ed.name_id IS NULL) AND e.guid = {$guid} ORDER BY id DESC LIMIT 1),
-  `num_contributions` = (SELECT COUNT(ed.entity_guid) FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN (2233,2047) OR ed.name_id IS NULL) AND e.guid = {$guid}),
-  `num_comments` = (SELECT COUNT(DISTINCT a.id) FROM annotations a WHERE a.name_id = 3141 AND a.entity_guid = {$guid} GROUP BY a.entity_guid),
-  `num_documents` = (SELECT COUNT(DISTINCT e.guid) FROM entities e WHERE e.type = 'object' AND e.subtype IN (22,25) AND e.container_guid = {$guid}),
+  `last_viewed_time` = (SELECT a.time_created FROM annotations a WHERE a.name_id = {$ms_id["viewed_lds"]} AND a.entity_guid = {$guid} ORDER by id DESC LIMIT 1),
+  `last_editor_name` = (SELECT u.name FROM annotations ed, users_entity u WHERE ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
+  `last_editor_username` = (SELECT u.username FROM annotations ed, users_entity u WHERE ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) AND ed.entity_guid = {$guid} AND ed.owner_guid = u.guid ORDER BY ed.id DESC LIMIT 1),
+  `last_edited_time` = (SELECT IFNULL(ed.time_created, e.time_created) FROM entities e LEFT JOIN (SELECT ed.time_created, ed.entity_guid FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) OR ed.name_id IS NULL) AND e.guid = {$guid} ORDER BY id DESC LIMIT 1) AS ed ON e.guid = ed.entity_guid WHERE e.guid = {$guid}),
+  `num_contributions` = (SELECT COUNT(ed.entity_guid) FROM annotations ed RIGHT JOIN entities e ON e.guid = ed.entity_guid WHERE (ed.name_id IN ({$ms_id["revised_docs"]},{$ms_id["revised_docs_editor"]}) OR ed.name_id IS NULL) AND e.guid = {$guid}),
+  `num_comments` = (SELECT COUNT(DISTINCT a.id) FROM annotations a WHERE a.name_id = {$ms_id["generic_comment"]} AND a.entity_guid = {$guid} GROUP BY a.entity_guid),
+  `num_documents` = (SELECT COUNT(DISTINCT e.guid) FROM entities e WHERE e.type = 'object' AND e.subtype IN ({$doc_id},{$doceditor_id}) AND e.container_guid = {$guid}),
   `editor_count` = (SELECT COUNT(ru.guid_one) FROM entity_relationships ru WHERE ru.relationship IN ('lds_editor','lds_editor_group') AND ru.guid_two = {$guid}),
   `viewer_count` = (SELECT COUNT(ru.guid_one) AS viewer_count FROM entity_relationships ru WHERE ru.relationship IN ('lds_viewer','lds_viewer_group')  AND ru.guid_two = {$guid}),
-  `all_can_view` = (SELECT entity_guid FROM metadata m WHERE m.name_id = 2065 AND m.value_id = 2066 AND m.entity_guid = {$guid}) IS NOT NULL,
-  `editor_type` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = 2037 AND met.entity_guid = {$guid}),
-  `editor_type_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = 2037 AND met.entity_guid = {$guid}),
-  `discipline` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3081 AND m.entity_guid = {$guid}),
-  `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3082 AND m.entity_guid = {$guid}),
-  `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 3383 AND m.entity_guid = {$guid}),
-  `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 2133 AND m.entity_guid = {$guid})) AS UNSIGNED),
-  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = 10173 AND entity_guid = {$guid} LIMIT 1)
+  `all_can_view` = (SELECT entity_guid FROM metadata m WHERE m.name_id = {$ms_id["all_can_view"]} AND m.value_id = {$ms_id["yes"]} AND m.entity_guid = {$guid}) IS NOT NULL,
+  `editor_type` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_type"]} AND met.entity_guid = {$guid}),
+  `editor_type_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_type"]} AND met.entity_guid = {$guid}),
+  `discipline` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["discipline"]} AND m.entity_guid = {$guid}),
+  `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["pedagogical_approach"]} AND m.entity_guid = {$guid}),
+  `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["tags"]} AND m.entity_guid = {$guid}),
+  `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_tstamp"]} AND m.entity_guid = {$guid})) AS UNSIGNED),
+  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1)
 SQL;
 
-        execute_delayed_write_query($query);
+        insert_data($query);
     }
 
     public function save() {

@@ -983,10 +983,10 @@ class RestEditor extends Editor
 
             $CONFIG->rest_editor_list['exelearningrest'] = array(
                 'name' => 'eXeLearning',
-                'url_rest' => "http://ldshake2.upf.edu:51235/",
-                'url_gui' => "http://ldshake2.upf.edu:51235/ldshakegui/",
-//                'url_rest' => "http://ilde:51235/",
-//                'url_gui' => "http://ilde:51235/ldshakegui/",
+                'url_rest' => "http://ldshake2.upf.edu:443/",
+                'url_gui' => "http://ldshake2.upf.edu:443/ldshakegui/",
+                //'url_rest' => "http://ilde:443/",
+                //'url_gui' => "http://ilde:443/ldshakegui/",
                 'preview' => true,
                 'imsld' => false,
                 'password' => 'LdS@k$1#',
@@ -1453,9 +1453,9 @@ class RestEditor extends Editor
         $clone->pub_previewDir = rand_str(64);
         $clone->revisionDir = rand_str(64);
 
-        if(file_exists($CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir)) {
-            $src_preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$this->_document->previewDir;
-            $preview_path = $CONFIG->editors_content.'content/'.$this->_document->editorType.'/'.$clone->previewDir;
+        if(file_exists($CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir)) {
+            $src_preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+            $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$clone->previewDir;
             mkdir($preview_path);
             shell_exec("cp -r {$src_preview_path}/. {$preview_path}");
         }

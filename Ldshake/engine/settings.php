@@ -25,6 +25,11 @@ if (isset($forcedEnv)) {
 	$CONFIG->currentEnv = $forcedEnv;
 }
 
+//LdShake mode
+if (isset($ldshake_mode)) {
+    $CONFIG->ldshake_mode = $ldshake_mode;
+}
+
 //ILDE debug mode
 if (isset($debug)) {
     $CONFIG->debug = $debug;

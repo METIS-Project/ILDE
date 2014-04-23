@@ -104,8 +104,8 @@ $resultIds->requestCompleted = true;
 $preserved_lds = array();
 $items_to_implement = array();
 $pg_data = json_decode($project_design->description, true);
-$lds_list = lds_contTools::getProjectLdSList($pd_guid, true);
 $pd_guid = $project_design->guid;
+$lds_list = lds_contTools::getProjectLdSList($pd_guid, true);
 
 if($project_design->getSubtype() == 'LdSProject_implementation') {
     foreach($pg_data as &$item) {

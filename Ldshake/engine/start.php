@@ -223,6 +223,8 @@ foreach($boot as $b) {
     //echo microtime(true) - $time.' '.$b.'<br />';
 }
 
+site_configuration();
+
 		// Load plugins
 
 //exit;

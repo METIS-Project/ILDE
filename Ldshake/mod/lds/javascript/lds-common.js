@@ -34,6 +34,7 @@
  ********************************************************************************/
 
 var tooltip_timer_ids = new Array();
+var lds_submit_click = false;
 
 function tooltips ()
 {

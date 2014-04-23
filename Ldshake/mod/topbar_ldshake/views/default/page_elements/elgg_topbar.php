@@ -42,6 +42,7 @@
 global $CONFIG;
 
 $disable_projects = $CONFIG->disable_projects;
+$static_resources = ldshake_theme_static("shell");
 if (isloggedin()) :
 ?>
 <div id="ldshake_topbar">
@@ -76,7 +77,7 @@ if (isloggedin()) :
         </div>
 		<div id="ldshake_topbar_container_left">
 			<div id="ldshake_topbar_logo">
-				<a href="<?php echo $vars['url']; ?>pg/lds/"><img width="54" height="34" src="<?php echo $vars['url']; ?>mod/topbar_ldshake/graphics/FINAL_LOGO.png" alt="LdShake" /></a>
+				<a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo $static_resources["topbar_logo"]; ?></a>
 			</div>
 			<div id="toolbarlinks">
 				<ul id="toolbar_options">

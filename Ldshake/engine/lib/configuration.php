@@ -160,9 +160,11 @@
 				$pathpart = str_replace("//","/",str_replace($_SERVER['DOCUMENT_ROOT'],"",$CONFIG->path));
 				if (substr($pathpart,0,1) != "/") $pathpart = "/" . $pathpart; 
 				$CONFIG->wwwroot = "http://" . $_SERVER['HTTP_HOST'] . $pathpart;
-		
 			}
-		
+
+            if(empty($CONFIG->ldshake_mode))
+                $CONFIG->ldshake_mode = 'default';
+
 			if (empty($CONFIG->url))
 				$CONFIG->url = $CONFIG->wwwroot;
 			
@@ -171,52 +173,43 @@
 				
 			if (empty($CONFIG->language))
 				$CONFIG->language = "en";
+    	}
 
-		}
-		
+function site_configuration() {
+    global $CONFIG;
+    if (isset($CONFIG->site) && ($CONFIG->site instanceof ElggSite)) {
+/*        if(isset($_SESSION['site_configured'])){
+            $CONFIG->sitename = $_SESSION['sitename'];
+            $CONFIG->sitedescription = $_SESSION['sitedescription'];
+            $CONFIG->siteemail = $_SESSION['siteemail'];
+        } else {
+*/
+            $CONFIG->sitename = $CONFIG->site->name;
+            $CONFIG->sitedescription = $CONFIG->site->description;
+            $CONFIG->siteemail = $CONFIG->site->email;
+
+            $_SESSION['site_configured'] = true;
+            $_SESSION['sitename'] = $CONFIG->sitename;
+            $_SESSION['sitedescription'] = $CONFIG->sitedescription;
+            $_SESSION['siteemail'] = $CONFIG->siteemail;
+//        }
+    }
+}
+
 	/**
 	 * Function that provides some config initialisation on system init
 	 *
 	 */
 		
 		function configuration_init() {
-			
 			global $CONFIG;
-			
-			//if (!is_installed() || !is_db_installed()) return false;
-			
-			/// LdShake change ///
-			//Auto-detect path
-			//$path = datalist_get('path');
-			//if (!empty($path))
-			//	$CONFIG->path = $path;
-			//$dataroot = datalist_get('dataroot');
-			//if (!empty($dataroot))
-			//	$CONFIG->dataroot = $dataroot;
-			if (isset($CONFIG->site) && ($CONFIG->site instanceof ElggSite)) {
-				//$CONFIG->wwwroot = $CONFIG->site->url;
-                if(isset($_SESSION['site_configured'])){
-                    $CONFIG->sitename = $_SESSION['sitename'];
-                    $CONFIG->sitedescription = $_SESSION['sitedescription'];
-                    $CONFIG->siteemail = $_SESSION['siteemail'];
-                } else {
-                    $CONFIG->sitename = $CONFIG->site->name;
-                    $CONFIG->sitedescription = $CONFIG->site->description;
-                    $CONFIG->siteemail = $CONFIG->site->email;
 
-                    $_SESSION['site_configured'] = true;
-                    $_SESSION['sitename'] = $CONFIG->sitename;
-                    $_SESSION['sitedescription'] = $CONFIG->sitedescription;
-                    $_SESSION['siteemail'] = $CONFIG->siteemail;
-                }
-			}
 			$CONFIG->url = $CONFIG->wwwroot;
 			/// LdShake change ///
 			// Load default settings from database
 			get_all_config(1);
 			
 			return true;
-			
 		}
 		
 	/**

@@ -41,12 +41,13 @@
 		
 		// Garbage collect metastrings
 		echo elgg_echo('garbagecollector:gc:metastrings');
-		
+
+        /*
 		if (delete_orphaned_metastrings()!==false) {
 			echo elgg_echo('garbagecollector:ok');
 		} else
 			echo elgg_echo('garbagecollector:error');
-			
+		*/
 		echo "\n";
 		
 		// Now, because we are nice, trigger a plugin hook to let other plugins do some GC

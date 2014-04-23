@@ -964,6 +964,8 @@ SQL;
         foreach ($fields as $f) {
             $time = microtime(true);
             $returnObj->$f = lds_contTools::getUserTagsAvailable($f);
+            if(!$returnObj->$f)
+                $returnObj->$f = array();
             //echo microtime(true) - $time.' tl<br />'.'<br>';
         }
         /*

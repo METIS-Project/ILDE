@@ -107,7 +107,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                                 <p>Project Design Conceptualize </p>
                             </div>
                             <div id="ldproject_toolBar" class="ui-widget-header"><p>
-                                <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' tooltype="design_pattern">
+                                <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' subtype="design_pattern">
                                     Design Pattern
                                 </div>
                                 <div class="draggable ui-widget-content" toolname="CourseMap" tooltype="doc" subtype="coursemap">

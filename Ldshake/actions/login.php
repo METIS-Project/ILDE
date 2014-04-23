@@ -46,7 +46,8 @@
             else
             {
             	$user = get_loggedin_user();
-            	
+
+                /*
             	//Purges the metastrings: Too difficult to install a CRON in WIN
             	$sql = "DELETE FROM {$CONFIG->dbprefix}metastrings
 				        WHERE id NOT IN (SELECT name_id FROM {$CONFIG->dbprefix}metadata)
@@ -54,6 +55,7 @@
 				        AND id NOT IN (SELECT name_id FROM {$CONFIG->dbprefix}annotations)
 				        AND id NOT IN (SELECT value_id FROM {$CONFIG->dbprefix}annotations)";
 				execute_query ($sql, get_db_link('write'));
+                */
             	
             	if (!$user->isExpert)
             		forward("pg/lds/firststeps/");

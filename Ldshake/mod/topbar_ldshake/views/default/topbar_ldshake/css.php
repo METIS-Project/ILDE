@@ -182,7 +182,6 @@ margin-right: 20px;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 1px 4px #666666;
     top: 37px;
-    left: 110px;
     z-index: 900;
 }
 

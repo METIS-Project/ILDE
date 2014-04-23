@@ -80,6 +80,7 @@ function lds_init()
 //    require_once __DIR__.'/model/ImplementationObject.php';
 
 	require_once __DIR__.'/editors/editorsFactory.php';
+	require_once __DIR__.'/mode/mode.php';
 
     if($rest_services) {
         require_once __DIR__.'/rest.php';
