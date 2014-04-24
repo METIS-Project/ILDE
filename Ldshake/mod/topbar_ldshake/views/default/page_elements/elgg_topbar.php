@@ -121,9 +121,9 @@ if (isloggedin()) :
                 </div>
                 <div id="new_menu_implement" class="menu level2">
                     <ul>
-                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design to implement in a VLE through GLUEPS") ?></a></li>
-                        <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vledata/"><?php echo T("See your VLE") ?></a></li>
-                        <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Register your VLE") ?></a></li>
+                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design implementation") ?></a></li>
+                        <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Add VLE") ?></a></li>
+                        <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vledata/"><?php echo T("Configure VLE") ?></a></li>
                     </ul>
                 </div>
                 <div id="new_menu_conceptualize" class="menu level2">
@@ -147,13 +147,9 @@ if (isloggedin()) :
                 <?php if(!$disable_projects):?>
                 <div id="new_menu_project" class="menu level2">
                     <ul>
-                        <li id="tb_newlds_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Project Workflow") ?></a></li>
-                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Manage projects designs") ?></a></li>
-                        <?php
-                        $projects = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 15);
-                        if($projects)foreach($projects as $project): ?>
-                        <li class="menu_option"><a class="new_project_menu_item" href="<?php echo $vars['url']; ?>pg/lds/new/projects/implement/" project_guid="<?php echo $project->guid;?>"><?php echo $project->title ?></a></li>
-                        <?php endforeach; ?>
+                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects/implement"><?php echo T("Select pathway for my project") ?></a></li>
+                        <li id="tb_newlds_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Add pathway") ?></a></li>
+                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Edit pathway") ?></a></li>
                     </ul>
                 </div>
                 <?php endif; ?>
@@ -163,10 +159,4 @@ if (isloggedin()) :
 </div>
 
 <div style="clear:both;"></div>
-
-    <?php include_once(__DIR__.'/../projects/new_projectimplementation_form.php');    ?>
-
-
-<?php
-endif;
-?>
+<?php endif;?>

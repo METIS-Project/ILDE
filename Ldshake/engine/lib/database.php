@@ -218,7 +218,6 @@
             //$DB_QUERY_CACHE[$query] = $result;
 
 			return $result;
-				
 		}
 		
 		/**
@@ -379,8 +378,7 @@
             
             if (execute_query("$query", $dblink)) 
                 return mysqli_insert_id($dblink);
-                
-                
+
 			return false;
         }
         

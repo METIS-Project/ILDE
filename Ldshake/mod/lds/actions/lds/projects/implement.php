@@ -138,6 +138,7 @@ foreach($pd_data as &$item) {
     }
 }
 
+
 $project_design_implementation->description = json_encode($pd_data);
 $project_design_implementation->save();
 

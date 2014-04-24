@@ -2656,6 +2656,9 @@ function lds_exec_projects ($params)
         $vars['title'] = T("All my project designs");
     }
 
+    if(isset($params[1]) && $params[1] == 'implement')
+        $vars['implement'] = true;
+
     $vars['list_type'] = T('projects');
     $vars['section'] = 'off';
     $body = elgg_view('lds/projects/myprojects',$vars);

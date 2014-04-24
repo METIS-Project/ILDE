@@ -3,7 +3,7 @@
  * LdShake is a platform for the social sharing and co-edition of learning designs
  * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
  *
- * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
+ * (Contributors, alpha. order) Abenia, P., Carralero, M.A., ChacÃ³n, J., HernÃ¡ndez-Leo, D., Moreno, P.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -34,116 +34,118 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
+
+extract($vars);
+$edit_imp_label = $implement ? T("Implement") : T("Edit");
+$edit_imp_url = isset($implement) ? "implement" : "edit";
+$imp_action = isset($implement) ? "project_implement_action" : "lds_edit_action";
 ?>
-
-<?php extract($vars) ?>
 <div id="two_column_left_sidebar">
-	<div id="owner_block">
+    <div id="owner_block">
         <?php if($section != 'off'): ?>
-        <ul id="lds_side_sections_prj">
-            <li><a<?php if ($section == 'prj-') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations' ?>"><?php echo T("All my projects") ?></a></li>
-            <li><a<?php if ($section == 'prj-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-            <li><a<?php if ($section == 'prj-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-            <li><a<?php if ($section == 'prj-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
-        </ul>
+            <ul id="lds_side_sections_prj">
+                <li><a<?php if ($section == 'prj-') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations' ?>"><?php echo T("All my projects") ?></a></li>
+                <li><a<?php if ($section == 'prj-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+                <li><a<?php if ($section == 'prj-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+                <li><a<?php if ($section == 'prj-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/projects_implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
+            </ul>
 
-		<ul id="lds_side_sections">
-			<li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
-			<li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
-			<li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
-			<li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
-		</ul>
+            <ul id="lds_side_sections">
+                <li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('mine') ?>"><?php echo T("All my LdS") ?></a></li>
+                <li><a<?php if ($section == 'created-by-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('created-by-me') ?>"><?php echo T("Created by me") ?></a></li>
+                <li><a<?php if ($section == 'shared-with-me') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('shared-with-me') ?>"><?php echo T("Shared with me") ?></a></li>
+                <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
+            </ul>
 
-        <ul id="lds_side_sections_imp">
-            <li><a<?php if ($section == 'imp') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
-            <li><a<?php if ($section == 'imp-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
-            <li><a<?php if ($section == 'imp-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
-            <li><a<?php if ($section == 'imp-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
-        </ul>
+            <ul id="lds_side_sections_imp">
+                <li><a<?php if ($section == 'imp') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
+                <li><a<?php if ($section == 'imp-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
+                <li><a<?php if ($section == 'imp-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
+                <li><a<?php if ($section == 'imp-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
+            </ul>
         <?php endif; ?>
     </div>
-	<div id="owner_block_bottom"></div>
+    <div id="owner_block_bottom"></div>
 </div>
 
 <div id="two_column_left_sidebar_maincontent">
-	<div id="content_area_user_title">
-		<?php if ($filtering): ?>
-		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo $title ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
-		<?php else: ?>
-		<h2><?php echo $title ?></h2>
-		<?php endif; ?>
-	</div>
-	
-	<div class="filters">
-	</div>
-	
-	<?php if (is_array($list) && sizeof($list) > 0): ?>
-	<form method="post" action="#">
-		<div id="my_lds_list_header">
-			<input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
-			<?php if ($section != 'trashed'): ?>
-			<input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
-			<?php else: ?>
-			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
-			<?php endif; ?>
-            <!--
+    <div id="content_area_user_title">
+        <?php if ($filtering): ?>
+            <h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo $title ?></a> Â» <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
+        <?php else: ?>
+            <h2><?php echo $title ?></h2>
+        <?php endif; ?>
+    </div>
+
+    <div class="filters">
+    </div>
+
+    <?php if (is_array($list) && sizeof($list) > 0): ?>
+        <form method="post" action="#">
+            <div id="my_lds_list_header">
+                <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
+                <?php if ($section != 'trashed'): ?>
+                    <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
+                <?php else: ?>
+                    <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
+                <?php endif; ?>
+                <!--
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
             <input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" />
             <input type="button" style="border-color:#999; margin:5px 0;" id="implement_project" value="<?php echo T("Implement project") ?>" disabled="disabled" />
             -->
-		</div>
-		<ul id="my_lds_list">
-			<?php foreach($list as $item): ?>
-			<?php if ($section != 'trashed'): ?>
-			<li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
-				<?php if ($item->starter->guid == get_loggedin_userid()): ?>
-				<input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<?php else: ?>
-				<!--<div class="lds_select_spacer"></div>-->
-                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<?php endif; ?>
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
-				<div class="lds_info">
+            </div>
+            <ul id="my_lds_list">
+                <?php foreach($list as $item): ?>
+                    <?php if ($section != 'trashed'): ?>
+                        <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
+                            <?php if ($item->starter->guid == get_loggedin_userid()): ?>
+                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
+                            <?php else: ?>
+                                <!--<div class="lds_select_spacer"></div>-->
+                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
+                            <?php endif; ?>
+                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
+                            <div class="lds_info">
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>
-                            <a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a>
+                            <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
                         <?php endif; ?>
                         <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
-						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
+                        <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-					<?php if ($item->locked): ?>
-					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
-					<?php endif; ?>
-					<span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
-                    <div class="clearfloat"></div>
-				</div>
-			</li>
-			<?php else: ?>
-			<li class="lds_list_element">
-				<input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
-				<div class="lds_info">
+                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+                                <?php if ($item->locked): ?>
+                                    <span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
+                                <?php endif; ?>
+                                <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+                                <div class="clearfloat"></div>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li class="lds_list_element">
+                            <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
+                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
+                            <div class="lds_info">
 					<span class="lds_title_tags">
 						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
-						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
+                        <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-					<span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
-                    <div class="clearfloat"></div>
-                </div>
-            </li>
-			<?php endif; ?>
-			<?php endforeach; ?>
-		</ul>
-	</form>
-	<?php else: ?>
-		<p class="noresults"><?php echo T("Oops, no LdS here!") ?></p>
-	<?php endif; ?>
-	
-	
-	<div class="filters">
-	</div>
+                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+                                <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+                                <div class="clearfloat"></div>
+                            </div>
+                        </li>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </ul>
+        </form>
+    <?php else: ?>
+        <p class="noresults"><?php echo T("Oops, no LdS here!") ?></p>
+    <?php endif; ?>
+    <div class="filters">
+    </div>
 </div>
 
-<?php include (__DIR__.'/../clonelds_form.php') ?>
+<?php include (__DIR__.'/../clonelds_form.php');?>
+<?php include (__DIR__.'/new_projectimplementation_form.php');?>

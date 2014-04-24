@@ -3,7 +3,7 @@
  * LdShake is a platform for the social sharing and co-edition of learning designs
  * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
  *
- * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
+ * (Contributors, alpha. order) Abenia, P., Carralero, M.A., ChacÃ³n, J., HernÃ¡ndez-Leo, D., Moreno, P.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -94,16 +94,15 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				<?php endif; ?>
 				-->
 
-                <iframe id="lds_editor_iframe" src="" width="958" height="616" style="border: 0px solid grey;"></iframe>
+                <iframe id="lds_editor_iframe" src="" auth="messaging" width="958" height="616" style="border: 0px solid grey;"></iframe>
 
             </div>
             <div id="lds_edit_tabs" class="scrollable">
                 <?php /** Botonets de scroll **/ ?>
-                <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
+                <div class="arrow right" style="top:4px !important">â–º</div><div class="arrow left" style="top:4px !important">â—„</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
                     <li class="lds_newtab">+ <?php echo T("Add document") ?></li>
                     <li class="lds_exetab"> <?php echo $editor_label ?></li>
-
                 </ul>
             </div>
             <br>
@@ -147,7 +146,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                             <li><?php echo T("Activity") ?></li>
                             <li><?php echo T("Tool (to be used within an activity)") ?></li>
                             <li><?php echo T("Document (to be used within an activity)") ?></li>
-                            <li><?php echo T("Resource (image, table, schema, picture…)") ?></li>
+                            <li><?php echo T("Resource (image, table, schema, pictureâ€¦)") ?></li>
                         </ol>
                     </div>
                 </div>

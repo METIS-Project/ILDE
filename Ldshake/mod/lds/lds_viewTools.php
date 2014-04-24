@@ -4,7 +4,7 @@
  * LdShake is a platform for the social sharing and co-edition of learning designs
  * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
  *
- * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
+ * (Contributors, alpha. order) Abenia, P., Carralero, M.A., ChacÃ³n, J., HernÃ¡ndez-Leo, D., Moreno, P.
  *
  * This program is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Affero General Public License version 3 as published by the
@@ -37,79 +37,79 @@
 
 
 /**
- * Set of helper functions for the views of the LdS module 
+ * Set of helper functions for the views of the LdS module
  */
 
 class lds_viewTools
 {
 
-	public static function pagination ($count, $elementsPerPage = 10)
-	{
-		$params = array(
-			'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
-			'offset' => get_input('offset', 0),
-			'count' => $count,
-			'limit' => $elementsPerPage
-		);
-		
-		return elgg_view('navigation/pagination', $params);
-	}
-	
-	public static function tag_display ($tags, $class)
-	{
-		$tags = $tags->$class;
-		//debug_print($tags);
-		if (is_string($tags) && strlen($tags)) $tags = array($tags);
-		
-		$tagstring = '';
-		if (is_array($tags) && count($tags))
-			foreach($tags as $tag)
-				$tagstring .= '<a href="'.self::getUrl().'?tagk='.$class.'&tagv='.urlencode($tag).'" class="lds_tag '.$class.'">'.$tag.'</a> ';
-		
-		return $tagstring;
-	}
+    public static function pagination ($count, $elementsPerPage = 10)
+    {
+        $params = array(
+            'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
+            'offset' => get_input('offset', 0),
+            'count' => $count,
+            'limit' => $elementsPerPage
+        );
 
-	public static function all_tag_display ($lds)
-	{
-		$tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
+        return elgg_view('navigation/pagination', $params);
+    }
 
-		//We build an array of all the tags of the LdS
-		$arr = array();
-		foreach ($tagtypes as $type)
-		{
-			$tags = $lds->$type;
+    public static function tag_display ($tags, $class)
+    {
+        $tags = $tags->$class;
+        //debug_print($tags);
+        if (is_string($tags) && strlen($tags)) $tags = array($tags);
 
-			if (is_string($tags) && strlen($tags)) $tags = array($tags);
-			
-			if (is_array($tags))
-			{
-				foreach ($tags as $tag)
-				{
-					$t = new stdClass();
-					$t->type = $type;
-					$t->tag = $tag;
-					$arr[] = $t;
-				}
-			}
+        $tagstring = '';
+        if (is_array($tags) && count($tags))
+            foreach($tags as $tag)
+                $tagstring .= '<a href="'.self::getUrl().'?tagk='.$class.'&tagv='.urlencode($tag).'" class="lds_tag '.$class.'">'.$tag.'</a> ';
 
-		}
+        return $tagstring;
+    }
 
-		//Order them by name
-		Utils::osort($arr, 'tag');
-		
-		//Print them
-		$str = '';
-		foreach ($arr as $tag)
-			$str .= '<span class="lds_small_tag '.$tag->type.'">'.$tag->tag.'</span>';
+    public static function all_tag_display ($lds)
+    {
+        $tagtypes = array ('tags', 'discipline', 'pedagogical_approach');
 
-		return $str;
-	}
+        //We build an array of all the tags of the LdS
+        $arr = array();
+        foreach ($tagtypes as $type)
+        {
+            $tags = $lds->$type;
 
-	public static function url_for ($lds, $type = 'view')
-	{
-		global $CONFIG;
-		
-		$editortype = ($lds->external_editor ? 'editor' : '');
+            if (is_string($tags) && strlen($tags)) $tags = array($tags);
+
+            if (is_array($tags))
+            {
+                foreach ($tags as $tag)
+                {
+                    $t = new stdClass();
+                    $t->type = $type;
+                    $t->tag = $tag;
+                    $arr[] = $t;
+                }
+            }
+
+        }
+
+        //Order them by name
+        Utils::osort($arr, 'tag');
+
+        //Print them
+        $str = '';
+        foreach ($arr as $tag)
+            $str .= '<span class="lds_small_tag '.$tag->type.'">'.$tag->tag.'</span>';
+
+        return $str;
+    }
+
+    public static function url_for ($lds, $type = 'view')
+    {
+        global $CONFIG;
+
+        $editortype = ($lds->external_editor ? 'editor' : '');
 
         $folder = $type.$editortype;
 
@@ -120,6 +120,8 @@ class lds_viewTools
                 $folder = 'edit_project';
             } elseif($type == 'view') {
                 $folder = 'project_implementation';
+            } elseif($type == 'implement') {
+                $folder = 'project/implement/';
             }
         }
 
@@ -127,29 +129,29 @@ class lds_viewTools
         if($type == 'history' && $lds->editor_type == 'google_docs')
             $folder = 'history';
 
-		return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';
-	}
-	
-	public static function getUrl ($type = 'list')
-	{
-		global $CONFIG;
-		
-		switch ($type)
-		{
-			case 'mine':
-				return $CONFIG->url . 'pg/lds/';
-			case 'trashed':
-				return $CONFIG->url . 'pg/lds/trashed/';
-			case 'created-by-me':
-				return $CONFIG->url . 'pg/lds/created-by-me/';
-			case 'shared-with-me':
-				return $CONFIG->url . 'pg/lds/shared-with-me/';
-			case 'list':
-				return $CONFIG->url . 'pg/lds/browse/';
+        return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';
+    }
+
+    public static function getUrl ($type = 'list')
+    {
+        global $CONFIG;
+
+        switch ($type)
+        {
+            case 'mine':
+                return $CONFIG->url . 'pg/lds/';
+            case 'trashed':
+                return $CONFIG->url . 'pg/lds/trashed/';
+            case 'created-by-me':
+                return $CONFIG->url . 'pg/lds/created-by-me/';
+            case 'shared-with-me':
+                return $CONFIG->url . 'pg/lds/shared-with-me/';
+            case 'list':
+                return $CONFIG->url . 'pg/lds/browse/';
             case 'patterns':
                 return $CONFIG->url . 'pg/lds/query/';
-		}
-	}
+        }
+    }
 
     public static function iconSupport ($type)
     {

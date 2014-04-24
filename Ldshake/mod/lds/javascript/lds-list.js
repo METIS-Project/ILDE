@@ -52,6 +52,49 @@ $(document).ready(function()
     $(window).resize(height_correction);
     */
 
+    //new project implementation
+
+    $('.project_implement_action').click(function (event) {
+        event.preventDefault();
+        //event.stopPropagation();
+
+        lds_newprojectimplementation_guid = $(this).attr("project_guid");
+
+        $('#implement_project_popup_close').click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            $('#implement_project').fadeOut(200);
+        });
+        $('#implement_project').fadeToggle(200);
+        $('input[name=new_projectimplementation_title]')
+            .keypress(function(e) {
+                if (e.keyCode == '13') {
+                    e.preventDefault();
+                    $('#projectimplementation_submit').click();
+                }
+            })
+            .focus();
+    });
+
+    $("#projectimplementation_submit").click(function (event) {
+        var submitData =
+        {
+            guid: lds_newprojectimplementation_guid,
+            title: $('input[name=new_projectimplementation_title]').val()
+        };
+
+        if(submitData.title.length == 0)
+            $('#projectimplementation_submit_incomplete').show();
+        else {
+            if(!lds_submit_click) {
+                lds_submit_click = true;
+                $.post (baseurl + "action/lds/projects/implement", submitData, function(data) {
+                    window.location = baseurl + 'pg/lds/project_implementation/'+data;
+                });
+            }
+        }
+    });
+
     $(".lds_select_implement_action").click(function (event) {
         event.preventDefault();
         window.implement_lds = $(this).attr('lds');
