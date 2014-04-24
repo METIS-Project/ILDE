@@ -27,18 +27,18 @@
 	 */
 		function get_access_list($user_id = 0, $site_id = 0, $flush = false) {
 			
-			global $CONFIG, $init_finished, $SESSION;
+			global $CONFIG, $init_finished;
 			static $access_list;
 			
 			if (!isset($access_list) || !$init_finished)
 				$access_list = array();
 				
-			if ($user_id == 0) $user_id = $SESSION['id'];
+			if ($user_id == 0) $user_id = $_SESSION['id'];
 			if (($site_id == 0) && (isset($CONFIG->site_id))) $site_id = $CONFIG->site_id;
 			$user_id = (int) $user_id;
 			$site_id = (int) $site_id;
 			
-			if (isset($access_list[$user_id])) return $access_list[$user_id];
+			if (isset($access_list[$user_id]) && !$flush) return $access_list[$user_id];
 			
 			$access_list[$user_id] = "(" . implode(",",get_access_array($user_id, $site_id, $flush)) . ")";
 			

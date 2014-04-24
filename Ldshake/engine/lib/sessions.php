@@ -258,6 +258,9 @@
             // Users privilege has been elevated, so change the session id (help prevent session hijacking)
 	        session_regenerate_id();
 
+            //regenerate access array in case we login after the engine is startred (REST)
+            get_access_list($user->getGUID(), 0, true);
+
 	        // Update statistics
 	        set_last_login($_SESSION['guid']);
 
