@@ -90,11 +90,12 @@ $vars['publishedId'] = lds_contTools::getPublishedId($vars['currentDocId']);
 $vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
 
 //These are all my friends
-$arrays = lds_contTools::buildObjectsArray($vars['lds']);
+/*$arrays = lds_contTools::buildObjectsArray($vars['lds']->guid);
 $vars['jsonfriends'] = json_encode($arrays['available']);
 $vars['viewers'] = json_encode($arrays['viewers']);
 $vars['editors'] = json_encode($arrays['editors']);
-$vars['groups'] = json_encode(ldshakers_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+$vars['groups'] = json_encode(array());
+*/
 $vars['starter'] = get_user($vars['lds']->owner_guid);
 
 //$vars['all_can_read'] = $vars['lds']->all_can_read;
