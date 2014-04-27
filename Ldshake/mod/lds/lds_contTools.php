@@ -2209,30 +2209,25 @@ SQL;
         */
 
         if(is_string($search)) {
-            $tp_k = get_metastring_id("pedagogical_approach");
-            $td_k = get_metastring_id("discipline");
-            $tt_k = get_metastring_id("tags");
-            $t_v = get_metastring_id($search);
-
             $l_ds = get_subtype_id('object', 'LdS');
             $l_doc = get_subtype_id('object', 'LdS_document');
 
-            if($t_v)
-                $tags_query = "OR ( mt.name_id IN ($tp_k,$td_k,$tt_k) AND mt.value_id = '{$t_v}' )";
-            else
-                $tags_query = "";
-
             $search = sanitise_string($search);
-            //$order_query['join'] = "LEFT JOIN objects_entity oeo ON e.guid = oeo.guid";
-            $search_query['join'] = "LEFT JOIN objects_property op ON op.container_guid = e.guid LEFT JOIN {$CONFIG->dbprefix}objects_entity do ON op.guid = do.guid";// JOIN metadata mt ON e.guid = mt.entity_guid";
-            $search_query['query'] = <<<SQL
+            $search = preg_replace("/[^\pL\s]+/u", " ", $search);
+
+            if(strlen(trim($search)) > 0 && str_word_count(trim($search)) > 0) {
+                $search_query['join'] = "LEFT JOIN objects_property op ON op.container_guid = e.guid LEFT JOIN {$CONFIG->dbprefix}objects_entity do ON op.guid = do.guid";
+                $search_query['query'] = <<<SQL
 (
 (op.subtype = {$l_doc} AND MATCH(do.title,do.description) AGAINST('{$search}'))
 OR
 (e.subtype = {$l_ds} AND (MATCH(e.title) AGAINST('{$search}'))
-OR(MATCH(e.tags,e.discipline,e.pedagogical_approach) AGAINST('+{$search}' IN BOOLEAN MODE)))
+OR(MATCH(e.tags,e.discipline,e.pedagogical_approach) AGAINST('+({$search})' IN BOOLEAN MODE)))
 ) AND
 SQL;
+            } else {
+                return $count ? 0 : false;
+            }
         }
 
         $custom_join = '';
