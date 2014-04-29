@@ -983,8 +983,8 @@ class RestEditor extends Editor
 
             $CONFIG->rest_editor_list['exelearningrest'] = array(
                 'name' => 'eXeLearning',
-                'url_rest' => "http://ldshake2.upf.edu:443/",
-                'url_gui' => "http://ldshake2.upf.edu:443/ldshakegui/",
+                'url_rest' => "http://ldshake2.upf.edu:8080/",
+                'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
                 //'url_rest' => "http://ilde:443/",
                 //'url_gui' => "http://ilde:443/ldshakegui/",
                 'preview' => true,

@@ -80,6 +80,8 @@ class DocumentEditorRevisionObject extends ElggObject
 		$revision->id = $document->revisionDir.'_'.lds_revision_id;
         $revision->title = $document->title;
         $revision->description = $document->description;
+        if(isset($document->previewDir))
+            $revision->previewDir = $document->previewDir;
 
 		//$editor->revisionPreview($revision);
 		
