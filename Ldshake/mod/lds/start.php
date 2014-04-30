@@ -1052,7 +1052,6 @@ function lds_exec_neweditor ($params)
 	echo elgg_view('lds/editform_editor',$vars);
 }
 
-
 /**
  * Pass the directory to import in the url
  */

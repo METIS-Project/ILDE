@@ -148,6 +148,11 @@
 	 */
 		function isadminloggedin()
 		{
+            global $is_admin;
+
+            if($is_admin)
+                return true;
+
             if(isset($_SESSION['is_admin'])) {
                 return $_SESSION['is_admin'];
             }

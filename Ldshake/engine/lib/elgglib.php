@@ -1462,11 +1462,8 @@
 					}
 				}
 				return $return;
-			
 			}
-			
 			return false;
-			
 		}
 		
 	/**

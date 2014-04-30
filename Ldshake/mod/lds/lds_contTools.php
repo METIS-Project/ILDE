@@ -44,6 +44,7 @@
 
 //shutdown functions
 function ldshake_delayed_buildgdocs($data) {
+    //flush();
     $editor = editorsFactory::getTempInstance('google_docs');
     $editor->cache_remote_gdoc($data);
 }

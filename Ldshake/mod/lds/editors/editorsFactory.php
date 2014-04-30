@@ -1684,10 +1684,13 @@ class GoogleEditor extends Editor
             $query = <<<SQL
 SELECT entity_guid AS guid
 FROM metadata m
+JOIN entities e ON e.guid = m.entity_guid
+JOIN objects_entity o ON e.guid = m.entity_guid
 WHERE
 name_id = {$thn}
 AND value_id = {$thv}
-AND enabled = 'yes'
+AND m.enabled = 'yes'
+AND e.enabled = 'yes'
 LIMIT 50
 SQL;
 
@@ -1697,7 +1700,7 @@ SQL;
                     $try_guid = mt_rand(0, count($gdocs)-1);
 
                     $query = <<<SQL
-UPDATA metadata
+UPDATE metadata
 SET enabled = 'no'
 WHERE
 name_id = {$thn}
@@ -1714,13 +1717,23 @@ SQL;
                 }
                 if($guid) {
                     //build one more document
+                    $this->schedule_cache_remote_gdoc(array(
+                        'number' => 1,
+                        'data' => $template,
+                        'mimeType' => $mimetype,
+                        'uploadType' => 'media',
+                        'convert' => true,
+                        'hash' => $hash,
+                        'title' => 'template',
+                        'description' => 'desc1'
+                    ));
                     return $guid;
                 }
             }
         }
 
        //build more documents
-        register_shutdown_function('ldshake_delayed_buildgdocs', array(
+        $this->schedule_cache_remote_gdoc(array(
             'number' => 10,
             'data' => $template,
             'mimeType' => $mimetype,
@@ -1773,19 +1786,35 @@ SQL;
         return $createdFile;
     }
 
-    public function cache_remote_gdoc($data) {
-        if($gdoc = $this->create_remote_document($data)) {
-            $cached_gdoc                = new ElggObject();
-            $cached_gdoc->subtype       = 'cached_gdoc';
-            $cached_gdoc->gdoc_hash     = $data->hash;
-            $cached_gdoc->title         = $gdoc->id;
-            $cached_gdoc->description   = $gdoc->alternateLink;
+    private function schedule_cache_remote_gdoc($data) {
+        global $CONFIG;
 
-            $cached_gdoc->save();
-        }
-        return false;
+        $cached_gdoc                = new ElggObject();
+        $cached_gdoc->subtype       = 'cached_gdoc';
+        $cached_gdoc->description   = serialize($data);
+
+        if(!$cache_id = $cached_gdoc->save())
+            return false;
+
+        $cmd = 'php ' .$CONFIG->path . 'mod/lds/background/gdocs_cache.php ' . $CONFIG->currentEnv . ' ' . $cache_id . ' > /dev/null &';
+        exec($cmd);
     }
 
+    public function cache_remote_gdoc($data) {
+        for($i=0; $i < $data['number']; $i++) {
+            if($gdoc = $this->create_remote_document($data)) {
+                $cached_gdoc                = new ElggObject();
+                $cached_gdoc->subtype       = 'cached_gdoc';
+                $cached_gdoc->access_id     = ACCESS_PUBLIC;
+                $cached_gdoc->gdoc_hash     = $data['hash'];
+                $cached_gdoc->title         = $gdoc->id;
+                $cached_gdoc->description   = $gdoc->alternateLink;
+                $cached_gdoc->save();
+            } else {
+                return false;
+            }
+        }
+    }
 
     //load an empty data file to start a new document
     public function newEditor($template_html = null)

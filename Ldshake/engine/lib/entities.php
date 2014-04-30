@@ -2092,7 +2092,10 @@
 	 */
 	function can_edit_entity($entity_guid, $user_guid = 0) {
 		global $CONFIG;
-		
+
+        if(isadminloggedin())
+            return true;
+
 		$user_guid = (int)$user_guid;
 		$user = get_entity($user_guid);
 		if (!$user) $user = get_loggedin_user();

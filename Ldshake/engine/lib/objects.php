@@ -128,10 +128,10 @@
 		 */
 		public function delete() 
 		{ 
-			if (!delete_object_entity($this->get('guid')))
-				return false;
-				
-			return parent::delete();
+            if (!parent::delete())
+                return false;
+
+            return delete_object_entity($this->get('guid'));
 		}
 	
 		/**
