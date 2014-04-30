@@ -1636,6 +1636,7 @@ class GoogleEditor extends Editor
     public $document_url;
     private $_editorType;
     private $_rest_id;
+    private $_service;
 
     public function getDocumentId()
     {
@@ -1673,21 +1674,141 @@ class GoogleEditor extends Editor
 
         return $service;
     }
+
+    private function get_created_document($template, $mimetype) {
+        $hash = hash('sha256', $template);
+        $thn = get_metastring_id("gdoc_hash");
+        $thv = get_metastring_id($hash);
+
+        if($thn && $thv) {
+            $query = <<<SQL
+SELECT entity_guid AS guid
+FROM metadata m
+WHERE
+name_id = {$thn}
+AND value_id = {$thv}
+AND enabled = 'yes'
+LIMIT 50
+SQL;
+
+            $guid = 0;
+            if($gdocs = get_data($query, "ldshake_guid_callback")) {
+                while(!$guid && count($gdocs)) {
+                    $try_guid = mt_rand(0, count($gdocs)-1);
+
+                    $query = <<<SQL
+UPDATA metadata
+SET enabled = 'no'
+WHERE
+name_id = {$thn}
+AND value_id = {$thv}
+AND enabled = 'yes'
+AND entity_guid = {$gdocs[$try_guid]}
+LIMIT 1
+SQL;
+
+                    if(update_data_affected($query))
+                        $guid = $gdocs[$try_guid];
+                    else
+                        unset($gdocs[$try_guid]);
+                }
+                if($guid) {
+                    //build one more document
+                    return $guid;
+                }
+            }
+        }
+
+       //build more documents
+        register_shutdown_function('ldshake_delayed_buildgdocs', array(
+            'number' => 10,
+            'data' => $template,
+            'mimeType' => $mimetype,
+            'uploadType' => 'media',
+            'convert' => true,
+            'hash' => $hash,
+            'title' => 'template',
+            'description' => 'desc1'
+        ));
+        return false;
+    }
+
+    private function create_remote_document($data) {
+        $title = $data['title'];
+        $description = $data['description'];
+        $mimeType = $data['mimeType'];
+        $data = $data['data'];
+
+        $file = new Google_Service_Drive_DriveFile();
+        $file->setTitle($title);
+        $file->setDescription($description);
+        $file->setMimeType($mimeType);
+        $file->setWritersCanShare(false);
+        $file->setFileSize(strlen($data));
+        try {
+            $createdFile = $this->_service->files->insert($file, array(
+                'data' => $data,
+                'mimeType' => $mimeType,
+                'uploadType' => 'media',
+                'convert' => true,
+            ));
+        } catch (Exception $e) {
+            return false;
+        }
+
+        $value = 'me';
+        $type = 'anyone';
+        $role = 'writer';
+        $fileId = $createdFile->id;
+        $newPermission = new Google_Service_Drive_Permission();
+        $newPermission->setValue($value);
+        $newPermission->setType($type);
+        $newPermission->setRole($role);
+        $newPermission->setWithLink(true);
+        try {
+            $this->_service->permissions->insert($fileId, $newPermission);
+        } catch (Exception $e) {
+            return false;
+        }
+        return $createdFile;
+    }
+
+    public function cache_remote_gdoc($data) {
+        if($gdoc = $this->create_remote_document($data)) {
+            $cached_gdoc                = new ElggObject();
+            $cached_gdoc->subtype       = 'cached_gdoc';
+            $cached_gdoc->gdoc_hash     = $data->hash;
+            $cached_gdoc->title         = $gdoc->id;
+            $cached_gdoc->description   = $gdoc->alternateLink;
+
+            $cached_gdoc->save();
+        }
+        return false;
+    }
+
+
     //load an empty data file to start a new document
     public function newEditor($template_html = null)
     {
         global $CONFIG;
-        $user = get_loggedin_user();
-        $rand_id = rand_str(64);
         $editorType = $this->_editorType;
-
         $ldshake_url = parse_url($CONFIG->url);
-        $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
         $vars['editor'] = $editorType;
         $vars['editor_label'] = 'google_docs';
         $vars['restapi'] = false;
 
+        if($template_html) {
+            if($guid = $this->get_created_document($template_html, 'text/html')) {
+                $premade_gdoc = get_entity($guid);
+                $vars['editor_id'] = $premade_gdoc->title;
+                $doc_url = $premade_gdoc->description;
+                $vars['document_url'] = null;
+                $vars['document_iframe_url'] = $doc_url;
+
+                return $vars;
+            }
+        }
         $service = $this->google_auth();
 
         if(!$template_html) {
@@ -2202,6 +2323,8 @@ class GoogleEditor extends Editor
             $this->_editorType = $document->editorType;
         else
             $this->_editorType = $editorType;
+
+        $this->_service = $this->google_auth();
     }
 }
 

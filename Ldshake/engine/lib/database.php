@@ -386,7 +386,7 @@
      * Update database data
      * 
      * @param mixed $query The query to run.
-     * @return int|false Either the number of affected rows, or false on failure
+     * @return true|false Either true on success, or false on failure
      */ 
     
         function update_data($query) {
@@ -404,8 +404,31 @@
             	return true; //return mysql_affected_rows();
 
          	return false;   
-            
         }
+
+/**
+ * Update database data
+ *
+ * @param mixed $query The query to run.
+ * @return int|false Either the number of affected rows, or false on failure
+ */
+
+function update_data_affected($query) {
+
+    global $CONFIG, $DB_QUERY_CACHE;
+
+    $dblink = get_db_link('write');
+
+    // Invalidate query cache
+    if ($DB_QUERY_CACHE) $DB_QUERY_CACHE->clear();
+    if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
+        error_log("Query cache invalidated");
+
+    if (execute_query("$query", $dblink))
+        return mysqli_affected_rows($dblink);
+
+    return false;
+}
 
 	/**
 	 * Use this function to delete data

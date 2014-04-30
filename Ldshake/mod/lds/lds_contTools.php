@@ -41,6 +41,13 @@
 
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
+
+//shutdown functions
+function ldshake_delayed_buildgdocs($data) {
+    $editor = editorsFactory::getTempInstance('google_docs');
+    $editor->cache_remote_gdoc($data);
+}
+
 function ldshake_dummy_callback($row) {
     return $row;
 }
