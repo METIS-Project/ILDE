@@ -76,7 +76,7 @@ function encodeURIComponent($str) {
                 <?php endif; ?>
                 <?php if (isadminloggedin()): ?>
                     <a class="leftbutton" href="<?php echo "{$url}pg/lds/vle/{$lds->vle_id}" ?>"><?php echo T("View VLE")." cid:".$lds->course_id ?></a>
-                    <?php if ($currentDoc->editorType == 'gluepsrest' || RestEditor::rest_enabled($currentDoc->editorType)): ?>
+                    <?php if($currentDoc->editorType == 'gluepsrest' || RestEditor::rest_enabled($currentDoc->editorType)): ?>
                         <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title."(impl).json") ?>"><?php echo T("Download impl file") ?></a>
                     <?php endif; ?>
                 <?php endif; ?>

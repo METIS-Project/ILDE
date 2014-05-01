@@ -2075,6 +2075,7 @@ function lds_exec_vieweditor ($params)
 	
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
+    $_SESSION['editors_content'] = $CONFIG->editors_content;
 	echo elgg_view('lds/view_internal_editor',$vars);
 }
 

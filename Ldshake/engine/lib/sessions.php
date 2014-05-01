@@ -331,7 +331,13 @@
 			//session_set_save_handler("__elgg_session_open", "__elgg_session_close", "__elgg_session_read", "__elgg_session_write", "__elgg_session_destroy", "__elgg_session_gc");
 
             register_shutdown_function('session_delayedexecution_save');
-			session_name('LdShake');
+
+            $script_path = explode('/', __DIR__);
+            $nfolders = count($script_path);
+            $base_folder = array_slice($script_path, 0, $nfolders - 2);
+            $base_folder = implode('/', $base_folder);
+
+			session_name("LdShake_" . hash('crc32b', $base_folder));
 	        session_start();
             session_write_close();
 
