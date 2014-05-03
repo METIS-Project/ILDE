@@ -411,6 +411,8 @@
 
 	        if ($_SESSION['id'] > 0) {
                 $_SESSION['user'] = get_user($_SESSION['id']);
+                $_SESSION['username'] = $_SESSION['user']->username;
+                $_SESSION['name'] = $_SESSION['user']->name;
                 set_last_action_session($_SESSION['id']);
 	        }
 

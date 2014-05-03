@@ -365,7 +365,7 @@ function encodeURIComponent($str) {
 
     var t9n = {
         unpublishConfirm1 : "<?php echo T("Are you sure you want to unpublish this document?") ?>",
-        unpublishConfirm2 : "<?php echo T("All the external links to the document will be broken!") ?>",
+        unpublishConfirm2 : "<?php echo T("All the external links to the document will be broken!") ?>"
     };
 </script>
 
