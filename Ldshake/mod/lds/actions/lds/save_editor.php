@@ -115,9 +115,11 @@ else
 }
 
 try {
-$lds->title = get_input('title');
-$lds->granularity = get_input('granularity');
-$lds->completeness = get_input('completeness');
+    $title = get_input('title');
+    $lds->title = $title;
+    $document_editor->title = $title;
+    $lds->granularity = get_input('granularity');
+    $lds->completeness = get_input('completeness');
 
 //If we save it for the first time, we're going to put some default value, which will be
 //modified by an ajax call to share.php

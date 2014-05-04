@@ -64,7 +64,7 @@
 		<?php if (!is_null($prevId)) : ?><span id="previous_revision_details">– <a href="<?php echo $prevReviser->getUrl() ?>"><img src="<?php echo $prevReviser->getIcon('tiny') ?>" /></a> Comparing with previous revision by <a href="<?php echo $prevReviser->getUrl() ?>"><?php echo $prevReviser->name ?></a> on <?php echo date('j M Y H:i', $prevRevision->time_created) ?></span><?php endif; ?>
 	</div>
 	<div id="the_lds" style="padding: 0px 0px 0px 0px;">
-		<div id="revision_wrapper"><iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $revision->previewDir ?>/index.html?t=<?php echo rand(0, 1000)?>" width="955" height="1000"></iframe></div>
-		<div id="diff_wrapper"><iframe src="<?php echo $CONFIG->url ?>content/exe/<?php echo $revision->previewDir ?>/diff.html?t=<?php echo rand(0, 1000)?>" width="955" height="1000"></iframe></div>
+		<div id="revision_wrapper"><iframe src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $revision->previewDir ?>/index.html?t=<?php echo rand(0, 1000)?>" width="955" height="1000"></iframe></div>
+		<div id="diff_wrapper"><iframe src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $revision->previewDir ?>/diff.html?t=<?php echo rand(0, 1000)?>" width="955" height="1000"></iframe></div>
 	</div>
 </div>

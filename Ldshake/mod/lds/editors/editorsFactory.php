@@ -987,6 +987,8 @@ class RestEditor extends Editor
                 'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
                 //'url_rest' => "http://ilde:443/",
                 //'url_gui' => "http://ilde:443/ldshakegui/",
+                //'url_rest' => "http://192.168.1.219:8080/",
+                //'url_gui' => "http://192.168.1.219:8080/ldshakegui/",
                 'preview' => true,
                 'imsld' => false,
                 'password' => 'LdS@k$1#',
@@ -1405,8 +1407,8 @@ class RestEditor extends Editor
             unlink($zip_file);
         }
 
-        $this->_document->rev_last = 0;
-        $this->_document->lds_revision_id = 0;
+        //$this->_document->rev_last = 0;
+        //$this->_document->lds_revision_id = 0;
 
         $resultIds->guid = $this->_document->lds_guid;
         $resultIds->file_guid = $this->_document->file_guid;

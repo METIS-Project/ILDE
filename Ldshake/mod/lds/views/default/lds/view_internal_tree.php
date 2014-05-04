@@ -51,7 +51,7 @@
     </script>
     <?php if ($editor == 'exe'): ?>
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/exe/<?php echo $currentDoc->previewDir ?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="957px" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
-    <?php elseif (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+    <?php elseif (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;"></iframe>
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
@@ -71,4 +71,3 @@
 
 <!-- Hidden stuff -->
 <div id="shade"></div>
-

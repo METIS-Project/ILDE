@@ -126,7 +126,7 @@ class lds_viewTools
         }
 
         //Google Docs history
-        if($type == 'history' && $lds->editor_type == 'google_docs')
+        if($type == 'history' && ($lds->editor_type == 'google_docs' || $lds->editor_type == 'exelearningrest'))
             $folder = 'history';
 
         return $CONFIG->url . 'pg/lds/'.$folder.'/' . $lds->guid . '/';

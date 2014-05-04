@@ -839,11 +839,14 @@ SQL;
 	
 	public static function getLdsDocuments ($lds_guid)
 	{
-		if(!($arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document', 0, 10000))) {
-            $arr = get_entities_from_metadata ('lds_guid',$lds_guid,'object','LdS_document_editor', 0, 100);
-        }
+        $arr = array();
+        if($doc = get_entities_from_metadata('lds_guid',$lds_guid,'object','LdS_document', 0, 10000))
+            $arr = array_merge($arr, $doc);
 
-		if(is_array($arr))
+        if($doc = get_entities_from_metadata('lds_guid',$lds_guid,'object','LdS_document_editor', 0, 10000))
+            $arr = array_merge($arr, $doc);
+
+        if(is_array($arr))
 			Utils::osort($arr, 'guid');
 		
 		return $arr;

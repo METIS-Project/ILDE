@@ -2151,7 +2151,9 @@ function lds_exec_viewrevision ($params)
 	//TODO access policies
 	$revision = get_entity ($params[1]);
 
-    if($revision->editorType == 'google_docs' || $revision->editor_type == 'google_docs')
+    if($revision->editorType == 'google_docs' || $revision->editor_type == 'google_docs' ||
+        $revision->editorType == 'exelearningrest' || $revision->editor_type == 'exelearningrest'
+    )
         return lds_exec_viewrevisioneditor($params);
 
 	if ($revision->subtype == get_subtype_id('object', 'LdS_document_revision')
