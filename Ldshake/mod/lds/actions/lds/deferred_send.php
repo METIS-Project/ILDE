@@ -84,7 +84,8 @@ if (is_array($dns)) {
             $notification_list = lds_contTools::build_notification($dn, $users_guids);
 
             foreach ($notification_list as $nf) {
-                if($nf['recipient_guid'] != $nf['sender_guid']) {
+                $user = get_user($nf['recipient_guid']);
+                if($nf['recipient_guid'] != $nf['sender_guid'] && !$user->disable_user_notifications) {
 
                     echo "Sending to {$nf['recipient_guid']} from {$nf['sender_guid']} ({$nf['title']})...\n";
 

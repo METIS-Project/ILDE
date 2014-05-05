@@ -16,31 +16,13 @@
 ?>
 	<h3><?php echo T("Notification settings"); ?></h3>
 	
-	<p><?php echo T("Please specify which methods you want to permit."); ?>
-	
-	<table>
-<?php
-		// Loop through options
-		foreach ($NOTIFICATION_HANDLERS as $k => $v) 
-		{	
-?>
-			<tr>
-				<td><?php echo elgg_echo($k); ?>: </td>
+	<p><?php echo T("Please specify you want to receive notifications by e-mail."); ?></p>
 
-				<td>
 <?php
 
-	if ($notification_settings->$k) {
-		$val = "yes";
-	} else {
-		$val = "no";
-	}
-	echo elgg_view('input/radio',array('internalname' => "method[{$k}]", 'options' => array(elgg_echo('option:yes') => 'yes',elgg_echo('option:no') => 'no'), 'value' => $val));
-
-?>				
-				</td>
-			</tr>
-<?php
-		}
-?>
-	</table>
+    if (!get_loggedin_user()->disable_user_notifications) {
+        $val = "yes";
+    } else {
+        $val = "no";
+    }
+    echo elgg_view('input/radio',array('internalname' => "disable_user_notifications", 'options' => array(elgg_echo('option:yes') => 'yes',elgg_echo('option:no') => 'no'), 'value' => $val));
