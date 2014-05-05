@@ -2759,7 +2759,7 @@ function lds_exec_new_project ($params)
 
     $vars['am_i_starter'] = true;
 
-    $vars['all_can_read'] = 'true';
+    $vars['all_can_read'] = 'false';
 
     $vars['initLdS'] = json_encode($vars['initLdS']);
 
