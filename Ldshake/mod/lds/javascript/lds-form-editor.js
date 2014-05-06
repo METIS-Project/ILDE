@@ -805,7 +805,8 @@ function docExists (title)
 function tabs()
 {
     //Show tab options menu
-    $('.lds_tab_options').live ('click', function (event)
+    //$('.lds_tab_options').live ('click', function (event)
+    $(document).on("click", ".lds_tab_options", function (event)
     {
         event.stopPropagation();
 
@@ -828,7 +829,8 @@ function tabs()
     });
 
     //Clicking tab for doc switching
-    $('#lds_edit_tabs li.lds_tab').live ('click', function ()
+    //$('#lds_edit_tabs li.lds_tab').live ('click', function ()
+    $(document).on("click", "#lds_edit_tabs li.lds_tab", function ()
     {
         //What tab have we clicked?
         pos = $(this).prevAll('li.lds_tab').length;

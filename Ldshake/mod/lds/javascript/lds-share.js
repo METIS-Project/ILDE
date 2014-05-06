@@ -315,7 +315,8 @@ $(document).ready(function()
 		.insertAfter($(this));
 	});
 	
-	$('.can_view_option').live('click', function ()
+	//$('.can_view_option').live('click', function ()
+    $(document).on("click", ".can_view_option", function ()
 	{
 		if (!allCanView)
 		{
@@ -335,7 +336,8 @@ $(document).ready(function()
 		return false;
 	});
 	
-	$('.can_edit_option').live('click', function ()
+	//$('.can_edit_option').live('click', function ()
+    $(document).on("click", ".can_edit_option", function ()
 	{
 		$(this).addClass('pressed')
 		.closest('.share_type_switch').find('.can_view_option').removeClass('pressed');
@@ -410,7 +412,8 @@ $(document).ready(function()
 		}
 	});
 	
-	$('.suggest_dropdown>li').live('mouseenter', function ()
+	//$('.suggest_dropdown>li').live('mouseenter', function ()
+    $(document).on("mouseenter", ".suggest_dropdown > li", function ()
 	{
 		var id = $(this).closest('.suggest_dropdown').attr('id');
 		var pos = $(this).prevAll('li').length;
@@ -420,7 +423,8 @@ $(document).ready(function()
 	
 	
 	//Select a result
-	$('.suggest_dropdown>li').live('click', function (e)
+	//$('.suggest_dropdown>li').live('click', function (e)
+    $(document).on("click", ".suggest_dropdown > li", function (e)
 	{
 		e.stopPropagation();
 		
@@ -437,7 +441,8 @@ $(document).ready(function()
 		$('.suggest_dropdown').hide();
 	});
 	
-	$('.remove_contributor').live ('click', function ()
+	//$('.remove_contributor').live('click', function ()
+    $(document).on("click", ".remove_contributor", function ()
 	{
 		var type = $(this).closest('li').hasClass('editors') ? 'editors' : 'viewers';
 		var contactid = $(this).attr('data-guid');
