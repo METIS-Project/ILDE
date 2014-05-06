@@ -2551,6 +2551,8 @@ function lds_exec_help ($params) {
 
 function lds_exec_test2 ($params) {
 
+    $mm = new MoodleManager();
+    $mm->getVleInfo();
     page_draw("test", "test");
     //echo "test";
 }
