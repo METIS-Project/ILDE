@@ -23,6 +23,14 @@ $(document).ready(function()
      });
      */
 
+    $(".menu_option").each(function(elem) {
+        var $option = $(this);
+
+        $option.addClass("show_tooltip");
+        $option.addClass("t_tb_conceptualize_new");
+        $option.attr("data-pos", "#" + $option.attr("id") + "@400,400");
+    });
+
     //Topbar account options
     $('#ldshake_topbar_menu_switch').click (function (e)
     {

@@ -162,7 +162,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 				</div>
 			</div>
 			
-						<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
+			<div class="tooltip_bl" id="t_granularity" style="width: 280px;">
 				<div class="tooltip_bl_stem"></div>
 				<div class="tooltip_bl_body">
 					<h4><?php echo T("Granularity") ?></h4>
