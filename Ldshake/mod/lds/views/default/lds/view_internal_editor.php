@@ -65,8 +65,14 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
 
+            <?php if(isset($currentDoc->downloable)): ?>
+                <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title . '.' . $currentDoc->downloable) ?>"><?php echo T("Download %1 file", $currentDoc->downloable) ?></a>
+            <?php endif; ?>
             <?php if($currentDoc->file_imsld_guid): ?>
                 <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_imsld_guid . "&title=" . encodeURIComponent($lds->title."(ims-lds).zip") ?>"><?php echo T("Download IMS-LD file") ?></a>
+            <?php endif; ?>
+            <?php if($currentDoc->file_scorm_guid): ?>
+                <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_scorm_guid . "&title=" . encodeURIComponent($lds->title."(scorm).zip") ?>"><?php echo T("Download SCORM file") ?></a>
             <?php endif; ?>
             <?php if ($lds->editor_type == 'gluepsrest'): ?>
                 <?php if (!$glueps): ?>

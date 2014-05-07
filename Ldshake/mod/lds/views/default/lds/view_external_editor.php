@@ -151,7 +151,7 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     $editor = $doc->editorType;
     $currentDoc = $doc;
     ?>
-    <?php if (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/'.$currentDoc->editorType.'/'.$currentDoc->previewDir)): ?>
+    <?php if (RestEditor::rest_enabled($editor) && file_exists($CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$currentDoc->previewDir)): ?>
     <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>

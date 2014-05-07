@@ -992,7 +992,8 @@ class RestEditor extends Editor
                 'preview' => true,
                 'imsld' => false,
                 'password' => 'LdS@k$1#',
-                'icon' => false
+                'icon' => false,
+                'downloable' => 'elp',
             );
         }
 
@@ -1407,6 +1408,12 @@ class RestEditor extends Editor
             unlink($zip_file);
         }
 
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['scorm'])
+            $this->save_scorm($doc_id);
+
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['downloable'])
+            $this->_document->downloable = $CONFIG->rest_editor_list[$this->_document->editorType]['downloable'];
+
         //$this->_document->rev_last = 0;
         //$this->_document->lds_revision_id = 0;
 
@@ -1416,6 +1423,36 @@ class RestEditor extends Editor
         $this->_document->save();
 
         return array($this->_document, $resultIds);
+    }
+
+    private function save_scorm($doc_id) {
+        global $CONFIG;
+        $uri = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_rest']}ldshake/ldsdoc/{$doc_id}".'.scorm';
+
+        try {
+            $response = \Httpful\Request::get($uri)
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$this->_document->editorType]['password'])
+                ->sendIt();
+
+            if($response->code > 299)
+                throw new Exception("Error code {$response->code}");
+
+        } catch (Exception $e) {
+            register_error(htmlentities($e->getMessage()));
+            return false;
+        }
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id.'.zip';
+        if($this->_document->file_scorm_guid)
+            $file = get_entity($this->_document->file_scorm_guid);
+        else
+            $file = $this->getNewFile($filestorename);
+
+        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body, FILE_BINARY);
+        $this->_document->file_scorm_guid = $file->guid;
+        $this->_document->save();
     }
 
     public function cloneDocument($lds)
@@ -1615,6 +1652,9 @@ class RestEditor extends Editor
             fclose($handle);
             */
         }
+
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['scorm'])
+            $this->save_scorm($doc_id);
 
         $this->_document->save();
 
