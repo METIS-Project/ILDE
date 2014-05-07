@@ -28,8 +28,29 @@ $(document).ready(function()
 
         $option.addClass("show_tooltip");
         $option.addClass("t_tb_conceptualize_new");
-        $option.attr("data-pos", "#" + $option.attr("id") + "@400,400");
+        $option.attr("data-pos", "#" + $option.attr("id") + "@20,10");
     });
+
+    $("#tb_ldshakers")
+        .addClass("show_tooltip")
+        .addClass("t_s1t");
+
+    $("#tb_mylds")
+        .addClass("show_tooltip")
+        .addClass("t_s2t");
+
+    $("#tb_browselds")
+        .addClass("show_tooltip")
+        .addClass("t_s3t");
+
+    /*
+    $("#tb_newlds")
+        .addClass("show_tooltip")
+        .addClass("t_s4t")
+        .click(function() {
+            $("#t_s4t").hide();
+        });
+        */
 
     //Topbar account options
     $('#ldshake_topbar_menu_switch').click (function (e)

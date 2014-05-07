@@ -65,6 +65,10 @@ function tooltips ()
 						var left = 0;
 						var top = 0;
 
+                        if($caller.attr('data-pos')) {
+                            pos = $caller.attr('data-pos');
+                        }
+
 						if (typeof pos !== 'undefined' && pos !== false)
 						{
 							if (pos.indexOf('@') != -1)
@@ -76,7 +80,14 @@ function tooltips ()
 							
 							$(id)
 							.css('top',$(selector).offset().top + top)
-							.css('left',$(selector).offset().left + left)
+							.css('left', function() {
+                                    if($caller.attr('data-pos')) {
+                                        return $(selector).offset().left
+                                            + $(selector).outerWidth() + left;
+                                    } else {
+                                        return $(selector).offset().left + left;
+                                    }
+                                })
 							.fadeIn('fast');
 						}
 						else

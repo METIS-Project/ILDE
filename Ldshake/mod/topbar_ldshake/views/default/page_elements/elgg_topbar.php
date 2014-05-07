@@ -100,23 +100,23 @@ if (isloggedin()) :
                           if(get_loggedin_user()->editor):
                             if($editor = get_entity(get_loggedin_user()->editor)):
                         ?>
-                        <li id="tb_new_option_debug" class="menu_option menu_suboption"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/<?php echo $editor->internalname?>/"><?php echo $editor->name ?></a></li>
+                        <li id="tb_new_option_debug" class="menu_suboption"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/<?php echo $editor->internalname?>/"><?php echo $editor->name ?></a></li>
                         <?php
                             endif;
                         endif;
                         ?>
-                        <li id="tb_new_option_conceptualize" class="menu_option menu_suboption"><?php echo T("Conceptualize") ?></li>
-                        <li id="tb_new_option_author" class="menu_option menu_suboption"><?php echo T("Author") ?></li>
-                        <li id="tb_new_option_implement" class="menu_option menu_suboption" ><?php echo T("Implement") ?></li>
-                        <?php if(!$disable_projects):?><li id="tb_new_option_project" class="menu_option menu_suboption" ><?php echo T("Project") ?></li><?php endif;?>
+                        <li id="tb_new_option_conceptualize" class="menu_suboption"><?php echo T("Conceptualize") ?></li>
+                        <li id="tb_new_option_author" class="menu_suboption"><?php echo T("Author") ?></li>
+                        <li id="tb_new_option_implement" class="menu_suboption" ><?php echo T("Implement") ?></li>
+                        <?php if(!$disable_projects):?><li id="tb_new_option_project" class="menu_suboption" ><?php echo T("Project") ?></li><?php endif;?>
                     </ul>
 			    </div>
                 <div id="new_menu_author" class="menu level2">
                     <ul>
-                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/exelearningrest/"><?php echo T("eXeLearning") ?></a></li>
+                        <li id="tb_newlds_exe" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/exelearningrest/"><?php echo T("eXeLearning") ?></a></li>
                         <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollagerest/"><?php echo T("WebCollage") ?></a></li>
-                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/openglm"><?php echo T("OpenGLM (upload)") ?></a></li>
-                        <li id="tb_newlds_wic" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cadmos"><?php echo T("CADMOS (upload)") ?></a></li>
+                        <li id="tb_newlds_ogm" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/openglm"><?php echo T("OpenGLM (upload)") ?></a></li>
+                        <li id="tb_newlds_cmd" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cadmos"><?php echo T("CADMOS (upload)") ?></a></li>
                     </ul>
                 </div>
                 <div id="new_menu_implement" class="menu level2">
@@ -129,7 +129,7 @@ if (isloggedin()) :
                 <div id="new_menu_conceptualize" class="menu level2">
                     <ul>
                         <?php if($vars['url'] == "http://ilde.upf.edu/kek/"):?>
-                            <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/kek_p1"><?php echo T("Πρότυπο Διδακτικού Σεναρίου") ?></a></li>
+                            <li id="tb_conceptualize_new11" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/kek_p1"><?php echo T("Πρότυπο Διδακτικού Σεναρίου") ?></a></li>
                         <?php endif; ?>
                         <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_conceptualize_new1" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/design_pattern"><?php echo T("Design Pattern") ?></a></li>
@@ -140,16 +140,16 @@ if (isloggedin()) :
                         <li id="tb_conceptualize_new6" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/FC"><?php echo T("Factors and Concerns") ?></a></li>
                         <li id="tb_conceptualize_new7" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/HE"><?php echo T("Heuristic Evaluation") ?></a></li>
                         <li id="tb_conceptualize_new8" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cld"><?php echo T("CompendiumLD (upload)") ?></a></li>
-                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Image (upload)") ?></a></li>
-                        <li id="tb_conceptualize_new" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("For other conceptualizations") ?></a></li>
+                        <li id="tb_conceptualize_new9" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Image (upload)") ?></a></li>
+                        <li id="tb_conceptualize_new10" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("For other conceptualizations") ?></a></li>
                     </ul>
                 </div>
                 <?php if(!$disable_projects):?>
                 <div id="new_menu_project" class="menu level2">
                     <ul>
                         <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects/implement"><?php echo T("Select pathway for my project") ?></a></li>
-                        <li id="tb_newlds_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Add pathway") ?></a></li>
-                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Edit pathway") ?></a></li>
+                        <li id="tb_newlds_add_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Add pathway") ?></a></li>
+                        <li id="tb_newlds_edit_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Edit pathway") ?></a></li>
                     </ul>
                 </div>
                 <?php endif; ?>
@@ -161,9 +161,37 @@ if (isloggedin()) :
 <div style="clear:both;"></div>
 <?php endif;?>
 
+
 <div class="tooltip_bl" id="t_tb_conceptualize_new" data-pos="#tb_conceptualize_new2@20,40" style="width: 280px;">
-    <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
         sample tooltip
+    </div>
+</div>
+
+<div class="tooltip_bl" id="t_s1t" data-pos="#tb_ldshakers@-75,20">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("Discover other LdShakers here") ?></strong></div>
+    </div>
+</div>
+
+<div class="tooltip_bl" id="t_s2t" data-pos="#tb_mylds@-85,20" style="width:230px;">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("You can publish the LdS that you start, which you'll find in this section.") ?></strong></div>
+    </div>
+</div>
+
+<div class="tooltip_bl" id="t_s3t" data-pos="#tb_browselds@-73,20">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("Discover existing LdS here") ?></strong></div>
+    </div>
+</div>
+
+<div class="tooltip_bl" id="t_s4t" data-pos="#tb_newlds@-60,20">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("Create your LdS here") ?></strong></div>
     </div>
 </div>
