@@ -2160,7 +2160,8 @@ function lds_exec_viewrevision ($params)
         || $revision->subtype == get_subtype_id('object', 'LdS_document_editor_revision'))
 	{
 		$document = get_entity ($revision->document_guid);
-		$revDate = $revision->time_created;
+        $lds_annotation = get_annotation($revision->lds_revision_id);
+		$revDate = $lds_annotation->time_created;
 	}
 	else
 	{
@@ -2247,7 +2248,8 @@ function lds_exec_viewrevisioneditor ($params)
 	if ($revision->subtype == get_subtype_id('object', 'LdS_document_editor_revision'))
 	{
 		$document = get_entity ($revision->document_guid);
-		$revDate = $revision->time_created;
+        $lds_annotation = get_annotation($revision->lds_revision_id);
+		$revDate = $lds_annotation->time_created;
 	}
 	else
 	{

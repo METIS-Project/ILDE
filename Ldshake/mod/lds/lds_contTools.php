@@ -2223,8 +2223,8 @@ SQL;
             $l_ds = get_subtype_id('object', 'LdS');
             $l_doc = get_subtype_id('object', 'LdS_document');
 
-            $search = sanitise_string($search);
             $search = preg_replace("/[^\pL\s\pNd]+/u", " ", $search);
+            $search = sanitise_string($search);
 
             if(strlen(trim($search)) > 0 && str_word_count(trim($search)) > 0) {
                 $search_query['join'] = "LEFT JOIN objects_property op ON op.container_guid = e.guid LEFT JOIN {$CONFIG->dbprefix}objects_entity do ON op.guid = do.guid";
