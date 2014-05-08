@@ -42,11 +42,39 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
-//shutdown functions
-function ldshake_delayed_buildgdocs($data) {
-    //flush();
-    $editor = editorsFactory::getTempInstance('google_docs');
-    $editor->cache_remote_gdoc($data);
+function ldshake_check_user_guid($guid, $write = false, $user_id = null) {
+    if(!$user_id)
+        $user_id = get_loggedin_userid();
+
+    $entity = get_entity($guid);
+
+    $type = $entity->type;
+    if($type != 'object')
+        return false;
+
+    $subtype = $entity->getSubtype();
+    if($subtype != 'LdS') {
+        if(empty($entity->lds_guid))
+            return false;
+
+        $lds_guid = $entity->lds_guid;
+        if(!is_numeric($lds_guid))
+            return false;
+
+        $lds = get_entity($lds_guid);
+
+        if(empty($lds))
+            return false;
+
+        if($lds->type != object || $lds->getSubtype() != 'LdS')
+            return false;
+
+        $entity = $lds;
+    }
+    $check = lds_contTools::getUserEntities('object', 'LdS', $user_id, true, 1, 0, null, null, "time", $write, null, false, null, false, $entity->guid);
+
+    return !empty($check);
+    //public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null) {
 }
 
 function ldshake_dummy_callback($row) {
@@ -2126,7 +2154,7 @@ SQL;
         return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom, $guid_only);
     }
 
-    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false) {
+    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null) {
         global $CONFIG;
 
         if($count) $enrich = false;
@@ -2195,30 +2223,6 @@ SQL;
         $search_query['join'] = "";
         $search_query['query'] = "";
 
-        /*
-        if(is_string($search)) {
-            $tp_k = get_metastring_id("pedagogical_approach");
-            $td_k = get_metastring_id("discipline");
-            $tt_k = get_metastring_id("tags");
-            $t_v = get_metastring_id($search);
-
-            if($t_v)
-                $tags_query = "OR ( mt.name_id IN ($tp_k,$td_k,$tt_k) AND mt.value_id = '{$t_v}' )";
-            else
-                $tags_query = "";
-
-            $search = sanitise_string($search);
-            $order_query['join'] = "JOIN objects_entity oeo ON e.guid = oeo.guid";
-            $search_query['join'] = "JOIN {$CONFIG->dbprefix}entities de ON e.guid = de.container_guid JOIN {$CONFIG->dbprefix}objects_entity do ON de.guid = do.guid JOIN metadata mt ON e.guid = mt.entity_guid";
-            $search_query['query'] = <<<SQL
-(
-(oeo.title LIKE '%{$search}%' OR do.title LIKE '%{$search}%' OR do.description LIKE '%{$search}%')
-{$tags_query}
-) AND
-SQL;
-        }
-        */
-
         if(is_string($search)) {
             $l_ds = get_subtype_id('object', 'LdS');
             $l_doc = get_subtype_id('object', 'LdS_document');
@@ -2259,6 +2263,15 @@ SQL;
 
         }
 
+        $guid_where = "";
+        if(is_numeric($check_guid)) {
+            $check_guid = (int)$check_guid;
+            if($check_guid > 0)
+                $guid_where = <<<SQL
+ AND e.guid = {$check_guid}
+SQL;
+        }
+
 $query = <<<SQL
 SELECT {$count_query} FROM {$CONFIG->dbprefix}objects_property e
 {$order_query['join']}
@@ -2269,6 +2282,7 @@ SELECT {$count_query} FROM {$CONFIG->dbprefix}objects_property e
 WHERE {$search_query['query']} {$mw} e.subtype = {$subtype}
 AND ({$permissions_query['permission']})
 {$custom_where}
+{$guid_where}
 {$custom_group_by}
 {$order_query['by']}
 {$query_limit}

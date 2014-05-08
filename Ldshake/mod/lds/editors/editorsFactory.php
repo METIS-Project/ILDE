@@ -55,7 +55,7 @@ class Editor
 	}
 
 	//create an ElggFile, object and return it
-	public static function getNewFile($filename)
+	public function getNewFile($filename)
 	{
 		$user = get_loggedin_user();
 		$file = new ElggFile();
@@ -64,6 +64,10 @@ class Editor
 		$file->subtype = "lds_editor_file";
 		$file->originalfilename = $filename;
 		$file->access_id = 2;
+        if(!empty($this->_document))
+            if(!empty($this->_document->lds_guid))
+                $file->lds_guid = $this->_document->lds_guid;
+
 		$file->open("write");
 		//write a zero bytes size string to force Elgg to create the working directory for the present user
 		$file->write("");
