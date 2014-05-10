@@ -228,7 +228,7 @@ function lds_query() {
     }
 
     if(strlen($query)) {
-        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value, false, true);
+        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), false, $editor_type_key, $editor_type_value, false, true);
     } else {
         $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
     }
@@ -304,7 +304,7 @@ function lds_view() {
     }
 
     if(strlen($query)) {
-        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), $editor_type_key, $editor_type_value, false);
+        $entities = lds_contTools::searchLdS($query, $limit, $offset, get_loggedin_userid(), false, $editor_type_key, $editor_type_value, false);
     } else {
         $entities = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, $limit, $offset, $editor_type_key, $editor_type_value);
     }

@@ -1142,10 +1142,7 @@ $(document).ready(function()
 	//Doesn't really work w/firebug enabled. Will always warn.
     window.onbeforeunload = function ()
     {
-        documents[currentTab].body = editor.getData();
-
-        if (beforeEditChecksum != calcChecksum ())
-            return t9n.confirmExit;
+        return t9n.confirmExit;
     };
 
     //$("#lds_editor_iframe").attr("src", document_iframe_url);

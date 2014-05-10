@@ -160,38 +160,65 @@ if (isloggedin()) :
 
 <div style="clear:both;"></div>
 <?php endif;?>
+<?php
+    $new_tooltips = array(
+        'tb_newlds_exe' => T('Create educational web content.'),
+        'tb_newlds_wic' => T('Create collaborative learning activities based on patterns.'),
+        'tb_newlds_add_project' => T('Define a new group of tools/activities for your own pathway.'),
+        'tb_newlds_edit_project' => T('See list of pathways I can edit.'),
+        'tb_newlds_manage_projects' => T('See list of public pathways for starting your project.'),
+    );
+?>
+<script>
+    var ldshake_toolbar_tooltips = <?php echo json_encode($new_tooltips); ?>
+</script>
 
-
-<div class="tooltip_bl" id="t_tb_conceptualize_new" data-pos="#tb_conceptualize_new2@20,40" style="width: 280px;">
+<?php foreach($new_tooltips as $key => $value): ?>
+<div class="tooltip_bl" id="t_<?php echo $key ?>" style="width: 280px;">
     <div class="tooltip_bl_body">
-        sample tooltip
+        <div><strong><?php echo $value ?></strong></div>
+    </div>
+</div>
+<?php endforeach; ?>
+
+<div class="tooltip_bl" id="t_s1t" data-pos="#tb_ldshakers@-60,29" style="width:180px">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("See list of members in the community.") ?></strong></div>
     </div>
 </div>
 
-<div class="tooltip_bl" id="t_s1t" data-pos="#tb_ldshakers@-75,20">
+<div class="tooltip_bl" id="t_s2t" data-pos="#tb_mylds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("Discover other LdShakers here") ?></strong></div>
+        <div><strong><?php echo T("See list of learning design projects, artifacts and implementations I can edit.") ?></strong></div>
     </div>
 </div>
 
-<div class="tooltip_bl" id="t_s2t" data-pos="#tb_mylds@-85,20" style="width:230px;">
+<div class="tooltip_bl" id="t_s3t" data-pos="#tb_browselds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("You can publish the LdS that you start, which you'll find in this section.") ?></strong></div>
+        <div><strong><?php echo T("See list of learning design artifacts I can edit or view.") ?></strong></div>
     </div>
 </div>
 
-<div class="tooltip_bl" id="t_s3t" data-pos="#tb_browselds@-73,20">
+<div class="tooltip_bl" id="t_s4t" data-pos="#tb_newlds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("Discover existing LdS here") ?></strong></div>
+        <div><strong><?php echo T("Create a new learning design project, artifact or implementation.") ?></strong></div>
     </div>
 </div>
 
-<div class="tooltip_bl" id="t_s4t" data-pos="#tb_newlds@-60,20">
+<div class="tooltip_bl" id="t_s5t" data-pos="#tb_about@-70,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("Create your LdS here") ?></strong></div>
+        <div><strong><?php echo T("Information about the environment.") ?></strong></div>
+    </div>
+</div>
+
+<div class="tooltip_bl" id="t_s6t" data-pos="#tb_messages@-80,29" style="width:180px">
+    <div class="tooltip_bl_stem"></div>
+    <div class="tooltip_bl_body">
+        <div><strong><?php echo T("Private messages to community members.") ?></strong></div>
     </div>
 </div>

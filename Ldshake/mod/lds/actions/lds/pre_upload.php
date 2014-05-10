@@ -42,7 +42,7 @@ if($_FILES['file']['error']) {
 }
 
 $filename = rand_str();
-$file = Editor::getNewFile($filename);
+$file = Editor::getNewFileStatic($filename);
 $file->upload_filename = $_FILES['file']['name'];
 $full_file_path = Editor::getFullFilePath($file->guid);
 if(!(move_uploaded_file($_FILES['file']['tmp_name'], $full_file_path))) {

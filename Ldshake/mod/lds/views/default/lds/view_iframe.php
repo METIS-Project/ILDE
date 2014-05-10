@@ -400,7 +400,6 @@ extract ($vars);
         text-decoration: none;
     }
     </style>
-    <?php /*echo elgg_view('page_elements/analytics', $vars)*/ ?>
 </head>
 <body><?php
     if($diff)

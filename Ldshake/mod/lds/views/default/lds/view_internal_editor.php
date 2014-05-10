@@ -301,8 +301,8 @@ function encodeURIComponent($str) {
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
 
-        <?php elseif ($editor == 'openglm' && is_array($ldsDocs) && count($ldsDocs) > 0): ?>
-            <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $ldsDocs[0]->guid ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
+        <?php elseif ($editor == 'openglm' && is_array($ldsDocs) && count($ldsDocs) > 1): ?>
+            <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $ldsDocs[1]->guid ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
             </iframe>
         <?php else:?>
             <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">

@@ -25,15 +25,27 @@ $(document).ready(function()
 
     $(".menu_option").each(function(elem) {
         var $option = $(this);
+        var id = $option.attr("id")
 
-        $option.addClass("show_tooltip");
-        $option.addClass("t_tb_conceptualize_new");
-        $option.attr("data-pos", "#" + $option.attr("id") + "@20,10");
+        if($("#t_" + id).length) {
+            $option.addClass("show_tooltip");
+            $option.addClass("t_" + id);
+            $option.attr("data-pos", "#" + id + "@20,5");
+        }
     });
 
     $("#tb_ldshakers")
         .addClass("show_tooltip")
         .addClass("t_s1t");
+
+    $("li#tb_ldshakers").next("li")
+        .attr("id", "tb_messages")
+        .addClass("show_tooltip")
+        .addClass("t_s6t");
+
+    $("#tb_about")
+        .addClass("show_tooltip")
+        .addClass("t_s5t");
 
     $("#tb_mylds")
         .addClass("show_tooltip")
@@ -43,14 +55,15 @@ $(document).ready(function()
         .addClass("show_tooltip")
         .addClass("t_s3t");
 
-    /*
+
     $("#tb_newlds")
         .addClass("show_tooltip")
         .addClass("t_s4t")
-        .click(function() {
+        .click(function(e) {
+            e.preventDefault();
             $("#t_s4t").hide();
         });
-        */
+
 
     //Topbar account options
     $('#ldshake_topbar_menu_switch').click (function (e)
@@ -64,10 +77,13 @@ $(document).ready(function()
 
     $('#tb_newlds').click (function (e)
     {
-        $('#toolbar_lds_types').fadeToggle(200);
-        $('#tb_newlds a').toggleClass('menu_active');
         e.preventDefault();
         e.stopPropagation();
+
+        var left = $("#tb_newlds").position().left-5;
+        $('#toolbar_lds_types').css("left" , left+"px");
+        $('#toolbar_lds_types').fadeToggle(200);
+        $('#tb_newlds a').toggleClass('menu_active');
     });
 
     $('#toolbar_lds_types').mouseenter(function(){

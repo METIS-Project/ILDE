@@ -54,7 +54,7 @@ class Editor
 		return $readfile->getFilenameOnFilestore();
 	}
 
-	//create an ElggFile, object and return it
+	//create an ElggFile object and return it
 	public function getNewFile($filename)
 	{
 		$user = get_loggedin_user();
@@ -64,17 +64,42 @@ class Editor
 		$file->subtype = "lds_editor_file";
 		$file->originalfilename = $filename;
 		$file->access_id = 2;
-        if(!empty($this->_document))
-            if(!empty($this->_document->lds_guid))
+
+        if(!empty($this->_document)) {
+            if(!empty($this->_document->lds_guid)) {
                 $file->lds_guid = $this->_document->lds_guid;
+                $file->container_guid = $this->_document->guid;
+            }
+        }
 
 		$file->open("write");
-		//write a zero bytes size string to force Elgg to create the working directory for the present user
+		//write a zero byte long string to force Elgg to create the working directory for the current user
 		$file->write("");
 		$file->close();
 		$file->save();
 		return $file;
 	}
+
+    /*
+     * create an ElggFile object and return it
+     * DEPRECATED
+     */
+    public static function getNewFileStatic($filename)
+    {
+        $user = get_loggedin_user();
+        $file = new ElggFile();
+        $file->setFilename($filename);
+        $file->owner_guid = $user->guid;
+        $file->subtype = "lds_editor_file";
+        $file->originalfilename = $filename;
+        $file->access_id = 2;
+        $file->open("write");
+        //write a zero byte long string to force Elgg to create the working directory for the current user
+        $file->write("");
+        $file->close();
+        $file->save();
+        return $file;
+    }
 }
 
 class ManagerFactory {
@@ -876,17 +901,25 @@ class OpenglmEditor extends Editor {
 
         //create a new file to store the document
         $filestorename = $params['lds']->guid.'_'.rand_str(64);
-        $file = Editor::getNewFile($filestorename);
-        copy($params['file'], $file->getFilenameOnFilestore());
 
         $document = new DocumentEditorObject($params['lds']->guid);
+        $document->save();
+        $file = Editor::getNewFileStatic($filestorename);
+        $file->lds_guid = $document->lds_guid;
+        $file->container_guid = $document->guid;
+        $file->save();
+        copy($params['file'], $file->getFilenameOnFilestore());
+
         $document->file_guid = $file->guid;
         $document->upload_filename = $params['filename'];
 
         $document->editorType = $params['lds']->editor_type;
 
         $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-        $file = Editor::getNewFile($filestorename);
+        $file = Editor::getNewFileStatic($filestorename);
+        $file->lds_guid = $document->lds_guid;
+        $file->container_guid = $document->guid;
+        $file->save();
         if(isset($params['file_imsld'])) {
             copy($params['file_imsld'], $file->getFilenameOnFilestore());
             $document->upload_filename_imsld = $params['filename_imsld'];
@@ -927,7 +960,11 @@ class OpenglmEditor extends Editor {
         if(isset($params['file_imsld'])) {
             if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->file_imsld_guid = Editor::getNewFile($filestorename);
+                $file_imsld = Editor::getNewFileStatic($filestorename);
+                $file_imsld->lds_guid = $document->lds_guid;
+                $file_imsld->container_guid = $document->guid;
+                $file_imsld->save();
+                $document->file_imsld_guid = $file_imsld->guid;
             }
 
             $fullfilepath = Editor::getFullFilePath($document->file_imsld_guid);
@@ -936,7 +973,11 @@ class OpenglmEditor extends Editor {
         } else {
             if(!$document->file_imsld_guid) {
                 $filestorename = $params['lds']->guid.'_'.rand_str(12).'.zip';
-                $document->file_imsld_guid = Editor::getNewFile($filestorename);
+                $file_imsld = Editor::getNewFileStatic($filestorename);
+                $file_imsld->lds_guid = $document->lds_guid;
+                $file_imsld->container_guid = $document->guid;
+                $file_imsld->save();
+                $document->file_imsld_guid = $file_imsld->guid;
             }
 
             $fullfilepath = Editor::getFullFilePath($document->file_imsld_guid);
@@ -2644,6 +2685,7 @@ class UploadEditor extends Editor
         //save the contents
         if($docSession = $params['editor_id']) {
             $doc_file = get_entity($docSession);
+            //TODO: check $doc_file permisssions before proceeding
             $this->_document->upload_filename = $doc_file->upload_filename;
             $file_origin = Editor::getFullFilePath($docSession);
             copy($file_origin, $file->getFilenameOnFilestore());
@@ -3426,14 +3468,14 @@ class GluepsManager
         $rand_id = mt_rand(400,9000000);
 
         //create a new file to store the document
+        $this->_document->save();
         $filestorename = (string)$rand_id;
-        $file = Editor::getNewFile($filestorename);
+        $file = $this->getNewFile($filestorename);
         file_put_contents($file->getFilenameOnFilestore(), $glueps_xmlcontent);
         //copy($filename_editor, $file->getFilenameOnFilestore());
         //unlink($filename_editor);
 
         $this->_document->file_guid = $file->guid;
-        $this->_document->save();
 
         //assign a random string to each directory
         $this->_document->previewDir = rand_str(64);
@@ -3540,12 +3582,15 @@ class GluepsManager
         $rand_id = mt_rand(400,9000000);
 
         $clone = new DocumentEditorObject($lds);
-
+        $clone->save();
         $file_origin = Editor::getFullFilePath($this->_document->file_guid);
 
         //create a new file to store the document
         $filestorename = (string)$rand_id;
-        $file = Editor::getNewFile($filestorename);
+        $file = Editor::getNewFileStatic($filestorename);
+        $file->lds_guid = $clone->lds_guid;
+        $file->container_guid = $clone->guid;
+        $file->save();
         copy($file_origin, $file->getFilenameOnFilestore());
 
         $clone->file_guid = $file->guid;
@@ -4202,7 +4247,7 @@ class MoodleManager
     public function saveNewDocument($params = null)
     {
         global $CONFIG;
-
+/*
         //save the contents
         $docSession = $params['editor_id'];
 
@@ -4237,6 +4282,7 @@ class MoodleManager
         $this->_document->save();
 
         return array($this->_document, $resultIds);
+*/
     }
 
     public function saveDocument($params=null)
@@ -4323,6 +4369,7 @@ class MoodleManager
 
     public function cloneDocument($lds)
     {
+        /*
         global $CONFIG;
 
         $rand_id = mt_rand(400,9000000);
@@ -4353,6 +4400,7 @@ class MoodleManager
         create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         return array($clone);
+        */
     }
 }
 

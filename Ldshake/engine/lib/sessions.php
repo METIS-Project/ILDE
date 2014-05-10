@@ -410,10 +410,19 @@
             }
 
 	        if ($_SESSION['id'] > 0) {
-                $_SESSION['user'] = get_user($_SESSION['id']);
-                $_SESSION['username'] = $_SESSION['user']->username;
-                $_SESSION['name'] = $_SESSION['user']->name;
-                set_last_action_session($_SESSION['id']);
+                if($_SESSION['user'] = get_user($_SESSION['id'])) {
+                    $_SESSION['username'] = $_SESSION['user']->username;
+                    $_SESSION['name'] = $_SESSION['user']->name;
+                    set_last_action_session($_SESSION['id']);
+                } else {
+                    unset($_SESSION['username']);
+                    unset($_SESSION['name']);
+                    unset($_SESSION['code']);
+                    unset($_SESSION['guid']);
+                    unset($_SESSION['id']);
+                    unset($_SESSION['user']);
+                    unset($_SESSION['is_admin']);
+                }
 	        }
 
             register_action("login",true);

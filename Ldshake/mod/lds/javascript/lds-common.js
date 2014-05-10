@@ -88,7 +88,7 @@ function tooltips ()
                                         return $(selector).offset().left + left;
                                     }
                                 })
-							.fadeIn('fast');
+							.fadeIn(70);
 						}
 						else
 						{
@@ -115,13 +115,13 @@ function tooltips ()
 				clearTimeout(tooltip_timer_ids[id]);
 				
 				$(id)
-					.fadeOut('fast');
+					.fadeOut(70);
 				
-				setTimeout (function ()
+/*				setTimeout (function ()
 				{
 					$(id)
 					.fadeOut('fast');
-				}, 100);
+				}, 100);*/
 			}
 		}
 	});

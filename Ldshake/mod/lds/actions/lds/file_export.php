@@ -39,8 +39,10 @@ global $CONFIG;
 //TODO file permissions check
 //receive the file Id and force the download
 $doc_guid = get_input ('docId');
-if(!ldshake_check_user_guid($doc_guid))
+
+/*if(!ldshake_check_user_guid($doc_guid))
     forward();
+*/
 
 $file = get_entity($doc_guid);
 
