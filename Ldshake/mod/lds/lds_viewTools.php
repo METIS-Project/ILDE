@@ -155,7 +155,7 @@ class lds_viewTools
 
     public static function iconSupport ($type)
     {
-        $supported = array("doc",'webcollagerest','glueps','openglm','cadmos','project_design');
+        $supported = array("doc",'webcollagerest','glueps','openglm','cadmos','project_design','exelearningrest');
 
         return in_array($type, $supported);
     }

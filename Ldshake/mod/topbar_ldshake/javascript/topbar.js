@@ -32,7 +32,9 @@ $(document).ready(function()
             $option.addClass("t_" + id);
             $option.attr("data-pos", "#" + id + "@20,5");
         }
-    });
+    }).click(function() {
+            $(".tooltip_bl").fadeOff(70);
+        });
 
     $("#tb_ldshakers")
         .addClass("show_tooltip")

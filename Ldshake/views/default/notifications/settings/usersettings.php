@@ -16,7 +16,7 @@
 ?>
 	<h3><?php echo T("Notification settings"); ?></h3>
 	
-	<p><?php echo T("Please specify you want to receive notifications by e-mail."); ?></p>
+	<p><?php echo T("Please specify if you want to receive notifications by e-mail."); ?></p>
 
 <?php
 

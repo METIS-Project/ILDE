@@ -146,6 +146,14 @@ class richTextEditor extends Editor
         $revision = $lds->getAnnotations('revised_docs', 1, 0, 'desc');
         $revision = $revision[0];
 
+        //TODO: fix non existing subtype on empty database
+        if($editordocument = get_entities_from_metadata('lds_guid',$this->_lds->guid,'object','LdS_document_editor', 0, 100)) {
+            foreach($editordocument as $e_d) {
+                $em = EditorsFactory::getInstance($e_d);
+                $em->cloneDocument($lds->guid);
+            }
+        }
+
         if(is_array($this->_document))
         foreach($this->_document as $d) {
             $newdoc = new DocumentObject($lds->guid);
@@ -153,14 +161,6 @@ class richTextEditor extends Editor
             $newdoc->title = $d->title;
             $newdoc->lds_revision_id = $revision->id;
             $newdoc->save();
-        }
-
-        //TODO: fix non existing subtype on empty database
-        if($editordocument = get_entities_from_metadata('lds_guid',$this->_lds->guid,'object','LdS_document_editor', 0, 100)) {
-            foreach($editordocument as $e_d) {
-                $em = EditorsFactory::getInstance($e_d);
-                $em->cloneDocument($lds->guid);
-            }
         }
 
         return $lds;
@@ -1032,8 +1032,8 @@ class RestEditor extends Editor
                 'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
                 //'url_rest' => "http://ilde:443/",
                 //'url_gui' => "http://ilde:443/ldshakegui/",
-                //'url_rest' => "http://192.168.1.219:8080/",
-                //'url_gui' => "http://192.168.1.219:8080/ldshakegui/",
+                //'url_rest' => "http://192.168.1.219:51235/",
+                //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
                 'preview' => true,
                 'imsld' => false,
                 'password' => 'LdS@k$1#',
