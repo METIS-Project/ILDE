@@ -1241,17 +1241,22 @@ class RestEditor extends Editor
 
         $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
 
-        $post = array(
-            'lang' => $lang,
-            'sectoken' => $rand_id,
-            'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
-            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
-            'name' => $params['name'],
-            'ldshake_frame_origin' => $ldshake_frame_origin,
-        );
+        try {
+            //check if the design exists
+            if(!file_exists($filename_lds))
+                throw new Exception("Design file doesn't exists.");
+
+            $post = array(
+                'lang' => $lang,
+                'sectoken' => $rand_id,
+                'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
+                'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
+                'name' => $params['name'],
+                'ldshake_frame_origin' => $ldshake_frame_origin,
+            );
 
         $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
-        try {
+
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
@@ -2565,16 +2570,20 @@ class UploadEditor extends Editor
         $rand_id = rand_str(64);
         //$filename_editor = $CONFIG->exedata.'export/'.$rand_id.'.elp';
 
-        $post = array(
-            'lang' => 'en',
-            'sectoken' => $rand_id,
-            'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
-            'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
-        );
-
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/?XDEBUG_SESSION_START=16713";
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
         try {
+            //check if the design exists
+            if(!file_exists($filename_lds))
+                throw new Exception("Design file doesn't exists.");
+
+            $post = array(
+                'lang' => 'en',
+                'sectoken' => $rand_id,
+                'document' => "@{$filename_lds};type=application/json; charset=UTF-8",
+                'vle_info' => "@{$m_fd['uri']};type=application/json; charset=UTF-8"
+            );
+
+            $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
@@ -2828,6 +2837,32 @@ class GluepsManager
         $this->_implementation = $implementation;
         $this->_document = $glueps_document;
         $this->_vle = $vle;
+    }
+
+    //create an ElggFile object and return it
+    public function getNewFile($filename)
+    {
+        $user = get_loggedin_user();
+        $file = new ElggFile();
+        $file->setFilename($filename);
+        $file->owner_guid = $user->guid;
+        $file->subtype = "lds_editor_file";
+        $file->originalfilename = $filename;
+        $file->access_id = 2;
+
+        if(!empty($this->_document)) {
+            if(!empty($this->_document->lds_guid)) {
+                $file->lds_guid = $this->_document->lds_guid;
+                $file->container_guid = $this->_document->guid;
+            }
+        }
+
+        $file->open("write");
+        //write a zero byte long string to force Elgg to create the working directory for the current user
+        $file->write("");
+        $file->close();
+        $file->save();
+        return $file;
     }
 
     public function testVle() {

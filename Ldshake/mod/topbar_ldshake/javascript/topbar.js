@@ -30,7 +30,7 @@ $(document).ready(function()
         if($("#t_" + id).length) {
             $option.addClass("show_tooltip");
             $option.addClass("t_" + id);
-            $option.attr("data-pos", "#" + id + "@20,5");
+            $option.attr("data-pos", "#" + id + "@20,-10");
         }
     }).click(function() {
             $(".tooltip_bl").fadeOff(70);

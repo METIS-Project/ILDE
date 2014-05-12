@@ -94,11 +94,11 @@ extract($vars);
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE version')?></span>
-                <input class="vle_form_input" type="text" name="vle_version" value="<?php echo htmlspecialchars($vle->version)?>" />
+                <input class="vle_form_input" type="text" name="vle_version" value="<?php echo htmlspecialchars($vle->vle_version)?>" />
             </div>
             <div class="lds_form_block">
                 <span class="vle_form_label"><?php echo T('VLE wstoken')?></span>
-                <input class="vle_form_input" type="text" name="vle_wstoken" value="<?php echo htmlspecialchars($vle->wstoken)?>" />
+                <input class="vle_form_input" type="text" name="vle_wstoken" value="<?php echo htmlspecialchars($vle->vle_wstoken)?>" />
             </div>
 
             <input type="hidden" name="vle_id" value="<?php echo $vle_id;?>" />

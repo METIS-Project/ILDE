@@ -441,7 +441,7 @@ fwrite($handle, $contents);
 fclose($handle);
 
 //Create the PDF (custom margins to respect web layout)
-exec("{$CONFIG->pdf_converter_location} -L 11mm -R 12mm $inname $outname");
+exec("{$CONFIG->pdf_converter_location} --dpi 102 -L 13mm -R 9mm $inname $outname");
 
 //Send the PDF to the client
 header("Content-disposition: attachment; filename=\"{$doc->title}.pdf\"");
