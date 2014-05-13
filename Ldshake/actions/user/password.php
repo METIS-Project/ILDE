@@ -15,8 +15,8 @@
 
 	gatekeeper();
 	
-	$password = get_input('password');
-	$password2 = get_input('password2');
+	$password = get_input('new_password');
+	$password2 = get_input('new_password2');
 	$user_id = get_input('guid');
 	$user = "";
 	

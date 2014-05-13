@@ -309,7 +309,7 @@ jQuery.imgAreaSelect = function (img, options) {
         options.enable = options.disable = undefined;
     };
 
-    if (jQuery.browser.msie)
+    if (navigator.userAgent.search("msie") < 0)
         jQuery(img).attr('unselectable', 'on');
         
     $a.add($o).css({ display: 'none', position: fixed ? 'fixed' : 'absolute', overflow: 'hidden', 

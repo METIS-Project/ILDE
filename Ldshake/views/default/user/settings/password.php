@@ -18,10 +18,10 @@
 	<p>
 		<?php echo T("Your new password"); ?>: 
 		<?php
-			echo elgg_view('input/password',array('internalname' => 'password'));
+			echo elgg_view('input/password',array('internalname' => 'new_password'));
 		?></p><p>
 		<?php echo T("Your new password again"); ?>: <?php
-			echo elgg_view('input/password',array('internalname' => 'password2'));
+			echo elgg_view('input/password',array('internalname' => 'new_password2'));
 		?>
 	</p>
 

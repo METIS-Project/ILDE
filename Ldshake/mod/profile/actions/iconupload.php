@@ -55,6 +55,7 @@
 					$filehandler->close();
 					
 					$_SESSION['user']->icontime = time();
+                    $_SESSION['user']->save();
 					
 					system_message(elgg_echo("profile:icon:uploaded"));
 					

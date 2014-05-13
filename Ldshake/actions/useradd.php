@@ -43,6 +43,28 @@
 			$new_user->admin_created = true;
 			$new_user->isnew = '1';
 
+            //Create new document
+            $wl = new LdSObject();
+            $wl->access_id = 2;
+            $wl->editor_type = 'doc';
+            $wl->editor_subtype = 'doc';
+            $wl->title = T("My first LdS");
+            $wl->owner_guid = $new_user->guid;
+            $wl->container_guid = $new_user->guid;
+            $wl->granularity = '0';
+            $wl->completeness = '0';
+            $wl->all_can_view = "no";
+            $wl->welcome = 1;
+            $wl->save ();
+
+            $doc = new DocumentObject($wl->guid);
+            $doc->title = T("My first LdS");
+            $doc->description = elgg_view('lds/welcome_lds/welcome_lds_'.$CONFIG->language);
+            $doc->owner_guid = $new_user->guid;
+            $doc->container_guid = $wl->guid;
+            $doc->access_id = 2;
+            $doc->save();
+
             $vars = array();
             $vars['new_user'] = $new_user;
             $vars['site'] = $CONFIG->site;

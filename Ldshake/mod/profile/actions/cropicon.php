@@ -56,6 +56,7 @@
 					$user->y2 = $y2;
 					
 					$_SESSION['user']->icontime = time();
+                    $_SESSION['user']->save();
 					
 					system_message(elgg_echo("profile:icon:uploaded"));
 				
