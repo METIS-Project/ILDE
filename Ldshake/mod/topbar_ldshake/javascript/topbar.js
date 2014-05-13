@@ -23,17 +23,20 @@ $(document).ready(function()
      });
      */
 
-    $(".menu_option").each(function(elem) {
+    $(".menu_option, .menu_suboption").each(function(elem) {
         var $option = $(this);
-        var id = $option.attr("id")
+        var id = $option.attr("id");
 
         if($("#t_" + id).length) {
             $option.addClass("show_tooltip");
             $option.addClass("t_" + id);
-            $option.attr("data-pos", "#" + id + "@20,-10");
+            if($option.hasClass("menu_suboption"))
+                $option.attr("data-pos", "#" + id + "@40,40");
+            else
+                $option.attr("data-pos", "#" + id + "@20,-10");
         }
     }).click(function() {
-            $(".tooltip_bl").fadeOff(70);
+            $(".tooltip_bl").fadeOff(20);
         });
 
     $("#tb_ldshakers")
