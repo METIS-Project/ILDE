@@ -115,7 +115,7 @@ function tooltips ()
 				clearTimeout(tooltip_timer_ids[id]);
 				
 				$(id)
-					.fadeOut(70);
+					.fadeOut(30);
 				
 /*				setTimeout (function ()
 				{
