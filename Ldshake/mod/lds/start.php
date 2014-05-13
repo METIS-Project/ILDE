@@ -1009,8 +1009,12 @@ function lds_exec_neweditor ($params)
     } else {
         $vars['supportGoogleDoc'];
 
+        $temp_support_doc = new ElggObject();
+        $temp_support_doc->description = T("Write here any support notes for this LdS...").'<img border="0" width="0" height="0" src="http://ilde.upf.edu/mod/lds/templates/gdocs_fix/gdfix.png">';
+        $temp_support_doc->title = T("Support Document");
+
         $support_vars = array(
-            'doc' => T("Write here any support notes for this LdS..."),
+            'doc' => $temp_support_doc,
             'title' => T("Support Document")
         );
 

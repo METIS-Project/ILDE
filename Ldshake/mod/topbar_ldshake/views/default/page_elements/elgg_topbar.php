@@ -162,7 +162,7 @@ if (isloggedin()) :
 <?php endif;?>
 <?php
     $new_tooltips = array(
-        'tb_new_option_conceptualize' => T('Options for starting to think about you learning desing.'),
+        'tb_new_option_conceptualize' => T('Options for starting to think about your learning design.'),
 
         'tb_newlds_exe' => T('Create educational web content.'),
         'tb_newlds_wic' => T('Create collaborative learning activities based on patterns.'),

@@ -612,13 +612,18 @@
 			}
 			$CONFIG->site_guid = $CONFIG->site_id;
 
+            /*
             if(isset($_SESSION['site'])) {
                 $CONFIG->site = $_SESSION['site'];
             } else {
                 $CONFIG->site = get_entity($CONFIG->site_guid);
                 $_SESSION['site'] = $CONFIG->site;
             }
-			//$CONFIG->site = get_entity($CONFIG->site_guid);
+            */
+            $CONFIG->site = get_entity($CONFIG->site_guid);
+            $_SESSION['site'] = $CONFIG->site;
+
+            //$CONFIG->site = get_entity($CONFIG->site_guid);
 			
 			return true;
 		}
