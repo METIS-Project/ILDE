@@ -41,6 +41,7 @@ echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
 
+<!--
 <style>
     #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none;}
     #lds_edit_contents .draggable, #lds_edit_contents .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important;}
@@ -48,6 +49,17 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     #lds_edit_contents #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
     #lds_edit_contents #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; border-color: black}
     #lds_edit_contents .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
+</style>
+-->
+
+<style>
+    #droppable_grid { width: 700px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none; position: relative; z-index:0}
+    #ldproject_toolBar { width: 250px; height: 616px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
+    .draggable, .draggable-nonvalid { width: 50px; height: 50px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
+    .ui-widget-content {background-image: none; }
+
+    .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
+
 </style>
 
 <div id="layout_canvas">
@@ -94,69 +106,48 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
             </div>
 			<div id="lds_edit_contents">
 
-                <div id="tabs">
-                    <ul>
-                        <li><a href="#ldproject_conceptualize_grid">Conceptualize</a></li>
-                        <li><a href="#ldproject_author_grid">Author</a></li>
-                        <!-- <li><a href="#ldproject_implement_grid">Implement</a></li> -->
-                    </ul>
-
-                    <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
-                        <div id="two_column" style="padding-bottom:0 !important">
-                            <div id="droppable_conteptualize" class="ui-widget-header" type="conceptualize">
-                                <p>Project Design Conceptualize </p>
-                            </div>
-                            <div id="ldproject_toolBar" class="ui-widget-header"><p>
-                                <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' subtype="design_pattern">
-                                    Design Pattern
-                                </div>
-                                <div class="draggable ui-widget-content" toolname="CourseMap" tooltype="doc" subtype="coursemap">
-                                    CourseMap
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype="doc" subtype="MDN">
-                                    Design Narrative
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype="doc" subtype="PC">
-                                    Persona Card
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype="doc" subtype="FC">
-                                    Factors And Concerns
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype="doc" subtype="HE">
-                                    Heuristic Evaluation
-                                </div>
-                                <div class="draggable ui-widget-content" toolname="CompendiumLD" tooltype="cld">
-                                    CompendiumLD
-                                </div>
-                                <div class="draggable ui-widget-content" toolname="Image" tooltype="image">
-                                    Image
-                                </div>
-                                </p></div>
+                <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
+                    <div id="two_column" style="padding-bottom:0 !important">
+                        <div id="droppable_grid" class="ui-widget-header" type="conceptualize">
+                            <p>Project Design Conceptualize </p>
                         </div>
-                    </div>
-                    <div id="ldproject_author_grid"> <!-- This will act as design container -->
-                        <div id="two_column" style="padding-bottom:0 !important">
-                            <div id="droppable_author" class="ui-widget-header" type="author">
-                                <p>Project Design Author</p>
+                        <div id="ldproject_toolBar">
+                            <div class="draggable ui-widget-content" title="Design Pattern">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/DP.png" toolname="Design Pattern" tooltype='doc' subtype="design_pattern" >
                             </div>
-                            <div id="ldproject_toolBar">
-                                <div class="draggable ui-widget-content" toolname="WebCollage" tooltype="webcollagerest">
-                                    WebCollage
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="OpenGLM" tooltype="openglm">
-                                    OpenGLM
-                                </div>
-                                <div class="draggable ui-widget-content"  toolname="CADMOS" tooltype="cadmos">
-                                    CADMOS
-                                </div>
+                            <div class="draggable ui-widget-content" title="CourseMap">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CM.png" toolname="CourseMap" tooltype="doc" subtype="coursemap" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="Design Narrative">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/DN.png" toolname="Design Narrative" tooltype="doc" subtype="MDN" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="Persona Card">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/PC.png" toolname="Persona Card" tooltype="doc" subtype="PC" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="Factors and Concerns">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/FAC.png" toolname="Factors and Concerns" tooltype="doc" subtype="FAC" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="Heuristic Evaluation">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/HE.png" toolname="Heuristic Evaluation" tooltype="doc" subtype="HE" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="CompendiumLD">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CLD.png" toolname="CompendiumLD" tooltype="cld" >
+                            </div>
+                            <div class="draggable ui-widget-content" toolname="Image" tooltype="image">
+                                Image
+                            </div>
+                            <div class="draggable ui-widget-content" title="WebCollage">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/COLLAGE.png" toolname="WebCollage" tooltype="webcollage" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="Open GLM">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/OGLM.png" toolname="OpenGLM" tooltype="openglm" >
+                            </div>
+                            <div class="draggable ui-widget-content" title="CADMOS">
+                                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CADMOS.png" toolname="CADMOS" tooltype="cadmos" >
                             </div>
                         </div>
                     </div>
-                    <!-- <div id="ldproject_implement_grid">
-                        <div id="droppable_implement" class="ui-widget-header" type="implement">
-                            <p>Project Design Impl</p>
-                        </div>
-                    </div> -->
+                    <div style="clear:both"></div>
                 </div>
 
 
