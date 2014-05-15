@@ -88,4 +88,3 @@ if (get_context() == 'lds_exec_firststeps'):
 	echo Utils::getJsDeclaration('lds', 'lds-firststeps');
 endif;
 echo Utils::getJsDeclaration('lds', 'lds-common');
-echo Utils::getJsDeclaration('lds', 'ldprojects-common');

@@ -54,7 +54,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 
 <style>
     #droppable_grid { width: 700px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none; position: relative; z-index:0}
-    #ldproject_toolBar { width: 250px; height: 616px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
+    #ldproject_toolBar { position: relative; width: 250px; height: 616px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
     .draggable, .draggable-nonvalid { width: 50px; height: 50px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
     .ui-widget-content {background-image: none; }
 
