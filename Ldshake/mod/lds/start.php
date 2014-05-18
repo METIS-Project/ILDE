@@ -369,10 +369,13 @@ function lds_exec_implementable ($params)
     if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
         $vle_data = array();
         foreach($vles as $vle) {
-            $gluepsm = new GluepsManager($vle);
-            if($vle_info = $gluepsm->getVleInfo())
+            $globalvlemanager = new VLEManager($vle);
+            $vlemanager = $globalvlemanager->getAvailableManager();
+
+            if($vle_info = $vlemanager->getVleInfo())
                 $vle_info->item = $vle;
-                $vle_data[$vle->guid] = $vle_info;
+
+            $vle_data[$vle->guid] = $vle_info;
         }
     } else {
         register_error(T("You need to register a VLE first."));
@@ -2557,7 +2560,8 @@ function lds_exec_help ($params) {
 
 function lds_exec_test2 ($params) {
 
-    $mm = new MoodleManager();
+    $vle = get_entity($params[1]);
+    $mm = new MoodleManager($vle);
     $mm->getVleInfo();
     page_draw("test", "test");
     //echo "test";

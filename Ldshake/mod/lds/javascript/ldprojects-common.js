@@ -50,13 +50,30 @@ $(document).ready(function() {
         var toolLocation = toolElem.getBoundingClientRect();
         var left    = $(toolElem).find(".subtool").length * (width + margin);
         var bottom  = -(toolLocation.height + margin);
-        var id = "b";
+        var ldsimg     = baseurl + 'mod/lds/images/lds-doc-icon-64.png';
 
-        var item = '<div id="' + id + '" style="border: 1px solid red; width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999" />';
+        //generate new unique id
+        var id = $(toolElem).find('[tooltype]').attr("tooltype") + "_"
+            + $(toolElem).find('[subtype]').attr("subtype") + "_"
+            + toolElem.subToolElemCount++;
+
+        //add button id
+        var id_add = $(toolElem).find('[tooltype]').attr("tooltype") + "_"
+            + $(toolElem).find('[subtype]').attr("subtype") + "_add";
+
+        var item = '<div id="' + id + '" class="subtool" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999; background-image: url(\'' + ldsimg + '\'); background-size: contain;" />';
 
         console.log(item);
         $(toolElem).append(item);
         var $addedItem = $("#"+id);
+        addRemoveIcon($addedItem.get(0));
+
+        //link the elements
+        $addedItem.get(0).jsPlumbConn = toolElem.jsPlumb.connect({
+            source: id_add,
+            target: id,
+            anchor: ["Bottom", "Top"]
+        });
 
         /*
         $addedItem.on("click", function(event) {
@@ -67,6 +84,37 @@ $(document).ready(function() {
 */
     }
 
+    function addRemoveIcon(subToolElem) {
+        var src     = baseurl + 'mod/ldprojects/images/plus-icon.png';//TODO: change the icon
+        var width   = 20;
+        var height  = 20;
+        var toolLocation = subToolElem.getBoundingClientRect();
+        var left    = toolLocation.width - width/2;
+        var bottom  = toolLocation.height - height/2;
+        var id = subToolElem.id + "_remove";
+
+        var item = '<img id="' + id + '" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999" />';
+
+        console.log(item);
+        console.log(toolLocation);
+        $(subToolElem).append(item);
+        var $addedItem = $("#"+id);
+
+        $addedItem.on("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            var tool = subToolElem.parentElement;
+            tool.jsPlumb.detach(subToolElem.jsPlumbConn);
+            $(subToolElem).remove();
+            if(!$(tool).find(".subtool").length) {
+                $(tool).find(".addsubtool-icon").remove();
+                $(tool).css("top", "");
+                $(tool).css("left", "");
+                deleteLdSTool(tool);
+            }
+        });
+    }
+
     function addPlusIcon(toolElem) {
         var src     = baseurl + 'mod/ldprojects/images/plus-icon.png';
         var width   = 20;
@@ -74,9 +122,10 @@ $(document).ready(function() {
         var toolLocation = toolElem.getBoundingClientRect();
         var left    = (toolLocation.width - width)/2;
         var bottom  = -height/2;
-        var id = "a";
+        var id = $(toolElem).find('[tooltype]').attr("tooltype") + "_"
+            + $(toolElem).find('[subtype]').attr("subtype") + "_add";
 
-        var item = '<img id="' + id + '" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999" />';
+        var item = '<img id="' + id + '" class="addsubtool-icon" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999" />';
 
         console.log(item);
         console.log(toolLocation);
@@ -92,6 +141,10 @@ $(document).ready(function() {
     }
 
     $(".draggable" ).each(function(){
+        //create a jsPlumb instance for each draggable
+        this.jsPlumb = jsPlumb.getInstance();
+        this.jsPlumb.Defaults.Container = this;
+        this.subToolElemCount = 0;
         jsPlumb.draggable(this);
         $(this).on("mouseup", function(event) {
             //event.preventDefault();
@@ -200,10 +253,10 @@ $(function() {
 function storeLdSTool( myElement )
 {
     var tool = new Object();
-    tool.editor_type=$(myElement).attr("tooltype");
-    tool.toolName=$(myElement).attr("toolname");
+    tool.editor_type=$(myElement).find('[tooltype]').attr("tooltype");
+    tool.toolName=$(myElement).find('[tooltype]').attr("toolname");
     //If check if the tool has sybtype...
-    var subtype =$(myElement).attr("subtype");
+    var subtype =$(myElement).find('[tooltype]').attr("subtype");
     if (subtype)
         tool.editor_subtype=subtype;
 
@@ -229,7 +282,7 @@ function updateLdSTool (myElement) //TODO: mirar si se puede implementar Hashmap
     for (var i=0; i < arrayLength; i++)
     {
         tool = ldproject[i];
-        if(tool.toolName ==  $(myElement).attr("toolname") )
+        if(tool.toolName ==  $(myElement).find('[tooltype]').attr("toolname") )
         {
             ldproject[i].left = location.left;
             ldproject[i].bottom = location.bottom;
@@ -246,7 +299,7 @@ function deleteLdSTool(myElement)
     for (var i=0; i < arrayLength; i++)
     {
         tool = ldproject[i];
-        if(tool.toolName ==  $(myElement).attr("toolname") )
+        if(tool.toolName ==  $(myElement).find('[tooltype]').attr("toolname") )
         {
             ldproject.splice(i, 1);
             $(myElement).attr("tooltype_added", "false");

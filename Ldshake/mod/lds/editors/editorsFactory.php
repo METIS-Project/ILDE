@@ -3753,14 +3753,55 @@ class MoodleManager
         return false;
     }
 
+    private function moodleLogin() {
+        global $CONFIG;
+
+        $moodle_url = $CONFIG->moodle['url'];
+        $vle_username = $this->_vle->username;
+        $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
+        $service = 'ldshake_scorm_deployment';
+
+        $uri = "{$moodle_url}login/token.php?"
+            ."username=".urlencode($vle_username)."&"
+            ."password=".urlencode($vle_password)."&"
+            ."service=".urlencode($service);// . '&XDEBUG_SESSION_START=18908';
+
+        //https://www.yourmoodle.com/login/token.php?username=USERNAME&password=PASSWORD&service=SERVICESHORTNAME
+        try {
+            $response = \Httpful\Request::get($uri)
+                ->expects("application/json")
+                ->sendIt();
+
+            if($response->code > 399) {
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+            if(!($response->body instanceof stdClass)) {
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+            if(empty($response->body->token)) {
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+
+        }
+        catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url . 'pg/lds/');
+            return false;
+        }
+
+        $this->wstoken = $response->body->token;
+        return true;
+    }
+
     public function getVleInfo($test = false) {
         global $CONFIG;
 
         //if(!$this->validateVle())
         //    return false;
 
+        $this->moodleLogin();
         $moodle_url = $CONFIG->moodle['url'];
-        $wstoken = $CONFIG->moodle['wstoken'];
+        $wstoken = $this->wstoken;
 
         /*
         if($this->_vle->admin_id) {
@@ -3771,7 +3812,7 @@ class MoodleManager
         */
 
         $get = array(
-            'wsfunction' => 'core_course_get_courses',
+            'wsfunction' => 'local_wstemplate_get_courses',
             'wstoken' => $wstoken,
             'moodlewsrestformat' => 'json'
         );
@@ -3779,11 +3820,19 @@ class MoodleManager
         $uri = "{$moodle_url}webservice/rest/server.php?"
             ."&wsfunction=".urlencode($get['wsfunction'])."&"
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
-            ."wstoken=".urlencode($get['wstoken']);
+            ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
+
+        $roles = "editingteacher,manager";
+        $params = array(
+            'roles' => $roles,
+        );
 
         try {
-            $response = \Httpful\Request::get($uri)
-                ->addHeader('Accept', 'application/json')
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                //->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+                ->body($params, 'multipart/form-data')
+                ->expects("application/json")
                 ->sendIt();
 
             if($response->code > 399) {
@@ -4439,3 +4488,91 @@ class MoodleManager
     }
 }
 
+class VLEManager {
+    private $vle;
+    private $accept = array(
+        'glueps' => array('webcollagerest','openglm','cadmos'),
+        'moodle' => array('exelearning'),
+    );
+
+    private $preference = array('glueps','moodle');
+
+    public function __construct($vle) {
+        $this->vle = $vle;
+    }
+
+    public function getVleInfo() {
+        $glueps = new GluePSManager($this->vle);
+        $moodle = new MoodleManager($this->vle);
+
+        if(isset($this->_vle->admin_id)) {
+            $admin_vle = get_entity($this->vle->admin_id);
+            $managers = !empty($admin_vle->managers) ? explode(',', $admin_vle->managers) : false;
+        }
+
+        if(!empty($managers)) {
+            if(in_array('glueps', $managers)) {
+                return $glueps->getVleInfo();
+            }
+
+            if(in_array('moodle', $managers)) {
+                return $moodle->getVleInfo();
+            }
+        } else {
+            return $glueps->getVleInfo();
+        }
+    }
+
+    public function getAvailableManager() {
+        if(isset($this->_vle->admin_id)) {
+            $admin_vle = get_entity($this->vle->admin_id);
+            $managers = !empty($admin_vle->managers) ? explode(',', $admin_vle->managers) : false;
+        }
+
+        $manager = false;
+        foreach($this->preference as $ep) {
+            if(in_array($ep, $managers))
+                $manager = $ep;
+        }
+
+        if(!$manager)
+            return false;
+
+        $result = false;
+        switch($manager) {
+            case 'glueps':
+                $result = new GluePSManager($this->vle);
+                break;
+            case 'moodle':
+                $result = new MoodleManager($this->vle);
+                break;
+        }
+        return $result;
+    }
+
+    public function getImplementationManager($ih) {
+        $lds = get_entity($ih->lds_guid);
+        $subtype = $lds->getSubtype();
+        $manager_type = false;
+        foreach($this->accept as $k=>$am) {
+            if(in_array($subtype, $am))
+                $manager_type = $k;
+        }
+
+        if(!$manager_type)
+            return false;
+
+        $manager = false;
+        switch($manager_type) {
+            case 'glueps':
+                $manager = new GluePSManager($this->vle);
+                break;
+            case 'moodle':
+                $manager = new MoodleManager($this->vle);
+                break;
+        }
+        return $manager;
+    }
+
+
+}

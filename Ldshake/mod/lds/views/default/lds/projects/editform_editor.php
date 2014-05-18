@@ -59,7 +59,6 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
     .ui-widget-content {background-image: none; }
 
     .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
-
 </style>
 
 <div id="layout_canvas">
