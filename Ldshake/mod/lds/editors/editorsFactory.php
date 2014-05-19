@@ -3756,7 +3756,9 @@ class MoodleManager
     private function moodleLogin() {
         global $CONFIG;
 
-        $moodle_url = $CONFIG->moodle['url'];
+        $admin_vle = get_entity($this->_vle->admin_id);
+        $this->moodle_url = $admin_vle->vle_url;
+        $moodle_url = $this->moodle_url;
         $vle_username = $this->_vle->username;
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
         $service = 'ldshake_scorm_deployment';
@@ -3800,16 +3802,8 @@ class MoodleManager
         //    return false;
 
         $this->moodleLogin();
-        $moodle_url = $CONFIG->moodle['url'];
+        $moodle_url = $this->moodle_url;
         $wstoken = $this->wstoken;
-
-        /*
-        if($this->_vle->admin_id) {
-            $admin_vle = get_entity($this->_vle->admin_id);
-            $version = ($admin_vle->vle_version) ? $admin_vle->vle_version : '';
-            $wstoken = ($admin_vle->vle_wstoken) ? $admin_vle->vle_wstoken : '';
-        }
-        */
 
         $get = array(
             'wsfunction' => 'local_wstemplate_get_courses',
@@ -3825,6 +3819,71 @@ class MoodleManager
         $roles = "editingteacher,manager";
         $params = array(
             'roles' => $roles,
+        );
+
+        try {
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                //->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+                ->body($params, 'multipart/form-data')
+                ->expects("application/json")
+                ->sendIt();
+
+            if($response->code > 399) {
+                if($test)
+                    return false;
+                else
+                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+        }
+        catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url . 'pg/lds/');
+            return false;
+        }
+
+        return $response->body;
+    }
+
+    /*
+    private function filterCourse($id, $courses) {
+        foreach($courses as $course) {
+            if($course->id == $id)
+                return $course;
+        }
+        return false;
+    }*/
+
+    public function uploadFile($courseid, $sectionid) {
+        global $CONFIG;
+
+        //if(!$this->validateVle())
+        //    return false;
+
+        $this->moodleLogin();
+        $moodle_url = $this->moodle_url;
+        $wstoken = $this->wstoken;
+
+        $get = array(
+            'wsfunction' => 'local_wstemplate_upload_scorm',
+            'wstoken' => $wstoken,
+            'moodlewsrestformat' => 'json'
+        );
+
+        $uri = "{$moodle_url}webservice/rest/server.php?"
+            ."&wsfunction=".urlencode($get['wsfunction'])."&"
+            ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
+            ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
+
+
+        $filename = 'name_'.rand(1,99999).'.zip';
+        $filecontents = base64_encode(file_get_contents('/var/www/scorm.zip'));
+
+        $params = array(
+            'course'        => $courseid,
+            'sectionid'     => $sectionid,
+            'filename'      => $filename,
+            'filecontents'  => $filecontents,
         );
 
         try {
