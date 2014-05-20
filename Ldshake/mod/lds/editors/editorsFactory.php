@@ -3913,7 +3913,7 @@ class MoodleManager
         return $response->body;
     }
 
-    public function addScorm($courseid, $sectionid, $scormtitle, $filename) {
+    public function addScorm($courseid, $sectionid, $scormtitle) {
         global $CONFIG;
 
         //if(!$this->validateVle())
@@ -3934,11 +3934,16 @@ class MoodleManager
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
             ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
 
+        $filename = 'name_'.rand(1,99999).'.zip';
+        $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
+        $filecontents = rtrim(chunk_split($filecontents, 64, "\n"), "\n");
+
         $params = array(
             'course'        => $courseid,
             'sectionid'     => $sectionid,
             'scormtitle'    => $scormtitle,
             'filename'      => $filename,
+            'filecontents'  => $filecontents,
         );
 
         try {

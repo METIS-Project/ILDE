@@ -2562,8 +2562,7 @@ function lds_exec_test2 ($params) {
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
     //$mm->getVleInfo();
-    $file_record = $mm->uploadFile(2,12);
-    $mm->addScorm(2,12,'new scorm',$file_record->filename);
+    $mm->addScorm(2,3,'new scorm 2');
     page_draw("test", "test");
     //echo "test";
 }
