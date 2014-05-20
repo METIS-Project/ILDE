@@ -3877,7 +3877,8 @@ class MoodleManager
 
 
         $filename = 'name_'.rand(1,99999).'.zip';
-        $filecontents = base64_encode(file_get_contents('/var/www/scorm.zip'));
+        $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
+        $filecontents = chunk_split($filecontents, 64, "\n");
 
         $params = array(
             'course'        => $courseid,
@@ -3886,10 +3887,12 @@ class MoodleManager
             'filecontents'  => $filecontents,
         );
 
+        $lines = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
+
         try {
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-                //->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
                 ->body($params, 'multipart/form-data')
                 ->expects("application/json")
                 ->sendIt();

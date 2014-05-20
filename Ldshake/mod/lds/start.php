@@ -2562,7 +2562,8 @@ function lds_exec_test2 ($params) {
 
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
-    $mm->getVleInfo();
+    //$mm->getVleInfo();
+    $mm->uploadFile(2,3);
     page_draw("test", "test");
     //echo "test";
 }
