@@ -2559,11 +2559,11 @@ function lds_exec_help ($params) {
 }
 
 function lds_exec_test2 ($params) {
-
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
     //$mm->getVleInfo();
-    $mm->uploadFile(2,3);
+    $file_record = $mm->uploadFile(2,12);
+    $mm->addScorm(2,12,'new scorm',$file_record->filename);
     page_draw("test", "test");
     //echo "test";
 }

@@ -3878,7 +3878,7 @@ class MoodleManager
 
         $filename = 'name_'.rand(1,99999).'.zip';
         $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
-        $filecontents = chunk_split($filecontents, 64, "\n");
+        $filecontents = rtrim(chunk_split($filecontents, 64, "\n"), "\n");
 
         $params = array(
             'course'        => $courseid,
@@ -3888,6 +3888,58 @@ class MoodleManager
         );
 
         $lines = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
+
+        try {
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+                ->body($params, 'multipart/form-data')
+                ->expects("application/json")
+                ->sendIt();
+
+            if($response->code > 399) {
+                if($test)
+                    return false;
+                else
+                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+        }
+        catch (Exception $e) {
+            register_error($e->getMessage());
+            forward($CONFIG->url . 'pg/lds/');
+            return false;
+        }
+
+        return $response->body;
+    }
+
+    public function addScorm($courseid, $sectionid, $scormtitle, $filename) {
+        global $CONFIG;
+
+        //if(!$this->validateVle())
+        //    return false;
+
+        $this->moodleLogin();
+        $moodle_url = $this->moodle_url;
+        $wstoken = $this->wstoken;
+
+        $get = array(
+            'wsfunction' => 'local_wstemplate_add_scorm',
+            'wstoken' => $wstoken,
+            'moodlewsrestformat' => 'json'
+        );
+
+        $uri = "{$moodle_url}webservice/rest/server.php?"
+            ."&wsfunction=".urlencode($get['wsfunction'])."&"
+            ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
+            ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
+
+        $params = array(
+            'course'        => $courseid,
+            'sectionid'     => $sectionid,
+            'scormtitle'    => $scormtitle,
+            'filename'      => $filename,
+        );
 
         try {
             $response = \Httpful\Request::post($uri)
