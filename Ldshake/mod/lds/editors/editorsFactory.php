@@ -3816,15 +3816,17 @@ class MoodleManager
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
             ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
 
-        $roles = "editingteacher,manager";
         $params = array(
-            'roles' => $roles,
+            'enroled_only' => (int)false,
+/*            'limit' => false,
+            'enroled_only' => false,
+*/
         );
 
         try {
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-                //->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
                 ->body($params, 'multipart/form-data')
                 ->expects("application/json")
                 ->sendIt();
@@ -3913,7 +3915,7 @@ class MoodleManager
         return $response->body;
     }
 
-    public function addScorm($courseid, $sectionid, $scormtitle) {
+    public function addScorm($courseid, $scormtitle) {
         global $CONFIG;
 
         //if(!$this->validateVle())
@@ -3924,7 +3926,7 @@ class MoodleManager
         $wstoken = $this->wstoken;
 
         $get = array(
-            'wsfunction' => 'local_wstemplate_add_scorm',
+            'wsfunction' => 'local_ldshake_add_scorm',
             'wstoken' => $wstoken,
             'moodlewsrestformat' => 'json'
         );
@@ -3932,7 +3934,7 @@ class MoodleManager
         $uri = "{$moodle_url}webservice/rest/server.php?"
             ."&wsfunction=".urlencode($get['wsfunction'])."&"
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
-            ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
+            ."wstoken=".urlencode($get['wstoken']);
 
         $filename = 'name_'.rand(1,99999).'.zip';
         $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
@@ -3940,7 +3942,6 @@ class MoodleManager
 
         $params = array(
             'course'        => $courseid,
-            'sectionid'     => $sectionid,
             'scormtitle'    => $scormtitle,
             'filename'      => $filename,
             'filecontents'  => $filecontents,
@@ -3949,7 +3950,7 @@ class MoodleManager
         try {
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+//                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
                 ->body($params, 'multipart/form-data')
                 ->expects("application/json")
                 ->sendIt();

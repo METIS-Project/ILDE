@@ -2562,7 +2562,7 @@ function lds_exec_test2 ($params) {
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
     //$mm->getVleInfo();
-    $mm->addScorm(2,3,'new scorm 2');
+    $mm->addScorm(2,'new scorm 3');
     page_draw("test", "test");
     //echo "test";
 }
