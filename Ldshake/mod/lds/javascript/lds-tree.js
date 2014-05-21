@@ -835,12 +835,12 @@ function tree_popup_show(d){
                     $(iframe_tree_contents).filter("html").css("width", iframe_xsize+"px");
                     iframe_ysize = $(iframe_tree_contents).filter("html").find("body").outerHeight();
                     $(iframe_tree_contents).filter("html").css("position", "relative");
-                    console.log(iframe_xsize);
                     $(iframe_tree_contents).css("transition","opacity "+fadein_timing+"s");
                     $(popup_id_selector+"#internal_iviewer").css("transition","opacity "+fadein_timing+"s");
                     setTimeout(function(){
                         $(iframe_tree_contents).css("transition",transition_settings);
                         $(popup_id_selector+"#internal_iviewer").css("transition",transition_settings);
+                        $(iframe_tree_contents).filter("html").css("overflow-y","auto");
                     },fadein_timing*1000);
 
                     $(iframe_tree_contents).filter("html").find("body").click(function(e){

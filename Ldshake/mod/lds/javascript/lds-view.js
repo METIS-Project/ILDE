@@ -40,19 +40,22 @@ $(document).ready(function()
         $('#footer_ending').css('display', 'none');
         var top = $('#the_lds').offset().top;
         var height = $(window).height();
-        var commentHeight = $('#layout_footer').outerHeight();
+        var commentHeight = $('#layout_footer').height();
 
         var h = Math.max(400, height - top - commentHeight);
 
-        h = Math.max(h-2-20, $('#the_lds').contents().find('body').height());
-        $('#the_lds').height(h);
+        h = Math.max(h-2-20, $('#the_lds').contents().find('html').outerHeight());
+        var current_h = $('#the_lds').height();
+        if(h > current_h)
+            $('#the_lds').height(h);
         //$('#the_lds').height($('#the_lds').contents().find('body').height());
         //$('#the_lds').width($('#one_column').width()-2);
     }
 
+    $('#the_lds').on("load", resizeViewport);
     resizeViewport();
+    setInterval(resizeViewport, 300);
 
-    $('#the_lds').load(resizeViewport);
     $(window).resize(resizeViewport);
 
 
