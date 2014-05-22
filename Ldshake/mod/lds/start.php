@@ -369,13 +369,17 @@ function lds_exec_implementable ($params)
     if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
         $vle_data = array();
         foreach($vles as $vle) {
-            $globalvlemanager = new VLEManager($vle);
-            $vlemanager = $globalvlemanager->getAvailableManager();
+            $globalVLEManager = new VLEManager($vle);
+            $vlemanager = $globalVLEManager->getAvailableManager();
 
-            if($vle_info = $vlemanager->getVleInfo())
+            if($vle_info = $vlemanager->getVleInfo()) {
                 $vle_info->item = $vle;
-
-            $vle_data[$vle->guid] = $vle_info;
+                $vle_data[$vle->guid] = $vle_info;
+            }
+            if(empty($vle_data)) {
+                register_error(T("None of the registered VLEs are working."));
+                forward($CONFIG->url.'pg/lds/vle');
+            }
         }
     } else {
         register_error(T("You need to register a VLE first."));
@@ -2561,9 +2565,9 @@ function lds_exec_help ($params) {
 function lds_exec_test2 ($params) {
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
-    //$mm->getVleInfo();
-    $mm->addScorm(2,'new scorm 3');
-    page_draw("test", "test");
+    $res = var_export($mm->getVleInfo(), true);
+    //$res = print_r($mm->addScorm(2,'new scorm 4'.' '. date("D M Y  H:m:s")), true);
+    page_draw("test", '<pre>'.$res.'</pre>');
     //echo "test";
 }
 

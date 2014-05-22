@@ -89,7 +89,11 @@ $(document).ready(function()
             if(!lds_submit_click) {
                 lds_submit_click = true;
                 $.post (baseurl + "action/lds/projects/implement", submitData, function(data) {
-                    window.location = baseurl + 'pg/lds/project_implementation/'+data;
+                    data = parseInt(data, 10);
+                    if(data == -2)
+                        window.location = baseurl + 'pg/lds/';
+                    else
+                        window.location = baseurl + 'pg/lds/project_implementation/'+data;
                 });
             }
         }

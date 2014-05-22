@@ -47,18 +47,26 @@ $course_name = get_input('course_name', null);
 
 $lds = get_entity($lds_id);
 
-$implementation = new ElggObject();
-$implementation->subtype = 'LdS_implementation_helper';
-$implementation->access_id = ACCESS_PUBLIC;
-$implementation->owner_guid = get_loggedin_userid();
-$implementation->container_guid = $lds->guid;
-$implementation->title = $title;
-$implementation->vle_id = $vle_id;
-$implementation->course_id = $course_id;
-$implementation->vle_name = $vle_name;
-$implementation->course_name = $course_name;
-$implementation->lds_id = $lds->guid;
-$implementation->editor_type = 'gluepsrest';
-$implementation->save();
+if($lds->getSubtype() == 'exelearningrest') {
+    $vle = get_entity($vle);
+    $mm = new MoodleManager($vle);
+    $res = $mm->addScorm($course_id, $title . ' ' . date("D M Y  H:m:s"));
+    if($res)
+        echo '-2';
+} else {
+    $implementation = new ElggObject();
+    $implementation->subtype = 'LdS_implementation_helper';
+    $implementation->access_id = ACCESS_PUBLIC;
+    $implementation->owner_guid = get_loggedin_userid();
+    $implementation->container_guid = $lds->guid;
+    $implementation->title = $title;
+    $implementation->vle_id = $vle_id;
+    $implementation->course_id = $course_id;
+    $implementation->vle_name = $vle_name;
+    $implementation->course_name = $course_name;
+    $implementation->lds_id = $lds->guid;
+    $implementation->editor_type = 'gluepsrest';
+    $implementation->save();
 
-echo $implementation->guid;
+    echo $implementation->guid;
+}

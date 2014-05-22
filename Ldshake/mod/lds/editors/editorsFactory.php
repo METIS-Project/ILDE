@@ -3786,8 +3786,6 @@ class MoodleManager
 
         }
         catch (Exception $e) {
-            register_error($e->getMessage());
-            forward($CONFIG->url . 'pg/lds/');
             return false;
         }
 
@@ -3795,18 +3793,20 @@ class MoodleManager
         return true;
     }
 
-    public function getVleInfo($test = false) {
+    public function getVleInfo() {
         global $CONFIG;
 
         //if(!$this->validateVle())
         //    return false;
 
-        $this->moodleLogin();
+        if(!$this->moodleLogin())
+            return false;
+
         $moodle_url = $this->moodle_url;
         $wstoken = $this->wstoken;
 
         $get = array(
-            'wsfunction' => 'local_wstemplate_get_courses',
+            'wsfunction' => 'local_ldshake_get_courses',
             'wstoken' => $wstoken,
             'moodlewsrestformat' => 'json'
         );
@@ -3826,25 +3826,34 @@ class MoodleManager
         try {
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
+//                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
                 ->body($params, 'multipart/form-data')
                 ->expects("application/json")
                 ->sendIt();
 
             if($response->code > 399) {
-                if($test)
-                    return false;
-                else
-                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+
+            if(!empty($response->body->exception)) {
+                throw new Exception($response->body->message);
             }
         }
         catch (Exception $e) {
             register_error($e->getMessage());
-            forward($CONFIG->url . 'pg/lds/');
+            //forward($CONFIG->url . 'pg/lds/');
             return false;
         }
 
-        return $response->body;
+        //to GLUEPS format
+        $courses = array();
+        foreach($response->body as $course) {
+            $courses[$course->id] = $course->fullname;
+        }
+        $vle = new stdClass();
+        $vle->courses = $courses;
+
+        return $vle;
     }
 
     /*
@@ -3855,65 +3864,6 @@ class MoodleManager
         }
         return false;
     }*/
-
-    public function uploadFile($courseid, $sectionid) {
-        global $CONFIG;
-
-        //if(!$this->validateVle())
-        //    return false;
-
-        $this->moodleLogin();
-        $moodle_url = $this->moodle_url;
-        $wstoken = $this->wstoken;
-
-        $get = array(
-            'wsfunction' => 'local_wstemplate_upload_scorm',
-            'wstoken' => $wstoken,
-            'moodlewsrestformat' => 'json'
-        );
-
-        $uri = "{$moodle_url}webservice/rest/server.php?"
-            ."&wsfunction=".urlencode($get['wsfunction'])."&"
-            ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
-            ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
-
-
-        $filename = 'name_'.rand(1,99999).'.zip';
-        $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
-        $filecontents = rtrim(chunk_split($filecontents, 64, "\n"), "\n");
-
-        $params = array(
-            'course'        => $courseid,
-            'sectionid'     => $sectionid,
-            'filename'      => $filename,
-            'filecontents'  => $filecontents,
-        );
-
-        $lines = preg_split('/[\s]+/', $filecontents, -1, PREG_SPLIT_NO_EMPTY);
-
-        try {
-            $response = \Httpful\Request::post($uri)
-                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-                ->addHeader("Cookie", "XDEBUG_SESSION=PHPSTORM")
-                ->body($params, 'multipart/form-data')
-                ->expects("application/json")
-                ->sendIt();
-
-            if($response->code > 399) {
-                if($test)
-                    return false;
-                else
-                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
-            }
-        }
-        catch (Exception $e) {
-            register_error($e->getMessage());
-            forward($CONFIG->url . 'pg/lds/');
-            return false;
-        }
-
-        return $response->body;
-    }
 
     public function addScorm($courseid, $scormtitle) {
         global $CONFIG;
@@ -3956,10 +3906,11 @@ class MoodleManager
                 ->sendIt();
 
             if($response->code > 399) {
-                if($test)
-                    return false;
-                else
-                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+            }
+
+            if(!empty($response->body->exception)) {
+                throw new Exception($response->body->message);
             }
         }
         catch (Exception $e) {
@@ -4621,6 +4572,7 @@ class VLEManager {
         $this->vle = $vle;
     }
 
+    /*
     public function getVleInfo() {
         $glueps = new GluePSManager($this->vle);
         $moodle = new MoodleManager($this->vle);
@@ -4642,8 +4594,9 @@ class VLEManager {
             return $glueps->getVleInfo();
         }
     }
-
+*/
     public function getAvailableManager() {
+/*
         if(isset($this->_vle->admin_id)) {
             $admin_vle = get_entity($this->vle->admin_id);
             $managers = !empty($admin_vle->managers) ? explode(',', $admin_vle->managers) : false;
@@ -4657,7 +4610,8 @@ class VLEManager {
 
         if(!$manager)
             return false;
-
+*/
+        $manager = 'moodle';
         $result = false;
         switch($manager) {
             case 'glueps':
