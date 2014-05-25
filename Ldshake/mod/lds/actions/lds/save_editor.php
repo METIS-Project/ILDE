@@ -103,7 +103,7 @@ else
 	$document_editor->save();
 
     //google docs support document
-    if($editor_type == 'google_docs') {
+    if(strstr($editor_type, 'google')) {
         $document_editor_support = new DocumentEditorObject($lds->guid, 0);
         $document_editor_support->editorType = $editor_type;
         $document_editor_support->support = true;
@@ -190,7 +190,7 @@ if($save_result = $editor->saveDocument($save_params)) {
 }
 
 //google_docs_support
-if($editor_type == 'google_docs') {
+if(strstr($editor_type, 'google')) {
     $save_params_support = array(
         'title' => $google_docs_support_title,
         'editor_id' => $google_docs_support_id,
@@ -217,7 +217,7 @@ $resultIds->saved = 1;
 $lds->save();
 $resultIds->LdS = $lds->guid;
 
-if($editor_type != 'google_docs') {
+if(!strstr($editor_type, 'google')) {
     $documents = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document');
     $recovered_documents = array();
 

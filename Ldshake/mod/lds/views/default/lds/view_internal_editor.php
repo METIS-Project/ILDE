@@ -55,7 +55,7 @@ function encodeURIComponent($str) {
 	<div id="lds_view_actions">
 		<input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
 		<input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
-        <?php if ($lds->editor_type == 'google_docs'): ?>
+        <?php if (strstr($lds->editor_type, 'google')): ?>
         <a class="rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
         <?php endif; ?>
 		<?php if ($lds->canEdit()): ?>
@@ -114,21 +114,14 @@ function encodeURIComponent($str) {
 	<div class="arrow right">►</div><div class="arrow left">◄</div>
 	<?php /** Aquí es importante no indentar líneas ni dejar código html con un newline al final, por el css inline-block. **/ ?>
 	<ul id="lds_view_tabs" class="content">
-		<?php if (is_array($ldsDocs)): ?>
-			<?php foreach ($ldsDocs as $doc): ?>
-            <?php if (($doc->guid != $currentDocId || !$iseXe) && ($doc->support && $doc->editorType == 'google_docs')): ?>
-                <?php if ($doc->guid == $currentDocId): ?>
-                    <li class="activetab"><?php echo $doc->title ?></li>
-                <?php else: ?>
-                    <li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $doc->title ?></a></li>
-                <?php endif; ?>
+        <?php foreach($ldsDocs as $doc): ?>
+            <?php $title = empty($doc->title) ? $lds->title : $doc->title; ?>
+            <?php if ($doc->guid == $currentDocId): ?>
+                <li class="activetab"><?php echo $title ?></li>
+            <?php else: ?>
+                <li><a href="<?php echo lds_viewTools::url_for($lds, 'view').'doc/'.$doc->guid.'/'?>"><?php echo $title ?></a></li>
             <?php endif; ?>
-			<?php endforeach; ?>
-		<?php endif; ?>
-		<?php if ($iseXe): ?>
-			<li class="activetab"><?php echo $lds->title ?></li><?php else: ?>
-			<li><a href="<?php echo lds_viewTools::url_for($lds, 'view') ?>"><?php echo $lds->title ?></a></li>
-        <?php endif; ?>
+        <?php endforeach; ?>
 	</ul>
 </div>
 
@@ -269,7 +262,7 @@ function encodeURIComponent($str) {
 		<?php if ($currentDoc->editorType == 'exe'): ?>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title . ".elp") ?>" style="float: left;"><?php echo T("Save as eXe Learning file") ?></a>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->scorm . "&title=" . encodeURIComponent($lds->title . "_scorm.zip") ?>" style="float: left;"><?php echo T("Save as SCORM") ?></a>
-		<!--<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->scorm2004 . "&title=" . encodeURIComponent($lds->title . ".zip") ?>" style="float: left;"><?php echo T("Save as SCORM 2004") ?></a>-->
+		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->scorm2004 . "&title=" . encodeURIComponent($lds->title . ".zip") ?>" style="float: left;"><?php echo T("Save as SCORM 2004") ?></a>
 		<?php endif; ?>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->ims_ld . "&title=" . encodeURIComponent($lds->title . "_imsld.zip") ?>" style="float: left;"><?php echo T("Save as IMS-LD") ?></a>
 		<a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->webZip . "&title=" . encodeURIComponent($lds->title . "_html.zip") ?>" style="float: left;"><?php echo T("Save as zipped web page") ?></a>
@@ -296,7 +289,7 @@ function encodeURIComponent($str) {
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
-        <?php elseif ($editor  == 'google_docs' && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
+        <?php elseif (strstr($editor, 'google') && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
@@ -313,8 +306,8 @@ function encodeURIComponent($str) {
         <script>
             image = false;
         </script>
-        <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
-            <?php echo $currentDoc->description ?>
+        <div id="the_lds_wrapper">
+            <iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>"></iframe>
         </div>
     <?php endif; ?>
 

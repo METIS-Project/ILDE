@@ -96,7 +96,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <?php else: ?>
                 <div id="rich_text_box" style="display: block;">
                 <?php endif; ?>
-                <?php if($editor == 'google_docs'): ?>
+                <?php if(strstr($editor, 'google')): ?>
                     <iframe id="lds_support_editor_iframe" alt_src="<?php echo htmlentities($support_editor['document_iframe_url']);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php else: ?>
                     <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
@@ -118,7 +118,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                     <?php endif; ?>
                 <?php endif; ?>
 
-                <?php if($editor == 'google_docs'): ?>
+                <?php if(strstr($editor, 'google')): ?>
                     <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php endif; ?>
 
@@ -128,9 +128,9 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <?php /** Botonets de scroll **/ ?>
                 <div class="arrow right" style="top:4px !important">►</div><div class="arrow left" style="top:4px !important">◄</div>
                 <ul id="lds_edit_tabs_scrolling" class="content">
-                    <?php if($editor != 'google_docs'):?><li class="lds_newtab">+ <?php echo T("Add document") ?></li><?php endif;?>
+                    <?php if(!strstr($editor, 'google')):?><li class="lds_newtab">+ <?php echo T("Add document") ?></li><?php endif;?>
                     <?php if(!isset($upload)): ?>
-                        <?php if($editor != 'google_docs'):?>
+                        <?php if(!strstr($editor, 'google')):?>
                             <li class="lds_exetab"> <?php echo $editor_label ?></li>
                         <?php else: ?>
                             <li class="lds_exetab"> <?php echo $lds_title ?></li>
@@ -248,8 +248,8 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         <?php if($vars['restapi']): ?>
         var restapi_remote_domain = "<?php echo $vars['restapi_remote_domain']; ?>";
         <?php endif; ?>
-        var google_docs = <?php echo (($editor == 'google_docs') ? 'true' : 'false')?>;
-        <?php if($editor == 'google_docs'): ?>
+        var google_docs = <?php echo (strstr($editor, 'google') ? 'true' : 'false')?>;
+        <?php if(strstr($editor, 'google')): ?>
         var google_docs_support_id = "<?php echo $support_editor['editor_id']; ?>";
         <?php endif; ?>
         var ilde_debug = <?php echo ($CONFIG->editor_debug ? 'true' : 'false')?>;

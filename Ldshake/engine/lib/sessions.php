@@ -330,7 +330,7 @@
 			$DB_PREFIX = $CONFIG->dbprefix; // HACK to allow access to prefix after object distruction
 			//session_set_save_handler("__elgg_session_open", "__elgg_session_close", "__elgg_session_read", "__elgg_session_write", "__elgg_session_destroy", "__elgg_session_gc");
 
-            register_shutdown_function('session_delayedexecution_save');
+            //register_shutdown_function('session_delayedexecution_save');
 
             $script_path = explode('/', __DIR__);
             $nfolders = count($script_path);
@@ -339,7 +339,7 @@
 
 			session_name("LdShake_" . hash('crc32b', $base_folder));
 	        session_start();
-            session_write_close();
+            //session_write_close();
 
             /*
 	        // Do some sanity checking by generating a fingerprint (makes some XSS attacks harder)
@@ -424,6 +424,7 @@
                     unset($_SESSION['is_admin']);
                 }
 	        }
+            //session_write_close();
 
             register_action("login",true);
             register_action("logout");

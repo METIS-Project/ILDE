@@ -1302,7 +1302,6 @@
 	 */
 		
 		function system_messages($message = "", $register = "messages", $count = false) {
-			
 			if (!isset($_SESSION['msg'])) {
 				$_SESSION['msg'] = array();
 			}

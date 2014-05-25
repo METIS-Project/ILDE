@@ -90,10 +90,7 @@ $(document).ready(function()
                 lds_submit_click = true;
                 $.post (baseurl + "action/lds/projects/implement", submitData, function(data) {
                     data = parseInt(data, 10);
-                    if(data == -2)
-                        window.location = baseurl + 'pg/lds/';
-                    else
-                        window.location = baseurl + 'pg/lds/project_implementation/'+data;
+                    window.location = baseurl + 'pg/lds/project_implementation/'+data;
                 });
             }
         }
@@ -131,7 +128,11 @@ $(document).ready(function()
             $('#impl_submit_incomplete').show();
         else
             $.post (baseurl + "action/lds/implement", submitData, function(data) {
-                window.location = baseurl + 'pg/lds/implementeditor/'+data;
+                data = parseInt(data, 10);
+                if(data == -2)
+                    window.location = baseurl + 'pg/lds/';
+                else
+                    window.location = baseurl + 'pg/lds/implementeditor/'+data;
             });
     });
 

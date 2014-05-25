@@ -121,7 +121,7 @@ if (isloggedin()) :
                 </div>
                 <div id="new_menu_implement" class="menu level2">
                     <ul>
-                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design implementation") ?></a></li>
+                        <li id="tb_implement_select" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/implementable/"><?php echo T("Select a design for implementation") ?></a></li>
                         <li id="tb_implement_register" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vle/"><?php echo T("Add VLE") ?></a></li>
                         <li id="tb_implement_see" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/vledata/"><?php echo T("Configure VLE") ?></a></li>
                     </ul>
@@ -147,9 +147,9 @@ if (isloggedin()) :
                 <?php if(!$disable_projects):?>
                 <div id="new_menu_project" class="menu level2">
                     <ul>
-                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects/implement"><?php echo T("Select pathway for my project") ?></a></li>
-                        <li id="tb_newlds_add_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Add pathway") ?></a></li>
-                        <li id="tb_newlds_edit_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Edit pathway") ?></a></li>
+                        <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects/implement"><?php echo T("Select Workflow for my Project") ?></a></li>
+                        <li id="tb_newlds_add_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new_project"><?php echo T("Add Workflow") ?></a></li>
+                        <li id="tb_newlds_edit_project" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects"><?php echo T("Edit Workflow") ?></a></li>
                     </ul>
                 </div>
                 <?php endif; ?>
@@ -162,20 +162,23 @@ if (isloggedin()) :
 <?php endif;?>
 <?php
     $new_tooltips = array(
-        'tb_new_option_conceptualize' => T('Options for starting to think about your learning design.'),
+        'tb_new_option_conceptualize'   => T('Options for starting to think about your learning design.'),
+        'tb_new_option_author'          => T('Options for creating learning activities (units of learning) and learning materials.'),
+        'tb_new_option_implement'       => T('Options for being able to transfer the authored activities and materials to a VLE.'),
+        'tb_new_option_project'         => T('Options to structure your learning design work.'),
 
         'tb_newlds_exe' => T('Create educational web content.'),
-        'tb_newlds_wic' => T('Create collaborative learning activities based on patterns.'),
-        'tb_newlds_ogm' => T('Create a unit of learning using the OpenGLM authoring tool.'),
-        'tb_newlds_cmd' => T('Upload a learning design created with the CADMOS authoring tool.'),
+        'tb_newlds_wic' => T('Create a unit of learning including collaborative activities based on patterns.'),
+        'tb_newlds_ogm' => T('Create/upload a unit of learning using the OpenGLM authoring tool.'),
+        'tb_newlds_cmd' => T('Create/upload a unit of learning using the CADMOS authoring tool.'),
 
         'tb_implement_select' => T('Select an authored design to implement in a VLE.'),
         'tb_implement_register' => T('Add (and configure) a new VLE in which to deploy authored designs.'),
         'tb_implement_see' => T('Manage the list of you configured VLEs.'),
 
-        'tb_newlds_add_project' => T('Define a new group of tools/activities for your own pathway.'),
-        'tb_newlds_edit_project' => T('See list of pathways I can edit.'),
-        'tb_newlds_manage_projects' => T('See list of public pathways for starting your project.'),
+        'tb_newlds_add_project' => T('Define a new workflow.'),
+        'tb_newlds_edit_project' => T('See list of workflows I can edit.'),
+        'tb_newlds_manage_projects' => T('See list of suggested workflows to start your project.'),
     );
 ?>
 <script>
@@ -200,21 +203,21 @@ if (isloggedin()) :
 <div class="tooltip_bl" id="t_s2t" data-pos="#tb_mylds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("See list of learning design projects, artifacts and implementations I can edit.") ?></strong></div>
+        <div><strong><?php echo T("See list of projects, concepts, designs and implementations I can edit.") ?></strong></div>
     </div>
 </div>
 
 <div class="tooltip_bl" id="t_s3t" data-pos="#tb_browselds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("See list of learning design artifacts I can edit or view.") ?></strong></div>
+        <div><strong><?php echo T("See list of learning design solutions I can edit or view.") ?></strong></div>
     </div>
 </div>
 
 <div class="tooltip_bl" id="t_s4t" data-pos="#tb_newlds@-60,29" style="width:180px">
     <div class="tooltip_bl_stem"></div>
     <div class="tooltip_bl_body">
-        <div><strong><?php echo T("Create a new learning design project, artifact or implementation.") ?></strong></div>
+        <div><strong><?php echo T("Create a new learning design solution (project, concept, design, implementation).") ?></strong></div>
     </div>
 </div>
 

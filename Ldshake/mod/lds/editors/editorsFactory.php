@@ -100,6 +100,36 @@ class Editor
         $file->save();
         return $file;
     }
+
+    protected function cloneFile($field, $lds) {
+        if(empty($this->_document->$field)) {
+            return null;
+        }
+
+        $file_origin = Editor::getFullFilePath($this->_document->$field);
+
+        if(!file_exists($file_origin)) {
+            return null;
+        }
+
+        //create a new file to store the document
+        $filestorename = rand_str() . '.ldshake';
+        $file = $this->getNewFile($filestorename);
+        $file->lds_guid = $lds->guid;
+        $file->save();
+
+        try {
+            if(!copy($file_origin, $file->getFilenameOnFilestore())) {
+                return null;
+            }
+        } catch(Exception $e) {
+            return null;
+        }
+
+        return $file->guid;
+    }
+
+
 }
 
 class ManagerFactory {
@@ -163,6 +193,7 @@ class richTextEditor extends Editor
             $newdoc->save();
         }
 
+        $lds->save();
         return $lds;
     }
 
@@ -713,6 +744,8 @@ class EditorsFactory
             return new RestEditor($document);
         if($document->editorType == 'google_docs')
             return new GoogleEditor($document);
+        if($document->editorType == 'google_spreadsheet')
+            return new GoogleEditor($document);
         if($document->editorType == 'openglm')
             return new UploadEditor($document);
         if($document->editorType == 'cadmos')
@@ -737,7 +770,8 @@ class EditorsFactory
             return new RestEditor($document);
         if($document->editorType == 'google_docs')
             return new GoogleEditor($document);
-    }
+        if($document->editorType == 'google_spreadsheet')
+            return new GoogleEditor($document);    }
 
 	public static function getTempInstance($editorType)
 	{
@@ -756,6 +790,8 @@ class EditorsFactory
         if($editorType == 'image')
             return new UploadEditor(null, $editorType);
         if($editorType == 'google_docs')
+            return new GoogleEditor(null, $editorType);
+        if($editorType == 'google_spreadsheet')
             return new GoogleEditor(null, $editorType);
     }
 }
@@ -1036,6 +1072,7 @@ class RestEditor extends Editor
                 //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
                 'preview' => true,
                 'imsld' => false,
+                'scorm' => true,
                 'password' => 'LdS@k$1#',
                 'icon' => false,
                 'downloable' => 'elp',
@@ -1492,16 +1529,22 @@ class RestEditor extends Editor
             return false;
         }
 
-        //create a new file to store the document
-        $rand_id = mt_rand(400,9000000);
-        $filestorename = (string)$rand_id.'.zip';
-        if($this->_document->file_scorm_guid)
-            $file = get_entity($this->_document->file_scorm_guid);
-        else
+        if(empty($this->_document->file_scorm_guid)) {
+            //create a new file to store the document
+            $rand_id = mt_rand(400,9000000);
+            $filestorename = (string)$rand_id.'.zip';
             $file = $this->getNewFile($filestorename);
+            $this->_document->file_scorm_guid = $file->guid;
+        }
 
-        file_put_contents($file->getFilenameOnFilestore(), $response->raw_body, FILE_BINARY);
-        $this->_document->file_scorm_guid = $file->guid;
+        try {
+            file_put_contents($this->getFullFilePath($this->_document->file_scorm_guid), $response->raw_body, FILE_BINARY);
+        } catch(Exception $e) {
+            //$this->_document->file_scorm_guid = null;
+            //$this->_document->save();
+            return false;
+        }
+
         $this->_document->save();
     }
 
@@ -1513,25 +1556,14 @@ class RestEditor extends Editor
 
         $clone = new DocumentEditorObject($lds);
 
-        $file_origin = Editor::getFullFilePath($this->_document->file_guid);
+        $file_fields = array(
+            'file_guid',
+            'file_imsld_guid',
+            'file_scorm_guid',
+        );
 
-        //create a new file to store the document
-        $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
-        copy($file_origin, $file->getFilenameOnFilestore());
-
-        $clone->file_guid = $file->guid;
-
-        if($this->_document->file_imsld_guid) {
-            $file_origin = Editor::getFullFilePath($this->_document->file_imsld_guid);
-
-            //create a new file to store the document
-            $filestorename = (string)$rand_id.'.zip';
-            $file = $this->getNewFile($filestorename);
-            copy($file_origin, $file->getFilenameOnFilestore());
-
-            $clone->file_imsld_guid = $file->guid;
-        }
+        foreach($file_fields as $file_field)
+            $clone->$file_field = $this->cloneFile($file_field, $lds);
 
         $clone->editorType = $this->_document->editorType;
 
@@ -1636,6 +1668,9 @@ class RestEditor extends Editor
             file_put_contents($this->getFullFilePath($this->_document->file_imsld_guid), $response->raw_body);
         }
 
+        if($CONFIG->rest_editor_list[$this->_document->editorType]['scorm'])
+            $this->save_scorm($doc_id);
+
         $old_previewDir = $this->_document->previewDir;
         $this->_document->previewDir = rand_str(64);
 
@@ -1702,9 +1737,6 @@ class RestEditor extends Editor
             fclose($handle);
             */
         }
-
-        if($CONFIG->rest_editor_list[$this->_document->editorType]['scorm'])
-            $this->save_scorm($doc_id);
 
         $this->_document->save();
 
@@ -1919,6 +1951,7 @@ SQL;
         $vars['editor_label'] = 'google_docs';
         $vars['restapi'] = false;
 
+        /*
         if($template_html) {
             if($guid = $this->get_created_document($template_html, 'text/html')) {
                 $premade_gdoc = get_entity($guid);
@@ -1930,6 +1963,7 @@ SQL;
                 return $vars;
             }
         }
+        */
         $service = $this->google_auth();
 
         if(!$template_html) {
@@ -1943,6 +1977,14 @@ SQL;
             $description="desc1";
             $mimeType = 'text/html';
             $data = $template_html;
+        }
+
+        if($this->_editorType == 'google_spreadsheet') {
+            $title="spreadsheet";
+            $description = "desc1";
+            $mimeType = "application/x-vnd.oasis.opendocument.spreadsheet";
+            $filename = $CONFIG->path.'vendors/emptydocs/empty.ods';
+            $data = file_get_contents($filename);
         }
 
         $file = new Google_Service_Drive_DriveFile();
@@ -2952,7 +2994,7 @@ class GluepsManager
         return false;
     }
 
-    public function getVleInfo($test = false) {
+    public function getVleInfo() {
         global $CONFIG;
 
         if(!$this->validateVle())
@@ -2993,18 +3035,13 @@ class GluepsManager
                 ->basicAuth('ldshake','Ld$haK3')
                 ->sendIt();
 
-
             if($response->code > 399) {
-                if($test)
-                    return false;
-                else
-                    throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
             }
 
             }
         catch (Exception $e) {
             register_error($e->getMessage());
-            forward($CONFIG->url . 'pg/lds/');
             return false;
         }
 
@@ -3763,7 +3800,7 @@ class MoodleManager
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
         $service = 'ldshake_scorm_deployment';
 
-        $uri = "{$moodle_url}login/token.php?"
+        $uri = "{$moodle_url}/login/token.php?"
             ."username=".urlencode($vle_username)."&"
             ."password=".urlencode($vle_password)."&"
             ."service=".urlencode($service);// . '&XDEBUG_SESSION_START=18908';
@@ -3811,7 +3848,7 @@ class MoodleManager
             'moodlewsrestformat' => 'json'
         );
 
-        $uri = "{$moodle_url}webservice/rest/server.php?"
+        $uri = "{$moodle_url}/webservice/rest/server.php?"
             ."&wsfunction=".urlencode($get['wsfunction'])."&"
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
             ."wstoken=".urlencode($get['wstoken']);// . '&XDEBUG_SESSION_START=18908';
@@ -3881,14 +3918,37 @@ class MoodleManager
             'moodlewsrestformat' => 'json'
         );
 
-        $uri = "{$moodle_url}webservice/rest/server.php?"
+        $uri = "{$moodle_url}/webservice/rest/server.php?"
             ."&wsfunction=".urlencode($get['wsfunction'])."&"
             ."moodlewsrestformat=".urlencode($get['moodlewsrestformat'])."&"
             ."wstoken=".urlencode($get['wstoken']);
 
-        $filename = 'name_'.rand(1,99999).'.zip';
-        $filecontents = base64_encode(file_get_contents('/var/local/testscorm.zip'));
+        $filename = 'name_'.rand_str().'.zip';
+
+        if(empty($this->_implementation->file_scorm_guid)) {
+            register_error(T("This LdS doesn't have a SCORM file."));
+            return false;
+        }
+
+        $filepath = Editor::getFullFilePath($this->_implementation->file_scorm_guid);
+
+        if(!file_exists($filepath)) {
+            register_error(T("This LdS doesn't have a SCORM file."));
+            return false;
+        }
+
+        $filecontents = base64_encode(file_get_contents($filepath));
         $filecontents = rtrim(chunk_split($filecontents, 64, "\n"), "\n");
+
+        if(strlen($filecontents) < 32) {
+            register_error(T("The SCORM file is empty."));
+            return false;
+        }
+
+        if(!(is_numeric($courseid) and ((int)$courseid) > 0)) {
+            register_error(T("The SCORM file is empty."));
+            return false;
+        }
 
         $params = array(
             'course'        => $courseid,
@@ -3909,13 +3969,12 @@ class MoodleManager
                 throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
             }
 
-            if(!empty($response->body->exception)) {
-                throw new Exception($response->body->message);
+            if(empty($response->body->scormid)) {
+                throw new Exception(T("Failed to deploy the SCORM package. Check your moodle configuration."));
             }
         }
         catch (Exception $e) {
             register_error($e->getMessage());
-            forward($CONFIG->url . 'pg/lds/');
             return false;
         }
 
@@ -4559,7 +4618,7 @@ class MoodleManager
     }
 }
 
-class VLEManager {
+class VLEManagerFactory {
     private $vle;
     private $accept = array(
         'glueps' => array('webcollagerest','openglm','cadmos'),
@@ -4567,10 +4626,6 @@ class VLEManager {
     );
 
     private $preference = array('glueps','moodle');
-
-    public function __construct($vle) {
-        $this->vle = $vle;
-    }
 
     /*
     public function getVleInfo() {
@@ -4595,30 +4650,35 @@ class VLEManager {
         }
     }
 */
-    public function getAvailableManager() {
-/*
-        if(isset($this->_vle->admin_id)) {
-            $admin_vle = get_entity($this->vle->admin_id);
-            $managers = !empty($admin_vle->managers) ? explode(',', $admin_vle->managers) : false;
+    public static function getManager($vle) {
+
+        if(isset($vle->admin_id)) {
+            $admin_vle = get_entity($vle->admin_id);
+            $vle_type = $admin_vle->vle_type;
+            //$managers = !empty($admin_vle->managers) ? explode(',', $admin_vle->managers) : false;
         }
 
-        $manager = false;
-        foreach($this->preference as $ep) {
-            if(in_array($ep, $managers))
-                $manager = $ep;
-        }
+        /*        $manager = false;
+                foreach($this->preference as $ep) {
+                    if(in_array($ep, $managers))
+                        $manager = $ep;
+                }
 
-        if(!$manager)
-            return false;
-*/
-        $manager = 'moodle';
+                if(!$manager)
+                    return false;
+        */
+        $manager = 'glueps';
+
+        if($vle_type == 'MoodleLdshake')
+            $manager="moodle";
+
         $result = false;
         switch($manager) {
             case 'glueps':
-                $result = new GluePSManager($this->vle);
+                $result = new GluePSManager($vle);
                 break;
             case 'moodle':
-                $result = new MoodleManager($this->vle);
+                $result = new MoodleManager($vle);
                 break;
         }
         return $result;

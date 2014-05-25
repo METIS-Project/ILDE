@@ -343,6 +343,7 @@ function ldshake_richlds($row) {
     $obj->lds->subtype = $row->subtype;
     $obj->lds->subtype_string = $row->subtype_string;
     $obj->lds->editor_type = $row->editor_type;
+    $obj->lds->editor_subtype = $row->editor_subtype;
     $obj->lds->title = $row->title;
     $obj->lds->owner_guid = (int)$row->owner_guid;
     $obj->lds->time_created = (int)$row->time_created;
@@ -693,7 +694,7 @@ SQL;
      *
      */
     public static function isSyncLdS ($lds){
-        if($lds->editor_type == 'google_docs')
+        if(strstr($lds->editor_type, 'google'))
             return true;
 
         return false;

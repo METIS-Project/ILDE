@@ -371,7 +371,7 @@ function lds_tracking_user_reviews() {
 
     for($i=1; $i<=52; $i++) {
         $header[] = "2013W{$i} (count)";
-        $header[] = "2013W{$i}";
+        $header[] = "2014W{$i}";
     }
 
     $data = array();
@@ -384,7 +384,7 @@ function lds_tracking_user_reviews() {
         $user_total_count = 0;
         for($i=0; $i<52; $i++) {
             $end = $i+1;
-            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2013W01+{$i}week"), strtotime("2013W01+{$end}week"));
+            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2014W01+{$i}week"), strtotime("2014W01+{$end}week"));
 
             if(!$reviews)
                 $reviews = array();
@@ -410,8 +410,8 @@ function lds_tracking_user_reviews_days() {
     $header = array("user id", "username", " total number of reviews");
 
     for($i=0; $i<365; $i++) {
-        $header[] = date("Y-m-d", strtotime("2013.001+{$i}days"))." (count)";
-        $header[] = '="'.date("Y-m-d", strtotime("2013.001+{$i}days")).'"';
+        $header[] = date("Y-m-d", strtotime("2014.001+{$i}days"))." (count)";
+        $header[] = '="'.date("Y-m-d", strtotime("2014.001+{$i}days")).'"';
     }
 
     $data = array();
@@ -424,7 +424,7 @@ function lds_tracking_user_reviews_days() {
         $user_total_count = 0;
         for($i=0; $i<365; $i++) {
             $end = $i+1;
-            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2013.001+{$i}days"), strtotime("2013.001+{$end}days"));
+            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2014.001+{$i}days"), strtotime("2014.001+{$end}days"));
 
             if(!$reviews)
                 $reviews = array();
@@ -450,8 +450,8 @@ function lds_tracking_user_reviews_months() {
     $header = array("user id", "username", " total number of reviews");
 
     for($i=0; $i<12; $i++) {
-        $header[] = date("Y-m-d", strtotime("2013.001+{$i}months"))." (count)";
-        $header[] = '="'.date("Y-m-d", strtotime("2013.001+{$i}months")).'"';
+        $header[] = date("Y-m-d", strtotime("2014.001+{$i}months"))." (count)";
+        $header[] = '="'.date("Y-m-d", strtotime("2014.001+{$i}months")).'"';
     }
 
     $data = array();
@@ -464,7 +464,7 @@ function lds_tracking_user_reviews_months() {
         $user_total_count = 0;
         for($i=0; $i<12; $i++) {
             $end = $i+1;
-            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2013.001+{$i}months"), strtotime("2013.001+{$end}months"));
+            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2014.001+{$i}months"), strtotime("2014.001+{$end}months"));
 
             if(!$reviews)
                 $reviews = array();

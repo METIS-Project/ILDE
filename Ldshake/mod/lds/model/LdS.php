@@ -72,7 +72,8 @@ class LdS extends ElggObject
             'revised_docs',
             'revised_docs_editor',
             'viewed_lds',
-            'external_editor'
+            'external_editor',
+            'editor_subtype',
         );
         $ms_id = array();
 
@@ -112,7 +113,9 @@ INSERT INTO objects_property SET
   `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["pedagogical_approach"]} AND m.entity_guid = {$guid}),
   `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["tags"]} AND m.entity_guid = {$guid}),
   `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_tstamp"]} AND m.entity_guid = {$guid})) AS UNSIGNED),
-  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1)
+  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1),
+  `editor_subtype` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_subtype"]} AND met.entity_guid = {$guid}),
+  `editor_subtype_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_subtype"]} AND met.entity_guid = {$guid})
 ON DUPLICATE KEY UPDATE
   `guid` = {$guid},
   `subtype` = (SELECT e.subtype FROM entities e WHERE e.guid = {$guid}),
@@ -141,7 +144,9 @@ ON DUPLICATE KEY UPDATE
   `pedagogical_approach` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["pedagogical_approach"]} AND m.entity_guid = {$guid}),
   `tags` = (SELECT GROUP_CONCAT(string SEPARATOR ',') AS string FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$tag_id["tags"]} AND m.entity_guid = {$guid}),
   `editing_tstamp` = CAST(((SELECT string AS editing_tstamp FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_tstamp"]} AND m.entity_guid = {$guid})) AS UNSIGNED),
-  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1)
+  `editing_by` = (SELECT string AS editing_by FROM metadata m LEFT JOIN metastrings ms ON ms.id = m.value_id WHERE m.name_id = {$ms_id["editing_by"]} AND entity_guid = {$guid} LIMIT 1),
+  `editor_subtype` = (SELECT string FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_subtype"]} AND met.entity_guid = {$guid}),
+  `editor_subtype_id` = (SELECT met.value_id FROM metadata met JOIN metastrings ms ON met.value_id = ms.id WHERE met.name_id = {$ms_id["editor_subtype"]} AND met.entity_guid = {$guid})
 SQL;
 
         insert_data($query);
@@ -159,6 +164,14 @@ SQL;
             self::create_properties();
 
         return $guid;
+    }
+
+    function annotate($name, $value, $access_id = 0, $owner_id = 0, $vartype = "") {
+        if($result = parent::annotate($name, $value, $access_id, $owner_id, $vartype)) {
+            self::create_properties();
+        }
+
+        return $result;
     }
 
     public function enable() {

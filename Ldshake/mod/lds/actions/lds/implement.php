@@ -47,12 +47,17 @@ $course_name = get_input('course_name', null);
 
 $lds = get_entity($lds_id);
 
-if($lds->getSubtype() == 'exelearningrest') {
-    $vle = get_entity($vle);
-    $mm = new MoodleManager($vle);
-    $res = $mm->addScorm($course_id, $title . ' ' . date("D M Y  H:m:s"));
-    if($res)
+if($lds->editor_type == 'exelearningrest') {
+    $vle = get_entity($vle_id);
+    $editordocument_query = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 1);
+    $mm = new MoodleManager($vle, $editordocument_query[0]);
+    $res = $mm->addScorm($course_id, $title . ' ' . date("D M Y  H:i:s"));
+    if($res) {
+        system_message(T("Successfully deployed the SCORM package."));
         echo '-2';
+    } else {
+        echo '-2';
+    }
 } else {
     $implementation = new ElggObject();
     $implementation->subtype = 'LdS_implementation_helper';

@@ -369,18 +369,20 @@ function lds_exec_implementable ($params)
     if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
         $vle_data = array();
         foreach($vles as $vle) {
-            $globalVLEManager = new VLEManager($vle);
-            $vlemanager = $globalVLEManager->getAvailableManager();
+            $vlemanager = VLEManagerFactory::getManager($vle);
 
             if($vle_info = $vlemanager->getVleInfo()) {
                 $vle_info->item = $vle;
                 $vle_data[$vle->guid] = $vle_info;
             }
-            if(empty($vle_data)) {
-                register_error(T("None of the registered VLEs are working."));
-                forward($CONFIG->url.'pg/lds/vle');
-            }
         }
+
+        //no valid vles
+        if(empty($vle_data)) {
+            register_error(T("None of the registered VLEs are working."));
+            forward($CONFIG->url.'pg/lds/vle');
+        }
+
     } else {
         register_error(T("You need to register a VLE first."));
         forward($CONFIG->url.'pg/lds/vle');
@@ -500,8 +502,8 @@ function lds_exec_vle ($params)
     } else {
         $vle = get_entity($params[1]);
         $id = $vle->guid;
-        $gluepsm = new GluepsManager($vle);
-        $vle_info = $gluepsm->getVleInfo(true);
+        $vlemanager = VLEManagerFactory::getManager($vle);
+        $vle_info = $vlemanager->getVleInfo();
     }
     $svlelist_data = array();
 
@@ -1005,7 +1007,7 @@ function lds_exec_neweditor ($params)
 	$vars['initLdS']->guid = '0';
 
     //And a support doc!
-    if($params[1] != 'google_docs') {
+    if(!strstr($params[1], 'google')) {
         $vars['initDocuments'][0] = new stdClass();
         $vars['initDocuments'][0]->title = T("Support Document");
         $vars['initDocuments'][0]->guid = '0';
@@ -1026,7 +1028,7 @@ function lds_exec_neweditor ($params)
         );
 
         $support_html = elgg_view('lds/view_iframe', $support_vars);
-        $support_editor = editorsFactory::getTempInstance($params[1]);
+        $support_editor = editorsFactory::getTempInstance('google_docs');
         $support_vars = $support_editor->newEditor($support_html);
         $vars['support_editor'] = $support_vars;
         $vars['initDocuments'] = json_encode(array());
@@ -1049,7 +1051,7 @@ function lds_exec_neweditor ($params)
     $vars['jsonfriends'] = json_encode(lds_contTools::entitiesToObjects($available));
     $vars['viewers'] = json_encode(array());
     $vars['editors'] = json_encode(array());
-    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
 
 	$vars['starter'] = get_loggedin_user();
 	
@@ -2017,31 +2019,46 @@ function lds_exec_vieweditor ($params)
     create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
 	//TODO permission / exist checks
 
-	$editordocument_query = get_entities_from_metadata('lds_guid',$lds->guid,'object','LdS_document_editor', 0, 100);
+    $vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
 
-    $doc = false;
-
-    if(isset($params[2]))
-        if($params[2] == 'doc')
-            $doc = true;
-
-    if(!$editordocument_query[0]->support && !$doc){
-        $editordocument = array($editordocument_query[0], $editordocument_query[1]);
-    }
-    else {
-        $editordocument = array($editordocument_query[1], $editordocument_query[0]);
+    //the support document is LdS_document_editor
+    if($lds->editor_type == 'google_docs' and count($vars['ldsDocs']) >= 2 and !empty($vars['ldsDocs'][0]->support)){
+        $vars['ldsDocs'] = array($vars['ldsDocs'][1], $vars['ldsDocs'][0]);
     }
 
-    switch($editordocument[0]->editorType) {
+    $vars['currentDocId']   = $vars['ldsDocs'][0]->guid;
+    $vars['currentDoc']     = $vars['ldsDocs'][0];
+
+    if(isset($params[3])) {
+        foreach($vars['ldsDocs'] as $fdoc) {
+            if($fdoc->guid == $params[3]) {
+                $vars['currentDocId'] = $fdoc->guid;
+                $vars['currentDoc'] = $fdoc;
+            }
+        }
+    }
+
+    $vars['editor'] = $vars['currentDoc']->editorType;
+
+    $vars['iseXe'] = $vars['currentDoc']->getSubtype() == 'LdS_document_editor' ? true : false;
+
+    if($vars['iseXe']) {
+        //Check if it's published
+        $vars['publishedId'] = lds_contTools::getPublishedEditorId($vars['currentDocId']);
+    } else {
+        //Check if it's published
+        $vars['publishedId'] = lds_contTools::getPublishedId($vars['currentDocId']);
+    }
+
+    switch($vars['editor']) {
         case 'cld':
         case 'image':
         case 'openglm':
             $vars['upload'] = true;
-            $vars['uploadDoc'] = $editordocument[0];
+            $vars['uploadDoc'] = $vars['ldsDocs'][0];
             break;
         default:
             $vars['upload'] = false;
-
     }
 
     $vars['glueps'] = get_entities_from_metadata_multi(array(
@@ -2050,27 +2067,6 @@ function lds_exec_vieweditor ($params)
         ),
         'object','LdS_document_editor', 0, 1);
 
-    $vars['editor'] = $editordocument[0]->editorType;
-
-    if($vars['editor'] == 'google_docs')
-        $vars['ldsDocs'] = $editordocument;
-    else
-	    $vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
-
-	$vars['iseXe'] = $params[3] ? false : true;
-
-	if($vars['iseXe']) {
-		$vars['currentDocId'] = $editordocument[0]->guid;
-		$vars['currentDoc'] = $editordocument[0];
-		//Check if it's published
-		$vars['publishedId'] = lds_contTools::getPublishedEditorId($vars['currentDocId']);
-	} else {
-		$vars['currentDocId'] = $params[3] ?: $vars['ldsDocs'][0]->guid;
-		$vars['currentDoc'] = get_entity($vars['currentDocId']);
-		//Check if it's published
-		$vars['publishedId'] = lds_contTools::getPublishedId($vars['currentDocId']);
-	}
-
 	$vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
 
     //These are all my friends
@@ -2078,7 +2074,7 @@ function lds_exec_vieweditor ($params)
     $vars['jsonfriends'] = json_encode($arrays['available']);
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
-    $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
+    $vars['groups'] = json_encode(array());
 	
 	$vars['starter'] = get_user($vars['lds']->owner_guid);
 	
@@ -2086,7 +2082,10 @@ function lds_exec_vieweditor ($params)
 	
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
+    //iframe view auth
+    session_start();
     $_SESSION['editors_content'] = $CONFIG->editors_content;
+    session_write_close();
 	echo elgg_view('lds/view_internal_editor',$vars);
 }
 
@@ -2450,9 +2449,8 @@ function lds_exec_datatracking ($params) {
 
 }
 
-
-function lds_exec_tracking ($params)
-{
+function lds_exec_tracking ($params) {
+    include_once(__DIR__.'/stadistics.php');
 
     switch($params[1]) {
         case 'implemented':
