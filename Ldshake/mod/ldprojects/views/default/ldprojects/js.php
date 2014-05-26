@@ -33,4 +33,10 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
-?><?php echo Utils::getJsDeclaration('ldprojects', 'ldprojects-common') ?>
+?><?php
+
+echo Utils::getJsDeclaration('ldprojects', 'jquery.jsPlumb-1.6.1');
+
+echo Utils::getJsDeclaration('ldprojects', 'ldprojects-common');
+
+?>

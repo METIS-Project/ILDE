@@ -1,40 +1,3 @@
-<?php
-/*********************************************************************************
- * LdShake is a platform for the social sharing and co-edition of learning designs
- * Copyright (C) 2009-2012, Universitat Pompeu Fabra, Barcelona.
- *
- * (Contributors, alpha. order) Abenia, P., Carralero, M.A., Chacón, J., Hernández-Leo, D., Moreno, P.
- *
- * This program is free software; you can redistribute it and/or modify it under
- * the terms of the GNU Affero General Public License version 3 as published by the
- * Free Software Foundation with the addition of the following permission added
- * to Section 15 as permitted in Section 7(a): FOR ANY PART OF THE COVERED WORK
- * IN WHICH THE COPYRIGHT IS OWNED BY Universitat Pompeu Fabra (UPF), Barcelona,
- * UPF DISCLAIMS THE WARRANTY OF NON INFRINGEMENT OF THIRD PARTY RIGHTS.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
- * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
- *
- * You should have received a copy of the GNU Affero General Public License along with
- * this program; if not, see http://www.gnu.org/licenses.
- *
- * You can contact the Interactive Technologies Group (GTI), Universitat Pompeu Fabra, Barcelona.
- * headquarters at c/Roc Boronat 138, Barcelona, or at email address davinia.hernandez@upf.edu
- *
- * The interactive user interfaces in modified source and object code versions
- * of this program must display Appropriate Legal Notices, as required under
- * Section 5 of the GNU Affero General Public License version 3.
- *
- * In accordance with Section 7(b) of the GNU Affero General Public License version 3,
- * these Appropriate Legal Notices must retain the display of the "Powered by
- * LdShake" logo with a link to the website http://ldshake.upf.edu.
- * If the display of the logo is not reasonably feasible for
- * technical reasons, the Appropriate Legal Notices must display the words
- * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
- ********************************************************************************/
-
-?>
 
 <?php
 extract ($vars);
@@ -43,92 +6,105 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 ?>
 
 <style>
-    #droppable_conteptualize, #droppable_author, #droppable_implement { width: 758px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none;}
-    .draggable, .draggable-nonvalid { width: 50px; height: 50px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important;}
+    #droppable_grid { width: 700px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none; position: relative; z-index:0}
+    #ldproject_toolBar { position: relative; width: 250px; height: 700px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
+    .draggable, .draggable-nonvalid { width: 90px; height: 90px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
     .ui-widget-content {background-image: none; }
-    #ldproject_toolBar { margin-left: 780px !important; height: 616px;  border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
-    #ldproject_conceptualize_grid, #ldproject_author_grid {padding: 0px !important; border-color: black}
+
     .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
+
+    .lds_att_popup {
+        top: 100px;
+        left: 50%;
+        z-index: 100000;
+        position: fixed;
+        background-color: #fff;
+        padding: 10px;
+        border: 10px solid rgba(120,120,120,0.42);
+        -moz-border-radius: 5px 5px 5px 5px;
+        -webkit-border-radius: 5px 5px 5px 5px;
+        border-radius: 5px 5px 5px 5px;
+        -webkit-background-clip: padding-box;
+        background-clip: padding-box;
+        display: none;
+        font-size: 13px;
+    }
+
+    #lds_attachment_popup {
+        width: 500px;
+        top: 150px;
+        left: 50%;
+        margin-left: -260px;
+    }
 
 </style>
 
 <div class="clearfloat"></div>
 <div id="layout_canvas">
-    <div id="tabs" >
-        <ul>
-            <li><a href="#ldproject_conceptualize_grid">Conceptualize</a></li>
-            <li><a href="#ldproject_author_grid">Author</a></li>
-           <!-- <li><a href="#ldproject_implement_grid">Implement</a></li> -->
-        </ul>
-
-        <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
-            <div id="two_column" style="padding-bottom:0 !important">
-                <div id="droppable_conteptualize" class="ui-widget-header" type="conceptualize">
-                    <p>Project Design Conceptualize </p>
-                </div>
-                <div id="ldproject_toolBar" class="ui-widget-header"><p>
-                    <div class="draggable ui-widget-content" toolname="Design Pattern" tooltype='doc' tooltype="design_pattern">
-                        Design Pattern
-                    </div>
-                    <div class="draggable ui-widget-content" toolname="CourseMap" tooltype="doc" subtype="coursemap">
-                        CourseMap
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="Design Narrative" tooltype="doc" subtype="MDN">
-                        Design Narrative
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="Persona Card" tooltype="doc" subtype="PC">
-                        Persona Card
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="Factors and Concerns" tooltype="doc" subtype="FC">
-                        Factors And Concerns
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="Heuristic Evaluation" tooltype="doc" subtype="HE">
-                        Heuristic Evaluation
-                    </div>
-                    <div class="draggable ui-widget-content" toolname="CompendiumLD" tooltype="cld">
-                        CompendiumLD
-                    </div>
-                    <div class="draggable ui-widget-content" toolname="Image" tooltype="image">
-                        Image
-                    </div>
-                </p></div>
+    <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
+        <div id="two_column" style="padding-bottom:0 !important">
+            <div id="droppable_grid" class="ui-widget-header" type="conceptualize">
+                <p>Project Design Conceptualize </p>
             </div>
-        </div>
-        <div id="ldproject_author_grid"> <!-- This will act as design container -->
-            <div id="two_column" style="padding-bottom:0 !important">
-                <div id="droppable_author" class="ui-widget-header" type="author">
-                    <p>Project Design Author</p>
+            <div id="ldproject_toolBar">
+                <div class="draggable ui-widget-content" title="Design Pattern">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/DP.png" toolname="Design Pattern" tooltype='doc' subtype="design_pattern" >
                 </div>
-                <div id="ldproject_toolBar">
-                    <div class="draggable ui-widget-content" toolname="WebCollage" tooltype="webcollage">
-                        WebCollage
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="OpenGLM" tooltype="openglm">
-                        OpenGLM
-                    </div>
-                    <div class="draggable ui-widget-content"  toolname="CADMOS" tooltype="cadmos">
-                        CADMOS
-                    </div>
+                <div class="draggable ui-widget-content" title="CourseMap">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CM.png" toolname="CourseMap" tooltype="doc" subtype="coursemap" >
+                </div>
+                <div class="draggable ui-widget-content" title="Design Narrative">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/DN.png" toolname="Design Narrative" tooltype="doc" subtype="MDN" >
+                </div>
+                <div class="draggable ui-widget-content" title="Persona Card">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/PC.png" toolname="Persona Card" tooltype="doc" subtype="PC" >
+                </div>
+                <div class="draggable ui-widget-content" title="Factors and Concerns">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/FAC.png" toolname="Factors and Concerns" tooltype="doc" subtype="FAC" >
+                </div>
+                <div class="draggable ui-widget-content" title="Heuristic Evaluation">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/HE.png" toolname="Heuristic Evaluation" tooltype="doc" subtype="HE" >
+                </div>
+                <div class="draggable ui-widget-content" title="CompendiumLD">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CLD.png" toolname="CompendiumLD" tooltype="cld" >
+                </div>
+                <div class="draggable ui-widget-content" title="Image">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/image.png" toolname="Image" tooltype="image" >
+                </div>
+                <div class="draggable ui-widget-content" title="WebCollage">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/COLLAGE.png" toolname="WebCollage" tooltype="webcollage" >
+                </div>
+                <div class="draggable ui-widget-content" title="Open GLM">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/OGLM.png" toolname="OpenGLM" tooltype="openglm" >
+                </div>
+                <div class="draggable ui-widget-content" title="CADMOS">
+                    <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/CADMOS.png" toolname="CADMOS" tooltype="cadmos" >
                 </div>
             </div>
         </div>
-        <!-- <div id="ldproject_implement_grid">
-            <div id="droppable_implement" class="ui-widget-header" type="implement">
-                <p>Project Design Impl</p>
-            </div>
-        </div> -->
+        <div style="clear:both"></div>
     </div>
-</div> <!-- Layout Canvas ->
+</div> <!-- Layout Canvas -->
 
-<div class="clearfloat"></div>
-</div><!-- /#page_wrapper -->
-</div><!-- /#page_container -->
-	<script type="text/javascript">
 
-        /*  Here my Vars in order to send it to JSON --> */
-        var ldproject = new Array();
+<div id="lds_attachment_popup" class="lds_att_popup">
 
-	</script>
-	<?php echo elgg_view('page_elements/jsarea', $vars); ?>
+</div>
+
+<script type="text/javascript">
+
+    /*  Here my Vars in order to send it to JSON --> */
+    var ldsToBeListed =<?php echo $ldsToBeListed?>;
+    var ldproject =<?php echo $ldproject?>;
+    var totalToLoad = ldproject.length;
+    var toolLoaded = 0;
+    var $fmr = document.getElementById("droppable_grid").targetTop;
+
+</script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>                                                                                                                                                                                                                                                                                                                                                                                                                          d
+
+<?php echo elgg_view('page_elements/jsarea', $vars); ?>
 </body>
 </html>
