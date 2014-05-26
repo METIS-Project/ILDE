@@ -2777,10 +2777,19 @@ function lds_exec_new_project ($params)
 
     $vars['initLdS'] = json_encode($vars['initLdS']);
 
-    $vars['editor_type'] = 'project_design';
+    //support doc
+    $vars['initDocuments'][0] = new stdClass();
+    $vars['initDocuments'][0]->title = T("Support Document");
+    $vars['initDocuments'][0]->guid = '0';
+    $vars['initDocuments'][0]->modified = '0';
+    $vars['initDocuments'][0]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
+
+    $vars['initDocuments'] = json_encode($vars['initDocuments']);
+
+    $vars['editor'] = 'project_design';
     $vars['jsondata'] = json_encode(array(), true);
 
-    $vars['tags'] = json_encode(lds_contTools::getMyTags ());
+    $vars['tags'] = json_encode(lds_contTools::getMyTags());
 
     $available = lds_contTools::getAvailableUsers(null);
 
@@ -2793,11 +2802,11 @@ function lds_exec_new_project ($params)
 
     $vars['title'] = T("New LdS Project Design");
 
-    $vars['list'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+    $vars['project']['ldproject'] = '{}';
+    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+    $vars['project']['vle_list'] = array();
 
-    $vars['vle_list'] = array();
-
-    echo elgg_view('lds/projects/editform_editor',$vars);
+    echo elgg_view('lds/editform_editor',$vars);
 }
 
 function lds_exec_edit_project ($params)

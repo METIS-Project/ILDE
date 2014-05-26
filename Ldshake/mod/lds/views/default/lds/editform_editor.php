@@ -110,7 +110,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 					<iframe id="lds_editor_iframe" scrolling="no" src="/editors/webcollage/main.php?ldid=<?php echo $editor_id ?>" width="958" height="600"></iframe>
 				<?php endif; ?>
 				-->
-                <?php if($restapi): ?>
+                <?php if(!empty($restapi)): ?>
                     <?php if ($editor == 'webcollagerest'): ?>
                     <iframe id="lds_editor_iframe" auth="messaging" src="" width="958" height="616" style="border: 0px solid grey"></iframe>
                     <?php else: ?>
@@ -122,6 +122,9 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                     <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php endif; ?>
 
+                <?php if ($editor == 'project_design'): ?>
+                    <?php echo elgg_view('lds/projects/editor', $project); ?>
+                <?php endif; ?>
 
                 </div>
             <div id="lds_edit_tabs" class="scrollable">

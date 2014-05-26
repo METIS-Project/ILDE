@@ -359,6 +359,7 @@ function ajax_submit (save_seq, redirect)
 	} else if(editorType == 'project_design')
     {
         save_url = "action/lds/projects/save";
+        var ldproject = saveProjectN();
 
         submitData =
         {

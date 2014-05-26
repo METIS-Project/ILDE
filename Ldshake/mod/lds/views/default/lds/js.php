@@ -87,4 +87,8 @@ endif;
 if (get_context() == 'lds_exec_firststeps'):
 	echo Utils::getJsDeclaration('lds', 'lds-firststeps');
 endif;
+if (strstr(get_context(), '_project')):
+    ?><script type="text/javascript" src="<?php echo $vars['url']?>vendors/jsPlumb/jquery.jsPlumb-1.6.2-min.js"></script><?php
+    echo Utils::getJsDeclaration('lds', 'ldprojects-common');
+endif;
 echo Utils::getJsDeclaration('lds', 'lds-common');
