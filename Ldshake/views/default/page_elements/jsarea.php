@@ -18,7 +18,6 @@ var ldshake_cache = <?php echo json_encode($ldshake_jscache_break) ?>;
 
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <script src="<?php echo $vars['url']; ?>vendors/moment/moment-with-langs.min.js"></script>
-<script src="http://jsplumbtoolkit.com/js/jquery.jsPlumb-1.6.1-min.js"></script>
 <script type="text/javascript" src="<?php echo $vars['url']; ?>javascript/initialise_elgg.js"></script>
 <script type="text/javascript" src="<?php echo $vars['url']; ?>javascript/common.js"></script>
 <script type="text/javascript">

@@ -52,10 +52,10 @@ $project_design_implementation->editor_type = $project_design_reference->editor_
 $project_design_implementation->project_design_reference = $project_design_reference->guid;
 $project_design_implementation->save();
 
-$pd_data = json_decode($project_design_reference->description, true);
-$pd_guid = $project_design_implementation->guid;
+$pg_data = json_decode($project_design_reference->description, true);
+ldsshake_project_implement($pg_data, $project_design_implementation);
 
-foreach($pd_data as &$item) {
+/*foreach($pd_data as &$item) {
     if(isset($item['guid'])) {
         if($lds = get_entity($item['guid'])) {
             if($item['creation'] == "existent") {
@@ -138,8 +138,27 @@ foreach($pd_data as &$item) {
     }
 }
 
-
-$project_design_implementation->description = json_encode($pd_data);
+*/
+$project_design_implementation->description = json_encode($pg_data);
 $project_design_implementation->save();
+
+create_annotation($project_design_implementation->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+
+//We get the revision id to send it back to the form
+$revision = $project_design_implementation->getAnnotations('revised_docs', 1, 0, 'desc');
+$revision = $revision[0];
+$resultIds->revision = $revision->id;
+$resultIds->requestCompleted = true;
+
+//For each of the documents that this LdS has...
+$documents = get_entities_from_metadata('lds_guid', $project_design_reference->guid, 'object', 'LdS_document', 0, 100);
+
+foreach($documents as $d) {
+    $newdoc = new DocumentObject($project_design_implementation->guid);
+    $newdoc->description = $d->description;
+    $newdoc->title = $d->title;
+    $newdoc->lds_revision_id = $revision->id;
+    $newdoc->save();
+}
 
 echo $project_design_implementation->guid;

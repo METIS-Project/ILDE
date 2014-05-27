@@ -42,6 +42,118 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldsshake_project_implement(&$pg_data, $project_design) {
+    $pd_guid = $project_design->guid;
+    $title = $project_design->title;
+    $preserved_lds = array();
+    $lds_list = lds_contTools::getProjectLdSList($pd_guid, true, true);
+    if(!$lds_list)
+        $lds_list=array();
+
+    foreach($pg_data as &$tool) {//tooltype
+        if(empty($tool['associatedLdS']) or !is_array($tool['associatedLdS']))
+            continue;
+
+        foreach($tool['associatedLdS'] as &$item) {//lds
+            if(!empty($item['guid'])) {
+                $preserved_lds[] = $item['guid'];
+
+                if(!in_array($item['guid'], $lds_list)) {
+                    if($item['creation'] == "existent") {
+                        add_entity_relationship($item['guid'], 'lds_project_existent', $pd_guid);
+                    } else {
+                        $lds = get_entity($item['guid']);
+                        $ldsm = new richTextEditor(null, $lds);
+                        $cloned_lds = $ldsm->cloneLdS("{$tool['toolName']} ($title)");
+                        $item['original_guid'] = $item['guid'];
+                        $item['guid'] = $cloned_lds->guid;
+                        add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
+                    }
+                }
+            } else {
+                if($tool['tooltype'] == 'doc') {
+                    $lds = new LdSObject();
+                    $lds->project_design = $project_design->guid;
+                    $lds->owner_guid = get_loggedin_userid();
+                    $lds->access_id = 2;
+                    $lds->all_can_view = "no";
+                    $lds->title = "{$tool['toolName']} ($title)";
+                    $lds->editor_type = $tool['tooltype'];
+                    $item['guid'] = $lds->save();
+                    add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+
+                    $initDocuments = array();
+                    $initDocuments[] = '';
+
+                    if(isset($item['editor_subtype'])) {
+                        require_once __DIR__.'/../../../templates/templates.php';
+                        $lds->editor_subtype = $tool['editor_subtype'];
+                        $templates = ldshake_get_template($lds->editor_subtype);
+                        $i=0;
+                        foreach($templates as $template) {
+                            $initDocuments[$i++] = $template;
+                        }
+                        $lds->save();
+                    }
+
+                    foreach($initDocuments as $initDocument) {
+                        $docObj = new DocumentObject($lds->guid);
+                        $docObj->title = $lds->title;
+                        $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
+                        $docObj->save();
+                    }
+                } else {
+                    $lds = new LdSObject();
+                    $lds->title = "{$item['toolName']} ($title)";
+                    //$lds->project_design = $pd_guid;
+                    $lds->owner_guid = get_loggedin_userid();
+                    $lds->access_id = 2;
+                    $lds->all_can_view = "no";
+                    $lds->editor_type = $tool['tooltype'];
+                    $lds->external_editor = true;
+                    $item['guid'] = $lds->save();
+                    add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+
+                    $docObj = new DocumentObject($lds->guid);
+                    $docObj->title = T('Support Document');
+                    $docObj->description = T('Write support notes here...'); //We put it in ths desciption in order to use the objects_entity table of elgg db
+                    $docObj->save();
+
+                    $document_editor = new DocumentEditorObject($lds->guid, 0);
+                    $document_editor->editorType = $lds->editor_type;
+                    $document_editor->lds_guid = $lds->guid;
+                    $document_editor->lds_revision_id = 0;
+                    $document_editor->save();
+
+                    $editor = editorsFactory::getInstance($document_editor);
+                    $editor_vars = $editor->newEditor();
+
+                    if($save_result = $editor->saveDocument($editor_vars)) {
+                        list($document_editor, $resultIds_add) = $save_result;
+                    } else {
+                        throw new Exception("Save failed");
+                    }
+                }
+            }
+        }
+    }
+
+    if($existent_lds = $project_design->getEntitiesFromRelationship('lds_project_existent')) {
+        foreach($existent_lds as $fel)
+            $preserved_lds[] = $fel->guid;
+
+        $preserved_lds = array_unique($preserved_lds);
+    }
+
+    $delete_lds = array_diff($lds_list, $preserved_lds);
+
+    foreach($delete_lds as $d) {
+        if($lds_result = get_entity($d))
+            $lds_result->disable();
+    }
+    return true;
+}
+
 function ldshake_check_user_guid($guid, $write = false, $user_id = null) {
     if(!$user_id)
         $user_id = get_loggedin_userid();

@@ -359,6 +359,8 @@ function ajax_submit (save_seq, redirect)
 	} else if(editorType == 'project_design')
     {
         save_url = "action/lds/projects/save";
+        documents[currentTab].body = editor.getData();
+
         var ldproject = saveProjectN();
 
         submitData =
@@ -371,6 +373,7 @@ function ajax_submit (save_seq, redirect)
             tags: $('#as-values-tags').val(),
             completeness: $('#completeness_input').val(),
             granularity: $('#granularity_input').val(),
+            documents: documents,
 //            editor_id: editor_id,
             editorType: editorType,
             JSONData: JSON.stringify(ldproject)
@@ -463,6 +466,11 @@ function ajax_submit (save_seq, redirect)
                     first_save = false;
                 }
 
+                if(editorType == 'project_design') {
+                    if(ldshake_projec_asign_guid)
+                        ldshake_projec_asign_guid(returnData.project_data);
+
+                }
                 /*
                 if (sharingOptionsPendingToSave)
                     saveSharingOptions ();

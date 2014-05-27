@@ -34,6 +34,7 @@
  ********************************************************************************/
 
 function saveProjectN(){
+    ldproject = [];
     $(".draggable").each(function(){
 
         if( $(this).attr("tooltype_added") ){
@@ -53,10 +54,16 @@ function saveProjectN(){
             tool.top = location.top;
             tool.right = location.right;
 
-            tool.associatedLdS = {};
+            tool.associatedLdS = [];
 
             $(this).find(".subtool._jsPlumb_endpoint_anchor_").each(function(){
-                tool.associatedLdS.guid=parseInt($(this).attr("associatedLdS"), 10);
+                var associatedLdS = {};
+                if($(this).attr("associatedLdS"))
+                    associatedLdS.guid=parseInt($(this).attr("associatedLdS"), 10);
+                else
+                    associatedLdS.guid = null;
+
+                tool.associatedLdS.push(associatedLdS);
             })
 
             ldproject.push(tool);
@@ -65,6 +72,21 @@ function saveProjectN(){
     return ldproject;
 }
 
+function ldshake_projec_asign_guid(project_data) {
+    for(var i=0; i<project_data.length; i++) {
+        var tool = project_data[i];
+        for(var j=0; j<tool.associatedLdS.length; j++) {
+            var lds = project_data[i].associatedLdS[j];
+            var $item = $('[associatedLdS="'+lds.guid+'"]');
+            if(!$item.length && lds.guid) {
+                $('.subtool[tooltype="'+tool.tooltype+'"][subtype="'+tool.editor_subtype+'"]')
+                    .not('[associatedLdS]')
+                    .first()
+                    .attr("associatedLdS", lds.guid);
+            }
+        }
+    }
+}
 
 $(document).ready(function() {
 
@@ -222,7 +244,8 @@ $(document).ready(function() {
             var item ='<form action=""  name="myldSform">';
 
             ldsToBeListed.forEach(function(entry){
-                if($(subToolElem).attr("tooltype") == entry.lds.editor_type)
+                if($(subToolElem).attr("tooltype") == entry.lds.editor_type
+                    && $(subToolElem).attr("subtype") == entry.lds.editor_subtype)
                     item = item + '<input type="radio" name="lds_selection" value="'+entry.lds.guid+'">'+entry.lds.title+'</br>';
             });
             item = item + '<input type="submit" value="Submit">'
@@ -234,6 +257,7 @@ $(document).ready(function() {
                 $(subToolElem).attr("associatedLdS", lds_id);
                 $('#lds_attachment_popup').toggle();
                 $('#shade').toggle();
+                $('#lds_attachment_popup').empty();
             });
             //Ventana emergente con mi div y
             //Div ponerlo en relative z index que 9999
@@ -243,6 +267,8 @@ $(document).ready(function() {
     //Buscaba una forma de que el contenedor de herramientas siempre sea un poco mayor que e
     // $("#ldproject_toolBar").css("bottom", '"'+document.querySelector("[toolname='CADMOS']").getBoundingClientRect().bottom+600+"'");
 
+    var toolLoaded=0;
+    var totalToLoad=ldproject.length;
     $(".draggable" ).each(function(){
         //create a jsPlumb instance for each draggable
         this.jsPlumb = jsPlumb.getInstance();
@@ -266,7 +292,7 @@ $(document).ready(function() {
                     {
                         var $addedElement = addSubToolElem(this);
                         var addedElement = $addedElement.get(0);
-                        addedElement.associatedLdS = tool.associatedLdS[i];
+                        $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
                     }
                 }
                 toolLoaded++;

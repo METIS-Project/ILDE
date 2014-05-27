@@ -2754,6 +2754,18 @@ function lds_exec_project_implementation ($params)
     page_draw($vars['title'], $body);
 }
 
+function lds_exec_project_preview($params)
+{
+    $offset = get_input('offset') ?: '0';
+    set_context("lds_exec_main");
+    $project = get_entity($params[1]);
+    //TODO:check privileges
+
+    $preview = get_entity($project->preview);
+
+    page_draw($project->title, $preview->description);
+}
+
 function lds_exec_new_project ($params)
 {
     global $CONFIG;
@@ -2802,9 +2814,11 @@ function lds_exec_new_project ($params)
 
     $vars['title'] = T("New LdS Project Design");
 
-    $vars['project']['ldproject'] = '{}';
+    $vars['project']['ldproject'] = '[]';
     $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
     $vars['project']['vle_list'] = array();
+
+    $vars['editor_label'] = 'Project editor';
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -2858,8 +2872,7 @@ function lds_exec_edit_project ($params)
 
     $vars['initLdS'] = json_encode($vars['initLdS']);
 
-    $vars['jsondata'] = $editLdS->description;
-    $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 500, 0, null, null, "time", true);
+//    $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 500, 0, null, null, "time", true);
 
     $vars['tags'] = json_encode(lds_contTools::getMyTags ());
 
@@ -2872,20 +2885,35 @@ function lds_exec_edit_project ($params)
     $vars['starter'] = get_user($editLdS->owner_guid);
 
     $vars['title'] = T("Edit Project");
-    $vars['editor_type'] = $editLdS->editor_type;
+    $vars['editor'] = $editLdS->editor_type;
+
+    //For each of the documents that this LdS has...
+    $documents = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document', 0, 100);
+
+    //Send their data to the form
+    foreach ($documents as $doc)
+    {
+        $obj = new stdClass();
+        $obj->title = $doc->title;
+        $obj->guid = $doc->guid;
+        $obj->body = $doc->description;
+        $obj->modified = '0';
+        $vars['initDocuments'][] = $obj;
+    }
+
+    Utils::osort($vars['initDocuments'], 'guid');
+
+    $vars['initDocuments'] = json_encode($vars['initDocuments']);
 
     $vle_data = array();
-    /*
-    if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
-        foreach($vles as $vle) {
-            $gluepsm = new GluepsManager($vle);
-            if($vle_info = $gluepsm->getVleInfo())
-                $vle_info->item = $vle;
-            $vle_data[$vle->guid] = $vle_info;
-        }
-    }*/
 
-    $vars['vle_list'] = $vle_data;
+    $vars['project']['ldproject'] = $editLdS->description;
+    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+    $vars['project']['vle_list'] = array();
 
-    echo elgg_view('lds/projects/editform_editor',$vars);
+    $vars['project']['vle_list'] = json_encode($vle_data);
+
+    $vars['editor_label'] = 'Project editor';
+
+    echo elgg_view('lds/editform_editor',$vars);
 }

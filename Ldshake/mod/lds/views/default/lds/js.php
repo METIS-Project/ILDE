@@ -58,10 +58,6 @@ if (get_context() == 'lds_exec_history'):
 	echo Utils::getJsDeclaration('lds', 'lds-history');
 endif;
 
-if (get_context() == 'lds_exec_new_project' || get_context() == 'lds_exec_edit_project'):
-    echo Utils::getJsDeclaration('lds', 'ldprojects-common');
-endif;
-
 if (get_context() == 'lds_exec_viewrevision' || get_context() == 'lds_exec_viewrevisioneditor'):
 	echo Utils::getJsDeclaration('lds', 'lds-revision');
 endif;

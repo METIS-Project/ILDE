@@ -79,6 +79,9 @@
     <div style="clear:both"></div>
 </div>
 
+<div id="lds_attachment_popup" class="lds_att_popup">
+</div>
+
 <script type="text/javascript">
 
     /*  Here my Vars in order to send it to JSON --> */
