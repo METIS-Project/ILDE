@@ -121,8 +121,8 @@ class lds_viewTools
             } elseif($type == 'view') {
                 if($subtype != 'LdSProject')
                     $folder = 'project_implementation';
-                else return '#';
-                    //$folder = 'project_preview';
+                else //return '#';
+                    $folder = 'project_preview';
             } elseif($type == 'implement') {
                 $folder = 'project/implement/';
             }

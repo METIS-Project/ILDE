@@ -2228,7 +2228,6 @@ SQL;
         $rand_id = mt_rand(400,9000000);
         $filestorename = (string)$rand_id;
         $file = $this->getNewFile($filestorename);
-        file_put_contents($file->getFilenameOnFilestore(), "");
         $this->_document->file_guid = $file->guid;
 
         $this->_document->drive_id = $google_file->id;
@@ -2240,16 +2239,47 @@ SQL;
         $this->_document->pub_previewDir = rand_str(64);
         $this->_document->revisionDir = rand_str(64);
 
-        $uri = $google_file->exportLinks['text/html'];
+        $this->savePreview($google_file);
+        //$this->_document->rev_last = 0;
+        //$this->_document->lds_revision_id = 0;
 
-        $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
-        mkdir($preview_path);
+        $resultIds->guid = $this->_document->lds_guid;
+        $resultIds->file_guid = $this->_document->file_guid;
 
+        $this->_document->save();
+
+        return array($this->_document, $resultIds);
+    }
+
+    protected function savePreview($google_file) {
+        switch($this->_document->editorType) {
+            case 'google_docs':
+                $this->savePreviewDoc($google_file);
+                break;
+            case 'google_spreadsheet':
+                $this->savePreviewSpreadsheet($google_file);
+                break;
+        }
+
+    }
+
+    protected function savePreviewSpreadsheet($google_file) {
+        global $CONFIG;
+
+        $this->_document->description = $google_file->embedLink;
+    }
+
+    protected function savePreviewDoc($google_file) {
+        global $CONFIG;
 
         try {
+            $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+            mkdir($preview_path);
 
             if(!($fd = fopen($preview_path.'/index.html','w')))
                 throw new Exception("Cannot create file.");
+
+            $uri = $google_file->exportLinks['text/html'];
 
             $options = array(
                 CURLOPT_FILE    => $fd,
@@ -2269,16 +2299,6 @@ SQL;
             register_error(htmlentities($e->getMessage()));
             return false;
         }
-
-        //$this->_document->rev_last = 0;
-        //$this->_document->lds_revision_id = 0;
-
-        $resultIds->guid = $this->_document->lds_guid;
-        $resultIds->file_guid = $this->_document->file_guid;
-
-        $this->_document->save();
-
-        return array($this->_document, $resultIds);
     }
 
     public function cloneDocument($lds)
@@ -2409,35 +2429,7 @@ SQL;
         $this->_document->previewDir = rand_str(64);
         $preview_path = $this->_document->previewDir;
 
-        //preview
-        $uri = $google_file->exportLinks['text/html'];
-
-        $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
-        mkdir($preview_path);
-
-        try {
-
-            if(!($fd = fopen($preview_path.'/index.html','w')))
-                throw new Exception("Cannot create file.");
-
-            $options = array(
-                CURLOPT_FILE    => $fd,
-                CURLOPT_TIMEOUT =>  60,
-                CURLOPT_URL     => $uri,
-                CURLOPT_SSL_VERIFYPEER => false
-            );
-
-            $ch = curl_init();
-            curl_setopt_array($ch, $options);
-            $result = curl_exec($ch);
-
-            if($result)
-                $this->_document->description = file_get_contents($preview_path.'/index.html');
-
-        } catch (Exception $e) {
-            register_error(htmlentities($e->getMessage()));
-            return false;
-        }
+        $this->savePreview($google_file);
 
         /*
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');

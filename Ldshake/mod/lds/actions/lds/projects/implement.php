@@ -52,93 +52,16 @@ $project_design_implementation->editor_type = $project_design_reference->editor_
 $project_design_implementation->project_design_reference = $project_design_reference->guid;
 $project_design_implementation->save();
 
+$project_preview_reference = get_entity($project_design_reference->preview);
+$project_preview = new ElggObject();
+$project_preview->subtype = 'LdSProject_preview';
+$project_preview->access_id = ACCESS_PUBLIC;
+$project_preview->description = $project_preview_reference->description;
+$project_design_implementation->preview = $project_preview->save();
+$project_design_implementation->save();
+
 $pg_data = json_decode($project_design_reference->description, true);
 ldsshake_project_implement($pg_data, $project_design_implementation);
-
-/*foreach($pd_data as &$item) {
-    if(isset($item['guid'])) {
-        if($lds = get_entity($item['guid'])) {
-            if($item['creation'] == "existent") {
-                add_entity_relationship($lds->guid, 'lds_project_existent', $pd_guid);
-            } else {
-                $ldsm = new richTextEditor(null, $lds);
-                $cloned_lds = $ldsm->cloneLdS("{$item['toolName']} ($title)");
-                $item['original_guid'] = $item['guid'];
-                $item['guid'] = $cloned_lds->guid;
-                add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
-            }
-        }
-    } else {
-        if($item['editor_type'] == 'doc') {
-            $lds = new LdSObject();
-            $lds->project_design = $pd_guid;
-            $lds->owner_guid = get_loggedin_userid();
-            $lds->access_id = 2;
-            $lds->all_can_view = "no";
-            $lds->title = "{$item['toolName']} ($title)";
-            $lds->editor_type = $item['editor_type'];
-            $item['guid'] = $lds->save();
-            add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
-
-            $initDocuments = array();
-            $initDocuments[] = '';
-
-            if(isset($item['editor_subtype'])) {
-                require_once __DIR__.'/../../../templates/templates.php';
-                $lds->editor_subtype = $item['editor_subtype'];
-                $templates = ldshake_get_template($lds->editor_subtype);
-                $i=0;
-                foreach($templates as $template) {
-                    $initDocuments[$i++] = $template;
-                }
-                $lds->save();
-            }
-
-            foreach($initDocuments as $initDocument) {
-                $docObj = new DocumentObject($lds->guid);
-                //$docObj->doc_recovery = $doc['doc_recovery'];
-                $docObj->title = 'default title';
-                $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
-                //$docObj->lds_revision_id = $revision->id;
-                $docObj->save();
-            }
-
-        } else {
-            $lds = new LdSObject();
-            $lds->title = "{$item['toolName']} ($title)";
-            $lds->project_design = $pd_guid;
-            $lds->owner_guid = get_loggedin_userid();
-            $lds->access_id = 2;
-            $lds->all_can_view = "no";
-            $lds->editor_type = $item['editor_type'];
-            $lds->external_editor = true;
-            $item['guid'] = $lds->save();
-            add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
-
-            $docObj = new DocumentObject($lds->guid);
-            $docObj->title = T('Support Document');
-            $docObj->description = 'Write support notes here...'; //We put it in ths desciption in order to use the objects_entity table of elgg db
-            $docObj->save();
-
-            $document_editor = new DocumentEditorObject($lds->guid, 0);
-            $document_editor->editorType = $lds->editor_type;
-            $document_editor->lds_guid = $lds->guid;
-            $document_editor->lds_revision_id = 0;
-            $document_editor->save();
-
-            $editor = editorsFactory::getInstance($document_editor);
-            $editor_vars = $editor->newEditor();
-
-            if($save_result = $editor->saveDocument($editor_vars)) {
-                list($document_editor, $resultIds_add) = $save_result;
-            } else {
-                throw new Exception("Save failed");
-            }
-        }
-    }
-}
-
-*/
 $project_design_implementation->description = json_encode($pg_data);
 $project_design_implementation->save();
 

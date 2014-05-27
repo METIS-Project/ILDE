@@ -362,6 +362,7 @@ function ajax_submit (save_seq, redirect)
         documents[currentTab].body = editor.getData();
 
         var ldproject = saveProjectN();
+        var project_html = ldshake_project_saveToHTML;
 
         submitData =
         {
@@ -376,6 +377,7 @@ function ajax_submit (save_seq, redirect)
             documents: documents,
 //            editor_id: editor_id,
             editorType: editorType,
+            preview: project_html,
             JSONData: JSON.stringify(ldproject)
 //            summary: encodeURIComponent(top.window.document.getElementById('lds_editor_iframe').contentWindow.document.getElementById('SummaryTabContent').innerHTML),
         };

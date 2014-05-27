@@ -291,6 +291,8 @@ function encodeURIComponent($str) {
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
         <?php elseif (strstr($editor, 'google') && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
             <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+        <?php elseif (strstr($editor, 'google')): ?>
+            <iframe id="internal_iviewer" src="<?php echo htmlentities($currentDoc->description);?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
         <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
             <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
 

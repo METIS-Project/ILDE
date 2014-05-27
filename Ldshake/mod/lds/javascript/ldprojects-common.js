@@ -72,6 +72,18 @@ function saveProjectN(){
     return ldproject;
 }
 
+function ldshake_project_saveToHTML(){
+    var item = '<div style="position:relative">';
+    item += '<div style="position:relative; left:708px; width: 704px; height: 630px;">';
+    $(".draggable").each(function(){
+        if( $(this).attr("tooltype_added") ){
+            item+=this.outerHTML;
+        }
+    });
+    item += "</div></div>";
+    return item;
+}
+
 function ldshake_projec_asign_guid(project_data) {
     for(var i=0; i<project_data.length; i++) {
         var tool = project_data[i];
@@ -79,7 +91,12 @@ function ldshake_projec_asign_guid(project_data) {
             var lds = project_data[i].associatedLdS[j];
             var $item = $('[associatedLdS="'+lds.guid+'"]');
             if(!$item.length && lds.guid) {
-                $('.subtool[tooltype="'+tool.tooltype+'"][subtype="'+tool.editor_subtype+'"]')
+                var selector = '.subtool[tooltype="'+tool.tooltype+'"]';
+
+                if(tool.editor_subtype)
+                    selector += '[subtype="'+tool.editor_subtype+'"]';
+
+                $(selector)
                     .not('[associatedLdS]')
                     .first()
                     .attr("associatedLdS", lds.guid);

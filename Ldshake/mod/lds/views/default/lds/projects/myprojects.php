@@ -39,6 +39,7 @@ extract($vars);
 $edit_imp_label = $implement ? T("Implement") : T("Edit");
 $edit_imp_url = isset($implement) ? "implement" : "edit";
 $imp_action = isset($implement) ? "project_implement_action" : "lds_edit_action";
+$is_implementation = !empty($is_implementation);
 ?>
 <div id="two_column_left_sidebar">
     <div id="owner_block">
@@ -89,6 +90,15 @@ $imp_action = isset($implement) ? "project_implement_action" : "lds_edit_action"
                 <?php else: ?>
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
                 <?php endif; ?>
+
+                <?php if($is_implementation): ?>
+                    <input onclick="window.location='<?php echo $url.'pg/lds/project_preview/'.$implementation_guid;?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("View workflow") ?>" />
+                <?php endif; ?>
+
+                <?php if($is_implementation): ?>
+                    <input onclick="window.location='<?php echo $url.'pg/lds/edit_project/'.$implementation_guid;?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("Edit workflow") ?>" />
+                <?php endif; ?>
+
                 <!--
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
             <input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" />

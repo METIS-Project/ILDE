@@ -2737,8 +2737,12 @@ function lds_exec_projects_implementations ($params)
 
 function lds_exec_project_implementation ($params)
 {
+    global $CONFIG;
     $offset = get_input('offset') ?: '0';
     set_context("lds_exec_main");
+    if(!is_numeric($params[1]))
+        forward($CONFIG->url . 'pg/lds/');
+
     $project_implementation = get_entity($params[1]);
     //TODO:check privileges
 
@@ -2749,6 +2753,8 @@ function lds_exec_project_implementation ($params)
 
     $vars['list_type'] = T('LdS');
     $vars['section'] = 'off';
+    $vars['is_implementation'] = true;
+    $vars['implementation_guid'] = $project_implementation->guid;
     $body = elgg_view('lds/projects/myprojects',$vars);
 
     page_draw($vars['title'], $body);
@@ -2828,10 +2834,13 @@ function lds_exec_edit_project ($params)
     global $CONFIG;
 
     set_context("lds_exec_new_project");
-    //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
 
     $editLdS = get_entity($params[1]);
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    if($editLdS->getSubtype() != 'LdSProject_implementation')
+        $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
+    else
+        $vars['referer'] = $CONFIG->url.'pg/lds/project_implementation/'.$editLdS->guid;
 
     if (!$editLdS->canEdit())
     {

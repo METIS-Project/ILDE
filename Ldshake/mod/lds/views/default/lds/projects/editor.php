@@ -1,39 +1,5 @@
 <?php extract($vars); ?>
 <div id="lds_editor_iframe">
-<style>
-    #droppable_grid { width: 690px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none; position: relative; z-index:0}
-    #ldproject_toolBar { position: relative; width: 250px; height: 700px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
-    .draggable, .draggable-nonvalid { width: 90px; height: 90px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
-    .ui-widget-content {background-image: none; }
-
-    .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
-
-    .lds_att_popup {
-        top: 100px;
-        left: 50%;
-        z-index: 100000;
-        position: fixed;
-        background-color: #fff;
-        padding: 10px;
-        border: 10px solid rgba(120,120,120,0.42);
-        -moz-border-radius: 5px 5px 5px 5px;
-        -webkit-border-radius: 5px 5px 5px 5px;
-        border-radius: 5px 5px 5px 5px;
-        -webkit-background-clip: padding-box;
-        -moz-background-clip: padding;
-        background-clip: padding-box;
-        display: none;
-        font-size: 13px;
-    }
-
-    #lds_attachment_popup {
-        width: 500px;
-        top: 150px;
-        left: 50%;
-        margin-left: -260px;
-    }
-
-</style>
 
 <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
     <div id="two_column" style="padding-bottom:0 !important">
@@ -66,7 +32,7 @@
                 <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/image.png" toolname="Image" tooltype="image" >
             </div>
             <div class="draggable ui-widget-content" title="WebCollage">
-                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/COLLAGE.png" toolname="WebCollage" tooltype="webcollage" >
+                <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/COLLAGE.png" toolname="WebCollage" tooltype="webcollagerest" >
             </div>
             <div class="draggable ui-widget-content" title="Open GLM">
                 <img src="<?php echo $vars['url']; ?>mod/ldprojects/images/OGLM.png" toolname="OpenGLM" tooltype="openglm" >

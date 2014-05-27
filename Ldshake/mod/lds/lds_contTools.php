@@ -104,7 +104,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     }
                 } else {
                     $lds = new LdSObject();
-                    $lds->title = "{$item['toolName']} ($title)";
+                    $lds->title = "{$tool['toolName']} ($title)";
                     //$lds->project_design = $pd_guid;
                     $lds->owner_guid = get_loggedin_userid();
                     $lds->access_id = 2;

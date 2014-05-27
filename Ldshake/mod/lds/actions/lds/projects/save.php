@@ -55,6 +55,7 @@ if (get_input('guid') > 0)
 {
 	//We're editing. Fetch it from the DB
     $project_design = get_entity(get_input('guid'));
+    $project_preview = get_entity($project_design->preview);
 }
 else
 {
@@ -65,9 +66,9 @@ else
     $project_design->lds_recovery = $lds_recovery;
 	$project_design->owner_guid = get_loggedin_userid();
 
-    $project_preview = new LdS();
+    $project_preview = new ElggObject();
     $project_preview->subtype = 'LdSProject_preview';
-    $project_preview->description = get_input('preview');
+    $project_preview->access_id = ACCESS_PUBLIC;
     $project_design->preview = $project_preview->save();
 
 	$isNew = true;
@@ -78,6 +79,9 @@ $project_design->granularity = get_input('granularity');
 $project_design->completeness = get_input('completeness');
 $project_design->description = get_input('JSONData', null, false);
 $project_design->editor_type = get_input('editorType');
+
+$project_preview->description = get_input('preview', "", false);
+$project_preview->save();
 
 //Now the tags. We'll delete the existing ones to save them again
 $tagFields = array ('discipline', 'pedagogical_approach', 'tags');
