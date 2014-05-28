@@ -1547,6 +1547,10 @@ a.rightbutton:active {
 	color: green;
 }
 
+.ldshake-user-nonvalidated {
+    color: black;
+}
+
 form#editorfileupload {
 	float: right;
 }

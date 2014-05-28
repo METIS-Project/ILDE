@@ -44,7 +44,10 @@
 		/// LdShake change ///		
 		$class='';
 		if ($vars['entity']->admin)
-			$class="ldshake-listing-admin";
+			$class.="ldshake-listing-admin";
+
+        if(empty($vars['entity']->validated) && empty($vars['entity']->admin_created))
+            $class.="ldshake-user-nonvalidated";
 
 		$info .= "<p><b><a href=\"" . $vars['entity']->getUrl() . "\" rel=\"$rel\" class=\". $class . \">" . $vars['entity']->name . "</a></b></p>";
 		/// LdShake change ///

@@ -19,6 +19,9 @@ action_gatekeeper();
 
 // Get the user
 $guid = get_input('guid');
+
+$access_status = access_get_show_hidden_status();
+access_show_hidden_entities(true);
 $obj = get_entity($guid);
 
 if ( ($obj instanceof ElggUser) && ($obj->canEdit()))
@@ -32,6 +35,8 @@ if ( ($obj instanceof ElggUser) && ($obj->canEdit()))
 }
 else
     register_error(T('Error validating the user.'));
+
+access_show_hidden_entities($access_status);
 
 forward($_SERVER['HTTP_REFERER']);
 exit;

@@ -31,7 +31,10 @@
 		
 		set_context('search');
 
+        $access_status = access_get_show_hidden_status();
+        access_show_hidden_entities(true);
 		$result = list_entities('user');
+        access_show_hidden_entities($access_status);
 		
 		set_context('admin');
 

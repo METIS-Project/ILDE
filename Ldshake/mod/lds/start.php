@@ -2752,7 +2752,7 @@ function lds_exec_project_implementation ($params)
     $vars['jsondata'] = $project_implementation->jsondata;
 
     $vars['list_type'] = T('LdS');
-    $vars['section'] = 'off';
+    $vars['section'] = 'on';
     $vars['is_implementation'] = true;
     $vars['implementation_guid'] = $project_implementation->guid;
     $body = elgg_view('lds/projects/myprojects',$vars);

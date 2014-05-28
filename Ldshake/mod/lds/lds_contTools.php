@@ -85,8 +85,8 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $initDocuments = array();
                     $initDocuments[] = '';
 
-                    if(isset($item['editor_subtype'])) {
-                        require_once __DIR__.'/../../../templates/templates.php';
+                    if(isset($tool['editor_subtype'])) {
+                        require_once __DIR__.'/templates/templates.php';
                         $lds->editor_subtype = $tool['editor_subtype'];
                         $templates = ldshake_get_template($lds->editor_subtype);
                         $i=0;
