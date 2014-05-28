@@ -95,10 +95,14 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         }
                         $lds->save();
                     }
-
+                    $i=0;
                     foreach($initDocuments as $initDocument) {
                         $docObj = new DocumentObject($lds->guid);
-                        $docObj->title = $lds->title;
+                        if(!$i++)
+                            $docObj->title = $lds->title;
+                        else
+                            $docObj->title = T('Support Document');
+
                         $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
                         $docObj->save();
                     }
