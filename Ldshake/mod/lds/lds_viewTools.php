@@ -120,9 +120,10 @@ class lds_viewTools
                 $folder = 'edit_project';
             } elseif($type == 'view') {
                 if($subtype != 'LdSProject')
-                    $folder = 'project_implementation';
+                    $folder = 'vieweditor';
                 else //return '#';
-                    $folder = 'project_preview';
+                    //$folder = 'project_preview';
+                    $folder = 'vieweditor';
             } elseif($type == 'implement') {
                 $folder = 'project/implement/';
             }

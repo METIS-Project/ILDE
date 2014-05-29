@@ -763,7 +763,7 @@ function initDocName ()
         {
             if ($.trim($(this).val()).length > 0)
             {
-                if(!upload && !restapi && editorType != 'gluepsrest') {
+                if(!upload && !restapi && editorType != 'gluepsrest' && editorType != 'project_design') {
                     if(!google_docs) documents[0].title = $(this).val();
                     $affectedTab.text($(this).val());
                 }
@@ -772,7 +772,7 @@ function initDocName ()
             }
             else
             {
-                if(!upload && !restapi && editorType != 'gluepsrest') {
+                if(!upload && !restapi && editorType != 'gluepsrest' && editorType != 'project_design') {
                     if(!google_docs) documents[0].title = t9n.untitledDoc;
                     $affectedTab.text(t9n.untitledDoc);
                 }

@@ -65,6 +65,10 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
 
+
+            <?php if(ldshake_supports_pdf($currentDoc)): ?>
+                    <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+            <?php endif; ?>
             <?php if(isset($currentDoc->downloable)): ?>
                 <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title . '.' . $currentDoc->downloable) ?>"><?php echo T("Download %1 file", $currentDoc->downloable) ?></a>
             <?php endif; ?>
@@ -95,10 +99,10 @@ function encodeURIComponent($str) {
 			<?php endif; ?>
 		<?php endif; ?>
 		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
-        <?php if ($lds->editor_type != 'gluepsrest'): ?>
+        <?php if ($lds->editor_type != 'gluepsrest' && $lds->editor_type != 'project_design'): ?>
             <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
+            <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
         <?php endif; ?>
-        <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
 	</div>
 
 	<!--<form id="editorfileupload" action="<?php echo $url ?>action/lds/import_editor_file" method="post" enctype="multipart/form-data">

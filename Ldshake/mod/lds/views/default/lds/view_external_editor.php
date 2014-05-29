@@ -142,7 +142,7 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	<?php if ($doc->file_imsld_guid): ?>
         <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/imsld">Save as IMS-LD</a>
         <!--<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/webZip">Save as zipped web page</a>-->
-    <?php elseif($doc->editorType != 'google_docs'): ?>
+    <?php elseif($doc->editorType != 'google_docs' && $lds->editor_type != 'project_design'): ?>
         <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/binary">Download binary file</a>
     <?php endif; ?>
 

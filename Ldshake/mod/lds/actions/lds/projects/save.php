@@ -51,25 +51,23 @@ if(get_input('guid') <= 0 && $recovered_lds = get_entities_from_metadata("lds_re
     set_input('guid', $recovered_lds[0]->guid);
 
 //We first create the LDS (or update it)
-if (get_input('guid') > 0)
-{
+if (get_input('guid') > 0) {
 	//We're editing. Fetch it from the DB
     $project_design = get_entity(get_input('guid'));
-    $project_preview = get_entity($project_design->preview);
+    $project_preview = reset(get_entities_from_metadata('lds_guid',$project_design->guid,'object','LdS_document_editor', 0, 1));
 }
-else
-{
+else {
 	//We're creating it from scratch. Construct a new obj.
 	$project_design = new LdS();
     $project_design->subtype = 'LdSProject';
     $project_design->access_id = 2;
     $project_design->lds_recovery = $lds_recovery;
 	$project_design->owner_guid = get_loggedin_userid();
+	$project_design->external_editor = true;
+	$project_design->save();
 
-    $project_preview = new ElggObject();
-    $project_preview->subtype = 'LdSProject_preview';
-    $project_preview->access_id = ACCESS_PUBLIC;
-    $project_design->preview = $project_preview->save();
+    $project_preview = new DocumentEditorObject($project_design->guid);
+    $project_preview->save();
 
 	$isNew = true;
 } 
@@ -81,6 +79,8 @@ $project_design->description = get_input('JSONData', null, false);
 $project_design->editor_type = get_input('editorType');
 
 $project_preview->description = get_input('preview', "", false);
+$project_preview->editorType = $project_design->editor_type;
+$project_preview->title = $project_design->title;
 $project_preview->save();
 
 //Now the tags. We'll delete the existing ones to save them again

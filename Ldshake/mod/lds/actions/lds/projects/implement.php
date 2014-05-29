@@ -49,16 +49,17 @@ $project_design_implementation->subtype = 'LdSProject_implementation';
 $project_design_implementation->title = $title;
 $project_design_implementation->description = $project_design_reference->description;
 $project_design_implementation->editor_type = $project_design_reference->editor_type;
+$project_design_implementation->external_editor = $project_design_reference->external_editor;
+$project_design_implementation->all_can_view = "no";
 $project_design_implementation->project_design_reference = $project_design_reference->guid;
 $project_design_implementation->save();
 
-$project_preview_reference = get_entity($project_design_reference->preview);
-$project_preview = new ElggObject();
-$project_preview->subtype = 'LdSProject_preview';
-$project_preview->access_id = ACCESS_PUBLIC;
+$project_preview_reference = reset(get_entities_from_metadata('lds_guid',$project_design_reference->guid,'object','LdS_document_editor', 0, 1));
+$project_preview = new DocumentEditorObject($project_design_implementation->guid);
 $project_preview->description = $project_preview_reference->description;
-$project_design_implementation->preview = $project_preview->save();
-$project_design_implementation->save();
+$project_preview->title = $project_preview_reference->title;
+$project_preview->editorType = $project_preview_reference->editorType;
+$project_preview->save();
 
 $pg_data = json_decode($project_design_reference->description, true);
 ldsshake_project_implement($pg_data, $project_design_implementation);

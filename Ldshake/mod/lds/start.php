@@ -2772,6 +2772,75 @@ function lds_exec_project_preview($params)
     page_draw($project->title, $preview->description);
 }
 
+function lds_exec_project_preview2($params)
+{
+    global $CONFIG;
+    $id = $params[1];
+    $lds = get_entity($id);
+
+    $vars['lds'] = $lds;
+    create_annotation($vars['lds']->guid, 'viewed_lds', '1', 'text', get_loggedin_userid(), 2);
+    //TODO permission / exist checks
+
+    if(!empty($lds->preview)) {
+        $vars['ldsDocs'][] = get_entity($lds->preview);
+    }
+    $vars['ldsDocs'][] = lds_contTools::getLdsDocuments($id);
+
+    $vars['currentDocId']   = $vars['ldsDocs'][0]->guid;
+    $vars['currentDoc']     = $vars['ldsDocs'][0];
+
+    if(!empty($params[3])) {
+        foreach($vars['ldsDocs'] as $fdoc) {
+            if($fdoc->guid == $params[3]) {
+                $vars['currentDocId'] = $fdoc->guid;
+                $vars['currentDoc'] = $fdoc;
+            }
+        }
+    }
+
+    $vars['editor'] = $lds->editor_type;
+
+    $vars['iseXe'] = $vars['currentDoc']->getSubtype() == 'LdS_document_editor' ? true : false;
+
+    if($vars['iseXe']) {
+        //Check if it's published
+        $vars['publishedId'] = lds_contTools::getPublishedEditorId($vars['currentDocId']);
+    } else {
+        //Check if it's published
+        $vars['publishedId'] = lds_contTools::getPublishedId($vars['currentDocId']);
+    }
+
+    $vars['upload'] = false;
+
+    $vars['glueps'] = get_entities_from_metadata_multi(array(
+            'lds_guid' => $lds->guid,
+            'editorType' => 'gluepsrest'
+        ),
+        'object','LdS_document_editor', 0, 1);
+
+    $vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
+
+    //These are all my friends
+    $arrays = lds_contTools::buildObjectsArray($vars['lds']);
+    $vars['jsonfriends'] = json_encode($arrays['available']);
+    $vars['viewers'] = json_encode($arrays['viewers']);
+    $vars['editors'] = json_encode($arrays['editors']);
+    $vars['groups'] = json_encode(array());
+
+    $vars['starter'] = get_user($vars['lds']->owner_guid);
+
+    $vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
+
+    $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
+
+    //iframe view auth
+    session_start();
+    $_SESSION['editors_content'] = $CONFIG->editors_content;
+    session_write_close();
+    echo elgg_view('lds/view_internal_editor',$vars);
+}
+
 function lds_exec_new_project ($params)
 {
     global $CONFIG;

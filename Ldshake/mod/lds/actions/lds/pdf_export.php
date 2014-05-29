@@ -414,6 +414,9 @@ $contents = <<<EOD
         display: inline-block;
         text-decoration: none;
     }
+
+    .draggable, .draggable-nonvalid { width: 90px; height: 90px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
+
 		</style>
 	</head>
 	<body>

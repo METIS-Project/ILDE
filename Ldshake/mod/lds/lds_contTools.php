@@ -42,6 +42,22 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_supports_pdf($document) {
+    $subtype = $document->getSubtype();
+    $lds = get_entity($document->lds_guid);
+    $supported_editors = array(
+        'project_design',
+    );
+
+    if($subtype == 'LdS_document')
+        return true;
+
+    if(in_array($document->editorType, $supported_editors))
+        return true;
+
+    return false;
+}
+
 function ldsshake_project_implement(&$pg_data, $project_design) {
     $pd_guid = $project_design->guid;
     $title = $project_design->title;
