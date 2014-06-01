@@ -209,7 +209,7 @@ $(document).ready(function()
 	});
 
 
-    $("#payload div[associatedlds]").each(function(elem) {
+    $("#payload .draggable > div.subtool").each(function(elem) {
         var $this = $(this);
         console.log(this);
         this.lds_guid = parseInt($this.attr("associatedlds"), 10);
@@ -221,7 +221,7 @@ $(document).ready(function()
             //window.open(baseurl + 'pg/lds/view/' + $this.attr("associatedlds"));
         });*/
 
-        $this.click(project_popup_show);
+        $this.filter('[associatedlds]').click(project_popup_show);
 
         $this.find("img").hide();
         $this.css("cursor", "pointer");
