@@ -160,12 +160,24 @@ function lds_write_permission_check($hook, $entity_type, $returnvalue, $params)
     //$time=microtime(true);
     $subtype = $params['entity']->getSubtype();
 
-    if ($subtype == 'LdS' || $subtype == 'LdS_implementation') {
+    if ($subtype == 'LdS' || $subtype == 'LdS_implementation' || $subtype == 'LdSProject' || $subtype == 'LdSProject_implementation') {
+
+        if($returnvalue)
+            return $returnvalue;
 
         $result = lds_contTools::LdSCanEdit($params['entity']->guid, $params['user']);
         //echo microtime(true)-$time.' pf<br>';
-        return $result;
 
+        if($result)
+            return $result;
+
+        //check for project relationship
+        if($rel_entities = $params['entity']->getEntitiesFromRelationship("lds_project_existent")) {
+            foreach($rel_entities as $rel_entity) {
+                if(lds_contTools::LdSCanEdit($rel_entity->guid, $params['user']))
+                    return true;
+            }
+        }
     }
 }
 
@@ -1330,7 +1342,7 @@ function lds_exec_editeditor ($params)
 	//We're editing. Fetch it from the DB
 	$editordocument_query = get_entities_from_metadata('lds_guid',$editLdS->guid,'object','LdS_document_editor', 0, 100);
 
-    if($editLdS->editor_type == 'google_docs') {
+    if(strstr($editLdS->editor_type, 'google')) {
         if(!$editordocument_query[0]->support){
             $editordocument = array($editordocument_query[0], $editordocument_query[1]);
         }
@@ -1344,7 +1356,7 @@ function lds_exec_editeditor ($params)
 	$editor = EditorsFactory::getInstance($editordocument[0]);
 	$vars_editor = $editor->editDocument();
 
-    if($editLdS->editor_type == 'google_docs') {
+    if(strstr($editLdS->editor_type, 'google')) {
         $editor_support = EditorsFactory::getInstance($editordocument[1]);
         $vars['support_editor'] = $editor_support->editDocument();
     }
@@ -2728,6 +2740,8 @@ function lds_exec_projects_implementations ($params)
         $vars['title'] = T("All my Project designs");
     }
 
+
+    $vars['implement_list'] = true;
     $vars['list_type'] = T('project');
     $vars['section'] = 'prj-'.$params[1];
     $body = elgg_view('lds/projects/myprojects',$vars);
@@ -2755,6 +2769,7 @@ function lds_exec_project_implementation ($params)
     $vars['section'] = 'on';
     $vars['is_implementation'] = true;
     $vars['implementation_guid'] = $project_implementation->guid;
+    $vars['implementation'] = $project_implementation;
     $body = elgg_view('lds/projects/myprojects',$vars);
 
     page_draw($vars['title'], $body);
@@ -2982,6 +2997,9 @@ function lds_exec_edit_project ($params)
     Utils::osort($vars['initDocuments'], 'guid');
 
     $vars['initDocuments'] = json_encode($vars['initDocuments']);
+
+    if($editLdS->getSubtype() == 'LdSProject_implementation')
+        $vars['project']['is_implementation'] = true;
 
     $vle_data = array();
 

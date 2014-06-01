@@ -42,7 +42,41 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
-function ldshake_supports_pdf($document) {
+function ldshake_get_filepath($file_guid)
+{
+    $file = get_entity($file_guid);
+    $readfile = new ElggFile();
+    $readfile->owner_guid = $file->owner_guid;
+    $readfile->setFilename($file->originalfilename);
+    return $readfile->getFilenameOnFilestore();
+}
+
+function ldshake_download_file($url, $filepath) {
+    try {
+        if(!($fd = fopen($filepath,'w')))
+            throw new Exception("Cannot create file.");
+
+        $options = array(
+            CURLOPT_FILE    => $fd,
+            CURLOPT_TIMEOUT =>  60,
+            CURLOPT_URL     => $url,
+            CURLOPT_SSL_VERIFYPEER => false
+        );
+
+        $ch = curl_init();
+        curl_setopt_array($ch, $options);
+        $result = curl_exec($ch);
+    } catch (Exception $e) {
+        register_error($e->getMessage());
+    }
+
+    if(!empty($fd))
+        fclose($fd);
+
+    return (!empty($result));
+}
+
+    function ldshake_supports_pdf($document) {
     $subtype = $document->getSubtype();
     $lds = get_entity($document->lds_guid);
     $supported_editors = array(
@@ -62,7 +96,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
     $pd_guid = $project_design->guid;
     $title = $project_design->title;
     $preserved_lds = array();
-    $lds_list = lds_contTools::getProjectLdSList($pd_guid, true, true);
+    $lds_list = lds_contTools::getProjectLdSList($pd_guid, false, true);
     if(!$lds_list)
         $lds_list=array();
 
@@ -75,15 +109,22 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                 $preserved_lds[] = $item['guid'];
 
                 if(!in_array($item['guid'], $lds_list)) {
-                    if($item['creation'] == "existent") {
-                        add_entity_relationship($item['guid'], 'lds_project_existent', $pd_guid);
+                    if(empty($item['clone'])) {
+                        try {
+                            add_entity_relationship($item['guid'], 'lds_project_existent', $pd_guid);
+                        } catch (Exception $e) {
+                        }
                     } else {
                         $lds = get_entity($item['guid']);
                         $ldsm = new richTextEditor(null, $lds);
                         $cloned_lds = $ldsm->cloneLdS("{$tool['toolName']} ($title)");
+                        $cloned_lds->container_guid = $pd_guid;
                         $item['original_guid'] = $item['guid'];
                         $item['guid'] = $cloned_lds->guid;
-                        add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
+                        try {
+                            add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
+                        } catch (Exception $e) {
+                        }
                     }
                 }
             } else {
@@ -91,12 +132,16 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $lds = new LdSObject();
                     $lds->project_design = $project_design->guid;
                     $lds->owner_guid = get_loggedin_userid();
+                    $lds->container_guid = $pd_guid;
                     $lds->access_id = 2;
                     $lds->all_can_view = "no";
                     $lds->title = "{$tool['toolName']} ($title)";
                     $lds->editor_type = $tool['tooltype'];
                     $item['guid'] = $lds->save();
-                    add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+                    try {
+                        add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+                    } catch (Exception $e) {
+                    }
 
                     $initDocuments = array();
                     $initDocuments[] = '';
@@ -127,17 +172,13 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $lds->title = "{$tool['toolName']} ($title)";
                     //$lds->project_design = $pd_guid;
                     $lds->owner_guid = get_loggedin_userid();
+                    $lds->container_guid = $pd_guid;
                     $lds->access_id = 2;
                     $lds->all_can_view = "no";
                     $lds->editor_type = $tool['tooltype'];
                     $lds->external_editor = true;
                     $item['guid'] = $lds->save();
                     add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
-
-                    $docObj = new DocumentObject($lds->guid);
-                    $docObj->title = T('Support Document');
-                    $docObj->description = T('Write support notes here...'); //We put it in ths desciption in order to use the objects_entity table of elgg db
-                    $docObj->save();
 
                     $document_editor = new DocumentEditorObject($lds->guid, 0);
                     $document_editor->editorType = $lds->editor_type;
@@ -152,6 +193,34 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         list($document_editor, $resultIds_add) = $save_result;
                     } else {
                         throw new Exception("Save failed");
+                    }
+
+                    if(strstr($lds->editor_type, 'google')) {
+                        $google_support_doc = new DocumentEditorObject($lds->guid);
+                        $google_support_doc->description = T("Write here any support notes for this LdS...").'<img border="0" width="0" height="0" src="http://ilde.upf.edu/mod/lds/templates/gdocs_fix/gdfix.png">';
+                        $google_support_doc->title = T("Support Document");
+                        $google_support_doc->editorType = 'google_docs';
+                        $google_support_doc->support = true;
+                        $google_support_doc->lds_revision_id = 0;
+                        $google_support_doc->save();
+
+                        $support_vars = array(
+                            'doc' => $google_support_doc,
+                            'title' => T("Support Document")
+                        );
+
+                        $support_html = elgg_view('lds/view_iframe', $support_vars);
+                        $support_editor = editorsFactory::getInstance($google_support_doc);
+                        $editor_vars = $support_editor->newEditor($support_html);
+                        $editor_vars = array_merge($editor_vars, $support_vars);
+                        if(!$support_editor->saveDocument($editor_vars)) {
+                            throw new Exception(T("Save failed"));
+                        }
+                    } else {
+                        $docObj = new DocumentObject($lds->guid);
+                        $docObj->title = T('Support Document');
+                        $docObj->description = T('Write support notes here...'); //We put it in ths desciption in order to use the objects_entity table of elgg db
+                        $docObj->save();
                     }
                 }
             }
@@ -168,8 +237,16 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
     $delete_lds = array_diff($lds_list, $preserved_lds);
 
     foreach($delete_lds as $d) {
-        if($lds_result = get_entity($d))
-            $lds_result->disable();
+        if(!$lds_result = get_entity($d))
+            continue;
+
+        if(check_entity_relationship($lds_result->guid, 'lds_project_existent', $pd_guid)) {
+            remove_entity_relationship($lds_result->guid, 'lds_project_existent', $pd_guid);
+            continue;
+        }
+
+        $lds_result->disable();
+
     }
     return true;
 }

@@ -44,4 +44,5 @@
 
     <div id="projectimplementation_submit_incomplete" style="display:none;color:red"><?php echo T("You must introduce a title!");?></div>
     <input type="button" id="projectimplementation_submit" value="<?php echo T('Submit')?>" />
+    <img class="busy" src="<?php echo $vars['url'] ?>_graphics/spinner.gif" style="display: none" />
 </div>

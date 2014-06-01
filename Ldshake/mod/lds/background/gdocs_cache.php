@@ -15,7 +15,7 @@ require_once(__DIR__."/../../../engine/start.php");
 if(!$gdoc_cache = get_entity($gdoc_cache_id))
     exit();
 
-$data = unserialize($gdoc_cache->description);
+$data = unserialize(base64_decode($gdoc_cache->description));
 $editor = editorsFactory::getTempInstance('google_docs');
 $editor->cache_remote_gdoc($data);
 $gdoc_cache->delete();

@@ -38,6 +38,7 @@
 extract($vars);
 $edit_imp_label = $implement ? T("Implement") : T("Edit");
 $edit_imp_url = isset($implement) ? "implement" : "edit";
+$view_mode = isset($implement_list) ? "list" : "view";
 $imp_action = isset($implement) ? "project_implement_action" : "lds_edit_action";
 $is_implementation = !empty($is_implementation);
 ?>
@@ -92,11 +93,8 @@ $is_implementation = !empty($is_implementation);
                 <?php endif; ?>
 
                 <?php if($is_implementation): ?>
-                    <input onclick="window.location='<?php echo $url.'pg/lds/project_preview/'.$implementation_guid;?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("View workflow") ?>" />
-                <?php endif; ?>
-
-                <?php if($is_implementation): ?>
-                    <input onclick="window.location='<?php echo $url.'pg/lds/edit_project/'.$implementation_guid;?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("Edit workflow") ?>" />
+                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'view');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("View workflow") ?>" />
+                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'edit');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("Edit workflow") ?>" />
                 <?php endif; ?>
 
                 <!--
@@ -121,7 +119,7 @@ $is_implementation = !empty($is_implementation);
        					<?php if (!$item->locked): ?>
                             <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
                         <?php endif; ?>
-                        <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
+                        <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $view_mode) ?>"><?php echo $item->lds->title ?></a>
                         <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>

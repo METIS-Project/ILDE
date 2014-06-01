@@ -275,9 +275,9 @@
                     if($result = get_data($query)) {
                         foreach($result as $r) {
                             $key = (int)$r->key;
-                            if($del_md = shmop_open($key, 'w', 0, 0)) {
-                                $query = "DELETE FROM data_cache WHERE `id` = {$r->id}";
-                                delete_data($query);
+                            $query = "DELETE FROM data_cache WHERE `id` = {$r->id}";
+                            delete_data($query);
+                            if($del_md = @shmop_open($key, 'w', 0, 0)) {
                                 shmop_delete ($del_md);
                                 shmop_close($del_md);
                             }

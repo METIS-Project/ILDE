@@ -105,7 +105,7 @@ else
     //google docs support document
     if(strstr($editor_type, 'google')) {
         $document_editor_support = new DocumentEditorObject($lds->guid, 0);
-        $document_editor_support->editorType = $editor_type;
+        $document_editor_support->editorType = 'google_docs';
         $document_editor_support->support = true;
         $document_editor_support->lds_guid = $lds->guid;
         $document_editor_support->lds_revision_id = 0;

@@ -188,7 +188,7 @@ $(document).ready(function()
 		}
 		return false;
 	});
-	
+
 	$('#the_lds').dblclick(function ()
 	{
 		window.location = baseurl + 'pg/lds/edit/' + $('#lds_edit_guid').val() + '/';

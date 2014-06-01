@@ -45,6 +45,11 @@ if (is_numeric($lds))
             if($lds->getSubtype() == 'LdSProject_implementation') {
                 if($project_list = lds_contTools::getProjectLdSList($lds->guid, true)) {
                     foreach($project_list as $fpl) {
+                        if(check_entity_relationship($fpl->guid, 'lds_project_existent', $lds->guid)) {
+                            remove_entity_relationship($fpl->guid, 'lds_project_existent', $lds->guid);
+                            continue;
+                        }
+
                         $fpl->deleted = '1';
                         $fpl->save_ktu();
                         $fpl->disable();

@@ -99,12 +99,12 @@ $resultIds->LdS = $project_design->guid;
 if (get_input('revision') == 0)
 {
 	//We save for the first time in this edition session. So we create a revision.
-	create_annotation($project_design->guid, 'revised_docs', '', 'text', get_loggedin_userid(), 1);
+	create_annotation($project_design->guid, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 } else {
     $project_design->lds_recovery = 0;
 }
 //We get the revision id to send it back to the form
-$revision = $project_design->getAnnotations('revised_docs', 1, 0, 'desc');
+$revision = $project_design->getAnnotations('revised_docs_editor', 1, 0, 'desc');
 $revision = $revision[0];
 $resultIds->revision = $revision->id;
 $resultIds->requestCompleted = true;

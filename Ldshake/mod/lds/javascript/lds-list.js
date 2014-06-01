@@ -54,6 +54,10 @@ $(document).ready(function()
 
     //new project implementation
 
+    $('.lds_popup input[type="button"]').click(function() {
+        $('.lds_popup .busy').show();
+    });
+
     $('.project_implement_action').click(function (event) {
         event.preventDefault();
         //event.stopPropagation();

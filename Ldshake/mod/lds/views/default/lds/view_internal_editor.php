@@ -72,10 +72,13 @@ function encodeURIComponent($str) {
             <?php if(isset($currentDoc->downloable)): ?>
                 <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title . '.' . $currentDoc->downloable) ?>"><?php echo T("Download %1 file", $currentDoc->downloable) ?></a>
             <?php endif; ?>
-            <?php if($currentDoc->file_imsld_guid): ?>
+            <?php if(isset($currentDoc->file_xlsx_guid)): ?>
+                <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_xlsx_guid . "&title=" . encodeURIComponent($lds->title.".xlsx") ?>"><?php echo T("Download excel file") ?></a>
+            <?php endif; ?>
+            <?php if(isset($currentDoc->file_imsld_guid)): ?>
                 <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_imsld_guid . "&title=" . encodeURIComponent($lds->title."(ims-lds).zip") ?>"><?php echo T("Download IMS-LD file") ?></a>
             <?php endif; ?>
-            <?php if($currentDoc->file_scorm_guid): ?>
+            <?php if(isset($currentDoc->file_scorm_guid)): ?>
                 <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_scorm_guid . "&title=" . encodeURIComponent($lds->title."(scorm).zip") ?>"><?php echo T("Download SCORM file") ?></a>
             <?php endif; ?>
             <?php if ($lds->editor_type == 'gluepsrest'): ?>
@@ -303,6 +306,57 @@ function encodeURIComponent($str) {
         <?php elseif ($editor == 'openglm' && is_array($ldsDocs) && count($ldsDocs) > 1): ?>
             <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $ldsDocs[1]->guid ?>" height="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;">
             </iframe>
+        <?php elseif ($editor == 'project_design'): ?>
+            <?php
+            $preview_lds_box = <<<HTML
+    <div id="tree_info_popup_shell_empty" class="tooltip_bl_body" style="position:absolute;height:300px;width:400px;background-color: #FFF;overflow:hidden;display:none">
+        <div class="tree_info_popup_control">
+
+            <!--
+            <div class="tree_info_popup_control_button move">
+                <svg width="28px" height="20px"><g>
+                    <line x1="8.0" y1="10" x2="20" y2="10" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="14" y1="4" x2="14" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
+            -->
+            <div class="tree_info_popup_control_button close">
+                <svg width="28px" height="20px"><g>
+                    <line x1="10" y1="6" x2="18" y2="14" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="10" y1="14" x2="18" y2="6" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
+            <div class="tree_info_popup_control_button maximize">
+                <svg width="28px" height="20px"><g><rect rx="3" ry="3" x="4" y="4" width="20" height="12" style="stroke:#FFF;stroke-width:2;fill:transparent"></rect></g></svg>
+            </div>
+            <div class="tree_info_popup_control_button minimize">
+                <svg width="28px" height="20px"><g><line x1="4.0" y1="16" x2="24" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line></g></svg>
+            </div>
+            <div class="tree_info_popup_control_button diff">
+                <svg width="28px" height="20px"><g>
+                    <line x1="4.0" y1="4" x2="24" y2="4" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="8" x2="24" y2="8" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="12" x2="24" y2="12" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    <line x1="4.0" y1="16" x2="24" y2="16" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                </g></svg>
+            </div>
+        </div>
+        <div id="tree_info_popup" style="width:100%;height:100%"></div>
+    </div>
+    <div id="tree_info_popup_move_empty" class="tree_info_popup_move"></div>
+HTML;
+            ?>
+
+            <script>
+                ldproject = <?php echo $lds->description;?>;
+                project_lds_box = <?php echo json_encode($preview_lds_box);?>;
+            </script>
+            <?php echo $currentDoc->description ?>
+            <div class="tooltip_bl" id="t_project_lds" style="width: 200px;">
+                <div class="tooltip_bl_body">
+                    <div><strong></strong></div>
+                </div>
+            </div>
         <?php else:?>
             <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
                 <?php echo $currentDoc->description ?>

@@ -2252,9 +2252,41 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 /*** projects css ***/
-#droppable_grid { width: 690px; height: 616px; padding: 0.5em; float: left; background-color: white !important; background-image: none; position: relative; z-index:0}
-#ldproject_toolBar { position: relative; width: 250px; height: 700px; float:left; border-style: solid; border-color: black; background-color: #d3d3d3 !important; background-image: none;}
-.draggable, .draggable-nonvalid { width: 90px; height: 90px; position: relative; float: left; margin: 10px 10px 10px 0; background-color: rgb(157,31,94); color: white !important; z-index: 10}
+#droppable_grid {
+    width: 690px;
+    height: 616px;
+    padding: 0.5em;
+    border: 1px solid grey;
+    float: left;
+    background-color: white !important;
+    background-image: none;
+    position: relative;
+    z-index:0;
+}
+
+#ldproject_toolBar {
+    position: relative;
+    width: 250px;
+    height: 630px;
+    float:left;
+    border-style:
+    solid; border-color:
+    black; background-color: #F0F0F0 !important;
+    background-image: none;
+}
+
+.draggable, .draggable-nonvalid {
+    width: 75px;
+    height: 75px;
+    padding: 5px;
+    position: relative;
+    float: left;
+    margin: 8px 0px 0px 8px;
+    background-color: white;
+    color: white !important;
+    border: 1px solid #dddddd;
+    z-index: 10;
+}
 .ui-widget-content {background-image: none; }
 
 .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
@@ -2282,4 +2314,17 @@ div.cc_info_icon > div.cc_icon_title {
     top: 150px;
     left: 50%;
     margin-left: -260px;
+}
+
+.draggable > img[tooltype] {
+    width: inherit;
+}
+
+.draggable[tooltype_added="true"] {
+    padding: 0px 5px 10px 5px;
+    box-shadow: 2px 2px 0px #F0F0F0;
+}
+
+.subtool_title {
+    color: grey;
 }

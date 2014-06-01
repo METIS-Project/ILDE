@@ -208,9 +208,362 @@ $(document).ready(function()
 		return false;
 	});
 
+
+    $("#payload div[associatedlds]").each(function(elem) {
+        var $this = $(this);
+        console.log(this);
+        this.lds_guid = parseInt($this.attr("associatedlds"), 10);
+
+        /*$this.click(function() {
+            //console.log(this);
+            lds_guid = parseInt($this.attr("associatedlds"), 10);
+            project_popup_show({"lds_guid": lds_guid});
+            //window.open(baseurl + 'pg/lds/view/' + $this.attr("associatedlds"));
+        });*/
+
+        $this.click(project_popup_show);
+
+        $this.find("img").hide();
+        $this.css("cursor", "pointer");
+        $this.parent().parent().parent().css("overflow-y", "scroll");
+
+        /*
+        var $option = $(this);
+        var id = $option.attr("id");
+
+        if($("#t_" + id).length) {
+            $option.addClass("show_tooltip");
+            $option.addClass("t_" + id);
+            if($option.hasClass("menu_suboption"))
+                $option.attr("data-pos", "#" + id + "@40,40");
+            else
+                $option.attr("data-pos", "#" + id + "@20,-10");
+        }
+        */
+    });
+
     $('form#editorfileupload').hide();
     $('#lds_import_button').click(function() {
         $('form#editorfileupload').show();
     });
 
 });
+
+var z_popup = 9000;
+function project_popup_show(d){
+    d = d.target;
+    console.log(d);
+    console.log(this);
+    var popup_id = d.lds_guid;
+    var tree_popup_random = Math.floor(Math.random()*1000000000);
+    var popup_id_selector = "#tree_info_popup_shell_"+ popup_id + "_" + tree_popup_random + " ";
+    var $popup, $popup_move;
+    var tree_box_origin=this;
+    var node = this.getBoundingClientRect();
+    var X = this.getBoundingClientRect().left;
+    var Y = this.getBoundingClientRect().top;
+    var height = this.getBoundingClientRect().height - 32;
+    var width = this.getBoundingClientRect().width - 32;
+    var popup_width = 600;
+    var popup_height = 400;
+    var fadein_timing = 1;
+    var popupX = X-100,
+        popupY = Y+100;
+
+    var transition_settings = "width "+fadein_timing+"s, height "+fadein_timing+"s, opacity "+fadein_timing+"s, top "+fadein_timing+"s, left "+fadein_timing+"s";
+    transition_settings = "all 2.0s ease";
+
+    $("#payload")
+        //.empty()
+        .append(project_lds_box);
+
+    $popup = $("#tree_info_popup_shell_empty")
+        .attr("id", "tree_info_popup_shell_"+ popup_id + "_"+ tree_popup_random)
+        .css("z-index", z_popup++);
+
+    $popup_move = $("#tree_info_popup_move_empty")
+        .attr("id", "tree_info_popup_move_"+ popup_id + "_"+ tree_popup_random);
+
+    if($(window).height() < Y + popup_height + 50)
+        popupY = $(window).height() - popup_height - 50;
+
+    if($(window).width() < X + popup_width + 50)
+        popupX = $(window).height() - popup_width - 50;
+
+    /*if(lds_guid == d.lds_guid)
+        $popup.find(".tree_info_popup_control_button.diff").hide();
+*/
+
+    //$popup = $(popup_id_selector);
+    //$popup_move= $(popup_id_selector + ".tree_info_popup_move");
+    //$popup_move.show();
+
+    $.post(
+        baseurl+'action/lds/tree_lds_view',
+        {
+            guid: d.lds_guid,
+            ref_id: d.lds_guid
+        },
+        function(data) {
+            var $interal_viewer;
+            var maximized= 0,
+                minimized=0;
+            var iframe_ready=false,
+                iframe_diff=false;
+            var tree_popup_zoom_level = 100*popup_width/957;
+            var iframe_xsize,
+                iframe_ysize;
+
+
+            $popup.show();
+            $(popup_id_selector+"#tree_info_popup").html(data.html);
+            $interal_viewer = $(popup_id_selector+"#internal_iviewer");
+
+
+            $popup.click(function(e) {
+                    $popup.css("z-index", z_popup++);
+                }
+            );
+
+            /*if(d.tags_html.length > 5)
+                $interal_viewer.attr("height","79%");
+                */
+
+            var zoom_update = function(popup_frame_width) {
+                tree_popup_zoom_level = 100*popup_frame_width/957;
+                popup_box_zoom();
+                if(iframe_ready)
+                    popup_iframe_zoom();
+            }
+
+            var popup_iframe_zoom = function() {
+                var iframe_tree_contents= $(popup_id_selector+"#internal_iviewer").contents().contents();
+                var iframe_width = 957*tree_popup_zoom_level/100;
+
+                if(!iframe_ready) {
+                    //iframe_xsize = $(iframe_tree_contents).filter("html").outerWidth();
+                    iframe_xsize = 880;
+                    $(iframe_tree_contents).filter("html").css("width", iframe_xsize+"px");
+                    iframe_ysize = $(iframe_tree_contents).filter("html").find("body").outerHeight();
+                    $(iframe_tree_contents).filter("html").css("position", "relative");
+                    $(iframe_tree_contents).css("transition","opacity "+fadein_timing+"s");
+                    $(popup_id_selector+"#internal_iviewer").css("transition","opacity "+fadein_timing+"s");
+                    setTimeout(function(){
+                        $(iframe_tree_contents).css("transition",transition_settings);
+                        $(popup_id_selector+"#internal_iviewer").css("transition",transition_settings);
+                        $(iframe_tree_contents).filter("html").css("overflow-y","auto");
+                    },fadein_timing*1000);
+
+                    $(iframe_tree_contents).filter("html").find("body").click(function(e){
+                        e.preventDefault();
+                        $popup.click();
+                    });
+
+                    iframe_ready=true;
+                }
+
+                //$(popup_id_selector+"#internal_iviewer")
+                //    .css("width", iframe_width+"px");
+
+                //$(iframe_tree_contents).css("zoom",tree_popup_zoom_level+"%");
+                var iframe_xmargin = iframe_xsize*(tree_popup_zoom_level/100 - 1)/2;
+                var iframe_ymargin = iframe_ysize*(tree_popup_zoom_level/100 - 1)/2;
+
+                $(iframe_tree_contents).css("left",iframe_xmargin+"px");
+                $(iframe_tree_contents).css("top",iframe_ymargin+"px");
+                $(iframe_tree_contents).filter("html").css("transform", "scale("+tree_popup_zoom_level/100+")");
+                $(iframe_tree_contents).filter("html").css("-webkit-transform", "scale("+tree_popup_zoom_level/100+")");
+
+                //$interal_viewer.css("transition","opacity 1s");
+                //$interal_viewer.css("transition",transition_settings);
+                $interal_viewer.css("opacity","1.0");
+
+            }
+
+            var popup_box_zoom = function() {
+                $(popup_id_selector + "#tree_info_popup #content_area_user_title").css("zoom",tree_popup_zoom_level+"%");
+                $(popup_id_selector + "#tree_info_popup > *").css("-webkit-user-select", "none");
+                $(popup_id_selector + "#tree_info_popup > *").css("-moz-user-select", "none");
+            }
+
+            zoom_update(popup_width);
+            $interal_viewer.load(popup_iframe_zoom);
+
+            var popupXlast = 0;
+            var popupYlast = 0;
+
+            $(popup_id_selector + ".tree_info_popup_control_button.diff").click(function(e){
+                iframe_ready=false;
+                $interal_viewer.css("transition","opacity "+fadein_timing/3+"s");
+                $interal_viewer.css("opacity","0.0");
+
+                setTimeout(function(){
+                    if(!iframe_diff) {
+                        $interal_viewer.attr("src", baseurl+"pg/lds/view_iframe/"+data.doc+"/"+data.ref_doc+"/");
+                    } else {
+                        $interal_viewer.attr("src", baseurl+"pg/lds/view_iframe/"+data.doc+"/");
+                    }
+                    iframe_diff = !iframe_diff;
+                },1000*fadein_timing/3);
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button.maximize").click(function(e){
+                var $tree = $(".tree");
+                var tree_offset= $tree.offset();
+                $popup.css("transition",transition_settings);
+
+                if(!maximized) {
+                    $popup.css("top",tree_offset.top+"px");
+                    $popup.css("left",tree_offset.left+"px");
+                    $popup.css("width",$tree.outerWidth()+"px");
+                    $popup.css("height",$tree.outerHeight()+"px");
+                    zoom_update($tree.outerWidth());
+                    $(popup_id_selector + ".tree_info_popup_control_button.move, "+popup_id_selector+".tree_info_popup_control").unbind("mousedown");
+                } else {
+                    $popup.css("top",popupY+"px");
+                    $popup.css("left",popupX+"px");
+                    $popup.css("width",popup_width+"px");
+                    $popup.css("height",popup_height+"px");
+                    zoom_update(popup_width);
+                    $(popup_id_selector + ".tree_info_popup_control_button.move, "+popup_id_selector+".tree_info_popup_control").on("mousedown", popup_move_enable);
+                }
+
+                minimized = false;
+                maximized = !maximized;
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button").on("mousedown", function(e){
+                e.stopPropagation();
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button.minimize").on("click", function(e){
+                e.stopPropagation();
+                var $tree = $(".tree");
+                var tree_offset= $tree.offset();
+                $popup.css("transition",transition_settings);
+
+                if(!minimized) {
+                    if(maximized) {
+                        $popup.css("top",popupY+"px");
+                        $popup.css("left",popupX+"px");
+                        $popup.css("width",popup_width+"px");
+                        $popup.css("height",popup_height+"px");
+                        zoom_update(popup_width);
+                        $(popup_id_selector + ".tree_info_popup_control_button.move, "+popup_id_selector+".tree_info_popup_control").on("mousedown", popup_move_enable);
+                    } else {
+                        $popup.css("top",popupY+"px");
+                        $popup.css("left",popupX+"px");
+                        $popup.css("width",popup_width*0.75+"px");
+                        $popup.css("height",popup_height*0.75+"px");
+                        zoom_update(popup_width*0.75);
+                        minimized = true;
+                    }
+
+                } else {
+                    $popup.css("top",tree_box_origin.getBoundingClientRect().top+"px");
+                    $popup.css("left",tree_box_origin.getBoundingClientRect().left+"px");
+                    $popup.css("width",width+"px");
+                    $popup.css("height",height+"px");
+                    $popup.css("opacity","0.0");
+                    setTimeout(function(){$popup.remove()}, 2000);
+                }
+
+                maximized = !maximized;
+            });
+
+            $(popup_id_selector + ".tree_info_popup_control_button.close").on("click", function(e){
+                e.stopPropagation();
+                $popup.css("transition",transition_settings);
+                $popup.css("top",tree_box_origin.getBoundingClientRect().top+"px");
+                $popup.css("left",tree_box_origin.getBoundingClientRect().left+"px");
+                $popup.css("width",width+"px");
+                $popup.css("height",height+"px");
+                $popup.css("opacity","0.0");
+                setTimeout(function(){$popup.remove()}, 2000);
+            });
+
+            var popup_move_enable = function(e){
+                //$(popup_id_selector + ".tree_info_popup_control_button.move").bind("mousedown", function(e){
+                popupXlast = e.pageX;
+                popupYlast = e.pageY;
+                $popup_move.show();
+                gecko_move_popup_mousedown = 1;
+                console.log("FFshow ");
+            }
+
+            $(popup_id_selector + ".tree_info_popup_control_button.move, "+popup_id_selector+".tree_info_popup_control").on("mousedown", popup_move_enable);
+
+            var gecko_move_popup_mousedown = 0;
+
+
+            $popup_move.on("mouseup", function(e){
+                gecko_move_popup_mousedown = 0;
+            }).on("mouseout", function(e){
+                gecko_move_popup_mousedown = 0;
+                console.log("FFout ");
+            });
+
+            $popup_move.bind("mousemove", function(e){
+                //e.stopPropagation();
+                var button = 0;
+
+                if(navigator.userAgent.indexOf("Gecko")>0 && navigator.userAgent.indexOf("WebKit")<0)
+                    button += gecko_move_popup_mousedown;
+                else if(navigator.userAgent.indexOf("MSIE")>0)
+                    button += event.button;
+                else
+                    button += e.which;
+
+                console.log("move "+button);
+
+                if(button && popupXlast && popupYlast){
+
+                    popupX -= popupXlast - e.pageX;
+                    popupY -= popupYlast - e.pageY;
+
+                    popupXlast = e.pageX;
+                    popupYlast = e.pageY;
+
+                    $popup.css("transition","all 0s");
+                    $popup.css("left",popupX+"px");
+                    $popup_move.css("left",popupX+"px");
+                    $popup.css("top",popupY+"px");
+                    $popup_move.css("top",popupY+"px");
+
+                    zoom_update($popup.outerWidth());
+
+                    //console.log("X: "+e.pageX+" Y: "+e.pageY+" buttons: "+ e.which);
+                    //console.log("X: "+panX+" Y: "+panY);
+                    //console.log("Xl: "+panXLast+" Yl: "+panYLast);
+                }
+                if(!button) {
+                    $popup_move.hide();
+                }
+            });
+
+        });
+
+    $popup.css("width",width+"px");
+    $popup.css("height",height+"px");
+    $popup.css("top",Y+"px");
+    $popup_move.css("top",Y+"px");
+    $popup.css("left",X+"px");
+    $popup_move.css("left",X+"px");
+    $popup.css("opacity",0.4);
+
+    $popup.show();
+    $popup.css("transition",transition_settings);
+    $popup.css("width",popup_width+"px");
+    $popup.css("height",popup_height+"px");
+    $popup.css("top",popupY+"px");
+    $popup_move.css("top",popupY+"px");
+    $popup.css("left",popupX+"px");
+    $popup_move.css("left",popupX+"px");
+    $popup.css("opacity",1.0);
+
+    //$popup.hide();
+
+
+    //console.log(node);
+    //console.log(d);
+}

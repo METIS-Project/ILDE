@@ -37,7 +37,7 @@ function saveProjectN(){
     ldproject = [];
     $(".draggable").each(function(){
 
-        if( $(this).attr("tooltype_added") ){
+        if($(this).attr("tooltype_added") === "true"){
             var tool = new Object();
             tool.tooltype=$(this).find('[tooltype]').attr("tooltype");
             tool.toolName=$(this).find('[tooltype]').attr("toolname");
@@ -48,11 +48,10 @@ function saveProjectN(){
 
             //Save locations
             var location = this.getBoundingClientRect();
+            var location2 = $("#droppable_grid").get(0).getBoundingClientRect();
 
-            tool.left = location.left;
-            tool.bottom = location.bottom;
-            tool.top = location.top;
-            tool.right = location.right;
+            tool.left = location.left - location2.left;
+            tool.top = location.top - location2.top;
 
             tool.associatedLdS = [];
 
@@ -73,14 +72,26 @@ function saveProjectN(){
 }
 
 function ldshake_project_saveToHTML(){
-    var item = '<div style="position:relative">';
-    item += '<div style="position:relative; left:708px; width: 704px; height: 630px;">';
+    var item = '<div style="position:relative; width: 704px; height: 630px;">';
     $(".draggable").each(function(){
         if( $(this).attr("tooltype_added") ){
-            item+=this.outerHTML;
+            var object = document.createElement("div");
+            object.innerHTML = this.outerHTML;
+
+            var location2 = $("#droppable_grid").get(0).getBoundingClientRect(); //posición origen dropable_grid
+            var location = $(this).get(0).getBoundingClientRect();
+
+            var top = location.top - location2.top;
+            var left = location.left -location2.left;
+
+            $(object).find(".draggable").css("top",  top+"px");
+            $(object).find(".draggable").css("left",  left+"px");
+            $(object).find(".draggable").css("position", "absolute");
+
+            item+=object.innerHTML;
         }
     });
-    item += "</div></div>";
+    item += "</div>";
     return item;
 }
 
@@ -103,6 +114,20 @@ function ldshake_projec_asign_guid(project_data) {
             }
         }
     }
+}
+
+function closemyLdSWindow()
+{
+    $('#lds_attachment_popup').toggle();
+    $('#shade').toggle();
+}
+
+function ldshake_projects_find_lds(guid) {
+    for(var i=0; i<ldsToBeListed.length; i++) {
+        if(ldsToBeListed[i].lds.guid == guid)
+        return ldsToBeListed[i];
+    }
+    return false;
 }
 
 $(document).ready(function() {
@@ -166,6 +191,13 @@ $(document).ready(function() {
         //console.log(item);Semantic mechanisms supporting management and re-use of learning designs in teacher communities
         $(toolElem).append(item);
 
+        if(is_implementation) {
+            item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
+            item += 'Untitled LdS';
+            item += '</div>';
+            $(toolElem).append(item);
+        }
+
         var $addedItem = $("#"+id);
         addRemoveIcon($addedItem.get(0));
         addAttacthIcon($addedItem.get(0));
@@ -185,7 +217,7 @@ $(document).ready(function() {
     }
 
     function addRemoveIcon(subToolElem) {
-        var src     = baseurl + 'mod/ldprojects/images/minus-icon.png';
+        var src     = baseurl + 'mod/lds/images/projects/minus-icon.png';
         var width   = 20;
         var height  = 20;
         var toolLocation = subToolElem.getBoundingClientRect();
@@ -206,18 +238,23 @@ $(document).ready(function() {
             var tool = subToolElem.parentElement;
             tool.jsPlumb.detach(subToolElem.jsPlumbConn);
             $(subToolElem).remove();
+            if(is_implementation) {
+                $('#' + subToolElem.id + '_title').remove();
+            }
+
             //TODO: aÃ±adir que quite el LdS eliminado de los associatedLdS
             if(!$(tool).find(".subtool").length) {
                 $(tool).find(".addsubtool-icon").remove();
                 $(tool).css("top", "");
                 $(tool).css("left", "");
-                deleteLdSTool(tool);
+                $(tool).attr("tooltype_added", "false"); //we update the added flag to true (is on the grid);
+                //deleteLdSTool(tool);
             }
         });
     }
 
     function addPlusIcon(toolElem) {
-        var src     = baseurl + 'mod/ldprojects/images/plus-icon.png';
+        var src     = baseurl + 'mod/lds/images/projects/plus-icon.png';
         var width   = 20;
         var height  = 20;
         var toolLocation = toolElem.getBoundingClientRect();
@@ -241,7 +278,7 @@ $(document).ready(function() {
     }
 
     function addAttacthIcon(subToolElem) {
-        var src     = baseurl + 'mod/ldprojects/images/attach-icon.png';
+        var src     = baseurl + 'mod/lds/images/projects/attach-icon.png';
         var width   = 20;
         var height  = 20;
         var toolLocation = subToolElem.getBoundingClientRect();
@@ -257,21 +294,35 @@ $(document).ready(function() {
         $addedItem.on("click", function(event) {
             $('#lds_attachment_popup').toggle();
             $('#shade').toggle();
+            $('#lds_attachment_popup').empty();
             //TODO: aÃ±adir cÃ³digo para asociar un ldS existente
             var item ='<form action=""  name="myldSform">';
-
+            var thereAreLdSListed = false;
             ldsToBeListed.forEach(function(entry){
                 if($(subToolElem).attr("tooltype") == entry.lds.editor_type
-                    && $(subToolElem).attr("subtype") == entry.lds.editor_subtype)
+                    && ($(subToolElem).attr("subtype") === "undefined" || $(subToolElem).attr("subtype") == entry.lds.editor_subtype)){
                     item = item + '<input type="radio" name="lds_selection" value="'+entry.lds.guid+'">'+entry.lds.title+'</br>';
+                    thereAreLdSListed=true;
+                }
             });
-            item = item + '<input type="submit" value="Submit">'
+            if(thereAreLdSListed)
+                item = item + '<input type="submit" value="Submit">'
+            else
+                item = item + "<h3 style='text-align:center'>Sorry, but there is not any compatible LdS with this Tool..</h3>";
+
+            item = item + '<input type="button" value="Close Window" onclick="closemyLdSWindow()" style="float:right">'
             item = item + "</form>";
             $('#lds_attachment_popup').append(item);
             $('[name="myldSform"]').on("submit", function(event){
                 event.preventDefault();
                 var lds_id = document.myldSform.lds_selection.value;
                 $(subToolElem).attr("associatedLdS", lds_id);
+                if(is_implementation) {
+                    var lds = ldshake_projects_find_lds(parseInt(lds_id, 10));
+                    if(lds)
+                        $('#' + subToolElem.id + '_title').text(lds.lds.title);
+                }
+
                 $('#lds_attachment_popup').toggle();
                 $('#shade').toggle();
                 $('#lds_attachment_popup').empty();
@@ -301,8 +352,18 @@ $(document).ready(function() {
             if(tool.toolName == $(this).find('[tooltype]').attr("toolName"))
             {
                 $(this).attr("tooltype_added", "true");
+
+                var location = this.getBoundingClientRect(); //posición de origen de la herramienta
+                var location2 = $("#droppable_grid").get(0).getBoundingClientRect(); //posición origen dropable_grid
+
+                var top = location.top - location2.top;
+                var left = location.left - location2.left;
+                tool.top = tool.top - top;
+                tool.left = tool.left - left;
+
                 $(this).css("top", tool.top + "px"); //lo posicionamos
-                $(this).css("left", -tool.left + "px");
+                $(this).css("left", tool.left + "px");
+
                 addPlusIcon(this); //AÃ±ado el icono de + y el primer LdS
                 if(tool.associatedLdS){
                     for(var i = 0; i < tool.associatedLdS.length; i++)
@@ -310,6 +371,11 @@ $(document).ready(function() {
                         var $addedElement = addSubToolElem(this);
                         var addedElement = $addedElement.get(0);
                         $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
+                        if(is_implementation) {
+                            var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
+                            if(lds)
+                                $('#' + addedElement.id + '_title').text(lds.lds.title);
+                        }
                     }
                 }
                 toolLoaded++;
@@ -318,7 +384,7 @@ $(document).ready(function() {
 
         $(this).on("mouseup", function(event) {
             if(isInsideDropGrid(this)) {
-                if( !$(this).attr("tooltype_added") || $(this).attr("tooltype_added") == "false"  ) {
+                if($(this).attr("tooltype_added") !== "true") {
                     //console.log("add");
                     $(this).attr("tooltype_added", "true"); //we update the added flag to true (is on the grid);
                     addPlusIcon(this);
