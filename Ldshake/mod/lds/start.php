@@ -141,6 +141,7 @@ function lds_init()
     //projects
     register_action("lds/projects/save", false, $CONFIG->pluginspath . "lds/actions/lds/projects/save.php");
     register_action("lds/projects/implement", false, $CONFIG->pluginspath . "lds/actions/lds/projects/implement.php");
+    register_action("lds/projects/update_preview", false, $CONFIG->pluginspath . "lds/actions/lds/projects/update_preview.php");
 
     if (get_context() == 'admin')
         add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
@@ -2034,7 +2035,7 @@ function lds_exec_vieweditor ($params)
     $vars['ldsDocs'] = lds_contTools::getLdsDocuments($id);
 
     //the support document is LdS_document_editor
-    if($lds->editor_type == 'google_docs' and count($vars['ldsDocs']) >= 2 and !empty($vars['ldsDocs'][0]->support)){
+    if(strstr($lds->editor_type, 'google') and count($vars['ldsDocs']) >= 2 and !empty($vars['ldsDocs'][0]->support)){
         $vars['ldsDocs'] = array($vars['ldsDocs'][1], $vars['ldsDocs'][0]);
     }
 

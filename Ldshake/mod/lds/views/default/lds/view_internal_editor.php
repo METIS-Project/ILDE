@@ -332,7 +332,7 @@ function encodeURIComponent($str) {
             <div class="tree_info_popup_control_button minimize">
                 <svg width="28px" height="20px"><g><line x1="4.0" y1="16" x2="24" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line></g></svg>
             </div>
-            <div class="tree_info_popup_control_button diff">
+            <div class="tree_info_popup_control_button diff" style="display:none">
                 <svg width="28px" height="20px"><g>
                     <line x1="4.0" y1="4" x2="24" y2="4" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
                     <line x1="4.0" y1="8" x2="24" y2="8" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>

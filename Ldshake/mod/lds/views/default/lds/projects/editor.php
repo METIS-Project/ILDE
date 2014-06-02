@@ -4,7 +4,6 @@
 <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
     <div id="two_column" style="padding-bottom:0 !important">
         <div id="droppable_grid" class="" type="conceptualize">
-            <p>Project Design Conceptualize </p>
         </div>
         <div id="ldproject_toolBar">
             <div class="draggable" title="Design Pattern">

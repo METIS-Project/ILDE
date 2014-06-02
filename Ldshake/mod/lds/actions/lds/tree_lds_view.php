@@ -61,11 +61,16 @@ switch($editordocument[0]->editorType) {
 
 }
 
-$vars['editor'] = $editordocument[0]->editorType;
+//the support document is LdS_document_editor
+if(strstr($lds->editor_type, 'google') and count($vars['ldsDocs']) >= 2 and !empty($vars['ldsDocs'][0]->support)){
+    $vars['ldsDocs'] = array($vars['ldsDocs'][1], $vars['ldsDocs'][0]);
+}
+
+$vars['editor'] = $vars['lds']->editor_type;//$editordocument[0]->editorType;
 
 if($vars['lds']->external_editor) {
-    $vars['currentDocId'] = $editordocument[0]->guid;
-    $vars['currentDoc'] = $editordocument[0];
+    $vars['currentDocId'] = $vars['ldsDocs'][0]->guid;
+    $vars['currentDoc'] = $vars['ldsDocs'][0];
 } else {
     $vars['currentDocId'] = $params[3] ?: $vars['ldsDocs'][0]->guid;
     $vars['ref_currentDocId'] = $params[3] ?: $vars['ref_ldsDocs'][0]->guid;

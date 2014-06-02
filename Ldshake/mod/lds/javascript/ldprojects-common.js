@@ -96,6 +96,7 @@ function ldshake_project_saveToHTML(){
 }
 
 function ldshake_projec_asign_guid(project_data) {
+    var update = false;
     for(var i=0; i<project_data.length; i++) {
         var tool = project_data[i];
         for(var j=0; j<tool.associatedLdS.length; j++) {
@@ -111,8 +112,19 @@ function ldshake_projec_asign_guid(project_data) {
                     .not('[associatedLdS]')
                     .first()
                     .attr("associatedLdS", lds.guid);
+
+                update = true;
             }
         }
+    }
+
+    if(update) {
+        $.post(baseurl + 'action/lds/projects/update_preview',
+            {
+                "guid": $('#lds_edit_guid').val(),
+                "preview": ldshake_project_saveToHTML()
+            }
+        );
     }
 }
 

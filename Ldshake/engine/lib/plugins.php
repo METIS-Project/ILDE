@@ -276,10 +276,13 @@
                         foreach($result as $r) {
                             $key = (int)$r->key;
                             $query = "DELETE FROM data_cache WHERE `id` = {$r->id}";
-                            delete_data($query);
-                            if($del_md = @shmop_open($key, 'w', 0, 0)) {
-                                shmop_delete ($del_md);
-                                shmop_close($del_md);
+                            if(delete_data($query)) {
+                                try {
+                                    if($del_md = @shmop_open($key, 'w', 0, 0)) {
+                                        @shmop_delete ($del_md);
+                                        @shmop_close($del_md);
+                                    }
+                                } catch(Exception $e) {}
                             }
                         }
                     }

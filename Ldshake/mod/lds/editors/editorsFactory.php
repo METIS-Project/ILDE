@@ -1995,9 +1995,9 @@ SQL;
 
         if(!$template) {
             $title="Untitled LdS.rtf";
-            $description="desc1";
+            $description="google docs";
             $mimeType="application/rtf";
-            $filename="/var/www/something.rtf";
+            $filename= $CONFIG->path . "vendors/emptydocs/empty.rtf";
             $data = file_get_contents($filename);
         } else {
             $title = T("New LdS");

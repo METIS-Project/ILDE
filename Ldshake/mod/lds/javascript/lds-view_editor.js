@@ -408,15 +408,16 @@ function project_popup_show(d){
             });
 
             $(popup_id_selector + ".tree_info_popup_control_button.maximize").click(function(e){
-                var $tree = $(".tree");
+                var $tree = $("#page_wrapper");
                 var tree_offset= $tree.offset();
                 $popup.css("transition",transition_settings);
 
                 if(!maximized) {
+                    var popup_resize_height = $tree.height() - ($popup.outerHeight() - $popup.height());
                     $popup.css("top",tree_offset.top+"px");
                     $popup.css("left",tree_offset.left+"px");
                     $popup.css("width",$tree.outerWidth()+"px");
-                    $popup.css("height",$tree.outerHeight()+"px");
+                    $popup.css("height",popup_resize_height+"px");
                     zoom_update($tree.outerWidth());
                     $(popup_id_selector + ".tree_info_popup_control_button.move, "+popup_id_selector+".tree_info_popup_control").unbind("mousedown");
                 } else {

@@ -55,6 +55,10 @@
         <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;opacity:0.0;"></iframe>
     <?php elseif ($editor == 'cld' || $editor == 'image'): ?>
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
+    <?php elseif (strstr($editor, 'google') && file_exists($CONFIG->editors_content.'content/webcollagerest/'.$currentDoc->previewDir)): ?>
+        <iframe id="internal_iviewer" src="<?php echo $CONFIG->url ?>content/webcollagerest/<?php echo $currentDoc->previewDir?>/index.html?t=<?php echo rand(0, 1000) ?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif (strstr($editor, 'google')): ?>
+        <iframe id="internal_iviewer" src="<?php echo htmlentities($currentDoc->description);?>" height="85%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php else:?>
         <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;overflow:scroll;">
             <?php echo $currentDoc->description ?>
