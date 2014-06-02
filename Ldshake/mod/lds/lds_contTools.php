@@ -177,6 +177,9 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $lds->all_can_view = "no";
                     $lds->editor_type = $tool['tooltype'];
                     $lds->external_editor = true;
+                    if($lds->editor_type == "webcollagerest" || $lds->editor_type == "openglm" || $lds->editor_type == "cadmos" || $lds->editor_type == "exelearningrest")
+                        $lds->implementable = '1';
+
                     $item['guid'] = $lds->save();
                     add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
 
