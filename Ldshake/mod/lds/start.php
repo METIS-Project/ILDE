@@ -150,6 +150,10 @@ function lds_init()
 
 	//Include the helper functions
     require_once __DIR__.'/lds_contTools.php';
+
+    extend_elgg_settings_page('lds/settings/help', 'usersettings/user');
+    register_plugin_hook('usersettings:save','user','ldshake_contextual_help_settings_save');
+
 }
 
 register_elgg_event_handler('init','system','lds_init');

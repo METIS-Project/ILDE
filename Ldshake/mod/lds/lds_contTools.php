@@ -42,6 +42,27 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_contextual_help_settings_save() {
+    $disable_contextual_help = get_input('disable_contextual_help');
+
+    $user = get_loggedin_user();
+    $disable_user_notifications = null;
+
+    switch($disable_contextual_help) {
+        case 'yes':
+            $disable_contextual_help = true;
+            break;
+        case 'no':
+            $disable_contextual_help = null;
+            break;
+        default:
+            $disable_contextual_help = null;
+    }
+
+    $user->disable_contextual_help = $disable_contextual_help;
+    $user->save();
+}
+
 function ldshake_get_filepath($file_guid)
 {
     $file = get_entity($file_guid);

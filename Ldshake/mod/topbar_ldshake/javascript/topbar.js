@@ -23,51 +23,8 @@ $(document).ready(function()
      });
      */
 
-    $(".menu_option, .menu_suboption").each(function(elem) {
-        var $option = $(this);
-        var id = $option.attr("id");
-
-        if($("#t_" + id).length) {
-            $option.addClass("show_tooltip");
-            $option.addClass("t_" + id);
-            if($option.hasClass("menu_suboption"))
-                $option.attr("data-pos", "#" + id + "@40,40");
-            else
-                $option.attr("data-pos", "#" + id + "@20,-10");
-        }
-    }).click(function() {
-            $(".tooltip_bl").fadeOff(20);
-        });
-
-    $("#tb_ldshakers")
-        .addClass("show_tooltip")
-        .addClass("t_s1t");
-
-    $("li#tb_ldshakers").next("li")
-        .attr("id", "tb_messages")
-        .addClass("show_tooltip")
-        .addClass("t_s6t");
-
-    $("#tb_about")
-        .addClass("show_tooltip")
-        .addClass("t_s5t");
-
-    $("#tb_mylds")
-        .addClass("show_tooltip")
-        .addClass("t_s2t");
-
-    $("#tb_browselds")
-        .addClass("show_tooltip")
-        .addClass("t_s3t");
-
-
-    $("#tb_newlds")
-        .addClass("show_tooltip")
-        .addClass("t_s4t")
-        .click(function(e) {
-            e.preventDefault();
-            $("#t_s4t").hide();
-        });
+    if(contextual_help)
+        ldshake_topbar_contextual_help();
 
 
     //Topbar account options
@@ -163,3 +120,51 @@ $(document).ready(function()
 
 
 });
+
+function ldshake_topbar_contextual_help() {
+    $(".menu_option, .menu_suboption").each(function(elem) {
+        var $option = $(this);
+        var id = $option.attr("id");
+
+        if($("#t_" + id).length) {
+            $option.addClass("show_tooltip");
+            $option.addClass("t_" + id);
+            if($option.hasClass("menu_suboption"))
+                $option.attr("data-pos", "#" + id + "@40,40");
+            else
+                $option.attr("data-pos", "#" + id + "@20,-10");
+        }
+    }).click(function() {
+        $(".tooltip_bl").fadeOut(20);
+    });
+
+    $("#tb_ldshakers")
+        .addClass("show_tooltip")
+        .addClass("t_s1t");
+
+    $("li#tb_ldshakers").next("li")
+        .attr("id", "tb_messages")
+        .addClass("show_tooltip")
+        .addClass("t_s6t");
+
+    $("#tb_about")
+        .addClass("show_tooltip")
+        .addClass("t_s5t");
+
+    $("#tb_mylds")
+        .addClass("show_tooltip")
+        .addClass("t_s2t");
+
+    $("#tb_browselds")
+        .addClass("show_tooltip")
+        .addClass("t_s3t");
+
+
+    $("#tb_newlds")
+        .addClass("show_tooltip")
+        .addClass("t_s4t")
+        .click(function(e) {
+            e.preventDefault();
+            $("#t_s4t").hide();
+        });
+}

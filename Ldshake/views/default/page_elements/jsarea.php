@@ -7,6 +7,9 @@ var t9nc = {
     deleteLdS : "<?php echo T("Are you sure you want to delete this LdS?") ?>"
 };
 var ldshake_cache = <?php echo json_encode($ldshake_jscache_break) ?>;
+<?php if(isloggedin()): ?>
+var contextual_help = <?php echo (empty(get_loggedin_user()->disable_contextual_help) ? 'true' : 'false'); ?>
+<?php endif; ?>
 </script>
 <!--[if (!IE)|(gt IE 8)]><!-->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
