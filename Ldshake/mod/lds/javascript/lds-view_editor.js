@@ -208,40 +208,6 @@ $(document).ready(function()
 		return false;
 	});
 
-
-    $("#payload .draggable > div.subtool").each(function(elem) {
-        var $this = $(this);
-        console.log(this);
-        this.lds_guid = parseInt($this.attr("associatedlds"), 10);
-
-        /*$this.click(function() {
-            //console.log(this);
-            lds_guid = parseInt($this.attr("associatedlds"), 10);
-            project_popup_show({"lds_guid": lds_guid});
-            //window.open(baseurl + 'pg/lds/view/' + $this.attr("associatedlds"));
-        });*/
-
-        $this.filter('[associatedlds]').click(project_popup_show);
-
-        $this.find("img").hide();
-        $this.css("cursor", "pointer");
-        $this.parent().parent().parent().css("overflow-y", "scroll");
-
-        /*
-        var $option = $(this);
-        var id = $option.attr("id");
-
-        if($("#t_" + id).length) {
-            $option.addClass("show_tooltip");
-            $option.addClass("t_" + id);
-            if($option.hasClass("menu_suboption"))
-                $option.attr("data-pos", "#" + id + "@40,40");
-            else
-                $option.attr("data-pos", "#" + id + "@20,-10");
-        }
-        */
-    });
-
     $('form#editorfileupload').hide();
     $('#lds_import_button').click(function() {
         $('form#editorfileupload').show();

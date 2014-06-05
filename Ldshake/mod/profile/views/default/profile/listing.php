@@ -49,7 +49,7 @@
         if(empty($vars['entity']->validated) && empty($vars['entity']->admin_created))
             $class.="ldshake-user-nonvalidated";
 
-		$info .= "<p><b><a href=\"" . $vars['entity']->getUrl() . "\" rel=\"$rel\" class=\". $class . \">" . $vars['entity']->name . "</a></b></p>";
+		$info .= "<p><b><a href=\"" . $vars['entity']->getUrl() . "\" rel=\"$rel\" class=\"". $class . "\">" . $vars['entity']->name . "</a></b></p>";
 		/// LdShake change ///
 
 		$location = $vars['entity']->location;

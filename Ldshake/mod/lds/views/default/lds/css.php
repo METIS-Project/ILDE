@@ -2328,3 +2328,12 @@ div.cc_info_icon > div.cc_icon_title {
 .subtool_title {
     color: grey;
 }
+
+#ldproject_view_grid .draggable {
+    display: none;
+    position: absolute;
+}
+
+#ldproject_view_grid {
+    position: relative;
+}

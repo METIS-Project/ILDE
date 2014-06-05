@@ -95,6 +95,10 @@ function ldshake_project_saveToHTML(){
     return item;
 }
 
+function ldshake_project_isedit() {
+    return !is_project_view;
+}
+
 function ldshake_projec_asign_guid(project_data) {
     var update = false;
     for(var i=0; i<project_data.length; i++) {
@@ -117,14 +121,21 @@ function ldshake_projec_asign_guid(project_data) {
             }
         }
     }
+}
 
-    if(update) {
-        $.post(baseurl + 'action/lds/projects/update_preview',
-            {
-                "guid": $('#lds_edit_guid').val(),
-                "preview": ldshake_project_saveToHTML()
+function ldshake_project_update_titles(project_data) {
+    var update = false;
+    for(var i=0; i<project_data.length; i++) {
+        var tool = project_data[i];
+        for(var j=0; j<tool.associatedLdS.length; j++) {
+            var lds = project_data[i].associatedLdS[j];
+            var lds_data = ldshake_projects_find_lds(lds.guid);
+            var $item = $('[associatedLdS="'+lds.guid+'"]');
+
+            if(!$item.length && lds_data) {
+                $($item.id + '_title').text(lds_data.lds.title);
             }
-        );
+        }
     }
 }
 
@@ -203,7 +214,7 @@ $(document).ready(function() {
         //console.log(item);Semantic mechanisms supporting management and re-use of learning designs in teacher communities
         $(toolElem).append(item);
 
-        if(is_implementation) {
+        if(is_implementation || !ldshake_project_isedit()) {
             item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
             item += 'Untitled LdS';
             item += '</div>';
@@ -211,8 +222,11 @@ $(document).ready(function() {
         }
 
         var $addedItem = $("#"+id);
-        addRemoveIcon($addedItem.get(0));
-        addAttacthIcon($addedItem.get(0));
+
+        if(ldshake_project_isedit()) {
+            addRemoveIcon($addedItem.get(0));
+            addAttacthIcon($addedItem.get(0));
+        }
 
         //link the elements
         $addedItem.get(0).jsPlumbConn = toolElem.jsPlumb.connect({
@@ -355,23 +369,29 @@ $(document).ready(function() {
         this.jsPlumb.Defaults.Container = this;
         this.subToolElemCount = 0;
         this.associatedLdS = new Array();
-        jsPlumb.draggable(this);
 
-        //EDIT PART
+        if(ldshake_project_isedit())
+            jsPlumb.draggable(this);
+
+        //EDIT/VIEW PART
         if(ldproject.length > 0 && toolLoaded < totalToLoad)
         {
             var tool = ldproject[toolLoaded]; //obtenemos el objeto
             if(tool.toolName == $(this).find('[tooltype]').attr("toolName"))
             {
                 $(this).attr("tooltype_added", "true");
+                $(this).show();
 
-                var location = this.getBoundingClientRect(); //posición de origen de la herramienta
-                var location2 = $("#droppable_grid").get(0).getBoundingClientRect(); //posición origen dropable_grid
+                if(ldshake_project_isedit()) {
+                    var location = this.getBoundingClientRect(); //posición de origen de la herramienta
+                    var location2 = $("#droppable_grid").get(0).getBoundingClientRect(); //posición origen dropable_grid
 
-                var top = location.top - location2.top;
-                var left = location.left - location2.left;
-                tool.top = tool.top - top;
-                tool.left = tool.left - left;
+                    var top = location.top - location2.top;
+                    var left = location.left - location2.left;
+
+                    tool.top = tool.top - top;
+                    tool.left = tool.left - left;
+                }
 
                 $(this).css("top", tool.top + "px"); //lo posicionamos
                 $(this).css("left", tool.left + "px");
@@ -394,16 +414,31 @@ $(document).ready(function() {
             }
         }
 
-        $(this).on("mouseup", function(event) {
-            if(isInsideDropGrid(this)) {
-                if($(this).attr("tooltype_added") !== "true") {
-                    //console.log("add");
-                    $(this).attr("tooltype_added", "true"); //we update the added flag to true (is on the grid);
-                    addPlusIcon(this);
-                    addSubToolElem(this);
+        if(ldshake_project_isedit()) {
+            $(this).on("mouseup", function(event) {
+                if(isInsideDropGrid(this)) {
+                    if($(this).attr("tooltype_added") !== "true") {
+                        //console.log("add");
+                        $(this).attr("tooltype_added", "true"); //we update the added flag to true (is on the grid);
+                        addPlusIcon(this);
+                        addSubToolElem(this);
+                    }
                 }
-            }
 
-        });
+            });
+        }
     });
+
+    if(!ldshake_project_isedit()) {
+        $("#payload .draggable > div.subtool").each(function(elem) {
+            var $this = $(this);
+            console.log(this);
+            this.lds_guid = parseInt($this.attr("associatedlds"), 10);
+
+            $this.filter('[associatedlds]').click(project_popup_show);
+            $this.find("img").hide();
+            $this.css("cursor", "pointer");
+            $this.parent().parent().parent().css("overflow-y", "scroll");
+        });
+    }
 });

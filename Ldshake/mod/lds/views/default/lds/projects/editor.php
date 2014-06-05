@@ -61,6 +61,8 @@
 <script type="text/javascript">
 
     /*  Here my Vars in order to send it to JSON --> */
+    var is_project_edit = true;
+    var is_project_view = false;
     var is_implementation = <?php echo (!empty($is_implementation) ? 'true' : 'false')?>;
     var ldsToBeListed =<?php echo $ldsToBeListed?>;
     var ldproject =<?php echo $ldproject?>;
