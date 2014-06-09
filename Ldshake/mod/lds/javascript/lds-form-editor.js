@@ -1059,6 +1059,13 @@ $(document).ready(function()
 	top.window.onclick = active;
 	top.window.onkeypress = active;
 
+
+    if(google_docs) {
+        $('#page_wrapper').css('width', '1137px');
+        $('#page_wrapper').css('box-shadow', '3px 0px 9px 4px rgba(85, 85, 85, 0.6), -3px 0px 9px 4px rgba(85, 85, 85, 0.6)');
+        $('#one_column, #lds_editor_iframe, #lds_support_editor_iframe').css('width', '1097px');
+    }
+
     //$('#lds_edit_body').hide();
 
     //active();

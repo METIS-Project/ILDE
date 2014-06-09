@@ -210,8 +210,30 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $document_editor->lds_revision_id = 0;
                     $document_editor->save();
 
+                    if(isset($tool['editor_subtype'])) {
+                        require_once __DIR__.'/templates/templates.php';
+                        $lds->editor_subtype = $tool['editor_subtype'];
+
+                        $preferred_formats = array('docx','xlsx', null);
+                        foreach($preferred_formats as $format){
+                            $template_format = $format;
+                            if($templates = ldshake_get_template($lds->editor_subtype, $format))
+                                break;
+                        }
+
+                        if(empty($templates)) {
+                            $template = null;
+                            $template_format = null;
+                        } else {
+                            $template = $templates[0];
+                        }
+                    }
+
                     $editor = editorsFactory::getInstance($document_editor);
-                    $editor_vars = $editor->newEditor();
+                    if($template)
+                        $editor_vars = $editor->newEditor($template, $template_format);
+                    else
+                        $editor_vars = $editor->newEditor();
 
                     if($save_result = $editor->saveDocument($editor_vars)) {
                         list($document_editor, $resultIds_add) = $save_result;

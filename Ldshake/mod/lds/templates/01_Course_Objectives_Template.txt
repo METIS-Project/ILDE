@@ -1,0 +1,510 @@
+<div class="WordSection1">
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<h1><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">01 Course Objectives</span></h1>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 16pt;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Description:</span></b></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">The main objective of this template is to help you determine your course&rsquo;s learning objectives. This is perhaps one of the most important steps in the design process as good learning objectives work as a good roadmap in the design process.</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">To be sent to: </span></b></p>
+
+<ul style="margin-top: 0cm;" type="square">
+	<li class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Project coordinator</span></li>
+</ul>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Instructions</span></b></p>
+
+<p class="MsoTableColorfulListAccent1CxSpFirst" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Fill in the general data: course name, your name, date, time used</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpMiddle" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">As objectives need to be related to tasks identified as priorities in the analysis phase, <b>write</b> those tasks in the corresponding space in the template.</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpMiddle" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Determine knowledge area related to the task.</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpLast" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Write your course objectives. Use the taxonomy table.</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Course Objectives</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">General data</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp; </span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; margin-left: 36pt; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid black; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Course name</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Your name</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Date</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">How long did it take to define this objecitves?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Example:</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Task + Knowledge Areas</span></b></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid black; border-image: none; width: 62.1pt;" valign="top" width="83">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">id</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 5cm;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Task description</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Knowledge area</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comments</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 62.1pt;" valign="top" width="83">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 5cm;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">To put an injection</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Sterilization</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Pharmacology</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Anatomy</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Objectives:</span></b></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="width: 595pt; margin-left: 4.4pt; border-collapse: collapse;" width="793">
+	<tbody>
+		<tr style="height: 35pt;">
+			<td rowspan="2" style="background: rgb(204, 204, 255); border-width: 1pt; border-style: solid; border-color: windowtext windowtext black; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 35pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Knowledge dimension</span></i></b></p>
+			</td>
+			<td colspan="6" style="background: rgb(31, 183, 20); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext black windowtext currentColor; padding: 0cm 5.4pt; width: 502.4pt; height: 35pt;" valign="top" width="670">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Cognitive process dimension<a href="#_ftn1" name="_ftnref1" title=""><span class="MsoFootnoteReference"><span class="MsoFootnoteReference"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 12pt;">[1]</span></b></span></span></a></span></i></b></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Remember</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Understand</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Apply</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Analyze</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Evaluate</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Create</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">A. Factual</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">B. Conceptual </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">C. Procedural&nbsp;</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 31pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 31pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">D. Metacognitive&nbsp;</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 31pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 31pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 31pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 31pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 31pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 31pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+</div>
+
+<div class="WordSection3">
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Task + Knowledge Areas</span></b></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid black; border-image: none; width: 62.1pt;" valign="top" width="83">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">id</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 5cm;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Task description</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Knowledge area</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comments</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td rowspan="3" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 62.1pt;" valign="top" width="83">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></p>
+			</td>
+			<td rowspan="3" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 5cm;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(247, 150, 70); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[write task name]</span></p>
+
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 155.95pt;" valign="top" width="208">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 141.7pt;" valign="top" width="189">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Objectives:</span></b></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="width: 595pt; margin-left: 4.4pt; border-collapse: collapse;" width="793">
+	<tbody>
+		<tr style="height: 35pt;">
+			<td rowspan="2" style="background: rgb(204, 204, 255); border-width: 1pt; border-style: solid; border-color: windowtext windowtext black; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 35pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Knowledge dimension</span></i></b></p>
+			</td>
+			<td colspan="6" style="background: rgb(31, 183, 20); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext black windowtext currentColor; padding: 0cm 5.4pt; width: 502.4pt; height: 35pt;" valign="top" width="670">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Cognitive process dimension<a href="#_ftn2" name="_ftnref2" title=""><span class="MsoFootnoteReference"><span class="MsoFootnoteReference"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 12pt;">[2]</span></b></span></span></a></span></i></b></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Remember</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Understand</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Apply</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Analyze</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Evaluate</span></b></p>
+			</td>
+			<td style="background: rgb(31, 183, 20); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Create</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">A. Factual</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">B. Conceptual </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 16pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 16pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">C. Procedural&nbsp;</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 16pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 16pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 16pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 16pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 16pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 31pt;">
+			<td style="background: rgb(204, 204, 255); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 92.6pt; height: 31pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">D. Metacognitive&nbsp;</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 31pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 31pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 31pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 31pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 31pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 31pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+</div>
+
+<div class="WordSection6">
+<p class="MsoNormal">&nbsp;</p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Observable verbs:</span></b></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="0" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="width: 595pt; margin-left: 4.4pt; border-collapse: collapse;" width="793">
+	<tbody>
+		<tr style="height: 90.05pt;">
+			<td style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 92.6pt; height: 90.05pt;" valign="top" width="123">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Observable verbs</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Examples</span></b><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 90.05pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">recognize; remember</span></i></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 82.45pt; height: 90.05pt;" valign="top" width="110">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="EN-US" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">interpret; exemplify; classify; sum up; infere; compare; explain</span></i></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 82.95pt; height: 90.05pt;" valign="top" width="111">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">execute; implement</span></i></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 86.65pt; height: 90.05pt;" valign="top" width="116">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">differenciate; organize; relate</span></i></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 80.35pt; height: 90.05pt;" valign="top" width="107">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">check; criticize</span></i></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext black currentColor; padding: 0cm 5.4pt; width: 89.65pt; height: 90.05pt;" valign="top" width="120">
+			<p class="MsoNormal" style="margin-bottom: 10pt;"><i><span lang="ES-TRAD" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">generalize; plan; produce</span></i></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+</div>

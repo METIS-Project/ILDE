@@ -2254,7 +2254,7 @@ div.cc_info_icon > div.cc_icon_title {
 /*** projects css ***/
 #droppable_grid {
     width: 690px;
-    height: 616px;
+    height: 661px;
     padding: 0.5em;
     border: 1px solid grey;
     float: left;
@@ -2267,7 +2267,7 @@ div.cc_info_icon > div.cc_icon_title {
 #ldproject_toolBar {
     position: relative;
     width: 250px;
-    height: 630px;
+    height: 675px;
     float:left;
     border-style:
     solid; border-color:
@@ -2287,6 +2287,11 @@ div.cc_info_icon > div.cc_icon_title {
     border: 1px solid #dddddd;
     z-index: 10;
 }
+
+.draggable:not([tooltype_added="true"]):hover {
+    border-color: #757575;
+}
+
 .ui-widget-content {background-image: none; }
 
 .ui-widget-header {background-image: none; background-color: green !important; border-color: black}
@@ -2316,7 +2321,7 @@ div.cc_info_icon > div.cc_icon_title {
     margin-left: -260px;
 }
 
-.draggable > img[tooltype] {
+.draggable img[tooltype] {
     width: inherit;
 }
 
@@ -2336,4 +2341,25 @@ div.cc_info_icon > div.cc_icon_title {
 
 #ldproject_view_grid {
     position: relative;
+}
+
+.projects_tool_caption {
+    position: absolute;
+    bottom: 5px;
+    left: 7px;
+    width: 70px;
+    background-color: rgba(235, 235, 235, 0.8);
+    color: rgb(73, 73, 73);
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px;
+    font-size: 11px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default
 }

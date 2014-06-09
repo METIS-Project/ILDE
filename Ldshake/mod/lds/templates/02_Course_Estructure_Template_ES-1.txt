@@ -1,0 +1,877 @@
+<div class="WordSection1">
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p align="center" class="MsoNormal" style="text-align: center;"><b><span lang="FR" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Dise&ntilde;o Recruitment Course - <span style="color: red;">Estructura</span></span></b></p>
+
+<p class="MsoTocHeading"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&Iacute;ndice</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoToc2"><span lang="ES"><a href="#_Toc326188104"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1. Introducci&oacute;n</span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">. </span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">1</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES"><a href="#_Toc326188105"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2. Componentes B&aacute;sicos del Curso</span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">. </span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">1</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES"><a href="#_Toc326188106"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3. Course Basic Structure</span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">. </span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">2</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES"><a href="#_Toc326188107"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4. Course Structure</span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">. </span><span style="color: windowtext; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; text-decoration: none; display: none;">3</span></a></span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="FR" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b><a name="_Toc326188104"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1. Introducci&oacute;n</span></a></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">En este documento se definen en primer lugar los criterios sobre c&oacute;mo se estructura el curso. Por un lado, se definen los componentes b&aacute;sicos del curso, por otro, la estructura b&aacute;sica com&uacute;n a cualquier curso a distancia. Finalmente, se hace una propuesta de estructuraci&oacute;n de los dos cursos teniendo en cuenta los resultados del an&aacute;lisis y los criterios de estructuraci&oacute;n expuestos en este documento.</span></p>
+
+<h2><a name="_Toc326188105"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2. Componentes B&aacute;sicos del Curso</span></a></h2>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">A continuaci&oacute;n se describen los componentes b&aacute;sicos del curso. Todos no tendr&aacute;n que estar en todos los m&oacute;dulos.</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 19.6pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(191, 191, 191); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 219.7pt;" valign="top" width="293">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Componente</span></b></p>
+			</td>
+			<td style="background: rgb(191, 191, 191); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 467.9pt;" valign="top" width="624">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Descripci&oacute;n</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.6pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 219.7pt;" valign="top" width="293">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 467.9pt;" valign="top" width="624">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Este componente est&aacute; basado en tareas de la vida real, relacionadas con el &aacute;rea de conocimiento en cuesti&oacute;n. Tienen el prop&oacute;sito de integrar habilidades, actitudes y conocimientos. No tienen una respuesta cerrada y deben ordenarse de menos a m&aacute;s dif&iacute;cil. </span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.6pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 219.7pt;" valign="top" width="293">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 467.9pt;" valign="top" width="624">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Esta informaci&oacute;n tiene el objetivo de apoyar la consecuci&oacute;n de la tarea. Se explican elementos b&aacute;sicos del &aacute;rea de conocimiento.&nbsp; Esta informaci&oacute;n es el puente entre lo que saben los alumnos y lo que deben saber para solucionar la tarea. Por ejemplo, un documento que explique qu&eacute; es un &aacute;rbol de problemas, cu&aacute;l es su objetivo, cu&aacute;l es su base te&oacute;rica.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.6pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 219.7pt;" valign="top" width="293">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 467.9pt;" valign="top" width="624">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Esta es informaci&oacute;n b&aacute;sica sobre aspectos rutinarios de una tarea. Por ejemplo, qu&eacute; pasos se deben seguir para realizar un &aacute;rbol de problemas. Se debe proporcionar just in time, es decir, cuando la tarea lo requiera.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.6pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 219.7pt;" valign="top" width="293">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 467.9pt;" valign="top" width="624">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Son ejercicios que se ofrecen a los alumnos para que alcancen un nivel alto de automatismo sobre aspectos rutinarios de una tarea. Por ejemplo, una actividad de autoaprendizaje sobre c&oacute;mo hacer un &aacute;rbol de problemas, cu&aacute;les son los pasos a seguir, qu&eacute; aspectos se deben tener en cuenta, etc.</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<h2><a name="_Toc326188106"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3. Course Basic Structure</span></a></h2>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">La estructura que se propone a continuaci&oacute;n es independiente del contenido del curso. El objetivo principal de esta estructura es facilitar el aprendizaje de los alumnos en l&iacute;nea.</span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">El modelo consta de <b>3</b> partes o fases: <b>Introducci&oacute;n</b>, <b>N&uacute;cleo</b> y <b>Reflexi&oacute;n </b>(<i>ver gr&aacute;fico 3)</i>. En la fase de <b>Introducci&oacute;n, </b>el participante toma un primer contacto con el curso, sus compa&ntilde;eros, los contenidos, etc. En la fase de <b>Reflexi&oacute;n</b> se revisa y eval&uacute;a lo hecho en el curso. Entre estas dos fases se encuentra el <b>N&uacute;cleo</b>, en el que tienen lugar las actividades de aprendizaje relacionadas directamente con el &aacute;rea de conocimiento del curso: Recruitmen in MSF<b> </b></span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span style="left: 0px; width: 493px; height: 50px; margin-top: 6px; margin-left: 2px; position: absolute; z-index: 251658240;"><img src="http://ldshake2.upf.edu/images/image001.png" style="width: 493px; height: 50px;" /></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="margin-left: 70.8pt;"><b><i><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Gr&aacute;fico 3</span></i></b></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">A continuaci&oacute;n se describen brevemente estas <b>3 fases</b>:</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoListParagraph" style="line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><b><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Fase 1. Introducci&oacute;n: </span></b></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Esta fase ir&aacute; m&aacute;s all&aacute; de las t&iacute;picas actividades de calentamiento. Se seguir&aacute;n los siguientes principios:</span></p>
+
+<p class="MsoListParagraphCxSpFirst" style="text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">a.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">El alumno debe <b>familiarizarse</b> con los <b>objetivos de aprendizaje</b>, las <b>tareas</b> que se deben llevar a cabo, <b>problemas </b>que se deben solucionar, el <b>material</b>, los <b>criterios de evaluaci&oacute;n</b> y la <b>metodolog&iacute;a</b> del curso. </span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">b.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Es importante que el alumno <b>conozca</b> y <b>sepa usar el entorno de aprendizaje</b> en el que va a aprender. </span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">c.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Durante esta fase tambi&eacute;n se <b>activa</b> <b>el conocimiento previo</b> de los alumnos relacionado con el &aacute;rea de conocimiento y la tarea de aprendizaje final. Es necesario hacer que los alumnos recuerden conocimientos espec&iacute;ficos mediante actividades dise&ntilde;adas con este prop&oacute;sito.</span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">d.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Por &uacute;ltimo, es importante <b>motivar</b> al alumno. Se deben crear expectativas, proponer actividades atractivas que lo animen a participar. Uno de los elementos claves para que el curso tenga &eacute;xito es <b>generar una comunidad </b>(virtual)<b> de aprendizaje</b>. El participante debe sentirse parte de un grupo con el que pueda compartir dudas, preocupaciones, logros, etc.</span></p>
+
+<p class="MsoListParagraphCxSpLast" style="line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><b><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Fase 2. N&uacute;cleo: </span></b></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">En esta fase tienen lugar las actividades relacionadas con los objetivos de aprendizaje del curso. Estas actividades deben seguir una secuencia o andamiaje l&oacute;gico dependiendo de los objetivos, el tipo de contenido y el problema o tarea final que se pretenda solucionar o lograr. Dependiendo de los objetivos, el perfil de los alumnos, la duraci&oacute;n del curso, etc. deber&aacute;s incluir actividades de un tipo u otro. El dise&ntilde;o de esta parte debe tener en cuenta que:</span></p>
+
+<p class="MsoListParagraph" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 46.85pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">a.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Sub-fase 2.1] El alumno tiene que ser capaz de <b>intercambiar informaci&oacute;n</b>, <b>realizar</b> <b>tareas cooperativas </b>y <b>planificar</b> con el objetivo de solventar el problema o desarrollar la tarea. Para ello: </span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 82.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">interactuar&aacute; con los materiales y los dem&aacute;s participantes (compa&ntilde;eros y tutor)</span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 82.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">har&aacute; lluvias de ideas en grupo, </span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 82.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">tratar&aacute; de definir el problema o tarea (en caso de que lo haya), </span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 82.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">identificar&aacute; los factores o los aspectos importantes y </span></p>
+
+<p class="MsoListParagraphCxSpFirst" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 82.85pt;"><span lang="ES" style="line-height: 150%; font-family: Symbol; font-size: 11pt;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">definir&aacute; los pasos que tienen que seguir estableciendo prioridades. </span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 82.85pt;"><span lang="ES" style="line-height: 150%; font-family: Symbol; font-size: 11pt;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">aprender&aacute; a dar <i>feedback </i>en un entorno virtual de aprendizaje.</span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 46.85pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">b.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Sub-fase 2.2] Tras haber intercambiado informaci&oacute;n y/o planificado las diferentes acciones, el alumno tiene que ser capaz de <b>desarrollar la tarea</b> (o solucionar el problema) y <b>construir el conocimiento </b>que implica este desarrollo. En esta fase los alumnos: </span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 82.85pt;"><span lang="ES" style="line-height: 150%; font-family: Symbol; font-size: 11pt;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">reconocen los beneficios de la interacci&oacute;n (s&iacute;ncrona y as&iacute;ncrona) con los dem&aacute;s participantes y por lo tanto la ponen en pr&aacute;ctica,</span></p>
+
+<p class="MsoListParagraphCxSpMiddle" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 82.85pt;"><span lang="ES" style="line-height: 150%; font-family: Symbol; font-size: 11pt;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">llevan a cabo la tarea o resuelven los problemas derivados de esta de manera cooperativa y </span></p>
+
+<p class="MsoListParagraphCxSpLast" style="text-align: justify; line-height: 150%; text-indent: -18pt; margin-left: 82.85pt;"><span lang="ES" style="line-height: 150%; font-family: Symbol; font-size: 11pt;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">comienzan a tener m&aacute;s control sobre su aprendizaje y por lo tanto son m&aacute;s aut&oacute;nomos,</span></p>
+
+<p class="MsoNormal" style="text-align: justify; line-height: 150%; margin-left: 46.85pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoListParagraph" style="line-height: 150%; text-indent: -18pt;"><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><b><span lang="ES" style="line-height: 150%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Fase 3. Reflexi&oacute;n:</span></b></p>
+
+<p class="MsoNormal" style="line-height: 150%;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Esta fase debe ir destinada principalmente a evaluar y reflexionar sobre los resultados de aprendizaje. Esto se puede hacer de maneras muy diferentes: ex&aacute;menes, r&uacute;bricas, portfolios, presentaciones, etc. Es importante considerar la inclusi&oacute;n de actividades en las que se fomente la evaluaci&oacute;n formativa frente a la sumativa, ya que la primera implica la participaci&oacute;n activa de los estudiantes y repercute positivamente en los resultados de aprendizaje. El objetivo es hacer que el conocimiento recientemente construido sea transferido a los dem&aacute;s alumnos haciendo que estos compartan su trabajo con los dem&aacute;s y el tutor. Para lograr esto los alumnos: </span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 46.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">har&aacute;n una presentaci&oacute;n<a href="#_ftn1" name="_ftnref1" title=""><span class="MsoFootnoteReference"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"><span class="MsoFootnoteReference"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[1]</span></span></span></span></a> (antes habr&aacute; que ense&ntilde;arles a hacerla), la distribuir&aacute;n y la defender&aacute;n ante el resto de la clase (esto se har&aacute; virtualmente)</span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 46.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">revisar&aacute;n el propio proceso (portfolio, r&uacute;brica) y </span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 46.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">recibir&aacute;n <i>feedback </i>del tutor y de los dem&aacute;s participantes e</span></p>
+
+<p class="MsoNormal" style="margin: 0cm 0cm 0pt 46.85pt; text-align: justify; line-height: 150%; text-indent: -18pt;"><span lang="ES" style="font-family: Symbol;">&middot;<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">integrar&aacute;n lo aprendido en el mundo real<a href="#_ftn2" name="_ftnref2" title=""><span class="MsoFootnoteReference"><span style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"><span class="MsoFootnoteReference"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[2]</span></span></span></span></a> </span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<h2><a name="_Toc326188107"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4. Course Structure</span></a></h2>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">En este apartado se hace una propuesta de programa estructura basada en los resultados del Informe de An&aacute;lisis (pendiente de validaci&oacute;n). </span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Desarrollo</span></b></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Fase 1: Introducci&oacute;n</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 0: </span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">N</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Programa del curso</span></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Criterios de evaluaci&oacute;n</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Se explica c&oacute;mo funciona el curso</span></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Fase 2: N&uacute;cleo</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 1: </span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 2: </span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">N</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 3: </span></b><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">AN&Aacute;LISIS DE PROBLEMAS</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 4: </span></b><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">AN&Aacute;LISIS DE OBJETIVOS</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 5: </span></b><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">AN&Aacute;LISIS DE ESTRATEGIAS</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">N</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 6: </span></b><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Elaborar Matriz de Planificaci&oacute;n</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Fase 3: Reflexi&oacute;n</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="4" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 711pt;" valign="top" width="948">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module 7: </span></b><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">REFLEXION</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Component</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y/N</span></b></p>
+			</td>
+			<td style="background: rgb(217, 217, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Comentarios</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Tarea de aprendizaje</span></b></p>
+
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">[elemento principal]</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n de apoyo</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Informaci&oacute;n procedimental</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 19.7pt;" valign="top" width="26">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 148.75pt;" valign="top" width="198">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Actividades o pr&aacute;ctica parcial</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 49.6pt;" valign="top" width="66">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Y</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 492.95pt;" valign="top" width="657">
+			<p class="MsoNormal" style="line-height: normal; margin-bottom: 0pt;"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+&nbsp;
+
+<hr align="left" size="1" width="33%" /></div>
+
+<div>
+<div id="ftn1">
+<p class="MsoNormal" style="text-align: justify;"><a href="#_ftnref1" name="_ftn1" title=""><span class="MsoFootnoteReference"><span lang="ES" style="line-height: 115%; font-family: &quot;Calibri&quot;,&quot;sans-serif&quot;; font-size: 8pt;"><span class="MsoFootnoteReference"><span lang="ES" style="line-height: 115%; font-family: &quot;Calibri&quot;,&quot;sans-serif&quot;; font-size: 8pt;">[1]</span></span></span></span></a><span lang="ES" style="line-height: 115%; font-size: 8pt;"> </span><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 8pt;">Es importante dar a los alumnos la oportunidad de discutir qu&eacute; han aprendido con otros participantes en el curso. Tambi&eacute;n deben tener la oportunidad de &ldquo;defender&rdquo; lo que han aprendido cuando se les ponga a prueba. Cuando hacen lo mencionado anteriormente, en cierto modo, asumen el rol del tutor. La necesidad de &ldquo;defender&rdquo; lo que se ha aprendido refuerza el modelo mental resultante del proceso de aprendizaje reciente. </span></p>
+</div>
+
+<div id="ftn2">
+<p class="MsoFootnoteText" style="text-align: justify; line-height: 115%;"><a href="#_ftnref2" name="_ftn2" title=""><span class="MsoFootnoteReference"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"><span class="MsoFootnoteReference"><span lang="ES" style="line-height: 115%; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 10pt;">[2]</span></span></span></span></a><span lang="ES"> </span><span lang="ES" style="line-height: 115%; font-size: 8pt;">La integraci&oacute;n de los &ldquo;productos&rdquo; en el mundo real es un elemento con una gran fuerza motivadora. </span></p>
+</div>
+</div>

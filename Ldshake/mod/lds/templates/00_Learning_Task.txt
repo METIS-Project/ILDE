@@ -1,0 +1,435 @@
+<div id="revision_wrapper">
+<div class="WordSection1">
+<p align="center" class="MsoNormal" style="text-align: center;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Learning Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: Design Guidelines and Template</span><span style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5em;">&nbsp;</span></p>
+
+<p class="MsoTocHeading"><span lang="ES">&nbsp;</span></p>
+
+<p class="MsoToc2"><span lang="ES-TRAD"><a href="#_Toc355708477"><span lang="EN-US">0 Introduction</span><span style="color: windowtext; text-decoration: none; display: none;">.. </span><span style="color: windowtext; text-decoration: none; display: none;">1</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES-TRAD"><a href="#_Toc355708478"><span lang="EN-US">1. Instructions</span><span style="color: windowtext; text-decoration: none; display: none;">. </span><span style="color: windowtext; text-decoration: none; display: none;">1</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES-TRAD"><a href="#_Toc355708479"><span lang="EN-US">2. Glossary</span><span style="color: windowtext; text-decoration: none; display: none;">. </span><span style="color: windowtext; text-decoration: none; display: none;">2</span></a></span></p>
+
+<p class="MsoToc2"><span lang="ES-TRAD"><a href="#_Toc355708480"><span lang="EN-US">3. Learning Task Template</span><span style="color: windowtext; text-decoration: none; display: none;">. </span><span style="color: windowtext; text-decoration: none; display: none;">5</span></a></span></p>
+
+<p class="MsoNormal"><span lang="ES-TRAD">&nbsp;</span></p>
+
+<h2><a name="_Toc355708477"><span lang="EN-US">0 Introduction</span></a></h2>
+
+<p class="MsoNormal"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">When designing complex learning actions the first step is to determine and outline the learning tasks that will be the backbone on the learning action. The allow us to connect with the analysis phase (Task Analysis) and will work as the engine of all the instructional design process.<b> </b></span></p>
+
+<h2><a name="_Toc355708478"><span lang="EN-US">1. Instructions</span></a></h2>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></b></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Phase</span></b></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Who</span></b></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Recommendation</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Take <b>real-life tasks</b> as a starting point. Include the real-life tasks in the template.</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Technical referent </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Use the task analysis document in which the priorization has been made. Consider first high priority tasks.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Describe <b>task support elements </b>in the template. This are the &ldquo;raw&rdquo; elements of the task. </span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Technical referent </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">When designing learning tasks distinguish between <b>Task Support</b> (Given states (problem situations) Goal States (product) and acceptable solution (how to) ) and <b>Problem solving guidance (</b>Processes needed to solve the problem. See glossary below for more details.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Determine task type.</span></p>
+
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Instructional Designer </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Consider the level of fidelity. Start with <b>low fidelity</b> tasks environments and move towards <b>higher fidelity</b> environments. (Low: Case problems in a paper &ndash; Medium: Computer simulations, role playing &ndash; High: Real partients in a nutrition crisis)</span></p>
+
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Determine </span><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Problem Solving Guidance</span></p>
+
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Determine and describe guidance technique. </span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Instructional Designer </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Although this is done by the ID, the technical referent should collaborate in this task.</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 24.5pt;" valign="top" width="33">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 193pt;" valign="top" width="257">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Sequence Learning tasks</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 142.3pt;" valign="top" width="190">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Instructional Designer </span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 349pt;" valign="top" width="465">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">When sequencing the learning tasks, consider the scaffolding of these tasks. Start with learning tasks with a high level of support and guidance and end with tasks without support and guidance.</span></p>
+
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+
+<h2><a name="_Toc355708479"><span lang="EN-US">2. Glossary</span></a></h2>
+
+<p class="MsoNormal"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">All the elements that need to be included in the learning task description are explained below.</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Fidelity: </span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Task Support</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">:</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Given State</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: Situation the learner confronts. This is the starting point for the learner. This could be formulated as a problem. <b>For example</b>: <i>The mission coordination team (MCT) has identified some gaps in the context analysis document.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Goal State</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This represents the final &ldquo;product&rdquo; or state that the learner reaches after solving the problem. <b>For example</b>: <i>A context analysis document that acutely represents all the elements of a given context.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Acceptable Solution</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: A series of actions or &ldquo;operators&rdquo; that enable the transformation from the given state to the goal state. This solution explains the steps or processes that were taken to solve the problem. In other words, this means to describe how the problem stated is solved. <b>For example</b>: &ldquo;<i>In order to update the context analysis document, I have followed this steps: 1 &ndash; x, 2 &ndash; y, etc.&rdquo;</i> There may be many ways to solve the same problem.</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Types of Tasks: </span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Different types of learning tasks provide different amounts of support by providing different amounts of information on the <b>given state</b>, the <b>goal state</b> and/or <b>the solution</b>.<b> </b></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Case Study</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: Learners are presented with descriptions of actual or hypothetical problem situations (given state). They also provide solutions and the goal states or products. The learners will have to evaluate or study the solutions provided. This is a highly supported type of task indicated for early stages in the learning process.</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Reverse Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: In this kind of task, the <b>given state</b> or <b>problem situation</b> is missing and the learner has to predict it. They will have the goal state and the solution. Learners will have to relate solution steps to given situations or problems. <b>For example</b>: <i>Students have a context analysis document and the solution (how this document has been done) Learners will have to deduce what is the problem or problems that have originated these results.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Imitation Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This kind go task presents a conventional task (see below) with a case study of an analogous task. <b>For example</b>: <i>Learners have a worked out example of how to develop a case study with a problem situation similar to the one they will have to develop.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Non Specific Goal Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This kind of activities stimulate learner to explore relationships between solutions and the goals that can be reached by those solutions. <b>For example: </b><i>There is some security problems related to context analysis. What will you propose as a solution? How will you apply this solution?</i> </span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Completion Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This kind of tasks provides the problem situation (given state), a clear goal and a partial solution. The learners must complete the partial solution by determining and adding the missing steps. <b>For example</b>: <i>Considering the context analysis example: Problem: There is some security problems related to context analysis. Goal: A context analysis document adapted to the new situation. Solution: An incomplete process describing how the problem was solved. The learners have to work out those solutions.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Conventional Task</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This kind of task gives little or no support to learners. They receive a problem situation and a high specific goal. They have to produce the solution (how to) and the goal product (what). In other task types either the goal or the solutions are given to the students. In this case, they have to produce all. </span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Problem solving guidance</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">: This part deals with the process that is needed to solve the problem. Problem solving guidance may be provided in the form of modeling examples, process worksheets and performance constraints.</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Modeling Examples: &nbsp;</span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Maximum guidance is provided by &ldquo;Modeling examples&rdquo;. These examples pay special attention to the processes needed to reach an acceptable solution. Example: <i>Taking into account the context analysis example, a modeling example could consist of a document in which the process to update an actual context analysis is described and commented by an expert. This also could be in the form of video or audio. This could also be done by the teacher thinking aloud while explaining the example.</i></span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Process Worksheets: </span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">This technique provides the learner with the steps that they need to take to solve the problem and guides them through the problem solving process. This is a systematic approach to problem solving for the learning task. This worksheet could also include rules-of-thumb or guiding questions. Taking the context analysis example as an example:</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="border: currentColor; border-image: none; margin-left: 72pt; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(184, 204, 228); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 20pt;" valign="top" width="27">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(184, 204, 228); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 296.15pt;" valign="top" width="395">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Phase in problem solving process</span></p>
+			</td>
+			<td style="background: rgb(184, 204, 228); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 320.65pt;" valign="top" width="428">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Rules of Thumb&nbsp; - Guiding questions</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 20pt;" valign="top" width="27">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 296.15pt;" valign="top" width="395">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Order all the documents that are related to context analysis</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 320.65pt;" valign="top" width="428">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How are you going to organize these documents? </span></p>
+
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Is there a filing system in the mission?</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 20pt;" valign="top" width="27">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 296.15pt;" valign="top" width="395">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Review the documents </span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 320.65pt;" valign="top" width="428">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Which are the most outstaing issues of the document being analyzed?</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 20pt;" valign="top" width="27">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 296.15pt;" valign="top" width="395">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Etc.</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 320.65pt;" valign="top" width="428">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Performance Constraints: </span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">This technique is similar to process worksheets although more directive. It consists in making particular actions that are not relevant in a particular phase of the problem solving process unavailable to the learners in that phase. For example: Students will not be able to &ldquo;Review the documents&rdquo; until they &ldquo;Have ordered all the documents that are related to context analysis&rdquo;. This technique is particularly useful in early phases in the learning process.</span></p>
+
+<p class="MsoNormal"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5em;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span style="font-family: Arial, sans-serif; font-size: 11pt; line-height: 1.5em;">&nbsp;</span></p>
+
+<h2><a name="_Toc355708480"><span lang="EN-US">3. Learning Task Template</span></a></h2>
+
+<p class="MsoNormal"><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Just fill in the information related to your role. Consider the following color code.</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(219, 229, 241); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 705pt;" valign="top" width="940">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">To be filled by technical referent</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 705pt;" valign="top" width="940">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">To be filled by instructional designer</span></b></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoTableGrid" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td colspan="2" style="padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 182.6pt;" valign="top" width="243">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Training/Learning Program</span></b></p>
+			</td>
+			<td colspan="7" style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 522.4pt;" valign="top" width="697">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+			<td style="border-width: medium medium 1pt; border-style: none none solid; border-color: currentColor currentColor windowtext; border-image: none;" width="5">
+			<p class="MsoNormal">&nbsp;</p>
+			</td>
+		</tr>
+		<tr style="height: 8.15pt;">
+			<td rowspan="2" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt; height: 8.15pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">General Information</span></b></p>
+			</td>
+			<td colspan="6" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 302.05pt; height: 8.15pt;" valign="top" width="403">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Learning Task Title:</span></b></p>
+			</td>
+			<td colspan="3" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 302.1pt; height: 8.15pt;" valign="top" width="403">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Date:</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 8.1pt;">
+			<td colspan="6" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 302.05pt; height: 8.1pt;" valign="top" width="403">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Real life task (s):</span></b></p>
+			</td>
+			<td colspan="3" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 302.1pt; height: 8.1pt;" valign="top" width="403">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Author (s):</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 4.1pt;">
+			<td rowspan="10" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt; height: 4.1pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Learning Task Support</span></b></p>
+			</td>
+			<td colspan="2" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 99.2pt; height: 4.1pt;" valign="top" width="132">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Given State or problema situation</span></b></p>
+			</td>
+			<td colspan="7" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 504.95pt; height: 4.1pt;" valign="top" width="673">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr style="height: 4.05pt;">
+			<td colspan="2" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 99.2pt; height: 4.05pt;" valign="top" width="132">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Goal or resultant product:</span></b></p>
+			</td>
+			<td colspan="7" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 504.95pt; height: 4.05pt;" valign="top" width="673">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr style="height: 4.05pt;">
+			<td colspan="2" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 99.2pt; height: 4.05pt;" valign="top" width="132">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Acceptable solution:</span></b></p>
+			</td>
+			<td colspan="7" style="background: rgb(219, 229, 241); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 504.95pt; height: 4.05pt;" valign="top" width="673">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr style="height: 2.15pt;">
+			<td colspan="3" rowspan="6" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 134.65pt; height: 2.15pt;" valign="top" width="180">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Type of learning task </span></b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">(Ordered from high task support to low task support)</span></p>
+			</td>
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2.15pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Case Study</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2.15pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+			<td colspan="2" rowspan="6" style="background: rgb(191, 191, 191); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 271.05pt; height: 2.15pt;" valign="top" width="361">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 2pt;">
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Reverse task</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 2pt;">
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Imitation task</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 2pt;">
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Non-specific goal Task</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 2pt;">
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Completion Task</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 2pt;">
+			<td colspan="3" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 167.4pt; height: 2pt;" valign="top" width="223">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Conventional Task</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 31.05pt; height: 2pt;" valign="top" width="41">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="9" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 604.15pt;" valign="top" width="806">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Notes:</span></b></p>
+			</td>
+		</tr>
+		<tr style="height: 8.5pt;">
+			<td rowspan="3" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt; height: 8.5pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Learning Task Guidance</span></b></p>
+			</td>
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 155.9pt; height: 8.5pt;" valign="top" width="208">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Modelling Examples</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 1cm; height: 8.5pt;" valign="top" width="38">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="background: yellow; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">x</span></b></p>
+			</td>
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 419.9pt; height: 8.5pt;" valign="top" width="560">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr style="height: 8.5pt;">
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 155.9pt; height: 8.5pt;" valign="top" width="208">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Process worsheet</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 1cm; height: 8.5pt;" valign="top" width="38">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 419.9pt; height: 8.5pt;" valign="top" width="560">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr style="height: 8.5pt;">
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 155.9pt; height: 8.5pt;" valign="top" width="208">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Performance constraints</span></b></p>
+			</td>
+			<td style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 1cm; height: 8.5pt;" valign="top" width="38">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+			</td>
+			<td colspan="4" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 419.9pt; height: 8.5pt;" valign="top" width="560">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include description]</span></i></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Instructions</span></b></p>
+			</td>
+			<td colspan="9" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 604.15pt;" valign="top" width="806">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include instructions to students]</span></i></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Dynamics</span></b></p>
+			</td>
+			<td colspan="9" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 604.15pt;" valign="top" width="806">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Include instructions to teachers]</span></i></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 104.65pt;" valign="top" width="140">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><b><span lang="ES-TRAD" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Evaluation</span></b></p>
+			</td>
+			<td colspan="9" style="background: rgb(253, 233, 217); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 604.15pt;" valign="top" width="806">
+			<p class="MsoNormal" style="margin-bottom: 0pt;"><i><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">[Describe how learners performance will be evaluated]</span></i></p>
+			</td>
+		</tr>
+		<tr height="0">
+			<td style="border: currentColor; border-image: none;" width="136">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="93">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="22">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="29">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="24">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="38">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="110">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="33">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="217">&nbsp;</td>
+			<td style="border: currentColor; border-image: none;" width="4">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><b><span lang="EN-US" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+</div>
+</div>

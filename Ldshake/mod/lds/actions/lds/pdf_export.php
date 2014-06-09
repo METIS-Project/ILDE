@@ -393,9 +393,11 @@ $contents = <<<EOD
     div.WordSection2
     {page:WordSection2;}
 
+    /*
     table {
         width: 100%;
     }
+    */
 
     ins {
         background-color: #49FC49;
@@ -418,7 +420,7 @@ $contents = <<<EOD
 /*** projects css ***/
 #droppable_grid {
     width: 690px;
-    height: 616px;
+    height: 661px;
     padding: 0.5em;
     border: 1px solid grey;
     float: left;
@@ -431,7 +433,7 @@ $contents = <<<EOD
 #ldproject_toolBar {
     position: relative;
     width: 250px;
-    height: 630px;
+    height: 675px;
     float:left;
     border-style:
     solid; border-color:

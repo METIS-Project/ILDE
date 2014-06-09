@@ -1,0 +1,152 @@
+<div class="WordSection1">
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 16pt;">Development Template (Main)</span></b></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Introduction</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: This template is a pre step before implementing the activities in exelearning, xerte or moodle. It is advisable you write everything here just in case some of the tools have problems. Moreover, we will send this document to a proofreader that will test spelling, style, etc.</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Instructions:</span></b></p>
+
+<ol start="1" style="margin-top: 0cm;" type="1">
+	<li class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Have your &ldquo;Activities and resources&rdquo; document at hand. You will develop your activities based on what you designed previously.</span></li>
+	<li class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Write your activities. Add a cage per activity,</span></li>
+	<li class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">You may need extra material: photos, video, etc. This will need to be stored in a different folder.</span></li>
+</ol>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<div style="background: rgb(179, 179, 179); padding: 1pt 4pt; border: 1pt solid windowtext; border-image: none;">
+<p class="MsoNormal" style="background: rgb(179, 179, 179); padding: 0cm; border: currentColor; border-image: none;"><span lang="EN-GB" style="color: gray; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module x.x Name</span></p>
+</div>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(204, 255, 204); padding: 0cm 5.4pt; border: 1pt solid black; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Activity code</span></b></p>
+			</td>
+			<td style="background: rgb(204, 255, 204); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">SubMII.1.1</span></p>
+
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="background: rgb(255, 204, 0); border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Activity title</span></b></p>
+			</td>
+			<td style="background: rgb(255, 204, 0); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Activity characteri</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">Compulsory/Voluntary</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Objetivo de la actividad</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Grouping</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Time needed (student)</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Materials</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Additional resources</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 153.5pt;">
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt; height: 153.5pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Activity texts</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt; height: 153.5pt;" valign="top" width="765">
+			<p class="MsoNormal"><b><span lang="EN-US">Introduction</span></b><span lang="EN-US">:</span></p>
+
+			<p class="MsoNormal"><i><span lang="EN-US">&nbsp;</span></i></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">&nbsp;</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">Instructions:</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">Activity text + Feedback</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">&nbsp;</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">Reflexion</span></b></p>
+
+			<p class="MsoNormal"><b><span lang="EN-US">&nbsp;</span></b></p>
+
+			<p class="MsoNormal"><span lang="EN-US">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Examples</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 133pt;" valign="top" width="177">
+			<p class="MsoNormal"><b><span lang="ES" style="font-family: &quot;Arial Narrow&quot;,&quot;sans-serif&quot;;">Tutor&rsquo;s functions</span></b></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 574.1pt;" valign="top" width="765">
+			<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="ES">&nbsp;</span></p>
+
+<div style="padding: 1pt 4pt; border: 1pt solid windowtext; border-image: none;">
+<p class="MsoNormal" style="padding: 0cm; border: currentColor; border-image: none;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+</div>
+</div>

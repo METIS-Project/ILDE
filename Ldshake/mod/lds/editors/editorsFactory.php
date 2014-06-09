@@ -1983,7 +1983,7 @@ SQL;
     }
 
     //load an empty data file to start a new document
-    public function newEditor($template = null)
+    public function newEditor($template = null, $format = null)
     {
         global $CONFIG;
         $editorType = $this->_editorType;
@@ -2002,16 +2002,26 @@ SQL;
         } else {
             $title = T("New LdS");
             $description=T("New LdS");
+
+
             $mimeType = 'text/html';
+            if($format == 'docx') {
+                $mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+            }
             $data = $template;
         }
 
         if($this->_editorType == 'google_spreadsheet') {
             $title=T("New LdS");
             $description = T("New LdS");
-            $mimeType = "application/x-vnd.oasis.opendocument.spreadsheet";
-            $filename = $CONFIG->path.'vendors/emptydocs/empty.ods';
-            $data = file_get_contents($filename);
+            if(!$template) {
+                $mimeType = "application/x-vnd.oasis.opendocument.spreadsheet";
+                $filename = $CONFIG->path.'vendors/emptydocs/empty.ods';
+                $data = file_get_contents($filename);
+            } else {
+                $data = $template;
+                $mimeType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            }
         }
 
         if($guid = $this->get_created_document($data, $mimeType)) {

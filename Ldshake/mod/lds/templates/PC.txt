@@ -8,7 +8,7 @@ line-height:115%"><span style="line-height:115%">Persona Card - Learning Design<
 		<tr>
 			<td style="width:97.5pt;border:solid black 1.0pt;
   padding:5.0pt 5.0pt 5.0pt 5.0pt" valign="top" width="130">
-			<p class="MsoNormal" style="line-height:normal"><font color="black" face="Arial" size="2"><span style="font-size:11.0pt"><img id="image01.png" src="http://ilde.upf.edu/mod/lds/templates/Personacard_files/image002.png" style="border-width: 0px; border-style: solid; width: 89px; height: 178px; float: left;" /></span></font><span style="color: rgb(80, 0, 80); font-family: arial, sans-serif; font-size: 13px; line-height: normal;">R</span><span style="color: rgb(80, 0, 80); font-family: arial, sans-serif; font-size: 13px; line-height: normal;">eplace this image with your own, to give your persona a face.</span></p>
+			<p class="MsoNormal" style="line-height:normal"><font color="black" face="Arial" size="2"><span style="font-size:11.0pt"><img id="image01.png" src="http://ilde.upf.edu/pg/lds/imgdisplay/6426/" style="border-width: 0px; border-style: solid; width: 89px; height: 178px; float: left;" /></span></font><span style="color: rgb(80, 0, 80); font-family: arial, sans-serif; font-size: 13px; line-height: normal;">R</span><span style="color: rgb(80, 0, 80); font-family: arial, sans-serif; font-size: 13px; line-height: normal;">eplace this image with your own, to give your persona a face.</span></p>
 			</td>
 			<td style="width:370.5pt;border:solid black 1.0pt;
   border-left:none;padding:5.0pt 5.0pt 5.0pt 5.0pt" valign="top" width="494">

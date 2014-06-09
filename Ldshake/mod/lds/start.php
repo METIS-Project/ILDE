@@ -151,6 +151,11 @@ function lds_init()
 	//Include the helper functions
     require_once __DIR__.'/lds_contTools.php';
 
+    //Include templates config
+
+    require_once __DIR__.'/templates/project_templates.php';
+
+
     extend_elgg_settings_page('lds/settings/help', 'usersettings/user');
     register_plugin_hook('usersettings:save','user','ldshake_contextual_help_settings_save');
 
@@ -988,23 +993,39 @@ function lds_exec_neweditor ($params)
     switch($params[2]) {
         case 'template':
             require_once __DIR__.'/templates/templates.php';
-            $templates = ldshake_get_template($params[3]);
+            $preferred_formats = array('docx','xlsx', null);
+            foreach($preferred_formats as $format){
+                $template_format = $format;
+                if($templates = ldshake_get_template($params[3], $format))
+                    break;
+            }
+
+            if(empty($templates)) {
+                $template = null;
+                $template_format = null;
+                break;
+            }
+            //$templates = ldshake_get_template($params[3]);
             $template = $templates[0];
 
             $template_doc = new ElggObject();
             $template_doc->description = $template;
             $template_vars = array(
                 'doc' => $template_doc,
-                'title' => $params[3]
+                'title' => $params[3],
+                'format' => $template_format
             );
 
-            $template_html = elgg_view('lds/view_iframe', $template_vars);
+            if(!$template_format)
+                $template_html = elgg_view('lds/view_iframe', $template_vars);
+            else
+                $template_html = $template;
         break;
     }
 
 	//Make an editor object according to the parameters received and create a new session
 	$editor = editorsFactory::getTempInstance($params[1]);
-	$vars = $editor->newEditor($template_html);
+	$vars = $editor->newEditor($template_html, $template_format);
     if(!$vars) {
         register_error("New document error");
         forward($CONFIG->url . 'pg/lds/');

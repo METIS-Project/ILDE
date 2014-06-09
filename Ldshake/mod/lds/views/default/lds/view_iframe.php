@@ -378,9 +378,11 @@ extract ($vars);
     div.WordSection2
     {page:WordSection2;}
 
+    /*
     table {
         width: 100%;
     }
+    */
 
     ins {
         background-color: #49FC49;

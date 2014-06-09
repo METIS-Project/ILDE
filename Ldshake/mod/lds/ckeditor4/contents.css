@@ -28,11 +28,12 @@ ol,ul,dl
 {
     padding-right:40px;
 }
-
+/*
 img.cke_anchor,
 a[data-cke-saved-name] {
     display: none!important;
 }
+*/
 
 html
 {
@@ -357,6 +358,8 @@ div.WordSection1
 div.WordSection2
 {page:WordSection2;}
 
+/*
 table {
     width: 100%;
 }
+*/

@@ -1,0 +1,566 @@
+<div class="WordSection1">
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<h1><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">03 Activities and Resources Outline</span></h1>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 16pt;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Description:</span></b></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">The main objective of this template is to help you determine the outline of the different activities and resources that will be included in the course. </span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">To be sent to: </span></b></p>
+
+<ul style="margin-top: 0cm;" type="square">
+	<li class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Project coordinator</span></li>
+</ul>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Instructions</span></b></p>
+
+<p class="MsoTableColorfulListAccent1CxSpFirst" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">1.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Fill in the general data: course name, your name, date, time used</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpMiddle" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">2.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Consider the different options offered in the MSF e-Campus Handbook and in the CDW (Salmon and Huang&rsquo;s Models)</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpMiddle" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">3.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Determine your courses structure.</span></p>
+
+<p class="MsoTableColorfulListAccent1CxSpLast" style="text-indent: -18pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">4.<span style="font: 7pt/normal &quot;Times New Roman&quot;; font-size-adjust: none; font-stretch: normal;">&nbsp;&nbsp;&nbsp; </span></span><span lang="EN-GB" style="color: rgb(155, 187, 89); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">TIP:</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"> Consider a modular structure. It is more flexible and reusable in different contexts.</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Activities and Resources Outline</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">General data</span></b></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp; </span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; margin-left: 36pt; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="padding: 0cm 5.4pt; border: 1pt solid black; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Course name</span></p>
+			</td>
+			<td style="border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: black black black currentColor; padding: 0cm 5.4pt; border-image: none; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Your name</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor black black; padding: 0cm 5.4pt; border-image: none; width: 260.55pt;" valign="top" width="347">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Date</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor black black currentColor; padding: 0cm 5.4pt; width: 8cm;" valign="top" width="302">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="EN-GB" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module x:</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"> [write name]</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write tasks]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Sub-module x</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: [write name]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">-[write task]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write learning objectives]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Learning Unit x</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: [write name]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write tasks]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write learning objectives]</span></p>
+
+<p class="MsoNormal" style="margin: 0.1pt 0cm 0.1pt 54pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="margin: 0.1pt 0cm 0.1pt 54pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Activities</span></b><span lang="EN-GB" style="font-family: &quot;Times&quot;,&quot;serif&quot;; font-size: 10pt;">:</span></p>
+
+<table border="0" cellpadding="0" class="MsoNormalTable">
+	<tbody>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">id</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Activity title + description</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Objective</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Content</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Resources</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Duration</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Dynamic</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Evaluation</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Modality</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">0<br />
+			Activation</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1<br />
+			Activation</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2<br />
+			Demonstration</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3<br />
+			Demonstration</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4<br />
+			Demonstration</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">TASK</span><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Application + Integration</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="margin: 0.1pt 0cm 0.1pt 54pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Module x:</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;"> [write name]</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write tasks]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Sub-module x</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: [write name]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">-[write task]</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write learning objectives]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Learning Unit x</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">: [write name]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write tasks]</span></p>
+
+<p class="MsoNormal" style="margin-left: 72pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">- [write learning objectives]</span></p>
+
+<p class="MsoNormal" style="margin: 0.1pt 0cm 0.1pt 54pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">&nbsp;</span></b></p>
+
+<p class="MsoNormal" style="margin: 0.1pt 0cm 0.1pt 54pt;"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;;">Activities</span></b><span lang="EN-GB" style="font-family: &quot;Times&quot;,&quot;serif&quot;; font-size: 10pt;">:</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 14pt;">[example]</span></p>
+
+<table border="0" cellpadding="0" class="MsoNormalTable" style="margin-left: -1pt;">
+	<tbody>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">id</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Activity title + description</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Objective</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Content</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Resources</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Duration</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Dynamic</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Evaluation</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Modality</span></b></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">0<br />
+			<b>Activation</b></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What do you know about MSF?</span></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">This could be a short test in which the student is asked about some basic aspects about basic principles of humanitarian actions, MSF history, identity and mission and about advocacy.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Recognize</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"> basic concept related to humanitarian action and MSF.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">basic principles of humanitarian actions, MSF history, identity and mission and about advocacy</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">6 question test developed with exelearning</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">10 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Self Learning</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Summative</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1<br />
+			<b>Activation</b></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">MSF in One Sentence</span></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Students have to post a message in a forum in which they will have to define MSF in one sentence. They will also have to post a comment to another participant.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Recall</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"> basic concepts related to humanitarian action and MSF</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">basic principles of humanitarian actions, MSF history, identity and mission and about advocacy</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Forum<br />
+			Post some samples</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">10 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Collaborative</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Peer-evaluation</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2<br />
+			<b>Demonstration</b></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Humanitarian Action: Basic Principles</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Recognize</span></b><span lang="EN-GB" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"> the basic principles of Humanitarian aid Action.</span><br />
+			&nbsp;</p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Humanitarian Action Basic Principles</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Ver documento &quot;FAQ on International Humanitary Law&quot; (doc PPD virtual) ExeLearning activities.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">20 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Self Learning</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Summative</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3<br />
+			<b>Demonstration</b></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">MSF: History and Identity</span></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Participants have access to a document (video, text or graphic - or all of them. Alain, buscar documentos en PPD virtual) in which MSF History and Identity is described (or depicted) The participant has to answer some questions. It would be advisable to work on some of the formats that will asked for in the final task.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Recall</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"> the main events and elements related to MSF history and identity</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">MSF History and Identity</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="ES" style="color: red; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">La Mancha doc, La Carta,</span><br />
+			<span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"><span style="color: red;">Ver material disponible en el PPD virtual Self-Learning Activity (exeLearning)</span><br />
+			<span style="color: red;">See actividad del PPD virtual</span></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">20 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Self-Learning<br />
+			<span style="color: red;">+ Cuestionario???</span><br />
+			<span style="color: red;">Ver actividad que hay en el PPD</span></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Summative</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4<br />
+			<b>Demonstration</b></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Do you Know Something about Advocacy?</span></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Participants will have access to some actual examples in which advocacy actions are described or showed. The student, the needs to choose the characteristics that conform or describe concetps. Maybe the student could choose a list of characteristics from a list to complete a conceptual map (include tips) - <span style="color: red;">PULIR ESTA ACTIVIDAD</span></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Infer which are the main objectives and characteristics / Activities of advocacy by having access to some actual examples and pointing out the main elements.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Advocacy in MSF</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Self learning ExeLearning</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">20 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">SelfLearning</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Summative</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="color: black; font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">TASK</span></b><br />
+			<b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Application + Integration</span></b></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Show Off What you Know!!!</span></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Students will have to design a ppt in which the 3 areas seen previously are synthetized. They will have to use a template in which some tips and guiding questions will be included.<br />
+			Presentations will be posted in a data base or forum for peer review and voting.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Explain the following concepts: basic principles of humanitarian actions, MSF history, identity and mission and about advocacy</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">basic principles of humanitarian actions, MSF history, identity and mission and about advocacy</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><b><u><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">PPT template</span></u></b><br />
+			<span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"><span style="color: red;">Could they use other format?</span></span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">60 m</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Self Learning or Group work. It will depend on the situation at the time of delivery.</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Rubric<br />
+			Peer-evaluation</span></p>
+			</td>
+			<td style="padding: 0.75pt; border: 1pt solid windowtext; border-image: none;">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Online</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal" style="margin-left: 36pt;"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+</div>

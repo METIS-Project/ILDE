@@ -1,0 +1,678 @@
+<div class="WordSection1">
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 14pt;">Activity Analysis Questionnaire</span></b></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></b></p>
+
+<p class="MsoNormal"><b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Activity:</span></b><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;"> <i>Design a Security Plan </i></span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(230, 230, 230); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Step</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Guiding questions</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Responses</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Clarify purpose of activity System</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 29.5pt;">
+			<td rowspan="2" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 29.5pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1.1</span></p>
+			</td>
+			<td rowspan="2" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 29.5pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Understand relevant context (s) within which the activity occurs</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 29.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Generate a list of situations within which activity under consideration might arise. </span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 29.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 29.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 29.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What factors contribute to the dynamics of the situation?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 29.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">1.2</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Understand the learner his/her motivations and interpretations of perceived contradictions system</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Generate a list of subject (learner)- driven motives and goals that might drive the activity.</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(255, 153, 0); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(230, 230, 230); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Step</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Guiding questions</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Responses</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Analyze the activity system</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="5" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2.1</span></p>
+			</td>
+			<td rowspan="5" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Define the subject (learner)</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Who are the participants in the activity system?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are their roles?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are their <span style="background: lime;">beliefs</span> towards the activty?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What motivates them to complete the task or activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are their expectations about their performance with respect to this task or activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 27.9pt;">
+			<td rowspan="5" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 27.9pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2.2</span></p>
+			</td>
+			<td rowspan="5" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 27.9pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Define the relevant community/communities</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How do participants perceive their roles in relationship to the goals of the organization?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 27.9pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What is the structure of social interactions surrounding the activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 27.9pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What other perspectives might impact this activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 27.9pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What perceived rewards await the subject (learner) when it accomplishes task?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 27.9pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What disincentives exist for not completing the goal?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 27.9pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">2.3</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Define the object</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What is the expected outcome of the activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.3pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What is the nature of the object? How tangible is it?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.3pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What criteria will be used by management to evaluate the outcome?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.3pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are the goals of the activity and how they are related to the goals of the organization?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.3pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(230, 230, 230); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Step</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Guiding questions</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Responses</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Analyze the Activity Structure</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3.1</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Define the activity itself</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How work is being done in practice?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What historical phases have there been on the work activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What norms, rules, and procedures in the actions and operations have been documented?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">In which actions the subjects (learners) participate?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 62.75pt;">
+			<td rowspan="2" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 62.75pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">3.2</span></p>
+			</td>
+			<td rowspan="2" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 62.75pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Decomposing the activity into its component actions and operations</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">List the actions implied in the process and who carry them out.</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">For each action, which are the operations the subject perform?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="color: rgb(153, 153, 153); font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(230, 230, 230); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Step</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Guiding questions</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Responses</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Analyze Mediators</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4.1</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Tool mediators and mediation</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What tools are used in this activity now?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What function do they perform?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are the other physical and cognitive tools (procedures, laws) used to perform activities in different settings?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What other uses does the tool have in other contexts (for example in Security management)?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 62.75pt;">
+			<td rowspan="3" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 62.75pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4.2</span></p>
+			</td>
+			<td rowspan="3" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 62.75pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Rule mediators and mediation</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What rules surround the task?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How have the rules been enforced?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How visible were the infractions enforced?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">4.3</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Role mediators and mediation</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What roles surround the activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How are those roles assigned?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How have those roles changed over time?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How permanent are roles in the organization? Are they person specific or task specific?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+
+<table border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable" style="border: currentColor; border-image: none; border-collapse: collapse;">
+	<tbody>
+		<tr>
+			<td style="background: rgb(230, 230, 230); padding: 0cm 5.4pt; border: 1pt solid windowtext; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Id</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Step</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Guiding questions</span></p>
+			</td>
+			<td style="background: rgb(230, 230, 230); border-width: 1pt 1pt 1pt medium; border-style: solid solid solid none; border-color: windowtext windowtext windowtext currentColor; padding: 0cm 5.4pt; border-image: none; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Responses</span></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="ES" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">5</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Analyze the Context</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="background: rgb(12, 12, 12); border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 25.35pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">5.1</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 25.35pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">Internal or subject (learner) bounds</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are the assumptions about the time and effort to be expended in this activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What internal/individual forces or needs propel de activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How these forces will be changed by the introduction of this learning action/course?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 25.35pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What are some of the limitations placed by other organization forces or job requirements?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 25.35pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 62.75pt;">
+			<td rowspan="4" style="border-width: medium 1pt 1pt; border-style: none solid solid; border-color: currentColor windowtext windowtext; padding: 0cm 5.4pt; border-image: none; width: 26.1pt; height: 62.75pt;" valign="top" width="35">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">5.2</span></p>
+			</td>
+			<td rowspan="4" style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 171pt; height: 62.75pt;" valign="top" width="228">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">External or community/contextual bounds</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How much freedom were individuals given about whether or not to participate in the course?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 62.75pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How congruent are the activity and goals of the community in which the activity occurs?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">How are tasks shared among participants?</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+		<tr style="height: 75.5pt;">
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">What and how the external (community) forces or needs propel the activity?</span></p>
+
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+			<td style="border-width: medium 1pt 1pt medium; border-style: none solid solid none; border-color: currentColor windowtext windowtext currentColor; padding: 0cm 5.4pt; width: 237.8pt; height: 75.5pt;" valign="top" width="317">
+			<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<p class="MsoNormal"><span lang="EN-GB" style="font-family: &quot;Arial&quot;,&quot;sans-serif&quot;; font-size: 11pt;">&nbsp;</span></p>
+</div>
