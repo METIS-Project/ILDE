@@ -2709,7 +2709,7 @@ function lds_exec_projects ($params)
         $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my project designs");
+        $vars['title'] = T("All my project workflows");
     }
 
     if(isset($params[1]) && $params[1] == 'implement')
@@ -2763,7 +2763,7 @@ function lds_exec_projects_implementations ($params)
         $vars['count'] = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my Project designs");
+        $vars['title'] = T("All my Project workflows");
     }
 
 
@@ -2891,7 +2891,7 @@ function lds_exec_new_project ($params)
 
     //Create an empty LdS object to initialize the form
     $vars['initLdS'] = new stdClass();
-    $vars['initLdS']->title = T("Untitled Project Design");
+    $vars['initLdS']->title = T("Untitled Project Workflow");
     $vars['initLdS']->granularity = '0';
     $vars['initLdS']->completeness = '0';
     $vars['initLdS']->tags = '';
@@ -2928,7 +2928,7 @@ function lds_exec_new_project ($params)
 
     $vars['starter'] = get_loggedin_user();
 
-    $vars['title'] = T("New LdS Project Design");
+    $vars['title'] = T("New LdS Project Workflow");
 
     $vars['project']['ldproject'] = '[]';
     $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));

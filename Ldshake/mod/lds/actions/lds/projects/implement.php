@@ -36,6 +36,9 @@
 /**
  * LdS save controller.
  */
+
+set_time_limit (0);
+
 require_once __DIR__.'/../../../lds_contTools.php';
 
 $project_design_id = get_input('guid');

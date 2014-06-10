@@ -214,12 +214,13 @@ $(document).ready(function() {
         //console.log(item);Semantic mechanisms supporting management and re-use of learning designs in teacher communities
         $(toolElem).append(item);
 
-        if(is_implementation || !ldshake_project_isedit()) {
-            item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
+        //lds title
+        item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
+        if(is_implementation) {
             item += 'Untitled LdS';
-            item += '</div>';
-            $(toolElem).append(item);
         }
+        item += '</div>';
+        $(toolElem).append(item);
 
         var $addedItem = $("#"+id);
 
@@ -289,18 +290,24 @@ $(document).ready(function() {
         var id = $(toolElem).find('[tooltype]').attr("tooltype") + "_"
             + $(toolElem).find('[subtype]').attr("subtype") + "_add";
 
-        var item = '<img id="' + id + '" class="addsubtool-icon" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999; cursor: pointer;"/>';
+        var pointer = "";
+        if (ldshake_project_isedit())
+            pointer = ' cursor: pointer;';
+
+        var item = '<img id="' + id + '" class="addsubtool-icon" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; display:block; position:absolute; z-index: 9999;' + pointer + '"/>';
 
         //console.log(item);
         //console.log(toolLocation);
         $(toolElem).append(item);
         var $addedItem = $("#"+id);
 
-        $addedItem.on("click", function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            addSubToolElem(toolElem);
-        });
+        if(ldshake_project_isedit()) {
+            $addedItem.on("click", function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addSubToolElem(toolElem);
+            });
+        }
     }
 
     function addAttacthIcon(subToolElem) {
@@ -403,7 +410,7 @@ $(document).ready(function() {
                         var $addedElement = addSubToolElem(this);
                         var addedElement = $addedElement.get(0);
                         $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
-                        if(is_implementation) {
+                        if(is_implementation || !ldshake_project_isedit()) {
                             var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
                             if(lds)
                                 $('#' + addedElement.id + '_title').text(lds.lds.title);
@@ -432,7 +439,11 @@ $(document).ready(function() {
     if(!ldshake_project_isedit()) {
         $("#payload .draggable > div.subtool").each(function(elem) {
             var $this = $(this);
-            console.log(this);
+
+            //no lds created
+            if(!$this.filter('[associatedlds]').length)
+                return true;
+
             this.lds_guid = parseInt($this.attr("associatedlds"), 10);
 
             $this.filter('[associatedlds]').click(project_popup_show);

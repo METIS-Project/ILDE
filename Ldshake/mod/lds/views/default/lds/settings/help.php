@@ -38,7 +38,7 @@ global $CONFIG;
 ?>
     <h3><?php echo T("Contextual help"); ?></h3>
 
-    <p><?php echo T("Do you want to disable the contextual help toolips?"); ?></p>
+    <p><?php echo T("Do you want to disable the contextual help tooltips?"); ?></p>
 
 <?php
 
