@@ -37,7 +37,7 @@
  * LdS save controller.
  */
 
-set_time_limit (0);
+set_time_limit (300);
 
 require_once __DIR__.'/../../../lds_contTools.php';
 

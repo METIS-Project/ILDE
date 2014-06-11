@@ -146,6 +146,13 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'icon' => 'msf',
         ),
 
+        'msf_a02' => array(
+            'title' => T('Task Analysis'),
+            'type'  => 'google_spreadsheet',
+            'subtype'   => 'msf_a02',
+            'icon' => 'msf',
+        ),
+
         'msf_d00' => array(
             'title' => T('Learning Task'),
             'type'  => 'google_docs',
@@ -180,14 +187,6 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'subtype'   => 'msf_d03',
             'icon' => 'msf',
         ),
-
-        'msf_a02' => array(
-            'title' => T('Task Analysis'),
-            'type'  => 'google_spreadsheet',
-            'subtype'   => 'msf_a02',
-            'icon' => 'msf',
-        ),
-
     );
 
     $CONFIG->project_templates['full'] = array_merge($CONFIG->project_templates['full'], $CONFIG->project_templates['msf']);
