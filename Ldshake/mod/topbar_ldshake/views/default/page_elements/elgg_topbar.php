@@ -131,6 +131,13 @@ if (isloggedin()) :
                         <?php if($vars['url'] == "http://ilde.upf.edu/kek/"):?>
                             <li id="tb_conceptualize_new11" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/kek_p1"><?php echo T("Πρότυπο Διδακτικού Σεναρίου") ?></a></li>
                         <?php endif; ?>
+
+                        <?php if(isset($CONFIG->project_templates['msf'])):?>
+                        <?php foreach($CONFIG->project_templates['msf'] as $project_template_key => $project_template): ?>
+                            <li id="tb_conceptualize_<?php echo $project_template_key?>" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/<?php echo $project_template['type']?>/template/<?php echo $project_template['subtype']?>"><?php echo T($project_template['title']) ?></a></li>
+                        <?php endforeach; ?>
+                        <?php endif; ?>
+
                         <li id="tb_newlds_pattern" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/coursemap"><?php echo T("Course Map") ?></a></li>
                         <li id="tb_conceptualize_new1" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/design_pattern"><?php echo T("Design Pattern") ?></a></li>
                         <li id="tb_conceptualize_new2" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/MDN"><?php echo T("Design Narrative") ?></a></li>
