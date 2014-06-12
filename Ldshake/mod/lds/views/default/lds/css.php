@@ -2363,3 +2363,20 @@ div.cc_info_icon > div.cc_icon_title {
     user-select: none;
     cursor: default
 }
+
+.workflow_order {
+    width: 18px;
+    height: 14px;
+    left: -5px;
+    top: -3px;
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    border: 3px solid #00F;
+    border-radius: 20px;
+    background-color: #FFF;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 2px;
+    padding-top: 2px;
+}

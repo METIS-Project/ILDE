@@ -155,6 +155,7 @@ function ldshake_projects_find_lds(guid) {
 
 $(document).ready(function() {
 
+    ldshake_project_doc_number = 1;
     jsPlumb.Defaults.Container = $("#ldproject_toolBar");
 
     /*crear elemento +
@@ -223,6 +224,10 @@ $(document).ready(function() {
         $(toolElem).append(item);
 
         var $addedItem = $("#"+id);
+
+        //workflow number workflow_order
+        item = '<div id="' + id + '_workflow_order' + '" class="subtool_title workflow_order"></div>';
+        $addedItem.append(item);
 
         if(ldshake_project_isedit()) {
             addRemoveIcon($addedItem.get(0));
@@ -305,7 +310,10 @@ $(document).ready(function() {
             $addedItem.on("click", function(event) {
                 event.preventDefault();
                 event.stopPropagation();
-                addSubToolElem(toolElem);
+
+                var $addedItem = addSubToolElem(toolElem);
+
+                $addedItem.find('.workflow_order').text(ldshake_project_doc_number++);
             });
         }
     }
@@ -409,6 +417,16 @@ $(document).ready(function() {
                     {
                         var $addedElement = addSubToolElem(this);
                         var addedElement = $addedElement.get(0);
+
+                        if(typeof tool.associatedLdS[i].workflow_order === 'number') {
+                            if(typeof tool.associatedLdS[i].workflow_order > ldshake_project_doc_number)
+                                ldshake_project_doc_number = tool.associatedLdS[i].workflow_order +1;
+
+                            $addedElement.find(".workflow_order").text(tool.associatedLdS[i].workflow_order);
+                        } else {
+                            $addedElement.find(".workflow_order").text(ldshake_project_doc_number++);
+                        }
+
                         $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
                         if(is_implementation || !ldshake_project_isedit()) {
                             var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
@@ -428,7 +446,9 @@ $(document).ready(function() {
                         //console.log("add");
                         $(this).attr("tooltype_added", "true"); //we update the added flag to true (is on the grid);
                         addPlusIcon(this);
-                        addSubToolElem(this);
+                        var $addedItem = addSubToolElem(this);
+
+                        $addedItem.find('.workflow_order').text(ldshake_project_doc_number++);
                     }
                 }
 
