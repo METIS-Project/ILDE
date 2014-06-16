@@ -50,6 +50,7 @@ $isNew = false;
 
 $lds_recovery = get_input('lds_recovery', "0");
 $editor_type = get_input('editorType');
+$editor_subtype = get_input('editor_subtype', null);
 $google_docs_support_id = get_input('google_docs_support_id', false);
 $google_docs_support_title = get_input('google_docs_support_title', false);
 $docSession = get_input('editor_id');
@@ -91,6 +92,7 @@ else
 	$lds->owner_guid = get_loggedin_userid();
 	$lds->external_editor = true;
     $lds->editor_type = $editor_type;
+    $lds->editor_subtype = $editor_subtype;
     if($lds->editor_type == "webcollagerest" || $lds->editor_type == "openglm" || $lds->editor_type == "cadmos" || $lds->editor_type == "exelearningrest")
         $lds->implementable = '1';
 	$user = get_loggedin_user();

@@ -111,10 +111,10 @@ $resultIds->requestCompleted = true;
 
 $preserved_lds = array();
 $items_to_implement = array();
-$pg_data = json_decode($project_design->description, true);
+$pg_data = ldshake_project_upgrade(json_decode($project_design->description));
 
 if($project_design->getSubtype() == 'LdSProject_implementation')
-    ldsshake_project_implement($pg_data, $project_design);
+    ldsshake_project_implement($pg_data->tools, $project_design);
 
 $project_design->description = json_encode($pg_data);
 $project_design->save();

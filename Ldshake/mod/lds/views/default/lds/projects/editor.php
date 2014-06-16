@@ -4,6 +4,7 @@
 <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
     <div id="two_column" style="padding-bottom:0 !important">
         <div id="droppable_grid" class="" type="conceptualize" style="width: <?php echo (934 - 95*(ceil(count($CONFIG->project_templates['full'])/7)))?>px;">
+            <div id="project_add_note">sticky note</div>
         </div>
         <div id="ldproject_toolBar" style="width: <?php echo (8 + 95*(ceil(count($CONFIG->project_templates['full'])/7)))?>px;">
 
@@ -33,7 +34,7 @@
     var is_project_view = false;
     var is_implementation = <?php echo (!empty($is_implementation) ? 'true' : 'false')?>;
     var ldsToBeListed =<?php echo $ldsToBeListed?>;
-    var ldproject =<?php echo $ldproject?>;
+    var ldproject =<?php echo json_encode(ldshake_project_upgrade(json_decode($ldproject)))?>;
     var totalToLoad = ldproject.length;
     var toolLoaded = 0;
     var $fmr = document.getElementById("droppable_grid").targetTop;

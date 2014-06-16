@@ -168,6 +168,13 @@ if (isloggedin()) :
 
 <div style="clear:both;"></div>
 <?php endif;?>
+
+<div id="min_version" class="lds_popup">
+    <a class="lds_close_popup" id="ldsimplement_popup_close" href="#"><?php echo T("Cancel") ?></a>
+
+    <div class="browseralert">Your browser does not support some of the required features to run this webapp.<br />Upgrade to a newer browser (e.g. <a href="http://www.google.com/chrome/" target="_blank">Chrome</a>, <a href="http://www.microsoft.com/en-us/download/internet-explorer-11-details.aspx" target="_blank">Internet Explorer 11</a>), <a href="http://www.firefox.com" target="_blank">Firefox</a>, <a href="http://www.opera.com" target="_blank">Opera</a> for a better browsing experience.</div>
+</div>
+
 <?php
     $new_tooltips = array(
         'tb_new_option_conceptualize'   => T('Options for starting to think about your learning design.'),

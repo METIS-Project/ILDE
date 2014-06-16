@@ -33,8 +33,27 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
+function ldshake_project_AddStickyNote(top, left) {
+    var width = 100;
+    var height = 100;
+    var item = '<div class="stickynote" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; top:' + top + 'px' + ';" />';
+
+    //console.log(item);Semantic mechanisms supporting management and re-use of learning designs in teacher communities
+    $('#droppable_grid, #ldproject_view_grid').append(item);
+    var $note = $('.stickynote').last();
+
+    jsPlumb.draggable($note, {
+        containment: "#droppable_grid"
+    });
+    item = '<textarea class="stickynotetext" />';
+    $note.append(item);
+    return $note;
+}
+
+
 function saveProjectN(){
-    ldproject = [];
+    ldproject = {};
+    ldproject.tools = [];
     $(".draggable").each(function(){
 
         if($(this).attr("tooltype_added") === "true"){
@@ -62,12 +81,33 @@ function saveProjectN(){
                 else
                     associatedLdS.guid = null;
 
+                var workflow_order;
+                try {
+                    workflow_order = parseInt($(this).find('.workflow_order > input').val(), 10);
+                } catch(e) {
+                    workflow_order = 0;
+                }
+                associatedLdS.workflow_order = workflow_order;
+                //associatedLdS.title = $(this.id + '_title').text();
+
+                if($(this).filter('[clone]').length)
+                    associatedLdS.clone = true;
+
                 tool.associatedLdS.push(associatedLdS);
             })
 
-            ldproject.push(tool);
+            ldproject.tools.push(tool);
         }
     });
+
+    ldproject.stickynotes = [];
+    $(".stickynotetext").each(function() {
+        var note = {};
+        note.pos = $(this).parent().position();
+        note.text = $(this).val();
+        ldproject.stickynotes.push(note);
+    });
+
     return ldproject;
 }
 
@@ -153,10 +193,29 @@ function ldshake_projects_find_lds(guid) {
     return false;
 }
 
+function ldshake_projects_find_projectlds(guid) {
+    for(var i=0; i<ldproject.tools.length; i++) {
+        for(var j=0; j < ldproject.tools[i].associatedLdS.length; j++) {
+            if(ldproject.tools[i].associatedLdS[j].guid == guid)
+            return ldproject.tools[i].associatedLdS[j];
+        }
+    }
+    return false;
+}
+
 $(document).ready(function() {
 
     ldshake_project_doc_number = 1;
-    jsPlumb.Defaults.Container = $("#ldproject_toolBar");
+
+    jsPlumb.draggable($('#project_add_note'), {
+        containment: "#droppable_grid"
+    });
+
+    $('#project_add_note').on('mouseup', function() {
+        var pos = $(this).position();
+        ldshake_project_AddStickyNote(pos.top,pos.left);
+        $(this).css("top", "").css("left", "");
+    });
 
     /*crear elemento +
      Meterle un evento""
@@ -226,7 +285,10 @@ $(document).ready(function() {
         var $addedItem = $("#"+id);
 
         //workflow number workflow_order
-        item = '<div id="' + id + '_workflow_order' + '" class="subtool_title workflow_order"></div>';
+        var readonly = '';
+        if(!ldshake_project_isedit())
+            readonly = 'readonly="readonly"';
+        item = '<div id="' + id + '_workflow_order' + '" class="subtool_title workflow_order"><input type="text" maxlength="2" ' + readonly + ' value="" /></div>';
         $addedItem.append(item);
 
         if(ldshake_project_isedit()) {
@@ -270,7 +332,7 @@ $(document).ready(function() {
             var tool = subToolElem.parentElement;
             tool.jsPlumb.detach(subToolElem.jsPlumbConn);
             $(subToolElem).remove();
-            if(is_implementation) {
+            if(ldshake_project_isedit()) {
                 $('#' + subToolElem.id + '_title').remove();
             }
 
@@ -313,7 +375,7 @@ $(document).ready(function() {
 
                 var $addedItem = addSubToolElem(toolElem);
 
-                $addedItem.find('.workflow_order').text(ldshake_project_doc_number++);
+                $addedItem.find('.workflow_order > input').val(ldshake_project_doc_number++);
             });
         }
     }
@@ -341,28 +403,37 @@ $(document).ready(function() {
             var thereAreLdSListed = false;
             ldsToBeListed.forEach(function(entry){
                 if($(subToolElem).attr("tooltype") == entry.lds.editor_type
-                    && ($(subToolElem).attr("subtype") === "undefined" || $(subToolElem).attr("subtype") == entry.lds.editor_subtype)){
+                    && ($(subToolElem).attr("subtype") === "undefined" || $(subToolElem).attr("subtype") == entry.lds.editor_subtype)
+                    && !ldshake_projects_find_projectlds(entry.lds.guid)){
                     item = item + '<input type="radio" name="lds_selection" value="'+entry.lds.guid+'">'+entry.lds.title+'</br>';
                     thereAreLdSListed=true;
                 }
             });
             if(thereAreLdSListed)
-                item = item + '<input type="submit" value="Submit">'
+                item = item + '<input class="clone" type="submit" value="Attach a duplicate" style="margin-right: 40px" /><input class="noclone" type="submit" value="Attach" />'
             else
                 item = item + "<h3 style='text-align:center'>Sorry, but there is not any compatible LdS with this Tool..</h3>";
 
             item = item + '<input type="button" value="Close Window" onclick="closemyLdSWindow()" style="float:right">'
             item = item + "</form>";
             $('#lds_attachment_popup').append(item);
+            $('#lds_attachment_popup').find('input.clone').on('click', function() {
+                $(subToolElem).attr("clone", "clone");
+            });
+
+            $('#lds_attachment_popup').find('input.noclone').on('click', function() {
+                $(subToolElem).removeAttr("clone");
+            });
+
             $('[name="myldSform"]').on("submit", function(event){
                 event.preventDefault();
                 var lds_id = document.myldSform.lds_selection.value;
                 $(subToolElem).attr("associatedLdS", lds_id);
-                if(is_implementation) {
+                //if(is_implementation) {
                     var lds = ldshake_projects_find_lds(parseInt(lds_id, 10));
                     if(lds)
                         $('#' + subToolElem.id + '_title').text(lds.lds.title);
-                }
+                //}
 
                 $('#lds_attachment_popup').toggle();
                 $('#shade').toggle();
@@ -377,22 +448,31 @@ $(document).ready(function() {
     // $("#ldproject_toolBar").css("bottom", '"'+document.querySelector("[toolname='CADMOS']").getBoundingClientRect().bottom+600+"'");
 
     var toolLoaded=0;
-    var totalToLoad=ldproject.length;
+    var totalToLoad=ldproject.tools.length;
     $(".draggable" ).each(function(){
         //create a jsPlumb instance for each draggable
         this.jsPlumb = jsPlumb.getInstance();
-        this.jsPlumb.Defaults.Container = this;
+        //this.jsPlumb.Defaults.Container = this;
         this.subToolElemCount = 0;
         this.associatedLdS = new Array();
 
         if(ldshake_project_isedit())
-            jsPlumb.draggable(this);
+            jsPlumb.draggable(this, {
+                containment: "#ldproject_conceptualize_grid"
+            });
 
         //EDIT/VIEW PART
-        if(ldproject.length > 0 && toolLoaded < totalToLoad)
+        if(ldproject.tools.length > 0 && toolLoaded < totalToLoad)
         {
-            var tool = ldproject[toolLoaded]; //obtenemos el objeto
-            if(tool.toolName == $(this).find('[tooltype]').attr("toolName"))
+            var toolName = $(this).find('[tooltype]').attr("toolName");
+            var tool = false; //obtenemos el objeto
+
+            for(var i=0;i < ldproject.tools.length; i++) {
+                if(ldproject.tools[i].toolName == toolName)
+                    tool = ldproject.tools[i];
+            }
+
+            if(tool)
             {
                 $(this).attr("tooltype_added", "true");
                 $(this).show();
@@ -419,20 +499,24 @@ $(document).ready(function() {
                         var addedElement = $addedElement.get(0);
 
                         if(typeof tool.associatedLdS[i].workflow_order === 'number') {
-                            if(typeof tool.associatedLdS[i].workflow_order > ldshake_project_doc_number)
-                                ldshake_project_doc_number = tool.associatedLdS[i].workflow_order +1;
+                            if(tool.associatedLdS[i].workflow_order > ldshake_project_doc_number)
+                                ldshake_project_doc_number = tool.associatedLdS[i].workflow_order + 1;
 
-                            $addedElement.find(".workflow_order").text(tool.associatedLdS[i].workflow_order);
+                            $addedElement.find(".workflow_order > input").val(tool.associatedLdS[i].workflow_order);
                         } else {
-                            $addedElement.find(".workflow_order").text(ldshake_project_doc_number++);
+                            $addedElement.find(".workflow_order > input").val(ldshake_project_doc_number++);
+                        }
+
+                        if(tool.associatedLdS[i].clone === true) {
+                            $addedElement.attr("clone","clone");
                         }
 
                         $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
-                        if(is_implementation || !ldshake_project_isedit()) {
+                        //if(is_implementation || !ldshake_project_isedit()) {
                             var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
                             if(lds)
                                 $('#' + addedElement.id + '_title').text(lds.lds.title);
-                        }
+                        //}
                     }
                 }
                 toolLoaded++;
@@ -448,7 +532,7 @@ $(document).ready(function() {
                         addPlusIcon(this);
                         var $addedItem = addSubToolElem(this);
 
-                        $addedItem.find('.workflow_order').text(ldshake_project_doc_number++);
+                        $addedItem.find('.workflow_order  > input').val(ldshake_project_doc_number++);
                     }
                 }
 
@@ -472,4 +556,12 @@ $(document).ready(function() {
             $this.parent().parent().parent().css("overflow-y", "scroll");
         });
     }
+
+    for(var n=0; n<ldproject.stickynotes.length;n++) {
+        var note = ldproject.stickynotes[n];
+        var $note = ldshake_project_AddStickyNote(note.pos.top, note.pos.left);
+
+        $note.find("textarea").val(note.text);
+    }
+
 });

@@ -2366,7 +2366,7 @@ div.cc_info_icon > div.cc_icon_title {
 
 .workflow_order {
     width: 18px;
-    height: 14px;
+    height: 15px;
     left: -5px;
     top: -3px;
     display: block;
@@ -2375,8 +2375,56 @@ div.cc_info_icon > div.cc_icon_title {
     border: 3px solid #00F;
     border-radius: 20px;
     background-color: #FFF;
-    font-weight: bold;
-    text-align: center;
     padding-bottom: 2px;
-    padding-top: 2px;
+    padding-top: 1px;
+}
+
+.workflow_order > input {
+    padding: 0px;
+    width: 100%;
+    background-color: rgba(0,0,0,0);
+    margin: 0px;
+    border-width: 0px;
+    text-align: center;
+    font-weight: bold;
+    color: grey;
+    font-size: 12px;
+}
+
+.stickynote {
+    width: 150px;
+    height: 300px;
+    display: block;
+    position: absolute;
+    z-index: 9999;
+    border: 3px solid yellow;
+    border-top-width: 13px;
+    border-top-color: rgb(241, 241, 0);
+    background-color: yellow;
+    cursor: all-scroll;
+}
+
+.stickynotetext {
+    width: 100%;
+    height: 100%;
+    border-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    resize: none;
+    background-color: yellow;
+    color: grey;
+}
+
+#project_add_note {
+    float: right;
+    width: 100px;
+    height: 30px;
+    position: relative;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: yellow;
+    padding-left: 9px;
+    padding-top: 6px;
+    cursor: all-scroll;
+    color: grey;
 }

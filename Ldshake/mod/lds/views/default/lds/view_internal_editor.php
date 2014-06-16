@@ -61,7 +61,7 @@ function encodeURIComponent($str) {
 		<?php if ($lds->canEdit()): ?>
 			<?php if (!lds_contTools::isLockedBy($lds->guid)): ?>
 			<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
-			<a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this LdS") ?></a>
+			<a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this %1", ldshake_env_category($lds)) ?></a>
 			<?php endif; ?>
 			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
 
@@ -94,7 +94,7 @@ function encodeURIComponent($str) {
                     <?php endif; ?>
                 <?php endif; ?>
             <?php else: ?>
-                <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
+                <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this %1", ldshake_env_category($lds)) ?></a>
             <?php endif; ?>
 			<!--<a class="leftbutton" id="lds_import_button" href="#"><?php echo T("Import an eXe Learning file") ?></a>-->
 			<?php else: ?>
@@ -348,7 +348,7 @@ HTML;
             ?>
 
             <script>
-                ldproject = <?php echo $lds->description;?>;
+                ldproject = <?php echo json_encode(ldshake_project_upgrade(json_decode($lds->description)));?>;
                 project_lds_box = <?php echo json_encode($preview_lds_box);?>;
                 is_implementation = false;
                 is_project_view = true;

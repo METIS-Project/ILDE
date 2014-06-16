@@ -35,10 +35,26 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-
 /**
  * Set of helper functions for the views of the LdS module
  */
+
+function ldshake_env_category($lds) {
+    $subtype = $lds->getSubtype();
+    switch($subtype) {
+        case 'LdS':
+            return 'LdS';
+        break;
+        case 'LdSProject_implementation':
+            return 'project';
+        break;
+        case 'LdSProject':
+            return 'workflow';
+        break;
+    }
+
+    return false;
+}
 
 class lds_viewTools
 {

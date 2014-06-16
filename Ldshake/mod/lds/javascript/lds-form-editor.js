@@ -420,6 +420,7 @@ function ajax_submit (save_seq, redirect)
                 granularity: $('#granularity_input').val(),
                 editor_id: editor_id,
                 editorType: editorType,
+                editor_subtype: editor_subtype,
                 documents: documents,
                 document_url: document_url
             };

@@ -42,16 +42,18 @@
 		<div id="left_filters">
             <h3><?php echo T("Tools") ?></h3>
             <ul class="tag_selector">
-                <?php foreach ($editor_subtype as $k=>$v): ?>
-                    <li>
-                        <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($k) ?>"><?php echo $v ?></a>
-                    </li>
-                <?php endforeach; ?>
-                <?php foreach ($editor_type as $k=>$v): ?>
-                    <li>
-                        <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($k) ?>"><?php echo $v ?></a>
-                    </li>
-                <?php endforeach; ?>
+
+                <?php
+                foreach ($CONFIG->project_templates['full'] as $template):
+                ?><li><?php
+                    if($template['subtype']):
+                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                    else:
+                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                    endif;
+                ?></li><?php
+                endforeach;
+                ?></li>
 
             </ul>
             <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></a></h3>
@@ -111,8 +113,8 @@
 		<?php if ($filtering): ?>
             <?php
             $tagv_label = $tagv;
-            if(isset($editor_type[$tagv])) $tagv_label = $editor_type[$tagv];
-            if(isset($editor_subtype[$tagv])) $tagv_label = $editor_subtype[$tagv];
+            //if(isset($editor_type[$tagv])) $tagv_label = $editor_type[$tagv];
+            if(isset($CONFIG->project_templates['full'][$tagv])) $tagv_label = $CONFIG->project_templates['full'][$tagv]['title'];
             ?>
 		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo T("All LdS") ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv_label ?></span></h2>
 		<?php else: ?>

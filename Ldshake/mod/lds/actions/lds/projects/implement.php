@@ -64,8 +64,8 @@ $project_preview->title = $project_preview_reference->title;
 $project_preview->editorType = $project_preview_reference->editorType;
 $project_preview->save();
 
-$pg_data = json_decode($project_design_reference->description, true);
-ldsshake_project_implement($pg_data, $project_design_implementation);
+$pg_data = ldshake_project_upgrade(json_decode($project_design_reference->description, true));
+ldsshake_project_implement($pg_data->tools, $project_design_implementation);
 $project_design_implementation->description = json_encode($pg_data);
 $project_design_implementation->save();
 

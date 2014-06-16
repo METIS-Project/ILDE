@@ -237,6 +237,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
         var new_lds = (initLdS.guid == '0') ? true : false;
 		var documents = "2";
 		var editorType = '<?php echo $editor ?>';
+		var editor_subtype = <?php echo (empty($editor_subtype) ? 'null' : "'{$editor_subtype}'") ?>;
 		var mytags = <?php echo $tags ?>;
 		var am_i_starter = <?php echo ($am_i_starter ? 'true' : 'false') ?>;
 		var friends = new Array();

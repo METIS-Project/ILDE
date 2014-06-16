@@ -989,6 +989,7 @@ function lds_exec_neweditor ($params)
 	global $CONFIG;
 
     $template_html = null;
+    $editor_subtype = null;
 
     switch($params[2]) {
         case 'template':
@@ -1006,6 +1007,7 @@ function lds_exec_neweditor ($params)
                 break;
             }
             //$templates = ldshake_get_template($params[3]);
+            $editor_subtype = $params[3];
             $template = $templates[0];
 
             $template_doc = new ElggObject();
@@ -1030,6 +1032,8 @@ function lds_exec_neweditor ($params)
         register_error("New document error");
         forward($CONFIG->url . 'pg/lds/');
     }
+
+    $vars['editor_subtype'] = $editor_subtype;
 
 	//Get the page that we come from (if we come from an editing form, we go back to my lds)
 	$vars['referer'] = $CONFIG->url.'pg/lds/';
@@ -1096,8 +1100,7 @@ function lds_exec_neweditor ($params)
 	$vars['am_i_starter'] = true;
 
     $vars['editor_type'] = $params[1];
-    $vars['editor_subtype'] = 0;
-	
+
 	$vars['title'] = T("New LdS");
 	
 	echo elgg_view('lds/editform_editor',$vars);
@@ -2709,13 +2712,13 @@ function lds_exec_projects ($params)
         $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my project workflows");
+        $vars['title'] = T("All my Workflows");
     }
 
     if(isset($params[1]) && $params[1] == 'implement')
         $vars['implement'] = true;
 
-    $vars['list_type'] = T('projects');
+    $vars['list_type'] = T('workflows');
     $vars['section'] = 'off';
     $body = elgg_view('lds/projects/myprojects',$vars);
 
@@ -2763,7 +2766,7 @@ function lds_exec_projects_implementations ($params)
         $vars['count'] = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableProjectImplementations(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichLdS($entities);
-        $vars['title'] = T("All my Project workflows");
+        $vars['title'] = T("All my Projects");
     }
 
 
@@ -2790,6 +2793,8 @@ function lds_exec_project_implementation ($params)
     $vars['list'] = $lds_list = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true);
     $vars['title'] = $project_implementation->title;
     $vars['jsondata'] = $project_implementation->jsondata;
+    $pg_data = json_decode($project_implementation->description);
+    $vars['list'] = ldshake_project_add_title_order($vars['list'], $pg_data);
 
     $vars['list_type'] = T('LdS');
     $vars['section'] = 'on';

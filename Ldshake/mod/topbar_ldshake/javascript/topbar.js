@@ -23,6 +23,11 @@ $(document).ready(function()
      });
      */
 
+    $(".min_browser").each(function(event) {
+        event.preventDefault();
+
+    });
+
     if(contextual_help)
         ldshake_topbar_contextual_help();
 

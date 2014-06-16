@@ -97,7 +97,7 @@ function ldshake_download_file($url, $filepath) {
     return (!empty($result));
 }
 
-    function ldshake_supports_pdf($document) {
+function ldshake_supports_pdf($document) {
     $subtype = $document->getSubtype();
     $lds = get_entity($document->lds_guid);
     $supported_editors = array(
@@ -109,6 +109,50 @@ function ldshake_download_file($url, $filepath) {
 
     if(in_array($document->editorType, $supported_editors))
         return true;
+
+    return false;
+}
+
+function ldshake_project_upgrade($pg_data) {
+    if(!is_array($pg_data))
+        return $pg_data;
+
+    $project = new stdClass();
+    $project->stickynotes = array();
+    $project->tools = $pg_data;
+
+    return $project;
+}
+
+function ldshake_project_add_title_order($lds_list, $pg_data) {
+    if(!is_array($lds_list))
+        return $lds_list;
+
+    foreach($lds_list as &$rlds) {
+        if(!$project_lds = ldshake_project_find_guid($pg_data, $rlds->lds->guid))
+            continue;
+
+        if(isset($project_lds->workflow_order)) {
+            $rlds->lds->title .= ' ['. $project_lds->workflow_order . ']';
+        }
+    }
+
+    return $lds_list;
+}
+
+function ldshake_project_find_guid($pg_data, $guid) {
+    if(!is_array($pg_data))
+        return false;
+
+    foreach($pg_data as $tool) {
+        if(!is_array($tool->associatedLdS))
+            continue;
+
+        foreach($tool->associatedLdS as $lds) {
+            if($lds->guid == $guid)
+                return $lds;
+        }
+    }
 
     return false;
 }
@@ -129,7 +173,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
             if(!empty($item['guid'])) {
                 $preserved_lds[] = $item['guid'];
 
-                if(!in_array($item['guid'], $lds_list)) {
+                if(!in_array($item['guid'], $lds_list) && get_entity($item['guid'])) {
                     if(empty($item['clone'])) {
                         try {
                             add_entity_relationship($item['guid'], 'lds_project_existent', $pd_guid);
@@ -138,12 +182,14 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     } else {
                         $lds = get_entity($item['guid']);
                         $ldsm = new richTextEditor(null, $lds);
-                        $cloned_lds = $ldsm->cloneLdS("{$tool['toolName']} ($title)");
+                        $cloned_lds = $ldsm->cloneLdS("{$lds->title} ($title)");
+                        $cloned_lds->project_design = $project_design->guid;
                         $cloned_lds->container_guid = $pd_guid;
+                        $cloned_lds->save();
                         $item['original_guid'] = $item['guid'];
                         $item['guid'] = $cloned_lds->guid;
                         try {
-                            add_entity_relationship($lds->guid, 'lds_project_nfe', $pd_guid);
+                            add_entity_relationship($cloned_lds->guid, 'lds_project_nfe', $pd_guid);
                         } catch (Exception $e) {
                         }
                     }

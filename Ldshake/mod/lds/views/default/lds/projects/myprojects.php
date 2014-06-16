@@ -93,8 +93,8 @@ $is_implementation = !empty($is_implementation);
                 <?php endif; ?>
 
                 <?php if($is_implementation): ?>
-                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'view');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("View workflow") ?>" />
-                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'edit');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("Edit workflow") ?>" />
+                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'view');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("View project") ?>" />
+                    <input onclick="window.location='<?php echo lds_viewTools::url_for($implementation, 'edit');?>'" type="button" style="border-color:#999; margin:5px 0;" id="view_workflow" name="view_workflow" value="<?php echo T("Edit project") ?>" />
                 <?php endif; ?>
 
                 <!--
