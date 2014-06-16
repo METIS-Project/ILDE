@@ -166,10 +166,14 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
         $lds_list=array();
 
     foreach($pg_data as &$tool) {//tooltype
-        if(empty($tool['associatedLdS']) or !is_array($tool['associatedLdS']))
+        $tool = (array)$tool;
+        if(empty($tool['associatedLdS']) or !is_array($tool['associatedLdS'])) {
+            $tool = (object)$tool;
             continue;
+        }
 
         foreach($tool['associatedLdS'] as &$item) {//lds
+            $item = (array)$item;
             if(!empty($item['guid'])) {
                 $preserved_lds[] = $item['guid'];
 
@@ -256,6 +260,10 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $document_editor->lds_revision_id = 0;
                     $document_editor->save();
 
+                    $templates = null;
+                    $template = null;
+                    $template_format = null;
+
                     if(isset($tool['editor_subtype'])) {
                         require_once __DIR__.'/templates/templates.php';
                         $lds->editor_subtype = $tool['editor_subtype'];
@@ -317,6 +325,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                 }
             }
         }
+        $tool = (object)$tool;
     }
 
     if($existent_lds = $project_design->getEntitiesFromRelationship('lds_project_existent')) {

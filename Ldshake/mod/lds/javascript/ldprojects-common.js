@@ -41,12 +41,26 @@ function ldshake_project_AddStickyNote(top, left) {
     //console.log(item);Semantic mechanisms supporting management and re-use of learning designs in teacher communities
     $('#droppable_grid, #ldproject_view_grid').append(item);
     var $note = $('.stickynote').last();
+    var readonly = '';
+
+    if(!ldshake_project_isedit())
+        readonly = 'readonly="readonly"';
 
     jsPlumb.draggable($note, {
         containment: "#droppable_grid"
     });
-    item = '<textarea class="stickynotetext" />';
+    item = '<textarea class="stickynotetext" ' + readonly + ' />';
     $note.append(item);
+
+    //close
+    item = '<div class="stickynoteclose">X</div>';
+    $note.append(item);
+    var $close = $note.find('.stickynoteclose').last();
+
+    $close.on('click', function() {
+        $note.remove();
+    })
+
     return $note;
 }
 

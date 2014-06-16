@@ -78,7 +78,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 						<label for="completeness"><?php echo T("Completeness") ?>:</label>
 					</div>
 					<div id="lds_edit_tags">
-						<?php echo T("Tags") ?>: <span class="tooltip"><?php echo T("Click here to add tags to the LdS") ?></span><span id="lds_edit_tags_list"></span>
+						<?php echo T("Tags") ?>: <span class="tooltip"><?php echo T("Click here to add tags to the %1", ldshake_env_category($lds)) ?></span><span id="lds_edit_tags_list"></span>
 					</div>
 				</div>
                 <?php if(isset($upload)):?>
@@ -150,7 +150,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
 						
 			<div id="lds_edit_tags_popup">
 				<a id="lds_edit_tags_popup_close" href="#"><?php echo T("Done") ?></a>
-				<div id="lds_edit_tags_popup_header"><?php echo T("Edit LdS tags") ?></div>
+				<div id="lds_edit_tags_popup_header"><?php echo T("Edit %1 tags", ldshake_env_category($lds)) ?></div>
 				<div class="lds_edit_tags_popup_section section_discipline">
 					<div class="lds_edit_tags_popup_fieldname"><?php echo T("Discipline") ?>:</div>
 					<input type="text" id="lds_edit_tags_input_discipline" name="discipline" value="" />

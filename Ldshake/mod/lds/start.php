@@ -2896,7 +2896,7 @@ function lds_exec_new_project ($params)
 
     //Create an empty LdS object to initialize the form
     $vars['initLdS'] = new stdClass();
-    $vars['initLdS']->title = T("Untitled Project Workflow");
+    $vars['initLdS']->title = T("Untitled Workflow");
     $vars['initLdS']->granularity = '0';
     $vars['initLdS']->completeness = '0';
     $vars['initLdS']->tags = '';
@@ -2933,13 +2933,15 @@ function lds_exec_new_project ($params)
 
     $vars['starter'] = get_loggedin_user();
 
-    $vars['title'] = T("New LdS Project Workflow");
+    $vars['title'] = T("New Workflow");
 
     $vars['project']['ldproject'] = '[]';
     $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
     $vars['project']['vle_list'] = array();
+    $vars['lds'] = new ElggObject();
+    $vars['lds']->subtype = 'LdSProject';
 
-    $vars['editor_label'] = 'Project editor';
+    $vars['editor_label'] = 'Workflow editor';
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -3008,8 +3010,9 @@ function lds_exec_edit_project ($params)
     $vars['groups'] = json_encode(array());
     $vars['starter'] = get_user($editLdS->owner_guid);
 
-    $vars['title'] = T("Edit Project");
+    $vars['title'] = T("Edit %1", ldshake_env_category($editLdS));
     $vars['editor'] = $editLdS->editor_type;
+    $vars['lds'] = $editLdS;
 
     //For each of the documents that this LdS has...
     $documents = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document', 0, 100);
@@ -3040,7 +3043,7 @@ function lds_exec_edit_project ($params)
 
     $vars['project']['vle_list'] = json_encode($vle_data);
 
-    $vars['editor_label'] = 'Project editor';
+    $vars['editor_label'] = ldshake_env_category($editLdS) . ' editor';
 
     echo elgg_view('lds/editform_editor',$vars);
 }

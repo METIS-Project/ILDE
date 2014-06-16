@@ -2341,6 +2341,8 @@ div.cc_info_icon > div.cc_icon_title {
 
 #ldproject_view_grid {
     position: relative;
+    height: 100%;
+    overflow-y: scroll;
 }
 
 .projects_tool_caption {
@@ -2427,4 +2429,14 @@ div.cc_info_icon > div.cc_icon_title {
     padding-top: 6px;
     cursor: all-scroll;
     color: grey;
+}
+
+.stickynoteclose {
+    position: absolute;
+    right: 3px;
+    top: -14px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
 }

@@ -87,5 +87,5 @@ function ldshake_get_template($template, $format = null){
         }
         return $doc;
     }
-    return '';
+    return null;
 }

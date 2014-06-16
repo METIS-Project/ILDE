@@ -40,7 +40,13 @@
  */
 
 function ldshake_env_category($lds) {
-    $subtype = $lds->getSubtype();
+    if(is_string($lds))
+        $subtype = $lds;
+    elseif($lds)
+        $subtype = $lds->getSubtype();
+    else
+        return 'LdS';
+
     switch($subtype) {
         case 'LdS':
             return 'LdS';
