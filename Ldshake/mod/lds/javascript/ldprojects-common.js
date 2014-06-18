@@ -64,7 +64,6 @@ function ldshake_project_AddStickyNote(top, left) {
     return $note;
 }
 
-
 function saveProjectN(){
     ldproject = {};
     ldproject.tools = [];
@@ -102,7 +101,9 @@ function saveProjectN(){
                     workflow_order = 0;
                 }
                 associatedLdS.workflow_order = workflow_order;
-                //associatedLdS.title = $(this.id + '_title').text();
+
+                if($('#' + this.id + '_title textarea').attr("newtitle") == "true")
+                    associatedLdS.title = $('#' + this.id + '_title textarea').val();
 
                 if($(this).filter('[clone]').length)
                     associatedLdS.clone = true;
@@ -155,10 +156,10 @@ function ldshake_project_isedit() {
 
 function ldshake_projec_asign_guid(project_data) {
     var update = false;
-    for(var i=0; i<project_data.length; i++) {
-        var tool = project_data[i];
+    for(var i=0; i<project_data.tools.length; i++) {
+        var tool = project_data.tools[i];
         for(var j=0; j<tool.associatedLdS.length; j++) {
-            var lds = project_data[i].associatedLdS[j];
+            var lds = tool.associatedLdS[j];
             var $item = $('[associatedLdS="'+lds.guid+'"]');
             if(!$item.length && lds.guid) {
                 var selector = '.subtool[tooltype="'+tool.tooltype+'"]';
@@ -175,19 +176,21 @@ function ldshake_projec_asign_guid(project_data) {
             }
         }
     }
+
+    ldshake_project_update_titles(project_data);
 }
 
 function ldshake_project_update_titles(project_data) {
-    var update = false;
-    for(var i=0; i<project_data.length; i++) {
-        var tool = project_data[i];
+    for(var i=0; i<project_data.tools.length; i++) {
+        var tool = project_data.tools[i];
         for(var j=0; j<tool.associatedLdS.length; j++) {
-            var lds = project_data[i].associatedLdS[j];
-            var lds_data = ldshake_projects_find_lds(lds.guid);
+            var lds = tool.associatedLdS[j];
             var $item = $('[associatedLdS="'+lds.guid+'"]');
 
-            if(!$item.length && lds_data) {
-                $($item.id + '_title').text(lds_data.lds.title);
+            if($item.length) {
+                $('#' + $item.attr('id') + '_title textarea')
+                    .val(lds.title)
+                    .attr("newtitle", "true");
             }
         }
     }
@@ -289,21 +292,66 @@ $(document).ready(function() {
         $(toolElem).append(item);
 
         //lds title
+        var defaultTitle = 'Untitled LdS';
         item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
-        if(is_implementation) {
+
+        var readonly = '';
+        if(!ldshake_project_isedit())
+            readonly = 'readonly="readonly"';
+        item += '<textarea ' + readonly + ' newtitle="false"></textarea>';
+        /*if(is_implementation) {
             item += 'Untitled LdS';
         }
+        */
+
         item += '</div>';
         $(toolElem).append(item);
 
         var $addedItem = $("#"+id);
+        var $addedTitleItem = $("#" + id + '_title');
+
+        $addedTitleItem.find('textarea')
+            .val(defaultTitle)
+            .on('focus', function() {
+                if($(this).val() == defaultTitle) {
+                    $(this).val('');
+                }
+            })
+            .on('blur', function() {
+                if($(this).val() == "") {
+                    $(this).val(defaultTitle);
+                    $(this).attr("newtitle", "false");
+                } else {
+                    $(this).attr("newtitle", "true");
+                }
+            });
 
         //workflow number workflow_order
         var readonly = '';
         if(!ldshake_project_isedit())
             readonly = 'readonly="readonly"';
-        item = '<div id="' + id + '_workflow_order' + '" class="subtool_title workflow_order"><input type="text" maxlength="2" ' + readonly + ' value="" /></div>';
+        item = '<div id="' + id + '_workflow_order' + '" class="workflow_order"><input type="text" maxlength="2" ' + readonly + ' value="" /></div>';
         $addedItem.append(item);
+
+        //if(ldshake_project_isedit()) {
+            $addedItem.find('.workflow_order input')
+                .on('focus keyup', function() {
+                    var current_order = this.value;
+                    var $equals = $('.workflow_order input').filter(
+                        function() {
+                            return this.value == current_order;
+                        }
+                    );
+
+                    $('.workflow_order input').parent().css('background-color', '');
+
+                    if($equals.length > 1)
+                        $equals.parent().css('background-color', '#ABFCFF');
+                })
+                .on('blur', function() {
+                    $('.workflow_order input').parent().css('background-color', '');
+                });
+        //}
 
         if(ldshake_project_isedit()) {
             addRemoveIcon($addedItem.get(0));
@@ -527,9 +575,15 @@ $(document).ready(function() {
 
                         $addedElement.attr("associatedLdS", tool.associatedLdS[i].guid);
                         //if(is_implementation || !ldshake_project_isedit()) {
-                            var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
-                            if(lds)
-                                $('#' + addedElement.id + '_title').text(lds.lds.title);
+                        var lds = ldshake_projects_find_lds(tool.associatedLdS[i].guid);
+                        if(lds) {
+                            $('#' + addedElement.id + '_title textarea').val(lds.lds.title);
+                            $('#' + addedElement.id + '_title textarea').attr("newtitle", "true");
+                        }
+                        else if(tool.associatedLdS[i].title !== undefined) {
+                            $('#' + addedElement.id + '_title textarea').val(tool.associatedLdS[i].title);
+                            $('#' + addedElement.id + '_title textarea').attr("newtitle", "true");
+                        }
                         //}
                     }
                 }

@@ -1504,9 +1504,11 @@ a.rightbutton:active {
 }
 
 #comment_switcher {
+    height: 0px;
 	background-color: #DFE6CB;
 	padding: 5px 10px;
 	font-weight: bold;
+    display:none;
 }
 
 #fs_xul {
@@ -2439,4 +2441,22 @@ div.cc_info_icon > div.cc_icon_title {
     font-weight: bold;
     cursor: pointer;
     z-index: 10000;
+}
+
+.subtool_title textarea {
+    width: 100%;
+    height: 100%;
+    border-width: 0px;
+    padding: 0px;
+    margin: 0px;
+    resize: none;
+    color: darkgrey;
+}
+
+.subtool_title textarea[newtitle="false"] {
+    font-style: italic;
+}
+
+.subtool_title textarea[newtitle="true"] {
+    color: #525252;
 }

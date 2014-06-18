@@ -98,6 +98,9 @@ function ldshake_download_file($url, $filepath) {
 }
 
 function ldshake_supports_pdf($document) {
+    if(!$document)
+        return false;
+
     $subtype = $document->getSubtype();
     $lds = get_entity($document->lds_guid);
     $supported_editors = array(
@@ -141,10 +144,10 @@ function ldshake_project_add_title_order($lds_list, $pg_data) {
 }
 
 function ldshake_project_find_guid($pg_data, $guid) {
-    if(!is_array($pg_data))
+    if(!is_array($pg_data->tools))
         return false;
 
-    foreach($pg_data as $tool) {
+    foreach($pg_data->tools as $tool) {
         if(!is_array($tool->associatedLdS))
             continue;
 
@@ -176,8 +179,9 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
             $item = (array)$item;
             if(!empty($item['guid'])) {
                 $preserved_lds[] = $item['guid'];
+                $lds = get_entity($item['guid']);
 
-                if(!in_array($item['guid'], $lds_list) && get_entity($item['guid'])) {
+                if(!in_array($item['guid'], $lds_list) && $lds) {
                     if(empty($item['clone'])) {
                         try {
                             add_entity_relationship($item['guid'], 'lds_project_existent', $pd_guid);
@@ -323,6 +327,13 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         $docObj->save();
                     }
                 }
+            }
+
+            if($lds && !empty($item['title'])) {
+                $lds->title = $item['title'] . " ($title)";
+                $lds->save();
+            } else if($lds) {
+                $item['title'] = $lds->title;
             }
         }
         $tool = (object)$tool;

@@ -83,9 +83,5 @@
 // Forward to the
 global $CONFIG;
 
-if ($entity->external_editor)
-	forward ($CONFIG->url .'pg/lds/vieweditor/'.$entity->guid.'/'); 
-else
-	forward ($CONFIG->url .'pg/lds/info/'.$entity->guid.'/'); 
-//forward($entity->getURL());
+forward ($CONFIG->url .'pg/lds/info/'.$entity->guid.'/');
 /// LdShake change ///

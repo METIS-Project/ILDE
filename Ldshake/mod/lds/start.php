@@ -2135,6 +2135,7 @@ function lds_exec_info ($params)
 	$vars['infoComments'] = true;
 	$vars['lds'] = get_entity($params[1]);
 	$vars['ldsDocs'] = lds_contTools::getLdsDocuments($params[1]);
+	$vars['currentDoc'] = null;
 	$vars['nComments'] = $vars['lds']->countAnnotations('generic_comment');
 	
 	$vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
@@ -2167,8 +2168,13 @@ function lds_exec_info ($params)
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
 
-    $body = elgg_view('lds/view_internal',$vars);
-	page_draw($vars['lds']->title, $body);
+    if(empty($vars['lds']->external_editor)) {
+        $body = elgg_view('lds/view_internal',$vars);
+        page_draw($vars['lds']->title, $body);
+    }
+    else
+        echo elgg_view('lds/view_internal_editor',$vars);
+
 }
 
 function lds_exec_imgdisplay ($params)

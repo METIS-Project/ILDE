@@ -37,7 +37,7 @@
 ?><?php
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
-echo elgg_view('messages/list', array('object' => $sysmessages));
+echo elgg_view('messages/list', array('object' => system_messages(null,"")));
 
 function encodeURIComponent($str) {
 	$revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
@@ -121,6 +121,10 @@ function encodeURIComponent($str) {
 	<div class="arrow right">►</div><div class="arrow left">◄</div>
 	<?php /** Aquí es importante no indentar líneas ni dejar código html con un newline al final, por el css inline-block. **/ ?>
 	<ul id="lds_view_tabs" class="content">
+        <?php if ($infoComments): ?>
+            <li class="activetab infotab"><?php echo T("Info and Comments") ?> (<?php echo $nComments ?>)</li><?php else: ?>
+            <li><a class="infotab" href="<?php echo lds_viewTools::url_for($lds, 'info') ?>"><?php echo T("Info and Comments") ?> (<?php echo $nComments ?>)</a></li><?php endif; ?>
+
         <?php foreach($ldsDocs as $doc): ?>
             <?php $title = empty($doc->title) ? $lds->title : $doc->title; ?>
             <?php if ($doc->guid == $currentDocId): ?>

@@ -133,6 +133,9 @@ class lds_viewTools
 
         $editortype = ($lds->external_editor ? 'editor' : '');
 
+        if($type == 'info')
+            $editortype = '';
+
         $folder = $type.$editortype;
 
         //$subtype = is_string($lds->subtype) ? $lds->subtype : $lds->getSubtype();

@@ -39,7 +39,7 @@ $(document).ready(function()
 	function resizeViewport () {
 		var top = $('#payload').offset().top;
         var height = image ? $(document).height() : $(window).height();
-		var commentHeight = $('#comment_switcher').outerHeight();
+		var commentHeight = 0;//$('#comment_switcher').outerHeight();
 
         var lastItemBottom = $('#comment_switcher').offset().top + commentHeight;
 
@@ -217,9 +217,13 @@ $(document).ready(function()
 
 var z_popup = 9000;
 function project_popup_show(d){
+
+    //check if the clicked element is the same where we binded the click event
+    if(d.target != this)
+        return false;
+    //d = d.target;
     d = d.target;
-    console.log(d);
-    console.log(this);
+
     var popup_id = d.lds_guid;
     var tree_popup_random = Math.floor(Math.random()*1000000000);
     var popup_id_selector = "#tree_info_popup_shell_"+ popup_id + "_" + tree_popup_random + " ";
