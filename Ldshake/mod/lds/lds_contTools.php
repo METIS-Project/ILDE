@@ -329,7 +329,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                 }
             }
 
-            if($lds && !empty($item['title'])) {
+            if($lds && !empty($item['title']) && !check_entity_relationship($lds->guid, 'lds_project_existent', $pd_guid)) {
                 $lds->title = $item['title'] . " ($title)";
                 $lds->save();
             } else if($lds) {

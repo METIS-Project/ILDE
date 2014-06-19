@@ -137,7 +137,6 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <div style="clear:both"></div>
     </div>
 
-
 <div id="exportcontainer">
 	<?php if ($doc->file_imsld_guid): ?>
         <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/imsld">Save as IMS-LD</a>

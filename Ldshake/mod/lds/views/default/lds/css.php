@@ -2278,8 +2278,8 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 .draggable, .draggable-nonvalid {
-    width: 75px;
-    height: 75px;
+    width: 45px;
+    height: 45px;
     padding: 5px;
     position: relative;
     float: left;
@@ -2288,6 +2288,15 @@ div.cc_info_icon > div.cc_icon_title {
     color: white !important;
     border: 1px solid #dddddd;
     z-index: 10;
+}
+
+.draggable_wrapper {
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    position: relative;
+    float: left;
+    z-index: 9;
 }
 
 .draggable:not([tooltype_added="true"]):hover {

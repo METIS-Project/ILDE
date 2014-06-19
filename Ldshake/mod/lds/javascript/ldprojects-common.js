@@ -398,6 +398,16 @@ $(document).ready(function() {
                 $('#' + subToolElem.id + '_title').remove();
             }
 
+            $(tool).find('.subtool').each(function(i, e){
+                $(e).css('left', (i*70)+'px');
+            });
+
+            $(tool).find('.subtool_title').each(function(i, e){
+                $(e).css('left', (i*70)+'px');
+            });
+
+            tool.jsPlumb.repaintEverything();
+
             //TODO: aÃ±adir que quite el LdS eliminado de los associatedLdS
             if(!$(tool).find(".subtool").length) {
                 $(tool).find(".addsubtool-icon").remove();
@@ -555,6 +565,12 @@ $(document).ready(function() {
 
                 addPlusIcon(this); //AÃ±ado el icono de + y el primer LdS
                 if(tool.associatedLdS){
+                    try {
+                        tool.associatedLdS = tool.associatedLdS.sort(function(a, b){return a.workflow_order-b.workflow_order});
+                    } catch (e) {
+
+                    }
+
                     for(var i = 0; i < tool.associatedLdS.length; i++)
                     {
                         var $addedElement = addSubToolElem(this);
@@ -621,7 +637,7 @@ $(document).ready(function() {
             $this.filter('[associatedlds]').click(project_popup_show);
             $this.find("img").hide();
             $this.css("cursor", "pointer");
-            $this.parent().parent().parent().css("overflow-y", "scroll");
+            //$this.parent().parent().parent().css("overflow-y", "scroll");
         });
     }
 

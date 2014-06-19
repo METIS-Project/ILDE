@@ -48,6 +48,7 @@ $(document).ready(function()
             $('#payload').height(h);
             $('#the_lds').height(h-2);
             $('#internal_iviewer').width($('#payload').width()-2);
+            $('#internal_iviewer').height(h-2);
             //$('#the_lds').width($('#payload').width()-2);
             if(image) document_resized_once = 1;
         }
