@@ -2278,8 +2278,8 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 .draggable, .draggable-nonvalid {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     padding: 5px;
     position: relative;
     float: left;
@@ -2291,8 +2291,8 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 .draggable_wrapper {
-    width: 45px;
-    height: 45px;
+    width: 55px;
+    height: 55px;
     padding: 5px;
     position: relative;
     float: left;

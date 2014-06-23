@@ -44,10 +44,10 @@ $CONFIG->project_templates['default'] = array(
         'subtype'   => 'coursemap',
     ),
 
-    'DN' => array(
+    'MDN' => array(
         'title' => T('Design Narrative'),
         'type'  => 'doc',
-        'subtype'   => 'DN',
+        'subtype'   => 'MDN',
     ),
 
     'design_pattern' => array(
