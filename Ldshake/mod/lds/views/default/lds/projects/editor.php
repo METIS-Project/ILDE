@@ -4,8 +4,8 @@
 <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
     <div id="two_column" style="padding-bottom:0 !important">
 
-        <!--<div id="ldproject_toolBar" style="width: <?php echo (8 + 95*(ceil(count($CONFIG->project_templates['full'])/7)))?>px;">-->
-        <div id="ldproject_toolBar" style="width: 100%; height: <?php echo (8 + 95*(ceil(count($CONFIG->project_templates['full'])/7)))?>px;">
+        <!--<div id="ldproject_toolBar" style="width: <?php echo (18 + 67*(ceil(count($CONFIG->project_templates['full'])/14)))?>px;">-->
+        <div id="ldproject_toolBar" style="width: 100%; height: <?php echo (18 + 67*(ceil(count($CONFIG->project_templates['full'])/14)))?>px;">
 
             <?php foreach($CONFIG->project_templates['full'] as $project_template_key => $project_template): ?>
             <div class="draggable_wrapper">

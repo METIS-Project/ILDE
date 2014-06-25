@@ -458,7 +458,7 @@ SQL;
     return $query;
 }
 
-function buildPermissionsQuery($user_id, $writable_only = true) {
+function buildPermissionsQuery($user_id, $writable_only = true, $isglobalenv = false) {
     global $CONFIG;
 
     if(!$user_id)
@@ -489,12 +489,24 @@ function buildPermissionsQuery($user_id, $writable_only = true) {
         $user_permission = "'lds_editor'";
     }
 
+    if(!$isglobalenv) {
+        if($projects = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, false, null, true)) {
+            $projects_lds = implode(',', $projects);
+            $query['permission'] = <<<SQL
+{$query['permission']}
+e.guid IN ({$projects_lds})
+OR
+SQL;
+        }
+    }
+
     if($writable_only == false) {
         /*$query['join'] = <<<SQL
 JOIN objects_properties op ON e.guid = op.guid
 SQL;*/
 
         $query['permission'] = <<<SQL
+{$query['permission']}
 (
     e.all_can_view = 1
 )
@@ -2377,6 +2389,10 @@ SQL;
 
     public static function getUserEditableProjects($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
         return self::getUserEntities('object', 'LdSProject', $user_id, $count, $limit, $offset, $m_key, $m_value, 'time', true);
+    }
+
+    public static function getUserViewableProjects($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {
+        return self::getUserEntities('object', 'LdSProject', $user_id, $count, $limit, $offset, $m_key, $m_value, 'time', false);
     }
 
     public static function getUserEditableProjectImplementations($user_id, $count = false, $limit = 0, $offset = 0, $m_key = null, $m_value = null) {

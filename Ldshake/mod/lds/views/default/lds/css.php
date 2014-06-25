@@ -2283,7 +2283,7 @@ div.cc_info_icon > div.cc_icon_title {
     padding: 5px;
     position: relative;
     float: left;
-    margin: 8px 0px 0px 8px;
+    margin: 4px 0px 0px 5px;
     background-color: white;
     color: white !important;
     border: 1px solid #dddddd;
@@ -2297,6 +2297,7 @@ div.cc_info_icon > div.cc_icon_title {
     position: relative;
     float: left;
     z-index: 9;
+    margin: 1px;
 }
 
 .draggable:not([tooltype_added="true"]):hover {
@@ -2360,13 +2361,14 @@ div.cc_info_icon > div.cc_icon_title {
     position: absolute;
     bottom: 5px;
     left: 3px;
-    width: 70px;
+    width: 50px;
     background-color: rgba(235, 235, 235, 0.8);
     color: rgb(73, 73, 73);
     text-align: center;
     font-weight: bold;
     border-radius: 8px;
     font-size: 11px;
+    word-break: break-all;
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;

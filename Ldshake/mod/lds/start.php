@@ -2715,14 +2715,19 @@ function lds_exec_projects ($params)
     }
     else
     {
-        $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
-        $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        if(isset($params[1]) && $params[1] == 'implement') {
+            $check = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, false, null, true);
+            $vars['implement'] = true;
+            $vars['count'] = lds_contTools::getUserViewableProjects(get_loggedin_userid(), true);
+            $entities = lds_contTools::getUserViewableProjects(get_loggedin_userid(), false, 50, $offset);
+            $vars['list'] = lds_contTools::enrichLdS($entities);
+        } else {
+            $vars['count'] = lds_contTools::getUserEditableProjects(get_loggedin_userid(), true);
+            $entities = lds_contTools::getUserEditableProjects(get_loggedin_userid(), false, 50, $offset);
+            $vars['list'] = lds_contTools::enrichLdS($entities);
+        }
         $vars['title'] = T("All my Workflows");
     }
-
-    if(isset($params[1]) && $params[1] == 'implement')
-        $vars['implement'] = true;
 
     $vars['list_type'] = T('workflows');
     $vars['section'] = 'off';
