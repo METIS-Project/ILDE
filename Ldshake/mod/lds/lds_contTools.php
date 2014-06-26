@@ -127,6 +127,17 @@ function ldshake_project_upgrade($pg_data) {
     return $project;
 }
 
+function ldshake_isglobalenv($type, $subtype) {
+    if(is_numeric($subtype))
+        $subtype = get_subtype_from_id($subtype);
+
+    if($type == 'object' and $subtype == 'LdSProject_implementation')
+        return true;
+
+    return false;
+}
+
+
 function ldshake_project_add_title_order($lds_list, $pg_data) {
     if(!is_array($lds_list))
         return $lds_list;
@@ -490,11 +501,12 @@ function buildPermissionsQuery($user_id, $writable_only = true, $isglobalenv = f
     }
 
     if(!$isglobalenv) {
-        if($projects = lds_contTools::getUserEntities('object', 'LdSProject', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, false, null, true)) {
+        $projects = lds_contTools::getUserEntities('object', 'LdSProject_implementation', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, false, null, true);
+        if(!empty($projects)) {
             $projects_lds = implode(',', $projects);
             $query['permission'] = <<<SQL
 {$query['permission']}
-e.guid IN ({$projects_lds})
+e.container_guid IN ({$projects_lds})
 OR
 SQL;
         }
@@ -2521,7 +2533,7 @@ SQL;
         }
 
         //$permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
-        $permissions_query = buildPermissionsQuery($user_id, $writable_only);
+        $permissions_query = buildPermissionsQuery($user_id, $writable_only, ldshake_isglobalenv($type, $subtype));
 
         $rich_query['columns'] = '';
         $rich_query['join'] = '';
