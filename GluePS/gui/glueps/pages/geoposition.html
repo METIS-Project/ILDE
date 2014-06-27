@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>GLUE!-PS</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 10px; padding: 0px }
+  #map_canvas { width: 700px; height: 500px; border-width: 1px; border-style: solid; border-color: #979797; padding:8px 8px 8px 8px }
+</style>
+<script type="text/javascript"
+src="https://maps.google.com/maps/api/js?sensor=true">
+	   
+</script>
+<script type="text/javascript">
+
+	var map      = null;
+	var geocoder = null;
+	var markerOptions = { position: null }
+	var marker = new google.maps.Marker(markerOptions);
+	var location_timeout;
+	
+	currentLocation();
+	
+	function googleMapIt(p)
+	{ 
+		clearTimeout(location_timeout);	
+	 var lat = p.coords.latitude;
+	 var lng = p.coords.longitude;
+	 initialize(lat, lng);
+		}
+
+	function geolocFail() {
+	//	alert('No ha sido posible obtener la geolocalización actual.');
+		if (marker.getPosition() == null) {
+			initialize("40.4168","-3.7023");			
+		}	
+		
+	} 
+
+	function currentLocation() {
+
+		if (navigator.geolocation) {
+		    location_timeout = setTimeout("geolocFail()", 50);
+	
+		    navigator.geolocation.getCurrentPosition(googleMapIt, function(error) {		        
+		    	clearTimeout(location_timeout);		       
+		        geolocFail();
+		    });
+		} else {
+			alert('El navegador web no permite la geolocalización, por lo que no se puede obtener la localización actual');
+		    geolocFail();
+		}
+	
+	}
+	
+  function initialize(lat, lng) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    var mapOptions = {
+      zoom: 15,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var map = new google.maps.Map(document.getElementById("map_canvas"),
+        mapOptions);
+    var markerOptions = { position: latlng }
+    marker.setOptions(markerOptions);
+    marker.setMap(map);
+    document.form_mapa.coordenadas.value = lat + "," + lng;
+    document.form_mapa.address.value = "";
+    geocoder = new google.maps.Geocoder();  
+    
+    //Actualizar marcador al hacer click
+    updateMarker(map);
+  }
+  
+	//Actualizar marcador al hacer click
+  function updateMarker(map) {
+	  google.maps.event.addListener(map, 'click', function(event) {
+	  	latlng = event.latLng;
+	  	var markerOptions = { position: latlng }
+	  	marker.setOptions(markerOptions);
+	      marker.setMap(map);
+	      document.form_mapa.coordenadas.value = latlng.lat() + "," + latlng.lng();
+	      document.form_mapa.address.value = "";
+	  });
+  }
+
+  function showAddress(address, zoom) {
+  	if (geocoder) {
+  		geocoder.geocode({ 'address': address}, geocodeResult);
+  	} else {
+  		geocoder.geocode({ 'address': address}, geocodeResult);
+  	}
+  		
+  }
+  
+  function geocodeResult(results, status) {
+	    // Verificamos el estatus
+	    if (status == 'OK') {
+	        // Si hay resultados encontrados, centramos y repintamos el mapa
+	        // esto para eliminar cualquier pin antes puesto
+	        var mapOptions = {
+	            center: results[0].geometry.location,
+	            mapTypeId: google.maps.MapTypeId.ROADMAP
+	        };
+	        map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+	        // fitBounds acercará el mapa con el zoom adecuado de acuerdo a lo buscado
+	        map.fitBounds(results[0].geometry.viewport);
+	        // Dibujamos un marcador con la ubicación del primer resultado obtenido
+	        var markerOptions = { position: results[0].geometry.location }
+	        marker.setOptions(markerOptions);
+	        marker.setMap(map);
+	        document.form_mapa.coordenadas.value = results[0].geometry.location.lat() + "," + results[0].geometry.location.lng();
+	        updateMarker(map);
+	    } else {
+	        // En caso de no haber resultados o que haya ocurrido un error
+	        // lanzamos un mensaje con el error
+	        alert("Geocoding no tuvo éxito debido a: " + status);
+	    }
+	}
+
+  
+  
+</script>
+</head>
+<body>
+	
+	<h1 style="border: 1px solid #CCC;background-color: #EEE;color: #999;font-family: verdana;">OBTENER COORDENADAS GEOGRÁFICAS</h1>
+     
+     <div id="formMap" style="width:60%">
+	    <form name="form_mapa" action="#" onsubmit=" showAddress(this.address.value, this.zoom.value=parseFloat(this.zoom.value)); return false">
+	
+	
+		<p style="font-size: 10px;font-family: verdana;font-weight: bold;">Dirección a buscar: <input type="text" name="address" value="" style="width: 400px;font-size: 10px;font-family: verdana;font-weight: bold;" />
+	
+	    <input type="hidden" size="1" name="zoom" value=15 />
+	    <input type="submit" value="Ver" /></p>
+	    <p style="font-size: 10px;font-family: verdana;font-weight: bold;">Coordenadas: <input type="text" name="coordenadas" value="" style="width: 400px;font-size: 10px;font-family: verdana;font-weight: bold;" />
+	    </p>
+	    </form>
+    </div>
+         <div id="CurrentLocation">
+         	<form name="buttonCL" action="#" onsubmit=" currentLocation(); return false">
+         	<input type="submit" value="Usar localización actual" /></p>
+         </div>
+
+      </form>
+  <div id="map_canvas"></div>
+</body>
+</html>

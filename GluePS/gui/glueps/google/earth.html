@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Earth - Glue-PS! Adapter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap css -->
+    <link href="lib/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/info.css" rel="stylesheet">
+    <link href="css/customControls.css" rel="stylesheet">
+    <!-- HTML5 shim IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../lib/html5shiv.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="js/i18n.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://www.google.com/jsapi?key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+	<script src="lib/bootstrap/js/bootstrap.js"></script>
+	<script src="lib/jquery-18n-properties/jquery.i18n.properties-min-1.0.9.js"></script>
+	<script type="text/javascript" src="js/customControls.js"></script>
+	<script type="text/javascript" src="js/distances.js"></script>
+	<script type="text/javascript" src="js/utils.js"></script>
+	<script type="text/javascript" src="js/earth.js"></script>
+	<script type="text/javascript" src="js/maps.js"></script>
+	<script type="text/javascript" src="js/viewController.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/firstpersoncam.js"></script>
+	<!-- firstPersonCam required files -->
+	<script type="text/javascript" src="lib/firstPersonCam/math3d.js"></script>
+	
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.png">                              
+  </head>
+
+  <body onKeyDown="return keyDown(event);" onKeyUp="return keyUp(event);">
+
+    <div class="navbar navbar-static-top">
+      <div class="navbar-inner">
+
+        <div id="headerContainer" class="container" style="width:auto;margin-left:0px;margin-right:0px;">
+		  <span class="brand" style="padding-top:0px;padding-bottom:0px;"><img src="images/logo-gsic-alpha.png" alt="GSIC-EMIC" style="height:50px;"/></span>
+          <span id="adapterName" class="brand" >Google Earth Learning Environment</span>
+          <span class="brand" >
+              <img id="earthEn" src="images/en.png" alt="English" title="English" width="25" height="25"/> 
+			  <img id="earthEs" src="images/es.png" alt="Spanish" title="Spanish" width="25" height="25"/>
+          </span>
+          <!--  <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>-->
+          <!--<div  class="nav-collapse collapse">--> 
+          <div> 
+            <form id="loginForm" class="navbar-form pull-right">
+              <span id="message" class="error" style="padding-top:3px;padding-bottom:10px;vertical-align:middle;display:none"></span>
+              <!--  <span style="color:red">You have not provided a Username</span>-->
+              <input id="username" class="span2" type="text" placeholder="Usuario">
+              <!-- input id="password" class="span2" type="password" placeholder="Password">-->
+              <button id="entrar" type="submit" class="btn">Enter</button>
+            </form>
+            <div id="logoutDiv" class="navbar-form pull-right"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div id="mainContainer" class="container" style="width:auto;margin-top:10px;margin-left:10px;margin-right:10px;">
+	  <div id="panel" style="display:none;">
+			<select id="selectPoi" name="selectPoi" style="margin-bottom:0px;"></select>
+			<select id="selectPerson" name="selectPerson" style="margin-bottom:0px;"></select>
+			<select id="selectBucket" name="selectBucket" style="margin-bottom:0px;display:none"></select>
+			<input id="target" type="text" placeholder="Look for a place" style="margin-bottom:0px;" style="display:none">
+			<input id="targetEarth" type="text" placeholder="Look for a place"  style="margin-bottom:0px;" >
+			<button id="searchTargetEarth" class="btn">Search</button>	
+      </div>
+      <!-- Main hero unit for google earth plugin container -->
+      <div id="mapContainer" class="hero-unit" style="padding:15px;">
+		<div id="map3d" ></div>
+		<div id="map_canvas"></div>
+		<!--  <div><span id="plugin_version">Installed Plugin Version: </span><span id="installed-plugin-version" style="font-weight: bold;">Loading...</span></div>-->
+      </div>
+
+	  <div id="firstPersonCamControls" style="display:none;">
+	  	<h4>User controls</h4>
+	  	<span>Use the <b>rounded buttons</b> or the keyboard arrows (left, up, down, right) to control the <b>user</b> (with focus on page).<br/>
+	  	Use the <b>squared buttons</b> or the keyboard keys (a, s, d, f) to control the <b>altitude</b> of the user (with focus on page).</span>
+	  	<!--  
+	  	<table>
+	  		<tr>
+	  			<td>key</td>
+	  			<td>action</td>
+	  		</tr>
+	  		<tr>
+	  			<td>left arrow</td>
+	  			<td>turn left</td>
+	  		</tr>
+	  		<tr>
+	  			<td>right arrow</td>
+	  			<td>turn right</td>
+	  		</tr>
+	  		<tr>
+	  			<td>up arrow</td>
+	  			<td>move forward</td>
+	  		</tr>
+	  		<tr>
+	  			<td>down arrow</td>
+	  			<td>move backwards</td>
+	  		</tr>
+	  	</table>
+	  	-->
+	  	<!--  
+		<table>
+			<tr>
+				<td>To control the user use the rounded buttons or keyboard arrows (with focus on page).</td>
+				<td>To control the camera use the squared buttons or keyboar keys (a,s,d,f)(with focus on page).</td>
+			</tr>
+			<tr>
+				<td>
+					<table>
+						<tr>
+							<td></td>
+							<td><input type="image" src="images/arrow-up.png" onmousedown="moveForward=true;" onmouseup="moveForward=false;"></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input type="image" src="images/arrow-left.png" onmousedown="turnLeft=true;" onmouseup="turnLeft=false;" ></td>
+							<td><input type="image" src="images/arrow-down.png" onmousedown="moveBackward=true;" onmouseup="moveBackward=false;"></td>
+							<td><input type="image" src="images/arrow-right.png" onmousedown="turnRight=true;" onmouseup="turnRight=false;"></td>
+						</tr>
+					</table>
+				</td>
+				<td>
+					<table>
+						<tr>
+							<td></td>
+							<td><input type="image" src="images/rounded-arrow-up.png" onmousedown="altitudeUp=true;" onmouseup="altitudeUp=false;" ></td>
+							<td></td>
+						</tr>
+						<tr>
+							<td><input type="image" src="images/rounded-arrow-left.png" onmousedown="strafeLeft=true;" onmouseup="strafeLeft=false;" ></td>
+							<td><input type="image" src="images/rounded-arrow-down.png" onmousedown="altitudeDown=true;" onmouseup="altitudeDown=false;"></td>
+							<td><input type="image" src="images/rounded-arrow-right.png" onmousedown="strafeRight=true;" onmouseup="strafeRight=false;"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		-->
+	</div>
+
+
+		<!-- Example row of columns -->
+      <!-- 
+      <div class="row">
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+       </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="#">View details &raquo;</a></p>
+        </div>
+      </div>
+      -->
+	  <!--  
+      <hr>
+
+      <footer>
+        <p>TFG Mario Marinero Domingo 2013</p>
+      </footer>
+      -->
+
+    </div> <!-- /container -->
+      <!-- Modal -->
+  <div class="modal fade modal-admin" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="bucketTitle">Bucket configuration</h4>
+        </div>
+        <div id ="iframe" class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button id="close-dialog" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+  </body>
+</html>

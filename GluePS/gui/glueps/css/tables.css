@@ -1,0 +1,149 @@
+table.tableInfo {
+	margin-left: 10px;
+	/*margin-bottom: 10px;*/
+}
+
+div.info table.tableInfo {
+	margin-left: 10px;
+	margin-bottom: 5px;
+	border-color: rgb(152, 180, 206);
+	border-width: 2px;
+	border-style: solid;
+}
+
+#divLeyenda table.tableInfo {
+	margin-bottom: 0px;
+}
+
+table.tableInfo tr {
+    background-color: rgb(230, 240, 250);
+}
+
+table.tableInfo tr:hover {
+    background-color: rgb(210, 220, 250);
+}
+
+table.tableInfo .participants {
+    background-color: white;
+}
+
+table.tableInfo .participants:hover {
+    background-color: white;
+}
+
+table.tableInfo td,th {
+    padding: 5px;
+}
+
+table.tableInfo td.item {
+    font-weight:bold;
+    font-size: 12px;
+}
+
+table.tableInfo td.counter {
+    font-weight:bold;
+    font-size: 12px;
+    background-color: white;
+}
+
+table.tableInfo th{
+    font-weight:bold;
+    font-size: 12px;
+    color: darkblue;
+}
+
+table.tableInfo .resourceSelected {
+    background-color: rgb(150, 150, 255);
+    /*cursor: pointer;*/
+}
+
+table.tableInfo .resourceSelected:hover {
+    background-color: rgb(150, 150, 255);
+    /*cursor: pointer;*/
+}
+
+table.tableInfo .toolSelected {
+    background-color: rgb(150, 150, 255);
+    /*cursor: pointer;*/
+}
+
+table.tableInfo .toolSelected:hover {
+    background-color: rgb(150, 150, 255);
+    /*cursor: pointer;*/
+}
+
+table.tableAllParticipants .group {
+    background-color: rgb(230, 240, 250);
+}
+
+table.tableInfo .groupSelected {
+    background-color: rgb(150, 150, 255);
+}
+
+/*table.tableInfo li {
+    list-style: none;
+}*/
+
+table .wb {
+    background-color: white;
+
+}
+
+table.tableAllParticipants{
+	margin-left: 0px;
+	margin-bottom: 10px;
+}
+
+table.tableAllParticipants tr {
+    background-color: white;
+}
+
+table.tableAllParticipants tr:hover {
+    background-color: white;
+}
+
+table.tableAllParticipants td {
+    padding: 5px;
+}
+
+table.tableAllParticipants td.item {
+    font-weight:bold;
+    font-size: 12px;
+}
+
+table.tableAllParticipants .participant {
+    background-color: rgb(230, 240, 250);
+    cursor: pointer;
+}
+
+table.tableAllParticipants .participantSelected {
+    background-color: rgb(150, 150, 255);
+    cursor: pointer;
+}
+
+table.tableAllParticipants .participant:hover {
+    background-color: rgb(210, 220, 250);
+}
+
+table.participantsTable tr {
+    background-color: #f3f3f3;
+}
+
+table.participantsTable th{
+    font-weight:bold;
+    font-size: 12px;
+    color: blue;
+}
+
+table.participantsTable td {
+    padding: 5px;
+}
+
+table.participantsTable tr:hover {
+    background-color: #eee0ee;
+}
+
+table#addParticipantsTable, table#deleteParticipantsTable, table#remainParticipantsTable{
+	margin-left: 0px;
+	width: 100%;
+}

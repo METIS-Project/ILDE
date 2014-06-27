@@ -1,0 +1,96 @@
+.floatingMenu {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    font-size: 11px;
+    background-color: #f0f0f0;
+    z-index: 30000;
+}
+
+.floatingMenuTitle {
+    color:white;
+    font-weight:bold;
+    font-size:smaller;
+    padding:2px;
+}
+
+.floatingMenuTitle_default, .floatingMenuTitle_clfp {
+    background:#222;
+}
+.floatingMenuTitle_role {
+    background:#822;
+}
+
+.floatingMenuTitle_groupPatternAlerts{
+    background:#822;
+}
+
+.floatingMenuTitle_groupPatternOptions{
+    background:#822;
+}
+
+.floatingMenuTitle_activity {
+    background:#282;
+}
+.floatingMenuTitle_act {
+    background:#228;
+}
+
+.floatingMenuItem {
+    cursor: pointer;
+    padding: 1px;
+    margin: 1px;
+    border: 1px white;
+    height: 16px;
+}
+
+.floatingMenuItemDisabled {
+    cursor: default;
+    padding: 1px;
+    margin: 1px;
+    border: 1px white;
+    height: 16px;
+    opacity: 0.6;
+}
+
+div.floatingMenuItem:hover {
+    background: #c8c8ff;
+    border: #c0c0f2;
+}
+
+div.floatingMenuItemDisabled:hover {
+    border: #c0c0f2;
+}
+
+.floatingMenuSeparator {
+    background: gray;
+    height: 1px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.floatingMenuSubMenuItem {
+    padding-left: 30px;
+}
+
+.modaler {
+    position: absolute;
+    opacity: .05;
+    background: black;
+}
+
+.niceDialogContent {
+    padding:10px;
+    overflow:auto;
+}
+
+
+.dijitTextArea
+{
+    height:50px;
+}
+
+.menuItemIcon {
+    margin-right: 5px;
+}
+

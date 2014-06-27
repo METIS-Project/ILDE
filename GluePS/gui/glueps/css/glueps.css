@@ -1,0 +1,179 @@
+#myListDesignUl{
+	padding:0px;
+}
+
+/*Pantalla de new design*/
+#labelNewDImportDesign,#labelNewDTitle,#labelNewDDesigType {
+  margin-left:1em;
+  margin-right:1em;
+  float:left;
+}
+
+/*Pantalla de de My Designs and Deploys*/
+.widthSpan7em{
+    display:block;
+    width:20em;
+    padding: 3px 0;
+    float:left;
+}
+.widthSpan3emCenter{
+    display:block;
+    width:8em;
+    padding: 0 0;
+    text-align: center;
+    font-weight:bold;
+    color:#E47E28;
+    float:left;
+}
+
+/*Pantalla new deploy*/
+
+#participantAndGroups{
+    padding: 1em;
+}
+
+#vle{
+    padding: 1em;
+}
+.buttons{
+   text-align:center;
+   padding:1em 1em 0em 1em;
+}
+.buttons Button{
+   width:12em;
+   padding:0.3em;
+}
+
+.buttons #toolReuseButtonConfigurationCreate,#toolReuseButtonConfigurationSave{
+   width:12em;
+   padding:0.1em;
+   font-size: 0.875em
+}
+
+/*Pagina ToolTypes*/
+#divUlToolTypes li{
+ list-style:none;
+}
+#ToolBack{
+  display:inline;
+  width:3em;
+}
+
+
+/*Pantalla ToolReuse*/
+#toolReuseSpanLabelNameDesign,#toolReuseSpanLabelNameDeploy{
+  display:inline-block;
+   margin:-2em;
+   width:6em;
+  }
+
+#divUlToolReuse li{
+ list-style:none;
+}
+
+
+#toolTypesSpanLabelNameDesign,#toolTypesSpanLabelNameDeploy{
+   display:inline-block;
+   margin:-2em;
+   width:6em; 
+}
+
+#deployVleSpanLabelNameDesign,#deployVleSpanLabelNameDeploy{
+   display:inline-block;
+   margin:-2em;
+   width:6em;
+}
+#toolTypesSpanLabelNameDesign,#toolTypesSpanLabelNameDeploy,#toolReuseSpanLabelNameDesign,#toolReuseSpanLabelNameDeploy
+,#deployVleSpanLabelNameDesign,#deployVleSpanLabelNameDeploy
+{
+  font-weight:bold;
+  padding:2em 2em;
+}
+
+#gifAnimadoEspera{
+  margin-top:1em;
+  margin-left:5em;
+}
+.marginLeft5em{
+  margin-left:1em;
+}
+/*Clase para modificar aspecto de enlaces de actividades*/
+.toggler{
+   color:#000000;
+   font-weight:bold;
+}
+.styleNone{
+  list-style:none;
+}
+
+.fieldsetPantalla2{
+	padding:1em;
+	border: solid black 1px;
+	background-color:#F9F7ED;
+}
+.fieldsetPantalla3{
+	padding:1em;
+        /*arriba,derecha,abajo,izquierda*/
+        margin: 0  0 1em 1.5em;
+	border: solid black 1px;
+}
+.fieldsetPantalla3 select{
+    margin:0.2em 0 0 1em;
+}
+.fieldsetPantalla4{
+    margin-left:4em;
+	padding:1em;
+	border: solid black 1px;
+}
+
+.fieldsetPantalla4 ul {
+     margin:0;
+     padding:0;
+}
+
+.linkWrapper{
+   padding: 4px 0;
+}
+
+
+/* Tipo del diseño*/
+.designType{
+    padding-left: 10px;
+    font-weight:bold;
+    color:#E47E28;
+}
+
+/*Estilo para una tabla que contiene diseños*/
+.tableDesigns{
+	border-spacing:0em 1em;
+}
+
+/*Estilo para una tabla que contiene despliegues*/
+.tableDeployments{
+	border-spacing: 1em 0.5em;
+}
+	
+
+/*Estilo para los nombres de los diseños*/ 
+.designName{
+	font-weight:bold;
+	text-decoration:underline;
+}
+
+a.info{
+	font-weight:bold;
+	text-decoration:underline;
+    position:relative;
+    padding-left:1.5em;}
+
+a.info span{
+    display:block;
+    position:absolute;
+    top:-1.2em; left:2em; width:10em;
+    border:1px solid #0cf;
+    background-color:#cff; color:#000;
+    text-align: center}
+    
+.lditem {
+	cursor: pointer;
+}

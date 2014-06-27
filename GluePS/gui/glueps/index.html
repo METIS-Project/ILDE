@@ -1,0 +1,515 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+<link rel="stylesheet" type="text/css" href="css/glueps.css" />
+<link rel="stylesheet" type="text/css" href="css/loadingpane.css" />
+<link rel="stylesheet" type="text/css" href="lib/dojo/dojo/resources/dojo.css" />
+<link rel="stylesheet" type="text/css" href="lib/dojo/dijit/themes/soria/soria.css" />
+<link rel="stylesheet" type="text/css" href="css/index.css" />
+<link rel="stylesheet" type="text/css" href="css/tables.css" />
+<link rel="stylesheet" type="text/css" href="css/floatingMenu.css" />
+<link rel="stylesheet" type="text/css" href="css/main.css" />
+
+
+<script type="text/javascript" src="js/djConfig.js"></script>
+<script type="text/javascript" src="lib/dojo/dojo/dojo.js"></script>
+<script type="text/javascript" src="js/require.js"></script>
+<script type="text/javascript" src="js/i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/es/es_i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/en/en_i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/ca/ca_i18n.js"></script>
+ 
+ <!-- dialogs -->
+ <script type="text/javascript" src="js/dialogs/IndexInformativeDialogs.js"></script>
+ <script type="text/javascript" src="js/dialogs/CreateLeDialog.js"></script>
+ <script type="text/javascript" src="js/dialogs/EditLeDialog.js"></script>
+ <script type="text/javascript" src="js/dialogs/CloneDeployDialog.js"></script>
+ 
+ <!--  controllers -->
+ <script type="text/javascript" src="js/controllers/ImportDeploy.js"></script>
+ <script type="text/javascript" src="js/controllers/learningEnv.js"></script>
+ <script type="text/javascript" src="js/controllers/VleManagement.js"></script>
+ 
+<script type="text/javascript" src="js/indexInit.js"></script>
+<script type="text/javascript" src="js/Deploy.js"></script>
+<script type="text/javascript" src="js/Design.js"></script>
+<script type="text/javascript" src="js/glueps.js"></script>
+<script type="text/javascript" src="js/ErrorCodes.js"></script>
+
+<!--  menus -->
+<script type="text/javascript" src="js/menus/DesignMenu.js"></script>
+<script type="text/javascript" src="js/menus/DeployMenu.js"></script>
+<script type="text/javascript" src="js/menus/LeUserMenu.js"></script>
+
+<script type="text/javascript" src="lib/jquery/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="lib/jquery.collapsorz.js"></script>
+<script type="text/javascript" src="lib/natsort.js"></script>
+<script type="text/javascript" src="js/ParserXforms.js"></script>
+<script type="text/javascript" src="js/widgets/MenuManager.js"></script>
+<script type="text/javascript" src="js/widgets/Icons.js"></script>
+
+<!--  oauth -->
+<script type="text/javascript" src="js/oauth/OauthManager.js"></script>
+<!--  PostMessage events -->
+<script type="text/javascript" src="js/controllers/MessageManager.js"></script>
+
+<title>GLUE!-PS</title>
+</head>
+
+<body class="soria">
+	<div style="width: 100%; height: 100%; overflow: auto;">
+
+		<div id="mainWindow" dojoType="dijit.layout.ContentPane" region="left"
+			style="padding-bottom: 20px;">
+			<div class="home">
+				<img id="loginImage" src="images/icons/login.png" width="25" height="25" title="Login" alt="Login" />
+				<img id="exitImage" src="images/icons/logout.png" width="24" height="24" title="Logout" alt="Logout" />
+			</div>
+			<div class="localeChooseBlock">
+				<img id="localeEn" src="images/i18n/en.png" alt="English" title="English" width="25" height="25"/> 
+				<img id="localeEs" src="images/i18n/es.png" alt="Spanish" title="Spanish" width="25" height="25"/>
+				<img id="localeCa" src="images/i18n/ca.png" alt="Catalan" title="Catalan" width="25" height="25"/>
+			</div>
+			<div style="clear:both;"></div>
+			
+			<img src="images/GLUEPSp.png" />
+			
+			<div id="newDesign" dojoType="dijit.TitlePane" title="">
+				<form id="myform" jsId="myform" method="post" action="" encType="multipart/form-data">
+					<table>
+						<tr>
+							<td><label id="labelNewDTitle" for="NewDTextBox"></label></td>
+							<td><div id="NewDTextBox" name="NewDTitle"
+									dojoType="dijit.form.TextBox"></div></td>
+						</tr>
+						<!-- <input type="text" id="NewDTextBox" name="NewDTextBox" value="Nombre Diseño" dojoType="dijit.form.ValidationTextBox"
+				regExp="\w+" required="true" invalidMessage="Rellenar campo">-->
+						<tr>
+							<td><label id="labelNewDImportDesign" for="NewDImportDesign"></label>
+							</td>
+							<td><input id="NewDImportDesign" name="NewDImportDesign"
+								size="28" type="file" /></td>
+						</tr>
+						<tr>
+							<td><label id="labelNewDDesigType"></label>
+							</td>
+							<td><input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="imsldTypeValue"  checked value="IMS LD" /><label id="imsldDesignType" for="imsldTypeValue"></label>
+							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="ppcTypeValue" value="PPC" /><label id="ppcType" for="ppcTypeValue"></label>
+							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="T2TypeValue" value="T2" /><label id="T2Type" for="T2TypeValue"></label>
+							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="gluepsTypeValue" value="GLUEPS" /><label id="gluepsType" for="gluepsTypeValue"></label>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td>
+								<button id="newDButtonCreateDesign" dojoType="dijit.form.Button"
+									name="newDButtonCreateDesign" value="Submit"></button>
+								<button dojoType="dijit.form.Button" type="reset">Reset</button>
+							</td>
+						</tr>
+						<div id="getLicenseHeaders"></div>
+					</table>
+				</form>
+			</div>
+			
+			<div id="importDeploy" dojoType="dijit.TitlePane" title="">
+				<form id="importDeployForm" jsId="importDeployForm" method="post" action="" encType="multipart/form-data">
+					<table>
+						<tr>
+							<td><label id="labelImportDeployTitle" for="importDeployTextBox"></label></td>
+							<td><div id="importDeployTextBox" name="NewDeployTitleName"
+									dojoType="dijit.form.TextBox"></div></td>
+						</tr>
+						<tr>
+							<td><label id="labelImportDeploy" for="deployImport"></label>
+							</td>
+							<td><input id="deployImport" name="archiveWic"
+								size="28" type="file" /></td>
+						</tr>
+						<tr>
+							<td><label id="labelImportDeployType"></label>
+							</td>
+							<td>
+							    <input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="gluepsDeployTypeValue" checked value="GLUEPS" /><label id="gluepsDeployType" for="gluepsDeployTypeValue"></label>
+							</td>
+						</tr>
+						<tr>
+							<td><label id="importDeployVleSelect"></label>
+							<td><select id="importVleSelect" name="vleSelect"></select>
+								<button id="manageVleButton" dojoType="dijit.form.Button" name="manageVleButton" value="manageVle">Gestión de LMS</button>
+							</td>
+						</tr>
+						<tr id="importDeployCourseTr" style="display:none;">
+							<td><label id="importDeployCourseSelect"></label></td>
+							<td><select id="importCourseSelect" name="courseSelect"><option value="0">-- Selecciona un curso --</option></select></td>	
+						</tr>
+						<!--  						
+						<tr>
+							<td><label id="labelImportDeployToolsConf"></label>
+							</td>
+							<td>
+								<input id="checkImportToolsConf" name="checkImportToolsConf" dojoType="dijit.form.CheckBox" value="import">
+								<img id="helpCheckImport" src="images/icons/info.png"></img>
+							</td>
+						</tr>
+						-->
+						<tr>
+							<td></td>
+							<td>
+								<button id="importDeployButton" dojoType="dijit.form.Button"
+									name="importDeployButton" value="Submit"></button>
+								<button dojoType="dijit.form.Button" type="reset">Reset</button>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			
+			<div id="myListDesign" dojoType="dijit.TitlePane"
+				refreshOnShow="true" title=""
+				style="padding-bottom: 20px; width: 925px;">
+				<div id="divUlDesign" style="padding-left: 15px;min-height:250px;"></div>
+			</div>
+			<div id="newDeploy" dojoType="dijit.TitlePane" title="">
+				<form id="deployForm" action="" enctype="multipart/form-data">
+					<div>
+						<span id="spanNDeployDesignTitle" class="widthSpan3emCenter"></span>
+						<p id="newDeployDesignTitle"></p>
+						<span id="spanNDeployTitleDeploy" class="widthSpan3emCenter"></span>
+						<div id="NewDeployTitleName" name="NewDeployTitleName"
+							dojoType="dijit.form.TextBox"></div>
+						<span id="idNewDeployTitleName" sytle="display:none;"></span>
+					</div>
+					<br>
+
+					<div id="participantAndGroups">
+						<fieldset class="fieldsetPantalla2">
+							<legend id="legendParticipantes"></legend>
+							<span id="newDeployPartSpanFormat" class="widthSpan3emCenter"></span>
+							<!-- select id="formatSelect" disabled
+								dojoType="dijit.form.FilteringSelect">
+								<option value="WIC">WebCollage</option>
+							</select--> 
+							<input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="imsldTypeValueInst"  checked value="IMS LD" /><label id="imsldTypeInst" for="imsldTypeValueInst"></label>
+						    <input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="T2TypeValueInst" value="T2" /><label id="T2TypeInst" for="T2TypeValueInst"></label>						  
+							<br> <br> <span id="newDeployPartSpanUploadFile"
+								class="widthSpan3emCenter"></span> <input id="archiveWic"
+								name="archiveWic" size="28" type="file" />
+						</fieldset>
+					</div>
+
+					<br>
+					<div id="vle">
+						<fieldset class="fieldsetPantalla2">
+							<legend id="legendLMS"></legend>
+							<span id="newDeployVleSelect" class="widthSpan3emCenter"></span>
+							<select id="vleSelect" name="vleSelect">
+							</select>
+							<br>
+							<div id="divCourseSelect">
+							<br>
+							<span id="newDeployCourseSelect" class="widthSpan3emCenter"></span>
+							<select id="courseSelect" name="courseSelect">							
+							</select>
+							</div><br> <br> <span id="newDeployTeacherUsername"
+								class="widthSpan3emCenter" style="display: none;"></span>
+							<div id="newDeployTextBoxTeacher" name="newDeployTextBoxTeacher"
+								dojoType="dijit.form.TextBox" style="display: none;">
+								lprisan</div>
+							<input id="checkDeploy"
+								name="checkDeploy" dojoType="dijit.form.CheckBox" value="agreed">
+							<label id="labelMyCheck" for="mycheck"> </label> <select
+								id="temaSelect" name="temaSelect">
+							</select>
+						</fieldset>
+					</div>
+					<div>
+						<div id="buttonsDeploy" class="buttons">
+							<button id="buttonNewDeployBack" dojoType="dijit.form.Button"
+								type="button"></button>
+							<button id="buttonNewDeployNext" dojoType="dijit.form.Button"
+								type="button"></button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+		</div>
+	</div>
+
+	<div id="dialogAlert" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogAlertInfo" dojoType="dijit.layout.ContentPane"
+			style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogAlertOk" dojoType="dijit.form.Button"
+				label="Aceptar" onclick="Glueps.hideAlertDialog();"></button>
+		</div>
+	</div>
+	<div id="dialogConfirmDeleteDeploy" dojoType="dijit.Dialog"
+		showTitle="true">
+		<div id="dialogConfirmDeleteDeployInfo"
+			dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteDeployOk" dojoType="dijit.form.Button"
+				label="Aceptar"></button>
+			<button id="dialogConfirmDeleteDeployCancel"
+				dojoType="dijit.form.Button" label="Cancelar"></button>
+		</div>
+		<div>
+			<input id="deleteDeployId" dojoType="dijit.form.TextBox"
+				name="eliminarDeployId" type="hidden" />
+		</div>
+	</div>
+
+	<div id="dialogConfirmDeleteDesign" dojoType="dijit.Dialog"
+		showTitle="true">
+		<div id="dialogConfirmDeleteDesignInfo"
+			dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteDesignOk" dojoType="dijit.form.Button"
+				label="Aceptar"></button>
+			<button id="dialogConfirmDeleteDesignCancel"
+				dojoType="dijit.form.Button" label="Cancelar"
+				></button>
+		</div>
+		<div>
+			<input id="deleteDesignId" dojoType="dijit.form.TextBox"
+				name="eliminarDesignId" type="hidden" />
+		</div>
+	</div>
+
+	<div id="dialogConfirmDeleteToolInstance" dojoType="dijit.Dialog"
+		showTitle="true">
+		<div id="dialogConfirmDeleteToolInstanceInfo"
+			dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteToolInstanceOk"
+				dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteToolInstanceCancel"
+				dojoType="dijit.form.Button" label="Cancelar"
+				onclick="ToolsReuse.hideDeleteToolInstance();"></button>
+		</div>
+		<div>
+			<input id="deleteToolInstanceId" dojoType="dijit.form.TextBox"
+				name="eliminarToolInstanceId" type="hidden" />
+		</div>
+	</div>
+
+	<div id="dialogConfirmDeploy" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeployInfo" dojoType="dijit.layout.ContentPane"
+			style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeployOk" dojoType="dijit.form.Button"
+				label="Aceptar"></button>
+			<button id="dialogConfirmDeployCancel" dojoType="dijit.form.Button"
+				label="Cancelar" onclick="ToolsReuse.hideDeploy();"></button>
+		</div>
+	</div>
+	
+
+	<div id="loading" dojoType="dijit.Dialog" closable="false"
+		title="Espere, por favor.">
+		<div id="loadingInfo" dojoType="dijit.layout.ContentPane"
+			style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<img id="gifAnimadoEspera" src="images/82.gif"
+				style="display: block; margin-left: auto; margin-right: auto;"></img>
+		</div>
+	</div>
+	
+	<!--  Diálogo de cierre de sesión -->
+	<div id="dialogLogout" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogLogoutInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogLogoutOk" dojoType="dijit.form.Button" label="Aceptar" ></button>
+		</div>
+	</div>
+
+	<div id="FloatingMenu" class="floatingMenu dijitTooltip">
+		<div class="dijitTooltipConnector"></div>
+		<div id="FloatingMenuContainer"
+			class="dijitTooltipContainer dijitTooltipContents">
+			<div id="FloatingMenuTitle" class="floatingMenuTitle"></div>
+			<div id="FloatingMenuContent"></div>
+		</div>
+	</div>
+	
+	
+	<!-- VLE management dialogs -->
+	
+	<!--  VLE installations dialog -->
+	<div dojoType="dijit.Dialog" id="manageVles" showTitle="true" title="Gestión de VLEs" style="max-width:400px;">
+        <div align="center" style="padding-bottom:10px;">
+           <button id="createVleInstallation" dojoType="dijit.form.Button" label="Crear instalación VLE"></button>
+        </div>
+        <div id="divTableVleInst" dojoType="dijit.TitlePane" title="Lista de instalaciones de VLE" style="width:100%;padding-bottom:20px;">
+            <div id="tableVleInst" style="height:20em; overflow:auto;min-width:340px;">
+            </div>
+        </div>
+        <div align="center">
+            <button id="acceptManageVles" dojoType="dijit.form.Button" label="Ok"></button>
+            <button id="cancelManageVles" dojoType="dijit.form.Button" label="Cancelar"></button>
+        </div>
+        
+        
+        	<!--  Diálogo de confirmación de borrado de LE -->
+	<div id="dialogConfirmDeleteLe" dojoType="dijit.Dialog"
+		showTitle="true">
+		<div id="dialogConfirmDeleteLeInfo"
+			dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteLeOk" dojoType="dijit.form.Button"
+				label="Aceptar"></button>
+			<button id="dialogConfirmDeleteLeCancel"
+				dojoType="dijit.form.Button" label="Cancelar"></button>
+		</div>
+		<div>
+			<input id="deleteLeId" dojoType="dijit.form.TextBox"
+				name="eliminarLeId" type="hidden" />
+		</div>
+	</div>
+	
+	
+    </div>
+    
+   <!--  New LE dialog -->
+   <div dojoType="dijit.Dialog" id="dialogNewLe" showTitle="true" title="Crear un nuevo VLE">
+        <div id="dialogNewLeErrorReport" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <form id="formNewLe" name="formNewLe" method="POST" enctype="application/x-www-form-urlencoded">
+                <table>
+                   <tr>
+                        <td>
+                            <label id="labelNewLeInstallation">Instalación de LE</label>
+                        </td>
+                        <td>
+                            <select id="dialogNewLeInstallation" name="leInstallation">
+                            	<option value="0">Selecciona una instalación de LE</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label id="labelNewLeName">Nombre del VLE</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogNewLeName" name="leName" style="width:280px;"/>
+                        </td>
+                    </tr>
+                    <tr id="trNewLeUser">
+                        <td>
+                           <label id="labelNewLeUser">Usuario</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogNewLeUser" name="leUser" style="width:200px;"/>
+                        </td>
+                        
+                    </tr>
+                    <tr id="trNewLePassword">
+                        <td>
+                            <label id="labelNewLePassword">Password</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogNewLePassword" name="lePassword" type="password" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <!--
+                    <tr id="trOauthLinkVle">
+                        <td>
+                        </td>
+                        <td>
+                            <a id="oauthLinkVle" href="javascript:OauthManager.getOauthUrl();" target="_blank">Oauth authentication</a>
+                        </td>
+                    </tr>
+                    -->
+                </table>
+            </form>
+        </div>
+
+        <div align="center">
+            <button id="acceptNewLe" dojoType="dijit.form.Button" label="Ok">
+            </button>
+            <button id="cancelNewLe" dojoType="dijit.form.Button" label="Cancel">
+            </button>
+        </div>
+    </div>
+    
+       <!--  Edit LE dialog -->
+   <div dojoType="dijit.Dialog" id="dialogEditLe" showTitle="true" title="Editar VLE">
+        <div id="dialogEditLeErrorReport" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <form id="formEditLe" name="formEditLe" method="POST" enctype="application/x-www-form-urlencoded">
+                <table>
+                   <tr>
+                        <td>
+                            <label id="labelEditLeInstallation">Instalación de LE</label>
+                        </td>
+                        <td>
+                            <select id="dialogEditLeInstallation" name="leInstallation">
+                            	<option value="0">Selecciona una instalación de LE</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        	<label id="labelEditLeName">Nombre del VLE</label>                            
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogEditLeName" name="leName" style="width:280px;"/>
+                        </td>
+                    </tr>
+                    <tr id="trEditLeUser">
+                        <td>
+                        	<label id="labelEditLeUser">Usuario</label>                            
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogEditLeUser" name="leUser" style="width:200px;"/>
+                        </td>
+                    </tr>
+                    <tr id="trEditLePassword">
+                        <td>
+                            <label id="labelEditLePassword">Password</label>
+                        </td>
+                        <td>
+                            <input dojoType="dijit.form.TextBox" id="dialogEditLePassword" name="lePassword" type="password" style="width:200px;"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div align="center">
+            <button id="acceptEditLe" dojoType="dijit.form.Button" label="Ok">
+            </button>
+            <button id="cancelEditLe" dojoType="dijit.form.Button" label="Cancel">
+            </button>
+        </div>
+    </div>
+    
+    <!--  Clone deploy dialog -->
+	<div id="cloneDeployDialog" dojoType="dijit.Dialog" title="Clone deploy">
+	    <div id="cloneDeployError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="cloneDeployDialogContent" dojoType="dijit.layout.ContentPane">
+    		<table>
+    		<tr>
+    		<td><label id="labelDeployName" for="deployName">Nombre del despliegue</label></td>
+    		<td><input dojoType="dijit.form.TextBox" id="deployName" name="deployName" style="width:250px;" maxlength="255"/></td>
+    		</tr>
+    		</table>	
+    	</div>
+    	<div align="center">
+        	<button id="cloneDeployDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="cloneDeployDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>
+
+</body>
+</html>
+

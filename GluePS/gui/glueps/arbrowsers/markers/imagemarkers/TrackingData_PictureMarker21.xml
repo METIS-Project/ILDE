@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--    Example tracking configuration file for using marker-based tracking.
+        Marker tracking is the detection of markers in a camera image and
+        the estimation of the camera position with respect to these markers.
+        Markers, in contrast to natural features, are easy to detect with high
+        precision, which in turn allows to estimate the camera position with
+        high accuracy. 
+        There are three different marker types that can be used:
+        - ID marker,
+        - picture marker and
+        - rectangular image marker
+        To use one or more of these markers for the tracking process, they need
+        to be defined in the configuration file. If a marker is not defined, 
+        but is seen during the tracking process, then it will simply be ignored. 
+        Besides the configuration file, a camera calibration file needs to be 
+        provided. A more precise camera calibration will lead to more accurate 
+        tracking results, so it is advisible to use a high-quality camera 
+        calibration. -->
+<TrackingData>
+    <Sensors>
+	
+	    <!--    Use "MarkerBasedSensorSource" as type to use marker tracking -->
+        <Sensor type="MarkerBasedSensorSource">
+		
+		    <!--    Assign ID to uniquely identify this tracker -->
+            <SensorID>Markertracking1</SensorID>
+			
+            <Parameters>
+			
+                <!--    Parameters for the marker tracker itself. These 
+                        parameters are independent from the specific markers. 
+                        -->
+                <MarkerTrackingParameters>
+				
+				     <!--    Strategy which is used for the marker detection. 
+                            There are two types available:
+                            - "robust" to use a robust approach to detect the 
+                              markers, which usually gives the best results, 
+                              but consumes more computational time, i.e. is 
+                              slower.
+                            - "fast" to use a more simple approach to detect 
+                              the markers, which is less precise, but faster 
+                              than robust. 
+                              -->
+                    <trackingQuality>robust</trackingQuality>
+					<!--    <TrackingQuality>fast</TrackingQuality> -->
+
+                    <!--    The threshold which is used to binarize the camera 
+                            image. Binarizing is the process where each pixel 
+                            is converted to a grayscale value (between 0 and 
+                            255) and then is set to 0 when the value is below 
+                            the threshold and to 1 when the value is above. 
+                            This helps to clearly identify the marker and is 
+                            therefore important for the detection process. When 
+                            the tracking quality is set to "fast", then this 
+                            value is fixed and will not change during the 
+                            tracking process. When the tracking quality is set 
+                            to "robust", then the value is only the starting 
+                            value in the very first frame after loading the 
+							tracking.xml. Detecting markers using a fixed 
+							threshold can lead to failure. The value range for
+							the threshold is between 0 and 255.
+							-->
+                    <thresholdOffset>128</thresholdOffset>
+					
+					<!--    Number of search iterations which controls the 
+                            number of attempts to find a marker with a new 
+                            ThresholdOffset. This parameter matters when "robust" 
+							is set as "TrackingQuality", but is ignored for 
+							"fast". The ThresholdOffset is adapted when no 
+							marker was detected. 							
+                            With a high number, the marker tracker is more 
+                            likely to detect a marker, but it also needs more 
+                            computational time, i.e. is slower. -->
+                    <numberOfSearchIterations>3</numberOfSearchIterations>
+					
+                </MarkerTrackingParameters>
+            </Parameters>
+            
+			<!--    The following XML nodes define the markers which are used 
+                    for marker tracking. Each node is independent from each 
+                    other. The following nodes are examples for each marker 
+                    type which can be defined in this file. For your 
+                    information, "COS" stands for "coordinate system" because 
+                    each marker is associated with an independent coordinate 
+                    system. -->
+
+            <!--    Example ID marker configuration, which uses a matrix ID 
+                    (similar to a 2D barcode) to identify the marker. The 
+                    matrix ID must be provided and should be unique for each 
+                    marker. Two markers cannot have the same matrix ID. -->
+					
+            <SensorCOS>
+			
+			    <!--    ID string for uniquely identifying the marker. This ID 
+                        string must not be assigned to another marker. -->
+                <SensorCosID>Marker1</SensorCosID>
+				
+				
+                <Parameters>
+				
+				    <!--    Description of the marker properties. -->
+                    <MarkerParameters>
+					
+					    <!--    Matrix ID to identify the marker. The ID is
+                                associated with the pattern on the marker and 
+                                is used to identify the marker in the camera 
+                                image. -->
+                        <MatrixID>102</MatrixID>
+						
+						<!--    Reference image to identify the marker. The 
+                                filename is relative (not absolute!) to the 
+                                folder in which the tracking configuration XML 
+                                file is located. Supported image formats are 
+                                ppm, pgm, png and jpeg. The image must be the 
+                                same as on the printed marker (without the 
+                                black border surrounding it). "WidthMM" and 
+								"heightMM" specify the scale of the image in 
+								millimeters in order to correctly relate pixel
+								dimensions to real world dimensions. By default, 
+								the image resolution will be taken as their 
+								values. It is advised to set these attributes 
+								to augment the image independently of the 
+								reference image resolution. The "ReferenceImage" 
+								node also defines two attributes:
+                                - "Binary" which is optional and is set to
+								  "true" or "false". This attribute tells if the
+								  image is a binary image (all pixel values are
+								  black or white) or a regular image (color or 
+                                  grayscale). It is recommended to set the 
+                                  value to "false", which works in general for
+								  both cases. The value "true" is mainly used
+								  as a "speed up" for older systems. The default
+                                  value is "false".
+                                - "QualityThreshold" which defines a threshold 
+                                  for the system to determine if detection was 
+                                  successful or not. The value range is 
+                                  between 0.0 and 1.0. A high value means that 
+                                  the system will only accept detected markers 
+                                  if they are very similar to the reference 
+                                  image. If this value is too high, it could 
+                                  mean, e.g., that mere illumination changes 
+                                  may make the tracker reject a marker because 
+                                  it is not "similar enough" to the template 
+                                  image any more. A low value is more 
+                                  permissive, but may also lead to false 
+                                  positives, i.e. wrong detection. 
+                                  Typically "0.7" is sufficient, but in some 
+                                  cases, it is advised to adapt this value to 
+                                  the user's environment. -->
+                        <referenceImage widthMM="300" heightMM="300" binary="0" qualityThreshold="0.70">imagemarker1.png</referenceImage>
+                    </MarkerParameters>
+                </Parameters>
+            </SensorCOS>
+            
+            <SensorCOS>
+                <SensorCosID>Marker2</SensorCosID>
+                <Parameters>
+                    <MarkerParameters>
+                        <MatrixID>104</MatrixID>
+                        <referenceImage widthMM="300" heightMM="450" binary="0" qualityThreshold="0.70">imagemarker2.png</referenceImage>
+                    </MarkerParameters>
+                </Parameters>
+            </SensorCOS>
+            
+        </Sensor>
+    </Sensors>
+</TrackingData>
