@@ -35,6 +35,7 @@
  ********************************************************************************/
 
 ?><?php
+global $jslibs;
 extract ($vars);
 echo elgg_view('page_elements/header', $vars);
 echo elgg_view('messages/list', array('object' => system_messages(null,"")));
@@ -312,6 +313,7 @@ function encodeURIComponent($str) {
             </iframe>
         <?php elseif ($editor == 'project_design'): ?>
             <?php
+            $jslibs['project'] = true;
             $preview_lds_box = <<<HTML
     <div id="tree_info_popup_shell_empty" class="tooltip_bl_body" style="position:absolute;height:300px;width:400px;background-color: #FFF;overflow:hidden;display:none">
         <div class="tree_info_popup_control">

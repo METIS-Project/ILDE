@@ -38,6 +38,7 @@
 
 <?php
 global $ldshake_jscache_break;
+global $jslibs;
 if (get_context() == 'lds_exec_new' || get_context() == 'lds_exec_edit' || get_context() == 'lds_exec_neweditor' || get_context() == 'lds_exec_editeditor' || get_context() == 'lds_exec_implementeditor' || get_context() == 'lds_exec_newimplementglueps' || get_context() == 'lds_exec_editglueps' || get_context() == 'lds_exec_upload'  || get_context() == 'lds_exec_new_project'):
 ?>
 	<script type="text/javascript" src="<?php echo $vars['url'] ?>mod/lds/autoSuggest/jquery.autoSuggest.js<?php echo "?q=".$ldshake_jscache_break["lds"]; ?>"></script>
@@ -83,7 +84,7 @@ endif;
 if (get_context() == 'lds_exec_firststeps'):
 	echo Utils::getJsDeclaration('lds', 'lds-firststeps');
 endif;
-if (strstr(get_context(), '_project') or get_context() == 'lds_exec_vieweditor'):
+if (isset($jslibs['project'])):
     ?><script type="text/javascript" src="<?php echo $vars['url']?>vendors/jsPlumb/jquery.jsPlumb-1.6.2-min.js"></script><?php
     echo Utils::getJsDeclaration('lds', 'ldprojects-common');
 endif;

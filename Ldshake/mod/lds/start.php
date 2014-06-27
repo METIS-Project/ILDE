@@ -2900,7 +2900,9 @@ function lds_exec_project_preview2($params)
 
 function lds_exec_new_project ($params)
 {
-    global $CONFIG;
+    global $CONFIG, $jslibs;
+
+    $jslibs['project'] = true;
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
     $vars['referer'] = $CONFIG->url.'pg/lds/projects/';
@@ -2959,7 +2961,9 @@ function lds_exec_new_project ($params)
 
 function lds_exec_edit_project ($params)
 {
-    global $CONFIG;
+    global $CONFIG, $jslibs;
+
+    $jslibs['project'] = true;
 
     set_context("lds_exec_new_project");
 
