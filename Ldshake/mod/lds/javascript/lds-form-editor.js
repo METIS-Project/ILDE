@@ -422,7 +422,8 @@ function ajax_submit (save_seq, redirect)
                 editorType: editorType,
                 editor_subtype: editor_subtype,
                 documents: documents,
-                document_url: document_url
+                document_url: document_url,
+                stats: stats
             };
             if(google_docs) {
                 submitData['google_docs_support_id'] = google_docs_support_id;
@@ -1043,13 +1044,22 @@ $(document).ready(function() {
             if(event.data.type == 'glueps_deployment') {
                 register_deployment();
             }
+
+            if(event.data.type == 'ldshake_editor_stats') {
+                if(!stats.events)
+                    stats.events = [];
+
+                stats.events.push(event.data.data);
+                //alert('id');
+                //register_deployment();
+            }
         },false);
     }
 });
 
-
 $(document).ready(function()
 {
+    stats = {};
     lds_recovery = Math.floor((Math.random()*100000000000000000)+1);
     for(var i=0; i<documents.length;i++) {
         if(documents[i].guid == "0")

@@ -56,6 +56,7 @@ $google_docs_support_title = get_input('google_docs_support_title', false);
 $docSession = get_input('editor_id');
 $document_url = get_input('document_url');
 $is_implementation = get_input('is_implementation');
+$stats = get_input('stats', null);
 
 $new_imp = false;
 
@@ -153,6 +154,11 @@ $revisions = $lds->getAnnotations('revised_docs_editor', 2, 0, 'desc');
 $revision = $revisions[0];
 $resultIds->revision = $revision->id;
 
+//save stats
+    if(!empty($stats)) {
+        $stats['revision'] = (int)$resultIds->revision;
+        create_annotation($lds->guid, 'editor_stats', serialize($stats), 'text', get_loggedin_userid(), 1);
+    }
 
 //create a new revision if is the first save in this session
 if(get_input('guid') > 0 && get_input('revision') == 0 && count($revisions) > 1) {

@@ -116,6 +116,7 @@ if($CONFIG->url == 'http://ilde.upf.edu/kek/') {
         'title' => T('Πρότυπο Διδακτικού Σεναρίου'),
         'type'  => 'doc',
         'subtype'   => 'kek_p1',
+        'icon' => 'text',
     );
 
 }

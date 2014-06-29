@@ -2359,7 +2359,7 @@ div.cc_info_icon > div.cc_icon_title {
 
 .projects_tool_caption {
     position: absolute;
-    bottom: 5px;
+    bottom: 0px;
     left: 3px;
     width: 50px;
     background-color: rgba(235, 235, 235, 0.8);

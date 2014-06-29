@@ -419,6 +419,29 @@ $(document).ready(function() {
         });
     }
 
+    function addEditIcon(subToolElem) {
+        var src     = baseurl + 'mod/lds/images/projects/edit.png';
+        var width   = 16;
+        var height  = 16;
+        var toolLocation = subToolElem.getBoundingClientRect();
+        var left    = toolLocation.width - width/2;
+        var bottom  = toolLocation.height - height/2 - 10;
+        var id = subToolElem.id + "_edit";
+
+        var item = '<img id="' + id + '" class="project-edit-link" src="' + src + '" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + bottom + 'px' + '; position:absolute; z-index: 9999; cursor: pointer;" />';
+
+        //console.log(item);
+        //console.log(toolLocation);
+        $(subToolElem).append(item);
+        var $addedItem = $("#"+id);
+
+        $addedItem.on("click", function(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            window.location = baseurl + 'pg/lds/edit/' + $(subToolElem).attr('associatedlds');
+        });
+    }
+
     function addPlusIcon(toolElem) {
         var src     = baseurl + 'mod/lds/images/projects/plus-icon.png';
         var width   = 20;
@@ -576,6 +599,10 @@ $(document).ready(function() {
                         var $addedElement = addSubToolElem(this);
                         var addedElement = $addedElement.get(0);
 
+                        if(is_implementation && !ldshake_project_isedit()) {
+                            addEditIcon(addedElement);
+                        }
+
                         if(typeof tool.associatedLdS[i].workflow_order === 'number') {
                             if(tool.associatedLdS[i].workflow_order > ldshake_project_doc_number)
                                 ldshake_project_doc_number = tool.associatedLdS[i].workflow_order + 1;
@@ -636,6 +663,7 @@ $(document).ready(function() {
 
             $this.filter('[associatedlds]').click(project_popup_show);
             $this.find("img").hide();
+            $this.find("img.project-edit-link").show();
             $this.css("cursor", "pointer");
             //$this.parent().parent().parent().css("overflow-y", "scroll");
         });
