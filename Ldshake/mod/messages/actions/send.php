@@ -117,7 +117,7 @@
                     // Email notification
                     global $CONFIG;
                     $message_contents = strip_tags($message_contents);
-                    if ($r->getGUID() != $_SESSION['user']->getGUID()) {
+                    if ($r->getGUID() != $_SESSION['user']->getGUID() && empty($r->disable_user_notifications)) {
 
                         notify_user($r->getGUID(), $_SESSION['user']->getGUID(), elgg_echo('messages:email:subject'),
                             sprintf(

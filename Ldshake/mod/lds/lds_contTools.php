@@ -42,6 +42,18 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_stats_log_event($event, $data = null, $user = null) {
+    if(!$user)
+        $user = get_loggedin_user();
+
+    if($data)
+        $data = serialize($data);
+    else
+        $data = '';
+
+    create_annotation($user->guid, $event, $data, 'text', $user->guid, ACCESS_PUBLIC);
+}
+
 function ldshake_contextual_help_settings_save() {
     $disable_contextual_help = get_input('disable_contextual_help');
 

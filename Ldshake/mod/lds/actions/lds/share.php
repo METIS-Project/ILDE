@@ -60,6 +60,7 @@ foreach($del_viewers as $v) {
     $e = get_entity($v);
     $relationship = ($e->type == 'user') ? 'lds_viewer' : 'lds_viewer_group';
     remove_entity_relationship($v, $relationship, $guid);
+    ldshake_stats_log_event('share_del_viewer');
 }
 
 foreach($add_viewers as $v) {
@@ -67,6 +68,7 @@ foreach($add_viewers as $v) {
     $e = get_entity($v);
     $relationship = ($e->type == 'user') ? 'lds_viewer' : 'lds_viewer_group';
     add_entity_relationship($v, $relationship, $guid);
+    ldshake_stats_log_event('share_add_viewer');
 }
 
 if ($allCanView != '0') {
@@ -76,12 +78,15 @@ if ($allCanView != '0') {
     */
     $lds->access_id = 2;
     $lds->all_can_view = "yes";
+    ldshake_stats_log_event('share_add_viewer');
+
 } else {
     /*
     if(check_entity_relationship($lds->owner_guid, 'lds_all_can_view', $guid))
         remove_entity_relationship($lds->owner_guid, 'lds_all_can_view', $guid);
     */
     $lds->all_can_view = "no";
+    ldshake_stats_log_event('share_del_viewer');
 }
 $lds->save();
 
@@ -95,6 +100,7 @@ foreach($del_editors as $e) {
     $en = get_entity($e);
     $relationship = ($en->type == 'user') ? 'lds_editor' : 'lds_editor_group';
     remove_entity_relationship($e, $relationship, $guid);
+    ldshake_stats_log_event('share_del_editor');
 }
 
 foreach($add_editors as $e) {
@@ -102,6 +108,7 @@ foreach($add_editors as $e) {
     $en = get_entity($e);
     $relationship = ($en->type == 'user') ? 'lds_editor' : 'lds_editor_group';
     add_entity_relationship($e, $relationship, $guid);
+    ldshake_stats_log_event('share_add_editor');
 }
 
 //lds_contTools::markLdSAsViewed ($lds->guid);

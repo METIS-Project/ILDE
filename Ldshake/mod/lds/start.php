@@ -483,6 +483,7 @@ function lds_exec_implementations ($params)
 }
 
 function lds_exec_search ($params) {
+    ldshake_stats_log_event('search');
 	$query = urldecode(get_input('q', ""));
     $offset = (int)get_input('offset', 0);
 	
@@ -553,6 +554,7 @@ function lds_exec_vledata ($params)
 {
     global $CONFIG;
     $user = get_loggedin_user();
+    ldshake_stats_log_event('vledata');
 
     $vlelist = get_entities('object', 'user_vle', get_loggedin_userid(), '', 9999);
     if(!$vlelist) {
@@ -783,6 +785,12 @@ function lds_exec_browse ($params)
         $vars['tagk'] = urldecode(get_input('tagk'));
         $vars['tagv'] = urldecode(get_input('tagv'));
 
+        if(in_array($vars['tagk'], array('editor_type', 'editor_subtype'))) {
+            ldshake_stats_log_event('browse_tool', $vars['tagv']);
+        } elseif(in_array($vars['tagk'], array('tags', 'discipline', 'pedagogical_approach'))) {
+            ldshake_stats_log_event('browse_tag_' . $vars['tagk'], $vars['tagv']);
+        }
+
         $title = T("LdS tagged %1",$vars['tagv']);
         //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
         $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], $order, true);
@@ -908,6 +916,9 @@ function lds_exec_new ($params)
 
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
     //$time = microtime(true);
+
+    ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
+
     echo elgg_view('lds/editform',$vars);
     //echo microtime(true) - $time." form<br>";
     global $start_time;
@@ -1102,6 +1113,8 @@ function lds_exec_neweditor ($params)
     $vars['editor_type'] = $params[1];
 
 	$vars['title'] = T("New LdS");
+
+    ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
 	
 	echo elgg_view('lds/editform_editor',$vars);
 }
@@ -2586,6 +2599,9 @@ function lds_exec_patterns ($params)
 
 function lds_exec_query ($params) {
     include_once __DIR__.'/Java.inc';
+
+    ldshake_stats_log_event('search_patterns');
+
     $query = urldecode(get_input('q'));
     $vars['query'] = $query;
 
@@ -2976,7 +2992,7 @@ function lds_exec_edit_project ($params)
 
     if (!$editLdS->canEdit())
     {
-        register_error("You don't have permissions to edit this LdS.");
+        register_error("You don't have permissions to edit this workflow.");
         header("Location: " . $_SERVER['HTTP_REFERER']);
         return '';
     }
