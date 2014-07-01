@@ -42,6 +42,22 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_lds_referer($lds) {
+    global $CONFIG;
+
+    $referer = $CONFIG->url.'pg/lds/';
+
+    if($container = get_entity($lds->container_guid)) {
+        $subtype = $container->getSubtype();
+
+        if($subtype == 'LdSProject_implementation') {
+            $referer = $CONFIG->url.'pg/lds/project_implementation/' . $container->guid;
+        }
+    }
+
+    return $referer;
+}
+
 function ldshake_stats_log_event($event, $data = null, $user = null) {
     if(!$user)
         $user = get_loggedin_user();
@@ -353,8 +369,19 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
             }
 
             if($lds && !empty($item['title']) && !check_entity_relationship($lds->guid, 'lds_project_existent', $pd_guid)) {
-                $lds->title = $item['title'] . " ($title)";
-                $lds->save();
+                if($lds->title != $item['title'] . " ($title)") {
+                    if(strstr($item['title'], "($title)"))
+                        $lds->title = $item['title'];
+                    else
+                        $lds->title = $item['title'] . " ($title)";
+                    $lds->save();
+                }
+/*
+                if(!strstr($lds->title, "($title)")) {
+                    $lds->title = $item['title'] . " ($title)";
+                    $lds->save();
+                }
+*/
             } else if($lds) {
                 $item['title'] = $lds->title;
             }

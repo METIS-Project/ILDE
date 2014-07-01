@@ -356,7 +356,7 @@ HTML;
             <script>
                 ldproject = <?php echo json_encode(ldshake_project_upgrade(json_decode($lds->description)));?>;
                 project_lds_box = <?php echo json_encode($preview_lds_box);?>;
-                is_implementation = <?php echo (($lds->getSubtype() != 'LdSProject') ? 'true' : 'false')?>;;
+                is_implementation = <?php echo (($lds->getSubtype() != 'LdSProject') ? 'true' : 'false');?>;
                 is_project_view = true;
                 is_project_edit = false;
                 var ldsToBeListed = <?php echo json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));?>;

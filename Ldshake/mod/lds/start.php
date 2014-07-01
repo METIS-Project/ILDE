@@ -1205,6 +1205,8 @@ function lds_exec_edit ($params)
 	//	$vars['referer'] = $_SERVER['HTTP_REFERER'];
 	
 	$editLdS = get_entity($params[1]);
+
+    $vars['referer'] = ldshake_lds_referer($editLdS);
 	
 	if (!$editLdS->canEdit())
 	{

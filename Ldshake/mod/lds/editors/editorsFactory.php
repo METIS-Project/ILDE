@@ -3218,11 +3218,14 @@ class GluepsManager
         $ldshake_url = parse_url($CONFIG->url);
         $ldshake_frame_origin = $ldshake_url['scheme'].'://'.$ldshake_url['host'];
 
+        $imsld_zip = $CONFIG->tmppath . rand_str(16) . '.zip';
+        file_put_contents($imsld_zip, file_get_contents($filename_lds));
+
         $post = array(
             'NewDeployTitleName' => $implementation->title,
             'instType' => 'IMS LD',
             'sectoken' => $sectoken,
-            'archiveWic' => "@{$filename_lds}",
+            'archiveWic' => "@{$imsld_zip}",
             'vleData' => "@{$m_fd['uri']};type=application/json; charset=UTF-8",
             'ldshake_frame_origin' => $ldshake_frame_origin,
             'lang' => 'en'
@@ -3236,6 +3239,7 @@ class GluepsManager
                 ->basicAuth('ldshake','Ld$haK3')
                 ->sendIt();
 
+            unlink($imsld_zip);
             if($response->code != 200)
                 throw new Exception($response->code. ' ' .$response->body);
             $xmldoc = new DOMDocument();

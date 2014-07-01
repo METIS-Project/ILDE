@@ -604,7 +604,7 @@ $(document).ready(function() {
                         }
 
                         if(typeof tool.associatedLdS[i].workflow_order === 'number') {
-                            if(tool.associatedLdS[i].workflow_order > ldshake_project_doc_number)
+                            if(tool.associatedLdS[i].workflow_order >= ldshake_project_doc_number)
                                 ldshake_project_doc_number = tool.associatedLdS[i].workflow_order + 1;
 
                             $addedElement.find(".workflow_order > input").val(tool.associatedLdS[i].workflow_order);

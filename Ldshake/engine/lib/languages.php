@@ -96,7 +96,11 @@
                 //if ($CONFIG->url == "http://web.dev/ilde/")
                 //    exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
 				return $CONFIG->translations["en"][$message_key];
-			}
+			} else if (isset($CONFIG->translations[$CONFIG->language][$message_key])) {
+                //if ($CONFIG->url == "http://web.dev/ilde/")
+                //    exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
+                return $CONFIG->translations[$CONFIG->language][$message_key];
+            }
 				
 			return $message_key;
 			
