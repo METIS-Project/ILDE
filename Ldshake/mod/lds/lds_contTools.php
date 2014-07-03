@@ -540,7 +540,7 @@ function buildPermissionsQuery($user_id, $writable_only = true, $isglobalenv = f
     }
 
     if(!$isglobalenv) {
-        $projects = lds_contTools::getUserEntities('object', 'LdSProject_implementation', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, false, null, true);
+        $projects = lds_contTools::getUserEntities('object', 'LdSProject_implementation', get_loggedin_userid(), false, 9999, 0, null, null, "time", $writable_only, null, false, null, true);
         if(!empty($projects)) {
             $projects_lds = implode(',', $projects);
             $query['permission'] = <<<SQL
