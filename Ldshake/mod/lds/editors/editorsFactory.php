@@ -55,8 +55,10 @@ class Editor
 	}
 
 	//create an ElggFile object and return it
-	public function getNewFile($filename)
+	public function getNewFile($filename, $document = null)
 	{
+        if(!$document)
+            $document = $this->_document;
 		$user = get_loggedin_user();
 		$file = new ElggFile();
 		$file->setFilename($filename);
@@ -65,10 +67,10 @@ class Editor
 		$file->originalfilename = $filename;
 		$file->access_id = 2;
 
-        if(!empty($this->_document)) {
-            if(!empty($this->_document->lds_guid)) {
-                $file->lds_guid = $this->_document->lds_guid;
-                $file->container_guid = $this->_document->guid;
+        if(!empty($document)) {
+            if(!empty($document->lds_guid)) {
+                $file->lds_guid = $document->lds_guid;
+                $file->container_guid = $document->guid;
             }
         }
 
@@ -101,7 +103,7 @@ class Editor
         return $file;
     }
 
-    protected function cloneFile($field, $lds) {
+    protected function cloneFile($field, $lds, $document) {
         if(empty($this->_document->$field)) {
             return null;
         }
@@ -114,7 +116,7 @@ class Editor
 
         //create a new file to store the document
         $filestorename = rand_str() . '.ldshake';
-        $file = $this->getNewFile($filestorename);
+        $file = $this->getNewFile($filestorename, $document);
         $file->lds_guid = $lds->guid;
         $file->save();
 
@@ -1110,8 +1112,8 @@ class RestEditor extends Editor
                 'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
                 //'url_rest' => "http://ilde:443/",
                 //'url_gui' => "http://ilde:443/ldshakegui/",
-                'url_rest' => "http://192.168.1.219:51235/",
-                'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
+                //'url_rest' => "http://192.168.1.219:51235/",
+                //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
                 'preview' => true,
                 'imsld' => false,
                 'scorm' => true,
@@ -1597,6 +1599,7 @@ class RestEditor extends Editor
         $rand_id = mt_rand(400,9000000);
 
         $clone = new DocumentEditorObject($lds);
+        $clone->save();
 
         $file_fields = array(
             'file_guid',
@@ -1605,7 +1608,7 @@ class RestEditor extends Editor
         );
 
         foreach($file_fields as $file_field)
-            $clone->$file_field = $this->cloneFile($file_field, $lds);
+            $clone->$file_field = $this->cloneFile($file_field, $lds, $clone);
 
         $clone->editorType = $this->_document->editorType;
 
@@ -2613,19 +2616,20 @@ class UploadEditor extends Editor
         $rand_id = mt_rand(400,9000000);
 
         $clone = new DocumentEditorObject($lds);
+        $clone->save();
 
         $file_origin = Editor::getFullFilePath($this->_document->file_guid);
 
         //create a new file to store the document
         $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
+        $file = $this->getNewFile($filestorename, $clone);
         copy($file_origin, $file->getFilenameOnFilestore());
         $clone->file_guid = $file->guid;
         $clone->upload_filename = $this->_document->upload_filename;
 
         if($this->_document->file_imsld_guid) {
             $filestorename = (string)$rand_id.'.zip';
-            $file = $this->getNewFile($filestorename);
+            $file = $this->getNewFile($filestorename, $clone);
             $file_origin = Editor::getFullFilePath($this->_document->file_imsld_guid);
             copy($file_origin, $file->getFilenameOnFilestore());
             $clone->file_imsld_guid = $file->guid;
