@@ -172,6 +172,17 @@ a.underfield
     font-weight: bold;
 }
 
+#about {
+    margin-top: 7px;
+}
+
+#about a
+{
+    font-weight: bold;
+    font-size: 14px;
+    color: #fff;
+}
+
 #footer
 {
     margin: 0 30px;
@@ -292,7 +303,10 @@ ul.links a
         </div>
     </form>
     <?php if(!$vars['config']->disable_registration): ?>
-        <div id="register"><?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a></div>
+        <div id="register">
+            <?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a>
+            <div id="about"><span><a target="_blank" href="<?php echo $url ?>views/default/misc/ilde/about.php"><?php echo T("About") ?></span></a></div>
+        </div>
     <?php endif; ?>
 </div>
 <?php echo elgg_view('messages/list', array('object' => $sysmessages)); ?>

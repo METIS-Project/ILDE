@@ -557,6 +557,82 @@ function lds_tracking_user_tool() {
     }
 
     lds_echocsv($header, $data, "user_tool");
+
+}function lds_tracking_user_conceptualize_tool() {
+    global $CONFIG;
+    $header = array("user id", "username", "Design Pattern (number)", "Design Pattern", "Design Narrative (number)", "Design Narrative", "Persona Card (number)", "Persona Card", "Factors and Concerns (number)", "Factors and Concerns","Heuristic Evaluation (number)","Heuristic Evaluation","Course Map (number)", "Course Map", "CompendiumLD (number)","CompendiumLD","Image (number)","Image","WebCollage (number)","WebCollage","OpenGLM (number)","OpenGLM", "CADMOS (number)", "CADMOS");
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+
+    $users = get_entities('user','',0,'',9999);
+
+    foreach($tools as $tool) {
+        
+    }
+    //count designs
+    foreach($users as $user) {
+        $editor_subtypes = array(
+            'design_pattern',
+            'MDN',
+            'PC',
+            'FC',
+            'HE',
+            'coursemap',
+        );
+
+        $editor_types = array(
+            'cld',
+            'image',
+            'webcollagerest',
+            'openglm',
+            'cadmos',
+        );
+
+        $row = array();
+
+        $row[] = $user->guid;
+        $row[] = $user->username;
+
+        foreach($editor_subtypes as $e_s) {
+            $ldss = get_entities_from_metadata('editor_subtype',$e_s, 'object', 'LdS', $user->guid, 9999);
+            if(!$ldss)
+                $ldss = array();
+
+            $lds_list = array();
+
+            foreach($ldss as $lds ) {
+                $lds_list[] = $lds->guid;
+            }
+            $lds_list = implode(',', $lds_list);
+
+
+            $row[] = count($ldss);
+            $row[] = $lds_list;
+        }
+
+        foreach($editor_types as $e_t) {
+            $ldss = get_entities_from_metadata('editor_type',$e_t, 'object', 'LdS', $user->guid, 9999);
+            if(!$ldss)
+                $ldss = array();
+
+            $lds_list = array();
+
+            foreach($ldss as $lds ) {
+                $lds_list[] = (int)$lds->guid;
+            }
+            $lds_list = implode(',', $lds_list);
+
+
+            $row[] = count($ldss);
+            $row[] = $lds_list;
+        }
+
+        $data[] = $row;
+
+    }
+
+    lds_echocsv($header, $data, "user_tool");
 }
 
 function lds_tracking_tool() {
