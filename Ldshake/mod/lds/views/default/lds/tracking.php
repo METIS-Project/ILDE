@@ -110,6 +110,9 @@ Number of designs published (accessible outside LdShake): <?php echo $nPublished
         echo 'https://www.google.com/analytics/web/?hl=es&pli=1#report/visitors-overview/a40421532w69605041p76200864/%3F_u.date00%3D20130903%26_u.date01%3D20130903/';
 ?>">Visits to the site / pages (request access to the data sending an email to pablo.abna at gmail.com with a google enabled account)</a>
 
+Total number of comments: <?php echo count_annotations(0, 'object', 'LdS', 'generic_comment');?>
+
+Total number of LdS: <?php echo (get_entities('object', 'LdS', 0, '', 99999, 0, true)-$nUsers);?>
 
 
 </pre>

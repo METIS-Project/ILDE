@@ -557,6 +557,37 @@ function lds_tracking_user_tool() {
     }
 
     lds_echocsv($header, $data, "user_tool");
+
+}function lds_tracking_user_conceptualize_tool() {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+    $data[] = $header;
+
+    foreach($tools as $tool) {
+        if(empty($tool['subtype']))
+            continue;
+
+        $row = array();
+        $row[] = $tool['title'];
+        foreach($users as $user) {
+            $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, true);
+            $row[] = $lds_count;
+        }
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, "user_conceptualize");
 }
 
 function lds_tracking_tool() {

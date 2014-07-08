@@ -2626,12 +2626,14 @@ function lds_exec_help ($params) {
 }
 
 function lds_exec_test2 ($params) {
+    /*
     $vle = get_entity($params[1]);
     $mm = new MoodleManager($vle);
     $res = var_export($mm->getVleInfo(), true);
     //$res = print_r($mm->addScorm(2,'new scorm 4'.' '. date("D M Y  H:m:s")), true);
     page_draw("test", '<pre>'.$res.'</pre>');
     //echo "test";
+    */
 }
 
 function lds_exec_admin ($params) {
