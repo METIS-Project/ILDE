@@ -560,79 +560,34 @@ function lds_tracking_user_tool() {
 
 }function lds_tracking_user_conceptualize_tool() {
     global $CONFIG;
-    $header = array("user id", "username", "Design Pattern (number)", "Design Pattern", "Design Narrative (number)", "Design Narrative", "Persona Card (number)", "Persona Card", "Factors and Concerns (number)", "Factors and Concerns","Heuristic Evaluation (number)","Heuristic Evaluation","Course Map (number)", "Course Map", "CompendiumLD (number)","CompendiumLD","Image (number)","Image","WebCollage (number)","WebCollage","OpenGLM (number)","OpenGLM", "CADMOS (number)", "CADMOS");
 
     $tools = $CONFIG->project_templates['full'];
     $data = array();
-
+    $row = array();
     $users = get_entities('user','',0,'',9999);
 
-    foreach($tools as $tool) {
-        
-    }
-    //count designs
+    //header
+    $header = array();
+    $header[] = "";
     foreach($users as $user) {
-        $editor_subtypes = array(
-            'design_pattern',
-            'MDN',
-            'PC',
-            'FC',
-            'HE',
-            'coursemap',
-        );
+        $header[] = $user->username;
+    }
+    $data[] = $header;
 
-        $editor_types = array(
-            'cld',
-            'image',
-            'webcollagerest',
-            'openglm',
-            'cadmos',
-        );
+    foreach($tools as $tool) {
+        if(empty($tool['subtype']))
+            continue;
 
         $row = array();
-
-        $row[] = $user->guid;
-        $row[] = $user->username;
-
-        foreach($editor_subtypes as $e_s) {
-            $ldss = get_entities_from_metadata('editor_subtype',$e_s, 'object', 'LdS', $user->guid, 9999);
-            if(!$ldss)
-                $ldss = array();
-
-            $lds_list = array();
-
-            foreach($ldss as $lds ) {
-                $lds_list[] = $lds->guid;
-            }
-            $lds_list = implode(',', $lds_list);
-
-
-            $row[] = count($ldss);
-            $row[] = $lds_list;
+        $row[] = $tool['title'];
+        foreach($users as $user) {
+            $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, true);
+            $row[] = $lds_count;
         }
-
-        foreach($editor_types as $e_t) {
-            $ldss = get_entities_from_metadata('editor_type',$e_t, 'object', 'LdS', $user->guid, 9999);
-            if(!$ldss)
-                $ldss = array();
-
-            $lds_list = array();
-
-            foreach($ldss as $lds ) {
-                $lds_list[] = (int)$lds->guid;
-            }
-            $lds_list = implode(',', $lds_list);
-
-
-            $row[] = count($ldss);
-            $row[] = $lds_list;
-        }
-
         $data[] = $row;
-
     }
 
-    lds_echocsv($header, $data, "user_tool");
+    lds_echocsv($header, $data, "user_conceptualize");
 }
 
 function lds_tracking_tool() {

@@ -680,6 +680,185 @@ $translations = array (
 "Your comment was successfully posted."
 => "El teu comentari s'ha enviat.",
 
+"Add (and configure) a new VLE in which to deploy authored designs."
+=> "Afegir (i configurar) un nou VLE en el qual desplegar dissenys ja creats.",
+
+"Add VLE"
+=> "Afegir VLE",
+
+"Add Workflow"
+=> "Afegir Workflow",
+
+"All my projects"
+=> "Tots els meus projectes",
+
+"All my Workflows"
+=> "Tots els meus Workflows",
+
+"Cadmos"
+=> "Cadmos",
+
+"Click here to add tags to the %1"
+=> "Fes click aquí per a afegir tags al %1",
+
+"CompendiumLD"
+=> "CompendiumLD",
+
+"Configure VLE"
+=> "Configura el VLE",
+
+"Contextual help"
+=> "Ajuda contextual",
+
+"Course Features (Google Docs)"
+=> "Course Features (Google Docs)",
+
+"Create a new learning design solution (project, concept, design, implementation)."
+=> "Crea una nova solució de disseny d'aprenentatge (projecte, concepte, disseny, implementació)",
+
+"Create a unit of learning including collaborative activities based on patterns."
+=> "Crea una unitat d'aprenentatge incloent activitats col·laboratives basades en patrons d'aprenentatge.",
+
+"Create educational web content."
+=> "Crea contingut web educacional",
+
+"Create/upload a unit of learning using the CADMOS authoring tool."
+=> "Crea/envia una unitat d'aprenentatge amb l'eina d'autoria CADMOS",
+
+"Create/upload a unit of learning using the OpenGLM authoring tool."
+=> "Crea/envia una unitat d'aprenentatge amb l'eina d'autoria OpenGLM",
+
+"Define a new workflow."
+=> "Defineix un nou Workflow.",
+
+"Discipline"
+=> "Disciplina",
+
+"Do you want to disable the contextual help tooltips?"
+=> "Vols desactivar les suggerencies d'ajuda contextual?",
+
+"Edit %1 tags"
+=> "Edita els tags del %1",
+
+"Edit Workflow"
+=> "Edita el Workflow",
+
+"Enter the project title"
+=> "Introdueix el títol del projecte",
+
+"External repositories"
+=> "Repositori extern",
+
+"Google Docs"
+=> "Document de Google",
+
+"Google Spreadsheet"
+=> "Full de càlcul de Google",
+
+"Image"
+=> "Imatge",
+
+"Implement project"
+=> "Implementa un projecte",
+
+"Information about the environment."
+=> "Informació sobre l'entorn.",
+
+"Manage the list of you configured VLEs."
+=> "Gestiona la llista dels teus VLEs",
+
+"newest"
+=> "més recent",
+
+"View project"
+=> "Veure el projecte",
+
+"Edit project"
+=> "Editar el projecte",
+
+"New Workflow"
+=> "Nou workflow",
+
+"Trash selected project"
+=> "Esborra el projecte seleccionat",
+
+"Options for being able to transfer the authored activities and materials to a VLE."
+=> "Opcions per a poder transferir les activitats i els materials creats a un VLE",
+
+"Options for creating learning activities (units of learning) and learning materials."
+=> "Opcions per crear activitats d'aprenentatge (unitat d'aprenentatge) i materials d'aprenentatge",
+
+"Options for starting to think about your learning design."
+=> "Opcions per a començar a pensar sobre el teu disseny d'aprenentatge",
+
+"Options to structure your learning design work."
+=> "Opcions per a estructurar el teu treball de disseny d'aprenentatge",
+
+"Pedagogical approach"
+=> "Aproximació pedagògica",
+
+"Persona Card (Google Docs)"
+=> "Persona Card (Google Docs)",
+
+"Please specify if you want to receive notifications by e-mail."
+=> "Si ues plau indica si vols rebre notificacions per e-mail",
+
+"Private messages to community members."
+=> "Missatges privats als membres de la comunitat",
+
+"Project"
+=> "Projecte",
+
+"See list of learning design solutions I can edit or view."
+=> "Veure la llista de solucions de disseny d'aprenentatge que puc editar o veure",
+
+"See list of members in the community."
+=> "Veure la llista de membres de la comunitat",
+
+"See list of projects, concepts, designs and implementations I can edit."
+=> "Veure la llista de projecte, conceptes, dissenys i implementacions que puc editar",
+
+"See list of suggested workflows to start your project."
+=> "Veure una llista de workflows sugerits per a iniciar el meu projecte",
+
+"See list of workflows I can edit."
+=> "Veure la llista de workflows que puc editar",
+
+"Select a design for implementation"
+=> "Selecciona un disseny per a implementar",
+
+"Select an authored design to implement in a VLE."
+=> "Selecciona un disseny ja creat per a implementar en un VLE",
+
+"Select Workflow for my Project"
+=> "Seleccionar un Workflow per al meu projecte",
+
+"Show less tags"
+=> "Mostra menys tags",
+
+"Show more tags"
+=> "Mostra mes tags",
+
+"sort by"
+=> "Ordenar per",
+
+"Submit"
+=> "Enviar",
+
+"Tags"
+=> "Etiquetes",
+
+"title"
+=> "títol",
+
+"Trash selected workflows"
+=> "Esborra els workflows seleccionats",
+
+"Untitled Workflow"
+=> "Workflow sense títol",
+
+//"workflows"
+//=> "",
 
 
     '%1 comments' => '%1 comentaris',
