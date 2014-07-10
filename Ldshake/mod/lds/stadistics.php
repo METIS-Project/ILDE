@@ -557,8 +557,9 @@ function lds_tracking_user_tool() {
     }
 
     lds_echocsv($header, $data, "user_tool");
+}
 
-}function lds_tracking_user_conceptualize_tool() {
+function lds_tracking_user_conceptualize_tool($start = 0, $end = 2404864000) {
     global $CONFIG;
 
     $tools = $CONFIG->project_templates['full'];
@@ -572,22 +573,646 @@ function lds_tracking_user_tool() {
     foreach($users as $user) {
         $header[] = $user->username;
     }
-    $data[] = $header;
+
+    $conceptualize = array();
 
     foreach($tools as $tool) {
-        if(empty($tool['subtype']))
+        if(!in_array($tool['type'], array('doc', 'google_docs', 'google_spreadsheet', 'image', 'cld')))
             continue;
+
+        if($tool['type'] == 'google_docs' and empty($tool['subtype']))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    $conceptualize[] = array(
+        'title' => T('For other conceptualizations'),
+        'type'  => 'doc',
+        'subtype'   => null,
+    );
+
+    foreach($conceptualize as $tool) {
 
         $row = array();
         $row[] = $tool['title'];
         foreach($users as $user) {
-            $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, true);
-            $row[] = $lds_count;
+            if(!empty($tool['subtype']))
+                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+            else {
+                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = ldshake_filter_empty_subtype($lds_count);
+            }
+
+            if(empty($lds_count))
+                $lds_count = array();
+
+            $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+            $row[] = count($lds_count);
         }
         $data[] = $row;
     }
 
     lds_echocsv($header, $data, "user_conceptualize");
+}
+
+function lds_tracking_user_authoring_tool($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    foreach($conceptualize as $tool) {
+
+        $row = array();
+        $row[] = $tool['title'];
+        foreach($users as $user) {
+            $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+
+            if(empty($lds_count))
+                $lds_count = array();
+
+            $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+            $row[] = count($lds_count);
+        }
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, "user_authoring");
+}
+
+function lds_tracking_user_implement($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    //implementation
+    $row = array();
+    $row[] = 'Select a design for implementation';
+    foreach($users as $user) {
+        $lds_count = get_entities('object', 'LdS_implementation', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Add VLE';
+    foreach($users as $user) {
+        $lds_count = get_entities('object', 'user_vle', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Configure VLE';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','vledata','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    lds_echocsv($header, $data, "user_authoring");
+}
+
+function lds_tracking_user_project($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    //implementation
+    $row = array();
+    $row[] = 'Select a design for implementation';
+    foreach($users as $user) {
+        $lds_count = get_entities('object', 'LdSProject_implementation', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Add workflow';
+    foreach($users as $user) {
+        $lds_count = get_entities('object', 'LdSProject', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Edit workflow';
+    foreach($users as $user) {
+        $lds_count = get_annotations(0, 'object', 'LdSProject', 'revised_docs_editor', '', $user->guid, 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    lds_echocsv($header, $data, "user_project");
+}
+
+function lds_tracking_user_browsing($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    //search
+    $row = array();
+    $row[] = 'Free search';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','search','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    //Browse by tools
+    $row = array();
+    $row[] = 'Browse by tools';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','browse_tool','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+
+    //Search patterns
+    $row = array();
+    $row[] = 'Search patterns';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','search_patterns','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    //Browse by tags
+    $row = array();
+    $row[] = 'Browse by tags';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','browse_tag_tags','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    //Browse by discipline
+    $row = array();
+    $row[] = 'Browse by discipline';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','browse_tag_discipline','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    //Browse by pedagogical approach
+    $row = array();
+    $row[] = 'Browse by pedagogical approach';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','browse_tag_pedagogical_approach','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    lds_echocsv($header, $data, "user_browsing_functions");
+}
+
+function lds_tracking_user_sharing($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    //implementation
+    $row = array();
+    $row[] = 'Create a LdShakers\' group';
+    foreach($users as $user) {
+        $lds_count = get_entities('group', '', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    //Share a LdS with others
+    $row = array();
+    $row[] = 'Share a LdS with others';
+    foreach($users as $user) {
+        $lds_count = get_annotations($user->guid, '','','share_add_viewer','',0,9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Add a comment to a LdS';
+    foreach($users as $user) {
+        $lds_count = get_annotations(0, '','','generic_comment','', $user->guid, 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Exchange messages with other LdShakers';
+    foreach($users as $user) {
+        $lds_count = get_entities('object', 'sent_messages', $user->guid, '', 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'View someone else\'s LdS';
+    foreach($users as $user) {
+        $lds_count = get_annotations(0, '','','viewed_lds','', $user->guid, 9999);
+
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $fc = count($lds_count);
+        for($i=0; $i<$fc; $i++) {
+            $lds = get_entity($lds_count[$i]->entity_guid);
+            if($lds->owner_guid == $user->guid)
+                unset($lds_count[$i]);
+        }
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    $row = array();
+    $row[] = 'Edit someone else\'s LdS';
+    foreach($users as $user) {
+        $lds_count = get_annotations(0, '','','revised_docs','', $user->guid, 9999);
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count_editor = get_annotations(0, '','','revised_docs_editor','', $user->guid, 9999);
+        if(empty($lds_count_editor))
+            $lds_count_editor = array();
+
+        $lds_count = array_merge($lds_count, $lds_count_editor);
+        if(empty($lds_count))
+            $lds_count = array();
+
+        $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+        $fc = count($lds_count);
+        for($i=0; $i<$fc; $i++) {
+            $lds = get_entity($lds_count[$i]->entity_guid);
+            if($lds->owner_guid == $user->guid)
+                unset($lds_count[$i]);
+        }
+        $row[] = count($lds_count);
+    }
+    $data[] = $row;
+
+    lds_echocsv($header, $data, "user_sharing");
+}
+
+function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('doc', 'google_docs', 'google_spreadsheet', 'image', 'cld')))
+            continue;
+
+        if($tool['type'] == 'google_docs' and empty($tool['subtype']))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    $conceptualize[] = array(
+        'title' => T('For other conceptualizations'),
+        'type'  => 'doc',
+        'subtype'   => null,
+    );
+
+    foreach($conceptualize as $tool) {
+        $row = array();
+        $row[] = $tool['title'];
+        foreach($users as $user) {
+            if(!empty($tool['subtype'])) {
+                $stools = serialize(array($tool['type'].','.$tool['subtype'], $tool['subtype']));
+                $lds_init = get_annotations($user->guid, '','','new',$stools, 0, 9999);
+
+                if(empty($lds_init))
+                    $lds_init = array();
+
+                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+            } else {
+                if($tool['type'] == 'doc')
+                    $stools = serialize(array('doc,0', 0));
+                else
+                    $stools = serialize(array($tool['type'], null));
+
+                $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+
+                if(empty($lds_init))
+                    $lds_init = array();
+
+                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                if(empty($lds_count))
+                    $lds_count = array();
+                $lds_count = ldshake_filter_empty_subtype($lds_count);
+            }
+
+            if(!is_array($lds_count))
+                $lds_count = array();
+
+            $fc = count($lds_init);
+            for($i=0; $i<$fc; $i++) {
+                if($lds_init[$i]->value != $stools)
+                    unset($lds_init[$i]);
+            }
+
+            $fc = count($lds_count);
+            for($i=0; $i<$fc; $i++) {
+                $delete = false;
+                //exclude duplicates
+                if(!isset($lds_count[$i]->parent))
+                    $delete = true;
+
+                //exclude projects
+                if($lds_count[$i]->container_guid != $lds_count[$i]->owner_guid)
+                    $delete = true;
+
+                if($delete)
+                    unset($lds_count[$i]);
+            }
+
+            $lds_init = ldshake_filter_by_date($lds_init, $start, $end);
+            $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+            $row[] = count($lds_init) - count($lds_count);
+        }
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, "user_conceptualize_saved");
+}
+
+function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
+    global $CONFIG;
+
+    $tools = $CONFIG->project_templates['full'];
+    $data = array();
+    $row = array();
+    $users = get_entities('user','',0,'',9999);
+
+    //header
+    $header = array();
+    $header[] = "";
+    foreach($users as $user) {
+        $header[] = $user->username;
+    }
+
+    $conceptualize = array();
+
+    foreach($tools as $tool) {
+        if(!in_array($tool['type'], array('webcollagerest', 'openglm', 'exelearningrest', 'cadmos')))
+            continue;
+
+        $conceptualize[] = $tool;
+    }
+
+    foreach($conceptualize as $tool) {
+
+        $row = array();
+        $row[] = $tool['title'];
+        foreach($users as $user) {
+            if(!empty($tool['subtype'])) {
+                $stools = serialize(array($tool['type'].','.$tool['subtype'], $tool['subtype']));
+                $lds_init = get_annotations($user->guid, '','','new',$stools, 0, 9999);
+
+                if(empty($lds_init))
+                    $lds_init = array();
+
+                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+            } else {
+                if($tool['type'] == 'doc')
+                    $stools = serialize(array('doc,0', 0));
+                else
+                    $stools = serialize(array($tool['type'], null));
+
+                $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+
+                if(empty($lds_init))
+                    $lds_init = array();
+
+                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                if(empty($lds_count))
+                    $lds_count = array();
+                $lds_count = ldshake_filter_empty_subtype($lds_count);
+            }
+
+            if(!is_array($lds_count))
+                $lds_count = array();
+
+            $fc = count($lds_init);
+            for($i=0; $i<$fc; $i++) {
+                if($lds_init[$i]->value != $stools)
+                    unset($lds_init[$i]);
+            }
+
+            $fc = count($lds_count);
+            for($i=0; $i<$fc; $i++) {
+                $delete = false;
+                //exclude duplicates
+                if(!isset($lds_count[$i]->parent))
+                    $delete = true;
+
+                //exclude projects
+                if($lds_count[$i]->container_guid != $lds_count[$i]->owner_guid)
+                    $delete = true;
+
+                if($delete)
+                    unset($lds_count[$i]);
+            }
+
+            $lds_init = ldshake_filter_by_date($lds_init, $start, $end);
+            $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
+            $row[] = count($lds_init) - count($lds_count);
+        }
+        $data[] = $row;
+    }
+
+    lds_echocsv($header, $data, "user_authoring");
 }
 
 function lds_tracking_tool() {

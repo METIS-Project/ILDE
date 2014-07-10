@@ -977,6 +977,7 @@ function lds_exec_upload ($params)
 
     $vars['title'] = T("New LdS");
 
+    ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
 
 
@@ -2634,6 +2635,8 @@ function lds_exec_test2 ($params) {
     page_draw("test", '<pre>'.$res.'</pre>');
     //echo "test";
     */
+    include_once(__DIR__.'/stadistics.php');
+    lds_tracking_user_authoring_tool_saved();
 }
 
 function lds_exec_admin ($params) {

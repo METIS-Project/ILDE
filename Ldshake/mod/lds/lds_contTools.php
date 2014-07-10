@@ -42,6 +42,30 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_filter_by_date($entities, $start, $end) {
+    $last = count($entities);
+    for($i=0; $i < $last; $i++) {
+        if($entities[$i]->time_created >= $start and $entities[$i]->time_created <= $end)
+            continue;
+
+        unset($entities[$i]);
+    }
+
+    return array_values($entities);
+}
+
+function ldshake_filter_empty_subtype($entities) {
+    $last = count($entities);
+    for($i=0; $i < $last; $i++) {
+        if(empty($entities[$i]->editor_subtype))
+            continue;
+
+        unset($entities[$i]);
+    }
+
+    return array_values($entities);
+}
+
 function ldshake_lds_referer($lds) {
     global $CONFIG;
 
