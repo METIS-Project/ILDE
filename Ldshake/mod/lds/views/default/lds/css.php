@@ -2472,7 +2472,6 @@ div.cc_info_icon > div.cc_icon_title {
     color: #525252;
 }
 
-
 form[name="myldSform"] {
     max-height: 500px;
     overflow-y: scroll;

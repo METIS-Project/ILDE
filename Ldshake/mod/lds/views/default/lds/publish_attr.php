@@ -34,74 +34,22 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-extract ($vars); ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title><?php echo $title ?> - LdShake</title>
-	<link rel="icon" type="image/png" href="<?php echo $url ?>_graphics/favicon.ico" />
-	<style type="text/css">
-		body {
-			margin:0;
-			padding:0;
-		}
-		
-		span#doctitle {
-			margin: 0;
-			font-family: Helvetica, Arial, sans-serif;
-			font-size: 20px;
-			color: #444;
-		}
+extract($vars);
 
-        #titleblock {
-            background-color: #e7e8e9;
-            border-bottom: 1px solid #aaa;
-            padding: 5px;
+?><div id="view-ext-bottom-attributes">
+    <?php if(!empty($authors)):?>
+    <div><?php echo T("Author") . '(s): '; ?>
+        <?php foreach ($authors as $author): ?>
+        <?php
+            echo $author->name;
 
-        }
-		
-		#doc {
-			padding: 20px;
-			font-family: Helvetica, Arial, sans-serif;
-			font-size: 12pt;
-			line-height: 1.6em;
-		}
-
-        #license {
-            float: right;
-            /*width: 800px;*/
-            font-family: sans-serif;
-        }
-
-        .license_banner {
-            display: none;
-        }
-
-        #view-ext-bottom-attributes {
-            font-family: sans-serif;
-            font-size: 70%;
-            padding-left: 20px;
-            background-color: #E2F1DF;
-        }
-
-	</style>
-	<?php echo elgg_view('page_elements/analytics', $vars) ?>
-</head>
-<body>
-    <div id="titleblock">
-        <span id="doctitle"><?php echo $title ?></span>
-        <?php if($lds->license): ?>
-        <div id="license">
-            <?php include('license_banner.php'); ?>
-            <div style="clear:both"></div>
-        </div>
-        <?php endif; ?>
-        <div style="clear:both"></div>
+            if($author != end($authors))
+                echo ', ';
+            ?>
+        <?php endforeach; ?>
     </div>
+    <?php endif;?>
 
-    <div id="doc">
-		<?php echo $doc->description ?>
-	</div>
-    <?php echo $attributes;?>
-</body>
-</html>
+    <div><?php echo T("Published at") . ': '?><?php echo gmdate('d M Y H:i', $doc->time_updated); ?> GMT</div>
+    <div><?php echo T("Original link") . ' (' . T('login required') . '): '?><a target="_blank" href="<?php echo lds_viewTools::url_for($lds, 'view');?>"><?php echo lds_viewTools::url_for($lds, 'view');?></a></div>
+</div>

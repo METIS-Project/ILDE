@@ -142,18 +142,16 @@
 			global $CONFIG;
 			
 			$installed = array();
-			
-			foreach ($CONFIG->translations as $k => $v)
-			{
-				$installed[$k] = elgg_echo($k, $k);
 
-                /*
-				$completeness = get_language_completeness($k);
-				if ((isadminloggedin()) && ($completeness<100) && ($k!='en'))
-					$installed[$k] .= " (" . $completeness . "% " . elgg_echo('complete') . ")";
-                */
-			}
-			
+            if ($handle = opendir($CONFIG->path . '/languages')) {
+                while ($language = readdir($handle)) {
+                    if(strstr($language, '.php')) {
+                        $language = str_replace('.php', '', $language);
+                        $installed[$language] = elgg_echo($language, 'en');
+                    }
+                }
+            }
+
 			return $installed;
 		}
 		

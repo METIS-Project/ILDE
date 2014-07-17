@@ -980,7 +980,6 @@ function lds_exec_upload ($params)
     ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
     $vars['editor_type'] = implode(',', array($vars['editor_type'], $vars['editor_subtype']));
 
-
     $vars['upload_link'] = "";
 
     if($params[1] == 'openglm')
@@ -991,7 +990,6 @@ function lds_exec_upload ($params)
         $vars['upload_link'] = "CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
     if($params[1] == 'image')
         $vars['upload_link'] = "Upload a jpeg, png, gif or svg image.";
-
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -1937,8 +1935,12 @@ function lds_exec_viewext ($params)
 		$vars['title'] = $vars['lds']->title;
 	else
 		$vars['title'] = $doc->title;
-	
-	echo elgg_view('lds/view_external',$vars); 
+
+    $vars['authors'] = ldshake_get_lds_authors($vars['doc']);
+    $vars['attributes'] = elgg_view('lds/publish_attr',$vars);
+
+	echo elgg_view('lds/view_external',$vars);
+
 }
 
 function lds_exec_viewexteditor ($params)
@@ -2008,6 +2010,9 @@ function lds_exec_viewexteditor ($params)
 			return;
 		}
 	}
+
+    $vars['authors'] = ldshake_get_lds_authors($vars['doc']);
+    $vars['attributes'] = elgg_view('lds/publish_attr',$vars);
 
     echo elgg_view('lds/view_external_editor',$vars);
 }
@@ -2496,6 +2501,9 @@ function lds_exec_datatracking ($params) {
 
     require_once __DIR__.'/stadistics.php';
 
+    $vars['start'] = $params[1];
+    $vars['end'] = $params[2];
+
     $vars['nUsers'] = get_entities('user','',0,'',9999, 0, true);
     $vars['nGroups'] = get_entities('group','',0,'',9999, 0, true);
 
@@ -2514,8 +2522,33 @@ function lds_exec_datatracking ($params) {
 
 function lds_exec_tracking ($params) {
     include_once(__DIR__.'/stadistics.php');
-
+    $start = $params[2];
+    $end = $params[3];
     switch($params[1]) {
+        case 'user_conceptualize_tool':
+            lds_tracking_user_conceptualize_tool($start, $end);
+            break;
+        case 'user_authoring_tool':
+            lds_tracking_user_authoring_tool($start, $end);
+            break;
+        case 'user_implement':
+            lds_tracking_user_implement($start, $end);
+            break;
+        case 'user_project':
+            lds_tracking_user_project($start, $end);
+            break;
+        case 'user_browsing':
+            lds_tracking_user_browsing($start, $end);
+            break;
+        case 'user_sharing':
+            lds_tracking_user_sharing($start, $end);
+            break;
+        case 'user_conceptualize_tool_saved':
+            lds_tracking_user_conceptualize_tool_saved($start, $end);
+            break;
+        case 'user_authoring_tool_saved':
+            lds_tracking_user_authoring_tool_saved($start, $end);
+            break;
         case 'implemented':
             lds_tracking_implemented();
             break;

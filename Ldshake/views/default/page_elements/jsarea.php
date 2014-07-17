@@ -28,7 +28,7 @@ var contextual_help = <?php echo (empty(get_loggedin_user()->disable_contextual_
 $(function() {
     $(".timeago_timestamp").each(function() {
         var $e          = $(this);
-        var timestamp   = parseInt($e.attr("timestamp"));
+        var timestamp   = parseInt($e.attr("timestamp"), 10);
         var now         = moment();
         var lds_date    = moment.unix(timestamp);
         var date;
@@ -46,6 +46,19 @@ $(function() {
         }
         $e.text(date);
     });
+
+    $("[friendly_timestamp]").each(function() {
+        var $e          = $(this);
+        var timestamp   = parseInt($e.attr("friendly_timestamp"), 10);
+        var lds_date    = moment.unix(timestamp);
+
+        var format = "D MMMM YYYY HH:mm:ss";
+        var date = lds_date.format(format);
+
+        $e.text(date);
+    });
+
+
 });
 </script>
 <?php
