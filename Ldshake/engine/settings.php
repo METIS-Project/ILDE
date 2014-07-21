@@ -78,6 +78,8 @@ $CONFIG->vle_key = $vle_key;
 $CONFIG->google_drive = $google_drive;
 $CONFIG->editor_debug = $editor_debug;
 $CONFIG->moodle = $moodle;
+if(isset($glueps_url))
+    $CONFIG->glueps_url = $glueps_url;
 
 if(isset($google_analytics))
     $CONFIG->google_analytics = $google_analytics;

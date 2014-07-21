@@ -602,6 +602,12 @@ function lds_tracking_user_conceptualize_tool($start = 0, $end = 2404864000) {
             else {
                 $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 $lds_count = ldshake_filter_editorsubtype($lds_count, $tool['type']);
+
+                $new_user = ldshake_filter_by_date(array($user), $start, $end);
+                if(!empty($new_user) and !empty($lds_count)) {
+                    if($lds_count[0]->title == T('My first LdS'))
+                        array_pop($lds_count);
+                }
             }
 
             if(empty($lds_count))
@@ -723,7 +729,7 @@ function lds_tracking_user_implement($start = 0, $end = 2404864000) {
     }
     $data[] = $row;
 
-    lds_echocsv($header, $data, "user_authoring");
+    lds_echocsv($header, $data, "user_implement");
 }
 
 function lds_tracking_user_project($start = 0, $end = 2404864000) {
@@ -1064,6 +1070,9 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
         'subtype'   => null,
     );
 
+    $access_status = access_get_show_hidden_status();
+    access_show_hidden_entities(true);
+
     foreach($conceptualize as $tool) {
         $row = array();
         $row[] = $tool['title'];
@@ -1157,6 +1166,7 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
         }
         $data[] = $row;
     }
+    access_show_hidden_entities($access_status);
 
     lds_echocsv($header, $data, "user_conceptualize_saved");
 }

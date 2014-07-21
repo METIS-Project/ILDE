@@ -85,11 +85,14 @@ $is_implementation = !empty($is_implementation);
     <?php if (is_array($list) && sizeof($list) > 0): ?>
         <form method="post" action="#">
             <div id="my_lds_list_header">
-                <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
-                <?php if ($section != 'trashed'): ?>
+                <?php if ($section != 'prj-trashed'): ?>
+                    <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
                 <?php else: ?>
-                    <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
+                    <!--
+                    <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
+                    <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected ".$list_type) ?>" />
+                    -->
                 <?php endif; ?>
 
                 <?php if($is_implementation): ?>
@@ -105,7 +108,7 @@ $is_implementation = !empty($is_implementation);
             </div>
             <ul id="my_lds_list">
                 <?php foreach($list as $item): ?>
-                    <?php if ($section != 'trashed'): ?>
+                    <?php if ($section != 'prj-trashed'): ?>
                         <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
                             <?php if ($item->starter->guid == get_loggedin_userid()): ?>
                                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />

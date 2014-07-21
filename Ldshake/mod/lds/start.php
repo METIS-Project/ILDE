@@ -58,8 +58,8 @@ function lds_init()
     };
 
     //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
-    $CONFIG->webcollagerest_url= "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
-    $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
+    if(empty($CONFIG->glueps_url))
+        $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
 
     $CONFIG->editor_templates["openglm"]["filename"] = "openglm_file.glm";
     $CONFIG->editor_templates["openglm"]["path"] = "vendors/openglm/EmptyOpenGLM.zip";
