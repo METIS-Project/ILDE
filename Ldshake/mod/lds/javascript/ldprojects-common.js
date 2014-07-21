@@ -522,7 +522,7 @@ $(document).ready(function() {
 
             $('[name="myldSform"]').on("submit", function(event){
                 event.preventDefault();
-                var lds_id = document.myldSform.lds_selection.value;
+                var lds_id = $('input[name=lds_selection]:checked', document.myldSform).val();
                 $(subToolElem).attr("associatedLdS", lds_id);
                 //if(is_implementation) {
                     var lds = ldshake_projects_find_lds(parseInt(lds_id, 10));

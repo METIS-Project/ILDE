@@ -49,9 +49,9 @@ DirectoryIndex index.php
 	# to make sure register global is off
 	php_value register_globals 0
 	# max post size to 8Mb
-	php_value post_max_size 8388608
+	php_value post_max_size 32M
 	# upload size limit to 5Mb	
-	php_value upload_max_filesize 5242880
+	php_value upload_max_filesize 32M
 	# hide errors, enable only if debug enabled
 	php_value display_errors 0
 </IfModule>
