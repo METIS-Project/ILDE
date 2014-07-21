@@ -49,6 +49,11 @@ if($lds->license) {
     $license = elgg_view("lds/license_banner", array("lds"=>$lds));
 }
 
+$vars['authors'] = ldshake_get_lds_authors($doc);
+$vars['lds'] = $lds;
+$vars['doc'] = $doc;
+$attributes = elgg_view('lds/publish_attr',$vars);
+
 //Wrap the contents into a utf-8 html string. This will allow accents and other alphabets to be displayed correctly
 //Also add some basic styling to resemble the view in the web (line height)
 $contents = <<<EOD
@@ -490,11 +495,17 @@ $contents = <<<EOD
     padding: 0px 5px 10px 5px;
     box-shadow: 2px 2px 0px #F0F0F0;
 }
+
+#view-ext-bottom-attributes {
+    font-family: sans-serif;
+    font-size: 70%;
+}
 		</style>
 	</head>
 	<body>
 		{$doc->description}
         {$license}
+        {$attributes}
 	</body>
 </html>
 EOD;
@@ -509,7 +520,7 @@ if(isset($doc->file_pdf_guid)) {
     if($doc->editorType == 'google_docs') {
         $contents = $doc->description;
         if($lds->license) {
-            $contents = str_replace('</body>', '<br />'.$license.'</body>', $contents);
+            $contents = str_replace('</body>', '<br />' . $license . $attributes . '</body>', $contents);
             $contents = str_replace('</style>', ' .license_banner{display: none;margin-top:20px;}'.'</style>', $contents);
         }
     }

@@ -40,6 +40,7 @@ class Editor
 {
 	public $_document;
     protected $_lds;
+    protected $_clone_mode; //to this variable to the new document entity at the start of each cloning document method
 
     public function getDocument() {
         return $this->_document;
@@ -57,8 +58,11 @@ class Editor
 	//create an ElggFile object and return it
 	public function getNewFile($filename, $document = null)
 	{
+        if(!empty($this->_clone_mode) and !$document)
+            $document =& $this->_clone_mode;
+
         if(!$document)
-            $document = $this->_document;
+            $document =& $this->_document;
 		$user = get_loggedin_user();
 		$file = new ElggFile();
 		$file->setFilename($filename);
@@ -132,29 +136,34 @@ class Editor
     }
 
     protected function getItemPath($item = "") {
+        if(!empty($this->_clone_mode))
+            $document =& $this->_clone_mode;
+        else
+            $document =& $this->_document;
+
         if(!empty($item))
             $item .= '_';
 
         $field = "file_" . $item . "guid";
 
         $newfile = false;
-        if(empty($this->_document->$field)) {
+        if(empty($document->$field)) {
             $newfile = true;
-        } elseif(!is_numeric($this->_document->$field)) {
+        } elseif(!is_numeric($document->$field)) {
             $newfile = true;
-        } elseif(!($file = get_entity($this->_document->$field))) {
+        } elseif(!($file = get_entity($document->$field))) {
             $newfile = true;
-        } elseif(!file_exists(Editor::getFullFilePath($this->_document->$field))) {
+        } elseif(!file_exists(Editor::getFullFilePath($document->$field))) {
             $newfile = true;
         }
 
         if($newfile) {
             $filename = rand_str();
             $file = $this->getNewFile($filename);
-            $this->_document->$field = $file->guid;
+            $document->$field = $file->guid;
         }
 
-        $filepath = Editor::getFullFilePath($this->_document->$field);
+        $filepath = Editor::getFullFilePath($document->$field);
 
         if(!file_exists($filepath)) {
             return null;
@@ -909,8 +918,8 @@ class LdSFactory
         $docObj->lds_revision_id = $revision->id;
         $docObj->save();
 
+        ldshake_stats_log_event('new_remote', array($lds->editor_type, null));
         return $lds;
-
     }
 
     public static function updateLdS($ldsparams = null) {
@@ -2464,6 +2473,12 @@ SQL;
         } catch (Exception $e) {
             return false;
         }
+
+        $this->_clone_mode =& $clone;
+        $this->savePreview($copiedFile);
+        $clone->save();
+        $this->_clone_mode = null;
+
         create_annotation($lds, 'revised_docs_editor', '', 'text', get_loggedin_userid(), 1);
 
         return array($clone);

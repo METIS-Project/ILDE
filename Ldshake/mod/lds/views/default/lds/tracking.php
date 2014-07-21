@@ -41,7 +41,40 @@ extract($vars);
     <h2><?php echo T("Tracking data") ?></h2>
 </div>
 
+
 <pre>
+Start:  <span friendly_timestamp="<?php echo $start?>"></span> UTC
+End:    <span friendly_timestamp="<?php echo $end?>"></span> UTC
+
+<a href="<?php echo $url ."pg/lds/tracking/user_conceptualize_tool/" . $start . "/" . $end;?>">
+    Conceptualize functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_authoring_tool/" . $start . "/" . $end;?>">
+    Author functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_implement/" . $start . "/" . $end;?>">
+    Implement functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_project/" . $start . "/" . $end;?>">
+    Project functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_browsing/" . $start . "/" . $end;?>">
+    Browsing functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_sharing/" . $start . "/" . $end;?>">
+    Sharing functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_conceptualize_tool_saved/" . $start . "/" . $end;?>">
+    Non saved conceptualize functions
+</a>
+<a href="<?php echo $url ."pg/lds/tracking/user_authoring_tool_saved/" . $start . "/" . $end;?>">
+    Non saved authoring functions
+</a>
+
+
+<a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number of designs created with each tool</a>
+
+
 <a href="<?php echo $url ."pg/lds/tracking/tool";?>">Number of designs created with each tool</a>
 <a href="<?php echo $url ."pg/lds/tracking/user_tool";?>">Number and list of designs created with each tool by each user</a>
 

@@ -54,6 +54,76 @@ function ldshake_filter_by_date($entities, $start, $end) {
     return array_values($entities);
 }
 
+function ldshake_get_lds_authors($doc) {
+
+    $lds = get_entity($doc->lds_guid);
+
+    if(isset($lds->external_editor))
+        $revisions = lds_contTools::getRevisionEditorList($lds);
+    else
+        $revisions = lds_contTools::getRevisionList($lds);
+
+    $revision_id = (int)$doc->lds_revision_id;
+    if(isset($doc->document_guid)) {
+        $doc_guid = $doc->document_guid;
+        $doc = get_entity($doc_guid);
+    } else
+        $doc_guid = $doc->guid;
+
+    $doc_revisions = array();
+
+    foreach($revisions as $revision) {
+        foreach($revision->revised_documents as $revised_document) {
+            if($revised_document->document_guid == $doc_guid) {
+                if($revision_id > (int)$revised_document->lds_revision_id)
+                    $doc_revisions[] = $revised_document;
+            }
+        }
+    }
+
+    $authors = array();
+
+    foreach($doc_revisions as $revision) {
+        $owner = get_user($revision->owner_guid);
+
+        if(empty($owner))
+            continue;
+
+        $authors[$owner->guid] = $owner;
+    }
+
+    $owner = get_user($doc->owner_guid);
+
+    if($owner)
+        $authors[$owner->guid] = $owner;
+
+    return $authors;
+}
+
+
+function ldshake_filter_editorsubtype($entities, $type, $subtype = null) {
+
+    $last = count($entities);
+    for($i=0; $i < $last; $i++) {
+        //both empty
+        if(empty($entities[$i]->editor_subtype) and empty($subtype))
+            continue;
+
+        //same types
+        if(!empty($entities[$i]->editor_subtype) and empty($subtype))
+            if($entities[$i]->editor_subtype == $type)
+            continue;
+
+        //match
+        if(!empty($entities[$i]->editor_subtype) and $entities[$i]->editor_subtype == $subtype)
+            continue;
+
+        unset($entities[$i]);
+    }
+
+    return array_values($entities);
+}
+
 function ldshake_filter_empty_subtype($entities) {
     $last = count($entities);
     for($i=0; $i < $last; $i++) {
@@ -1294,8 +1364,6 @@ SQL;
 	 */
 	public static function getRevisionList ($lds)
 	{	
-		//Cutre això del limit, però què hi farem :(
-
         $external = '';
         if($lds->external_editor)
             $external = '_editor';

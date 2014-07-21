@@ -601,7 +601,7 @@ function lds_tracking_user_conceptualize_tool($start = 0, $end = 2404864000) {
                 $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             else {
                 $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
-                $lds_count = ldshake_filter_empty_subtype($lds_count);
+                $lds_count = ldshake_filter_editorsubtype($lds_count, $tool['type']);
             }
 
             if(empty($lds_count))
@@ -1077,12 +1077,48 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
 
                 $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             } else {
-                if($tool['type'] == 'doc')
+                if($tool['type'] == 'doc') {
                     $stools = serialize(array('doc,0', 0));
-                else
-                    $stools = serialize(array($tool['type'], null));
+                    $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
 
-                $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+                    $fc = count($lds_init);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init[$i]->value != $stools)
+                            unset($lds_init[$i]);
+                    }
+                }
+                else {
+                    $stools = serialize(array($tool['type'], null));
+                    $lds_init1 = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+
+                    if(empty($lds_init1))
+                        $lds_init1 = array();
+
+                    $fc = count($lds_init1);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init1[$i]->value != $stools)
+                            unset($lds_init1[$i]);
+                    }
+
+                    $stools = serialize(array($tool['type'], $tool['type']));
+                    $lds_init2 = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+
+                    if(empty($lds_init2))
+                        $lds_init2 = array();
+
+                    $fc = count($lds_init2);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init2[$i]->value != $stools)
+                            unset($lds_init2[$i]);
+                    }
+
+                    if(empty($lds_init1))
+                        $lds_init1 = array();
+                    if(empty($lds_init2))
+                        $lds_init2 = array();
+
+                    $lds_init = array_merge(array_values($lds_init1), array_values($lds_init2));
+                }
 
                 if(empty($lds_init))
                     $lds_init = array();
@@ -1090,23 +1126,18 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
                 $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 if(empty($lds_count))
                     $lds_count = array();
-                $lds_count = ldshake_filter_empty_subtype($lds_count);
+
+                $lds_count = ldshake_filter_editorsubtype($lds_count, $tool['type'], $tool['subtype']);
             }
 
             if(!is_array($lds_count))
                 $lds_count = array();
 
-            $fc = count($lds_init);
-            for($i=0; $i<$fc; $i++) {
-                if($lds_init[$i]->value != $stools)
-                    unset($lds_init[$i]);
-            }
-
             $fc = count($lds_count);
             for($i=0; $i<$fc; $i++) {
                 $delete = false;
                 //exclude duplicates
-                if(!isset($lds_count[$i]->parent))
+                if(isset($lds_count[$i]->parent))
                     $delete = true;
 
                 //exclude projects
@@ -1119,7 +1150,10 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
 
             $lds_init = ldshake_filter_by_date($lds_init, $start, $end);
             $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
-            $row[] = count($lds_init) - count($lds_count);
+            $total = count($lds_init) - count($lds_count);
+            if($total < 0)
+                $total = 0;
+            $row[] = $total;
         }
         $data[] = $row;
     }
@@ -1165,12 +1199,47 @@ function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
 
                 $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             } else {
-                if($tool['type'] == 'doc')
+                if($tool['type'] == 'doc') {
                     $stools = serialize(array('doc,0', 0));
-                else
-                    $stools = serialize(array($tool['type'], null));
+                    $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
 
-                $lds_init = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+                    $fc = count($lds_init);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init[$i]->value != $stools)
+                            unset($lds_init[$i]);
+                    }
+                }
+                else {
+                    $stools = serialize(array($tool['type'], null));
+                    $lds_init1 = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+                    if(empty($lds_init1))
+                        $lds_init1 = array();
+
+                    $fc = count($lds_init1);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init1[$i]->value != $stools)
+                            unset($lds_init1[$i]);
+                    }
+
+                    $stools = serialize(array($tool['type'], $tool['type']));
+                    $lds_init2 = get_annotations($user->guid, '','','new',$stools, $user->guid, 9999);
+                    $lds_init2 = ldshake_filter_by_date($lds_init2, $start, $end);
+                    if(empty($lds_init2))
+                        $lds_init2 = array();
+
+                    $fc = count($lds_init2);
+                    for($i=0; $i<$fc; $i++) {
+                        if($lds_init2[$i]->value != $stools)
+                            unset($lds_init2[$i]);
+                    }
+
+                    if(empty($lds_init1))
+                        $lds_init1 = array();
+                    if(empty($lds_init2))
+                        $lds_init2 = array();
+
+                    $lds_init = array_merge(array_values($lds_init1), array_values($lds_init2));
+                }
 
                 if(empty($lds_init))
                     $lds_init = array();
@@ -1178,23 +1247,19 @@ function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
                 $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 if(empty($lds_count))
                     $lds_count = array();
-                $lds_count = ldshake_filter_empty_subtype($lds_count);
+
+                $lds_count = ldshake_filter_editorsubtype($lds_count, $tool['type'], $tool['subtype']);
+                $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
             }
 
             if(!is_array($lds_count))
                 $lds_count = array();
 
-            $fc = count($lds_init);
-            for($i=0; $i<$fc; $i++) {
-                if($lds_init[$i]->value != $stools)
-                    unset($lds_init[$i]);
-            }
-
             $fc = count($lds_count);
             for($i=0; $i<$fc; $i++) {
                 $delete = false;
                 //exclude duplicates
-                if(!isset($lds_count[$i]->parent))
+                if(!empty($lds_count[$i]->parent))
                     $delete = true;
 
                 //exclude projects
@@ -1207,12 +1272,17 @@ function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
 
             $lds_init = ldshake_filter_by_date($lds_init, $start, $end);
             $lds_count = ldshake_filter_by_date($lds_count, $start, $end);
-            $row[] = count($lds_init) - count($lds_count);
+            $total = count($lds_init) - count($lds_count);
+
+            if($total < 0)
+                $total = 0;
+
+            $row[] = $total;
         }
         $data[] = $row;
     }
 
-    lds_echocsv($header, $data, "user_authoring");
+    lds_echocsv($header, $data, "user_authoring_saved");
 }
 
 function lds_tracking_tool() {

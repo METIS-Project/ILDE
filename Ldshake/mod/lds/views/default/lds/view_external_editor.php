@@ -123,7 +123,13 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         .license_banner {
             display: none;
         }
-	
+
+        #view-ext-bottom-attributes {
+            font-family: sans-serif;
+            font-size: 70%;
+            padding-left: 20px;
+            background-color: #E2F1DF;
+        }
 	</style>	
 </head>
 <body>
@@ -167,5 +173,6 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		<iframe src="<?php echo $CONFIG->url ?>content/webcollage/<?php echo $doc->pub_previewDir?>.html?t=<?php echo rand(0, 1000) ?>" width="100%" height="100%"></iframe>
 	<?php endif; ?>
 	-->
+    <?php echo $attributes;?>
 </body>
 </html>
