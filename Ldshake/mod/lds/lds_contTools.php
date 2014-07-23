@@ -42,6 +42,19 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_mode_view($view) {
+    global $CONFIG;
+    $vars['url'] = $CONFIG->url;
+    $filepath = $CONFIG->path . 'mod/lds/mode/' . $CONFIG->ldshake_mode . '/theme/' . $view . '.php';
+    if(file_exists($filepath))
+        @include($filepath);
+    else {
+        $filepath = $CONFIG->path . 'mod/lds/mode/default/theme/' . $view . '.php';
+        if(file_exists($filepath))
+            @include($filepath);
+    }
+}
+
 function ldshake_filter_by_date($entities, $start, $end) {
     $last = count($entities);
     for($i=0; $i < $last; $i++) {

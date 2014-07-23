@@ -601,7 +601,91 @@
 		return get_data($query);
 	}
 	/// LdShake change ///
-	
+    /**
+     * Return a list of entities based on the given search criteria (owner_guid version).
+     *
+     * @param mixed $meta_name
+     * @param mixed $meta_value
+     * @param string $entity_type The type of entity to look for, eg 'site' or 'object'
+     * @param string $entity_subtype The subtype of the entity.
+     * @param int $limit
+     * @param int $offset
+     * @param string $order_by Optional ordering.
+     * @param int $site_guid The site to get entities for. Leave as 0 (default) for the current site; -1 for all sites.
+     * @param true|false $count If set to true, returns the total number of entities rather than a list. (Default: false)
+     *
+     * @return int|array A list of entities, or a count if $count is set to true
+     */
+    function get_entities_from_metadata_owner($meta_name, $meta_value = "", $entity_type = "", $entity_subtype = "", $owner_guid = 0, $limit = 10, $offset = 0, $order_by = "", $site_guid = 0, $count = false)
+    {
+        global $CONFIG;
+
+        $meta_n = get_metastring_id($meta_name);
+        $meta_v = get_metastring_id($meta_value);
+
+        $entity_type = sanitise_string($entity_type);
+        $entity_subtype = get_subtype_id($entity_type, $entity_subtype);
+        $limit = (int)$limit;
+        $offset = (int)$offset;
+        if ($order_by == "") $order_by = "e.time_created desc";
+        $order_by = sanitise_string($order_by);
+        $site_guid = (int) $site_guid;
+        if ((is_array($owner_guid) && (count($owner_guid)))) {
+            foreach($owner_guid as $key => $guid) {
+                $owner_guid[$key] = (int) $guid;
+            }
+        } else {
+            $owner_guid = (int) $owner_guid;
+        }
+        if ($site_guid == 0)
+            $site_guid = $CONFIG->site_guid;
+
+        //$access = get_access_list();
+
+        $where = array();
+
+        if ($entity_type!="")
+            $where[] = "e.type='$entity_type'";
+        if ($entity_subtype)
+            $where[] = "e.subtype=$entity_subtype";
+        if ($meta_name!="")
+            $where[] = "m.name_id='$meta_n'";
+        if ($meta_value!="")
+            $where[] = "m.value_id='$meta_v'";
+        if ($site_guid > 0)
+            $where[] = "e.site_guid = {$site_guid}";
+        if (is_array($owner_guid)) {
+            $where[] = "e.owner_guid in (".implode(",",$owner_guid).")";
+        } else if ($owner_guid > 0)
+            $where[] = "e.owner_guid = {$owner_guid}";
+
+        if (!$count) {
+            $query = "SELECT distinct e.* ";
+        } else {
+            $query = "SELECT count(distinct e.guid) as total ";
+        }
+
+        $query .= "from {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}metadata m on e.guid = m.entity_guid where";
+        foreach ($where as $w)
+            $query .= " $w and ";
+        $query .= get_access_sql_suffix("e"); // Add access controls
+        $query .= ' and ' . get_access_sql_suffix("m"); // Add access controls
+
+        if (!$count) {
+            $query .= " order by $order_by limit $offset, $limit"; // Add order and limit
+
+            return get_data($query, "entity_row_to_elggstar");
+        } else {
+            if ($row = get_data_row($query))
+                return $row->total;
+        }
+
+        return false;
+    }
+
+/// LdShake change ///
+/// LdShake change ///
+
 	/**
 	 * Return a list of entities based on the given search criteria.
 	 * 

@@ -144,7 +144,7 @@ function lds_tracking_implemented() {
     $data = array();
 
     foreach($ldss as $lds) {
-        $implementations = get_entities_from_metadata('lds_id', $lds->guid, 'object','LdS_implementation',0,9999,0,'',0,true);
+        $implementations = get_entities_from_metadata_owner('lds_id', $lds->guid, 'object','LdS_implementation',0,9999,0,'',0,true);
         $data[] = array($lds->guid, $lds->title, "yes", $implementations);
     }
 
@@ -519,7 +519,7 @@ function lds_tracking_user_tool() {
         $row[] = $user->username;
 
         foreach($editor_subtypes as $e_s) {
-            $ldss = get_entities_from_metadata('editor_subtype',$e_s, 'object', 'LdS', $user->guid, 9999);
+            $ldss = get_entities_from_metadata_owner('editor_subtype',$e_s, 'object', 'LdS', $user->guid, 9999);
             if(!$ldss)
                 $ldss = array();
 
@@ -536,7 +536,7 @@ function lds_tracking_user_tool() {
         }
 
         foreach($editor_types as $e_t) {
-            $ldss = get_entities_from_metadata('editor_type',$e_t, 'object', 'LdS', $user->guid, 9999);
+            $ldss = get_entities_from_metadata_owner('editor_type',$e_t, 'object', 'LdS', $user->guid, 9999);
             if(!$ldss)
                 $ldss = array();
 
@@ -598,9 +598,9 @@ function lds_tracking_user_conceptualize_tool($start = 0, $end = 2404864000) {
         $row[] = $tool['title'];
         foreach($users as $user) {
             if(!empty($tool['subtype']))
-                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             else {
-                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 $lds_count = ldshake_filter_editorsubtype($lds_count, $tool['type']);
 
                 $new_user = ldshake_filter_by_date(array($user), $start, $end);
@@ -651,7 +651,7 @@ function lds_tracking_user_authoring_tool($start = 0, $end = 2404864000) {
         $row = array();
         $row[] = $tool['title'];
         foreach($users as $user) {
-            $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+            $lds_count = get_entities_from_metadata_owner('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
 
             if(empty($lds_count))
                 $lds_count = array();
@@ -1084,7 +1084,7 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
                 if(empty($lds_init))
                     $lds_init = array();
 
-                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             } else {
                 if($tool['type'] == 'doc') {
                     $stools = serialize(array('doc,0', 0));
@@ -1132,7 +1132,7 @@ function lds_tracking_user_conceptualize_tool_saved($start = 0, $end = 240486400
                 if(empty($lds_init))
                     $lds_init = array();
 
-                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 if(empty($lds_count))
                     $lds_count = array();
 
@@ -1207,7 +1207,7 @@ function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
                 if(empty($lds_init))
                     $lds_init = array();
 
-                $lds_count = get_entities_from_metadata('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_subtype',$tool['subtype'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
             } else {
                 if($tool['type'] == 'doc') {
                     $stools = serialize(array('doc,0', 0));
@@ -1254,7 +1254,7 @@ function lds_tracking_user_authoring_tool_saved($start = 0, $end = 2404864000) {
                 if(empty($lds_init))
                     $lds_init = array();
 
-                $lds_count = get_entities_from_metadata('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
+                $lds_count = get_entities_from_metadata_owner('editor_type',$tool['type'], 'object', 'LdS', $user->guid, 9999, 0, '', 0, false);
                 if(empty($lds_count))
                     $lds_count = array();
 
@@ -1324,7 +1324,7 @@ function lds_tracking_tool() {
 
     foreach($editor_subtypes as $e_s) {
         $row = array();
-        $ldss = get_entities_from_metadata('editor_subtype',$e_s[0], 'object', 'LdS', 0, 9999);
+        $ldss = get_entities_from_metadata_owner('editor_subtype',$e_s[0], 'object', 'LdS', 0, 9999);
         if(!$ldss)
             $ldss = array();
 
@@ -1337,7 +1337,7 @@ function lds_tracking_tool() {
 
     foreach($editor_types as $e_t) {
         $row = array();
-        $ldss = get_entities_from_metadata('editor_type',$e_t[0], 'object', 'LdS', $user->guid, 9999);
+        $ldss = get_entities_from_metadata_owner('editor_type',$e_t[0], 'object', 'LdS', $user->guid, 9999);
         if(!$ldss)
             $ldss = array();
 

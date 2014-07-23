@@ -13,6 +13,8 @@ function ldshake_theme($element) {
 function ldshake_theme_static($section) {
     global $CONFIG;
 
+    $theme_elements = array();
+
     $file = __DIR__ . "/default/" . 'theme/static/' . $section . '.php';
     include_once($file);
 

@@ -1345,7 +1345,7 @@ class RestEditor extends Editor
                 'ldshake_frame_origin' => $ldshake_frame_origin,
             );
 
-        $uri = "{$CONFIG->webcollagerest_url}ldshake/ldsdoc/";
+        $uri = "{$CONFIG->rest_editor_list["webcollagerest"]["url_rest"]}ldshake/ldsdoc/";
 
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
