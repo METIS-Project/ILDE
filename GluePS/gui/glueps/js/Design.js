@@ -275,22 +275,21 @@ var Design = {
 		}
 		if (!errorForm) {
 			var baseUrl = window.location.href.split("/GLUEPSManager")[0];
+			dojo.byId("importDeployForm").action = baseUrl + "/GLUEPSManager/deploys";
+			Glueps.showLoadingDialog(i18n.get("creatingDeployment"));
 			var post = dojo.io.iframe
 					.send({
-						url : baseUrl + "/GLUEPSManager/deploys",
-						method : "post",
-						form : "importDeployForm",
-						handleAs : "xml",
+						method : "POST",
+						form : dojo.byId("importDeployForm"),
+						handleAs : "html",
 						load : function(data) {
-							recentlyCreatedId = Design.getDesignId(data);					
-							// Obtener todos los disenos y generar el listado
-							Design.getJsonDesigns(recentlyCreatedId);
-							Design.resetFormDeploy();
+							var deployUrl = Deploy.getDeployId(data);
+							Design.deployImportInprocess(deployUrl);
 						},
 						error : function(error, ioargs) {
-							var message = "";
-							var codigo = 1;
-							message = ErrorCodes.errores(codigo);
+							Glueps.hideLoadingDialog();
+		                    var codigo = 2;
+		                    var message = ErrorCodes.errores(codigo);
 							Glueps.showAlertDialog(i18n.get("warning"), message);
 						}
 					});
@@ -298,6 +297,40 @@ var Design = {
 			// Para el caso en que falte un campo por rellenar
 			Glueps.showAlertDialog("warning", i18n.get("ErrorRellenarCampos"));
 		}
+	},
+	
+	deployImportInprocess: function(deployUrl){
+		var url = deployUrl;
+        var xhrArgs = {
+            url : url,
+            handleAs : "xml",// Tipo de dato de la respuesta del Get,
+            sync: true,
+            load : function(data) {	
+				// Obtener todos los disenos y generar el listado
+            	var deployUrl = Deploy.getDeployId(data);
+				Design.getJsonDesigns(deployUrl);
+				Design.resetFormDeploy();
+            },
+
+            error : function(error, ioargs) { 
+            	if (ioargs.xhr.status == 503 || error.dojoType=='cancel')
+            	{
+            		//Está en proceso
+            		//Esperar un tiempo en milisegundos y volver a realizar el GET
+            		window.setTimeout(function(){Design.deployImportInprocess(deployUrl);}, 5000);
+            	}
+            	else
+            	{
+	            	//Otro error en el proceso de despliegue
+					Glueps.hideLoadingDialog()
+                    var codigo = 2;
+                    var message = ErrorCodes.errores(codigo);
+					Glueps.showAlertDialog(i18n.get("warning"), message);
+            	}
+            }
+        }
+        // Call the asynchronous xhrGet
+        var deferred = dojo.xhrGet(xhrArgs);			
 	},
 	
 	/**
@@ -338,5 +371,4 @@ var Design = {
 		}
 		return false;
     }
-	
 };

@@ -78,6 +78,8 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 	 * TODO - define our own "glue.core.glueletManager" Logger, for instance
 	 **/
 	private static Logger logger = Logger.getLogger("org.restlet");
+	
+	private GLUEPSManagerApplication applicationResouce = null;
  
 	
 	/** Local id. Integer used as identifier in table of tool learningEnvironments */
@@ -86,34 +88,6 @@ public class LearningEnvironmentResource extends GLUEPSResource {
     protected LearningEnvironment le;
     
     protected String feedReference;
-    
-    public LearningEnvironment getLEObject(){
-    	return this.le;
-    }
-    
-    public LearningEnvironment getCompleteLEObject(){
-    	GLUEPSManagerApplication app = (GLUEPSManagerApplication)this.getApplication();
-
-		//We ask GLUEletManager for the external tools, and add it to the LE data
-		le.setExternalTools(getExternalTools());
-		
-		//TODO Order the course entries by course name??
-		if (app.getOnlyUserCourses()){
-			le.setCourses(getCourses(le.getAccessLocation(), le.getCreduser()));
-		}
-		else{
-			le.setCourses(getCourses(le.getAccessLocation()));
-		}
-
-		//We convert the internal tool IDs to accessible URLs (to get the configuration)
-		le.setInternalTools(getInternalTools());
-		
-		//JUAN: introduced to may hide AR controls in GUI
-		boolean showAr = Constants.GUI_SHOWAR;
-		le.setShowAr(showAr);
-
-		return le;
-    }
     
     
     @Override
@@ -134,6 +108,42 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 
     }
     
+    public LearningEnvironment getLEObject(){
+    	return this.le;
+    }
+    
+    public LearningEnvironment getCompleteLEObject(){
+    	GLUEPSManagerApplication app = getApplicationResource();
+
+		//We ask GLUEletManager for the external tools, and add it to the LE data
+		le.setExternalTools(getExternalTools());
+		
+		//TODO Order the course entries by course name??
+		if (app.getOnlyUserCourses()){
+			le.setCourses(getCourses(le.getAccessLocation(), le.getCreduser()));
+		}
+		else{
+			le.setCourses(getCourses(le.getAccessLocation()));
+		}
+
+		//We convert the internal tool IDs to accessible URLs (to get the configuration)
+		le.setInternalTools(getInternalTools());
+		
+		//JUAN: introduced to may hide AR controls in GUI
+		/*boolean showAr = Constants.GUI_SHOWAR;
+		le.setShowAr(showAr);*/
+
+		return le;
+    }   
+    
+    public LearningEnvironment getToolsLEObject(){
+		//We ask GLUEletManager for the external tools, and add it to the LE data
+		le.setExternalTools(getExternalTools());
+
+		//We convert the internal tool IDs to accessible URLs (to get the configuration)
+		le.setInternalTools(getInternalTools());
+		return le;
+    } 
 
  
     @Get("xml|html")
@@ -265,7 +275,7 @@ private HashMap<String, String> fixInternalToolURLs(HashMap<String, String> inte
 	if(internalTools == null) return null;
 	if(internalTools.size()==0) return internalTools;
 	
-	GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+	GLUEPSManagerApplication app = getApplicationResource();
 	String gluepsUrl = app.getAppExternalUri();
 
 	HashMap<String, String> newInternalTools = new HashMap<String, String>();
@@ -311,7 +321,7 @@ private HashMap<String, String> fixInternalToolURLs(HashMap<String, String> inte
 
 protected HashMap<String, String> getCourses(URL baseurl) {
 	
-	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory((GLUEPSManagerApplication) this.getApplication());
+	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory(getApplicationResource());
 	IVLEAdaptor adaptor = adaptorFactory.getVLEAdaptor(this.le);
 	
 		logger.info("Trying to get courses from the URL: "+baseurl.toString());
@@ -335,7 +345,7 @@ protected HashMap<String, String> getCourses(URL baseurl) {
 
 protected HashMap<String, String> getCourses(URL baseurl, String username) {
 	
-	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory((GLUEPSManagerApplication) this.getApplication());
+	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory(getApplicationResource());
 	IVLEAdaptor adaptor = adaptorFactory.getVLEAdaptor(this.le);
 		logger.info("Trying to get courses from the URL: "+baseurl.toString());
 		HashMap<String,String> courses = adaptor.getCourses(baseurl.toString(), username);
@@ -358,7 +368,7 @@ protected HashMap<String, String> getCourses(URL baseurl, String username) {
 
 protected HashMap<String, String> getInternalTools() {
 	
-	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory((GLUEPSManagerApplication) this.getApplication());
+	VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory(getApplicationResource());
 	IVLEAdaptor adaptor = adaptorFactory.getVLEAdaptor(this.le);
 	
 	HashMap<String,String> tools = adaptor.getInternalTools();		
@@ -401,7 +411,7 @@ protected HashMap<String, String> getInternalTools() {
 		HashMap<String,String> tools = null;
     	
     	//Get the GlueletManager URL from app properties
-		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+		GLUEPSManagerApplication app = getApplicationResource();
 		String gmUrl = app.getGmurlinternal();
 	
 		//We get the external GLUEPS URI, either from the properties or from our own reference
@@ -604,5 +614,19 @@ protected HashMap<String, String> getInternalTools() {
         
         return entry;
     } 
+    
+    private GLUEPSManagerApplication getApplicationResource(){
+    	GLUEPSManagerApplication app;
+    	if (this.getApplication() instanceof GLUEPSManagerApplication){
+    		app = (GLUEPSManagerApplication) this.getApplication();
+    	}else {
+    		app = this.applicationResouce;
+    	}
+    	return app;
+    }
+    
+    public void setApplicationResource(GLUEPSManagerApplication applicationResource){
+    	this.applicationResouce = applicationResource;
+    }
     
 }

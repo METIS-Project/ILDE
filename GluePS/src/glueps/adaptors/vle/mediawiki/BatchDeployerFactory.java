@@ -1,6 +1,7 @@
 package glueps.adaptors.vle.mediawiki;
 
 import java.net.URL;
+import java.util.Map;
 
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
 
@@ -37,7 +38,7 @@ public class BatchDeployerFactory {
 		
 	}
 	
-	public IMWBatchDeployer getDeployer(URL wikiURL, String user, String pwd, String mode){
+	public IMWBatchDeployer getDeployer(URL wikiURL, String user, String pwd, String mode, Map<String, String> parameters){
 		
 		IMWBatchDeployer deployer = null;
 		
@@ -60,13 +61,11 @@ public class BatchDeployerFactory {
 			return deployer;
 		} else if(mode.equals(OPEN4_MODE)){
 			//We construct the simple mode deployer and return it
-			if(app!=null) deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd, app);
-			else deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd);
+			deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd, parameters);
 			return deployer;
 		} else if(mode.equals(OPEN5_MODE)){
 			//We construct the simple mode deployer and return it
-			if(app!=null) deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd, app);
-			else deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd);
+			deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd, parameters);
 			return deployer;
 		}
 		
@@ -74,19 +73,17 @@ public class BatchDeployerFactory {
 
 	}
 
-	public IMWBatchReDeployer getReDeployer(URL wikiURL, String user, String pwd, String mode) {
+	public IMWBatchReDeployer getReDeployer(URL wikiURL, String user, String pwd, String mode, Map<String, String> parameters) {
 		IMWBatchReDeployer deployer = null;
 		
 		if(mode==null || mode.length()==0) return null;
 		else if(mode.equals(OPEN4_MODE)){
 			//We construct the simple mode deployer and return it
-			if(app!=null) deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd, app);
-			else deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd);
+			deployer = new OpenMWBatchDeployer4(wikiURL, user, pwd, parameters);
 			return deployer;
 		} else if(mode.equals(OPEN5_MODE)){
 			//We construct the simple mode deployer and return it
-			if(app!=null) deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd, app);
-			else deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd);
+			deployer = new OpenMWBatchDeployer5(wikiURL, user, pwd, parameters);
 			return deployer;
 		}
 		

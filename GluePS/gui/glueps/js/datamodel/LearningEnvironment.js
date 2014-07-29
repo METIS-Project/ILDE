@@ -16,6 +16,10 @@ var LearningEnvironment = {
 		return JsonDB.deploy.learningEnvironment.type;
 	},
 	
+	getLearningEnvironmentParameters: function() {
+		return JsonDB.deploy.learningEnvironment.parameters;
+	},
+	
 	getCreduser: function() {
 		return JsonDB.deploy.learningEnvironment.creduser;
 	},

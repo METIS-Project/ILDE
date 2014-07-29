@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -51,25 +52,24 @@ import com.google.gson.JsonObject;
  */
 
 public class BloggerAdaptor implements IDynamicVLEDeployer {
-
-	private GLUEPSManagerApplication app=null;
 	
 	private String bloggerAccessToken; //the access token to make the Oauth 2.0 requests
 	 
  	private String clientId; //Client ID for web application
 	private String apiKey; //API key for browser applications
+	protected Map<String, String> parameters;
 	  
 
 	public BloggerAdaptor() {
 		super();
 	}
 	
-	public BloggerAdaptor(GLUEPSManagerApplication applicationRest, String bloggerAccessToken, String clientId, String apiKey){
+	public BloggerAdaptor(String bloggerAccessToken, String clientId, String apiKey, Map<String, String> parameters){
 		super();
-		this.app = applicationRest;
 		this.bloggerAccessToken = bloggerAccessToken;
 		this.clientId = clientId;
 		this.apiKey = apiKey;
+		this.parameters = parameters;
 	}
 	
 	@Override
@@ -465,7 +465,7 @@ public class BloggerAdaptor implements IDynamicVLEDeployer {
      */
     private String generateJavascriptContent(){
     	String content = "";
-    	String jsFilePath = app.getAppPath() + "/oauth/oauthScript.js";
+    	String jsFilePath = getAppPath() + "/oauth/oauthScript.js";
 		content += "<script type=\"text/javascript\" language=\"javascript\">if ((typeof googleOauthClientId==\"undefined\") && (typeof googleOauthApiKey==\"undefined\")){var googleOauthClientId=\""+ clientId + "\";var googleOauthApiKey=\"" + apiKey + "\";var firstOauthScript = true;}</script>";
 		content += "<script type=\"text/javascript\" language=\"javascript\">" + readJavascriptFile(jsFilePath) + "</script>";
     	return content;    	
@@ -790,6 +790,15 @@ public class BloggerAdaptor implements IDynamicVLEDeployer {
 			if(httpput!=null) httpput.abort();
 			if(httpclient!=null) httpclient.getConnectionManager().shutdown();
 		}
+	}
+	
+	private String getAppPath() {
+		return parameters.get("appPath");
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
 	}
 
     

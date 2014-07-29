@@ -13,6 +13,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -40,34 +41,34 @@ public class MediaWikiAdaptor extends MWOperator implements IDynamicVLEDeployer 
 	//This is the wiki base URL
 	//private URL wikiURL = null;
 	//protected String wikiCookie = "";
-	private GLUEPSManagerApplication app=null;
 	
 	//TODO These two should be set somehow in the constructor. For now, we hardwire them for delfos
 	private String wikiUser;
 	private String wikiPassword;
 	private Properties properties;
+	private Map<String, String> parameters;
 	
 	
 	public MediaWikiAdaptor() {
 		super();
 	}
 	
-	public MediaWikiAdaptor(GLUEPSManagerApplication app, Properties properties){
+	public MediaWikiAdaptor(Properties properties, Map<String, String> parameters){
 		
 		super();
-		this.app=app;
 		this.wikiUser=getMWGluepsUser();
 		this.wikiPassword=getMWGluepsPwd();
 		this.properties = properties;
+		this.parameters = parameters;
 	}
 	
-	public MediaWikiAdaptor(GLUEPSManagerApplication app, String wikiUser, String wikiPassword, Properties properties){
+	public MediaWikiAdaptor(String wikiUser, String wikiPassword, Properties properties, Map<String, String> parameters){
 		
 		super();
-		this.app=app;
 		this.wikiUser=wikiUser;
 		this.wikiPassword=wikiPassword;
 		this.properties = properties;
+		this.parameters = parameters;
 	}	
 	
 	
@@ -265,12 +266,11 @@ public class MediaWikiAdaptor extends MWOperator implements IDynamicVLEDeployer 
 		Deploy updatedDeploy=null;
 		try {
 			BatchDeployerFactory factory;
-			if(app!=null) factory = new BatchDeployerFactory(app);
-			else factory = new BatchDeployerFactory();
+			factory = new BatchDeployerFactory();
 			
 			IMWBatchDeployer deployer;
-			if(app!=null) deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode());
-			else deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE);
+			if(getMWBatchDeployMode()!=null) deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode(), parameters);
+			else deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE, parameters);
 			updatedDeploy = deployer.batchDeploy(lfdeploy);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -296,12 +296,11 @@ public class MediaWikiAdaptor extends MWOperator implements IDynamicVLEDeployer 
 		Deploy updatedDeploy=null;
 		try {
 			BatchDeployerFactory factory;
-			if(app!=null) factory = new BatchDeployerFactory(app);
-			else factory = new BatchDeployerFactory();
+			factory = new BatchDeployerFactory();
 			
 			IMWBatchDeployer deployer;
-			if(app!=null) deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode());
-			else deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE);
+			if(getMWBatchDeployMode()!=null) deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode(), parameters);
+			else deployer = factory.getDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE, parameters);
 			updatedDeploy = deployer.batchUndeploy(lfdeploy);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -346,12 +345,11 @@ public class MediaWikiAdaptor extends MWOperator implements IDynamicVLEDeployer 
 		Deploy updatedDeploy=null;
 		try {
 			BatchDeployerFactory factory;
-			if(app!=null) factory = new BatchDeployerFactory(app);
-			else factory = new BatchDeployerFactory();
+			factory = new BatchDeployerFactory();
 			
 			IMWBatchReDeployer deployer;
-			if(app!=null) deployer = factory.getReDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode());
-			else deployer = factory.getReDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE);
+			if(getMWBatchDeployMode()!=null) deployer = factory.getReDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, getMWBatchDeployMode(), parameters);
+			else deployer = factory.getReDeployer(this.wikiURL, this.wikiUser, this.wikiPassword, BatchDeployerFactory.OPEN4_MODE, parameters);
 			updatedDeploy = deployer.batchReDeploy(lfdeploy);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -381,5 +379,10 @@ public class MediaWikiAdaptor extends MWOperator implements IDynamicVLEDeployer 
 	
 	private String getMWBatchDeployMode(){
 		return properties.getProperty("batchdeploymode", "simple");
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
 	}
 }

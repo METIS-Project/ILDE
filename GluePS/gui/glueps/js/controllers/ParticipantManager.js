@@ -23,6 +23,8 @@ var ParticipantManager = {
 	      */
 	     getCourseParticipants:function() {
 		 	if (LdShakeManager.ldShakeMode){
+		 		var version = gupUrl("http://localhost?" + LearningEnvironment.getLearningEnvironmentParameters(), "version");
+		 		var wstoken = gupUrl("http://localhost?" + LearningEnvironment.getLearningEnvironmentParameters(), "wstoken");
 		     	var url = window.location.href.split("/GLUEPSManager")[0];
 		     	url = url + "/GLUEPSManager/ldshake/courses";
 		        var content = {
@@ -32,7 +34,9 @@ var ParticipantManager = {
 		        		credsecret: JsonDB.deploy.learningEnvironment.credsecret,
 		        		course: JsonDB.deploy.course.id.substring(JsonDB.deploy.course.id.lastIndexOf("/courses/")+9),
 		        		sectoken: LdShakeManager.sectoken,
-		        		deployId: JsonDB.getDeploymentId().substring(JsonDB.getDeploymentId().lastIndexOf("/deploys/")+9)
+		        		deployId: JsonDB.getDeploymentId().substring(JsonDB.getDeploymentId().lastIndexOf("/deploys/")+9),
+		        		version: version,
+		        		wstoken: wstoken
 		        };
 		 	}
 		 	else{
@@ -54,14 +58,20 @@ var ParticipantManager = {
 	            	ParticipantManagementDialog.showParticipantsDelete(participantsDelete);
 	            	
 	            	//Obtener los participantes que permanecen
-	            	var participantsRemain = ParticipantManager.getParticipantsRemain(participantsAdd, participantsDelete);
+	            	var participantsRemain = ParticipantManager.getParticipantsRemain(participantsUpdated, participantsAdd, participantsDelete);
 	            	ParticipantManagementDialog.showParticipantsRemain(participantsRemain);
 	            	
 	            	ParticipantManagementDialog.showParticipantManagement();
 	            	
 	            },
-	            error: function(error, ioargs) {  	   
-	         	   InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("ErrorUpdatingParticipants"));
+	            error: function(error, ioargs) {
+	            	if (ioargs.xhr.status == 403){//wrong credentials
+	            		InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("ErrorUpdatingParticipants.credentialError"));
+					}else if (ioargs.xhr.status == 404){//the user doesn't have permission to get the course and its participants or the course no longer exists
+						InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("ErrorUpdatingParticipants.courseError"));
+					}else{ //Another internal error
+						InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("ErrorUpdatingParticipants.internalError"));
+					}
 	            }
 	        };
 
@@ -133,27 +143,26 @@ var ParticipantManager = {
 	    	return participantsDelete;
 	    },
 	    
-	    getParticipantsRemain: function(participantsAdd, participantsDelete){
+	    getParticipantsRemain: function(participantsUpdated, participantsAdd, participantsDelete){
 	    	var participantsRemain = new Array();
-	    	var participantsOld = ParticipantContainer.getAllParticipants();
-	    	for (var i = 0; i < participantsOld.length; i++){
+	    	for (var i = 0; i < participantsUpdated.length; i++){
 	    		var found = false;
 	    		var j = 0;
 	    		while (found == false && j < participantsAdd.length){
-	    			if (participantsOld[i].getId()== participantsAdd[j].id){
+	    			if (participantsUpdated[i].id == participantsAdd[j].id){
 	    				found = true;
 	    			}
 	    			j++;
 	    		}
 	    		j = 0;
 	    		while (found == false && j < participantsDelete.length){
-	    			if (participantsOld[i].getId() == participantsDelete[j].getId()){
+	    			if (participantsUpdated[i].id == participantsDelete[j].getId()){
 	    				found = true;
 	    			}
 	    			j++;
 	    		}
 	    		if (found == false){
-	    			participantsRemain.push(participantsOld[i]);
+	    			participantsRemain.push(new Participant(participantsUpdated[i]));
 	    		}
 	    	}
 	    	return participantsRemain;

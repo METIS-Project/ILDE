@@ -243,7 +243,8 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 		
 		LearningEnvironment le;
 		try {
-			le = new LearningEnvironment(null, leName, leType, accessLocation, userid, leUser, lePassword, trimId(leInstallation));
+			//We should receive the parameters with the values for showAR and show VG. By now, we set both values to false
+			le = new LearningEnvironment(null, leName, leType, accessLocation, userid, leUser, lePassword, trimId(leInstallation),false,false);
 			dbmanager.insertLearningEnvironment(le);
 		}
 		catch (Exception e) {
@@ -256,7 +257,7 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
      * Update the database fields of every LearningEnvironmentEntity with the information contained in its Deploy xmlfile
      * @throws UnsupportedEncodingException 
      */
-	@Put()
+	/*@Put()
     public Representation updateLearningEnvironmentEntities(Representation entity){
 		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
 		if (app.getLetPutUpdateTables()){
@@ -267,9 +268,11 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 	    	if(leEntities!=null){
 	    		for(LearningEnvironmentEntity lee : leEntities){
 	    			LearningEnvironmentInstallation lei = dbmanager.findLEInstObjectByAccessLocation(lee.getAccessLocation().toString());
-	    			lee.setInstallation(Long.valueOf(lei.getId()));
-	    			//Make the changes permanent
-	    			dbmanager.insertLearningEnvironment(lee);
+	    			if (lei!=null){
+		    			lee.setInstallation(Long.valueOf(lei.getId()));
+		    			//Make the changes permanent
+		    			dbmanager.insertLearningEnvironment(lee);
+	    			}	
 	    		}
 	    	}
 	    	logger.info("** Finished updating glueps_learning_environments table");
@@ -277,7 +280,7 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 	    }else{
 	    	throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "updating glueps_learning_environments table is not allowed");
 	    }
-    }
+    }*/
     
 
 }

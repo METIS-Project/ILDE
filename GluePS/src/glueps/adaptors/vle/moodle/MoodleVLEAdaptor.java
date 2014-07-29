@@ -1,5 +1,6 @@
 package glueps.adaptors.vle.moodle;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -60,7 +61,10 @@ public class MoodleVLEAdaptor implements VLEAdaptor{
 	}
 
 	@Override
-	public IVLEAdaptor getVLEAdaptor(GLUEPSManagerApplication app, Map<String, String> parameters) {
+	public IVLEAdaptor getVLEAdaptor(Map<String, String> parameters) {
+		templateDir = parameters.get("appPath") + File.separator + "templates" + File.separator;
+		UPLOAD_DIRECTORY = parameters.get("appPath") + "/uploaded/";
+		tmpDir = UPLOAD_DIRECTORY + File.separator+"temp" + File.separator+"zips" + File.separator;
 		
     	String propertyBatchDeployMode = configuration.getProperty("batchdeploymode", "normal");
     	String creduser = parameters.get("creduser");
@@ -73,32 +77,32 @@ public class MoodleVLEAdaptor implements VLEAdaptor{
 			//We construct the MoodleAdaptor
 			MoodleAdaptor mooAdaptor = null;
 			if ((propertyBatchDeployMode.equals(MOODLE_BATCHMODE_NORMAL) && batchdeploymode==null) || (batchdeploymode!=null && batchdeploymode.equals(MOODLE_BATCHMODE_NORMAL))){
-				mooAdaptor = new MoodleAdaptor21v(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, wstoken);
+				mooAdaptor = new MoodleAdaptor21v(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, wstoken, parameters);
 			}else if ((propertyBatchDeployMode.equals(MOODLE_BATCHMODE_DYNAMIC )&& batchdeploymode==null) || (batchdeploymode!=null && batchdeploymode.equals(MOODLE_BATCHMODE_DYNAMIC))){
-				mooAdaptor = new MoodleDynAdaptor21v(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, wstoken);
+				mooAdaptor = new MoodleDynAdaptor21v(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, wstoken, parameters);
 			}else if ((propertyBatchDeployMode.equals(MOODLE_BATCHMODE_SELENIUM)&& batchdeploymode==null) || (batchdeploymode!=null && batchdeploymode.equals(MOODLE_BATCHMODE_SELENIUM))){
 				if (version.equals("2.5")){					
-					mooAdaptor = new MoodleDynAdaptor25vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+					mooAdaptor = new MoodleDynAdaptor25vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 				}else if (version.equals("2.3")){
-					mooAdaptor = new MoodleDynAdaptor23vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+					mooAdaptor = new MoodleDynAdaptor23vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 				}else{
-					mooAdaptor = new MoodleDynAdaptor21vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+					mooAdaptor = new MoodleDynAdaptor21vSelenium(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 				}
 			}
 			mooAdaptor.setTemplateDir(templateDir);
 			return mooAdaptor;
 		}else if(propertyBatchDeployMode.equals(MOODLE_BATCHMODE_NORMAL)){
 			//We construct the MoodleAdaptor
-			MoodleAdaptor mooAdaptor = new MoodleAdaptor(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml",app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+			MoodleAdaptor mooAdaptor = new MoodleAdaptor(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml", "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 			mooAdaptor.setTemplateDir(templateDir);
 			return mooAdaptor;
 		}else if(propertyBatchDeployMode.equals(MOODLE_BATCHMODE_ONETOPIC)){
 			//We construct the MoodleAdaptor
-			MoodleAdaptorSelectiveOneTopic mooAdaptor = new MoodleAdaptorSelectiveOneTopic(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml",app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+			MoodleAdaptorSelectiveOneTopic mooAdaptor = new MoodleAdaptorSelectiveOneTopic(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml","glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 			mooAdaptor.setTemplateDir(templateDir);
 			return mooAdaptor;
 		}else if(propertyBatchDeployMode.equals(MOODLE_BATCHMODE_DYNAMIC)){
-			MoodleDynAdaptor mooAdaptor = new MoodleDynAdaptor(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml",app, "glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret);
+			MoodleDynAdaptor mooAdaptor = new MoodleDynAdaptor(UPLOAD_DIRECTORY ,this.templateDir+"moodlebackup.xml","glueps.adaptors.vle.moodle.model","moodle.xml",this.tmpDir, accessLocation, creduser, credsecret, parameters);
 			mooAdaptor.setTemplateDir(templateDir);
 			return mooAdaptor;
 		}else return null;

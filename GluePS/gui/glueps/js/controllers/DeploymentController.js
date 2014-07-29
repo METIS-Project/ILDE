@@ -305,8 +305,14 @@ var DeploymentController = {
 					DeploymentController.getInprocess();
 				},
 				error : function(error, ioargs) {
+					//Forbidden -> The user is not allowed to deploy into the VLE
+					if (ioargs.xhr.status == 403){
+						DeploymentController.liveErrorMessage = i18n.get("deploymentErrorCredentials");
+						DeploymentController.finishedLive = true;
+						DeploymentController.checkFinished();
+					}
 					//Method not allowed -> the live deployment is not available
-					if (ioargs.xhr.status == 405){
+					else if (ioargs.xhr.status == 405){
 						DeploymentController.finishedLive = true;
 						DeploymentController.checkFinished();
 					}

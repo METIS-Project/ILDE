@@ -509,8 +509,12 @@ public class DesignListResource extends GLUEPSResource {
 							LDAdaptorFactory factory = new LDAdaptorFactory(app);
 							
 							ILDAdaptor adaptor = factory.getLDAdaptor(designType, designId);
-							
-							design = adaptor.fromLDToLF(file.toString());
+							try{
+								design = adaptor.fromLDToLF(file.toString());
+							}
+							catch (Exception e){
+								throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, e.getMessage()); 
+							}
 							//old version
 							//design = adaptor.processUoL(uploadDir + designId + ".zip");
 							if(design==null) throw new ResourceException(Status.CLIENT_ERROR_UNPROCESSABLE_ENTITY, "Failed to parse the provided design");  

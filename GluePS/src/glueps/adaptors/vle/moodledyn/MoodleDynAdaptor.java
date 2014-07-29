@@ -3,6 +3,7 @@ package glueps.adaptors.vle.moodledyn;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -32,16 +33,14 @@ public class MoodleDynAdaptor extends MoodleAdaptor implements
 	public MoodleDynAdaptor() {
 	}
 
-	public MoodleDynAdaptor(String base, String template,
-			GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor(String base, String template, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
-	public MoodleDynAdaptor(String base, String template,
-			GLUEPSManagerApplication applicationRest, String modelPackage,
-			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, modelPackage, backupXmlFilename,
-				tmpDir, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor(String base, String template, String modelPackage,
+			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, modelPackage, backupXmlFilename,
+				tmpDir, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
 
@@ -217,6 +216,11 @@ public class MoodleDynAdaptor extends MoodleAdaptor implements
 	public Deploy redeploy(String string, Deploy newDeploy) {
 		//In order to re-deploy, we just deploy (the original one will be deleted! sp. internal tools)
 		return deploy (string, newDeploy);
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
 	}
 
 }

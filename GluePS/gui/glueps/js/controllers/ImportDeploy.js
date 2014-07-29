@@ -118,6 +118,9 @@ var ImportDeploy = {
        * @param lms Identificador del LMS del que se obtendrán las clases
        */
       getClassesVle: function(lms){
+    	  dojo.style("importDeployCourseTr","display","");
+ 		 dojo.style("importDeployLoadingTd","display","");
+		 dojo.style("importCourseSelectTd","display","none");
          var xhrArgs = {
               url: lms,
               handleAs: "text",//Tipo de dato de la respuesta del Get
@@ -130,9 +133,12 @@ var ImportDeploy = {
                   	var option = new Option(clases[i].name, clases[i].id);
                   	class_select.options[class_select.options.length]=option;
                  }
-                 dojo.style("importDeployCourseTr","display","");
+         		 dojo.style("importDeployLoadingTd","display","none");
+        		 dojo.style("importCourseSelectTd","display","");
               },
-              error: function(error, ioargs) { 
+              error: function(error, ioargs) {
+          		 dojo.style("importDeployLoadingTd","display","none");
+        		 dojo.style("importCourseSelectTd","display","");
             	  if (error.status == 403){
             		  //Mostrar mensaje
             		  Glueps.showAlertDialog(i18n.get("warning"), i18n.get("errorGetCourseListCredentials"));

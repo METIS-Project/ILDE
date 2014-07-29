@@ -135,7 +135,7 @@ public class CourseResource extends GLUEPSResource {
 		Course course;
 		//TODO For now, we just get course id and name... we could think of getting all the data at some point
 		if((coursename = courses.get(this.courseLocalId)) != null) course = new Course(this.courseLocalId, coursename, null, null, null);
-		else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist");
+		else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist or you do not have the necessary permissions to get its participants.");
 		
 		//Now, we get the users for that course
 		HashMap<String,Participant> users = adaptor.getCourseUsers(vle.getAccessLocation().toString(),this.courseLocalId);

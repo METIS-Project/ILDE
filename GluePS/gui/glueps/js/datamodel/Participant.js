@@ -17,5 +17,9 @@ var Participant = function(data)
 	
 	this.getIsStaff = function(){
 		return data.isStaff;
+	},
+	
+	this.setIsStaff = function(isStaff){
+		data.isStaff = isStaff;
 	}
 }

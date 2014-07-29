@@ -5,11 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -40,14 +38,6 @@ public class LearningEnvironmentEntity implements Serializable {
 	private String name;
 	
 	@Basic(optional = false)
-    @Column(name = "type")
-	private String type;
-	
-	@Basic(optional = false)
-    @Column(name = "accessLocation")
-	private String accessLocation;
-	
-	@Basic(optional = false)
 	@Column(name = "userid")
 	private String userid;
 	
@@ -63,14 +53,22 @@ public class LearningEnvironmentEntity implements Serializable {
 	@Column(name = "installation")
 	private long installation;
 	
+	@Basic(optional = false)
+	@Column(name = "showAR")
+	private boolean showAR;
+	
+	@Basic(optional = false)
+	@Column(name = "showVG")
+	private boolean showVG;
+	
 	
     /*@Lob
 	@Basic(fetch = FetchType.LAZY)
 	@Column(length=1048576) 
 	private byte[] xmlfile;*/
 	
-    
-    public LearningEnvironmentEntity() {
+
+	public LearningEnvironmentEntity() {
     	
     }
 
@@ -78,15 +76,15 @@ public class LearningEnvironmentEntity implements Serializable {
         this.id = id;
     }
     
-    public LearningEnvironmentEntity(long id, String name, String type, String accessLocation, String userid, String creduser, String credsecret, long installation) {
+    public LearningEnvironmentEntity(long id, String name, String userid, String creduser, String credsecret, long installation, boolean showAR, boolean showVG) {
         this.id = id;
         this.name = name;
-        this.type = type;
-        this.accessLocation = accessLocation;
         this.userid = userid;
         this.creduser = creduser;
         this.credsecret = credsecret;
         this.installation = installation;
+        this.showAR = showAR;
+        this.showVG = showVG;
     }
 
     public long getId() {
@@ -103,22 +101,6 @@ public class LearningEnvironmentEntity implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-    
-    public String getAccessLocation() {
-        return accessLocation;
-    }
-
-    public void setAccessLocation(String accessLocation) {
-        this.accessLocation = accessLocation;
     }
     
     public String getUserid() {
@@ -152,6 +134,22 @@ public class LearningEnvironmentEntity implements Serializable {
     public void setInstallation(long installation) {
         this.installation  = installation;
     }
+    
+    public boolean isShowAR() {
+		return showAR;
+	}
+
+	public void setShowAR(boolean showAR) {
+		this.showAR = showAR;
+	}
+
+	public boolean isShowVG() {
+		return showVG;
+	}
+
+	public void setShowVG(boolean showVG) {
+		this.showVG = showVG;
+	}
 
  
 

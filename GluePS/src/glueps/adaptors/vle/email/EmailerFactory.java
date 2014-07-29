@@ -1,6 +1,7 @@
 package glueps.adaptors.vle.email;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.Properties;
 
 import glueps.adaptors.vle.mediawiki.IMWBatchDeployer;
@@ -13,8 +14,6 @@ import glueps.adaptors.vle.mediawiki.SimpleMWBatchDeployer;
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
 
 public class EmailerFactory {
-
-	private GLUEPSManagerApplication app;
 	
 	// Different modes of deploying
 	//single - single email with all the deploy is sent to all participants
@@ -24,11 +23,12 @@ public class EmailerFactory {
 	//personalized - one email is sent to each participant, including only his activities; a complete one is sent to teachers
 	public static final String PERSONAL_MODE = "personalized";
 	private Properties properties;
+	protected Map<String, String> parameters;
 	
-	public EmailerFactory(GLUEPSManagerApplication applicationRest, Properties properties){
+	public EmailerFactory(Properties properties, Map<String, String> parameters){
 		
-		this.app = applicationRest;
 		this.properties = properties;
+		this.parameters = parameters;
 		
 	}
 	
@@ -39,7 +39,7 @@ public class EmailerFactory {
 		if(mode==null || mode.length()==0) return null;
 		else if(mode.equals(SINGLE_MODE)){
 			//We construct the simple mode emailer and return it
-			emailer = new SingleEmailer(getEmailTemplate(), app.getAppExternalUri());
+			emailer = new SingleEmailer(getEmailTemplate(), getAppExternalUri());
 			return emailer;
 		}
 		
@@ -49,4 +49,8 @@ public class EmailerFactory {
 	private String getEmailTemplate(){
 		return properties.getProperty("template");
     }
+	
+	private String getAppExternalUri(){
+		   return parameters.get("appExternalUri");
+	}
 }

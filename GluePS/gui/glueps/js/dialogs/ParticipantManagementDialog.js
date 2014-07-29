@@ -1,12 +1,13 @@
 /**
- * Diálogo de actualización del listado de participantes
+ * Diï¿½logo de actualizaciï¿½n del listado de participantes
  */
 
 var ParticipantManagementDialog = {
 		
-	participantsAdd: new Array(),
-	
+	participantsAdd: new Array(),	
 	participantsDelete: new Array(),
+	participantsRemain: new Array(),
+	
 		
 	init: function(){
 		dojo.connect(dojo.byId("botonAceptarCambiosAlumnos"), "onclick", function() {
@@ -21,10 +22,11 @@ var ParticipantManagementDialog = {
 	reset: function(){
 		ParticipantManagementDialog.participantsAdd = new Array();
 		ParticipantManagementDialog.participantsDelete = new Array();
+		ParticipantManagementDialog.participantsRemain = new Array();
 	},
 	
 	/**
-	 * Muestra la ventana de actualización del listado de participantes
+	 * Muestra la ventana de actualizaciï¿½n del listado de participantes
 	 */
 	showParticipantManagement: function()
 	{
@@ -34,7 +36,7 @@ var ParticipantManagementDialog = {
 	},
 	
 	/**
-	 * Oculta la ventana de actualización del listado de participantes
+	 * Oculta la ventana de actualizaciï¿½n del listado de participantes
 	 */
 	hideParticipantManagement: function()
 	{
@@ -43,7 +45,7 @@ var ParticipantManagementDialog = {
 	
 	
     /**
-     * Muestra en una tabla el listado de participantes que se van a añadir
+     * Muestra en una tabla el listado de participantes que se van a aï¿½adir
      */
     showParticipantsAdd: function(participantsAdd){
     	ParticipantManagementDialog.participantsAdd = participantsAdd;
@@ -56,7 +58,7 @@ var ParticipantManagementDialog = {
         }
         if (participantsAdd.length>0){
         	table.className="tableAllParticipants";
-            //Se construye la tabla con la nueva información
+            //Se construye la tabla con la nueva informaciï¿½n
             for (var i = 0; i < participantsAdd.length; i++){
                     var tr = table.appendChild(document.createElement("tr"));
                     var td = tr.appendChild(document.createElement("td"));
@@ -83,7 +85,7 @@ var ParticipantManagementDialog = {
         }
         if (participantsDelete.length>0){
         	table.className="tableAllParticipants";
-            //Se construye la tabla con la nueva información
+            //Se construye la tabla con la nueva informaciï¿½n
             for (var i = 0; i < participantsDelete.length; i++){
                     var tr = table.appendChild(document.createElement("tr"));
                     
@@ -112,6 +114,7 @@ var ParticipantManagementDialog = {
      * Muestra en una tabla el listado de participantes que permanecen
      */
     showParticipantsRemain: function(participantsRemain){
+    	ParticipantManagementDialog.participantsRemain = participantsRemain;
         var table = document.getElementById("remainParticipantsTable");
         //Se elimina el contenido anterior de la tabla
         if (table.hasChildNodes()){
@@ -121,7 +124,7 @@ var ParticipantManagementDialog = {
         }
         if (participantsRemain.length>0){
             table.className="tableAllParticipants";
-            //Se construye la tabla con la nueva información
+            //Se construye la tabla con la nueva informaciï¿½n
             for (var i = 0; i < participantsRemain.length; i++){
                 var tr = table.appendChild(document.createElement("tr"));
                 
@@ -146,15 +149,23 @@ var ParticipantManagementDialog = {
     },
     
        
-    updateParticipantList: function(){	   
+    updateParticipantList: function(){	
+    	var updated = false;
     	ParticipantManagementDialog.hideParticipantManagement();	
         for (var i = 0; i < ParticipantManagementDialog.participantsDelete.length; i++){
     		ParticipantManager.deleteParticipant(ParticipantManagementDialog.participantsDelete[i]);
     	}
     	for (var i = 0; i < ParticipantManagementDialog.participantsAdd.length; i++){
     		ParticipantContainer.addParticipant(ParticipantManagementDialog.participantsAdd[i]);
-    	}        		
-    	if (ParticipantManagementDialog.participantsAdd.length > 0 || ParticipantManagementDialog.participantsDelete.length > 0){
+    	}
+    	for (var i = 0; i < ParticipantManagementDialog.participantsRemain.length; i++){
+    		var participant = ParticipantContainer.getParticipant(ParticipantManagementDialog.participantsRemain[i].getId());
+    		if (ParticipantManagementDialog.participantsRemain[i].getIsStaff()!=participant.getIsStaff()){
+    			participant.setIsStaff(ParticipantManagementDialog.participantsRemain[i].getIsStaff());
+    			updated = true;
+    		}
+    	}
+    	if (ParticipantManagementDialog.participantsAdd.length > 0 || ParticipantManagementDialog.participantsDelete.length > 0 || updated==true){
     		InformativeDialogs.showAlertDialog(i18n.get("info"), i18n.get("SuccessUpdatingParticipants"));
     		GroupsPainter.currentState = GroupsPainter.updateCurrentStateInfo();
     		JsonDB.notifyChanges();

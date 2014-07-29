@@ -115,7 +115,7 @@
 			</div>
 			
 			<div id="importDeploy" dojoType="dijit.TitlePane" title="">
-				<form id="importDeployForm" jsId="importDeployForm" method="post" action="" encType="multipart/form-data">
+				<form id="importDeployForm" action="" enctype="multipart/form-data">
 					<table>
 						<tr>
 							<td><label id="labelImportDeployTitle" for="importDeployTextBox"></label></td>
@@ -143,7 +143,8 @@
 						</tr>
 						<tr id="importDeployCourseTr" style="display:none;">
 							<td><label id="importDeployCourseSelect"></label></td>
-							<td><select id="importCourseSelect" name="courseSelect"><option value="0">-- Selecciona un curso --</option></select></td>	
+							<td id="importDeployLoadingTd" ><img src="images/loader.gif" alt="Loading..." width="24" height="24"></img></td>
+							<td id="importCourseSelectTd"><select id="importCourseSelect" name="courseSelect"><option value="0">-- Selecciona un curso --</option></select></td>	
 						</tr>
 						<!--  						
 						<tr>
@@ -211,6 +212,7 @@
 							<div id="divCourseSelect">
 							<br>
 							<span id="newDeployCourseSelect" class="widthSpan3emCenter"></span>
+							<img id="newDeployCourseLoading" src="images/loader.gif" alt="Loading..." width="24" height="24"></img>
 							<select id="courseSelect" name="courseSelect">							
 							</select>
 							</div><br> <br> <span id="newDeployTeacherUsername"

@@ -16,6 +16,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import glueps.adaptors.vle.IDynamicVLEDeployer;
+import glueps.adaptors.vle.IVLEAdaptor;
+import glueps.adaptors.vle.VLEAdaptorFactory;
 import glueps.adaptors.vle.moodle.MoodleAdaptor;
 import glueps.adaptors.vle.moodle.MoodleAdaptor21v;
 import glueps.adaptors.vle.moodle.model.MODS;
@@ -41,6 +43,8 @@ import glueps.core.model.Participant;
 
 
 import org.openqa.selenium.*;
+import org.restlet.data.Status;
+import org.restlet.resource.ResourceException;
 
 import com.sun.xml.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 
@@ -57,16 +61,14 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	public MoodleDynAdaptor21v() {
 	}
 
-	public MoodleDynAdaptor21v(String base, String template,
-			GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword, String wstoken) {
-		super(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword, wstoken);
+	public MoodleDynAdaptor21v(String base, String template,String moodleUrl, String moodleUser, String moodlePassword, String wstoken, Map<String, String> parameters) {
+		super(base, template, moodleUrl, moodleUser, moodlePassword, wstoken, parameters);
 	}
 
-	public MoodleDynAdaptor21v(String base, String template,
-			GLUEPSManagerApplication applicationRest, String modelPackage,
-			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, String wstoken) {
-		super(base, template, applicationRest, modelPackage, backupXmlFilename,
-				tmpDir, moodleUrl, moodleUser, moodlePassword,wstoken);
+	public MoodleDynAdaptor21v(String base, String template, String modelPackage,
+			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, String wstoken, Map<String, String> parameters) {
+		super(base, template, modelPackage, backupXmlFilename,
+				tmpDir, moodleUrl, moodleUser, moodlePassword,wstoken, parameters);
 	}
 
 	  private boolean isElementPresent(By by) {
@@ -95,7 +97,7 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	
 	@Override
 	public Deploy deploy(String baseUri, Deploy lfdeploy) {
-		HashMap<String, Participant> users = getCourseUsers(baseUri, lfdeploy.getCourse().getId());
+		/*HashMap<String, Participant> users = getCourseUsers(baseUri, lfdeploy.getCourse().getId());
 		ArrayList<CourseEnrol> courseEnrols = getCourseEnrols(lfdeploy.getCourse());
 		for (int i = 0; i < courseEnrols.size(); i++){
 			CourseEnrol enrol = courseEnrols.get(i);
@@ -112,22 +114,38 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 		}
 		//It is necessary to add the manual enrolment method for that course
 		Integer enrolid = addEnrolMethod(lfdeploy.getCourse(), "manual");
-		Iterator it = users.entrySet().iterator();
-		ArrayList<Participant> courseParts = new ArrayList<Participant>();
-		while (it.hasNext()){
-			Map.Entry<String, Participant> e = (Map.Entry<String, Participant>)it.next();
-			Participant p = e.getValue();
-			courseParts.add(p);
+		if (users!=null){
+			ArrayList<Participant> courseParts = new ArrayList<Participant>();
+			Iterator it = users.entrySet().iterator();
+			while (it.hasNext()){
+				Map.Entry<String, Participant> e = (Map.Entry<String, Participant>)it.next();
+				Participant p = e.getValue();
+				courseParts.add(p);
+			}
+			//Enrol the previous users in the course
+			enrolUsers(lfdeploy.getCourse(), courseParts);
 		}
-		//Enrol the previous users in the course
-		enrolUsers(lfdeploy.getCourse(), courseParts);
+		*/
+		ArrayList<CourseEnrol> courseEnrols = getCourseEnrols(lfdeploy.getCourse());
+		boolean manualEnrol = false;
+		for (int i = 0; i < courseEnrols.size(); i++){
+			CourseEnrol enrol = courseEnrols.get(i);
+			if (enrol.getEnrol().equals("manual")){
+				manualEnrol = true;
+				break;
+			}
+		}
+		if (manualEnrol == false){
+			//add the manual enrol method
+			Integer enrolid = addEnrolMethod(lfdeploy.getCourse(), "manual");
+		}		
+		
 		//Enrol the users in the course
 		enrolUsers(lfdeploy.getCourse(), lfdeploy.getParticipants());
 		
-		//ArrayList<Integer> groupingids = new ArrayList<Integer>();
 		Integer startingSection;
 		boolean addingContent;
-		String lfsection = lfdeploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD);
+		String lfsection = lfdeploy.getFieldFromDeployData(this.getStartingSectionField());
 		if(lfsection!=null && lfsection.length()>0){
 			startingSection = Integer.parseInt(lfsection);
 			addingContent = true;
@@ -140,7 +158,7 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 				Group deployGroup = lfdeploy.getGroups().get(i);
 				boolean exists = false;
 				if (courseGroups!=null){
-					for (it = courseGroups.entrySet().iterator(); it.hasNext();){
+					for (Iterator it = courseGroups.entrySet().iterator(); it.hasNext();){
 						Map.Entry<String, Group> e = (Map.Entry<String, Group>)it.next();
 						Group courseGroup = e.getValue();
 						//Check if the group already exists in Moodle by the username. Maybe, it should better be made by the ID
@@ -180,7 +198,7 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 			HashMap<String, Group> groups = getCourseGroups(baseUri, lfdeploy.getCourse().getId());
 			if (groups!=null){
 				ArrayList<Integer> oldGroupids = new ArrayList<Integer>();
-				it = groups.entrySet().iterator();
+				Iterator it = groups.entrySet().iterator();
 				while (it.hasNext()){
 					Map.Entry<String, Group> e = (Map.Entry<String, Group>)it.next();
 					oldGroupids.add(Integer.parseInt(e.getValue().getId()));
@@ -256,8 +274,8 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	    		String nameSect = getNameSection(lfdeploy.getDesign().getRootActivity(),sectionNumber - startingSection);
 	    		//we erase the Root/Method part, which is useless, and add a link back to the GLUE!-PS, in case changes have to be made to the deploy
 	    		nameSect = nameSect.replace("Root/Method - ", "");
-	    		String lfdeployUrl = app.getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
-	    		if (app.getLdShakeMode()==false){
+	    		String lfdeployUrl = getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
+	    		if (getLdShakeMode()==false){
 	    			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br/>";
 	    		}
 	    		section.setSummary(nameSect);
@@ -335,6 +353,14 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	}
 	
 	private ArrayList<Integer> insertCourseUrls(Deploy lfdeploy, HashMap prueba){
+		boolean displayGlueletInFrame = true;
+		boolean requiresCallerUser;
+		
+		/**This if is just to skip a bug in the Moodle version used by that Moodle installation when displaying the content in a frame . Please, remember to delete these code lines when they are no longer necessary*/
+		if (lfdeploy.getLearningEnvironment().getAccessLocation().toString().startsWith("http://www.edaverneda.org/moodle/")){
+			displayGlueletInFrame =false;
+		}
+		
 		ArrayList<Integer> urlids = new ArrayList<Integer>();
     	for (Iterator it = prueba.keySet().iterator(); it.hasNext();) {
     		// Get the key
@@ -359,16 +385,29 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 		            if (contSec.getLocation()!=null){
 		            	location = contSec.getLocation();
 		            }
-        			if (!location.contains("GLUEletManager") || (location.contains("GLUEletManager") && location.contains("callerUser")) ){
-        				description += "<p>If you can not see the resource in the frame below, click on the link to open it: <a href=\"" + location + "\" target=\"_blank\">" + contSec.getModName() + "</a></p>";
-        			}else{
-        				description += "<p>If you can not see the resource in the frame below, click on the link to open it: <a href=\"" + location + "?callerUser=" + "\" target=\"_blank\">" + contSec.getModName() + "</a></p>";
-        			}
+		    		if (!location.contains("GLUEletManager") || (location.contains("GLUEletManager") && location.contains("callerUser")) ){
+		    			requiresCallerUser = false;
+		    		}else{
+		    			requiresCallerUser = true;
+		    		}
+	        		if (!requiresCallerUser){
+	        			description += "<p>If you can not see the resource in the frame below, click on the link to open it: <a href=\"" + location + "\" target=\"_blank\">" + contSec.getModName() + "</a></p>";
+	        		}else if(displayGlueletInFrame){
+	        			description += "<p>If you can not see the resource in the frame below, click on the link to open it: <a href=\"" + location + "?callerUser=" + "\" target=\"_blank\">" + contSec.getModName() + "</a></p>";
+		            }
 		            		
 		    		CourseUrl url = new CourseUrl(null, Integer.parseInt(lfdeploy.getCourse().getId()), contSec.getModName(), description, 1, location);
-		    		url.setDisplay(2);
+		    		if (!requiresCallerUser || displayGlueletInFrame){
+			    		url.setDisplay(2);
+		    		}else{
+			    		url.setDisplay(1);
+		    		}
 		    		url.setDisplayoptions("a:2:{s:12:\"printheading\";i:0;s:10:\"printintro\";i:1;}");
-		    		url.setParameters("a:1:{s:10:\"callerUser\";s:12:\"userusername\";}");
+		    		if (requiresCallerUser){
+		    			url.setParameters("a:1:{s:10:\"callerUser\";s:12:\"userusername\";}");
+		    		}else{
+		    			url.setParameters("a:0:{}");
+		    		}
 		    		urlids.add(insertCourseUrl(url));
 		        }
 	        }
@@ -565,7 +604,7 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 		ArrayList<CourseSection> cs = getCourseSections(lfdeploy.getCourse());
 		
 		Integer startingSection = 1;//Default starting section is 1
-		String lfsection = lfdeploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD);
+		String lfsection = lfdeploy.getFieldFromDeployData(getStartingSectionField());
 		if(lfsection!=null && lfsection.length()>0){
 			startingSection = Integer.parseInt(lfsection);
 		}
@@ -759,6 +798,20 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 			}
 		}
 		return null;		
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy){
+		HashMap<String,String> courses = null;
+		Boolean auth = moodleAuth(baseUri, moodleUser, moodlePassword);
+		if (auth == false){
+			return false;
+		}
+		courses = getCourses(baseUri, lfdeploy.getLearningEnvironment().getCreduser());
+		if (courses!=null && courses.get(lfdeploy.getCourse().getId())!=null){
+			return true;
+		}
+		return false;
 	}
 
 }

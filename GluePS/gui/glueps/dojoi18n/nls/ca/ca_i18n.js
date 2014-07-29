@@ -32,8 +32,10 @@
 //Error pantalla herramientas.
 "ErrorToolActivity":"Has d'escollir una eina per cada activitat. Revisa les activitats",
 
-"updateParticipantList":"Click here to <b>update the participant list</b> with the participants available for the course selected in the VLE. <br />It will show the participants added, deleted or who remain since the last update process",
-"ErrorUpdatingParticipants":"The list of participants could not be updated from the course",
+"updateParticipantList":"Click here to <b>update the participant list</b> with the participants available for the course selected in the VLE. <br />It will show the participants added, deleted or who remain since the last update process.",
+"ErrorUpdatingParticipants.credentialError":"The list of participants could not be updated from the course.<br> The credentials provided for the VLE are wrong. Please, check your credentials in the VLE.",
+"ErrorUpdatingParticipants.courseError":"The list of participants could not be updated from the course. <br> Please, check that the course exists in the VLE and that you have the necessary permissions in that course.",
+"ErrorUpdatingParticipants.internalError":"The list of participants could not be updated from the course. <br> The server returned an internal error.",
 "SuccessUpdatingParticipants":"The list of participants has been updated successfully",
 "participantsToAdd":"Participants to be added",
 "participantsToDelete":"Participants to be deleted",
@@ -176,6 +178,7 @@
 "deletingToolInstance":"S'està eliminant la instància de l'eina",
 "creatingToolInstance":"S'està creant la instància de l'eina.",
 "loadingConfiguration":"Carregant el formulari de configuració.",
+"creatingDeployment":"The deployment is being created",
 
 "info":"Informació",
 "createdToolInstance": "S'ha creat la instància de l'eina.",
@@ -198,7 +201,7 @@
 "deploymentOk": "El procés d'implementació s'ha completat satisfactòriament.",
 "deploymentError": "El procés d'implementació no s'ha completat satisfactòriament.<br />Algunes instàncies de l'eina no s'han pogut crear.<br />Si us plau, revisa la seva configuració.",
 "deploymentErrorProcess": "El procés d'implementació no s'ha completat satisfactòriament<br />S'ha produït un error desconegut en el procés d'implementació.",
-"deploymentErrorCredentials": "The deployment process has not been completed successfully.<br />The VLE user associated with the deployment is not authorized to deploy in the VLE. <br>Please, check your credentials for the VLE used for this deployment.",
+"deploymentErrorCredentials": "The deployment process has not been completed successfully.<br />The VLE user associated with the deployment is not authorized to deploy in the VLE. <br>Please, check your credentials and permissions for the VLE and course used for this deployment.",
 "deploymentErrorInProcess": "The course content could not be generated in the VLE.<br />There is in process another request for deploying this deploy into the VLE.<br />Wait until it finishes and try then again",
 "deploymentErrorCourseInProcess": "The course content could not be generated in the VLE.<br />There is in process another request for deploying into the same VLE and course.<br />Wait a time until it can have finished and try it again",
 

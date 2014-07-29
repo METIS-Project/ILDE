@@ -38,8 +38,8 @@ public class EmailVLEAdaptor implements VLEAdaptor{
 	}
 
 	@Override
-	public IVLEAdaptor getVLEAdaptor(GLUEPSManagerApplication applicationRest, Map<String, String> parameters) {
-		EmailAdaptor emailAdaptor = new EmailAdaptor(applicationRest, configuration);
+	public IVLEAdaptor getVLEAdaptor(Map<String, String> parameters) {
+		EmailAdaptor emailAdaptor = new EmailAdaptor(configuration, parameters);
 		return emailAdaptor;
 	}
 

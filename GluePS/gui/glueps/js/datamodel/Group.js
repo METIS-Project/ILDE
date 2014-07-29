@@ -23,7 +23,10 @@ var Group = function(data) {
 		if (data.participantIds)
 		{
 			for ( var i = 0; i < data.participantIds.length; i++) {
-				participantList.push(ParticipantContainer.getParticipant(data.participantIds[i]));
+				var participant = ParticipantContainer.getParticipant(data.participantIds[i]);
+				if (participant !=false){
+					participantList.push(participant);
+				}
 			}
 		}
 		return participantList;

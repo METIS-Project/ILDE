@@ -101,6 +101,9 @@ var Deploy = {
       * @param lms Identificador del LMS del que se obtendrían las clases
       */
      getClassesLms: function(lms){
+    	dojo.style("divCourseSelect","display","");
+    	dojo.style("newDeployCourseLoading", "display","");
+    	dojo.style("courseSelect","display","none");
         var xhrArgs = {
              url: lms,
              handleAs: "text",//Tipo de dato de la respuesta del Get
@@ -113,10 +116,13 @@ var Deploy = {
                  	var option = new Option(clases[i].name, clases[i].id);
                  	class_select.options[class_select.options.length]=option;
                 }
-                dojo.style("divCourseSelect","display","");
+            	dojo.style("newDeployCourseLoading", "display","none");
+            	dojo.style("courseSelect","display","");
              },
              error: function(error, ioargs) {  	   
             	 //Mostrar mensaje
+             	dojo.style("newDeployCourseLoading", "display","none");
+            	dojo.style("courseSelect","display","");
             }
         };
         //Call the asynchronous xhrGet
@@ -230,9 +236,11 @@ var Deploy = {
             dojo.io.iframe.send({
                 method : "POST",
                 form : dojo.byId("deployForm"),
-                handleAs : "html",
+                handleAs : "xml",
+                timeout: 0, //wait until the process finishes
                 load : function(data) {
-                	window.location="deploy.html?deployId=" + data.getElementsByTagName('deploy')[0].getAttribute('id').split("/deploys/")[1];
+					var deployUrl = Deploy.getDeployId(data);
+					Deploy.deployPostDeployInprocess(deployUrl);
                 },
                 error : function(error, ioargs) {
                     // Oculto gif animado puesto en marcha en putDeploys
@@ -248,6 +256,42 @@ var Deploy = {
         	Glueps.showAlertDialog(i18n.get("warning"),i18n.get("ErrorRellenarCampos"));
         }
     },
+    
+    /**
+     * Ask for the deploy until the creation of the deploy ends
+     * @parameter deployUrl the url of the deploy resource
+     */
+	deployPostDeployInprocess: function(deployUrl){
+		var url = deployUrl;
+        var xhrArgs = {
+            url : url,
+            handleAs : "xml",// Tipo de dato de la respuesta del Get,
+            sync: true,
+            load : function(data) {	
+            	window.location="deploy.html?deployId=" + data.getElementsByTagName('deploy')[0].getAttribute('id').split("/deploys/")[1];
+            },
+
+            error : function(error, ioargs) { 
+            	if (ioargs.xhr.status == 503 || error.dojoType=='cancel')
+            	{
+            		//Está en proceso
+            		//Esperar un tiempo en milisegundos y volver a realizar el GET
+            		window.setTimeout(function(){Deploy.deployPostDeployInprocess(deployUrl);}, 5000);
+            	}
+            	else
+            	{
+                    // Oculto gif animado puesto en marcha en putDeploys
+                    dijit.byId("loading").hide();
+                    var message = "";
+                    var codigo = 2;
+                    message = ErrorCodes.errores(codigo);
+                    Glueps.showAlertDialog(i18n.get("info"),message);
+            	}
+            }
+        }
+        // Call the asynchronous xhrGet
+        var deferred = dojo.xhrGet(xhrArgs);			
+	},
     
     /**
      * Muestra el listado de despliegues de cada diseño
@@ -282,10 +326,26 @@ var Deploy = {
         var deferred = dojo.xhrGet(xhrArgs);
     },
     
-	getDeployId : function(link) {
+	getDeployIdFromLink : function(link) {
 		var search = 'deploys/';
 		return link.substring(link.lastIndexOf(search) + search.length);
 	},
+	
+    /**
+     * Obtiene el identificador del despliegue
+     * @param jsdom DOM del documento de diseño
+     * @returns id del despliegue o false si no se ha encontrado
+     */
+    getDeployId: function(jsdom){
+		var designNode = jsdom.getElementsByTagName("deploy")[0];
+		var atrib = designNode.attributes;
+		for ( var k = 0; k < atrib.length; k++) {
+			if (atrib[k].nodeName == "id") {
+				return(atrib[k].nodeValue);
+			}
+		}
+		return false;
+    },
 	
     /**
 	 * Construye el listado de despliegues
@@ -304,7 +364,7 @@ var Deploy = {
             linkDesign = listDeploys[i].design;
             idDesign = linkDesign.substring(linkDesign.lastIndexOf("/") + 1, linkDesign.length);
             nameDeploy = listDeploys[i].name;
-            idDeploy = Design.obtenerId(listDeploys[i].id);
+            idDeploy = Deploy.getDeployIdFromLink(listDeploys[i].id);
 
             nodoUl = document.getElementById("li-" + idDesign + "-ul");
             if (nodoUl != null) {
@@ -314,7 +374,7 @@ var Deploy = {
                 nodoLiDeploy = document.createElement("li");
                 nodoLiDeploy.setAttribute("id", idDeploy);
                 nodoLiDeploy.innerHTML = nameDeploy;
-                if (recentlyCreatedId && recentlyCreatedId==idDeploy.substring(idDeploy.lastIndexOf("/")+1))
+                if (recentlyCreatedId && recentlyCreatedId==listDeploys[i].id)
                 {
                 	nodoLiDeploy.setAttribute("style","color:blue;font-weight:bold");
                 }
@@ -331,7 +391,7 @@ var Deploy = {
                         return DeployMenu.getDeployMenu(data);
                     },
                     data: {
-                    	idDeploy: Deploy.getDeployId(idDeploy),
+                    	idDeploy: idDeploy,
                     	nameDeploy: Deploy.buildUniqueDeployName(listDeploys, listDeploys[i])
                     },
                     menuStyle: "default"
