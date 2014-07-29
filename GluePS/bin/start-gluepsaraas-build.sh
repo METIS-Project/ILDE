@@ -16,6 +16,7 @@ GMARAAS_HOME=$GLUEPSARAAS_HOME/manager
 CONFARAAS_DIR=$GMARAAS_HOME/conf
 GLUEPSARAAS_LIB_DIR=$GLUEPSARAAS_HOME/lib
 GMARAAS_LIB_DIR=$GMARAAS_HOME/lib
+GMARAAS_LIB_TEST_DIR=$GMARAAS_HOME/lib-test
 LOGARAAS_DIR=$GMARAAS_HOME/log
 
 # Classpath composition
@@ -83,6 +84,7 @@ CLASSPATH=$CLASSPATH:$GMARAAS_LIB_DIR/xmlrpc-client-3.1.2.jar
 CLASSPATH=$CLASSPATH:$GMARAAS_LIB_DIR/jug-1.1.2.jar
 CLASSPATH=$CLASSPATH:$GMARAAS_LIB_DIR/xmlrpc-common-3.1.2.jar
 CLASSPATH=$CLASSPATH:$GMARAAS_LIB_DIR/log4j-1.2.11.jar
+CLASSPATH=$CLASSPATH:$GMARAAS_LIB_TEST_DIR/selenium-server-standalone-2.31.0.jar
 echo $CLASSPATH
 
 # We need to change to the manager directory to launch the server. Otherwise app.properties will not be found

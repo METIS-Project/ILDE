@@ -71,7 +71,7 @@
 "ImportDeployDeleteToolsConf":"Import configuration",
 "helpCheckImportInfo":"Check it only if you want to keep the configuration of the tools from the deploy to import. <br />Take into account that the changes you make can affect the original deploy. ",
 "errorGetCourseList":"The course list from the VLE could not be returned.<br />An unexpected error has occurred.",
-"errorGetCourseListCredentials":"The course list from the VLE could not be returned.<br />Please, check your credentials for the VLE.",
+"errorGetCourseListCredentials":"The course list from the VLE could not be returned.<br />The credentials provided for the VLE are wrong. <br />Please, check your credentials in the VLE.",
 
 //Menu LE user
 "MenuEditLe":"Edit VLE",

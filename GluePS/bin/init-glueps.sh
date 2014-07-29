@@ -56,6 +56,7 @@ export GLUEPSCLASSPATH=$GLUEPSCLASSPATH:"./lib/xmlrpc-client-3.1.2.jar"
 export GLUEPSCLASSPATH=$GLUEPSCLASSPATH:"./lib/jug-1.1.2.jar"
 export GLUEPSCLASSPATH=$GLUEPSCLASSPATH:"./lib/xmlrpc-common-3.1.2.jar"
 export GLUEPSCLASSPATH=$GLUEPSCLASSPATH:"./lib/log4j-1.2.11.jar"
+export GLUEPSCLASSPATH=$GLUEPSCLASSPATH:"./lib-test/selenium-server-standalone-2.31.0.jar"
 nohup java -cp $GLUEPSCLASSPATH glueps.core.gluepsManager.GLUEPSManagerServerMain >/tmp/glueps.log &
 
 

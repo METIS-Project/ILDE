@@ -15,6 +15,7 @@ SET GM_HOME=%GLUEPS_HOME%\manager
 SET CONF_DIR=%GM_HOME%\conf
 SET GLUEPS_LIB_DIR=%GLUEPS_HOME%\lib
 SET GM_LIB_DIR=%GM_HOME%\lib
+SET GM_LIB_TEST_DIR=%GM_HOME%\lib-test
 SET LOG_DIR=%GM_HOME%\log
 SET COMMONS_LOG_DIR=%LOG_DIR%\commons-daemon
 
@@ -82,6 +83,7 @@ set CLASSPATH=%CLASSPATH%;%GM_LIB_DIR%\xmlrpc-client-3.1.2.jar
 set CLASSPATH=%CLASSPATH%;%GM_LIB_DIR%\jug-1.1.2.jar
 set CLASSPATH=%CLASSPATH%;%GM_LIB_DIR%\xmlrpc-common-3.1.2.jar
 set CLASSPATH=%CLASSPATH%;%GM_LIB_DIR%\log4j-1.2.11.jar
+set CLASSPATH=%CLASSPATH%;%GM_LIB_TEST_DIR%\selenium-server-standalone-2.31.0.jar
 
 :: Go!
 SET MANUAL_MODE=%1

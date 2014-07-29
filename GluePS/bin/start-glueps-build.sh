@@ -89,6 +89,8 @@ echo $CLASSPATH
 
 # We need to change to the manager directory to launch the server. Otherwise app.properties will not be found
 cd $GM_HOME
+#Export display to may run firefox in the Moodle dynamic deploy
+export DISPLAY=:99
 
 # Go!
 java -cp $CLASSPATH glueps.core.gluepsManager.GLUEPSManagerServerMain >> $LOG_DIR/manager.log 2>> $LOG_DIR/managerError.log &

@@ -71,7 +71,7 @@ i18n.i18nStrings["es"]={
 "ImportDeployDeleteToolsConf":"Importar configuración",
 "helpCheckImportInfo":"Marca esta opción sólo si desea mantener la configuración de las herramientas del despliegue a importar. <br />Tenga en cuenta que los cambios que realice pueden afectar al despliegue original.",
 "errorGetCourseList":"No se ha podido obtener la lista de cursos del VLE. <br />Se ha producido un error inesperado.",
-"errorGetCourseListCredentials":"No se ha podido obtener la lista de cursos del VLE. <br />Por favor, comprueba tus credenciales para el VLE.",
+"errorGetCourseListCredentials":"No se ha podido obtener la lista de cursos del VLE. <br />Los credenciales proporcionados para el VLE son incorrectos. <br />Por favor, comprueba tus credenciales en el VLE.",
 
 //Menu LE user
 "MenuEditLe":"Editar VLE",
