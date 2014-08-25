@@ -151,13 +151,86 @@ function ldshakers_exec_group ($params)
 
 function ldshakers_exec_userprofile ($params)
 {
+    $option = $params[1];
 	$cuser = get_user_by_username($params[0]);
 
 	$lds = get_entities('object', 'LdS', $cuser->guid, 'time_updated DESC', 20, 0, false, 1, $cuser->guid);
 	$list = lds_contTools::enrichLdS($lds);
-	
-	$vars['list'] = $list;
+
+    $activity_counters = array();
+
+//'ldshake_custom_query_from_guid'
+    $offset = 0;
+    $limit = 10;
+    $activity_counters['started'] = lds_contTools::getUserEntities('object', 'LdS', 0, true, 9999, 0, null, null, "time", false, null, false, null, false, null, $cuser->guid);
+    $started = lds_contTools::getUserEntities('object', 'LdS', 0, false, 9999, 0, null, null, "time", false, null, true, null, false, null, $cuser->guid);
+
+    $activity_counters['comments'] = count_annotations(0, "object", "LdS", 'generic_comment', "", $cuser->guid);
+    $comments = get_annotations(0, "object", "LdS", 'generic_comment', "", $cuser->guid, $limit, $offset, "desc");
+    $comments_lds = ldshake_lds_from_array($comments);
+
+    $activity_counters['coedition'] = lds_contTools::getUserCoedition($cuser->guid, 9999, $offset, true);
+    $coedition = lds_contTools::getUserCoedition($cuser->guid, $limit, $offset);
+    $coedition_lds = ldshake_lds_from_array($coedition);
+
+    $activity_counters['published'] = get_entities_from_metadata_owner('published', '1', 'object', '', $cuser->guid, 10, $offset, "", 0, true);
+    $published = get_entities_from_metadata_owner('published', '1', 'object', '', $cuser->guid, $limit, $offset);
+    $published_lds = ldshake_lds_from_array($published);
+
+    //$implemented = get_entities('object', 'LdS_implementation', $cuser->guid, "", $limit, $offset);
+    //ldshake_custom_query_implemented_lds
+    $custom = array(
+        'build_callback' => 'ldshake_custom_query_implemented_lds',
+        'params' => array(),
+    );
+    $activity_counters['implemented'] = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 9999, 0, null, null, "time", false, null, false, $custom, true, null, $cuser->guid);
+    if($activity_counters['implemented'])
+        $activity_counters['implemented'] = count($activity_counters['implemented']);
+    else
+        $activity_counters['implemented'] = 0;
+
+    $implemented = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 9999, 0, null, null, "time", false, null, false, $custom, false, null, $cuser->guid);
+    $implemented_lds = ldshake_lds_from_array($implemented);
+
+    $vars['activity_counters'] =  $activity_counters;
+
+    switch($option) {
+        case 'coedited':
+            $vars['list'] = $coedition_lds;
+            break;
+        case 'published':
+            $vars['list'] = $published_lds;
+            break;
+        case 'implemented':
+            $vars['list'] = $implemented_lds;
+            break;
+        case 'comments':
+            $vars['list'] = $comments_lds;
+            $vars['comments'] = $comments;
+            break;
+        default:
+            $vars['list'] = $started;
+            break;
+    }
+
+	//$vars['list'] = $list;
 	$vars['cuser'] = $cuser;
+    /*
+    ///comments
+    $vars['list'] = $full_list;
+    //$vars['comments'] = $comments;
+
+    ///coedition
+    $vars['list'] = $coedition_lds;
+
+    ///published
+    $vars['list'] = $published_lds;
+
+    ///implemented
+    $vars['list'] = $implemented_lds;
+
+    */
+    ///
 	$vars['title'] = T("LdS of %1", $cuser->name);
 	$body = elgg_view('ldshakers/profile',$vars);
 	page_draw($vars['title'], $body);

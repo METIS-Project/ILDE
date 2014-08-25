@@ -34,13 +34,14 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-
-<?php extract($vars) ?>
-<?php if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
+extract($vars);
+$i = 0;
+if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
 <ul id="lds_list">
 	<?php foreach($vars['list'] as $item): ?>
     <?php
+        if(empty($item))
+            continue;
         $can_edit = $item->lds->can_edit;
         ?>
 	<li class="lds_list_element">
@@ -63,7 +64,7 @@
                         <?php echo T("%1 is editing.", $item->locked_by->name) ?>
                     </div>
                 <?php else: ?>
-                    <?php if ($can_edit): ?>
+                    <?php if ($can_edit and !isset($comments)): ?>
                         <div>
                             <?php if ($can_edit): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
                             <?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid ?>"><?php echo T("Delete") ?></a><?php endif; ?>
@@ -81,21 +82,34 @@
             </div>
 
             <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_title"><?php echo $item->lds->title ?></a>
-			<ul class="tagarea">
+
+            <?php if (isset($comments)): ?>
+                <div><?php echo $comments[$i]->value; ?></div>
+
+                <div class="authory">
+                    <?php echo T("Posted %1", friendly_time($comments[$i]->time_created), '<a href="'.$url.'pg/ldshakers/'.$item->starter->username.'">'.$item->starter->name.'</a>') ?>
+                </div>
+            <?php else: ?>
+            <ul class="tagarea">
 				<li><?php echo T("Discipline") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'discipline') ?></li>
 				<li><?php echo T("Pedag. approach") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'pedagogical_approach') ?></li>
 				<li><?php echo T("Free tags") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'tags') ?></li>
 			</ul>
-			<div class="authory">
-				<?php echo T("Started %1 by %2", friendly_time($item->lds->time_created), '<a href="'.$url.'pg/ldshakers/'.$item->starter->username.'">'.$item->starter->name.'</a>') ?>
-				<?php if ($item->num_contributions > 1): ?>
-				<br />
-				<?php echo T("Latest revision %1 by %2", friendly_time($item->last_contribution_at), '<a href="'.$url.'pg/ldshakers/'.$item->last_contributor->username.'">'.$item->last_contributor->name.'</a>') ?>
-				<?php endif; ?>
-			</div>
+
+            <div class="authory">
+                <?php echo T("Started %1 by %2", friendly_time($item->lds->time_created), '<a href="'.$url.'pg/ldshakers/'.$item->starter->username.'">'.$item->starter->name.'</a>') ?>
+                <?php if ($item->num_contributions > 1): ?>
+                    <br />
+                    <?php echo T("Latest revision %1 by %2", friendly_time($item->last_contribution_at), '<a href="'.$url.'pg/ldshakers/'.$item->last_contributor->username.'">'.$item->last_contributor->name.'</a>') ?>
+                <?php endif; ?>
+            </div>
+            <?php endif; ?>
+
+
 		</div>
 		<div class="clearfloat"></div>
 	</li>
+    <?php $i++; ?>
 	<?php endforeach; ?>
 </ul>
 <?php else: ?>

@@ -482,7 +482,7 @@ $contents = <<<EOD
 
 #lds_attachment_popup {
     width: 500px;
-    top: 150px;
+    top: 75px;
     left: 50%;
     margin-left: -260px;
 }

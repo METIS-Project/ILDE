@@ -2328,7 +2328,7 @@ div.cc_info_icon > div.cc_icon_title {
 
 #lds_attachment_popup {
     width: 500px;
-    top: 150px;
+    top: 75px;
     left: 50%;
     margin-left: -260px;
 }
@@ -2475,4 +2475,15 @@ div.cc_info_icon > div.cc_icon_title {
 form[name="myldSform"] {
     max-height: 500px;
     overflow-y: scroll;
+}
+
+#profile_user_activity a {
+    display: inline-block;
+    width: 130px;
+}
+
+#profile_user_activity .profile_counter {
+    display: inline-block;
+    text-align: right;
+    width: 30px;
 }

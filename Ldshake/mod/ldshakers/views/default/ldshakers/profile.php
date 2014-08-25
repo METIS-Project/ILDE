@@ -41,7 +41,16 @@
 		<ul id="profile_actions">
 			<li><a href="<?php echo $url ?>mod/messages/send.php?send_to=<?php echo $cuser->guid ?>"><?php echo T("Send a message") ?></a></li>
 		</ul>
-	</div>
+
+        <ul id="profile_user_activity">
+            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/"><?php echo T("Created LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['started'];?></div></li>
+            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/coedited"><?php echo T("Co-edited LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['coedition'];?></div></li>
+            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/published"><?php echo T("Published LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['published'];?></div></li>
+            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/implemented"><?php echo T("Implemented LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['implemented'];?></div></li>
+            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/comments"><?php echo T("Commented LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['comments'];?></div></li>
+        </ul>
+
+    </div>
 	<div id="owner_block_bottom"></div>
 </div>
 

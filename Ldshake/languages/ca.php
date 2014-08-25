@@ -1028,7 +1028,7 @@ You cannot reply to this email.",
 'email' => 'Direcció de email',
 'email:validate:body' => 'Hola %s,
 
-Si us play, confirma el teu email obrint l\'enllaç que hi ha a continuació.
+Si us plau, confirma el teu email obrint l\'enllaç que hi ha a continuació.
 
 %s
 ',

@@ -54,6 +54,7 @@
         <li id="tb_conceptualize_new8" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cld"><?php echo T("CompendiumLD (upload)") ?></a></li>
         <li id="tb_conceptualize_new9" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Image (upload)") ?></a></li>
         <li id="tb_conceptualize_new10" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("For other conceptualizations") ?></a></li>
+        <li id="tb_conceptualize_new11" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_docs/"><?php echo T("For other conceptualizations (Google Docs)") ?></a></li>
         <li id="tb_conceptualize_new4" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_spreadsheet"><?php echo T("Google Spreadsheet") ?></a></li>
     </ul>
 </div>

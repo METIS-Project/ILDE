@@ -42,6 +42,99 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+
+function ldshake_lds_from_array($elements) {
+    $elements_guids = ldshake_guid_from_array($elements);
+    $custom = array(
+        'build_callback' => 'ldshake_custom_query_from_guid',
+        'params' => array(
+            'guids' => $elements_guids
+        ),
+    );
+
+    $result = lds_contTools::getUserEntities('object', 'LdS', 0, false, 9999, 0, null, null, "time", false, null, true, $custom);
+
+    $index = array();
+    foreach($result as $entity)
+        $index[$entity->lds->guid] = $entity;
+
+    $full_list = array();
+    foreach($elements_guids as $guid)
+        if(isset($index[$guid]))
+            $full_list[] = $index[$guid];
+        else
+            $full_list[] = null;
+
+    return $full_list;
+}
+
+function ldshake_guid_from_array($elements) {
+
+    if(empty($elements))
+        return array();
+
+    $elements = array_values($elements);
+
+    if(isset($elements[0]->lds_guid))
+        $gstring = 'lds_guid';
+    elseif(isset($elements[0]->lds_id))
+        $gstring = 'lds_id';
+    elseif(isset($elements[0]->guid))
+        $gstring = 'guid';
+    else
+        $gstring = 'entity_guid';
+
+    $guids = array();
+    foreach($elements as $element) {
+        $guid = $element->$gstring;
+        if(!empty($guid))
+            $guids[] = $element->$gstring;
+    }
+
+    return $guids;
+}
+
+function ldshake_custom_query_implemented_lds($userid, $params) {
+    $lds_id_id = get_metastring_id("lds_id");
+
+    $query['select'] = "e.guid, 'object' AS type";
+
+    $query['join'] = "JOIN metadata i ON i.entity_guid = e.guid";
+
+    $query['where'] = <<<SQL
+i.name_id = {$lds_id_id}
+SQL;
+
+    $query['group_by'] = <<<SQL
+i.value_id
+SQL;
+
+    return $query;
+}
+
+function ldshake_custom_query_from_guid($userid, $params) {
+    if(!empty($params['guids']) and is_array($params)) {
+        if(is_numeric($params['guids'][0]))
+            $guids = implode(',', $params['guids']);
+        else {
+            $guids = array();
+            foreach($params['guids'] as $entity)
+                $guids[] = isset($entity->guid) ? $entity->guid : $entity->entity_guid;
+
+            $guids = implode(',', $guids);
+        }
+    }
+    else
+        return false;
+
+    $query['select'] = "e.guid, 'object' AS type";
+    $query['where'] = <<<SQL
+e.guid IN ({$guids})
+SQL;
+
+    return $query;
+}
+
 function ldshake_mode_view($view) {
     global $CONFIG;
     $vars['url'] = $CONFIG->url;
@@ -2648,7 +2741,7 @@ SQL;
         return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom, $guid_only);
     }
 
-    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null) {
+    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null, $owner_guid = 0) {
         global $CONFIG;
 
         if($count) $enrich = false;
@@ -2690,6 +2783,12 @@ SQL;
 
         if($guid_only) {
             $callback = "ldshake_guid_callback";
+        }
+
+        if($owner_guid) {
+            $owner_guid_query = "AND e.owner_guid = {$owner_guid}";
+        } else {
+            $owner_guid_query = "";
         }
 
         if ($count) {
@@ -2746,14 +2845,14 @@ SQL;
             if(isset($custom['callback']))
                 $callback = $custom['callback'];
 
-                $build_callback = $custom['build_callback'];
-                $custom_query = $build_callback($user_id, $custom['params']);
+            $build_callback = $custom['build_callback'];
+            $custom_query = $build_callback($user_id, $custom['params']);
 
-                $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
-                $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
-                $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
-                $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';
-                $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
+            $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
+            $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
+            $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
+            $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';
+            $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
 
         }
 
@@ -2775,6 +2874,7 @@ SELECT {$count_query} FROM {$CONFIG->dbprefix}objects_property e
 {$permissions_query['join']}
 WHERE {$search_query['query']} {$mw} e.subtype = {$subtype}
 AND ({$permissions_query['permission']})
+{$owner_guid_query}
 {$custom_where}
 {$guid_where}
 {$custom_group_by}
@@ -2790,18 +2890,19 @@ SQL;
             $query_base = <<<SQL
 SELECT e.guid FROM {$CONFIG->dbprefix}objects_property e
 {$order_query['join']}
+{$custom_join}
 {$mj}
 {$search_query['join']}
 {$permissions_query['join']}
 WHERE {$search_query['query']} {$mw} e.subtype = {$subtype}
 AND ({$permissions_query['permission']})
+{$owner_guid_query}
+{$custom_where}
 {$order_query['by']}
 {$query_limit}
 SQL;
-//echo '<pre>'.$query_base.'</pre>'.'<br>';
-            $time = microtime(true);
+
             $result_order = get_data("{$query_base}", "ldshake_richlds_order");
-            //echo microtime(true) - $time.' ce<br />';
 
             $slice_start = (int)$offset - $query_start;
             $slice_size = $limit;
@@ -2914,6 +3015,7 @@ SQL;
             return $row->total;
         } else {
             $time = microtime(true);
+            $query .= " /* {$callback} */";
             $entities = get_data($query, $callback);
             //echo '<pre>'.$query.'</pre>'.'<br>';
             //echo microtime(true) - $time.' e<br />';
@@ -2973,6 +3075,40 @@ SQL;
             return count($entities);
 
         return $entities;
+    }
+
+    public static function getUserCoedition($user_id = 0, $limit = 10, $offset = 0, $count = false) {
+        global $CONFIG;
+
+        $annotation_name_id = get_metastring_id('revised_docs');
+        $annotation_name_id_2 = get_metastring_id('revised_docs_editor');
+        $subtype_id = get_subtype_id('object', 'LdS');
+
+        if(empty($user_id))
+            $user_id = get_loggedin_userid();
+
+        $user_q = '';
+        if($user_id)
+            $user_q = "AND a.owner_guid = {$user_id} AND e.owner_guid <> {$user_id}";
+        $query = <<<SQL
+SELECT a.*, e.guid, e.type
+FROM {$CONFIG->dbprefix}entities e
+JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid
+WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2})
+AND e.enabled = 'yes'
+AND e.subtype = {$subtype_id}
+AND e.access_id > 0
+{$user_q}
+GROUP BY e.guid
+LIMIT {$offset}, {$limit}
+SQL;
+
+        $annotations = get_data($query, "row_to_elggannotation");
+
+        if($count)
+            return count($annotations);
+
+        return $annotations;
     }
 
 

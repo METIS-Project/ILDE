@@ -3125,10 +3125,9 @@ class GluepsManager
                 ->sendIt();
 
             if($response->code > 399) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration. {$response->body}");
             }
-
-            }
+        }
         catch (Exception $e) {
             register_error($e->getMessage());
             return false;
@@ -3170,11 +3169,20 @@ class GluepsManager
             ."version=".urlencode($get['version'])."&"
             ."wstoken=".urlencode($get['wstoken']);
 
-        $response = \Httpful\Request::get($uri)
+        try {
+            $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
             //->expectsXML()
             ->basicAuth('ldshake','Ld$haK3')
             ->sendIt();
+
+            if(!($response->code >= 200 and $response->code < 399))
+                throw new Exception($response->code. ' ' .$response->body);
+
+        } catch (Exception $e) {
+            register_error($e->getMessage());
+            forward();
+        }
 
         return $response->body;
     }
@@ -3905,13 +3913,13 @@ class MoodleManager
                 ->sendIt();
 
             if($response->code > 399) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration.");
             }
             if(!($response->body instanceof stdClass)) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration.");
             }
             if(empty($response->body->token)) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration.");
             }
 
         }
@@ -3962,7 +3970,7 @@ class MoodleManager
                 ->sendIt();
 
             if($response->code > 399) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration.");
             }
 
             if(!empty($response->body->exception)) {
@@ -4059,7 +4067,7 @@ class MoodleManager
                 ->sendIt();
 
             if($response->code > 399) {
-                throw new Exception("VLE server error, go to \"Register VLE\" and check the configuration.");
+                throw new Exception("VLE server error, go to \"New LdS > Implement > Configure VLE\" and check the configuration.");
             }
 
             if(empty($response->body->scormid)) {
