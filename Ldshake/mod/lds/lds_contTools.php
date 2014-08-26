@@ -42,6 +42,30 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_recover_project_lds($guid) {
+    $project = get_entity($guid);
+    $data = json_decode($project->description);
+    $tools = $data->tools;
+    $lds_guids = array();
+
+    if(empty($tools))
+        return true;
+
+    foreach($tools as $tool) {
+        if(empty($tool->associatedLdS))
+            continue;
+
+        foreach($tool->associatedLdS as $tlds) {
+            if($lds = get_entity($tlds->guid)) {
+                $lds->deleted = '0';
+                $lds->save_ktu();
+                $lds->enable();
+                $lds_guids[] = $lds->guid;
+            }
+        }
+    }
+
+}
 
 function ldshake_lds_from_array($elements) {
     $elements_guids = ldshake_guid_from_array($elements);
@@ -2701,19 +2725,25 @@ SQL;
         global $CONFIG;
 
         $callback = "entity_row_to_elggstar";
+        $table = "objects_property";
 
         if($enrich)
             $callback = "ldshake_richlds";
+        else
+            $table = "entities";
 
         if($guid_only)
             $callback = "ldshake_guid_callback";
+
+        if($enrich and $guid_only)
+            throw new Exception("Invalid function parameters");
 
         $rel = "'lds_project_existent','lds_project_nfe','lds_project_new'";
         if($only_exclusive)
             $rel = "'lds_project_nfe','lds_project_new'";
 
         $query = <<<SQL
-SELECT *, 'object' as type FROM objects_property e WHERE guid IN (
+SELECT *, 'object' as type FROM {$table} e WHERE guid IN (
 			SELECT DISTINCT rg.guid_one FROM entity_relationships rg WHERE
 			rg.relationship IN ({$rel})
 			AND rg.guid_two = {$pd_guid}

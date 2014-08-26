@@ -89,10 +89,10 @@ $is_implementation = !empty($is_implementation);
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
                 <?php else: ?>
-                    <!--
+
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected ".$list_type) ?>" />
-                    -->
+
                 <?php endif; ?>
 
                 <?php if($is_implementation): ?>

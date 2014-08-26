@@ -159,7 +159,6 @@ function ldshakers_exec_userprofile ($params)
 
     $activity_counters = array();
 
-//'ldshake_custom_query_from_guid'
     $offset = 0;
     $limit = 10;
     $activity_counters['started'] = lds_contTools::getUserEntities('object', 'LdS', 0, true, 9999, 0, null, null, "time", false, null, false, null, false, null, $cuser->guid);
@@ -177,8 +176,6 @@ function ldshakers_exec_userprofile ($params)
     $published = get_entities_from_metadata_owner('published', '1', 'object', '', $cuser->guid, $limit, $offset);
     $published_lds = ldshake_lds_from_array($published);
 
-    //$implemented = get_entities('object', 'LdS_implementation', $cuser->guid, "", $limit, $offset);
-    //ldshake_custom_query_implemented_lds
     $custom = array(
         'build_callback' => 'ldshake_custom_query_implemented_lds',
         'params' => array(),

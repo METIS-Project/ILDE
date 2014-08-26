@@ -76,35 +76,36 @@
 	 * @param string $language Optionally, the standard language code (defaults to the site default, then English)
 	 * @return string Either the translated string, or the original English string, or an empty string
 	 */
-		function elgg_echo($message_key, $language = "") {
-			
-			global $CONFIG;
+    function elgg_echo($message_key, $language = "") {
 
-			$user = get_loggedin_user();
-			
-			if ((empty($language)) && (isset($user)) && ($user->language))
-				$language = $user->language;
-	
-			if ((empty($language)) && (isset($CONFIG->language)))
-				$language = $CONFIG->language;
-				
-			if (isset($CONFIG->translations[$language][$message_key])) {
-                //if ($CONFIG->url == "http://web.dev/ilde/")
-                //    exec('echo \''. $message_key .' => '.$CONFIG->translations[$language][$message_key].'\' >> /var/lib/ldshake/en.txt');
-				return $CONFIG->translations[$language][$message_key];
-			} else if (isset($CONFIG->translations["en"][$message_key])) {
-                //if ($CONFIG->url == "http://web.dev/ilde/")
-                //    exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
-				return $CONFIG->translations["en"][$message_key];
-			} else if (isset($CONFIG->translations[$CONFIG->language][$message_key])) {
-                //if ($CONFIG->url == "http://web.dev/ilde/")
-                //    exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
-                return $CONFIG->translations[$CONFIG->language][$message_key];
-            }
-				
-			return $message_key;
-			
-		}
+        global $CONFIG;
+
+        $user = get_loggedin_user();
+
+        if ((empty($language)) && (isset($user)) && ($user->language))
+            $language = $user->language;
+
+        if ((empty($language)) && (isset($CONFIG->language)))
+            $language = $CONFIG->language;
+
+        if (isset($CONFIG->translations[$language][$message_key])) {
+            if ($CONFIG->url == "http://web.dev/ilde/")
+                exec('echo \''. $message_key .' => '.$CONFIG->translations[$language][$message_key].'\' >> /var/lib/ldshake/en.txt');
+            return $CONFIG->translations[$language][$message_key];
+            $result = $CONFIG->translations[$language][$message_key];
+        } else if (isset($CONFIG->translations["en"][$message_key])) {
+            if ($CONFIG->url == "http://web.dev/ilde/")
+                exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
+            return $CONFIG->translations["en"][$message_key];
+        } else if (isset($CONFIG->translations[$CONFIG->language][$message_key])) {
+            if ($CONFIG->url == "http://web.dev/ilde/")
+                exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
+            return $CONFIG->translations[$CONFIG->language][$message_key];
+        }
+
+        return $message_key;
+
+    }
 		
 	/**
 	 * When given a full path, finds translation files and loads them

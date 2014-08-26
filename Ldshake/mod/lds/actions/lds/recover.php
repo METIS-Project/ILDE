@@ -45,6 +45,9 @@ if (is_numeric($lds))
 	{
 		if ($lds->canEdit())
 		{
+            if($lds->getSubtype() == "LdSProject_implementation")
+                ldshake_recover_project_lds($lds->guid);
+
 			$lds->deleted = '0';
 			$lds->save_ktu();
 			$lds->enable();
@@ -70,6 +73,9 @@ else
 				{
 					if ($lds->canEdit())
 					{
+                        if($lds->getSubtype() == "LdSProject_implementation")
+                            ldshake_recover_project_lds($lds->guid);
+
 						$lds->deleted = '0';
 						$lds->save_ktu();
 						$lds->enable();

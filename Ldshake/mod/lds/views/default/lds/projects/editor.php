@@ -25,7 +25,7 @@
     <div style="clear:both"></div>
     <!--<div id="droppable_grid" class="" type="conceptualize" style="width: <?php echo (934 - 95*(ceil(count($CONFIG->project_templates['full'])/7)))?>px;">-->
     <div id="droppable_grid" class="" type="conceptualize" style="width: 100%;">
-        <div id="project_add_note">sticky note</div>
+        <div id="project_add_note"><?php echo T("sticky note"); ?></div>
     </div>
     <div style="clear:both"></div>
 </div>
