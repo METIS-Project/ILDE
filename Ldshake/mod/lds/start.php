@@ -143,6 +143,8 @@ function lds_init()
     register_action("lds/projects/implement", false, $CONFIG->pluginspath . "lds/actions/lds/projects/implement.php");
     register_action("lds/projects/update_preview", false, $CONFIG->pluginspath . "lds/actions/lds/projects/update_preview.php");
 
+    register_action("registercsv", false, $CONFIG->pluginspath . "lds/actions/registercsv.php", true);
+
     if (get_context() == 'admin')
         add_submenu_item(T("Manage VLEs"), $CONFIG->wwwroot . 'pg/lds/admin/vle/');
 

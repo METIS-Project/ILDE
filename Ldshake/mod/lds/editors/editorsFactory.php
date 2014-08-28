@@ -1174,18 +1174,17 @@ class RestEditor extends Editor
             'ldshake_frame_origin' => $ldshake_frame_origin
         );
 
-        //$uri = "http://web.dev/ilde/services/dummy?XDEBUG_SESSION_START=16713";
         $uri = "{$CONFIG->rest_editor_list[$editorType]['url_rest']}ldshake/ldsdoc/";
 
         try {
-        $response = \Httpful\Request::post($uri)
-            ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
-            ->body($post, 'multipart/form-data')
-            ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$editorType]['password'])
-            ->sendIt();
+            $response = \Httpful\Request::post($uri)
+                ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
+                ->body($post, 'multipart/form-data')
+                ->basicAuth('ldshake_default_user', $CONFIG->rest_editor_list[$editorType]['password'])
+                ->sendIt();
 
-        if($response->code > 299)
-            throw new Exception("Error code {$response->code}");
+            if($response->code > 299)
+                throw new Exception("Error code {$response->code}");
 
         } catch (Exception $e) {
             register_error(htmlentities($e->getMessage()));
@@ -1202,7 +1201,12 @@ class RestEditor extends Editor
                 $url_path_filtered[] = $up;
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$editorType]['url_gui']}?document_id={$doc_id}&lang={$lang}";
+        $sectoken_url = "";
+
+        if($editorType != "webcollagerest")
+            $sectoken_url = "&sectoken={$rand_id}";
+
+        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$editorType]['url_gui']}?document_id={$doc_id}{$sectoken_url}&lang={$lang}";
         //$vars['document_url'] = "{$response->raw_body}";
 
         $gui_url = parse_url($response->raw_body);
@@ -1275,7 +1279,11 @@ class RestEditor extends Editor
         $doc_id = $url_path_filtered[count($url_path_filtered) -1];
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
-        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_gui']}?document_id={$doc_id}&lang={$lang}";
+
+        if($editorType != "webcollagerest")
+            $sectoken_url = "&sectoken={$rand_id}";
+
+        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_gui']}?document_id={$doc_id}&sectoken={$rand_id}{$sectoken_url}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;

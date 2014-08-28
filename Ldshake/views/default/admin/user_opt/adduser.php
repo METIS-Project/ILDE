@@ -18,3 +18,10 @@
 <div id="add_user_showhide" style="display:none" >
 <?php echo elgg_view('account/forms/useradd', array('show_admin'=>true)); ?>
 </div>
+
+<div class="admin_adduser_link">
+    <a href="#" onclick="$('#add_usercsv_showhide').toggle()"><?php echo T("Click here to add multiple users through CSV upload..."); ?></a>
+</div>
+<div id="add_usercsv_showhide" style="display:none" >
+    <?php echo elgg_view('account/forms/useraddcsv', array('show_admin'=>true)); ?>
+</div>

@@ -324,6 +324,12 @@ $(document).ready(function() {
                 } else {
                     $(this).attr("newtitle", "true");
                 }
+            })
+            .on('keydown', function() {
+                    if (event.which == 13 || event.key == "Enter") {
+                        event.preventDefault();
+                        $(this).trigger("blur");
+                    }
             });
 
         //workflow number workflow_order

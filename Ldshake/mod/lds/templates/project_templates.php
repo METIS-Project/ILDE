@@ -109,6 +109,12 @@ $CONFIG->project_templates['default'] = array(
         'type'  => 'image',
         'subtype'   => null,
     ),
+
+    'doc' => array(
+        'title' => T('Other'),
+        'type'  => 'doc',
+        'subtype'   => null,
+    ),
 );
 
 if($CONFIG->url == 'http://ilde.upf.edu/kek/') {
