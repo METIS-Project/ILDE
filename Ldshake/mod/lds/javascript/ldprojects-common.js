@@ -504,7 +504,7 @@ $(document).ready(function() {
             var thereAreLdSListed = false;
             ldsToBeListed.forEach(function(entry){
                 if($(subToolElem).attr("tooltype") == entry.lds.editor_type
-                    && ($(subToolElem).attr("subtype") === "undefined" || $(subToolElem).attr("subtype") == entry.lds.editor_subtype)
+                    && (($(subToolElem).attr("subtype") === "undefined" && (entry.lds.editor_subtype == null || entry.lds.editor_subtype == "" || entry.lds.editor_subtype == "0" || entry.lds.editor_subtype == entry.lds.editor_type)) || $(subToolElem).attr("subtype") == entry.lds.editor_subtype)
                     && !ldshake_projects_find_projectlds(entry.lds.guid)){
                     item = item + '<input type="radio" name="lds_selection" value="'+entry.lds.guid+'">'+entry.lds.title+'</br>';
                     thereAreLdSListed=true;

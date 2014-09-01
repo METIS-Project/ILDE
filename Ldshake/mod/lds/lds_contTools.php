@@ -42,6 +42,15 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_exelearning_get_newfile($params = null) {
+    global $CONFIG;
+
+    if($CONFIG->ldshake_mode != "msf")
+        return $CONFIG->path.'vendors/exelearning/'.'empty_en_intef.elp';
+    else
+        return null;
+}
+
 function ldshake_recover_project_lds($guid) {
     $project = get_entity($guid);
     $data = json_decode($project->description);

@@ -39,15 +39,25 @@ $defaultLang = array (
 );
 
 $editor_debug = false;
+//$editor_debug = true;
+//$debug = true;
 
 $vle_key = "92EB2B8ED34885A22685FE2CB8739153";
 
 $google_drive = array(
     'client_id' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7.apps.googleusercontent.com',
     'service_account_name' => '97389171535-6kve10eet4irq5d3o2mco5futkhoaop7@developer.gserviceaccount.com',
-    'key_file_location' => '/var/www/0f2dd252fa9986159f0f4377b3ad852c05874328-privatekey.p12',
+    'key_file_location' => '/var/www/ilde/ea543845443947837b5c89843eb9c3fc935a693e-privatekey.p12',
     'application_name' => 'ilde-docs',
 );
+
+//$glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
+
+$glueps_url = "http://glueps-dev.gsic.uva.es/GLUEPSManager/";
+
+$ldshake_mode = 'ilde';
+$ldshake_mode = 'msf';
+$ldshake_mode = 'ldshake';
 
 /**
  * List of environments, containing the regular expression of the server name that defines them.
@@ -72,7 +82,8 @@ $confOptions = array (
         'prod' =>		'localhost'
     ),
     'dbname' =>		array (
-        'devel' =>		'metis_innodb',
+        'devel' =>		'ilde_perf',
+        //'devel' =>		'ilde_patterns_v3',
         //'devel' =>		'metis_patterns',
         'staging' =>	'ldshake',
         'prod' =>		'ldshake'
@@ -164,9 +175,9 @@ $confPaths = array (
      * Location of the PDF conversion application: wkhtmltopdf ( https://github.com/antialize/wkhtmltopdf )
      */
     'pdf_converter_location' => array	(
-        'devel' =>		'/opt/wkhtmltox/wkhtmltopdf',
-        'staging' =>	'/opt/wkhtmltox/wkhtmltopdf',
-        'prod' =>		'/opt/wkhtmltox/wkhtmltopdf'
+        'devel' =>		'/opt/wkhtmltox/bin/wkhtmltopdf',
+        'staging' =>	'/opt/wkhtmltox/bin/wkhtmltopdf',
+        'prod' =>		'/opt/wkhtmltox/bin/wkhtmltopdf'
     ),
 
     /**
@@ -213,9 +224,9 @@ $confPaths = array (
      * Location of the PED & img exporter
      */
     'screenshot_generator' => array	(
-        'devel' =>		'/opt/wkhtmltox/wkhtmltopdf',
-        'staging' =>	'/opt/wkhtmltox/wkhtmltopdf',
-        'prod' =>		'/opt/wkhtmltox/wkhtmltopdf'
+        'devel' =>		'/opt/wkhtmltox/bin/wkhtmltoimage',
+        'staging' =>	'/opt/wkhtmltox/bin/wkhtmltoimage',
+        'prod' =>		'/opt/wkhtmltox/bin/wkhtmltoimage'
     ),
 
     /**

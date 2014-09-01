@@ -1129,6 +1129,8 @@ class RestEditor extends Editor
                 'password' => 'LdS@k$1#',
                 'icon' => false,
                 'downloable' => 'elp',
+                'new_from_file' => true,
+                'new_from_file_callback' => "ldshake_exelearning_get_newfile",
             );
         }
 
@@ -1170,9 +1172,17 @@ class RestEditor extends Editor
         $post = array(
             'lang' => $lang,
             'sectoken' => $rand_id,
-            'name' => T('Untitled LdS'),
+            'name' => 'empty',
             'ldshake_frame_origin' => $ldshake_frame_origin
         );
+
+        if(!empty($CONFIG->rest_editor_list[$editorType]['new_from_file'])) {
+            $newfile_callback = $CONFIG->rest_editor_list[$editorType]['new_from_file_callback'];
+            $newfile = $newfile_callback();
+            if(file_exists($newfile)) {
+                $post['document'] = "@{$newfile};type=application/json; charset=UTF-8";
+            }
+        }
 
         $uri = "{$CONFIG->rest_editor_list[$editorType]['url_rest']}ldshake/ldsdoc/";
 

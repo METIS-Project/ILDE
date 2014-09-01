@@ -3007,7 +3007,7 @@ function lds_exec_new_project ($params)
     $vars['title'] = T("New Workflow");
 
     $vars['project']['ldproject'] = '[]';
-    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 700, 0, null, null, "time", true));
     $vars['project']['vle_list'] = array();
     $vars['lds'] = new ElggObject();
     $vars['lds']->subtype = 'LdSProject';
@@ -3111,7 +3111,7 @@ function lds_exec_edit_project ($params)
     $vle_data = array();
 
     $vars['project']['ldproject'] = $editLdS->description;
-    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 100, 0, null, null, "time", true));
+    $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 700, 0, null, null, "time", true));
     $vars['project']['vle_list'] = array();
 
     $vars['project']['vle_list'] = json_encode($vle_data);

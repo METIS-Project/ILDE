@@ -117,6 +117,22 @@ $CONFIG->project_templates['default'] = array(
     ),
 );
 
+if($CONFIG->ldshake_mode == 'ldshake') {
+    $CONFIG->project_templates['default'] = array(
+        'image' => array(
+            'title' => T('Image'),
+            'type'  => 'image',
+            'subtype'   => null,
+        ),
+
+        'doc' => array(
+            'title' => T('Document'),
+            'type'  => 'doc',
+            'subtype'   => null,
+        ),
+    );
+}
+
 if($CONFIG->url == 'http://ilde.upf.edu/kek/') {
     $CONFIG->project_templates['default']['kek_p1'] = array(
         'title' => T('Πρότυπο Διδακτικού Σεναρίου'),
