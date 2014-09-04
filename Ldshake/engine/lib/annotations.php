@@ -554,9 +554,23 @@
 	 */
 	function count_annotations($entity_guid = 0, $entity_type = "", $entity_subtype = "", $name = "", $value = "", $value_type = "", $owner_guid = 0)
 	{
-		return __get_annotations_calculate_x("count", $entity_guid, $entity_type, $entity_subtype, $name);
+		return __get_annotations_calculate_x("count", $entity_guid, $entity_type, $entity_subtype, $name, $value, $value_type, $owner_guid);
 	}
-	
+
+
+    /**
+     * Count the number of annotations based on search parameters
+     *
+     * @param int $entity_guid
+     * @param string $entity_type
+     * @param string $entity_subtype
+     * @param string $name
+     */
+    function count_annotations_enabled($entity_guid = 0, $entity_type = "", $entity_subtype = "", $name = "", $value = "", $value_type = "", $owner_guid = 0)
+    {
+        return __get_annotations_calculate_x_enabled("count", $entity_guid, $entity_type, $entity_subtype, $name, $value, $value_type, $owner_guid);
+    }
+
 	/**
 	 * Perform a mathmatical calculation on integer annotations.
 	 * 
@@ -566,7 +580,7 @@
 	 * @param $entity_subtype string
 	 * @param $name string
 	 */
-	function __get_annotations_calculate_x($sum = "avg", $entity_guid, $entity_type = "", $entity_subtype = "", $name = "")
+	function __get_annotations_calculate_x($sum = "avg", $entity_guid, $entity_type = "", $entity_subtype = "", $name = "", $value = "", $value_type = "", $owner_guid = 0)
 	{
 		global $CONFIG;
 		
@@ -588,6 +602,8 @@
 			$where[] = "e.subtype=$entity_subtype";
 		if ($name!="")
 			$where[] = "a.name_id='$name'";
+        if ($owner_guid!=0)
+            $where[] = "a.owner_guid=$owner_guid";
 			
 		if ($sum != "count")
 			$where[] = "a.value_type='integer'"; // Limit on integer types
@@ -603,7 +619,58 @@
 			
 		return false;
 	}
-	
+
+    /**
+     * Perform a mathmatical calculation on integer annotations.
+     *
+     * @param $sum string
+     * @param $entity_id int
+     * @param $entity_type string
+     * @param $entity_subtype string
+     * @param $name string
+     */
+    function __get_annotations_calculate_x_enabled($sum = "avg", $entity_guid, $entity_type = "", $entity_subtype = "", $name = "", $value = "", $value_type = "", $owner_guid = 0)
+    {
+        global $CONFIG;
+
+        $sum = sanitise_string($sum);
+        $entity_guid = (int)$entity_guid;
+        $entity_type = sanitise_string($entity_type);
+        $entity_subtype = get_subtype_id($entity_type, $entity_subtype);
+        $name = get_metastring_id($name);
+
+        if (empty($name)) return 0;
+
+        $where = array();
+
+        $where[] = "e.enabled='yes'";
+
+        if ($entity_guid)
+            $where[] = "e.guid=$entity_guid";
+        if ($entity_type!="")
+            $where[] = "e.type='$entity_type'";
+        if ($entity_subtype)
+            $where[] = "e.subtype=$entity_subtype";
+        if ($name!="")
+            $where[] = "a.name_id='$name'";
+        if ($owner_guid!=0)
+            $where[] = "a.owner_guid=$owner_guid";
+
+        if ($sum != "count")
+            $where[] = "a.value_type='integer'"; // Limit on integer types
+
+        $query = "SELECT $sum(ms.string) as sum from {$CONFIG->dbprefix}annotations a JOIN {$CONFIG->dbprefix}entities e on a.entity_guid = e.guid JOIN {$CONFIG->dbprefix}metastrings ms on a.value_id=ms.id WHERE ";
+        foreach ($where as $w)
+            $query .= " $w and ";
+        $query .= get_access_sql_suffix("a"); // now add access
+
+        $row = get_data_row($query);
+        if ($row)
+            return $row->sum;
+
+        return false;
+    }
+
 	/**
 	 * Delete a given annotation.
 	 * 

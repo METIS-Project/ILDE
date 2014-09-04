@@ -26,21 +26,28 @@ var contextual_help = <?php echo (empty(get_loggedin_user()->disable_contextual_
 <script type="text/javascript">
 //Unix time to language
 $(function() {
-    $(".timeago_timestamp").each(function() {
+    $(".timeago_timestamp, .text_date_same_year").each(function() {
         var $e          = $(this);
         var timestamp   = parseInt($e.attr("timestamp"), 10);
         var now         = moment();
         var lds_date    = moment.unix(timestamp);
         var date;
 
-        if(now.diff(lds_date, 'days') < 7)
+        if(now.diff(lds_date, 'days') < 7 && $e.hasClass("timeago_timestamp"))
             date = lds_date.fromNow();
         else {
             var format;
-            if(now.isSame(lds_date, 'year'))
-                format = "D MMM";
+            var month_format;
+
+            if($e.hasClass("long_month"))
+                month_format = "MMMM";
             else
-                format = "D MMM YY";
+                month_format = "MMM";
+
+            if(now.isSame(lds_date, 'year'))
+                format = "D " + month_format;
+            else
+                format = "D " + month_format + " YY";
 
             date = lds_date.format(format);
         }

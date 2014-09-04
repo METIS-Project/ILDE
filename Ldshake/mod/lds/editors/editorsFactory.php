@@ -1293,7 +1293,7 @@ class RestEditor extends Editor
         if($editorType != "webcollagerest")
             $sectoken_url = "&sectoken={$rand_id}";
 
-        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_gui']}?document_id={$doc_id}&sectoken={$rand_id}{$sectoken_url}&lang={$lang}";
+        $vars['document_iframe_url'] = "{$CONFIG->rest_editor_list[$this->_document->editorType]['url_gui']}?document_id={$doc_id}{$sectoken_url}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;

@@ -42,12 +42,12 @@
 			<li><a href="<?php echo $url ?>mod/messages/send.php?send_to=<?php echo $cuser->guid ?>"><?php echo T("Send a message") ?></a></li>
 		</ul>
 
-        <ul id="profile_user_activity">
-            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/"><?php echo T("Created LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['started'];?></div></li>
-            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/coedited"><?php echo T("Co-edited LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['coedition'];?></div></li>
-            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/published"><?php echo T("Published LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['published'];?></div></li>
-            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/implemented"><?php echo T("Implemented LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['implemented'];?></div></li>
-            <li><a href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/comments"><?php echo T("Commented LdS") ?></a><div class="profile_counter"><?php echo $activity_counters['comments'];?></div></li>
+        <ul id="lds_side_sections">
+            <li><div class="profile_counter <?php if($section == "default") echo "current"?>"><?php echo $activity_counters['started'];?></div><a class="<?php if($section == "default") echo "current"?>" href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/"><?php echo T("Created LdS") ?></a></li>
+            <li><div class="profile_counter <?php if($section == "coedited") echo "current"?>"><?php echo $activity_counters['coedition'];?></div><a class="<?php if($section == "coedited") echo "current"?>" href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/coedited"><?php echo T("Co-edited LdS") ?></a></li>
+            <li><div class="profile_counter <?php if($section == "published") echo "current"?>"><?php echo $activity_counters['published'];?></div><a class="<?php if($section == "published") echo "current"?>" href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/published"><?php echo T("Published LdS") ?></a></li>
+            <li><div class="profile_counter <?php if($section == "implemented") echo "current"?>"><?php echo $activity_counters['implemented'];?></div><a class="<?php if($section == "implemented") echo "current"?>" href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/implemented"><?php echo T("Implemented LdS") ?></a></li>
+            <li><div class="profile_counter <?php if($section == "comments") echo "current"?>"><?php echo $activity_counters['comments'];?></div><a class="<?php if($section == "comments") echo "current"?>" href="<?php echo $url ?>pg/ldshakers/<?php echo $cuser->username ?>/comments"><?php echo T("Commented LdS") ?></a></li>
         </ul>
 
     </div>

@@ -2477,13 +2477,12 @@ form[name="myldSform"] {
     overflow-y: scroll;
 }
 
-#profile_user_activity a {
-    display: inline-block;
-    width: 130px;
+.profile_counter {
+    float: right;
+    padding: 4px;
 }
 
-#profile_user_activity .profile_counter {
-    display: inline-block;
-    text-align: right;
-    width: 30px;
+.profile_counter.current {
+    color: white;
+    font-weight: bold;
 }

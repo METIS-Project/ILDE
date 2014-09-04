@@ -3144,8 +3144,12 @@ SQL;
 
         $annotations = get_data($query, "row_to_elggannotation");
 
-        if($count)
-            return count($annotations);
+        if($count) {
+            if(empty($annotations))
+                return 0;
+            else
+                return count($annotations);
+        }
 
         return $annotations;
     }

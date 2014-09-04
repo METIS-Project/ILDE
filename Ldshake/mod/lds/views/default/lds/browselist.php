@@ -84,10 +84,12 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
             <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_title"><?php echo $item->lds->title ?></a>
 
             <?php if (isset($comments)): ?>
-                <div><?php echo $comments[$i]->value; ?></div>
+                <div>
+                    <?php echo $comments[$i]->value; ?>
+                </div>
 
                 <div class="authory">
-                    <?php echo T("Posted %1", friendly_time($comments[$i]->time_created), '<a href="'.$url.'pg/ldshakers/'.$item->starter->username.'">'.$item->starter->name.'</a>') ?>
+                    <?php echo T("Posted on") ?> <span class="text_date_same_year long_month" timestamp="<?php echo $comments[$i]->time_created; ?>"></span>
                 </div>
             <?php else: ?>
             <ul class="tagarea">
@@ -97,10 +99,10 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
 			</ul>
 
             <div class="authory">
-                <?php echo T("Started %1 by %2", friendly_time($item->lds->time_created), '<a href="'.$url.'pg/ldshakers/'.$item->starter->username.'">'.$item->starter->name.'</a>') ?>
+                <?php echo T("Started on")?> <span class="text_date_same_year long_month" timestamp="<?php echo $item->lds->time_created; ?>"></span> <?php echo T("by")?> <a href="<?php echo $url ?>pg/ldshakers/<?php echo $item->starter->username; ?>"><?php echo $item->starter->name ?></a>
                 <?php if ($item->num_contributions > 1): ?>
                     <br />
-                    <?php echo T("Latest revision %1 by %2", friendly_time($item->last_contribution_at), '<a href="'.$url.'pg/ldshakers/'.$item->last_contributor->username.'">'.$item->last_contributor->name.'</a>') ?>
+                    <?php echo T("Latest revision on")?> <span class="text_date_same_year long_month" timestamp="<?php echo $item->last_contribution_at; ?>"></span> <?php echo T("by")?> <a href="<?php echo $url ?>pg/ldshakers/<?php echo $url.'pg/ldshakers/'.$item->last_contributor->username; ?>"><?php echo $item->last_contributor->name ?></a>
                 <?php endif; ?>
             </div>
             <?php endif; ?>
