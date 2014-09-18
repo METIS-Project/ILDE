@@ -26,6 +26,8 @@ var contextual_help = <?php echo (empty(get_loggedin_user()->disable_contextual_
 <script type="text/javascript">
 //Unix time to language
 $(function() {
+    moment.lang(language);
+
     $(".timeago_timestamp, .text_date_same_year").each(function() {
         var $e          = $(this);
         var timestamp   = parseInt($e.attr("timestamp"), 10);
@@ -37,17 +39,18 @@ $(function() {
             date = lds_date.fromNow();
         else {
             var format;
-            var month_format;
+            var month_format = "MMM";
+            var year_format = "YY";
 
-            if($e.hasClass("long_month"))
+            if($e.hasClass("long_month")) {
                 month_format = "MMMM";
-            else
-                month_format = "MMM";
+                year_format = "YYYY";
+            }
 
             if(now.isSame(lds_date, 'year'))
                 format = "D " + month_format;
             else
-                format = "D " + month_format + " YY";
+                format = "D " + month_format + " " + year_format;
 
             date = lds_date.format(format);
         }

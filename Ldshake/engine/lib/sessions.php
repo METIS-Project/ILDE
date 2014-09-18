@@ -414,6 +414,9 @@
                     $_SESSION['username'] = $_SESSION['user']->username;
                     $_SESSION['name'] = $_SESSION['user']->name;
                     set_last_action_session($_SESSION['id']);
+                    if($CONFIG->language != $_SESSION['user']->language and !empty($_SESSION['user']->language)) {
+                        register_translations($CONFIG->path.'languages/', $_SESSION['user']->language);
+                    }
                 } else {
                     unset($_SESSION['username']);
                     unset($_SESSION['name']);

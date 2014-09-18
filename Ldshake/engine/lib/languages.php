@@ -92,7 +92,6 @@
             if ($CONFIG->url == "http://web.dev/ilde/")
                 exec('echo \''. $message_key .' => '.$CONFIG->translations[$language][$message_key].'\' >> /var/lib/ldshake/en.txt');
             return $CONFIG->translations[$language][$message_key];
-            $result = $CONFIG->translations[$language][$message_key];
         } else if (isset($CONFIG->translations["en"][$message_key])) {
             if ($CONFIG->url == "http://web.dev/ilde/")
                 exec('echo \''. $message_key .' => '.$CONFIG->translations["en"][$message_key].'\' >> /var/lib/ldshake/en.txt');
@@ -112,12 +111,16 @@
 	 *
 	 * @param string $path Full path
 	 */
-		function register_translations($path) {
+		function register_translations($path, $language = null) {
 			global $CONFIG;
 			
 			if (isset($CONFIG->debug) && $CONFIG->debug == true) error_log("Translations loaded from : $path");
 
-            if(!include($path . $CONFIG->language.'.php')) {
+            if(empty($language)) {
+                $language = $CONFIG->language;
+            }
+
+            if(!include($path . $language.'.php')) {
                 if(!include($path . 'en'.'.php'))
                     throw new InstallationException("Elgg could not load the language file");
             }

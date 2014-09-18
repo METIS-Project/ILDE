@@ -130,6 +130,10 @@ function ldshake_guid_from_array($elements) {
 function ldshake_custom_query_implemented_lds($userid, $params) {
     $lds_id_id = get_metastring_id("lds_id");
 
+    if(!$lds_id_id) {
+        return null;
+    }
+
     $query['select'] = "e.guid, 'object' AS type";
 
     $query['join'] = "JOIN metadata i ON i.entity_guid = e.guid";
@@ -503,6 +507,10 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         }
                         $lds->save();
                     }
+
+                    if(count($initDocuments) == 1) {
+                        $initDocuments[] = '<p> '.T("Write here any support notes for this LdS...").'</p>';
+                    }
                     $i=0;
                     foreach($initDocuments as $initDocument) {
                         $docObj = new DocumentObject($lds->guid);
@@ -511,7 +519,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         else
                             $docObj->title = T('Support Document');
 
-                        $docObj->description = $initDocument; //We put it in ths desciption in order to use the objects_entity table of elgg db
+                        $docObj->description = $initDocument; //We put it in ths description in order to use the objects_entity table of elgg db
                         $docObj->save();
                     }
                 } else {
@@ -2790,6 +2798,12 @@ SQL;
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id($type, $subtype);
+        if(empty($subtype)) {
+            if($count)
+                return 0;
+            else
+                return false;
+        }
 
         $callback = "entity_row_to_elggstar";
 
@@ -2887,12 +2901,18 @@ SQL;
             $build_callback = $custom['build_callback'];
             $custom_query = $build_callback($user_id, $custom['params']);
 
+            if($custom_query === null) {
+                if($count)
+                    return 0;
+                else
+                    return false;
+            }
+
             $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
             $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
             $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
             $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';
             $custom_group_by = isset($custom_query['group_by']) ? 'GROUP BY '.$custom_query['group_by'] : '';
-
         }
 
         $guid_where = "";

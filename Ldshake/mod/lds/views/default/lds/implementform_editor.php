@@ -146,7 +146,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                             <li><?php echo T("Activity") ?></li>
                             <li><?php echo T("Tool (to be used within an activity)") ?></li>
                             <li><?php echo T("Document (to be used within an activity)") ?></li>
-                            <li><?php echo T("Resource (image, table, schema, pictureâ€¦)") ?></li>
+                            <li><?php echo T("Resource (image, table, schema, picture...)") ?></li>
                         </ol>
                     </div>
                 </div>

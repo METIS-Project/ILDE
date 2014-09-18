@@ -191,8 +191,8 @@ $translations = array (
 "Document (to be used within an activity)"
 => "Document (per ser utilitzar en una activitat)",
 
-"Resource (image, table, schema, picture…)"
-=> "Recurs (imatge, taula, esquema, dibuix…)",
+"Resource (image, table, schema, picture...)"
+=> "Recurs (imatge, taula, esquema, dibuix...)",
 
 "How ready to use is this activity?"
 => "Com de llesta per a l'ús està aquesta activitat?",
@@ -1042,7 +1042,7 @@ $translations = array (
     'Remove selected LdShakers from %1' => 'Borrar els LdShakers seleccionats desde %1',
     'Rename this document' => 'Canviar el nom a aquest document',
     'Republish this document' => 'Republicar auqest document',
-    'Resource (image, table, schema, picture…)' => 'Recurs (imatge, taula, esquema...)',
+    'Resource (image, table, schema, picture...)' => 'Recurs (imatge, taula, esquema...)',
     'Results for' => 'Resultats per a',
     'Rich Text' => 'Text Enriquit',
     'Save as IMS-LD' => 'Guardar com a IMS-LD',

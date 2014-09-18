@@ -164,7 +164,7 @@ function ldshakers_exec_userprofile ($params)
     $activity_counters['started'] = lds_contTools::getUserEntities('object', 'LdS', 0, true, 9999, 0, null, null, "time", false, null, false, null, false, null, $cuser->guid);
     $activity_counters['comments'] = count_annotations_enabled(0, "object", "LdS", 'generic_comment', "", "", $cuser->guid);
     $activity_counters['coedition'] = lds_contTools::getUserCoedition($cuser->guid, 9999, $offset, true);
-    $activity_counters['published'] = get_entities_from_metadata_owner('published', '1', 'object', '', $cuser->guid, 10, $offset, "", 0, true);
+    $activity_counters['published'] = get_entities_from_metadata_owner('published', '1', 'object', 'LdS', $cuser->guid, 10, $offset, "", 0, true);
     $activity_counters['implemented'] = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 9999, 0, null, null, "time", false, null, false, $custom, true, null, $cuser->guid);
     if($activity_counters['implemented'])
         $activity_counters['implemented'] = count($activity_counters['implemented']);
