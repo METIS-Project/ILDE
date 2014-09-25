@@ -41,13 +41,13 @@
 	<h3><?php echo T("LdS Sharing options") ?></h3>
 	<ul id="added_contacts">
 		<li>
-			<img src="<?php echo $starter->getIcon('small') ?>" />
+			<img height="40" width="40" src="<?php echo $starter->getIcon('small') ?>" />
 			<span class="contactinfo" data-guid="<?php echo $starter->guid ?>"><?php echo $starter->name ?></span>
 			<span class="static_label"><?php echo T("Starter") ?></span>
 		</li>
 		<?php if (!$am_i_starter): ?>
 		<li>
-			<img src="<?php echo get_loggedin_user()->getIcon('small') ?>" />
+			<img height="40" width="40" src="<?php echo get_loggedin_user()->getIcon('small') ?>" />
 			<span class="contactinfo" data-guid="<?php echo get_loggedin_userid() ?>"><?php echo get_loggedin_user()->name ?></span>
 			<span class="static_label"><?php echo T("Can edit") ?></span>		
 		</li>

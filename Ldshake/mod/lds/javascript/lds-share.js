@@ -82,7 +82,7 @@ function addContactToList (guid, type)
 	if (contact != null)
 	{
 		var licontents =
-			'<img src="' + contact.pic + '" />' +
+			'<img height="40" width="40" src="' + contact.pic + '" />' +
 			'<span class="contactinfo" data-guid="' + contact.guid + '">' +
 			contact.name +
 			'</span>' +
@@ -121,7 +121,7 @@ function initContactList (type)
 		if (am_i_starter || isadminloggedin)
 		{
 			var licontents =
-				'<img src="' + contact.pic + '" />' +
+				'<img height="40" width="40" src="' + contact.pic + '" />' +
 				'<span class="contactinfo" data-guid="' + contact.guid + '">' +
 				contact.name +
 				'</span>' +
@@ -132,7 +132,7 @@ function initContactList (type)
 		else
 		{
 			var licontents =
-				'<img src="' + contact.pic + '" />' +
+				'<img height="40" width="40" src="' + contact.pic + '" />' +
 				'<span class="contactinfo" data-guid="' + contact.guid + '">' +
 				contact.name +
 				'</span>' +
