@@ -1036,9 +1036,10 @@ width: 955px;
 
 #lds_single_share_popup {
 	width: 500px;
-	top: 150px;
+	top: 50%;
 	left: 50%;
 	margin-left: -260px;
+    margin-top: -208px;
 }
 
 #implement_popup {
@@ -2437,7 +2438,7 @@ div.cc_info_icon > div.cc_icon_title {
 #project_add_note {
     float: right;
     width: 100px;
-    height: 30px;
+    /*height: 30px;*/
     position: relative;
     font-size: 16px;
     font-weight: bold;
