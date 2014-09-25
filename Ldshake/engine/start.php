@@ -295,12 +295,12 @@ $CONFIG->events['init']['system'] = array (
 //LDS
 if($plugin_handler == 'lds') {
     $CONFIG->events['init']['system'] = array (
-        1 => 'users_init',
-        2 => 'lds_profile_init',
+        1 => 't9n_init',
+        2 => 'users_init',
+        3 => 'lds_profile_init',
         101 => 'filestore_init',
         500 => 'elgg_init',
         503 => 'lds_admin_init',
-        512 => 't9n_init',
         513 => 'lds_messages_init',
         514 => 'topbar_ldshake_init',
         515 => 'lds_init',

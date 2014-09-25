@@ -3,756 +3,2348 @@
 // Generado por translationbrowser 
 
 $spanish = array(
-    'item:site'  =>  "Lugares" ,
-    'login'  =>  "Entrar" ,
-    'loginok'  =>  "Fluye libremente por la red .:ALD:. ;)" ,
-    'loginerror'  =>  "Acceso denegado!. Revisa que hayas metido bien los datos de Usuari@ y Clave. Si estan bien, seguramente es tu pimer intento y no tienes la cuenta activada. En ocasiones el mensaje de validaciÃ³n llega a la carpeta de SPAM." ,
-    'logout'  =>  "Salir" ,
-    'logoutok'  =>  "Acabas de salir de la red .:ALD:." ,
-    'logouterror'  =>  "No podemos sacarte de la red, estas atrapada!, intentalo de nuevo..." ,
-    'exception:title'  =>  "Bienvenid@ a la red social .:ALD:." ,
-    'InstallationException:CantCreateSite'  =>  "No es posible crear un sitio en la plataforma con esos datos" ,
-    'actionundefined'  =>  "Esa acciÃ³n no esta definida en el sistema. No la intentes mÃ¡s" ,
-    'actionloggedout'  =>  "Lo sentimos, no puedes realizar esta acciÃ³n hasta que no te hayas conectado" ,
-    'notfound'  =>  "No se han encontrado resultados." ,
-    'SecurityException:Codeblock'  =>  "Acceso denegado. Te faltan privilegios!" ,
-    'DatabaseException:WrongCredentials'  =>  "Elgg no puede conectarse a la base de datos utilizando los credenciales %s@%s (pw: %s)." ,
-    'DatabaseException:NoConnect'  =>  "Elgg no puede seleccionar la base de datos '%s', por favor, revisa si existe tal base de datos y si tienes acceso" ,
-    'SecurityException:FunctionDenied'  =>  "Acceso denegado. No tienes privilegios!" ,
-    'DatabaseException:DBSetupIssues'  =>  "Existen una serie de cuestiones: " ,
-    'DatabaseException:ScriptNotFound'  =>  "Elgg no encuentra el script de la base de datos que solicitas en %s" ,
-    'IOException:FailedToLoadGUID'  =>  "Error al cargar un nuevo %s desde GUID:%d" ,
-    'InvalidParameterException:NonElggObject'  =>  "Pasando un no-ElggObject al constructor de ElggObjects!" ,
-    'InvalidParameterException:UnrecognisedValue'  =>  "Valor no vÃ¡lido para el constructor de objetos!" ,
-    'InvalidClassException:NotValidElggStar'  =>  "GUID:%d no es un %s vÃ¡lido" ,
-    'PluginException:MisconfiguredPlugin'  =>  "%s es un plugin mal configuradon." ,
-    'InvalidParameterException:NonElggUser'  =>  "Pasando un no-ElggUser al constructor de ElggUsers!" ,
-    'InvalidParameterException:NonElggSite'  =>  "Pasando un no-ElggSite al constructor de EggSites!" ,
-    'InvalidParameterException:NonElggGroup'  =>  "Pasando un no-ElggGroup al constructor de ElggGroups!" ,
-    'IOException:UnableToSaveNew'  =>  "imposible salvar %s" ,
-    'InvalidParameterException:GUIDNotForExport'  =>  "el GUID no ha sido especificado durante la exportacion, no deberÃ­a de ocurrir." ,
-    'InvalidParameterException:NonArrayReturnValue'  =>  "Entity serialisation function ha pasado un parametro non-array returnvalue" ,
-    'ConfigurationException:NoCachePath'  =>  "Cache path sin configurar!" ,
-    'IOException:NotDirectory'  =>  "%s no es un directorio" ,
-    'IOException:BaseEntitySaveFailed'  =>  "Imposible guardar una nueva base de entidades de informaciÃ³n!" ,
-    'InvalidParameterException:UnexpectedODDClass'  =>  "import() ha tenido un unexpected ODD class" ,
-    'InvalidParameterException:EntityTypeNotSet'  =>  "Entity debe ser configurada" ,
-    'ClassException:ClassnameNotClass'  =>  "%s no es %s." ,
-    'ClassNotFoundException:MissingClass'  =>  "La clase '%s' no ha sido encontrada, plugin perdido?" ,
-    'InstallationException:TypeNotSupported'  =>  "Caracteres %s no estan soportados. Esto se debe a un error en la instalaciÃ³n, o en por un upgrade incompleto." ,
-    'ImportException:ImportFailed'  =>  "No se puede importar el elemento %d" ,
-    'ImportException:ProblemSaving'  =>  "Ha habido un problema al salvar %s" ,
-    'ImportException:NoGUID'  =>  "Se ha creado una nueva entiedad sin GUID, no deberÃ­a de pasar!" ,
-    'ImportException:GUIDNotFound'  =>  "Entity '%d' no puede ser encontrada." ,
-    'ImportException:ProblemUpdatingMeta'  =>  "Ha habido un problema al actualizar '%s' con la entidad '%d'" ,
-    'ExportException:NoSuchEntity'  =>  "La entidad no contiene el GUID:%d" ,
-    'ImportException:NoODDElements'  =>  "No se han encontrado elemntos OpenDD eal importar los datos. Fallo en la importaciÃ³n!" ,
-    'ImportException:NotAllImported'  =>  "No todos los elementos pueden ser importados." ,
-    'InvalidParameterException:UnrecognisedFileMode'  =>  "Modo de fichero irreconocido '%s'" ,
-    'InvalidParameterException:MissingOwner'  =>  "Todos los ficheros tienes que tener un creador!" ,
-    'IOException:CouldNotMake'  =>  "No puedo hacer %s" ,
-    'IOException:MissingFileName'  =>  "Debes especificar un nombre antes de abrir un fichero" ,
-    'ClassNotFoundException:NotFoundNotSavedWithFile'  =>  "Sistema de ficheros no encontrado o clase no guardada con el fichero!" ,
-    'NotificationException:NoNotificationMethod'  =>  "No se ha especificado un mÃ©todo de notificaciÃ³n." ,
-    'NotificationException:NoHandlerFound'  =>  "No se ha encontrado un handler para '%s'  o no es posible llamarlo." ,
-    'NotificationException:ErrorNotifyingGuid'  =>  "Ha habido un error al notificar %d" ,
-    'NotificationException:NoEmailAddress'  =>  "No es posible obtener la direcciÃ³n de email para el GUID:%d" ,
-    'NotificationException:MissingParameter'  =>  "Se ha perdido el parametro requerido '%s'!" ,
-    'DatabaseException:WhereSetNonQuery'  =>  "El contenido no se ha configurado como WhereQueryComponent" ,
-    'DatabaseException:SelectFieldsMissing'  =>  "Campos perdidos en el select style query" ,
-    'DatabaseException:UnspecifiedQueryType'  =>  "Tipo de query irreconocible o no bien especificada" ,
-    'DatabaseException:NoTablesSpecified'  =>  "No se han especificado tablas para la query" ,
-    'DatabaseException:NoACL'  =>  "No se ha especificado un control de acceso para la query" ,
-    'InvalidParameterException:NoEntityFound'  =>  "Entidad no puede ser encontrada o no tienes acceso!" ,
-    'InvalidParameterException:GUIDNotFound'  =>  "GUID:%s no puede ser encontrado o no tienes acceso!" ,
-    'InvalidParameterException:IdNotExistForGUID'  =>  "Opss!, '%s' no existe para el guid:%d" ,
-    'InvalidParameterException:CanNotExportType'  =>  "Disculpa!, no se como exportar '%s'" ,
-    'InvalidParameterException:NoDataFound'  =>  "No encuentro ningÃºn dato!!!!" ,
-    'InvalidParameterException:DoesNotBelong'  =>  "No pertenece a la entidad" ,
-    'InvalidParameterException:DoesNotBelongOrRefer'  =>  "No pertenece a la entidad o no se encuentra referenciada" ,
-    'InvalidParameterException:MissingParameter'  =>  "ParÃ¡metro perdido, necesitas suministrar un GUID." ,
-    'SecurityException:APIAccessDenied'  =>  "Perdona!, el acceso a la API ha sido deshabilitada por el adminitrador." ,
-    'SecurityException:NoAuthMethods'  =>  "No se han encontrado mÃ©todos de autenticaciÃ³n vÃ¡lidos para esta clase de peticiÃ³n a la API." ,
-    'APIException:ApiResultUnknown'  =>  "El resultado de la API devuelve un tipo no reconocido. No deberÃ­a de ocurrir nunca!!." ,
-    'ConfigurationException:NoSiteID'  =>  "No se ha especificado un ID para el sitio" ,
-    'InvalidParameterException:UnrecognisedMethod'  =>  "Llamada al metodo '%s' no reconocida!" ,
-    'APIException:MissingParameterInMethod'  =>  "Perdido parametro %s en el metodo %s" ,
-    'APIException:ParameterNotArray'  =>  "%s no parece que sea un array" ,
-    'APIException:UnrecognisedTypeCast'  =>  "Tipo no reconocido en %s para la variable '%s'  en el metodo '%s'" ,
-    'APIException:InvalidParameter'  =>  "Encontrado parametro invalido en '%s' en el metodo '%s'." ,
-    'APIException:FunctionParseError'  =>  "%s(%s) tiene un error de parseo!" ,
-    'APIException:FunctionNoReturn'  =>  "%s(%s) no ha retornado ningun valor" ,
-    'SecurityException:AuthTokenExpired'  =>  "El token de autenticaciÃ³n se ha perdido, es invalido o ha expirado!." ,
-    'CallException:InvalidCallMethod'  =>  "%s debe ser llamada utilizando '%s'" ,
-    'APIException:MethodCallNotImplemented'  =>  "Metodo de llamada '%s' no ha sido implementado" ,
-    'APIException:AlgorithmNotSupported'  =>  "Algoritmo '%s' no estÃ¡ soportado o ha sido deshabilitado!." ,
-    'ConfigurationException:CacheDirNotSet'  =>  "El directorio de chache 'cache_path' no ha sido configurado." ,
-    'APIException:NotGetOrPost'  =>  "El metodo para la peticiÃ³n debe ser GET o POST" ,
-    'APIException:MissingAPIKey'  =>  "He perdido el X-Elgg-apikey HTTP header!!!!!!" ,
-    'APIException:MissingHmac'  =>  "He perdido el X-Elgg-hmac header!!!" ,
-    'APIException:MissingHmacAlgo'  =>  "He perdido el X-Elgg-hmac-algo header!!!" ,
-    'APIException:MissingTime'  =>  "He perdido el X-Elgg-time header!!!!" ,
-    'APIException:TemporalDrift'  =>  "X-Elgg-time estÃ¡ demasiado lejos en el pasado y en el futuro. Menudo error!!!!." ,
-    'APIException:NoQueryString'  =>  "No hay datos en el string de la query!!!" ,
-    'APIException:MissingPOSTHash'  =>  "He perdido el X-Elgg-posthash header!!" ,
-    'APIException:MissingPOSTAlgo'  =>  "He perdido el X-Elgg-posthash_algo header!!!" ,
-    'APIException:MissingContentType'  =>  "He perdido el tipo de contenido de datos que iba a postear!!" ,
-    'SecurityException:InvalidPostHash'  =>  "POST data hash es invalido - Esperaba %s pero he recibido %s." ,
-    'SecurityException:DupePacket'  =>  "La firma del paquete ya ha sido vista!!" ,
-    'SecurityException:InvalidAPIKey'  =>  "API Key perdida o invÃ¡lida!" ,
-    'NotImplementedException:CallMethodNotImplemented'  =>  "La llamada al metodo '%s' no se encuentra soportada actualmente." ,
-    'NotImplementedException:XMLRPCMethodNotImplemented'  =>  "el metodo de llamada XML-RPC '%s'  no se encuentra implementado" ,
-    'InvalidParameterException:UnexpectedReturnFormat'  =>  "La llamada al metodo '%s' ha devuelto un resultado inesperado" ,
-    'CallException:NotRPCCall'  =>  "La llamada no parece contener una llamada  XML-RPC valida." ,
-    'PluginException:NoPluginName'  =>  "El nombre del plugin no puede ser encontrado!" ,
-    'ConfigurationException:BadDatabaseVersion'  =>  "La base de datos que has instalado no parece tener los requisitos bÃ¡sicos para soportar una instalaciÃ³n de Elgg. Consulta la documentaciÃ³n y requerimientos." ,
-    'ConfigurationException:BadPHPVersion'  =>  "Necesitas la Ãºltima versiÃ³n de PHP 5.2 para correr Elgg." ,
-    'configurationwarning:phpversion'  =>  "Elgg necesita la Ãºltma versiÃ³n de PHP 5.2, puedes instalarla o tratar de usar la que tienes actualmente, eso es cosa tuya ;)" ,
-    'InstallationException:DatarootNotWritable'  =>  "El directorio de datos %s no tiene permisos de escritura!" ,
-    'InstallationException:DatarootUnderPath'  =>  "El directorio de datos %s debe estar fuera de tu path de instalaciÃ³n." ,
-    'InstallationException:DatarootBlank'  =>  "No has especificado un directorio de datos." ,
-    'SecurityException:authenticationfailed'  =>  "El usuario no puede autenticarse!" ,
-    'CronException:unknownperiod'  =>  "%s no es un periodo reconocido." ,
-    'SecurityException:deletedisablecurrentsite'  =>  "No puedes borrar o deshabilitar el sitio mientras lo estas viendo!" ,
-    'system.api.list'  =>  "Listar todas las llamadas a la API disponibles en el sistema." ,
-    'auth.gettoken'  =>  "La llamada a la API necesita un usuario logueado!!" ,
-    'name'  =>  "Introduce una identidad" ,
-    'email'  =>  "Correo electr&oacute;nico de contacto" ,
-    'username'  =>  "Nickname" ,
-    'password'  =>  "Clave" ,
-    'passwordagain'  =>  "Repetir Clave" ,
-    'admin_option'  =>  "Convertir en Admin" ,
-    'ACCESS_PRIVATE'  =>  "Nadie" ,
-    'ACCESS_LOGGED_IN'  =>  "Usuari@s de la red .:ALD:." ,
-    'ACCESS_PUBLIC'  =>  "Todo el mundo (Internet)" ,
-    'PRIVATE'  =>  "Privado" ,
-    'LOGGED_IN'  =>  "Usuari@s de la red .:ALD:." ,
-    'PUBLIC'  =>  "Todo el mundo (Internet)" ,
-    'access'  =>  "Elige quiÃ©n puede verlo" ,
-    'access:friends:label'  =>  "Solo Amig@s" ,
-    'dashboard'  =>  "Escritorio" ,
-    'dashboard:configure'  =>  "Habilitar/Deshabilitar Plugins" ,
-    'dashboard:nowidgets'  =>  "El escritorio es el interfaz de tu zona. Pulse 'Editar la pÃ¡gina para aÃ±adir componentes y nuevas funcioneso. Recuerda que puedes personalizarlo a tu gusto" ,
-    'widgets:add'  =>  "AÃ±adir componentes a su pÃ¡gina" ,
-    'widgets:add:description'  =>  "Seleccione las caracterÃ­sticas que quieras aÃ±adir a tÃº pÃ¡gina arrastrando desde la <b>galerÃ­a de componentes</b> de la derecha, a cualquier area de la zona de abajo. Simplemente ponlo donde mÃ¡s te guste.
+    "aa"
+    => "Afar",
 
-Para eliminar el componente arrÃ¡stralo fuera de la <b>galerÃ­a de componentes</b>." ,
-    'widgets:position:fixed'  =>  "(PosiciÃ³n fija en la pÃ¡gina)" ,
-    'widgets'  =>  "Componentes" ,
-    'widget'  =>  "Componente" ,
-    'item:object:widget'  =>  "Componentes" ,
-    'layout:customise'  =>  "Personalize las zonas" ,
-    'widgets:gallery'  =>  "Galer&iacute;a de componentes" ,
-    'widgets:leftcolumn'  =>  "Componentes de la izquierda" ,
-    'widgets:fixed'  =>  "Posici&oacute;n fijada" ,
-    'widgets:middlecolumn'  =>  "Componentes del centro" ,
-    'widgets:rightcolumn'  =>  "Componentes de la derecha" ,
-    'widgets:profilebox'  =>  "Cuadro de perfiles" ,
-    'widgets:panel:save:success'  =>  "Los componentes han sido guardados con Ã©xito" ,
-    'widgets:panel:save:failure'  =>  "Existe algÃºn problema al grabar los componentes. IntÃ©ntalo de nuevo o ponte en contacto con el administrador" ,
-    'widgets:save:success'  =>  "El componente ha sido guardado con Ã©xito" ,
-    'widgets:save:failure'  =>  "No podemos guardar los componentes. IntÃ©ntalo de nuevo o ponte en contacto con el administrador." ,
-    'widgets:handlernotfound'  =>  "Este componente puede estar roto o ha sido deshabilitado por el administrador" ,
-    'group'  =>  "Grupo" ,
-    'item:group'  =>  "Grupos" ,
-    'profile'  =>  "Perfil" ,
-    'profile:edit:default'  =>  "Sustituir campos del perfil" ,
-    'user'  =>  "Usuari@" ,
-    'item:user'  =>  "Usuari@s" ,
-    'riveritem:single:user'  =>  "un usuari@" ,
-    'riveritem:plural:user'  =>  "algunos usuari@s" ,
-    'profile:yours'  =>  "Su perfil" ,
-    'profile:user'  =>  "Perfil de %s" ,
-    'profile:edit'  =>  "Editar datos de tu perfil" ,
-    'profile:profilepictureinstructions'  =>  "La imagen del perfil no se puede mostrar en su pÃ¡gina. <br/> Recuerda que puedes cambiarla cuando quieras. (El formato del fichero que acepta la plataforma es: .GIF, .JPG o .PNG)" ,
-    'profile:icon'  =>  "Imagen del perfil" ,
-    'profile:createicon'  =>  "Crear su avatar" ,
-    'profile:currentavatar'  =>  "Avatar actual" ,
-    'profile:createicon:header'  =>  "Imagen del perfil" ,
-    'profile:profilepicturecroppingtool'  =>  "Herramienta para el ajuste de la imagen de tÃº perfil" ,
-    'profile:createicon:instructions'  =>  "Arrastra el cuadro inferior como te parezca para buscar el encuadre del perfil mÃ¡s adecuado. Tienes una vista previa de cÃ³mo va quedando en la caja de la derecha. Cuando veas que te gusta, dale al botÃ³n 'Crear su avatar'" ,
-    'profile:editdetails'  =>  "Editar detalles" ,
-    'profile:editicon'  =>  "Editar el icono de tu perfil" ,
-    'profile:aboutme'  =>  "Acerca de mi;" ,
-    'profile:description'  =>  "Acerca de mi" ,
-    'profile:briefdescription'  =>  "Descripci&oacute;n breve" ,
-    'profile:location'  =>  "LocalizaciÃ³n" ,
-    'profile:skills'  =>  "Habilidades" ,
-    'profile:interests'  =>  "Intereses" ,
-    'profile:contactemail'  =>  "Email de contacto" ,
-    'profile:phone'  =>  "Tel&eacute;fono" ,
-    'profile:mobile'  =>  "M&oacute;vil" ,
-    'profile:website'  =>  "Sitio web" ,
-    'profile:banned'  =>  "Este usuario ha sido suspendido!!" ,
-    'profile:river:update'  =>  "%s ha actualizado su perfil" ,
-    'profile:river:iconupdate'  =>  "%s ha actualizado el icono de su perfil" ,
-    'profile:label'  =>  "Etiqueta del perfil" ,
-    'profile:type'  =>  "Tipo del perfil" ,
-    'profile:editdefault:fail'  =>  "El perfil por defecto no puede ser guardado" ,
-    'profile:editdefault:success'  =>  "ArtÃ­culo aÃ±adido con Ã©xito a tu perfil por defecto :)" ,
-    'profile:editdefault:delete:fail'  =>  "Fallo en la eliminaciÃ³n del artÃ­culo del perfil por defecto!!. Ponte en contacto con el administrador" ,
-    'profile:editdefault:delete:success'  =>  "Objeto del perfil por defecto eliminado!" ,
-    'profile:defaultprofile:reset'  =>  "Perfil por defecto al del sistema reseteado" ,
-    'profile:resetdefault'  =>  "Resetear el perfil por defecto" ,
-    'profile:saved'  =>  "El perfil ha sido guardado correctamente." ,
-    'profile:icon:uploaded'  =>  "La imagen ha sido actualizada correctamente." ,
-    'profile:noaccess'  =>  "No tienes permiso para acceder al perfil!!" ,
-    'profile:notfound'  =>  "No encontramos el perfil que buscas. Prueba con otro." ,
-    'profile:cantedit'  =>  "No flipes!!. No tienes permisos para editar el perfil ^^" ,
-    'profile:icon:notfound'  =>  "Hay problemas subiendo el fichero. No lo encuentro. Prueba de nuevo o contacta con el administrador" ,
-    'friends'  =>  "Amig@s" ,
-    'friends:yours'  =>  "Tus Amig@s" ,
-    'friends:owned'  =>  "Mis %s Amig@s" ,
-    'friend:add'  =>  "A&ntilde;adir Amig@" ,
-    'friend:remove'  =>  "Eliminar Amig@" ,
-    'friends:add:successful'  =>  "Has a&ntilde;adido a %s a tu lista de amig@s. Ahora tendrÃ¡ que aceptar la peticiÃ³n. Ya veremos... :)" ,
-    'friends:add:failure'  =>  "No podemos a&ntilde;adir los %s amigos. Prueba de nuevo o contacta con el administrador" ,
-    'friends:remove:successful'  =>  "Has eliminado a %s de tu lista de amig@s" ,
-    'friends:remove:failure'  =>  "No podemos eliminar a %s de tu lista de amig@s!. Prueba de nuevo o contacta con el administrador" ,
-    'friends:none'  =>  "Este usuario no ha sido a&ntilde;adido por ninguno de tus amig@s aÃºn." ,
-    'friends:none:you'  =>  "No tienes amig@s?. A que esperas para aÃ±adirl@s?" ,
-    'friends:none:found'  =>  "No has encontrado amig@s?. Prueba a presentarte en algÃºn grupo." ,
-    'friends:of:none'  =>  "Nadie ha a&ntilde;adido a este usuario como amig@ aÃºn." ,
-    'friends:of:none:you'  =>  "Nadie te ha a&ntilde;adido como amig@ aÃºn. Una buena idea si no conoces a nadie es rellenar el perfil que te representa para permitir que la gente te encuentre. TambiÃ©n puedes unirte a algÃºn grupo. Es cuestiÃ³n de moverse un poco!" ,
-    'friends:of'  =>  "Amig@s de" ,
-    'friends:of:owned'  =>  "Gente que ha hecho %s amig@s" ,
-    'friends:num_display'  =>  "N&uacute;mero de amig@s a mostrar" ,
-    'friends:icon_size'  =>  "TamaÃ±o del icono: <br />" ,
-    'friends:tiny'  =>  "Diminuto" ,
-    'friends:small'  =>  "PequeÃ±o" ,
-    'friends:collections'  =>  "Lista de amig@s" ,
-    'friends:collections:add'  =>  "Nueva lista de amig@s" ,
-    'friends:addfriends'  =>  "A&ntilde;adir amig@s" ,
-    'friends:collectionname'  =>  "Lista de nombres" ,
-    'friends:collectionfriends'  =>  "Amig@s en la lista" ,
-    'friends:collectionedit'  =>  "Edita Ã©sta lista" ,
-    'friends:nocollections'  =>  "No tienes aÃºn ninguna lista" ,
-    'friends:collectiondeleted'  =>  "La lista ha sido borrada!!" ,
-    'friends:collectiondeletefailed'  =>  "Ha sido imposible eliminar la lista. No tiene permisos, o algÃºn otro problema ha ocurrido." ,
-    'friends:collectionadded'  =>  "La colecciÃ³n se ha creado correctamente :)" ,
-    'friends:nocollectionname'  =>  "Necesita asignar un nombre a su lista antes de ser creada." ,
-    'friends:collections:members'  =>  "ColecciÃ³n de miembros" ,
-    'friends:collections:edit'  =>  "Editar la colecci&oacute;n" ,
-    'friends:river:created'  =>  "%s componentes de amigos a&ntilde;adidos" ,
-    'friends:river:updated'  =>  "%s componentes de sus amigos actualizados." ,
-    'friends:river:delete'  =>  "%s componentes de sus amigos eliminados." ,
-    'friends:river:add'  =>  "%s aÃ±ade a su lista de amigos a:" ,
-    'feed:rss'  =>  "Subscribirse al RSS" ,
-    'feed:odd'  =>  "Sindicarse a OpenDD" ,
-    'link:view'  =>  "ver enlace" ,
-    'river'  =>  "Relaciones" ,
-    'river:relationship:friend'  =>  "en este momento es amigo de " ,
-    'river:noaccess'  =>  "No tiene permisos para ver Ã©ste objeto!!" ,
-    'river:posted:generic'  =>  "%s deja" ,
-    'plugins:settings:save:ok'  =>  "Configuraciones por los %s plugins que han sido guardado satisfactoriamente." ,
-    'plugins:settings:save:fail'  =>  "Se ha dado un problema a la hora de guardar la configuraciones de los %s plugins." ,
-    'plugins:usersettings:save:ok'  =>  "La configuraci&oacute;n del usuario para los %s plugins han sido correctamente guardados." ,
-    'plugins:usersettings:save:fail'  =>  "Ha habido un problema al guardas la configuraci&oacute;n de los %s plugins." ,
-    'admin:plugins:label:version'  =>  "VersiÃ³n" ,
-    'item:object:plugin'  =>  "Configuraci&oacute;n de plugins" ,
-    'notifications:usersettings'  =>  "Configuraci&oacute;n de las notificaciones" ,
-    'notifications:methods'  =>  "Por favor, especifique cu&aacute;les m&eacute;todos quiere permitir." ,
-    'notifications:usersettings:save:ok'  =>  "La configuraci&oacute;n de  notificaciones han sido guardadas." ,
-    'notifications:usersettings:save:fail'  =>  "No se ha podido guardar la configuraci&oacute;n de la notifiaci&oacute;n." ,
-    'user.notification.get'  =>  "Devolver la configuraci&oacute;n de la notificaci&oacute;n a la usuaria." ,
-    'user.notification.set'  =>  "Conjunto de notificaciones configuradas para  lausuaria." ,
-    'search'  =>  "Introduce texto y/o etiquetas" ,
-    'search:go'  =>  "Buscar" ,
-    'searchtitle'  =>  "Buscando: %s" ,
-    'users:searchtitle'  =>  "Buscando usuari@s: %s" ,
-    'advancedsearchtitle'  =>  "%s con resultados coincidentes  %s" ,
-    'next'  =>  "Siguiente" ,
-    'previous'  =>  "Anterior" ,
-    'viewtype:change'  =>  "Cambiar la forma de listar" ,
-    'viewtype:list'  =>  "Ver en formato Lista" ,
-    'viewtype:gallery'  =>  "Ver en formato GalerÃ­a" ,
-    'tag:search:startblurb'  =>  "Tareas, artÃ­culos, ficheros, pÃ¡ginas, blogs, fotos y videos con la etiqueta: '%s'" ,
-    'user:search:startblurb'  =>  "Detalles de los usuari@s de la red que coinciden con: %s" ,
-    'user:search:finishblurb'  =>  "Para ver mÃ¡s, pulsa aquÃ­;." ,
-    'account'  =>  "Cuenta" ,
-    'settings'  =>  "Configuraci&oacute;n" ,
-    'tools'  =>  "Herramientas" ,
-    'tools:yours'  =>  "Tus herramientas" ,
-    'register'  =>  "Registro" ,
-    'registerok'  =>  "Te has registrado en %s con Ã©xito :)" ,
-    'registerbad'  =>  "El registro no es vÃ¡lido!!. Puede ser que el Usuari@ ya exista, la clave repetida no coincida o hayas utilizado unos registros demasiado cortos" ,
-    'registerdisabled'  =>  "El registro ha sido desabilitado por el administrador del sistema!!" ,
-    'registration:notemail'  =>  "El email que has introducido no parece ser vÃ¡lido." ,
-    'registration:userexists'  =>  "Ese Usuari@ ya existe!... prueba con otro :)" ,
-    'registration:usernametooshort'  =>  "El nombre de usuari@ debe tener un mÃ­nimo de 4 caracteres." ,
-    'registration:passwordtooshort'  =>  "La clave debe tener un mÃ­nimo de 6 caracteres" ,
-    'registration:dupeemail'  =>  "Ese email estÃ¡ asociado a otra cuenta!! :P" ,
-    'registration:invalidchars'  =>  "El nombre de usuari@ contiene caracteres invÃ¡lidos!. No utilices tÃ­ldes ni nada extraÃ±o. Gracias :)" ,
-    'registration:emailnotvalid'  =>  "El email que has introducido es invÃ¡lido para el sistema. Revisa que lo hayas escrito bien. Gracias :)" ,
-    'registration:passwordnotvalid'  =>  "La clave que has introducido es invÃ¡lida para el sistema!. Revisa que la hayas escrito bien. Gracias :)" ,
-    'registration:usernamenotvalid'  =>  "El Usuari@ que has introducido es invÃ¡lido para el sistema!. Prueba con otro." ,
-    'adduser'  =>  "A&ntilde;adir usuario" ,
-    'adduser:ok'  =>  "Acabas de aÃ±adir un nuevo usuario." ,
-    'adduser:bad'  =>  "El usuario nuevo no puede ser creado." ,
-    'item:object:reported_content'  =>  "Articulos publicados" ,
-    'user:set:name'  =>  "Configuraci&oacute;n del nombre" ,
-    'user:name:label'  =>  "Nuevo nombre" ,
-    'user:name:success'  =>  "Se ha cambiado tu nombre en el sistema!, ahora eres otr@ :)" ,
-    'user:name:fail'  =>  "No se ha podido cambiar tu nombre en el sistema!" ,
-    'user:set:password'  =>  "ConfiguraciÃ³n de la password" ,
-    'user:password:label'  =>  "Nueva clave <br>" ,
-    'user:password2:label'  =>  "Repite la clave<br>" ,
-    'user:password:success'  =>  "Clave cambiada" ,
-    'user:password:fail'  =>  "No se a podido cambiar la clave del sistema." ,
-    'user:password:fail:notsame'  =>  "No coinciden las claves :)" ,
-    'user:password:fail:tooshort'  =>  "Claves demasiado cortas!... pon unas mÃ¡s largas/seguras." ,
-    'user:set:language'  =>  "Configuraci&oacute;n del idioma" ,
-    'user:language:label'  =>  "Tu idioma" ,
-    'user:language:success'  =>  "Tu idioma ha sido actualizado." ,
-    'user:language:fail'  =>  "Tu idioma no se ha podido guardar." ,
-    'user:username:notfound'  =>  "Usuario %s no encontrado." ,
-    'user:password:lost'  =>  "Clave olvidada" ,
-    'user:password:resetreq:success'  =>  "La nueva clave ha sido enviada a su correo" ,
-    'user:password:resetreq:fail'  =>  "No puedo generar una nueva clave." ,
-    'user:password:text'  =>  "Para generar una nueva clave, introduzca su usuario abajo. Le enviaremos a su email una verificaciÃ³n &uacute;nica cn informaci&oacute;n de la clae." ,
-    'user:persistent'  =>  "Recordarlo" ,
-    'admin:configuration:success'  =>  "Tu configuraci&oacute;n ha sido guardada! yeah :)" ,
-    'admin:configuration:fail'  =>  "Tu configuraci&oacute;n ha podido ser guardada!" ,
-    'admin'  =>  "Administraci&oacute;n" ,
-    'admin:description'  =>  "El panel de administraci&oacute;n permite el control de todos los aspectos del sistema, desde la gesti&oacute;n de usuarios hasta como se comporta los plugins. Elija la opci&oacute;n de abajo para comenzar." ,
-    'admin:user'  =>  "Administraci&oacute;n de usuarios" ,
-    'admin:user:description'  =>  "Este panel de administraci&oacute;n permite el control de la configuraci&oacute;n de suario de su red social. Elija la opci&oacute;n adecuada abajo para comenzar." ,
-    'admin:user:adduser:label'  =>  "Pulse aqu&iacute; para a&ntilde;adir un nueva usuaria..." ,
-    'admin:user:opt:linktext'  =>  "Configure las usuari@s..." ,
-    'admin:user:opt:description'  =>  "Informaci&oacute; de la configuraci&oacute; de usuarios y sus cuentas. " ,
-    'admin:site'  =>  "Administraci&oacute;n del Sitio" ,
-    'admin:site:description'  =>  "Este panel de administraci&oacute; permite controlar la configuraci&oacute;n global de la red social. Elija una opci&oacute;n adecuada para comenzar." ,
-    'admin:site:opt:linktext'  =>  "Configure el lugar..." ,
-    'admin:site:opt:description'  =>  "Configure t&eacute;cnicamente y no t&eacute;cnicamente del lugar. " ,
-    'admin:plugins'  =>  "Administraci&oacute;n de Herramientas" ,
-    'admin:plugins:description'  =>  "El panel de Administrador  permite el control y la configuraciÃ³n de las herramientas instaladas en la red social." ,
-    'admin:plugins:opt:linktext'  =>  "Configure las herramientas..." ,
-    'admin:plugins:opt:description'  =>  "Configure las herramientas instaladas en el lugar. " ,
-    'admin:plugins:label:author'  =>  "Autor" ,
-    'admin:plugins:label:copyright'  =>  "Copyright" ,
-    'admin:plugins:label:licence'  =>  "Licencia" ,
-    'admin:plugins:label:website'  =>  "URL" ,
-    'admin:plugins:label:moreinfo'  =>  "m&aacute;s info" ,
-    'admin:plugins:reorder:yes'  =>  "Plugin %s se ha reordenado correctamente." ,
-    'admin:plugins:reorder:no'  =>  "Plugin %s no se ha podido reordenar." ,
-    'admin:plugins:disable:yes'  =>  "Plugin %s se ha deshabilitado correctamente." ,
-    'admin:plugins:disable:no'  =>  "Plugin %s no puede ser deshabilitado." ,
-    'admin:plugins:enable:yes'  =>  "Plugin %s ha sido habilitado correctamente." ,
-    'admin:plugins:enable:no'  =>  "Plugin %s no ha podido habilitarse." ,
-    'admin:statistics'  =>  "Estad&iacute;sticas" ,
-    'admin:statistics:description'  =>  "Ã‰sta es una visiÃ³n previa de las estadÃ­sticas de su lugar." ,
-    'admin:statistics:opt:description'  =>  "Ver informaciÃ³n estadÃ­stica sobre los usuarios y los objetos del sistema." ,
-    'admin:statistics:opt:linktext'  =>  "Ver estad&iacute;sticas..." ,
-    'admin:statistics:label:basic'  =>  "Estad&iacute;sticas b&aacute;sicas del lugar" ,
-    'admin:statistics:label:numentities'  =>  "Entidades del lugar" ,
-    'admin:statistics:label:numusers'  =>  "N&uacute;mero de usuari@s" ,
-    'admin:statistics:label:numonline'  =>  "N&uacute;mero de usuari@s on line" ,
-    'admin:statistics:label:onlineusers'  =>  "Usuari@s online en este momento" ,
-    'admin:statistics:label:version'  =>  "VersiÃ³n elgg" ,
-    'admin:statistics:label:version:release'  =>  "Release" ,
-    'admin:statistics:label:version:version'  =>  "Version" ,
-    'admin:user:label:search'  =>  "Buscar usuari@s:" ,
-    'admin:user:label:seachbutton'  =>  "Buscar" ,
-    'admin:user:ban:no'  =>  "No puede prohibir al usuari@" ,
-    'admin:user:ban:yes'  =>  "Usuari@s prohibidos." ,
-    'admin:user:unban:no'  =>  "No puede liberar alusuari@" ,
-    'admin:user:unban:yes'  =>  "Usuari@ liberad@." ,
-    'admin:user:delete:no'  =>  "No puede borrar usuari@" ,
-    'admin:user:delete:yes'  =>  "Usuari@ eliminad@" ,
-    'admin:user:resetpassword:yes'  =>  "Clave reseteada y notificado al usuari@." ,
-    'admin:user:resetpassword:no'  =>  "La clave no puede ser reseteada." ,
-    'admin:user:makeadmin:yes'  =>  "El usuario es ahora administrador." ,
-    'admin:user:makeadmin:no'  =>  "No podemos hacer este usuario administrador." ,
-    'admin:user:removeadmin:yes'  =>  "El usuario ya no es administrador." ,
-    'admin:user:removeadmin:no'  =>  "No podemos eliminar los privilegios de administraci&oacute;n de este usuario." ,
-    'usersettings:description'  =>  "La configuraci&oacute;n del panel de usuario permite el control de su espacio, desde la gesti&oacute;n de usuarios hasta c&oacute;mo se comporta los plugins. Elija una opci&oaucte;n de abajo para comenzar." ,
-    'usersettings:statistics'  =>  "Tus estad&iacute;sticas" ,
-    'usersettings:statistics:opt:description'  =>  "Ver la informaci&oacute;n estad&iacute;stica acerca de los usuarios y objetos del lugar." ,
-    'usersettings:statistics:opt:linktext'  =>  "Estad&iacute;sticas de la cuenta" ,
-    'usersettings:user'  =>  "Configuraci&oacute;n de la cuenta" ,
-    'usersettings:user:opt:description'  =>  "Esto le permite controlar la configuraci&oacute;n del usuario." ,
-    'usersettings:user:opt:linktext'  =>  "Configurar Usuari@" ,
-    'usersettings:plugins'  =>  "Herramientas" ,
-    'usersettings:plugins:opt:description'  =>  "Configura tus herramientas activas" ,
-    'usersettings:plugins:opt:linktext'  =>  "Configurar herramientas" ,
-    'usersettings:plugins:description'  =>  "Este panel te permite controlar y configurar las herramientas que tienes instaladas" ,
-    'usersettings:statistics:label:numentities'  =>  "Tus entidades" ,
-    'usersettings:statistics:yourdetails'  =>  "Tus detalles" ,
-    'usersettings:statistics:label:name'  =>  "Identidad" ,
-    'usersettings:statistics:label:email'  =>  "Email" ,
-    'usersettings:statistics:label:membersince'  =>  "Miembro desde" ,
-    'usersettings:statistics:label:lastlogin'  =>  "Ãšltimo acceso" ,
-    'save'  =>  "Guardar" ,
-    'publish'  =>  "Publicar" ,
-    'cancel'  =>  "Cancelar" ,
-    'saving'  =>  "Guardando ..." ,
-    'update'  =>  "Actualizar" ,
-    'edit'  =>  "Editar" ,
-    'delete'  =>  "Eliminar" ,
-    'load'  =>  "Cargar" ,
-    'upload'  =>  "Subir" ,
-    'ban'  =>  "Prohibir" ,
-    'unban'  =>  "Liberar" ,
-    'enable'  =>  "Habilitar" ,
-    'disable'  =>  "Deshabilitar" ,
-    'request'  =>  "Solicitar" ,
-    'complete'  =>  "Completado" ,
-    'open'  =>  "Abierto" ,
-    'close'  =>  "Cerrado" ,
-    'reply'  =>  "Responder" ,
-    'more'  =>  "M&aacute;s" ,
-    'comments'  =>  "Comentarios" ,
-    'import'  =>  "Importar" ,
-    'export'  =>  "Exportar" ,
-    'up'  =>  "Arriba" ,
-    'down'  =>  "Abajo" ,
-    'top'  =>  "Superior" ,
-    'bottom'  =>  "Inferior" ,
-    'invite'  =>  "Invitar" ,
-    'resetpassword'  =>  "Resetear clave" ,
-    'makeadmin'  =>  "Hacer admin" ,
-    'removeadmin'  =>  "Eliminar admin" ,
-    'option:yes'  =>  "Si" ,
-    'option:no'  =>  "No" ,
-    'unknown'  =>  "Desconocido" ,
-    'active'  =>  "Activo" ,
-    'total'  =>  "Total" ,
-    'learnmore'  =>  "Pulse aqu&iacute; para aprender m&aacute;s." ,
-    'content'  =>  "Contenido" ,
-    'content:latest'  =>  "&Uacute;ltimas actividades" ,
-    'content:latest:blurb'  =>  "Alternativamente, pulse aqu&iacute; para ver los &uacute;ltimos contenidos del lugar." ,
-    'link:text'  =>  "ver enlace" ,
-    'enableall'  =>  "Habilitar todo" ,
-    'disableall'  =>  "Deshabilitar todo" ,
-    'question:areyousure'  =>  "Seguro?, recuerda que no hay vuelta atrÃ¡s!" ,
-    'title'  =>  "T&iacute;tulo" ,
-    'description'  =>  "Descripci&oacute;n" ,
-    'tags'  =>  "Etiquetas" ,
-    'spotlight'  =>  "Noticias:" ,
-    'all'  =>  "Todos" ,
-    'by'  =>  "por" ,
-    'annotations'  =>  "Anotaciones" ,
-    'relationships'  =>  "Relaciones" ,
-    'metadata'  =>  "Metadatos" ,
-    'deleteconfirm'  =>  "Seguro que quieres eliminar el artÃ­culo?" ,
-    'fileexists'  =>  "El fichero ha sido subido...para reemplazarlo selecciona abajo:" ,
-    'systemmessages:dismiss'  =>  "Pulsa para echar" ,
-    'importsuccess'  =>  "La importaci&oacute;n de datos fue correcta" ,
-    'importfail'  =>  "La importaciÃ³n OpenDD ha fallado!" ,
-    'useradd:subject'  =>  "Cuenta de usuari@ creada" ,
-    'useradd:body'  =>  "
-%s,
-Se ha creado una cuenta de usuario en %s. Para entrar, visite:
+    "ab"
+    => "Abjasia",
 
-	%s
+    "admin:plugins:label:moreinfo"
+    => 'más información',
 
-Y para poder participar debe usar las siguientes credenciales:
+    "af"
+    => "Afrikaans",
 
-	Username: %s
-	Clave: %s
+    "am"
+    => "Amárico",
 
-Una vez que se haya logado, le recomendamos que cambie su clave.
-" ,
-    'friendlytime:justnow'  =>  "justo ahora" ,
-    'friendlytime:minutes'  =>  "hace %s minutos" ,
-    'friendlytime:minutes:singular'  =>  "hace un minuto" ,
-    'friendlytime:hours'  =>  "hace %s horas" ,
-    'friendlytime:hours:singular'  =>  "hace una hora" ,
-    'friendlytime:days'  =>  "hace %s dias" ,
-    'friendlytime:days:singular'  =>  "ayer" ,
-    'date:month:01'  =>  "%s de Enero" ,
-    'date:month:02'  =>  "%s de Febrero" ,
-    'date:month:03'  =>  "%s de Marzo" ,
-    'date:month:04'  =>  "%s de Abril" ,
-    'date:month:05'  =>  "%s de Mayo" ,
-    'date:month:06'  =>  "%s de Junio" ,
-    'date:month:07'  =>  "%s de Julio" ,
-    'date:month:08'  =>  "%s de Agosto" ,
-    'date:month:09'  =>  "%s de Septiembre" ,
-    'date:month:10'  =>  "%s de Octubre" ,
-    'date:month:11'  =>  "%s de Noviembre" ,
-    'date:month:12'  =>  "%s de Diciembre" ,
-    'installation:error:htaccess'  =>  "Elgg necesita un fichero llamado.htaccess para configurar el fichero raÃ­z del directorio en su instalaciÃ³n. Hemos tratado de crearlo por ti pero Elgg no tiene permisos de escritura en ese directorio. Tienes que cambiarlos
+    "ar"
+    => "Árabe",
 
-Copia el contenido de la caja de texto de debajo en un editor de texto, dale a salvar y pon de nombre .htaccess. Revisa de nuevo los permisos.
+    "as"
+    => "Asamés",
 
-" ,
-    'installation:error:settings'  =>  "Elgg no encuentra su fichero de configuraciÃ³n. Tienes que suministrar algunos datos de conexiÃ³n con la base de datos para que Elgg pueda funcionar de forma correcta:
+    "ay"
+    => "Aimará",
 
-1. Renombra engine/settings.example.php a settings.php en tu instalaciÃ³n de Elgg
+    "az"
+    => "Azerbaiyano",
 
-2. Abre el fichero con un editor de texto e introduce los datos requeridos para la base de datos MYSQL. Si no los conoces, ponte en contacto con el administrador del sistema.
+    "ba"
+    => "Bashkir",
 
-Alternatively, you can enter your database settings below and we will try and do this for you..." ,
-    'installation:error:configuration'  =>  "Una vez que hayas corregido todas las incidencias de configuraciÃ³n, presiona recargar para intentarlo de nuevo." ,
-    'installation'  =>  "InstalaciÃ³n" ,
-    'installation:success'  =>  "La base de datos de Elgg se ha instalado correctamente." ,
-    'installation:configuration:success'  =>  "Tus configuraciones iniciales se han guardado. Ahora tienes que crearte un usuario inicial. Ã‰ste serÃ¡ el primer Administrador del sistema." ,
-    'installation:settings'  =>  "ConfiguraciÃ³n del sistema" ,
-    'installation:settings:description'  =>  "Ahora que la base de datos de Elgg se ha instalado correctamente tienes que configurar un par de cosas mÃ¡s para que la red social funcione bien. Descubre todas las posibilidades que te brinda. Suerte :)" ,
-    'installation:settings:dbwizard:prompt'  =>  "Introduce los datos de tu base de datos debajo y presiona \"guardar\":" ,
-    'installation:settings:dbwizard:label:user'  =>  "Usuario de la base de datos" ,
-    'installation:settings:dbwizard:label:pass'  =>  "Password de la base de datos" ,
-    'installation:settings:dbwizard:label:dbname'  =>  "Nombre de la base de datos de Elgg" ,
-    'installation:settings:dbwizard:label:host'  =>  "Database hostname (normalmente 'localhost')" ,
-    'installation:settings:dbwizard:label:prefix'  =>  "Database table prefix (normalmente 'elgg')" ,
-    'installation:settings:dbwizard:savefail'  =>  "No hemos podido salvar el nuevo settings.php. Intenta hacerlo a mano utilizando un editor de texto. Recuerda, se trata de engine/settings.php." ,
-    'installation:sitename'  =>  "Nombre de tu red social" ,
-    'installation:sitedescription'  =>  "PequeÃ±a descripciÃ³n de la red social" ,
-    'installation:wwwroot'  =>  "La URL del sitio seguida de un slash: " ,
-    'installation:path'  =>  "El path completo del raÃ­z de tu sitio en tu disco duro, seguido de un slash:" ,
-    'installation:dataroot'  =>  "TEl path completo del directorio donde los ficheros subidos van a ser guardados, seguido de un slash:" ,
-    'installation:dataroot:warning'  =>  "Debes crear el directorio de forma manual. Es recomendable hacerlo fuera del directorio donde tienes la instalaciÃ³n de Elgg. Por ejemplo, en tu /home/ estarÃ­a bien." ,
-    'installation:language'  =>  "Idioma por defecto:" ,
-    'installation:debug'  =>  "El modo debug proporciona informaciÃ³n extra muy Ãºtil para realizar diagnÃ³sticos y tareas de desarrollo. Cuidado porque habilitarlo puede relentizar tu sistema." ,
-    'installation:debug:label'  =>  "Habilitar modo debug" ,
-    'installation:usage'  =>  "Ã‰sta opciÃ³n envia un mensaje anÃ³nmigo a las estadÃ­sticas generales de Curverider." ,
-    'installation:usage:label'  =>  "Enviar anonimamente estadÃ­sticas de uso" ,
-    'installation:view'  =>  "Introduce la vista que quieres utilizar por defecto en tu sitio o dejalo en blanco si quieres que se utilice la vista por defecto. " ,
-    'installation:siteemail'  =>  "DirecciÃ³n de email del sitio (utilizada cuando se envian mensajes del sistema)" ,
-    'installation:disableapi'  =>  "La API RESTful es un interfaz flexible y extensible que habilita ciertas aplicaciones que usan Elgg de forma remota." ,
-    'installation:disableapi:label'  =>  "Habilitar la API RESTful" ,
-    'upgrading'  =>  "Actualizando" ,
-    'upgrade:db'  =>  "La base de datos ha sido actualizada" ,
-    'upgrade:core'  =>  "La instalaciÃ³n de Elgg ha sido actualizada" ,
-    'welcome'  =>  "Bienvenid@ " ,
-    'welcome_message'  =>  "Bienvenid@ a la instalaciÃ³n de Elgg :)" ,
-    'email:settings'  =>  "Configuraci&oacute;n del email" ,
-    'email:address:label'  =>  "Nueva direcci&oacute;n de email" ,
-    'email:save:success'  =>  "El nuevo email se ha guardado, verificaciÃ³n al sistema enviada con Ã©xito." ,
-    'email:save:fail'  =>  "Tu nuevo email no puede ser guadado. Intentalo de nuevo" ,
-    'email:confirm:success'  =>  "Ya tiene confirmada su cuenta" ,
-    'email:confirm:fail'  =>  "Tu correo no puede ser verificad@..." ,
-    'friend:newfriend:subject'  =>  "%s se ha hecho amig@ suy@!" ,
-    'friend:newfriend:body'  =>  "%s se ha hecho amigo suyo
+    "be"
+    => "Bielorruso",
 
-Para ver su perfil, pulse aqui;:
+    "bg"
+    => "Búlgaro",
 
-	%s
+    "bh"
+    => "Bihari",
 
-Por favor no conteste a este correo." ,
-    'email:resetpassword:subject'  =>  "Clave reseteada!!" ,
-    'email:resetpassword:body'  =>  "Hola %s,
-			
-La clave ha sido restablecida a: %s" ,
-    'email:resetreq:subject'  =>  "PeticiÃ³n de clave nueva." ,
-    'email:resetreq:body'  =>  "Hola %s,
-			
-Alguien (desde la IP %s) ha solicitado una nueva clave para tu cuenta.
+    "bi"
+    => "Bislama",
 
-Si has sido tÃº quien la ha solicitado, pulsa en el enlace de abajo, sino ignora Ã©ste email.
+    "bn"
+    => "Bengali; Bangla",
+
+    "bo"
+    => "Tibetano",
+
+    "br"
+    => "Bretón",
+
+    "ca"
+    => "Catalán",
+
+    "co"
+    => "Corsa",
+
+    "cs"
+    => "Checo",
+
+    "cy"
+    => "Galés",
+
+    "da"
+    => "Danés",
+
+    "de"
+    => "Alemán",
+
+    "dz"
+    => "Bhutani",
+
+    "el"
+    => "Griego",
+
+    "en"
+    => "Inglés",
+
+    "eo"
+    => "Esperanto",
+
+    "es"
+    => "Español",
+
+    "et"
+    => "Estonio",
+
+    "eu"
+    => "Vasco",
+
+    "fa"
+    => "Persa",
+
+    "fi"
+    => "Finlandés",
+
+    "fj"
+    => "Fiji",
+
+    "fo"
+    => "Islas Feroe",
+
+    "fr"
+    => "Francés",
+
+    "fy"
+    => "Frisón",
+
+    "ga"
+    => "Irlandés",
+
+    "gd"
+    => "Scocés / Gaélico",
+
+    "gl"
+    => "Gallego",
+
+    "gn"
+    => "Guaraní",
+
+    "gu"
+    => "Gujarati",
+
+    "ha"
+    => "Hausa",
+
+    "he"
+    => "Hebreo",
+
+    "hi"
+    => "Hindi",
+
+    "hr"
+    => "Croata",
+
+    "hu"
+    => "Húngaro",
+
+    "hy"
+    => "Armenio",
+
+    "ia"
+    => "Interlingua",
+
+    "id"
+    => "Indonesio",
+
+    "ie"
+    => "Interlingue",
+
+    "ik"
+    => "Inupiak",
+
+    "is"
+    => "Islandés",
+
+    "it"
+    => "Italiano",
+
+    "iu"
+    => "Inuktitut",
+
+    "iw"
+    => "Hebreo (obsoleto)",
+
+    "ja"
+    => "Japonés",
+
+    "ji"
+    => "Yiddish (obsoleto)",
+
+    "jw"
+    => "Javanés",
+
+    "ka"
+    => "Georgiano",
+
+    "kk"
+    => "Kazajo",
+
+    "kl"
+    => "Groenlandés",
+
+    "km"
+    => "Camboyano",
+
+    "kn"
+    => "Kannada",
+
+    "ko"
+    => "Coreano",
+
+    "ks"
+    => "Kashmiri",
+
+    "ku"
+    => "Kurdo",
+
+    "ky"
+    => "Kirghiz",
+
+    "la"
+    => "Latín",
+
+    "ln"
+    => "Lingala",
+
+    "lo"
+    => "Laosiano",
+
+    "lt"
+    => "Lituano",
+
+    "lv"
+    => "Letón/Letona",
+
+    "mg"
+    => "Magadascarí",
+
+    "mi"
+    => "Maorí",
+
+    "mk"
+    => "Macedonio",
+
+    "ml"
+    => "Malayalam",
+
+    "mn"
+    => "Mongol",
+
+    "mo"
+    => "Moldavo",
+
+    "mr"
+    => "Marathi",
+
+    "ms"
+    => "Malayo",
+
+    "mt"
+    => "Maltés",
+
+    "my"
+    => "Birmano",
+
+    "na"
+    => "Nauru",
+
+    "ne"
+    => "Nepali",
+
+    "nl"
+    => "Holandés",
+
+    "no"
+    => "Noruego",
+
+    "oc"
+    => "Occitano",
+
+    "om"
+    => "(Afan) Oromo",
+
+    "or"
+    => "Oriya",
+
+    "pa"
+    => "Punjabi",
+
+    "pl"
+    => "Polaco",
+
+    "ps"
+    => "Pashto / Pushto",
+
+    "pt"
+    => "Portugués",
+
+    "qu"
+    => "Quechua",
+
+    "rm"
+    => "Retorrománico",
+
+    "rn"
+    => "Kirundi",
+
+    "ro"
+    => "Rumano",
+
+    "ru"
+    => "Ruso",
+
+    "rw"
+    => "Kinyarwanda",
+
+    "sa"
+    => "Sanscrito",
+
+    "sd"
+    => "Sindhi",
+
+    "sg"
+    => "Sangro",
+
+    "sh"
+    => "Serbo-Croata",
+
+    "si"
+    => "Cingalés",
+
+    "sk"
+    => "Eslovaco",
+
+    "sl"
+    => "Esloveno",
+
+    "sm"
+    => "Samoan",
+
+    "sn"
+    => "Shona",
+
+    "so"
+    => "Somalí",
+
+    "sq"
+    => "Albanés",
+
+    "sr"
+    => "Serbio",
+
+    "ss"
+    => "Siswati",
+
+    "st"
+    => "Sesotho",
+
+    "su"
+    => "Sudanés",
+
+    "sv"
+    => "Sueco",
+
+    "sw"
+    => "Suajili",
+
+    "ta"
+    => "Tamil",
+
+    "te"
+    => "Tegulu",
+
+    "tg"
+    => "Tayiko",
+
+    "th"
+    => "Tailandés",
+
+    "ti"
+    => "Tigrinya",
+
+    "tk"
+    => "Turcomano",
+
+    "tl"
+    => "Tagalog",
+
+    "tn"
+    => "Setswana",
+
+    "to"
+    => "Tonga",
+
+    "tr"
+    => "Turco",
+
+    "ts"
+    => "Tsonga",
+
+    "tt"
+    => "Tártaro",
+
+    "tw"
+    => "Twi",
+
+    "ug"
+    => "Uigur",
+
+    "uk"
+    => "Ucraniano",
+
+    "ur"
+    => "Urdu",
+
+    "uz"
+    => "Uzbeco",
+
+    "vi"
+    => "Vietnamita",
+
+    "vo"
+    => "Volapuk",
+
+    "wo"
+    => "Wolof",
+
+    "xh"
+    => "Xhosa",
+
+    "yi"
+    => "Judío",
+
+    "yo"
+    => "Yoruba",
+
+    "za"
+    => "Zuang",
+
+    "zh"
+    => "Chino",
+
+    "zu"
+    => "Zulú",
+
+    'about'
+    => "Acerca de",
+
+    'access'
+    => "Acceso",
+
+    'access:friends:label'
+    => "LdShakers",
+
+    'ACCESS_LOGGED_IN'
+    => "Usuarios conectados",
+
+    'ACCESS_PRIVATE'
+    => "Privado",
+
+    'ACCESS_PUBLIC'
+    => "Público",
+
+    'account'
+    => "Cuenta",
+
+    'actiongatekeeper:missingfields'
+    => 'Fantan los campos __token o __ts del formulario',
+
+    'actiongatekeeper:pluginprevents'
+    => 'Una extensión ha impedido que se envíe el formulario.',
+
+    'actiongatekeeper:timeerror'
+    => 'La página que estabas usando ha expirado. Por favor, refresca la página y inténtalo de nuevo.',
+
+    'actiongatekeeper:tokeninvalid'
+    => "Encontramos un error (el token no coincide). Esto probablemente significa que la página que estabas usando ha expirado. Por favor, inténtalo de nuevo.",
+
+    'actionloggedout'
+    => "Lo sentimos, no puedes realizar esta acción mientras esté desconectado.",
+
+    'actionundefined'
+    => "La acción solicitada (%s) no estaba definida en el sistema.",
+
+    'active'
+    => 'Activo',
+
+    'adduser'
+    => "Añadir usuario",
+
+    'adduser:bad'
+    => "El nuevo usuario no pudo ser creado.",
+
+    'adduser:ok'
+    => "Has añadido un nuevo usuario con éxito.",
+
+    'admin'
+    => "Administración",
+
+    'admin:configuration:fail'
+    => "Tu configuración no pudo ser guardada.",
+
+    'admin:configuration:success'
+    => "Tu configuración ha sido guardada.",
+
+    'admin:description'
+    => "El panel de administrador te permite controlar todos los aspectos del sistema, desde la gestión de los usuarios a como se comportan los plugins. Selecciona una opción para comenzar.",
+
+    'admin:plugins'
+    => "Administración de herramientas",
+
+    'admin:plugins:description'
+    => "El panel de administración te permite controlar y configurar las herramientas instaladas en tu sistema.",
+
+    'admin:plugins:disable:no'
+    => "El plugin %s no pudo ser deshabilitado.",
+
+    'admin:plugins:disable:yes'
+    => "El plugin %s ha sido deshabilitado con éxito.",
+
+    'admin:plugins:enable:no'
+    => "No se pudo activar el plugin %s.",
+
+    'admin:plugins:enable:yes'
+    => "El plugin %s fue activado con éxito.",
+
+    'admin:plugins:label:author'
+    => "Autor",
+
+    'admin:plugins:label:copyright'
+    => "Derechos de autor",
+
+    'admin:plugins:label:licence'
+    => "Licencia",
+
+    'admin:plugins:label:website'
+    => "URL",
+
+    'admin:plugins:opt:description'
+    => "Configurar las herramientas instaladas en el sistema. ",
+
+    'admin:plugins:opt:linktext'
+    => "Configurar las herramientas...",
+
+    'admin:plugins:reorder:no'
+    => "El plugin %s no pudo ser reordenado.",
+
+    'admin:plugins:reorder:yes'
+    => "El plugin %s fue reordenado con éxito.",
+
+    'admin:site'
+    => "Administración del sistema",
+
+    'admin:site:description'
+    => "El panel de administración te permite controlar configuraciones globales para tu sistema. Elige una opción para comenzar.",
+
+    'admin:site:opt:description'
+    => "Configurar las características técnicas y no técnicas del sistema. ",
+
+    'admin:site:opt:linktext'
+    => "Configurar el sistema...",
+
+    'admin:statistics'
+    => "Estadísticas",
+
+    'admin:statistics:description'
+    => "Este es una visión general de estadísticas de tu sistema. Si necesita estadísticas más detalladas. Si necesita estadísticas más detalladas, está disponible una funcionalidad de administación profesional.",
+
+    'admin:statistics:label:basic'
+    => "Estadísticas básicas del sistema",
+
+    'admin:statistics:label:numentities'
+    => "Número de entidades en el sistema",
+
+    'admin:statistics:label:numonline'
+    => "Número de usuarios en línea",
+
+    'admin:statistics:label:numusers'
+    => "Número de usuarios",
+
+    'admin:statistics:label:onlineusers'
+    => "usuarios en linea ahora",
+
+    'admin:statistics:label:version'
+    => "Versión de Elgg",
+
+    'admin:statistics:label:version:release'
+    => "Release",
+
+    'admin:statistics:label:version:version'
+    => "Versión",
+
+    'admin:statistics:opt:description'
+    => "Ver información estadística acerca de los usuarios y objetos en tu sistema.",
+
+    'admin:statistics:opt:linktext'
+    => "Ver estadísticas...",
+
+    'admin:user'
+    => "Administración de usuario",
+
+    'admin:user:adduser:label'
+    => "Haz click aquí para añadir un nuevo usuario...",
+
+    'admin:user:ban:no'
+    => "No puedes banear el usuario",
+
+    'admin:user:ban:yes'
+    => "Usuario baneado.",
+
+    'admin:user:delete:no'
+    => "No puedes borrar el usuario",
+
+    'admin:user:delete:yes'
+    => "Usuario borrado",
+
+    'admin:user:description'
+    => "Este panel de administración te permite controlar los ajustes de usuario para tu sistema. Selecciona una opción para comenzar.",
+
+    'admin:user:label:seachbutton'
+    => "Buscar",
+
+    'admin:user:label:search'
+    => "Encontrar usuarios:",
+
+    'admin:user:makeadmin:no'
+    => "No se pudo convertir este usuario en administrador.",
+
+    'admin:user:makeadmin:yes'
+    => "El usuario es ahora administrador.",
+
+    'admin:user:opt:description'
+    => "Configurar usuarios y información de la cuenta. ",
+
+    'admin:user:opt:linktext'
+    => "Configurar usuarios...",
+
+    'admin:user:resetpassword:no'
+    => "No se pudo resetear la contraseña.",
+
+    'admin:user:resetpassword:yes'
+    => "Contraseña reseteada, usuario notificado.",
+
+    'admin:user:unban:no'
+    => "No se puede desbanear el usuario.",
+
+    'admin:user:unban:yes'
+    => "Usuario desbaneado",
+
+    'admin_option'
+    => "Convertir este usuario en administrador?",
+
+    'advancedsearchtitle'
+    => "%s con resultados coincidentes con %s",
+
+    'all'
+    => "Todo",
+
+    'annotations'
+    => "Anotaciones",
+
+    'apiadmin'
+    => 'Administración de la API',
+
+    'apiadmin:generate'
+    => 'Generar un nuevo par de claves',
+
+    'apiadmin:generated'
+    => 'La clave de la API ha sido generada con éxito',
+
+    'apiadmin:generated'
+    => 'El nuevo par de claves de la API ha sido generada con éxito',
+
+    'apiadmin:generationfail'
+    => 'Hubo un problema generando el nuevo par de claves',
+
+    'apiadmin:keynotrevoked'
+    => 'La clave de la API no se pudo revocar',
+
+    'apiadmin:keyrevoked'
+    => 'La clave de la API fue revocada',
+
+    'apiadmin:noreference'
+    => 'Debes proporcionar una referencia para tu nueva clave.',
+
+    'apiadmin:private'
+    => 'Privado',
+
+    'apiadmin:public'
+    => 'Público',
+
+    'apiadmin:revoke'
+    => 'Revocar clave',
+
+    'apiadmin:yourref'
+    => 'Tu referencia',
+
+    'auth.gettoken'
+    => "Esta llamada a la API permite al usuario iniciar sesión, devolviendo un token de autenticación que puede ser usado en lugar de un usuario y contraseña para autenticar futuras llamadas.",
+
+    'ban'
+    => "Banear",
+
+    'blog:friends'
+    => "LdShakers' blogs",
+
+    'blog:user:friends'
+    => "%s's LdShakers' blog",
+
+    'bookmarks:friends'
+    => "Marcadores de los LdShakers",
+
+    'bottom'
+    => 'Parte de abajo',
+
+    'by'
+    => 'por',
+
+    'cancel'
+    => "Cancelar",
+
+    'close'
+    => 'Cerrar',
+
+    'comments:count'
+    => "%s comentarios",
+
+    'complete'
+    => "Completar",
+
+    'configurationwarning:phpversion'
+    => "Elgg ruiere al menos la versión 5.2 de PHP, puedes instalarlo en la 5.1.6 pero algunas funcionalidades podrían no funcionar. Úsalo bajo tu propia responsabilidad.",
+
+    'content'
+    => "contenido",
+
+    'content:latest'
+    => 'Actividad más reciente',
+
+    'content:latest:blurb'
+    => 'De forma alternativa, haz click aquí para ver el contenido más reciente de todo el sistema.',
+
+    'CronException:unknownperiod'
+    => '%s es un periodo no reconocido.',
+
+    'dashboard'
+    => "Inicio",
+
+    'dashboard:brieftools'
+    => 'Breves herramientas',
+
+    'dashboard:configure'
+    => "Editar página",
+
+    'dashboard:nowidgets'
+    => "Tu tablero de mandos es tu puerta de entrada al sistema. Haz click en 'Editar página' para añadir widgets para mantener un registro del contenido y actividad en el sistema.",
+
+    'delete'
+    => "Borrar",
+
+    'deleteconfirm'
+    => "Está seguro de que desea borrar este elemento?",
+
+    'description'
+    => "Descripción",
+
+    'diagnostics'
+    => 'Diagnóstico del sistema',
+
+    'disable'
+    => "Deshabilitar",
+
+    'down'
+    => 'Abajo',
+
+    'edit'
+    => "Editar",
+
+    'elggchat:friendspicker:info'
+    => "LdShakers en línea",
+
+    'email'
+    => "Dirección de correo electrónico",
+
+    'email:address:label'
+    => "Tu dirección de correo electrónico",
+
+    'email:confirm:fail'
+    => "No se pudo verificar tu dirección de correo electrónico...",
+
+    'email:confirm:success'
+    => "Has confirmado tu dirección de correo electrónico!",
+
+    'email:resetpassword:subject'
+    => "Restablecer contraseña!",
+
+    'email:resetreq:subject'
+    => "Solicitud de nueva contraseña.",
+
+    'email:save:fail'
+    => "No se pudo guardar tu nueva dirección de correo electrónico.",
+
+    'email:save:success'
+    => "Nueva dirección de correo electrónico guardada, verificación solicitada.",
+
+    'email:settings'
+    => "Configuración del correo electrónico",
+
+    'email:validate:subject'
+    => "%s por favor confirma tu dirección de correo electrónico!",
+
+    'email:validate:success:subject'
+    => "Correo electrónico validado %s!",
+
+    'enable'
+    => "Habilitar",
+
+    'entity:default:missingsupport:popup'
+    => 'Esta entidad no se puede mostrar correctamente. Esto puede ser debido a que requiere soporte proporcionado por un plugin que ya no está instalado.',
+
+    'entity:default:strapline'
+    => 'Creado %s por %s',
+
+    'entity:delete:fail'
+    => 'La entidad %s no pudo ser borrada',
+
+    'entity:delete:success'
+    => 'La entidad %s ha sido borrada',
+
+    'exception:title'
+    => "Bienvenido a Elgg.",
+
+    'feed:odd'
+    => 'Sindicar OpenDD',
+
+    'feed:rss'
+    => 'Subscribir a feed',
+
+    'feeds:friends'
+    => "Feeds de los LdShakers",
+
+    'feeds:friendsfeeds'
+    => 'LdShakers\' feeds',
+
+    'feeds:friendswelcome'
+    => "Esta página te permite ver todos los feeds que tus LdShakers han puesto disponibles para su red. Si hay alguno disponible, verás una lista encima en el lado derecho. Haz click en un enlace para leer el contenido",
+
+    'file:friends'
+    => "%s's LdShakers' ficheros",
+
+    'file:friends:type:audio'
+    => "Tu audio de LdShakers",
+
+    'file:friends:type:document'
+    => "Tus documentos de LdShakers",
+
+    'file:friends:type:general'
+    => "Tus ficheros generales de LdShakers",
+
+    'file:friends:type:image'
+    => "Tus fotos de LdShakers",
+
+    'file:friends:type:video'
+    => "Tus videos de LdShakers",
+
+    'file:yours:friends'
+    => "Tus ficheros de LdShakers",
+
+    'fileexists'
+    => "Ya ha sido subido un fichero. Para reemplazarlo, seleccionale a continuación:",
+
+    'friend:add'
+    => "Añadir como un LdShaker",
+
+    'friend:add'
+    => "Añadir amigo",
+
+    'friend:newfriend:subject'
+    => "%s te ha añadido como un LdShaker!",
+
+    'friend:newfriend:subject'
+    => "%s se ha hecho amigo tuyo!",
+
+    'friend:remove'
+    => "Eliminar como LdShaker",
+
+    'friend:remove'
+    => "Eliminar amigo",
+
+    'friendlytime:days'
+    => "hace %s días",
+
+    'friendlytime:days:singular'
+    => "ayer",
+
+    'friendlytime:hours'
+    => "hace %s horas",
+
+    'friendlytime:hours:singular'
+    => "hace una hora",
+
+    'friendlytime:justnow'
+    => "justo ahora",
+
+    'friendlytime:minutes'
+    => "hace %s minutos",
+
+    'friendlytime:minutes:singular'
+    => "hace un minuto",
+
+    'friendlytime:today'
+    => "hoy",
+
+    'friends'
+    => "Amigos",
+
+    'friends'
+    => "LdShakers",
+
+    'friends:add:failure'
+    => "No se pudo añadir %s como amigo. Por favor, inténtalo de nuevo.",
+
+    'friends:add:failure'
+    => "No se pudo añair %s como LdShaker. Por favor, inténtalo de nuevo.",
+
+    'friends:add:successful'
+    => "Has añadido a %s como amigo con éxito.",
+
+    'friends:add:successful'
+    => "Has añadido a %s como LdShaker con éxito.",
+
+    'friends:addfriends'
+    => "Añadir amigos",
+
+    'friends:addfriends'
+    => "Añadir LdShakers",
+
+    'friends:all'
+    => "Todos los LdShakers",
+
+    'friends:closeall'
+    => 'Cerrar todo',
+
+    'friends:collectionadded'
+    => "Tu colección fue creada con éxito",
+
+    'friends:collectiondeleted'
+    => "Tu colección ha sido borrada.",
+
+    'friends:collectiondeletefailed'
+    => "No se pudo borrar la colección. O no tienes permiso o ha ocurrido algún otro problema.",
+
+    'friends:collectionedit'
+    => "Editar esta colección",
+
+    'friends:collectionfriends'
+    => "Amigos en la colección",
+
+    'friends:collectionfriends'
+    => "LdShakers en la colección",
+
+    'friends:collectionname'
+    => "Nombre de la colección",
+
+    'friends:collections'
+    => "Colecciones de amigos",
+
+    'friends:collections'
+    => "Colecciones de LdShakers",
+
+    'friends:collections:add'
+    => "Nueva colección de LdShakers",
+
+    'friends:collections:add'
+    => "Colección de nuevos amigos",
+
+    'friends:collections:edit'
+    => "Editar colección",
+
+    'friends:collections:members'
+    => "Miembros de la colección",
+
+    'friends:expandall'
+    => 'Expandir todo',
+
+    'friends:icon_size'
+    => "Tamaño del icono",
+
+    'friends:invite'
+    => 'Invitar LdShakers',
+
+    'friends:nocollectionname'
+    => "necesitas dar un nombre a tu colección antes de que pueda ser creada.",
+
+    'friends:nocollections'
+    => "Todavía no tienes colecciones.",
+
+    'friends:none'
+    => "Este usuario todavía no ha añadido a nadie como amigo.",
+
+    'friends:none'
+    => "Este usuario todavía no ha añadido a nadie como Ldshaker.",
+
+    'friends:none:found'
+    => "No se encontraron amigos.",
+
+    'friends:none:found'
+    => "No se encontraron LdShakers.",
+
+    'friends:none:you'
+    => "Todavía no has añadido a nadie como amigo! Busca tus intereses para empezar a encontrar gente a la que seguir.",
+
+    'friends:none:you'
+    => "Todavía no has añadido a nadie como LdShaker! Busca tus intereses para empezar a encontrar gente a la que seguir.",
+
+    'friends:num_display'
+    => "Número de amigos a mostrar",
+
+    'friends:num_display'
+    => "Número de LdShakers a mostrar",
+
+    'friends:of'
+    => "Amigos de",
+
+    'friends:of'
+    => "LdShaker de",
+
+    'friends:of'
+    => "LdShakers de",
+
+    'friends:of:none'
+    => "Nadie ha añadido a este usuario como amigo todavía.",
+
+    'friends:of:none'
+    => "Nadie ha añadido a este usuario como LdShaker todavía.",
+
+    'friends:of:none:you'
+    => "Nadie te ha añadido como amigo todavía. ¡Comienza a añadir contenido y completa tu perfil para que la gente pueda encontrarte!",
+
+    'friends:of:none:you'
+    => "Nadie te ha añadido como LdShaker. ¡Comienza a añadir contentido y completa tu perfil para que la gente pueda encontrarte!",
+
+    'friends:of:owned'
+    => "Personas que han hecho a %d su amigo",
+
+    'friends:of:owned'
+    => "Personas que se han hecho a %s un LdShaker",
+
+    'friends:owned'
+    => "amigos de %s",
+
+    'friends:owned'
+    => "LdShakers de %s",
+
+    'friends:remove:failure'
+    => "No se pudo eliminar a %s de tus amigos. Por favor, inténtalo de nuevo.",
+
+    'friends:remove:failure'
+    => "No se pudo eliminar a %s de tus LdShakers. Por favor, inténtalo de nuevo.",
+
+    'friends:remove:successful'
+    => "Has eliminado con éxito a %s de tus amigos.",
+
+    'friends:remove:successful'
+    => "has eliminado con éxito a %s de tus LdShakers.",
+
+    'friends:river:add'
+    => "%s añade a alguien como amigo.",
+
+    'friends:river:add'
+    => "%s añadió un nuevo LdShaker",
+
+    'friends:river:created'
+    => "%s añadió el widget de los amigos.",
+
+    'friends:river:created'
+    => "%s añadió el el widget de los LdShakers.",
+
+    'friends:river:delete'
+    => "%s eliminó el widget de sus amigos.",
+
+    'friends:river:delete'
+    => "%s eliminó su widget de LdShakers.",
+
+    'friends:river:updated'
+    => "%s actualizo el widget de sus amigos.",
+
+    'friends:river:updated'
+    => "%s actualizó el widget de sus LdShakers.",
+
+    'friends:small'
+    => "pequeño",
+
+    'friends:tiny'
+    => "diminuto",
+
+    'friends:widget:description'
+    => "Muestra algunos de tus amigos.",
+
+    'friends:yours'
+    => "Tus amigos",
+
+    'friends:yours'
+    => "Tus LdShakers",
+
+    'garbagecollector'
+    => "RECOLECTOR DE BASURO\n",
+
+    'garbagecollector:done'
+    => "HECHO\n",
+
+    'garbagecollector:error'
+    => "ERROR",
+
+    'garbagecollector:gc:metastrings'
+    => 'Limpiando metastrings no enlazados: ',
+
+    'garbagecollector:monthly'
+    => 'Una vez al mes',
+
+    'garbagecollector:ok'
+    => "OK",
+
+    'garbagecollector:optimize'
+    => "Optimizando %s ",
+
+    'garbagecollector:period'
+    => 'Con qué frecuencia debería ejectuarse el recolector de basura de Elgg?',
+
+    'garbagecollector:weekly'
+    => 'Una vez a la semana',
+
+    'garbagecollector:yearly'
+    => 'Una vez al año',
+
+    'generic_comment:blank'
+    => "Lo siento; tienes que poner algo en tu comentario antes de que se pueda guardar.",
+
+    'generic_comment:deleted'
+    => "Tu comentario fue borrado con éxito.",
+
+    'generic_comment:email:subject'
+    => 'Tienes un nuevo comentario!',
+
+    'generic_comment:failure'
+    => "Ocurrió un error inesperado al añadir tu comentario. Por favor, inténtalo de nuevo.",
+
+    'generic_comment:notdeleted'
+    => "Lo siento; no se pudo borrar este comentario.",
+
+    'generic_comment:notfound'
+    => "Lo siento; no se pudo encontrar el elemento indicado.",
+
+    'generic_comment:posted'
+    => "Su comentario se publicó correctamente.",
+
+    'generic_comments:add'
+    => "Añadir un comentario",
+
+    'generic_comments:text'
+    => "Añadir tu comentario",
+
+    'group'
+    => "Grupo",
+
+    'group:replies'
+    => 'Respuestas',
+
+    'groups'
+    => "Grupos",
+
+    'groups:access'
+    => "Permisos de acceso",
+
+    'groups:addedtogroup'
+    => 'Usuario añadido al grupo con éxito',
+
+    'groups:addtopic'
+    => 'Añadir un tema',
+
+    'groups:all'
+    => "Añadir todos los grupos del sitio web",
+
+    'groups:alldiscussion'
+    => 'Discusión más reciente',
+
+    'groups:alreadymember'
+    => 'Ya eres miembro de este grupo!',
+
+    'groups:briefdescription'
+    => 'Breve descripción',
+
+    'groups:cantedit'
+    => 'No puedes editar este grupo',
+
+    'groups:cantjoin'
+    => 'No puedes unirte al grupo',
+
+    'groups:cantleave'
+    => 'No pudo dejar el grupo',
+
+    'groups:description'
+    => 'Descripción',
+
+    'groups:edit'
+    => "Editar grupo",
+
+    'groups:edittopic'
+    => 'Editar tema',
+
+    'groups:forum'
+    => 'Fromo del grupo',
+
+    'groups:forumlatest'
+    => 'Más reciente en el foro',
+
+    'groups:forumtopic:edited'
+    => 'Tema del foro editado con éxito.',
+
+    'groups:group'
+    => "Grupo",
+
+    'groups:icon'
+    => 'Icono del grupo (dejalo en blanco para dejarlo sin cambios)',
+
+    'groups:interests'
+    => 'Intereses',
+
+    'groups:invite'
+    => 'Invitar a amigos',
+
+    'groups:invite:subject'
+    => "%s has sido invitado a unirte %s!",
+
+    'groups:inviteto'
+    => "Invitar amigos a '%s'",
+
+    'groups:join'
+    => 'Unirse al grupo',
+
+    'groups:joined'
+    => 'Unido al grupo con éxito!',
+
+    'groups:joinrequest'
+    => 'Solicitar afilición',
+
+    'groups:joinrequestmade'
+    => 'Solicitud de unirse a un grupo creada con éxito',
+
+    'groups:joinrequestnotmade'
+    => 'No se pudo crear la solicitud de afiliación',
+
+    'groups:lastperson'
+    => 'Última persona',
+
+    'groups:latestdiscussion'
+    => 'Última discusión',
+
+    'groups:leave'
+    => 'Dejar el grupo',
+
+    'groups:left'
+    => 'Grupo dejado con éxito',
+
+    'groups:members'
+    => 'Miembros del grupo',
+
+    'groups:membership'
+    => "Afiliación",
+
+    'groups:name'
+    => 'Nombre del grupo',
+
+    'groups:new'
+    => "Crear un nuevo grupo",
+
+    'groups:noaccess'
+    => 'Sin acceso al grupo',
+
+    'groups:nofriends'
+    => "No tienes amigos que no hayan sido invitados a este grupo.",
+
+    'groups:notitle'
+    => 'Los grupos deben tener un título',
+
+    'groups:notowner'
+    => 'Lo siento, no eres el propietario de este grupo.',
+
+    'groups:nowidgets'
+    => 'No se han definido widgets para este grupo.',
+
+    'groups:owned'
+    => "Grupos que posees",
+
+    'groups:owner'
+    => "Propietario",
+
+    'groups:posts'
+    => 'Publicaciones',
+
+    'groups:privategroup'
+    => 'Este grupo es privado, solicitando afiliación.',
+
+    'groups:reply'
+    => 'Publicar un comentario',
+
+    'groups:request:subject'
+    => "%s ha solicitado unirse %s",
+
+    'groups:river:member'
+    => 'es ahora miembro de',
+
+    'groups:saved'
+    => 'Grupo guardado',
+
+    'groups:topic'
+    => 'Tema',
+
+    'groups:topicclosed'
+    => 'Cerrado',
+
+    'groups:topiccloseddesc'
+    => 'Este ha sido cerrado ahora y no acepta nuevos comentarios.',
+
+    'groups:topicisclosed'
+    => 'Este tema está cerrado.',
+
+    'groups:topicmessage'
+    => 'mensaje del tema',
+
+    'groups:topicopen'
+    => 'Abierto',
+
+    'groups:topicresolved'
+    => 'Resuelto',
+
+    'groups:topicstatus'
+    => 'Estado del tema',
+
+    'groups:topicsticky'
+    => 'Tema destacado',
+
+    'groups:user'
+    => "grupos de %",
+
+    'groups:userinvited'
+    => 'El usuario ha sido invitado.',
+
+    'groups:username'
+    => 'Nombre corto del grupo (se muestra en las URLs, sólo caracteres alfanuméricos)',
+
+    'groups:usernotinvited'
+    => 'No se pudo invitar al usuario.',
+
+    'groups:website'
+    => 'Sitio web',
+
+    'groups:welcome:subject'
+    => "Bienvienido al grupo de %s!",
+
+    'groups:when'
+    => 'Cuando',
+
+    'groups:widget:membership'
+    => 'Afiliación del grupo',
+
+    'groups:widget:num_display'
+    => 'Número de grupos a mostrar',
+
+    'groups:widgets:description'
+    => 'Mostrar en tu perfil los grupos de los que eres miembro',
+
+    'groups:widgets:entities:description'
+    => "Listar los objetos guardados en este grupo",
+
+    'groups:widgets:entities:label:displaynum'
+    => 'Listar los objetos de un grupo.',
+
+    'groups:widgets:entities:label:pleaseedit'
+    => 'Por favor, configura este widget.',
+
+    'groups:widgets:entities:title'
+    => "Objetos en un grupo",
+
+    'groups:widgets:members:description'
+    => 'Listar los miembros de un grupo.',
+
+    'groups:widgets:members:label:displaynum'
+    => 'Listar los miembros de un grupo.',
+
+    'groups:widgets:members:label:pleaseedit'
+    => 'Por favor, configura este widget.',
+
+    'groups:widgets:members:title'
+    => 'Miembros del grupo',
+
+    'groups:yours'
+    => "Tus grupos",
+
+    'groupspost:success'
+    => 'Tu comentario fue publicado con éxito',
+
+    'groupstopic:deleted'
+    => 'El tema ha sido borrado.',
+
+    'grouptopic:created'
+    => 'Tu tema fue creado.',
+
+    'grouptopic:error'
+    => 'Tu tema de grupo no se pudo crear. Por favor, inténtalo de nuevo o contacta con un administrador del sistema.',
+
+    'grouptopic:notcreated'
+    => 'No se han creado temas.',
+
+    'importfail'
+    => "Fallo la importación de datos de OpenDD.",
+
+    'importsuccess'
+    => "La importación de datos se hizo con éxito",
+
+    'installation'
+    => "Instalación",
+
+    'invite'
+    => "Invitar",
+
+    'invitefriends:failure'
+    => 'No se pudo invitar a tus LdShakers.',
+
+    'invitefriends:introduction'
+    => 'Para invitar LdShakers a unirse a esta red, introduce su dirección de correo electrónico debajo (una en cada linea):',
+
+    'invitefriends:success'
+    => 'Tus LdShakers fueron invitados.',
+
+    'item:group'
+    => "Grupos",
+
+    'item:object:api_key'
+    => 'Claves de la API',
+
+    'item:object:groupforumtopic'
+    => "Temas del foro",
+
+    'item:object:messages'
+    => 'Mensajes',
+
+    'item:object:plugin'
+    => 'Ajustes de configuración del plugin',
+
+    'item:object:reported_content'
+    => "Elementos notificados",
+
+    'item:object:widget'
+    => "Widgets",
+
+    'item:site'
+    => 'Sitios',
+
+    'item:user'
+    => "Usuarios",
+
+    'layout:customise'
+    => "Personalizar diseño",
+
+    'learnmore'
+    => "Haz click aquí para aprender más.",
+
+    'link:text'
+    => 'ver enlace',
+
+    'link:view'
+    => 'ver enlace',
+
+    'load'
+    => "Cargar",
+
+    'logbrowser'
+    => 'Registro del navegador',
+
+    'logbrowser:browse'
+    => 'Navegar por el registro del sistema',
+
+    'logbrowser:endtime'
+    => 'Hora de finalización',
+
+    'logbrowser:explore'
+    => 'Explorar registro',
+
+    'logbrowser:search'
+    => 'Refinar resultados',
+
+    'logbrowser:starttime'
+    => 'Hora de comienzo (por ejemplo "pasado lunes", "hace una hora")',
+
+    'logbrowser:user'
+    => 'Nombre de usuario por el que buscar',
+
+    'LOGGED_IN'
+    => "Usuarios conectados",
+
+    'login'
+    => "Iniciar sesión",
+
+    'loginerror'
+    => "No se pudo iniciar la sesión. Puede deberse a que no has validado tu cuenta todavía o que los detalles suministrados eran incorrectos. Asegúrate de que tus detalles son correctos e inténtalo de nuevo.",
+
+    'loginok'
+    => "Has iniciado sesión.",
+
+    'logout'
+    => "Cerrar sesión",
+
+    'logouterror'
+    => "No se pudo cerrar la sesión. Por favor, inténtalo de nuevo.",
+
+    'logoutok'
+    => "Has cerrado la sesión.",
+
+    'logrotate:lognotrotated'
+    => "Error rotando el registro\n",
+
+    'logrotate:logrotated'
+    => "Registro rotado\n",
+
+    'logrotate:monthly'
+    => 'Una vez al mes',
+
+    'logrotate:period'
+    => '¿Con qué frecuencia debería archivarse el registro del sistema?',
+
+    'logrotate:weekly'
+    => 'Una vez a la semana',
+
+    'logrotate:yearly'
+    => 'Una vez al año',
+
+    'makeadmin'
+    => "Hacer administrador",
+
+    'memcache:noaddserver'
+    => 'Desactivado el soporte para servidores múltiples, puede que necesites actualizar tu librería memcache PECL',
+
+    'memcache:noservers'
+    => 'NO se han definido servidores memcache, por favor proporciona el valor de la variable $CONFIG->memcache_servers',
+
+    'memcache:notinstalled'
+    => 'El módulo PHP memcache no está instalado, debes instalar php5-memcache',
+
+    'memcache:versiontoolow'
+    => 'Memcache necesita al menos la versión %s para ejecutarse, estás ejecutando la versión%s',
+
+    'messageboard:blank'
+    => "Lo siento; necesitas poner algo en el área de recorte antes de que se pueda guardar.",
+
+    'messageboard:board'
+    => "Album de recortes",
+
+    'messageboard:deleted'
+    => "Borraste con éxito el recorte.",
+
+    'messageboard:desc'
+    => "Este es un album de recortes que puedes poner en tu perfil donde otros usuarios pueden comentar.",
+
+    'messageboard:email:subject'
+    => 'Tienes un nuevo comentario en el álbum de recortes!',
+
+    'messageboard:failure'
+    => "Un error inesperado ocurrió al añadir el recorte. Por favor, inténtalo de nuevo.",
+
+    'messageboard:history'
+    => "historia",
+
+    'messageboard:history'
+    => "Historia",
+
+    'messageboard:messageboard'
+    => "album de recortes",
+
+    'messageboard:none'
+    => "No hay nada en este álbum de recortes",
+
+    'messageboard:notdeleted'
+    => "Lo siento; no se pudo borrar este recorte.",
+
+    'messageboard:notfound'
+    => "Lo siento; no se pudo encontrar el elemento indicado.",
+
+    'messageboard:num_display'
+    => "Número de recortes a mostrar",
+
+    'messageboard:posted'
+    => "Publicaste correctamente en el álbum de recortes.",
+
+    'messageboard:postit'
+    => "Publicar esto",
+
+    'messageboard:river:added'
+    => "%s publicado en",
+
+    'messageboard:river:annotate'
+    => "%s ha añadido un nuevo comentario publicado en su álbum de recortes.",
+
+    'messageboard:river:create'
+    => "%s añadió el widget álbum de recortes.",
+
+    'messageboard:river:messageboard'
+    => "álbum de recortes",
+
+    'messageboard:river:update'
+    => "%s actualizó su widget álbum de recortes.",
+
+    'messageboard:somethingwentwrong'
+    => "Algo salió mal al intentar guardar tu mensaje, asegúrate de que escribiste un recorte.",
+
+    'messageboard:user'
+    => "scrapbook de %s",
+
+    'messageboard:viewall'
+    => "Ver todo",
+
+    'messages'
+    => "Mensajes",
+
+    'messages:answer'
+    => "Responder",
+
+    'messages:back'
+    => "volver a los mensajes",
+
+    'messages:blank'
+    => "Lo siento; necesitas poner algo en el cuerpo del mensaje antes de que puedas guardarlo.",
+
+    'messages:compose'
+    => "Enviar un mensaje",
+
+    'messages:deleted'
+    => "Tu mensaje se borró con éxito.",
+
+    'messages:email:subject'
+    => 'Tienes un nuevo mensaje!',
+
+    'messages:fly'
+    => "Déjalo volar",
+
+    'messages:from'
+    => "De",
+
+    'messages:inbox'
+    => "Bandeja de entrada",
+
+    'messages:message'
+    => "Mensaje",
+
+    'messages:nomessages'
+    => "No hay mensajes para mostrar.",
+
+    'messages:nopermission'
+    => "No tienes permiso para borrar este mensaje.",
+
+    'messages:notdeleted'
+    => "Lo siento; no se pudo borrar ese mensaje.",
+
+    'messages:notfound'
+    => "Lo siento; no se pudo encontrar el mensaje especificado.",
+
+    'messages:original'
+    => "Mensaje original",
+
+    'messages:posted'
+    => "Tu mensaje se envió con éxito.",
+
+    'messages:posttitle'
+    => "mensajes de %s: %s",
+
+    'messages:recent'
+    => "Mensajes recientes",
+
+    'messages:replying'
+    => "Mensaje respondiendo a",
+
+    'messages:send'
+    => "Enviar un mensaje",
+
+    'messages:sendmessage'
+    => "Enviar un mensaje",
+
+    'messages:sent'
+    => "Mensajes enviados",
+
+    'messages:sentmessages'
+    => "Mensajes enviados",
+
+    'messages:sentMessages'
+    => "Mensajes enviados",
+
+    'messages:title'
+    => "Título",
+
+    'messages:to'
+    => "Para",
+
+    'messages:user'
+    => "Tu bandeja de entrada",
+
+    'messages:user:nonexist'
+    => "No se pudo encontrar el destinatario en la base de datos.",
+
+    'messages:yours'
+    => "Tu mensaje",
+
+    'metadata'
+    => "Metadata",
+
+    'metatag_manager:settings:author'
+    => "Autoría",
+
+    'metatag_manager:settings:description'
+    => "Descrición",
+
+'metatag_manager:settings:keywords'
+=> "Palabras claves",
+
+'metatag_manager:settings:robots'
+=> "Robots",
+
+'metatag_manager:settings:save'
+=> "Ajustes de metatags guardados con éxito",
+
+'metatag_manager:settings:title'
+=> "Configurar tus metatags",
+
+'name'
+=> "Nombre para mostrar",
+
+'name:label'
+=> "Este es el nombre que será asociado con todos los contenidos que creas en LdShake.",
+
+'next'
+=> "Siguiente",
+
+'notfound'
+=> "No se encontraron resultados.",
+
+'notfound'
+=> "No se pudo encontrar el recurso solicitado, o no tienes acceso a este.",
+
+'notifications:methods'
+=> "Por favor especifica qué métodos quieres permitir.",
+
+'notifications:usersettings'
+=> "Ajustes de notificación",
+
+'notifications:usersettings:save:fail'
+=> "Hubo un problema al guardar tus ajustes de notificaciones.",
+
+'notifications:usersettings:save:ok'
+=> "Tus ajustes de notificaciones fueron guardadas con éxito.",
+
+'open'
+=> 'Abrir',
+
+'option:no'
+=> "No",
+
+'option:yes'
+=> "Si",
+
+'password'
+=> "Contraseña",
+
+'passwordagain'
+=> "Reescribir contraseña",
+
+'plugins:settings:save:fail'
+=> "Hubo un problema guardando los ajustes para el plugin %s.",
+
+'plugins:settings:save:ok'
+=> "Ajustes para el plugin %s se guardaron con éxito.",
+
+'plugins:usersettings:save:fail'
+=> "Hubo un problema al guardar los ajustes del usuario para el plugin %s.",
+
+'plugins:usersettings:save:ok'
+=> "Los ajustes del usuario para el plugin %s se guardaron con éxito.",
+
+'previous'
+=> "Previo",
+
+'PRIVATE'
+=> "Privado",
+
+'profile'
+=> "Perfil",
+
+'profile:aboutme'
+=> "Acerca de mi",
+
+'profile:briefdescription'
+=> "Breve descripción",
+
+'profile:cantedit'
+=> "Lo siento; no tienes permiso para editar este perfil.",
+
+'profile:contactemail'
+=> "Contactar correo electrónico",
+
+'profile:createicon'
+=> "Crear tu avatar",
+
+'profile:createicon:header'
+=> "Imagen del perfil",
+
+'profile:createicon:instructions'
+=> "Haz click y arrastra un cuadrado debajo para ajustar cómo quieres tu imagen recortada. Una vista previa de tu imagen recortada aparecerá en la caja a la derecha. Cuando estés satisfecho con la vista previa, haz clickn en 'Crear tu avatar'. La imagen recortada será usada en todo el sitio como tu avatar. ",
+
+'profile:currentavatar'
+=> "Avatar actual",
+
+'profile:defaultprofile:reset'
+=> 'Reestablecer perfil del sistema por defecto',
+
+'profile:description'
+=> "Acerca de mi",
+
+'profile:edit'
+=> "Editar perfil",
+
+'profile:edit:default'
+=> 'Reemplazar campos del perfil',
+
+'profile:editdefault:delete:fail'
+=> 'Falló la eliminación del campo del elemento de perfil por defecto',
+
+'profile:editdefault:delete:success'
+=> 'Elemento de perfil por defecto eliminado!',
+
+'profile:editdefault:fail'
+=> 'No se pudo guardar el perfil por defecto',
+
+'profile:editdefault:success'
+=> 'Elemento añadido con éxito al perfil por defecto',
+
+'profile:editdetails'
+=> "Editar detalles",
+
+'profile:editicon'
+=> "Editar icono del perfil",
+
+'profile:icon'
+=> "Imagen del perfil",
+
+'profile:icon:notfound'
+=> "Lo siento; hubo un problema al subir la imagen del perfil.",
+
+'profile:icon:uploaded'
+=> "La imagen de perfil fue subida con éxito.",
+
+'profile:interests'
+=> "Intereses",
+
+'profile:label'
+=> "Etiqueta de perfil",
+
+'profile:location'
+=> "Localización",
+
+'profile:mobile'
+=> "Teléfono móvil",
+
+'profile:noaccess'
+=> "No tienes permiso para editar este perfil.",
+
+'profile:notfound'
+=> "Lo siento; no se pudo encontrar el perfil especificado.",
+
+'profile:phone'
+=> "Teléfono",
+
+'profile:profilepicturecroppingtool'
+=> "Herramienta de recorte de la imagen de perfil",
+
+'profile:profilepictureinstructions'
+=> "La imagen de perfil es la imagen que se muestra en tu página de perfil. <br /> Puedes cambiarla tan a menudo como quieras. (Los formatos de fichero aceptados son: GIF, JPG or PNG)",
+
+'profile:resetdefault'
+=> 'Reestablecer el perfil por defecto',
+
+'profile:river:iconupdate'
+=> "%s actualizó su icono de perfil",
+
+'profile:river:update'
+=> "%s actualizó su perfil",
+
+'profile:saved'
+=> "Tu perfil fue guardado con éxito.",
+
+'profile:skills'
+=> "Destrezas",
+
+'profile:type'
+=> "Tipo de perfil",
+
+'profile:user'
+=> "perfil de %s",
+
+'profile:website'
+=> "Página web",
+
+'profile:yours'
+=> "Tu perfil",
+
+'PUBLIC'
+=> "Público",
+
+'register'
+=> "Registro",
+
+'registerbad'
+=> "No se pudo realizar elregistro. El usuario ya existe, tu contraseña podría no coincidir, o tu nombre de usuario o contraseña ser demasiado cortos.",
+
+'registerdisabled'
+=> "El registro ha sido deshabilitado por el administrador del sistema",
+
+'registerok'
+=> "Te has registrado con éxito para %s.",
+
+'registration:dupeemail'
+=> 'Esta dirección de correo electrónico ya está registrada.',
+
+'registration:emailnotvalid'
+=> 'Lo siento, la dirección de correo introducida no es válida en este sistema',
+
+'registration:invalidchars'
+=> 'Lo siento, tu nombre de usuario contiene caracteres no permitidos.',
+
+'registration:notemail'
+=> 'La dirección de correo proporcionada no parece ser una dirección de correo electrónico válida.',
+
+'registration:passwordnotvalid'
+=> 'Lo siento, la contraseña introducida no es válida en este sistema',
+
+'registration:passwordtooshort'
+=> 'La contraseña debe tener una longitud mínima de 6 caracteres.',
+
+'registration:userexists'
+=> 'Ese nombre de usuario ya existe',
+
+'registration:usernamenotvalid'
+=> 'Lo siento, el nombre de usuario introducido no es válido en este sistema',
+
+'registration:usernametooshort'
+=> 'Tu nombre de usuario debe tener una longitud mínima de 4 caracteres.',
+
+'relationships'
+=> "Relaciones",
+
+'reply'
+=> "Responder",
+
+'request'
+=> "Petición",
+
+'resetpassword'
+=> "Reestablecer contraseña",
+
+'river'
+=> "Río",
+'river:relationship:friend'
+=> "es ahora un LdShaker de",
+
+'river:relationship:friend'
+=> 'es ahora amigo de',
+
+'river:widget:description'
+=> "Mostrar tu actividad más reciente.",
+
+'river:widget:description:friends'
+=> "Mostrar lo que están haciendo tus amigos.",
+
+'river:widget:description:friends'
+=> "Mostrar lo que están haciendo tus LdShakers.",
+
+'river:widget:label:displaynum'
+=> "Número de entradas a mostrar:",
+
+'river:widget:noactivity'
+=> 'No se encontró ninguna actividad.',
+
+'river:widget:title'
+=> "Actividad",
+
+'river:widget:title:friends'
+=> "Actividad de amigos",
+
+'river:widget:title:friends'
+=> "Actividad de LdShakers",
+
+'river:widgets:friends'
+=> "LdShakers",
+
+'riveraction:annotation:generic_comment'
+=> '%s comentó en %s',
+
+'riveritem:plural:user'
+=> 'algunos usuarios',
+
+'riveritem:single:user'
+=> 'un usuario',
+
+'save'
+=> "Guardar",
+
+'saving'
+=> "Guardando ...",
+
+'search'
+=> "Buscar",
+
+'searchtitle'
+=> "Buscar: %s",
+
+'settings'
+=> "Ajustes",
+
+'spotlight'
+=> "Foco",
+
+'system.api.list'
+=> "Mostrar todas las llamadas a la API disponibles en el sistema.",
+
+'systemmessages:dismiss'
+=> "haz click para descartar",
+
+'tag:search:startblurb'
+=> "Elementos con etiquetas que contienen '%s':",
+
+'tags'
+=> "Etiquetas",
+
+'title'
+=> "Título",
+
+'tools'
+=> "Herramientas",
+
+'tools:yours'
+=> "Tus herramientas",
+
+'top'
+=> 'Superior',
+
+'total'
+=> 'Total',
+
+'unban'
+=> "Desprohibir",
+
+'unknown'
+=> 'Desconocido',
+
+'up'
+=> 'Arriba',
+
+'update'
+=> "Actualizar",
+
+'upgrading'
+=> 'Actualizando',
+
+'upload'
+=> "Subir",
+
+'user'
+=> "Usuario",
+
+'user.notification.get'
+=> 'Devolver los ajustes de notificaciones para un usuario dado.',
+
+'user.notification.set'
+=> 'Establecer los ajustes de notificación para un usuario dado.',
+
+'user:language:fail'
+=> "Tus ajustes de idioma no se pudieron guardar.",
+
+'user:language:label'
+=> "Tu idioma",
+
+'user:language:success'
+=> "Tus ajustes de idioma han sido actualizados.",
+
+'user:name:fail'
+=> "No se pudo cambiar tu nombre en el sistema.",
+
+'user:name:label'
+=> "Tu nombre",
+
+'user:name:success'
+=> "Tu nombre se cambió con éxito en el sistema.",
+
+'user:password:fail'
+=> "No se pudo cambiar tu contraseña en el sistema.",
+
+'user:password:fail:notsame'
+=> "Las dos contraseñas no son iguales!",
+
+'user:password:fail:tooshort'
+=> "La contraseña es demasiado corta!",
+
+'user:password:label'
+=> "Tu nueva contraseña",
+
+'user:password:lost'
+=> 'Password no encontrada',
+
+'user:password:resetreq:fail'
+=> 'No se pudo solicitar una nueva contraseña.',
+
+'user:password:resetreq:success'
+=> 'Se solicitó una nuevo contraseña con éxito, correo electrónico enviado',
+
+'user:password:success'
+=> "Contraseña cambiada",
+
+'user:password:text'
+=> 'Para generar una nueva contraseña, introduce tu nombre debajo. Te enviaremos la dirección de una página de verificación via correo electrónico. Haz click en el enlace del cuerpo del mensaje y se te enviará una nueva contraseña.',
+
+'user:password2:label'
+=> "Tu nueva contraseña de nuevo",
+
+'user:persistent'
+=> 'Recuérdame',
+
+'user:search:finishblurb'
+=> "Para ver más, haz click aquí.",
+
+'user:search:startblurb'
+=> "Usuarios que contienen '%s':",
+
+'user:set:language'
+=> "Ajustes de idioma",
+
+'user:set:name'
+=> "Ajustes del nombre de la cuenta",
+
+'user:set:password'
+=> "Contraseña de la cuenta",
+
+'user:username:notfound'
+=> 'Nombre de usuario %s no encontrado.',
+
+'username'
+=> "Nombre de usuario",
+
+'users:searchtitle'
+=> "Buscando usuarios: %s",
+
+'usersettings:description'
+=> "El panel de ajustes de usuario te permite controlar todos tus ajustes personales, desde la aministración de usaurio a cómo se comportan los plugins. Elige una opción para empezar.",
+
+'usersettings:plugins'
+=> "Herramientas",
+
+'usersettings:plugins:description'
+=> "Este panel te permite controlar y configurar los ajustes personales para las herramientas instaladas por tu administrador del sistema.",
+
+'usersettings:plugins:opt:description'
+=> "Configurar ajustes para tus herramientas activas.",
+
+'usersettings:plugins:opt:linktext'
+=> "Configurar tus herramientas",
+
+'usersettings:statistics'
+=> "Tus estadísticas",
+
+'usersettings:statistics:label:email'
+=> "Correo electrónico",
+
+'usersettings:statistics:label:lastlogin'
+=> "Última conexión",
+
+'usersettings:statistics:label:membersince'
+=> "Miembro desde",
+
+'usersettings:statistics:label:name'
+=> "Nombre completo",
+
+'usersettings:statistics:label:numentities'
+=> "Tus entidades",
+
+'usersettings:statistics:opt:description'
+=> "Ver información estadística acerca de los usuarios y objetos en tu sitio.",
+
+'usersettings:statistics:opt:linktext'
+=> "Estadísticas de la cuenta",
+
+'usersettings:statistics:yourdetails'
+=> "Tus detalles",
+
+'usersettings:user'
+=> "Tus ajustes",
+
+'usersettings:user:opt:description'
+=> "Esto tet permite controlar los ajustes de usuario.",
+
+'usersettings:user:opt:linktext'
+=> "Cambiar tus ajustes",
+
+'uservalidationbyemail:registerok'
+=> "Para activar tu cuenta, por favor confirma tu dirección de correo electrónico haciendo click en el enlace que te enviamos.",
+
+'viewtype:change'
+=> "cambiar el tipo de listado",
+
+'viewtype:gallery'
+=> "Galería",
+
+'viewtype:list'
+=> "Vista de lista",
+
+'welcome'
+=> "Bienvenido %s",
+
+'welcome_message'
+=> "Bienvienido a esta instalación de Elgg.",
+
+'whatsexpectatives'
+=> "¿Cuales son tus expectativas para este sitio?",
+
+'widget'
+=> "Widget",
+
+'widgets'
+=> "Widgets",
+
+'xmlrpc:noinputdata'
+=> "Faltan los datos de entrada",
+
+'email:resetpassword:body'
+=> "Hola %s,
+
+Tu contraseña ha sido reestablecida a: %s
+Tu nombre de usuario es: %s",
+
+'email:resetreq:body'
+=> "Hola %s,
+
+Alguien (desde la dirección IP %s) ha solicitado una nueva contraseña para su cuenta.
+
+Si tú la solicitaste haz click en el enlace de abajo, en caso contrario ignora este correo.
+
+%s
+",
+
+'email:validate:body'
+=> "Hola %s,
+
+Por favor, confirma tu dirección de correo electrónico haciendo click en el enlace de abajo:
+
+%s
+",
+
+'email:validate:success:body'
+=> "Hola %s,
+
+Felicidades, has validado correctamente tu dirección de correo.",
+
+'friend:newfriend:body' => "%s te ha añadido como un LdShaker!
+
+Para ver su perfil, haz click aquí:
 
 %s
 
-" ,
-    'default_access:settings'  =>  "Tu nivel de acceso por defecto" ,
-    'default_access:label'  =>  "Acceso por defecto" ,
-    'user:default_access:success'  =>  "Tu nuevo nivel de acceso ha sido guardado." ,
-    'user:default_access:failure'  =>  "Tu nuevo nivel de acceso no puede guardarse." ,
-    'xmlrpc:noinputdata'  =>  "Datos de entrada inv&aacute;lidos" ,
-    'comments:count'  =>  "%s comentarios" ,
-    'riveraction:annotation:generic_comment'  =>  "un comentario en" ,
-    'generic_comments:add'  =>  "A&ntilde;adir un comentario" ,
-    'generic_comments:text'  =>  "Comentario" ,
-    'generic_comment:posted'  =>  "El comentario ha sido enviado correctamente." ,
-    'generic_comment:deleted'  =>  "El comentario ha sido eliminado correctamente." ,
-    'generic_comment:blank'  =>  "Perdona... necesitas ponern \"algo\" en el comentario antes de guardarlo." ,
-    'generic_comment:notfound'  =>  "Opss!... no podemos encontrar el artÃ­culo :(" ,
-    'generic_comment:notdeleted'  =>  "Agg!.. no podemos eliminar el comentario :(" ,
-    'generic_comment:failure'  =>  "Un error inesperado ha ocurrido al aÃ±adir el comentario!!...intÃ©ntalo de nuevo..." ,
-    'generic_comment:email:subject'  =>  "Tienes un comentario nuevo en uno de tus artÃ­culos" ,
-    'generic_comment:email:body'  =>  "Tienes un comentario en el  artÃ­culo \"%s\" escrito por %s. que dice:
+No puedes responder a este correo electrónico.",
 
-			
+'friend:newfriend:body'
+=> "%s te ha añadido como LdShaker!
+
+Para ver su perfil, haz click aquí:
+
+%s
+
+No puedes responder a este correo.",
+
+'generic_comment:email:body'
+=> "Tienes un nuevo comentario en tu artículo \"%s\" de %s. Este dice:
+
+
 %s
 
 
-Para contestar o ver el mensaje original, pulsa aqui:
+Para responder o ver el artículo original, haz click aquí:
 
 	%s
 
-Para ver el perfil de usuario@ de  %s, pulsa aqui:
+Para ver el perfil de %s, haz click aquí:
 
 	%s
 
-Por cierto, no respondas a este correo. Te lo ha escrito una mÃ¡quina ;)" ,
-    'entity:default:strapline'  =>  "Creada %s por %s" ,
-    'entity:default:missingsupport:popup'  =>  "Esta entindad no puede ser desplegada correctamente. Puede ser por que requiere soporte de un plugin que no ha sido instalado." ,
-    'entity:delete:success'  =>  "%s entidades han sido eliminadas" ,
-    'entity:delete:fail'  =>  "%s entidades no han podido ser eliminadas" ,
-    'actiongatekeeper:missingfields'  =>  "El formulario est&aacute; campo perdido __token o __ts" ,
-    'actiongatekeeper:tokeninvalid'  =>  "Hemos encontrado un error (token mismatch)!. La sesiÃ³n ha expirado. REFRESCA la pÃ¡gina (F5)." ,
-    'actiongatekeeper:timeerror'  =>  "La p&aacute;gina en la que te encuentras ha expirado!. Es necesario que refresques de nuevo." ,
-    'actiongatekeeper:pluginprevents'  =>  "Una extensi&oacute;n ha sido retenida por este formulario." ,
-    'word:blacklist'  =>  "y, el, entonces, pero, ella, su, uno, un, no, acerca, ahora, sin embargo, aun, de otro modo, and, the, then, but, she, his, her, him, one, not, also, about, now, hence, however, still, likewise, otherwise, therefore, conversely, rather, consequently, furthermore, nevertheless, instead, meanwhile, accordingly, this, seems, what, whom, whose, whoever, whomever" ,
-    'aa'  =>  "Afar" ,
-    'ab'  =>  "Abkhazian" ,
-    'af'  =>  "Afrikaans" ,
-    'am'  =>  "Amharic" ,
-    'ar'  =>  "Arabico" ,
-    'as'  =>  "Assamese" ,
-    'ay'  =>  "Aymara" ,
-    'az'  =>  "Azerbaijani" ,
-    'ba'  =>  "Bashkir" ,
-    'be'  =>  "Byelorussian" ,
-    'bg'  =>  "Bulgaro" ,
-    'bh'  =>  "Bihari" ,
-    'bi'  =>  "Bislama" ,
-    'bn'  =>  "Bengali; Bangla" ,
-    'bo'  =>  "Tibetan" ,
-    'br'  =>  "Breton" ,
-    'ca'  =>  "Catalan" ,
-    'co'  =>  "Corsa" ,
-    'cs'  =>  "Checo" ,
-    'cy'  =>  "Welsh" ,
-    'da'  =>  "DanÃ©s" ,
-    'de'  =>  "AlemÃ¡n" ,
-    'dz'  =>  "Bhutani" ,
-    'el'  =>  "Griego" ,
-    'en'  =>  "InglÃ©s" ,
-    'eo'  =>  "Esperanto" ,
-    'es'  =>  "Espa&ntilde;ol" ,
-    'et'  =>  "Estonio" ,
-    'eu'  =>  "Euskera" ,
-    'fa'  =>  "Persiana" ,
-    'fi'  =>  "FinlandÃ©s" ,
-    'fj'  =>  "Fiji" ,
-    'fo'  =>  "Faeroese" ,
-    'fr'  =>  "FrancÃ©s" ,
-    'fy'  =>  "Frisian" ,
-    'ga'  =>  "IrlandÃ©s" ,
-    'gd'  =>  "GaÃ©lico" ,
-    'gl'  =>  "Gallego" ,
-    'gn'  =>  "Guarani" ,
-    'gu'  =>  "Gujarati" ,
-    'he'  =>  "Hebreo" ,
-    'ha'  =>  "Hausa" ,
-    'hi'  =>  "HindÃº" ,
-    'hr'  =>  "Croata" ,
-    'hu'  =>  "Hungaro" ,
-    'hy'  =>  "Armenio" ,
-    'ia'  =>  "Interlenguaje" ,
-    'id'  =>  "Indonesio" ,
-    'ie'  =>  "Interlenguaje" ,
-    'ik'  =>  "Inupiak" ,
-    'is'  =>  "IslandÃ©s" ,
-    'it'  =>  "Italiano" ,
-    'iu'  =>  "Inuktitut" ,
-    'iw'  =>  "Hebreo antiguo" ,
-    'ja'  =>  "JaponÃ©s" ,
-    'ji'  =>  "Yiddish" ,
-    'jw'  =>  "Javanese" ,
-    'ka'  =>  "Georgiano" ,
-    'kk'  =>  "Kazakh" ,
-    'kl'  =>  "Greenlandic" ,
-    'km'  =>  "Cambodian" ,
-    'kn'  =>  "Canadiense" ,
-    'ko'  =>  "Coreano" ,
-    'ks'  =>  "Kashmiri" ,
-    'ku'  =>  "Kurdo" ,
-    'ky'  =>  "Kirghiz" ,
-    'la'  =>  "Latin" ,
-    'ln'  =>  "Lingala" ,
-    'lo'  =>  "LaotÃ¡n" ,
-    'lt'  =>  "Lituaniano" ,
-    'lv'  =>  "Latvian/Lettish" ,
-    'mg'  =>  "Malagasy" ,
-    'mi'  =>  "Maori" ,
-    'mk'  =>  "Macedonio" ,
-    'ml'  =>  "Malayalam" ,
-    'mn'  =>  "Mongolo" ,
-    'mo'  =>  "Moldavo" ,
-    'mr'  =>  "Marathi" ,
-    'ms'  =>  "Malay" ,
-    'mt'  =>  "Maltes" ,
-    'my'  =>  "Burmes" ,
-    'na'  =>  "Nauru" ,
-    'ne'  =>  "Nepali" ,
-    'nl'  =>  "Holandes" ,
-    'no'  =>  "Noruego" ,
-    'oc'  =>  "Occitan" ,
-    'om'  =>  "(Afan) Oromo" ,
-    'or'  =>  "Oriya" ,
-    'pa'  =>  "Punjabi" ,
-    'pl'  =>  "Polaco" ,
-    'ps'  =>  "Pashto / Pushto" ,
-    'pt'  =>  "Portuges" ,
-    'qu'  =>  "Quechua" ,
-    'rm'  =>  "Rhaeto-Romance" ,
-    'rn'  =>  "Kirundi" ,
-    'ro'  =>  "Rumano" ,
-    'ru'  =>  "Ruso" ,
-    'rw'  =>  "Kinyarwanda" ,
-    'sa'  =>  "Sanskrit" ,
-    'sd'  =>  "Sindhi" ,
-    'sg'  =>  "Sangro" ,
-    'sh'  =>  "Serbo-Croata" ,
-    'si'  =>  "Singhalese" ,
-    'sk'  =>  "Slovako" ,
-    'sl'  =>  "Sloveno" ,
-    'sm'  =>  "Samoan" ,
-    'sn'  =>  "Shona" ,
-    'so'  =>  "Somali" ,
-    'sq'  =>  "Albano" ,
-    'sr'  =>  "Serbio" ,
-    'ss'  =>  "Siswati" ,
-    'st'  =>  "Sesotho" ,
-    'su'  =>  "Sundanes" ,
-    'sv'  =>  "Sueco" ,
-    'sw'  =>  "Swahili" ,
-    'ta'  =>  "Tamil" ,
-    'te'  =>  "Tegulu" ,
-    'tg'  =>  "Tajik" ,
-    'th'  =>  "Thai" ,
-    'ti'  =>  "Tigrinya" ,
-    'tk'  =>  "Turco" ,
-    'tl'  =>  "Tagalog" ,
-    'tn'  =>  "Setswana" ,
-    'to'  =>  "Tonga" ,
-    'tr'  =>  "Turkoman" ,
-    'ts'  =>  "Tsonga" ,
-    'tt'  =>  "Tatar" ,
-    'tw'  =>  "Twi" ,
-    'ug'  =>  "Uigur" ,
-    'uk'  =>  "Ukrainian" ,
-    'ur'  =>  "Urdu" ,
-    'uz'  =>  "Uzbek" ,
-    'vi'  =>  "Vietnamita" ,
-    'vo'  =>  "Volapuk" ,
-    'wo'  =>  "Wolof" ,
-    'xh'  =>  "Xhosa" ,
-    'yi'  =>  "Yiddisha" ,
-    'yo'  =>  "Yoruba" ,
-    'za'  =>  "Zuang" ,
-    'zh'  =>  "Chino" ,
-    'zu'  =>  "Zulu" ,
-    'memcache:notinstalled'  =>  "El modulo PHP memcache no se encuentra instalado. prueba sudo apt-get install php5-memcache" ,
-    'memcache:noservers'  =>  "No hay servidores de memcache definidos, asegurate de comprobar la variable " ,
-    'memcache:versiontoolow'  =>  "Memcache necesita la versiÃ³n %s para funcionar correctamente, tu tienes la %s" ,
-    'memcache:noaddserver'  =>  "Soporte para mÃºltiples servidores deshabilitado, necesitar actualizar tu librerÃ­a memcache PECL" ,
-    'deprecatedfunction'  =>  "AtenciÃ³n: El cÃ³digo utiliza la funciÃ³n antigua '%s' y no es compatible con esta versiÃ³n de Elgg" ,
-    'pageownerunavailable'  =>  "AtenciÃ³n: El propietario de la pÃ¡gina %d no es accesible!!" ,
-    'profile:deleteduser'  =>  "Borrar usuari@" ,
-    'profile:explainchangefields'  =>  "Puedes reemplazar los campos del perfil para poner lo que quieras." ,
-    'friendspicker:chararray'  =>  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ,
-    'groups:searchtitle'  =>  "Buscando grupos: %s" ,
-    'group:search:startblurb'  =>  "Grupos con la etiqueta: '%s'" ,
-    'group:search:finishblurb'  =>  "Para ver mÃ¡s, click aquÃ­." ,
-    'firstadminlogininstructions'  =>  "Tu nueva red social Elgg se ha instalado con Ã©xito y tu cuenta de administrador ha sido creada. Puedes comenzar a configurar tu sitio habilitando plugins y herramientas. Mucha suerte :)" ,
-    'admin:site:access:warning'  =>  "Cambiar las configuraciones de acceso solo afecta a los permisos del contenido que se vaya a crear en el futuro." ,
-    'admin:plugins:warning:elggversionunknown'  =>  "AtenciÃ³n: El plugin no es compatible con la versiÃ³n de Elgg" ,
-    'admin:plugins:warning:elggtoolow'  =>  "AtenciÃ³n: El plugin requiere una versiÃ³n superior de Elgg!" ,
-    'accept'  =>  "Aceptar" ,
-    'installation:sitepermissions'  =>  "Permisos de acceso por defecto:" ,
-    'installation:httpslogin'  =>  "Habilitar para que los \"login\" de los usuarios se haga a travÃ©s de HTTPS. Recuerda que tienes que tener disponible el servicio/puerto en tu sistema" ,
-    'installation:httpslogin:label'  =>  "Habilitar logins con HTTPS" ,
-    'installation:allow_user_default_access:description'  =>  "Si lo seleccionas, los usuarios podrÃ¡n configurar sus propios niveles de acceso que pueden sobreescribir los nieveles de acceso por defecto del sistema. Es una opciÃ³n bastante insegura. PiÃ©nsalo." ,
-    'installation:allow_user_default_access:label'  =>  "Permitir acceso por defecto a los usuarios" ,
-    'installation:simplecache:description'  =>  "La cache simple incrementa la eficiencia en el cacheo de contenido estÃ¡tico incluyendo ficheros CSS y JavaScript. Lo mejor es ponerla en \"on\"" ,
-    'installation:simplecache:label'  =>  "Utilizar cache simple (recomendado)" ,
-    'installation:viewpathcache:description'  =>  "La vista de la cache filepath decrementa el tiempo de carga de los plugins al cachear las localizaciones de las vistas. Bastante Ãºtil." ,
-    'installation:viewpathcache:label'  =>  "Utilizar la cache de vistas filepath (recomendado)" ,
-    'welcome:user'  =>  "%s"
+No puedes responder a este correo.",
+
+'groups:invite:body'
+=> "Hola %s,
+
+Has sido invitado a unirte al grupo '%s', haz click debajo para confirmar:
+
+%s",
+
+'groups:request:body'
+=> "Hola %s,
+
+%s ha solicitado unirse al grupo '%s', haz click debajo para ver su perfil:
+
+%s
+
+or haz click a continuación para confirmar la solicitud:
+
+%s",
+
+'groups:welcome:body'
+=> "Hola %s!
+
+Ahora esres miembro del grupo '%s'! Haz click a continuación para empezar a publicar!
+
+%s",
+
+'messageboard:email:body'
+=> "Tienes un nuevo comentario en el álbum de recortes de %s. Este dice:
+
+
+%s
+
+
+Para ver tus comentarios del álbum de recortes, haz click aquí:
+
+	%s
+
+Para ver el perfil de %s, haz click aquí:
+
+	%s
+
+No puedes responder a este correo.",
+
+'messages:email:body'
+=> "Tienes un nuevo mensaje de %s. Este dice:
+
+
+%s
+
+
+Para ver tus mensajes, haz click aquí:
+
+	%s
+
+Para enviar un mensaje a %s, haz click aquí:
+
+	%s
+
+No puedes responder a este correo.",
+
+
 );
 
 add_translation('es', $spanish);

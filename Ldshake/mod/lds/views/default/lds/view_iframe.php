@@ -406,6 +406,8 @@ extract ($vars);
 <body><?php
     if($diff)
         echo $diff;
+        elseif($doc->editorType == "google_draw")
+            echo '<iframe src="'.$doc->description.'" style="width:100%;height:100%"></iframe>';
     else
         echo $doc->description;
     ?></body>

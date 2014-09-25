@@ -985,13 +985,13 @@ function lds_exec_upload ($params)
     $vars['upload_link'] = "";
 
     if($params[1] == 'openglm')
-        $vars['upload_link'] = "OpenGLM is a desktop tool, you need to <a href=\"http://sourceforge.net/projects/openglm/files/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+        $vars['upload_link'] = T("OpenGLM is a desktop tool, you need to <a href=\"http://sourceforge.net/projects/openglm/files/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.");
     if($params[1] == 'cadmos')
-        $vars['upload_link'] = "CADMOS is a desktop tool, you need to <a href=\"http://cosy.ds.unipi.gr/cadmos/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+        $vars['upload_link'] = T("CADMOS is a desktop tool, you need to <a href=\"http://cosy.ds.unipi.gr/cadmos/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.");
     if($params[1] == 'cld')
-        $vars['upload_link'] = "CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.";
+        $vars['upload_link'] = T("CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc.");
     if($params[1] == 'image')
-        $vars['upload_link'] = "Upload a jpeg, png, gif or svg image.";
+        $vars['upload_link'] = T("Upload a jpeg, png, gif or svg image.");
 
     echo elgg_view('lds/editform_editor',$vars);
 }
@@ -1006,7 +1006,7 @@ function lds_exec_neweditor ($params)
     switch($params[2]) {
         case 'template':
             require_once __DIR__.'/templates/templates.php';
-            $preferred_formats = array('docx','xlsx', null);
+            $preferred_formats = array('docx','xlsx', 'google_doc_id', null);
             foreach($preferred_formats as $format){
                 $template_format = $format;
                 if($templates = ldshake_get_template($params[3], $format))

@@ -147,8 +147,8 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	<?php if ($doc->file_imsld_guid): ?>
         <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/imsld">Save as IMS-LD</a>
         <!--<a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/webZip">Save as zipped web page</a>-->
-    <?php elseif($doc->editorType != 'google_docs' && $lds->editor_type != 'project_design'): ?>
-        <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/binary">Download binary file</a>
+    <?php elseif($doc->editorType != 'google_docs' && $doc->editorType != 'google_draw' && $lds->editor_type != 'project_design'): ?>
+        <a class="exportbutton" href="<?php echo $url ?>ve/<?php echo lds_contTools::encodeId($doc->guid)?>/binary"><?php echo T("Download binary file") ?></a>
     <?php endif; ?>
 
 </div>
@@ -162,6 +162,8 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <?php echo elgg_view('lds/editor_type/cld', array('entity' => $currentDoc)); ?>
     <?php elseif ($editor == 'google_docs'): ?>
         <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>" height="100%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
+    <?php elseif (strstr($editor, 'google')): ?>
+        <iframe id="internal_iviewer" src="<?php echo htmlentities($currentDoc->description);?>" height="860" width="1150" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;display: block; margin-left: auto;margin-right: auto;"></iframe>
     <?php else:?>
     <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
         <?php echo $currentDoc->description ?>

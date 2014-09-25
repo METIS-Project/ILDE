@@ -71,7 +71,7 @@
     <input type="hidden" name="x_2" value="<?php echo $vars['user']->x2; ?>" id="x_2" />
     <input type="hidden" name="y_1" value="<?php echo $vars['user']->y1; ?>" id="y_1" />
     <input type="hidden" name="y_2" value="<?php echo $vars['user']->y2; ?>" id="y_2" />
-	<input type="submit" name="submit" value="<?php echo elgg_echo("Create your avatar"); ?>" />
+	<input type="submit" name="submit" value="<?php echo T("Create your avatar"); ?>" />
 </form>
 
 </div>

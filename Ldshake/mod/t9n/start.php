@@ -49,7 +49,7 @@ function t9n_init() {
 	register_page_handler('translation','t9n_page_handler');
 }
 
-register_elgg_event_handler('init','system','t9n_init');
+register_elgg_event_handler('init','system','t9n_init',1);
 
 
 function t9n_page_handler ($page) {

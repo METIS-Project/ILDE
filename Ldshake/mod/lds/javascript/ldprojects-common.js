@@ -293,7 +293,7 @@ $(document).ready(function() {
 
         //lds title
         var defaultTitle = 'Untitled LdS';
-        item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + width + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
+        item = '<div id="' + id + '_title' + '" class="subtool_title" tooltype="'+$(toolElem).find('[tooltype]').attr("tooltype")+'" subtype="'+$(toolElem).find('[subtype]').attr("subtype")+'" style="width:' + (width + margin - 5) + 'px' + '; height:' + height + 'px' + '; left:' + left + 'px' + '; bottom:' + (bottom - height - 10) + 'px' + '; display:block; position:absolute; z-index: 9999;" >';
 
         var readonly = '';
         if(!ldshake_project_isedit())

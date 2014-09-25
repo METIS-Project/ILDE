@@ -61,6 +61,10 @@ function ldshake_get_template($template, $format = null){
         'msf_a02' => array('02_TaskAnalysisTemplate_size'),
         ///MSF
 
+        ///google draw
+        'mooc_canvas' => array('mooc_canvas'),
+        ///google draw
+
         't1e' => array('e_text_integrat'),
         't2e' => array('e_equip'),
         't3e' => array('e_mapa'),

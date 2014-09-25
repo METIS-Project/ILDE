@@ -39,7 +39,7 @@ $(document).ready(function () {
     $('<div id="user_avatar_preview"><img src="'+masterimage+'" /></div>') 
     .insertAfter($('#user_avatar'));
     
-    $('<div id="user_avatar_preview_title"><label>Preview</label></div>').insertBefore($('#user_avatar_preview'));
+    $('<div id="user_avatar_preview_title"><label>' + t9n['Preview'] + '</label></div>').insertBefore($('#user_avatar_preview'));
     
 }); 
 

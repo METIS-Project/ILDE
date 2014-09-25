@@ -189,7 +189,7 @@ class lds_viewTools
 
     public static function detailedHistorySupport($lds)
     {
-        $supported = array("google_docs", "google_spreadsheet");
+        $supported = array("google_docs", "google_spreadsheet", "google_draw");
 
         return in_array($lds->editor_type, $supported);
     }

@@ -802,7 +802,7 @@ width: 955px;
 }
 
 #lds_view_actions {
-	height: 20px;
+	/*height: 20px;*/
 	font-size: 13px;
 }
 
@@ -1246,6 +1246,10 @@ a.rightbutton,#lds_view_actions span {
 a.leftbutton {
 	font-size: 13px;
 	padding: 3px 5px;
+}
+
+#lds_view_actions a.leftbutton {
+    display: inline-block;
 }
 
 a.rightbutton {
@@ -2457,6 +2461,7 @@ div.cc_info_icon > div.cc_icon_title {
 .subtool_title textarea {
     width: 100%;
     height: 100%;
+    font-size: 10px;
     border-width: 0px;
     padding: 0px;
     margin: 0px;

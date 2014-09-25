@@ -799,6 +799,8 @@ class EditorsFactory
             return new GoogleEditor($document);
         if($document->editorType == 'google_spreadsheet')
             return new GoogleEditor($document);
+        if($document->editorType == 'google_draw')
+            return new GoogleEditor($document);
         if($document->editorType == 'openglm')
             return new UploadEditor($document);
         if($document->editorType == 'cadmos')
@@ -824,7 +826,10 @@ class EditorsFactory
         if($document->editorType == 'google_docs')
             return new GoogleEditor($document);
         if($document->editorType == 'google_spreadsheet')
-            return new GoogleEditor($document);    }
+            return new GoogleEditor($document);
+        if($document->editorType == 'google_draw')
+            return new GoogleEditor($document);
+    }
 
 	public static function getTempInstance($editorType)
 	{
@@ -845,6 +850,8 @@ class EditorsFactory
         if($editorType == 'google_docs')
             return new GoogleEditor(null, $editorType);
         if($editorType == 'google_spreadsheet')
+            return new GoogleEditor(null, $editorType);
+        if($editorType == 'google_draw')
             return new GoogleEditor(null, $editorType);
     }
 }
@@ -1951,16 +1958,21 @@ SQL;
         $file = new Google_Service_Drive_DriveFile();
         $file->setTitle($title);
         $file->setDescription($description);
-        $file->setMimeType($mimeType);
         $file->setWritersCanShare(false);
         $file->setFileSize(strlen($data));
         try {
-            $createdFile = $this->_service->files->insert($file, array(
-                'data' => $data,
-                'mimeType' => $mimeType,
-                'uploadType' => 'media',
-                'convert' => true,
-            ));
+            if($mimeType == "google_doc_id") {
+                $createdFile = $this->_service->files->copy($data['data'], $file);
+            } else {
+                $file->setMimeType($mimeType);
+                $file->setFileSize(strlen($data));
+                $createdFile = $this->_service->files->insert($file, array(
+                    'data' => $data,
+                    'mimeType' => $mimeType,
+                    'uploadType' => 'media',
+                    'convert' => true,
+                ));
+            }
         } catch (Exception $e) {
             return false;
         }
@@ -2037,7 +2049,8 @@ SQL;
             $mimeType = 'text/html';
             if($format == 'docx') {
                 $mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
-            }
+            } elseif ($format == 'google_doc_id')
+                $mimeType = "google_doc_id";
             $data = $template;
         }
 
@@ -2069,16 +2082,21 @@ SQL;
         $file = new Google_Service_Drive_DriveFile();
         $file->setTitle($title);
         $file->setDescription($description);
-        $file->setMimeType($mimeType);
         $file->setWritersCanShare(false);
-        $file->setFileSize(strlen($data));
         try {
-            $createdFile = $service->files->insert($file, array(
-                'data' => $data,
-                'mimeType' => $mimeType,
-                'uploadType' => 'media',
-                'convert' => true,
-            ));
+            if($mimeType == "google_doc_id") {
+                $createdFile = $this->_service->files->copy($data, $file);
+            } else {
+                $file->setMimeType($mimeType);
+                $file->setFileSize(strlen($data));
+
+                $createdFile = $service->files->insert($file, array(
+                    'data' => $data,
+                    'mimeType' => $mimeType,
+                    'uploadType' => 'media',
+                    'convert' => true,
+                ));
+            }
         } catch (Exception $e) {
             return false;
         }
@@ -2335,6 +2353,10 @@ SQL;
             case 'google_docs':
                 $this->savePreviewDoc($google_file);
                 break;
+            case 'google_draw':
+                $this->savePreviewDraw($google_file);
+                $this->saveExportDraw($google_file);
+                break;
             case 'google_spreadsheet':
                 $this->savePreviewSpreadsheet($google_file);
                 $this->saveExportSpreadsheet($google_file);
@@ -2347,6 +2369,7 @@ SQL;
         $item_to_mime = array(
             'pdf' => 'application/pdf',
             'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'svg' => 'image/svg+xml',
         );
 
         if(!($path = $this->getItemPath($item)))
@@ -2371,9 +2394,16 @@ SQL;
         $this->saveGoogleExport("pdf", $google_file);
     }
 
-    protected function savePreviewSpreadsheet($google_file) {
-        global $CONFIG;
+    protected function saveExportDraw($google_file) {
+        //$this->saveGoogleExport("xlsx", $google_file);
+        $this->saveGoogleExport("pdf", $google_file);
+    }
 
+    protected function savePreviewSpreadsheet($google_file) {
+        $this->_document->description = $google_file->embedLink;
+    }
+
+    protected function savePreviewDraw($google_file) {
         $this->_document->description = $google_file->embedLink;
     }
 
@@ -2420,28 +2450,6 @@ SQL;
 
         $file_origin = Editor::getFullFilePath($this->_document->file_guid);
 
-        //create a new file to store the document
-        /*
-        $filestorename = (string)$rand_id;
-        $file = $this->getNewFile($filestorename);
-        copy($file_origin, $file->getFilenameOnFilestore());
-
-        $clone->file_guid = $file->guid;
-        */
-
-        /*
-        if($this->_document->file_imsld_guid) {
-            $file_origin = Editor::getFullFilePath($this->_document->file_imsld_guid);
-
-            //create a new file to store the document
-            $filestorename = (string)$rand_id.'.zip';
-            $file = $this->getNewFile($filestorename);
-            copy($file_origin, $file->getFilenameOnFilestore());
-
-            $clone->file_imsld_guid = $file->guid;
-        }
-
-        */
         $clone->editorType = $this->_document->editorType;
 
         $clone->save();
