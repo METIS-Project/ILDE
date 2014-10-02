@@ -63,7 +63,11 @@
 					) {
 						
 						$new_user = get_entity($guid);
-						
+
+                        if(!empty($CONFIG->register_params)) {
+                            foreach($CONFIG->register_params as $param_func)
+                                $param_func();
+                        }
 						//Pau: Save extra fields of register form
 						$new_user->expectations = $expectations;
 						//$new_user->isnew = '1';

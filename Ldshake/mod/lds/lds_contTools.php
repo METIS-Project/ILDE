@@ -108,6 +108,9 @@ function ldshake_guid_from_array($elements) {
 
     $elements = array_values($elements);
 
+    if(is_numeric($elements[0]))
+        return $elements;
+
     if(isset($elements[0]->lds_guid))
         $gstring = 'lds_guid';
     elseif(isset($elements[0]->lds_id))
@@ -125,6 +128,31 @@ function ldshake_guid_from_array($elements) {
     }
 
     return $guids;
+}
+
+function ldshake_query_design_implementation_list($userid, $params) {
+    $lds_id_id = get_metastring_id("lds_id");
+
+    if(!$lds_id_id) {
+        return null;
+    }
+
+    $query['select'] = "lds_guid.string AS guid, 'object' AS type";
+
+    $query['join'] = <<<SQL
+JOIN metadata i ON i.entity_guid = e.guid
+JOIN metastrings lds_guid ON i.value_id = lds_guid.id
+SQL;
+
+    $query['where'] = <<<SQL
+i.name_id = {$lds_id_id}
+SQL;
+
+    $query['group_by'] = <<<SQL
+lds_guid.string
+SQL;
+
+    return $query;
 }
 
 function ldshake_custom_query_implemented_lds($userid, $params) {
@@ -694,7 +722,7 @@ function ldshake_dummy_callback($row) {
 }
 
 function ldshake_guid_callback($row) {
-    return $row->guid;
+    return (int)$row->guid;
 }
 
 function ldshake_available_users_callback($row) {

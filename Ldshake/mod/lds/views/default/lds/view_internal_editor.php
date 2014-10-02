@@ -103,7 +103,7 @@ function encodeURIComponent($str) {
                 <?php endif; ?>
             <?php endif; ?>
             <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
-            <?php if ($lds->editor_type != 'gluepsrest' && $lds->editor_type != 'project_design'): ?>
+            <?php if (/*$lds->editor_type != 'gluepsrest' &&*/ $lds->editor_type != 'project_design'): ?>
                 <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
                 <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
             <?php endif; ?>

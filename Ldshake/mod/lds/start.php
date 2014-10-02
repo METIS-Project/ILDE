@@ -753,12 +753,6 @@ function lds_exec_browse ($params)
     $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
     //echo microtime(true) - $time.' tf<br />';
 
-    /*
-    $time = microtime(true);
-    $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
-    echo microtime(true) - $time.' tfl<br />';
-    */
-
     $tools = array();
 
     $vars['editor_subtype'] = array(
@@ -2662,16 +2656,28 @@ function lds_exec_help ($params) {
 }
 
 function lds_exec_test2 ($params) {
-    /*
-    $vle = get_entity($params[1]);
-    $mm = new MoodleManager($vle);
-    $res = var_export($mm->getVleInfo(), true);
-    //$res = print_r($mm->addScorm(2,'new scorm 4'.' '. date("D M Y  H:m:s")), true);
-    page_draw("test", '<pre>'.$res.'</pre>');
-    //echo "test";
-    */
-    include_once(__DIR__.'/stadistics.php');
-    lds_tracking_user_authoring_tool_saved();
+
+    $custom = array(
+        'build_callback' => 'ldshake_query_design_implementation_list',
+        'params' => array(),
+    );
+
+    $implemented_lds_guid = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 9999, 0, null, null, "time", false, null, false, $custom, true, null);
+    $implemented_lds = ldshake_lds_from_array($implemented_lds_guid);
+
+    $body = "";
+    $lds_implementations_list = array();
+    foreach($implemented_lds as $lds_rich) {
+        $body .= '<p>lds</p>';
+        $body .= elgg_view("lds/browselist", array('list' => array('list' => $lds_rich)));
+        $lds_implementations = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 5, 0, "lds_id", $lds_rich->lds->guid, "time", false, null, true);
+        $body .= '<p>implementations</p>';
+        $body .= elgg_view("lds/browselist", array('list' => $lds_implementations));
+    }
+
+
+
+    page_draw("Test", $body);
 }
 
 function lds_exec_admin ($params) {

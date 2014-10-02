@@ -97,6 +97,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <div id="rich_text_box" style="display: block;">
                 <?php endif; ?>
                 <?php if(strstr($editor, 'google')): ?>
+                    <div class="google-docs-blocking-user"></div>
                     <iframe id="lds_support_editor_iframe" alt_src="<?php echo htmlentities($support_editor['document_iframe_url']);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php else: ?>
                     <textarea name="body" id="lds_edit_body" tabindex="2"></textarea>
@@ -119,6 +120,7 @@ echo elgg_view('messages/list', array('object' => $sysmessages));
                 <?php endif; ?>
 
                 <?php if(strstr($editor, 'google')): ?>
+                    <div class="google-docs-blocking-user"></div>
                     <iframe id="lds_editor_iframe" src="<?php echo htmlentities($document_iframe_url);?>" width="958" height="616" style="border: 0px solid grey"></iframe>
                 <?php endif; ?>
 

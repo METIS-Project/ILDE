@@ -368,6 +368,12 @@
 
 #lds_edit_contents {
 	margin-top: 10px;
+    position: relative;
+    z-index: 20;
+}
+
+#lds_editor_iframe {
+    z-index: 30;
 }
 
 #lds_edit_title {
@@ -2491,4 +2497,14 @@ form[name="myldSform"] {
 .profile_counter.current {
     color: white;
     font-weight: bold;
+}
+
+.google-docs-blocking-user {
+    position: absolute;
+    z-index: 40;
+    top: 0px;
+    background-color: #FFFFFF;
+    width: 297px;
+    height: 55px;
+    left: 800px;
 }

@@ -20,10 +20,17 @@
 	if (($_SESSION['user']->admin) && ($vars['show_admin'])) 
 		$admin_option = true;
 		
-	$form_body = "<br />";
-	$form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (required)</label>" . elgg_view('input/text' , array('internalname' => 'dfyhr745u5e4h45t3y545euy45hgtr', 'class' => "registerform", 'value' => $name));
+
+    $form_body = "<br />";
+
+$form_body .= "<p><label class=\"sidelabel\">" . T('High school') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $institution, 'options_values' => array(
+        'pinguin' => 'Escola del pingüí',
+    ))) . "</p>";
+
+
+$form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (required)</label>" . elgg_view('input/text' , array('internalname' => 'dfyhr745u5e4h45t3y545euy45hgtr', 'class' => "registerform", 'value' => $name));
 	$form_body .= "<div class=\"annotation\" style=\"padding-left: 270px;margin-bottom: 20px;\">" . elgg_echo('name:label') . "</div>";
-	
+
 	$form_body .= "<br /><label class=\"sidelabel\">" . elgg_echo('email') . " (required)</label>" . elgg_view('input/text' , array('internalname' => 'hdg7867rehg54ht937hg398g4', 'class' => "registerform", 'value' => $email));
     $form_body .= "<div class=\"annotation\" style=\"padding-left: 270px;margin-bottom: 20px;\">" . T('LdShake will use this address to contact you about changes to the site. It will not be passed onto any other organisations') . "</div>";
     $form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'ddyhryeryheryheyheueyhehgh5g', 'class' => "registerform", 'value' => '')) . "</p>";
