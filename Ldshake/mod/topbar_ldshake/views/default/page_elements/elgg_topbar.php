@@ -80,20 +80,7 @@ if (isloggedin()) :
 				<a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo $static_resources["topbar_logo"]; ?></a>
 			</div>
 			<div id="toolbarlinks">
-				<ul id="toolbar_options">
-					<li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("New LdS") ?></a></li>
-					<!--<li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollage/">New WebCollage LdS</a></li-->
-					<li id="tb_mylds"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("My LdS") ?></a></li>
-					<li id="tb_browselds"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Browse LdS") ?></a></li>
-					<li id="tb_ldshakers"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
-					<?php
-					//allow people to extend this top menu
-					echo elgg_view('elgg_topbar/extend', $vars);
-					?>
-                    <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
-
-				</ul>
-                <?php ldshake_mode_view('topbar/new'); ?>
+                <?php ldshake_mode_view('topbar/topbar'); ?>
             </div>
 		</div>
 	</div>

@@ -55,10 +55,13 @@
 	</ul>
 	
 	<?php if ($am_i_starter || isadminloggedin()): ?>
-	<div class="sharing_field" id="read_all_wrapper">
-		<input type="checkbox" name="read_all" id="read_all" checked="checked" />
-		<span><?php echo T("Allow all LdShakers to view this LdS") ?></span>
-	</div>
+
+        <?php if (ldshake_allow_read_all_sharing()): ?>
+        <div class="sharing_field" id="read_all_wrapper">
+            <input type="checkbox" name="read_all" id="read_all" checked="checked" />
+            <span><?php echo T("Allow all LdShakers to view this LdS") ?></span>
+    	</div>
+        <?php endif; ?>
 	
 	<div class="sharing_field">
 		<div class="floated-field" style="margin-right:18px;visibility:hidden;" id="add_viewer_wrapper">

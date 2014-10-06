@@ -34,32 +34,19 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-function ldshake_highschool_register_input(&$user) {
-    $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    ldshake_highschool_register($user, $highschool_value, 'pupil');
-}
-
-function ldshake_highschool_register(&$user, $highschool_value, $role) {
-    global $highschool_institutions;
-    $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    $user->highschool = $highschool_institutions[$highschool_value]['code'];
-    $user->role = $role;
-}
-
-function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query) {
-    $query['permissions'] .= <<<SQL
-
-SQL;
-
-    return $query;
-}
-
-function ldshake_mode_ldsnew($params) {
-    $params['data']['all_can_read'] = 'false';
-
-    return $params['data'];
-}
-
-function ldshake_mode_allow_read_all_sharing() {
-    return false;
-}
+?>
+<ul id="toolbar_options">
+    <li id="tb_wording"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Wording") ?></a></li>
+    <li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("New LdS") ?></a></li>
+    <!--<li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollage/">New WebCollage LdS</a></li-->
+    <li id="tb_mylds"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("My LdS") ?></a></li>
+    <li id="tb_browselds"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Browse LdS") ?></a></li>
+    <li id="tb_ldshakers"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
+    <?php
+    //allow people to extend this top menu
+    echo elgg_view('elgg_topbar/extend', $vars);
+    ?>
+    <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
+</ul>
+<?php ldshake_mode_view('topbar/new'); ?>
+<?php ldshake_mode_view('topbar/wording'); ?>

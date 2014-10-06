@@ -196,6 +196,12 @@ function site_configuration() {
     }
 }
 
+function ldshake_mode_configuration() {
+    global $CONFIG;
+    if(file_exists($CONFIG->path . 'mod/lds/mode/' . $CONFIG->ldshake_mode . '/register_funcs.php'))
+        include($CONFIG->path . 'mod/lds/mode/' . $CONFIG->ldshake_mode . '/register_funcs.php');
+}
+
 	/**
 	 * Function that provides some config initialisation on system init
 	 *

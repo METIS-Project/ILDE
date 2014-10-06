@@ -53,6 +53,17 @@ $(document).ready(function()
         $('#tb_newlds a').toggleClass('menu_active');
     });
 
+    $('#tb_wording').click (function (e)
+    {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var left = $("#tb_wording").position().left-5;
+        $('#toolbar_wording_types').css("left" , left+"px");
+        $('#toolbar_wording_types').fadeToggle(200);
+        $('#tb_wording a').toggleClass('menu_active');
+    });
+
     $('#toolbar_lds_types').mouseenter(function(){
         $(this).find('li')
             .css('background-color', '')
@@ -110,6 +121,7 @@ $(document).ready(function()
         $('#toolbar_lds_types').fadeOut(200);
         $('.menu').fadeOut(200);
         $('#tb_newlds a').removeClass('menu_active');
+        $('#tb_wording a').removeClass('menu_active');
 
         $('#ldshake_topbar_user_menu').hide();
         $('#ldshake_topbar_user_options').removeClass('menu_active');

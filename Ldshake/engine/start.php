@@ -224,7 +224,7 @@ foreach($boot as $b) {
 }
 
 site_configuration();
-
+ldshake_mode_configuration();
 		// Load plugins
 
 //exit;

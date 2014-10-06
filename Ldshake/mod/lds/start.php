@@ -915,6 +915,13 @@ function lds_exec_new ($params)
 
     ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
 
+    if(function_exists("ldshake_mode_ldsnew")) {
+        $vars = ldshake_mode_ldsnew(
+            array(
+                'data' => $vars)
+        );
+    }
+
     echo elgg_view('lds/editform',$vars);
     //echo microtime(true) - $time." form<br>";
     global $start_time;

@@ -35,7 +35,7 @@
  ********************************************************************************/
 
 ?>
-<div id="toolbar_lds_types" class="menu">
+<div id="toolbar_wording_types" class="menu">
 <ul>
 <li class="menu_suboption"><?php echo T("Problem 1") ?></li>
 <li class="menu_suboption"><?php echo T("Problem 2") ?></li>

@@ -855,7 +855,17 @@ OR
 )
 SQL;
 
+    if(function_exists("ldshake_mode_build_permissions")) {
+        $query = ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query);
+    }
     return $query;
+}
+
+function ldshake_allow_read_all_sharing() {
+    if(function_exists("ldshake_mode_allow_read_all_sharing")) {
+        return ldshake_mode_allow_read_all_sharing();
+    } else
+        return true;
 }
 
 function ldshake_tag_callback($row) {
