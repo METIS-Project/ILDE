@@ -918,7 +918,9 @@ function lds_exec_new ($params)
     if(function_exists("ldshake_mode_ldsnew")) {
         $vars = ldshake_mode_ldsnew(
             array(
-                'data' => $vars)
+                'data' => $vars,
+                'params' => &$params
+            )
         );
     }
 
@@ -2064,6 +2066,12 @@ function lds_exec_view ($params)
     $vars['starter'] = get_user($vars['lds']->owner_guid);
 
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
+
+    $vars['minimal'] = false;
+
+    if(function_exists("ldshake_mode_view_minimal")) {
+        $vars['minimal'] = ldshake_mode_view_minimal($vars);
+    }
 
 	$body = elgg_view('lds/view_internal',$vars);
 	page_draw($vars['lds']->title. ': ' .$vars['currentDoc']->title, $body);

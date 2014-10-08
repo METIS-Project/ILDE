@@ -2985,7 +2985,7 @@ SQL;
             //$query_end = (int)$offset < 150 ? 0 : (int)$offset - 150;
 
             $query_base = <<<SQL
-SELECT e.guid FROM {$CONFIG->dbprefix}objects_property e
+SELECT DISTINCT e.guid FROM {$CONFIG->dbprefix}objects_property e
 {$order_query['join']}
 {$custom_join}
 {$mj}

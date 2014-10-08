@@ -34,22 +34,46 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-function ldshake_highschool_register_input(&$user) {
+function ldshake_mode_open_register(&$user) {
     $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    ldshake_highschool_register($user, $highschool_value, 'pupil');
+    ldshake_highschool_register($user, $highschool_value, 'student');
+}
+
+function ldshake_mode_csv_register(&$user, $params) {
+    if(!isset($params[0]) or !isset($params[1]))
+        return false;
+    $user->school   = $params[0];
+    $user->role     = $params[1];
 }
 
 function ldshake_highschool_register(&$user, $highschool_value, $role) {
-    global $highschool_institutions;
     $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    $user->highschool = $highschool_institutions[$highschool_value]['code'];
+    if(isset($highschool_institutions[$highschool_value]))
+        $user->school = $highschool_value;
+    else
+        throw new Exception("Invalid institution code");
+
     $user->role = $role;
 }
 
 function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query) {
-    $query['permissions'] .= <<<SQL
+    $role_msid = get_metastring_id('role');
+    $student_msid = get_metastring_id('student');
+    $teacher_msid = get_metastring_id('teacher');
 
+    $user = get_user($user_id);
+    if($user->role == 'teacher' and !$writable_only) {
+        $query['join'] .= <<<SQL
+
+LEFT JOIN metadata m_role ON m_role.entity_guid = e.owner_guid
 SQL;
+
+        $query['permission'] .= <<<SQL
+OR (
+  m_role.name_id = {$role_msid} AND m_role.value_id = {$student_msid}
+)
+SQL;
+    }
 
     return $query;
 }
@@ -57,9 +81,30 @@ SQL;
 function ldshake_mode_ldsnew($params) {
     $params['data']['all_can_read'] = 'false';
 
+    if(isset($params['params'][1]) and isset($params['params'][2])) {
+        if($params['params'][1] == 'wording' and is_numeric($params['params'][2])) {
+            $template_lds = get_entity($params['params'][2]);
+            $template_tags = explode(',', $template_lds->tags);
+
+            if(in_array('wording', $template_tags)) {
+                if($template_documents = get_entities_from_metadata('lds_guid', $template_lds->guid,'object','LdS_document', 0, 100))
+                    $params['data']['initDocuments'][0]->body = $template_documents[0]->description;
+            }
+        }
+    }
+
     return $params['data'];
 }
 
 function ldshake_mode_allow_read_all_sharing() {
+    return false;
+}
+
+function ldshake_mode_view_minimal($params) {
+    $lds = $params['lds'];
+    $tags = explode(',', $lds->tags);
+    if(in_array("wording", $tags))
+        return true;
+
     return false;
 }

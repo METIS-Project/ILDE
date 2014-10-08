@@ -56,6 +56,8 @@ foreach($user_array as $user_row) {
     $password = "{$user_fields[1]}";
     $email = "{$user_fields[4]}";
 
+    $extra_fields = array_slice($user_fields, 5);
+
     try {
         validate_username($username);
         validate_email_address($email);
@@ -70,6 +72,9 @@ foreach($user_array as $user_row) {
         $user->name = $name;
         $user->email = $email;
         $user->password = $password;
+        if(function_exists("ldshake_mode_csv_register") and !empty($extra_fields)) {
+            ldshake_mode_csv_register($user, $extra_fields);
+        }
         $user->save();
         $updated++;
     } else {
@@ -78,6 +83,9 @@ foreach($user_array as $user_row) {
             $user = get_user($guid);
             $user->admin_created = true;
             $user->isnew = '1';
+            if(function_exists("ldshake_mode_csv_register") and !empty($extra_fields)) {
+                ldshake_mode_csv_register($user, $extra_fields);
+            }
             $user->save();
 
             //Create new document

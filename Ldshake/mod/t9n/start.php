@@ -145,10 +145,11 @@ function T ($copy) {
 		$translation = $CONFIG->t9n[$copy]; 
 	} else {
 		$translation = $copy;
-        if($CONFIG->url == "http://web.dev/ilde/") {
+/*        if($CONFIG->url == "http://web.dev/ilde/") {
             $copy = addcslashes($copy, '"');
             exec("echo '\"{$copy}\" => \"\",' >> " . $CONFIG->tmppath . "notrans_{$CONFIG->language}.txt");
         }
+*/
 	}
 
     //$translation = $copy;

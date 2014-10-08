@@ -101,7 +101,11 @@
 							admin_gatekeeper(); // Only admins can make someone an admin
 							$new_user->admin = 'yes';
 						}
-						
+
+                        if(function_exists("ldshake_mode_open_register")) {
+                            ldshake_mode_open_register($user);
+                        }
+
 						// Send user validation request on register only
 						request_user_validation($guid);
 						

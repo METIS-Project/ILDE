@@ -40,27 +40,30 @@
 	<div id="content_area_user_title">
 		<h2><?php echo $lds->title ?></h2>
 	</div>
-	<div id="lds_view_actions">
-		<input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
-		<input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
-		<?php if ($lds->canEdit()): ?>
-			<?php if (!lds_contTools::isLockedBy($lds->guid)): ?>
-			<?php if ($lds->owner_guid == get_loggedin_userid()): ?>
-			<a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this LdS") ?></a>
-			<?php endif; ?>
-			<a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
-			<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
-			<?php else: ?>
-			<span><?php echo T("%1 is editing this LdS", lds_contTools::isLockedBy($lds->guid)->name) ?></span>
-			<?php endif; ?>
-		<?php endif; ?>
-		<a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
-        <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
-        <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
-	</div>
-<div id="lds_view_tab_container" style="width:953px;" class="scrollable">
-<?php /** Botonets de scroll **/ ?>
-<div class="arrow right">►</div><div class="arrow left">◄</div>
+    <?php if(empty($minimal)): ?>
+        <div id="lds_view_actions">
+            <input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
+            <input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
+            <?php if ($lds->canEdit()): ?>
+                <?php if (!lds_contTools::isLockedBy($lds->guid)): ?>
+                    <?php if ($lds->owner_guid == get_loggedin_userid()): ?>
+                        <a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this LdS") ?></a>
+                    <?php endif; ?>
+                    <a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
+                    <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'edit') ?>"><?php echo T("Edit this LdS") ?></a>
+                <?php else: ?>
+                    <span><?php echo T("%1 is editing this LdS", lds_contTools::isLockedBy($lds->guid)->name) ?></span>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <a class="leftbutton" href="<?php echo lds_viewTools::url_for($lds, 'history') ?>"><?php echo T("View revision history") ?></a>
+            <a id="duplicate_design" class="leftbutton" href="#"><?php echo T("Duplicate this LdS") ?></a>
+            <a class="leftbutton" href="<?php echo $CONFIG->url . 'pg/lds/tree/' . $lds->guid ?>"><?php echo T("View duplicates") ?></a>
+        </div>
+
+        <div id="lds_view_tab_container" style="width:953px;" class="scrollable">
+            <?php /** Botonets de scroll **/ ?>
+            <div class="arrow right">►</div><div class="arrow left">◄</div>
 <?php /** Aquí es importante no indentar líneas ni dejar código html con un newline al final, por el css inline-block. **/ ?>
 <ul id="lds_view_tabs" class="content">
 <?php if ($infoComments): ?>
@@ -157,11 +160,11 @@
             <div style="clear:both"></div>
 		</div>
 	<?php endif; ?>
-
+	<?php endif; ?>
+    <?php endif;/*minimal*/ ?>
     <div id="the_lds_wrapper">
         <iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>"></iframe>
     </div>
-<?php endif; ?>
 </div>
 
 <!-- Hidden stuff -->
