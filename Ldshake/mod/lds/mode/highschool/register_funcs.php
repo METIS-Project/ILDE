@@ -87,8 +87,11 @@ function ldshake_mode_ldsnew($params) {
             $template_tags = explode(',', $template_lds->tags);
 
             if(in_array('wording', $template_tags)) {
-                if($template_documents = get_entities_from_metadata('lds_guid', $template_lds->guid,'object','LdS_document', 0, 100))
-                    $params['data']['initDocuments'][0]->body = $template_documents[0]->description;
+                if($template_documents = get_entities_from_metadata('lds_guid', $template_lds->guid,'object','LdS_document', 0, 100)) {
+                    $initDocuments = json_decode($params['data']['initDocuments']);
+                    $initDocuments[0]->body = $template_documents[0]->description;
+                    $params['data']['initDocuments'] = json_encode($initDocuments);
+                }
             }
         }
     }
