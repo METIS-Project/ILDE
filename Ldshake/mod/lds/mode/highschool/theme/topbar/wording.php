@@ -37,8 +37,14 @@
 ?>
 <div id="toolbar_wording_types" class="menu">
 <ul>
-<li class="menu_suboption"><?php echo T("Problem 1") ?></li>
-<li class="menu_suboption"><?php echo T("Problem 2") ?></li>
-<li class="menu_suboption"><?php echo T("Problem 3") ?></li>
+    <?php
+    global $CONFIG;
+        $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'wording', 'time', true);
+        if(empty($list))
+        $list = array();
+    ?>
+    <?php foreach($list as $element): ?>
+        <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/view/'.$element->lds->guid ?>"><?php echo $element->lds->title ?></a></li>
+    <?php endforeach; ?>
 </ul>
 </div>

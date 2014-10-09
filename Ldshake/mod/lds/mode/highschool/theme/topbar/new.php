@@ -56,7 +56,15 @@
                 <li id="tb_conceptualize_new4" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_spreadsheet"><?php echo T("Google Spreadsheet") ?></a></li>
                 <li id="tb_conceptualize_new9" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Upload image") ?></a></li>
             <?php else: ?>
-                <li id="tb_conceptualize_new10" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/wording/"><?php echo T("Document") ?></a></li>
+                <?
+                global $CONFIG;
+                $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'answer_template', 'time', true);
+                if(empty($list))
+                $list = array();
+                ?>
+                <?php foreach($list as $element): ?>
+                    <li class="menu_option"><a href="<?php echo $CONFIG->url.'pg/lds/new/wording/'.$element->lds->guid ?>"><?php echo $element->lds->title ?></a></li>
+                <?php endforeach; ?>
             <?php endif; ?>
         </ul>
     </div>

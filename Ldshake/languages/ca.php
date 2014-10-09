@@ -1126,7 +1126,7 @@ No pots contestar a aquest correu.
 'profile:resetdefault' => 'Restaurar perfil predeterminat',
 'profile:type' => 'Tipus de perfil',
 'registerok' => 'Has registrat correctament  %s.',
-'register' => 'Registra',
+'register' => 'Registre',
 'resetpassword' => 'Canviar contrassenya',
 'river:widget:description:friends' => 'Mostrar qué estan fent els  teus LdShakers.',
 'river:widget:description' => 'Visualitza la teva activitat recent.',

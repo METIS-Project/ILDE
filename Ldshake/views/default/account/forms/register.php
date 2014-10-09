@@ -23,9 +23,7 @@
 
     $form_body = "<br />";
 
-$form_body .= "<p><label class=\"sidelabel\">" . T('High school') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $institution, 'options_values' => array(
-        'pinguin' => 'Escola del pingüí',
-    ))) . "</p>";
+$form_body .= "<p><label class=\"sidelabel\">" . T('High school') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $institution, 'options_values' => array_merge(array('0' => 'Selecciona la teva escola'), $CONFIG->schools))) . "</p>";
 
 
 $form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (required)</label>" . elgg_view('input/text' , array('internalname' => 'dfyhr745u5e4h45t3y545euy45hgtr', 'class' => "registerform", 'value' => $name));

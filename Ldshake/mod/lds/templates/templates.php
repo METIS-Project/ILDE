@@ -35,7 +35,7 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-function ldshake_get_template($template, $format = null){
+function ldshake_get_template($template, $format = null) {
     global $CONFIG;
 
     $templates = array(

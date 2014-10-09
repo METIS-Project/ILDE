@@ -214,3 +214,19 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
 
     $CONFIG->project_templates['full'] = array_merge($CONFIG->project_templates['full'], $CONFIG->project_templates['msf']);
 }
+
+if($CONFIG->ldshake_mode == 'highschool') {
+    $CONFIG->project_templates['full'] = array();
+        if(isloggedin()) {
+        $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'answer_template', 'time', true);
+
+        foreach($list as $element) {
+            $CONFIG->project_templates['full']["{$element->lds->guid}"] = array(
+                'title' => $element->lds->title,
+                'type'  => 'doc',
+                'subtype'   => $element->lds->guid,
+            );
+        }
+    }
+}
+

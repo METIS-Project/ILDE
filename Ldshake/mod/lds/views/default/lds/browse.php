@@ -36,11 +36,21 @@
 
 ?>
 
-<?php extract($vars) ?>
+<?php extract($vars); ?>
+<?php
+$disable_search_patterns = false;
+$disable_external_repository = false;
+$tools_term = "Tools";
+
+if(function_exists("ldshake_mode_browselds")) {
+    ldshake_mode_browselds($disable_search_patterns, $disable_external_repository, $tools_term);
+}
+
+?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<div id="left_filters">
-            <h3><?php echo T("Tools") ?></h3>
+            <h3><?php echo T($tools_term) ?></h3>
             <ul class="tag_selector">
 
                 <?php
@@ -56,10 +66,16 @@
                 ?></li>
 
             </ul>
+
+            <?php if(!$disable_search_patterns):?>
             <h3><a href="<?php echo $url.'pg/lds/patterns'?>" style="color:black;"><?php echo T("Search patterns") ?></a></h3>
             <br />
+            <?php endif; ?>
+
+            <?php if(!$disable_external_repository):?>
             <h3><a href="<?php echo $url.'pg/lds/repository'?>" style="color:black;"><?php echo T("External repositories") ?></a></h3>
             <br />
+            <?php endif; ?>
 
             <?php
 			if (is_array($tags)):

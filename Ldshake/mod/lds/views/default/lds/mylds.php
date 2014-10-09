@@ -39,6 +39,12 @@
 <?php extract($vars);
 global $CONFIG;
 $disable_projects = $CONFIG->disable_projects;
+$disable_implementations = false;
+
+if(function_exists("ldshake_mode_mylds")) {
+    ldshake_mode_mylds($disable_projects, $disable_implementations);
+}
+
 ?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
@@ -59,12 +65,15 @@ $disable_projects = $CONFIG->disable_projects;
                 <li><a<?php if ($section == 'trashed') echo ' class="current"' ?> href="<?php echo lds_viewTools::getUrl('trashed') ?>"><?php echo T("Trashed") ?></a></li>
             </ul>
 
+            <?php if(!$disable_implementations):?>
             <ul id="lds_side_sections_imp">
                 <li><a<?php if ($section == 'imp') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations' ?>"><?php echo T("All my implementations") ?></a></li>
                 <li><a<?php if ($section == 'imp-created-by-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/created-by-me' ?>"><?php echo T("Created by me") ?></a></li>
                 <li><a<?php if ($section == 'imp-shared-with-me') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/shared-with-me' ?>"><?php echo T("Shared with me") ?></a></li>
                 <li><a<?php if ($section == 'imp-trashed') echo ' class="current"' ?> href="<?php echo $url . 'pg/lds/implementations/trashed' ?>"><?php echo T("Trashed") ?></a></li>
             </ul>
+            <?php endif; ?>
+
         <?php endif; ?>
 
     </div>
@@ -96,7 +105,7 @@ $disable_projects = $CONFIG->disable_projects;
 			<input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
 			<?php endif; ?>
             <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
-            <input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" />
+            <?php if(!$disable_implementations): ?><input type="button" style="border-color:#999; margin:5px 0;" id="implementations_by_design" value="<?php echo T("See implementations") ?>" disabled="disabled" /><?php endif; ?>
 		</div>
 		<ul id="my_lds_list">
 			<?php foreach($list as $item): ?>
@@ -117,7 +126,7 @@ $disable_projects = $CONFIG->disable_projects;
                         <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php echo T("viewer"); ?><?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
 					<?php if ($item->locked): ?>
 					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
 					<?php endif; ?>
@@ -134,7 +143,7 @@ $disable_projects = $CONFIG->disable_projects;
 						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php echo T("viewer"); ?><?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
                     <span class="lds_date timeago_timestamp" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
                     <div class="clearfloat"></div>
                 </div>

@@ -214,6 +214,10 @@ if (is_array($_POST['documents']))
 	}
 }
 
+if(function_exists("ldshake_mode_save_lds")) {
+    ldshake_mode_save_lds($lds);
+}
+
 if ($isNew) {
     $lds->notify = 1;
     $lds->save();

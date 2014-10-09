@@ -34,6 +34,20 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
+global $CONFIG;
+
+$CONFIG->schools = array(
+"ies0001" => "INS La Ribera",
+"ies0002" => "IES Els Arcs",
+"ies0003" => "IES Claret",
+"ies0004" => "IES Verdaguer",
+"ies0005" => "IES Jesus i Maria",
+"ies0006" => "Thau Sant Cugat",
+"ies0007" => "Escola Projecte",
+"ies0008" => "IES Marina",
+"ies0009" => "International School of Barcelona (ISB)",
+);
+
 function ldshake_mode_open_register(&$user) {
     $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
     ldshake_highschool_register($user, $highschool_value, 'student');
@@ -79,6 +93,7 @@ SQL;
 }
 
 function ldshake_mode_ldsnew($params) {
+    global $CONFIG;
     $params['data']['all_can_read'] = 'false';
 
     if(isset($params['params'][1]) and isset($params['params'][2])) {
@@ -86,11 +101,19 @@ function ldshake_mode_ldsnew($params) {
             $template_lds = get_entity($params['params'][2]);
             $template_tags = explode(',', $template_lds->tags);
 
-            if(in_array('wording', $template_tags)) {
+            if(in_array('answer_template', $template_tags)) {
                 if($template_documents = get_entities_from_metadata('lds_guid', $template_lds->guid,'object','LdS_document', 0, 100)) {
                     $initDocuments = json_decode($params['data']['initDocuments']);
                     $initDocuments[0]->body = $template_documents[0]->description;
                     $params['data']['initDocuments'] = json_encode($initDocuments);
+                    $params['data']['editor_type'] = 'doc,'.$template_lds->guid;
+                    $params['data']['editor_subtype'] = $template_lds->guid;
+                    $initLdS = json_decode($params['data']['initLdS']);
+                    $user = get_loggedin_user();
+                    if(isset($CONFIG->schools[$user->school]))
+                        $initLdS->tags = $CONFIG->schools[$user->school];
+
+                    $params['data']['initLdS'] = json_encode($initLdS);
                 }
             }
         }
@@ -100,14 +123,43 @@ function ldshake_mode_ldsnew($params) {
 }
 
 function ldshake_mode_allow_read_all_sharing() {
-    return false;
+    $user = get_loggedin_user();
+
+    if($user->role == 'student')
+        return false;
+    else
+        return true;
 }
 
 function ldshake_mode_view_minimal($params) {
+    $user = get_loggedin_user();
     $lds = $params['lds'];
     $tags = explode(',', $lds->tags);
-    if(in_array("wording", $tags))
+    if(in_array("answer_template", $tags) and ($user->role == "student" or $user->role == "teacher"))
         return true;
 
     return false;
+}
+
+function ldshake_mode_save_lds(&$lds) {
+    if(is_numeric($lds->editor_subtype)) {
+        if($template_lds = get_entity($lds->editor_subtype)) {
+            $template_tags = explode(',', $template_lds->tags);
+
+            if(in_array('answer_template', $template_tags)) {
+                $lds->parent = $lds->editor_subtype;
+            }
+        }
+    }
+}
+
+function ldshake_mode_mylds(&$disable_projects, &$disable_implementations) {
+    $disable_projects = true;
+    $disable_implementations = true;
+}
+
+function ldshake_mode_browselds(&$disable_search_patterns, &$disable_external_repository, &$tools_term) {
+    $disable_search_patterns = true;
+    $disable_external_repository = true;
+    $tools_term = "Problemes";
 }

@@ -8,8 +8,17 @@ $translations = array (
 "Tags"
 => "Etiquetes",
 
+"viewer"
+=> "lector",
+
 "Discipline"
 => "Tema",
+
+"all"
+=> "tots els",
+
+"to"
+=> "a",
 
 "Pedagogical approach"
 => "Tipus d'activitat",
