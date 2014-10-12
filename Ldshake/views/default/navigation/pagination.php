@@ -63,7 +63,7 @@
 			$prevurl .= "?{$word}=" . $prevoffset;
 		}
 		
-		echo "<a href=\"{$prevurl}\" class=\"pagination_previous\">&laquo; ". elgg_echo("previous") ."</a> ";
+		echo "<a href=\"{$prevurl}\" class=\"pagination_previous\">&laquo; ". T("Previous") ."</a> ";
 		
 	}
 

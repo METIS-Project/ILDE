@@ -26,7 +26,7 @@ $obj = get_entity($guid);
 
 if ( ($obj instanceof ElggUser) && ($obj->canEdit()))
 {
-    if(set_user_validation_status($obj->guid, true, 'admin')) {
+    if(set_user_validation_status($obj->guid, true, 'admin') && $obj->enable()) {
         system_message(T('The user has been validated.'));
 
         //notify_user($obj->guid, $CONFIG->site->guid, elgg_echo('email:resetpassword:subject'), sprintf(elgg_echo('email:resetpassword:body'), $obj->name, $password, $obj->username), NULL, 'email');

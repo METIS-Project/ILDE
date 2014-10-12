@@ -35,13 +35,13 @@
  ********************************************************************************/
 
 ?>
-<ul id="toolbar_options">
-    <li id="tb_wording"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Problemes") ?></a></li>
-    <li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Solució") ?></a></li>
+<ul id="toolbar_options" style="padding-left: 0px">
+    <li id="tb_wording" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Problemes") ?></a></li>
+    <li id="tb_newlds" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Solució") ?></a></li>
     <!--<li id="tb_newlds"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/webcollage/">New WebCollage LdS</a></li-->
-    <li id="tb_mylds"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("My LdS") ?></a></li>
-    <li id="tb_browselds"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Browse LdS") ?></a></li>
-    <li id="tb_ldshakers"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
+    <li id="tb_mylds" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/"><?php echo T("My LdS") ?></a></li>
+    <li id="tb_browselds" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Browse LdS") ?></a></li>
+    <li id="tb_ldshakers" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
     <?php
     //allow people to extend this top menu
     echo elgg_view('elgg_topbar/extend', $vars);

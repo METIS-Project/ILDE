@@ -76,6 +76,7 @@ foreach ($confPaths as $k=>$v)
 
 $CONFIG->vle_key = $vle_key;
 $CONFIG->google_drive = $google_drive;
+$CONFIG->disable_contextual_help = $disable_contextual_help;
 $CONFIG->editor_debug = $editor_debug;
 $CONFIG->moodle = $moodle;
 if(isset($glueps_url))

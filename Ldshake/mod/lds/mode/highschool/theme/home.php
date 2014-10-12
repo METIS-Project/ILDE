@@ -1,10 +1,9 @@
-<?php extract ($vars);
-?><!DOCTYPE html>
+<?php extract ($vars) ?><!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title><?php echo $site->name.': '.$site->description ?></title>
+<title><?php echo T("LdShake: Learning Desgin Solutions") ?></title>
 <link rel="icon" type="image/png" href="<?php echo $url ?>_graphics/favicon.ico" />
 <?php echo elgg_view('page_elements/analytics');?>
 <style>
@@ -25,7 +24,7 @@ h1, h2
 {
     font-size: 19px;
     margin: 10px 0;
-    /*text-align: right;*/
+    text-align: right;
 }
 
 #topbar
@@ -59,7 +58,9 @@ h1, h2
     top: 50%;
     left: 50%;
     margin-top: -175px;/* half elements height*/
-    margin-left: -235px;/* half elements width*/
+    margin-left: -455px;/* half elements width*/
+    width: 911px;
+    height: 350px;
 }
 
 #logo
@@ -172,17 +173,6 @@ a.underfield
     font-weight: bold;
 }
 
-#about {
-    margin-top: 7px;
-}
-
-#about a
-{
-    font-weight: bold;
-    font-size: 14px;
-    color: #fff;
-}
-
 #footer
 {
     margin: 0 30px;
@@ -196,7 +186,7 @@ a img
 
 #footer-logos {
     height: 66px;
-    /*width: 824px;*/
+    width: 824px;
     float: left;
 }
 
@@ -211,10 +201,6 @@ a img
 #footer-logos li {
     padding: 5px;
     float: left;
-}
-
-#footer-logos img {
-    height: 57px;
 }
 
 #footer-contents
@@ -302,62 +288,49 @@ ul.links a
             <input type="submit" value="Login"  tabindex="3" />
         </div>
     </form>
-    <?php if(!$vars['config']->disable_registration): ?>
-        <div id="register">
-            <?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a>
-            <div id="about"><span><a target="_blank" href="<?php echo $url ?>views/default/misc/ilde/about.php"><?php echo T("About") ?></span></a></div>
-        </div>
-    <?php endif; ?>
+    <div id="register"><?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a></div>
 </div>
 <?php echo elgg_view('messages/list', array('object' => $sysmessages)); ?>
 <div id="middlecontents">
     <div id="contentswrapper">
         <div id="logo">
             <h1>
-                <img src="<?php echo $url ?>_graphics/metis/ilde-logo.png" alt="Ilde logo" />
+                <img src="<?php echo $url ?>_graphics/ldshake-logo-home.png" alt="LdShake logo" />
             </h1>
-            <h2><img height="70" src="<?php echo $url ?>_graphics/metis/ilde-home.png" alt="Ilde logo" /></h2>
+            <h2><?php echo T("A Web2.0 tool for the <span %1>social sharing and<br /> co-editing</span> of <span %2>learning design solutions</span>.", 'style="color: #709900;"', 'style="color: #960001;"') ?></h2>
         </div>
-        <!--<div id="claims">
-				<div class="home-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
-					<img src="_graphics/ld-shake-1.PNG" height="60" />
-					<p><?php echo T("Shake hands with other teachers!") ?></p>
-				</div>
+        <div id="claims">
+            <div class="home-pill" style="background-color: #DDEFAA; transform: rotate(1.1deg); -o-transform: rotate(1.1deg); -moz-transform: rotate(1.1deg); -webkit-transform: rotate(1.1deg);">
+                <img src="_graphics/ld-shake-1.PNG" height="60" />
+                <p><?php echo T("Shake hands with other teachers!") ?></p>
+            </div>
 
-				<div class="home-pill" style="background-color: #99DBE7; transform: rotate(-1.3deg); -o-transform: rotate(-1.3deg); -moz-transform: rotate(-1.3deg); -webkit-transform: rotate(-1.3deg);">
-					<img src="_graphics/ld-shake-2.PNG" height="60" />
-					<p><?php echo T("Shake different learning design solutions!") ?></p>
-				</div>
+            <div class="home-pill" style="background-color: #99DBE7; transform: rotate(-1.3deg); -o-transform: rotate(-1.3deg); -moz-transform: rotate(-1.3deg); -webkit-transform: rotate(-1.3deg);">
+                <img src="_graphics/ld-shake-2.PNG" height="60" />
+                <p><?php echo T("Shake different learning design solutions!") ?></p>
+            </div>
 
-				<div class="home-pill" style="background-color: #FEFBC2; transform: rotate(-0.9deg); -o-transform: rotate(-0.9deg); -moz-transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg);">
-					<img src="_graphics/ld-shake-3.PNG" height="60" />
-					<p><?php echo T("Shake your students with the learning designs!") ?></p>
-				</div>
+            <div class="home-pill" style="background-color: #FEFBC2; transform: rotate(-0.9deg); -o-transform: rotate(-0.9deg); -moz-transform: rotate(-0.9deg); -webkit-transform: rotate(-0.9deg);">
+                <img src="_graphics/ld-shake-3.PNG" height="60" />
+                <p><?php echo T("Shake your students with the learning designs!") ?></p>
+            </div>
 
-				<div class="home-pill" style="background-color: #FFD9D4; transform: rotate(1.9deg); -o-transform: rotate(1.9deg); -moz-transform: rotate(1.9deg); -webkit-transform: rotate(1.9deg);">
-					<img src="_graphics/ld-shake-4.PNG" height="60" />
-					<p><?php echo T("Shake up your way of working!") ?></p>
-				</div>
+            <div class="home-pill" style="background-color: #FFD9D4; transform: rotate(1.9deg); -o-transform: rotate(1.9deg); -moz-transform: rotate(1.9deg); -webkit-transform: rotate(1.9deg);">
+                <img src="_graphics/ld-shake-4.PNG" height="60" />
+                <p><?php echo T("Shake up your way of working!") ?></p>
+            </div>
 
-				<div style="clear:both;"></div>
-			</div>-->
+            <div style="clear:both;"></div>
+        </div>
     </div>
 </div>
 <div id="bottombar">
     <div id="footer">
         <div id="footer-logos">
             <ul>
-                <li><a href="http://metis-project.org/index.php" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logo-footer-metis.png" alt="<?php echo T("METIS") ?>"></a></li>
-                <li><a href="http://ec.europa.eu/education/lifelong-learning-programme/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logos-footer-llp.png" alt="<?php echo T("Lifelong Learning Programme") ?>"></a></li>
+                <li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/upf-logo.png" alt="<?php echo T("UPF logo") ?>"></a></li>
+                <li><a href="http://gti.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/gti-small.png" alt="<?php echo T("GTI UPF logo") ?>"></a></li>
                 <li><a href="http://ldshake.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/powered-by-ldshake.png" alt="<?php echo T("Powered by LdShake") ?>" /></a></li>
-                <li><a href="http://www.gsic.uva.es/glueps/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/glueps-inside.png" alt="<?php echo T("GLUEPS") ?>"></a></li>
-                <li><a href="http://www.gsic.uva.es/webcollage/index.php?l=en" target="_blank"><img src="<?php echo $url ?>_graphics/metis/WC-inside.png" alt="<?php echo T("WebCollage") ?>"></a></li>
-                <li><a href="http://sourceforge.net/projects/openglm/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/openglm-supported.png" alt="<?php echo T("OpenGLM") ?>"></a></li>
-                <li><a href="http://cosy.ds.unipi.gr/index.php?option=com_content&view=article&id=117&Itemid=71" target="_blank"><img src="<?php echo $url ?>_graphics/metis/cadmos-supported.png" alt="<?php echo T("CADMOS") ?>"></a></li>
-                <li><a href="http://www.open.ac.uk/blogs/OULDI/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/ouldi-inside-supported.png" alt="<?php echo T("Ouldi tools") ?>"></a></li>
-                <!--<li><a href="http://www.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/upf-logo.png" alt="<?php echo T("UPF logo") ?>"></a></li>
-                    <li><a href="http://gti.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/gti-small.png" alt="<?php echo T("GTI UPF logo") ?>"></a></li>
-                    <li><a href="http://ldshake.upf.edu" target="_blank"><img src="<?php echo $url ?>_graphics/powered-by-ldshake.png" alt="<?php echo T("Powered by LdShake") ?>" /></a></li>-->
             </ul>
         </div>
     </div>

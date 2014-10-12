@@ -45,7 +45,7 @@
 		
 		$admin = get_input('admin');
 		if (is_array($admin)) $admin = $admin[0];
-		
+
 		//if ($resp->is_valid)
 		if (true)
 		{
@@ -54,6 +54,14 @@
 		// For now, just try and register the user
 		
 				try {
+                    if(function_exists("ldshake_mode_open_register_validation")) {
+                        try {
+                            ldshake_mode_open_register_validation();
+                        } catch(Exception $e) {
+                            throw new RegistrationException($e->getMessage());
+                        }
+                    }
+
 					if (
 						(
 							(trim($password)!="") &&
@@ -102,17 +110,16 @@
 							$new_user->admin = 'yes';
 						}
 
-                        if(function_exists("ldshake_mode_open_register")) {
-                            ldshake_mode_open_register($user);
-                        }
-
 						// Send user validation request on register only
 						request_user_validation($guid);
-						
+
+                        if(function_exists("ldshake_mode_open_register")) {
+                            ldshake_mode_open_register($new_user);
+                        }
+
 						if (!$new_user->admin)
 							$new_user->disable('new_user');	// Now disable if not an admin
-						
-						
+
 						system_message(sprintf(elgg_echo("registerok"),$CONFIG->sitename));
 						
 						forward(); // Forward on success, assume everything else is an error...

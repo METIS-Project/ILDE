@@ -157,9 +157,14 @@ function lds_init()
 
     require_once __DIR__.'/templates/project_templates.php';
 
+    if(empty($CONFIG->disable_contextual_help)) {
+        extend_elgg_settings_page('lds/settings/help', 'usersettings/user');
+        register_plugin_hook('usersettings:save','user','ldshake_contextual_help_settings_save');
+    }
 
-    extend_elgg_settings_page('lds/settings/help', 'usersettings/user');
-    register_plugin_hook('usersettings:save','user','ldshake_contextual_help_settings_save');
+    if(function_exists("ldshake_mode_extensions")) {
+        ldshake_mode_extensions();
+    }
 
 }
 
@@ -802,7 +807,7 @@ function lds_exec_browse ($params)
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
         //echo microtime(true) - $time.' bc<br />';
         //$time = microtime(true);
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true);
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true, null, 'viewlist');
         //echo microtime(true) - $time.' be<br />';
     }
 

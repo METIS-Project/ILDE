@@ -48,48 +48,141 @@ $CONFIG->schools = array(
 "ies0009" => "International School of Barcelona (ISB)",
 );
 
+function ldshake_mode_open_register_validation() {
+    global $CONFIG;
+
+    $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
+
+    if(isset($CONFIG->schools[$highschool_value]))
+        return true;
+    else {
+        throw new Exception(T('Has de seleccionar una escola.'));
+        return false;
+    }
+}
+
 function ldshake_mode_open_register(&$user) {
     $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
     ldshake_highschool_register($user, $highschool_value, 'student');
+    $user->isExpert = 1;
 }
 
 function ldshake_mode_csv_register(&$user, $params) {
-    if(!isset($params[0]) or !isset($params[1]))
+    global $CONFIG;
+    if(!isset($params[0]) or !isset($params[1]) or !isset($CONFIG->schools[$params[0]]))
         return false;
     $user->school   = $params[0];
     $user->role     = $params[1];
+    $user->isExpert = 1;
 }
 
 function ldshake_highschool_register(&$user, $highschool_value, $role) {
-    $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    if(isset($highschool_institutions[$highschool_value]))
+    global $CONFIG;
+    if(isset($CONFIG->schools[$highschool_value]))
         $user->school = $highschool_value;
     else
-        throw new Exception("Invalid institution code");
+        throw new Exception("Invalid school code");
 
     $user->role = $role;
 }
 
-function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query) {
+function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query, $context = null) {
     $role_msid = get_metastring_id('role');
     $student_msid = get_metastring_id('student');
     $teacher_msid = get_metastring_id('teacher');
+    $tags_msid = get_metastring_id('tags');
+    $wording_msid = get_metastring_id('wording');
+    $answer_template_msid = get_metastring_id('answer_template');
+
+    if(!($role_msid
+    or $student_msid
+    or $teacher_msid
+    or $tags_msid
+    or $wording_msid
+    or $answer_template_msid
+    ))
+        return $query;
 
     $user = get_user($user_id);
     if($user->role == 'teacher' and !$writable_only) {
+        $myfirstlds = sanitise_string(T("My first LdS"));
         $query['join'] .= <<<SQL
 
-LEFT JOIN metadata m_role ON m_role.entity_guid = e.owner_guid
+LEFT JOIN objects_entity oe_title ON e.guid = oe_title.guid
+LEFT JOIN (
+SELECT m_answer.entity_guid AS answer
+FROM metadata m_answer
+WHERE m_answer.name_id = {$role_msid} AND m_answer.value_id = {$student_msid}
+) AS t_answer
+ON t_answer.answer = e.owner_guid
 SQL;
 
         $query['permission'] .= <<<SQL
 OR (
-  m_role.name_id = {$role_msid} AND m_role.value_id = {$student_msid}
+   t_answer.answer IS NOT NULL AND oe_title.title <> '{$myfirstlds}'/*student owner*/
 )
 SQL;
     }
 
+    if($user->role == 'student' and !$writable_only) {
+
+    }
+
     return $query;
+}
+
+function ldshake_mode_build_permissions_acv($user_id, $writable_only, $isglobalenv, $query, $context = null) {
+    $role_msid = get_metastring_id('role');
+    $student_msid = get_metastring_id('student');
+    $teacher_msid = get_metastring_id('teacher');
+    $tags_msid = get_metastring_id('tags');
+    $wording_msid = get_metastring_id('wording');
+    $answer_template_msid = get_metastring_id('answer_template');
+
+    if(!($role_msid
+        or $student_msid
+        or $teacher_msid
+        or $tags_msid
+        or $wording_msid
+        or $answer_template_msid
+    ))
+        return $query;
+
+    $user = get_user($user_id);
+
+    if(($user->role == 'student' or $user->role == 'teacher') and !$writable_only and $context == 'viewlist') {
+        $guids = ldshake_mode_wording_guids();
+        if(!empty($guids)) {
+            $guids = implode(',', $guids);
+            $query = <<<SQL
+(
+    e.all_can_view = 1
+    AND
+    e.guid NOT IN({$guids})
+) OR
+SQL;
+        }
+
+    }
+
+    return $query;
+}
+
+function ldshake_mode_wording_guids() {
+    global $CONFIG;
+
+    $tags_msid = get_metastring_id('tags');
+    $wording_msid = get_metastring_id('wording');
+    $answer_template_msid = get_metastring_id('answer_template');
+
+    $query = "SELECT m.entity_guid AS guid FROM {$CONFIG->dbprefix}metadata m ";
+    $query .= " WHERE m.name_id = {$tags_msid} AND ( m.value_id = {$wording_msid} OR m.value_id = {$answer_template_msid} )";
+
+    $guids = array();
+    $guids = get_data($query, "ldshake_guid_query");
+    if(!$guids)
+        $guids = array();
+    return $guids;
 }
 
 function ldshake_mode_ldsnew($params) {
@@ -135,7 +228,7 @@ function ldshake_mode_view_minimal($params) {
     $user = get_loggedin_user();
     $lds = $params['lds'];
     $tags = explode(',', $lds->tags);
-    if(in_array("answer_template", $tags) and ($user->role == "student" or $user->role == "teacher"))
+    if(in_array("wording", $tags) and ($user->role == "student" or $user->role == "teacher"))
         return true;
 
     return false;
@@ -162,4 +255,29 @@ function ldshake_mode_browselds(&$disable_search_patterns, &$disable_external_re
     $disable_search_patterns = true;
     $disable_external_repository = true;
     $tools_term = "Problemes";
+}
+
+function ldshake_mode_extensions() {
+    if(isloggedin()) {
+        $user = get_loggedin_user();
+        if(isset($user->role)) {
+            extend_elgg_settings_page('lds/mode/highschool/settings/school', 'usersettings/user', 1);
+            register_plugin_hook('usersettings:save','user','ldshake_mode_school_settings_save');
+        }
+    }
+}
+
+function ldshake_mode_school_settings_save() {
+    global $CONFIG;
+
+    $user = get_loggedin_user();
+    $school_id = get_input('school', null);
+
+    if(!$school_id)
+        return false;
+
+    if(isset($CONFIG->schools[$school_id])) {
+        $user->school = $school_id;
+    }
+    $user->save();
 }

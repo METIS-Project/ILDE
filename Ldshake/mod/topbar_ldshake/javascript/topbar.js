@@ -49,6 +49,12 @@ $(document).ready(function()
 
         var left = $("#tb_newlds").position().left-5;
         $('#toolbar_lds_types').css("left" , left+"px");
+
+        if(!$('#tb_newlds a').hasClass('menu_active')) {
+            $('.menu').fadeOut(200);
+            $('.menu_active').removeClass('menu_active');
+        }
+
         $('#toolbar_lds_types').fadeToggle(200);
         $('#tb_newlds a').toggleClass('menu_active');
     });
@@ -60,6 +66,11 @@ $(document).ready(function()
 
         var left = $("#tb_wording").position().left-5;
         $('#toolbar_wording_types').css("left" , left+"px");
+
+        if(!$('#tb_wording a').hasClass('menu_active')) {
+            $('.menu').fadeOut(200);
+            $('.menu_active').removeClass('menu_active');
+        }
         $('#toolbar_wording_types').fadeToggle(200);
         $('#tb_wording a').toggleClass('menu_active');
     });

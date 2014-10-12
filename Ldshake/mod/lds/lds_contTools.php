@@ -777,7 +777,7 @@ SQL;
     return $query;
 }
 
-function buildPermissionsQuery($user_id, $writable_only = true, $isglobalenv = false) {
+function buildPermissionsQuery($user_id, $writable_only = true, $isglobalenv = false, $context = null) {
     global $CONFIG;
 
     if(!$user_id)
@@ -825,13 +825,17 @@ SQL;
 JOIN objects_properties op ON e.guid = op.guid
 SQL;*/
 
-        $query['permission'] = <<<SQL
-{$query['permission']}
+        $acv_p = <<<SQL
 (
     e.all_can_view = 1
 )
 OR
 SQL;
+
+        if(function_exists("ldshake_mode_build_permissions_acv")) {
+            $acv_p = ldshake_mode_build_permissions_acv($user_id, $writable_only, $isglobalenv, $acv_p, $context);
+        }
+        $query['permission'] .= $acv_p;
     }
 
     $group_permissions = "LEFT JOIN(
@@ -856,7 +860,7 @@ OR
 SQL;
 
     if(function_exists("ldshake_mode_build_permissions")) {
-        $query = ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query);
+        $query = ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query, $context);
     }
     return $query;
 }
@@ -2815,18 +2819,18 @@ SQL;
     }
 
     public static function getUserTagFrequency($category) {
-        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 0, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_relevance_query", "callback" => "ldshake_tag_callback", "params" => $category));
+        return self::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 0, 0, null, null, null, false, null, false, array("build_callback" => "ldshake_tag_relevance_query", "callback" => "ldshake_tag_callback", "params" => $category), false, false, 0, 'viewlist');
     }
 
-    public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null) {
-        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom = null);
+    public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $context = null) {
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom = null, false, false, 0, $context);
     }
 
     public static function getUserEditableLdS($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $guid_only = false) {
         return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, true, null, $enrich, $custom, $guid_only);
     }
 
-    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null, $owner_guid = 0) {
+    public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null, $owner_guid = 0, $context = null) {
         global $CONFIG;
 
         if($count) $enrich = false;
@@ -2861,7 +2865,7 @@ SQL;
         }
 
         //$permissions_query = self::buildPermissionsQuery($user_id, $writable_only);
-        $permissions_query = buildPermissionsQuery($user_id, $writable_only, ldshake_isglobalenv($type, $subtype));
+        $permissions_query = buildPermissionsQuery($user_id, $writable_only, ldshake_isglobalenv($type, $subtype), $context);
 
         $rich_query['columns'] = '';
         $rich_query['join'] = '';

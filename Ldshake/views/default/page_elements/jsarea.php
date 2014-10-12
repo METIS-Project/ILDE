@@ -1,5 +1,6 @@
 <script type="text/javascript">
 <?php global $ldshake_jscache_break;?>
+<?php global $CONFIG;?>
 var baseurl = '<?php echo $vars['url'] ?>';
 var language = '<?php echo $vars['config']->language ?>';
 var isadminloggedin = <?php echo (isadminloggedin() ? 'true' : 'false') ?>;
@@ -8,7 +9,7 @@ var t9nc = {
 };
 var ldshake_cache = <?php echo json_encode($ldshake_jscache_break) ?>;
 <?php if(isloggedin()): ?>
-var contextual_help = <?php echo (empty(get_loggedin_user()->disable_contextual_help) ? 'true' : 'false'); ?>
+var contextual_help = <?php echo ((empty(get_loggedin_user()->disable_contextual_help ) and empty($CONFIG->disable_contextual_help)) ? 'true' : 'false'); ?>
 <?php endif; ?>
 </script>
 <!--[if (!IE)|(gt IE 8)]><!-->

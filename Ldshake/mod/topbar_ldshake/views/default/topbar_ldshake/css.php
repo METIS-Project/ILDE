@@ -14,7 +14,7 @@
 
 #ldshake_topbar_logo {
 	float: left;
-	margin-right: 30px;
+	margin-right: 20px;
 }
 
 #ldshake_topbar_logo img {
@@ -136,7 +136,7 @@ margin-right: 20px;
 	font-size: 13px;
 	margin: 0;
 	padding: 2px;
-	width: 200px;
+	width: 190px;
 	height: 19px;
 	text-shadow: 0px 1px 0px #fff;
 }
@@ -154,7 +154,7 @@ margin-right: 20px;
 
 #ldshake_topbar_search_submit {
 	position: relative;
-	left: 205px;
+	left: 195px;
 	top: 3px;
 }
 
@@ -235,8 +235,8 @@ margin-right: 20px;
 
 .menu, .menu_option:first-child{
     z-index: 1000;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    /*border-top-left-radius: 5px;
+    border-top-right-radius: 5px;*/
 }
 
 #implement_project {

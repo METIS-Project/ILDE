@@ -20,6 +20,24 @@ $translations = array (
 "to"
 => "a",
 
+"required"
+=> "requerit",
+
+"optional"
+=> "opcional",
+
+"by"
+=> "per",
+
+"Previous"
+=> "Previ",
+
+"Latest revision on"
+=> "Útima revisió el:",
+
+"Started on"
+=> "Data de creació:",
+
 "Pedagogical approach"
 => "Tipus d'activitat",
 
@@ -563,6 +581,9 @@ $translations = array (
 "Click and drag a square below to match how you want your picture cropped.  A preview of your cropped picture will appear in the box on the right.  When you are happy with the preview, click 'Create your avatar'. This cropped image will be used throughout the site as your avatar."
 => "Dibuixa un quadrat a la imatge de sota per definir l'àrea que es retallarà. A la dreta apareixarà una previsualització de la imatge retallada. Prem el botó 'Retalla la imatge' quan estiguis satisfet amb l'enquadrament.",
 
+"Create your avatar"
+=> "Retalla la imatge",
+
 "Profile picture"
 => "Imatge de perfil",
 
@@ -630,6 +651,9 @@ $translations = array (
 => "No ets un LdShaker encara?",
 
 "Register here!"
+=> "Registra't!",
+
+"Register"
 => "Registra't!",
 
 "A Web2.0 tool for the <span %1>social sharing and<br /> co-editing</span> of <span %2>learning design solutions</span>."
@@ -810,7 +834,7 @@ $translations = array (
 => "Persona Card (Google Docs)",
 
 "Please specify if you want to receive notifications by e-mail."
-=> "Si ues plau indica si vols rebre notificacions per e-mail",
+=> "Si us plau indica si vols rebre notificacions per email",
 
 "Private messages to community members."
 => "Missatges privats als membres de la comunitat",
@@ -846,7 +870,7 @@ $translations = array (
 => "Mostra menys tags",
 
 "Show more tags"
-=> "Mostra mes tags",
+=> "Mostra més tags",
 
 "sort by"
 => "Ordenar per",
@@ -891,14 +915,14 @@ $translations = array (
     'A fully complete didactic unit is an exemplar ready to use, while the structure of a group activity dynamics is an incomplete chunck which needs inputs to be used.' => 'Una unitat didàctica completa és un exemplar llest per a utilitzar, mentre que l’estructura d’una dinàmica d’activitat de grup es un fragment incomplet que necessita inputs per ser utilitzat.',
     'All LdS' => 'Tots els  LdS',
     'All LdShakers' => 'Tots els LdShakers',
-    'All LdShakers can read' => 'Tots els LdShakers que poden llegir',
+    'All LdShakers can read' => 'Tots els LdShakers poden llegir',
     'All my implementations' => 'Totes les meves implementacions',
     'All my LdS' => 'Tots els meus LdS',
     'All my LdS > implementable in VLE' => 'Tots els meus LdS > implementació en VLE',
     'All my LdS > Implementations' => 'Tots els meus LdS > Implementacions',
     'Allow all LdShakers to view this LdS' => 'Permet a tots els LdShakers llegir aquest LdS',
     'Almost from scratch' => 'Quasi desde zero',
-    'and your password is %1,' => 'i la teva contrassenya és %1,',
+    'and your password is %1,' => 'i la teva contrasenya és %1,',
     'Are you sure you want to delete the following document?' => 'Estàs segur de que vols eliminar el document?',
     'Are you sure you want to delete this message?' => 'Estàs segur de que vols eliminar aquest missatge?',
     'A site where teachers <span style="color:#960001">(LdShakers)</span> co-edit and share Learning design Solutions <span style="color:#960001">(LdS)</span>' => 'Un lloc on professors<span style="color:#960001">(LdShakers)</span> co-editen i comparteixen solucions de dissenys d’aprenentatge (Learning design Solutions o <span style="color:#960001">LdS</span>)',
@@ -971,7 +995,7 @@ $translations = array (
     'External tools' => 'Eines externes',
     'Factors and Concerns' => 'Factors i Preocupacions',
     'Filter by design' => 'Filtrar per disseny',
-    'Forgot your password?' => '¿Has oblidat la teva contrasenya?',
+    'Forgot your password?' => 'Has oblidat la teva contrasenya?',
     'For other conceptualizations' => 'Per a altres conceptualitzacions',
     'Free tags' => 'Tags lliures',
     'General info' => 'Informació general',
@@ -1014,7 +1038,7 @@ $translations = array (
     'My trashed LdS' => 'Els meus LdS descartats',
     'New LdS in LdShake: %1' => 'Nou LdS a LdShake: %1',
     'New LdS' => 'Nou LdS',
-    'Not an LdShaker yet?' => '¿Encara no ets un LdShaker?',
+    'Not an LdShaker yet?' => 'Encara no ets un LdShaker?',
     'Notification settings' => 'Ajustos de notificacions',
     'Only you can edit' => 'Només tu pots editar',
     'Only you can read' => 'Només tu pots llegir',
@@ -1026,12 +1050,12 @@ $translations = array (
     'or' => 'o',
     'Ouldi tools' => 'Eines Ouldi',
     'Participants for course' => 'Participants per al curs',
-    'Password' => 'Contrassenya',
+    'Password' => 'Contrasenya',
     'Patterns Results' => 'Resultats de Patrons',
-    'Pedag. approach' => 'Enfoc pedag.',
+    'Pedag. approach' => 'Enfoc pedagògic',
     'Pedagogical approach' => 'Enfoc pedagògic',
     'Persona Card' => 'Persona Card',
-    'Please, change your password as soon as possible. You can do it by going to "Account Settings". This option will appear if you click your username located at the left of the topbar menu.' => 'Si us plau, canvia la teva contrassenya tan aviat com puguis. Pots canviar-la en “Ajustos de compte”. Aquesta opció apareixerà si fas click en el teu nom d’usuari situat a l’esquerra de la barra de menú superior.',
+    'Please, change your password as soon as possible. You can do it by going to "Account Settings". This option will appear if you click your username located at the left of the topbar menu.' => 'Si us plau, canvia la teva contrasenya tan aviat com puguis. Pots canviar-la en “Ajustos de compte”. Aquesta opció apareixerà si fas click en el teu nom d’usuari situat a l’esquerra de la barra de menú superior.',
     'Please specify which methods you want to permit.' => 'Si us plau, especifica quins mètodes vols permetre.',
     'Please tell us your expectations so we can strive to meet them in future developments' => 'Si us plau, explica’ns les teves expectatives per a que puguem tratar-les en futurs desenvolupaments',
     'Please write a new title for the document:' => 'Si us plau, escriu un nou títol per al document',
@@ -1045,9 +1069,9 @@ $translations = array (
     'Publish this document' => 'Publica aquest document',
     'Publish your LdS' => 'Publica el teu LdS',
     'Recover selected LdS' => 'Recupera els LdS seleccionats',
-    'Register here!' => 'Regístra’t aquí!',
+    'Register here!' => 'Registra’t aquí!',
     'Register your VLE' => 'Registra el teu VLE',
-    'Remember me' => 'Recordar-me',
+    'Remember me' => 'Recorda\'m',
     'Remove selected LdShakers from %1' => 'Borrar els LdShakers seleccionats desde %1',
     'Rename this document' => 'Canviar el nom a aquest document',
     'Republish this document' => 'Republicar auqest document',
@@ -1082,7 +1106,7 @@ $translations = array (
     'Site administration' => 'Administració del LdShake',
     'Start discovering other LdShakers' => 'Comença descobrint altres LdShakers',
     'Started %1 by %2' => 'Iniciat el %1 per %2',
-    'Starter' => 'Arrencar',
+    'Starter' => 'Creador',
     '<strong>Warning:</strong> An older version of this document is published.' => '<strong>Alerta:</strong> Hi ha publicada una versió antiga d’aquest document.',
     'Support Document' => 'Document de Suport',
     'Tags' => 'Etiquetes',
@@ -1116,7 +1140,7 @@ $translations = array (
     'View revision history' => 'Veure l’historial de revisions',
     'VLE configuration' => 'Configuració del VLE',
     'VLE name' => 'Nom del VLE',
-    'VLE password' => 'Contrassenya del VLE',
+    'VLE password' => 'Contrasenya del VLE',
     'VLE sections' => 'Seccions del VLE',
     'VLE type' => 'Tipus de VLE',
     'VLE url' => 'Url del VLE',
@@ -1142,8 +1166,8 @@ $translations = array (
     'Your language' => 'El teu idioma',
     'Your message was successfully sent.' => 'El teu missatge s’ha enviat correctament.',
     'Your name' => 'El teu nom',
-    'Your new password again' => 'La teva nova contrassenya, un altre cop',
-    'Your new password' => 'La teva nova contrassenya',
+    'Your new password again' => 'La teva nova contrasenya, un altre cop',
+    'Your new password' => 'La teva nova contrasenya',
     'Your settings' => 'La teva configuració',
     'Your username is %1' => 'El teu nom d’usuari és %1 ',
     'Your VLE configuration is working properly, these are the available courses' => 'La teva configuració  de VLE està funcionant adequadament, aquests són els cursos disponibles',

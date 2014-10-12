@@ -71,7 +71,7 @@ foreach($user_array as $user_row) {
     if($user = get_user_by_username($username)) {
         $user->name = $name;
         $user->email = $email;
-        $user->password = $password;
+        $user->password = generate_user_password($user, $password);
         if(function_exists("ldshake_mode_csv_register") and !empty($extra_fields)) {
             ldshake_mode_csv_register($user, $extra_fields);
         }
