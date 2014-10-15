@@ -285,7 +285,7 @@ ul.links a
             echo elgg_view('input/hidden', array('internalname' => '__elgg_token', 'value' => $token));
             echo elgg_view('input/hidden', array('internalname' => '__elgg_ts', 'value' => $ts));
             ?>
-            <input type="submit" value="Login"  tabindex="3" />
+            <input type="submit" value="<?php echo elgg_echo("login"); ?>"  tabindex="3" />
         </div>
     </form>
     <div id="register"><?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a></div>

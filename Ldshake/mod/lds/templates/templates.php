@@ -50,6 +50,8 @@ function ldshake_get_template($template, $format = null) {
         'FC' => array('FC','yishay'),
         'HE' => array('HE','HEs'),
         'CF' => array('CF'),
+        'DB' => array('dreambazaar'),
+        'LO' => array('learningobjectives'),
 
         ///MSF
         'msf_a01' => array('01_ActivityAnalysisTemplate'),
@@ -63,6 +65,7 @@ function ldshake_get_template($template, $format = null) {
 
         ///google draw
         'mooc_canvas' => array('mooc_canvas'),
+        'google_draw' => array('new_google_draw'),
         ///google draw
 
         't1e' => array('e_text_integrat'),

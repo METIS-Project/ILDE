@@ -281,3 +281,9 @@ function ldshake_mode_school_settings_save() {
     }
     $user->save();
 }
+
+function ldshake_mode_open_register_welcome(&$title, &$description) {
+    global $CONFIG;
+    $title = "La meva primera proposta";
+    $description = elgg_view('lds/mode/'.$CONFIG->ldshake_mode.'/welcome_lds/welcome_lds_'.$CONFIG->language);
+}

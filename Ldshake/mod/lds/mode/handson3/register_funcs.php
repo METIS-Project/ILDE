@@ -34,18 +34,58 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-?>
-<ul id="toolbar_options" style="padding-left: 0px">
-    <li id="tb_wording" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Problemes") ?></a></li>
-    <li id="tb_newlds" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Proposar solució") ?></a></li>
-    <li id="tb_browse" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Explora") ?></a></li>
-    <li id="tb_ldshakers" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
-    <?php
-    //allow people to extend this top menu
-    echo elgg_view('elgg_topbar/extend', $vars);
-    ?>
-    <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
-</ul>
-<?php ldshake_mode_view('topbar/new'); ?>
-<?php ldshake_mode_view('topbar/wording'); ?>
-<?php ldshake_mode_view('topbar/browse'); ?>
+global $CONFIG;
+
+$CONFIG->community_languages = array(
+    "bg" => "Bulgarian",
+    "ca" => "Catalan",
+    "en" => "English",
+    "fr" => "French",
+    "el" => "Greek",
+    "sl" => "Slovenian",
+    "es" => "Spanish",
+);
+
+function ldshake_mode_get_translations() {
+    global $CONFIG;
+    return  $CONFIG->community_languages;
+}
+
+function ldshake_mode_open_register_validation() {
+    global $CONFIG;
+
+    $highschool_value = get_input('sdfsddfsdfre2352sgdsgsse78gh5g',null);
+
+    if(isset($CONFIG->community_languages[$highschool_value]))
+        return true;
+    else {
+        throw new Exception(T('Please, select you preferred language.'));
+        return false;
+    }
+}
+
+function ldshake_mode_open_register(&$user) {
+    $value = get_input('sdfsddfsdfre2352sgdsgsse78gh5g',null);
+    ldshake_handson3_register($user, $value);
+}
+
+function ldshake_handson3_register(&$user, $value) {
+    global $CONFIG;
+    if(isset($CONFIG->community_languages[$value]))
+        $user->language = $value;
+    else
+        throw new Exception("Invalid language code");
+}
+
+function ldshake_mode_ldsnew($params) {
+    global $CONFIG;
+
+    $initLdS = json_decode($params['data']['initLdS']);
+    $user = get_loggedin_user();
+    if(isset($CONFIG->community_languages[$user->language]))
+        $initLdS->tags = $CONFIG->community_languages[$user->language];
+
+    $params['data']['initLdS'] = json_encode($initLdS);
+
+    return $params['data'];
+}

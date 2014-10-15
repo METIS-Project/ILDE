@@ -198,8 +198,16 @@ function site_configuration() {
 
 function ldshake_mode_configuration() {
     global $CONFIG;
-    if(file_exists($CONFIG->path . 'mod/lds/mode/' . $CONFIG->ldshake_mode . '/register_funcs.php'))
-        include($CONFIG->path . 'mod/lds/mode/' . $CONFIG->ldshake_mode . '/register_funcs.php');
+
+    if(isset($CONFIG->ldshake_submode))
+        $mode = $CONFIG->ldshake_submode;
+    elseif(isset($CONFIG->ldshake_mode))
+        $mode = $CONFIG->ldshake_mode;
+
+    if(isset($mode)) {
+        if(file_exists($CONFIG->path . 'mod/lds/mode/' . $mode . '/register_funcs.php'))
+            include($CONFIG->path . 'mod/lds/mode/' . $mode . '/register_funcs.php');
+    }
 }
 
 	/**

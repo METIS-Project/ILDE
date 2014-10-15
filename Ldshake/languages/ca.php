@@ -473,13 +473,13 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'user:language:success' => "Els ajustos d'idioma s'han desat correctament.",
     'user:language:fail' => "Your language settings could not be saved.",
 
-    'user:username:notfound' => 'Username %s not found.',
+    'user:username:notfound' => 'No s\'ha trobat el nom d\'usuari %s.',
 
-    'user:password:lost' => 'Lost password',
-    'user:password:resetreq:success' => 'Successfully requested a new password, email sent',
-    'user:password:resetreq:fail' => 'Could not request a new password.',
+    'user:password:lost' => 'Contrasenya perduda',
+    'user:password:resetreq:success' => 'Nova contransenya sol·licitada, correu enviat.',
+    'user:password:resetreq:fail' => 'No s\'ha pogut sol·licitar una nova contrasenya.',
 
-    'user:password:text' => 'To generate a new password, enter your username below. We will send the address of a unique verification page to you via email click on the link in the body of the message and a new password will be sent to you.',
+    'user:password:text' => 'Per a generar una nova contrasenya, introdueix el teu nom d\'usuari. T\'enviarem la direcció d\'una pàgina de verificació mitjançant email.',
 
     'user:persistent' => 'Remember me',
     /**
@@ -592,7 +592,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'unban' => "Unban",
     'enable' => "Enable",
     'disable' => "Disable",
-    'request' => "Request",
+    'request' => "Sol·licitar",
     'complete' => "Complete",
     'open' => 'Open',
     'close' => 'Close',

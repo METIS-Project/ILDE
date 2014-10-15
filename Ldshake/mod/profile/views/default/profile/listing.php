@@ -46,7 +46,7 @@
 		if ($vars['entity']->admin)
 			$class.="ldshake-listing-admin";
 
-        if(empty($vars['entity']->validated) && empty($vars['entity']->admin_created))
+        if((empty($vars['entity']->validated) or $vars['entity']->enabled == 'no') && empty($vars['entity']->admin_created))
             $class.="ldshake-user-nonvalidated";
 
 		$info .= "<p><b><a href=\"" . $vars['entity']->getUrl() . "\" rel=\"$rel\" class=\"". $class . "\">" . $vars['entity']->name . "</a></b></p>";

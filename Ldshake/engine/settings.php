@@ -30,6 +30,10 @@ if (isset($ldshake_mode)) {
     $CONFIG->ldshake_mode = $ldshake_mode;
 }
 
+if (isset($ldshake_submode)) {
+    $CONFIG->ldshake_submode = $ldshake_submode;
+}
+
 //ILDE debug mode
 if (isset($debug)) {
     $CONFIG->debug = $debug;

@@ -1,0 +1,19 @@
+<p><strong><span style="font-family:times new roman,serif;"><span style="font-size:18.0pt;">The current situation (context)</span></span></strong></p>
+
+<p><em><span style="font-family:times new roman,serif;"><span style="font-size:12.0pt;">Describe the material and social characteristics of the environment in which you operate. Where will your project take place? Who are the main actors involved? Include images, videos, sketches - anything that would help others understand the opportunities and constraints you are dealing with.</span></span></em></p>
+
+<p><strong><span style="font-family:times new roman,serif;"><span style="font-size:18.0pt;">The change you would like to see (challenge)</span></span></strong></p>
+
+<p><em><span style="font-family:times new roman,serif;"><span style="font-size:12.0pt;">What do you hope to achieve? What would be different if you succeed?</span></span></em></p>
+
+<p>&nbsp;</p>
+
+<p><strong><span style="font-family:times new roman,serif;"><span style="font-size:18.0pt;">How you might go about bringing that change (solution)</span></span></strong></p>
+
+<p><em><span style="font-family:times new roman,serif;"><span style="font-size:12.0pt;">What is your pedagogical approach? Which technologies will you use to implement it, and how?</span></span></em></p>
+
+<p>&nbsp;</p>
+
+<p><strong><span style="font-family:times new roman,serif;"><span style="font-size:18.0pt;">Measures of success (evaluation)</span></span></strong></p>
+
+<p><em><span style="font-family:times new roman,serif;"><span style="font-size:12.0pt;">What would be the indicators that you have succeeded?</span></span></em></p>

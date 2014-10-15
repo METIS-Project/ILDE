@@ -383,6 +383,9 @@ $translations = array (
 "Trash this LdS"
 => "Mou a la paperera",
 
+"Trash this %1"
+=> "Mou a la paperera",
+
 "Sharing options..."
 => "Opcions de compartició",
 
@@ -1020,7 +1023,7 @@ $translations = array (
     'LdS created by me' => 'LdS creats per mi.',
     'LdShake: Learning Desgin Solutions' => 'LdShake: Learning Desgin Solutions',
     'LdShakers' => 'LdShakers',
-    'LdShake will use this address to contact you about changes to the site. It will not be passed onto any other organisations' => 'LdShake utilitzarà aquesta direcció per a contactar amb tu sobre els canvis en la pàgina. No es donarà a conèixer a cap altre organiztació.',
+    'LdShake will use this address to contact you about changes to the site. It will not be passed onto any other organisations' => 'LdShake utilitzarà aquesta direcció per a contactar amb tu sobre els canvis en la pàgina. No es donarà a conèixer a cap altre organització.',
     'LdS History' => 'Història de LdS',
     'LdS shared with me' => 'LdS compartits amb tu',
     'LdS Sharing options' => 'Opcions de compartir LdS',
@@ -1123,7 +1126,6 @@ $translations = array (
     'Trashed' => 'Esborrat',
     'Trash selected implementations' => 'Borra les implementacions seleccionades',
     'Trash selected LdS' => 'Borra els LdS seleccionats',
-    'Trash this LdS' => 'Borra aquest LdS',
     'Unpublish this document' => 'Despublicar aquest document',
     'Untitled Document' => 'Document sense títol',
     'Untitled implementation' => 'Implementació sense títol',

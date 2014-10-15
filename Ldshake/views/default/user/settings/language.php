@@ -23,8 +23,12 @@
 			$value = $CONFIG->language;
 			if ($user->language)
 				$value = $user->language;
-			
-			echo elgg_view("input/pulldown", array('internalname' => 'language', 'value' => $value, 'options_values' => get_installed_translations()));
+
+            $options = get_installed_translations();
+            if(function_exists("ldshake_mode_get_translations")) {
+                $options = ldshake_mode_get_translations();
+            }
+			echo elgg_view("input/pulldown", array('internalname' => 'language', 'value' => $value, 'options_values' => $options));
 		
 		 ?> 
 

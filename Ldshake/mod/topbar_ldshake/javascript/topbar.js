@@ -75,6 +75,22 @@ $(document).ready(function()
         $('#tb_wording a').toggleClass('menu_active');
     });
 
+    $('#tb_browse').click (function (e)
+    {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var left = $("#tb_browse").position().left-5;
+        $('#toolbar_browse_types').css("left" , left+"px");
+
+        if(!$('#tb_browse a').hasClass('menu_active')) {
+            $('.menu').fadeOut(200);
+            $('.menu_active').removeClass('menu_active');
+        }
+        $('#toolbar_browse_types').fadeToggle(200);
+        $('#tb_browse a').toggleClass('menu_active');
+    });
+
     $('#toolbar_lds_types').mouseenter(function(){
         $(this).find('li')
             .css('background-color', '')

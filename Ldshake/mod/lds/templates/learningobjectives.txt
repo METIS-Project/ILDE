@@ -1,0 +1,22 @@
+<p><strong>Defining learning objectives</strong></p>
+
+<p><span style="background:yellow;">Template</span></p>
+
+<p><span style="background:yellow;">Please use this document to specify the learning objectives of your ICT-based learning activity. Delete unnecessary information (e.g. the text in yellow).</span></p>
+
+<p><strong>Theme</strong>: [<span style="background:yellow;">formulate the theme of your ICT-based learning activity</span>]</p>
+
+<p><strong>Learning objectives</strong> [<span style="background:yellow;">list learning objectives using the format below</span>]</p>
+
+<p><em>After finishing this learning activity you should be able&nbsp; to</em> [<span style="background:yellow;">use action verbs as shown below depending on what you want to do</span>]</p>
+
+<ul>
+	<li>[<span style="background:yellow;">in case you want your students better understand a concept, model, relationship, theory, perspective use the following action verbs</span> <span style="background:yellow;">or similar</span>: <em>describe, define, compare, identify, explain, give example</em>]</li>
+	<li>[<span style="background:yellow;">in case you want your students apply a concept, model, theory use the following action verbs</span> <span style="background:yellow;">or similar</span>: &nbsp;<em>illustrate, calculate, draw, demonstrate, estimate, measure</em>].</li>
+	<li>[<span style="background:yellow;">in case you want to stimulate critical thinking, use the following action verbs or similar</span>:&nbsp; <em>analyse, classify, determine, interpret, query, examine</em>]</li>
+	<li>[<span style="background:yellow;">in case you want to develop practical problem solving or decision making skills, use the following action verbs</span> <span style="background:yellow;">or similar</span>:&nbsp; <em>advice, consult, &nbsp;predict, debate, evaluate, justify, judge</em>]</li>
+	<li>[<span style="background:yellow;">in case you want to stimulate creativity, use the following action verbs</span> <span style="background:yellow;">or similar</span>: <em>compose, transform, construct, design, develop</em>]</li>
+	<li>[<span style="background:yellow;">in case you want to develop some performance skills, use the following action verbs or similar</span>: <em>conduct, execute, operate, perform,&nbsp; produce</em>]</li>
+	<li>[<span style="background:yellow;">in case you want to develop metacognitive skills (learning how to learn), use the following action verbs or similar</span>: <em>reflect, self-assess, self-regulate, self-monitor, identify your learning styles and barriers</em>]</li>
+	<li>[<span style="background:yellow;">in case you target attitudes, ethics, moral principles, values, beliefs, use the following action verbs or similar</span>: <em><span style="font-family:times new roman,serif;">express, feel confident, inspire, mobilize, motivate, negotiate, collaborate, nurture, respect, respond sensitively, take responsibility, value, commit to, get excited about, tolerate, care for, resolve conflict, suspend judgement</span></em><span style="font-family:times new roman,serif;">]</span></li>
+</ul>

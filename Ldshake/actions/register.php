@@ -78,14 +78,20 @@
                         }
 						//Pau: Save extra fields of register form
 						$new_user->expectations = $expectations;
-						//$new_user->isnew = '1';
+                        //$new_user->isnew = '1';
+                        $title = T("My first LdS");
+                        $description = elgg_view('lds/welcome_lds/welcome_lds_'.$CONFIG->language);
+
+                        if(function_exists("ldshake_mode_open_register_welcome")) {
+                            ldshake_mode_open_register_welcome($title, $description);
+                        }
 
                         //Create new document
                         $wl = new LdSObject();
                         $wl->access_id = 2;
                         $wl->editor_type = 'doc';
                         $wl->editor_subtype = 'doc';
-                        $wl->title = T("My first LdS");
+                        $wl->title = $title;
                         $wl->owner_guid = $new_user->guid;
                         $wl->container_guid = $new_user->guid;
                         $wl->granularity = '0';
@@ -96,7 +102,8 @@
 
                         $doc = new DocumentObject($wl->guid);
                         $doc->title = T("My first LdS");
-                        $doc->description = elgg_view('lds/welcome_lds/welcome_lds_'.$CONFIG->language);
+                        $doc->description = $description;
+
                         $doc->owner_guid = $new_user->guid;
                         $doc->container_guid = $wl->guid;
                         $doc->access_id = 2;

@@ -35,17 +35,9 @@
  ********************************************************************************/
 
 ?>
-<ul id="toolbar_options" style="padding-left: 0px">
-    <li id="tb_wording" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Problemes") ?></a></li>
-    <li id="tb_newlds" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/new/"><?php echo T("Proposar solució") ?></a></li>
-    <li id="tb_browse" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/lds/browse/"><?php echo T("Explora") ?></a></li>
-    <li id="tb_ldshakers" style="margin-right: 14px"><a href="<?php echo $vars['url']; ?>pg/ldshakers/"><?php echo T("LdShakers") ?></a></li>
-    <?php
-    //allow people to extend this top menu
-    echo elgg_view('elgg_topbar/extend', $vars);
-    ?>
-    <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
-</ul>
-<?php ldshake_mode_view('topbar/new'); ?>
-<?php ldshake_mode_view('topbar/wording'); ?>
-<?php ldshake_mode_view('topbar/browse'); ?>
+<div id="toolbar_browse_types" class="menu">
+    <ul>
+        <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/'?>"><?php echo T("Les meves solucions") ?></a></li>
+        <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/browse/'?>"><?php echo T("Altres solucions") ?></a></li>
+    </ul>
+</div>
