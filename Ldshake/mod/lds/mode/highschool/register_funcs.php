@@ -84,6 +84,7 @@ function ldshake_highschool_register(&$user, $highschool_value, $role) {
         throw new Exception("Invalid school code");
 
     $user->role = $role;
+    $user->save();
 }
 
 function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, $query, $context = null) {
@@ -105,7 +106,7 @@ function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, 
 
     $user = get_user($user_id);
     if($user->role == 'teacher' and !$writable_only) {
-        $myfirstlds = sanitise_string(T("My first LdS"));
+        $myfirstlds = sanitise_string(T("La meva primera proposta"));
         $query['join'] .= <<<SQL
 
 LEFT JOIN objects_entity oe_title ON e.guid = oe_title.guid

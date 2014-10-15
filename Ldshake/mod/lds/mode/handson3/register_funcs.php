@@ -54,9 +54,9 @@ function ldshake_mode_get_translations() {
 function ldshake_mode_open_register_validation() {
     global $CONFIG;
 
-    $highschool_value = get_input('sdfsddfsdfre2352sgdsgsse78gh5g',null);
+    $value = get_input('sdfsddfsdfre2352sgdsgsse78gh5g',null);
 
-    if(isset($CONFIG->community_languages[$highschool_value]))
+    if(isset($CONFIG->community_languages[$value]))
         return true;
     else {
         throw new Exception(T('Please, select you preferred language.'));
