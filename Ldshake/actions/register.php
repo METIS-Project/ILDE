@@ -122,6 +122,7 @@
 
                         if(function_exists("ldshake_mode_open_register")) {
                             ldshake_mode_open_register($new_user);
+                            $new_user->save();
                         }
 
 						if (!$new_user->admin)
