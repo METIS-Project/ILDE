@@ -1001,6 +1001,15 @@ function lds_exec_upload ($params)
     if($params[1] == 'image')
         $vars['upload_link'] = T("Upload a jpeg, png, gif or svg image.");
 
+    if(function_exists("ldshake_mode_ldsnew")) {
+        $vars = ldshake_mode_ldsnew(
+            array(
+                'data' => $vars,
+                'params' => &$params
+            )
+        );
+    }
+
     echo elgg_view('lds/editform_editor',$vars);
 }
 
@@ -1124,7 +1133,16 @@ function lds_exec_neweditor ($params)
 	$vars['title'] = T("New LdS");
 
     ldshake_stats_log_event('new', array($vars['editor_type'], $vars['editor_subtype']));
-	
+
+    if(function_exists("ldshake_mode_ldsnew")) {
+        $vars = ldshake_mode_ldsnew(
+            array(
+                'data' => $vars,
+                'params' => &$params
+            )
+        );
+    }
+
 	echo elgg_view('lds/editform_editor',$vars);
 }
 

@@ -234,6 +234,19 @@ function ldshake_mode_view_minimal($params) {
     return false;
 }
 
+function ldshake_mode_lds_print_license($lds, &$license, &$attributes) {
+    $user = get_loggedin_user();
+    $tags = explode(',', $lds->tags);
+    if(in_array("wording", $tags) and ($user->role == "student" or $user->role == "teacher")) {
+        $license = "";
+        $attributes = "";
+    }
+}
+
+function ldshake_mode_lds_print_postprocess($lds, &$content) {
+    $content = str_replace('ldshake4.upf.edu', 'ldshake4.s.upf.edu', $content);
+}
+
 function ldshake_mode_save_lds(&$lds) {
     if(is_numeric($lds->editor_subtype)) {
         if($template_lds = get_entity($lds->editor_subtype)) {

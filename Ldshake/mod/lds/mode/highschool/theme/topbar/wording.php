@@ -39,7 +39,7 @@
 <ul>
     <?php
     global $CONFIG;
-        $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'wording', 'time', true);
+        $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'wording', '', true);
         if(empty($list))
         $list = array();
     ?>

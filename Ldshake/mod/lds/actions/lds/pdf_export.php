@@ -45,6 +45,7 @@ $doc = get_entity ($doc_guid);
 $license = "";
 
 $lds=get_entity($doc->lds_guid);
+$license= "";
 if($lds->license) {
     $license = elgg_view("lds/license_banner", array("lds"=>$lds));
 }
@@ -53,6 +54,10 @@ $vars['authors'] = ldshake_get_lds_authors($doc);
 $vars['lds'] = $lds;
 $vars['doc'] = $doc;
 $attributes = elgg_view('lds/publish_attr',$vars);
+
+if(function_exists("ldshake_mode_lds_print_license")) {
+    ldshake_mode_lds_print_license($lds, $license, $attributes);
+}
 
 //Wrap the contents into a utf-8 html string. This will allow accents and other alphabets to be displayed correctly
 //Also add some basic styling to resemble the view in the web (line height)
@@ -523,6 +528,10 @@ if(isset($doc->file_pdf_guid)) {
             $contents = str_replace('</body>', '<br />' . $license . $attributes . '</body>', $contents);
             $contents = str_replace('</style>', ' .license_banner{display: none;margin-top:20px;}'.'</style>', $contents);
         }
+    }
+
+    if(function_exists("ldshake_mode_lds_print_postprocess")) {
+        ldshake_mode_lds_print_postprocess($lds, $contents);
     }
 
     //Save the document data to the file

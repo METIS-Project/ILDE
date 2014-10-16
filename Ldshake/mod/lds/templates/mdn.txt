@@ -1,161 +1,76 @@
-<p><p class="MsoTitle"><span lang="EN-GB">Methodology
-Design Narrative Template<o:p></o:p></span></p>
+<p><em>A <a href="http://www.ld-grid.org/resources/representations-and-languages/design-narratives" target="_blank">design narrative</a> is a semi-structured story that illuminates a particular attempt to address a complex challenge. It can be told from the view (and in the voice) of the designer, or the user (the learner or teacher, in the case of learning design). A design narrative recounts an incident where the designer attempted to bring about a change in the user&#39;s world. It details the context of this incident, the objectives of the design and the user, the actions they took and their result, the obstacles they encountered and how they dealt with them.&nbsp;</em><em style="font-size: 12pt; line-height: 1.5em;">See the support document for more information and guidance. </em></p>
 
-<p class="MsoTitle"><span lang="EN-GB" style="font-size: 12pt;">(Information about the
-template at <br>
-http://www.ld-grid.org/resources/representations-and-languages/design-narratives)<o:p></o:p></span></p>
+<p><em>Design narratives are built on the STARR model: Situation, Task, Actions, Results, Reflections. </em></p>
 
-<p class="MsoNormal"><b><span lang="EN-GB">&nbsp;</span></b></p>
+<p style="text-align: center;"><strong>Tell your story as it happened, and leave any interpretation to the end.</strong></p>
 
-<ol style="margin-top:0cm" start="1" type="1">
- <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
-     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Situation <o:p></o:p></span></b></li>
-</ol>
+<p><em>Use the headings in this template for your narrative. Replace the guidance notes with your content. Add or delete sections as you find fit.</em></p>
 
-<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
- .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
- <tbody><tr>
-  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
- </tr>
-</tbody></table>
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;"><span id="docs-internal-guid-8c10cbdb-13b0-61c7-8f46-ed74e24ce602"><span style="font-size: 13px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"><img height="31px;" src="https://lh3.googleusercontent.com/S5hVsVYKCtft8aVhs1FM3W8nk6wzmdH2W-Zt2GZDWIGpkQk80Dfcf6WwbqgxbuCHcG3usBSJCrukTsU6XUBoqtVFhHZWEcTNzFogDT2ENbuf0JJSWcln-tiHC7uK" style="border: none; transform: rotate(0.00rad); -webkit-transform: rotate(0.00rad);" width="88px;" /> </span><span style="font-size: 13px; font-family: Arial; vertical-align: baseline; white-space: pre-wrap;"> </span></span>This template is based on the <a href="http://goo.gl/8Nq2T" target="_blank">Design Narrative Template</a> by Yishay Mor, and is&nbsp;is licensed under a <a href="http://creativecommons.org/licenses/by-sa/2.0/uk/deed.en_GB">Creative Commons Attribution-ShareAlike 2.0 UK: England &amp; Wales License</a>.</p>
 
-<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+<hr />
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Abstract</h1>
 
-<ol style="margin-top:0cm" start="2" type="1">
- <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
-     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Task<o:p></o:p></span></b></li>
-</ol>
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;"><em>After you complete all other sections, write a brief summary of the narrative.</em></p>
 
-<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
- .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
- <tbody><tr>
-  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
- </tr>
-</tbody></table>
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
 
-<p class="MsoNormal"><span lang="EN-GB">&nbsp;</span></p>
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Situation (Context)</h1>
 
-<ol style="margin-top:0cm" start="3" type="1">
- <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
-     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Actions </span></b><span lang="EN-GB">(How did you try to address
-     the issue?)<b><o:p></o:p></b></span></li>
-</ol>
+<p dir="ltr"><em>Where and when did this narrative happen? What were the conditions and constraints that shaped the events?&nbsp;<span style="font-size: 12pt; line-height: 1.5em;">It is often convinient to organise the description of the situation / context along three dimenssions:</span></em></p>
 
-<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
- .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
- <tbody><tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity<o:p></o:p></span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border:solid windowtext 1.0pt;
-  border-left:none;mso-border-left-alt:solid windowtext .5pt;mso-border-alt:
-  solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
-  </td>
- </tr>
- <tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity goal(s) or intended outcome (“X”)<o:p></o:p></span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="text-align:justify"><i><span lang="EN-GB">&nbsp;</span></i></p>
-  </td>
- </tr>
- <tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity title &amp; description<o:p></o:p></span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="margin-bottom:12.0pt"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
- </tr>
- <tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity materials<o:p></o:p></span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="margin-left:36.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;<o:p></o:p></span></p>
-  </td>
- </tr>
- <tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">The “how” (steps A, B, C, that lead to Y
-  or the activity outcomes)<o:p></o:p></span></p>
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="margin-left:18.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
- </tr>
- <tr>
-  <td width="130" valign="top" style="width:97.55pt;border:solid windowtext 1.0pt;
-  border-top:none;mso-border-top-alt:solid windowtext .5pt;mso-border-alt:solid windowtext .5pt;
-  padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">Activity outcomes (“Y”) (positive)<o:p></o:p></span></p>
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
-  <td width="512" valign="top" style="width:383.85pt;border-top:none;border-left:
-  none;border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  mso-border-top-alt:solid windowtext .5pt;mso-border-left-alt:solid windowtext .5pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="margin-left:18.0pt;text-align:justify"><span lang="EN-GB">&nbsp;</span></p>
-  </td>
- </tr>
-</tbody></table>
+<p dir="ltr"><strong>Material</strong> <em>What are the spatial characteristics of the settings? What tools and resources are available to protagonists? </em></p>
 
-<p class="MsoNormal"><b><span lang="EN-GB" style="font-size:16.0pt;mso-bidi-font-family:Arial">&nbsp;</span></b></p>
+<p dir="ltr"><strong>Social</strong> <em>Who are the protagonists, what are the relationships between them, and what are the social and institutional configurations in which they operate? </em></p>
 
-<ol style="margin-top:0cm" start="4" type="1">
- <li class="MsoNormalCxSpMiddle" style="margin-bottom:10.0pt;mso-add-space:auto;
-     line-height:115%;mso-list:l0 level1 lfo1"><b><span lang="EN-GB">Reflection <o:p></o:p></span></b></li>
-</ol>
+<p dir="ltr"><strong>Intentional</strong> <em>What are the protagonists beliefs, desires and intentions, which shape the problem space?</em></p>
 
-<table class="MsoNormalTable" border="1" cellspacing="0" cellpadding="0" style="border-collapse:collapse;border:none;mso-border-alt:solid windowtext .5pt;
- mso-yfti-tbllook:1184;mso-padding-alt:0cm 5.4pt 0cm 5.4pt;mso-border-insideh:
- .5pt solid windowtext;mso-border-insidev:.5pt solid windowtext">
- <tbody><tr>
-  <td width="642" valign="top" style="width:481.4pt;border:solid windowtext 1.0pt;
-  mso-border-alt:solid windowtext .5pt;padding:0cm 5.4pt 0cm 5.4pt">
-  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
-  <p class="MsoNormal" style="margin-left:18.0pt"><span lang="EN-GB">&nbsp;</span></p>
-  <a name="_GoBack"></a>
-  <p class="MsoNormal"><span lang="EN-GB" style="font-size:12.0pt;mso-bidi-font-family:
-  Arial">&nbsp;</span></p>
-  </td>
- </tr></tbody></table></p>
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
+
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Task (Challenge)</h1>
+
+<p dir="ltr"><em>What is the change the designers intended to engender? What are the educational goals and objectives they set? Typically,&nbsp;</em><em style="font-size: 12pt; line-height: 1.5em;">this would be phrased primarily as a change in learners&#39; knowledge or behaviour. As a derivative, the challenge could focus on providing teachers or learners with new resources (tools, content, and activities) which can potentially afford a desired change in knowledge or behaviour. You may find it difficult to draw a clear line between the situation and the task. The rule of thumb is that the task is what you are trying to change, the situation is what you accept as a given.</em></p>
+
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
+
+<h1 dir="ltr">Theoretical / Pedagogical Framework</h1>
+
+<p dir="ltr"><em>The theoretical framework defines the process by which the designer approaches the challenge and the methods by which she evaluates the outcomes. This framework will often be derived from an external paradigm, i.e. one that is grounded in natural science, humanities or social science. For example, the criteria for desirability of outcomes may be ethically motivated (drawing on philosophy), the process of deriving a solution to the challenge may draw on neuro-cognitive science, and the methods of evaluation may be rooted in an ethnographic or sociological tradition. </em></p>
+
+<div>&nbsp;</div>
+
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Actions</h1>
+
+<p dir="ltr"><em>What were the actions the designer took in order to address the challenge, and what were the consequent actions of the protagonists?</em></p>
+
+<p dir="ltr"><em>The events and actions constitute the core of the narrative, describing the designers&#39; attempts to address the challenge and their effects as they unfold. These need to be reported with a credible reference to verifiable data. They are the main support for the claims embodied in the narrative. It is important to include not just the evidence of success, but also the unexpected obstacles that the designer encountered and the ways in which these were tackled. </em></p>
+
+<div>&nbsp;</div>
+
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
+
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Results&nbsp;</h1>
+
+<p dir="ltr"><em>How were the objectives met? What were the unexpected outcomes, both positive and negative?&nbsp;What evidence do you have for the success and unexpected outcomes you report?</em></p>
+
+<p dir="ltr"><em>The results are an assessment of the extent to which the task was achieved and the challenge was met, using whatever measures are appropriate to the nature of the challenge and the theoretical framework. The results should also include any unexpected but significant effects of the designers&#39; actions, be they positive or negative. These could often open up new paths of exploration, either by illuminating uncharted challenges or by suggesting novel solutions.</em></p>
+
+<div>&nbsp;</div>
+
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
+
+<h1 dir="ltr" style="line-height: 1.15; margin-top: 0pt; margin-bottom: 0pt;">Reflections</h1>
+
+<p dir="ltr"><em>Finally, and only after telling the story - provide your interpretation and analysis of the narrative above. What are the lessons that can be learned from it?</em></p>
+
+<div>&nbsp;</div>
+
+<p dir="ltr" style="line-height:1.15;margin-top:0pt;margin-bottom:0pt;">&nbsp;</p>
+
+<h1>Notes</h1>
+
+<p>&nbsp;</p>
+
+<h1>Links and references</h1>
+
+<p>&nbsp;</p>

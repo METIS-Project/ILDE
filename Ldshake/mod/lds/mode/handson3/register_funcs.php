@@ -71,8 +71,10 @@ function ldshake_mode_open_register(&$user) {
 
 function ldshake_handson3_register(&$user, $value) {
     global $CONFIG;
-    if(isset($CONFIG->community_languages[$value]))
+    if(isset($CONFIG->community_languages[$value])) {
         $user->language = $value;
+        $user->save();
+    }
     else
         throw new Exception("Invalid language code");
 }

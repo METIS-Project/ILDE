@@ -58,12 +58,12 @@
             <?php else: ?>
                 <?
                 global $CONFIG;
-                $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'answer_template', 'time', true);
+                $list = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'tags', 'answer_template', '', true);
                 if(empty($list))
                 $list = array();
                 ?>
                 <?php foreach($list as $element): ?>
-                    <li class="menu_option"><a href="<?php echo $CONFIG->url.'pg/lds/new/wording/'.$element->lds->guid ?>"><?php echo $element->lds->title ?></a></li>
+                    <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/new/wording/'.$element->lds->guid ?>"><?php echo $element->lds->title ?></a></li>
                 <?php endforeach; ?>
             <?php endif; ?>
         </ul>
