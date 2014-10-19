@@ -463,7 +463,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'user:set:password' => "Account password",
     'user:password:label' => "Your new password",
     'user:password2:label' => "Your new password again",
-    'user:password:success' => "Password changed",
+    'user:password:success' => "Contrasenya canviada. S'ha enviat un correu amb la nova contrasenya.",
     'user:password:fail' => "Could not change your password on the system.",
     'user:password:fail:notsame' => "The two passwords are not the same!",
     'user:password:fail:tooshort' => "Password is too short!",
@@ -542,8 +542,8 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'admin:user:delete:no' => "Can not delete user",
     'admin:user:delete:yes' => "User deleted",
 
-    'admin:user:resetpassword:yes' => "Password reset, user notified.",
-    'admin:user:resetpassword:no' => "Password could not be reset.",
+    'admin:user:resetpassword:yes' => "Contransenya reiniciada, l'usuari ha sigut notificat.",
+    'admin:user:resetpassword:no' => "No s'ha pogut reiniciar la contransenya.",
 
     'admin:user:makeadmin:yes' => "User is now an admin.",
     'admin:user:makeadmin:no' => "We could not make this user an admin.",
@@ -555,11 +555,11 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
 
     'usersettings:statistics' => "Your statistics",
     'usersettings:statistics:opt:description' => "View statistical information about users and objects on your site.",
-    'usersettings:statistics:opt:linktext' => "Account statistics",
+    'usersettings:statistics:opt:linktext' => "Estadístiques del compte",
 
     'usersettings:user' => "Your settings",
     'usersettings:user:opt:description' => "This allows you to control user settings.",
-    'usersettings:user:opt:linktext' => "Change your settings",
+    'usersettings:user:opt:linktext' => "Canvia la teva configuració",
 
     'usersettings:plugins' => "Tools",
     'usersettings:plugins:opt:description' => "Configure settings for your active tools.",
@@ -605,7 +605,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
 
     'invite' => "Invite",
 
-    'resetpassword' => "Reset password",
+    'resetpassword' => "Reiniciar contrasenya",
     'makeadmin' => "Make admin",
 
     'option:yes' => "Yes",
@@ -762,18 +762,18 @@ You cannot reply to this email.",
 
 
 
-    'email:resetpassword:subject' => "Password reset!",
-    'email:resetpassword:body' => "Hi %s,
+    'email:resetpassword:subject' => "Reinici de la contrasenya!",
+    'email:resetpassword:body' => "Hola %s,
 			
-Your password has been reset to: %s",
+La teva contrasenya ha sigut reiniciada a: %s",
 
 
-    'email:resetreq:subject' => "Request for new password.",
-    'email:resetreq:body' => "Hi %s,
+    'email:resetreq:subject' => "Petició d'una nova contrasenya.",
+    'email:resetreq:body' => "Hola %s,
 			
-Somebody (from the IP address %s) has requested a new password for their account.
+Algú des de l'adreça IP %s ha demanat una nova contrasenya per al seu compte d'usuari.
 
-If you requested this click on the link below, otherwise ignore this email.
+Si has sigut tu qui ho ha demanat prem a l'enllaç de sota, sinó ignora aquest correu.
 
 %s
 ",
@@ -1160,5 +1160,3 @@ No pots contestar a aquest correu.
 );
 
 add_translation("ca",$catalan);
-
-?>
