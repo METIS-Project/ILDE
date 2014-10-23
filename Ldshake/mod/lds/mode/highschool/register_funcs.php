@@ -46,6 +46,10 @@ $CONFIG->schools = array(
 "ies0007" => "Escola Projecte",
 "ies0008" => "IES Marina",
 "ies0009" => "International School of Barcelona (ISB)",
+"ies0010" => "Escola IPSE",
+"ies0011" => "Thau",
+"ies0012" => "La Salle Mollerussa",
+"ies0013" => "INS Dr. Puigvert",
 );
 
 function ldshake_mode_open_register_validation() {
@@ -61,9 +65,20 @@ function ldshake_mode_open_register_validation() {
     }
 }
 
+function ldshake_mode_register_retry_params() {
+    $teacher_mode = get_input("teacher_mode", null);
+    if($teacher_mode == "buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify")
+        return '&teacher_token=d8jey93Hg3tlamzG2jfiKh38f6H6bbfPwmVenNR7FTRVR622NFF9S6W7H3BVVYT7FBhgdfdgtry54yerhegwyyoi5rtuhedhsf2yrethjednmcnxhsyi64f7sjrhfijfidftyuewh1YTFYR5e7fuygrsnrryjhenbFYTDYTFKYGKfytftbfebdvjchv653929jjnndrfuvGfdte5fekkebfuYWPufvbftvd';
+    return '';
+}
+
 function ldshake_mode_open_register(&$user) {
+    $mode = "student";
     $highschool_value = get_input('sdfsdfgsduh544dsgdsgsse78gh5g',null);
-    ldshake_highschool_register($user, $highschool_value, 'student');
+    $teacher_mode = get_input("teacher_mode", null);
+    if($teacher_mode == "buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify")
+        $mode = "teacher";
+    ldshake_highschool_register($user, $highschool_value, $mode);
     $user->isExpert = 1;
 }
 
@@ -300,4 +315,43 @@ function ldshake_mode_open_register_welcome(&$title, &$description) {
     global $CONFIG;
     $title = "La meva primera proposta";
     $description = elgg_view('lds/mode/'.$CONFIG->ldshake_mode.'/welcome_lds/welcome_lds_'.$CONFIG->language);
+}
+
+function ldshake_mode_admin_user_menu_actions($vars, $ts, $token) {
+    $user = $vars['entity'];
+
+    $options = "";
+    $student = false;
+    $teacher = false;
+
+    if($user->role == "student")
+        $teacher = true;
+
+    if($user->role == "teacher")
+        $student = true;
+
+    if(isset($user->role)) { //is teacher or student
+        //Remove role
+        $options .= <<<HTML
+<a href="{$vars['url']}actions/admin/user/role?guid={$vars['entity']->guid}&__elgg_token={$token}&__elgg_ts={$ts}&mode=remove">Remove role</a>
+HTML;
+
+    }
+
+    if($student) {
+        //Change role
+        $options .= <<<HTML
+<a href="{$vars['url']}actions/admin/user/role?guid={$vars['entity']->guid}&__elgg_token={$token}&__elgg_ts={$ts}&mode=student">Make student</a>
+HTML;
+
+    }
+
+    if($teacher) {
+        //Change role
+        $options .= <<<HTML
+<a href="{$vars['url']}actions/admin/user/role?guid={$vars['entity']->guid}&__elgg_token={$token}&__elgg_ts={$ts}&mode=teacher">Make teacher</a>
+HTML;
+    }
+
+    return $options;
 }

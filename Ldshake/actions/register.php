@@ -150,6 +150,9 @@
 		$qs = $qs[0];
 		//TODO Pau: Això és cutre, s'hauria de passar per sessió, pq el camp expectatives pot ser molt llarg.
 		$qs .= "?u=" . urlencode($username) . "&e=" . urlencode($email) . "&n=" . urlencode($name) . "&friend_guid=" . $friend_guid . "&exp=" . urlencode($expectations);
+        if(function_exists("ldshake_mode_register_retry_params")) {
+            $qs.= ldshake_mode_register_retry_params();
+        }
 		/// LdShake change ///
 		forward($qs);
 

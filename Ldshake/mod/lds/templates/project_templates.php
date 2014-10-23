@@ -74,6 +74,27 @@ $CONFIG->project_templates['default'] = array(
         'subtype'   => 'HE',
     ),
 
+    'DB' => array(
+        'title' => T('Dream Bazaar'),
+        'type'  => 'doc',
+        'subtype'   => 'DB',
+        'icon' => 'doc'
+    ),
+
+    'LO' => array(
+        'title' => T('Learning Objectives'),
+        'type'  => 'doc',
+        'subtype'   => 'LO',
+        'icon' => 'doc'
+    ),
+
+    'scenario' => array(
+        'title' => T('Scenario'),
+        'type'  => 'doc',
+        'subtype'   => 'scenario',
+        'icon' => 'doc'
+    ),
+
     'exe' => array(
         'title' => T('eXeLearning'),
         'type'  => 'exelearningrest',

@@ -470,7 +470,7 @@ $contents = <<<EOD
 .lds_att_popup {
     top: 100px;
     left: 50%;
-    z-index: 100000;
+    z-index: 9999;
     position: fixed;
     background-color: #fff;
     padding: 10px;
@@ -487,9 +487,10 @@ $contents = <<<EOD
 
 #lds_attachment_popup {
     width: 500px;
-    top: 75px;
+    top: 50%;
     left: 50%;
     margin-left: -260px;
+    margin-top: -270px;
 }
 
 .draggable > img[tooltype] {

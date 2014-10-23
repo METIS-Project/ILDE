@@ -30,7 +30,11 @@
 				<a href="<?php echo $vars['url']; ?>actions/admin/user/resetpassword?guid=<?php echo $vars['entity']->guid; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("resetpassword"); ?></a>				
 				<?php if (!$vars['entity']->admin) { ?><a href="<?php echo $vars['url']; ?>actions/admin/user/makeadmin?guid=<?php echo $vars['entity']->guid; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo elgg_echo("makeadmin"); ?></a> <?php } ?>
 				<?php if ((empty($vars['entity']->validated) or $vars['entity']->enabled == 'no') && empty($vars['entity']->admin_created)) { ?><a href="<?php echo $vars['url']; ?>actions/admin/user/validate?guid=<?php echo $vars['entity']->guid; ?>&__elgg_token=<?php echo $token; ?>&__elgg_ts=<?php echo $ts; ?>"><?php echo T("Validate"); ?></a> <?php } ?>
-
+                <?php
+                    if(function_exists("ldshake_mode_admin_user_menu_actions")) {
+                        if($additional_options = ldshake_mode_admin_user_menu_actions($vars, $ts, $token))
+                            echo $additional_options;
+                    } ?>
 <?php 
 				}
 			}

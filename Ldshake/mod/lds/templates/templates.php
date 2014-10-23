@@ -52,6 +52,7 @@ function ldshake_get_template($template, $format = null) {
         'CF' => array('CF'),
         'DB' => array('dreambazaar'),
         'LO' => array('learningobjectives'),
+        'scenario' => array('scenario'),
 
         ///MSF
         'msf_a01' => array('01_ActivityAnalysisTemplate'),

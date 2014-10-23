@@ -53,6 +53,7 @@
         <li id="tb_conceptualize_new7" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/HE"><?php echo T("Heuristic Evaluation") ?></a></li>
         <li id="tb_conceptualize_new14" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/DB"><?php echo T("Dream Bazaar") ?></a></li>
         <li id="tb_conceptualize_new15" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/LO"><?php echo T("Learning objectives") ?></a></li>
+        <li id="tb_conceptualize_new17" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/scenario"><?php echo T("Scenario") ?></a></li>
         <li id="tb_conceptualize_new12" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_draw/template/mooc_canvas"><?php echo T("MOOC Canvas") ?></a></li>
         <li id="tb_conceptualize_new8" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/cld"><?php echo T("CompendiumLD (upload)") ?></a></li>
         <li id="tb_conceptualize_new9" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/upload/image"><?php echo T("Image (upload)") ?></a></li>

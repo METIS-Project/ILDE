@@ -40,7 +40,7 @@ if (is_numeric($lds))
 {
 	if ($lds = get_entity($lds))
 	{
-		if ($lds->canEdit())
+		if ($lds->owner_guid == get_loggedin_userid() or isadminloggedin())
 		{
             if($lds->getSubtype() == 'LdSProject_implementation') {
                 if($project_list = lds_contTools::getProjectLdSList($lds->guid, true)) {
@@ -63,7 +63,10 @@ if (is_numeric($lds))
 			
 			echo 'ok';
 		}
-		else echo 'error:1:permission_denied';
+		else {
+            echo 'error:1:permission_denied';
+            register_error(T("The %1 could not be deleted.", ldshake_env_category($lds)));
+        }
 	}
 	else echo 'error:2:invalid_lds';
 }
@@ -80,7 +83,7 @@ else
 			{
 				if ($lds = get_entity($id))
 				{
-					if ($lds->canEdit())
+					if ($lds->owner_guid == get_loggedin_userid() or isadminloggedin())
 					{
                         if($lds->getSubtype() == 'LdSProject_implementation') {
                             if($project_list = lds_contTools::getProjectLdSList($lds->guid, true)) {
@@ -98,7 +101,10 @@ else
 
 						echo 'ok';
 					}
-					else $numerrors++;
+					else {
+                        $numerrors++;
+                        register_error(T("The %1 %2 could not be deleted.", ldshake_env_category($lds), $lds->title));
+                    }
 				}
 				else $numerrors++;
 			}
@@ -106,7 +112,8 @@ else
 		
 		if (!$numerrors)
 			echo 'ok';
-		else
+		else {
 			echo "error:3:multiple_errors_$numerrors";
+        }
 	}
 }

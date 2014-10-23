@@ -524,7 +524,7 @@
 
 #lds_edit_tabs_popup {
 	position: absolute;
-	z-index: 10000;
+	z-index: 9999;
 	background-color: #fff;
 	padding: 0;
 	border-top: 1px solid #eee;
@@ -1159,7 +1159,7 @@ width: 955px;
 	font-weight: bold;
 }
 
-#shade {
+#shade, #editor_shade {
 	position: fixed;
 	z-index: 100;
 	top: 0;
@@ -2322,7 +2322,7 @@ div.cc_info_icon > div.cc_icon_title {
 .lds_att_popup {
     top: 100px;
     left: 50%;
-    z-index: 100000;
+    z-index: 9999;
     position: fixed;
     background-color: #fff;
     padding: 10px;
@@ -2339,9 +2339,10 @@ div.cc_info_icon > div.cc_icon_title {
 
 #lds_attachment_popup {
     width: 500px;
-    top: 75px;
+    top: 50%;
     left: 50%;
     margin-left: -260px;
+    margin-top: -270px;
 }
 
 .draggable img[tooltype] {
@@ -2379,7 +2380,7 @@ div.cc_info_icon > div.cc_icon_title {
     font-weight: bold;
     border-radius: 8px;
     font-size: 11px;
-    word-break: break-all;
+    /*word-break: break-all;*/
 
     -webkit-touch-callout: none;
     -webkit-user-select: none;

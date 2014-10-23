@@ -430,6 +430,9 @@ function ldshake_isglobalenv($type, $subtype) {
     return false;
 }
 
+function ldshake_project_add_title_order_callback($a, $b) {
+    return (int)$a->lds->workflow_order > (int)$b->lds->workflow_order;
+}
 
 function ldshake_project_add_title_order($lds_list, $pg_data) {
     if(!is_array($lds_list))
@@ -441,8 +444,11 @@ function ldshake_project_add_title_order($lds_list, $pg_data) {
 
         if(isset($project_lds->workflow_order)) {
             $rlds->lds->title .= ' ['. $project_lds->workflow_order . ']';
+            $rlds->lds->workflow_order = $project_lds->workflow_order;
         }
     }
+
+    uasort($lds_list, "ldshake_project_add_title_order_callback");
 
     return $lds_list;
 }
@@ -481,9 +487,13 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
 
         foreach($tool['associatedLdS'] as &$item) {//lds
             $item = (array)$item;
+            $lds = false;
             if(!empty($item['guid'])) {
-                $preserved_lds[] = $item['guid'];
                 $lds = get_entity($item['guid']);
+            }
+            if($lds) {
+                $preserved_lds[] = $item['guid'];
+                //$lds = get_entity($item['guid']);
 
                 if(!in_array($item['guid'], $lds_list) && $lds) {
                     if(empty($item['clone'])) {
@@ -513,7 +523,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $lds->owner_guid = get_loggedin_userid();
                     $lds->container_guid = $pd_guid;
                     $lds->access_id = 2;
-                    $lds->all_can_view = "no";
+                    $lds->all_can_view = "yes";
                     $lds->title = "{$tool['toolName']} ($title)";
                     $lds->editor_type = $tool['tooltype'];
                     $item['guid'] = $lds->save();
@@ -557,7 +567,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     $lds->owner_guid = get_loggedin_userid();
                     $lds->container_guid = $pd_guid;
                     $lds->access_id = 2;
-                    $lds->all_can_view = "no";
+                    $lds->all_can_view = "yes";
                     $lds->editor_type = $tool['tooltype'];
                     $lds->external_editor = true;
                     if($lds->editor_type == "webcollagerest" || $lds->editor_type == "openglm" || $lds->editor_type == "cadmos" || $lds->editor_type == "exelearningrest")
@@ -2802,11 +2812,11 @@ SQL;
             $rel = "'lds_project_nfe','lds_project_new'";
 
         $query = <<<SQL
-SELECT *, 'object' as type FROM {$table} e WHERE guid IN (
+SELECT *, 'object' as type FROM {$table} e NATURAL JOIN entities en WHERE guid IN (
 			SELECT DISTINCT rg.guid_one FROM entity_relationships rg WHERE
 			rg.relationship IN ({$rel})
 			AND rg.guid_two = {$pd_guid}
-		)
+		) AND en.enabled = 'yes'
 SQL;
 
         $entities = get_data($query, $callback);

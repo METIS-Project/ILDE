@@ -24,8 +24,14 @@
 
     $form_body = "<br />";
 
-if($CONFIG->ldshake_mode == 'highschool')
+if($CONFIG->ldshake_mode == 'highschool') {
+    $teacher_token = get_input("teacher_token", null);
+    if($teacher_token == "") {
+        $form_body .= '<h1><strong>Enllaç exclusiu per a professors. No enviar als alumnes.</strong></h1>';
+        $form_body .= '<input name="teacher_mode" type="hidden" value="buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify"/>';
+    }
     $form_body .= "<p><label class=\"sidelabel\">" . T('Escola') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $institution, 'options_values' => array_merge(array('0' => 'Selecciona la teva escola'), $CONFIG->schools))) . "</p>";
+}
 
 if($CONFIG->ldshake_submode == 'handson3')
     $form_body .= "<p><label class=\"sidelabel\">" . T('Language') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsddfsdfre2352sgdsgsse78gh5g', 'value' => '0', 'options_values' => array_merge(array('0' => 'Select your preferred language'), $CONFIG->community_languages))) . "</p>";

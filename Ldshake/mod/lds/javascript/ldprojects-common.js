@@ -199,7 +199,7 @@ function ldshake_project_update_titles(project_data) {
 function closemyLdSWindow()
 {
     $('#lds_attachment_popup').toggle();
-    $('#shade').toggle();
+    $('#editor_shade').toggle();
 }
 
 function ldshake_projects_find_lds(guid) {
@@ -497,7 +497,7 @@ $(document).ready(function() {
 
         $addedItem.on("click", function(event) {
             $('#lds_attachment_popup').toggle();
-            $('#shade').toggle();
+            $('#editor_shade').toggle();
             $('#lds_attachment_popup').empty();
             //TODO: aÃ±adir cÃ³digo para asociar un ldS existente
             var item ='<form action=""  name="myldSform">';
@@ -537,7 +537,7 @@ $(document).ready(function() {
                 //}
 
                 $('#lds_attachment_popup').toggle();
-                $('#shade').toggle();
+                $('#editor_shade').toggle();
                 $('#lds_attachment_popup').empty();
             });
             //Ventana emergente con mi div y

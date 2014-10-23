@@ -1,0 +1,102 @@
+<h2 dir="ltr">Objective</h2>
+
+<p dir="ltr">Tell a story about learning in your design challenge. Scenarios are tools for thinking about, sharing and analysing design challenges. This initial scenario is a starting point for design conversations with yourself and others. It will evolve so don&rsquo;t invest too much time and effort in producing a first draft.</p>
+
+<h2 dir="ltr"><span style="font-size: 12pt; line-height: 1.5em;">Further information</span></h2>
+
+<p dir="ltr">It may be best to do an initial version first but if you want look at <a href="http://cloudworks.ac.uk/cloud/view/6639">an introduction to scenario-based learning design</a> and/or <a href="https://docs.google.com/document/pub?id=14Eu_7yNGsStRnE5IrszUcBWwD_wgTMU1v4GZ5nunrDA#">an example of a completed template</a>.</p>
+
+<p dir="ltr">This template is based on th <a href="http://www.olds.ac.uk/the-course/inquire#w2t2">OLDSMOOC Week 2 activity 2</a></p>
+
+<hr />
+<p>First time through do each step as quick as you can, get feedback &amp; revise if you have time</p>
+
+<h2 dir="ltr">1) Brainstorm components of your scenario</h2>
+
+<hr />
+<p><strong>Actors</strong>: (who is involved?) Jane, a 21 year old student living in..., working part-time... John a 54 year-old lecturer who can&rsquo;t stand social media...</p>
+
+<p><br />
+<strong>Goals</strong>: (why?) Jane wants to..., John wants to... We (the designers) want to..., the funders want to...</p>
+
+<p><br />
+<strong>Settings</strong>: (where &amp; when?) Most of the action happens in...</p>
+
+<p><br />
+<strong>Objects</strong>: (what things are involved?) mobile phone, laptop, overhead projector</p>
+
+<p><br />
+<strong>Actions</strong>: &nbsp;(what do actors do?) Jane gets up one day and...</p>
+
+<p><br />
+<strong>Events</strong>: (what happens to actors?) Jane realises she is getting nowhere with... The projector breaks down...</p>
+
+<p><br />
+<strong>Results</strong>: (what is achieved?) Jane gets a certificate in... and good references for...</p>
+
+<p><br />
+<strong>Your design</strong>: (what role does your design play?) The app we are design will help... to...</p>
+
+<p>&nbsp;</p>
+
+<hr />
+<h2>2) Develop a narrative scenario/s</h2>
+
+<p dir="ltr">Introduce actors and goals, describe the settings, put the events in order...</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<hr />
+<p><em>Jane lives in... She is really hoping... she...</em></p>
+
+<p><br />
+&nbsp;</p>
+
+<p dir="ltr"><em>What happens next...</em></p>
+
+<p><br />
+&nbsp;</p>
+
+<p dir="ltr"><em>Then...</em></p>
+
+<p><br />
+&nbsp;</p>
+
+<p dir="ltr"><em>Later...</em></p>
+
+<p>&nbsp;</p>
+
+<p dir="ltr"><em>And after interaction with your design...</em></p>
+
+<p><br />
+<br />
+&nbsp;</p>
+
+<hr />
+<h2>3) Scrutinize your scenario &amp; revise as necessary</h2>
+
+<p dir="ltr">What claims are you making: for your designs? about context? about the people involved? etc...</p>
+
+<p dir="ltr">Do these hold up? Summarise your claims below particularly those that you feel need more support.</p>
+
+<p dir="ltr">&nbsp;</p>
+
+<hr />
+<p><em>Our design will... by...</em></p>
+
+<p>&nbsp;</p>
+
+<p dir="ltr"><em>The important features of context in our scenario are....</em></p>
+
+<p>&nbsp;</p>
+
+<hr />
+<h2>4) Invite others to comment on your scenarios</h2>
+
+<p dir="ltr">You don&rsquo;t need to share this whole document but you do need to share and get feedback on your scenarios.</p>
+
+<p dir="ltr">You may want to: extract just the scenario, publish it somewhere and invite comments on it, print it out and discuss it with people who know about the setting, act it out, speak about it in a video, represent and share it in some other more accessible way...</p>
+
+<p>&nbsp;</p>
+
+<p dir="ltr"><strong>Remember</strong> to give your scenario a title (something that encapsulates the essence of what is going on)</p>

@@ -2695,25 +2695,7 @@ function lds_exec_help ($params) {
 
 function lds_exec_test2 ($params) {
 
-    $custom = array(
-        'build_callback' => 'ldshake_query_design_implementation_list',
-        'params' => array(),
-    );
-
-    $implemented_lds_guid = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 9999, 0, null, null, "time", false, null, false, $custom, true, null);
-    $implemented_lds = ldshake_lds_from_array($implemented_lds_guid);
-
-    $body = "";
-    $lds_implementations_list = array();
-    foreach($implemented_lds as $lds_rich) {
-        $body .= '<p>lds</p>';
-        $body .= elgg_view("lds/browselist", array('list' => array('list' => $lds_rich)));
-        $lds_implementations = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, false, 5, 0, "lds_id", $lds_rich->lds->guid, "time", false, null, true);
-        $body .= '<p>implementations</p>';
-        $body .= elgg_view("lds/browselist", array('list' => $lds_implementations));
-    }
-
-
+    $body = "<pre>" . htmlspecialchars(ldshake_lds_export_ods(get_entity($params[1]))) . "</pre>";
 
     page_draw("Test", $body);
 }

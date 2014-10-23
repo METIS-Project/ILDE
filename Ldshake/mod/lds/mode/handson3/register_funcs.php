@@ -91,3 +91,25 @@ function ldshake_mode_ldsnew($params) {
 
     return $params['data'];
 }
+
+function ldshake_lds_export_ods($lds) {
+    $lom = '<?xml version="1.0" encoding="UTF-8"?><lom/>';
+    $ods = new simpleXMLElement($lom);
+    /*
+    $ods = (object)array(
+        "general" => new sdtClass(),
+        "technical" => new sdtClass(),
+        "classification" => new sdtClass(),
+    );
+    */
+
+    $taxon = "taxonpath";
+    $ods->general->title = '"en","'.$lds->title.'"';
+    $ods->technical->location = "http://somewhere";
+    $ods->classification->purpose = "educational";
+    $ods->classification->$taxon->source = "science";
+    $ods->classification->$taxon->id = "320";
+    $ods->classification->$taxon->entry = "astronomy";
+
+    return $ods->asXML();
+}

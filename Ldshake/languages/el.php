@@ -762,7 +762,7 @@ You cannot reply to this email.",
 
 
 
-    'email:resetpassword:subject' => "Password reset!",
+    'email:resetpassword:subject' => "Password reset! Please check your email for the new password.",
     'email:resetpassword:body' => "Hi %s,
 			
 Your password has been reset to: %s",

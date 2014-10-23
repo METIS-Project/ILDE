@@ -33,6 +33,8 @@
 <div id="lds_attachment_popup" class="lds_att_popup">
 </div>
 
+<div id="editor_shade" style="display: none;"></div>
+
 <script type="text/javascript">
 
     /*  Here my Vars in order to send it to JSON --> */
