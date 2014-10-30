@@ -26,7 +26,7 @@
 
 if($CONFIG->ldshake_mode == 'highschool') {
     $teacher_token = get_input("teacher_token", null);
-    if($teacher_token == "") {
+    if($teacher_token == "d8jey93Hg3tlamzG2jfiKh38f6H6bbfPwmVenNR7FTRVR622NFF9S6W7H3BVVYT7FBhgdfdgtry54yerhegwyyoi5rtuhedhsf2yrethjednmcnxhsyi64f7sjrhfijfidftyuewh1YTFYR5e7fuygrsnrryjhenbFYTDYTFKYGKfytftbfebdvjchv653929jjnndrfuvGfdte5fekkebfuYWPufvbftvd") {
         $form_body .= '<h1><strong>Enllaç exclusiu per a professors. No enviar als alumnes.</strong></h1>';
         $form_body .= '<input name="teacher_mode" type="hidden" value="buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify"/>';
     }

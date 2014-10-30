@@ -50,6 +50,7 @@ $CONFIG->schools = array(
 "ies0011" => "Thau",
 "ies0012" => "La Salle Mollerussa",
 "ies0013" => "INS Dr. Puigvert",
+"other0001" => "Altres",
 );
 
 function ldshake_mode_open_register_validation() {

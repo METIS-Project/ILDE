@@ -532,6 +532,11 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                     } catch (Exception $e) {
                     }
 
+                    if(function_exists("ldshake_mode_ldsnew_project")) {
+                        ldshake_mode_ldsnew_project($lds);
+                        $lds->save();
+                    }
+
                     $initDocuments = array();
                     $initDocuments[] = '';
 
@@ -575,6 +580,11 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
 
                     $item['guid'] = $lds->save();
                     add_entity_relationship($lds->guid, 'lds_project_new', $pd_guid);
+
+                    if(function_exists("ldshake_mode_ldsnew_project")) {
+                        ldshake_mode_ldsnew_project($lds);
+                        $lds->save();
+                    }
 
                     $document_editor = new DocumentEditorObject($lds->guid, 0);
                     $document_editor->editorType = $lds->editor_type;

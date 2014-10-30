@@ -92,9 +92,60 @@ function ldshake_mode_ldsnew($params) {
     return $params['data'];
 }
 
+function ldshake_mode_ldsnew_project(&$initLdS) {
+    global $CONFIG;
+
+    $user = get_loggedin_user();
+    if(isset($CONFIG->community_languages[$user->language]))
+        $initLdS->tags = array($CONFIG->community_languages[$user->language]);
+}
+
+function ldshake_lds_oia_mph_get_dblink() {
+    global $CONFIG;
+    $host = $CONFIG->dbhost;
+    $user = $CONFIG->dbuser;
+    $password = $CONFIG->dbpass;
+    $database = "oai_headers";
+
+    if (!$dblink = mysqli_init())
+        throw new DatabaseException("Error configuring database link");
+
+    if(!mysqli_options($dblink, MYSQLI_OPT_CONNECT_TIMEOUT, 30))
+        throw new DatabaseException("Error configuring database link");
+
+    // Connect to database
+    if (!mysqli_real_connect($dblink, $host, $user, $password, $database))
+        throw new DatabaseException(sprintf(elgg_echo('DatabaseException:WrongCredentials'), $user, $host, "****"));
+
+    if(!mysqli_set_charset($dblink, "utf8"))
+        throw new DatabaseException("Error configuring database link");
+
+    return $dblink;
+}
+
+
+function ldshake_lds_oia_mph_get_current_elements($om_dblink) {
+
+    $query = <<<SQL
+SELECT * FROM oai_headers;
+SQL;
+
+    $om_dblink= "";
+    $records = array();
+    if($result = mysqli_query($om_dblink, $query)) {
+        while($record = mysqli_fetch_all($result)) {
+            $records[] = $record;
+        };
+    }
+
+    return records;
+}
+
+
 function ldshake_lds_export_ods($lds) {
-    $lom = '<?xml version="1.0" encoding="UTF-8"?><lom/>';
-    $ods = new simpleXMLElement($lom);
+    global $CONFIG;
+    $lom = '<?xml version="1.0" encoding="UTF-8"?><lom:lom xmlns:lom="http://ltsc.ieee.org/xsd/LOM"/>';
+    $ods = new simpleXMLElement($lom, 0, false, 'lom', true);
     /*
     $ods = (object)array(
         "general" => new sdtClass(),
@@ -103,13 +154,17 @@ function ldshake_lds_export_ods($lds) {
     );
     */
 
-    $taxon = "taxonpath";
-    $ods->general->title = '"en","'.$lds->title.'"';
-    $ods->technical->location = "http://somewhere";
-    $ods->classification->purpose = "educational";
-    $ods->classification->$taxon->source = "science";
-    $ods->classification->$taxon->id = "320";
-    $ods->classification->$taxon->entry = "astronomy";
+    $taxon = "taxonPath";
+    $ods->general->title->string['language'] = "en";
+    $ods->general->title->string = $lds->title;
+    $ods->technical->location = $CONFIG->url.'pg/lds/view/'.$lds->guid;
+    $ods->classification->purpose->source = "LOMv1.0";
+    $ods->classification->purpose->value = "educational objective";
+    $ods->classification->$taxon->source->string['language'] = "en";
+    $ods->classification->$taxon->source->string = "science";
+    $ods->classification->$taxon->taxon->id = "";
+    $ods->classification->$taxon->taxon->entry->string['language'] = "en";
+    $ods->classification->$taxon->taxon->entry->string = "astronomy";
 
     return $ods->asXML();
 }
