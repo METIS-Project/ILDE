@@ -915,6 +915,11 @@ input[type="submit"]:active,input[type="button"]:active {
 	font-size: 1.2em;
 	color:gray;
 }
+
+#register-box p {
+    clear: both;
+}
+
 #login-box p.loginbox {
 	margin:10px 0 0 0;
 }

@@ -2853,7 +2853,10 @@ SQL;
     public static function getUserEntities($type, $subtype, $user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $writable_only = false, $search = null, $enrich = false, $custom = null, $guid_only = false, $check_guid = null, $owner_guid = 0, $context = null) {
         global $CONFIG;
 
-        if($count) $enrich = false;
+        $table = "objects_property";
+
+        if($count)
+            $enrich = false;
         $offset = sanitise_string((int)$offset);
         $limit = sanitise_string((int)$limit);
         $type = sanitise_string($type);
@@ -2987,7 +2990,7 @@ SQL;
         }
 
 $query = <<<SQL
-SELECT {$count_query} FROM {$CONFIG->dbprefix}objects_property e
+SELECT {$count_query} FROM {$CONFIG->dbprefix}{$table} e
 {$order_query['join']}
 {$custom_join}
 {$mj}

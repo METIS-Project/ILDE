@@ -2697,6 +2697,11 @@ function lds_exec_test2 ($params) {
 
     $body = "<pre>" . htmlspecialchars(ldshake_lds_export_ods(get_entity($params[1]))) . "</pre>";
 
+    $om_dblink = ldshake_lds_oia_mph_get_dblink();
+    //ldshake_lds_oia_mph_get_current_elements($om_dblink);
+    //ldshake_lds_oia_mph_put_document($om_dblink, get_entity($params[1]));
+    //ldshake_lds_oia_mph_mark_deleted_document($om_dblink, get_entity($params[1]));
+    ldshake_lds_oia_mph_update_elements($om_dblink);
     page_draw("Test", $body);
 }
 

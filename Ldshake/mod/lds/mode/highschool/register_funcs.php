@@ -50,6 +50,8 @@ $CONFIG->schools = array(
 "ies0011" => "Thau",
 "ies0012" => "La Salle Mollerussa",
 "ies0013" => "INS Dr. Puigvert",
+"ies0014" => "INS Miquel Martí i Pol",
+"ies0015" => "Salesià de Sant Josep",
 "other0001" => "Altres",
 );
 
@@ -68,9 +70,13 @@ function ldshake_mode_open_register_validation() {
 
 function ldshake_mode_register_retry_params() {
     $teacher_mode = get_input("teacher_mode", null);
+    $school = get_input("sdfsdfgsduh544dsgdsgsse78gh5g", null);
+    $params = '';
+    if($school)
+        $params .= '&school='.$school;
     if($teacher_mode == "buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify")
-        return '&teacher_token=d8jey93Hg3tlamzG2jfiKh38f6H6bbfPwmVenNR7FTRVR622NFF9S6W7H3BVVYT7FBhgdfdgtry54yerhegwyyoi5rtuhedhsf2yrethjednmcnxhsyi64f7sjrhfijfidftyuewh1YTFYR5e7fuygrsnrryjhenbFYTDYTFKYGKfytftbfebdvjchv653929jjnndrfuvGfdte5fekkebfuYWPufvbftvd';
-    return '';
+        $params .= '&teacher_token=d8jey93Hg3tlamzG2jfiKh38f6H6bbfPwmVenNR7FTRVR622NFF9S6W7H3BVVYT7FBhgdfdgtry54yerhegwyyoi5rtuhedhsf2yrethjednmcnxhsyi64f7sjrhfijfidftyuewh1YTFYR5e7fuygrsnrryjhenbFYTDYTFKYGKfytftbfebdvjchv653929jjnndrfuvGfdte5fekkebfuYWPufvbftvd';
+    return $params;
 }
 
 function ldshake_mode_open_register(&$user) {

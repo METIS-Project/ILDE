@@ -26,11 +26,12 @@
 
 if($CONFIG->ldshake_mode == 'highschool') {
     $teacher_token = get_input("teacher_token", null);
+    $school = get_input("school", '0');
     if($teacher_token == "d8jey93Hg3tlamzG2jfiKh38f6H6bbfPwmVenNR7FTRVR622NFF9S6W7H3BVVYT7FBhgdfdgtry54yerhegwyyoi5rtuhedhsf2yrethjednmcnxhsyi64f7sjrhfijfidftyuewh1YTFYR5e7fuygrsnrryjhenbFYTDYTFKYGKfytftbfebdvjchv653929jjnndrfuvGfdte5fekkebfuYWPufvbftvd") {
         $form_body .= '<h1><strong>Enllaç exclusiu per a professors. No enviar als alumnes.</strong></h1>';
         $form_body .= '<input name="teacher_mode" type="hidden" value="buyf76e65eo8fjtdy54e7dokuf869gvgxtxtoplkFd4545WWyufuify"/>';
     }
-    $form_body .= "<p><label class=\"sidelabel\">" . T('Escola') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $institution, 'options_values' => array_merge(array('0' => 'Selecciona la teva escola'), $CONFIG->schools))) . "</p>";
+    $form_body .= "<p><label class=\"sidelabel\">" . T('Escola') . "</label>" . elgg_view('input/pulldown' , array('internalname' => 'sdfsdfgsduh544dsgdsgsse78gh5g', 'value' => $school, 'options_values' => array_merge(array('0' => 'Selecciona la teva escola'), $CONFIG->schools))) . "</p>";
 }
 
 if($CONFIG->ldshake_submode == 'handson3')
@@ -44,7 +45,7 @@ $form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (".T("requir
     $form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'ddyhryeryheryheyheueyhehgh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeireyherhyed78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuhfdgeryeryrreh5g', 'class' => "registerform", 'value' => '')) . "</p>";
-	$form_body .= "<p><label class=\"sidelabel\">" . T('Username') . " (".T("required") . ")</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuh544e78gh5g', 'class' => "registerform", 'value' => $username)) . "</p>";
+	$form_body .= "<p><label class=\"sidelabel\">" . T('Username') . " (".T("at least 4 characters sans spaces or symbols, eg. jsmith") . ") (".T("required") . ")</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuh544e78gh5g', 'class' => "registerform", 'value' => $username)) . "</p>";
 	$form_body .= "<p><label class=\"sidelabel\">" . elgg_echo('password') . ' ' . T("(6 or more characters required)") . "</label>" . elgg_view('input/password' , array('internalname' => 'dgn45hygeihg5teh7ggg4e8gh', 'class' => "registerform")) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuhfdgetge544e78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyhdgfdgtge544e78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";

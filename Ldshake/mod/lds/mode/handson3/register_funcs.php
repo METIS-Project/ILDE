@@ -105,7 +105,7 @@ function ldshake_lds_oia_mph_get_dblink() {
     $host = $CONFIG->dbhost;
     $user = $CONFIG->dbuser;
     $password = $CONFIG->dbpass;
-    $database = "oai_headers";
+    $database = "oai-mph-ilde";
 
     if (!$dblink = mysqli_init())
         throw new DatabaseException("Error configuring database link");
@@ -124,23 +124,76 @@ function ldshake_lds_oia_mph_get_dblink() {
 }
 
 
+function ldshake_lds_oia_mph_put_document($om_dblink, $document) {
+
+    $lom = ldshake_lds_export_ods($document);
+    $lom = mysqli_real_escape_string($om_dblink, $lom);
+
+    $query = <<<SQL
+    INSERT INTO oai_headers SET
+  `oai_identifier` = {$document->guid},
+  `oai_metadataprefix` = 'lom',
+  `datestamp` = {$document->time_updated},
+  `deleted` = 0,
+  `oai_set` = '',
+  `metadata_contents` = '{$lom}'
+ON DUPLICATE KEY UPDATE
+  `oai_identifier` = {$document->guid},
+  `oai_metadataprefix` = 'lom',
+  `datestamp` = {$document->time_updated},
+  `deleted` = 0,
+  `oai_set` = '',
+  `metadata_contents` = '{$lom}'
+SQL;
+
+    mysqli_query($om_dblink, $query);
+}
+
+function ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $document) {
+
+    $query = <<<SQL
+UPDATE oai_headers SET
+`deleted` = 1
+WHERE
+`oai_identifier` = {$document['oai_identifier']}
+SQL;
+
+    mysqli_query($om_dblink, $query);
+}
+
 function ldshake_lds_oia_mph_get_current_elements($om_dblink) {
 
     $query = <<<SQL
 SELECT * FROM oai_headers;
 SQL;
 
-    $om_dblink= "";
     $records = array();
     if($result = mysqli_query($om_dblink, $query)) {
-        while($record = mysqli_fetch_all($result)) {
-            $records[] = $record;
+        if($record = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+            foreach($record as $r)
+                $records["{$r['oai_identifier']}"] = $r;
         };
     }
 
-    return records;
+    //$published_docs = lds_contTools::getUserEntities('object', 'LdS_document', 0, false, 9999, 0, 'published', '1');
+    return $records;
 }
 
+function ldshake_lds_oia_mph_update_elements($om_dblink) {
+    $current_lom_elements = ldshake_lds_oia_mph_get_current_elements($om_dblink);
+    $current_published_docs = get_entities_from_metadata('published', '1', "", "", 0, 9999);
+
+    foreach($current_published_docs as $doc) {
+        ldshake_lds_oia_mph_put_document($om_dblink, $doc);
+        if(isset($current_lom_elements["{$doc->guid}"])) {
+            unset($current_lom_elements["{$doc->guid}"]);
+        }
+    }
+
+    foreach($current_lom_elements as $doc) {
+        ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $doc);
+    }
+}
 
 function ldshake_lds_export_ods($lds) {
     global $CONFIG;
