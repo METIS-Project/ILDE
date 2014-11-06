@@ -109,6 +109,7 @@ RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [L,QSA]
 #Homemade by Pau
 RewriteRule ^v\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewext/$1/
+RewriteRule ^v\/([A-Za-z0-9]+)\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewext/$1/$2/
 RewriteRule ^ve\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewexteditor/$1/
 RewriteRule ^ve\/([A-Za-z0-9]+)\/([A-Za-z0-9]+)(\/)?$ pg/lds/viewexteditor/$1/$2/
 RewriteRule ^pg/profile/([A-Za-z0-9_.-]+)\/?$ pg/ldshakers/$1/

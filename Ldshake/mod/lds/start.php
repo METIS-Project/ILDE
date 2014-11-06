@@ -1967,7 +1967,12 @@ function lds_exec_viewext ($params)
     $vars['authors'] = ldshake_get_lds_authors($vars['doc']);
     $vars['attributes'] = elgg_view('lds/publish_attr',$vars);
 
-	echo elgg_view('lds/view_external',$vars);
+    if($params[2] == 'pdf') {
+        set_input("docId", $publishedId);
+        @include(__DIR__."/actions/lds/pdf_export.php");
+    } else {
+	    echo elgg_view('lds/view_external',$vars);
+    }
 
 }
 

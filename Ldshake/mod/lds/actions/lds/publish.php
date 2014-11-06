@@ -52,22 +52,30 @@ if ($doc = get_entity(get_input('doc')))
 				$revisions = get_entities_from_metadata('document_guid',$doc->guid,'object','LdS_document_revision',0,10000,0,'time_created');
 				//Remove any mark of published on the previous revisions (for the republish action)
 				if (is_array($revisions) && count($revisions))
-					foreach ($revisions as $rev)
+					foreach ($revisions as $rev) {
 						$rev->published = '0';
+                        $published = get_metadata_byname($rev->guid, 'published');
+                        delete_metadata($published->id);
+                    }
 				
 				echo 'ok:'.$CONFIG->url.'v/'.lds_contTools::encodeId($doc->guid);
 			}
 			else
 			{
 				$doc->published = '0';
+                $published = get_metadata_byname($doc->guid, 'published');
+                delete_metadata($published->id);
 				
 				//Get all the revisions of this document
 				$revisions = get_entities_from_metadata('document_guid',$doc->guid,'object','LdS_document_revision',0,10000,0,'time_created');
 				//Remove any mark of published on the previous revisions
 				if (is_array($revisions) && count($revisions))
-					foreach ($revisions as $rev)
-						$rev->published = '0';
-				
+					foreach ($revisions as $rev) {
+                        $rev->published = '0';
+                        $published = get_metadata_byname($rev->guid, 'published');
+                        delete_metadata($published->id);
+                    }
+
 				echo 'ok';
 			}
 		}

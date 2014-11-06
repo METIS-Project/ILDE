@@ -123,24 +123,49 @@ function ldshake_lds_oia_mph_get_dblink() {
     return $dblink;
 }
 
+function ldshake_lds_oia_mph_get_identifier($guid) {
+    global $CONFIG;
+    $url = parse_url($CONFIG->url);
+    $url['path'] = str_replace('/', '', $url['path']);
+    if(empty($url['path']))
+        $url['path'] = 'root';
+
+    $identifier = 'oai:'.$url['host'].'-'.$url['path'].':'.lds_contTools::encodeId($guid);
+
+    return $identifier;
+}
+
+function ldshake_lds_oia_mph_get_guid_from_identifier($identifier) {
+    global $CONFIG;
+    $identifier = explode(':', $identifier);
+    if(isset($identifier[2]))
+        return base_convert(strtolower($identifier[2]), 36, 10) - $CONFIG->salt;
+
+    return 0;
+}
 
 function ldshake_lds_oia_mph_put_document($om_dblink, $document) {
 
     $lom = ldshake_lds_export_ods($document);
     $lom = mysqli_real_escape_string($om_dblink, $lom);
+    $guid = ($document->getSubtype() == 'LdS_document') ? $document->guid : $document->document_guid;
+    $identifier = ldshake_lds_oia_mph_get_identifier($guid);
+    $identifier = sanitise_string($identifier);
+
+    $published = get_metadata_byname($document->guid, 'published');
 
     $query = <<<SQL
     INSERT INTO oai_headers SET
-  `oai_identifier` = {$document->guid},
+  `oai_identifier` = '{$identifier}',
   `oai_metadataprefix` = 'lom',
-  `datestamp` = {$document->time_updated},
+  `datestamp` = {$published->time_created},
   `deleted` = 0,
   `oai_set` = '',
   `metadata_contents` = '{$lom}'
 ON DUPLICATE KEY UPDATE
-  `oai_identifier` = {$document->guid},
+  `oai_identifier` = '{$identifier}',
   `oai_metadataprefix` = 'lom',
-  `datestamp` = {$document->time_updated},
+  `datestamp` = {$published->time_created},
   `deleted` = 0,
   `oai_set` = '',
   `metadata_contents` = '{$lom}'
@@ -151,11 +176,13 @@ SQL;
 
 function ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $document) {
 
+    $identifier = sanitise_string($document['oai_identifier']);
     $query = <<<SQL
 UPDATE oai_headers SET
-`deleted` = 1
+`deleted` = 1,
+`datestamp` = UNIX_TIMESTAMP()
 WHERE
-`oai_identifier` = {$document['oai_identifier']}
+`oai_identifier` = '{$identifier}'
 SQL;
 
     mysqli_query($om_dblink, $query);
@@ -164,7 +191,7 @@ SQL;
 function ldshake_lds_oia_mph_get_current_elements($om_dblink) {
 
     $query = <<<SQL
-SELECT * FROM oai_headers;
+SELECT * FROM oai_headers WHERE `deleted` = 0;
 SQL;
 
     $records = array();
@@ -181,12 +208,16 @@ SQL;
 
 function ldshake_lds_oia_mph_update_elements($om_dblink) {
     $current_lom_elements = ldshake_lds_oia_mph_get_current_elements($om_dblink);
-    $current_published_docs = get_entities_from_metadata('published', '1', "", "", 0, 9999);
+    $current_published_docs = get_entities_from_metadata('published', '1', "object", "LdS_document", 0, 9999);
+    $current_published_docs_revisions = get_entities_from_metadata('published', '1', "object", "LdS_document_revision", 0, 9999);
 
+    $current_published_docs = array_merge($current_published_docs, $current_published_docs_revisions);
     foreach($current_published_docs as $doc) {
         ldshake_lds_oia_mph_put_document($om_dblink, $doc);
-        if(isset($current_lom_elements["{$doc->guid}"])) {
-            unset($current_lom_elements["{$doc->guid}"]);
+        $guid = ($doc->getSubtype() == 'LdS_document') ? $doc->guid : $doc->document_guid;
+        $identifier = ldshake_lds_oia_mph_get_identifier($guid);
+        if(isset($current_lom_elements["{$identifier}"])) {
+            unset($current_lom_elements["{$identifier}"]);
         }
     }
 
@@ -195,7 +226,7 @@ function ldshake_lds_oia_mph_update_elements($om_dblink) {
     }
 }
 
-function ldshake_lds_export_ods($lds) {
+function ldshake_lds_export_ods($doc) {
     global $CONFIG;
     $lom = '<?xml version="1.0" encoding="UTF-8"?><lom:lom xmlns:lom="http://ltsc.ieee.org/xsd/LOM"/>';
     $ods = new simpleXMLElement($lom, 0, false, 'lom', true);
@@ -209,8 +240,8 @@ function ldshake_lds_export_ods($lds) {
 
     $taxon = "taxonPath";
     $ods->general->title->string['language'] = "en";
-    $ods->general->title->string = $lds->title;
-    $ods->technical->location = $CONFIG->url.'pg/lds/view/'.$lds->guid;
+    $ods->general->title->string = $doc->title;
+    $ods->technical->location = $CONFIG->url.'v/'.lds_contTools::encodeId($doc->guid).'/pdf';
     $ods->classification->purpose->source = "LOMv1.0";
     $ods->classification->purpose->value = "educational objective";
     $ods->classification->$taxon->source->string['language'] = "en";
