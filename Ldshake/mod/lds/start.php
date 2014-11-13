@@ -689,10 +689,14 @@ function lds_exec_viewtrashed ($params)
 
 function lds_exec_browse_test ($params)
 {
-    $order = get_input('order') ?: 'newest';
+    global $ldshake_css, $start_time;
+    $order = get_input('order', 'time');
     $offset = get_input('offset') ?: '0';
 
-    //$vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+    $vars['order'] = $order;
+    $time = microtime(true);
+    $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
+    //echo microtime(true) - $time.' tf<br />';
 
     $tools = array();
 
@@ -722,9 +726,15 @@ function lds_exec_browse_test ($params)
         $vars['tagk'] = urldecode(get_input('tagk'));
         $vars['tagv'] = urldecode(get_input('tagv'));
 
+        if(in_array($vars['tagk'], array('editor_type', 'editor_subtype'))) {
+            ldshake_stats_log_event('browse_tool', $vars['tagv']);
+        } elseif(in_array($vars['tagk'], array('tags', 'discipline', 'pedagogical_approach'))) {
+            ldshake_stats_log_event('browse_tag_' . $vars['tagk'], $vars['tagv']);
+        }
+
         $title = T("LdS tagged %1",$vars['tagv']);
         //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], "title");
+        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], $order, true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
         $vars['filtering'] = true;
     }
@@ -733,18 +743,39 @@ function lds_exec_browse_test ($params)
     {
         $title = T("Browse LdS");
 
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, "title");
+        //$time = microtime(true);
         $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
+        //echo microtime(true) - $time.' bc<br />';
+        //$time = microtime(true);
+        //$vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true, null, 'viewlist');
+        //$vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true, null, 'viewlist');
+
+
+        $custom = array(
+            'build_callback' => 'ldshake_custom_query_edited_project_lds',
+            'params' => array(
+                //'guids' => $elements_guids
+            ),
+        );
+
+        $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+        //echo microtime(true) - $time.' be<br />';
     }
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
     }
 
-    //$vars['list'] = lds_contTools::enrichLdS($vars['list']);
+    $ldshake_css['#layout_canvas']['min-height'] = $vars['count'] * 137;
 
-    //$body = elgg_view('lds/browse',$vars);
-    //page_draw($title, $body);
+    //$time = microtime(true);
+    $body = elgg_view('lds/browse',$vars);
+    //echo microtime(true) - $time.' start3<br />';
+
+    //$time = microtime(true);
+    page_draw($title, $body);
+    //echo microtime(true) - $time.' start4<br />';
+    //echo microtime(true) - $start_time.' start_finish<br />';
 }
 
 function lds_exec_browse ($params)
@@ -817,7 +848,6 @@ function lds_exec_browse ($params)
 
     $ldshake_css['#layout_canvas']['min-height'] = $vars['count'] * 137;
 
-
     //$time = microtime(true);
     $body = elgg_view('lds/browse',$vars);
     //echo microtime(true) - $time.' start3<br />';
@@ -878,7 +908,7 @@ function lds_exec_new ($params)
                 if($templates = ldshake_get_template($params[2])) {
                     $i=0;
                     foreach($templates as $template) {
-                        $vars['initDocuments'][$i++]->body = $template;
+                        $vars['initDocuments'][$i++]->body = $template[0];
                     }
                     $vars['editor_subtype'] = $params[2];
                 } else {
@@ -1023,12 +1053,10 @@ function lds_exec_neweditor ($params)
     switch($params[2]) {
         case 'template':
             require_once __DIR__.'/templates/templates.php';
-            $preferred_formats = array('docx','xlsx', 'google_doc_id', null);
-            foreach($preferred_formats as $format){
-                $template_format = $format;
-                if($templates = ldshake_get_template($params[3], $format))
-                    break;
-            }
+            //$preferred_formats = array('docx','xlsx', 'google_doc_id', null);
+                //$template_format = $format;
+            $templates = ldshake_get_template($params[3]);
+            //}
 
             if(empty($templates)) {
                 $template = null;
@@ -1040,23 +1068,23 @@ function lds_exec_neweditor ($params)
             $template = $templates[0];
 
             $template_doc = new ElggObject();
-            $template_doc->description = $template;
+            $template_doc->description = $template[0];
             $template_vars = array(
                 'doc' => $template_doc,
                 'title' => $params[3],
-                'format' => $template_format
+                'format' => $template[1]
             );
 
-            if(!$template_format)
+            if(!$template[1])
                 $template_html = elgg_view('lds/view_iframe', $template_vars);
             else
-                $template_html = $template;
+                $template_html = $template[0];
         break;
     }
 
 	//Make an editor object according to the parameters received and create a new session
 	$editor = editorsFactory::getTempInstance($params[1]);
-	$vars = $editor->newEditor($template_html, $template_format);
+	$vars = $editor->newEditor($template_html, $templates[0][1]);
     if(!$vars) {
         register_error("New document error");
         forward($CONFIG->url . 'pg/lds/');
@@ -1100,8 +1128,14 @@ function lds_exec_neweditor ($params)
 
         $support_html = elgg_view('lds/view_iframe', $support_vars);
         $support_editor = editorsFactory::getTempInstance('google_docs');
-        $support_vars = $support_editor->newEditor($support_html);
-        $vars['support_editor'] = $support_vars;
+        if(isset($templates[1])) {
+            if($templates[1][1] == 'docx') {
+                $support_vars_editor = $support_editor->newEditor($templates[1][0], $templates[1][1]);
+            }
+        }
+        if(empty($support_vars_editor))
+            $support_vars_editor = $support_editor->newEditor($support_html);
+        $vars['support_editor'] = $support_vars_editor;
         $vars['initDocuments'] = json_encode(array());
         $vars['lds_title'] = T('Untitled LdS');
     }

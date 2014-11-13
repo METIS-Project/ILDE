@@ -14,7 +14,7 @@
 
 $result = $vars['result'];
 $export = $result->export();
-
+header('Access-Control-Allow-Origin: *');
 if($export->status >= SuccessResult::$RESULT_SUCCESS) {
     echo '<?xml version="1.0" encoding="UTF-8"?>'."\n";
     echo ldshake_array_to_xml($export->result);

@@ -175,7 +175,7 @@ function generateTagList (source)
 }
 
 function save_error() {
-    $('#lds_edit_buttons').removeClass('busy');
+    $('#lds_edit_buttons, #lds_edit_buttons_fullscreen').removeClass('busy');
     saving_started = false;
     alert("There is a network error, check your connection and try again!");
 }
@@ -186,7 +186,7 @@ function save_lds(save_seq, params) {
             return false;
 
         saving_started = true;
-        $('#lds_edit_buttons').addClass('busy');
+        $('#lds_edit_buttons, #lds_edit_buttons_fullscreen').addClass('busy');
         save_seq = new Object();
         save_seq.lds = false;
         save_seq.params = params;
@@ -195,7 +195,7 @@ function save_lds(save_seq, params) {
         save_seq.stop = false;
         save_seq.save = arguments.callee;
         save_seq.cancel = function() {
-            $('#lds_edit_buttons').removeClass('busy');
+            $('#lds_edit_buttons, #lds_edit_buttons_fullscreen').removeClass('busy');
             saving_started = false;
             if(save_seq.timer)
                 clearTimeout(save_seq.timer);
@@ -212,7 +212,7 @@ function save_lds(save_seq, params) {
 
     if( save_seq.stop
         || save_seq.retry_count > ajax_retry_max) {
-        $('#lds_edit_buttons').removeClass('busy');
+        $('#lds_edit_buttons, #lds_edit_buttons_fullscreen').removeClass('busy');
         saving_started = false;
         if(save_seq.timer) {
             clearTimeout(save_seq.timer);
@@ -253,7 +253,7 @@ function save_lds(save_seq, params) {
             window.onbeforeunload = null;
             window.location = $('#lds_edit_referer').val();
         } else {
-            $('#lds_edit_buttons').removeClass('busy');
+            $('#lds_edit_buttons, #lds_edit_buttons_fullscreen').removeClass('busy');
             saving_started = false;
         }
         return true;
@@ -1022,6 +1022,23 @@ function inaction_trigger ()
     });
 }
 
+/*google docs fullscreen*/
+$(document).ready(function() {
+    $('.google-docs-blocking-user > div.switch').on('click', function(){
+        $('#lds_editor_iframe').toggleClass('fullscreen');
+        $('.google-docs-blocking-user').toggleClass('fullscreen');
+        if($('.google-docs-blocking-user').hasClass('fullscreen')) {
+            var body_h = $('body').outerWidth();
+            var column_h = $('#one_column').outerWidth();
+            $('.google-docs-blocking-user').css('right', (body_h - column_h)/2 + 'px');
+        } else {
+            $('.google-docs-blocking-user').css('right', '0px');
+        }
+
+
+    });
+});
+
 /*editor iframe information exchange*/
 $(document).ready(function() {
     if(restapi) {
@@ -1130,6 +1147,12 @@ $(document).ready(function()
 
     //Save action
     $('#lds_edit_save').click (function () {
+        save_lds (null,{redirect: false});
+        return false;
+    });
+
+    //Save action fullscreen
+    $('#lds_edit_save_fullscreen').click (function () {
         save_lds (null,{redirect: false});
         return false;
     });

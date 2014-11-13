@@ -65,7 +65,7 @@ function ldshake_get_template($template, $format = null) {
         ///MSF
 
         ///google draw
-        'mooc_canvas' => array('mooc_canvas'),
+        'mooc_canvas' => array('mooc_canvas', 'mooc_canvas_support'),
         'google_draw' => array('new_google_draw'),
         ///google draw
 
@@ -78,20 +78,28 @@ function ldshake_get_template($template, $format = null) {
     if(isset($templates[$template])) {
         $doc = array();
         foreach($templates[$template] as $file) {
+            $preferred_formats = array('docx','xlsx', 'google_doc_id', null);
 
-            if(!empty($format)) {
-                if(!empty($format) and file_exists(__DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format))
-                    $filename = __DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format;
-                elseif(file_exists(__DIR__. '/' . $format . '/'.$file.'.'.$format))
-                    $filename = __DIR__. '/' . $format . '/'.$file.'.'.$format;
+            foreach($preferred_formats as $format) {
+                $filename = "";
+                if(!empty($format)) {
+                    if(!empty($format) and file_exists(__DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format))
+                        $filename = __DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format;
+                    elseif(file_exists(__DIR__. '/' . $format . '/'.$file.'.'.$format))
+                        $filename = __DIR__. '/' . $format . '/'.$file.'.'.$format;
+                }
+                elseif(file_exists(__DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt'))
+                    $filename = __DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt';
+                else
+                    $filename = __DIR__.'/'.$file.'.txt';
+
+                if(!empty($filename)) {
+                    if($text = file_get_contents($filename)) {
+                        $doc[] = array($text, $format);
+                        continue;
+                    }
+                }
             }
-            elseif(file_exists(__DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt'))
-                $filename = __DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt';
-            else
-                $filename = __DIR__.'/'.$file.'.txt';
-
-            if($text = file_get_contents($filename))
-                $doc[] = $text;
         }
         return $doc;
     }

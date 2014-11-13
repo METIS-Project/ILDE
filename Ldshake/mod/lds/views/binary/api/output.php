@@ -2,6 +2,7 @@
 $file = $vars['result']->export()->result;
 
 header(' ', true, 200);
+header('Access-Control-Allow-Origin: *');
 header('Content-Description: File Transfer');
 header('Content-Type: application/octet-stream');
 header('Content-Disposition: attachment; filename='.basename($file));

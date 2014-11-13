@@ -2045,7 +2045,6 @@ SQL;
             $title = T("New LdS");
             $description=T("New LdS");
 
-
             $mimeType = 'text/html';
             if($format == 'docx') {
                 $mimeType = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';

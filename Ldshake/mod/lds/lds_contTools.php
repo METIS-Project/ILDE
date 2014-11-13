@@ -42,6 +42,29 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_custom_query_edited_project_lds($userid, $params) {
+    $project_id = get_subtype_id('object', 'LdSProject_implementation');
+
+    if(empty($project_id) or (empty($project_id))) {
+        return null;
+    }
+
+    $query['select'] = "e.guid, 'object' AS type";
+
+    $query['join'] = <<<SQL
+JOIN
+(SELECT * FROM entities ep where ep.type = 'object' AND ep.subtype = {$project_id} AND ep.enabled = 'yes')
+AS projects
+ON projects.guid = e.container_guid
+SQL;
+
+    $query['where'] = <<<SQL
+e.num_contributions > 0
+SQL;
+
+    return $query;
+}
+
 function ldshake_exelearning_get_newfile($params = null) {
     global $CONFIG;
 

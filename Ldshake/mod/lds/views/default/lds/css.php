@@ -354,7 +354,16 @@
 	padding-right: 25px;
 }
 
-#lds_edit_buttons.busy {
+#lds_edit_buttons_fullscreen {
+    position: relative;
+    top: 6px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
+
+#lds_edit_buttons.busy,
+.fullscreen > #lds_edit_buttons_fullscreen.busy {
 	background:url("<?php echo $vars['url'] ?>_graphics/spinner.gif") no-repeat scroll right center transparent;
 }
 
@@ -372,9 +381,20 @@
     z-index: 20;
 }
 
+#lds_editor_iframe.fullscreen {
+    border: 0px solid #808080 !important;
+    height: 100%!important;
+    width: 1137px !important;
+    position: fixed;
+    top: 0px;
+    margin-left: -20px;
+}
+
 #lds_editor_iframe {
     z-index: 30;
 }
+
+
 
 #lds_edit_title {
 	width: 500px;
@@ -2500,6 +2520,29 @@ form[name="myldSform"] {
     font-weight: bold;
 }
 
+.google-docs-blocking-user > div.switch,
+.google-docs-blocking-user > div.save {
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+    border: 1px solid #CCC;
+    color: #000;
+    padding: 3px 5px;
+    font-size: 13px;
+    border-radius: 3px 3px 3px 3px;
+    background-color: #EAEAEA;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#dfdfdf');
+    background: -webkit-gradient(linear, center top, center bottom, from(#FAFAFA), to(#DFDFDF));
+}
+
+.google-docs-blocking-user > div.save {
+    display: none;
+}
+
+.google-docs-blocking-user.fullscreen > div.save {
+    display: inline-block;
+}
+
 .google-docs-blocking-user {
     position: absolute;
     z-index: 40;
@@ -2507,5 +2550,12 @@ form[name="myldSform"] {
     background-color: #FFFFFF;
     width: 297px;
     height: 55px;
-    left: 800px;
+    right: 0px;
+}
+
+.google-docs-blocking-user.fullscreen {
+    position: fixed;
+    top: 0px;
+    width: 357px;
+    margin-left: 220px;
 }
