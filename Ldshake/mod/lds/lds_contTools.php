@@ -569,7 +569,7 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         $templates = ldshake_get_template($lds->editor_subtype);
                         $i=0;
                         foreach($templates as $template) {
-                            $initDocuments[$i++] = $template;
+                            $initDocuments[$i++] = $template[0];
                         }
                         $lds->save();
                     }
@@ -623,18 +623,22 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         require_once __DIR__.'/templates/templates.php';
                         $lds->editor_subtype = $tool['editor_subtype'];
 
+                        /*
                         $preferred_formats = array('docx','xlsx', null);
                         foreach($preferred_formats as $format){
                             $template_format = $format;
                             if($templates = ldshake_get_template($lds->editor_subtype, $format))
                                 break;
-                        }
+                        }*/
+
+                        $templates = ldshake_get_template($lds->editor_subtype);
 
                         if(empty($templates)) {
                             $template = null;
                             $template_format = null;
                         } else {
-                            $template = $templates[0];
+                            $template = $templates[0][0];
+                            $template_format = $templates[0][1];
                         }
                     }
 
@@ -665,8 +669,14 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
                         );
 
                         $support_html = elgg_view('lds/view_iframe', $support_vars);
+                        $template_format = null;
+
+                        if(isset($templates[1])) {
+                            $template_format = $templates[1][1];
+                            $support_html = $templates[1][0];
+                        }
                         $support_editor = editorsFactory::getInstance($google_support_doc);
-                        $editor_vars = $support_editor->newEditor($support_html);
+                        $editor_vars = $support_editor->newEditor($support_html, $template_format);
                         $editor_vars = array_merge($editor_vars, $support_vars);
                         if(!$support_editor->saveDocument($editor_vars)) {
                             throw new Exception(T("Save failed"));

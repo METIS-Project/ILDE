@@ -136,6 +136,13 @@ $CONFIG->project_templates['default'] = array(
         'type'  => 'doc',
         'subtype'   => null,
     ),
+
+    'mooc_canvas' => array(
+        'title' => T('Mooc Canvas'),
+        'type'  => 'google_draw',
+        'subtype'   => 'mooc_canvas',
+        'icon' => 'doc'
+    ),
 );
 
 if($CONFIG->ldshake_mode == 'ldshake') {

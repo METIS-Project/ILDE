@@ -164,7 +164,249 @@ extract ($vars) ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         <iframe id="internal_iviewer" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>" height="100%" width="100%" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;"></iframe>
     <?php elseif (strstr($editor, 'google')): ?>
         <iframe id="internal_iviewer" src="<?php echo htmlentities($currentDoc->description);?>" height="860" width="1150" style="border: 1px solid #aaa;box-shadow: 2px 2px 1px #CCC;display: block; margin-left: auto;margin-right: auto;"></iframe>
-    <?php else:?>
+    <?php elseif ($editor == 'project_design'): ?>
+        <style>
+            .draggable, .draggable-nonvalid {
+                width: 55px;
+                height: 55px;
+                padding: 5px;
+                position: relative;
+                float: left;
+                margin: 4px 0px 0px 5px;
+                background-color: #FFF;
+                color: #FFF !important;
+                border: 1px solid #DDD;
+                z-index: 10;
+            }
+
+            .draggable img[tooltype] {
+                width: inherit;
+            }
+
+            .draggable[tooltype_added="true"] {
+                padding: 0px 5px 10px 5px;
+                box-shadow: 2px 2px 0px #F0F0F0;
+            }
+
+            #ldproject_view_grid .draggable {
+                display: none;
+                position: absolute;
+            }
+
+            #ldproject_view_grid {
+                position: relative;
+                height: 750px;
+                overflow-y: scroll;
+                font-family: "sans-serif";
+            }
+
+            textarea {
+                font: 13px Arial, Helvetica, sans-serif;
+                border: solid 1px #CCC;
+                padding: 5px;
+                color: #000;
+            }
+
+            .projects_tool_caption {
+                font-family: Arial;
+                position: absolute;
+                bottom: 0px;
+                left: 3px;
+                width: 50px;
+                background-color: rgba(235, 235, 235, 0.8);
+                color: rgb(73, 73, 73);
+                text-align: center;
+                font-weight: bold;
+                border-radius: 8px;
+                font-size: 11px;
+                /*word-break: break-all;*/
+
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                cursor: default
+            }
+
+            .workflow_order {
+                width: 18px;
+                height: 15px;
+                left: -5px;
+                top: -3px;
+                display: block;
+                position: absolute;
+                z-index: 9999;
+                border: 3px solid #00F;
+                border-radius: 20px;
+                background-color: #FFF;
+                padding-bottom: 2px;
+                padding-top: 1px;
+            }
+
+            .workflow_order > input {
+                padding: 0px;
+                width: 100%;
+                background-color: rgba(0,0,0,0);
+                margin: 0px;
+                border-width: 0px;
+                text-align: center;
+                font-weight: bold;
+                color: grey;
+                font-size: 12px;
+            }
+
+            .stickynote {
+                width: 150px;
+                height: 300px;
+                display: block;
+                position: absolute;
+                z-index: 9999;
+                border: 3px solid yellow;
+                border-top-width: 13px;
+                border-top-color: rgb(241, 241, 0);
+                background-color: yellow;
+                cursor: all-scroll;
+            }
+
+            .stickynotetext {
+                width: 100%;
+                height: 100%;
+                border-width: 0px;
+                padding: 0px;
+                margin: 0px;
+                resize: none;
+                background-color: yellow;
+                color: grey;
+            }
+
+            #project_add_note {
+                float: right;
+                width: 100px;
+                /*height: 30px;*/
+                position: relative;
+                font-size: 16px;
+                font-weight: bold;
+                background-color: yellow;
+                padding-left: 9px;
+                padding-top: 6px;
+                cursor: all-scroll;
+                color: grey;
+            }
+
+            .stickynoteclose {
+                position: absolute;
+                right: 3px;
+                top: -14px;
+                font-size: 12px;
+                font-weight: bold;
+                cursor: pointer;
+                z-index: 10000;
+            }
+
+            .subtool_title textarea {
+                width: 100%;
+                height: 100%;
+                font-size: 10px;
+                border-width: 0px;
+                padding: 0px;
+                margin: 0px;
+                resize: none;
+                color: darkgrey;
+            }
+
+            .subtool_title textarea[newtitle="true"] {
+                color: #525252;
+            }
+        </style>
+        <?php
+        $jslibs['project'] = true;
+        $preview_lds_box = <<<HTML
+        <div id="tree_info_popup_shell_empty" class="tooltip_bl_body" style="position:absolute;height:300px;width:400px;background-color: #FFF;overflow:hidden;display:none">
+            <div class="tree_info_popup_control">
+
+                <!--
+                <div class="tree_info_popup_control_button move">
+                    <svg width="28px" height="20px"><g>
+                        <line x1="8.0" y1="10" x2="20" y2="10" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                        <line x1="14" y1="4" x2="14" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line>
+                    </g></svg>
+                </div>
+                -->
+                <div class="tree_info_popup_control_button close">
+                    <svg width="28px" height="20px"><g>
+                        <line x1="10" y1="6" x2="18" y2="14" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                        <line x1="10" y1="14" x2="18" y2="6" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                    </g></svg>
+                </div>
+                <div class="tree_info_popup_control_button maximize">
+                    <svg width="28px" height="20px"><g><rect rx="3" ry="3" x="4" y="4" width="20" height="12" style="stroke:#FFF;stroke-width:2;fill:transparent"></rect></g></svg>
+                </div>
+                <div class="tree_info_popup_control_button minimize">
+                    <svg width="28px" height="20px"><g><line x1="4.0" y1="16" x2="24" y2="16" style="stroke:#FFF;stroke-width:2;stroke-linecap:round"></line></g></svg>
+                </div>
+                <div class="tree_info_popup_control_button diff" style="display:none">
+                    <svg width="28px" height="20px"><g>
+                        <line x1="4.0" y1="4" x2="24" y2="4" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                        <line x1="4.0" y1="8" x2="24" y2="8" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                        <line x1="4.0" y1="12" x2="24" y2="12" style="stroke:rgb(255,0,0);stroke-width:2;stroke-linecap:round"></line>
+                        <line x1="4.0" y1="16" x2="24" y2="16" style="stroke:rgb(0,255,0);stroke-width:2;stroke-linecap:round"></line>
+                    </g></svg>
+                </div>
+            </div>
+            <div id="tree_info_popup" style="width:100%;height:100%"></div>
+        </div>
+        <div id="tree_info_popup_move_empty" class="tree_info_popup_move"></div>
+HTML;
+        ?>
+
+        <script>
+            ldproject = <?php echo json_encode(ldshake_project_upgrade(json_decode($lds->description)));?>;
+            project_lds_box = <?php echo json_encode($preview_lds_box);?>;
+            is_implementation = <?php echo (($lds->getSubtype() != 'LdSProject') ? 'true' : 'false');?>;
+            is_project_view = true;
+            is_project_edit = false;
+            var ldsToBeListed = <?php echo json_encode(array());?>;
+        </script>
+        <div id="ldproject_view_grid">
+
+            <?php foreach($CONFIG->project_templates['full'] as $project_template_key => $project_template): ?>
+                <div class="draggable" title="<?php echo htmlspecialchars($project_template['title'])?>">
+                    <div style="position:relative;width:inherit;height:inherit;">
+                        <img src="<?php echo $vars['url']; ?>mod/lds/images/projects/<?php echo htmlspecialchars((isset($project_template['icon']) ? $project_template['icon'] : $project_template_key))?>.png" toolname="<?php echo htmlspecialchars($project_template['title'])?>" tooltype="<?php echo htmlspecialchars($project_template['type'])?>" <?php if(!empty($project_template['subtype'])):?>subtype="<?php echo htmlspecialchars($project_template['subtype']);?>"<?php endif;?>>
+                        <?php if(isset($project_template['icon'])): ?>
+                            <div unselectable="on" class="projects_tool_caption"><?php echo htmlspecialchars($project_template['title']);?></div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+
+        </div>
+
+        <!--[if (!IE)|(gt IE 8)]><!-->
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <!--<![endif]-->
+
+        <!--[if lte IE 8]>
+        <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <!--[endif]-->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+        <?php
+
+        ?><script type="text/javascript" src="<?php echo $vars['url']?>vendors/jsPlumb/jquery.jsPlumb-1.6.2-min.js"></script><?php
+?>
+        <script>
+        var baseurl = '<?php echo $vars['url'] ?>';
+        var language = '<?php echo $vars['config']->language ?>';
+        var isadminloggedin = <?php echo (isadminloggedin() ? 'true' : 'false') ?>;
+        </script>
+<?php
+        echo Utils::getJsDeclaration('lds', 'ldprojects-common');
+        ?>
+
+        <?php else:?>
     <div id="the_lds" style="height: 380px;padding: 0px;margin: 0px;width: 100%;">
         <?php echo $currentDoc->description ?>
     </div>
