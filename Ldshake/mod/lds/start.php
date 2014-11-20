@@ -687,7 +687,7 @@ function lds_exec_viewtrashed ($params)
 	access_show_hidden_entities($access_status);
 }
 
-function lds_exec_browse_test ($params)
+function lds_exec_browse ($params)
 {
     global $ldshake_css, $start_time;
     $order = get_input('order', 'time');
@@ -721,26 +721,43 @@ function lds_exec_browse_test ($params)
 
     $vars['filtering'] = false;
     //If there is some filtering by tag
-    if (get_input('tagk') && get_input('tagv'))
-    {
-        $vars['tagk'] = urldecode(get_input('tagk'));
-        $vars['tagv'] = urldecode(get_input('tagv'));
+        $tagk = urldecode(get_input('tagk', null));
+        $tagv = urldecode(get_input('tagv', null));
+        $revised = urldecode(get_input('revised', "false"));
+        $key_params_s = get_input('filter', null, false);
 
-        if(in_array($vars['tagk'], array('editor_type', 'editor_subtype'))) {
-            ldshake_stats_log_event('browse_tool', $vars['tagv']);
-        } elseif(in_array($vars['tagk'], array('tags', 'discipline', 'pedagogical_approach'))) {
-            ldshake_stats_log_event('browse_tag_' . $vars['tagk'], $vars['tagv']);
+        $filter = null;
+        if(!empty($key_params_s)) {
+            try {
+                $key_params = unserialize(bzdecompress(base64_decode($key_params_s, true)));
+                $filter = $key_params['filter'];
+                $revised = $key_params['revised'];
+            } catch (Exception $e) {
+                $filter = null;
+                //log something
+            }
         }
 
-        $title = T("LdS tagged %1",$vars['tagv']);
-        //Keep them just in case we want to recover the old functionality of listing the LdS which are not mine.
-        $vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, $vars['tagk'], $vars['tagv'], $order, true);
-        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true, 0, 0, $vars['tagk'], $vars['tagv']);
-        $vars['filtering'] = true;
-    }
-    //It's just a whole list
-    else
-    {
+        if(!empty($tagk) and !empty($tagv)) {
+            if(in_array($tagk, array("editor_subtype", "editor_type"))) {
+                unset($filter['editor_type']);
+                unset($filter['editor_subtype']);
+                $filter[$tagk][0] = $tagv;
+            }
+            else {
+                if(in_array($tagk, array('tags', 'discipline', 'pedagogical_approach')))
+                    $filter[$tagk][] = $tagv;
+            }
+        }
+
+        $key_params = array(
+            'revised'   => $revised,
+            'filter'    => $filter
+        );
+
+        $vars['key_params'] = $key_params;
+        $vars['filter'] = base64_encode(bzcompress(serialize($key_params), 9));
+
         $title = T("Browse LdS");
 
         //$time = microtime(true);
@@ -754,13 +771,15 @@ function lds_exec_browse_test ($params)
         $custom = array(
             'build_callback' => 'ldshake_custom_query_edited_project_lds',
             'params' => array(
-                //'guids' => $elements_guids
+                'filter' => $filter,
+                'revised' => $revised
             ),
         );
 
         $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+        //$vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
         //echo microtime(true) - $time.' be<br />';
-    }
+
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
@@ -778,7 +797,7 @@ function lds_exec_browse_test ($params)
     //echo microtime(true) - $start_time.' start_finish<br />';
 }
 
-function lds_exec_browse ($params)
+function lds_exec_browse_legacy ($params)
 {
     global $ldshake_css, $start_time;
 	$order = get_input('order', 'time');

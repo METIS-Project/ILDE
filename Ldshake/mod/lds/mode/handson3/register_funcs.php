@@ -100,6 +100,17 @@ function ldshake_mode_ldsnew_project(&$initLdS) {
         $initLdS->tags = array($CONFIG->community_languages[$user->language]);
 }
 
+function ldshake_mode_browselds_filters($key_filters) {
+    global $CONFIG;
+
+    $filter = rawurlencode($key_filters['filter']);
+    $content = "";
+    $content .= '<div style="padding: 10px 0px 10px 0px; color: black; font-weight: bold"><a style="color: black!important; font-weight: bold" class="" href="'.$CONFIG->url.'pg/lds/browse/">' . htmlspecialchars(T('Clear all filters')) . '</a></div>';
+    $content .= '<div style="padding: 10px 0px 10px 0px; color: black; font-weight: bold"><a style="color: black!important; font-weight: bold" class="" href="'.$CONFIG->url.'pg/lds/browse/?revised=true&filter='.$filter.'">' . htmlspecialchars(T('Show only edited LdS from projects')) . '</a></div>';
+
+    return $content;
+}
+
 function ldshake_lds_oia_mph_get_dblink() {
     global $CONFIG;
     $host = $CONFIG->dbhost;

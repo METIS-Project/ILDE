@@ -46,10 +46,16 @@ if(function_exists("ldshake_mode_browselds")) {
     ldshake_mode_browselds($disable_search_patterns, $disable_external_repository, $tools_term);
 }
 
+$added_filter = "";
+if(function_exists("ldshake_mode_browselds_filters")) {
+    $added_filter = ldshake_mode_browselds_filters($key_params);
+}
+
 ?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<div id="left_filters">
+            <?php echo $added_filter; ?>
             <h3><?php echo T($tools_term) ?></h3>
             <ul class="tag_selector">
 
@@ -57,9 +63,9 @@ if(function_exists("ldshake_mode_browselds")) {
                 foreach ($CONFIG->project_templates['full'] as $template):
                 ?><li><?php
                     if($template['subtype']):
-                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
                     else:
-                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
                     endif;
                 ?></li><?php
                 endforeach;
@@ -98,7 +104,7 @@ if(function_exists("ldshake_mode_browselds")) {
                         <?php foreach ($used_tags as $u_t): ?>
                             <li>
                                 <span class="freq"><?php echo $u_t->frequency ?></span>
-                                <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($u_t->tag) ?>"><?php echo $u_t->tag ?></a>
+                                <a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($classname) ?>&tagv=<?php echo urlencode($u_t->tag) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo $u_t->tag ?></a>
                             </li>
                         <?php endforeach; ?>
 
@@ -126,13 +132,46 @@ if(function_exists("ldshake_mode_browselds")) {
 
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
-		<?php if ($filtering): ?>
+        <?php $filter = $key_params['filter']; ?>
+        <?php
+        if($key_params['revised'] == "true")
+            $filter['revised'] = $key_params['revised'];
+         ?>
+		<?php if (!empty($filter)): ?>
             <?php
             $tagv_label = $tagv;
-            //if(isset($editor_type[$tagv])) $tagv_label = $editor_type[$tagv];
-            if(isset($CONFIG->project_templates['full'][$tagv])) $tagv_label = $CONFIG->project_templates['full'][$tagv]['title'];
+            if(!empty($filter['editor_subtype'][0]) or !empty($filter['editor_type'][0])) {
+
+                if(!empty($filter['editor_subtype'][0]))
+                    $tool = $filter['editor_subtype'][0];
+                if(!empty($filter['editor_type'][0]))
+                    $tool = $filter['editor_type'][0];
+
+                if(isset($CONFIG->project_templates['full'][$tool])) {
+                    $tagv_label[] = array('tag_editor_subtype', $CONFIG->project_templates['full'][$tool]['title']);
+                }
+            }
+
+            foreach(array('revised', 'tags', 'discipline', 'pedagogical_approach') as $tag_class) {
+                if(!empty($filter[$tag_class])) {
+                    foreach($filter[$tag_class] as $tag) {
+                        $tagv_label[] = array($tag_class, $tag);
+                    }
+                }
+            }
+            if($key_params['revised'] == "true") {
+                $reach = T("Edited Lds from projects");
+                $reach_link = $url . 'pg/lds/browse/?revised=true';
+            } else {
+                $reach = T("All LdS");
+                $reach_link = lds_viewTools::getUrl();
+            }
             ?>
-		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo T("All LdS") ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv_label ?></span></h2>
+		<h2><a href="<?php echo $reach_link ?>"><?php echo $reach ?></a> » <?php
+                foreach($tagv_label as $tagv):
+            ?><span class="lds_tag <?php echo $tagv[0] ?>"><?php echo $tagv[1] ?></span><?php
+                endforeach;
+            ?></h2>
 		<?php else: ?>
 		<h2><?php echo T("All LdS") ?></h2>
 		<?php endif; ?>
@@ -140,7 +179,7 @@ if(function_exists("ldshake_mode_browselds")) {
 	
 	<div class="filters">
 		<div class="paging">
-			<?php echo lds_viewTools::pagination($count) ?>
+			<?php echo lds_viewTools::pagination($count, 10, $filter) ?>
 		</div>
         <div class="lds_order_by">
         <?php
@@ -156,7 +195,7 @@ if(function_exists("ldshake_mode_browselds")) {
 	
 	<div class="filters">
 		<div class="paging">
-			<?php echo lds_viewTools::pagination($count) ?>
+			<?php echo lds_viewTools::pagination($count, 10, $filter) ?>
 		</div>
 	</div>
 </div>

@@ -65,13 +65,14 @@ function ldshake_env_category($lds) {
 class lds_viewTools
 {
 
-    public static function pagination ($count, $elementsPerPage = 10)
+    public static function pagination ($count, $elementsPerPage = 10, $filter)
     {
         $params = array(
             'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
             'offset' => get_input('offset', 0),
             'count' => $count,
-            'limit' => $elementsPerPage
+            'limit' => $elementsPerPage,
+            'filter' => $filter
         );
 
         return elgg_view('navigation/pagination', $params);

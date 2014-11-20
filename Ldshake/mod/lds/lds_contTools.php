@@ -43,7 +43,10 @@
 //include_once __DIR__.'/query_repository.php';
 
 function ldshake_custom_query_edited_project_lds($userid, $params) {
+    $filter = $params['filter'];
+    $revised = $params['revised'];
     $project_id = get_subtype_id('object', 'LdSProject_implementation');
+
 
     if(empty($project_id) or (empty($project_id))) {
         return null;
@@ -51,17 +54,58 @@ function ldshake_custom_query_edited_project_lds($userid, $params) {
 
     $query['select'] = "e.guid, 'object' AS type";
 
-    $query['join'] = <<<SQL
-JOIN
-(SELECT * FROM entities ep where ep.type = 'object' AND ep.subtype = {$project_id} AND ep.enabled = 'yes')
-AS projects
-ON projects.guid = e.container_guid
+    $filter_query['where'] = "";
+    $filter_query['join'] = "";
+    if(!empty($filter)) {
+        $i=0;
+        foreach($filter as $fk => $fv) {
+            foreach($fv as $tag) {
+                if(!in_array($fk, array('editor_subtype', 'editor_type', 'tags', 'discipline', 'pedagogical_approach')))
+                    continue;
+
+                $val_id = get_metastring_id($tag);
+                $tags_id = get_metastring_id($fk);
+                    if(!empty($val_id) and !empty($tags_id)) {
+                    $filter_query['join'][] .= <<<SQL
+        JOIN metadata m{$i} ON m{$i}.entity_guid = e.guid
+SQL;
+                    $filter_query['where'][] .= <<<SQL
+        m{$i}.name_id = {$tags_id} AND m{$i}.value_id = {$val_id}
+SQL;
+                        $i++;
+                }
+            }
+        }
+    }
+
+    $query['join'] = "";
+    $query['where'] = "";
+    if(!empty($filter_query['where']) and !empty($filter_query['join'])) {
+        $query['join']  .= "\n";
+        $query['where'] .= " \n";
+        $query['join']  .= implode("\n", $filter_query['join']);
+        $query['where'] .= implode(" AND \n", $filter_query['where']);
+        $query['join']  .= "\n";
+        $query['where'] .= "\n";
+
+        if($revised == "true")
+            $query['where'] .= " AND ";
+    };
+
+if($revised == "true") {
+    $query['join'] .= <<<SQL
+    JOIN
+    (SELECT * FROM entities ep where ep.type = 'object' AND ep.subtype = {$project_id} AND ep.enabled = 'yes')
+    AS projects
+    ON projects.guid = e.container_guid
 SQL;
 
-    $query['where'] = <<<SQL
-e.num_contributions > 0
+        $query['where'] .= <<<SQL
+    e.num_contributions > 0
 SQL;
-
+}
+    if(empty($query['where']))
+        $query['where'] = "1=1";
     return $query;
 }
 
