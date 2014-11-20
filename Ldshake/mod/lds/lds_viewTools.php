@@ -65,7 +65,7 @@ function ldshake_env_category($lds) {
 class lds_viewTools
 {
 
-    public static function pagination ($count, $elementsPerPage = 10, $filter)
+    public static function pagination ($count, $elementsPerPage = 10, $filter = null)
     {
         $params = array(
             'baseurl' => 'http://'.$_SERVER['SERVER_NAME'].$_SERVER['REQUEST_URI'],
