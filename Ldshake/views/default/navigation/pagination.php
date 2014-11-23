@@ -41,7 +41,11 @@
     if(!isset($vars['filter'])) {
         $filter = false;
     } else {
-        $filter = $vars['filter'];
+        if(empty($vars['filter'])) {
+            $filter = false;
+        } else {
+            $filter = $vars['filter'];
+        }
     }
 
 	$totalpages = ceil($count / $limit);
@@ -68,8 +72,8 @@
 		} else {
 			$prevurl .= "?{$word}=" . $prevoffset;
 		}
-        if($filter) {
-            $prevurl .= "&filter=" . rawurlencode($filter);
+        if(!empty($filter)) {
+            //$prevurl .= "&filter=" . rawurlencode($filter);
         }
 
 		
@@ -120,7 +124,7 @@
 				$counturl .= "?{$word}=" . $curoffset;
 			}
             if($filter) {
-                $counturl .= "&filter=" . rawurlencode($filter);
+                //$counturl .= "&filter=" . rawurlencode($filter);
             }
 			if ($curoffset != $offset) {
 				echo " <a href=\"{$counturl}\" class=\"pagination_number\">{$i}</a> ";
@@ -145,7 +149,7 @@
 			$nexturl .= "?{$word}=" . $nextoffset;
 		}
         if($filter) {
-            $nexturl .= "&filter=" . rawurlencode($filter);
+            //$nexturl .= "&filter=" . rawurlencode($filter);
         }
 		echo " <a href=\"{$nexturl}\" class=\"pagination_next\">" . elgg_echo("next") . " &raquo;</a>";
 		

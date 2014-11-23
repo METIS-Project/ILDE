@@ -26,6 +26,15 @@
 
 	global $CONFIG;
 
+    //CORS
+    if($_SERVER["REQUEST_METHOD"] == 'OPTIONS') {
+        header('Access-Control-Allow-Origin: *');
+        header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+        header('Access-Control-Max-Age: 1000');
+        header('Access-Control-Allow-Headers: Authorization');
+        exit;
+    }
+
 	// Register the error handler
 	error_reporting(E_ALL); 
 	set_error_handler('__php_api_error_handler');

@@ -42,6 +42,73 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_get_document_formats($doc) {
+    global $CONFIG;
+    if(!empty($doc->editorType)) {
+        if(isset($CONFIG->rest_editor_list[$doc->editorType])) {
+            if(!empty($CONFIG->rest_editor_list[$doc->editorType]['imsld'])) {
+                $formats['ims-ld'] = array(
+                    'urlsuffix' => 'imsld',
+                    'mime'      => 'application/zip',
+                    'description'   => 'IMS LD standard file.',
+                    'tag'       => 'IMS LD',
+                    'titlesuffix' => 'IMS LD'
+                );
+            }
+        }
+    }
+
+    $formats['pdf'] = array(
+        'urlsuffix' => 'pdf',
+        'mime'      => 'application/pdf',
+        'description'   => 'PDF standard file.',
+        'titlesuffix' => 'PDF'
+    );
+    return $formats;
+}
+
+function ldshake_check_sanitize_filter_param($filter) {
+    if(!empty($filter)) {
+        $filter_error = false;
+        if(!$binary_filter = base64_decode($filter, true)) {
+            $filter_error = false;
+        }
+
+        if(!$filter_error) {
+            $serialized_filter = bzdecompress($binary_filter);
+            if($serialized_filter < 0 && $serialized_filter > -10) {
+                $filter_error = true;
+            }
+        }
+
+        if(!$filter_error) {
+            if(!$deserialized_filter = unserialize($serialized_filter)) {
+                $filter_error = true;
+            }
+        }
+
+        if(!$filter_error) {
+            if(!is_array($deserialized_filter)) {
+                $filter_error = true;
+            }
+        }
+
+        if(!$filter_error) {
+            if(!isset($deserialized_filter['revised']) or !isset($deserialized_filter['filter']))
+                $filter_error = true;
+        }
+
+        if(!$filter_error) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return false;
+}
+
+
+
 function ldshake_custom_query_edited_project_lds($userid, $params) {
     $filter = $params['filter'];
     $revised = $params['revised'];
@@ -65,14 +132,16 @@ function ldshake_custom_query_edited_project_lds($userid, $params) {
 
                 $val_id = get_metastring_id($tag);
                 $tags_id = get_metastring_id($fk);
-                    if(!empty($val_id) and !empty($tags_id)) {
+                if(!empty($val_id) and !empty($tags_id)) {
                     $filter_query['join'][] .= <<<SQL
         JOIN metadata m{$i} ON m{$i}.entity_guid = e.guid
 SQL;
                     $filter_query['where'][] .= <<<SQL
         m{$i}.name_id = {$tags_id} AND m{$i}.value_id = {$val_id}
 SQL;
-                        $i++;
+                    $i++;
+                } else {
+                    return null;
                 }
             }
         }
@@ -3050,7 +3119,9 @@ SQL;
                     return false;
             }
 
-            $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
+            if(!$count)
+                $count_query = isset($custom_query['select']) ? $custom_query['select'] : $count_query;
+
             $order_query = isset($custom_query['order']) ? $custom_query['order'] : $order_query;
             $custom_join = isset($custom_query['join']) ? $custom_query['join'] : '';
             $custom_where = isset($custom_query['where']) ? "AND ({$custom_query['where']})" : '';

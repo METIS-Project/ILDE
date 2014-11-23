@@ -893,6 +893,9 @@ $translations = array (
 "Untitled Workflow"
 => "Workflow sense títol",
 
+"Clear all filters"
+=> "Descarta tots els filtres",
+
 //"workflows"
 //=> "",
 

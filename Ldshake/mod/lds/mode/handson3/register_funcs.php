@@ -100,15 +100,19 @@ function ldshake_mode_ldsnew_project(&$initLdS) {
         $initLdS->tags = array($CONFIG->community_languages[$user->language]);
 }
 
-function ldshake_mode_browselds_filters($key_filters) {
+function ldshake_mode_browselds_filters($filter) {
     global $CONFIG;
 
-    $filter = rawurlencode($key_filters['filter']);
+    $filter = rawurlencode($filter);
     $content = "";
-    $content .= '<div style="padding: 10px 0px 10px 0px; color: black; font-weight: bold"><a style="color: black!important; font-weight: bold" class="" href="'.$CONFIG->url.'pg/lds/browse/">' . htmlspecialchars(T('Clear all filters')) . '</a></div>';
-    $content .= '<div style="padding: 10px 0px 10px 0px; color: black; font-weight: bold"><a style="color: black!important; font-weight: bold" class="" href="'.$CONFIG->url.'pg/lds/browse/?revised=true&filter='.$filter.'">' . htmlspecialchars(T('Show only edited LdS from projects')) . '</a></div>';
+    $content .= '<div class="browse-filter-button"><a href="'.$CONFIG->url.'pg/lds/browse/?revised=true&filter='.$filter.'">' . htmlspecialchars(T('Only display project LdS edited by users')) . '</a></div>';
 
     return $content;
+}
+
+function ldshake_mode_selected_language() {
+    global $CONFIG;
+    return $CONFIG->language;
 }
 
 function ldshake_lds_oia_mph_get_dblink() {
@@ -116,7 +120,7 @@ function ldshake_lds_oia_mph_get_dblink() {
     $host = $CONFIG->dbhost;
     $user = $CONFIG->dbuser;
     $password = $CONFIG->dbpass;
-    $database = "oai-mph-ilde";
+    $database =  "oai-mph-ilde-" . $CONFIG->dbname;
 
     if (!$dblink = mysqli_init())
         throw new DatabaseException("Error configuring database link");
@@ -134,14 +138,14 @@ function ldshake_lds_oia_mph_get_dblink() {
     return $dblink;
 }
 
-function ldshake_lds_oia_mph_get_identifier($guid) {
+function ldshake_lds_oia_mph_get_identifier($guid, $format = 'pdf') {
     global $CONFIG;
     $url = parse_url($CONFIG->url);
     $url['path'] = str_replace('/', '', $url['path']);
     if(empty($url['path']))
         $url['path'] = 'root';
 
-    $identifier = 'oai:'.$url['host'].'-'.$url['path'].':'.lds_contTools::encodeId($guid);
+    $identifier = 'oai:'.$url['host'].':'.lds_contTools::encodeId($guid) . '-' . $format;
 
     return $identifier;
 }
@@ -157,37 +161,55 @@ function ldshake_lds_oia_mph_get_guid_from_identifier($identifier) {
 
 function ldshake_lds_oia_mph_put_document($om_dblink, $document) {
 
-    $lom = ldshake_lds_export_ods($document);
-    $lom = mysqli_real_escape_string($om_dblink, $lom);
-    $guid = ($document->getSubtype() == 'LdS_document') ? $document->guid : $document->document_guid;
-    $identifier = ldshake_lds_oia_mph_get_identifier($guid);
-    $identifier = sanitise_string($identifier);
+    try {
+            $formats = ldshake_get_document_formats($document);
+    } catch (Exception $e) {
+        //TODO: log something
+    }
 
-    $published = get_metadata_byname($document->guid, 'published');
+    try {
+        $multiformat = (count($formats) > 1) ? true : false;
+        foreach($formats as $format_name => $format)
+            $lom_documents[$format_name] = ldshake_lds_export_ods($document, $format, $multiformat);
+    } catch(Exception $e) {
+        return false;
+    }
 
-    $query = <<<SQL
+    $result_identifiers = array();
+    foreach($lom_documents as $format => $lom) {
+        $lom = mysqli_real_escape_string($om_dblink, $lom);
+        $guid = (in_array($document->getSubtype(), array('LdS_document', 'LdS_document_editor'))) ? $document->guid : $document->document_guid;
+        $identifier = ldshake_lds_oia_mph_get_identifier($guid, $format);
+        $result_identifiers[] = $identifier;
+        $identifier = mysqli_real_escape_string($om_dblink, $identifier);
+
+        $published = get_metadata_byname($document->guid, 'published');
+
+        $query = <<<SQL
     INSERT INTO oai_headers SET
   `oai_identifier` = '{$identifier}',
   `oai_metadataprefix` = 'lom',
   `datestamp` = {$published->time_created},
   `deleted` = 0,
-  `oai_set` = '',
+  `oai_set` = 'class:handson3',
   `metadata_contents` = '{$lom}'
 ON DUPLICATE KEY UPDATE
   `oai_identifier` = '{$identifier}',
   `oai_metadataprefix` = 'lom',
   `datestamp` = {$published->time_created},
   `deleted` = 0,
-  `oai_set` = '',
+  `oai_set` = 'class:handson3',
   `metadata_contents` = '{$lom}'
 SQL;
 
-    mysqli_query($om_dblink, $query);
+        mysqli_query($om_dblink, $query);
+    }
+    return $result_identifiers;
 }
 
 function ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $document) {
 
-    $identifier = sanitise_string($document['oai_identifier']);
+    $identifier = mysqli_real_escape_string($om_dblink, $document['oai_identifier']);
     $query = <<<SQL
 UPDATE oai_headers SET
 `deleted` = 1,
@@ -207,7 +229,12 @@ SQL;
 
     $records = array();
     if($result = mysqli_query($om_dblink, $query)) {
-        if($record = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+        $record = array();
+        while($wrecord = mysqli_fetch_assoc($result))
+            $record[] = $wrecord;
+
+        //if($record = mysqli_fetch_all($result, MYSQLI_ASSOC)) {
+        if(!empty($record)) {
             foreach($record as $r)
                 $records["{$r['oai_identifier']}"] = $r;
         };
@@ -220,46 +247,239 @@ SQL;
 function ldshake_lds_oia_mph_update_elements($om_dblink) {
     $current_lom_elements = ldshake_lds_oia_mph_get_current_elements($om_dblink);
     $current_published_docs = get_entities_from_metadata('published', '1', "object", "LdS_document", 0, 9999);
+    $current_published_docs_editor = get_entities_from_metadata('published', '1', "object", "LdS_document_editor", 0, 9999);
     $current_published_docs_revisions = get_entities_from_metadata('published', '1', "object", "LdS_document_revision", 0, 9999);
 
-    $current_published_docs = array_merge($current_published_docs, $current_published_docs_revisions);
+    $current_published_docs = array_merge($current_published_docs, $current_published_docs_editor, $current_published_docs_revisions);
     foreach($current_published_docs as $doc) {
-        ldshake_lds_oia_mph_put_document($om_dblink, $doc);
-        $guid = ($doc->getSubtype() == 'LdS_document') ? $doc->guid : $doc->document_guid;
-        $identifier = ldshake_lds_oia_mph_get_identifier($guid);
-        if(isset($current_lom_elements["{$identifier}"])) {
-            unset($current_lom_elements["{$identifier}"]);
+        $guid = (in_array($doc->getSubtype(), array('LdS_document', 'LdS_document_editor'))) ? $doc->guid : $doc->document_guid;
+        $sure_doc = get_entity($guid);
+        $lds = get_entity($sure_doc->lds_guid);
+
+        if(!in_array($lds->editor_type, array('doc','webcollagerest')))
+            continue;
+
+        $identifiers = ldshake_lds_oia_mph_put_document($om_dblink, $doc);
+        foreach($identifiers as $identifier) {
+            if(isset($current_lom_elements["{$identifier}"])) {
+                unset($current_lom_elements["{$identifier}"]);
+            }
         }
     }
 
     foreach($current_lom_elements as $doc) {
-        ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $doc);
+        try {
+            ldshake_lds_oia_mph_mark_deleted_document($om_dblink, $doc);
+        } catch(Exception $e) {
+        }
     }
 }
 
-function ldshake_lds_export_ods($doc) {
+function ldshake_lds_export_ods($doc, $format, $multiformat = false) {
     global $CONFIG;
-    $lom = '<?xml version="1.0" encoding="UTF-8"?><lom:lom xmlns:lom="http://ltsc.ieee.org/xsd/LOM"/>';
+
+    if(in_array($doc->getSubtype(), array('LdS_document_revision', 'LdS_document_editor_revision'))) {
+        $doc = get_entity($doc->document_guid);
+    }
+
+    if(!$user = get_user($doc->owner_guid))
+        throw new Exception("The owner does not exist");
+
+    if(in_array($doc->getSubtype(), array('LdS_document','LdS_document_editor'))) {
+        if(!$lds = get_entity($doc->lds_guid))
+            throw new Exception("The LdS does not exist");
+    } else {
+        throw new Exception("The LdS does not exist");
+    }
+
+    $project = null;
+    if(isset($lds->project_design)) {
+        if(is_numeric($lds->project_design)) {
+            $project = get_entity($lds->project_design);
+        }
+    }
+
+
+    $lom = <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<lom:lom xmlns:lom="http://ltsc.ieee.org/xsd/LOM"/>
+XML;
     $ods = new simpleXMLElement($lom, 0, false, 'lom', true);
-    /*
-    $ods = (object)array(
-        "general" => new sdtClass(),
-        "technical" => new sdtClass(),
-        "classification" => new sdtClass(),
-    );
-    */
+
+    $editor_prefix = 'v/';
+    if($doc->editorType == 'webcollagerest')
+        $editor_prefix = 've/';
 
     $taxon = "taxonPath";
-    $ods->general->title->string['language'] = "en";
-    $ods->general->title->string = $doc->title;
-    $ods->technical->location = $CONFIG->url.'v/'.lds_contTools::encodeId($doc->guid).'/pdf';
+    $language = $user->language;
+    if(empty($language))
+        $language = $CONFIG->language;
+
+    $external = ($doc->getSubtype() == "LdS_document_editor") ? "ve" : "v";
+
+    //keywords 10 maximum
+    $tags = array();
+    $tags[] = "ILDE";
+    $tags[] = "HandsON ICT";
+    if(isset($format['tag']))
+        $tags[] = $format['tag'];
+
+    if($project) {
+        $tags[] = $project->title;
+    }
+
+    $tool = null;
+    $template = null;
+    if($lds->editor_type == 'webcollagerest') {
+        $tags[] = "WebCollage";
+        $tool = "WebCollage";
+    } elseif(isset($lds->editor_subtype)) {
+        if(isset($CONFIG->project_templates['full'][$lds->editor_subtype])) {
+            $tags[] = $CONFIG->project_templates['full'][$lds->editor_subtype]['title'];
+            $template = $CONFIG->project_templates['full'][$lds->editor_subtype]['title'];;
+        }
+    }
+
+    foreach(array('tags', 'discipline', 'pedagogical_approach') as $tags_name) {
+        if(!empty($lds->$tags_name)) {
+            $current_tag = $lds->$tags_name;
+            if(is_array($current_tag))
+                $tags = array_merge($tags, $current_tag);
+            else if(is_string($current_tag))
+                $tags[] = $current_tag;
+        }
+    }
+
+    $tags = array_slice($tags, 0, 10);
+
+    //license
+    $copyright = "yes";
+    if(!empty($lds->license)) {
+        if((int)$lds->license) {
+            switch($lds->license)  {
+                case LDS_LICENSE_CC_BY:
+                    $rights = "Creative Commons Attribution 3.0 Unported";
+                    break;
+                case LDS_LICENSE_CC_BY_ND:
+                    $rights = "Creative Commons Attribution-NoDerivs 3.0 Unported";
+                    break;
+                case LDS_LICENSE_CC_BY_SA:
+                    $rights = "Creative Commons Attribution-ShareAlike 3.0 Unported";
+                    break;
+                case LDS_LICENSE_CC_BY_NC:
+                    $rights = "Creative Commons Attribution-NonCommercial 3.0 Unported";
+                    break;
+                case LDS_LICENSE_CC_BY_NC_ND:
+                    $rights = "Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported";
+                    break;
+                case LDS_LICENSE_CC_BY_NC_NA:
+                    $rights = "Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported";
+                    break;
+                default:
+                    $rights = "(C) All rights reserved";
+                    break;
+            }
+        } else {
+            $rights = "(C) All rights reserved";
+        }
+    }
+    else {
+            $rights = "(C) All rights reserved";
+    }
+
+    $description = "";
+    $description .= "This learning design created using the ILDE environment.\n";
+    if($template)
+        $description .= "This design is based on the \"{$template}\" template.\n";
+    if($tool)
+        $description .= "The tool used to author the design is {$tool}.\n";
+    if($project)
+        $description .= "This document is part of the project \"{$project->title}\".\n";
+    if(!empty($format['description']))
+        $description .= $format['description']."\n";
+    if(!empty($rights))
+        $description .= "This work is licensed under the following terms:\n \"{$rights}\"\n";
+
+    //title
+    if(empty($doc->title))
+        $title = $lds->title;
+    else
+        $title = $doc->title;
+
+    if($multiformat) {
+        $title .= " ({$format['titlesuffix']})";
+    }
+
+    $ods->general->identifier[0]->catalog = "Public URL";
+    $ods->general->identifier[0]->entry = $CONFIG->url . $external . '/' . lds_contTools::encodeId($doc->guid);
+
+    $ods->general->identifier[1]->catalog = "Logged in URL";
+    $ods->general->identifier[1]->entry = $CONFIG->url . 'pg/lds/view/'. $lds->guid . '/doc/' . $doc->guid. '/';
+
+
+    $ods->general->title->string['language'] = $language;
+    $ods->general->title->string = $title;
+
+    $ods->general->language = $language;
+
+    $ods->general->description->string['language'] = "en";
+    $ods->general->description->string = $description;
+
+    if(!empty($tags)) {
+        $i=0;
+        foreach($tags as $tag) {
+            $ods->general->keyword[$i]->string['language'] = $language;
+            $ods->general->keyword[$i]->string = $tag;
+            $i++;
+        }
+    }
+
+    $ods->lifeCycle->contribute->role->source = "LOMv1.0";
+    $ods->lifeCycle->contribute->role->value = "author";
+    $ods->lifeCycle->contribute->entity = $user->name;
+
+    $ods->metaMetadata->identifier[0]->catalog = "Public URL";
+    $ods->metaMetadata->identifier[0]->entry = $CONFIG->url . $external . '/' . lds_contTools::encodeId($doc->guid);
+
+    $ods->metaMetadata->identifier[1]->catalog = "Logged in URL";
+    $ods->metaMetadata->identifier[1]->entry = $CONFIG->url . 'pg/lds/view/'. $lds->guid . '/doc/' . $doc->guid. '/';
+
+    $ods->metaMetadata->contribute->role->source = "LOMv1.0";
+    $ods->metaMetadata->contribute->role->value = "creator";
+    $ods->metaMetadata->contribute->entity = $user->name;
+
+    $ods->technical->format = $format['mime'];
+    $ods->technical->location = $CONFIG->url.$editor_prefix.lds_contTools::encodeId($doc->guid).'/'.$format['urlsuffix'];
+
+    $ods->rights->copyrightAndOtherRestrictions->source = "LOMv1.0";
+    $ods->rights->copyrightAndOtherRestrictions->value = $copyright;
+    $ods->rights->description->string['language'] = "en";
+    $ods->rights->description->string = $rights;
+
+    /*
+     * Metadata.Contribute
+     */
+
+    /*
+     * 5.5.4	LifeCycle.Status
+     *
+     */
+    /*
+    $ods->general->keyword->string['language'] = $language;
+    $ods->general->keyword->string = $doc->title;
+     */
+
+
     $ods->classification->purpose->source = "LOMv1.0";
     $ods->classification->purpose->value = "educational objective";
     $ods->classification->$taxon->source->string['language'] = "en";
-    $ods->classification->$taxon->source->string = "science";
+    $ods->classification->$taxon->source->string = "learning";
     $ods->classification->$taxon->taxon->id = "";
     $ods->classification->$taxon->taxon->entry->string['language'] = "en";
-    $ods->classification->$taxon->taxon->entry->string = "astronomy";
+    $ods->classification->$taxon->taxon->entry->string = "learning design";
 
-    return $ods->asXML();
+    $dom = dom_import_simplexml($ods)->ownerDocument;
+    $dom->preserveWhiteSpace = false;
+    $dom->formatOutput = true;
+    return $dom->saveXML();
 }

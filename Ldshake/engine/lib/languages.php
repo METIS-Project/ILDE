@@ -88,6 +88,10 @@
         if ((empty($language)) && (isset($CONFIG->language)))
             $language = $CONFIG->language;
 
+        if(function_exists("ldshake_mode_selected_language")) {
+            $language = ldshake_mode_selected_language();
+        }
+
         if (isset($CONFIG->translations[$language][$message_key])) {
             return $CONFIG->translations[$language][$message_key];
         } else if (isset($CONFIG->translations["en"][$message_key])) {

@@ -78,16 +78,24 @@ class lds_viewTools
         return elgg_view('navigation/pagination', $params);
     }
 
-    public static function tag_display ($tags, $class)
+    public static function tag_display ($tags, $class, $params = null)
     {
         $tags = $tags->$class;
-        //debug_print($tags);
-        if (is_string($tags) && strlen($tags)) $tags = array($tags);
+
+        if (is_string($tags) && strlen($tags))
+            $tags = array($tags);
+
+        $extra_params="";
+        if(is_array($params)) {
+            foreach($params as $k=>$v) {
+                $extra_params .= "&{$k}=" . rawurlencode($v);
+            }
+        }
 
         $tagstring = '';
         if (is_array($tags) && count($tags))
             foreach($tags as $tag)
-                $tagstring .= '<a href="'.self::getUrl().'?tagk='.$class.'&tagv='.urlencode($tag).'" class="lds_tag '.$class.'">'.$tag.'</a> ';
+                $tagstring .= '<a href="'.self::getUrl().'?tagk='.$class.'&tagv='.urlencode($tag). $extra_params .'" class="lds_tag '.$class.'">'.$tag.'</a> ';
 
         return $tagstring;
     }

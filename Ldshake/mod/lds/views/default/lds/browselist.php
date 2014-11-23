@@ -93,9 +93,15 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
                 </div>
             <?php else: ?>
             <ul class="tagarea">
-				<li><?php echo T("Discipline") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'discipline') ?></li>
-				<li><?php echo T("Pedag. approach") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'pedagogical_approach') ?></li>
-				<li><?php echo T("Free tags") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'tags') ?></li>
+                <?php
+                $tag_params = null;
+                if(!empty($filter)) {
+                    $tag_params = array("filter" => $filter);
+                }
+                ?>
+				<li><?php echo T("Discipline") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'discipline', $tag_params) ?></li>
+				<li><?php echo T("Pedag. approach") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'pedagogical_approach', $tag_params) ?></li>
+				<li><?php echo T("Free tags") ?>: <?php echo lds_viewTools::tag_display($item->lds, 'tags', $tag_params) ?></li>
 			</ul>
 
             <div class="authory">

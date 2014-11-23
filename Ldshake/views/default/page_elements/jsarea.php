@@ -2,7 +2,20 @@
 <?php global $ldshake_jscache_break;?>
 <?php global $CONFIG;?>
 var baseurl = '<?php echo $vars['url'] ?>';
-var language = '<?php echo $vars['config']->language ?>';
+<?php
+        $user = get_loggedin_user();
+
+        if ((empty($language)) && (isset($user)) && ($user->language))
+            $language = $user->language;
+
+        if ((empty($language)) && (isset($CONFIG->language)))
+            $language = $CONFIG->language;
+
+        if(function_exists("ldshake_mode_selected_language")) {
+            $language = ldshake_mode_selected_language();
+        }
+ ?>
+var language = '<?php echo $language ?>';
 var isadminloggedin = <?php echo (isadminloggedin() ? 'true' : 'false') ?>;
 var t9nc = {
     deleteLdS : "<?php echo T("Are you sure you want to delete this LdS?") ?>"

@@ -721,65 +721,55 @@ function lds_exec_browse ($params)
 
     $vars['filtering'] = false;
     //If there is some filtering by tag
-        $tagk = urldecode(get_input('tagk', null));
-        $tagv = urldecode(get_input('tagv', null));
-        $revised = urldecode(get_input('revised', "false"));
-        $key_params_s = get_input('filter', null, false);
+    $tagk = urldecode(get_input('tagk', null));
+    $tagv = urldecode(get_input('tagv', null));
+    $revised = urldecode(get_input('revised', "false"));
+    $key_params_s = get_input('filter', null, false);
 
-        $filter = null;
-        if(!empty($key_params_s)) {
-            try {
-                $key_params = unserialize(bzdecompress(base64_decode($key_params_s, true)));
-                $filter = $key_params['filter'];
-                $revised = $key_params['revised'];
-            } catch (Exception $e) {
-                $filter = null;
-                //log something
-            }
-        }
+    $filter = array();
+    if(ldshake_check_sanitize_filter_param($key_params_s)) {
+        $key_params = unserialize(bzdecompress(base64_decode($key_params_s, true)));
+        $filter = $key_params['filter'];
+        if($revised != "true")
+            $revised = $key_params['revised'];
+    }
 
-        if(!empty($tagk) and !empty($tagv)) {
-            if(in_array($tagk, array("editor_subtype", "editor_type"))) {
-                unset($filter['editor_type']);
-                unset($filter['editor_subtype']);
-                $filter[$tagk][0] = $tagv;
-            }
-            else {
-                if(in_array($tagk, array('tags', 'discipline', 'pedagogical_approach')))
+    if(!empty($tagk) and !empty($tagv)) {
+        if(in_array($tagk, array("editor_subtype", "editor_type"))) {
+            unset($filter['editor_type']);
+            unset($filter['editor_subtype']);
+            $filter[$tagk][0] = $tagv;
+        } else {
+            if(in_array($tagk, array('tags', 'discipline', 'pedagogical_approach')))
+                if(!in_array($tagv, $filter[$tagk]))
                     $filter[$tagk][] = $tagv;
-            }
         }
+    }
 
-        $key_params = array(
-            'revised'   => $revised,
-            'filter'    => $filter
-        );
+    $key_params = array(
+        'revised'   => $revised,
+        'filter'    => $filter
+    );
 
-        $vars['key_params'] = $key_params;
-        $vars['filter'] = base64_encode(bzcompress(serialize($key_params), 9));
+    $vars['key_params'] = $key_params;
+    $vars['filter'] = base64_encode(bzcompress(serialize($key_params), 9));
+    $title = T("Browse LdS");
 
-        $title = T("Browse LdS");
+    //$time = microtime(true);
+    //echo microtime(true) - $time.' bc<br />';
+    //$time = microtime(true);
 
-        //$time = microtime(true);
-        $vars['count'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), true);
-        //echo microtime(true) - $time.' bc<br />';
-        //$time = microtime(true);
-        //$vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true, null, 'viewlist');
-        //$vars['list'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 10, $offset, null, null, $order, true, null, 'viewlist');
+    $custom = array(
+        'build_callback' => 'ldshake_custom_query_edited_project_lds',
+        'params' => array(
+            'filter' => $filter,
+            'revised' => $revised
+        ),
+    );
 
-
-        $custom = array(
-            'build_callback' => 'ldshake_custom_query_edited_project_lds',
-            'params' => array(
-                'filter' => $filter,
-                'revised' => $revised
-            ),
-        );
-
-        $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
-        //$vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
-        //echo microtime(true) - $time.' be<br />';
-
+    $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+    $vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+    //echo microtime(true) - $time.' be<br />';
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
@@ -2005,17 +1995,40 @@ function lds_exec_viewext ($params)
 	//We didn't find any published thing, so 404.
 	if ($publishedId == -1)
 	{
-		lds_exec_404('public');
+        /*fix for wrong generated ve url*/
+        if($temp_doc = get_entity($id)) {
+            $lds = get_entity($temp_doc->lds_guid);
+        }
+        if(!empty($lds->external_editor)) {
+            if((int)$lds->external_editor) {
+                lds_exec_viewexteditor($params);
+                return true;
+            }
+        }
+
+        lds_exec_404('public');
 		return;
 	}
 
 	$doc = get_entity($publishedId);
 	$vars['doc'] = $doc;
+    if($doc->getSubtype() == 'LdS_document_revision') {
+        $current_doc = get_entity($doc->document_guid);
+    } else {
+        $current_doc = $doc;
+    }
+
     $vars['lds'] = get_entity($doc->lds_guid);
-	if (is_numeric($doc->lds_guid))
-		$vars['title'] = $vars['lds']->title;
-	else
-		$vars['title'] = $doc->title;
+
+    //wrong viewer
+    if(!empty($vars['lds']->external_editor)) {
+        if((int)$vars['lds']->external_editor) {
+            lds_exec_viewexteditor($params);
+            return true;
+        }
+    }
+
+    $vars['title'] = $current_doc->title;
 
     $vars['authors'] = ldshake_get_lds_authors($vars['doc']);
     $vars['attributes'] = elgg_view('lds/publish_attr',$vars);
@@ -2058,10 +2071,12 @@ function lds_exec_viewexteditor ($params)
             switch ($params[2]) {
 			    case 'imsld':
 			        $file_guid = $vars['doc']->file_imsld_guid;
-			        break;
+                    $content_type = "application/zip";
+                    break;
 			    case 'webZip':
 			        $file_guid = $vars['doc']->pub_webZip;
-			        break;
+                    $content_type = "application/zip";
+                    break;
 			    case 'scorm':
 			        $file_guid = $vars['doc']->pub_scorm;
 			        break;
@@ -2072,18 +2087,29 @@ function lds_exec_viewexteditor ($params)
                     $file_guid = $vars['doc']->file_guid;
                     $down_filename = $vars['doc']->upload_filename;
                     break;
+                case 'pdf':
+                    $inname = "{$CONFIG->editors_content}content/webcollagerest/{$vars['doc']->previewDir}/index.html";
+                    $filename = "{$CONFIG->tmppath}PDF_{$vars['doc']->guid}.pdf";
+                    exec("{$CONFIG->pdf_converter_location} --dpi 102 -L 13mm -R 9mm {$inname} {$filename}");
+                    $down_filename = $vars['doc']->title.'.pdf';
+                    $content_type = "application/pdf";
+                    break;
 			    default:
 			    	return '';
 			    	break;
 			}
-
-			$file = get_entity($file_guid);
-			$readfile = new ElggFile();
-			$readfile->owner_guid = $file->owner_guid;
-			$readfile->setFilename($file->originalfilename);
-			$filename = $readfile->getFilenameOnFilestore();
+            if(!isset($filename)) {
+                $file = get_entity($file_guid);
+                $readfile = new ElggFile();
+                $readfile->owner_guid = $file->owner_guid;
+                $readfile->setFilename($file->originalfilename);
+                $filename = $readfile->getFilenameOnFilestore();
+            }
 			header('Content-Description: File Transfer');
-		    header('Content-Type: application/octet-stream');
+		    if(isset($content_type))
+                header('Content-Type: '.$content_type);
+            else
+                header('Content-Type: application/octet-stream');
 		    header('Content-Disposition: attachment; filename="'.$down_filename.'"');
 		    header('Content-Transfer-Encoding: binary');
 		    header('Expires: 0');
@@ -2751,16 +2777,29 @@ function lds_exec_help ($params) {
     page_draw(T("Help"), $body);
 }
 
-function lds_exec_test2 ($params) {
+function lds_exec_generateoaimph ($params) {
+    admin_gatekeeper();
 
-    $body = "<pre>" . htmlspecialchars(ldshake_lds_export_ods(get_entity($params[1]))) . "</pre>";
+    //doc test
+    if(!empty($params[1]) and is_numeric($params[1])) {
+        $doc[] = get_entity($params[1]);
+        $formats = ldshake_get_document_formats($doc[0]);
+        $multiformat = (count($formats) > 1) ? true : false;
+        $message = "";
+        foreach($formats as $k => $v)
+            $message .= "<pre>" . htmlspecialchars(ldshake_lds_export_ods($doc[0], $v, $multiformat)) . "\n</pre><br/><br/><br/>";
+        page_draw("OAI-MPH update", $message);
+        return true;
+    }
 
-    $om_dblink = ldshake_lds_oia_mph_get_dblink();
-    //ldshake_lds_oia_mph_get_current_elements($om_dblink);
-    //ldshake_lds_oia_mph_put_document($om_dblink, get_entity($params[1]));
-    //ldshake_lds_oia_mph_mark_deleted_document($om_dblink, get_entity($params[1]));
-    ldshake_lds_oia_mph_update_elements($om_dblink);
-    page_draw("Test", $body);
+    if($om_dblink = ldshake_lds_oia_mph_get_dblink()) {
+        ldshake_lds_oia_mph_update_elements($om_dblink);
+        $message = "Updated oai-mph database";
+    } else {
+        $message = "Database error";
+    }
+
+    page_draw("OAI-MPH update", $message);
 }
 
 function lds_exec_admin ($params) {

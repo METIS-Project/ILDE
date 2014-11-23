@@ -75,7 +75,7 @@ $CONFIG->project_templates['default'] = array(
     ),
 
     'DB' => array(
-        'title' => T('Dream Bazaar'),
+        'title' => T('Dream'),
         'type'  => 'doc',
         'subtype'   => 'DB',
         'icon' => 'doc'

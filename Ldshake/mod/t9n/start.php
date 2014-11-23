@@ -41,11 +41,26 @@
 
 function t9n_init() {	
 	global $CONFIG;
-	
-	include_once "data/{$CONFIG->language}.php";
+
+    $user = get_loggedin_user();
+
+    if ((empty($language)) && (isset($user)) && ($user->language))
+        $language = $user->language;
+
+    if ((empty($language)) && (isset($CONFIG->language)))
+        $language = $CONFIG->language;
+
+    if(function_exists("ldshake_mode_selected_language")) {
+        $language = ldshake_mode_selected_language();
+    }
+
+    if(!file_exists(__DIR__ . "/data/{$language}.php"))
+        $language = "en";
+
+	include_once "data/{$language}.php";
 	
 	$CONFIG->t9n = $translations;
-	
+
 	register_page_handler('translation','t9n_page_handler');
 }
 

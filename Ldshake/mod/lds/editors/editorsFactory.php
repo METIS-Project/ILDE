@@ -1088,7 +1088,55 @@ class OpenglmEditor extends Editor {
         return $document;
     }
 }
+/*
+ * rest editors
+ */
+global $CONFIG;
+if(!$CONFIG->rest_editor_list) {
+    if($user_editor = get_entity(get_loggedin_user()->editor)) {
+        $CONFIG->rest_editor_list[$user_editor->internalname] = array(
+            'name' => $user_editor->name,
+            'url_rest' => $user_editor->resturl,
+            'url_gui' => $user_editor->guiurl,
+            'password' => $user_editor->restpass,
+            'imsld' => $user_editor->imsld,
+            'preview' => $user_editor->preview,
+            'icon' => false
+        );
+    }
 
+    $CONFIG->rest_editor_list['webcollagerest'] = array(
+        'name' => 'WebCollage',
+        'url_rest' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/",
+        'url_gui' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php",
+        'preview' => true,
+        'imsld' => true,
+        'password' => 'LdS@k$1#',
+        'icon' => true
+    );
+
+    $CONFIG->rest_editor_list['exelearningrest'] = array(
+        'name' => 'eXeLearning',
+        'url_rest' => "http://ldshake2.upf.edu:8080/",
+        'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
+        //'url_rest' => "http://ilde:443/",
+        //'url_gui' => "http://ilde:443/ldshakegui/",
+        //'url_rest' => "http://192.168.1.219:51235/",
+        //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
+        'preview' => true,
+        'imsld' => false,
+        'scorm' => true,
+        'password' => 'LdS@k$1#',
+        'icon' => false,
+        'downloable' => 'elp',
+        'new_from_file' => true,
+        'new_from_file_callback' => "ldshake_exelearning_get_newfile",
+    );
+}
+
+/**
+ * Class RestEditor
+ */
 class RestEditor extends Editor
 {
     public $document_url;
@@ -1098,49 +1146,6 @@ class RestEditor extends Editor
     /*also useful to check if a given editor supports the REST api*/
     public static function rest_enabled($editor_type) {
         global $CONFIG;
-
-        if(!$CONFIG->rest_editor_list) {
-            if($user_editor = get_entity(get_loggedin_user()->editor)) {
-                $CONFIG->rest_editor_list[$user_editor->internalname] = array(
-                    'name' => $user_editor->name,
-                    'url_rest' => $user_editor->resturl,
-                    'url_gui' => $user_editor->guiurl,
-                    'password' => $user_editor->restpass,
-                    'imsld' => $user_editor->imsld,
-                    'preview' => $user_editor->preview,
-                    'icon' => false
-                );
-            }
-
-            $CONFIG->rest_editor_list['webcollagerest'] = array(
-                'name' => 'WebCollage',
-                'url_rest' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/",
-                'url_gui' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php",
-                'preview' => true,
-                'imsld' => true,
-                'password' => 'LdS@k$1#',
-                'icon' => true
-            );
-
-            $CONFIG->rest_editor_list['exelearningrest'] = array(
-                'name' => 'eXeLearning',
-                'url_rest' => "http://ldshake2.upf.edu:8080/",
-                'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
-                //'url_rest' => "http://ilde:443/",
-                //'url_gui' => "http://ilde:443/ldshakegui/",
-                //'url_rest' => "http://192.168.1.219:51235/",
-                //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
-                'preview' => true,
-                'imsld' => false,
-                'scorm' => true,
-                'password' => 'LdS@k$1#',
-                'icon' => false,
-                'downloable' => 'elp',
-                'new_from_file' => true,
-                'new_from_file_callback' => "ldshake_exelearning_get_newfile",
-            );
-        }
-
         return $CONFIG->rest_editor_list[$editor_type];
     }
 

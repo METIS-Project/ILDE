@@ -51,7 +51,7 @@
         <li id="tb_conceptualize_new5" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_docs/template/CF"><?php echo T("Course Features (Google Docs)") ?></a></li>
         <li id="tb_conceptualize_new6" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/FC"><?php echo T("Factors and Concerns") ?></a></li>
         <li id="tb_conceptualize_new7" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/HE"><?php echo T("Heuristic Evaluation") ?></a></li>
-        <li id="tb_conceptualize_new14" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/DB"><?php echo T("Dream Bazaar") ?></a></li>
+        <li id="tb_conceptualize_new14" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/DB"><?php echo T("Dream") ?></a></li>
         <li id="tb_conceptualize_new15" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/LO"><?php echo T("Learning objectives") ?></a></li>
         <li id="tb_conceptualize_new17" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/new/template/scenario"><?php echo T("Scenario") ?></a></li>
         <li id="tb_conceptualize_new12" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_draw/template/mooc_canvas"><?php echo T("MOOC Canvas") ?></a></li>

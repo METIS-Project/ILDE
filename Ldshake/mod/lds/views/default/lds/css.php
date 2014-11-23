@@ -2559,3 +2559,26 @@ form[name="myldSform"] {
     width: 357px;
     margin-left: 220px;
 }
+
+.browse-filter-button {
+    font-weight: bold;
+    background: #eee;
+    background: linear-gradient(to right, #ECECEC 0%,#fcfcfc 100%);
+    /*border-radius: 5px;*/
+    border: 0px solid rgb(232, 232, 232);
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.browse-filter-button:hover {
+    background: rgb(208, 208, 208);
+    background: linear-gradient(to right, #E5E5E5 0%,#F9F9F9 100%);
+}
+
+.browse-filter-button > a {
+    text-decoration: none !important;
+    color: black!important;
+    font-weight: bold;
+    display: block;
+    padding: 5px;
+}

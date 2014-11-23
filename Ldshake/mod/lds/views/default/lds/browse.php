@@ -48,13 +48,25 @@ if(function_exists("ldshake_mode_browselds")) {
 
 $added_filter = "";
 if(function_exists("ldshake_mode_browselds_filters")) {
-    $added_filter = ldshake_mode_browselds_filters($key_params);
+    $added_filter = ldshake_mode_browselds_filters($filter);
+}
+
+if(ldshake_check_sanitize_filter_param($filter)) {
+    $filter_param = "&filter=" . rawurlencode($filter);
+} else {
+    $filter = null;
+    $vars['filter'] = null;
+    $filter_param = "";
 }
 
 ?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<div id="left_filters">
+            <div class="browse-filter-button">
+                <?php echo '<a style="color: black!important; font-weight: bold" class="" href="'.$url.'pg/lds/browse/">' . htmlspecialchars(T('Clear all filters')) . '</a>'?>
+            </div>
+
             <?php echo $added_filter; ?>
             <h3><?php echo T($tools_term) ?></h3>
             <ul class="tag_selector">
@@ -132,7 +144,9 @@ if(function_exists("ldshake_mode_browselds_filters")) {
 
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
-        <?php $filter = $key_params['filter']; ?>
+        <?php
+        $filter_orig = $filter;
+        $filter = $key_params['filter']; ?>
         <?php
         if($key_params['revised'] == "true")
             $filter['revised'] = $key_params['revised'];
@@ -184,9 +198,9 @@ if(function_exists("ldshake_mode_browselds_filters")) {
         <div class="lds_order_by">
         <?php
         if($order == "time")
-            echo T("sort by").' '.'<b>'.T("newest").'</b> / '.'<a href="'.lds_viewTools::getUrl()."?order=title&tagk={$tagk}&tagv={$tagv}".'">'.T("title").'</a>';
+            echo T("sort by").' '.'<b>'.T("newest").'</b> / '.'<a href="'.lds_viewTools::getUrl()."?order=title{$filter_param}".'">'.T("title").'</a>';
         else
-            echo T("sort by").' '.'<a href="'.lds_viewTools::getUrl()."?order=time&tagk={$tagk}&tagv={$tagv}".'">'.T("newest").'</a> / <b>'.T("title").'</b>';
+            echo T("sort by").' '.'<a href="'.lds_viewTools::getUrl()."?order=time{$filter_param}".'">'.T("newest").'</a> / <b>'.T("title").'</b>';
         ?>
         </div>
 	</div>

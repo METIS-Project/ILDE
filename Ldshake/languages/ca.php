@@ -413,7 +413,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'users:searchtitle' => "Searching for users: %s",
     'advancedsearchtitle' => "%s with results matching %s",
     'notfound' => "No results found.",
-    'next' => "Next",
+    'next' => "següent",
     'previous' => "Previous",
 
     'viewtype:change' => "Change listing type",

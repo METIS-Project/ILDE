@@ -42,11 +42,11 @@ global $CONFIG;
 
 $doc_guid = get_input ('docId');
 $doc = get_entity ($doc_guid);
-$license = "";
+
 
 $lds=get_entity($doc->lds_guid);
 $license= "";
-if($lds->license) {
+if(!empty($lds->license)) {
     $license = elgg_view("lds/license_banner", array("lds"=>$lds));
 }
 
@@ -505,6 +505,11 @@ $contents = <<<EOD
 #view-ext-bottom-attributes {
     font-family: sans-serif;
     font-size: 70%;
+}
+
+.license_banner {
+    display: none;
+    margin-top:20px;
 }
 		</style>
 	</head>
