@@ -134,11 +134,37 @@ function ldshake_custom_query_edited_project_lds($userid, $params) {
                 $tags_id = get_metastring_id($fk);
                 if(!empty($val_id) and !empty($tags_id)) {
                     $filter_query['join'][] .= <<<SQL
-        JOIN metadata m{$i} ON m{$i}.entity_guid = e.guid
+JOIN metadata m{$i} ON m{$i}.entity_guid = e.guid
 SQL;
+
+                $filter_query['where'][] .= <<<SQL
+m{$i}.name_id = {$tags_id} AND m{$i}.value_id = {$val_id}
+SQL;
+
+                if($fk == "editor_type" and in_array($tag, array("doc", "google_docs"))) {
+                    $editor_subtype_id = get_metastring_id("editor_subtype");
+                    $filter_query['join'][] .= <<<SQL
+JOIN metadata msub{$i} ON msub{$i}.entity_guid = e.guid
+LEFT JOIN (
+  SELECT mnosub.entity_guid FROM metadata mnosub WHERE mnosub.name_id = {$editor_subtype_id}
+) AS mnosub ON mnosub.entity_guid = e.guid
+SQL;
+
                     $filter_query['where'][] .= <<<SQL
-        m{$i}.name_id = {$tags_id} AND m{$i}.value_id = {$val_id}
+((msub{$i}.name_id = {$editor_subtype_id} AND msub{$i}.value_id = {$val_id}) OR (msub{$i}.name_id = {$tags_id} AND mnosub.entity_guid IS NULL))
 SQL;
+
+/*
+                        $filter_query['join'][] .= <<<SQL
+JOIN (
+  SELECT msub.entity_guid FROM metadata msub WHERE msub.name_id = {$editor_subtype_id}
+) AS msub ON msub.entity_guid = e.guid
+SQL;
+                        $filter_query['where'][] .= <<<SQL
+msub.entity_guid IS NULL
+SQL;
+*/                  }
+
                     $i++;
                 } else {
                     return null;
