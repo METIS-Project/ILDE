@@ -560,6 +560,7 @@ function ldshake_supports_pdf($document) {
     $lds = get_entity($document->lds_guid);
     $supported_editors = array(
         'project_design',
+        'webcollagerest'
     );
 
     if($subtype == 'LdS_document')
@@ -605,7 +606,7 @@ function ldshake_project_add_title_order($lds_list, $pg_data) {
             continue;
 
         if(isset($project_lds->workflow_order)) {
-            $rlds->lds->title .= ' ['. $project_lds->workflow_order . ']';
+            $rlds->lds->title = '['. $project_lds->workflow_order . '] '  . $rlds->lds->title;
             $rlds->lds->workflow_order = $project_lds->workflow_order;
         }
     }

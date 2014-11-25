@@ -59,25 +59,24 @@ function encodeURIComponent($str) {
             <?php if (strstr($lds->editor_type, 'google')): ?>
             <a class="rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
             <?php endif; ?>
+            <?php if(isset($currentDoc->file_imsld_guid)): ?>
+                <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_imsld_guid . "&title=" . encodeURIComponent($lds->title."(ims-lds).zip") ?>"><?php echo T("Download IMS-LD file") ?></a>
+            <?php endif; ?>
+            <?php if(ldshake_supports_pdf($currentDoc)): ?>
+                <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+            <?php endif; ?>
+
             <?php if ($lds->canEdit()): ?>
                 <?php if (!lds_contTools::isLockedBy($lds->guid)): ?>
                 <?php if ($lds->owner_guid == get_loggedin_userid()): ?>
                 <a class="rightbutton" id="lds_delete_button" href="#"><?php echo T("Trash this %1", ldshake_env_category($lds)) ?></a>
                 <?php endif; ?>
                 <a class="rightbutton" id="lds_share_button" href="#"><?php echo T("Sharing options...") ?></a>
-
-
-                <?php if(ldshake_supports_pdf($currentDoc)): ?>
-                        <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-                <?php endif; ?>
                 <?php if(isset($currentDoc->downloable)): ?>
                     <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_guid . "&title=" . encodeURIComponent($lds->title . '.' . $currentDoc->downloable) ?>"><?php echo T("Download %1 file", $currentDoc->downloable) ?></a>
                 <?php endif; ?>
                 <?php if(isset($currentDoc->file_xlsx_guid)): ?>
                     <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_xlsx_guid . "&title=" . encodeURIComponent($lds->title.".xlsx") ?>"><?php echo T("Download excel file") ?></a>
-                <?php endif; ?>
-                <?php if(isset($currentDoc->file_imsld_guid)): ?>
-                    <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_imsld_guid . "&title=" . encodeURIComponent($lds->title."(ims-lds).zip") ?>"><?php echo T("Download IMS-LD file") ?></a>
                 <?php endif; ?>
                 <?php if(isset($currentDoc->file_scorm_guid)): ?>
                     <a class="rightbutton" href="<?php echo $url ?>action/lds/file_export?docId=<?php echo $currentDoc->file_scorm_guid . "&title=" . encodeURIComponent($lds->title."(scorm).zip") ?>"><?php echo T("Download SCORM file") ?></a>

@@ -525,7 +525,28 @@ if(isset($doc->file_pdf_guid)) {
     $outname = ldshake_get_filepath($doc->file_pdf_guid);
 } else {
     //Generate temp filenames
-    $inname = "{$CONFIG->tmppath}HTM_{$doc_guid}.html";
+    $alternate_source = false;
+    if(!strstr($lds->editor_type, 'google')
+        and !empty($lds->external_editor)
+        and !empty($doc->previewDir)) {
+
+        $origin_index = $CONFIG->editors_content.'content/webcollagerest/'.$doc->previewDir . '/index.html';
+        if(file_exists($origin_index)) {
+            $origin_dir = dirname($origin_index);
+            exec("cp -r -u {$origin_dir} {$CONFIG->tmppath}");
+            $inname = "{$CONFIG->tmppath}{$doc->previewDir}/index.html";
+            if(!file_exists($inname)) {
+                throw new Exception("PDF static files copy error.");
+            } else {
+                $alternate_source = true;
+                $contents = file_get_contents($inname);
+            }
+        }
+    }
+
+    if(!$alternate_source) {
+        $inname = "{$CONFIG->tmppath}HTM_{$doc_guid}.html";
+    }
     $outname = "{$CONFIG->tmppath}PDF_{$doc_guid}.pdf";
 
     if($doc->editorType == 'google_docs') {

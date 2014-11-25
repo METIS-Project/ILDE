@@ -83,20 +83,22 @@ function ldshake_get_template($template, $format = null) {
             foreach($preferred_formats as $format) {
                 $filename = "";
                 if(!empty($format)) {
-                    if(!empty($format) and file_exists(__DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format))
+                    if(!empty($format) and file_exists(__DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format)) {
                         $filename = __DIR__. '/' . $format . '/i18n/'.$CONFIG->language.'/'.$file.'.'.$format;
-                    elseif(file_exists(__DIR__. '/' . $format . '/'.$file.'.'.$format))
+                    }
+                    elseif(file_exists(__DIR__. '/' . $format . '/'.$file.'.'.$format)) {
                         $filename = __DIR__. '/' . $format . '/'.$file.'.'.$format;
+                    }
                 }
                 elseif(file_exists(__DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt'))
                     $filename = __DIR__.'/i18n/'.$CONFIG->language.'/'.$file.'.txt';
-                else
+                elseif(file_exists(__DIR__.'/'.$file.'.txt'))
                     $filename = __DIR__.'/'.$file.'.txt';
 
                 if(!empty($filename)) {
                     if($text = file_get_contents($filename)) {
                         $doc[] = array($text, $format);
-                        continue;
+                        break;
                     }
                 }
             }
