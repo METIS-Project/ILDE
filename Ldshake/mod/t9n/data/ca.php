@@ -33,7 +33,7 @@ $translations = array (
 => "Previ",
 
 "Latest revision on"
-=> "Útima revisió el:",
+=> "Útima revisió:",
 
 "Started on"
 => "Data de creació:",
