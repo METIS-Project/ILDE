@@ -107,8 +107,6 @@ function ldshake_check_sanitize_filter_param($filter) {
     return false;
 }
 
-
-
 function ldshake_custom_query_edited_project_lds($userid, $params) {
     $filter = $params['filter'];
     $revised = $params['revised'];
