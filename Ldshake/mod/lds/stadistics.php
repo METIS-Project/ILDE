@@ -1510,80 +1510,80 @@ function ldshake_statistics_custom_query_start_finish_created_docs($userid, $par
     }
 
     $query['where'] = <<<SQL
-AND a.time_created >= {$params['start']}
-AND a.time_created < {$params['end']}
+e.time_created >= {$params['start']}
+AND e.time_created < {$params['end']}
 {$user_q}
 SQL;
 
+    return $query;
+}
+
+function ldshake_statistics_custom_query_start_finish_edited_docs($userid, $params) {
+    $revision_ms_id = get_metastring_id("revised_docs");
+    $revision_editor_ms_id = get_metastring_id("revised_docs_editor");
+
+    $user_q = '';
+    if(isset($params['user_id'])) {
+        $user_q = "owner_guid = {$params['user_id']} AND";
+    }
+
+    $query['join'] = <<<SQL
+JOIN(
+  SELECT entity_guid
+  FROM annotations
+  WHERE {$user_q}
+  name_id IN ({$revision_ms_id},{$revision_editor_ms_id})
+  AND time_created >= {$params['start']}
+  AND time_created < {$params['end']}
+  GROUP BY entity_guid
+) AS edit ON edit.entity_guid = e.guid
+SQL;
+
+    $query['where'] = <<<SQL
+edit.entity_guid IS NOT NULL
+SQL;
+
+    return $query;
 }
 
 function lds_tracking_user_created_weekly($params) {
     extract($params);
-    $header = array("user id", "username", "name");
+    $header = array("username", "name");
 
-    $years = (int)$finish_year - (int)$start_year;
-    $weeks = abs((int)$finish_week - (int)$start_week) + $years*52;
-
-    $year = (int)$start_year;
-    $week = (int)$start_week);
-    for($i=0; $i<$weeks; $i++) {
-        $header[] = "{$year}W{$week}";
-        $week++;
-        if($week > 52) {
-            $week = 1;
-            $year++;
-        }
+    for($i=0; $i<(int)$number; $i++) {
+        $header[] = gmdate("d M Y", strtotime("{$start_date} + {$i}{$interval}"));
     }
 
     $data = array();
-
     $users = get_entities('user','',0,'',9999);
 
     //count reviews
     foreach($users as $user) {
-        $user_reviews = array();
-        $user_total_count = 0;
-        for($i=0; $i<52; $i++) {
-            $end = $i+1;
+        $user_data = array();
+           for($i=0; $i<(int)$number; $i++) {
+            //calc start/end timestamps or the week
+            $start_timestamp = strtotime("{$start_date} + {$i}{$interval}");
+            $end_interval = $i+1;
+            $end_timestamp = strtotime("{$start_date} + {$end_interval}{$interval}");
 
+            //do something here
             $custom = array(
-                'build_callback' => 'ldshake_statistics_custom_query_start_finish_created_docs',
+                'build_callback' => "ldshake_statistics_custom_query_start_finish_{$state}_docs",
                 'params' => array(
-                    'start' => strtotime(,
-                        'end'   => strtotime(
-            ),
-    );
+                    'user_id' => $user->guid,
+                    'start' => $start_timestamp,
+                    'end'   => $end_timestamp
+                    )
+                );
 
-    $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
-    $vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
-
-            $reviews = lds_contTools::getModificationsLdSsByDate($user->guid, strtotime("2014W01+{$i}week"), strtotime("2014W01+{$end}week"));
-
-            if(!$reviews)
-                $reviews = array();
-
-            $user_reviews[] = count($reviews);
-            $user_total_count += count($reviews);
-
-            $user_week_list = array();
-            foreach($reviews as $review) {
-                $user_week_list["{$review->guid}"] = isset($user_week_list["{$review->guid}"]) ? $user_week_list["{$review->guid}"]+1 : 1;
-            }
-
-            $user_reviews[] = implode(',',array_keys($user_week_list));
+            $count = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 9999, 0, null, null, "time", false, null, true, $custom, false, false, 0, 'viewlist');
+            if(empty($count))
+                $count = 0;
+            $user_data[] = $count;
         }
-        $data[] = array_merge(array($user->guid, $user->username, $user_total_count), $user_reviews);
+
+        $data[] = array_merge(array($user->username, $user->name),  $user_data);
     }
 
     lds_echocsv($header, $data, 'reviews-weeks');
 }
-
-$annotation_name_id = get_metastring_id('revised_docs');
-$annotation_name_id_2 = get_metastring_id('revised_docs_editor');
-
-$user_q = '';
-if($user_id)
-    $user_q = "AND a.owner_guid = {$user_id}";
-$query = <<<SQL
-SELECT e.guid, e.type FROM {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2}) AND a.time_created >= {$start} AND a.time_created < {$end} AND e.enabled = 'yes' AND e.access_id > 0 {$user_q}
-SQL;

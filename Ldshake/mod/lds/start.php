@@ -2724,6 +2724,21 @@ function lds_exec_tracking ($params) {
         case 'user_tool':
             lds_tracking_user_tool();
             break;
+        case 'lds_tracking_user_created_weekly':
+            $start_date = $params[2];
+            $number = $params[3];
+            $interval = $params[4];
+            $state = $params[5];
+
+            lds_tracking_user_created_weekly(
+                array(
+                    'start_date'    => $start_date,
+                    'number'        => $number,
+                    'interval'      => $interval,
+                    'state'         => $state,
+                )
+            );
+            break;
 
     }
 
