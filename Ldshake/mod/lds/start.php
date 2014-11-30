@@ -2739,6 +2739,21 @@ function lds_exec_tracking ($params) {
                 )
             );
             break;
+        case 'lds_tracking_lds_activity':
+            $start_date = $params[2];
+            $number = $params[3];
+            $interval = $params[4];
+            $state = $params[5];
+
+            lds_tracking_lds_action_weekly(
+                array(
+                    'start_date'    => $start_date,
+                    'number'        => $number,
+                    'interval'      => $interval,
+                    'state'         => $state,
+                )
+            );
+            break;
 
     }
 

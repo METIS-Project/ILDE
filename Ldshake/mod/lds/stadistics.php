@@ -1585,5 +1585,155 @@ function lds_tracking_user_created_weekly($params) {
         $data[] = array_merge(array($user->username, $user->name),  $user_data);
     }
 
-    lds_echocsv($header, $data, 'reviews-weeks');
+    lds_echocsv($header, $data, "reviews-{$interval}");
+}
+
+function ldshake_statistics_custom_query_start_finish_created_lds($userid, $params) {
+
+    $user_q = '';
+    if(isset($params['user_id'])) {
+        $user_q = "owner_guid = {$params['user_id']} AND";
+    }
+
+    if($params['action'] == "revised") {
+        $where = <<<SQL
+    OR
+    (
+      last_edited_time >= {$params['start']}
+      AND last_edited_time < {$params['end']}
+    )
+SQL;
+    } elseif($params['action'] == "commented") {
+        $comment_ms_id = get_metastring_id("generic_comment");
+
+        $query['join'] = <<<SQL
+LEFT JOIN(
+  SELECT entity_guid
+  FROM annotations
+  WHERE name_id = {$comment_ms_id}
+  AND time_created >= {$params['start']}
+  AND time_created < {$params['end']}
+  GROUP BY entity_guid
+) AS commented ON commented.entity_guid = e.guid
+SQL;
+
+        $where = <<<SQL
+OR commented.entity_guid IS NOT NULL
+SQL;
+
+    }
+
+    $query['where'] = <<<SQL
+{$user_q}
+(
+    (
+      time_created >= {$params['start']}
+      AND time_created < {$params['end']}
+    )
+    {$where}
+)
+SQL;
+
+    return $query;
+}
+
+function ldshake_statistics_custom_query_start_finish_action_lds($userid, $params) {
+
+    if($params['action'] == "revised") {
+        $revision_ms_id = get_metastring_id("revised_docs");
+        $revision_editor_ms_id = get_metastring_id("revised_docs_editor");
+        $name_id = "{$revision_ms_id},{$revision_editor_ms_id}";
+    } elseif($params['action'] == "commented") {
+        $comment_ms_id = get_metastring_id("generic_comment");
+        $name_id = "{$comment_ms_id}";
+    }
+
+    $query['select'] = <<<SQL
+edit.total AS total
+SQL;
+
+    $query['join'] = <<<SQL
+JOIN(
+  SELECT entity_guid, id
+  FROM annotations
+  WHERE
+  name_id IN ({$name_id})
+  AND entity_guid = {$params['lds_guid']}
+  AND time_created >= {$params['start']}
+  AND time_created < {$params['end']}
+) AS edit ON edit.entity_guid = e.guid
+SQL;
+
+    $query['where'] = <<<SQL
+e.guid = {$params['lds_guid']}
+SQL;
+
+    return $query;
+}
+
+function lds_tracking_lds_action_weekly($params) {
+    extract($params);
+    $header = array("title", "id", "created in this timeframe");
+
+    for($i=0; $i<(int)$number; $i++) {
+        $header[] = gmdate("d m Y", strtotime("{$start_date} + {$i}{$interval}"));
+    }
+
+    $data = array();
+    //$users = get_entities('user','',0,'',9999);
+    //$lds = lds_contTools::getUserEntities()
+    //do something here
+    $start_timestamp_period = strtotime("{$start_date}");
+    $end_timestamp_period = strtotime("{$start_date} + {$number}{$interval}");
+    $custom = array(
+        'build_callback' => "ldshake_statistics_custom_query_start_finish_created_lds",
+        'params' => array(
+            'user_id' => null,
+            'start' => $start_timestamp_period,
+            'end'   => $end_timestamp_period,
+            'action'   => $state
+        )
+    );
+
+    $lds_list = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 9999, 0, null, null, "time", false, null, true, $custom, false, false, 0, 'viewlist');
+
+    //count reviews
+    foreach($lds_list as $lds) {
+        $lds_data = array();
+
+        if($lds->lds->time_created >= $start_timestamp_period
+            and $lds->lds->time_created < $end_timestamp_period) {
+            $lds_data[] = "yes";
+        } else {
+            $lds_data[] = "no";
+        }
+
+        for($i=0; $i<(int)$number; $i++) {
+            //calc start/end timestamps or the week
+            $start_timestamp = strtotime("{$start_date} + {$i}{$interval}");
+            $end_interval = $i+1;
+            $end_timestamp = strtotime("{$start_date} + {$end_interval}{$interval}");
+
+            //do something here
+            $custom = array(
+                'callback' => 'ldshake_query_custom_count_callback',
+                'build_callback' => "ldshake_statistics_custom_query_start_finish_action_lds",
+                'params' => array(
+                    'lds_guid' => $lds->lds->guid,
+                    'start' => $start_timestamp,
+                    'end'   => $end_timestamp,
+                    'action' => $state,
+                )
+            );
+
+            $count = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 9999, 0, null, null, "time", false, null, false, $custom, false, false, 0, 'viewlist');
+            if(empty($count))
+                $count = 0;
+            $lds_data[] = $count;
+        }
+
+        $data[] = array_merge(array($lds->lds->title, $lds->lds->guid), $lds_data);
+    }
+
+    lds_echocsv($header, $data, "reviews-{$interval}");
 }

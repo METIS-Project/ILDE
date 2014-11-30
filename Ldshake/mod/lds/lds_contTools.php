@@ -912,6 +912,10 @@ function ldshake_dummy_callback($row) {
     return $row;
 }
 
+function ldshake_query_custom_count_callback($row) {
+    return (int)$row->total;
+}
+
 function ldshake_guid_callback($row) {
     return (int)$row->guid;
 }
