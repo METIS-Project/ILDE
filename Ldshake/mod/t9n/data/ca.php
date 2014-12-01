@@ -11,6 +11,9 @@ $translations = array (
 "viewer"
 => "lector",
 
+"viewers"
+=> "lectors",
+
 "Discipline"
 => "Tema",
 

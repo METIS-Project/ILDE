@@ -2639,6 +2639,7 @@ function lds_exec_datatracking ($params) {
 }
 
 function lds_exec_tracking ($params) {
+    admin_gatekeeper();
     include_once(__DIR__.'/stadistics.php');
     $start = $params[2];
     $end = $params[3];
@@ -2740,6 +2741,7 @@ function lds_exec_tracking ($params) {
             );
             break;
         case 'lds_tracking_lds_activity':
+            //example use: http://ilde/pg/lds/tracking/lds_tracking_lds_activity/3-11-2014/5/weeks/commented
             $start_date = $params[2];
             $number = $params[3];
             $interval = $params[4];

@@ -126,7 +126,7 @@ if(function_exists("ldshake_mode_mylds")) {
                         <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php echo T("viewer"); ?><?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?><?php echo T('s');?><?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php if ($item->num_viewers != 1): ?><?php echo T("viewers"); ?><?php else: ?><?php echo T("viewer"); ?><?php endif; ?></span>
 					<?php if ($item->locked): ?>
 					<span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
 					<?php endif; ?>
@@ -143,7 +143,7 @@ if(function_exists("ldshake_mode_mylds")) {
 						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
 						<?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php echo T("viewer"); ?><?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+					<span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?><?php echo T('s');?><?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php if ($item->num_viewers != 1): ?><?php echo T("viewers"); ?><?php else: ?><?php echo T("viewer"); ?><?php endif; ?></span>
                     <span class="lds_date timeago_timestamp" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
                     <div class="clearfloat"></div>
                 </div>

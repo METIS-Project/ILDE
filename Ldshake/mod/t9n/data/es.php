@@ -1452,4 +1452,24 @@ $translations = array (
 
 "Upload a jpeg, png, gif or svg image."
 => "Sube una imagen jpeg, png, gif o svg.",
+
+"Clear all filters"
+=> "Quita todos los filtros",
+
+"viewer"
+=> "lector",
+
+"viewers"
+=> "lectores",
+
+"all"
+=> "todos",
+
+"to"
+=> "a",
+
+"s"
+=> "es",
+
+
 );
