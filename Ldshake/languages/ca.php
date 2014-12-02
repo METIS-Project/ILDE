@@ -479,7 +479,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
     'user:password:resetreq:success' => 'Nova contransenya sol·licitada, correu enviat.',
     'user:password:resetreq:fail' => 'No s\'ha pogut sol·licitar una nova contrasenya.',
 
-    'user:password:text' => 'Per a generar una nova contrasenya, introdueix el teu nom d\'usuari. T\'enviarem la direcció d\'una pàgina de verificació mitjançant email.',
+    'user:password:text' => 'Per a generar una nova contrasenya, introdueix el teu email o el nom d\'usuari. T\'enviarem la direcció d\'una pàgina de verificació mitjançant email.',
 
     'user:persistent' => 'Remember me',
     /**

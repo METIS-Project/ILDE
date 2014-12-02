@@ -11,7 +11,7 @@
 	 */
 
 	$form_body = "<p>" . elgg_echo('user:password:text') . "</p>";
-	$form_body .= "<p><b>". elgg_echo('username') . "</b> " . elgg_view('input/text', array('internalname' => 'username')) . "</p>";
+	$form_body .= "<p>" . elgg_view('input/text', array('internalname' => 'username')) . "</p>";
 	$form_body .= "<p>" . elgg_view('input/submit', array('value' => elgg_echo('request'))) . "</p>";
 ?>
 <div id="forgotten_box">

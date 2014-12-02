@@ -37,7 +37,7 @@
 /**
  * Exports an LdS document to a PDF file. Uses the wkhtmltopdf tool ( https://github.com/antialize/wkhtmltopdf )
  */
-
+set_time_limit(15);
 global $CONFIG;
 
 $doc_guid = get_input ('docId');
@@ -520,6 +520,12 @@ $contents = <<<EOD
 	</body>
 </html>
 EOD;
+
+if(in_array($lds->getSubtype(), array("LdSProject", "LdSProject_implementation"))) {
+    $vars['lds'] = $lds;
+
+    $contents = elgg_view('lds/projects/standalone_view', $vars);
+}
 
 if(isset($doc->file_pdf_guid)) {
     $outname = ldshake_get_filepath($doc->file_pdf_guid);

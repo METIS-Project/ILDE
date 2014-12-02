@@ -463,7 +463,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
 			'user:set:password' => "Account password",
 			'user:password:label' => "Your new password",
 			'user:password2:label' => "Your new password again",
-			'user:password:success' => "Password changed",
+			'user:password:success' => "Password changed, check your email.",
 			'user:password:fail' => "Could not change your password on the system.",
 			'user:password:fail:notsame' => "The two passwords are not the same!",
 			'user:password:fail:tooshort' => "Password is too short!",
@@ -479,7 +479,7 @@ To remove a widget drag it back to the <b>Widget gallery</b>.",
 			'user:password:resetreq:success' => 'Successfully requested a new password, email sent',
 			'user:password:resetreq:fail' => 'Could not request a new password.',
 	
-			'user:password:text' => 'To generate a new password, enter your username below. We will send the address of a unique verification page to you via email click on the link in the body of the message and a new password will be sent to you.',
+			'user:password:text' => 'To generate a new password, enter your email or username below. We will send the address of a unique verification page to you via email click on the link in the body of the message and a new password will be sent to you.',
 	
 			'user:persistent' => 'Remember me',
 		/**

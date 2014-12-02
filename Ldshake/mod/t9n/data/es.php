@@ -464,7 +464,7 @@ $translations = array (
 => "Editar icono del perfil"
 
 ,"Edit project"
-=> "Editar projecto"
+=> "Editar proyecto"
 
 ,"Edit this %1"
 => "Editar este %1"
@@ -1007,7 +1007,7 @@ $translations = array (
 => "Ver implementaciones"
 
 ,"See list of learning design solutions I can edit or view."
-=> "Ver la lsita de soluciones de diseño de aprendizaje que puedo ver o editar"
+=> "Ver la lista de soluciones de diseño de aprendizaje que puedo ver o editar"
 
 ,"See list of members in the community."
 => "Ver la lista de miembros en mi comunidad."

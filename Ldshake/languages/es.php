@@ -2109,7 +2109,7 @@ $spanish = array(
 => "Contraseña cambiada",
 
 'user:password:text'
-=> 'Para generar una nueva contraseña, introduce tu nombre debajo. Te enviaremos la dirección de una página de verificación via correo electrónico. Haz click en el enlace del cuerpo del mensaje y se te enviará una nueva contraseña.',
+=> 'Para generar una nueva contraseña, introduce tu email o el nombre de usuario debajo. Te enviaremos la dirección de una página de verificación via correo electrónico. Haz click en el enlace del cuerpo del mensaje y se te enviará una nueva contraseña.',
 
 'user:password2:label'
 => "Tu nueva contraseña de nuevo",

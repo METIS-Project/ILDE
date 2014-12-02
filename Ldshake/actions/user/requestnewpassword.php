@@ -14,10 +14,34 @@
 	global $CONFIG;
 	
 	action_gatekeeper();
-	
+
+function ldshake_get_recover_user_by_email($email) {
+
+    $email = sanitise_string($email);
+
+    $query = <<<SQL
+ SELECT e.*
+ FROM entities e
+ NATURAL JOIN users_entity u
+ WHERE email='{$email}'
+SQL;
+
+    if($users = get_data($query, 'entity_row_to_elggstar')) {
+        if($users[0] instanceof ElggUser) {
+            return $users[0];
+        }
+    }
+
+    return false;
+}
 	$username = get_input('username');
 	
 	$user = get_user_by_username($username);
+    if(!$user) {
+        $user = ldshake_get_recover_user_by_email($username);
+        set_input('username', $user->username);
+    }
+
 	if ($user)
 	{
 		if (send_new_password_request($user->guid))

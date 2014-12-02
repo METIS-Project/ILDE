@@ -2726,6 +2726,8 @@ function lds_exec_tracking ($params) {
             lds_tracking_user_tool();
             break;
         case 'lds_tracking_user_created_weekly':
+            //example use: http://ilde/pg/lds/tracking/lds_tracking_user_created_weekly/3-11-2014/5/weeks/created
+            //example use: http://ilde/pg/lds/tracking/lds_tracking_user_created_weekly/3-11-2014/5/weeks/edited
             $start_date = $params[2];
             $number = $params[3];
             $interval = $params[4];
@@ -2741,6 +2743,7 @@ function lds_exec_tracking ($params) {
             );
             break;
         case 'lds_tracking_lds_activity':
+            //example use: http://ilde/pg/lds/tracking/lds_tracking_lds_activity/3-11-2014/5/weeks/revised
             //example use: http://ilde/pg/lds/tracking/lds_tracking_lds_activity/3-11-2014/5/weeks/commented
             $start_date = $params[2];
             $number = $params[3];
@@ -3279,4 +3282,11 @@ function lds_exec_edit_project ($params)
     $vars['editor_label'] = ldshake_env_category($editLdS) . ' editor';
 
     echo elgg_view('lds/editform_editor',$vars);
+}
+
+function lds_exec_test ($params)
+{
+    $vars['lds'] = get_entity($params[1]);
+
+    echo elgg_view('lds/projects/standalone_view', $vars);
 }
