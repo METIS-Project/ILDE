@@ -65,12 +65,16 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 	  
 			String filename = file.getName();
 
-			driver.get(baseUrl);
-			driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			if (!baseUrl.equals("http://campusvirtual.uva.es/")){
+				driver.get(baseUrl);
+				driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			}else{
+				driver.get(baseUrl + "login/index.php");
+			}	
 		    //we do the user login here
 		    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(deploy.getLearningEnvironment().getCreduser());
 		    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(deploy.getLearningEnvironment().getCredsecret());
-		    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    driver.findElement(By.cssSelector("input#loginbtn[type=\"submit\"]")).click();
 		    
 		    //Here we should look for the course name
 		    driver.findElement(By.linkText(deploy.getCourse().getName())).click();
@@ -96,28 +100,31 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 			//restore the course using the backup file
 		    driver.findElement(By.xpath("(//a[contains(@href,'restorefile.php')])")).click();
 		   	driver.findElement(By.name("backupfilechoose")).click();
-		  	driver.findElement(By.xpath("(//a[img[contains(@src,'/standard/repository_upload')]])")).click();
+		  	//driver.findElement(By.xpath("(//a[img[contains(@src,'/standard/repository_upload')]])")).click();
+		   	driver.findElement(By.xpath("(//a[img[contains(@src,'/repository_upload')]])")).click();
 		    driver.findElement(By.name("repo_upload_file")).sendKeys(file.toString());
 		    driver.findElement(By.cssSelector("div > button.fp-upload-btn")).click();
 		    driver.findElement(By.cssSelector("input[type=\"submit\"][name=\"submitbutton\"]")).click();
 		    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
 			if(lfsection!=null && lfsection.length()>0){
-			    //We choose to keep the course content and restore in the same course
-			    driver.findElement(By.cssSelector("div.bcs-current-course.backup-section input[type=\"radio\"][value=\"1\"]")).click();
+				//We choose to keep the course content and restore in the same course
+				driver.findElement(By.cssSelector("div.bcs-current-course.backup-section input[type=\"radio\"][value=\"1\"]")).click();
 			}else{
 				//We choose to delete the course content and then restore in the same course
 				driver.findElement(By.cssSelector("div.bcs-current-course.backup-section input[type=\"radio\"][value=\"0\"]")).click();
 			}
-		    driver.findElement(By.cssSelector("div.bcs-current-course.backup-section input[type=\"submit\"]")).click();
-		    driver.findElement(By.name("submitbutton")).click();		    
-		    if(lfsection==null || lfsection.length()==0){
-			    //select the option to keep the current roles and enrolments
-			    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_keep_roles_and_enrolments\"]"))).selectByValue("1");
-			    //unselect the option to keep the current groups and groupings
-			    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_keep_groups_and_groupings\"]"))).selectByValue("0");
-		    }
-		    //unselect the option to override the course configuration
-		    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_overwrite_conf\"]"))).selectByValue("0");
+			driver.findElement(By.cssSelector("div.bcs-current-course.backup-section input[type=\"submit\"]")).click();
+		    driver.findElement(By.name("submitbutton")).click();
+		    if (!baseUrl.equals("http://campusvirtual.uva.es/")){
+			    if(lfsection==null || lfsection.length()==0){
+				    //select the option to keep the current roles and enrolments
+				    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_keep_roles_and_enrolments\"]"))).selectByValue("1");
+				    //unselect the option to keep the current groups and groupings
+				    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_keep_groups_and_groupings\"]"))).selectByValue("0");
+			    }
+			    //unselect the option to override the course configuration
+			    new Select(driver.findElement(By.cssSelector("select[id=\"id_setting_course_overwrite_conf\"]"))).selectByValue("0");
+		    }//Otherwise, the groups and groupings are kept
 		    driver.findElement(By.name("submitbutton")).click();
 		    driver.findElement(By.name("submitbutton")).click();
 		    driver.findElement(By.cssSelector("input[type=\"submit\"]")).click();
@@ -235,6 +242,7 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 			ArrayList<Group> deployGroups = new ArrayList<Group>();
 			for (int i = 0; i < groups.size(); i++){
 				Group g1 = groups.get(i);
+				g1.setName(g1.getName().replaceAll("\\s+", " "));
 				Boolean repeated = false;
 				for (int j = 0; j < i; j++){
 					Group g2 = groups.get(j);
@@ -246,8 +254,21 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 					deployGroups.add(g1);
 				}
 			}
+			
 			//Add the groups to the course
 			driver.get(baseUrl + "group/index.php?id=" + courseId);
+			if (baseUrl.equals("http://campusvirtual.uva.es/")){//Delete the existing groups first because we couldn't unselect the option to keep the current groups and groupings
+				int groupsNumber = new Select(driver.findElement(By.id("groups"))).getOptions().size();
+				for (int i = 0; i < groupsNumber; i++){					
+					String empty = " ";
+					String value = new Select(driver.findElement(By.id("groups"))).getOptions().get(0).getAttribute("value");
+					if (!empty.equals(value)){
+						new Select(driver.findElement(By.id("groups"))).selectByIndex(0);
+						driver.findElement(By.cssSelector("input#deletegroup[type=\"submit\"]")).click();
+						driver.findElement(By.cssSelector("form[action=\"delete.php\"] input[type=\"submit\"]")).click();
+					}
+				}
+			}
 			for (int i = 0; i < deployGroups.size(); i++){
 				Group group = deployGroups.get(i);
 				driver.findElement(By.cssSelector("input#showcreateorphangroupform")).click();
@@ -259,7 +280,17 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 					driver.findElement(By.cssSelector("input#showaddmembersform[type=\"submit\"]")).click();
 					ArrayList<String> participantIds = group.getParticipantIds();
 					for (int j = 0; j < participantIds.size(); j++){
-						new Select(driver.findElement(By.id("addselect"))).selectByValue(participantIds.get(j));
+						String moodlePartId = participantIds.get(j);
+						//Check if the participantId is the same as the participant id in Moodle
+						Participant p = deploy.getParticipantById(participantIds.get(j));
+						String learningEn= p.getLearningEnvironmentData();
+				        if(learningEn!=null){      	
+					        String [] lista=learningEn.split(Participant.USER_PARAMETER_SEPARATOR);
+					        if (lista!=null && lista.length > 0 && !moodlePartId.equals(lista[0])){
+					        	moodlePartId = lista[0];
+					        }
+				        }
+						new Select(driver.findElement(By.id("addselect"))).selectByValue(moodlePartId);
 						driver.findElement(By.cssSelector("input#add[type=\"submit\"]")).click();
 					}
 					driver.findElement(By.cssSelector("td#backcell input[type=\"submit\"][name=\"cancel\"]")).click();
@@ -268,6 +299,17 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 			}
 			//Add the groupings to the course
 			driver.get(baseUrl + "group/groupings.php?id=" + courseId);
+			if (baseUrl.equals("http://campusvirtual.uva.es/")){//Delete the existing groupings first because we couldn't unselect the option to keep the current groups and groupings
+				List<WebElement> weDeleteGroupings = driver.findElements(By.xpath("(//td/a[contains(@href,'grouping.php?id=') and (contains(@href,'delete='))])"));
+				ArrayList<String> hrefDeleteGroupings = new ArrayList<String>(weDeleteGroupings.size());
+				for (int i = 0; i < weDeleteGroupings.size(); i++){
+					hrefDeleteGroupings.add(weDeleteGroupings.get(i).getAttribute("href"));
+				}
+				for (int i = 0; i < hrefDeleteGroupings.size(); i++){
+					driver.get(hrefDeleteGroupings.get(i));
+					driver.findElement(By.cssSelector("form[action=\"grouping.php\"] input[type=\"submit\"]")).click();
+				}				
+			}
 			for (int i = 0; i < deployGroups.size(); i++){
 				Group group = deployGroups.get(i);
 				driver.findElement(By.cssSelector("form[action=\"grouping.php\"] input[type=\"submit\"]")).click();
@@ -312,7 +354,12 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 				driver.findElement(By.cssSelector("form[action=\"" + baseUrl + "course/view.php\"] input[type=\"submit\"]")).click();
 			}
 			ArrayList<String> modulesGroupids = getModulesGroupids(deploy);
-			List<WebElement> anchorModules = driver.findElements(By.cssSelector("span.commands > a.editing_update"));
+			List<WebElement> anchorModules;
+			if (baseUrl.equals("http://campusvirtual.uva.es/")){
+				anchorModules = driver.findElements(By.cssSelector("a.editing_update"));
+			}else{
+				anchorModules = driver.findElements(By.cssSelector("span.commands > a.editing_update"));
+			}
 			List<String> hrefModules = new ArrayList<String>();
 			for (int i = 0; i < anchorModules.size(); i++){
 				boolean existed = false;

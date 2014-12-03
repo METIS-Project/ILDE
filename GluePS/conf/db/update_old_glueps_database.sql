@@ -42,3 +42,29 @@ ALTER TABLE `glueps_learning_environments` add `showVG` TINYINT(1) NOT NULL DEFA
 
 ALTER TABLE `glueps_learning_environments` drop `type`;
 ALTER TABLE `glueps_learning_environments` drop `accessLocation`;
+
+ALTER TABLE `glueps_learning_environments_installations` add `leType` bigint(20) not NULL;
+ALTER TABLE `glueps_learning_environments_installations` drop `type`;
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `glueps_asynchronous_operations`
+--
+
+DROP TABLE IF EXISTS `glueps_asynchronous_operations`;
+CREATE TABLE IF NOT EXISTS `glueps_asynchronous_operations` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `operation` varchar(255) NOT NULL UNIQUE,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `resource` varchar(255) DEFAULT NULL,
+  `started`  timestamp DEFAULT CURRENT_TIMESTAMP,
+  `finished`  timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `glueps_asynchronous_operations` add `file` longblob;
+
+ALTER TABLE `glueps_deploy_versions` add `SAVED` TINYINT(1) NOT NULL DEFAULT '0';

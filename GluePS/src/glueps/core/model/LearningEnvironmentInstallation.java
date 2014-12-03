@@ -16,29 +16,24 @@ import org.restlet.resource.ResourceException;
 public class LearningEnvironmentInstallation {
 	
 	private String id;
-	
 	private String name;
-
-	private String type;
-	
 	private URL accessLocation;
-	
 	private String parameters;
-	
 	private long sectype;
+	private String leType;
 	
 	public LearningEnvironmentInstallation() {
 		super();
 	}
 
-	public LearningEnvironmentInstallation(String id, String name, String type, URL accessLocation, String parameters, long sectype) {
+	public LearningEnvironmentInstallation(String id, String name, URL accessLocation, String parameters, long sectype, String leType) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.type = type;
 		this.accessLocation = accessLocation;
 		this.parameters = parameters;
 		this.sectype = sectype;
+		this.leType = leType;
 	}
 
 	public String getId() {
@@ -57,14 +52,6 @@ public class LearningEnvironmentInstallation {
 		this.name = name;
 	}
 
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
 	public URL getAccessLocation() {
 		return accessLocation;
 	}
@@ -75,8 +62,8 @@ public class LearningEnvironmentInstallation {
 
 	@Override
 	public String toString() {
-		return "LearningEnvironmentInstallation [id=" + id + ", name=" + name + ", type="
-				+ type + ", accessLocation=" + accessLocation + "]";
+		return "LearningEnvironmentInstallation [id=" + id + ", name=" + name + ", leType="
+				+ leType + ", accessLocation=" + accessLocation + ", parameters=" + parameters + ",sectype=" + sectype + "]";
 	}
 	
 	
@@ -107,6 +94,24 @@ public class LearningEnvironmentInstallation {
 	public void setSectype(long sectype) {
 		this.sectype = sectype;
 	}
+	
+	
+	public String getParameters() {
+		return parameters;
+	}
+
+	public void setParameters(String parameters) {
+		this.parameters = parameters;
+	}
+
+	public String getLeType() {
+		return leType;
+	}
+
+	public void setLeType(String leType) {
+		this.leType = leType;
+	}
+
 
 	
 }

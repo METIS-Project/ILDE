@@ -93,13 +93,36 @@ var LearningEnvironment = {
 		}
 		return false;
 	},
-	getShowAr: function(){
-		if (typeof(JsonDB.deploy.learningEnvironment.showAr) != "undefined")
+	
+	getEnableAR: function(){
+		if (typeof(JsonDB.deploy.learningEnvironment.enableAR) != "undefined")
 		{		
-			return JsonDB.deploy.learningEnvironment.showAr;
+			return JsonDB.deploy.learningEnvironment.enableAR;
 		}
 		else{
-			//Por defecto, no se ven los controles AR
+			//By default the functionality is disabled
+			return false;
+		}
+	},
+	
+	getShowAR: function(){
+		if (typeof(JsonDB.deploy.learningEnvironment.showAR) != "undefined")
+		{		
+			return JsonDB.deploy.learningEnvironment.showAR;
+		}
+		else{
+			//By default the AR controls are hidden
+			return false;
+		}
+	},
+	
+	getShowVG: function(){
+		if (typeof(JsonDB.deploy.learningEnvironment.showVG) != "undefined")
+		{		
+			return JsonDB.deploy.learningEnvironment.showVG;
+		}
+		else{
+			//By default the VG controls are hidden
 			return false;
 		}
 	}

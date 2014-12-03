@@ -20,6 +20,8 @@
 <script type="text/javascript" src="dojoi18n/nls/es/es_i18n.js"></script>
 <script type="text/javascript" src="dojoi18n/nls/en/en_i18n.js"></script>
 <script type="text/javascript" src="dojoi18n/nls/ca/ca_i18n.js"></script>
+
+<script type="text/javascript" src="js/database/LearningEnvironmentTypesDB.js"></script>
  
  <!-- dialogs -->
  <script type="text/javascript" src="js/dialogs/IndexInformativeDialogs.js"></script>
@@ -98,6 +100,7 @@
 							<td><input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="imsldTypeValue"  checked value="IMS LD" /><label id="imsldDesignType" for="imsldTypeValue"></label>
 							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="ppcTypeValue" value="PPC" /><label id="ppcType" for="ppcTypeValue"></label>
 							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="T2TypeValue" value="T2" /><label id="T2Type" for="T2TypeValue"></label>
+							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="ppTypeValue" value="PP" /><label id="ppType" for="ppTypeValue"></label>
 							    <input type="radio" dojoType="dijit.form.RadioButton" name="imsldType" id="gluepsTypeValue" value="GLUEPS" /><label id="gluepsType" for="gluepsTypeValue"></label>
 							</td>
 						</tr>
@@ -194,7 +197,8 @@
 								<option value="WIC">WebCollage</option>
 							</select--> 
 							<input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="imsldTypeValueInst"  checked value="IMS LD" /><label id="imsldTypeInst" for="imsldTypeValueInst"></label>
-						    <input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="T2TypeValueInst" value="T2" /><label id="T2TypeInst" for="T2TypeValueInst"></label>						  
+						    <input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="T2TypeValueInst" value="T2" /><label id="T2TypeInst" for="T2TypeValueInst"></label>
+						    <input type="radio" dojoType="dijit.form.RadioButton" name="instType" id="PPTypeValueInst" value="PP" /><label id="PPTypeInst" for="PPTypeValueInst"></label>						  
 							<br> <br> <span id="newDeployPartSpanUploadFile"
 								class="widthSpan3emCenter"></span> <input id="archiveWic"
 								name="archiveWic" size="28" type="file" />
@@ -418,6 +422,17 @@
                             <input dojoType="dijit.form.TextBox" id="dialogNewLePassword" name="lePassword" type="password" style="width:200px;"/>
                         </td>
                     </tr>
+                    <tr id="trNewLeAR">
+                    	<td>
+                    		<label id="labelNewLeAR">Activar AR / VG</label>
+                    	</td>
+     					<td>
+                    		<input id="checkNewLeShowAR" name="checkNewLeShowAR" dojoType="dijit.form.CheckBox">
+                    		<label id="labelCheckNewLeShowAR" for="checkNewLeShowAR">Mostrar AR</label>
+                    		<input id="checkNewLeShowVG" name="checkNewLeShowVG" dojoType="dijit.form.CheckBox" style="margin-left:10px;">
+                    		<label id="labelCheckNewLeShowVG" for="checkNewLeShowVG">Mostrar VG</label>
+                    	</td>
+                    </tr>
                     <!--
                     <tr id="trOauthLinkVle">
                         <td>
@@ -479,6 +494,17 @@
                         <td>
                             <input dojoType="dijit.form.TextBox" id="dialogEditLePassword" name="lePassword" type="password" style="width:200px;"/>
                         </td>
+                    </tr>
+                    <tr id="trEditLeAR">
+                    	<td>
+                    		<label id="labelEditLeAR">Activar AR / VG</label>
+                    	</td>
+     					<td>
+                    		<input id="checkEditLeShowAR" name="checkEditLeShowAR" dojoType="dijit.form.CheckBox">
+                    		<label id="labelCheckEditLeShowAR" for="checkEditLeShowAR">Mostrar AR</label>
+                    		<input id="checkEditLeShowVG" name="checkEditLeShowVG" dojoType="dijit.form.CheckBox" style="margin-left:10px;">
+                    		<label id="labelCheckEditLeShowVG" for="checkEditLeShowVG">Mostrar VG</label>
+                    	</td>
                     </tr>
                 </table>
             </form>

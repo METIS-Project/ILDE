@@ -20,7 +20,7 @@ i18n.i18nStrings["es"]={
 "Error407":"Necesitas autentificarte en el proxy",
 "Error415":"Tipo de medio no soportado",
 //Errores Servidor
-"Error500":"Se ha producido un error en el servidor",
+"Error500":"Error interno del servidor",
 "Error501":"El servidor no entiende la petición",
 "Error502":"Gateway incorrecto",
 "Error503":"Servicio no disponible",
@@ -41,6 +41,7 @@ i18n.i18nStrings["es"]={
 "participantsToDelete":"Participantes a borrar",
 "participantsRemain":"Participantes que permanecen",
 "participantChanges":"Actualizar la lista de participantes",
+"getParticipantList":"Obteniendo la lista de participantes actualizada...",
 
 //Migas
 "MigasDesign":"1 Diseño",
@@ -55,6 +56,7 @@ i18n.i18nStrings["es"]={
 "NewDesignLabelNewDDesigTypeImsldType":"IMS LD",
 "NewDesignLabelNewDDesigTypePpcType":"PPC",
 "NewDesignLabelNewDDesigTypeT2Type":"T2",
+"NewDesignLabelNewDDesigTypePpType":"PP",
 "NewDesignLabelNewDDesigTypeGluepsType":"GLUE!PS",
 "NewDesignNewDButtonDesign":" Crear",
 
@@ -85,6 +87,9 @@ i18n.i18nStrings["es"]={
 "DialogCreateLeName": "Nombre del VLE",
 "DialogCreateLeUser": "Usuario",
 "DialogCreateLePassword": "Contraseña",
+"DialogCreateLeEnableAR": "Activar AR / VG",
+"DialogCreateLeShowAR": "Mostrar AR",
+"DialogCreateLeShowVG": "Mostrar VG",
 
 //VLE management
 "manageVlesTitle":"Gestión de VLEs",
@@ -170,7 +175,7 @@ i18n.i18nStrings["es"]={
 "DeleteAllToolInfo":"Haz click aquí para borrar todas las configuraciones de la herramienta para esta actividad",
 "ConfigureTool":"Configurar la herramienta",
 "ConfigureToolInfo":"Haz click aquí para configurar la herramienta",
-"OpenToolInstance":"Haz click aquí para abrir la instancia de herramienta creada",
+"OpenToolInstance":"Haz click aquí para abrir la instancia de herramienta",
 
 "getDeployToolTip": "Obtener este despliegue",
 
@@ -181,6 +186,8 @@ i18n.i18nStrings["es"]={
 "creatingToolInstance":"Se está creando la instancia de la herramienta.",
 "loadingConfiguration":"Cargando el formulario de configuración.",
 "creatingDeployment":"Se está creando el despliegue.",
+"editDeployForbidden":"No tiene permiso para editar este despliegue.",
+"deployNotFound":"No se ha encontrado el despliegue.",
 
 "info":"Información",
 "createdToolInstance": "Se ha creado la instancia de la herramienta.",

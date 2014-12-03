@@ -38,6 +38,27 @@ CREATE TABLE IF NOT EXISTS `glueps_users` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `glueps_learning_environments_types`
+--
+
+DROP TABLE IF EXISTS `glueps_learning_environments_types`;
+CREATE TABLE IF NOT EXISTS `glueps_learning_environments_types` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(2048) default '',
+  `getCourses` tinyint(1) NOT NULL DEFAULT '1',
+  `getParticipants` tinyint(1) NOT NULL DEFAULT '1',
+  `staticDeploy` tinyint(1) NOT NULL DEFAULT '1',
+  `dynamicDeploy` tinyint(1) NOT NULL DEFAULT '1',
+  `addTopic` tinyint(1) NOT NULL DEFAULT '0',
+  `multiplePosts` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY(`id`),
+  UNIQUE KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `glueps_learning_environments_installations`
 --
 
@@ -48,7 +69,10 @@ CREATE TABLE IF NOT EXISTS `glueps_learning_environments_installations` (
   `type` varchar(255) NOT NULL,
   `accessLocation` varchar(255) NOT NULL,
   `PARAMETERS` varchar(4096) default '',
-  PRIMARY KEY (`id`)
+  `sectype` bigint(20) not NULL default 1,
+  `leType` bigint(20) not NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT FOREIGN KEY (`leType`) REFERENCES `glueps_learning_environments_types(`id`)`
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -142,6 +166,7 @@ CREATE TABLE IF NOT EXISTS `glueps_deploy_versions` (
   `DEPLOYID` varchar(255) NOT NULL,
   `VERSION` INT(11) NOT NULL,
   `VALID` TINYINT(1) NOT NULL DEFAULT '1',
+  `SAVED` TINYINT(1) NOT NULL DEFAULT '0',
   `UNDOALERT` TINYINT(1) NOT NULL DEFAULT '0',
   `NEXT` INT(11) NULL DEFAULT NULL,
   `XMLFILE` longblob,
@@ -161,6 +186,26 @@ CREATE TABLE IF NOT EXISTS `glueps_sectokens` (
   PRIMARY KEY (`id`),
   CONSTRAINT FOREIGN KEY (`id`) REFERENCES `glueps_deploys`(`ID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+
+--
+-- Table structure for table `glueps_asynchronous_operations`
+--
+
+DROP TABLE IF EXISTS `glueps_asynchronous_operations`;
+CREATE TABLE IF NOT EXISTS `glueps_asynchronous_operations` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `operation` varchar(255) NOT NULL UNIQUE,
+  `status` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `resource` varchar(255) DEFAULT NULL,
+  `started`  timestamp DEFAULT CURRENT_TIMESTAMP,
+  `finished`  timestamp NULL DEFAULT NULL,
+  `file` longblob,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

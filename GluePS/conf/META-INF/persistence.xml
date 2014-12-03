@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
-  <persistence-unit name="GLUEPS_PU" transaction-type="RESOURCE_LOCAL">
+  <persistence-unit name="GLUEPS_PUe" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>glueps.core.persistence.entities.UserEntity</class>
     <class>glueps.core.persistence.entities.LearningEnvironmentEntity</class>
@@ -10,9 +10,11 @@
     <class>glueps.core.persistence.entities.SectokenEntity</class>
     <class>glueps.core.persistence.entities.OauthTokenEntity</class>
     <class>glueps.core.persistence.entities.DeployVersionEntity</class>
+    <class>glueps.core.persistence.entities.LearningEnvironmentTypeEntity</class>
+    <class>glueps.core.persistence.entities.AsynchronousOperationEntity</class>
     <properties> 
-      <property name="javax.persistence.jdbc.user" value="user"/>
-      <property name="javax.persistence.jdbc.password" value="password"/>
+      <property name="javax.persistence.jdbc.user" value="glueps"/>
+      <property name="javax.persistence.jdbc.password" value="glueps"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/glueps"/>
       <!--property name="eclipselink.ddl-generation" value="drop-and-create-tables"/-->

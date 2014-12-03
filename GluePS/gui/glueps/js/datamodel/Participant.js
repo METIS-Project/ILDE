@@ -21,5 +21,9 @@ var Participant = function(data)
 	
 	this.setIsStaff = function(isStaff){
 		data.isStaff = isStaff;
+	},
+	
+	this.setName = function(name){
+		data.name = name;
 	}
 }

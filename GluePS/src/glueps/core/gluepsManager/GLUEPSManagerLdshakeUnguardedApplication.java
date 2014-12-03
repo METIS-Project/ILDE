@@ -56,6 +56,9 @@ public class GLUEPSManagerLdshakeUnguardedApplication extends GLUEPSManagerAppli
 		router.attach("/deploys/{deployId}",DeployResource.class);
 		router.attach("/deploys/{deployId}/undo",DeployResource.class);
 		router.attach("/deploys/{deployId}/redo",DeployResource.class);
+		router.attach("/deploys/{deployId}/save",DeployResource.class);
+		router.attach("/deploys/{deployId}/saveAndExit",DeployResource.class);
+		router.attach("/deploys/{deployId}/cancel",DeployResource.class);
 		router.attach("/deploys/{deployId}/metadata",DeployResource.class);
 		router.attach("/deploys/{deployId}/ldshakedata",DeployResource.class);
 		// Route for the deployed versions of the deploy

@@ -17,19 +17,23 @@ import java.util.Random;
 import java.util.Map.Entry;
 
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
+import glueps.core.model.AsynchronousOperation;
 import glueps.core.model.Deploy;
 import glueps.core.model.Design;
 import glueps.core.model.InstancedActivity;
 import glueps.core.model.LearningEnvironment;
 import glueps.core.model.LearningEnvironmentInstallation;
+import glueps.core.model.LearningEnvironmentType;
 import glueps.core.model.Participant;
 import glueps.core.model.Resource;
 import glueps.core.model.ToolInstance;
+import glueps.core.persistence.entities.AsynchronousOperationEntity;
 import glueps.core.persistence.entities.DeployEntity;
 import glueps.core.persistence.entities.DeployVersionEntity;
 import glueps.core.persistence.entities.DesignEntity;
 import glueps.core.persistence.entities.LearningEnvironmentEntity;
 import glueps.core.persistence.entities.LearningEnvironmentInstallationEntity;
+import glueps.core.persistence.entities.LearningEnvironmentTypeEntity;
 import glueps.core.persistence.entities.OauthTokenEntity;
 import glueps.core.persistence.entities.SectokenEntity;
 import glueps.core.persistence.entities.UserEntity;
@@ -57,7 +61,6 @@ import org.apache.commons.io.FileUtils;
 public class JpaManager {
     // variables.
     public static JpaManager manager = null;
-    //public static EntityManager em = null;
 
     public static EntityManager userem = null;
     public static EntityManager leem = null;
@@ -66,7 +69,9 @@ public class JpaManager {
     public static EntityManager deployem = null;
     public static EntityManager deployversionem = null;
     public static EntityManager sectem = null;
-    public static EntityManager oauthtem = null;
+    public static EntityManager oauthtem = null; 
+    public static EntityManager letypeem = null;
+    public static EntityManager asynoperem = null;
 
     private static  JAXBContext jcDeploy = null;//created to avoid delays loading the deploy class
     
@@ -74,7 +79,7 @@ public class JpaManager {
      * Constructor. Crea la unidad de persistencia.
      */
     public JpaManager() {
-        String PERSISTENCEUNIT = "GLUEPS_PU";
+        String PERSISTENCEUNIT = "GLUEPS_PUe";
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCEUNIT, System.getProperties());
 
         userem = factory.createEntityManager();
@@ -85,6 +90,8 @@ public class JpaManager {
         deployversionem = factory.createEntityManager();
         sectem = factory.createEntityManager();
         oauthtem = factory.createEntityManager();
+        letypeem = factory.createEntityManager();
+        asynoperem = factory.createEntityManager();
     }
 
     /**
@@ -235,12 +242,16 @@ public class JpaManager {
     	if (leInstEnt == null){ 
     		return null;
     	}
+    	LearningEnvironmentTypeEntity leTypeEnt  = findLETypeById(leInstEnt.getLeType());
+    	if (leTypeEnt ==  null){
+    		return null;
+    	}
     	
 		LearningEnvironment le = new LearningEnvironment();
 		le.setId(String.valueOf(leEnt.getId()));//we set the object id to the trimmed/db one, just in case the xml has the url
 		
 		le.setName(leEnt.getName());
-		le.setType(leInstEnt.getType());
+		le.setType(leTypeEnt.getName());
 		try {
 			le.setAccessLocation(new URL(leInstEnt.getAccessLocation()));
 		} catch (MalformedURLException e) {
@@ -277,11 +288,12 @@ public class JpaManager {
     		for(LearningEnvironmentEntity lee : les){   			
     			LearningEnvironmentInstallationEntity leInstEnt = findLEInstallationById(lee.getInstallation());
     			if (leInstEnt!=null){
+    				LearningEnvironmentTypeEntity leTypeEnt = findLETypeById(leInstEnt.getLeType());
 	    			LearningEnvironment le = new LearningEnvironment();
 	    			le.setId(String.valueOf(lee.getId()));//we set the object id to the trimmed/db one, just in case the xml has the url
 	    			
 	    			le.setName(lee.getName());
-	    			le.setType(leInstEnt.getType());
+	    			le.setType(leTypeEnt.getName());
 	    			try {
 						le.setAccessLocation(new URL(leInstEnt.getAccessLocation()));
 					} catch (MalformedURLException e) {
@@ -365,6 +377,287 @@ public class JpaManager {
         
     }
     
+    //------------------------------------------------- LEARNING ENVIRONMENT TYPES
+
+    
+	public LearningEnvironmentTypeEntity findLETypeById(long id) {
+		synchronized (letypeem) {
+			try {
+				System.out.println("Retrieving LE type from database by id: [" + id + "]");
+				Query q = letypeem.createNamedQuery(LearningEnvironmentTypeEntity.QUERY_FIND_BY_ID);
+				q.setParameter(LearningEnvironmentTypeEntity.PARAM_ID, id);
+				LearningEnvironmentTypeEntity lete = (LearningEnvironmentTypeEntity) q.getSingleResult();
+				return lete;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	public LearningEnvironmentTypeEntity findLETypeByName(String name) {
+		synchronized (letypeem) {
+			try {
+				System.out.println("Retrieving LE type from database by name: [" + name + "]");
+				Query q = letypeem.createNamedQuery(LearningEnvironmentTypeEntity.QUERY_FIND_BY_NAME);
+				q.setParameter(LearningEnvironmentTypeEntity.PARAM_NAME, name);
+				LearningEnvironmentTypeEntity lete = (LearningEnvironmentTypeEntity) q.getSingleResult();
+				return lete;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	public List<LearningEnvironmentTypeEntity> listLETypes() {
+		synchronized (letypeem){
+			try {
+				System.out.println("Retrieving LE types from database");
+				Query q = letypeem.createNamedQuery(LearningEnvironmentTypeEntity.QUERY_LIST_ALL);
+				List<LearningEnvironmentTypeEntity> letes = q.getResultList();
+				return letes;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+    /**
+     * Convenience method that gets a LE type from DB by passing it the (possibly url) ID
+     */
+    public LearningEnvironmentType findLETypeObjectById(String id){
+    	
+    	String trimmedId = trimId(id);
+    	
+    	long dbId=0;
+    	try {
+			dbId = Long.parseLong(trimmedId);
+		} catch (NumberFormatException e) {
+			return null;
+		}
+    	
+    	LearningEnvironmentTypeEntity leTypeEnt = findLETypeById(dbId);
+    	if (leTypeEnt == null){
+    		return null;
+    	}
+    	
+		LearningEnvironmentType let = new LearningEnvironmentType(id, leTypeEnt.getName(), leTypeEnt.getDescription());
+		let.setGetCourses(leTypeEnt.isGetCourses());
+		let.setGetParticipants(leTypeEnt.isGetParticipants());
+		let.setStaticDeploy(leTypeEnt.isStaticDeploy());
+		let.setDynamicDeploy(leTypeEnt.isDynamicDeploy());
+		let.setAddTopic(leTypeEnt.isAddTopic());
+		let.setMultiplePosts(leTypeEnt.isMultiplePosts());
+    	
+		System.out.println("Retrieved LE type from database: "+let.toString());
+		return let;    	
+    }
+    
+    /**
+     * Convenience method that gets a LE type from DB by passing it the name
+     */
+    public LearningEnvironmentType findLETypeObjectByName(String name){
+    	LearningEnvironmentTypeEntity leTypeEnt = findLETypeByName(name);
+    	if (leTypeEnt == null){
+    		return null;
+    	}
+    	
+		LearningEnvironmentType let = new LearningEnvironmentType(String.valueOf(leTypeEnt.getId()), leTypeEnt.getName(), leTypeEnt.getDescription());
+		let.setGetCourses(leTypeEnt.isGetCourses());
+		let.setGetParticipants(leTypeEnt.isGetParticipants());
+		let.setStaticDeploy(leTypeEnt.isStaticDeploy());
+		let.setDynamicDeploy(leTypeEnt.isDynamicDeploy());
+		let.setAddTopic(leTypeEnt.isAddTopic());
+		let.setMultiplePosts(leTypeEnt.isMultiplePosts());
+    	
+		System.out.println("Retrieved LE type from database: "+let.toString());
+		return let;    	
+    }
+    
+	/**
+     * Convenience method that gets LE types from DB 
+     */
+    public List<LearningEnvironmentType> listLETypeObjects(){
+    	
+    	List<LearningEnvironmentTypeEntity> letes = this.listLETypes();
+    	
+    	List<LearningEnvironmentType> letObjects = null;
+    	if(letes!=null){
+    		letObjects = new ArrayList<LearningEnvironmentType>(letes.size());
+    		
+    		for(LearningEnvironmentTypeEntity leTypeEnt : letes){   			
+	    			LearningEnvironmentType let = new LearningEnvironmentType(String.valueOf(leTypeEnt.getId()), leTypeEnt.getName(), leTypeEnt.getDescription());
+	    			let.setGetCourses(leTypeEnt.isGetCourses());
+	    			let.setGetParticipants(leTypeEnt.isGetParticipants());
+	    			let.setStaticDeploy(leTypeEnt.isStaticDeploy());
+	    			let.setDynamicDeploy(leTypeEnt.isDynamicDeploy());
+	    			let.setAddTopic(leTypeEnt.isAddTopic());
+	    			let.setMultiplePosts(leTypeEnt.isMultiplePosts());
+	    			letObjects.add(let); 
+    			}
+    		}
+    	return letObjects;
+    }
+    
+    //------------------------------------------------- ASYNCHRONOUS OPERATIONS
+
+    
+	public AsynchronousOperationEntity findAsynchOperById(long id) {
+		synchronized (asynoperem) {
+			try {
+				System.out.println("Retrieving Asynchronous Operation Entity from database by id: [" + id + "]");
+				Query q = asynoperem.createNamedQuery(AsynchronousOperationEntity.QUERY_FIND_BY_ID);
+				q.setParameter(AsynchronousOperationEntity.PARAM_ID, id);
+				AsynchronousOperationEntity asynOperEnt = (AsynchronousOperationEntity) q.getSingleResult();
+				return asynOperEnt;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	public AsynchronousOperationEntity findAsynchOperByOperation(String operation) {
+		synchronized (asynoperem) {
+			try {
+				System.out.println("Retrieving Asynchronous Operation Entity from database by operation: [" + operation + "]");
+				Query q = asynoperem.createNamedQuery(AsynchronousOperationEntity.QUERY_FIND_BY_OPERATION);
+				q.setParameter(AsynchronousOperationEntity.PARAM_OPERATION, operation);
+				AsynchronousOperationEntity asynOperEnt = (AsynchronousOperationEntity) q.getSingleResult();
+				return asynOperEnt;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	public List<AsynchronousOperationEntity> listAsynchOpers() {
+		synchronized(asynoperem){
+			try {
+				System.out.println("Retrieving Asynchronous Operation Entity list from database");
+				Query q = asynoperem.createNamedQuery(AsynchronousOperationEntity.QUERY_LIST_ALL);
+				List<AsynchronousOperationEntity> asynOperEntities = q.getResultList();
+				return asynOperEntities;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+	}
+	
+	/**
+     * Insert an Asynchronous Operation in the DB, and return the id... if the id already exists, we update the record
+     */
+    public long insertAsynchronousOperation(AsynchronousOperationEntity asynOperEnt) {
+    	synchronized(asynoperem) {
+    		AsynchronousOperationEntity existingAsynOperEnt = findAsynchOperById(asynOperEnt.getId());
+	    	
+	    	//We set the ID so that a new user is NOT generated, rather update the existing one
+	    	if(existingAsynOperEnt!=null){
+	            System.out.println("Asynchronous operation " + existingAsynOperEnt.getId()+" already exists in DB: ["+existingAsynOperEnt.toString()+"] -> ["+asynOperEnt.toString()+"]");
+	            asynOperEnt.setId(existingAsynOperEnt.getId());
+	    	}
+	    	
+	    	asynoperem.getTransaction().begin();
+	
+	        System.out.println("Inserting/updating Asychronous operation in DB: ["+asynOperEnt.toString()+"]");
+	
+	        if (asynOperEnt.getId()==0){
+	        	asynoperem.persist(asynOperEnt); //persist can only create new objects, it can not update existing ones
+	        }else{
+		        asynoperem.merge(asynOperEnt); //search for and object with the same id and update it. If it doesn't exist, we insert the new one
+	        }
+	        asynoperem.flush();
+	
+	        System.out.println("Asychronous operation inserted/updated in DB");
+	
+	        asynoperem.getTransaction().commit();
+	        return asynOperEnt.getId();
+    	}
+    }
+    
+    public long insertAsynchronousOperation(AsynchronousOperation asynOper) throws Exception{
+    	long id;
+    	if(asynOper.getId()==null){
+    		id = 0;
+    	}else{
+    		id = Long.valueOf(asynOper.getId());
+    	}
+
+    	AsynchronousOperationEntity asynOperEnt = new AsynchronousOperationEntity(id, asynOper.getOperation(), asynOper.getStatus(), asynOper.getDescription(), asynOper.getResource(),asynOper.getStarted(), asynOper.getFinished());
+    	return insertAsynchronousOperation(asynOperEnt);   	
+    }
+    
+    public long insertAsynchronousOperation(AsynchronousOperation asynOper, String file) throws Exception{
+    	long id;
+    	if(asynOper.getId()==null){
+    		id = 0;
+    	}else{
+    		id = Long.valueOf(asynOper.getId());
+    	}
+
+    	AsynchronousOperationEntity asynOperEnt = new AsynchronousOperationEntity(id, asynOper.getOperation(), asynOper.getStatus(), asynOper.getDescription(), asynOper.getResource(),asynOper.getStarted(), asynOper.getFinished());
+    	asynOperEnt.setFile(file.getBytes());
+    	return insertAsynchronousOperation(asynOperEnt);   	
+    }
+    
+    public void deleteAsynchronousOperation(String id) {	
+    	long dbId= Long.parseLong(id);
+    	synchronized(asynoperem) {
+    		asynoperem.getTransaction().begin();
+	        System.out.println("Deleting Asynchronous Operation from DB with id: [" + dbId + "]");
+	        Query q = asynoperem.createNamedQuery(AsynchronousOperationEntity.QUERY_DELETE_BY_ID);
+	        q.setParameter(AsynchronousOperationEntity.PARAM_ID, dbId);
+	        int num = q.executeUpdate();
+	        System.out.println(num + " deleted entries.");
+	        asynoperem.getTransaction().commit();
+    	}       
+    }
+	
+    /**
+     * Convenient method that gets an Asynchronous operation object from the DB by passing it the id in the table
+     */
+    public AsynchronousOperation findAsynchOperObjectById(String id){
+		long dbId = Long.parseLong(id);
+    	AsynchronousOperationEntity asynOperEnt = findAsynchOperById(dbId);
+    	if (asynOperEnt == null){
+    		return null;
+    	}
+    	AsynchronousOperation asynOper = new AsynchronousOperation(String.valueOf(asynOperEnt.getId()), asynOperEnt.getOperation(), asynOperEnt.getStatus(), asynOperEnt.getDescription(), asynOperEnt.getResource(), asynOperEnt.getStarted(), asynOperEnt.getFinished());  	
+		//System.out.println("Asynchronous Operation from database: "+asynOper.toString());
+		return asynOper;    	
+    }
+    
+    /**
+     * Convenient method that gets an Asynchronous operation object from the DB by passing it the operation
+     */
+    public AsynchronousOperation findAsynchOperObjectByOperation(String operation){
+    	String trimmedOperation = trimId(operation);
+    	AsynchronousOperationEntity asynOperEnt = findAsynchOperByOperation(trimmedOperation);
+    	if (asynOperEnt == null){
+    		return null;
+    	}
+    	AsynchronousOperation asynOper = new AsynchronousOperation(String.valueOf(asynOperEnt.getId()), asynOperEnt.getOperation(), asynOperEnt.getStatus(), asynOperEnt.getDescription(), asynOperEnt.getResource(), asynOperEnt.getStarted(), asynOperEnt.getFinished());  	
+		//System.out.println("Asynchronous Operation from database: "+asynOper.toString());
+		return asynOper;    	
+    }
+    
+	/**
+     * Convenience method that gets the asynchronous operation objects from the DB 
+     */
+    public List<AsynchronousOperation> listAsynchOperObjects(){
+    	
+    	List<AsynchronousOperationEntity> asynOperEnts = listAsynchOpers();
+    	
+    	List<AsynchronousOperation> asynOperObjects = null;
+    	if(asynOperEnts!=null){
+    		asynOperObjects = new ArrayList<AsynchronousOperation>(asynOperEnts.size());
+    		
+    		for(AsynchronousOperationEntity asynOperEnt : asynOperEnts){   			
+    			AsynchronousOperation asynOper = new AsynchronousOperation(String.valueOf(asynOperEnt.getId()), asynOperEnt.getOperation(), asynOperEnt.getStatus(), asynOperEnt.getDescription(), asynOperEnt.getResource(), asynOperEnt.getStarted(), asynOperEnt.getFinished());
+	    		asynOperObjects.add(asynOper); 
+    		}
+    	}
+    	return asynOperObjects;
+    }
+    
     
   //------------------------------------------------- SECURITY TOKENS FOR LDSHAKE
     
@@ -372,7 +665,7 @@ public class JpaManager {
     	synchronized(sectem){
 
         try {
-            System.out.println("Retrieving security token from database: [" + id + "]");
+            //System.out.println("Retrieving security token from database: [" + id + "]");
             Query q = sectem.createNamedQuery("SectokenEntity.findById");
             q.setParameter("id",id);
             SectokenEntity u = (SectokenEntity) q.getSingleResult();
@@ -389,7 +682,7 @@ public class JpaManager {
     	synchronized(sectem){
 
         try {
-            System.out.println("Retrievinkg security token from database by token: [" + sectoken + "]");
+            //System.out.println("Retrievinkg security token from database by token: [" + sectoken + "]");
             Query q = sectem.createNamedQuery("SectokenEntity.findBySectoken");
             q.setParameter("sectoken",sectoken);
             SectokenEntity u = (SectokenEntity) q.getSingleResult();
@@ -405,7 +698,7 @@ public class JpaManager {
     public List<SectokenEntity> listSectokens(){
     	
         try {
-            System.out.println("Retrieving security token list from database");
+            //System.out.println("Retrieving security token list from database");
             Query q = sectem.createNamedQuery("SectokenEntity.listAll");
             List<SectokenEntity> sectokens = q.getResultList();
             
@@ -578,7 +871,7 @@ public class JpaManager {
     	
     	LearningEnvironmentInstallation leInst = null;
 		try {
-			leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), leInstEnt.getType(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype());
+			leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype(), String.valueOf(leInstEnt.getLeType()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -602,7 +895,7 @@ public class JpaManager {
     	
     	LearningEnvironmentInstallation leInst = null;
 		try {
-			leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), leInstEnt.getType(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype());
+			leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype(), String.valueOf(leInstEnt.getLeType()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -627,7 +920,7 @@ public class JpaManager {
     		for(LearningEnvironmentInstallationEntity leInstEnt : leInsts){
     			
     			try {
-    				LearningEnvironmentInstallation leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), leInstEnt.getType(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype());
+    				LearningEnvironmentInstallation leInst = new LearningEnvironmentInstallation(String.valueOf(leInstEnt.getId()), leInstEnt.getName(), new URL(leInstEnt.getAccessLocation()), leInstEnt.getParameters(), leInstEnt.getSectype(), String.valueOf(leInstEnt.getLeType()));
     				leInstObjects.add(leInst);
     			} catch (MalformedURLException e) {
     				e.printStackTrace();
@@ -1019,6 +1312,26 @@ public class JpaManager {
     	
     }
     
+    /**
+     * Convenience method that gets a Deploy which has been saved from DB by passing it the (possibly url) ID
+     */
+    public Deploy findSavedDeployObjectById(String id){    	
+    	String trimmedId = trimId(id);   	
+    	DeployVersionEntity depVerEnt = findLastSavedDeployVersion(trimmedId);
+    	if (depVerEnt!=null){
+        	String xmlfile;
+    		try {
+				xmlfile = new String(depVerEnt.getXmlfile(), "UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				return null;
+			}
+    		Deploy deploy = (Deploy) generateObject(xmlfile, glueps.core.model.Deploy.class);
+    	    deploy.setId(trimmedId);
+    		return deploy; 
+    	}else{
+    		return null;
+    	}	
+    }    
     
     /**
      * Convenience method that gets Designs from DB 
@@ -1236,6 +1549,25 @@ public class JpaManager {
 
     }
     
+    public long getLastSavedVersionDeploy(String deployid){
+    	synchronized(deployversionem){
+
+	        try {
+	            System.out.println("Getting the last saved version of the deploy querying the DB: [" + deployid + "]");
+	            Query q = deployversionem.createNamedQuery("DeployVersionEntity.findLastSavedVersionDeploy");
+	          
+	            q.setParameter("deployid",deployid);
+	
+	            long u = (Long)q.getSingleResult();
+	            return u;
+	        } catch (Exception e) {
+	            return 0;
+	        }
+    	
+    	}
+
+    }
+    
     public DeployVersionEntity findUndoVersionDeploy(String deployid){
     	synchronized(deployversionem){
     	
@@ -1258,20 +1590,44 @@ public class JpaManager {
     public DeployVersionEntity findLastValidDeployVersion(String deployid){
     	synchronized(deployversionem){
     	
-    	long lastValidVersion = getLastValidVersionDeploy(deployid);
-        try {
-            System.out.println("Retrieving Deploy version from database: [" + trimId(deployid) + ", " + lastValidVersion + "]");
-            Query q = deployversionem.createNamedQuery("DeployVersionEntity.findById");
-          
-            q.setParameter("deployid",trimId(deployid));
-            q.setParameter("version", lastValidVersion);
-
-            DeployVersionEntity u = (DeployVersionEntity) q.getSingleResult();
-            deployversionem.refresh(u);
-            return u;
-        } catch (Exception e) {
-            return null;
-        }
+	    	long lastValidVersion = getLastValidVersionDeploy(deployid);
+	        try {
+	            System.out.println("Retrieving Deploy version from database: [" + trimId(deployid) + ", " + lastValidVersion + "]");
+	            Query q = deployversionem.createNamedQuery("DeployVersionEntity.findById");
+	          
+	            q.setParameter("deployid",trimId(deployid));
+	            q.setParameter("version", lastValidVersion);
+	
+	            DeployVersionEntity u = (DeployVersionEntity) q.getSingleResult();
+	            deployversionem.refresh(u);
+	            return u;
+	        } catch (Exception e) {
+	            return null;
+	        }
+    	
+    	}
+    }
+    
+    public DeployVersionEntity findLastSavedDeployVersion(String deployid){
+    	synchronized(deployversionem){
+    	
+	    	long lastSavedVersion = getLastSavedVersionDeploy(deployid);
+	    	if (lastSavedVersion == 0){
+	    		return null;
+	    	};
+	        try {
+	            System.out.println("Retrieving Deploy version from database: [" + trimId(deployid) + ", " + lastSavedVersion + "]");
+	            Query q = deployversionem.createNamedQuery("DeployVersionEntity.findById");
+	          
+	            q.setParameter("deployid",trimId(deployid));
+	            q.setParameter("version", lastSavedVersion);
+	
+	            DeployVersionEntity u = (DeployVersionEntity) q.getSingleResult();
+	            deployversionem.refresh(u);
+	            return u;
+	        } catch (Exception e) {
+	            return null;
+	        }
     	
     	}
     }

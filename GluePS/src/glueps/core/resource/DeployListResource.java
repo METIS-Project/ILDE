@@ -37,6 +37,7 @@ import glueps.adaptors.vle.VLEAdaptorFactory;
 import glueps.core.controllers.exist.Exist;
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
 import glueps.core.gluepsManager.GLUEPSManagerServerMain;
+import glueps.core.model.AsynchronousOperation;
 import glueps.core.model.Course;
 import glueps.core.model.Deploy;
 import glueps.core.model.Design;
@@ -72,6 +73,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 import java.util.logging.Logger;
@@ -285,13 +287,17 @@ public class DeployListResource extends GLUEPSResource {
     
 	@Post("multipart")
 	public Representation postDeployForm(Representation entity) {
+		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
 		//Get the multipart request arguments as a FiletItem
 		List<FileItem> items = parseRequestAsFileItems();
 		//If a designId is provided, we create a deploy for an existing design
 		if (this.getRequest().getAttributes().get("designId")!=null)
 		{
-			return createDeployForm(entity, items);
-			//return createDeployFormService(entity, items);
+			if (app.isResponseAsAService()){
+				return createDeployFormService(entity, items);
+			}else{
+				return createDeployForm(entity, items);
+			}
 		}
 		for (final Iterator<FileItem> it = items.iterator(); it.hasNext();) {
 			FileItem fi = it.next();
@@ -300,14 +306,20 @@ public class DeployListResource extends GLUEPSResource {
 				//If it is a glueps type deploy, we are importing a deploy in the Glueps format
 				//The glueps type deploy already contains a design inside
 				if (deployType.equals(LDAdaptorFactory.GLUEPS_TYPE)){
-					return importDeployForm(entity, items);
-					//return importDeployFormService(entity, items);
+					if (app.isResponseAsAService()){
+						return importDeployFormService(entity, items);						
+					}else{
+						return importDeployForm(entity, items);
+					}
 				}
 			}
 		}
-		//Otherwise, we create both the deploy and its design. 
-		return postDesignDeployForm(entity, items);
-		//return postDesignDeployFormService(entity, items);
+		//Otherwise, we create both the deploy and its design. 		
+		if (app.isResponseAsAService()){
+			return postDesignDeployFormService(entity, items);
+		}else{
+			return postDesignDeployForm(entity, items);
+		}
 	}
 	
 	/**
@@ -572,7 +584,7 @@ public class DeployListResource extends GLUEPSResource {
 		if (new File(filePath).exists()) {
 
 			// TODO: What happens if vleUsers==null??
-			deploy = ldAdaptor.processInstantiation(filePath, design, vleUsers);
+			deploy = ldAdaptor.processInstantiation(filePath, design, vleGroups, vleUsers);
 			if (deploy == null)
 				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"Error while processing instantiation file. Probably bad format");
 
@@ -583,14 +595,16 @@ public class DeployListResource extends GLUEPSResource {
 			// vleUsers == null, we through an error
 			if (vleUsers == null)
 				throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST,"Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
-			else {
-
-				ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
-				ArrayList<Group> groups = null;
-				if (vleGroups != null) {
-					groups = new ArrayList<Group>(vleGroups.values());
+			else {				
+				deploy = ldAdaptor.processInstantiation(null, design, vleGroups, vleUsers);
+				if (deploy == null){			   
+					ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
+					ArrayList<Group> groups = null;
+					if(vleGroups!=null){
+						groups = new ArrayList<Group>(vleGroups.values());
+					}
+					deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 				}
-				deploy = new Deploy(null, design, null, null, null, new Date(),null, null, null, parts, groups);
 			}
 		}
 
@@ -677,6 +691,7 @@ public class DeployListResource extends GLUEPSResource {
 		String deployId = null;
 		Deploy deploy = null;
 		String deployUrl = null;
+		Representation answer = null;
 
 		String deployTitle = null;
 		String deployType = null;
@@ -793,35 +808,24 @@ public class DeployListResource extends GLUEPSResource {
 		design.setAuthor(login);
 		design.setId(designUrl);
 
-		// We store the deurlified design in DB
-		JpaManager dbmanager = JpaManager.getInstance();
-		try {
-			dbmanager.insertDesign(deURLifyDesign(design));
+		JpaManager dbmanager = JpaManager.getInstance();		
+		AsynchronousOperation asynOper = new AsynchronousOperation(null, AsynchronousOperation.generateOperationId(), AsynchronousOperation.STATUS_INPROGRESS, "The deployment is being created", null, new Date(), null);
+		long asynOperId;
+		try{
+			asynOperId = dbmanager.insertAsynchronousOperation(asynOper);
 		} catch (Exception e) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"Error while trying to insert the design in DB", e);
+			throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the asynchronous operation into the DB", e);
 		}
 		
-		deploy = new Deploy(deployId, design, deployTitle, null, login, new Date(), null, null, null, null, null);
-		deploy.setInProcess(true); //the deploy is being created
+		Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLivePostDesignDeploy(vleId, vledataFile, courseId, login, designId, deployId, deployType, designUploadDir, file, design, deployTitle, ldshakeFrameOrigin, app, asynOperId));
 		
-		// Guardo Xml en base de datos
-		Deploy deurlifiedDeploy;
-		try {
-			deurlifiedDeploy = deURLifyDeploy(deploy);
-		} catch (Exception e) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"Error while processing the generated deploy", e);
-		}
-		
-		deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);	
-		
-		dbmanager = JpaManager.getInstance();
-		try {
-			dbmanager.insertDeploy(deurlifiedDeploy);
-		} catch (Exception e) {
-			throw new ResourceException(Status.SERVER_ERROR_INTERNAL,"Error while trying to insert the generated deploy into the DB",e);
-		}
-		
-		Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLivePostDesignDeploy(vleId, vledataFile, courseId, login, designId, deployId, deployType, designUploadDir, file, design, deployTitle, ldshakeFrameOrigin, app));
+		URLifyAsynchronousOperation(asynOper, doGluepsUriSubstitution(getReference().getParentRef().getIdentifier()));
+   		String xmlfile = generateXML(asynOper, glueps.core.model.AsynchronousOperation.class);	
+   		if (xmlfile != null){
+   			answer = new StringRepresentation((CharSequence)xmlfile, MediaType.TEXT_XML);
+   			answer.setCharacterSet(CharacterSet.UTF_8);
+   		}				
+		getResponse().setLocationRef(asynOper.getOperation());
 		
 		if (sectoken!=null){
 			//Save the sectoken in the database
@@ -829,10 +833,8 @@ public class DeployListResource extends GLUEPSResource {
 			dbmanager.insertSectoken(sectEnt);
 		}
 
-		deployData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><deploy id=\"" + getReference().getParentRef().getIdentifier() +"deploys/" + deployId + "\"></deploy>";
-
-		Representation answer = new StringRepresentation((CharSequence) deployData, MediaType.TEXT_XML);
 		answer.setCharacterSet(CharacterSet.UTF_8);
+		setStatus(Status.SUCCESS_ACCEPTED);
 		return answer;
 
 	}
@@ -1248,6 +1250,7 @@ public class DeployListResource extends GLUEPSResource {
 		String courseId = null;
 		String sectoken = null;
 		String ldshakeFrameOrigin = null;
+		Representation answer = null;
 		
 		//Set the upload and schemas paths
 		GLUEPSManagerApplication app = (GLUEPSManagerApplication)this.getApplication();
@@ -1318,8 +1321,7 @@ public class DeployListResource extends GLUEPSResource {
 			e1.printStackTrace();
 			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Request could not be parsed", e1);  
 	
-		} catch (Exception e) {
-			
+		} catch (Exception e) {			
 			e.printStackTrace();
 			throw new ResourceException(Status.SERVER_ERROR_INSUFFICIENT_STORAGE, "Could not write the uploaded files", e);  
 	
@@ -1423,17 +1425,6 @@ public class DeployListResource extends GLUEPSResource {
 			design.setAuthor(login);
 			design.setId(designUrl);
 			design.setTimestamp(new Date());
-				
-			Design deurlifiedDesign = deURLifyDesign(design);
-				
-			//We store the deurlified design in DB
-			JpaManager dbmanager = JpaManager.getInstance();
-			try {
-				dbmanager.insertDesign(deurlifiedDesign);
-			} catch (Exception e) {
-				throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the design in DB", e);
-			}
-				
 								
 			// set the title of the deploy with the name received
 			// from the request
@@ -1442,47 +1433,35 @@ public class DeployListResource extends GLUEPSResource {
 
 			//We now ignore the author from the form, and use the login to GLUEPS
 			String originalAuthor = deploy.getAuthor();
-			deploy.setAuthor(login);
-			
+			deploy.setAuthor(login);			
 			deploy.setLdshakeFrameOrigin(ldshakeFrameOrigin);				
 			
-			// Guardo Xml en base de datos 
-			Deploy deurlifiedDeploy;
-			try {
-				deurlifiedDeploy = deURLifyDeploy(deploy);
+			JpaManager dbmanager = JpaManager.getInstance();		
+			AsynchronousOperation asynOper = new AsynchronousOperation(null, AsynchronousOperation.generateOperationId(), AsynchronousOperation.STATUS_INPROGRESS, "The deployment is being created", null, new Date(), null);
+			long asynOperId;
+			try{
+				asynOperId = dbmanager.insertAsynchronousOperation(asynOper);
 			} catch (Exception e) {
-				throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while processing the generated deploy", e);
+				throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the asynchronous operation into the DB", e);
 			}
-			
-			deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);
-			
-			try {
-				dbmanager.insertDeploy(deurlifiedDeploy);
-			} catch (Exception e) {
-				throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the generated deploy into the DB", e);
-			}
-			
 			//complete the process on the background by getting the information from the vle
-			Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLiveImportDeploy(deploy, ler, courseId, originalAuthor, importToolConf, app));
+			Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLiveImportDeploy(deploy, ler, courseId, originalAuthor, importToolConf, app, asynOperId));
 			
 			//Save the sectoken in the database
 			if (sectoken!=null){
 				SectokenEntity sectEnt = new SectokenEntity(deployId, sectoken);
 				dbmanager.insertSectoken(sectEnt);
 			}
-				
-			deployData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><deploy id=\"" + getReference().getParentRef().getIdentifier() + "deploys/" + deployId + "\"></deploy>";
-				
-			Representation answer = new StringRepresentation((CharSequence) deployData, MediaType.TEXT_XML);
-			/*Form responseHeaders = (Form) getResponse().getAttributes().get("org.restlet.http.headers");   
-			if ( responseHeaders == null ) {
-				responseHeaders = new Form();
-				getResponse().getAttributes().put("org.restlet.http.headers", responseHeaders);
-	        }
-			responseHeaders.add("Location", urlifiedDeploy.getId());
-			getResponse().redirectSeeOther(urlifiedDeploy.getId());*/
+			
+			URLifyAsynchronousOperation(asynOper, doGluepsUriSubstitution(getReference().getParentRef().getIdentifier()));
+	   		String xmlfile = generateXML(asynOper, glueps.core.model.AsynchronousOperation.class);	
+	   		if (xmlfile != null){
+	   			answer = new StringRepresentation((CharSequence)xmlfile, MediaType.TEXT_XML);
+	   			answer.setCharacterSet(CharacterSet.UTF_8);
+	   		}				
+			getResponse().setLocationRef(asynOper.getOperation());
 			answer.setCharacterSet(CharacterSet.UTF_8);
-			setStatus(Status.REDIRECTION_SEE_OTHER);
+			setStatus(Status.SUCCESS_ACCEPTED);
 			return answer;		
 	
 		} else {
@@ -1687,7 +1666,7 @@ public class DeployListResource extends GLUEPSResource {
 						ILDAdaptor adaptor = factory.getLDAdaptor(deployType, designId);
 
 						//TODO: What happens if vleUsers==null??
-						deploy = adaptor.processInstantiation(uploadDir + deployId + "_original.xml", design, vleUsers);
+						deploy = adaptor.processInstantiation(uploadDir + deployId + "_original.xml", design, vleGroups, vleUsers);
 						if(deploy==null) throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Error while processing instantiation file. Probably bad format");
 
 					} else {//We found no xml instantiation file, we have to create an empty deploy: no groups unless present in VLE, no instancedactivities, no toolinstances, list of participants from the VLE
@@ -1695,13 +1674,18 @@ public class DeployListResource extends GLUEPSResource {
 						//Since right now we cannot create users from scratch (they have to come from the LD tool or from the VLE), if the vleUsers == null, we through an error 
 						if(vleUsers==null) throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
 						else{
-						
-							ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
-							ArrayList<Group> groups = null;
-							if(vleGroups!=null){
-								groups = new ArrayList<Group>(vleGroups.values());
+							
+							LDAdaptorFactory factory = new LDAdaptorFactory(app);
+							ILDAdaptor ldAdaptor = factory.getLDAdaptor(deployType, designId);
+							deploy = ldAdaptor.processInstantiation(null, design, vleGroups, vleUsers);
+							if (deploy == null){			   
+								ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
+								ArrayList<Group> groups = null;
+								if(vleGroups!=null){
+									groups = new ArrayList<Group>(vleGroups.values());
+								}
+								deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 							}
-							deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 						}
 					}
 						
@@ -1807,6 +1791,7 @@ public class DeployListResource extends GLUEPSResource {
 		String uploadDir = null;
 		String deployId = null;
 		String deployUrl = null;
+		Representation answer = null;
 
 		//Form fields to be received
 		String designId = null;
@@ -1834,7 +1819,7 @@ public class DeployListResource extends GLUEPSResource {
 				String UPLOAD_DIRECTORY = app.getAppPath()+"/uploaded/";
 
 				//extract the design id from the request, coming in the url: /designs/{designId}/deploys
-				designId = trimId((String) this.getRequest().getAttributes().get("designId"));
+				designId = trimId((String) getRequest().getAttributes().get("designId"));
 				//extract the design object once we know the design id
 				// TODO: test this!
 				DesignResource dres = new DesignResource();
@@ -1911,42 +1896,27 @@ public class DeployListResource extends GLUEPSResource {
 						// Some problem occurred, we could not get the list of users
 						throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Incorrect request. No VLE specified");  
 					}
-						
-					deploy = new Deploy(deployId, design, deployTitle, null, login, new Date(), null, null, null, null, null);
-					deploy.setInProcess(true); //the deploy is being created
-					
-					// set the incremental deploy parameters
-					if(incremental && startLesson!=null){
-						String incrementalParameter = GLUEPSManagerApplication.STARTING_SECTION_FIELD+Deploy.DEPLOY_DATA_VALUE_SEPARATOR+startLesson+Deploy.DEPLOY_DATA_FIELD_SEPARATOR;
-						if(deploy.getDeployData()!=null) deploy.setDeployData(deploy.getDeployData()+incrementalParameter);
-						else deploy.setDeployData(incrementalParameter);
-					}
 
-					// Guardo Xml en base de datos 
-					Deploy deurlifiedDeploy;
-					try {
-						deurlifiedDeploy = deURLifyDeploy(deploy);
+					JpaManager dbmanager = JpaManager.getInstance();		
+					AsynchronousOperation asynOper = new AsynchronousOperation(null, AsynchronousOperation.generateOperationId(), AsynchronousOperation.STATUS_INPROGRESS, "The deployment is being created", null, new Date(), null);
+					long asynOperId;
+					try{
+						asynOperId = dbmanager.insertAsynchronousOperation(asynOper);
 					} catch (Exception e) {
-						throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while processing the generated deploy", e);
+						throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the asynchronous operation into the DB", e);
 					}
-					
-					deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);
-					
-					JpaManager dbmanager = JpaManager.getInstance();
-					try {
-						dbmanager.insertDeploy(deurlifiedDeploy);
-					} catch (Exception e) {
-						throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to insert the generated deploy into the DB", e);
-					}
-					deployData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><deploy id=\"" + getReference().getParentRef().getParentRef().getParentRef().getIdentifier() +"deploys/" + deployId + "\"></deploy>";
-					
-					Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLiveCreateDeploy(vleId, courseId, deployId, found, deployType, design, uploadDir, deployTitle, login, incremental, startLesson, app));
-					
-					Representation answer = new StringRepresentation((CharSequence) deployData, MediaType.TEXT_XML);
+					Future<Deploy> process = GLUEPSManagerServerMain.pool.submit(new BackgroundLiveCreateDeploy(vleId, courseId, deployId, found, deployType, design, uploadDir, deployTitle, login, incremental, startLesson, app, asynOperId));
+										
+					URLifyAsynchronousOperation(asynOper, doGluepsUriSubstitution(getReference().getParentRef().getParentRef().getParentRef().getIdentifier()));
+			   		String xmlfile = generateXML(asynOper, glueps.core.model.AsynchronousOperation.class);	
+			   		if (xmlfile != null){
+			   			answer = new StringRepresentation((CharSequence)xmlfile, MediaType.TEXT_XML);
+			   			answer.setCharacterSet(CharacterSet.UTF_8);
+			   		}				
+					getResponse().setLocationRef(asynOper.getOperation());
 					answer.setCharacterSet(CharacterSet.UTF_8);
+					setStatus(Status.SUCCESS_ACCEPTED);
 					return answer;		
-
-
 				}else{
 				    // POST request with a different content type (this should not happen).
 				    //setStatus(Status.CLIENT_ERROR_BAD_REQUEST);
@@ -2240,8 +2210,9 @@ public class DeployListResource extends GLUEPSResource {
 		private String deployTitle;
 		private String ldshakeFrameOrigin;
 		private GLUEPSManagerApplication app;
+		private long asynOperId;
 		
-		public BackgroundLivePostDesignDeploy(String vleId, File vledataFile, String courseId, String login, String designId, String deployId, String deployType, String designUploadDir, File file, Design design, String deployTitle, String ldshakeFrameOrigin, GLUEPSManagerApplication app){
+		public BackgroundLivePostDesignDeploy(String vleId, File vledataFile, String courseId, String login, String designId, String deployId, String deployType, String designUploadDir, File file, Design design, String deployTitle, String ldshakeFrameOrigin, GLUEPSManagerApplication app, long asynOperId){
 			this.vleId = vleId;
 			this.vledataFile = vledataFile;
 			this.courseId = courseId;
@@ -2255,10 +2226,12 @@ public class DeployListResource extends GLUEPSResource {
 			this.deployTitle = deployTitle;
 			this.ldshakeFrameOrigin = ldshakeFrameOrigin;
 			this.app = app;
+			this.asynOperId = asynOperId;
 		}
 		
 		@Override
 		public Deploy call(){
+			JpaManager dbmanager = JpaManager.getInstance();
 			HashMap<String, Participant> vleUsers = null;
 			HashMap<String, Group> vleGroups = null;
 			HashMap<String, String> courses = null;
@@ -2299,9 +2272,7 @@ public class DeployListResource extends GLUEPSResource {
 				}
 				//neither vleSelect nor vledataFile has been provided
 				else{
-					deleteDraftDeploy();
-					System.err.println("Incorrect request. No VLE specified");
-					//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Incorrect request. No VLE specified");
+					defineErrorAsynchronousOperation(asynOperId, "Incorrect request. No VLE specified");
 					return null;
 				}
 			}
@@ -2366,10 +2337,9 @@ public class DeployListResource extends GLUEPSResource {
 			if (new File(filePath).exists()) {
 
 				// TODO: What happens if vleUsers==null??
-				deploy = ldAdaptor.processInstantiation(filePath, design, vleUsers);
+				deploy = ldAdaptor.processInstantiation(filePath, design, vleGroups, vleUsers);
 				if (deploy == null){
-					deleteDraftDeploy();
-					System.err.println("Error while processing instantiation file. Probably bad format");
+					defineErrorAsynchronousOperation(asynOperId, "Error while processing instantiation file. Probably bad format");
 					return null;
 				}					
 
@@ -2379,21 +2349,21 @@ public class DeployListResource extends GLUEPSResource {
 				// have to come from the LD tool or from the VLE), if the
 				// vleUsers == null, we through an error
 				if (vleUsers == null){
-					deleteDraftDeploy();
-					System.err.println("Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
+					defineErrorAsynchronousOperation(asynOperId, "Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
 					return null;
 				}
-				else {
-
-					ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
-					ArrayList<Group> groups = null;
-					if (vleGroups != null) {
-						groups = new ArrayList<Group>(vleGroups.values());
+				else {					
+					deploy = ldAdaptor.processInstantiation(null, design, vleGroups, vleUsers);
+					if (deploy == null){			   
+						ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
+						ArrayList<Group> groups = null;
+						if(vleGroups!=null){
+							groups = new ArrayList<Group>(vleGroups.values());
+						}
+						deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 					}
-					deploy = new Deploy(null, design, null, null, null, new Date(),null, null, null, parts, groups);
 				}
 			}
-			
 			// set the title of the deploy with the name received
 			// from the request
 			deploy.setName(deployTitle);
@@ -2412,38 +2382,36 @@ public class DeployListResource extends GLUEPSResource {
 			
 		    //the post design deploy process has finished
 		    deploy.setInProcess(false);
+		    
+			// We store the deurlified design in DB
+			try {
+				dbmanager.insertDesign(deURLifyDesign(design));
+			} catch (Exception e) {
+				defineErrorAsynchronousOperation(asynOperId, "Error while trying to insert the design in DB");
+				return null;
+			}
+		    
+		    
 			// Guardo Xml en base de datos
 			Deploy deurlifiedDeploy;
 			try {
 				deurlifiedDeploy = deURLifyDeploy(deploy);
-			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while processing the generated deploy");
+			} catch (Exception e) {		
+				deleteDraftDesign(deploy);
+				defineErrorAsynchronousOperation(asynOperId, "Error while processing the generated deploy");
 				return null;
 			}
 			
 			deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);	
-			
-			JpaManager dbmanager = JpaManager.getInstance();
 			try {
 				dbmanager.insertDeploy(deurlifiedDeploy);
 			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while trying to insert the generated deploy into the DB");
+				deleteDraftDesign(deploy);
+				defineErrorAsynchronousOperation(asynOperId, "Error while trying to insert the generated deploy into the DB");
 				return null;
 			}
-			
+			defineSuccessAsynchronousOperation(asynOperId, "The design and deploy have been created", app.getAppExternalUri() + "deploys/" + deploy.getId());
 			return deploy;
-		}
-		
-		private void deleteDraftDeploy(){
-			JpaManager dbmanager = JpaManager.getInstance();
-			//delete the design
-			dbmanager.deleteDesign(designId);
-			//delete the deploy
-			dbmanager.deleteDeploy(deployId);
-			//delete all the versions of this deploy
-			dbmanager.deleteDeployVersions(deployId);
 		}
 	}
 	
@@ -2466,8 +2434,9 @@ public class DeployListResource extends GLUEPSResource {
 		private boolean incremental;
 		private String startLesson;
 		private GLUEPSManagerApplication app;
+		private long asynOperId;
 		
-		public BackgroundLiveCreateDeploy(String vleId, String courseId, String deployId, boolean found, String deployType, Design design, String uploadDir, String deployTitle, String login, boolean incremental, String startLesson, GLUEPSManagerApplication app) {
+		public BackgroundLiveCreateDeploy(String vleId, String courseId, String deployId, boolean found, String deployType, Design design, String uploadDir, String deployTitle, String login, boolean incremental, String startLesson, GLUEPSManagerApplication app, long asynOperId) {
 			this.vleId = vleId;
 			this.courseId = courseId;
 			this.deployId = deployId;
@@ -2480,9 +2449,11 @@ public class DeployListResource extends GLUEPSResource {
 			this.incremental = incremental;
 			this.startLesson = startLesson;
 			this.app = app;
+			this.asynOperId = asynOperId;
 		}
 		
 		public Deploy call() {
+			JpaManager dbmanager = JpaManager.getInstance();
 			HashMap<String, Participant> vleUsers = null;			
 			HashMap<String, Group> vleGroups = null;
 			HashMap<String,String> courses = null;
@@ -2543,10 +2514,9 @@ public class DeployListResource extends GLUEPSResource {
 				ILDAdaptor ldAdaptor = factory.getLDAdaptor(deployType, designId);
 
 				//TODO: What happens if vleUsers==null??
-				deploy = ldAdaptor.processInstantiation(uploadDir + deployId + "_original.xml", design, vleUsers);
+				deploy = ldAdaptor.processInstantiation(uploadDir + deployId + "_original.xml", design, vleGroups, vleUsers);
 				if(deploy==null) {					
-					deleteDraftDeploy();
-					System.err.println("Error while processing instantiation file. Probably bad format");
+					defineErrorAsynchronousOperation(asynOperId, "Error while processing instantiation file. Probably bad format");
 					return null;
 				}
 
@@ -2554,18 +2524,22 @@ public class DeployListResource extends GLUEPSResource {
 		        
 				//Since right now we cannot create users from scratch (they have to come from the LD tool or from the VLE), if the vleUsers == null, we through an error 
 				if(vleUsers==null){
-					deleteDraftDeploy();
-					System.err.println("Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
+					defineErrorAsynchronousOperation(asynOperId, "Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
 					return null;
 				}
 				else{
-				
-					ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
-					ArrayList<Group> groups = null;
-					if(vleGroups!=null){
-						groups = new ArrayList<Group>(vleGroups.values());
+				   
+					LDAdaptorFactory factory = new LDAdaptorFactory(app);
+					ILDAdaptor ldAdaptor = factory.getLDAdaptor(deployType, designId);
+					deploy = ldAdaptor.processInstantiation(null, design, vleGroups, vleUsers);
+					if (deploy == null){			   
+						ArrayList<Participant> parts = new ArrayList<Participant>(vleUsers.values());
+						ArrayList<Group> groups = null;
+						if(vleGroups!=null){
+							groups = new ArrayList<Group>(vleGroups.values());
+						}
+						deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 					}
-					deploy = new Deploy(null, design, null, null, null, new Date(), null, null, null, parts, groups);
 				}
 			}
 			
@@ -2595,31 +2569,21 @@ public class DeployListResource extends GLUEPSResource {
 			try {
 				deurlifiedDeploy = deURLifyDeploy(deploy);
 			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while processing the generated deploy");
+				defineErrorAsynchronousOperation(asynOperId, "Error while processing the generated deploy");
 				return null;
 				
 			}
 			
 			deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);
 			try {
-				JpaManager dbmanager = JpaManager.getInstance();
 				dbmanager.insertDeploy(deurlifiedDeploy);
 			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while trying to insert the generated deploy into the DB");
+				//deleteDraftDeploy(deploy);
+				defineErrorAsynchronousOperation(asynOperId, "Error while trying to insert the generated deploy into the DB");
 				return null;
 			}
-			
+			defineSuccessAsynchronousOperation(asynOperId, "The deployment for that design has been created", app.getAppExternalUri() + "deploys/" + deploy.getId());
 			return deploy;
-		}
-		
-		private void deleteDraftDeploy(){
-			JpaManager dbmanager = JpaManager.getInstance();
-			//delete the deploy
-			dbmanager.deleteDeploy(deployId);
-			//delete all the versions of this deploy
-			dbmanager.deleteDeployVersions(deployId);
 		}
 	}
 	
@@ -2637,17 +2601,20 @@ public class DeployListResource extends GLUEPSResource {
 		private String originalAuthor;
 		private boolean importToolConf;
 		private GLUEPSManagerApplication app;
+		private long asynOperId;
 		
-		public BackgroundLiveImportDeploy(Deploy deploy, LearningEnvironmentResource ler, String courseId, String originalAuthor, boolean importToolConf, GLUEPSManagerApplication app) {
+		public BackgroundLiveImportDeploy(Deploy deploy, LearningEnvironmentResource ler, String courseId, String originalAuthor, boolean importToolConf, GLUEPSManagerApplication app, long asynOperId) {
 			this.deploy = deploy;
 			this.ler = ler;
 			this.courseId = courseId;
 			this.originalAuthor = originalAuthor;
 			this.importToolConf = importToolConf;
 			this.app = app;
+			this.asynOperId = asynOperId;
 		}
 		
 		public Deploy call() {
+			JpaManager dbmanager = JpaManager.getInstance();
 			HashMap<String, Participant> vleUsers = null;
 			HashMap<String, Group> vleGroups = null;
 			HashMap<String,String> courses = null;
@@ -2708,9 +2675,7 @@ public class DeployListResource extends GLUEPSResource {
 			    }
 					
 			    if(vleUsers==null){
-					deleteDraftDeploy();
-					System.err.println("Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
-			    	//throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
+					defineErrorAsynchronousOperation(asynOperId, "Error while processing instantiation file. No participants provided, and no participants are enrolled in the course!");
 					return null;
 			    }
 			    else{
@@ -2765,36 +2730,77 @@ public class DeployListResource extends GLUEPSResource {
 		    }
 		    //the import deploy process has finished
 		    deploy.setInProcess(false);
+		    			
+			Design design = deploy.getDesign();
+			Design deurlifiedDesign = deURLifyDesign(design);
+			//We store the deurlified design in DB
+			try {
+				dbmanager.insertDesign(deurlifiedDesign);
+			} catch (Exception e) {
+				defineErrorAsynchronousOperation(asynOperId, "Error while trying to insert the design in DB");
+			}
+			
 			Deploy deurlifiedDeploy;
 			try {
 				deurlifiedDeploy = deURLifyDeploy(deploy);
 			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while processing the generated deploy");
+				deleteDraftDesign(deploy);
+				defineErrorAsynchronousOperation(asynOperId, "Error while processing the generated deploy");
 				return null;
 			}
-			
 			deurlifiedDeploy = fixToolKinds(deurlifiedDeploy);
-			
 			try {
-				JpaManager dbmanager = JpaManager.getInstance();
 				dbmanager.insertDeploy(deurlifiedDeploy);
 			} catch (Exception e) {
-				deleteDraftDeploy();
-				System.err.println("Error while trying to insert the generated deploy into the DB");
+				deleteDraftDesign(deploy);
+				deleteDraftDeploy(deploy);
+				defineErrorAsynchronousOperation(asynOperId, "Error while trying to insert the generated deploy into the DB");
 				return null;
 			}
+			
+			defineSuccessAsynchronousOperation(asynOperId, "The deployment has been created", app.getAppExternalUri() + "deploys/" + deploy.getId());
 			return deploy;
 		}
-		
-		
-		private void deleteDraftDeploy(){
-			JpaManager dbmanager = JpaManager.getInstance();
-			dbmanager.deleteDesign(deploy.getDesign().getId());
-			//delete the deploy
-			dbmanager.deleteDeploy(deploy.getId());
-			//delete all the versions of this deploy
-			dbmanager.deleteDeployVersions(deploy.getId());
+	}
+	
+	
+	private void deleteDraftDesign(Deploy deploy){
+		JpaManager dbmanager = JpaManager.getInstance();
+		dbmanager.deleteDesign(deploy.getDesign().getId());
+	}
+	
+	private void deleteDraftDeploy(Deploy deploy){
+		JpaManager dbmanager = JpaManager.getInstance();
+		//delete the deploy
+		dbmanager.deleteDeploy(deploy.getId());
+		//delete all the versions of this deploy
+		dbmanager.deleteDeployVersions(deploy.getId());
+	}
+	
+	private void defineSuccessAsynchronousOperation(long asynOperId, String description, String resource){
+		JpaManager dbmanager = JpaManager.getInstance();
+		AsynchronousOperation asynOper = dbmanager.findAsynchOperObjectById(String.valueOf(asynOperId));
+		asynOper.setDescription(description);
+		asynOper.setStatus(AsynchronousOperation.STATUS_OK);
+		asynOper.setResource(resource);
+		asynOper.setFinished(new Date());
+		try {
+			dbmanager.insertAsynchronousOperation(asynOper);
+		} catch (Exception e) {
+			System.err.println("Error while updating the asynchronous operation");
+		}
+	}
+	
+	private void defineErrorAsynchronousOperation(long asynOperId, String description){
+		JpaManager dbmanager = JpaManager.getInstance();
+		AsynchronousOperation asynOper = dbmanager.findAsynchOperObjectById(String.valueOf(asynOperId));
+		asynOper.setDescription(description);
+		asynOper.setStatus(AsynchronousOperation.STATUS_ERROR);
+		asynOper.setResource(null);
+		try {
+			dbmanager.insertAsynchronousOperation(asynOper);
+		} catch (Exception e) {
+			System.err.println("Error while updating the asynchronous operation");
 		}
 	}
 	

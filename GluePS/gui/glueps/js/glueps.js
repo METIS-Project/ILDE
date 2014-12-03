@@ -70,6 +70,7 @@ var Glueps = {
         dojo.byId("imsldDesignType").innerHTML = i18n.get("NewDesignLabelNewDDesigTypeImsldType");
         //dijit.byId("T2TypeValue").setAttribute("value", i18n.get("NewDesignLabelNewDDesigTypeT2Type"));
         dojo.byId("T2Type").innerHTML = i18n.get("NewDesignLabelNewDDesigTypeT2Type");
+        dojo.byId("ppType").innerHTML = i18n.get("NewDesignLabelNewDDesigTypePpType");
         dojo.byId("gluepsType").innerHTML = i18n.get("NewDesignLabelNewDDesigTypeGluepsType");
         dijit.byId("newDButtonCreateDesign").setAttribute("label", i18n.get("NewDesignNewDButtonDesign"));
         //Subida de despliegues
@@ -121,6 +122,7 @@ var Glueps = {
         dojo.byId("imsldTypeInst").innerHTML = i18n.get("NewDesignLabelNewDDesigTypeImsldType");
         //dijit.byId("T2TypeValueInst").setAttribute("value", i18n.get("NewDesignLabelNewDDesigTypeT2Type"));
         dojo.byId("T2TypeInst").innerHTML = i18n.get("NewDesignLabelNewDDesigTypeT2Type");
+        dojo.byId("PPTypeInst").innerHTML = i18n.get("NewDesignLabelNewDDesigTypePpType");
         dojo.byId("newDeployPartSpanUploadFile").innerHTML = i18n.get("NewDeployLabelUploadFile");
         dojo.byId("newDeployVleSelect").innerHTML = i18n.get("NewDeployLabelSelectVLE");
         dojo.byId("newDeployCourseSelect").innerHTML=i18n.get("NewDeployLabelSelectCourse");

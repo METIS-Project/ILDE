@@ -71,9 +71,20 @@ public class MoodleDynAdaptor extends MoodleAdaptor implements
 		    	//Moodle 1.9
 		    	driver.findElement(By.xpath("(//a[contains(@href,'backupdata')])")).click();
 		    }
-		    catch(Exception e){
-		    	//Try with Moodle 2.2. The sequence of steps is different for this moodle version
-		    	moodleTwo = true;
+		    catch(Exception e){		   
+		    	try{
+		    		//The administration section could be not visible 
+		    		boolean editEnabled = Boolean.valueOf(driver.findElement(By.cssSelector("input[type=\"hidden\"][name=\"edit\"]")).getAttribute("value"));
+		    		if (!editEnabled){
+		    			driver.findElement(By.cssSelector("input[type=\"hidden\"][name=\"edit\"]~input[type=\"submit\"]")).click();
+		    		}
+			    	String optionValue = driver.findElement(By.id("add_block_jump")).findElement(By.xpath("//option[contains(@value,'blockid=2')]")).getAttribute("value");
+			    	new Select (driver.findElement(By.id("add_block_jump"))).selectByValue(optionValue);
+		    	}
+		    	catch(Exception e2){
+		    		//Try with Moodle 2.2. The sequence of steps is different for this moodle version
+			    	moodleTwo = true;
+		    	}
 		    }
 		    
 		    if (!moodleTwo){

@@ -98,14 +98,24 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 		try{
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-			driver.get(moodleBaseUri);
-			driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			if (!moodleBaseUri.equals("http://campusvirtual.uva.es/")){
+				driver.get(moodleBaseUri);
+				driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			}else{
+				driver.get(moodleBaseUri + "login/index.php");
+			}				
 		    //we do the user login here
 		    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(moodleUser);
 		    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(moodlePassword);
-		    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    //driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    driver.findElement(By.cssSelector("input#loginbtn[type=\"submit\"]")).click();
 		    //Here we should look for the courses
-		    List<WebElement> archorCourses = (List<WebElement>) driver.findElements(By.cssSelector("div.coursebox > div.info a"));
+		    List<WebElement> archorCourses;
+		    if (!moodleBaseUri.equals("http://campusvirtual.uva.es/")){
+		    	archorCourses = (List<WebElement>) driver.findElements(By.cssSelector("div.coursebox > div.info a"));
+		    }else{
+		    	archorCourses = (List<WebElement>) driver.findElements(By.cssSelector("div.coursebox > div.course_title a"));
+		    }
 		    for (int i = 0; i < archorCourses.size(); i++){
 		    	String href = archorCourses.get(i).getAttribute("href");
 		    	if (href.contains("/course/view.php?id=")){
@@ -144,11 +154,17 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.get(moodleBaseUri);
-			driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			if (!moodleBaseUri.equals("http://campusvirtual.uva.es/")){
+				driver.get(moodleBaseUri);
+				driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			}else{
+				driver.get(moodleBaseUri + "login/index.php");
+			}	
+			
 		    //we do the user login here
 		    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(moodleUser);
 		    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(moodlePassword);
-		    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    driver.findElement(By.cssSelector("input#loginbtn[type=\"submit\"]")).click();
 		    //Here we should look for the link containing the courseId
 		    driver.findElement(By.xpath("(//a[contains(@href,'/course/view.php?id=" + courseId + "')])")).click();
 		    //Here we go to the user page
@@ -279,7 +295,7 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 		    //we do the user login here
 		    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(moodleUser);
 		    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(moodlePassword);
-		    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    driver.findElement(By.cssSelector("div.form-input > input#loginbtn[type=\"submit\"]")).click();
 		    //move to the course list page
 		    driver.get(moodleUrl + "course/index.php?categoryedit=on");
 		    //Here we should look for the links to the course categories
@@ -334,11 +350,16 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 			driver = new FirefoxDriver();
 			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 			driver.get(moodleUrl);
-			driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			if (!moodleUrl.equals("http://campusvirtual.uva.es/")){
+				driver.get(moodleUrl);
+				driver.findElement(By.cssSelector("div.logininfo > a")).click();
+			}else{
+				driver.get(moodleUrl + "login/index.php");
+			}	
 		    //we do the user login here
 		    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(moodleUser);
 		    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(moodlePassword);
-		    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+		    driver.findElement(By.cssSelector("input#loginbtn[type=\"submit\"]")).click();
 		    //Here we should look for the link containing the courseId
 		    driver.findElement(By.xpath("(//a[contains(@href,'/course/view.php?id=" + courseId + "')])")).click();
 		    //Here we go to the group page
@@ -346,8 +367,12 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 		    
 			ArrayList<String> groupIds = new ArrayList<String>();
 			Select selectGroups = new Select(driver.findElement(By.id("groups")));
-			for (int i = 0; i < selectGroups.getOptions().size(); i++){
-				groupIds.add(selectGroups.getOptions().get(i).getAttribute("value"));
+			for (int i = 0; i < selectGroups.getOptions().size(); i++){				
+				String empty = " ";
+				String groupId = selectGroups.getOptions().get(i).getAttribute("value");
+				if (!empty.equals(groupId)){
+					groupIds.add(groupId);
+				}
 			}
 			for (int i = 0; i < groupIds.size(); i++){
 				String groupId = groupIds.get(i);
@@ -391,8 +416,11 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 		}finally{
 			driver.quit();
 		}
-
-		System.out.println("The groups are: "+courseGroups.toString());
+		if (courseGroups!=null){
+			System.out.println("The groups are: "+ courseGroups);
+		}else{
+			System.out.println("There are no groups in the course");
+		}
 
 		return courseGroups;
 		
@@ -404,11 +432,16 @@ public MoodleAdaptor21vSelenium(String base, String template,String modelPackage
 				driver = new FirefoxDriver();
 				driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 				driver.get(moodleUrl);
-				driver.findElement(By.cssSelector("div.logininfo > a")).click();
+				if (!moodleUrl.equals("http://campusvirtual.uva.es/")){
+					driver.get(moodleUrl);
+					driver.findElement(By.cssSelector("div.logininfo > a")).click();
+				}else{
+					driver.get(moodleUrl + "login/index.php");
+				}	
 			    //we do the user login here
 			    driver.findElement(By.cssSelector("div.form-input > input#username")).sendKeys(moodleUser);
 			    driver.findElement(By.cssSelector("div.form-input > input#password")).sendKeys(moodlePassword);
-			    driver.findElement(By.cssSelector("div.form-input > input[type=\"submit\"]")).click();
+			    driver.findElement(By.cssSelector("input#loginbtn[type=\"submit\"]")).click();
 			    //If the login failed we would see the login form again
 			    List<WebElement> login = driver.findElements(By.cssSelector("div.logininfo > a"));
 			    for (int i = 0; i < login.size(); i++){

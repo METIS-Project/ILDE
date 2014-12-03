@@ -258,12 +258,21 @@ public class MoodleDynAdaptor23vSelenium extends MoodleAdaptor21vSelenium implem
 					new Select(driver.findElement(By.id("groups"))).selectByVisibleText(group.getName() + " (0)");
 					driver.findElement(By.cssSelector("input#showaddmembersform[type=\"submit\"]")).click();
 					ArrayList<String> participantIds = group.getParticipantIds();
-					for (int j = 0; j < participantIds.size(); j++){
-						new Select(driver.findElement(By.id("addselect"))).selectByValue(participantIds.get(j));
+					for (int j = 0; j < participantIds.size(); j++){						
+						String moodlePartId = participantIds.get(j);
+						//Check if the participantId is the same as the participant id in Moodle
+						Participant p = deploy.getParticipantById(participantIds.get(j));
+						String learningEn= p.getLearningEnvironmentData();
+				        if(learningEn!=null){      	
+					        String [] lista=learningEn.split(Participant.USER_PARAMETER_SEPARATOR);
+					        if (lista!=null && lista.length > 0 && !moodlePartId.equals(lista[0])){
+					        	moodlePartId = lista[0];
+					        }
+				        }						
+						new Select(driver.findElement(By.id("addselect"))).selectByValue(moodlePartId);
 						driver.findElement(By.cssSelector("input#add[type=\"submit\"]")).click();
 					}
-					driver.findElement(By.cssSelector("td#backcell input[type=\"submit\"][name=\"cancel\"]")).click();
-						
+					driver.findElement(By.cssSelector("td#backcell input[type=\"submit\"][name=\"cancel\"]")).click();						
 				}
 			}
 			//Add the groupings to the course

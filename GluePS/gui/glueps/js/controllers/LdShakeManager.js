@@ -61,6 +61,24 @@ var LdShakeManager = {
 		       }
 		 },
 		 
+	     /*
+	      * Receives a message from the LdShake which contains this Glue!PS inside a iframe in order to notify Glue!-PS that the deploy has been saved
+	     */
+		 saveDeploy: function(event) {
+			if(event.origin !== LdShakeManager.ldshakeFrameOrigin){
+				return;
+			}else{
+				var data = event.data;
+			    //Check the event type
+			    if (data.type == "ldshake_save"){
+			    	UndoManager.save();
+			    }
+			    else{
+			    	return;
+			    }
+			}
+		 },
+		 
          /*
           * Post a message to the LdShake which contains this Glue!PS inside a iframe in order to notify that Glue!PS has completed the deployment process successfully
           */

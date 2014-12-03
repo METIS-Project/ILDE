@@ -468,7 +468,8 @@ var parserXforms = {
 		var i=0;
 		while(divXml.childNodes.length!=1){
 			nodeName=divXml.childNodes[i].nodeName;
-			if ((nodeName!="xf:model")){
+			//if ((nodeName!="xf:model")){
+			if ((nodeName!="content")){
 				divXml.removeChild(divXml.childNodes[i]);				
 			}else{
 				i++;
@@ -562,10 +563,12 @@ var parserXforms = {
 		{
 			cadena = "data";
 		}
-		var nodoData=root.getElementsByTagName(cadena)[0].childNodes;
-		for(var j=0; j<nodoData.length; j++){
-			if (nodoData[j].nodeName==path.split("/")[1]){
-				nodoData[j].textContent=value;
+		if (root.getElementsByTagName(cadena).length > 0 ){
+			var nodoData=root.getElementsByTagName(cadena)[0].childNodes;
+			for(var j=0; j<nodoData.length; j++){
+				if (nodoData[j].nodeName==path.split("/")[1]){
+					nodoData[j].textContent=value;
+				}
 			}
 		}
 		return root;

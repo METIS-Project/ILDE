@@ -37,6 +37,16 @@ INSERT INTO `glueps_learning_environments_installations` (`id`, `name`, `type`, 
 (10, 'GSIC Email server', 'Email', 'http://gsic.uva.es:465');
 
 --
+-- Dumping data for table `glueps_learning_environments_types`
+--
+
+INSERT INTO `glueps_learning_environments_types` (`id`, `name`, `description`, `getCourses`, `getParticipants`, `staticDeploy`, `dynamicDeploy`, `addTopic`, `multiplePosts`) VALUES 
+(1, 'Moodle', 'A VLE of type Moodle', 1, 1, 1, 1, 1, 0),
+(2, 'MediaWiki', 'A VLE of type MediaWiki', 1, 1, 0, 1, 0, 0),
+(3, 'Blogger', 'A VLE of type Blogger', 1, 1, 0, 1, 1, 1),
+(4, 'Email', 'A VLE of type Email', 1, 1, 0, 1, 0, 0);
+
+--
 -- Dumping data for table `glueps_users`
 --
 

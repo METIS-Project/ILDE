@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBContext;
@@ -36,12 +37,15 @@ import org.apache.http.util.EntityUtils;
 
 import glue.common.resources.GLUEResource;
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
+import glueps.core.model.AsynchronousOperation;
 import glueps.core.model.Course;
 import glueps.core.model.Deploy;
 import glueps.core.model.Design;
 import glueps.core.model.InstancedActivity;
 import glueps.core.model.LearningEnvironment;
 import glueps.core.model.LearningEnvironmentInstallation;
+import glueps.core.model.LearningEnvironmentType;
+import glueps.core.model.LearningEnvironmentTypes;
 import glueps.core.model.Participant;
 import glueps.core.model.Resource;
 import glueps.core.model.ToolInstance;
@@ -50,10 +54,11 @@ public abstract class GLUEPSResource extends GLUEResource {
 
 	
 	protected boolean doAuthentication = true;//selects whether the user authentication will be performed for this resource - it will be false for locally created resources (e.g. not coming from an HTTP request)
+	private GLUEPSManagerApplication applicationResouce = null;
 	
 	protected String doGluepsUriSubstitution (String olduri){
 		String newuri = null;
-		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+		GLUEPSManagerApplication app = getApplicationResource();
         //If the external GLUEPS uri was set (it is different than the one we are being accessed as, due to redirections), use it as a base
         if(app.getAppExternalUri()!=null && app.getAppExternalUri().length()>0){
         	int index = olduri.lastIndexOf("GLUEPSManager/")+14;
@@ -71,7 +76,7 @@ public abstract class GLUEPSResource extends GLUEResource {
 
 	//TODO HttpClient reuses connections. This way of doing things is wasteful, to be optimized!!
 	protected String doGetFromURL(String url) throws Exception{
-		
+		GLUEPSManagerApplication app = getApplicationResource();
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(url);
 		HttpResponse response = null;
@@ -119,16 +124,12 @@ public abstract class GLUEPSResource extends GLUEResource {
 			if(httpget!=null) httpget.abort();
 			if(httpclient!=null) httpclient.getConnectionManager().shutdown();
 		}
-		
-
-		
-		
 	}
 	
 	
 	//TODO HttpClient reuses connections. This way of doing things is wasteful, to be optimized!!
 	protected int doDeleteFromURL(String url) throws Exception{
-		
+		GLUEPSManagerApplication app = getApplicationResource();
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpDelete httpdelete = new HttpDelete(url);
 		HttpResponse response = null;
@@ -178,6 +179,7 @@ public abstract class GLUEPSResource extends GLUEResource {
 
 	
 	protected String doPostToUrl(String url, String entityToSend, String contentType) throws Exception {
+		GLUEPSManagerApplication app = getApplicationResource();
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httppost = new HttpPost(url);
 		StringEntity postee = null;
@@ -442,6 +444,17 @@ public abstract class GLUEPSResource extends GLUEResource {
     	updatedLEInst.setId(trimId(leInst.getId()));
     	return updatedLEInst;
 	}
+    
+    protected LearningEnvironmentType deURLifyLearningEnvironmentType(LearningEnvironmentType leType) {
+		LearningEnvironmentType updatedLEType = null;
+		if(leType==null) return null;
+		
+		updatedLEType = leType;
+		
+    	//deurlify LE type id
+    	updatedLEType.setId(trimId(leType.getId()));
+    	return updatedLEType;
+	}
 
 	protected Design deURLifyDesign(Design d) {
     	Design updatedDesign = null;
@@ -594,6 +607,11 @@ public abstract class GLUEPSResource extends GLUEResource {
     	
     	//urlify LE id
     	updatedLE.setId(baseUrl+"learningEnvironments/"+updatedLE.getId());
+    	
+    	//urlify LE type id
+    	if (updatedLE.getLeType()!=null){
+    		updatedLE.getLeType().setId(baseUrl + "learningEnvironmentTypes/" + updatedLE.getLeType().getId());
+    	}
 
     	return updatedLE;
 	}
@@ -607,8 +625,57 @@ public abstract class GLUEPSResource extends GLUEResource {
     	
     	//urlify LE Installation id
 		updatedLEInst.setId(baseUrl+"learningEnvironmentInstallations/"+updatedLEInst.getId());
+		updatedLEInst.setLeType(baseUrl+"learningEnvironmentTypes/"+updatedLEInst.getLeType());
+		
 
     	return updatedLEInst;
 	}
+	
+	protected LearningEnvironmentType URLifyLearningEnvironmentType(LearningEnvironmentType leType, String baseUrl) {
+		
+		LearningEnvironmentType updatedLEType = null;
+		if(leType==null) return null;
+		
+		updatedLEType = deURLifyLearningEnvironmentType(leType);
+    	
+    	//urlify LE type id
+		updatedLEType.setId(baseUrl+"learningEnvironmentTypes/"+updatedLEType.getId());
+
+    	return updatedLEType;
+	}
+	
+	protected void URLifyLearningEnvironmentType(List<LearningEnvironmentType> leTypes, String baseUrl) {
+		for(LearningEnvironmentType leType: leTypes){
+			deURLifyLearningEnvironmentType(leType);
+			leType.setId(baseUrl+"learningEnvironmentTypes/" + leType.getId());
+		}
+	}
+	
+	protected void URLifyAsynchronousOperation(AsynchronousOperation asynOperation, String baseUrl) {
+    	//urlify asynchronous operation id
+		if (asynOperation.getOperation()!= null){
+			asynOperation.setOperation(trimId(asynOperation.getOperation()));
+			asynOperation.setOperation(baseUrl + "asynchronousOperations/" + asynOperation.getOperation());
+		}
+		/*if (asynOperation.getResource() != null){
+			asynOperation.setResource(trimId(asynOperation.getResource()));
+			asynOperation.setResource(baseUrl + "deploys/" + asynOperation.getResource());
+		}*/
+	}
+	
+    protected GLUEPSManagerApplication getApplicationResource(){
+    	GLUEPSManagerApplication app;
+    	if (this.getApplication() instanceof GLUEPSManagerApplication){
+    		app = (GLUEPSManagerApplication) this.getApplication();
+    	}else {
+    		app = this.applicationResouce;
+    	}
+    	return app;
+    }
+    
+    protected void setApplicationResource(GLUEPSManagerApplication applicationResource){
+    	this.applicationResouce = applicationResource;
+    }
+
 
 }

@@ -775,7 +775,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
         		//Ponemos el nombre de la secci�n como el nombre del despliegue, y conectamos con GLUE!-PS
         		String nameSect = "<b>"+lfdeploy.getName()+"</b><br/>";
         		if (getLdShakeMode()==false){
-        			nameSect += "... this section was generated with <a href=\""+lfdeploy.getId().replace("/deploys/", "/gui/glueps/deploy.html?deployId=")+"\" target=\"_new\">GLUE!-PS</a><br/>";
+        			nameSect += "... this section was generated with <a href=\""+lfdeploy.getId().replace("/deploys/", "/gui/glueps/deploy.html?deployId=")+"\" target=\"_new\">GLUE!-PS</a><br></br>";
         		}
         		section.setSUMMARY(nameSect);
         		//VISIBLE section

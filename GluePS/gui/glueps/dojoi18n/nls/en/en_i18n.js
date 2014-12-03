@@ -20,7 +20,7 @@
 "Error407":"You need to authenticate with a proxy.",
 "Error415":"Tipo de medio no soportado",
 //Errores Servidor
-"Error500":"The server reported an error.",
+"Error500":"The server reported an internal error.",
 "Error501":"The server does not understand the request",
 "Error502":"Gateway wrong",
 "Error503":"Service Unavailable",
@@ -41,6 +41,7 @@
 "participantsToDelete":"Participants to be deleted",
 "participantsRemain":"Participants will remain",
 "participantChanges":"Update participant list",
+"getParticipantList":"Getting an updated participant list...",
 
 //Migas
 "MigasDesign":"1 Design",
@@ -55,6 +56,7 @@
 "NewDesignLabelNewDDesigTypeImsldType":"IMS LD",
 "NewDesignLabelNewDDesigTypePpcType":"PPC",
 "NewDesignLabelNewDDesigTypeT2Type":"T2",
+"NewDesignLabelNewDDesigTypePpType":"PP",
 "NewDesignLabelNewDDesigTypeGluepsType":"GLUE!PS",
 "NewDesignNewDButtonDesign":"Create",
 
@@ -85,6 +87,9 @@
 "DialogCreateLeName": "VLE Name",
 "DialogCreateLeUser": "User",
 "DialogCreateLePassword": "Password",
+"DialogCreateLeEnableAR": "Enable AR / VG",
+"DialogCreateLeShowAR": "Show AR",
+"DialogCreateLeShowVG": "Show VG",
 
 //VLE management
 "manageVlesTitle":"VLE Management",
@@ -170,7 +175,7 @@
 "DeleteAllToolInfo":"Click here to delete all the configurations of the tool for the activity",
 "ConfigureTool":"Configure the tool",
 "ConfigureToolInfo":"Click here to configure the tool",
-"OpenToolInstance":"Click here to open the created tool instance",
+"OpenToolInstance":"Click here to open the tool instance",
 	
 "getDeployToolTip": "Get this deployment",
 
@@ -181,6 +186,8 @@
 "creatingToolInstance":"The tool instance is being created.",
 "loadingConfiguration":"Loading the configuration form.",
 "creatingDeployment":"The deployment is being created",
+"editDeployForbidden":"You are not allowed to edit this deployment.",
+"deployNotFound":"The deploy has not been found.",
 
 "info":"Information",
 "createdToolInstance": "The tool instance has been created.",

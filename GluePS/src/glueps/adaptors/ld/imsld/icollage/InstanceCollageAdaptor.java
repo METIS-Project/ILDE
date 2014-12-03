@@ -50,7 +50,7 @@ import glueps.core.model.ToolInstance;
 
 public class InstanceCollageAdaptor {
 
-	private ArrayList<Participant> participants;
+	private HashMap<String, Participant> participants;
 	
 	private ArrayList<Group> groups;
 	
@@ -230,25 +230,18 @@ public class InstanceCollageAdaptor {
 		return result;
 	}
 	
-	public String getIdAlumn(ArrayList<Participant> participants,String name){
+	public String getIdAlumn(HashMap<String,Participant> participants,String name){
+		Participant p = participants.get(name);
 		String result = null;
-		   for(int i=0; i<participants.size();i++){
-			   if (participants.get(i).getName().equals(name)){
-				   result=participants.get(i).getId();
-				   break;
-			   }
-		   }
-		
-		
-		
+		result = p.getId();
 		return result;
 	}
 
-	public void setParticipants(ArrayList<Participant> participants) {
+	public void setParticipants(HashMap<String,Participant> participants) {
 		this.participants = participants;
 	}
 
-	public ArrayList<Participant> getParticipants() {
+	public HashMap<String,Participant> getParticipants() {
 		return participants;
 	}
 
@@ -284,26 +277,27 @@ public class InstanceCollageAdaptor {
 		if(deploy==null) return null;
 		
 		ArrayList<ToolInstance> instances = null;
-		
-		for(Iterator<InstancedActivity> it = deploy.getInstancedActivities().iterator();it.hasNext();){
-			InstancedActivity instAct = it.next();
-			//For each instanced activity, we look at its activities' instantiable resources and generate a (mostly empty) toolinstance
-			Activity relevantActivity = deploy.getDesign().findActivityById(instAct.getActivityId());
-			
-			ArrayList<String> relevantToolResources = relevantActivity.getResourceIdsByInstantiable(deploy.getDesign(), true);
-			
-			if(relevantToolResources!=null){
-				for(Iterator<String> it2 = relevantToolResources.iterator();it2.hasNext();){
-					Resource toolResource = deploy.getDesign().findResourceById(it2.next());
-					String toolInstanceIdentifier = toolResource.getId()+TOOL_INSTANCE_SEPARATOR+getRoleOcurrence(deploy.findGroupById(instAct.getGroupId()));
-					ToolInstance instance = new ToolInstance(toolInstanceIdentifier, getToolInstanceName(toolResource, deploy.findGroupById(instAct.getGroupId())), deploy.getId(), toolResource.getId(), null);
-					
-					//we relate the tool instance with the instanced activity
-					if(instAct.getInstancedToolIds()==null) instAct.setInstancedToolIds(new ArrayList<String>(Arrays.asList(toolInstanceIdentifier)));
-					else instAct.getInstancedToolIds().add(toolInstanceIdentifier);
-					
-					if(instances==null) instances = new ArrayList<ToolInstance>();
-					instances.add(instance);
+		if (deploy.getInstancedActivities()!=null){
+			for(Iterator<InstancedActivity> it = deploy.getInstancedActivities().iterator();it.hasNext();){
+				InstancedActivity instAct = it.next();
+				//For each instanced activity, we look at its activities' instantiable resources and generate a (mostly empty) toolinstance
+				Activity relevantActivity = deploy.getDesign().findActivityById(instAct.getActivityId());
+				
+				ArrayList<String> relevantToolResources = relevantActivity.getResourceIdsByInstantiable(deploy.getDesign(), true);
+				
+				if(relevantToolResources!=null){
+					for(Iterator<String> it2 = relevantToolResources.iterator();it2.hasNext();){
+						Resource toolResource = deploy.getDesign().findResourceById(it2.next());
+						String toolInstanceIdentifier = toolResource.getId()+TOOL_INSTANCE_SEPARATOR+getRoleOcurrence(deploy.findGroupById(instAct.getGroupId()));
+						ToolInstance instance = new ToolInstance(toolInstanceIdentifier, getToolInstanceName(toolResource, deploy.findGroupById(instAct.getGroupId())), deploy.getId(), toolResource.getId(), null);
+						
+						//we relate the tool instance with the instanced activity
+						if(instAct.getInstancedToolIds()==null) instAct.setInstancedToolIds(new ArrayList<String>(Arrays.asList(toolInstanceIdentifier)));
+						else instAct.getInstancedToolIds().add(toolInstanceIdentifier);
+						
+						if(instances==null) instances = new ArrayList<ToolInstance>();
+						instances.add(instance);
+					}
 				}
 			}
 		}
@@ -331,12 +325,9 @@ public class InstanceCollageAdaptor {
 		return toolResource.getName()+" "+participantList;
 	}
 
-	private String getToolInstanceName(Resource toolResource,
-			Group group) {
-		
-		return toolResource.getName()+" ("+group.getName()+")";
-		
-			
+	private String getToolInstanceName(Resource toolResource, Group group) {		
+		//return toolResource.getName()+" ("+group.getName()+")";
+		return toolResource.getName();
 	}
 
 	private ArrayList<InstancedActivity> createInstancedActivities(
@@ -419,7 +410,7 @@ public class InstanceCollageAdaptor {
         //Procesamos
         List<User> userList=icollageMF.getRolePopulation().getUser(); 
         //Creo objeto de tipo participant de LF
-        participants = new ArrayList<Participant>();
+        participants = new HashMap<String,Participant>();
         groups = new ArrayList<Group>();
         Participant user;
         HashMap<String, String> randomIds = new HashMap<String, String>();
@@ -434,7 +425,7 @@ public class InstanceCollageAdaptor {
        			randomIds.put(uniqueId, uniqueId);
        			user = new Participant(uniqueId, userList.get(i).getIdentifier(), null, ""+Participant.USER_PARAMETER_SEPARATOR+Participant.USER_PARAMETER_SEPARATOR+Participant.USER_PARAMETER_SEPARATOR+Participant.USER_PARAMETER_SEPARATOR, false);
        		}
-       		participants.add(user);
+       		participants.put(userList.get(i).getIdentifier(), user);
        	}
        	
        	//Recogemos informaci�n para generar "El arbol"
@@ -620,11 +611,13 @@ public class InstanceCollageAdaptor {
 		ArrayList<glueps.core.model.Role> staffRoles = deploy.getDesign().getStaffRoles();
 		
 		ArrayList<Participant> fixedParticipants = null;
+		participants.entrySet().iterator();
+		
 		
 		if(deploy.getParticipants()!=null){
-			for(Iterator<Participant> it = participants.iterator(); it.hasNext();){
+			for(Iterator<Entry<String,Participant>> it = participants.entrySet().iterator(); it.hasNext();){
 				//We iterate through the participants
-				Participant part = it.next();
+				Participant part = it.next().getValue();
 				
 				//We get the participants' groups
 				ArrayList<Group> groupsForPart = deploy.getGroupsForParticipant(part.getId());

@@ -569,10 +569,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 										if (courseUsers == null){
 											courseUsers = new HashMap<String, Participant>();
 										}//Add the participant to the hash map
-										Participant part = new Participant(userId,username, null,userId + Participant.USER_PARAMETER_SEPARATOR + username
+										/*Participant part = new Participant(userId,username, null,userId + Participant.USER_PARAMETER_SEPARATOR + username
+												+ Participant.USER_PARAMETER_SEPARATOR + email + Participant.USER_PARAMETER_SEPARATOR + firstaccess + Participant.USER_PARAMETER_SEPARATOR,false);*/
+										Participant part = new Participant(userId,firstname + " " + lastname, null,userId + Participant.USER_PARAMETER_SEPARATOR + firstname + " " + lastname
 												+ Participant.USER_PARAMETER_SEPARATOR + email + Participant.USER_PARAMETER_SEPARATOR + firstaccess + Participant.USER_PARAMETER_SEPARATOR,false);
 										//The iCollage adaptor references users by the username, not the DB id
-										courseUsers.put(part.getName(), part);
+										courseUsers.put(username, part);
 									}
 								}							
 							}else if (keyName.equals("role")){
@@ -1226,6 +1228,7 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		try {
 			String response = doPostToUrl(qapiUrl, parameters);
+			response = response.replace("\r\n<?xml", "<?xml");
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));

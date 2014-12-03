@@ -39,7 +39,9 @@ import glueps.core.model.Activity;
 import glueps.core.model.Course;
 import glueps.core.model.Deploy;
 import glueps.core.model.Group;
+import glueps.core.model.InstancedActivity;
 import glueps.core.model.Participant;
+import glueps.core.model.ToolInstance;
 
 
 import org.openqa.selenium.*;
@@ -276,7 +278,7 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	    		nameSect = nameSect.replace("Root/Method - ", "");
 	    		String lfdeployUrl = getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
 	    		if (getLdShakeMode()==false){
-	    			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br/>";
+	    			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br></br>";
 	    		}
 	    		section.setSummary(nameSect);
 			}else{
@@ -395,8 +397,33 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 	        		}else if(displayGlueletInFrame){
 	        			description += "<p>If you can not see the resource in the frame below, click on the link to open it: <a href=\"" + location + "?callerUser=" + "\" target=\"_blank\">" + contSec.getModName() + "</a></p>";
 		            }
-		            		
-		    		CourseUrl url = new CourseUrl(null, Integer.parseInt(lfdeploy.getCourse().getId()), contSec.getModName(), description, 1, location);
+	        		
+	        		String groupId ="";
+	        		ToolInstance toolInstReused = lfdeploy.getToolInstanceByLocation(contSec.getLocation());
+	        		if (toolInstReused!=null){
+	        			toolInstReused = lfdeploy.getOriginalToolInstance(toolInstReused);
+	        			HashMap<String, InstancedActivity> ia = lfdeploy.getInstancedActivitiesForToolInstance(toolInstReused.getId());
+	        			if (ia!=null){
+	        				Iterator<Map.Entry<String,InstancedActivity>> itInstAct = ia.entrySet().iterator();
+	        				while(itInstAct.hasNext()){
+	        					Map.Entry<String, InstancedActivity> entry = itInstAct.next();
+	        					InstancedActivity instAct = entry.getValue();
+	        					groupId = instAct.getGroupId();
+	        				}
+	        			}
+	        		}else{
+	        			groupId = contSec.getGroupId();
+	        		}
+	        		String groupName = "";
+	        		ArrayList<Group> groups = lfdeploy.getGroups();
+	        		for (int g = 0; g < groups.size(); g++){
+	        			if (groups.get(g).getId().equals(groupId)){
+	        				groupName = " (" + groups.get(g).getName() + ")";
+	        				break;
+	        			}
+	        		}
+	        		
+		    		CourseUrl url = new CourseUrl(null, Integer.parseInt(lfdeploy.getCourse().getId()), contSec.getModName() + groupName, description, 1, location);
 		    		if (!requiresCallerUser || displayGlueletInFrame){
 			    		url.setDisplay(2);
 		    		}else{
@@ -812,6 +839,18 @@ public class MoodleDynAdaptor21v extends MoodleAdaptor21v implements
 			return true;
 		}
 		return false;
+	}
+	
+	//This returns the toolInstanceId
+	private String getTrimmedId(String id){
+		if(!id.startsWith("http://") || id.indexOf("/instance/")==-1){
+			//This is not an expected URL!
+			return id;
+		}else{
+			//This is an expected URL
+			return id.substring(id.indexOf("/instance/")+10);
+		}
+		
 	}
 
 }

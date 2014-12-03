@@ -179,7 +179,8 @@ var InstancedActivity = function(data){
 		}
 		var group = GroupContainer.getGroup(data.groupId);
 		//El nombre de la instancia de herramienta será el nombre de la herramienta y entre paréntesis su grupo
-		var name = tool.getName() + " (" + group.getName() + ")";
+		//var name = tool.getName() + " (" + group.getName() + ")";
+		var name = tool.getName();
 		var created = ToolInstanceContainer.addToolInstance(name, tool);
 		data.instancedToolIds.push(created.getId());
 		return created;

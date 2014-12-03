@@ -34,13 +34,21 @@ var DeployButtomPainter = {
 		},
 		
 		paint: function(){
-			
-			dojo.style(dojo.byId("divDeploymentButtomTop"), {
-				display : ""
-			});
-			dojo.style(dojo.byId("divDeploymentButtonBottom"), {
-				display : ""
-			});
+			if (!LearningEnvironmentType.isStaticDeploy() && !LearningEnvironmentType.isDynamicDeploy){
+				dojo.style(dojo.byId("divDeploymentButtomTop"), {
+					display : "none"
+				});
+				dojo.style(dojo.byId("divDeploymentButtonBottom"), {
+					display : "none"
+				});
+			}else{
+				dojo.style(dojo.byId("divDeploymentButtomTop"), {
+					display : ""
+				});
+				dojo.style(dojo.byId("divDeploymentButtonBottom"), {
+					display : ""
+				});
+			}
 			
 			this.internationalize();
 			if (this.undefinedTools() || this.webcontentLocationNull() || this.noActivitiesToDeploy() || this.repeatedGroups())
@@ -71,7 +79,9 @@ var DeployButtomPainter = {
 			}
 			this.showDeployLinks();
 			this.addtemas(20);
-			this.addOauth();
+			if (LearningEnvironmentType.isAddTopic()==false){
+				this.hideTemas();
+			}
 		},
 		
 		internationalize: function(){
@@ -229,6 +239,10 @@ var DeployButtomPainter = {
 			
 			
 			
+		},
+		
+		hideTemas : function(){
+			dojo.byId("divAddCourse").style.display="none";
 		},
 		
 	    addtemas : function(num) {

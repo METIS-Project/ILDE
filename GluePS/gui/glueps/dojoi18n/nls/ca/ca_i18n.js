@@ -41,6 +41,7 @@
 "participantsToDelete":"Participants to be deleted",
 "participantsRemain":"Participants will remain",
 "participantChanges":"Update participant list",
+"getParticipantList":"Getting an updated participant list...",
 
 //Migas
 "MigasDesign":"1 Disseny",
@@ -55,6 +56,7 @@
 "NewDesignLabelNewDDesigTypeImsldType":"IMS LD",
 "NewDesignLabelNewDDesigTypePpcType":"PPC",
 "NewDesignLabelNewDDesigTypeT2Type":"T2",
+"NewDesignLabelNewDDesigTypePpType":"PP",
 "NewDesignLabelNewDDesigTypeGluepsType":"GLUE!PS",
 "NewDesignNewDButtonDesign":"Crear",
 
@@ -85,6 +87,9 @@
 "DialogCreateLeName": "VLE Name",
 "DialogCreateLeUser": "User",
 "DialogCreateLePassword": "Password",
+"DialogCreateLeEnableAR": "Enable AR / VG",
+"DialogCreateLeShowAR": "Show AR",
+"DialogCreateLeShowVG": "Show VG",
 
 //VLE management
 "manageVlesTitle":"VLE Management",
@@ -167,7 +172,7 @@
 "DeleteToolInfo":"Feu clic aquí per eliminar la confiuració de l'eina per aquest grup",
 "ConfigureTool":"Configurar l'eina",
 "ConfigureToolInfo":"Feu clic aquí per a configurar l'eina",
-"OpenToolInstance":"Feu clic aquí per obrir la instància d'eina creada",
+"OpenToolInstance":"Feu clic aquí per obrir la instància d'eina",
 "ConfigureToolInfo":"Click here to configure the tool",
 "OpenToolInstance":"Click here to open the created tool instance",
 "getDeployToolTip": "Aconsegueix aquesta implementació",
@@ -179,6 +184,8 @@
 "creatingToolInstance":"S'està creant la instància de l'eina.",
 "loadingConfiguration":"Carregant el formulari de configuració.",
 "creatingDeployment":"The deployment is being created",
+"editDeployForbidden":"You are not allowed to edit this deployment.",
+"deployNotFound":"The deploy has not been found.",
 
 "info":"Informació",
 "createdToolInstance": "S'ha creat la instància de l'eina.",

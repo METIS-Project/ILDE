@@ -26,6 +26,8 @@ import javax.persistence.Table;
                 "u WHERE u.deployid = :deployid"),
         @NamedQuery(name = "DeployVersionEntity.findLastValidVersionDeploy", query = "SELECT max(u.version) FROM DeployVersionEntity " +
                 "u WHERE u.deployid = :deployid AND u.valid=1"),
+        @NamedQuery(name = "DeployVersionEntity.findLastSavedVersionDeploy", query = "SELECT max(u.version) FROM DeployVersionEntity " +
+                "u WHERE u.deployid = :deployid AND u.saved=1"),
         @NamedQuery(name = "DeployVersionEntity.findUndoVersionDeploy", query = "SELECT max(u.version) FROM DeployVersionEntity " +
                 "u WHERE u.deployid = :deployid AND u.valid=1" + " AND u.version < (SELECT max(u2.version) FROM DeployVersionEntity u2 WHERE u2.deployid = :deployid AND u2.valid=1)"),
         @NamedQuery(name = "DeployVersionEntity.updateValidDeploy", query = "UPDATE DeployVersionEntity u SET u.valid = :valid " +
@@ -63,6 +65,9 @@ public class DeployVersionEntity implements Serializable {
     @Column(name = "VALID")
     private boolean valid;
     
+    @Column(name = "SAVED")
+    private boolean saved;
+    
     @Column(name = "UNDOALERT")
     private boolean undoalert;
     
@@ -74,12 +79,13 @@ public class DeployVersionEntity implements Serializable {
 	@Column(length=1048576) 
 	private byte[] xmlfile;
 
-    public DeployVersionEntity(String deployid, long version ) {
+	public DeployVersionEntity(String deployid, long version ) {
     	this.deployid = deployid;
     	this.version = version;
     	this.valid = true;
     	this.undoalert = false;
     	this.next = 0;
+    	this.saved = false;
     }
 
     public String getDeployid() {
@@ -129,6 +135,14 @@ public class DeployVersionEntity implements Serializable {
 
 	public void setXmlfile(byte[] xmlfile) {
 		this.xmlfile = xmlfile;
+	}
+	
+    public boolean isSaved() {
+		return saved;
+	}
+
+	public void setSaved(boolean saved) {
+		this.saved = saved;
 	}
 
  

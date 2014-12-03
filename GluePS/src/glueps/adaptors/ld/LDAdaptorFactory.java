@@ -5,6 +5,7 @@ import java.io.File;
 import glueps.adaptors.ld.edit2.EDIT2Adaptor;
 import glueps.adaptors.ld.glueps.GluepsAdaptor;
 import glueps.adaptors.ld.imsld.IMSLDAdaptor;
+import glueps.adaptors.ld.pp.PPAdaptor;
 import glueps.adaptors.ld.ppc.PPCAdaptor;
 import glueps.adaptors.vle.IVLEAdaptor;
 import glueps.adaptors.vle.mediawiki.MediaWikiAdaptor; 
@@ -22,6 +23,7 @@ public final class LDAdaptorFactory {
 	public static final String PPC_TYPE = "PPC";
 	public static final String T2_TYPE = "T2";
 	public static final String GLUEPS_TYPE = "GLUEPS";
+	public static final String PP_TYPE = "PP";
 
 	public LDAdaptorFactory(GLUEPSManagerApplication applicationRest){
 		
@@ -32,7 +34,6 @@ public final class LDAdaptorFactory {
 	}
 	
 	public ILDAdaptor getLDAdaptor(String ldType, String designId){
-		
 		if(ldType==null) return null;
 		
 		if(ldType.equals(IMSLD_TYPE)){
@@ -57,8 +58,13 @@ public final class LDAdaptorFactory {
 			
 			return adaptor;
 			
-		}
-		else return null;
+		}else if(ldType.equals(PP_TYPE)){
+		
+			PPAdaptor adaptor = new PPAdaptor(designId);
+		
+			return adaptor;
+		
+		}else return null;
 		
 	}
 }

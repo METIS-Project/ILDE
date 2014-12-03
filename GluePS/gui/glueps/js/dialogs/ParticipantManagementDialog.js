@@ -164,6 +164,10 @@ var ParticipantManagementDialog = {
     			participant.setIsStaff(ParticipantManagementDialog.participantsRemain[i].getIsStaff());
     			updated = true;
     		}
+    		if (ParticipantManagementDialog.participantsRemain[i].getName() != participant.getName()){
+    			participant.setName(ParticipantManagementDialog.participantsRemain[i].getName());
+    			updated = true;
+    		}
     	}
     	if (ParticipantManagementDialog.participantsAdd.length > 0 || ParticipantManagementDialog.participantsDelete.length > 0 || updated==true){
     		InformativeDialogs.showAlertDialog(i18n.get("info"), i18n.get("SuccessUpdatingParticipants"));

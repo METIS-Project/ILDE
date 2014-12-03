@@ -90,6 +90,7 @@ var Design = {
 		var nodoDiv = document.getElementById("divUlDesign");
 		// Guarda el titulo del diseno
 		var design;
+		var type; //the design type
 
 		// Listado de los tag entrys
 		// Cada tag entry representa un diseno
@@ -115,6 +116,7 @@ var Design = {
 		tabla.setAttribute("class", "tableDesigns");
 		// Recorro los diseños
 		for ( var i = 0; i < entryList.length; i++) {
+			type = entryList[i].designtype;
 			if (entryList[i].name) {
 				design = entryList[i].name;
 			} else {
@@ -154,7 +156,8 @@ var Design = {
                 },
                 data: {
 					id: id,
-					design: design
+					design: design,
+					designtype: type
                 },
                 menuStyle: "default"
             });
@@ -281,10 +284,19 @@ var Design = {
 					.send({
 						method : "POST",
 						form : dojo.byId("importDeployForm"),
+			            //headers: {"Content-Type" :"text/xml"},
 						handleAs : "html",
 						load : function(data) {
 							var deployUrl = Deploy.getDeployId(data);
-							Design.deployImportInprocess(deployUrl);
+							if (deployUrl == false){
+								var asynOperNode = data.getElementsByTagName("asynchronousOperation")[0];
+								var operation = asynOperNode.getElementsByTagName("operation")[0].childNodes[0].nodeValue;
+								var status = asynOperNode.getElementsByTagName("status")[0].childNodes[0].nodeValue;
+								Design.checkOperationImportStatus(operation);
+							}else{
+								Design.getJsonDesigns(deployUrl);
+								Design.resetFormDeploy();
+							}
 						},
 						error : function(error, ioargs) {
 							Glueps.hideLoadingDialog();
@@ -299,38 +311,50 @@ var Design = {
 		}
 	},
 	
-	deployImportInprocess: function(deployUrl){
-		var url = deployUrl;
-        var xhrArgs = {
-            url : url,
-            handleAs : "xml",// Tipo de dato de la respuesta del Get,
-            sync: true,
-            load : function(data) {	
-				// Obtener todos los disenos y generar el listado
-            	var deployUrl = Deploy.getDeployId(data);
-				Design.getJsonDesigns(deployUrl);
-				Design.resetFormDeploy();
-            },
-
-            error : function(error, ioargs) { 
-            	if (ioargs.xhr.status == 503 || error.dojoType=='cancel')
-            	{
-            		//Está en proceso
-            		//Esperar un tiempo en milisegundos y volver a realizar el GET
-            		window.setTimeout(function(){Design.deployImportInprocess(deployUrl);}, 5000);
-            	}
-            	else
-            	{
-	            	//Otro error en el proceso de despliegue
-					Glueps.hideLoadingDialog()
-                    var codigo = 2;
-                    var message = ErrorCodes.errores(codigo);
+	/**
+	 * Check the current status of an asynchronous operation
+	 * @param operation URL of the resource with the information about the status of the operation
+	 */
+	checkOperationImportStatus: function(operation){
+		var url = operation;
+		var xhrArgs = {
+			url: url,
+			handleAs: "json",
+			headers : {
+				"Content-Type": "application/json",
+			    "Accept" : "application/json"		
+			},
+			load: function(data) {
+				var status = data.status;
+				if (status == "in progress"){
+					//The operation is still in process
+					//Wait for a while an try it again
+					window.setTimeout(function(){
+						Design.checkOperationImportStatus(data.operation);}, 5000);					
+				}
+				else if (status == "ok"){
+					var resource = data.resource;
+					Design.getJsonDesigns(resource);
+					Design.resetFormDeploy();
+					
+				}
+				else if (status == "error"){
+	            	//There was an error while deploying
+					Glueps.hideLoadingDialog();
+					var message = data.description;
 					Glueps.showAlertDialog(i18n.get("warning"), message);
-            	}
+				}
+			},
+            error : function(error, ioargs) { 
+            	//There was an error while getting the status of the operation
+				Glueps.hideLoadingDialog()
+                var code = 2;
+                var message = ErrorCodes.errores(code);
+				Glueps.showAlertDialog(i18n.get("warning"), message);
             }
-        }
+		}
         // Call the asynchronous xhrGet
-        var deferred = dojo.xhrGet(xhrArgs);			
+        var deferred = dojo.xhrGet(xhrArgs);
 	},
 	
 	/**

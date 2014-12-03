@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -241,7 +242,9 @@ public class ToolInstanceResource extends GLUEPSResource{
    			Status st = deleteGMResource(targetURI);
 			
    			// set status result
-   			getResponse().setStatus(st);
+   			if (getResponse()!=null){
+   				getResponse().setStatus(st);
+   			}
 			
    			// change the instance location, change the deploy resource and store it in DB??
    			if (st.isSuccess() || st.getCode()==404) {
@@ -259,7 +262,7 @@ public class ToolInstanceResource extends GLUEPSResource{
 				}
    				
 				//The location has been set to null and the instance doesn't exist, so we don't need to delete it
-				if (st.getCode() == 404){
+				if (st.getCode() == 404 && getResponse()!=null){
 					getResponse().setStatus(st.SUCCESS_OK);
 				}
 				
@@ -740,25 +743,35 @@ public class ToolInstanceResource extends GLUEPSResource{
 		
 		String[] newUsers = null;
 		if(teachersNames!=null && teachersNames.length>0){
-			//teacher = teachersNames[0];
-			//If there are teachers, we just add all of them to the users list
-			
-			if(usersNames!=null && usersNames.length>0){//if there are students in the group
-				newUsers = new String[usersNames.length+teachersNames.length+1];
-				for(int i = 0; i<usersNames.length; i++) newUsers[i] = usersNames[i];
-				for(int i = 0; i<teachersNames.length; i++) newUsers[i+usersNames.length]=teachersNames[i];
-				newUsers[usersNames.length+teachersNames.length]=creduser;
-			}else{//if there are no students, the teachers are the only users
-				newUsers = new String[teachersNames.length+1];
-				for(int i = 0; i<teachersNames.length; i++) newUsers[i]=teachersNames[i];
-				newUsers[teachersNames.length] = creduser;
+			//If there are teachers, we just add all of them to the users list			
+			ArrayList<String> nu = new ArrayList<String>();
+			if (usersNames != null){
+				for (int i = 0; i < usersNames.length; i++){
+					nu.add(usersNames[i]);
+				}
 			}
-		}else{//No teachers, we just put the logged in user as callerUser
-			//teacher = login;
-			if(usersNames!=null && usersNames.length>0){
-				newUsers = new String[usersNames.length+1];
-				for(int i = 0; i<usersNames.length; i++) newUsers[i] = usersNames[i];
-				newUsers[usersNames.length] = creduser;
+			for (int i = 0; i < teachersNames.length; i++){
+				if (!nu.contains(teachersNames[i])){
+					nu.add(teachersNames[i]);
+				}
+			}
+			if(!nu.contains(creduser)){
+				nu.add(creduser);
+			}
+			newUsers = new String[nu.size()];
+			nu.toArray(newUsers);
+		}else{
+			//No teachers, we just put the logged in user as callerUser
+			if(usersNames!=null){
+				ArrayList<String> nu = new ArrayList<String>();
+				for(int i = 0; i<usersNames.length; i++){
+					nu.add(usersNames[i]);
+				}
+				if(!nu.contains(creduser)){
+					nu.add(creduser);
+				}
+				newUsers = new String[nu.size()];
+				nu.toArray(newUsers);
 			}else{
 				newUsers = new String[1];
 				newUsers[0] = creduser;
@@ -766,8 +779,6 @@ public class ToolInstanceResource extends GLUEPSResource{
 		}
 		
 		entry.addExtentedStructuredList("users", "user", newUsers);
-		//entry.addExtendedTextChild("callerUser", teacher);			
-		//entry.addExtendedTextChild("callerUser", login);
 		entry.addExtendedTextChild("callerUser", creduser);
 		
 		return entry.getRepresentation();

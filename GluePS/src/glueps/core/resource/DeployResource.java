@@ -56,6 +56,7 @@ import glueps.core.model.Deploy;
 import glueps.core.model.Design;
 import glueps.core.model.Group;
 import glueps.core.model.LearningEnvironment;
+import glueps.core.model.LearningEnvironmentType;
 import glueps.core.model.Participant;
 import glueps.core.model.Resource;
 import glueps.core.model.ToolInstance;
@@ -141,6 +142,11 @@ public class DeployResource extends GLUEPSResource {
    		
    		JpaManager dbmanager = JpaManager.getInstance();
    		deploy = dbmanager.findDeployObjectById(this.deployId);
+   		if (deploy!=null){
+	   		//We update the learning environment type info because it could have changed
+	   		LearningEnvironmentType leType = dbmanager.findLETypeObjectByName(deploy.getLearningEnvironment().getType());
+	   		deploy.getLearningEnvironment().setLeType(leType);
+   		}
 
    		// does it exist?
 		setExisting(this.deploy != null);	// setting 'false' implies that REST methods won't start; server will respond with 404
@@ -422,6 +428,7 @@ public class DeployResource extends GLUEPSResource {
 		prop.put("deployid", depVe.getDeployid());
 		prop.put("version", String.valueOf(depVe.getVersion()));
 		prop.put("valid", String.valueOf(depVe.getValid()));
+		prop.put("saved", String.valueOf(depVe.isSaved()));
 		prop.put("undoalert", String.valueOf(depVe.getUndoalert()));
 		prop.put("next", String.valueOf(depVe.getNext()));
 		return prop;
@@ -752,6 +759,174 @@ public class DeployResource extends GLUEPSResource {
    		logger.info("** GET JSON REDO DEPLOY answer: \n" + (answer != null ? json : "NULL"));
    		return answer;  
 	}
+	
+	/**
+	 * The edition of the deploy is saved.
+	 * The tool instances that were created in the last edition session are not deleted.
+	 * This request deletes the deploy and its design from the database and the files that were uploaded in the creation of the design and the deploy
+	 * @return
+	 */
+	private Representation saveDeploy() {
+		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+		if(app.getLdShakeMode()==false) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "This request is only allowed in the LdShake mode");
+   		logger.info("** PUT SAVE DEPLOY received");
+		JpaManager dbmanager = JpaManager.getInstance();
+		DeployVersionEntity version = dbmanager.findLastValidDeployVersion(deployId);
+		version.setSaved(true); //set the saved value to true to indicate that a new editing session has started in LdShake
+		dbmanager.updateDeployVersion(version);
+			
+   		logger.info("** PUT SAVE DEPLOY completed");
+   		return null;  
+	}
+	
+	/**
+	 * The edition of the deploy is saved and exit by LdShake.
+	 * The tool instances that were created in the last edition session are not deleted.
+	 * This request deletes the deploy and its design from the database and the files that were uploaded in the creation of the design and the deploy
+	 * @return
+	 */
+	private Representation saveAndExitDeploy(){
+		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+		if(app.getLdShakeMode()==false) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "This request is only allowed in the LdShake mode");
+		//We check that the deploy is not in process, and that the request does not try to override the (faulty) in process mechanism
+    	String override = this.getQuery()!=null ? this.getQuery().getValues("override") : null;
+    	boolean deployInProcess = false;
+    	if (deploy.getLearningEnvironment()!=null){
+    		deployInProcess = GLUEPSManagerServerMain.ips.askDeployInProcess(new InProcessInfo(deploy.getId(),deploy.getLearningEnvironment().getAccessLocation().toString(),deploy.getCourse().getId()));
+    	}
+		if(deployInProcess && override==null) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "The deployment is in process. Please try saving & exiting it again later");
+
+    	logger.info("** SAVE AND EXIT DEPLOY received");	
+		
+		String UPLOAD_DIRECTORY = app.getAppPath()+"/uploaded/";
+		//We delete the design uploaded files
+		File designDir = new File(UPLOAD_DIRECTORY + trimId(deploy.getDesign().getId()));
+		if(!designDir.exists() || !designDir.isDirectory()){
+	   		logger.info("The design directory does not exist! we do nothing...");			
+		}else{
+			try {
+				FileUtils.deleteDirectory(designDir);
+			} catch (IOException e) {
+		   		logger.info("Error while deleting the design directory. We continue...");			
+				e.printStackTrace();
+			}
+		}
+		
+		//We delete the deploy uploaded files
+		File deployDir = new File(UPLOAD_DIRECTORY + this.deployId);
+		if(!deployDir.exists() || !deployDir.isDirectory()){
+	   		logger.info("The deploy directory does not exist! we do nothing...");			
+		}else{
+			try {
+				FileUtils.deleteDirectory(deployDir);
+			} catch (IOException e) {
+		   		logger.info("Error while deleting the deploy directory. We continue...");			
+				e.printStackTrace();
+			}
+		}
+		
+		JpaManager dbmanager = JpaManager.getInstance();
+		//delete the deploy from the database
+		dbmanager.deleteDeploy(deployId);
+		//delete all the versions of this deploy
+		dbmanager.deleteDeployVersions(deployId);		
+		//delete the design as well
+		dbmanager.deleteDesign(trimId(deploy.getDesign().getId()));
+		//delete the sectoken
+		dbmanager.deleteSectoken(deployId);
+		
+   		logger.info("** SAVE AND EXIT DEPLOY completed");
+   		return null;
+	}
+	
+	/**
+	 * The edition of the deploy is cancelled by LdShake.
+	 * Delete the tool instances that have been created since the last time the deploy was saved by LdShake.
+	 * This request deletes the deploy and its design from the database and the files that were uploaded in the creation of the design and the deploy
+	 * @return
+	 */
+	private Representation cancelDeploy(){
+		GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.getApplication();
+		if(app.getLdShakeMode()==false) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "This request is only allowed in the LdShake mode");
+		//WE check that the deploy is not in process, and that the request does not try to override the (faulty) in process mechanism
+    	String override = this.getQuery()!=null ? this.getQuery().getValues("override") : null;
+    	boolean deployInProcess = false;
+    	if (deploy.getLearningEnvironment()!=null){
+    		deployInProcess = GLUEPSManagerServerMain.ips.askDeployInProcess(new InProcessInfo(deploy.getId(),deploy.getLearningEnvironment().getAccessLocation().toString(),deploy.getCourse().getId()));
+    	}
+		if(deployInProcess && override==null) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "The deployment is in process. Please try cancelling it again later");
+
+    	logger.info("** CANCEL DEPLOY received");
+
+		JpaManager dbmanager = JpaManager.getInstance();
+		Deploy versionSession= dbmanager.findSavedDeployObjectById(deployId);//get the deploy status the last time it was saved
+		
+		//We delete only the (external) instances that have been created since the last session started (since the last time a save request was received)
+		// For now, we do it by calling to the toolInstancesResource
+		ArrayList<ToolInstance> instances = deploy.getToolInstances();
+		if(instances!=null){
+			for(Iterator<ToolInstance> it = instances.iterator();it.hasNext();){
+				ToolInstance instance = it.next();
+				Resource res = deploy.getDesign().getResourceById(instance.getResourceId());
+				if(res.getToolKind().equals(Resource.TOOL_KIND_EXTERNAL) && instance.getLocation()!=null && !instance.isRedirection(deploy)){//We just delete the non-redirected external instances
+					try {
+						if (versionSession!=null){
+					   		ToolInstance oldToolInstance = versionSession.getToolInstanceById(instance.getId());//search for that tool instance in the last saved version
+					   		if (oldToolInstance == null || oldToolInstance.getLocation()==null || oldToolInstance.isRedirection(versionSession)){
+					   			//delete only if the tool instance didn't exist in that version or it wasn't configured or it was a redirection to another tool
+						   		logger.info("Trying to delete toolInstance "+instance.getId()+".");
+					   			deleteLocalToolInstance(trimId(instance.getId()));
+					   		}
+						}else{
+					   		logger.info("Trying to delete toolInstance "+instance.getId()+".");
+				   			deleteLocalToolInstance(trimId(instance.getId()));
+						}
+					} catch (Exception e) {
+				   		logger.info("Exception while trying to delete toolInstance "+instance.getId()+". We continue");
+					}					
+				}				
+			}
+		}
+		
+		String UPLOAD_DIRECTORY = app.getAppPath()+"/uploaded/";
+		//We delete the design uploaded files
+		File designDir = new File(UPLOAD_DIRECTORY + trimId(deploy.getDesign().getId()));
+		if(!designDir.exists() || !designDir.isDirectory()){
+	   		logger.info("The design directory does not exist! we do nothing...");			
+		}else{
+			try {
+				FileUtils.deleteDirectory(designDir);
+			} catch (IOException e) {
+		   		logger.info("Error while deleting the design directory. We continue...");			
+				e.printStackTrace();
+			}
+		}
+		
+		//We delete the deploy uploaded files
+		File deployDir = new File(UPLOAD_DIRECTORY + this.deployId);
+		if(!deployDir.exists() || !deployDir.isDirectory()){
+	   		logger.info("The deploy directory does not exist! we do nothing...");			
+		}else{
+			try {
+				FileUtils.deleteDirectory(deployDir);
+			} catch (IOException e) {
+		   		logger.info("Error while deleting the deploy directory. We continue...");			
+				e.printStackTrace();
+			}
+		}
+		
+		//delete the deploy from the database
+		dbmanager.deleteDeploy(deployId);
+		//delete all the versions of this deploy
+		dbmanager.deleteDeployVersions(deployId);		
+		//delete the design as well
+		dbmanager.deleteDesign(trimId(deploy.getDesign().getId()));
+		//delete the sectoken
+		dbmanager.deleteSectoken(deployId);
+		
+   		logger.info("** CANCEL DEPLOY completed");
+   		return null;
+	}		
 		
 		
     @Delete
@@ -808,7 +983,7 @@ public class DeployResource extends GLUEPSResource {
 			for(Iterator<ToolInstance> it = instances.iterator();it.hasNext();){
 				ToolInstance instance = it.next();
 				Resource res = deploy.getDesign().getResourceById(instance.getResourceId());
-				if(res.getToolKind().equals(Resource.TOOL_KIND_EXTERNAL) && instance.getLocation()!=null && !instance.isRedirection(deploy)){//We just delete the non-redirected external instances
+				if(res!=null && res.getToolKind().equals(Resource.TOOL_KIND_EXTERNAL) && instance.getLocation()!=null && !instance.isRedirection(deploy)){//We just delete the non-redirected external instances
 					try {
 				   		logger.info("Trying to delete toolInstance "+instance.getId()+".");
 				   		deleteLocalToolInstance(trimId(instance.getId()));
@@ -1288,6 +1463,15 @@ public class DeployResource extends GLUEPSResource {
        	    	else if (getReference().getIdentifier().contains("/redo")){
        	    		return redoJsonDeploy();
        	    	}
+       	    	else if (getReference().getIdentifier().contains("/saveAndExit")){
+       	    		return saveAndExitDeploy();
+       	    	}
+       	    	else if (getReference().getIdentifier().contains("/save")){
+       	    		return saveDeploy();
+       	    	}
+       	    	else if (getReference().getIdentifier().contains("/cancel")){
+       	    		return cancelDeploy();
+       	    	}
 
     			//WE check that the deploy is not in process, and that the request does not try to override the (faulty) in process mechanism
        	    	String override = this.getQuery()!=null ? this.getQuery().getValues("override") : null;
@@ -1533,7 +1717,7 @@ public class DeployResource extends GLUEPSResource {
 
 
 	private Representation buildRepresentation(String toolId, String[] teachersNames, String[] usersNames) {
-
+		String creduser = deploy.getLearningEnvironment().getCreduser();
 		FormattedEntry entry = new FormattedEntry();
 		entry.addExtendedTextChild("tool", toolId);
 
@@ -1541,35 +1725,47 @@ public class DeployResource extends GLUEPSResource {
 		entry.addExtendedTextChild("configuration", "");
 
 		String[] newUsers = null;
-		String teacher = null;
 		if(teachersNames!=null && teachersNames.length>0){
-			teacher = teachersNames[0];
 			//If there are teachers, we just add all of them to the users list
-			int numTeachers = teachersNames.length;
-			
-			if(usersNames!=null) newUsers = new String[usersNames.length+numTeachers];
-			else newUsers = new String[numTeachers];
-			
-			if(usersNames!=null){
-				for(int i = 0; i<usersNames.length; i++) newUsers[i] = usersNames[i];
-				for(int i = 0; i<numTeachers; i++) newUsers[i+usersNames.length]=teachersNames[i];
-			}else{
-				for(int i = 0; i<numTeachers; i++) newUsers[i]=teachersNames[i];
+			ArrayList<String> nu = new ArrayList<String>();
+			if (usersNames != null){
+				for (int i = 0; i < usersNames.length; i++){
+					nu.add(usersNames[i]);
+				}
 			}
+			for (int i = 0; i < teachersNames.length; i++){
+				if (!nu.contains(teachersNames[i])){
+					nu.add(teachersNames[i]);
+				}
+			}
+			if(!nu.contains(creduser)){
+				nu.add(creduser);
+			}
+			newUsers = new String[nu.size()];
+			nu.toArray(newUsers);
 			
 		}else{//No teachers, we just put the first user as callerUser - if there are no users, we put nothing (but it will probably fail!)
 			if(usersNames!=null){
-				teacher = usersNames[0];
-				newUsers = usersNames;
+				//No teachers, we just put the logged in user as callerUser
+				ArrayList<String> nu = new ArrayList<String>();
+				for(int i = 0; i<usersNames.length; i++){
+					nu.add(usersNames[i]);
+				}
+				if(!nu.contains(creduser)){
+					nu.add(creduser);
+				}
+				newUsers = new String[nu.size()];
+				nu.toArray(newUsers);
+				
 			}else{
-				teacher = null;
-				newUsers = null;
+				newUsers = new String[1];
+				newUsers[0] = creduser;
 			}
 			
 		}
 		
-		if(newUsers!=null) entry.addExtentedStructuredList("users", "user", newUsers);
-		if(teacher!=null) entry.addExtendedTextChild("callerUser", teacher);			
+		entry.addExtentedStructuredList("users", "user", newUsers);
+		entry.addExtendedTextChild("callerUser", creduser);			
 		
 		return entry.getRepresentation();
 	}
@@ -1620,9 +1816,15 @@ public class DeployResource extends GLUEPSResource {
    	    	
    	    	if (getReference().getIdentifier().contains("/undo")){
    	    		return undoDeploy();
-   	    	}
-   	    	else if (getReference().getIdentifier().contains("/redo")){
+   	    	}else if (getReference().getIdentifier().contains("/redo")){
    	    		return redoDeploy();
+	    	}else if (getReference().getIdentifier().contains("/saveAndExit")){
+   	    		return saveAndExitDeploy();
+   	    	}else if (getReference().getIdentifier().contains("/save")){
+   	    		return saveDeploy();
+   	    	}
+   	    	else if (getReference().getIdentifier().contains("/cancel")){
+   	    		return cancelDeploy();
    	    	}
 			
 			logger.info("** PUT DEPLOY received");

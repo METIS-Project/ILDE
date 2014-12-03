@@ -30,7 +30,9 @@ var Deploy = {
     			OauthManager.startOauth("callerMethod=" + callerMethod + "&leId=" + leValue);
     	    }else{
     	    	Deploy.resetSelectClassLms();
-    	    	Deploy.checkGetClassesLms();
+    	    	if (leValue!="0"){
+    	    		LE.getLearningEnvironmentGetCourses(leValue);
+    	    	}
     	    }
         });
     },
@@ -41,14 +43,30 @@ var Deploy = {
 	 * Funcionalidad asociada al botón de nuevo despliegue de un diseño
 	 * @param idDesign Identificador numérico del diseñó
 	 * @param titleDesign Nombre del diseño
+	 * @param designType El tipo de diseño
 	 */
-	anadirTitle : function(idDesign, titleDesign) {
+	anadirTitle : function(idDesign, titleDesign, designType) {
 		Deploy.resetFormDeploy();
 		
 		var nodoP = dojo.byId("newDeployDesignTitle");
 		var nodoText = dojo.byId("NewDeployTitleName");
 		nodoP.innerHTML = titleDesign;
 		nodoText.value = titleDesign;
+		switch(designType){
+			case "IMSLD": {
+							dijit.byId("imsldTypeValueInst").attr("checked",true);
+							break;
+						  }
+			case "T2": {
+							dijit.byId("T2TypeValueInst").attr("checked",true);
+							break;
+						}
+			case "PP": {
+							dijit.byId("PPTypeValueInst").attr("checked",true);
+							break;
+						}
+			default: dijit.byId("imsldTypeValueInst").attr("checked",true);
+		}
 		var baseUrl = window.location.href.split("/GLUEPSManager")[0];
 		// Anado el action del form del Panel Deploy
 		dojo.byId("deployForm").action = baseUrl + "/GLUEPSManager/designs/" + idDesign + "/deploys";
@@ -240,7 +258,14 @@ var Deploy = {
                 timeout: 0, //wait until the process finishes
                 load : function(data) {
 					var deployUrl = Deploy.getDeployId(data);
-					Deploy.deployPostDeployInprocess(deployUrl);
+					if (deployUrl == false){
+						var asynOperNode = data.getElementsByTagName("asynchronousOperation")[0];
+						var operation = asynOperNode.getElementsByTagName("operation")[0].childNodes[0].nodeValue;
+						var status = asynOperNode.getElementsByTagName("status")[0].childNodes[0].nodeValue;
+						Deploy.checkOperationCreateStatus(operation);
+					}else{
+						window.location="deploy.html?deployId=" + deployUrl.split("/deploys/")[1];
+					}
                 },
                 error : function(error, ioargs) {
                     // Oculto gif animado puesto en marcha en putDeploys
@@ -256,41 +281,50 @@ var Deploy = {
         	Glueps.showAlertDialog(i18n.get("warning"),i18n.get("ErrorRellenarCampos"));
         }
     },
-    
-    /**
-     * Ask for the deploy until the creation of the deploy ends
-     * @parameter deployUrl the url of the deploy resource
-     */
-	deployPostDeployInprocess: function(deployUrl){
-		var url = deployUrl;
-        var xhrArgs = {
-            url : url,
-            handleAs : "xml",// Tipo de dato de la respuesta del Get,
-            sync: true,
-            load : function(data) {	
-            	window.location="deploy.html?deployId=" + data.getElementsByTagName('deploy')[0].getAttribute('id').split("/deploys/")[1];
-            },
-
-            error : function(error, ioargs) { 
-            	if (ioargs.xhr.status == 503 || error.dojoType=='cancel')
-            	{
-            		//Está en proceso
-            		//Esperar un tiempo en milisegundos y volver a realizar el GET
-            		window.setTimeout(function(){Deploy.deployPostDeployInprocess(deployUrl);}, 5000);
-            	}
-            	else
-            	{
-                    // Oculto gif animado puesto en marcha en putDeploys
+	
+	/**
+	 * Check the current status of an asynchronous operation
+	 * @param operation URL of the resource with the information about the status of the operation
+	 */
+	checkOperationCreateStatus: function(operation){
+		var url = operation;
+		var xhrArgs = {
+			url: url,
+			handleAs: "json",
+			headers : {
+				"Content-Type": "application/json",
+			    "Accept" : "application/json"		
+			},
+			load: function(data) {
+				var status = data.status;
+				if (status == "in progress"){
+					//The operation is still in process
+					//Wait for a while an try it again
+					window.setTimeout(function(){
+						Deploy.checkOperationCreateStatus(data.operation);}, 5000);					
+				}
+				else if (status == "ok"){
+					var resource = data.resource;
+					window.location="deploy.html?deployId=" + resource.split("/deploys/")[1];					
+				}
+				else if (status == "error"){
+                    // There was an error while deploying
                     dijit.byId("loading").hide();
-                    var message = "";
-                    var codigo = 2;
-                    message = ErrorCodes.errores(codigo);
-                    Glueps.showAlertDialog(i18n.get("info"),message);
-            	}
+					var message = data.description;
+					Glueps.showAlertDialog(i18n.get("info"), message);
+				}
+			},
+            error : function(error, ioargs) { 
+                // Oculto gif animado puesto en marcha en putDeploys
+                dijit.byId("loading").hide();
+                var message = "";
+                var codigo = 2;
+                message = ErrorCodes.errores(codigo);
+                Glueps.showAlertDialog(i18n.get("info"),message);
             }
-        }
+		}
         // Call the asynchronous xhrGet
-        var deferred = dojo.xhrGet(xhrArgs);			
+        var deferred = dojo.xhrGet(xhrArgs);
 	},
     
     /**
@@ -337,11 +371,14 @@ var Deploy = {
      * @returns id del despliegue o false si no se ha encontrado
      */
     getDeployId: function(jsdom){
-		var designNode = jsdom.getElementsByTagName("deploy")[0];
-		var atrib = designNode.attributes;
-		for ( var k = 0; k < atrib.length; k++) {
-			if (atrib[k].nodeName == "id") {
-				return(atrib[k].nodeValue);
+		var designNode = jsdom.getElementsByTagName("deploy");
+		if (designNode.length > 0){
+			designNode = designNode[0];
+			var atrib = designNode.attributes;
+			for ( var k = 0; k < atrib.length; k++) {
+				if (atrib[k].nodeName == "id") {
+					return(atrib[k].value);
+				}
 			}
 		}
 		return false;
@@ -479,7 +516,8 @@ var Deploy = {
                 },
                 data: {
 					id: id,
-					design: name
+					design: name,
+					designtype: designType
                 },
                 menuStyle: "default"
             });

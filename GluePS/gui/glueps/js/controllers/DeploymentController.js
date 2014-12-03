@@ -115,9 +115,19 @@ var DeploymentController = {
 				}                
 							                
 				//We generate both static and dynamic courses, if possible
-				//We try the PUT with both static and dynamic deploys (sets the deploy URL and stores updated fileDeploy if correct)				
-				DeploymentController.putStaticDeploy();
-				DeploymentController.putLiveDeploy();
+				//We try the PUT with both static and dynamic deploys (sets the deploy URL and stores updated fileDeploy if correct)	
+				if (LearningEnvironmentType.isStaticDeploy()==true){				
+					DeploymentController.putStaticDeploy();
+				}else{
+					DeploymentController.finishedStatic = true;
+					DeploymentController.checkFinished();
+				}
+				if (LearningEnvironmentType.isDynamicDeploy()==true){
+					DeploymentController.putLiveDeploy();
+				}else{
+					DeploymentController.finishedLive = true;
+					DeploymentController.checkFinished();
+				}
 			}
 	    },
 	    
@@ -227,8 +237,18 @@ var DeploymentController = {
 						JsonDB.setDeployURL(url);                 
 	            	   	//We generate both static and dynamic courses, if possible
 	            	   	//We try the PUT with both static and dynamic deploys (sets the deploy URL and stores updated fileDeploy if correct)
-						DeploymentController.putStaticDeploy();
-						DeploymentController.putLiveDeploy();      	   	
+						if (LearningEnvironmentType.isStaticDeploy()==true){				
+							DeploymentController.putStaticDeploy();
+						}else{
+							DeploymentController.finishedStatic = true;
+							DeploymentController.checkFinished();
+						}
+						if (LearningEnvironmentType.isDynamicDeploy()==true){
+							DeploymentController.putLiveDeploy();
+						}else{
+							DeploymentController.finishedLive = true;
+							DeploymentController.checkFinished();
+						}      	   	
 	                }
 	                else{
 	                	if (DeploymentController.toolInstancesCreateOk + DeploymentController.toolInstancesCreateError == DeploymentController.toolInstancesCreate){
@@ -422,7 +442,8 @@ var DeploymentController = {
 					}else{
 						InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("deploymentErrorProcess"));		
 					}
-					UndoManager.newEditionAction();
+					//UndoManager.newEditionAction();
+					UndoManager.newPostDeployAction();
 					StateManager.reset();
 					
 					DeploymentPainter.paint();
