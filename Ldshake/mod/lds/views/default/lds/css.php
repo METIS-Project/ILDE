@@ -2586,6 +2586,11 @@ form[name="myldSform"] {
 .implementation-list > ul > li:nth-child(even) {
     margin-bottom: 30px!important;
     margin-left: 20px;
+    background-color: #EDF9EC!important;
+}
+
+.implementation-list > ul > li:nth-child(odd) {
+    background-color: #E2F1FD!important;
 }
 
 .implementation-list > ul > li:nth-child(even) .lds_info {

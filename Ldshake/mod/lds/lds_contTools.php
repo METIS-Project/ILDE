@@ -42,6 +42,33 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_query_design_implementated_list($userid, $params) {
+    $lds_id_id = get_metastring_id("lds_id");
+    $lds_implementation_id = get_subtype_id("object", "LdS_implementation");
+
+    if(!$lds_id_id or !$lds_implementation_id) {
+        return null;
+    }
+
+    $query['join'] = <<<SQL
+JOIN (
+ SELECT DISTINCT CAST(msf.string AS INTEGER) AS ms_guid FROM entities ef
+ JOIN metadata mf ON ef.guid = mf.entity_guid
+ JOIN metastrings msf ON msf.id = mf.value_id
+ WHERE ef.subtype = {$lds_implementation_id}
+ AND mf.name_id = {$lds_id_id}
+ AND ef.enabled = 'yes'
+) AS imp on imp.ms_guid = e.guid
+SQL;
+
+    /*
+    $query['where'] = <<<SQL
+imp.guid IS NOT NULL
+SQL;
+*/
+    return $query;
+}
+
 function ldshake_get_document_formats($doc) {
     global $CONFIG;
     if(!empty($doc->editorType)) {
@@ -1217,6 +1244,9 @@ function ldshake_richlds($row) {
 
     $obj->starter = new stdClass();
     $obj->starter->name = $row->creator_name;
+    if(empty($obj->starter->name))
+        $obj->starter->name = T('Untitled LdS');
+    
     $obj->starter->username = $row->creator_username;
 
     $obj->last_contributor = new stdClass();
@@ -1642,6 +1672,8 @@ SQL;
                 $obj->new = $isnew;
 
                 $richList[] = $obj;
+            } else {
+                $richList[] = null;
             }
 		}
 		
@@ -2806,29 +2838,10 @@ SQL;
         global $CONFIG;
 
         if(isadminloggedin()) {
-            /*
-            $query_limit = ($limit == 0) ? '' : "9999";
             if($count)
-                return get_entities('object', 'LdS', 0, '', $query_limit, $offset, true);
-
-            return get_entities('object', 'LdS', 0, '', $query_limit, $offset);
-            */
-            $container_guid_query = "";
-            if($container_guid)
-                $container_guid_query = "AND e.container_guid = {$container_guid}";
-
-            $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
-            $subtype = get_subtype_id('object', 'LdS_implementation');
-
-            $query = <<<SQL
-SELECT * from {$CONFIG->dbprefix}entities e JOIN objects_entity oe ON e.guid = oe.guid WHERE e.type = 'object' AND e.subtype = $subtype $container_guid_query AND e.enabled = 'yes' order by time_updated desc {$query_limit}
-SQL;
-            $entities = get_data($query, "entity_row_to_elggstar");
-
-            if($count)
-                return count($entities);
-
-            return $entities;
+                return get_entities_from_metadata($m_key, $m_value, 'object', 'LdS_implementation', 0, 9999, 0, "time", 0, true);
+            else
+                return get_entities_from_metadata($m_key, $m_value, 'object', 'LdS_implementation', 0, $limit, $offset, "time_updated desc");
         }
 
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
@@ -2887,7 +2900,7 @@ SQL;
         $query = <<<SQL
 SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtype = $subtype AND e.owner_guid <> {$user_id} AND e.enabled = 'yes' AND (
 	(
-		e.container_guid IN (
+		e.guid IN (
 			SELECT DISTINCT rg.guid_two FROM {$CONFIG->dbprefix}entity_relationships rg WHERE rg.relationship = 'lds_editor_group' AND rg.guid_one IN (
 				SELECT rug.guid_two FROM {$CONFIG->dbprefix}entity_relationships rug WHERE rug.relationship = 'member' AND rug.guid_one = {$user_id}
 			)
@@ -2895,11 +2908,11 @@ SELECT * from {$CONFIG->dbprefix}entities e WHERE e.type = 'object' AND e.subtyp
 	)
 	OR
 	(
-		e.container_guid IN (
+		e.guid IN (
 			SELECT ru.guid_two FROM {$CONFIG->dbprefix}entity_relationships ru WHERE ru.relationship = 'lds_editor' AND ru.guid_one = {$user_id}
 		)
 	)
-) order by time_updated asc {$query_limit}
+) order by time_updated desc {$query_limit}
 SQL;
 
         $entities = get_data($query, "entity_row_to_elggstar");
@@ -3019,6 +3032,16 @@ SQL;
 
     public static function getUserViewableLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $context = null) {
         return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom = null, false, false, 0, $context);
+    }
+
+    public static function getUserViewableImplementedLdSs($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $context = null) {
+
+        $custom = array(
+            'build_callback' => 'ldshake_query_design_implementated_list',
+            'params' => array()
+        );
+
+        return self::getUserEntities('object', 'LdS', $user_id, $count, $limit, $offset, $mk, $mv, $order, false, null, $enrich, $custom, false, false, 0, $context);
     }
 
     public static function getUserEditableLdS($user_id, $count = false, $limit = 9999, $offset = 0, $mk = null, $mv = null, $order = "time", $enrich = false, $custom = null, $guid_only = false) {

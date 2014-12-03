@@ -42,7 +42,11 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
     <?php
         if(empty($item))
             continue;
-        $can_edit = $item->lds->can_edit;
+
+        $can_edit = !empty($item->lds->can_edit);
+        if(!$can_edit)
+            $can_edit = !empty($item->can_edit);
+
         ?>
 	<li class="lds_list_element">
 		<div class="lds_icon">
@@ -66,8 +70,8 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
                 <?php else: ?>
                     <?php if ($can_edit and !isset($comments)): ?>
                         <div>
-                            <?php if ($can_edit): ?><a href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>"><?php echo T("Edit") ?></a><?php endif; ?>
-                            <?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid ?>"><?php echo T("Delete") ?></a><?php endif; ?>
+                            <?php if ($can_edit): ?><a class="<?php if(empty($item->glueps)) echo 'lds_select_implement_action'; ?>" href="<?php echo lds_viewTools::url_for($item->lds, 'edit') ?>" lds="<?php echo $item->lds->guid; ?>"><?php echo T("Edit") ?></a><?php endif; ?>
+                            <?php if ($item->lds->owner_guid == get_loggedin_userid()): ?> | <a href="#" class="lds_action_delete" data-title="<?php echo htmlspecialchars($item->lds->title) ?>" data-id="<?php echo $item->lds->guid; ?>"><?php echo T("Delete") ?></a><?php endif; ?>
                             <div class="lds_loading"></div>
                         </div>
                     <?php endif; ?>

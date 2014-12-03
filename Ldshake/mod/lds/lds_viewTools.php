@@ -161,6 +161,12 @@ class lds_viewTools
             }
         }
 
+        if($subtype == 'LdS_implementation') {
+            if($type == 'edit') {
+                $folder = 'editglueps';
+            }
+        }
+
         //Google Docs history
         if($type == 'history' && ($lds->editor_type == 'google_docs' || $lds->editor_type == 'exelearningrest'))
             $folder = 'history';

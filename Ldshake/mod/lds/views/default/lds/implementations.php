@@ -89,13 +89,12 @@
     </div>
 
     <?php if (is_array($list) && sizeof($list) > 0): ?>
-        <?php if ($section != 'trashed'): ?>
+        <?php if ($section != 'imp-trashed'): ?>
             <div class="implementation-list">
             <?php echo elgg_view('lds/browselist', $vars) ?>
             </div>
+
         <?php else: ?>
-
-
             <form method="post" action="#">
                 <div id="my_lds_list_header">
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
@@ -126,7 +125,8 @@
                 </ul>
             </form>
         <?php endif; ?>
-            <p class="noresults"><?php echo T("Oops, no implementations here!") ?></p>
+    <?php else: ?>
+        <p class="noresults"><?php echo T("Oops, no implementations here!") ?></p>
     <?php endif; ?>
 
 

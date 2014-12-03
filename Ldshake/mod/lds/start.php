@@ -448,8 +448,6 @@ function lds_exec_implementations ($params)
     {
         $design_guid = $params[2];
         $lds = get_entity($design_guid);
-        //$vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, null, null, $design_guid);
-        //$entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, null, null, $design_guid);
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, 'lds_id', $design_guid);
         $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, 'lds_id', $design_guid);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
@@ -479,8 +477,14 @@ function lds_exec_implementations ($params)
         $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
 
+        $vars['title'] = T("All my LdS > Implementations");
+    }
+
+    if($vars['section'] != 'imp-trashed') {
+        $i=0;
         foreach($vars['list'] as $imp) {
-            $lds_list[] = get_entity($imp->implementation->lds_id);
+            $lds_list[$i] = get_entity($imp->implementation->lds_id);
+            $i++;
         }
 
         $lds_list_rich = lds_contTools::enrichLdS($lds_list);
@@ -488,14 +492,16 @@ function lds_exec_implementations ($params)
         for($i=0 ; $i<count($vars['list']); $i++) {
             $dual[$i*2] = $vars['list'][$i];
             $dual[$i*2]->lds = $vars['list'][$i]->implementation;
+            $dual[$i*2]->can_edit = $dual[$i*2]->lds->canEdit();
             $dual[$i*2+1] = $lds_list_rich[$i];
-            $dual[$i*2+1]->implementation = $dual[$i*2+1]->lds;
+            if(!empty($dual[$i*2+1])) {
+                $dual[$i*2+1]->can_edit = $dual[$i*2+1]->lds->canEdit();
+            }
         }
         $vars['list'] = $dual;
-        $vars['title'] = T("All my LdS > Implementations");
     }
 
-    $vars['designfilter'] = lds_contTools::getUserViewableLdSs(get_loggedin_userid(), false, 9999, 0, 'implementable', '1');
+    $vars['designfilter'] = lds_contTools::getUserViewableImplementedLdSs(get_loggedin_userid(), false, 9999, 0, 'implementable', '1');
     $vars['section'] = 'imp-'.$params[1];
     //$vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
