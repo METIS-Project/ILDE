@@ -72,7 +72,6 @@
         <?php endif; ?>
     </div>
 
-
     <?php echo T("Filter by design") ?>
     <select id="filter_by_design">
         <option value="0"><?php echo T("Select a design") ?></option>
@@ -90,71 +89,44 @@
     </div>
 
     <?php if (is_array($list) && sizeof($list) > 0): ?>
-        <form method="post" action="#">
-            <div id="my_lds_list_header">
-                <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
-                <?php if ($section != 'imp-trashed'): ?>
-                    <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected implementations") ?>" />
-                <?php else: ?>
-                    <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
-                <?php endif; ?>
-                <!--<input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_implementation" value="<?php echo T("Duplicate implementation") ?>" disabled="disabled" />-->
-                <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
+        <?php if ($section != 'trashed'): ?>
+            <div class="implementation-list">
+            <?php echo elgg_view('lds/browselist', $vars) ?>
             </div>
-            <ul id="my_lds_list">
-                <?php foreach($list as $item):
-                    $lds=get_entity($item->lds_id);
-                    ?>
-                    <?php if ($section != 'trashed'): ?>
-                        <li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
-                            <?php if ($item->starter->guid == get_loggedin_userid()): ?>
-                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
-                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
-                            <?php else: ?>
-                                <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
-                                <input id="imp_design_<?php echo $item->implementation->guid ?>" type="hidden" value="<?php echo $item->lds_id ?>" />
-                                <!--<div class="lds_select_spacer"></div>-->
-                            <?php endif; ?>
-                            <!--<a href="<?php /*echo lds_viewTools::url_for($item->lds, 'view')*/ ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" /></a>-->
-                            <img class="lds_icon" src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->implementation->editor_type; ?>-icon-20.png" alt="Imp" />
-                            <div class="lds_info">
-                                <span class="lds_title_tags">
-                                    <?php if (!$item->locked): ?>
-                                        <a class="lds_edit_action <?php echo (($lds->editor_type == 'webcollagerest' && !$item->glueps) ? ' lds_select_implement_action': '') ?>" lds="<?php echo "{$item->implementation->guid}" ?>" href="<?php echo $url."pg/lds/editglueps/{$item->implementation->guid}" ?>"><?php echo T("Edit") ?></a>
-                                        <!--<a class="lds_edit_action" href="<?php echo lds_viewTools::url_for($item->implementation, 'deploy') ?>"><?php echo T("Deploy") ?></a>-->
-                                    <?php endif; ?>
-						            <a class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->implementation, 'view') ?>"><?php echo $item->implementation->title ?></a>
-                                    <!--<span class="lds_title<?php if ($item->locked): ?> lds_padded<?php endif; ?>"><?php echo $item->implementation->title ?></span>-->
-                                    <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
-					            </span>
-                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-                                <?php if ($item->locked): ?>
-                                    <span class="lds_editing_by"><?php echo $item->locked_by->name ?> is editing now</span>
-                                <?php endif; ?>
-                                <span class="lds_date"><?php echo friendly_time($item->implementation->time_updated, false, true) ?></span>
-                            </div>
-                            <div class="clearfloat"></div>
-                        </li>
+        <?php else: ?>
+
+
+            <form method="post" action="#">
+                <div id="my_lds_list_header">
+                    <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
+                    <?php if ($section != 'imp-trashed'): ?>
+                        <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected implementations") ?>" />
                     <?php else: ?>
+                        <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected LdS") ?>" />
+                    <?php endif; ?>
+                    <!--<input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_implementation" value="<?php echo T("Duplicate implementation") ?>" disabled="disabled" />-->
+                    <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
+                </div>
+                <ul id="my_lds_list">
+
                         <li class="lds_list_element">
                             <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
                             <a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
                             <div class="lds_info">
-					<span class="lds_title_tags">
-						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
-                        <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
-					</span>
-                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-                                <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+                            <span class="lds_title_tags">
+                                <a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
+                                <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
+                            </span>
+                            <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+                            <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
                             </div>
                             <div class="clearfloat"></div>
                         </li>
-                    <?php endif; ?>
-                <?php endforeach; ?>
-            </ul>
-        </form>
-    <?php else: ?>
-        <p class="noresults"><?php echo T("Oops, no implementations here!") ?></p>
+
+                </ul>
+            </form>
+        <?php endif; ?>
+            <p class="noresults"><?php echo T("Oops, no implementations here!") ?></p>
     <?php endif; ?>
 
 

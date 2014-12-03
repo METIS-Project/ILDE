@@ -478,6 +478,20 @@ function lds_exec_implementations ($params)
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
         $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
+
+        foreach($vars['list'] as $imp) {
+            $lds_list[] = get_entity($imp->implementation->lds_id);
+        }
+
+        $lds_list_rich = lds_contTools::enrichLdS($lds_list);
+
+        for($i=0 ; $i<count($vars['list']); $i++) {
+            $dual[$i*2] = $vars['list'][$i];
+            $dual[$i*2]->lds = $vars['list'][$i]->implementation;
+            $dual[$i*2+1] = $lds_list_rich[$i];
+            $dual[$i*2+1]->implementation = $dual[$i*2+1]->lds;
+        }
+        $vars['list'] = $dual;
         $vars['title'] = T("All my LdS > Implementations");
     }
 

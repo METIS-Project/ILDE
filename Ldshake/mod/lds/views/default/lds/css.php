@@ -2582,3 +2582,12 @@ form[name="myldSform"] {
     display: block;
     padding: 5px;
 }
+
+.implementation-list > ul > li:nth-child(even) {
+    margin-bottom: 30px!important;
+    margin-left: 20px;
+}
+
+.implementation-list > ul > li:nth-child(even) .lds_info {
+    width: 630px!important;
+}
