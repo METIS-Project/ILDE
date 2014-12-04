@@ -84,7 +84,7 @@
 
     <div class="filters">
         <div class="paging">
-            <?php echo lds_viewTools::pagination($count, 50) ?>
+            <?php echo lds_viewTools::pagination($count, $limit) ?>
         </div>
     </div>
 
@@ -107,21 +107,21 @@
                     <input type="button" style="border-color:#999; margin:5px 0;" id="view_design" value="<?php echo T("View original design") ?>" disabled="disabled" />
                 </div>
                 <ul id="my_lds_list">
-
+                        <?php foreach($list as $item): ?>
                         <li class="lds_list_element">
-                            <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
+                            <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->implementation->guid ?>" />
+                            <a href="#" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-doc-icon-20.png" /></a>
                             <div class="lds_info">
                             <span class="lds_title_tags">
-                                <a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
-                                <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
+                                <a class="lds_title lds_padded" href="#"><?php echo $item->implementation->title ?></a>
+                                <?php echo lds_viewTools::all_tag_display ($item->implementation) ?>
                             </span>
                             <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
                             <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
                             </div>
                             <div class="clearfloat"></div>
                         </li>
-
+                        <?php endforeach; ?>
                 </ul>
             </form>
         <?php endif; ?>
@@ -132,7 +132,7 @@
 
     <div class="filters">
         <div class="paging">
-            <?php echo lds_viewTools::pagination($count, 50) ?>
+            <?php echo lds_viewTools::pagination($count, $limit) ?>
         </div>
     </div>
 </div>

@@ -1246,7 +1246,7 @@ function ldshake_richlds($row) {
     $obj->starter->name = $row->creator_name;
     if(empty($obj->starter->name))
         $obj->starter->name = T('Untitled LdS');
-    
+
     $obj->starter->username = $row->creator_username;
 
     $obj->last_contributor = new stdClass();

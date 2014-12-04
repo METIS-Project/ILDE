@@ -428,18 +428,19 @@ function lds_exec_implementable ($params)
 function lds_exec_implementations ($params)
 {
     $offset = get_input('offset') ?: '0';
+    $limit = 10;
 
     if ($params[1] == 'created-by-me')
     {
         $vars['count'] = get_entities('object', 'LdS_implementation', get_loggedin_userid(), '', 50, $offset, true);
-        $entities = get_entities('object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $entities = get_entities('object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', $limit, $offset);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("Created by me > Implementations");
     }
     elseif ($params[1] == 'shared-with-me')
     {
         $vars['count'] = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), true, 0 , 0);
-        $entities = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), false, 50, $offset);
+        $entities = lds_contTools::getUserSharedImplementationWithMe(get_loggedin_userid(), false, $limit, $offset);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("Shared with me > Implementations");
         $vars['editor_filter'] = $params[1];
@@ -449,7 +450,7 @@ function lds_exec_implementations ($params)
         $design_guid = $params[2];
         $lds = get_entity($design_guid);
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true, null, null, 'lds_id', $design_guid);
-        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset, 'lds_id', $design_guid);
+        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, $limit, $offset, 'lds_id', $design_guid);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
         $vars['editor_filter'] = $params[1];
@@ -463,7 +464,7 @@ function lds_exec_implementations ($params)
         $offset = get_input('offset') ?: '0';
 
         //TODO take the owner into account
-        $vars['list'] = get_entities_where('enabled = "no"', 'object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', 50, $offset);
+        $vars['list'] = get_entities_where('enabled = "no"', 'object', 'LdS_implementation', get_loggedin_userid(), 'time_updated DESC', $limit, $offset);
         $vars['count'] = get_entities_where('enabled = "no"', 'object', 'LdS_implementation', get_loggedin_userid(), '', 0, $offset, true);
         $vars['list'] = lds_contTools::enrichImplementation($vars['list']);
         $vars['title'] = T("My trashed LdS");
@@ -474,7 +475,7 @@ function lds_exec_implementations ($params)
     else
     {
         $vars['count'] = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), true);
-        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, 50, $offset);
+        $entities = lds_contTools::getUserEditableImplementations(get_loggedin_userid(), false, $limit, $offset);
         $vars['list'] = lds_contTools::enrichImplementation($entities);
 
         $vars['title'] = T("All my LdS > Implementations");
@@ -503,6 +504,7 @@ function lds_exec_implementations ($params)
 
     $vars['designfilter'] = lds_contTools::getUserViewableImplementedLdSs(get_loggedin_userid(), false, 9999, 0, 'implementable', '1');
     $vars['section'] = 'imp-'.$params[1];
+    $vars['limit'] = $limit;
     //$vars['courses'] = lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementations',$vars);
 

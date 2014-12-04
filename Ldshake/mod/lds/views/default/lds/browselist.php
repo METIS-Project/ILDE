@@ -39,10 +39,13 @@ $i = 0;
 if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
 <ul id="lds_list">
 	<?php foreach($vars['list'] as $item): ?>
-    <?php
-        if(empty($item))
-            continue;
+    <?php if(empty($item)): ?>
+            <li  class="lds_list_element" style="height=0px;padding:0px;"></li>
 
+    <?php
+        continue;
+        endif; ?>
+        <?php
         $can_edit = !empty($item->lds->can_edit);
         if(!$can_edit)
             $can_edit = !empty($item->can_edit);
