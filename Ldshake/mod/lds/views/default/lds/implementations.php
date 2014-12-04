@@ -90,7 +90,7 @@
 
     <?php if (is_array($list) && sizeof($list) > 0): ?>
         <?php if ($section != 'imp-trashed'): ?>
-            <div class="implementation-list">
+            <div class="<?php if(isset($design_filter)) echo "implementation-list-by-design"; else echo "implementation-list"; ?>">
             <?php echo elgg_view('lds/browselist', $vars) ?>
             </div>
 

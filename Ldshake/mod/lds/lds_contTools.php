@@ -50,12 +50,18 @@ function ldshake_query_design_implementated_list($userid, $params) {
         return null;
     }
 
+    $editable_implementations = lds_contTools::getUserEntities('object', 'LdS_implementation', 0, 0, 9999, 0, null, null, "time", true, null, null, null, true);
+    if(empty($editable_implementations))
+        return null;
+
+    $editable_implementations_string = implode(',', $editable_implementations);
     $query['join'] = <<<SQL
 JOIN (
  SELECT DISTINCT CAST(msf.string AS INTEGER) AS ms_guid FROM entities ef
  JOIN metadata mf ON ef.guid = mf.entity_guid
  JOIN metastrings msf ON msf.id = mf.value_id
- WHERE ef.subtype = {$lds_implementation_id}
+ WHERE /*ef.subtype = {$lds_implementation_id}*/
+ ef.guid IN ({$editable_implementations_string})
  AND mf.name_id = {$lds_id_id}
  AND ef.enabled = 'yes'
 ) AS imp on imp.ms_guid = e.guid
@@ -1238,14 +1244,14 @@ function ldshake_richlds($row) {
     $obj->lds->time_created = (int)$row->time_created;
     $obj->lds->time_updated = (int)$row->time_updated;
     $obj->lds->external_editor = $row->external_editor;
+    if(empty($obj->lds->title))
+        $obj->lds->title = T('Untitled LdS');
 
     if(isset($row->can_edit))
         $obj->lds->can_edit = $row->can_edit;
 
     $obj->starter = new stdClass();
     $obj->starter->name = $row->creator_name;
-    if(empty($obj->starter->name))
-        $obj->starter->name = T('Untitled LdS');
 
     $obj->starter->username = $row->creator_username;
 

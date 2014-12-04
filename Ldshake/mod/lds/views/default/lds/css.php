@@ -2596,3 +2596,18 @@ form[name="myldSform"] {
 .implementation-list > ul > li:nth-child(even) .lds_info {
     width: 630px!important;
 }
+
+.implementation-list-by-design > ul > li {
+    margin-left: 20px;
+    margin-bottom: 30px!important;
+    background-color: #E2F1FD!important;
+}
+
+.implementation-list-by-design > ul > li:first-child {
+    margin-left: 0px!important;
+    background-color: #EDF9EC!important;
+}
+
+.implementation-list-by-design > ul > li .lds_info {
+    width: 630px!important;
+}

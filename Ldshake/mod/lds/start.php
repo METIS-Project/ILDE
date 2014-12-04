@@ -454,6 +454,8 @@ function lds_exec_implementations ($params)
         $vars['list'] = lds_contTools::enrichImplementation($entities);
         $vars['title'] = T("All my LdS > Implementations > ") . $lds->title;
         $vars['editor_filter'] = $params[1];
+        $vars['design_filter'] = true;
+
     }
     elseif ($params[1] == 'trashed')
     {
@@ -482,24 +484,37 @@ function lds_exec_implementations ($params)
     }
 
     if($vars['section'] != 'imp-trashed') {
-        $i=0;
-        foreach($vars['list'] as $imp) {
-            $lds_list[$i] = get_entity($imp->implementation->lds_id);
-            $i++;
-        }
-
-        $lds_list_rich = lds_contTools::enrichLdS($lds_list);
-
-        for($i=0 ; $i<count($vars['list']); $i++) {
-            $dual[$i*2] = $vars['list'][$i];
-            $dual[$i*2]->lds = $vars['list'][$i]->implementation;
-            $dual[$i*2]->can_edit = $dual[$i*2]->lds->canEdit();
-            $dual[$i*2+1] = $lds_list_rich[$i];
-            if(!empty($dual[$i*2+1])) {
-                $dual[$i*2+1]->can_edit = $dual[$i*2+1]->lds->canEdit();
+        if($params[1] != "design") {
+            $i=0;
+            foreach($vars['list'] as $imp) {
+                $lds_list[$i] = get_entity($imp->implementation->lds_id);
+                $i++;
             }
+
+            $lds_list_rich = lds_contTools::enrichLdS($lds_list);
+
+            for($i=0 ; $i<count($vars['list']); $i++) {
+                $dual[$i*2] = $vars['list'][$i];
+                $dual[$i*2]->lds = $vars['list'][$i]->implementation;
+                $dual[$i*2]->can_edit = $dual[$i*2]->lds->canEdit();
+                $dual[$i*2+1] = $lds_list_rich[$i];
+                if(!empty($dual[$i*2+1])) {
+                    $dual[$i*2+1]->can_edit = $dual[$i*2+1]->lds->canEdit();
+                }
+            }
+            $vars['list'] = $dual;
+        } else {
+            $lds_list_rich = lds_contTools::enrichLdS(array($lds));
+
+            $dual = array();
+            for($i=0 ; $i<count($vars['list']); $i++) {
+                $dual[$i] = $vars['list'][$i];
+                $dual[$i]->lds = $vars['list'][$i]->implementation;
+                $dual[$i]->can_edit = $dual[$i]->lds->canEdit();
+            }
+            $vars['list'] = array_merge($lds_list_rich, $dual);
         }
-        $vars['list'] = $dual;
+
     }
 
     $vars['designfilter'] = lds_contTools::getUserViewableImplementedLdSs(get_loggedin_userid(), false, 9999, 0, 'implementable', '1');
