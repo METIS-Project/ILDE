@@ -899,9 +899,23 @@ $translations = array (
 "Clear all filters"
 => "Descarta tots els filtres",
 
+"Edit this %1"
+=> "Edita aquest %1",
+
+"Download IMS-LD file"
+=> "Baixa el fitxer IMS-LD",
+
 //"workflows"
 //=> "",
 
+    "OpenGLM is a desktop tool, you need to <a href=\"http://sourceforge.net/projects/openglm/files/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc."
+    => "OpenGLM es una eina d'escriptori, has d'anar a <a href=\"http://sourceforge.net/projects/openglm/files/\" target=\"_blank\">la seva web</a> i instalar el programari en el teu ordinador.",
+
+    "CADMOS is a desktop tool, you need to <a href=\"http://cosy.ds.unipi.gr/cadmos/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc."
+    => "CADMOS es una eina d'escriptori, has d'anar a <a href=\"http://cosy.ds.unipi.gr/cadmos/\" target=\"_blank\">la seva web</a> i instalar el programari en el teu ordinador.",
+
+    "CompendiumLD is a desktop tool, you need to <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">download</a> it and install it in your computer. After creating the learning design you can upload it to the system, tag it, share it with other LdShakers, comment it, etc."
+    => "CompendiumLD es una eina d'escriptori, has d'anar a <a href=\"http://compendiumld.open.ac.uk/\" target=\"_blank\">la seva web</a> i instalar el programari en el teu ordinador.",
 
     '%1 comments' => '%1 comentaris',
     '%1 documents' => '%1 documents',
@@ -1183,7 +1197,7 @@ $translations = array (
     'Your VLEs' => 'Els teus VLEs',
 
     'Are you sure you want to unpublish this document?' => 'Estás segur que vols despublicar aquest document?',
-    'All the external links to the document will be broken!' => 'Tot els ellaços externs al document no funcionarán!',
+    'All the external links to the document will be broken!' => 'Tot els enllaços externs al document no funcionarán!',
     'Are you sure you want to delete this LdS?' => 'Estás segur que vols esborrar aquest LdS?',
     'Add license' => 'Afegeix una llicència',
     'Manage license' => 'Administra la llicència',

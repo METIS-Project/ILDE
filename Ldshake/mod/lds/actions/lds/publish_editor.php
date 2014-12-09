@@ -47,8 +47,9 @@ if ($doc = get_entity(get_input('doc')))
 			if (get_input('action') == 'publish')
 			{
 				$doc->published = '1';
-				$editor = EditorsFactory::getInstance($doc);
-				$editor->updatePublish();
+				if($editor = EditorsFactory::getInstance($doc)) {
+				    $editor->updatePublish();
+                }
 				$doc->save();
 				
 				//Get all the revisions of this document

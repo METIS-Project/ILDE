@@ -811,6 +811,8 @@ class EditorsFactory
             return new UploadEditor($document);
         if($document->editorType == 'gluepsrest')
             return new GluepsManager(null, null, $document);
+
+        return false;
 	}
 
     public static function getManager($lds)

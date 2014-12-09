@@ -437,10 +437,12 @@ function ldshake_get_lds_authors($doc) {
     $doc_revisions = array();
 
     foreach($revisions as $revision) {
-        foreach($revision->revised_documents as $revised_document) {
-            if($revised_document->document_guid == $doc_guid) {
-                if($revision_id > (int)$revised_document->lds_revision_id)
-                    $doc_revisions[] = $revised_document;
+        if(!empty($revision->revised_documents )) {
+            foreach($revision->revised_documents as $revised_document) {
+                if($revised_document->document_guid == $doc_guid) {
+                    if($revision_id > (int)$revised_document->lds_revision_id)
+                        $doc_revisions[] = $revised_document;
+                }
             }
         }
     }
