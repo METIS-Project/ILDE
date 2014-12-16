@@ -31,7 +31,10 @@ require_once(dirname(__FILE__).'/../../config.php');
 // Load GlueServer Config
 global $GWS,$CFG;
 $moodleversion = substr($CFG->release, 0, 3);
-if ($moodleversion == '2.0' or $moodleversion == '2.1' or $moodleversion == '2.2' or $moodleversion == '2.3' or $moodleversion == '2.5'){
+if ($moodleversion == '2.5'){
+	require_once($GWS->gwsroot . '/user/db/m25/userDB.class.php');
+}
+else if ($moodleversion == '2.0' or $moodleversion == '2.1' or $moodleversion == '2.2' or $moodleversion == '2.3'){
     require_once($GWS->gwsroot . '/user/db/m20/userDB.class.php');
 } else if ($moodleversion == '1.9'){
     require_once($GWS->gwsroot . '/user/db/m19/userDB.class.php');

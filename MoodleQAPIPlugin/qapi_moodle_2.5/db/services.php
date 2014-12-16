@@ -47,7 +47,16 @@ $functions = array(
         'classname'   => 'glueserver_course_external',
         'methodname'  => 'get_courses_username',
         'classpath'   => 'local/glueserver/course/externallib.php',
-        'description' => 'Returns the details of all the courses of a user by the username',
+        'description' => 'Returns the details of all the courses in which the user as a role by the username',
+        'type'        => 'read',
+        'capabilities'=> 'moodle/course:view',
+    ),
+    
+    'gws_course_get_courses_enrolled_username'=> array(
+        'classname'   => 'glueserver_course_external',
+        'methodname'  => 'get_courses_enrolled_username',
+        'classpath'   => 'local/glueserver/course/externallib.php',
+        'description' => 'Returns the details of all the courses in which the user is enrolled (with or without a role) by the username',
         'type'        => 'read',
         'capabilities'=> 'moodle/course:view',
     ),
@@ -382,6 +391,15 @@ $functions = array(
         'methodname'  => 'get_roles_userid',
         'classpath'   => 'local/glueserver/role/externallib.php',
         'description' => 'Returns the details of all the roles of a user in a course',
+        'type'        => 'read',
+        'capabilities'=> ''
+    ),
+    
+    'gws_role_get_global_roles_username'=> array(
+        'classname'   => 'glueserver_role_external',
+        'methodname'  => 'get_global_roles_username',
+        'classpath'   => 'local/glueserver/role/externallib.php',
+        'description' => 'Returns the details of all the global roles of a user',
         'type'        => 'read',
         'capabilities'=> ''
     ),

@@ -96,14 +96,18 @@ class glueserver_user_external extends external_api {
         $returns = array();
         $i = 0;
         foreach ($users as $user) {
-            $server_user = new glueserver_user($user["user"]);
-            $returns[$i]["user"] = $server_user->get_data();
-            $returns[$i]["role"] = array();
-            foreach ($user["role"] as $role){
-	            $server_role = new glueserver_role($role);
-	            $returns[$i]["role"][] = $server_role->get_data();
-            }
-            $i++;
+        	if (strcmp($user["user"]->username, "guest")!==0){
+	            $server_user = new glueserver_user($user["user"]);
+	            $returns[$i]["user"] = $server_user->get_data();
+	            $returns[$i]["role"] = array();
+	            if (isset($user["role"])){
+		            foreach ($user["role"] as $role){
+			            $server_role = new glueserver_role($role);
+			            $returns[$i]["role"][] = $server_role->get_data();
+		            }
+	            }
+	            $i++;
+        	}
         }
         return $returns;
     }
