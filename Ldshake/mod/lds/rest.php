@@ -371,6 +371,9 @@ function lds_update($params) {
         if(is_numeric($params[1]) && $params[2] == 'data')
             return lds_download($params);
 
+        if(is_numeric($params[1]) && $params[2] == 'data.imsld')
+            return lds_download($params);
+
         if(is_numeric($params[1]) && $params[2] == 'properties')
             return lds_view_properties($params[1]);
 
@@ -558,7 +561,11 @@ function lds_download($params = null) {
     $editordocument = get_entities_from_metadata('lds_guid',$params[1],'object','LdS_document_editor', 0, 100);
     $document = $editordocument[0];
 
-    $result = Editor::getFullFilePath($document->file_guid);
+    if(isset($params[2]))
+        if($params[2] == "data.imsld")
+            $result = Editor::getFullFilePath($document->file_imsld_guid);
+    else
+        $result = Editor::getFullFilePath($document->file_guid);
 
     $result = SuccessResult::getInstance($result);
 

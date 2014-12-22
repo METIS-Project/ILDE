@@ -111,7 +111,8 @@
 	function add_metastring($string)
 	{
 		global $CONFIG, $METASTRINGS_CACHE, $METASTRINGS_DEADNAME_CACHE;
-		
+
+        $string = (string)$string;
 		$sanstring = sanitise_string($string);
 		
 		$id = get_metastring_id($string);
