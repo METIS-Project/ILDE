@@ -1021,8 +1021,7 @@ class OpenglmEditor extends Editor {
         if(isset($params['file_imsld'])) {
             copy($params['file_imsld'], $file->getFilenameOnFilestore());
             $document->upload_filename_imsld = $params['filename_imsld'];
-        }
-        else {
+        } else {
             copy($params['file'], $file->getFilenameOnFilestore());
             $document->upload_filename_imsld = $params['filename'];
         }
@@ -1107,10 +1106,17 @@ if(!$CONFIG->rest_editor_list) {
         );
     }
 
+    $webcollagerest_url = "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
+    $webcollagerest_password = 'LdS@k$1#';
+    if(!empty($CONFIG->webcollagerest_url)) {
+        $webcollagerest_url = $CONFIG->webcollagerest_url;
+        $webcollagerest_password = $CONFIG->webcollagerest_password;
+    }
+
     $CONFIG->rest_editor_list['webcollagerest'] = array(
         'name' => 'WebCollage',
-        'url_rest' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/",
-        'url_gui' => "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php",
+        'url_rest' => $webcollagerest_url,
+        'url_gui' => $webcollagerest_url . "indexLdShake.php",
         'preview' => true,
         'imsld' => true,
         'password' => 'LdS@k$1#',
@@ -1404,7 +1410,7 @@ class RestEditor extends Editor
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
+        $vars['document_iframe_url'] = $CONFIG->rest_editor_list['webcollagerest']['url_gui'] . "?document_id={$doc_id}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -2236,7 +2242,7 @@ SQL;
         $this->_rest_id = $doc_id;
         $vars['document_url'] = "{$response->raw_body}";
         //$vars['document_iframe_url'] = "{$CONFIG->webcollagerest_url}?document_id={$doc_id}&sectoken={$rand_id}";
-        $vars['document_iframe_url'] = "http://pandora.tel.uva.es/~wic/wic2Ldshake/indexLdShake.php?document_id={$doc_id}&lang={$lang}";
+        $vars['document_iframe_url'] = $CONFIG->rest_editor_list['webcollagerest']['url_gui'] . "?document_id={$doc_id}&lang={$lang}";
         $vars['editor_id'] = $rand_id;
 
         return $vars;
@@ -3122,6 +3128,7 @@ class GluepsManager
             return false;
 
         $glueps_url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $version='';
@@ -3153,7 +3160,7 @@ class GluepsManager
         try {
             $response = \Httpful\Request::get($uri)
                 ->addHeader('Accept', 'application/json')
-                ->basicAuth('ldshake','Ld$haK3')
+                ->basicAuth('ldshake', $glueps_password)
                 ->sendIt();
 
             if($response->code > 399) {
@@ -3171,6 +3178,7 @@ class GluepsManager
     public function getCourseInfo($course_id) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $version='';
@@ -3205,7 +3213,7 @@ class GluepsManager
             $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
             //->expectsXML()
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
             if(!($response->code >= 200 and $response->code < 399))
@@ -3222,6 +3230,7 @@ class GluepsManager
     public function newImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
@@ -3295,7 +3304,7 @@ class GluepsManager
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
-                ->basicAuth('ldshake','Ld$haK3')
+                ->basicAuth('ldshake', $glueps_password)
                 ->sendIt();
 
             unlink($imsld_zip);
@@ -3345,10 +3354,11 @@ class GluepsManager
     public function updateImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$url}deploys/{$params['id']}";
         $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->body;
@@ -3357,10 +3367,11 @@ class GluepsManager
     public function deployImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$url}deploys/{$params['id']}/static";
         $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->body;
@@ -3369,13 +3380,14 @@ class GluepsManager
     public static function getImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$params['document_url']}";
 
         $response = \Httpful\Request::get($uri)
             //->addHeader('Accept', 'application/json')
             //->expectsXML()
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->raw_body;
@@ -3449,6 +3461,7 @@ class GluepsManager
         $rand_id = mt_rand(400,5000000);
 
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         $course = $params['course'];
 
         $vle_info = $this->getVleInfo();
@@ -3508,7 +3521,7 @@ class GluepsManager
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
-                ->basicAuth('ldshake','Ld$haK3')
+                ->basicAuth('ldshake', $glueps_password)
                 ->sendIt();
 
             if($response->code != 200)
@@ -4117,6 +4130,7 @@ class MoodleManager
     public function getCourseInfo($course_id) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         $vle_password = $this->_vle->encrypted ? lds_contTools::decrypt_password($this->_vle->password): $this->_vle->password;
 
         $version='';
@@ -4150,7 +4164,7 @@ class MoodleManager
         $response = \Httpful\Request::get($uri)
             ->addHeader('Accept', 'application/json')
             //->expectsXML()
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->body;
@@ -4159,6 +4173,7 @@ class MoodleManager
     public function newImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         /*
         $vle_url = "http://glue-test.cloud.gsic.tel.uva.es/moodle/";
         $type = 'Moodle';
@@ -4229,7 +4244,7 @@ class MoodleManager
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
-                ->basicAuth('ldshake','Ld$haK3')
+                ->basicAuth('ldshake', $glueps_password)
                 ->sendIt();
 
             if($response->code != 200)
@@ -4278,10 +4293,11 @@ class MoodleManager
     public function updateImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$url}deploys/{$params['id']}";
         $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->body;
@@ -4290,10 +4306,11 @@ class MoodleManager
     public function deployImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$url}deploys/{$params['id']}/static";
         $response = \Httpful\Request::put($uri, "@{$params['file']}", 'application/octet-stream')
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->body;
@@ -4302,13 +4319,14 @@ class MoodleManager
     public static function getImplementation($params = null) {
         global $CONFIG;
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
 
         $uri = "{$params['document_url']}";
 
         $response = \Httpful\Request::get($uri)
             //->addHeader('Accept', 'application/json')
             //->expectsXML()
-            ->basicAuth('ldshake','Ld$haK3')
+            ->basicAuth('ldshake', $glueps_password)
             ->sendIt();
 
         return $response->raw_body;
@@ -4382,6 +4400,7 @@ class MoodleManager
         $rand_id = mt_rand(400,5000000);
 
         $url = $CONFIG->glueps_url;
+        $glueps_password = $CONFIG->glueps_password;
         $course = $params['course'];
 
         $vle_info = $this->getVleInfo();
@@ -4441,7 +4460,7 @@ class MoodleManager
             $response = \Httpful\Request::post($uri)
                 ->registerPayloadSerializer('multipart/form-data', $CONFIG->rest_serializer)
                 ->body($post, 'multipart/form-data')
-                ->basicAuth('ldshake','Ld$haK3')
+                ->basicAuth('ldshake', $glueps_password)
                 ->sendIt();
 
             if($response->code != 200)

@@ -83,8 +83,16 @@ $CONFIG->google_drive = $google_drive;
 $CONFIG->disable_contextual_help = $disable_contextual_help;
 $CONFIG->editor_debug = $editor_debug;
 $CONFIG->moodle = $moodle;
-if(isset($glueps_url))
+
+if(isset($glueps_url)) {
     $CONFIG->glueps_url = $glueps_url;
+    $CONFIG->glueps_password = $glueps_password;
+}
+
+if(isset($webcollagerest_url) && isset($webcollagerest_password)) {
+    $CONFIG->webcollagerest_url = $webcollagerest_url;
+    $CONFIG->webcollagerest_password = $webcollagerest_password;
+}
 
 if(isset($google_analytics))
     $CONFIG->google_analytics = $google_analytics;
