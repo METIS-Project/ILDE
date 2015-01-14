@@ -37,22 +37,25 @@
 global $CONFIG;
 
 $CONFIG->schools = array(
-"ies0001" => "INS La Ribera",
-"ies0002" => "IES Els Arcs",
-"ies0003" => "IES Claret",
-"ies0004" => "IES Verdaguer",
-"ies0005" => "IES Jesus i Maria",
-"ies0006" => "Thau Sant Cugat",
-"ies0007" => "Escola Projecte",
-"ies0008" => "IES Marina",
-"ies0009" => "International School of Barcelona (ISB)",
-"ies0010" => "Escola IPSE",
-"ies0011" => "Thau",
-"ies0012" => "La Salle Mollerussa",
-"ies0013" => "INS Dr. Puigvert",
-"ies0014" => "INS Miquel Martí i Pol",
-"ies0015" => "Salesià de Sant Josep",
-"other0001" => "Altres",
+    "ies0001" => "INS La Ribera",
+    "ies0002" => "IES Els Arcs",
+    "ies0003" => "IES Claret",
+    "ies0004" => "IES Verdaguer",
+    "ies0005" => "IES Jesus i Maria",
+    "ies0006" => "Thau Sant Cugat",
+    "ies0007" => "Escola Projecte",
+    "ies0008" => "IES Marina",
+    "ies0009" => "International School of Barcelona (ISB)",
+    "ies0010" => "Escola IPSE",
+    "ies0011" => "Thau",
+    "ies0012" => "La Salle Mollerussa",
+    "ies0013" => "INS Dr. Puigvert",
+    "ies0014" => "INS Miquel Martí i Pol",
+    "ies0015" => "Salesià de Sant Josep",
+    "ies0016" => "Verdaguer",
+    "ies0017" => "Llor",
+    "ies0018" => "Joan Pelegrí",
+    "other0001" => "Altres",
 );
 
 function ldshake_mode_open_register_validation() {
@@ -118,11 +121,11 @@ function ldshake_mode_build_permissions($user_id, $writable_only, $isglobalenv, 
     $answer_template_msid = get_metastring_id('answer_template');
 
     if(!($role_msid
-    or $student_msid
-    or $teacher_msid
-    or $tags_msid
-    or $wording_msid
-    or $answer_template_msid
+        or $student_msid
+        or $teacher_msid
+        or $tags_msid
+        or $wording_msid
+        or $answer_template_msid
     ))
         return $query;
 
