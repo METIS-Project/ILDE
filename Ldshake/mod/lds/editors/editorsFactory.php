@@ -803,6 +803,8 @@ class EditorsFactory
             return new GoogleEditor($document);
         if($document->editorType == 'openglm')
             return new UploadEditor($document);
+        if($document->editorType == 'sycnmeta')
+            return new UploadEditor($document);
         if($document->editorType == 'cadmos')
             return new UploadEditor($document);
         if($document->editorType == 'cld')
@@ -842,6 +844,8 @@ class EditorsFactory
         if(RestEditor::rest_enabled($editorType))
             return new RestEditor(null, $editorType);
         if($editorType == 'openglm')
+            return new UploadEditor(null, $editorType);
+        if($editorType == 'sycnmeta')
             return new UploadEditor(null, $editorType);
         if($editorType == 'cadmos')
             return new UploadEditor(null, $editorType);

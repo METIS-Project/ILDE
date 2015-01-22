@@ -356,14 +356,14 @@ HTML;
 </div>
 
 <!--[if (!IE)|(gt IE 8)]><!-->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $vars['url']?>vendors/jquery/2.1.1/jquery.min.js"></script>
 <!--<![endif]-->
 
 <!--[if lte IE 8]>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $vars['url']?>vendors/jquery/1.11.1/jquery.min.js"></script>
 <!--[endif]-->
 
-<script src="https:////ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="<?php echo $vars['url']?>vendors/jqueryui/1.10.4/jquery-ui.min.js"></script>
 <?php
 
 ?><script type="text/javascript" src="<?php echo $vars['url']?>vendors/jsPlumb/jquery.jsPlumb-1.6.2-min.js"></script><?php
