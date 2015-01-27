@@ -202,6 +202,9 @@ class Request
         $info = curl_getinfo($this->_ch);
         $response = explode("\r\n\r\n", $result, 2 + $info['redirect_count']);
 
+        if($response[count($response) - 2] == "HTTP/1.1 100 Continue")
+            $response = explode("\r\n\r\n", $response[count($response) - 1], 2);
+
         $body = array_pop($response);
         $headers = array_pop($response);
 
@@ -757,13 +760,14 @@ class Request
         $headers = array();
         // https://github.com/nategood/httpful/issues/37
         // Except header removes any HTTP 1.1 Continue from response headers
-        $headers[] = 'Expect:';
+        //$headers[] = 'Expect:';
 
         if (!isset($this->headers['User-Agent'])) {
             $headers[] = $this->buildUserAgent();
         }
 
-        $headers[] = "Content-Type: {$this->content_type}";
+        if(!empty($this->content_type))
+            $headers[] = "Content-Type: {$this->content_type}";
 
         // allow custom Accept header if set
         if (!isset($this->headers['Accept'])) {

@@ -41,18 +41,18 @@ require_once __DIR__.'/../../lds_contTools.php';
 
 $guid = get_input('entity_guid');
 $lds = get_entity($guid);
-
 $editing = get_input('editing');
-if ($editing == 'true')
-{
+
+if(empty($lds) or empty($editing))
+    exit;
+
+if ($editing == 'true') {
 	//Sets the editing timestamp to now
 	$lds->editing_tstamp = time();
 	//And saves who's editing it
 	$lds->editing_by = get_loggedin_userid();
 	$lds->save_ktu();
-}
-else
-{
+} else {
 	$lds->editing_tstamp = 0;
 	$lds->editing_by = null;
 	$lds->save_ktu();

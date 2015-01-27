@@ -118,7 +118,12 @@
                 $language = $CONFIG->language;
             }
 
-            if(!include($path . $language.'.php')) {
+            if(file_exists($path . $language.'.php')) {
+                if(!include($path . $language.'.php')) {
+                    if(!include($path . 'en'.'.php'))
+                        throw new InstallationException("Elgg could not load the language file");
+                }
+            } else {
                 if(!include($path . 'en'.'.php'))
                     throw new InstallationException("Elgg could not load the language file");
             }

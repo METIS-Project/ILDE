@@ -1110,40 +1110,39 @@ if(!$CONFIG->rest_editor_list) {
         );
     }
 
-    $webcollagerest_url = "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
-    $webcollagerest_password = 'LdS@k$1#';
     if(!empty($CONFIG->webcollagerest_url)) {
         $webcollagerest_url = $CONFIG->webcollagerest_url;
         $webcollagerest_password = $CONFIG->webcollagerest_password;
+
+        $CONFIG->rest_editor_list['webcollagerest'] = array(
+            'name' => 'WebCollage',
+            'url_rest' => $webcollagerest_url,
+            'url_gui' => $webcollagerest_url . "indexLdShake.php",
+            'preview' => true,
+            'imsld' => true,
+            'password' => $webcollagerest_password,
+            'icon' => true
+        );
     }
 
-    $CONFIG->rest_editor_list['webcollagerest'] = array(
-        'name' => 'WebCollage',
-        'url_rest' => $webcollagerest_url,
-        'url_gui' => $webcollagerest_url . "indexLdShake.php",
-        'preview' => true,
-        'imsld' => true,
-        'password' => 'LdS@k$1#',
-        'icon' => true
-    );
+    if(!empty($CONFIG->exelearningrest_url)) {
+        $exelearningrest_url = $CONFIG->exelearningrest_url;
+        $exelearningrest_password = $CONFIG->exelearningrest_password;
 
-    $CONFIG->rest_editor_list['exelearningrest'] = array(
-        'name' => 'eXeLearning',
-        'url_rest' => "http://ldshake2.upf.edu:8080/",
-        'url_gui' => "http://ldshake2.upf.edu:8080/ldshakegui/",
-        //'url_rest' => "http://ilde:443/",
-        //'url_gui' => "http://ilde:443/ldshakegui/",
-        //'url_rest' => "http://192.168.1.219:51235/",
-        //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
-        'preview' => true,
-        'imsld' => false,
-        'scorm' => true,
-        'password' => 'LdS@k$1#',
-        'icon' => false,
-        'downloable' => 'elp',
-        'new_from_file' => true,
-        'new_from_file_callback' => "ldshake_exelearning_get_newfile",
-    );
+        $CONFIG->rest_editor_list['exelearningrest'] = array(
+            'name' => 'eXeLearning',
+            'url_rest' => $exelearningrest_url,
+            'url_gui' => $exelearningrest_url . "ldshakegui/",
+            'preview' => true,
+            'imsld' => false,
+            'scorm' => true,
+            'password' => $exelearningrest_password,
+            'icon' => false,
+            'downloable' => 'elp',
+            'new_from_file' => true,
+            'new_from_file_callback' => "ldshake_exelearning_get_newfile",
+        );
+    }
 }
 
 /**

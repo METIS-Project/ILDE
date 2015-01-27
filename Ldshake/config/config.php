@@ -2,35 +2,7 @@
 
 /**
  * Config file for the site
- * @author Pau Moreno
- *
- * APache config files for the editors instance:
-
-httpd.conf:
-
-#eXeLearning
-ProxyRequests Off
-
-<Proxy *>
-Order deny,allow
-Allow from all
-</Proxy>
-
-ProxyPass /exelearning http://127.0.0.1:8080/
-ProxyPassReverse /exelearning http://127.0.0.1:8080/
-
-
-Habilitar:
-LoadModule proxy_module modules/mod_proxy.so
-LoadModule proxy_http_module modules/mod_proxy_http.so
-
- */
-
-$moodleUrls = array (
-    'devel' =>		'',
-    'staging' =>	'',
-    'prod' =>		''
-);
+ **/
 
 $defaultLang = array (
     'devel' =>		'en',
@@ -53,11 +25,25 @@ $google_drive = array(
 
 //$glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
 
-$glueps_url = "http://glueps-dev.gsic.uva.es/GLUEPSManager/";
 
+$glueps_url = "http://glueps-dev.gsic.uva.es/GLUEPSManager/";
+$glueps_password = 'Ld$haK3';
+
+$webcollagerest_url = "http://pandora.tel.uva.es/~wic/wic2Ldshake/";
+$webcollagerest_password = 'LdS@k$1#';
+
+$exelearningrest_url = "http://ldshake2.upf.edu:8080/";
+$exelearningrest_password = 'LdS@k$1#';
+/*
+        //'url_rest' => "http://ilde:443/",
+        //'url_gui' => "http://ilde:443/ldshakegui/",
+        //'url_rest' => "http://192.168.1.219:51235/",
+        //'url_gui' => "http://192.168.1.219:51235/ldshakegui/",
+
+ */
 $ldshake_mode = 'ilde';
-$ldshake_mode = 'msf';
-$ldshake_mode = 'ldshake';
+//$ldshake_mode = 'msf';
+//$ldshake_mode = 'ldshake';
 
 /**
  * List of environments, containing the regular expression of the server name that defines them.
@@ -77,7 +63,7 @@ $confOptions = array (
      * Basic DB connection options
      */
     'dbhost' =>		array (
-        'devel' =>		'mdbvm',
+        'devel' =>		'192.168.26.150',
         'staging' =>	'localhost',
         'prod' =>		'localhost'
     ),
@@ -85,6 +71,7 @@ $confOptions = array (
         'devel' =>		'ilde_perf',
         //'devel' =>		'ilde_patterns_v3',
         //'devel' =>		'metis_patterns',
+        //'devel' =>		'ilde_uoc',
         'staging' =>	'ldshake',
         'prod' =>		'ldshake'
     ),
@@ -189,23 +176,10 @@ $confPaths = array (
         'prod' =>		'/var/lib/ldshake/'
     ),
 
-
     /**
      * Temp path (temporal files will be created here)
      */
     'tmppath' =>	array (
-        'devel' =>		'/var/local/ldshake/',
-        'staging' =>	'/var/local/ldshake/',
-        'prod' =>		'/var/local/ldshake/'
-    ),
-
-
-    //TODO Integrate w existing constants
-    /**
-     * Temp data and exported files for the eXeLearning module
-     * E:\python27exe\Python27\python.exe E:\exelearning\exe\exe\exe E:/editors-tmp 8080 /exelearning
-     */
-    'exedata' => array (
         'devel' =>		'/var/local/ldshake/',
         'staging' =>	'/var/local/ldshake/',
         'prod' =>		'/var/local/ldshake/'
@@ -227,14 +201,5 @@ $confPaths = array (
         'devel' =>		'/opt/wkhtmltox/bin/wkhtmltoimage',
         'staging' =>	'/opt/wkhtmltox/bin/wkhtmltoimage',
         'prod' =>		'/opt/wkhtmltox/bin/wkhtmltoimage'
-    ),
-
-    /**
-     * Location of the zip tool
-     */
-    'zip_path' => array (
-        'devel' =>		'zip',
-        'staging' =>	'zip',
-        'prod' =>		'zip'
     ),
 );

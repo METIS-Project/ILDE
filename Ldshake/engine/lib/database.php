@@ -206,7 +206,7 @@
 			/// LdShake change ///
             
         	if ((isset($CONFIG->debug)) && ($CONFIG->debug==true))
-            $DB_PROFILE[] = $query;
+                $DB_PROFILE[] = $query;
             	
             $result = mysqli_query($dblink, $query);
             $DB_QUERY_CACHE[$query] = -1; // Set initial cache to -1
