@@ -381,18 +381,6 @@ public class Deploy {
 		}else return null;
 		
 	}
-	
-	public ToolInstance getToolInstanceByLocation(String location) {
-		if(this.toolInstances!=null){
-			for(Iterator<ToolInstance> it = toolInstances.iterator();it.hasNext();){
-				ToolInstance inst = it.next();
-				if(inst.getLocation()!=null && inst.getLocation().toString().equals(location)) {
-					return inst;
-				}
-			}
-			return null;
-		}else return null;
-	}
 
 
 
@@ -682,30 +670,6 @@ public class Deploy {
 			}
 		}
 		return iaPosType;
-	}
-	
-	public boolean reusesToolInstance(ToolInstance toolInst) {
-		URL location = toolInst.getLocation();
-		if (location!=null && getToolInstanceById(location.toString()) != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
-	public ToolInstance getOriginalToolInstance(ToolInstance toolInst){
-		if (toolInst.getLocation()!=null) {
-			if (reusesToolInstance(toolInst)) {
-				// We are reusing a tool
-				return getOriginalToolInstance(getToolInstanceById(toolInst.getLocation().toString()));
-			} else {
-				//It is a created tool instance (a gluelet). There are no more reuses
-				return toolInst;
-			}
-		} else {
-			// the tool instance doesn't refer to another one
-			return toolInst;
-		}
 	}
 	
 	

@@ -95,7 +95,6 @@
 <script type="text/javascript" src="js/datamodel/ParticipantContainer.js"></script>
 <script type="text/javascript" src="js/datamodel/Participant.js"></script>
 <script type="text/javascript" src="js/datamodel/LearningEnvironment.js"></script>
-<script type="text/javascript" src="js/datamodel/LearningEnvironmentType.js"></script>
 
 <!--  oauth -->
 <script type="text/javascript" src="js/oauth/OauthManager.js"></script>
@@ -132,11 +131,9 @@
 		<div dojoType="dijit.layout.ContentPane" region="center" style="position: relative;" id="centralCP">
 		<img src="images/GLUEPSp.png" style="float:left;padding: 30px 0px 0px 20px;"/><div class="info"><table class="tableInfo"><tbody><tr><td id="designNameLabel" class="item"></td><td id="designName"></td></tr><tr><td id="deploymentNameLabel" class="item"></td><td id="deploymentName"></td></tr>
 		<tr><td id="learningEnvironmentNameLabel" class="item"></td><td id="learningEnvironmentName"></td></tr><tr><td id="courseNameLabel" class="item"></td><td id="courseName"></td></tr></tbody></table>
-								<div id="divAddCourse">
 								<input id="checkAddCourse" name="checkAddCourse" dojoType="dijit.form.CheckBox" style="margin-left:10px;">
-								<label id="labelCheckAddCourse" for="themeSelect">Añadir curso a partir del tema...</label><select id="themeSelect" name="themeSelect"></select></div></div>
-		<div style="clear:both;"></div>
-		<div id="divDeploymentButtomTop" style="text-align:center;display:none"><button id="deploymentButtonTop" dojoType="dijit.form.Button" label="Desplegar"></button><img id="exclamationDeploymentButtonTop" src="images/icons/exclamation.png"></img>
+								<label id="labelCheckAddCourse" for="themeSelect">Añadir curso a partir del tema...</label><select id="themeSelect" name="themeSelect"></select></div>
+		<div id="divDeploymentButtomTop" style="text-align:center;clear:both;display:none"><button id="deploymentButtonTop" dojoType="dijit.form.Button" label="Desplegar"></button><img id="exclamationDeploymentButtonTop" src="images/icons/exclamation.png"></img>
 		<a id="staticDeployLinkTop" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/zip.png"></img></a>
 		<a id="liveDeployLinkTop" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/link.png"></img></a>
 		<a id="markerListLinkTop" href="" style="text-decoration: none;"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/qr.png"></img></a>
@@ -146,11 +143,6 @@
 		<a id="staticDeployLinkBottom" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;"  src="images/icons/zip.png"></img></a>
 		<a id="liveDeployLinkBottom" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;"  src="images/icons/link.png"></img></a>
 		<a id="markerListLinkBottom" href="" style="text-decoration: none;"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/qr.png"></img></a>
-		</div>
-		<div id="saveCancelDiv" style="text-align:center;clear:both;margin:10px 0px;display:none;">
-			<button id="saveButton" dojoType="dijit.form.Button" label="Save"></button>
-			<button id="cancelButton" dojoType="dijit.form.Button" label="Cancel"></button>
-			<button id="saveAndExitButton" dojoType="dijit.form.Button" label="Save and Exit"></button>
 		</div>
 		</div>
 		</div>

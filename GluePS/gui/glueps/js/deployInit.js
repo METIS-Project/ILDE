@@ -13,82 +13,7 @@ function init(){
 	initDeploy();
 }
 
-function initDeploy(){ 
-	
-	/*dojo.connect(dojo.byId("saveButton"), "onclick", function(){
-			var url = JsonDB.getDeploymentId() + "/save";
-			if (LdShakeManager.ldShakeMode){
-				var url = LdShakeManager.buildLdshakeUrl(url);
-			}
-			var bindArgs = {
-				url : url,
-				method: "PUT",
-				handleAs : "json", // Manejamos la respuesta del get como un json
-				headers : { // Indicar en la cabecera que es json
-					"Content-Type" : "application/json",
-					"Accept" : "application/json"
-				},         
-				load : function(data) {
-					alert("saved");
-				},
-				error : function(error, ioargs) {
-					var message = "";
-					message = ErrorCodes.errores(ioargs.xhr.status);
-					InformativeDialogs.showAlertDialog(i18n.get("warning"), message);
-				}
-			}
-			dojo.xhrPut(bindArgs);
-	});
-	
-	dojo.connect(dojo.byId("cancelButton"), "onclick", function(){
-		var url = JsonDB.getDeploymentId() + "/cancel";
-		if (LdShakeManager.ldShakeMode){
-			var url = LdShakeManager.buildLdshakeUrl(url);
-		}
-		var bindArgs = {
-			url : url,
-			method: "PUT",
-			handleAs : "json", // Manejamos la respuesta del get como un json
-			headers : { // Indicar en la cabecera que es json
-				"Content-Type" : "application/json",
-				"Accept" : "application/json"
-			},         
-			load : function(data) {
-            	alert("cancelled");
-			},
-			error : function(error, ioargs) {
-				var message = "";
-				message = ErrorCodes.errores(ioargs.xhr.status);
-				InformativeDialogs.showAlertDialog(i18n.get("warning"), message);
-			}
-		}
-		dojo.xhrPut(bindArgs);
-	});
-	
-	dojo.connect(dojo.byId("saveAndExitButton"), "onclick", function(){
-		var url = JsonDB.getDeploymentId() + "/saveAndExit";
-		if (LdShakeManager.ldShakeMode){
-			var url = LdShakeManager.buildLdshakeUrl(url);
-		}
-		var bindArgs = {
-			url : url,
-			method: "PUT",
-			handleAs : "json", // Manejamos la respuesta del get como un json
-			headers : { // Indicar en la cabecera que es json
-				"Content-Type" : "application/json",
-				"Accept" : "application/json"
-			},         
-			load : function(data) {
-            	alert("saved and exit");
-			},
-			error : function(error, ioargs) {
-				var message = "";
-				message = ErrorCodes.errores(ioargs.xhr.status);
-				InformativeDialogs.showAlertDialog(i18n.get("warning"), message);
-			}
-		}
-		dojo.xhrPut(bindArgs);
-	});*/
+function initDeploy(){  
 	
 	dojo.connect(dojo.byId("homeImg"), "onclick", function() {
 		window.location = "index.html";
@@ -145,7 +70,6 @@ function initDeploy(){
 	                  
 	    //Listen to the message event from LdShake to change the title of the design 
 	    window.addEventListener('message', LdShakeManager.setTitle, false);   
-	    window.addEventListener('message', LdShakeManager.saveDeploy, false); 
 	}
 
 	GFXTooltip.init();

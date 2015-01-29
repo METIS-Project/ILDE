@@ -36,8 +36,6 @@ public class LearningEnvironment {
 
 	private String installation;
 	
-	private LearningEnvironmentType leType;
-	
 
 	//For now, we do not use this, until we know we need it
 	//Deploy modes: static (e.g. Moodle zip) and/or live (e.g. creating the wiki pages through an API)
@@ -53,14 +51,12 @@ public class LearningEnvironment {
 	private HashMap<String, String> courses;
 	
 	//JUAN: introduced to may hide the AR controls
-	private boolean enableAR;
-
+	//private boolean showAr;
+	
 	//Additional parameters for the learning environment
 	private String parameters;
 	
-	//Show AR things on the user interface
 	private boolean showAR;
-	//Show VG things on the user interface
 	private boolean showVG;
 	
 	public LearningEnvironment() {
@@ -201,14 +197,6 @@ public class LearningEnvironment {
 	public HashMap<String, String> getCourses() {
 		return courses;
 	}
-	
-	public boolean isEnableAR() {
-		return enableAR;
-	}
-
-	public void setEnableAR(boolean enableAR) {
-		this.enableAR = enableAR;
-	}
 
 	public boolean isShowAR() {
 		return showAR;
@@ -276,14 +264,6 @@ public class LearningEnvironment {
 			}
 		}
 		return result;
-	}
-
-	public LearningEnvironmentType getLeType() {
-		return leType;
-	}
-
-	public void setLeType(LearningEnvironmentType leType) {
-		this.leType = leType;
 	}
 	
 }

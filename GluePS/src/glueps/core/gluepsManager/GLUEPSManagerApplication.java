@@ -11,7 +11,6 @@ import org.restlet.data.CharacterSet;
 import org.restlet.resource.Directory;
 import org.restlet.routing.Router;  
 
-import glueps.core.resource.AsynchronousOperationResource;
 import glueps.core.resource.ConfigurationResource;
 import glueps.core.resource.CourseListResource;
 import glueps.core.resource.CourseResource;
@@ -23,8 +22,6 @@ import glueps.core.resource.LearningEnvironmentInstallationListResource;
 import glueps.core.resource.LearningEnvironmentInstallationResource;
 import glueps.core.resource.LearningEnvironmentListResource;
 import glueps.core.resource.LearningEnvironmentResource;
-import glueps.core.resource.LearningEnvironmentTypeListResource;
-import glueps.core.resource.LearningEnvironmentTypeResource;
 import glueps.core.resource.OauthResource;
 import glueps.core.resource.ToolInstanceListResource;
 import glueps.core.resource.ToolInstanceResource;
@@ -71,8 +68,6 @@ public class GLUEPSManagerApplication extends Application {
 	private String GSprd3GMType=null;
 	private String GPres3GMType=null;
 	
-	private boolean responseAsAService = false;
-	
 	private boolean moodleRealTimeGlueps=false;
 	
 	private boolean ldShakeMode = false;
@@ -114,9 +109,7 @@ public class GLUEPSManagerApplication extends Application {
 		GSprd3GMType=configuration.getProperty("gluelet.types.GSPRD3_GM_TYPE","2");
 		GPres3GMType=configuration.getProperty("gluelet.types.GPRES3_GM_TYPE","3");
 
-		responseAsAService=Boolean.valueOf(configuration.getProperty("responseAsAService", "false")).booleanValue();
 		moodleRealTimeGlueps=Boolean.valueOf(configuration.getProperty("moodle.realtimeglueps", "false")).booleanValue();
-		
 
 		ldShakeMode=Boolean.parseBoolean(configuration.getProperty("ldshakeMode","false"));
 		onlyUserCourses=Boolean.parseBoolean(configuration.getProperty("onlyUserCourses","false"));
@@ -246,12 +239,6 @@ public class GLUEPSManagerApplication extends Application {
 		router.attach("/learningEnvironmentInstallations",LearningEnvironmentInstallationListResource.class);
 		//Defines a route for the resource LearningEnvironmentInstallation
 		router.attach("/learningEnvironmentInstallations/{LEInstId}",LearningEnvironmentInstallationResource.class);
-		//Defines a route for the resource LearningEnvironmentTypeList
-		router.attach("/learningEnvironmentTypes",LearningEnvironmentTypeListResource.class);
-		//Defines a route for the resource LearningEnvironmentType
-		router.attach("/learningEnvironmentTypes/{LETypeId}",LearningEnvironmentTypeResource.class);
-		//Defines a route for the resource /AsynchronousOperation
-		router.attach("/asynchronousOperations/{operationId}",AsynchronousOperationResource.class);
 		// Defines a route for the resource list of DeployData
 		router.attach("/deploys",DeployListResource.class);	
 		// Defines a route for the resource DeployData
@@ -259,9 +246,6 @@ public class GLUEPSManagerApplication extends Application {
 		router.attach("/deploys/{deployId}/undo",DeployResource.class);
 		router.attach("/deploys/{deployId}/redo",DeployResource.class);
 		router.attach("/deploys/{deployId}/metadata",DeployResource.class);
-		router.attach("/deploys/{deployId}/save",DeployResource.class);
-		router.attach("/deploys/{deployId}/saveAndExit",DeployResource.class);
-		router.attach("/deploys/{deployId}/cancel",DeployResource.class);
 		router.attach("/deploys/{deployId}/clone",DeployResource.class);
 		// Route for the deployed versions of the deploy
 		router.attach("/deploys/{deployId}/static",DeployResource.class);	
@@ -363,16 +347,6 @@ public class GLUEPSManagerApplication extends Application {
 
 	public void setOauthGoogleClientsecret(String oauthGoogleClientsecret) {
 		this.oauthGoogleClientsecret = oauthGoogleClientsecret;
-	}
-
-
-	public void setResponseAsAService(boolean responseAsAService) {
-		this.responseAsAService = responseAsAService;
-	}
-
-
-	public boolean isResponseAsAService() {
-		return responseAsAService;
 	}
 
 

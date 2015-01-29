@@ -45,9 +45,7 @@ var GroupsPainter = {
 
 		GroupsPainter.appendAllParticipants(table);
 		
-		if (LearningEnvironmentType.isGetParticipants()){
-			GroupsPainter.addUpdateImage(tr);
-		}
+		GroupsPainter.addUpdateImage(tr);
 		// Añadir icono y eventos de mostrar los participantes disponibles
 		GroupsPainter.addShowAllParticipants(tr);
 		GroupsPainter.setCurrentVisibilityStateAll();

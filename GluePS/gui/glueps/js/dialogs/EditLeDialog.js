@@ -58,7 +58,6 @@ var EditLeDialog = {
 			var xhrArgs = {
 				url: baseUrl + "/GLUEPSManager/learningEnvironmentInstallations",
 				handleAs: "text",
-				headers: {"Content-Type" :"text/xml"},
 				load: function(dataInstallations){
 					EditLeDialog.updateSelectLe(dataInstallations);
 					EditLeDialog.getLearningEnvironment(dataInstallations);
@@ -137,22 +136,19 @@ var EditLeDialog = {
 			var user = dijit.byId("dialogEditLeUser");
 			var password = dijit.byId("dialogEditLePassword");
 			var leSelect=dojo.byId("dialogEditLeInstallation");
-			var showAR = dijit.byId("checkEditLeShowAR");
-			var showVG = dijit.byId("checkEditLeShowVG");
-			
 			if (name.value.length == 0 || user.value.length == 0 || password.value.length == 0 || leSelect.options[leSelect.selectedIndex].value=="0")
 			{
 				dojo.byId("dialogEditLeErrorReport").innerHTML = i18n.get("ErrorRellenarCampos");
 			}
 			else{
-				EditLeDialog.callEditLe(name.value, leSelect.options[leSelect.selectedIndex].value, user.value, password.value, showAR.checked, showVG.checked);
+				EditLeDialog.callEditLe(name.value, leSelect.options[leSelect.selectedIndex].value, user.value, password.value);
 			}
 	    },
 	    
 	    /**
 		 *  Realiza un PUT para actualizar el contenido del documento de despliegue
 		 */
-	    callEditLe : function(name, leInst, user, password, showAR, showVG) {
+	    callEditLe : function(name, leInst, user, password) {
 
 	        var xhrArgs = {
 	            url : EditLeDialog.leId,
@@ -165,9 +161,7 @@ var EditLeDialog = {
 	            	leName: name,
 	            	leInstallation: leInst,
 	            	leUser: user,
-	                lePassword: password,
-	                leShowAR: showAR,
-	                leShowVG: showVG
+	                lePassword: password
 	            },
 	            load : function(data) {
 	            	EditLeDialog.hideDialog();
@@ -193,14 +187,10 @@ var EditLeDialog = {
 			var creduser = dataLe.creduser;
 			var credsecret = dataLe.credsecret;
 			var accessLocation = dataLe.accessLocation;
-			var showAR = dataLe.showAR;
-			var showVG = dataLe.showVG;
 			dojo.byId("dialogEditLeErrorReport").innerHTML = "";
 			dijit.byId("dialogEditLeName").setValue(name);
 			dijit.byId("dialogEditLeUser").setValue(creduser);
 			dijit.byId("dialogEditLePassword").setValue(credsecret);
-			dijit.byId("checkEditLeShowAR").attr('checked', showAR);
-			dijit.byId("checkEditLeShowVG").attr('checked', showVG);
 			
 			var vleSelect=dojo.byId("dialogEditLeInstallation"); 
 	    	var jsdom = dojox.xml.DomParser.parse(dataInstallations);
@@ -222,8 +212,5 @@ var EditLeDialog = {
 			dojo.byId("labelEditLeName").innerHTML = i18n.get("DialogCreateLeName");
 			dojo.byId("labelEditLeUser").innerHTML = i18n.get("DialogCreateLeUser");
 			dojo.byId("labelEditLePassword").innerHTML = i18n.get("DialogCreateLePassword");
-			dojo.byId("labelEditLeAR").innerHTML = i18n.get("DialogCreateLeEnableAR");
-			dojo.byId("labelCheckEditLeShowAR").innerHTML = i18n.get("DialogCreateLeShowAR");
-			dojo.byId("labelCheckEditLeShowVG").innerHTML = i18n.get("DialogCreateLeShowVG");
 		}	
 }

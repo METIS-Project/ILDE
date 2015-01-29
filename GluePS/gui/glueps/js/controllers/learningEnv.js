@@ -86,63 +86,17 @@ var LE = {
     	}
    },
    
-
-   getLearningEnvironmentType : function(leId) {
-	   var leType = "";
-	   if (LE.leJson != "") {
-		   var leType = "";
-			for ( var i = 0; i < LE.leJson.length; i++) {
-				if (LE.leJson[i].id == leId) {
-					leType = LE.leJson[i].type;
-					return leType;
-				}
-			}
-	   }
-	   return leType;
-	},
-	
-    /**
-     * Gets a LE
-     */
-	getLearningEnvironmentGetCourses:function(leId) {
-       var url = leId;
-   	   //var baseUrl = window.location.href.split("/GLUEPSManager")[0];
-       //The parameters to pass to xhrGet, the url, how to handle it, and the callbacks.
-       var xhrArgs = {
-           //url: baseUrl + "/GLUEPSManager/learningEnvironments",
-    		url: url,
-			handleAs : "json",// Tipo de dato de la respuesta del Get,
-			headers : { // Indicar en la cabecera que es json
-				"Content-Type" : "application/json",
-				"Accept" : "application/json"
-			}, 
-           load: function(data) {
-        	   if (data.leType.getCourses==true){
-        		   Deploy.checkGetClassesLms();
-        	   }
-           },
-           error: function(error, ioargs) {  	   
-        	   var message = "";
-        	   LE.leJson = "";
-        	   message=ErrorCodes.errores(ioargs.xhr.status);
-        	   Glueps.showAlertDialog(i18n.get("warning"), message);
-           }
-       };
-
-       //Call the asynchronous xhrGet
-       var deferred = dojo.xhrGet(xhrArgs);
-   }/*,
-	
-	   getLearningEnvironmentGetCourses : function(leId) {
-		   var getCourses = true;
-		   if (LE.leJson != "") {
-				for ( var i = 0; i < LE.leJson.length; i++) {
-					if (LE.leJson[i].id == leId) {
-						getCourses = LE.leJson[i].leType.getCourses;
-						return getCourses;
-					}
-				}
-		   }
-		   return getCourses;
-		}*/
+   getLearningEnvironmentType: function(leId){
+   	var leType ="";
+     	if (LE.leJson!=""){
+   		var leType = "";
+   		for (var i = 0; i < LE.leJson.length; i++){
+   			if (LE.leJson[i].id==leId){
+   				leType = LE.leJson[i].type;
+   				return leType;
+   			}
+   		}       		
+   	}
+     	return leType;
+     }
 };

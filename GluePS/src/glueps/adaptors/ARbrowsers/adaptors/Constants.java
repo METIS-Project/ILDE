@@ -66,7 +66,7 @@ public final class Constants
     public static final String LAYAR_VISION_CHANNEL_ID = configuration().getProperty("layar.channelid.vision", null);
 
     //GUI constants
-    public static final boolean GUI_ENABLE_AR = Boolean.parseBoolean(configuration().getProperty("gui.enableAr", "false"));
+    public static final boolean GUI_SHOWAR = Boolean.parseBoolean(configuration().getProperty("gui.showAr", "false"));
 
 
     //We use the singleton pattern for this attribute

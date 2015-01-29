@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import glueps.adaptors.ld.ILDAdaptor;
-import glueps.adaptors.ld.LDAdaptor;
 import glueps.core.model.Activity;
 import glueps.core.model.Group;
 import glueps.core.model.InstancedActivity;
@@ -23,7 +21,7 @@ import glueps.core.model.Deploy;
 import glueps.core.model.Design;
 import glueps.core.model.ToolInstance;
 
-public class EDIT2Adaptor implements ILDAdaptor, LDAdaptor {
+public class EDIT2Adaptor implements ILDAdaptor {
 	
 	private String designId = null;
 	private ArrayList<Activity> activities = new ArrayList<Activity>();
@@ -530,18 +528,12 @@ public class EDIT2Adaptor implements ILDAdaptor, LDAdaptor {
 	}
 	
 	@Override
-	public Deploy processInstantiation(String filepath, Design design, HashMap<String, Group> vleGroups,
+	public Deploy processInstantiation(String filepath, Design design,
 			HashMap<String, Participant> vleUsers) {
 		String t2Content = readFile(filepath);
 		
 		Deploy deploy = convertEDIT2toLFDeploy(t2Content);
 		return deploy;
-	}
-
-	@Override
-	public ILDAdaptor getLDAdaptor(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

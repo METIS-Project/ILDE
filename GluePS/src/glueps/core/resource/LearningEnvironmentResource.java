@@ -27,11 +27,9 @@ import glueps.core.controllers.exist.Exist;
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
 import glueps.core.model.LearningEnvironment;
 import glueps.core.model.LearningEnvironmentInstallation;
-import glueps.core.model.LearningEnvironmentType;
 import glueps.core.model.Resource;
 import glueps.core.model.ToolInstance;
 import glueps.core.persistence.JpaManager;
-import glueps.core.persistence.entities.LearningEnvironmentTypeEntity;
 
 
 import org.apache.commons.io.FileUtils;
@@ -71,8 +69,6 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 	private static final String EDIT_LE_INSTALLATION_FIELD = "leInstallation";
 	private static final String EDIT_LE_USER_FIELD = "leUser";
 	private static final String EDIT_LE_PASSWORD_FIELD = "lePassword";
-	private static final String EDIT_LE_SHOW_AR_FIELD = "leShowAR";
-	private static final String EDIT_LE_SHOW_VG_FIELD = "leShowVG";
 	
 /// attributes ///
 	
@@ -82,6 +78,8 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 	 * TODO - define our own "glue.core.glueletManager" Logger, for instance
 	 **/
 	private static Logger logger = Logger.getLogger("org.restlet");
+	
+	private GLUEPSManagerApplication applicationResouce = null;
  
 	
 	/** Local id. Integer used as identifier in table of tool learningEnvironments */
@@ -132,11 +130,8 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 		le.setInternalTools(getInternalTools());
 		
 		//JUAN: introduced to may hide AR controls in GUI
-		boolean showAR = Constants.GUI_ENABLE_AR;
-		le.setEnableAR(showAR);
-		//le.setShowAR(le.isEnableAr()); //this line is just to keep the backwards compatibility
-		
-		le.setLeType(getLeType());
+		/*boolean showAr = Constants.GUI_SHOWAR;
+		le.setShowAr(showAr);*/
 
 		return le;
     }   
@@ -149,21 +144,12 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 		le.setInternalTools(getInternalTools());
 		return le;
     } 
-    
-    private LearningEnvironmentType getLeType(){
-   		JpaManager dbmanager = JpaManager.getInstance();
-   		LearningEnvironmentType let = dbmanager.findLETypeObjectByName(le.getType());
-   		return let;
-    }
 
  
     @Get("xml|html")
 	public Representation getLearningEnvironment()  {
     		
    		logger.info("** GET LEARNING ENVIRONMENT received");
-   		String login = this.getRequest().getChallengeResponse().getIdentifier();
-   		if(login==null) throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to get the learning environment caller user");
-   		if(!le.getUserid().equals(login)) throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "The caller is not the creator of the Learning Environment");
    		Representation answer = null;
 		
 		getCompleteLEObject();
@@ -186,9 +172,6 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 	public Representation getJsonLearningEnvironment()  {
     		
    		logger.info("** GET JSON LEARNING ENVIRONMENT received");
-   		String login = this.getRequest().getChallengeResponse().getIdentifier();
-   		if(login==null) throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to get the learning environment caller user");
-   		if(!le.getUserid().equals(login)) throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "The caller is not the creator of the Learning Environment");
    		Representation answer = null;
 
    		getCompleteLEObject();
@@ -240,8 +223,6 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 		String leInstallation 	= form.getFirstValue(EDIT_LE_INSTALLATION_FIELD);
 		String leUser 	= form.getFirstValue(EDIT_LE_USER_FIELD);
 		String lePassword 	= form.getFirstValue(EDIT_LE_PASSWORD_FIELD);
-		String leShowAR = form.getFirstValue(EDIT_LE_SHOW_AR_FIELD);
-		String leShowVG = form.getFirstValue(EDIT_LE_SHOW_VG_FIELD);
 		Representation answer = null;
 		
 		/// Checks parameter values
@@ -254,10 +235,6 @@ public class LearningEnvironmentResource extends GLUEPSResource {
 			missingParameters += EDIT_LE_USER_FIELD + ", ";
 		if (lePassword == null || lePassword.length() == 0) 
 			missingParameters += EDIT_LE_PASSWORD_FIELD + ", ";
-		/*if (leShowAR == null || leShowAR.length() == 0) 
-			missingParameters += EDIT_LE_SHOW_AR_FIELD + ", ";
-		if (leShowVG == null || leShowVG.length() == 0) 
-			missingParameters += EDIT_LE_SHOW_VG_FIELD + ", ";*/
 		
 		if (missingParameters.length() > 0) {
 			missingParameters = missingParameters.substring(0, missingParameters.length() - 2);			
@@ -269,25 +246,19 @@ public class LearningEnvironmentResource extends GLUEPSResource {
    		JpaManager dbmanager = JpaManager.getInstance();
    		LearningEnvironmentInstallation leInst = dbmanager.findLEInstObjectById(leInstallation);
    		if (leInst==null) throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to get the LE Installation from the DB");
-   		LearningEnvironmentType leType = dbmanager.findLETypeObjectById(String.valueOf(leInst.getLeType()));
-		String type = leType.getName();
+		String leType = leInst.getType();
 		URL accessLocation = leInst.getAccessLocation();
-		
-		boolean showAR = Boolean.valueOf(leShowAR).booleanValue();
-		boolean showVG = Boolean.valueOf(leShowVG).booleanValue();
 		
 		LearningEnvironment le;
 		try {
 			le = dbmanager.findLEObjectById(leId);
 			if (!le.getUserid().equals(userid)) throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "The caller is not the author of the Learning Environment");
 			le.setName(leName);
-			le.setType(type);
+			le.setType(leType);
 			le.setAccessLocation(accessLocation);
 			le.setUserid(userid);
 			le.setCreduser(leUser);
 			le.setCredsecret(lePassword);
-			le.setShowAR(showAR);
-			le.setShowVG(showVG);
 			//Hacemos el update
 			dbmanager.insertLearningEnvironment(le);
 		}
@@ -633,7 +604,6 @@ protected HashMap<String, String> getInternalTools() {
            	
             //Glueps specific elements
            	entry.addExtendedTextChild("id",this.leId);
-           	entry.addExtendedTextChild("name", this.le.getName());
            	entry.addExtendedTextChild("type",this.le.getType());
            	entry.addExtendedTextChild("vlelocation", this.le.getAccessLocation().toString());
            	entry.addExtendedTextChild("creduser", this.le.getCreduser());
@@ -645,5 +615,18 @@ protected HashMap<String, String> getInternalTools() {
         return entry;
     } 
     
+    private GLUEPSManagerApplication getApplicationResource(){
+    	GLUEPSManagerApplication app;
+    	if (this.getApplication() instanceof GLUEPSManagerApplication){
+    		app = (GLUEPSManagerApplication) this.getApplication();
+    	}else {
+    		app = this.applicationResouce;
+    	}
+    	return app;
+    }
+    
+    public void setApplicationResource(GLUEPSManagerApplication applicationResource){
+    	this.applicationResouce = applicationResource;
+    }
     
 }

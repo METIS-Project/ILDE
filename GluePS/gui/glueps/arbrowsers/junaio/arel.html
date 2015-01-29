@@ -170,9 +170,7 @@ arel.sceneReady(function()
 });
 
 //Auto-refresh (every 10 minutes)
-//window.setInterval(function(){arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false)},600000);
-//workaround because the triggerServerCall is not refreshing the 3D models (controls, logo, etc)
-window.setInterval(function(){arel.Scene.switchChannel(arel.Scene.getID());},600000);
+window.setInterval(function(){arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false)},600000);
 
 //tracing users (every 1 minutes)
 window.setInterval(function(){traceUsers()},60000);
@@ -209,7 +207,7 @@ function handleCustomPoiEvent(obj, type, param)
 	{
  		arel.Debug.log("llego a if de handle");
  		arel.Debug.log(obj.getParameter("description"));
-// 				arel.Debug.log(obj.getParameter("url"));
+		// 		arel.Debug.log(obj.getParameter("url"));
 		var id = obj.getID();
 		arel.Scene.triggerServerCall(false, {"filter_action": "interaction", "filter_id" : id}, false);
 	}	
@@ -275,9 +273,7 @@ function openUrlExternal(url)
 function closeUrl(type, param)
 {
 	if(type && type === arel.Events.Media.WEBSITE_CLOSED) {
-		//arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false);
-		//workaround because the triggerServerCall is not refreshing the 3D models (controls, logo, etc)
-		arel.Scene.switchChannel(arel.Scene.getID());
+		arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false);
 	}
 }
 

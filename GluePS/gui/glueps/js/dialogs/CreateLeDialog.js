@@ -54,14 +54,11 @@ var CreateLeDialog = {
 	},
 	
 	internationalize: function(){
-		dijit.byId("dialogNewLe").titleNode.innerHTML = i18n.get("createVleInstallation");
+		dijit.byId("dialogNewLe").titleNode.innerHTML = i18n.get("MenuEditLe");
 		dojo.byId("labelNewLeInstallation").innerHTML = i18n.get("DialogCreateLeInstallation");
 		dojo.byId("labelNewLeName").innerHTML = i18n.get("DialogCreateLeName");
 		dojo.byId("labelNewLeUser").innerHTML = i18n.get("DialogCreateLeUser");
 		dojo.byId("labelNewLePassword").innerHTML = i18n.get("DialogCreateLePassword");
-		dojo.byId("labelNewLeAR").innerHTML = i18n.get("DialogCreateLeEnableAR");
-		dojo.byId("labelCheckNewLeShowAR").innerHTML = i18n.get("DialogCreateLeShowAR");
-		dojo.byId("labelCheckNewLeShowVG").innerHTML = i18n.get("DialogCreateLeShowVG");
 	},	
 	
     /**
@@ -72,7 +69,6 @@ var CreateLeDialog = {
 		var xhrArgs = {
 			url: baseUrl + "/GLUEPSManager/learningEnvironmentInstallations",
 			handleAs: "text",
-			headers: {"Content-Type" :"text/xml"},
 			load: function(data){
 				CreateLeDialog.xmlData = data;
 				CreateLeDialog.updateSelectLe(CreateLeDialog.xmlData);
@@ -128,29 +124,27 @@ var CreateLeDialog = {
 		var user = dijit.byId("dialogNewLeUser");
 		var password = dijit.byId("dialogNewLePassword");
 		var leSelect=dojo.byId("dialogNewLeInstallation");
-		var showAR = dijit.byId("checkNewLeShowAR");
-		var showVG = dijit.byId("checkNewLeShowVG");
 		
 		var vleSelect = dojo.byId("dialogNewLeInstallation"); 
 		var index = vleSelect.selectedIndex;
 		var leId = vleSelect.options[index].value;
 		var leType = CreateLeDialog.getLearningEnvironmentType(leId );
 		
-		if (leType.name!="Blogger" && (name.value.length == 0 || user.value.length == 0 || password.value.length == 0 || leSelect.options[leSelect.selectedIndex].value=="0"))
+		if (leType!="Blogger" && (name.value.length == 0 || user.value.length == 0 || password.value.length == 0 || leSelect.options[leSelect.selectedIndex].value=="0"))
 		{
 			dojo.byId("dialogNewLeErrorReport").innerHTML = i18n.get("ErrorRellenarCampos");
 		}
 		else if (leType=="Blogger" && (name.value.length == 0 || leSelect.options[leSelect.selectedIndex].value=="0")){
 			dojo.byId("dialogNewLeErrorReport").innerHTML = i18n.get("ErrorRellenarCampos");
 		}else{
-			CreateLeDialog.callCreateLe(name.value, leSelect.options[leSelect.selectedIndex].value, user.value, password.value, showAR.checked, showVG.checked);
+			CreateLeDialog.callCreateLe(name.value, leSelect.options[leSelect.selectedIndex].value, user.value, password.value);
 		}
     },
     
     /**
      * Función que realiza el POST de creación de un LE
      */
-    callCreateLe: function (name, leInst, user, password, showAR, showVG){
+    callCreateLe: function (name, leInst, user, password){
     	var baseUrl = window.location.href.split("/GLUEPSManager")[0];
         var bindArgs = {
             url: baseUrl + "/GLUEPSManager/learningEnvironments",
@@ -159,9 +153,7 @@ var CreateLeDialog = {
             	leName: name,
             	leInstallation: leInst,
             	leUser: user,
-                lePassword: password,
-                leShowAR: showAR,
-                leShowVG: showVG
+                lePassword: password
             },
             load: function(data){
             	//Cerrar el dialog
@@ -195,7 +187,7 @@ var CreateLeDialog = {
 		var index = vleSelect.selectedIndex;
 		var leId = vleSelect.options[index].value;
     	var leType = CreateLeDialog.getLearningEnvironmentType(leId);
-    	if (leType.name == "Blogger" && OauthManager.oauthRequired(leId)){
+    	if (leType == "Blogger" && OauthManager.oauthRequired(leId)){
     		var callerMethod = "newle";
     		//start the oauth process in order to have an updated access token
     		//we provide a name for the callerMethod and the id of the selected vle
@@ -208,7 +200,7 @@ var CreateLeDialog = {
 		var index = vleSelect.selectedIndex;
 		var leId = vleSelect.options[index].value;
 		var leType = CreateLeDialog.getLearningEnvironmentType(leId );
-		if (leType.name!="Blogger"){
+		if (leType!="Blogger"){
 	    	dojo.byId("trNewLeUser").style.display="";
 	    	dojo.byId("trNewLePassword").style.display="";
 		}else{
@@ -225,8 +217,7 @@ var CreateLeDialog = {
         	for(var i=0; i<entryList.length;i++){
         		var id = entryList[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
         		if (leId == id){
-        			var glueLeType = entryList[i].getElementsByTagName("glue:leType")[0].childNodes[0].nodeValue;
-        			var leType = LearningEnvironmentTypesDB.getLearningEnvironmentType(glueLeType);
+        			leType = entryList[i].getElementsByTagName("glue:type")[0].childNodes[0].nodeValue;
         			break;
         		}
         	}     		

@@ -40,6 +40,10 @@ public class LearningEnvironmentInstallationEntity implements Serializable {
     private String name;
     
 	@Basic(optional = false)
+    @Column(name = "type")
+    private String type;
+    
+	@Basic(optional = false)
     @Column(name = "accessLocation")
     private String accessLocation;
 	
@@ -51,10 +55,6 @@ public class LearningEnvironmentInstallationEntity implements Serializable {
     @Column(name = "sectype")
     private long sectype;
     
-    @Basic(optional = false)
-    @Column(name = "leType")
-    private long leType;
-    
     public LearningEnvironmentInstallationEntity() {
     }
 
@@ -62,10 +62,10 @@ public class LearningEnvironmentInstallationEntity implements Serializable {
         this.id = id;
     }
     
-    public LearningEnvironmentInstallationEntity(long id, String name, long leType, String accessLocation) {
+    public LearningEnvironmentInstallationEntity(long id, String name, String type, String accessLocation) {
         this.id = id;
         this.name = name;
-        this.leType = leType;
+        this.type = type;
         this.accessLocation = accessLocation;
     }
 
@@ -84,6 +84,14 @@ public class LearningEnvironmentInstallationEntity implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getType() {
+        return type;
+    }
+    
+    public void setType(String type) {
+        this.type = type;
+    }   
     
     public String getAccessLocation() {
         return this.accessLocation;
@@ -107,14 +115,6 @@ public class LearningEnvironmentInstallationEntity implements Serializable {
 
 	public void setSectype(long sectype) {
 		this.sectype = sectype;
-	}
-	
-	public long getLeType(){
-		return leType;
-	}
-	
-	public void setLeType(long leType){
-		this.leType = leType;
 	}
    
 

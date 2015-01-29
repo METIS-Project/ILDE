@@ -68,7 +68,7 @@ var ToolInstanceCreator = {
 			//Se ha asignado previamente el nombre a la herramienta, si es necesario cambiarlo
 			
 			// Juan: Guardar la posición AR de la instancia de herramienta
-			if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {
+			if (LearningEnvironment.getShowAr()) {
 				if (toolInstanceObj.isCopyConf == false){
 					if(dijit.byId("ptNone").attr('value') !== false){
 						toolInstance.deletePosition();

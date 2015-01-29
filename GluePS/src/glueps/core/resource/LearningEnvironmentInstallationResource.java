@@ -98,7 +98,7 @@ public class LearningEnvironmentInstallationResource extends GLUEPSResource {
    		LearningEnvironmentInstallation urlifiedLEInst = URLifyLearningEnvironmentInstallation(leInst, doGluepsUriSubstitution(getReference().getParentRef().getParentRef().getIdentifier()));
    		
 		// convert java object to JSON format,
-		// and return it as a JSON formatted string
+		// and returned as JSON formatted string
 		Gson gson = new Gson();
 		String json = gson.toJson(urlifiedLEInst);
    		 		
@@ -153,9 +153,9 @@ public class LearningEnvironmentInstallationResource extends GLUEPSResource {
             //Glueps specific elements
            	entry.addExtendedTextChild("id",String.valueOf(this.leInstId));
            	entry.addExtendedTextChild("name",this.leInst.getName());
-           	entry.addExtendedTextChild("accessLocation", this.leInst.getAccessLocation().toString());   
-           	entry.addExtendedTextChild("sectype", String.valueOf(this.leInst.getSectype()));
-           	entry.addExtendedTextChild("leType", String.valueOf(this.leInst.getLeType()));
+           	entry.addExtendedTextChild("type", this.leInst.getType());
+           	entry.addExtendedTextChild("accessLocation", this.leInst.getAccessLocation().toString());          	
+           	
         } else {
         	setStatus(Status.CLIENT_ERROR_NOT_FOUND);
         }

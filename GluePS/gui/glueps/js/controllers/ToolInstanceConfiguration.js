@@ -44,7 +44,7 @@ var ToolInstanceConfiguration = {
 			var url = LdShakeManager.buildLdshakeUrl(url);
 		}
 		
-		//Se elimina este control, al aï¿½adir en ActivityPainter.js que al reutilizar se copia el position
+		//Se elimina este control, al añadir en ActivityPainter.js que al reutilizar se copia el position
 		/*
 		var toolInstanceOrigen = ToolInstanceReuse.getOriginalToolInstance(toolInstance);
 		if (toolInstance.getPosition() && toolInstance.getPosition() != "" && toolInstance.getPosition() != "undefined") {
@@ -59,7 +59,7 @@ var ToolInstanceConfiguration = {
 		
 		var xhrArgs = {
 			url : url,
-			timeout : 10000, // Tiempo mï¿½ximo de espera
+			timeout : 10000, // Tiempo máximo de espera
 			handleAs : "text",// Tipo de dato de la respuesta del Get
 			load : function(data) {
 				parserXforms.data = data;
@@ -73,7 +73,7 @@ var ToolInstanceConfiguration = {
 				formConfiguration.setAttribute("id", "formToolConfiguration");
 				divToolConfiguration.appendChild(formConfiguration);
 
-				// Aï¿½ado campo para el tï¿½tulo
+				// Añado campo para el título
 				var pTitleVle = document.createElement("p");
 				pTitleVle.innerHTML = i18n.get("ToolReuseTitleInVle");
 				var inputTitleVle = document.createElement("input");
@@ -87,29 +87,29 @@ var ToolInstanceConfiguration = {
 				
 				//Juan
 				
-				if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {					
-					//Si la herramienta es interna no aparecen campos de geoposiciï¿½n
+				if (LearningEnvironment.getShowAr()) {					
+					//Si la herramienta es interna no aparecen campos de geoposición
 					if (!tool.isInternal()) {
 						ToolInstanceConfiguration.addRadioButtonARPosition(formConfiguration, positionType);
-						// Se aï¿½ade campo para la geoposiciï¿½n
+						// Se añade campo para la geoposición
 						ToolInstanceConfiguration.addARConfFields(formConfiguration, toolInstance, instancedActivity);
-						//Se muestran los parï¿½metros de config de AR que correspondan
+						//Se muestran los parámetros de config de AR que correspondan
 						ToolInstanceConfiguration.showARConfFields(positionType);
 						formConfiguration.appendChild(document.createElement("br"));
 					}	
 				}
 
-				//Juan: Hasta aquï¿½ mi ï¿½apa
+				//Juan: Hasta aquí mi ñapa
 				
 				
 				var reuses = ToolInstanceReuse.reusesToolInstance(toolInstance);
-				// Aï¿½ado el radio button para la selecciï¿½n de crear instancia de herramienta o reutilizar
+				// Añado el radio button para la selección de crear instancia de herramienta o reutilizar
 				if (tool.getToolKind() != "internal") {
 					ToolInstanceConfiguration.addRadioButtonExternalTool(formConfiguration, reuses);
 					var divCI = formConfiguration.appendChild(document.createElement("div"));
 					divCI.setAttribute("id", "divCI");
 					formConfiguration.appendChild(divCI);
-					// Aï¿½ade cada uno de los campos del formulario
+					// Añade cada uno de los campos del formulario
 					for ( var i = 0; i < parserXforms.camposFormulario.length; i++) {
 						divCI.appendChild(parserXforms.camposFormulario[i]);
 					}
@@ -148,7 +148,7 @@ var ToolInstanceConfiguration = {
 									document.getElementById("buttonsCreate").childNodes[0]);
 				}
 
-				// Aï¿½adir botones
+				// Añadir botones
 				var buttonSave = document
 						.getElementById("buttonsConfiguration").appendChild(
 								document.createElement("button"));
@@ -173,7 +173,7 @@ var ToolInstanceConfiguration = {
 				}, buttonCancel);
 				dojo.style("buttonsConfiguration", "display", "");
 
-				// En las herramientas internas no aparece el botï¿½n de crear
+				// En las herramientas internas no aparece el botón de crear
 				if (tool.getToolKind() != "internal") {
 					var buttonCreate = document.getElementById("buttonsCreate")
 							.appendChild(document.createElement("button"));
@@ -228,7 +228,7 @@ var ToolInstanceConfiguration = {
 	},
 	
 	
-	//Juan: Funciï¿½n para guardar configuraciï¿½n sin crear instancia, cuando la instancia ya existe
+	//Juan: Función para guardar configuración sin crear instancia, cuando la instancia ya existe
 	toolInstanceUpdateConfig : function(toolInstance, position, activity, instancedActivity) {
 		// Muestro gif animado puesto en marcha al pedir el formulario xforms a Glue
 		InformativeDialogs.showLoadingDialog(i18n.get("loadingConfiguration"));
@@ -236,7 +236,7 @@ var ToolInstanceConfiguration = {
 		var tool = toolInstance.getTool();
 		var positionType = toolInstance.getPositionType();
 		
-		//Se elimina este control, al aï¿½adir en ActivityPainter.js que al reutilizar se copia el position
+		//Se elimina este control, al añadir en ActivityPainter.js que al reutilizar se copia el position
 		/*
 		var toolInstanceOrigen = ToolInstanceReuse.getOriginalToolInstance(toolInstance);
 		if (toolInstance.getPosition() && toolInstance.getPosition() != "" && toolInstance.getPosition() != "undefined") {
@@ -247,7 +247,7 @@ var ToolInstanceConfiguration = {
 			geoposition = toolInstance.getPosition();
 		}	
 		*/
-		//Juan: hasta aquï¿½ modificaciï¿½n
+		//Juan: hasta aquí modificación
 		
 		var toolType = tool.getToolType();
 		var toolKind = tool.getToolKind();
@@ -280,7 +280,7 @@ var ToolInstanceConfiguration = {
 				formConfiguration.setAttribute("id", "formToolConfiguration");
 				divToolConfiguration.appendChild(formConfiguration);
 
-				// Aï¿½ado campo para el tï¿½tulo
+				// Añado campo para el título
 				var pTitleVle = document.createElement("p");
 				pTitleVle.innerHTML = i18n.get("ToolReuseTitleInVle");
 				var inputTitleVle = document.createElement("input");
@@ -294,24 +294,24 @@ var ToolInstanceConfiguration = {
 				
 				//Juan
 
-				if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {
+				if (LearningEnvironment.getShowAr()) {
 					ToolInstanceConfiguration.addRadioButtonARPosition(formConfiguration, positionType);
 					
-					//Si la herramienta es interna no aparcen campos de geoposiciï¿½n
+					//Si la herramienta es interna no aparcen campos de geoposición
 					if (tool.getToolKind() != "internal") {	
-						// Se aï¿½aden campos AR
+						// Se añaden campos AR
 						ToolInstanceConfiguration.addARConfFields(formConfiguration, toolInstance, instancedActivity);
 						formConfiguration.appendChild(document.createElement("br"));
-						//Se muestran los parï¿½metros de config de AR que correspondan
+						//Se muestran los parámetros de config de AR que correspondan
 						ToolInstanceConfiguration.showARConfFields(positionType);
 
 					}	
 				}
 								
-				//Aï¿½ado campo aplicar a todos
+				//Añado campo aplicar a todos
 				ToolInstanceConfiguration.addApplyAllConf(formConfiguration);
 
-				//Juan: Hasta aquï¿½ mi ï¿½apa
+				//Juan: Hasta aquí mi ñapa
 				
 				// Elimino botones que he creado antes
 				while (document.getElementById("buttonsConfiguration").childNodes.length > 0) {
@@ -378,17 +378,17 @@ var ToolInstanceConfiguration = {
 	
 	
 	addSelectReuseTool : function(parentNode, toolInstance, position,activity, instancedActivity) {
-		// Aï¿½ado el select para la reutilizaciï¿½n de herramientas
+		// Añado el select para la reutilización de herramientas
 		var divSelect = parentNode.appendChild(document.createElement("div"));
 		divSelect.setAttribute("id", "divSelect");
 		dojo.style("divSelect", "padding", "10px 0px");
 		parentNode.appendChild(divSelect);
-		// Aï¿½adir el select con las instancias de herramientas del mismo tipo
+		// Añadir el select con las instancias de herramientas del mismo tipo
 		var nodoSelect = document.createElement("select");
 		nodoSelect.id = "selectToolInstance";
 		nodoSelect.name = "selectToolInstance";
 
-		// Obtenemos y aï¿½adimos al select las instancias del mismo tipo que han
+		// Obtenemos y añadimos al select las instancias del mismo tipo que han
 		// aparecido previamente
 		var tiPreviously = ToolInstanceReuse.getToolInstanceTypePreviously(toolInstance, position,activity, instancedActivity);
 		var option = new Option(i18n.get("selectToolInstanceDefault"),"0");
@@ -410,7 +410,7 @@ var ToolInstanceConfiguration = {
 		   }
 		}
 		else{
-			dojo.style("divSelect", "display", "none"); // Inicialmente estï¿½ oculto
+			dojo.style("divSelect", "display", "none"); // Inicialmente está oculto
 		}
 		divSelect.appendChild(nodoSelect);
 	},
@@ -420,7 +420,7 @@ var ToolInstanceConfiguration = {
 		divCheckbox.setAttribute("id", "divCheckbox");
 		dojo.style("divCheckbox", "margin", "10px 0px");
 		parentNode.appendChild(divCheckbox);
-		//Aï¿½adir el checkbox
+		//Añadir el checkbox
 		var checkbox = document.createElement("input");
 		checkbox.setAttribute("type","checkbox");
 		checkbox.setAttribute("id", "checkboxApplyAll");
@@ -476,7 +476,7 @@ var ToolInstanceConfiguration = {
 	},
 
 	/**
-	 * Aï¿½ade un radio button para la elecciï¿½n del tipo de configuraciï¿½n
+	 * Añade un radio button para la elección del tipo de configuración
 	 * 
 	 * @param parentNode
 	 */
@@ -513,7 +513,7 @@ var ToolInstanceConfiguration = {
 	},
 
 	addRadioButtonInternalTool : function(parentNode, moodleType, reuseToolInstance) {
-		// Las herramientas de tipo moodle no pueden reutilizar. Aï¿½adir mensaje informativo
+		// Las herramientas de tipo moodle no pueden reutilizar. Añadir mensaje informativo
 		if (moodleType) {
 			var div = document.createElement("div");
 			div.setAttribute("class", "divInfo");
@@ -563,7 +563,7 @@ var ToolInstanceConfiguration = {
 		}
 	},
 
-	//Juan: Aï¿½ado botï¿½n radio para posicionar en AR
+	//Juan: Añado botón radio para posicionar en AR
 	addRadioButtonARPosition : function(parentNode,positionType) {
 		var np;
 		var geo;
@@ -748,7 +748,7 @@ var ToolInstanceConfiguration = {
 		ToolInstanceConfiguration.tooltipHelp("geopositionSpan", i18n.get("ToolReuseGeopositionHelp"));
 			
 		
-		// Juan: Enlace a mapa para obtener geo-posiciï¿½n
+		// Juan: Enlace a mapa para obtener geo-posición
 		var linkToMap = document.createElement("a");
 		linkToMap.href = "pages/geoposition.html";
 		linkToMap.target = "_blank";
@@ -760,7 +760,7 @@ var ToolInstanceConfiguration = {
 	
 		
 			
-		// Juan: Aï¿½ado campo para la distancia mï¿½xima para mostrarlo en AR browser
+		// Juan: Añado campo para la distancia máxima para mostrarlo en AR browser
 		var pMaxdistance = document.createElement("p");
 		pMaxdistance.innerHTML = i18n.get("ToolReuseMaxdistance");
 		var inputMaxdistance = document.createElement("input");
@@ -776,8 +776,8 @@ var ToolInstanceConfiguration = {
 //		ToolInstanceConfiguration.showARorienField(divARgeo, toolInstance, "geo");
 	
 
-		//Se aï¿½aden campos para posicionamiento con marcadores
-		// Aï¿½ado el select para la selecciï¿½n de marcador
+		//Se añaden campos para posicionamiento con marcadores
+		// Añado el select para la selección de marcador
 		var divSelect = parentNode.appendChild(document.createElement("div"));
 		divSelect.setAttribute("id", "divSelectARjunaiomarker");
 		dojo.style("divSelectARjunaiomarker", "padding", "10px 0px");
@@ -788,7 +788,7 @@ var ToolInstanceConfiguration = {
 		nodoSelect.name = "selectMarker";
 
 		//Ubicacion actual de los 21 marcadores de prueba: http://157.88.130.207/GLUEPS_AR/markers/ID_Marker1-21/MetaioMarkerX.png
-		//TODO estï¿½ puesta a fuego la ubicaciï¿½n de los marcadores. Habrï¿½a que sacar parte de la URL automï¿½ticamente si es posible.
+		//TODO está puesta a fuego la ubicación de los marcadores. Habría que sacar parte de la URL automáticamente si es posible.
 		if (window.location.host == "www.gsic.uva.es") {
 			var urlmarker = "http://" + window.location.host + "/juanmunoz/GLUEPSManager/gui/glueps/arbrowsers/markers/ID_Marker1-21/MetaioMarker";
 		} else if (window.location.host == "glue-test.cloud.gsic.tel.uva.es") {
@@ -803,7 +803,7 @@ var ToolInstanceConfiguration = {
 			markers[i]=urlmarker + s + ".png";
 			}
 		
-		// Aï¿½adimos al select los marcadores
+		// Añadimos al select los marcadores
 		var option = new Option(i18n.get("selectMarkerDefault"),"0");
 		option.selected = true;
 		nodoSelect.options[0] = option;
@@ -811,7 +811,7 @@ var ToolInstanceConfiguration = {
 		for ( var i = 0; i < markers.length; i++) 
 		{
 			var s = i+1;
-			//Se comprueba que el marcador no estï¿½ ya usado en otra instanced activity (ni en la presente)
+			//Se comprueba que el marcador no está ya usado en otra instanced activity (ni en la presente)
 			var notused = true;
 			var toolinstances = new Array();
 			toolinstances = instancedActivity.getToolInstances();
@@ -863,7 +863,7 @@ var ToolInstanceConfiguration = {
 	},
 	
 	
-	//Juan: Hasta aquï¿½ modificaciï¿½n
+	//Juan: Hasta aquí modificación
 	
 	changeConfigurationModeExternal : function(create) {
 		dojo.byId("toolConfigurationError").innerHTML="";
@@ -892,7 +892,7 @@ var ToolInstanceConfiguration = {
 	
 
 	
-	//Juan: Para controlar la apariciï¿½n de los menï¿½s de posicionamiento AR
+	//Juan: Para controlar la aparición de los menús de posicionamiento AR
 	showARConfFields : function(postype) {
 		dojo.byId("toolConfigurationError").innerHTML="";
 		switch(postype)
@@ -968,7 +968,7 @@ var ToolInstanceConfiguration = {
 	
 	//Juan
 	/**	
-	 * Muestra el campo "orientaciï¿½n" en herramientas externas
+	 * Muestra el campo "orientación" en herramientas externas
 	**/
 	/*
 	showARorienField: function(parentNode, toolInstance, place){
@@ -1025,16 +1025,16 @@ var ToolInstanceConfiguration = {
 		var nameInput = "";
 		var valueInput = "";
 		// Se obtienen y almacenan cada uno de los campos del formulario de
-		// configuraciï¿½n de herramientas
+		// configuración de herramientas
 		for ( var j = 0; j < document.forms.formToolConfiguration.length; j++) {
 			nameInput = document.forms.formToolConfiguration[j].name;
 			valueInput = document.forms.formToolConfiguration[j].value;
 			configurationTool[nameInput] = valueInput;
 		}
 		
-		//Juan: Se aï¿½ade el positionType seleccionado en el elemento radio
+		//Juan: Se añade el positionType seleccionado en el elemento radio
 
-		if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {
+		if (LearningEnvironment.getShowAr()) {
 			var pos = null;
 			if(dijit.byId("ptNone")!=null && dijit.byId("ptNone").attr('value') !== false){
 				pos = dijit.byId("ptNone").attr('value');
@@ -1051,7 +1051,7 @@ var ToolInstanceConfiguration = {
 			configurationTool["positionType"] = pos;
 		}
 		
-		//Juan: Hasta aquï¿½
+		//Juan: Hasta aquí
 		
 		
 		return configurationTool;
@@ -1059,7 +1059,7 @@ var ToolInstanceConfiguration = {
 	},
 	
 	/**
-	 *  Comprueba que el formulario de actualizaciï¿½n de la configuraciï¿½n estï¿½ completo y 
+	 *  Comprueba que el formulario de actualización de la configuración está completo y 
 	 *  obtiene las instancias de la herramienta que se van a actualizar
 	 */
 	checkUpdateToolInstance: function(toolInstance, activity)
@@ -1071,7 +1071,7 @@ var ToolInstanceConfiguration = {
 		}
 		else{
 			dijit.byId("toolConfiguration").hide();
-			//Comprobar si el usuario quiere aplicar la misma configuraciï¿½n a todas las instancias de la misma herramienta en la actividad						
+			//Comprobar si el usuario quiere aplicar la misma configuración a todas las instancias de la misma herramienta en la actividad						
 			if (!dojo.byId("checkboxApplyAllConf").checked){
 				var ti = {
 						toolInstance: toolInstance,
@@ -1081,7 +1081,7 @@ var ToolInstanceConfiguration = {
 				ToolInstanceConfiguration.updateconfigToolInstance(ti);			
 			}
 			else{
-				if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()){
+				if (LearningEnvironment.getShowAr()){
 					var select = dojo.byId("selectMarker");
 					var newMarkerId = select.options[select.selectedIndex].value;
 				}
@@ -1106,7 +1106,7 @@ var ToolInstanceConfiguration = {
 								break;
 							}
 						}
-						if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()){
+						if (LearningEnvironment.getShowAr()){
 							var markerExists = false; //Indica si la actividad instanciada tiene asignado ya ese marcador en alguna instancia
 							for (var j = 0; j < toolInstances.length; j++){
 								if (toolInstances[j].getPosition()== newMarkerId){
@@ -1115,13 +1115,13 @@ var ToolInstanceConfiguration = {
 								}
 							}
 						}
-						var firstCopyConf = true; //Indica si es la primera copia de la configuraciï¿½n que se va a realizar en la actividad instanciada
+						var firstCopyConf = true; //Indica si es la primera copia de la configuración que se va a realizar en la actividad instanciada
 						for (var j = 0; j < toolInstances.length; j++)
 						{
 							//Evitar actualizar la instancia inicial de nuevo
 							if (toolInstance.getId()!= toolInstances[j].getId()){
 						    	var tool = toolInstances[j].getTool();
-						    	//Se debe de actualizar la configuraciï¿½n para aquellas instancias de la misma herramienta que han sido configuradas
+						    	//Se debe de actualizar la configuración para aquellas instancias de la misma herramienta que han sido configuradas
 						    	if (tool.getId()== toolSource.getId() && tool.isExternal() && toolInstances[j].getLocation())
 						    	{
 						    		var ti = {
@@ -1144,7 +1144,7 @@ var ToolInstanceConfiguration = {
 	},
 	
 	/**
-	 *  Comprueba que el formulario de creaciï¿½n de instancia estï¿½ completo y 
+	 *  Comprueba que el formulario de creación de instancia está completo y 
 	 *  obtiene las instancias de la herramienta que se van a instanciar
 	 */
 	checkCreateToolInstance: function(toolInstance, activity)
@@ -1156,7 +1156,7 @@ var ToolInstanceConfiguration = {
 		}
 		else{
 			dijit.byId("toolConfiguration").hide();
-			//Comprobar si el usuario quiere aplicar la misma configuraciï¿½n a todas las instancias de la misma herramienta en la actividad
+			//Comprobar si el usuario quiere aplicar la misma configuración a todas las instancias de la misma herramienta en la actividad
 			if (!dojo.byId("checkboxApplyAll").checked){
 				var toolInstancesCreate = new Array();
 				var ti = {
@@ -1168,7 +1168,7 @@ var ToolInstanceConfiguration = {
 				ToolInstanceCreator.startToolInstanceCreation(toolInstancesCreate);
 			}
 			else{
-				if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()){
+				if (LearningEnvironment.getShowAr()){
 					var select = dojo.byId("selectMarker");
 					var newMarkerId = select.options[select.selectedIndex].value;				
 				}
@@ -1195,7 +1195,7 @@ var ToolInstanceConfiguration = {
 							}
 						}
 						var markerExists = false; //Indica si la actividad instanciada tiene asignado ya ese marcador en alguna instancia
-						if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()){
+						if (LearningEnvironment.getShowAr()){
 							for (var j = 0; j < toolInstances.length; j++){
 								if (toolInstances[j].getPosition()== newMarkerId){
 									markerExists = true;
@@ -1203,7 +1203,7 @@ var ToolInstanceConfiguration = {
 								}
 							}
 						}
-						var firstCopyConf = true; //Indica si es la primera copia de la configuraciï¿½n que se va a realizar en la actividad instanciada
+						var firstCopyConf = true; //Indica si es la primera copia de la configuración que se va a realizar en la actividad instanciada
 						for (var j = 0; j < toolInstances.length; j++)
 						{
 							//Evitar incluir la instancia inicial de nuevo
@@ -1233,9 +1233,9 @@ var ToolInstanceConfiguration = {
 
 	
 	/**
-	 * Actualizar configuraciï¿½n de una instancia de herramienta (AR)
+	 * Actualizar configuración de una instancia de herramienta (AR)
 	 * 
-	 * @param toolInstanceObj Objeto con informaciï¿½n de la instancia de herramienta a actualizar
+	 * @param toolInstanceObj Objeto con información de la instancia de herramienta a actualizar
 	 */
 	updateconfigToolInstance : function(toolInstanceObj) {
 		var toolInstance = toolInstanceObj.toolInstance;
@@ -1243,12 +1243,12 @@ var ToolInstanceConfiguration = {
 		var configuration = ToolInstanceConfiguration.getFormContent();
 
 		// Guardar el nombre elegido para la instancia de herramienta.
-		//if (toolInstanceObj.isCopyConf==false){
+		if (toolInstanceObj.isCopyConf==false){
 			toolInstance.setName(configuration["titleVle"]);
-		//}
+		}
 
 		// Juan: Guardar la posiciÃ³n AR de la instancia de herramienta
-		if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {
+		if (LearningEnvironment.getShowAr()) {
 			if (toolInstanceObj.isCopyConf == false){
 				if (dijit.byId("ptNone").attr('value') !== false) {
 					toolInstance.deletePosition();
@@ -1299,7 +1299,7 @@ var ToolInstanceConfiguration = {
 					toolInstance.deleteScale();
 					// toolInstance.deleteOrientation();
 				}
-				//Si se estï¿½ aplicando la configuraciï¿½n de otra instancia sï¿½lo se almacena si es geoposiciï¿½n
+				//Si se está aplicando la configuración de otra instancia sólo se almacena si es geoposición
 				if (dijit.byId("ptGeo").attr('value') !== false) {
 					toolInstance.setPosition(configuration["geoposition"]);
 					toolInstance.setMaxdistance(configuration["maxdistance"]);
@@ -1344,20 +1344,20 @@ var ToolInstanceConfiguration = {
 			dojo.byId("toolConfigurationError").innerHTML = i18n.get("noVleTitle");
 		}
 		else{
-			// Oculto pantalla de configuraciï¿½n de la herramienta
+			// Oculto pantalla de configuración de la herramienta
 			dijit.byId("toolConfiguration").hide();
 			var createTool = dojo.byId("rbCi");
 			var dontReuse = dojo.byId("rbDontReuse");
 			// Comprobar si se ha elegido reutilizar herramienta
 			if ((createTool && !createTool.checked) || (dontReuse && !dontReuse.checked)) {
-				// Actualizaciï¿½n de la instancia de herramienta elegida
+				// Actualización de la instancia de herramienta elegida
 				var select = dojo.byId("selectToolInstance");
 				if (select && select.options[select.selectedIndex].value == "0") {
 					dojo.byId("toolConfigurationError").innerHTML = i18n.get("noToolSelected");
 				}
 				else{
 
-					//Comprobar si el usuario quiere aplicar la misma configuraciï¿½n a todas las instancias de la misma herramienta en la actividad
+					//Comprobar si el usuario quiere aplicar la misma configuración a todas las instancias de la misma herramienta en la actividad
 					if (!dojo.byId("checkboxApplyAll").checked){
 						ToolInstanceConfiguration.saveReuseConfiguration(toolInstance,activity, false);
 					}
@@ -1372,10 +1372,10 @@ var ToolInstanceConfiguration = {
 							if (toolInstances) {
 								for (var j = 0; j < toolInstances.length; j++)
 								{
-									//Evitar actualizar la instancia inicial de nuevo o copiar configuraciï¿½n en la instancia que se va a reutilizar
+									//Evitar actualizar la instancia inicial de nuevo o copiar configuración en la instancia que se va a reutilizar
 									if (toolInstance.getId()!= toolInstances[j].getId() && select.options[select.selectedIndex].value!=toolInstances[j].getId()){
 								    	var tool = toolInstances[j].getTool();
-								    	//Se debe copiar la configuraciï¿½n para aquellas instancias de la misma herramienta que no han sido configuradas
+								    	//Se debe copiar la configuración para aquellas instancias de la misma herramienta que no han sido configuradas
 								    	if (tool.getId()== toolSource.getId() && (tool.isExternal() && !toolInstances[j].getLocation()))
 								    	{
 								    		ToolInstanceConfiguration.saveReuseConfiguration(toolInstances[j],activity, true);
@@ -1399,11 +1399,11 @@ var ToolInstanceConfiguration = {
 	},
 
 	/**
-	 * Guarda la configuraciï¿½n de una herramienta almacenando el contenido del formulario
+	 * Guarda la configuración de una herramienta almacenando el contenido del formulario
 	 * 
-	 * @param toolInstance Herramienta cuya configuraciï¿½n se desea guardar
+	 * @param toolInstance Herramienta cuya configuración se desea guardar
 	 * @param activity Actividad de la herramienta
-	 * @param isCopyConf Se estï¿½ aplicando la configuraciï¿½n de otra instancia o no
+	 * @param isCopyConf Se está aplicando la configuración de otra instancia o no
 	 */
 	saveReuseConfiguration : function(toolInstance, activity, isCopyConf) {
 
@@ -1415,8 +1415,8 @@ var ToolInstanceConfiguration = {
 			toolInstance.setName(configuration["titleVle"]);
 		}
 		
-		// Juan: Guardar la posiciï¿½n AR de la instancia de herramienta
-		if (LearningEnvironment.getEnableAR() && LearningEnvironment.getShowAR()) {
+		// Juan: Guardar la posición AR de la instancia de herramienta
+		if (LearningEnvironment.getShowAr()) {
 			if (isCopyConf == false){
 				if(dijit.byId("ptNone")!=null && dijit.byId("ptNone").attr('value') !== false){
 					toolInstance.deletePosition();
@@ -1480,7 +1480,7 @@ var ToolInstanceConfiguration = {
 		var dontReuse = dojo.byId("rbDontReuse");
 		// Comprobar si se ha elegido reutilizar herramienta
 		if ((createTool && !createTool.checked) || (dontReuse && !dontReuse.checked)) {
-			// Actualizaciï¿½n de la instancia de herramienta elegida
+			// Actualización de la instancia de herramienta elegida
 			var select = dojo.byId("selectToolInstance");
 			if (select && select.options[select.selectedIndex].value != "0") {
 				var newInstancedToolId = select.options[select.selectedIndex].value;
@@ -1510,7 +1510,7 @@ var ToolInstanceConfiguration = {
 			}
 		}
 		else{
-			//Borrar la reutilizaciï¿½n de una herramienta interna
+			//Borrar la reutilización de una herramienta interna
 			if (dontReuse && dontReuse.checked)
 			{
 				toolInstance.deleteLocation();
@@ -1534,7 +1534,7 @@ var ToolInstanceConfiguration = {
 		var xhrArgs = {
 			url : url,
 			handleAs : "text",
-			timeout : 10000, // tiempo mï¿½ximo de expera de 10 segundos
+			timeout : 10000, // tiempo máximo de expera de 10 segundos
 			load : function(data) {
 				// Borrar el location
 				var toolInstance = ToolInstanceContainer
@@ -1553,7 +1553,7 @@ var ToolInstanceConfiguration = {
 	},
 
 	/**
-	 * Muestra la ventana de confirmaciï¿½n del borrado de una instancia de
+	 * Muestra la ventana de confirmación del borrado de una instancia de
 	 * herramienta
 	 * 
 	 * @param toolInstance
@@ -1569,7 +1569,7 @@ var ToolInstanceConfiguration = {
 	},
 
 	/**
-	 * OCulta la ventana de confirmaciï¿½n del borrado de una instancia de
+	 * OCulta la ventana de confirmación del borrado de una instancia de
 	 * herramienta
 	 */
 	hideDeleteToolInstance : function() {

@@ -473,6 +473,34 @@ public class JunaioArelAdaptor {
    	            	
    	            // ### CASE normal gluelets ###
    	            } else {		            
+   		            stringBuilder.append("<thumbnail>" + glueicon + "</thumbnail>");
+   		            stringBuilder.append("<icon>" + glueicon + "</icon>");
+   		            
+   	//	            stringBuilder.append("<homepage>" + poi.getLocation() + "</homepage>"); 
+   		            String locEncoded = Utils.encodeURIComponent(poi.getLocation().toString());
+   		            
+   		            stringBuilder.append("<popup>");
+   	   	            if (desc != null){
+   	   	            	if (!desc.equals("null")){
+   	   	   	            	stringBuilder.append("<description><![CDATA[" + desc + "]]></description>");
+   	   	            	} else {
+   	   	            		stringBuilder.append("<description><![CDATA[ ]]></description>");
+   	   	            	}
+   	   	            } else {
+   	   	            	stringBuilder.append("<description><![CDATA[ ]]></description>");
+   	   	            }
+   		            stringBuilder.append("<buttons>");
+   		            
+   		            //Old version, failing in junaio due to a junaio bug
+//   		        stringBuilder.append("<button id=\"openjun\" name=\"Abrir en Junaio\"><![CDATA[javascript:openurlinternal(\"" + locEncoded + "\")]]></button>");
+//		            stringBuilder.append("<button id=\"openbrow\" name=\"Abrir en Navegador de Internet\"><![CDATA[javascript:openUrlExternal(\"" + locEncoded + "\")]]></button>");
+
+   		            //Workaround
+   		            stringBuilder.append("<button id=\"openjun\" name=\"Abrir en Junaio\"><![CDATA[javascript:arel.Media.openWebsite(decodeURIComponent(\"" + locEncoded + "\"));]]></button>");
+   		            stringBuilder.append("<button id=\"openbrow\" name=\"Abrir en Navegador de Internet\"><![CDATA[javascript:arel.Media.openWebsite(decodeURIComponent(\"" + locEncoded + "\"), \"external\");]]></button>");
+
+   		            stringBuilder.append("</buttons>");
+   		    		stringBuilder.append("</popup>");
    		            
    		            //Positioning with markers
    		            if (positionType.equals(Constants.POS_TYPE_JUNAIOMARKER)) {
@@ -506,38 +534,6 @@ public class JunaioArelAdaptor {
 
    		     //       	stringBuilder.append("<mainresource>" + poi.getLocation() + "</mainresource>"); 
    		            }
-   		        
-   		            stringBuilder.append("<thumbnail>" + glueicon + "</thumbnail>");
-   		            stringBuilder.append("<icon>" + glueicon + "</icon>");
-   		            
-   	//	            stringBuilder.append("<homepage>" + poi.getLocation() + "</homepage>"); 
-   		            String locEncoded = Utils.encodeURIComponent(poi.getLocation().toString());
-   		            
-   		            stringBuilder.append("<popup>");
-   	   	            if (desc != null){
-   	   	            	if (!desc.equals("null")){
-   	   	   	            	stringBuilder.append("<description><![CDATA[" + desc + "]]></description>");
-   	   	            	} else {
-   	   	            		stringBuilder.append("<description><![CDATA[ ]]></description>");
-   	   	            	}
-   	   	            } else {
-   	   	            	stringBuilder.append("<description><![CDATA[ ]]></description>");
-   	   	            }
-   		            stringBuilder.append("<buttons>");
-   		            
-   		            //Old version, failing in junaio due to a junaio bug
-//   		        stringBuilder.append("<button id=\"openjun\" name=\"Abrir en Junaio\"><![CDATA[javascript:openurlinternal(\"" + locEncoded + "\")]]></button>");
-//		            stringBuilder.append("<button id=\"openbrow\" name=\"Abrir en Navegador de Internet\"><![CDATA[javascript:openUrlExternal(\"" + locEncoded + "\")]]></button>");
-
-   		            //Workaround
-   		            stringBuilder.append("<button id=\"openjun\" name=\"Abrir en Junaio\"><![CDATA[javascript:arel.Media.openWebsite(decodeURIComponent(\"" + locEncoded + "\"));]]></button>");
-   		            stringBuilder.append("<button id=\"openbrow\" name=\"Abrir en Navegador de Internet\"><![CDATA[javascript:arel.Media.openWebsite(decodeURIComponent(\"" + locEncoded + "\"), \"external\");]]></button>");
-
-
-   		            
-   		            stringBuilder.append("</buttons>");
-   		    		stringBuilder.append("</popup>");
-
    	            }
    	            stringBuilder.append("</object>");
    	        }

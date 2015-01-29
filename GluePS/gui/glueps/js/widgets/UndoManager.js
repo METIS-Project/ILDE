@@ -47,11 +47,11 @@ var UndoManager = {
     updateButtons: function() {
         this.undoButton.setAttribute("disabled", this.undoCount == 0);
         this.redoButton.setAttribute("disabled", this.redoCount == 0);
-        /*if (JsonDB.deploy && (JsonDB.deploy.staticDeployURL || JsonDB.deploy.liveDeployURL)){
+        if (JsonDB.deploy && (JsonDB.deploy.staticDeployURL || JsonDB.deploy.liveDeployURL)){
         	this.undoButton.setAttribute("disabled",true);
         	this.redoButton.setAttribute("disabled",true);
         	
-        }*/
+        }
     },
 	
     newEditionAction: function() {
@@ -59,16 +59,6 @@ var UndoManager = {
         this.redoCount = 0;
         //this.updateButtons();
         this.getMetadata();
-    },
-    
-    newPostDeployAction: function() {
-    	this.undoCount = this.redoCount = 0;
-    	this.getMetadata();
-    },
-    
-    save: function(){
-    	this.undoCount = this.redoCount = 0;
-    	this.getMetadata();
     },
 	
     undo: function() {
@@ -92,12 +82,14 @@ var UndoManager = {
     undone: function() {
         this.undoCount--;
         this.redoCount++;
+        //this.updateButtons();
         this.getMetadata();
     },
 
     redone: function() {
         this.undoCount++;
         this.redoCount--;
+        //this.updateButtons();
         this.getMetadata();
     },
     
@@ -127,7 +119,7 @@ var UndoManager = {
 	},
 	
 	/**
-	 *  Realiza un GET para obtener informaciÃ³n adicional sobre la versiÃ³n del despliegue
+	 *  Realiza un GET para obtener información adicional sobre la versión del despliegue
 	 *  Permite saber si debe mostrar la alerta al deshacer
 	 */
 	getMetadata : function() {

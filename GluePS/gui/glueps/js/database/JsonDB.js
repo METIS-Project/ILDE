@@ -53,12 +53,8 @@
 					}
 					window.close();
 				}
-				else if (ioargs.xhr.status == 403){
-					InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("editDeployForbidden"));
-				}else{
-					if (ioargs.xhr.status == 404){
-						InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("deployNotFound"));
-					}
+				else{
+					InformativeDialogs.showAlertDialog(i18n.get("warning"), message);
 				}
 			}
 		}
@@ -83,7 +79,8 @@
 				"Accept" : "application/json"
 			},         
 			load : function(data) {
-				JsonDB.deploy = data;
+				JsonDB.deploy = data;	
+				DeploymentPainter.showInformationCompleted();
 				DeploymentPainter.paint();
             	//Indicamos al undo manager que se ha realizado una operación de deshacer
             	UndoManager.undone();
@@ -116,6 +113,7 @@
 			},
 			load : function(data) {
 				JsonDB.deploy = data;	
+				DeploymentPainter.showInformationCompleted();
 				DeploymentPainter.paint();
             	//Indicamos al undo manager que se ha realizado una operación de rehacer
             	UndoManager.redone();

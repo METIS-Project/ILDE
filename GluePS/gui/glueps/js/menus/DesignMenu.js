@@ -24,7 +24,7 @@ var DesignMenu = {
 	            label: i18n.get("MyListDesignNewCreateDeployButton"),
 	            icon: "edit",
 	            onClick: function(data) {
-	            	Deploy.anadirTitle(data.id, data.design, data.designtype);
+	            	Deploy.anadirTitle(data.id, data.design);
 	            },
 	            data: data,
 	            help: i18n.get("newDeployInfo")

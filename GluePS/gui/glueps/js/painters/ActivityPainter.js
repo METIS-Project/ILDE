@@ -6,7 +6,7 @@ var ActivityPainter = {
 
 	positions: {},
 	/**
-	 * Posiciï¿½n inicial desde la que se pinta
+	 * Posición inicial desde la que se pinta
 	 */
 	startPosition : {
 		x : 50,//30
@@ -218,8 +218,8 @@ var ActivityPainter = {
 				content : divNode[i],
 				style : {
 					"padding" : "12px 15px",
-					//"min-width" : maxWidth + "px" // Todos tendrï¿½n de tamaï¿½o como mï¿½nimo el ancho mï¿½ximo,
-					"width" : parseInt(maxWidth + 10) + "px" // Todos tendrï¿½n de tamaï¿½o el ancho mï¿½ximo
+					//"min-width" : maxWidth + "px" // Todos tendrán de tamaño como mínimo el ancho máximo,
+					"width" : parseInt(maxWidth + 10) + "px" // Todos tendrán de tamaño el ancho máximo
 				}
 			});
 
@@ -456,7 +456,7 @@ var ActivityPainter = {
 	},
 	
 	/**
-	 * Aï¿½ade icono y funcionalidad de mover hacia arriba una actividad
+	 * Añade icono y funcionalidad de mover hacia arriba una actividad
 	 */
 	addMoveUpActivity: function(activity, bigGroup, x, y)
 	{
@@ -501,7 +501,7 @@ var ActivityPainter = {
 	},
 	
 	/**
-	 * Aï¿½ade icono y funcionalidad de mover hacia abajo una actividad
+	 * Añade icono y funcionalidad de mover hacia abajo una actividad
 	 */
 	addMoveDownActivity: function(activity, bigGroup, x, y)
 	{
@@ -695,7 +695,6 @@ var ActivityPainter = {
 						created.setScale(StateManager.data.toolInstance.getScale());
 		//				created.setOrientation(StateManager.data.toolInstance.getOrientation());
 						//Juan: Hasta aquÃ­ modificaciÃ³n
-						created.setName(StateManager.data.toolInstance.getName());
 						JsonDB.notifyChanges();
 					}
 				}
@@ -1373,7 +1372,7 @@ var ActivityPainter = {
 				{
 					var toolInstance = ToolInstanceContainer.getToolInstance(positions.toolInstances[j].id);
 					var tool = toolInstance.getTool();
-					//No reutiliza. Guardamos la posiciï¿½n del identificador
+					//No reutiliza. Guardamos la posición del identificador
 					if (!ToolInstanceReuse.reusesToolInstance(toolInstance))
 					{
 						for (var k=0; k < this.notReuse[tool.getId()].length; k++)
@@ -1803,7 +1802,6 @@ var ActivityPainter = {
 						created.setPositionType(StateManager.data.toolInstance.getPositionType());
 						created.setScale(StateManager.data.toolInstance.getScale());
 			//			created.setOrientation(StateManager.data.toolInstance.getOrientation());
-						created.setName(StateManager.data.toolInstance.getName());
 						//Juan: Hasta aquÃ­ modificaciÃ³n
 					}
 				}

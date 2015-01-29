@@ -36,7 +36,6 @@ import glueps.core.gluepsManager.GLUEPSManagerApplication;
 import glueps.core.model.Deploy;
 import glueps.core.model.LearningEnvironment;
 import glueps.core.model.LearningEnvironmentInstallation;
-import glueps.core.model.LearningEnvironmentType;
 import glueps.core.persistence.JpaManager;
 import glueps.core.persistence.entities.DeployEntity;
 import glueps.core.persistence.entities.LearningEnvironmentEntity;
@@ -76,8 +75,6 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 	private static final String NEW_LE_INSTALLATION_FIELD = "leInstallation";
 	private static final String NEW_LE_USER_FIELD = "leUser";
 	private static final String NEW_LE_PASSWORD_FIELD = "lePassword";
-	private static final String NEW_LE_SHOW_AR_FIELD = "leShowAR";
-	private static final String NEW_LE_SHOW_VG_FIELD = "leShowVG";
 	
 	/** 
 	 * Logger 
@@ -217,8 +214,6 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 		String leInstallation 	= form.getFirstValue(NEW_LE_INSTALLATION_FIELD);
 		String leUser 	= form.getFirstValue(NEW_LE_USER_FIELD);
 		String lePassword 	= form.getFirstValue(NEW_LE_PASSWORD_FIELD);
-		String leShowAR = form.getFirstValue(NEW_LE_SHOW_AR_FIELD);
-		String leShowVG = form.getFirstValue(NEW_LE_SHOW_VG_FIELD);
 		Representation answer = null;
 		
 		/// Checks parameter values
@@ -227,24 +222,18 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 			missingParameters += NEW_LE_NAME_FIELD + ", ";
 		if (leInstallation == null || leInstallation.length() == 0) 
 			missingParameters += NEW_LE_INSTALLATION_FIELD + ", ";
-		/*if (leShowAR == null || leShowAR.length() == 0) 
-			missingParameters += NEW_LE_SHOW_AR_FIELD + ", ";
-		if (leShowVG == null || leShowVG.length() == 0) 
-			missingParameters += NEW_LE_SHOW_VG_FIELD + ", ";*/
 		if (missingParameters.length() > 0) {
 			missingParameters = missingParameters.substring(0, missingParameters.length() - 2);			
 			throw new ResourceException(Status.CLIENT_ERROR_BAD_REQUEST, "Missing parameters: " + missingParameters);
 		}
-		boolean showAR = Boolean.valueOf(leShowAR).booleanValue();
-		boolean showVG = Boolean.valueOf(leShowVG).booleanValue();
 		
 		String userid = this.getRequest().getChallengeResponse().getIdentifier();
 		if(userid==null) throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to get the learning environment caller user");
    		JpaManager dbmanager = JpaManager.getInstance();
    		LearningEnvironmentInstallation leInst = dbmanager.findLEInstObjectById(leInstallation);
    		if (leInst==null) throw new ResourceException(Status.SERVER_ERROR_INTERNAL, "Error while trying to get the LE Installation from the DB");
-   		LearningEnvironmentType leType = dbmanager.findLETypeObjectById(String.valueOf(leInst.getLeType()));
-		String type = leType.getName();
+   		
+		String leType = leInst.getType();
 		if (leUser == null || leUser.length() == 0) 
 			leUser = "";
 		if (lePassword == null || lePassword.length() == 0) 
@@ -255,7 +244,7 @@ public class LearningEnvironmentListResource extends GLUEPSResource {
 		LearningEnvironment le;
 		try {
 			//We should receive the parameters with the values for showAR and show VG. By now, we set both values to false
-			le = new LearningEnvironment(null, leName, type, accessLocation, userid, leUser, lePassword, trimId(leInstallation),showAR,showVG);
+			le = new LearningEnvironment(null, leName, leType, accessLocation, userid, leUser, lePassword, trimId(leInstallation),false,false);
 			dbmanager.insertLearningEnvironment(le);
 		}
 		catch (Exception e) {

@@ -793,7 +793,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 	        		nameSect = nameSect.replace("Root/Method - ", "");
 	        		String lfdeployUrl = getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
 	        		if (getLdShakeMode()==false){
-	        			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br></br>";
+	        			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br/>";
 	        		}
 	        		section.setSUMMARY(nameSect);
 	        		
@@ -1264,33 +1264,8 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 				    	            //ID
 				    	            mod.setID(new BigInteger(String.valueOf(listConten.get(i).getModId())));
 				    	            
-					        		String groupId ="";
-					        		ToolInstance toolInstReused = lfdeploy.getToolInstanceByLocation(listConten.get(i).getLocation());
-					        		if (toolInstReused!=null){
-					        			toolInstReused = lfdeploy.getOriginalToolInstance(toolInstReused);
-					        			HashMap<String, InstancedActivity> ia = lfdeploy.getInstancedActivitiesForToolInstance(toolInstReused.getId());
-					        			if (ia!=null){
-					        				Iterator<Map.Entry<String,InstancedActivity>> itInstAct = ia.entrySet().iterator();
-					        				while(itInstAct.hasNext()){
-					        					Map.Entry<String, InstancedActivity> entry = itInstAct.next();
-					        					InstancedActivity instAct = entry.getValue();
-					        					groupId = instAct.getGroupId();
-					        				}
-					        			}
-					        		}else{
-					        			groupId = listConten.get(i).getGroupId();
-					        		}
-					        		String groupName = "";
-					        		ArrayList<Group> groups = lfdeploy.getGroups();
-					        		for (int g = 0; g < groups.size(); g++){
-					        			if (groups.get(g).getId().equals(groupId)){
-					        				groupName = " (" + groups.get(g).getName() + ")";
-					        				break;
-					        			}
-					        		}
-				    	            
 				    	            //NAME
-				    	            ((JAXBElement)listD.get(0)).setValue(listConten.get(i).getModName() + groupName);
+				    	            ((JAXBElement)listD.get(0)).setValue(listConten.get(i).getModName());
 				    	            
 				    	            //TYPE
 				    	            ((JAXBElement)listD.get(1)).setValue(listConten.get(i).getSubTipoModulo());
@@ -2560,7 +2535,6 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 				String content = EntityUtils.toString(entity, "UTF-8");
 				//unescape the entity escapes to a string containing the actual Unicode characters corresponding to the escapes. Otherwise, the parsing process could fail with some tags such as the firstname and lastname tags)
 				content = StringEscapeUtils.unescapeHtml4(content);
-				content = content.replace("&nbsp;", " ");//
 				System.out.println((new Date()).toString()+" - Got response from server: "+content);
 				return content;
 			} else throw new Exception("GET unsuccessful. Null entity!");

@@ -43,14 +43,11 @@ var ParticipantManager = {
 		 		url = JsonDB.getCourseId();
 		 		var content = {};
 		 	}
-		 	InformativeDialogs.showLoadingDialog(i18n.get("getParticipantList"));
 	        var xhrArgs = {
 	            url: url,
-	            headers: {"Content-Type" :"text/xml"},
 	            content: content,
 				handleAs : "text",// Tipo de dato de la respuesta del Get,
 	            load: function(data) {
-	            	InformativeDialogs.hideLoadingDialog();
 	            	//Obtener los participantes nuevos que aparecen
 	            	var participantsUpdated = ParticipantManager.getParticipantsFromXML(data);
 	            	var participantsAdd = ParticipantManager.getParticipantsAdd(participantsUpdated);
@@ -68,7 +65,6 @@ var ParticipantManager = {
 	            	
 	            },
 	            error: function(error, ioargs) {
-	            	InformativeDialogs.hideLoadingDialog();
 	            	if (ioargs.xhr.status == 403){//wrong credentials
 	            		InformativeDialogs.showAlertDialog(i18n.get("warning"), i18n.get("ErrorUpdatingParticipants.credentialError"));
 					}else if (ioargs.xhr.status == 404){//the user doesn't have permission to get the course and its participants or the course no longer exists

@@ -4,10 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.xml.bind.JAXBContext;
@@ -27,15 +25,13 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import glueps.adaptors.ld.ILDAdaptor;
-import glueps.adaptors.ld.LDAdaptor;
 import glueps.adaptors.ld.imsld.icollage.InstanceCollageAdaptor;
 import glueps.core.model.Activity;
 import glueps.core.model.Deploy;
 import glueps.core.model.Design;
-import glueps.core.model.Group;
 import glueps.core.model.Participant;
 
-public class IMSLDAdaptor implements ILDAdaptor, LDAdaptor {
+public class IMSLDAdaptor implements ILDAdaptor {
 
 	private final String schemaLocation;
 	
@@ -89,8 +85,7 @@ public class IMSLDAdaptor implements ILDAdaptor, LDAdaptor {
 		
 	}
 	
-	@Override
-	public Deploy processInstantiation(String instFile, Design design, HashMap<String, Group> vleGroups, HashMap<String,Participant> vleUsers){
+	public Deploy processInstantiation(String instFile, Design design, HashMap<String,Participant> vleUsers){
 		
 		Deploy deploy = null;
 		
@@ -110,8 +105,7 @@ public class IMSLDAdaptor implements ILDAdaptor, LDAdaptor {
 				e.printStackTrace();
 				return null;
 			}
-			ArrayList<Participant> participants = new ArrayList<Participant>(icAdaptor.getParticipants().values());
-			deploy.setParticipants(participants);
+			deploy.setParticipants(icAdaptor.getParticipants());
 			deploy.setGroups(icAdaptor.getGroups());
 			deploy = icAdaptor.mapRolesGroupsParticipants(deploy);
 			deploy = icAdaptor.generateInstancesFromGroups(deploy);
@@ -146,13 +140,6 @@ public class IMSLDAdaptor implements ILDAdaptor, LDAdaptor {
 	@Override
 	public Design fromLDToLF(String filepath) {
 		return processUoL(filepath);
-	}
-
-
-	@Override
-	public ILDAdaptor getLDAdaptor(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 	

@@ -99,7 +99,6 @@
 		<pathelement location="${lib.dir}/jaxb-xjc.jar" />
 		<pathelement location="${lib.dir}/jdo-api-3.0.1.jar" />
 		<pathelement location="${lib.dir}/jdom.jar" />
-		<pathelement location="${lib.dir}/jsoup-1.8.1.jar" />
 		<pathelement location="${lib.dir}/jsr173_1.0_api.jar" />
 		<pathelement location="${lib.dir}/jug-1.1.2.jar" />
 		<pathelement location="${lib.dir}/log4j-1.2.11.jar" />
@@ -211,7 +210,6 @@
 		<pathelement location="${build.lib.dir}/jaxb-xjc.jar" />
 		<pathelement location="${build.lib.dir}/jdo-api-3.0.1.jar" />
 		<pathelement location="${build.lib.dir}/jdom.jar" />
-		<pathelement location="${build.lib.dir}/jsoup-1.8.1.jar" />
 		<pathelement location="${build.lib.dir}/jsr173_1.0_api.jar" />
 		<pathelement location="${build.lib.dir}/jug-1.1.2.jar" />
 		<pathelement location="${build.lib.dir}/log4j-1.2.11.jar" />

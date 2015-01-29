@@ -6,7 +6,6 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -15,7 +14,6 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.io.FileUtils;
 
 import glueps.adaptors.ld.ILDAdaptor;
-import glueps.adaptors.ld.LDAdaptor;
 import glueps.adaptors.ld.ppc.model.PatternType;
 import glueps.adaptors.ld.ppc.model.ResourceType;
 import glueps.adaptors.ld.ppc.model.StudentActivityType;
@@ -23,11 +21,10 @@ import glueps.adaptors.ld.ppc.model.TeachingLearningActivityType;
 import glueps.core.model.Activity;
 import glueps.core.model.Deploy;
 import glueps.core.model.Design;
-import glueps.core.model.Group;
 import glueps.core.model.Participant;
 import glueps.core.model.Resource;
 
-public class PPCAdaptor implements ILDAdaptor, LDAdaptor {
+public class PPCAdaptor implements ILDAdaptor {
 
 	private String designId = null;
 	
@@ -162,13 +159,9 @@ public class PPCAdaptor implements ILDAdaptor, LDAdaptor {
 	}
 
 	@Override
-	public Deploy processInstantiation(String filepath, Design design, HashMap<String, Group> vleGroups, HashMap<String, Participant> vleUsers) {	
-		return null;
-	}
-
-	@Override
-	public ILDAdaptor getLDAdaptor(Map<String, String> parameters) {
-		// TODO Auto-generated method stub
+	public Deploy processInstantiation(String filepath, Design design,
+			HashMap<String, Participant> vleUsers) {
+		
 		return null;
 	}
 
