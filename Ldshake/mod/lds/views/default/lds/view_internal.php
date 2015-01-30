@@ -99,7 +99,7 @@
             <?php include('license_banner.php'); ?>
             <?php if($lds->license): ?>
                 <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Manage license") ?></a>
-                <?php else: ?>
+            <?php else: ?>
                 <a id="manage_license" class="publishbutton rightbutton" href="#"><?php echo T("Add license") ?></a>
             <?php endif; ?>
             <div style="clear:both"></div>
@@ -160,18 +160,22 @@
             <div style="clear:both"></div>
 		</div>
 	<?php endif; ?>
-	<?php endif; ?>
-    <?php else:/*minimal*/ ?>
-        <div id="lds_view_actions">
-            <input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
-            <input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
-        </div>
-        <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
-        <div style="clear:both"></div>
-        <?php endif; ?>
     <div id="the_lds_wrapper">
         <iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>"></iframe>
     </div>
+<?php endif; ?>
+<?php else:/*minimal*/ ?>
+    <div id="lds_view_actions">
+        <input type="hidden" id="lds_edit_guid" name="guid" value="<?php echo $lds->guid ?>" />
+        <input type="hidden" id="lds_base_url" name="guid" value="<?php echo $url ?>pg/lds/" />
+    </div>
+    <a class="publishbutton rightbutton" href="<?php echo $url ?>action/lds/pdf_export?docId=<?php echo $currentDoc->guid ?>"><?php echo T("Save as PDF") ?></a>
+    <div style="clear:both"></div>
+
+    <div id="the_lds_wrapper">
+        <iframe id="the_lds" src="<?php echo $url.'pg/lds/view_iframe/'. $currentDoc->guid ?>"></iframe>
+    </div>
+<?php endif; ?>
 </div>
 
 <!-- Hidden stuff -->

@@ -46,9 +46,9 @@ foreach ($confOptions as $k=>$v)
 {
 	//Is it env-dependent?
 	if (is_array($v) &&
-	    array_key_exists('devel', $v) && 
-	    array_key_exists('staging', $v) && 
-	    array_key_exists('prod', $v))
+        (array_key_exists('devel', $v) ||
+	    array_key_exists('staging', $v) ||
+	    array_key_exists('prod', $v)))
     {
     	$CONFIG->$k = $v[$CONFIG->currentEnv];	
     }
@@ -63,9 +63,9 @@ foreach ($confPaths as $k=>$v)
 {
 	//Is it env-dependent?
 	if (is_array($v) &&
-	    array_key_exists('devel', $v) && 
-	    array_key_exists('staging', $v) && 
-	    array_key_exists('prod', $v))
+        (array_key_exists('devel', $v) ||
+	    array_key_exists('staging', $v) ||
+	    array_key_exists('prod', $v)))
     {
     	$CONFIG->$k = $v[$CONFIG->currentEnv];	
     }

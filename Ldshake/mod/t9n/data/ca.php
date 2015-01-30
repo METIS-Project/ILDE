@@ -1192,7 +1192,7 @@ $translations = array (
     'Your new password again' => 'La teva nova contrasenya, un altre cop',
     'Your new password' => 'La teva nova contrasenya',
     'Your settings' => 'La teva configuració',
-    'Your username is %1' => 'El teu nom d’usuari és %1 ',
+    'Your username is %1 ' => 'El teu nom d’usuari és %1 ',
     'Your VLE configuration is working properly, these are the available courses' => 'La teva configuració  de VLE està funcionant adequadament, aquests són els cursos disponibles',
     'Your VLEs' => 'Els teus VLEs',
 

@@ -57,7 +57,7 @@ function ldshake_query_design_implementated_list($userid, $params) {
     $editable_implementations_string = implode(',', $editable_implementations);
     $query['join'] = <<<SQL
 JOIN (
- SELECT DISTINCT CAST(msf.string AS INTEGER) AS ms_guid FROM entities ef
+ SELECT DISTINCT CAST(msf.string AS UNSIGNED) AS ms_guid FROM entities ef
  JOIN metadata mf ON ef.guid = mf.entity_guid
  JOIN metastrings msf ON msf.id = mf.value_id
  WHERE /*ef.subtype = {$lds_implementation_id}*/
