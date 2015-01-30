@@ -44,16 +44,18 @@ DirectoryIndex index.php
 
 # php 5, apache 1 and 2
 <IfModule mod_php5.c>
-	# default memory limit to 64Mb
+	# default memory limit to 128Mb
 	php_value memory_limit 128M
 	# to make sure register global is off
 	php_value register_globals 0
-	# max post size to 8Mb
+	# max post size to 32Mb
 	php_value post_max_size 32M
-	# upload size limit to 5Mb	
+	# upload size limit to 32Mb
 	php_value upload_max_filesize 32M
 	# hide errors, enable only if debug enabled
 	php_value display_errors 0
+	# set the default timezone
+	php_value date.timezone "UTC"
 </IfModule>
 
 # Turn on mod_gzip if available
