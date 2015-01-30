@@ -58,6 +58,8 @@ DirectoryIndex index.php
 	php_value date.timezone "UTC"
 	# max_execution_time
 	php_value max_execution_time 120
+    # session gc
+    php_value session.gc_maxlifetime 604800
 </IfModule>
 
 # Turn on mod_gzip if available
