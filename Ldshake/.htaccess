@@ -56,6 +56,8 @@ DirectoryIndex index.php
 	php_value display_errors 0
 	# set the default timezone
 	php_value date.timezone "UTC"
+	# max_execution_time
+	php_value max_execution_time 120
 </IfModule>
 
 # Turn on mod_gzip if available
