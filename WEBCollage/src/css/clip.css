@@ -1,0 +1,80 @@
+
+.clipPane {
+    position: absolute;
+    top: 100px;
+    /*left: -1000px;*/
+    right: -1000px;
+    z-index: 1950;
+    background:#a6a6e6;
+    color:#000
+}
+
+.clipContents {
+    background:white;
+    min-width: 200px;
+    max-width: 500px;
+    margin: 7px;
+    padding: 7px;
+}
+
+.clipTitleContent {
+    background: #333333;
+    color: white;
+    font-weight: bold;
+    cursor: move;
+    padding: 3px;
+    padding-left: 6px;
+    position:relative;
+}
+
+.clipTitle {
+    width: 100%;
+}
+
+.clipCloseButton {
+    right: 2px;
+    top: 2px;
+    position: absolute;
+    cursor: pointer;
+}
+
+.clipContent {
+    max-height: 300px;
+    min-height: 250px;
+    overflow: auto;
+}
+
+.clipItem {
+    font-size: small;
+    cursor:pointer;
+}
+
+.clipGroup {
+    font-size: smaller;
+    cursor: pointer;
+}
+
+li.clipItem:hover, li.clipGroup:hover {
+    background-color: #eeeeee;
+}
+
+.clippending {
+    color: red;
+}
+
+.clipcleared {
+    color: #a0a0a0;
+}
+
+.clipnew {
+    font-weight: bold;
+    color:red;
+}
+
+.clipmodified {
+    font-style: italic;
+}
+
+img.alertBlock {
+    background-image: url("../images/alert.png");
+}

@@ -1,0 +1,93 @@
+/*
+ * CopperCore, an IMS-LD level C engine
+ * Copyright (C) 2003 Harrie Martens and Hubert Vogten
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program (/license.txt); if not,
+ * write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ *
+ *     Contact information:
+ *     Open University of the Netherlands
+ *     Valkenburgerweg 177 Heerlen
+ *     PO Box 2960 6401 DL Heerlen
+ *     e-mail: hubert.vogten@ou.nl or
+ *             harrie.martens@ou.nl
+ *
+ *
+ * Open Universiteit Nederland, hereby disclaims all copyright interest
+ * in the program CopperCore written by
+ * Harrie Martens and Hubert Vogten
+ *
+ * prof.dr. Rob Koper,
+ * director of learning technologies research and development
+ *
+ */
+
+package org.coppercore.condition;
+
+import java.io.PrintWriter;
+import java.util.Collection;
+
+import org.coppercore.business.Run;
+import org.coppercore.business.Uol;
+import org.coppercore.business.User;
+import org.coppercore.common.XMLTag;
+import org.coppercore.component.ComponentFactory;
+import org.coppercore.component.LocalPersonalContent;
+import org.coppercore.exceptions.ExpressionException;
+import org.coppercore.exceptions.PropertyException;
+import org.coppercore.exceptions.TypeCastException;
+import org.w3c.dom.Element;
+
+public class ShowHideItem extends ShowHide{
+  private static final long serialVersionUID = 42L;
+  private String componentIdentifier = null;
+  private String dataType = null;
+  public ShowHideItem(String identifier, String componentIdentifier, String dataType, boolean show) {
+    super(identifier,show);
+    this.componentIdentifier = componentIdentifier;
+    this.dataType = dataType;
+  }
+
+  public static ShowHideItem create(Element node) {
+    boolean show = "true".equalsIgnoreCase(node.getAttribute("show"));
+    String id = node.getAttribute("ref");
+    String componentId = node.getAttribute("component-identifier");
+    String type = node.getAttribute("datatype");
+    return new ShowHideItem(id, componentId, type, show);
+  }
+
+  protected void performAction(Uol uol, Run run, User user, Collection firedActions) throws TypeCastException, PropertyException, ExpressionException {
+    LocalPersonalContent content = ComponentFactory.getPropertyFactory().getLocalPersonalContent(uol,run,user,componentIdentifier,dataType);
+    if (show) {
+      content.showItem(identifier);
+    }  
+    else {
+      content.hideItem(identifier);      
+    }
+  }
+
+
+  protected void toXml(PrintWriter out) {
+    XMLTag tag = new XMLTag("show-hide-item");
+    tag.addAttribute("show",Boolean.valueOf(show).toString());
+    tag.addAttribute("ref",identifier);
+    tag.addAttribute("component-identifier", componentIdentifier);
+    tag.addAttribute("datatype",dataType);
+    tag.writeEmptyTag(out);
+
+  }
+
+}

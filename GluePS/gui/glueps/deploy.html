@@ -1,0 +1,670 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta http-equiv="content-language" content="es" />
+<!-- <meta http-equiv="refresh" content="15" /> -->
+<link rel="stylesheet" type="text/css" href="lib/dojo/dojo/resources/dojo.css" />
+<link rel="stylesheet" type="text/css" href="lib/dojo/dijit/themes/soria/soria.css" />
+<link rel="stylesheet" type="text/css" href="css/floatingMenu.css" />
+<link rel="stylesheet" type="text/css" href="css/deploy.css" />
+<link rel="stylesheet" type="text/css" href="css/tables.css" />
+
+<script type="text/javascript" src="js/djConfig.js"></script>
+<script type="text/javascript" src="lib/dojo/dojo/dojo.js"></script>
+<script type="text/javascript" src="js/require.js"></script>
+<script type="text/javascript" src="js/i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/es/es_i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/en/en_i18n.js"></script>
+<script type="text/javascript" src="dojoi18n/nls/ca/ca_i18n.js"></script>
+<script type="text/javascript" src="lib/jquery/jquery-1.2.6.js"></script>
+<script type="text/javascript" src="js/ErrorCodes.js"></script>
+<script type="text/javascript" src="lib/natsort.js"></script>
+
+<!--  painters -->
+<script type="text/javascript" src="js/painters/DeploymentPainter.js"></script>
+<script type="text/javascript" src="js/painters/InformationPainter.js"></script>
+<script type="text/javascript" src="js/painters/ActivityPainter.js"></script>
+<script type="text/javascript" src="js/painters/GroupsPainter.js"></script>
+<script type="text/javascript" src="js/painters/ResourcesPainter.js"></script>
+<script type="text/javascript" src="js/painters/DeployButtomPainter.js"></script>
+
+<!--  dialogs -->
+<script type="text/javascript" src="js/dialogs/GroupDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/EditGroupDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/InformativeDialogs.js"></script>
+<script type="text/javascript" src="js/dialogs/ResourceDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/EditResourceDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/EditActivityDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/CreateActivityDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/PeerReviewActivityDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/DeleteParticipantDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/ParticipantManagementDialog.js"></script>
+<script type="text/javascript" src="js/dialogs/RedeploymentDialog.js"></script>
+
+<!--  menus -->
+<script type="text/javascript" src="js/menus/CreateActivityMenu.js"></script>
+<script type="text/javascript" src="js/menus/ActivityGroupMenu.js"></script>
+<script type="text/javascript" src="js/menus/ActivityResourceMenu.js"></script>
+<script type="text/javascript" src="js/menus/ActivityToolInstanceMenu.js"></script>
+<script type="text/javascript" src="js/menus/ActivityMenu.js"></script>
+<script type="text/javascript" src="js/menus/GroupMenu.js"></script>
+<script type="text/javascript" src="js/menus/RepeatedGroupMenu.js"></script>
+<script type="text/javascript" src="js/menus/ResourceMenu.js"></script>
+<script type="text/javascript" src="js/menus/ToolMenu.js"></script>
+<script type="text/javascript" src="js/menus/ParticipantMenu.js"></script>
+
+<!--  widgets -->
+<script type="text/javascript" src="js/widgets/UndoManager.js"></script>
+<script type="text/javascript" src="js/widgets/MenuManager.js"></script>
+<script type="text/javascript" src="js/widgets/Icons.js"></script>
+<script type="text/javascript" src="js/widgets/GFXTooltip.js"></script>
+<script type="text/javascript" src="js/widgets/Ruler.js"></script>
+
+<script type="text/javascript" src="js/deployInit.js"></script>
+<script type="text/javascript" src="js/database/JsonDB.js"></script>
+<script type="text/javascript" src="js/database/LearningEnvironmentDB.js"></script>
+
+<!--  controllers -->
+<script type="text/javascript" src="js/controllers/LdShakeManager.js"></script>
+<script type="text/javascript" src="js/controllers/StateManager.js"></script>
+<script type="text/javascript" src="js/controllers/DeploymentController.js"></script>
+<script type="text/javascript" src="js/controllers/ToolInstanceCreator.js"></script>
+<script type="text/javascript" src="js/controllers/ToolInstanceReuse.js"></script>
+<script type="text/javascript" src="js/controllers/ToolInstanceConfiguration.js"></script>
+<script type="text/javascript" src="js/controllers/ResourceManager.js"></script>
+<script type="text/javascript" src="js/controllers/ToolInstanceManager.js"></script>
+<script type="text/javascript" src="js/controllers/GroupManager.js"></script>
+<script type="text/javascript" src="js/controllers/RepeatedGroups.js"></script>
+<script type="text/javascript" src="js/controllers/ParticipantManager.js"></script>
+<script type="text/javascript" src="js/ParserXforms.js"></script>
+
+<!-- datamodel -->
+<script type="text/javascript" src="js/datamodel/ActivityContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/Activity.js"></script>
+<script type="text/javascript" src="js/datamodel/InstancedActivity.js"></script>
+<script type="text/javascript" src="js/datamodel/InstancedActivityContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/GroupContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/Group.js"></script>
+<script type="text/javascript" src="js/datamodel/ResourceContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/Resource.js"></script>
+<script type="text/javascript" src="js/datamodel/ToolInstanceContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/ToolInstance.js"></script>
+<script type="text/javascript" src="js/datamodel/ToolContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/Tool.js"></script>
+<script type="text/javascript" src="js/datamodel/ParticipantContainer.js"></script>
+<script type="text/javascript" src="js/datamodel/Participant.js"></script>
+<script type="text/javascript" src="js/datamodel/LearningEnvironment.js"></script>
+
+<!--  oauth -->
+<script type="text/javascript" src="js/oauth/OauthManager.js"></script>
+<!--  PostMessage events -->
+<script type="text/javascript" src="js/controllers/MessageManager.js"></script>
+
+<title>GLUE!-PS</title>
+</head>
+<SCRIPT LANGUAGE="JavaScript">
+	var toolInstancesWithMarkers;
+</SCRIPT>
+<body class="soria">
+	<div id="deployBorderContainer" dojoType="dijit.layout.BorderContainer" design="headline">
+		<div dojoType="dijit.layout.BorderContainer" region="center">
+		<div dojoType="dijit.layout.ContentPane" region="top" style="background-color:rgba(255, 255, 255, 0.4);">
+		<div class="home">
+				<a href="index.html"><img id="homeImg" src="images/icons/home3.png" width="25" height="25" alt="Home" title="Home"/></a>
+				<img id="exitImg" src="images/icons/logout.png" width="25" height="23" title="Exit" alt="Logout" style="vertical-align:top"/>
+				<div dojoType="dijit.form.Button" id="toolbar.undo"
+					iconClass="dijitEditorIcon dijitEditorIconUndo" showLabel="false" style="vertical-align:top;margin-left:25px;margin-top:0px;">
+					deshacer</div>
+				<div dojoType="dijit.form.Button" id="toolbar.redo"
+					iconClass="dijitEditorIcon dijitEditorIconRedo" showLabel="false" style="vertical-align:top;margin-top:0px;">
+					rehacer</div>
+				<img id="savingGif" src="images/icons/saved.png" width="25" height="25" class="saved"/>
+		</div>
+		<div class="localeChooseBlock">
+				<img id="localeEnglish" src="images/i18n/en.png" alt="English" title="English" width="25" height="25"/> 
+				<img id="localeSpanish" src="images/i18n/es.png" alt="Spanish" title="Spanish" width="25" height="25"/>
+				<img id="localeCatalan" src="images/i18n/ca.png" alt="Catalan" title="Catalan" width="25" height="25"/>
+		</div>
+		<div style="clear:both;"></div>
+		</div>
+		<div dojoType="dijit.layout.ContentPane" region="center" style="position: relative;" id="centralCP">
+		<img src="images/GLUEPSp.png" style="float:left;padding: 30px 0px 0px 20px;"/><div class="info"><table class="tableInfo"><tbody><tr><td id="designNameLabel" class="item"></td><td id="designName"></td></tr><tr><td id="deploymentNameLabel" class="item"></td><td id="deploymentName"></td></tr>
+		<tr><td id="learningEnvironmentNameLabel" class="item"></td><td id="learningEnvironmentName"></td></tr><tr><td id="courseNameLabel" class="item"></td><td id="courseName"></td></tr></tbody></table>
+								<input id="checkAddCourse" name="checkAddCourse" dojoType="dijit.form.CheckBox" style="margin-left:10px;">
+								<label id="labelCheckAddCourse" for="themeSelect">Añadir curso a partir del tema...</label><select id="themeSelect" name="themeSelect"></select></div>
+		<div id="divDeploymentButtomTop" style="text-align:center;clear:both;display:none"><button id="deploymentButtonTop" dojoType="dijit.form.Button" label="Desplegar"></button><img id="exclamationDeploymentButtonTop" src="images/icons/exclamation.png"></img>
+		<a id="staticDeployLinkTop" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/zip.png"></img></a>
+		<a id="liveDeployLinkTop" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/link.png"></img></a>
+		<a id="markerListLinkTop" href="" style="text-decoration: none;"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/qr.png"></img></a>
+		</div>
+		<div class="title" id="activityTitle"></div><div id="divPaintActivities"></div>
+		<div id="divDeploymentButtonBottom" style="text-align:center;clear:both;display:none;margin:10px 0px"><button id="deploymentButtonBottom" dojoType="dijit.form.Button" label="Desplegar"></button><img id="exclamationDeploymentButtonBottom" src="images/icons/exclamation.png"></img>
+		<a id="staticDeployLinkBottom" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;"  src="images/icons/zip.png"></img></a>
+		<a id="liveDeployLinkBottom" href="" style="text-decoration: none;" target="_blank"><img style="vertical-align: middle;margin-left:5px;"  src="images/icons/link.png"></img></a>
+		<a id="markerListLinkBottom" href="" style="text-decoration: none;"><img style="vertical-align: middle;margin-left:5px;" src="images/icons/qr.png"></img></a>
+		</div>
+		</div>
+		</div>
+		<div dojoType="dijit.layout.BorderContainer" region="right" splitter="true" style="width: 25%;">
+			<div dojoType="dijit.layout.ContentPane" region="top" splitter="true" id="leyendContainer"><div class="title" id="leyendTitle">LEYENDA</div><img id="showLeyend" onclick="DeploymentPainter.showLeyendManager();" src="images/icons/minimize.png" width="25" hight="25" alt="Miminize size leyend section"></img>
+																					   <div id="divLeyenda"><table id="tableLeyend" class="tableInfo" >
+																					   <tr><td><img src="images/icons/activity.png" width="64" height="23"></td><td id="activityLeyend">Actividad</td></tr>
+																					   <tr><td><img src="images/icons/studentsEmpty.png" width="20" height="20"></td><td id="emptyGroupLeyend">Grupo vacío</td></tr>
+																					   <tr><td><img src="images/icons/students.png" width="20" height="20"></td><td id="notEmptyGroupLeyend">Grupo con participantes</td></tr>
+																					   <tr><td><img src="images/icons/document.png" width="20" height="20"></td><td id="documentLeyend">Documento (un fichero o página web)</td></tr>
+																					   <tr><td><img src="images/icons/tool.png" width="20" height="20"></td><td id="toolLeyend">Herramienta. Conjunto de documentos relacionados. p.ej. un GoogleDocs por grupo</td></tr>
+																					   <tr><td><img src="images/icons/resources.png" width="58" height="72"></td><td id="groupResourcesLeyend">Recursos que usa cada grupo en una actividad</td></tr>
+																					   <!--<tr><td><img src="images/icons/configurarH1.png" width="18" height="26"></td><td>Configurar y crear documento de tipo <b>H1</b></td></tr>
+																					   <tr><td><img src="images/icons/reutilizarH1.png" width="18" height="26"></td><td>Documento creado de tipo <b>H1</b> reutiliza otro</td></tr>
+																					   <tr><td><img src="images/icons/borrarH1.png" width="18" height="26"></td><td>Borrar documento creado de tipo <b>H1</b></td></tr>-->
+																					   <tr><td><img src="images/icons/document_c.png" width="20" height="20"></td><td id="configuredCreatedLeyend">El documento de tipo <b>H1</b> está configurado y creado</td></tr>
+																					   <tr><td><img src="images/icons/document_cr.png" width="20" height="20"></td><td id="reuseCreatedLeyend">El documento de tipo <b>H1</b> reutiliza otro que está creado</td></tr>
+																					   <tr><td><img src="images/icons/reset.png" width="20" height="20"></td><td id="reusedNotCreatedLeyend">El documento de tipo <b>H1</b> reutiliza otro que no está creado</td></tr>
+																					   </table></div></div>
+			<div dojoType="dijit.layout.BorderContainer" region="center" id="centralBorderContainer">
+				<div dojoType="dijit.layout.ContentPane" region="top" splitter="true" style="height: 40%;" id="centralContentPane"><div class="title" id="resourceTitle"></div><img id="showOnlyResources" onclick="DeploymentPainter.showResourcesManager();" src="images/icons/window.png" width="25" hight="25" alt="Maximize resource section"></img><div style="clear:both;"></div><div id="divResources"></div></div>
+				<div dojoType="dijit.layout.ContentPane" region="center" id="groupsContentPane" ><div class="title" id="participantsTitle"></div><img id="showOnlyGroups" onclick="DeploymentPainter.showGroupsManager();" src="images/icons/window.png" width="25" hight="25" alt="Maximize size resource section"></img><div style="clear:both;"></div><div id="divParticipants"></div><div class="title" id="groupTitle"></div><div id="divGroups"></div></div>
+			</div>
+		</div>
+
+	<!--  Editar actividad -->
+	<div id="editActivityDialog" dojoType="dijit.Dialog" title="Editar actividad">
+	    <div id="editActivityError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="editActivityDialogContent" dojoType="dijit.layout.ContentPane">
+
+    		<label id="labelActivityNameEdit" for="activityNameEdit">Nombre de la actividad</label><br/>
+    		<input dojoType="dijit.form.TextBox" id="activityNameEdit" name="activityNameEdit" style="margin:10px 0px;width:350px;" maxlength="255"/><br/>
+    		<label id="labelActivityDescriptionEdit" for="activityDescriptionEdit">Descripción de la actividad</label><br/>
+    		<input dojoType="dijit.form.SimpleTextarea" id="activityDescriptionEdit" name="activityDescriptionEdit" style="margin:10px 0px;width:350px;height:100px;"/><br/>	
+    	</div>
+    	<div align="center">
+        	<button id="editActivityDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="editActivityDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>	
+	
+	<!--  Crear actividad -->
+	<div id="createActivityDialog" dojoType="dijit.Dialog" title="Crear actividad">
+	    <div id="createActivityError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="createActivityDialogContent" dojoType="dijit.layout.ContentPane">
+
+    		<label id="labelActivityNameCreate" for="activityNameCreate">Nombre de la actividad</label><br/>
+    		<input dojoType="dijit.form.TextBox" id="activityNameCreate" name="activityNameCreate" style="margin:10px 0px;width:350px;" maxlength="255"/><br/>
+    		<label id="labelActivityDescriptionCreate" for="activityDescriptionCreate">Descripción de la actividad</label><br/>
+    		<input dojoType="dijit.form.SimpleTextarea" id="activityDescriptionCreate" name="activityDescriptionCreate" style="margin:10px 0px;width:350px;height:100px;"/><br/>	
+    	</div>
+    	<div align="center">
+        	<button id="createActivityDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="createActivityDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>
+	
+	<!--  Crear actividad peer-review -->
+	<div id="createPeerReviewActivityDialog" dojoType="dijit.Dialog" title="Crear actividad peer review">
+	    <div id="createPeerReviewActivityError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="createPeerReviewActivityContent" dojoType="dijit.layout.ContentPane">
+			<div id="contentCreatePeerReviewActivity">
+    		<label id="labelPeerReviewActivityNameCreate" for="peerReviewActivityNameCreate">Nombre de la actividad</label><br/>
+    		<input dojoType="dijit.form.TextBox" id="peerReviewActivityNameCreate" name="peerReviewActivityNameCreate" style="margin:10px 0px;width:350px;" maxlength="255"/><br/>
+    		<label id="labelPeerReviewActivityDescriptionCreate" for="peerReviewActivityDescriptionCreate">Descripción de la actividad</label><br/>
+    		<input dojoType="dijit.form.SimpleTextarea" id="peerReviewActivityDescriptionCreate" name="peerReviewActivityDescriptionCreate" style="margin:10px 0px;width:350px;height:100px;"/><br/>
+    		<div style="margin:10px 0px;">
+    		<label id="labelReviewMode" for="reviewMode"></label>
+			<input type="radio" dojoType="dijit.form.RadioButton" name="reviewMode" id="circularModeValue"  checked value="circular" /><label id="circularMode" for="circularModeValue"></label><br/>
+			</div>
+			<div style="margin:10px 0px;">
+			<label id="labelReviewGroups"></label>
+			<div id="divReviewGroups">
+			</div>
+			</div>
+			<div style="margin:10px 0px;">
+			<label id="labelReviewResources"></label><br />
+			<div id="divReviewResources">
+			</div>
+			</div>			
+			<div id="divHowManyGroups" style="margin:10px 0px;">
+				<label id="labelReviewHowManyGroups"></label>
+				<select id="selectHowManyGroups" name="selectHowManyGroups" dojoType="dojox.form.DropDownSelect"></select>
+			</div>
+			</div>
+    	</div>
+    	<div align="center">
+        	<button id="createPeerReviewActivityDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="createPeerReviewActivityDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>		
+	
+	<!--  Crear grupo -->
+	<div id="createGroupDialog" dojoType="dijit.Dialog" title="Crear grupo">
+	    <div id="createGroupError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="createGroupDialogContent" dojoType="dijit.layout.ContentPane">
+    		<table>
+    		<tr>
+    		<td><label id="labelGroupName" for="groupName">Nombre del grupo</label></td>
+    		<td><input dojoType="dijit.form.TextBox" id="groupName" name="groupName" style="width:200px;" maxlength="255"/></td>
+    		</tr>
+    		</table>	
+    	</div>
+    	<div align="center">
+        	<button id="createGroupDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="createGroupDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>
+	
+	<!--  Editar grupo -->
+	<div id="editGroupDialog" dojoType="dijit.Dialog" title="Editar grupo">
+	    <div id="editGroupError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="editGroupDialogContent" dojoType="dijit.layout.ContentPane">
+    		<table>
+    		<tr>
+    		<td><label id="labelGroupNameEdit" for="groupNameEdit">Nombre del grupo</label></td>
+    		<td><input dojoType="dijit.form.TextBox" id="groupNameEdit" name="groupNameEdit" style="width:200px;" maxlength="255"/></td>
+    		</tr>
+    		</table>	
+    	</div>
+    	<div align="center">
+        	<button id="editGroupDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="editGroupDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>	
+	
+	<!--  Crear recurso -->
+	<div id="createResourceDialog" dojoType="dijit.Dialog" title="Crear recurso">
+	    <div id="createResourceError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="createResourceDialogContent" dojoType="dijit.layout.ContentPane">
+    		<div id="radioCreateResource" style="margin-bottom:10px;">
+    				<label id="labelRadioCreateResource">Elija el tipo de recurso a crear:</label><br/>
+    				<input type="radio" name="resourceType" id="rbResource" checked value="resource" /><label id="labelRbResource" for="rbResource">Recurso</label><br />
+    				<input type="radio" type="dijit.form.RadioButton" name="resourceType" id="rbTool" value="Tool" /><label id="labelRbTool" for="rbTool">Herramienta</label>
+			</div>
+    		<div id="createResourceDivResource">
+    			<table>
+    			<tr>
+    			<td><label id="labelResourceName" for="resourceName">Nombre del recurso</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="resourceName" name="resourceName" style="width:200px;" maxlength="255" /></td>
+    			</tr>
+    			<tr>
+    			<td><label id="labelResourceLocation" for="resourceLocation">Location del recurso</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="resourceLocation" name="resourceLocation" style="width:200px;" maxlength="2083" /></td>
+    			</tr>
+    			</table>
+    		</div>
+    		<div id="createResourceDivTool">
+    			<table>
+    			<tr>
+    			<td><label id="labelToolName" for="toolName">Nombre de la herramienta</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="toolName" name="toolName" style="width:200px;" maxlength="255" /></td>
+    			</tr>
+    			<tr>
+    			<td><label id="labelToolType" for="toolType">Tipo de herramienta</label></td>
+    			<td><select id="selectToolType" name="select" dojoType="dojox.form.DropDownSelect"></select></td>
+    			</tr>
+    			</table>
+    		</div>		
+    	</div>
+    	<div align="center">
+        	<button id="createResourceDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="createResourceDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>
+	
+	<!--  Editar recurso -->
+	<div id="editResourceDialog" dojoType="dijit.Dialog" title="Editar recurso">
+	    <div id="editResourceError" dojoType="dijit.layout.ContentPane" class="errorReport">
+    	</div>
+    	<div id ="editResourceDialogContent" dojoType="dijit.layout.ContentPane">
+    	    <div id="editResourceInfo" class="divInfo">
+    	    	<img class="imgInfo" src="images/icons/info.png">
+    	    	<label id="labelEditResourceInfo"></label>
+    	    </div> 
+    		<div id="radioEditResource" style="margin-bottom:10px;">
+    				<label id="labelRadioEditResource">Elija el tipo de recurso a crear:</label><br/>
+    				<input type="radio" name="resourceType" id="rbResourceEdit" checked value="resource" /><label id="labelRbResourceEdit" for="rbResourceEdit">Recurso</label><br />
+    				<input type="radio" type="dijit.form.RadioButton" name="resourceType" id="rbToolEdit" value="Tool" /><label id="labelRbToolEdit" for="rbToolEdit">Herramienta</label>
+			</div>
+    		<div id="editResourceDivResource">
+    			<table>
+    			<tr>
+    			<td><label id="labelResourceNameEdit" for="resourceNameEdit">Nombre del recurso</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="resourceNameEdit" name="resourceNameEdit" style="width:200px;" maxlength="255" /></td>
+    			</tr>
+    			<tr>
+    			<td><label id="labelResourceLocationEdit" for="resourceLocationEdit">Location del recurso</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="resourceLocationEdit" name="resourceLocationEdit" style="width:200px;" maxlength="2083" /></td>
+    			</tr>
+    			</table>
+    		</div>
+    		<div id="editResourceDivTool">
+    			<table>
+    			<tr>
+    			<td><label id="labelToolNameEdit" for="toolNameEdit">Nombre de la herramienta</label></td>
+    			<td><input dojoType="dijit.form.TextBox" id="toolNameEdit" name="toolNameEdit" style="width:200px;" maxlength="255" /></td>
+    			</tr>
+    			<tr>
+    			<td><label id="labelToolTypeEdit" for="toolTypeEdit">Tipo de herramienta</label></td>
+    			<td><select id="selectToolTypeEdit" name="selectEdit" dojoType="dojox.form.DropDownSelect"></select></td>
+    			</tr>
+    			</table>
+    		</div>		
+    	</div>
+    	<div align="center">
+        	<button id="editResourceDialogOk" dojoType="dijit.form.Button" label="Ok">
+        	</button>
+        	<button id="editResourceDialogCancel" dojoType="dijit.form.Button" label="Cancel">
+        	</button>
+    	</div>
+	</div>
+	
+	<div id="deployVle" dojoType="dijit.Dialog" title="Despliegue en VLE">
+	    <div id="deployVleInfo" dojoType="dijit.layout.ContentPane"></div>
+		<div id="divDeployVle">
+				<span
+				id="deployVleDocumentos"> </span> <span
+				id="staticDeployVleTextoEnlace"> </span> <a id="staticDeployLink"
+				href="" style="text-decoration: none;"><img
+				src="images/icons/zip.png"></img> </a> <br /> <span
+				id="liveDeployVleTextoEnlace"> </span> <a id="liveDeployLink"
+				href="" style="text-decoration: none;" target="_blank"><img
+				src="images/icons/link.png"></img> </a>
+
+		</div>
+		<br />
+		<div id="crear" class="buttons">
+			<!-- <button  id="deployVleBotonCrear"  dojoType="dijit.form.Button" type="button">	                 
+	             </button>-->
+		</div>
+		<div align="center">
+			<button id="deployVleOk" dojoType="dijit.form.Button" label="Aceptar" ></button>
+		</div>
+	</div>
+	
+	<div id="loading" dojoType="dijit.Dialog" closable="false"
+		title="Espere, por favor.">
+		<div id="loadingInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div id="loadingGif" align="center">
+			<img id="gifAnimadoEspera" src="images/82.gif" style="display: block; margin-left: auto; margin-right: auto;"></img>
+		</div>
+	</div>	
+	
+	<div id="dialogLogout" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogLogoutInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogLogoutOk" dojoType="dijit.form.Button" label="Aceptar" ></button>
+		</div>
+	</div>
+	
+	<div id="dialogAlert" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogAlertInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogAlertOk" dojoType="dijit.form.Button" label="Aceptar" ></button>
+		</div>
+	</div>	
+		
+	<!-- Formulario de configuración de herramientas -->
+	<div id="toolConfiguration" dojoType="dijit.Dialog" title="">
+		<div id="toolConfigurationError" dojoType="dijit.layout.ContentPane" class="errorReport"></div>
+		<div id="divToolConfiguration">
+			<form id="formToolConfiguration" name="formToolConfiguration" enctype=""></form>
+		</div>
+		<div id="buttonsConfiguration" class="buttons"></div>
+		<div id="buttonsCreate" class="buttons"></div>
+	</div>
+	
+	<!-- Ventana que muestra información relativa a los participantes que se añaden, los que se mantienen y los que se eliminan-->
+    <div dojoType="dijit.Dialog" id="comparacionAlumnos" showTitle="true" title="Participant changes">
+        <table>
+            <tr>
+                <td width="220">
+                    <div id="addedParticipantsTP" align="center" dojoType="dijit.TitlePane" title="alumnosAnadidos">
+                        <div style="height:15em; overflow:auto;">
+                            <table id="addParticipantsTable">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td width="220">
+                    <div id="deletedParticipantsTP" align="center" dojoType="dijit.TitlePane" title="alumnosEliminados">
+                        <div style="height:15em; ; overflow:auto;">
+                            <table id="deleteParticipantsTable">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+                <td width="220">
+                    <div id="remainParticipantsTP" align="center" dojoType="dijit.TitlePane" title="alumnosPermanecen">
+                        <div style="height:15em; ; overflow:auto;">
+                            <table id="remainParticipantsTable">
+                            </table>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td id="numberAddedParticipants" align="center" width="220"></td>
+                <td id="numberDeletedParticipants" align="center" width="220"></td>
+                <td id="numberRemainParticipants" align="center" width="220"></td>
+            </tr>
+            <tr></tr>
+        </table>
+        <div align="center">
+            <button id="botonAceptarCambiosAlumnos" dojoType="dijit.form.Button" label="OK">
+            </button>
+            <button id="botonCancelarCambiosAlumnos" dojoType="dijit.form.Button" label="Cancel">
+            </button>
+        </div>
+    </div>
+    
+	
+	<!-- Para mostrar un menú flotante -->	
+	<div id="FloatingMenu" class="floatingMenu dijitTooltip">
+		<div class="dijitTooltipConnector"></div>
+		<div id="FloatingMenuContainer"
+			class="dijitTooltipContainer dijitTooltipContents">
+			<div id="FloatingMenuTitle" class="floatingMenuTitle"></div>
+			<div id="FloatingMenuContent"></div>
+		</div>
+	</div>
+	
+	<!--  Para mostrar un tooltip -->
+	<div id="GFXTooltip" class="floatingMenu dijitTooltip dijitTooltipRight">
+   	 	<div class="dijitTooltipConnector">
+    	</div>
+    	<div class="dijitTooltipContainer dijitTooltipContents">
+        	<div id="GFXTooltipContent">
+        	</div>
+   		</div>
+	</div>
+		
+		<!--  Confirmación de borrado de instancia de herramienta -->
+		<div id="dialogConfirmDeleteToolInstance" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteToolInstanceInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteToolInstanceOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteToolInstanceCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteToolInstanceId" dojoType="dijit.form.TextBox"
+				name="eliminarToolInstanceId" type="hidden" />
+		</div>
+		
+	</div>
+	
+		<!--  Confirmación de borrado de todas las instancias creadas de una herramienta en la actividad-->
+		<div id="dialogConfirmDeleteAllToolInstanceActivity" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteAllToolInstanceActivityInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteAllToolInstanceActivityOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteAllToolInstanceActivityCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteAllToolInstanceActivityActId" dojoType="dijit.form.TextBox"
+				name="deleteAllToolInstanceActivityActId" type="hidden" />
+			<input id="deleteAllToolInstanceActivityToolId" dojoType="dijit.form.TextBox"
+				name="deleteAllToolInstanceActivityToolId" type="hidden" />
+		</div>
+		
+		</div>
+	
+		<!--  Confirmación de borrado de una actividad-->
+		<div id="dialogConfirmDeleteActivity" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteActivityInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteActivityOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteActivityCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarActivityId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de grupo de una actividad-->
+		<div id="dialogConfirmDeleteGroupActivity" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteGroupActivityInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteGroupActivityOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteGroupActivityCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteGroupActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarGroupActivityId" type="hidden" />
+			<input id="deleteGroupInstancedActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarGroupInstancedActivityId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de un participante -->
+		<div id="dialogConfirmDeleteParticipant" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteParticipantInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteParticipantOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteParticipantCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteParticipantId" dojoType="dijit.form.TextBox"
+				name="eliminarParticipantId" type="hidden" />
+		</div>		
+		</div>
+	
+		<!--  Confirmación de borrado de grupo -->
+		<div id="dialogConfirmDeleteGroup" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteGroupInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteGroupOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteGroupCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteGroupId" dojoType="dijit.form.TextBox"
+				name="eliminarGroupId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de recurso de una actividad-->
+		<div id="dialogConfirmDeleteResourceActivity" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteResourceActivityInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteResourceActivityOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteResourceActivityCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteResourceActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarResourceActivityId" type="hidden" />
+			<input id="deleteResourceInstancedActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarResourceInstancedActivityId" type="hidden" />
+			<input id="deleteResourceResourceId" dojoType="dijit.form.TextBox"
+				name="eliminarResourceResourceId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de instancia de herramienta de una actividad-->
+		<div id="dialogConfirmDeleteToolInstanceActivity" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteToolInstanceActivityInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteToolInstanceActivityOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteToolInstanceActivityCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteToolInstanceActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarToolInstanceActivityId" type="hidden" />
+			<input id="deleteToolInstanceInstancedActivityId" dojoType="dijit.form.TextBox"
+				name="eliminarToolInstanceInstancedActivityId" type="hidden" />
+			<input id="deleteToolInstanceToolInstanceId" dojoType="dijit.form.TextBox"
+				name="eliminarToolInstanceToolInstanceId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de recurso(documento) -->
+		<div id="dialogConfirmDeleteResource" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteResourceInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteResourceOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteResourceCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteResourceId" dojoType="dijit.form.TextBox"
+				name="eliminarResourceId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de borrado de herramienta -->
+		<div id="dialogConfirmDeleteTool" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmDeleteToolInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmDeleteToolOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmDeleteToolCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>
+		<div>
+			<input id="deleteToolId" dojoType="dijit.form.TextBox"
+				name="eliminarToolId" type="hidden" />
+		</div>		
+		</div>
+		
+		<!--  Confirmación de deshacer -->
+		<div id="dialogConfirmUndo" dojoType="dijit.Dialog" showTitle="true">
+		<div id="dialogConfirmUndoInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+		<div align="center">
+			<button id="dialogConfirmUndoOk" dojoType="dijit.form.Button" label="Aceptar"></button>
+			<button id="dialogConfirmUndoCancel" dojoType="dijit.form.Button" label="Cancelar" ></button>
+		</div>		
+		</div>
+		
+		<!--  new deploy or redeploy dialog -->
+		<div id="redeploymentDialog" dojoType="dijit.Dialog" title="Redespliegue en blogger">
+			<div id="redeploymentDialogInfo" dojoType="dijit.layout.ContentPane" style="padding-bottom: 10px;"></div>
+	    	<div align="center">
+	        	<button id="redeploymentDialogNewDeploy" dojoType="dijit.form.Button" label="Cancel"></button>
+	        	<button id="redeploymentDialogRedeploy" dojoType="dijit.form.Button" label="Ok"></button>
+	        	<button id="redeploymentDialogCancel" dojoType="dijit.form.Button" label="Cancel"></button>
+	    	</div>
+		</div>
+	
+	
+	<div>
+    	<span id="ruler" style="visibility:hidden;white-space: nowrap;font-size:8pt;font-family: Arial;font-weight: bold"></span>
+	</div>
+	
+		</div>	
+	
+	
+</body>
+</html>
+

@@ -1,0 +1,16 @@
+/* CSS sprites */
+.tri-button {
+	overflow: hidden;
+}
+
+.tri-button,.tri-button:visited {
+	background: transparent none no-repeat scroll 0% 0%;
+}
+
+/*.tri-button:hover {
+	background-position: 0% 50%;
+}*/
+
+/*.tri-button:active {
+	background-position: 0% 100%;
+}*/

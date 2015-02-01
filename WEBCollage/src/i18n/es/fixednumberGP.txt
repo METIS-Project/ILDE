@@ -1,0 +1,13 @@
+grouppattern.fixednumbergroups.title=Número de Grupos Fijo
+grouppattern.fixednumbergroups.title.alert=<font color='brown'>Número de Grupos Fijo</font>
+grouppattern.fixednumbergroups.info=El número de grupos es fijo. Quiere establecer explícitamente <br/> cuantos grupos hay en la fase.
+grouppattern.fixednumbergroups.number=El número de grupos especificado es ${0}
+grouppattern.fixednumbergroups.unspecified=Número de grupos no especificado.
+
+
+grouppattern.fixednumbergroups.menuitem.number=Establecer el número de grupos (actualmente ${0})
+grouppattern.fixednumbergroups.menuitem.unspecified=Establecer el número de grupos (no especificado)
+
+help.grouppattern.fixednumbergroups.menuitem=Esto establece el número de grupos que debería haber en esta fase.
+
+grouppattern.fixednumbergroups.dialog.title=Seleccione el número de grupos deseado:

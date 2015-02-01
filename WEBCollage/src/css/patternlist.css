@@ -1,0 +1,48 @@
+
+.patternList {
+}
+
+.patternListRow {
+    padding: 3px;
+}
+
+.patternListSelectedRow {
+    background: #e0e0e0;
+}
+
+.patternListCellSelectable {
+    cursor: pointer;
+}
+
+.patternListCellSelectable, .patternListCell {
+    font-weight: bold;
+    border-bottom: thin dashed black;
+    border-bottom-color: gray;
+    padding: 3px;
+}
+
+.patternListTitle {
+    font-weight: bold;
+    font-variant: small-caps;
+}
+
+.patternListDescription {
+    font-weight: normal;
+    font-variant: normal;
+    font-size: small;
+    padding-left: 15px;
+}
+
+.patternListTechique, .patternListConfiguration {
+    font-style: italic;
+    padding-right: 3px;
+}
+
+.patternListTechique {
+    color: #0000a0;
+}
+
+.patternListConfiguration {
+    font-style: italic;
+    color: #00a000;
+}

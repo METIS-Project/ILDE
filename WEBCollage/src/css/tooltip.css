@@ -1,0 +1,23 @@
+
+.tooltipObjectInfo {
+    font-size: smaller;
+}
+
+.tooltipObjectTitle {
+    font-weight: bold;
+}
+
+.tooltipObjectItem {
+    font-style: italic;
+}
+
+.tooltipObjectDescription {
+
+}
+
+.tooltipInfoSeparator {
+    height: 1px;
+    border-top: thin solid gray;
+}
+
+

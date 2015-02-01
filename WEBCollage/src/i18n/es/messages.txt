@@ -1,0 +1,866 @@
+common.ok=Aceptar
+common.cancel=Cancelar
+common.edit=Editar
+common.add=Añadir
+common.error.noServer=No se ha podido establecer conexión con el servidor.
+common.select=Elegir
+common.select.confirm=Confirmar selección
+common.back=Volver atrás
+common.exit=Salir
+common.waiting=Cargando...
+
+common.saved=Guardado :)
+common.save=¡Guardar!
+common.saving=Guardando...
+
+common.pattern.doc=Leer acerca del patrón '${0}'
+
+common.undo=Deshacer
+common.redo=Rehacer
+
+menu.title.default=Opciones
+menu.title.role=Opciones de grupo '${0}'
+menu.title.activity=Opciones de actividad '${0}'
+menu.title.act=Opciones de ${0} (${1})
+menu.title.clfp=Opciones de ${0}
+
+loader.load.error=¡No he podido cargar el diseño!
+loader.save.error=¡No se ha podido guardar!
+loader.save.noAccess=No tiene permiso para editar este script. Se cerrará el diseño.
+loader.loading.wait=<p>Cargando el diseño. ¡Espera un momento!</p>
+loader.title=Cargando...
+loader.load.noAccess=No tiene permiso para ver este script. ¿Ha iniciado su sesión?
+loader.save.sessionExpired=Su sesión ha expirado. Si no inicia sesión se cerrará el diseño y se perderán los cambios realizados. <br />¿Desea iniciar sesión?
+loader.save.sessionExpired.title=Sesión expirada
+
+export.imsld.title=Exportar script a IMS-LD
+export.workflow.title=Exportar script a definición de flujo de trabajo
+export.waiting=Por favor espere mientras se crea el paquete IMS-LD...
+export.message=Haga click <a href='${0}'>aquí</a> para bajar el paquete IMS-LD.
+export.error=¡No se pudo empaquetar el diseño!
+
+index.toolNamePrefix=Web Instance
+index.newDesign=Nuevo diseño
+index.title=Título:
+index.create=Crear
+index.noSave=No necesito guardar
+index.play=Jugar
+index.openOwn=Mis diseños
+index.openPublic=Diseños creados por otros usuarios
+index.error.noName=¡Necesito un nombre para el diseño!
+index.error.noLogin=No has iniciado sesión.<br/>Pruebe a iniciar sesión de nuevo.
+index.error.noCreate=No se pudo crear el documento.<br/>Pruebe con otro nombre o avise al administrador.
+
+design.type.public.short=Público
+design.type.visible.short=Solo lectura
+design.type.private.short=Privado
+design.type.public.long=Público (cualquier usuario puede ver y editar el diseño).
+design.type.visible.long=Solo lectura (cualquier usuario puede ver el diseño, pero sólo el propietario puede editarlo).
+design.type.private.long=Privado (sólo el propietario puede ver el diseño).
+
+users.login=Login
+users.register=Registrar nuevo usuario
+users.logout=Salir
+users.nickname=Nombre de usuario
+users.password=Contraseña
+users.repeatPassword=Repetir contraseña
+users.email=Correo electrónico
+users.error.login=El nombre de usuario o la contraseña son incorrectos.
+users.error.userExists=El nombre de usuario '${0}' ya existe.
+users.error.differentPassword=Las contraseñas no coinciden.
+users.error.noPassword=La contraseña debe tener al menos ${0} caracteres.
+users.error.userBlank=El nombre de usuario no debe contener espacios en blanco.
+users.error.noUser=El nombre de usuario debe tener al menos ${0} caracteres.
+
+general.general=General
+general.title=Título
+general.editTitle=Editar título
+general.prerrequisites=Prerrequisitos
+general.editPrerrequisites=Editar prerrequisitos
+general.los=Objetivos de aprendizaje
+general.newLo=Nuevo objetivo de aprendizaje
+general.loName=Nombre
+general.loDescription=Descripción
+general.editLo=Editar objetivo de aprendizaje
+general.deleteLo=Eliminar objetivo de aprendizaje
+general.deleteLo.confirm=¿Estás seguro de querer eliminar el objetivo de aprendizaje '${0}'?
+general.loName.error.empty=Por favor, indique un nombre para el objetivo de aprendizaje
+
+
+flow.flow=Flujo de aprendizaje
+flow.structure=Estructura
+flow.options.show.assessment=Mostrar flujo de evaluación
+flow.options.zoom=Zoom:
+
+structuretree.dialog.title=Estructura del flujo de aprendizaje
+
+flow.activities=Actividades
+flow.activities.add=Añadir nueva actividad
+flow.activities.add.relative=Añadir nueva actividad...
+flow.activities.add.before=... antes de ésta
+flow.activities.add.after=... después de ésta
+flow.activities.added.new=Nueva
+flow.activities.edit=Editar
+flow.activities.delete=Eliminar actividad
+flow.activities.assess=Evaluar esta actividad
+flow.activities.makeassessor=Marcar como tarea de evaluador
+flow.activities.move.up=Mover actividad hacia arriba
+flow.activities.move.down=Mover actividad hacia abajo
+
+flow.activities.gap=¡Aquí!
+picker.location.new=Elegir posición de la nueva actividad
+picker.location.activity=Elegir actividad existente
+picker.location.clfp=Elegir nueva posición para la fase
+picker.move.gap=Mover aquí
+picker.move.act=Mover aquí
+
+flow.clfp.remove=Eliminar ${0}
+flow.clfp.remove.confirm=¿Estás seguro de quere eliminar ${0}?
+flow.clfp.move=Mover ${0}...
+flow.clfp.add=Añadir fases...
+flow.clfp.configure=Configurar ${0}...
+flow.clfp.configure.act=Ver '${0}'...
+flow.clfp.substitute=Reemplazar ${0} por fases detalladas...
+flow.clfp.add.before=... antes de ${0}
+flow.clfp.add.after=... después de ${0}
+
+flow.select.clfp=Seleccionar ${0}
+flow.select.activity=Seleccionar esta actividad: '${0}'
+
+resources.resources=Recursos
+resources.newDoc=Nuevo documento
+resources.editDoc=Editar recurso
+resources.editDoc.name=Nombre
+resources.editDoc.link=Enlace
+resources.editDoc.name.error.empty=Por favor, indique el nombre del documento
+resources.editDoc.link.error.empty=Por favor, indique el enlace del documento
+resources.editDoc.link.error.notvalid=El enlace indicado no es una URL válida
+resources.newTool=Nueva herramienta
+resources.editTool=Editar herramienta
+resources.editTool.name=Nombre
+resources.editTool.description=Descripción
+resources.inActivity.tools=Herramientas
+resources.inActivity.docs=Documentos
+
+resources.delete=Eliminar recurso
+resources.delete.confirm=¿Realmente quiere eliminar este recurso del script?
+
+resources.tool.description.default=No link
+resources.tool.description.ontoolquery=Tool description
+resources.tool.description.ontoolurl=Specific tool
+resources.tool.description.gluepsid=Herramienta de VLE: ${0}
+resources.tool.description.gluepsid.notset=(no establecido)
+
+resources.tool.name=Nombre de la herramienta (en Web Instance Collage)
+resources.tool.link=Enlace de la herramienta
+resources.tool.search.ontoolsearch=Buscar herramienta en OntoolSearch
+resources.tool.search.keyword=Buscar herramienta por palabra clave
+resources.tool.search.vle=Buscar herramienta en VLE
+resources.tool.vle.title=Selección de herramienta del VLE
+resources.tool.vle.select=Herramienta
+resources.tool.vle.selectinfo=-- Seleccione una herramienta --
+resources.tool.ontool.title=Esperando a Ontoolsearch...
+resources.tool.ontool.description=OntoolSearch está abierto en otra ventana/pestaña. Estoy esperando a que termine.<br/> Sin embargo, puede cerrar OntoolSearch haciendo click en 'cancelar'.
+resources.tool.ontool.title=Búsqueda de herramienta por palabra clave
+resources.tool.ontool.keywords=Palabra(s) clave(s)
+resources.tool.ontool.search=Buscar
+resources.tool.ontool.results=Resultados de la búsqueda
+resources.tool.ontool.select=Seleccionar
+
+assessment.assessment=Evaluación
+assessment.title.empty=[Evaluación vacía]
+assessment.task=[Tarea de evaluar]
+assessment.chooseActivity=[¡Elegir actividad!]
+flow.assessment.edit=Configurar evaluación
+assessment.edit=Configurar evaluación
+assessment.edit.process=Flujo de evaluación
+assessment.edit.what=Qué evaluar
+assessment.edit.how=Tarea de evaluar
+assessment.edit.whatfor=Uso de los resultados de evaluación
+assessment.edit.function.remove=Eliminar uso de los resultados de la evaluación
+assessment.delete=Eliminar esta evaluación
+assessment.delete.confirm=¿Estás seguro de querer eliminar esta evaluación?
+assessment.selectActivity=Selecciona <i>una actividad</i> para configurar la evaluación!
+
+assessment.edit.los=Objetivos de aprendizaje evaluados
+assessment.edit.source.choose=Elegir actividad de aprendizaje a evaluar...
+assessment.edit.source.change=Cambiar actividad de aprendizaje a evaluar...
+assessment.edit.source.configpattern=Elegir técnica de evaluación...
+
+assessment.edit.analysis.choose=Elegir actividad en la que se realiza la tarea de evaluar...
+assessment.edit.analysis.change=Cambiar actividad en la que se realiza la tarea de evaluar...
+assessment.edit.analysis.configpattern=Elegir técnica de evaluación...
+assessment.edit.functions=Usos de los resultados de la evaluación
+assessment.edit.functions.new=Nuevo uso
+assessment.edit.functions.summative=Poner nota
+assessment.edit.functions.formative=Proporcionar realimentación
+assessment.edit.functions.diagnosis=Intervenir o modificar actividad
+assessment.edit.functions.summative.use=Usar la evaluación para poner nota a los alumnos
+assessment.edit.functions.formative.use=Usar la evaluación para proporcionar realimentación a los alumnos
+assessment.edit.functions.diagnosis.use=Usar la evaluación para intervenir o modificar una actividad de aprendizaje
+assessment.edit.choose.activity=Elegir actividad
+
+assessment.edit.summative=Editar evaluación sumativa
+assessment.edit.summative.name=Título de la evaluación
+assessment.edit.summative.description=Descripción
+assessment.edit.summative.name.empty=Editar evaluación
+
+assessment.edit.summativeFunction.edit=Editar evaluación sumativa...
+assessment.edit.formativeFunction.edit=Elegir actividad en la que se entrega la realimentación...
+assessment.edit.diagnosisFunction.edit=Elegir actividad que es adaptada según los resultados de la evaluación...
+
+assessment.edit.assessor=Evaluador:
+assessment.edit.assessee=Alumno o grupo evaluado:
+
+assessment.link.choose=Elegir actividad
+
+assessment.patterns.delete=Eliminar patrón de evaluación
+assessment.patterns.delete.confirm=¿Seguro que quieres eliminar este patrón de evaluación?
+assessment.patterns.list.title=Configuración adicional
+assessment.patterns.list=Patrones de evaluación aplicados en esta evaluación:
+assessment.patterns.list.new=Añadir...
+
+assessment.conflict.dialog=Solucionar conflictos entre patrones
+assessment.conflict=Conflictos
+assessment.conflict.pattern.one=Incluir '${newpattern}' requiere eliminar el siguiente patrón: ${oldpatterns}. Sólo puede haber una técnica de evaluación en cada evaluación.
+assessment.conflict.pattern.several=Incluir este patrón '${newpattern}' requiere eliminar los siguientes patrones: ${oldpatterns}. Sólo puede haber una técnica de evaluación en cada evaluación.
+assessment.conflict.assessment.activity.first=Incluir el patrón '${pattern}' entra en conflicto con la tarea de evaluar existente: '${activity}'.<br/>¿Qué hacer con esta actividad?
+assessment.conflict.assessment.activity.other=Además, este patrón entra en conflicto con la tarea de evaluar existente: '${activity}'.<br/>¿Qué hacer con esta actividad?
+assessment.conflict.assessed.activity.first=Incluir el patrón '${pattern}' entra en conflicto con la actividad evaluada previamente elegida: '${activity}'.<br/>¿Qué hacer con esta actividad?
+assessment.conflict.assessed.activity.other=Además, este patrón entra en conflicto con la actividad evaluada previamente elegida: '${activity}'.<br/>¿Qué hacer con esta actividad?
+
+assessment.conflict.activity.delete=Eliminar la actividad existente (y crear una nueva actividad).
+assessment.conflict.activity.replace=Adaptar la actividad existente al patrón.
+assessment.conflict.activity.ignore=Crear una nueva actividad y dejar la antigua en el script.
+
+summary.summary=Resumen
+summary.open=Abrir en nueva ventana
+summary.title=Título: 
+summary.prerrequisites=Prerrequisitos: 
+summary.objectives=Objetivos de aprendizaje
+
+summary.assessmentlink.assessment=Ésta es la tarea de evaluar de: ${0} - ${1}.
+summary.assessmentlink.assessed=Esta actividad es evaluada en: ${0} - ${1}.
+summary.assessmentlink.formative=Esta actividad recibe realimentación de la evaluación: ${0} - ${1}.
+summary.assessmentlink.diagnosis=Esta actividad puede ser modificada de acuerdo con resultados de la evaluación: ${0} - ${1}.
+
+summary.general.head=Información general:
+summary.flow.head=Flujo de actividades:
+summary.assessment.head=Plan de evaluación:
+
+summary.activity.asssessment=La tarea de evaluar es: <strong>'${activity}'</strong> (en <strong>${act}</strong>, dentro de <strong>${clfp}</strong>.<br/>Realizada por <strong>${role}</strong>).
+summary.activity.asssessment.no=La tarea de evaluar no está definida aún.
+summary.activity.asssessed=Esta evaluación evalúa la actividad: <strong>'${activity}'</strong> (en <strong>${act}</strong>, dentro de <strong>${clfp}</strong>.<br/>Realizada por <strong>${role}</strong>).
+summary.activity.asssessed.no=La actividad evaluada no está elegida aún.
+
+summary.function.summative=Esta evaluación se usa para poner nota a los estudiantes: <strong>'${name}'</strong>, ${description}
+summary.function.formative=Esta evaluación se usa para dar realimentación a los estudiantes en la actividad: <strong>'${activity}'</strong> (en <strong>${act}</strong>, dentro de <strong>${clfp}</strong>.<br/>Realizada por <strong>${role}</strong>).
+summary.function.diagnosis=Los resultados de esta evaluación se usan para modificar o intervenir en la actividad: <strong>'${activity}'</strong> (en <strong>${act}</strong>, dentro de <strong>${clfp}</strong>.<br/>Realizada por <strong>${role}</strong>).
+summary.function.formative.no=Esta evaluación se usa para dar realimentación a los estudiantes (pero la actividad en la que se entrega no ha sido elegida aún).
+summary.function.diagnosis.no=Los resultados de esta evaluación se usan para modificar o intervenir en una actividad (pero ésta no ha sido elegida aún).
+
+summary.patterns.one=The following pattern has been applied to this assessment: <strong>${0}</strong>.
+summary.patterns.several=The following patterns have been applied to this assessment: <strong>${0}</strong>.
+
+selector.select=Crear nueva fase
+selector.type.clfps=Crear fases a partir de un CLFP
+selector.type.phase=Crear nueva fase en blanco
+selector.phase.title=Nueva fase vacía
+selector.phase2.title=Nueva fase vacía (con varios tipos de grupos de estudiantes)
+
+selector.type.assessment=Evaluación
+selector.criteria.attitudinal=Objetivos actitudinales
+selector.criteria.procedural=Objetivos procedimentales
+selector.criteria.problem=Problemas
+selector.criteria.complexity=Complejidad
+
+selector.complexity.any=Cualquiera
+selector.complexity.low=Riesgo bajo
+selector.complexity.medium=Riesgo medio
+selector.complexity.high=Riesgo alto
+
+selector.table.pattern=Patrón
+selector.table.type=Tipo
+selector.messages.clfp.a=CLFP
+selector.messages.clfp.b=un CLFP
+selector.messages.activity.a=Actividad
+selector.messages.activity.b=un patrón de actividad
+selector.messages.resource.a=Recurso
+selector.messages.resource.b=un patrón de recurso
+selector.messages.role.a=Rol
+selector.messages.role.b=un patrón de roles
+selector.messages.learner=estudiantes
+selector.messages.staff=profesores
+selector.messages.choose=Elegir ${0}
+selector.messages.error.role=Lo siento, necesito un patrón para ${0},<br/>no para ${1}.
+selector.messages.error.type=Lo siento, necesito ${0},<br/>no ${1}.
+
+selector.assessment.technique=Técnica de evaluación: 
+selector.assessment.configuration=Configuración de la evaluación:
+
+activity.edit=Editar Actividad
+activity.edit.description=Descripción
+activity.edit.los=Objetivos de Aprendizaje
+activity.edit.resources=Recursos
+
+activity.shortDescription=En <strong>${act}</strong> de <strong>${clfp}</strong>.<br/>Realizada por <strong>${role}</strong>.
+activity.assessmentDescription.a=Patrón de evaluación:
+activity.assessmentDescription.b=<br/>Los datos de evaluación provienen de la actividad <strong>${0}</strong>.
+activity.assessmentDescription.c=<br/>La evaluación se realiza en la actividad <strong>${0}</strong>.
+activity.assessmentDescription.d=<br/>La evaluación es automática.
+activity.assessmentRelationship.a=Evaluación: <strong>${0}</strong>.
+activity.assessmentRelationship.b=<br/>Los datos se evalúan en <strong>${0}</strong>.
+activity.assessmentRelationship.c=<br/>Los datos de evaluación provienen de la actividad <strong>${0}</strong>.
+activity.assessmentRelationship.d=<br/>Da <i>feedback</i> a los alumnos en la actividad <strong>${0}</strong>.
+activity.assessmentRelationship.e=<br/>Da información para decisiones instruccionales en la actividad <strong>${0}</strong>.
+
+roles.edit=Editar rol
+roles.edit.title=Editar rol '${0}'
+roles.edit.people=Número de personas por grupo
+roles.edit.min=Mínimo:
+roles.edit.max=Máximo:
+roles.edit.description=Descripción
+roles.common.rol=Rol
+roles.common.teacher=Profesor
+
+clip.label=Acciones a considerar
+clip.menu.title=Acciones a considerar:
+clip.actions.groups.general=Configuración general
+clip.actions.groups.los=Configurar objectivos de aprendizaje
+clip.actions.groups.resources=Configurar recursos
+clip.actions.groups.assessments=Completar la configuración de la evaluación
+clip.actions.groups.clfp=Completar la configuración de las actividades en el CLFP ${0}
+clip.new.actions=¡Nuevas acciones pendientes!
+clip.actions.text.title=Escribir el título del script.
+clip.actions.text.prerrequisites=Escribir los prerrequisitos del script.
+clip.actions.text.los=Añadir objetivos de aprendizaje para el script.
+clip.actions.text.flow=Añadir un CLFP para configurar la estructura del script.
+
+clip.actions.text.object.activity=Editar actividad
+clip.actions.text.object.ref.activity=Editar actividad '${0}'.
+clip.actions.text.object.resource=Usar recurso en alguna actividad
+clip.actions.text.object.ref.resource=Usar recurso '${0}' en alguna actividad.
+clip.actions.text.object.lo=Usar objetivo de aprendizaje en alguna actividad.
+clip.actions.text.object.ref.lo=Usar objetivo de aprendizaje '${0}' en alguna actividad.
+clip.actions.text.object.assessmentflow=Configurar evaluación.
+clip.actions.text.object.ref.assessmentflow=Configurar evaluación '${0}'.
+
+clip.actions.reason.setAssessmentActivity=Esta evaluación está incompleta: no indica quién es el evaluador, ni en qué actividad se realiza la tarea de evaluar. Esta información debería ser completada; esto se puede hacer seleccionando la 'tarea de evaluar'.
+clip.actions.reason.setAssessedActivity=Esta evaluación está incompleta: no indica cuál es la actividad evaluada. Por lo tanto, no se sabe qué alumnos o grupos son evaluados, no qué se evalúa exactamente. Esto se puede solucionar seleccionando una 'actividad evaluada'.
+clip.actions.reason.addAssessmentFunction=No se ha indicado cómo se utilizan los resultados de esta evaluación dentro del script. Si desea usar la evalución o los resultados con propósitos formativos, puede indicarlo añadiendo 'usos de los resultados de evaluación'.
+clip.actions.reason.editSummativeAssessmentFunction=Esta evaluación se utiliza para poner nota a los estudiantes, pero todavía no se ha indicado cómo. Esta información debería ser completada, explicando cómo afecta esta evaluación a las notas de los alumnos.
+clip.actions.reason.editFormativeAssessmentFunction=Esta evaluación se utiliza para entregar realimentación a los estudiantes. Sin embargo, no se ha indicado en qué actividad recibirán los estudiantes la realimentación. Esta información debería ser completada.
+clip.actions.reason.editDiagnosisAssessmentFunction=Esta evaluación se utiliza para obtener información a fin de corregir posibles problemas en el script. Por lo tanto, se debería indicar en qué actividad va a intervenir el profesor (por ejemplo, introduciendo cambios en dicha actividad) de ser necesario de acuerdo a los resultados de la evaluación.
+
+clip.actions.reason.general=Esta actividad no ha sido configurada aún, y por lo tanto está vacía. Se debería editar la descripción de la actividad, para indicar las tareas que se esperan en ella. Adicionalmente, es posible añadir objetivos de aprendizaje y recursos a esta actividad.
+clip.actions.reason.feedback=De acuerdo con el plan de evaluación, en esta actividad se entrega realimentación a los alumnos (procedente de la evaluación '${0}'). Sería adecuado editar esta actividad de acuerdo con esto teniendo en cuenta en las tareas de la actividad que la realimentación que estará disponible para los estudiantes.
+clip.actions.reason.modify=De acuerdo con el plan de evaluación, esta actividad es susceptible de ser modificada (o el profesor puede intervenir, en cualquier caso), de acuerdo con los resultados de la evaluación '${0}'. Por lo tanto, esta actividad debería ser configurada teniendo en cuenta este hecho.
+clip.actions.reason.assessed=Esta actividad será evaluada (en la evaluación '${0}'). Probablemente la configuración de la actividad deba tener este hecho en cuenta (por ejemplo, ¿es necesario indicar a los estudiantes cómo proceder para que sea posible la evaluación? ¿Hace falta aclarar el tipo y objetivo de la evaluación?); si cree que esto es necesario, puede añadir esa información a la descripción de la actividad (que los estudiantes leerán).
+clip.actions.reason.assessment=¡Esta actividad es una tarea de evaluar!. Esto significa que la persona que tiene la actividad asignada tomará el papel de evaluador. Probablemente será necesario dar instrucciones al evaluador, así como incluir aquellos recursos necesarios para la evaluación. Esta información se puede añadir a la descripción y lista de recursos de la actividad (que verá el evaluador).
+
+clip.actions.reason.pursueLO=Incluir este objetivo de aprendizaje en alguna actividad de aprendizaje.
+clip.actions.reason.assessLO=Incluir este objetivo de aprendizaje en alguna evaluación,<br/>de modo que se evaluado.
+
+
+clip.actions.reason.assessedAsTest=En esta actividad, los estudiantes deben completar un test. Se deberían escribir en la descripción de la actividad las instrucciones sobre cómo completarlo. Además, los materiales necesarios (por ejemplo, el propio test) deben ser entregados a los estudiantes. Esto se puede hacer incluyendo recursos en la actividad (o por cualquier otro medio). 
+clip.actions.reason.assessmentAsTest=En esta actividad el evaluador debe evaluar un test. Has escrito las instrucciones necesarias para el evaluador? Además, se debería asegurar que el evaluador recibirá todos los tests que completen los alumnos.
+clip.actions.reason.assessmentAsObservation=En esta actividad el evaluador observará un proceso colaborativo, a fin de evaluarlo. Se debería asegurar que los recursos necesarios están disponibles (por ejemplo, como recursos asignados a esta actividad), y que el evaluador puede observar las interaccioens entre alumnos. Quizás sea necesario que esta actividad y la actividad evaluada ocurran al mismo tiempo (para lo que deben estar en la misma fase del script).
+clip.actions.reason.assessedAsReportreview=El trabajo de los estudiantes de esta actividad se evalúa como una 'Revisión de informe'. Por lo tanto, se espera que los alumnos generen un informe en esta actividad. La configuración de la actividad debería reflejar esto.
+clip.actions.reason.assessmentAsReportreview=En esta tarea de evaluar, el evaluador revisará los informes generados por los estudiantes. Se deberían escribir las instrucciones necesarias sobre cómo revisar los documentos (se pueden incluir estas instrucciones en la descripción de la actividad). Además, es necesario asegurarse de que el evaluador tendrá acceso a todos los documentos.
+clip.actions.reason.assessedAsPresentation=Esta actividad es evaluada como una 'Presentación oral'. Por lo tanto, se espera que los estudiantes realicen una presentación en ella. Se debería escribir, en la descripción de la actividad, las intrucciones necesarias para que los estudiantes sepan cómo deben realizar esta presentación.
+clip.actions.reason.assessmentAsPresentation=En esta tarea de evaluar, el evaluador observará y evaluará una presentación oral. Por lo tanto, la descripción de la actividad debería incluir las instrucciones necesarias para el evaluador, explicando cómo se debe evaluar la presentación. Además, es necesario asegurarse de que el observador podrá ver las presentaciónes. Esto se puede hacer, por ejemplo, proporcionando los materiales necesarios (una grabación), o simplemente haciendo que esta actividad y la presentación oral ocurran al mismo tiempo (para ello ambas actividades deben ocurrir en la misma fase del script).
+clip.actions.reason.assessedAsPerformance=En esta actividad, se evalúa la demostración de habilidades de los estudiantes en la realización de una determinada tarea. Por lo tanto, es necesario incluir instrucciones acerca de dicha tarea, así como los recursos necesarios para que los estudiantes puedan completar la actividad.
+clip.actions.reason.assessmentAsPerformance=En esta tarea de evaluar, el evaluador observará y evaluará la realización de una tarea determinada por parte de los estudiantes. Por lo tanto, se deberían incluir, en la descripción de la actividad, las instrucciones necesarias indicando cómo evaluar dicha tarea. Además, se debería asegurar que el evaluador puede observar la tarea: bien mediante una grabación (incluida como recurso en esta actividad), o bien haciendo que esta actividad y la actividad observada ocurren al mismo tiempo (esto implica que ambas actividades se encuentran en la misma fase del script).
+clip.actions.reason.assessedAsPortfolio=En esta actividad, los estudiantes deben preparar un portfolio para su evaluación. Se deben dar las instrucciones necesarias acerca de cómo prepararlo, y dar los recursos necesarios. La descripción de la actividad y la lista de recursos se pueden utilizar para este fin. 
+clip.actions.reason.assessmentAsPortfolio=En esta tarea de evaluar, el evaluador debe evaluar los portfolios preparados por lo estudiantes. Por lo tanto, la actividad debe dar las instrucciones necesarias al instructor acerca de cómo evaluar (en la descripción de la actividad). Además, se debe asegurar que el evaluador tendrá acceso a los portfolios de los estudiantes.
+
+clip.actions.reason.assessmentAsRoles=En esta actividad, una evaluación de tipo 'Detección de roles' se lleva a cabo. Esta evaluación está basada en un análisis de interacciones entre estudiantes. Para hacerla posible, se debería preparar el software necesario, y añadirlo (como un recurso) en esta actividad. (la documentación del patrón 'Detección de roles' contiene más información acerca del software necesario).
+clip.actions.reason.assessmentAsRubric=En esta tarea de evaluar, se utilizan 'Rúbricas'. Por lo tanto, se debe proporcionar al evaluación un documento con la rúbrica a utilizar (por ejemplo, en la lista de recursos de la actividad), así como instrucciones acerca de cómo utilizarlas (en la descripción de la actividad).
+clip.actions.reason.assessedAsShared=Esta actividad es evaluada de tal modo que todos los estudiantes de cada grupo reciben la misma nota. Probablemente se deba indicar esto a los alumnos, para que sean conscientes de las condiciones de la evaluación. Esto se puede hacer (por ejemplo) en la descripción de la actividad.
+clip.actions.reason.assessmentAsShared=En esta tarea de evaluar, se pone la misma nota a todos los estudiantes de cada grupo. Se debe dar instrucciones al evaluador indicando esta característica de la evaluación.
+clip.actions.reason.assessmentAsSelf=Esta tarea de evaluar es una 'Auto evaluación'. Por lo tanto, se debe asegurar que el evaluador es la misma persona/grupo que los evaluados.
+clip.actions.reason.assessmentAsAnonymous=Esta tarea de evaluar es anónima. Se debería indicar este hecho al evaluador (por ejemplo, en la descripción de la actividad).
+clip.actions.reason.assessmentAsIA=En esta actividad, se lleva a cabo una evaluación de tipo 'Análisis de interacciones'. Esta evaluación está basada  en un análisis de las interacciones entre los estudiantes. Se debería preparar el software necesario a fin de hacer posible esta evaluación, por ejemplo, incluyendo el software como recursos de la actividad (la documentación del patrón 'Análisis de interacciones' contiene más información sobre este software).
+clip.actions.reason.assessmentAsRandom=En esta tarea de evaluar, cada grupos de estudiantes es evaluado mediante una tarea asignada a un miembro del grupo elegido aleatoriamente; este miembro tendrá la responsabilidad sobre las notas de todos sus compañeros. Se deberían dar instrucciones al evaluador acerca de cómo elegir el miembro que será evaluado, y cómo completar la tarea de evaluar.
+
+clip.menu.ignore.all=Ignorar estas acciones
+clip.menu.ignore.action=Ignorar esta acción
+clip.menu.goto.action=Ir a la ventana de edición correspondiente
+
+
+clfps.phase.title=Fase
+clfps.phase.edit.addgroup=... añadir nuevo tipo de grupos a la fase
+clfps.phase.edit.removegroup=Eliminat tipo de grupos '${0}'
+clfps.phase.newgrouptype=Nuevo tipo de grupos
+clfps.phase.support=Actividad de apoyo
+clfps.phase.activity=Actividad de aprendizaje
+
+clfps.brainstorming.title=Brainstorming
+clfps.brainstorming.group=Grupo de brainstorming
+clfps.brainstorming.support=Actividad de apoyo
+
+clfps.jigsaw.title=Jigsaw
+clfps.jigsaw.jigsaw.group=Grupo de Jigsaw
+clfps.jigsaw.jigsaw.phase=Fase de jigsaw
+clfps.jigsaw.jigsaw.activity1=Discusión global
+clfps.jigsaw.jigsaw.activity2=Propuesta de solución
+clfps.jigsaw.jigsaw.support=Apoyo de la discusión
+clfps.jigsaw.expert.group=Grupo de Expertos
+clfps.jigsaw.expert.phase=Fase de expertos
+clfps.jigsaw.expert.activity=Discusión del subproblema
+clfps.jigsaw.expert.support=Apoyo de la discusión
+clfps.jigsaw.individual.phase=Fase individual
+clfps.jigsaw.individual.activity=Estudio individual
+clfps.jigsaw.individual.support=Apoyo del estudio individual
+
+clfps.peerreview.title=Revisión entre pares
+clfps.peerreview.reviewers=Revisores
+clfps.peerreview.review=Revisión
+clfps.peerreview.review.activity=Revisar el trabajo de un compañero
+clfps.peerreview.review.support=Actividad de apoyo 1
+clfps.peerreview.feedback=Realimentación
+clfps.peerreview.feedback.activity=Análisis de la realimentación
+clfps.peerreview.feedback.support=Actividad de apoyo 2
+clfps.peerreview.discussion=Discusión
+clfps.peerreview.discussion.group=Grupo de discusión
+clfps.peerreview.discussion.activity=Discutir revisión
+clfps.peerreview.discussion.support=Actividad de apoyo 3
+clfps.peerreview.improve=Mejorar trabajo
+clfps.peerreview.improve.activity=Mejorar el trabajo con la revisión
+clfps.peerreview.improve.support=Actividad de apoyo 4
+
+
+clfps.pyramid.dialog.title=Pirámide: Número de niveles
+clfps.pyramid.dialog.intro=Elija el número de niveles para la nueva pirámide:
+clfps.pyramid.title=Pirámide
+clfps.pyramid.class=Clase
+clfps.pyramid.student=Estudiante
+clfps.pyramid.group=Grupo de nivel ${0}
+clfps.pyramid.level=Nivel ${0}
+clfps.pyramid.support=Actividad de apoyo ${0}
+
+clfps.simulation.title=Simulación
+clfps.sumulation.students=Estudiantes
+clfps.sumulation.information=Información
+clfps.sumulation.information.deliver=Entrega de información
+clfps.sumulation.information.support=Actividad de apoyo 1
+clfps.sumulation.defining=Definición de roles
+clfps.sumulation.defining.activity=Estudiar rol
+clfps.sumulation.defining.support=Actividad de apoyo 2
+clfps.sumulation.defining.role=Nuevo rol
+clfps.sumulation.groups=Grupos de simulación
+clfps.sumulation.groupos.role=Nuevo grupo
+clfps.sumulation.groups.activity=Preparar simulación
+clfps.sumulation.groups.support=Actividad de apoyo 3
+clfps.sumulation.simulation=Simulación
+clfps.sumulation.simulation.activity=Simulación
+clfps.sumulation.simulation.support=Actividad de apoyo 4
+clfps.sumulation.share=Compartir
+clfps.sumulation.share.activity=Compartir
+clfps.sumulation.share.support=Actividad de apoyo 5
+clfps.simulation.edit.addrole=... añadir rol
+clfps.simulation.edit.addgroup=... añadir grupo de simulación
+
+clfps.tapps.title=TAPPS
+clfps.tapps.pair=Pareja
+clfps.tapps.studentA=Estudiante A
+clfps.tapps.studentB=Estudiante B
+clfps.tapps.solve=Resolver problema
+clfps.tapps.listen=Escuchar solución
+clfps.tapps.problem=Problema ${0}
+clfps.tapps.support=Actividad de apoyo
+clfps.tapps.edit.add=... añadir problema
+
+clfps.tps.title=Piensa Discute Comparte (TPS)
+clfps.tps.students=Estudiantes
+clfps.tps.think=Piensa
+clfps.tps.think.activity=Estudio individual
+clfps.tps.think.support=Apoyo del estudio individual
+clfps.tps.pair=Discute
+clfps.tps.pair.role=Pareja
+clfps.tps.pair.activity=Discusión en parejas
+clfps.tps.pair.support=Apoyo de la discusión
+clfps.tps.share=Comparte
+clfps.tps.share.activity=Compartir con la clase
+clfps.tps.share.support=Actividad de apoyo
+
+pattern.observations.activity=Observar la colaboración
+pattern.observations.title=Observación
+
+patterns.presentstion.activity=Presentación oral
+patterns.presentstion.assess=Evaluar la presentación
+patterns.presentstion.title=Presentación oral
+
+patterns.performance.activity=Performance assessment
+patterns.performance.activity=Evaluar 'performance'
+
+patterns.report.title=Revisión de informe
+patterns.report.activity=Revisión de informe
+
+patterns.self.title=Auto evaluación
+patterns.self.activity=Auto evaluación
+
+patterns.test.title=Test
+patterns.test.assess=Corregir test
+patterns.test.activity=Test
+
+patterns.tutoring.title=Sesión de tutoría
+patterns.tutoring.activity=Asistir a sesión de tutoría
+patterns.tutoring.assess=Realizar sesión de tutoría
+
+
+help.assessment.icon.assessment=Este icono representa una tarea de evaluar (dentro de la evaluación '${0}'), que se lleva a cabo dentro de esta fase.
+help.assessment.icon.assessment.no=Este icono representa una evaluación, cuya tarea de evaluar no se ha elegido aún (por eso de momento está fuera del script).
+help.assessment.icon.assessed=Este icono indica que una actividad de aprendizaje (dentro de esta fase) es evaluada dentro de la evaluación '${0}'.
+help.assessment.icon.diagnosis=Este icono indica que los resultados de la evaluación '${0}' se utilizan para adaptar una actividad de aprendizaje dentro de esta fase.
+help.assessment.icon.formative=Este icono indica que los resultados de la evaluación '${0}' se utilizan para dar realimentación a los alumnos dentro de esta fase.
+
+help.flow.select.clfp=Esta opción 'activa' este CLFP, de modo que puede ser editado. Solo un CLFP puede estar activo en cada momento.
+help.flow.select.activity=Elegir esta actividad!
+
+help.flow.assessment.edit=Este elemento es parte de una evaluación incluida en el script. Elija esta opción para editarla.
+help.assessment.delete=Esta opción elimina esta evaluación del script. A pesar de esto, las actividades relacionadas con esta evaluación no se borrarán; sin embargo, Web Collage las considerará desconectadas de esta evaluación.
+help.roles.edit.title=Haga click aquí para editar este rol. Puede configurar el nombre de este rol, su descripción, y el número máximo y mínimo de personas que pueden asignarse a cada instancia (o copia) de este rol (ésto sirve para configurar el tamaño de los grupos).
+help.flow.clfp.configure.act=Haga click aquí para ver y configurar las actividades y roles incluidos en esta fase. También podrá cambiar el nombre de la fase.
+help.flow.clfp.substitute=Esta opción sirve para reemplazar las actividades de esta fase por la estructura de trabajo propuesta por otro CLFP. Es importante tener en cuenta que las actividades actualmente incluidas en esta fase serían borradas. A pesar de esto, esta opción es útil para organizar en detalle el trabajo colaborativo correspondiente a esta fase (de acuerdo con un nuevo CLFP, que tendría que ser seleccionado).
+help.flow.clfp.add.before=Esto le permite añadir actividades que se realizarían justo antes de este CLFP. Estas nuevas actividades se organizan tamibén como un CLFP, de modo que tendría que seleccionar uno.
+help.flow.clfp.add.after=Esto le permite añadir actividades que se realizarían justo después de este CLFP. Estas nuevas actividades se organizan tamibén como un CLFP, de modo que tendría que seleccionar uno.
+help.flow.clfp.move=Use esta opción para mover este CLFP a una nueva posición dentro del script. De este modo, las actividades se realizarían en un momento diference.
+help.flow.clfp.remove=Esta opción elimina este CLFP del script. Todas las actividades, fases y roles serían también eliminados. Además, cualquier CLFP que esté integrado en alguna fase del CLFP desaparecería del script.
+help.common.pattern.doc=Haga click aquí para leer la documentación de este CLFP.
+
+help.general.editLo=Haga click aquí para editar este objetivo de aprendizaje. Puede cambiar el nombre, así como su descripción.
+help.general.deleteLo=Esta opción elimina este objetivo de aprendizaje del script.
+
+help.resources.editTool=Haga click aquí para editar esta herramienta. Puede indicar su nombre y descripción.
+help.resources.editDocument=Haga click aquí para editar este documento. Puede indicar su nombre y el enlace (URL) para acceder a él.
+help.resources.delete=Haga click aquí para eliminar este recurso del script.
+
+help.flow.activities.add=Haga click aquí para crear una nueva actividad (vacía) para este rol.
+help.assessment.edit=Haga click aquí para editar esta evaluación. De este modo puede indicar las actividades relacionadas con ella, así como configurar la evaluación de acuerdo con patrones de diseño.
+help.activity.edit=Haga click aquí para editar esta actividad. Puede indicar el título, la descripción, los objetivos de aprendizaje que persigue y los recursos asociados a ella.
+help.flow.activities.add.before=Haga click aquí para crear una actividad justo antes de ésta.
+help.flow.activities.add.after=Haga click aquí para crear una actividad justo después de ésta.
+help.flow.activities.assess=Haga click aquí para crear una nueva evaluación, en la que esta actividad es evaluada. Al crear la evaluación, ésta será incompleta: no estará configurado quién es el evaluador ni cuál es la tarea de evaluar. Esto se podrá configurar más tarde.
+help.flow.activities.makeassessor=Haga click aquí para crear una nueva evaluación, en la que esta actividad es la actividad del evaluador. Al crear la evaluación, ésta será incompleta: no estará configurada la actividad de aprendizaje que es evaluada. Esto se podrá configurar más tarde.
+help.flow.activities.move.up=Esta opción moverá esta actividad hacia arriba una posición (esto significa que se realizará antes en la ejecución del script).
+help.flow.activities.move.down=Esta opción moverá esta actividad hacia abajo una posición (esto significa que se realizará más tarde en la ejecución del script).
+help.flow.activities.delete=Haga click aquí para eliminar esta actividad del script.
+
+help.picker.move.act=Esta opción selecciona esta posición para mover el CLFP dentro de esta fase. Esto tiene el efecto de configurar el trabajo colaborativo de la fase según el CLFP; además, esto borraría las actividades actualmente existentes en la fase.
+help.picker.move.gap=Esta opción selecciona esta posición para mover aquí el CLFP.
+help.picker.select.act=Elija esta fase, para ver los roles y actividades incluidas en ella.
+help.picker.select.activitygap=Esta opción selecciona esta posición para la nueva actividad.
+help.picker.select.activity=Esta opción selecciona esta actividad.
+
+
+help.clfp.add.first=Elija esta opción para aplicar un CLFP, y de este modo crear la estructura básica del script.
+
+help.ignore.actions=Esta opción elimina esta alerta, de modo que no se mostrará de nuevo.
+help.clip.menu.ignore.all=Esta opción elimina esta alerta todas las alertas actuales de este grupo, de modo que no se mostrarán de nuevo.
+help.clip.menu.goto.action=Elija esta opción para abrir una ventana en la que completar la acción recomendada.
+help.clip.menu.ignore.action=Esta opción elimina esta alerta, de modo que no se mostrará de nuevo.
+
+help.assessment.patterns.delete=Esta opción elimina este patrón de esta evaluación. Esto no borrará ninguna actividad, sin embargo, ni cambiará nada más de la evaluación.
+help.assessment.patterns.list.new=Esta opción aplica un patrón a esta evaluación. Mediante patrones de evaluación puede configurar algunos aspectos de la evaluación. Haga click aquí para ver la lista de patrones disponibles.
+help.assessment.edit.summativeFunction.edit=Haga click aquí para indicar cómo se pone notas a los estudiantes de acuerdo con los resultados de esta evaluación.
+help.assessment.edit.formativeFunction.edit=Este elemento indica que, después de obtener los resultados de evaluación, el evaluador genera realimentación que es entregada a los estudiantes. Haga click aquí para indicar en qué actividad de aprendizaje los estudiantes reciben esta realimentación. Más tarde, puede ser conveniente tener en cuenta esta realimentación para configurar esta actividad de aprendizaje.
+help.assessment.edit.diagnosisFunction.edit=Este elemento indica que, a partir de los resultados de evaluación, una actividad puede ser modificada (para adaptarse a las circustancias concretas detectadas en la evaluación). Haga click aquí para indicar la actividad de aprendizaje que puede ser modificada por el evaluador. Adicionalmente, puede ser conveniente configurar esta actividad teniendo en cuenta el hecho de que puede ser modificada.
+help.assessment.edit.function.remove=Haga click aquí para eliminar este uso de los resultados de la evaluación. Esto no borra ni modifica ninguna actividad del script.
+
+help.assessment.edit.analysis.choose=Haga click aquí para elegir la actividad en la que se lleva a cabo la tarea de evaluar. Esto es útil para indicar quién es el evaluador, así cómo la actividad en la que éste lleva a cabo la tarea de evaluar (y cómo se completa esta tarea).
+help.assessment.edit.analysis.change=Haga click aquí para cambiar la actividad en la que se lleva a cabo la tarea de evaluar. Esto es útil para indicar quién es el evaluador, así cómo la actividad en la que éste lleva a cabo la tarea de evaluar (y cómo se completa esta tarea).
+help.assessment.edit.analysis.configpattern=Haga click aquí para elegir una técnica de evaluación, que puede dar información acerca de cómo configurar la tarea de evaluar (cómo debe proceder el evaluador). Sólo se puede aplicar una técnica de evaluación en cada evaluación.
+
+help.assessment.edit.source.choose=Haga click aquí para elegir la actividad de evaluación. Esto es útil para indicar qué se va a evaluar y quién es el evaluado. Dependiento del tipo de evaluación, la actividad evaluada puede contener instrucciones para los estudiantes, indicando cómo deben proceder durante la evaluación.
+help.assessment.edit.source.change=Haga click aquí para cambiar la actividad de evaluación. Esto es útil para indicar qué se va a evaluar y quién es el evaluado. Dependiento del tipo de evaluación, la actividad evaluada puede contener instrucciones para los estudiantes, indicando cómo deben proceder durante la evaluación. La actividad evaluada actual no se borrará del script (simplemente, deja de ser evaluada aquí).
+help.assessment.edit.source.configpattern=Haga click aquí para elegir una técnica de evaluación, que puede dar información acerca de cómo configurar la actividad evaluada (cómo deben actuar los alumnos en ésta). Sólo se puede aplicar una técnica de evaluación en cada evaluación.
+
+
+help.clfps.tapps.edit.add=Haga click aquí para añadir un nuevo problema al TAPPS. Este CLFP puede contener tantos problemas como se desee para las parejas de estudiantes.
+help.clfps.simulation.edit.addrole=Haga click aquí para añadir un nuevo rol de la simulación. Puede crear tantos roles como sea necesario, cada uno de los cuales con una descripción y actividad de preparación diferente.
+help.clfps.simulation.edit.addgroup=Haga click aquí para añadir un nuevo grupo de simulación. Puede crear tantos grupos como sea necesario; cada grupo puede realizar una simulación diferente.
+help.clfps.simulation.edit.addrole=Haga click aquí para añadir un nuevo rol a la fase. Puede crear tantos roles como sea necesario, cada uno de los cuales con una descripción y actividad de preparación diferente.
+help.clfps.simulation.edit.addgroup=Haga click aquí para añadir un nuevo grupo a la fase. Puede crear tantos grupos como sea necesario.
+
+instancias.editar=Editar instancia
+instancias.eliminar=Eliminar instancia
+instancias.editar.info=Click aquí para editar esta instancia
+instancias.eliminar.info=Click aquí para eliminar esta instancia
+instancias.nueva=Nueva instancia
+instancias.errorNoName=Por favor, especifique un nombre para la instancia
+instancias.titulo=Título
+
+versiones.version=Versión
+versiones.ver=Ver versión
+versiones.instanciar=Instanciar versión
+versiones.eliminar=Eliminar versión
+versiones.ver.info=Click aquí para ver esta versión del diseño
+versiones.instanciar.info=Click aquí para instanciar esta versión del diseño
+versiones.eliminar.info=Click aquí para eliminar esta versión del diseño
+
+disenos.editar=Editar diseño
+disenos.instanciar=Instanciar diseño
+disenos.eliminar=Eliminar diseño
+disenos.clonar=Clonar diseño
+disenos.editar.info=Haga click en esta opción para editar este diseño
+disenos.instanciar.info=Click aquí para instanciar la última versión del diseño
+disenos.eliminar.info=Haga click en esta opción para eliminar este diseño
+disenos.clonar.info=Haga click en esta opción para crear una copia del diseño
+
+tab.metodo=Método pedagógico del diseño
+tab.participantes=Gestión de participantes
+participantes.lms=Selección de LMS
+participantes.errorGetLms=No se puede obtener la lista de LMS
+participantes.lms.select=-- Seleccione una instalación de LMS --
+participantes.clase=Selección de clase
+participantes.clase.select=-- Seleccione una clase --
+participantes.participantes=Listado de participantes de la clase
+participantes.tipoLMS.select=-- Seleccione un tipo de LMS --
+participantes.adminLMS=Administrar LMS
+participantes.crearLMS=Crear LMS
+participantes.crearInstalacionLMS=Crear Nueva Instalación
+participantes.optioneditlms=Editar instalación de LMS
+participantes.optiondeletelms=Eliminar instalación de LMS
+participantes.mostrarinstanciaslms=Lista de instalaciones de LMS
+participantes.gestionar_lms=Gestión de LMS
+participantes.editarInstalacionLMS=Editar instalación
+participantes.obtenerclases=Obtener Clase
+participantes.eliminarinst=¿Está seguro que desea eliminar la instalación?
+participantes.tipolms=Tipo LMS:
+participantes.nombrelms=Nombre
+participantes.usuariolms=Usuario
+participantes.lmsintallation.edit=Click aquí para editar la instalación de LMS
+participantes.lmsintallation.delete=Click aquí para eliminar la instalación de LMS
+participantes.confirmacioneliminar=Borrar instalación de LMS
+participantes.lmsglue.select=-- Seleccione un lms de glue --
+participantes.lmsglue=LMS:
+participantes.fichero=Fichero
+
+participantes.crearinstalacion.idlms=Por favor, selecciona un tipo de LMS
+participantes.crearinstalacion.title=Por favor, especifica un nombre de LMS
+participantes.crearinstalacion.uri=Por favor, especifica una URI
+participantes.crearinstalacion.user=Por favor, especifica un nombre de usuario
+participantes.crearinstalacion.passwd=Por favor, especifica una contraseña
+participantes.crearinstalacion.toolid=Por favor, especifica un toolid
+participantes.crearinstalacion.file=Por favor, selecciona un fichero a subir
+participantes.imposibleactualizar=No se puede editar una instalación de LMS en uso
+
+instanceLoader.load.error=¡No he podido cargar la instancia!
+instanceLoader.save.error=¡No se ha podido guardar!
+instanceLoader.save.noAccess=No tiene permiso para editar este script. Se cerrará la instancia.
+instanceLoader.loading.wait=<p>Cargando la instancia. ¡Espere un momento!</p>
+instanceLoader.title=Cargando...
+instanceLoader.load.noAccess=No tiene permiso para ver este script. ¿Ha iniciado su sesión?
+instanceLoader.save.sessionExpired=Su sesión ha expirado. Si no inicia sesión se cerrará la instancia y no se guardarán los cambios realizados. ¿Desea iniciar sesión?
+
+participantes.instanciaClaseElegidas=Instalación de LMS y clase elegidas
+participantes.instanciaElegida=Instalación de LMS elegida
+participantes.claseElegida=Clase elegida
+participantes.listadoAlumnos= Lista de participantes
+participantes.botonSeleccionar=Elegir
+participantes.botonActualizarListadoAlumnos=Actualizar lista
+participantes.seleccionarAlumnos= Obtención de participantes
+participantes.instalacion_lms=Instalación de LMS
+participantes.cambioAlumnos=Cambios en los participantes
+participantes.alumnosAnadidos=Participantes que se añadirán
+participantes.alumnosEliminados=Participantes que se eliminarán
+participantes.alumnosPermanecen=Participantes que permanecen
+participantes.obtener=Obtener Participantes
+participantes.lmsElegido=Tipo de LMS elegido
+participantes.errorGetParticipants=No se puedo obtener la lista de participantes de la clase
+participantes.numberParticipants=Participantes de la clase: 
+participantes.errorGetClasses=No se pudo obtener la lista de clases
+participantes.gestionar_lms=Gestión de LMS
+participantes.mostrarinstanciaslms=Listado de Instalaciones de LMS
+participantes.confirmacioneliminar=Borrar Instalación de LMS
+
+participantes.nombre=Nombre
+participantes.tipo=Tipo
+participantes.user=Usuario
+
+actualizar.aviso=Aviso
+actualizar.aviso.info=Por favor, haz click antes en el botón elegir y selecciona una instalación y una clase
+actualizar.aviso.fallo=No se ha podido obtener la lista actualizada de participantes
+
+participantes.obtenerparticipantes.cambios=¡Aviso! Se han detectado cambios en los participantes
+participantes.obtenerparticipantesLdshake.cambios=Aviso! Se ha actualizado la lista de participantes del diseño original debido a cambios en la composición de la clase
+participantes.editarinstalacion.error=Error inesperado a la hora de editar la instalación
+
+participantes.aviso=¡¡Aviso!!
+participantes.imposibilidadborrar=No se puede borrar una instalación de LMS en uso
+participantes.elegirinstancia=Cambiar
+
+
+roles.see=Ver rol
+activity.see=Ver actividad
+help.activity.see=Haga click aquí para ver esta actividad. Puede ver el título, la descripción, los objetivos de aprendizaje que persigue y los recursos asociados a ella.
+help.roles.see.title=Haga click aquí para ver este rol. Puede ver el nombre de este rol, su descripción, y el número máximo y mínimo de personas que pueden asignarse a cada instancia (o copia) de este rol (ésto sirve para configurar el tamaño de los grupos).
+
+assessment.see=Ver evaluación
+help.assessment.see=Haga click aquí para ver esta evaluación. De este modo puede ver las actividades relacionadas con ella, así como la configuración de la evaluación de acuerdo con patrones de diseño.
+
+roles.see.title=Ver rol '${0}'
+
+flow.clfp.see.act=Ver fase '${0}'...
+help.flow.clfp.see.act=Haga click aquí para ver las actividades y roles incluidos en esta fase. También podrá ver el nombre de la fase.
+
+flow.activities.see=Ver fase
+
+flow.assessment.see=Ver evaluación
+help.flow.assessment.see=Este elemento es parte de una evaluación incluida en el script. Elija esta opción para verla.
+help.flow.select.clfp.see=Esta opción 'activa' este CLFP, de modo que puede ser visto. Solo un CLFP puede estar activo en cada momento.
+
+ldmanager.eliminardiseno=¿Desea realmente borrar este diseño?
+
+learningflow.clonar=Clonar esta instancia de grupo
+learningflow.clonar.help=Haga click aquí para clonar esta instancia de grupo
+learningflow.borrar=Borrar esta instancia de grupo
+learningflow.borrar.help=Haga click aquí para borrar esta instancia de grupo
+learningflow.asignarparticipantes=Asignar estudiantes a esta instancia de grupo
+learningflow.asignarparticipantes.help=Haga click aquí para asignar estudiantes a esta instancia de grupo
+learningflow.asignarprofesores=Asignar profesores a esta instancia de grupo
+learningflow.asignarprofesores.help=Presione aquí para asignar profesores a esta instancia de grupo
+learningflowGroups.mostrarclfp=Mostrar CLFP asociado
+learningflowGroups.mostrarclfp.help=Haga click aquí para mostrar el CLFP asociado a esta instancia de grupo
+participants.alumnosasignados=Asignación de estudiantes a la instancia de grupo
+participants.alumnosasignadosgrupo=Estudiantes asignados a esta instancia
+participants.alumnosasignadosgrupotemp=Estudiantes temporales
+participants.alumnosdisponibles=Estudiantes disponibles
+participants.profesoresasignados=Profesores asignados
+participants.profesoresasignadosgrupo=Profesores asignados
+participants.profesoresdisponibles=Profesores disponibles
+
+participants.asignaralumnos=Asignar estudiante a la instancia
+participants.asignaralumnos.help=Haga click aquí para asignar el estudiante a la instancia
+participants.asignartodosalumnos=Asignar todos los estudiantes a la instancia
+participants.asignartodosalumnos.help=Haga click aquí para asignar a la instancia todos los estudiantes disponibles
+participants.asignarprofesores=Asignar profesores al grupo
+participants.asignarprofesores.help=Presione aquí para asignar profesores al grupo
+participants.asignartodosprofesores=Asignar todos los profesores al grupo
+participants.asignartodosprofesores.help=Presione aquí para asignar todos los profesores al grupo
+
+participants.desasignaralumnos=Descartar estudiante de la instancia
+participants.desasignaralumnos.help=Presione aquí para descartar el estudiante de la instancia
+participants.desasignartodosalumnos=Descartar todos los estudiantes de la instancia
+participants.desasignartodosalumnos.help=Haga click aquí para descartar todos los estudiantes asignados a la instancia
+participants.desasignarprofesores=Descartar profesores del grupo
+participants.desasignarprofesores.help=Presione aquí para descartar este profesor
+participants.desasignartodosprofesores=Descartar todos los profesores de este grupo
+participants.desasignartodosprofesores.help=Presione aquí para descartar todos los profesores de este grupo
+nombre.estudiantes=Nombre Estudiantes
+
+participants.alumnosasignadosotrasinstancias=Estudiantes asignados a otras instancias
+
+participants.numasignados=Estudiantes asignados a otras instancias: 
+participants.numdisponibles=Estudiantes disponibles: 
+participants.perteneciente=Estudiantes asignados a esta instancia: 
+participants.pertenecienteProfesor=Profesores asignados a este grupo: 
+participants.alumnoselegidos=Por favor, primero especifique la lista de participantes en la pestaña de gestión de participantes
+
+learningflow.verparticipantes=Listado de estudiantes asignados a esta instancia
+learningflow.verprofesores=Ver los profesores asignados
+learningflow.verparticipantes.help=Pinche aquí para ver la lista de estudiantes asignados a este grupo
+
+participants.toolid=Toolid
+participantes.uri=URI
+
+fichero.notSupportedFormat=Formato de fichero no soportado
+fichero.error=Error al subir el fichero
+
+export.title=Exportar
+deployGluePS.title=Despliegue en Glue!PS
+deployGluePS.error=Error al desplegar en Glue!PS
+deployingGluePS.title=Desplegando en Glue!PS...
+deployingGluePS.wait=El diseño de Web Collage se está desplegando en Glue!PS... <br/>Por favor, espere a que finalice el proceso!
+deployingGluePS.error.imsld=Error al tratar de exportar el script a IMS-LD
+deployingGluePS.error.internal.imsld=Error interno en Web Collage al tratar de exportar el script a IMS-LD
+deployingGluePS.error.design=Error al tratar de crear el diseño en Glue!PS
+deployingGluePS.error.deploy=Error al tratar de crear el despliegue en Glue!PS
+deployingGluePS.error.internal.glueps=Error interno en Glue!PS al tratar de desplegar
+
+registerResult.title=Resultado del registro del usuario
+registerResult.exit=El nuevo usuario ha sido registrado correctamente
+
+participantFlow.show=Mostrar flujo de participantes
+
+groupPatternAlerts.title=Alertas de patrones
+groupPatternAlerts.proposedGroupNumberInfo=El patrón propone la utilización de un número de grupos diferente del número de grupos actual
+groupPatternAlerts.proposedGroupCompositionInfo=El patrón propone una configuración de grupos diferente a la configuración de grupos actual
+
+groupPatternAlerts.proposedGroupNumberAlert=El número de grupos propuesto (${0}) es diferente del número de grupos actual (${1})
+groupPatternAlerts.proposedGroupCompositionAlert=La configuración de grupos propuesta no coincide con la configuración de grupos actual
+groupPatternAlerts.leftAlert=haga click en la flecha botón \"izquierda\" para ver más consejos sobre la formación de grupos
+groupPatternAlerts.rightAlert=haga click en la flecha \"derecha\" para ver más consejos sobre la formación de grupos
+
+groupPatternOptions.title=Opciones del patrón de grupo
+help.groupPattern.delete=Haga click aquí para eliminar este patrón de grupo
+help.groupPattern.documentation=Haga click aquí para leer la documentación del patrón de grupo
+
+groupPattern.updateGroupNumber=Actualizar el número de grupos
+groupPattern.updateGroupNumberOK=El número de grupos es correcto
+groupPattern.disabledGroupNumber=No se puede actualizar el número de grupos
+groupPattern.noAditionalConfiguration=Nada que configurar
+groupPattern.noAditionalConfiguration.help=El patrón no necesita ninguna configuración adicional
+
+groupPattern.updateGroupComposition=Actualizar la composición de grupos
+groupPattern.updateGroupCompositionOK=La composición de grupos es correcta
+groupPattern.disabledGroupComposition=No se puede actualizar la composición de grupos
+
+groupPattern.delete=Borrar este patrón de grupos
+groupPattern.documentation=Leer documentación del patrón de grupos
+groupPattern.emptyGroup=Hay grupos vacíos
+groupPattern.emptyGroup.help=Debería asignar estudiantes a cada instancia de grupo en esta fase
+groupPattern.notAsigned=Hay estudiantes no asignados a ningún grupo
+groupPattern.notAsigned.help=Podría querer que cada estudiante esté asignado a alguna instancia de grupo de la fase
+groupPattern.noAvailableParticipants=No hay estudiantes disponibles para ser asignados a los grupos
+groupPattern.noAvailableParticipants.help=Cada grupo en una fase debería tener estudiantes asignados
+groupPattern.notAsignedTeacher=No hay ningún profesor asignado a la fase
+groupPattern.notAsignedTeacher.help=Debería asignar al menos un profesor a esta fase
+groupPattern.noAvailableTeachers=No hay profesores disponibles para ser asignados a la fase
+groupPattern.noAvailableTeachers.help=Cada fase debería tener un  profesor asignado
+groupPattern.notAsignedSomeTeachers=Hay profesores no asignados a la fase
+groupPattern.notAsignedSomeTeachers.help=Podría querer que cada profesor esté asignado a la fase
+
+groupPattern.updatesNeeded.alert=${0} actualizaciones más serán necesarias para actualizar esta.
+groupPattern.baddependencies=Algunas dependencias deben ser comprobadas antes de que se pueda actualizar esta fase.
+
+groupPattern.management.dialogtitle=Gestión de patrones de grupos
+groupPattern.managment.newgn=Añadir patrón de número de grupos
+groupPattern.managment.newpa=Añadir patrón de asignación de estudiantes
+groupPattern.managment.currentgn=Patrones de número de grupos
+groupPattern.managment.currentpa=Patrones de asignación de estudiantes
+  
+groupPattern.management.move.down=Mover abajo
+help.groupPattern.management.move.down=Mover abajo
+groupPattern.management.move.up=Mover arriba
+help.groupPattern.management.move.up=Mover arriba
+
+groupPattern.management.undelete=Conservar este patrón
+help.groupPattern.management.undelete=Conservar este patrón
+groupPattern.management.delete=Borrar este patrón
+help.groupPattern.management.delete=Borrar este patrón
+
+groupPattern.general.lessthan=Menos de ${1}: ${0} 
+groupPattern.general.morethan=Más de ${1}: ${0}
+
+groupPattern.nopatterns=No hay patrones para configurar esto. ¡Puedes añadirles!
+
+grouplayer.menu.title=Miembros del grupo
+grouplayer.menu.itemhelp=Haz click para seleccionar este participante
+
+groupPattern.manage=Gestionar la política de grupos
+help.groupPattern.manage=Añadir reglas para controlar el número de grupos y la distribución de los estudiantes
+
+
+groupPattern.add=Añadir un patrón de grupo
+help.groupPattern.add=Añade un patrón de grupo a la fase
+
+changeTypeToStudent=Cambiar a estudiante
+changeTypeToStudent.help=El participante pasa a ser de tipo estudiante
+changeTypeToTeacher=Cambiar a profesor
+changeTypeToTeacher.help=El participante pasa a ser de tipo profesor
+changeTypeTitle=Confirmación del cambio de tipo
+changeType.info=Si cambia el tipo el participante se borrará de todos aquellos grupos a los que está asignado actualmente.<br/>¿Está seguro de que desea realizar el cambio?
+
+toolNameError=Por favor, indique un nombre para la herramienta

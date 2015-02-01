@@ -1,0 +1,26 @@
+{
+	"actobjs": [
+		{"id": "share", "name": "Foster exchange of ideas", "text": "Encourage students to take risks and share their ideas."},
+		{"id": "confidence", "name": "Support students' self-confidence", "text": "To show students that their knowledge and language skills are valued and accepted."},
+		{"id": "respect", "name": "Promote tolerance and respect", "text": "To teach students to accept and respect individual differences."}
+	],
+	"procobjs": [
+		{"id": "interdependence", "name": "Promote positive interdependence", "text": "To promote the feeling that all the members in a group are needed in order to success or reach a goal."},
+		{"id": "discussion", "name": "Foster discussion", "text": "Encourage students to discuss with the objective of building knowledge."},
+		{"id": "accountability", "name": "Promote individual accountability", "text": "Ensure taht each student contributes with their share of the work."},
+		{"id": "attention", "name": "Focus students' attention", "text": "Focus the students' attention in a particupar topic."},
+		{"id": "memory", "name": "Long-term memory ", "text": "Create the change to formulate answers from long-term memoty knowledge."},
+		{"id": "practice", "name": "Practice concepts", "text": "Let students practice concepts and reach a better comprehension."},
+		{"id": "analytical", "name": "Practice analytical reasoning skills", "text": "Foster analytical reasoning skills."},
+		{"id": "solve", "name": "Promote problem-solving skills", "text": "Practice problem-solving skills."}
+	],
+	"problems": [
+		{"id": "divisible", "name": "Divisible problem", "text": "Solver a complex problem or task that can be easily divided into several independent sections."},
+		{"id": "consensus", "name": "A problem that requires reaching gradial consensus", "text": "Complex problem, typically with no unique answer, whose solution involves reaching agreement of all participants."},
+		{"id": "simulation", "name": "Problem that requires simulation", "text": "Problem whose solution involves the simulation of a situation in which several roles are involved."},
+		{"id": "several", "name": "Problem with many possible answers", "text": "Problem whose solution is the generation of a large number of answers in a short time."},
+		{"id": "openended", "name": "Open-answer problem", "text": "Open-answer question."},
+		{"id": "problems", "name": "A series of problems", "text": "A series of problems, whose solution requires reasoning skills."}
+	]
+}
+

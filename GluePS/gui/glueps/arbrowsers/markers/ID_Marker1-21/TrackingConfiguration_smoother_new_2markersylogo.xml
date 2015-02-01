@@ -1,0 +1,372 @@
+<?xml version="1.0"?>
+<!--    Example tracking configuration file for using marker-based tracking.
+        Marker tracking is the detection of markers in a camera image and
+        the estimation of the camera position with respect to these markers.
+        Markers, in contrast to natural features, are easy to detect with high
+        precision, which in turn allows to estimate the camera position with
+        high accuracy. 
+        There are three different marker types that can be used:
+        - ID marker,
+        - picture marker and
+        - rectangular image marker
+        To use one or more of these markers for the tracking process, they need
+        to be defined in the configuration file. If a marker is not defined, 
+        but is seen during the tracking process, then it will simply be ignored. 
+        Besides the configuration file, a camera calibration file needs to be 
+        provided. A more precise camera calibration will lead to more accurate 
+        tracking results, so it is advisible to use a high-quality camera 
+        calibration. -->
+<TrackingData>
+    <Sensors>
+
+        <!--    Use "MarkerBasedSensorSource" as type to use marker tracking -->
+        <Sensor type="MarkerBasedSensorSource">
+
+            <!--    Assign ID to uniquely identify this tracker -->
+            <SensorID>Markertracking1</SensorID>
+
+            <Parameters>
+
+                <!--    Parameters for the marker tracker itself. These 
+                        parameters are independent from the specific markers. 
+                        -->
+                <MarkerTrackingParameters>
+
+                    <!--    Strategy which is used for the marker detection. 
+                            There are two types available:
+                            - "robust" to use a robust approach to detect the 
+                              markers, which usually gives the best results, 
+                              but consumes more computational time, i.e. is 
+                              slower.
+                            - "fast" to use a more simple approach to detect 
+                              the markers, which is less precise, but faster 
+                              than robust. 
+                              -->
+                    <TrackingQuality>Fast</TrackingQuality>
+                    <!--    <TrackingQuality>fast</TrackingQuality> -->
+
+                    <!--    The threshold which is used to binarize the camera 
+                            image. Binarizing is the process where each pixel 
+                            is converted to a grayscale value (between 0 and 
+                            255) and then is set to 0 when the value is below 
+                            the threshold and to 1 when the value is above. 
+                            This helps to clearly identify the marker and is 
+                            therefore important for the detection process. When 
+                            the tracking quality is set to "fast", then this 
+                            value is fixed and will not change during the 
+                            tracking process. When the tracking quality is set 
+                            to "robust", then the value is only the starting 
+                            value in the very first frame after loading the 
+							tracking.xml. Detecting markers using a fixed 
+							threshold can lead to failure. The value range for
+							the threshold is between 0 and 255.
+							-->
+                    <ThresholdOffset>110</ThresholdOffset>
+
+                    <!--    Number of search iterations which controls the 
+                            number of attempts to find a marker with a new 
+                            ThresholdOffset. This parameter matters when "robust" 
+							is set as "TrackingQuality", but is ignored for 
+							"fast". The ThresholdOffset is adapted when no 
+							marker was detected. 							
+                            With a high number, the marker tracker is more 
+                            likely to detect a marker, but it also needs more 
+                            computational time, i.e. is slower. -->
+                    <NumberOfSearchIterations>3</NumberOfSearchIterations>
+
+                </MarkerTrackingParameters>
+            </Parameters>
+
+            <!--    The following XML nodes define the markers which are used 
+                    for marker tracking. Each node is independent from each 
+                    other. The following nodes are examples for each marker 
+                    type which can be defined in this file. For your 
+                    information, "COS" stands for "coordinate system" because 
+                    each marker is associated with an independent coordinate 
+                    system. -->
+
+            <!--    Example ID marker configuration, which uses a matrix ID 
+                    (similar to a 2D barcode) to identify the marker. The 
+                    matrix ID must be provided and should be unique for each 
+                    marker. Two markers cannot have the same matrix ID. -->
+            <SensorCOS>
+
+                <!--    ID string for uniquely identifying the marker. This ID 
+                        string must not be assigned to another marker. -->
+                <SensorCosID>Marker1</SensorCosID>
+
+                <Parameters>
+
+                    <!--    Description of the marker properties. -->
+                    <MarkerParameters>
+
+                        <!--    Size of the marker which has to be provided to 
+                                correctly relate the marker pixel size to world 
+                                coordinates. The size is specified in 
+                                millimeters. -->
+                        <Size>60</Size>
+
+                        <!--    Matrix ID to identify the marker. The ID is
+                                associated with the pattern on the marker and 
+                                is used to identify the marker in the camera 
+                                image. -->
+                        <MatrixID>1</MatrixID>
+
+                    </MarkerParameters>
+                </Parameters>
+            </SensorCOS>
+
+
+			<SensorCOS>
+				<SensorCosID>Marker2</SensorCosID>
+				<Parameters>
+					<MarkerParameters>
+						<Size>60</Size>
+						<MatrixID>2</MatrixID>
+					</MarkerParameters>
+				</Parameters>
+			</SensorCOS>
+
+			<SensorCOS>
+				<SensorCosID>Marker3</SensorCosID>
+				<Parameters>
+					<MarkerParameters>
+						<MatrixID>2</MatrixID>
+						<referenceImage>logo_gsic.png</referenceImage>
+					</MarkerParameters>
+				</Parameters>
+			</SensorCOS>
+
+			
+
+			
+			
+		</Sensor>
+		
+		<Sensor Type="FeatureBasedSensorSource" Subtype="Fast"><!--	Assign an ID to this sensor -->
+		<SensorID>FeatureTracking1</SensorID><!--	Parameters that apply to the sensor -->
+		<Parameters><!--	The following feature descriptor types are available: 
+						"regular", "upright", "gravity", "rectified". 
+						- The "regular" feature descriptor type is the most 
+						  general feature descriptor type and is used as 
+						  default if the tag is not specified. 
+						- The "upright" feature descriptor type assumes that 
+						  the camera is not rotated with respect to the optical 
+						  axis, i.e. is turned upside down, during the tracking 
+						  process. 
+						- The "gravity" feature descriptor type can only be 
+						  used with devices with inertial sensors which 
+						  measures gravity. It is used for localizing static 
+						  objects that provide (close to) vertical surfaces, 
+						  e.g. buildings or posters on a wall. The orientation 
+						  of the features will then be aligned with gravity. 
+						- The "rectified" feature descriptor type can only be 
+						  used with devices with inertial sensors which 
+						  measures gravity. It is used for planar objects on a 
+						  horizontal surface, e.g. a magazine on a table.
+						  This will improve the result of the localization of 
+						  planar objects under steep camera angles at the cost 
+						  of a lower framerate during localization.
+						This parameter is for expert usage only. In general it 
+						is advised to leave the value unchanged. --><FeatureDescriptorAlignment>regular</FeatureDescriptorAlignment><!--	A restriction on the number of reference planar objects 
+						to be localized per frame. Localization takes longer 
+						than interframe tracking, and if the system tries to 
+						localize too many objects at the same time, it might 
+						cause a lower framerate. The default value for this is 5 
+						and is used if the tag is not specified.
+						Another name that can be used for this parameter is 
+						<MultipleReferenceImagesFast>. This name is however 
+						deprecated and should not be used any more. 
+						This parameter is for expert usage only. In general it 
+						is advised to leave the value unchanged. --><MaxObjectsToDetectPerFrame>5</MaxObjectsToDetectPerFrame><!--	The maximum number of objects that should be tracked in 
+						parallel. Tracking many objects in parallel is quite 
+						expensive and might lead to a lower framerate. As soon 
+						as the maximum number of tracked objects is reached, 
+						the system will no longer try to localize new objects. 
+						The default value for this is 1 and is used if the tag 
+						is not specified. 
+						Another name that can be used for this parameter is 
+						<MaxNumCosesForInit>. This name is however deprecated 
+						and should not be used any more. 
+						This parameter is for expert usage only. In general it 
+						is advised to leave the value unchanged. --><MaxObjectsToTrackInParallel>1</MaxObjectsToTrackInParallel><!--	Default similarity threshold for specifying whether
+						template tracking was successful or failed. The 
+						tracking quality measure is defined between -1 and 1, 
+						where 1 is the best	possible value. If the tracking 
+						quality	is reported to be below the threshold, the 
+						tracker will treat the corresponding frame as lost. 
+						The default value for this is 0.7 and is used if the 
+						tag is not specified. This setting can be overridden 
+						for each "COS" if it is defined there. 
+						This parameter is for expert usage only. In general it 
+						is advised to leave the value unchanged. --><SimilarityThreshold>0.7</SimilarityThreshold></Parameters><!--	Define a "SensorCOS" for this sensor. This is essentially a 
+					coordinate system associated with a template image that is 
+					to be tracked. --><SensorCOS><!--	An ID that this COS is associated with. --><SensorCosID>Patch4</SensorCosID><!--	Parameters that should be applied to this "SensorCOS". 
+						--><Parameters><!--	Reference image file name. If available, width and 
+							height of the tracking template in millimeters can
+							be specified by adding attributes "WidthMM" and/or 
+							"HeightMM". If these values are not specified at 
+							all, the width and height of the reference image in 
+							pixels will be used. If only width or heigth are 
+							specified, the missing quantity will be calculated 
+							such that sizes agree with the aspect ratio of the 
+							image. 
+							These parameters are not required and are intended 
+							for expert use only. --><ReferenceImage>logo_gsic.png</ReferenceImage><!-- <ReferenceImage WidthMM="100" HeightMM="100">metaioman.png</ReferenceImage> --><!--	Another similarity threshold can be specified here. 
+							It will override the default similarity threshold 
+							specified for the sensor. 
+							This parameter is for expert usage only. In general 
+							it is advised to leave the value unchanged. --><SimilarityThreshold>0.7</SimilarityThreshold></Parameters></SensorCOS><!--	The commented lines below show how another COS can be 
+					added to the configuration. --><!--
+			<SensorCOS>
+				<SensorCosID>Patch2</SensorCosID>
+				<Parameters>
+					<ReferenceImage>junaioman.png</ReferenceImage>
+					<SimilarityThreshold>0.8</SimilarityThreshold>
+				</Parameters>
+			</SensorCOS>
+			--></Sensor>
+		
+		
+		
+	</Sensors>
+	<Connections>
+		<COS>
+			<Name>COS1</Name>
+			<Fuser type="SmoothingFuser">
+				<Parameters>
+					<!-- Alpha is in the range [0...1] and determines how strong a new pose is.
+				  alpha = 0.9: less smoothing
+				  alpha = 0.1: alot smoothing-->
+					<AlphaRotation>0.5</AlphaRotation> 
+					<AlphaTranslation>0.8</AlphaTranslation>
+					<!-- if we lose tracking, keep the old pose for several frames -->
+					<KeepPoseForNumberOfFrames>3</KeepPoseForNumberOfFrames> 
+				</Parameters>
+			</Fuser>
+			<SensorSource trigger="1">
+				<SensorID>Markertracking1</SensorID>
+				<SensorCosID>Marker1</SensorCosID>
+				<HandEyeCalibration>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</HandEyeCalibration>
+				<COSOffset>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</COSOffset>
+			</SensorSource>
+		</COS>
+
+
+		<COS>
+			<Name>COS2</Name>
+			<Fuser type="SmoothingFuser">
+				<Parameters>
+					<!-- Alpha is in the range [0...1] and determines how strong a new pose is.
+				  alpha = 0.9: less smoothing
+				  alpha = 0.1: alot smoothing-->
+					<AlphaRotation>0.5</AlphaRotation> 
+					<AlphaTranslation>0.8</AlphaTranslation>
+					<!-- if we lose tracking, keep the old pose for several frames -->
+					<KeepPoseForNumberOfFrames>3</KeepPoseForNumberOfFrames>
+				</Parameters>
+			</Fuser>
+			<SensorSource trigger="1">
+				<SensorID>Markertracking1</SensorID>
+				<SensorCosID>Marker2</SensorCosID>
+				<HandEyeCalibration>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</HandEyeCalibration>
+				<COSOffset>
+					<TranslationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+					</TranslationOffset>
+					<RotationOffset>
+						<x>0</x>
+						<y>0</y>
+						<z>0</z>
+						<w>1</w>
+					</RotationOffset>
+				</COSOffset>
+			</SensorSource>
+		</COS>
+
+				<COS>
+			<Name>MarkerlessCOS4</Name>
+			<Fuser Type="BestQualityFuser">
+				<Parameters>
+					<KeepPoseForNumberOfFrames>2</KeepPoseForNumberOfFrames>
+					<GravityAssistance></GravityAssistance>
+					<AlphaTranslation>0.8</AlphaTranslation>
+					<GammaTranslation>0.8</GammaTranslation>
+					<AlphaRotation>0.5</AlphaRotation>
+					<GammaRotation>0.5</GammaRotation>
+					<ContinueLostTrackingWithOrientationSensor>false</ContinueLostTrackingWithOrientationSensor>
+				</Parameters>
+			</Fuser>
+
+			<SensorSource>
+				<SensorID>FeatureTracking1</SensorID>
+				<SensorCosID>Patch4</SensorCosID>
+				<HandEyeCalibration>
+					<TranslationOffset>
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</TranslationOffset>
+					<RotationOffset>
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+						<W>1</W>
+					</RotationOffset>
+				</HandEyeCalibration>
+				<COSOffset>
+					<TranslationOffset>
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+					</TranslationOffset>
+					<RotationOffset>
+						<X>0</X>
+						<Y>0</Y>
+						<Z>0</Z>
+						<W>1</W>
+					</RotationOffset>
+				</COSOffset>
+			</SensorSource>
+		</COS>
+
+	</Connections>
+</TrackingData>

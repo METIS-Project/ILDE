@@ -1,0 +1,44 @@
+grouppattern.expertgroup.title=Grupos de expertos
+grouppattern.expertgroup.title.alert=<font color='brown'>Grupos de expertos</font>
+grouppattern.expertgroup.info=El número de subproblemas es fijo. Quiere que el número de <br/> grupos dependa del número de subproblemas que el Jigsaw <br/> tiene para resolver.
+
+grouppattern.expertgroup.number.alert=El número de subproblemas especificado es ${0}, así que debería haber ${0} grupos.
+grouppattern.expertgroup.nonumber.alert=Debe haber al menos 2 grupos de expertos (cada grupo trabajará en un subproblema).
+
+grouppattern.expertgroup.dialog.title=Grupos de expertos: número de subproblemas
+grouppattern.expertgroup.dialog.text=Selecciona el número de subproblemas para este Jigsaw
+
+grouppattern.expertgroup.menuitem=Establecer el número de subproblemas (${0})
+grouppattern.expertgroup.menuitem.help=Esto establece el número de <font color='brown'>subproblemas</font> para este Jigsaw. El número de <font color='brown'>subproblemas</font> determina el número de <font color='green'>Grupos de Expertos</font>, ya que cada<font color='green'>Grupo de Expertos</font> se centrará en un sólo <font color='brown'>subproblema</font>.<br/><br/>
+grouppattern.expertgroup.menuitem.help.unset=Actualmente, el número de <font color='brown'>subproblemas</font> está sin especificar.
+grouppattern.expertgroup.menuitem.help.set=Actualmente, el número de <font color='brown'>subproblemas</font> es ${0}.
+grouppattern.expertgroup.unsetsubproblems=sin especificar
+
+
+grouppattern.expertgroup.np.groupcompositionok=Debido a que no conocemos los participantes todavía, no podemos distribuirlos...
+
+grouppattern.expertgroup.justone.unset.alert.text=Sólo hay un grupo de expertos
+grouppattern.expertgroup.justone.unset.alert.help=Un sólo <font color='green'>Grupo de Expertos</font> significaría solamente un <font color='brown'>subproblema</font> para el Jigsaw, y esto no funcionaría.<br/><br/>Para arreglarlo, <b>crea más <font color='green'>Grupos de Expertos</green> manualmente</b> o <b>establece el número de <font color='brown'>subproblemas</font> en el menú junto a este icono</b>, de manera que el número de <font color='green'>Grupos de Expertos</font> pueda establecerse de forma automática.
+grouppattern.expertgroup.justone.unset.wtd.help=El número de <font color='green'>Grupos de Expertos</font> no puede ser actualizado de forma automática, ya que no has especificado el número de <font color='brown'>subproblemas</font>.<br/><br/>Por favor, observa que <b>puedes especificar el número de <font color='brown'>subproblemas</font> abajo en este menú</b>.
+grouppattern.expertgroup.justone.unset.ok=El número de <font color='green'>Grupos de Expertos</font> es correcto, ya que hay más uno.
+
+grouppattern.expertgroup.gn.set.alert.text=Necesitamos ${0} Grupos de Expertos (no ${1})
+grouppattern.expertgroup.gn.set.alert.help=El número de <font color='brown'>subproblemas</font> especificado para este Jigsaw is ${0}, de modo que necesitamos ${0} <font color='green'>Grupos de Expertos</font>. Sin embargo, el número actual de <font color='green'>Grupos de Expertos</font> es ${1}.<br/><br/>El número de <font color='green'>Grupos de Expertos</font> <b>debería fijarse para coincider con el número de <font color='brown'>subproblemas</font></b>.
+
+grouppattern.expertgroup.gn.set.wtd.help=El número de <font color='green'>Grupos de Expertos</font> no puede actualizarse de forma automática, ya que no has especificado el número de <font color='brown'>subproblemas</font>.<br/><br/>Por favor, observa que <b>puedes especificar el número de <font color='brown'>subproblemas</font> abajo en este menú</b>.
+grouppattern.expertgroup.gn.set.wtd.create=<b>Esto creará ${0} nuevos <font color='green'>${1}</font> para tener ${2}.</b><br/><br/>  
+grouppattern.expertgroup.gn.set.wtd.delete=<b>Esto borrará ${0} <font color='green'>${1}</font> para tener ${2}.</b><br/><br/> 
+grouppattern.expertgroup.gn.set.wtd.more=Como el número de <font color='brown'>subproblemas</font> ha sido establecido a ${0}, necesitamos ${0} <font color='green'>Grupos de Expertos</font>. 
+
+grouppattern.expertgroup.justone.set.ok=El número de <font color='green'>Grupos de Expertos</font> es correcto, ya que hay más de uno.
+
+
+
+
+grouppattern.expertgroup.singular=Grupo de Expertos
+grouppattern.expertgroup.plural=Grupos de Expertos
+
+grouppattern.expertgroup.list.named=${0} ${1}
+grouppattern.expertgroup.list.separator=, 
+grouppattern.expertgroup.list.lastseparator= y 
+

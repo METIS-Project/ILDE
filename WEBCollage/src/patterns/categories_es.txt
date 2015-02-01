@@ -1,0 +1,26 @@
+{
+	"actobjs": [
+		{"id": "share", "name": "Fomentar el intercambio de ideas", "text": "Animar a los alumnos a arriesgarse y compartir sus ideas."},
+		{"id": "confidence", "name": "Apoyar la confianza de los alumnos", "text": "Demostrar a los alumnos que su conocimiento y habilidades con el lenguage son valorados y aceptados."},
+		{"id": "respect", "name": "Promover la tolerancia y el respeto", "text": "Enseñar a aceptar y respetar las diferencias individuales."}
+	],
+	"procobjs": [
+		{"id": "interdependence", "name": "Promover la interdependencia positiva", "text": "Promover el sentimiento de que los miembros de un grupo se necesitan mutuamente para alcanzar un objetivo."},
+		{"id": "discussion", "name": "Favorecer la discusión", "text": "Animar a discutir con el objetivo de construir el conocimiento de los estudiantes."},
+		{"id": "accountability", "name": "Promover la responsabilidad individual", "text": "Asegurarse de que cada alumno contribuyen con su parte correspondiente."},
+		{"id": "attention", "name": "Enfocar la atención de los estudiantes", "text": "Enfocar la atención de los estudiantes en un tema concreto."},
+		{"id": "memory", "name": "Memoria de largo plazo", "text": "Ofrecer la oportunidad de formular las respuestas a partir de información de la memoria de largo plazo."},
+		{"id": "practice", "name": "Practicar conceptos", "text": "Permitir a los estudiantes practicar los conceptos y producir un mayor entendimiento del material."},
+		{"id": "analytical", "name": "Practicar habilidades de razonamiento analítico", "text": "Fomentar las habilidades de razonamiento analítico."},
+		{"id": "solve", "name": "Promover las habilidades de resolución de problemas", "text": "Apoyar las habilidades de resolución de problemas."}
+	],
+	"problems": [
+		{"id": "divisible", "name": "Problema divisible", "text": "Resolver un problema o tarea complejo que se puede dividir fácilmente en secciones o sub-problemas independientes."},
+		{"id": "consensus", "name": "Problema que requiere alcanzar consenso gradual", "text": "Problema complejo, generalmente sin una solución concreta, cuya resolución implica conseguir el consenso de todos los participantes."},
+		{"id": "simulation", "name": "Problema que requiere simulación", "text": "Problema cuya solución implica la simulación de una situación en la que participan varios roles o papeles."},
+		{"id": "several", "name": "Problema con muchas posibles soluciones", "text": "Problema, cuya solución es la generación de un gran número de posibles soluciones de forma rápida."},
+		{"id": "openended", "name": "Pregunta con respuesta abierta", "text": "Pregunta con respuesta abierta."},
+		{"id": "problems", "name": "Una serie de problemas", "text": "Una serie de problemas, cuya solución requiere procesos de razonamiento."}
+	]
+}
+

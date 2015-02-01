@@ -1,0 +1,254 @@
+<body class="claro">
+    <div id="WaitWhileLoadingPane" class="waitWhileLoadingPane">
+        ${common.waiting}<br/>
+        <img src="images/loading.gif"/>
+    </div>
+    <div class="localeChooseBlock">
+        <a href="index.php?l=en"><img src="images/i18n/en.gif" alt="English"/></a>
+        <a href="index.php?l=es"><img src="images/i18n/es.gif" alt="Espa&ntilde;ol"/></a>
+        <a href="index.php?l=ca"><img src="images/i18n/ca.gif" alt="Catalan"/></a>
+    </div>
+    <div class="title"><img src="images/logo-WIC2-alpha.png" width="300px;"/>
+    </div>
+    <div id="LoginMenuTabs" dojoType="dijit.layout.StackContainer" style="padding-bottom:10px;width:35%;height:25px;">
+        <div id="LoginMenuTabsLogin" dojoType="dijit.layout.ContentPane" class="loginMenu">
+            <div id="DoLogin" class="loginMenuItem">
+                ${users.login}
+            </div>
+            | 
+            <div id="RegisterUser" class="loginMenuItem" style="padding-right:10px;">
+                ${users.register}
+            </div>
+        </div>
+        <div id="LoginMenuTabsLogged" dojoType="dijit.layout.ContentPane" class="loginMenu">
+            <div id="UserName" class="userName">
+            </div>
+            | 
+            <div id="DoLogout" class="loginMenuItem" style="padding-right:10px;">
+                ${users.logout}
+            </div>
+        </div>
+    </div>
+    <div id="NewDesignPane" dojoType="dijit.TitlePane" title="${index.newDesign}" style="padding-bottom:20px; width:35%;">
+        <div style="overflow: auto;">
+            <div id="NewDesignPaneErrorReport" class="errorReport">
+            </div>
+            <table>
+                <tr id="NewLdRow">
+                    <td>
+                        ${index.title}
+                    </td>
+                    <td>
+                        <div id="NewLdName" dojoType="dijit.form.TextBox" style="width:250px;">
+                        </div>
+                    </td>
+                    <td>
+                        <div id="NewLdButton" dojoType="dijit.form.Button" label="${index.create}">
+                        </div>
+                    </td>
+                </tr>
+                <!--            <tr>
+                                <td colspan="2">
+                                    ${index.noSave}
+                                </td>
+                                <td>
+                                    <div id="PlayButton" dojoType="dijit.form.Button" label="${index.play}">
+                                    </div>
+                                </td>
+                            </tr>
+                -->
+            </table>
+        </div>
+        <div id="ConfirmacionEliminarDiseno" dojoType="dijit.Dialog" showTitle="true">
+            <div dojoType="dijit.layout.ContentPane" align="center">
+                ${ldmanager.eliminardiseno}
+                <br>
+                <button id="confirmacionEliminarDisenoOk" dojoType="dijit.form.Button" label="${common.ok}">
+                </button>
+                <button id="confirmacionEliminarDisenoCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+                </button>
+            </div>
+            <div><input id="eliminarDisenoDocID" dojoType="dijit.form.TextBox" name="docid" type="hidden"/>
+            </div>
+        </div>
+    </div>
+    <div id="MyLds" dojoType="dijit.TitlePane" title="${index.openOwn}" style="float:left;width:35%;padding-right:20px;padding-bottom: 20px;">
+        <div style="overflow: auto;">
+            <ul id="MyLdList">
+            </ul>
+            <div dojoType="dijit.layout.ContentPane" id="DesignInstanceTree">
+            </div>
+        </div>
+    </div>
+    <!--    <div id="PublicLds" dojoType="dijit.TitlePane" title="${index.openPublic}" style="width:35%;">
+            <ul id="PublicLdList">
+            </ul>
+        </div> -->
+    <form action="main.php" method="post" name="openForm">
+        <input type="hidden" name="ldid" /><input type="hidden" name="timestamp" />
+    </form>
+
+    <!-- new user dialog -->
+    <div id="RegisterNewUserDialog" dojoType="dijit.Dialog" title="${users.register}">
+        <div id="RegisterNewUserErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <table>
+                <tr>
+                    <td>
+                        ${users.nickname}
+                    </td>
+                    <td>
+                        <input id="nickname" dojoType="dijit.form.TextBox" name="username"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ${users.password}
+                    </td>
+                    <td>
+                        <input id="password" dojoType="dijit.form.TextBox" name="password" type="password"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ${users.repeatPassword}
+                    </td>
+                    <td>
+                        <input id="repeatpasswd" dojoType="dijit.form.TextBox" name="repeatpassword" type="password"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ${users.email}
+                    </td>
+                    <td>
+                        <input id="mail" dojoType="dijit.form.TextBox" name="email"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="RegisterNewUserDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="RegisterNewUserDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+
+    <div dojoType="dijit.Dialog" id="registerResult" title="${registerResult.title}">
+        <div id="RegisterInfo" style="padding:10px 0px 10px 0px;">        
+            ${registerResult.exit} </div>    
+        <div align="center">
+            <button dojoType="dijit.form.Button" id="RegisterResultOkButton" onclick="Users.closeRegisterResultDialog();">
+                ${common.ok}
+            </button>
+        </div>
+    </div>
+
+
+
+
+    <!-- login dialog-->
+    <div id="LoginDialog" dojoType="dijit.Dialog" title="${users.login}">
+        <div id="LoginErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <table>
+                <tr>
+                    <td>
+                        ${users.nickname}
+                    </td>
+                    <td>
+                        <input id="LoginDialogUsername" dojoType="dijit.form.TextBox" name="username"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        ${users.password}
+                    </td>
+                    <td>
+                        <input id="LoginDialogPassword" dojoType="dijit.form.TextBox" name="password" type="password"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="LoginDialogOk" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="LoginDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+    <!-- Clonar diseño -->
+    <div id="ClonarDiseno" dojoType="dijit.Dialog" title="Clonar diseño">
+        <div id="ClonarDisenoError" dojoType="dijit.layout.ContentPane" class="errorReport">
+        </div>
+        <div dojoType="dijit.layout.ContentPane">
+            <table>
+                <tr>
+                    <td>
+                        Título
+                    </td>
+                    <td>
+                        <input id="clonarDisenoTitulo" dojoType="dijit.form.TextBox" name="titulo" />
+                    </td>
+                </tr>
+                <tr>
+                    <td><input id="clonarDisenoDocID" dojoType="dijit.form.TextBox" name="docid" type="hidden"/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div dojoType="dijit.layout.ContentPane" align="center">
+            <button id="ClonarDisenoOk" dojoType="dijit.form.Button" label="${common.ok}">
+            </button>
+            <button id="ClonarDisenoCancel" dojoType="dijit.form.Button" label="${common.cancel}">
+            </button>
+        </div>
+    </div>
+
+    <div id="VisibilityDialog" dojoType="dijit.TooltipDialog" title="Permisos" style="display:none;">
+        <table>
+            <tr>
+                <td>
+                    <input dojoType="dijit.form.RadioButton" id="VisibilityOption_private" value="private" name="VisibilityChoice" onClick="LDManager.changedVisibility('private');"/>
+                    <label for="VisibilityOption_private">
+                        ${design.type.private.long}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input dojoType="dijit.form.RadioButton" id="VisibilityOption_visible" value="visible" name="VisibilityChoice" onClick="LDManager.changedVisibility('visible');"/>
+                    <label for="VisibilityOption_visible">
+                        ${design.type.visible.long}
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input dojoType="dijit.form.RadioButton" id="VisibilityOption_public" value="public" name="VisibilityChoice" onClick="LDManager.changedVisibility('public');"/>
+                    <label for="VisibilityOption_public">
+                        ${design.type.public.long}
+                    </label>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="MagicPopupsContainer">
+    </div>
+    <div id="FloatingMenu" class="floatingMenu dijitTooltip">
+        <div class="dijitTooltipConnector">
+        </div>
+        <div id="FloatingMenuContainer" class="dijitTooltipContainer dijitTooltipContents">
+            <div id="FloatingMenuTitle" class="floatingMenuTitle"></div>
+            <div id="FloatingMenuContent">
+            </div>
+        </div>
+    </div>
+
+</body>

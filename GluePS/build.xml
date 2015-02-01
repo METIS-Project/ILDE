@@ -1,0 +1,657 @@
+<project name="GLUEPSManagerAdapter" default="build" basedir=".">
+	<!-- Author: Javier Enrique Hoyos Torío -->
+	<!-- NOTE: Apache Ant 1.7 or later is required!! -->
+	
+	<description>
+		GLUE!-PS is a service-based architecture with the purpose of deploying learning designs, expressed in multiple languages (e.g. IMS-LD, LDL, ...) 
+		into multiple learning environments for their execution, such as VLEs/LMSs (Moodle, Blackboard, LAMS, ...).
+	</description>
+
+	
+	<!-- Global properties for this build -->
+	<property name="db.user" value="glueps" />
+	<property name="db.passwd" value="glueps" />
+	<property name="component" value="glueps_manager" />
+	<property name="jarname" value="glueps-manager" />
+	<property name="cia" value="gsic" />
+	<property name="version" value="0.6.6" />
+	
+	<property name="src.dir" value="src" />
+	<property name="src.tests.dir" value="test" />
+	<property name="bin.dir" value="bin" />
+	<property name="conf.dir" value="conf" />
+	<property name="dist.dir" value="dist" />
+	<property name="doc-usr.dir" value="doc-usr" />
+	<property name="lib.dir" value="lib" />
+	<property name="lib.tests.dir" value="lib-test" />
+	<property name="lib.svn.dir" value="lib-svn" />
+	
+	<property name="gui.dir" value="gui" />
+	<property name="oauth.dir" value="oauth" />
+	<property name="schemas.dir" value="schemas" />
+	<property name="templates.dir" value="templates" />
+	<property name="le.dir" value="le" />
+	<property name="transactions.dir" value="transActions" />
+	
+	<property name="build.root.dir" value="build" />
+	<property name="build.dir" value="${build.root.dir}/manager" />
+	<property name="build.classes.dir" value="${build.dir}/classes" />
+	<property name="build.tests.dir" value="${build.root.dir}/manager-test" />
+	<property name="build.tests.classes.dir" value="${build.tests.dir}/classes" />
+	<property name="build.log.dir" value="${build.dir}/log" />
+	<property name="build.conf.dir" value="${build.dir}/conf" />
+	<property name="build.log.commons.dir" value="${build.dir}/log/commons-daemon" />
+	<property name="build.lib.dir" value="${build.dir}/lib" />
+	<property name="build.lib.tests.dir" value="${build.dir}/lib-test" />
+	<property name="build.uploaded.dir" value="${build.dir}/uploaded" />
+	<property name="build.uploaded.temp.dir" value="${build.uploaded.dir}/temp" />
+	<property name="build.uploaded.temp.zips.dir" value="${build.uploaded.temp.dir}/zips" />
+	<property name="build.transactions.dir" value="${build.dir}/transActions" />
+
+	<property name="common.dir" value="../GLUECommonTmp" />	
+	<property name="common.lib.dir" value="${common.dir}/lib" />									
+	<property name="common.lib.restlet.dir" value="${common.lib.dir}/dep/restlet-jse-2.0.11/lib" />	
+	<property name="common.lib.eclipselink.dir" value="${common.lib.dir}/dep/eclipselink/jlib" />	
+	<property name="common.lib.jdbc.dir" value="${common.lib.dir}/dep/jdbc-connector" />	
+	
+	<property name="install.dir" value="CHANGEME" />
+	
+	<!-- Global paths -->
+	<path id="glue-common.lib">		
+		<pathelement location="${common.dir}/build/classes" />
+	</path>
+	
+	<path id="restlet.core.libs">
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.atom.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.xml.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.crypto.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.fileupload.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.json.jar" />
+	</path>
+	
+	<path id="glueps.libs">
+		<pathelement location="${lib.dir}/activation.jar" />
+		<pathelement location="${lib.dir}/javax.mail.jar" />
+		<pathelement location="${lib.dir}/bucket.jar" />
+		<pathelement location="${lib.dir}/commons-codec-1.4.jar" />
+		<pathelement location="${lib.dir}/commons-collections-3.2.1.jar" />
+		<pathelement location="${lib.dir}/commons-email-1.3.1.jar" />
+		<pathelement location="${lib.dir}/commons-fileupload-1.2.2.jar" />
+		<pathelement location="${lib.dir}/commons-io-2.0.1.jar" />
+		<pathelement location="${lib.dir}/commons-lang3-3.1.jar" />
+		<pathelement location="${lib.dir}/commons-logging-1.1.1.jar" />
+		<pathelement location="${lib.dir}/commons-validator-1.4.0.jar" />
+		<pathelement location="${lib.dir}/dom4j-1.6.1.jar" />
+		<pathelement location="${lib.dir}/exist.jar" />
+		<pathelement location="${lib.dir}/exist-optional.jar" />
+		<pathelement location="${lib.dir}/gson-2.1.jar" />
+		<pathelement location="${lib.dir}/guava-14.0.1.jar"/>
+		<pathelement location="${lib.dir}/httpclient-4.1.3.jar" />
+		<pathelement location="${lib.dir}/httpclient-cache-4.1.3.jar" />
+		<pathelement location="${lib.dir}/httpcore-4.1.4.jar" />
+		<pathelement location="${lib.dir}/httpmime-4.1.3.jar" />
+		<pathelement location="${lib.dir}/j2ee-1.4.jar" />
+		<pathelement location="${lib.dir}/javax.persistence_2.0.3.v201010191057.jar" />
+		<pathelement location="${lib.dir}/jaxb1-impl.jar" />
+		<pathelement location="${lib.dir}/jaxb-api.jar" />
+		<pathelement location="${lib.dir}/jaxb-impl.jar" />
+		<pathelement location="${lib.dir}/jaxb-xjc.jar" />
+		<pathelement location="${lib.dir}/jdo-api-3.0.1.jar" />
+		<pathelement location="${lib.dir}/jdom.jar" />
+		<pathelement location="${lib.dir}/jsr173_1.0_api.jar" />
+		<pathelement location="${lib.dir}/jug-1.1.2.jar" />
+		<pathelement location="${lib.dir}/log4j-1.2.11.jar" />
+		<pathelement location="${lib.dir}/log4j-1.2.16.jar" />
+		<pathelement location="${lib.dir}/mailapi.jar" />
+		<pathelement location="${lib.dir}/mysql-connector-java-5.1.18-bin.jar" />
+		<pathelement location="${lib.dir}/net.jcip.annotations.jar" />
+		<pathelement location="${lib.dir}/org.json.jar" />
+		<pathelement location="${lib.dir}/persistence.jar" />
+		<pathelement location="${lib.dir}/ws-commons-util-1.0.2.jar" />
+		<pathelement location="${lib.dir}/xml-apis.jar" />
+		<pathelement location="${lib.dir}/xml-apis-1.3.04.jar" />
+		<pathelement location="${lib.dir}/xmldb.jar" />
+		<pathelement location="${lib.dir}/xmlrpc-client-3.1.2.jar" />
+		<pathelement location="${lib.dir}/xmlrpc-common-3.1.2.jar" />
+		<pathelement location="${lib.tests.dir}/selenium-server-standalone-2.31.0.jar" />
+	</path>
+	
+	<path id="restlet.server.libs">
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.jetty.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.ajp.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.continuations.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.http.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.io.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.server.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.eclipse.jetty_7.1/org.eclipse.jetty.util.jar" />
+		<pathelement location="${common.lib.restlet.dir}/javax.servlet_2.5/javax.servlet.jar" />
+	</path>
+	
+	<path id="restlet.client.libs">
+		<pathelement location="${common.lib.restlet.dir}/org.restlet.ext.httpclient.jar" />
+		<pathelement location="${common.lib.restlet.dir}/net.jcip.annotations_1.0/net.jcip.annotations.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.commons.codec_1.4/org.apache.commons.codec.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.commons.logging_1.1/org.apache.commons.logging.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.httpclient_4.0/org.apache.httpclient.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.httpcore_4.0/org.apache.httpcore.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.httpmime_4.0/org.apache.httpmime.jar" />
+		<pathelement location="${common.lib.restlet.dir}/org.apache.james.mime4j_0.6/org.apache.james.mime4j.jar" />
+	</path>
+	
+	<path id="eclipselink.libs">
+		<!-- only the necessary JAR files -->
+		<pathelement location="${common.lib.eclipselink.dir}/eclipselink.jar" />
+		<pathelement location="${common.lib.eclipselink.dir}/jpa/javax.persistence_2.0.3.v201010191057.jar" />
+	</path>
+	
+	<path id="cucumber.tests.libs">
+		<pathelement location="${lib.tests.dir}/cucumber-core-1.1.2.jar" />
+		<pathelement location="${lib.tests.dir}/cucumber-html-0.2.2.jar" />
+		<pathelement location="${lib.tests.dir}/cucumber-java-1.1.2.jar" />
+		<pathelement location="${lib.tests.dir}/cucumber-junit-1.1.2.jar" />
+		<!--pathelement location="${lib.dir}/jchronic-0.2.6.jar" /-->
+		<pathelement location="${lib.tests.dir}/junit-4.11.jar" />
+		<pathelement location="${lib.tests.dir}/selenium-server-standalone-2.31.0.jar" />
+	</path>
+	
+	<path id="database.access.libs">
+		<path refid="eclipselink.libs" />
+		<pathelement path="${common.jdbc.dir}/*.jar" />
+	</path>
+	
+	
+	<path id="project.classpath">
+		<path refid="glue-common.lib"/>
+		<path refid="restlet.core.libs"/>
+		<path refid="glueps.libs"/>
+		<path refid="restlet.server.libs"/>
+		<path refid="restlet.client.libs"/>
+		<path refid="database.access.libs"/>
+		<pathelement location="${conf.dir}" />		<!-- required to find app.properties -->
+	</path>
+	
+	<path id="project.tests.classpath">
+		<path refid="project.classpath"/>
+		<path refid="cucumber.tests.libs"/>
+		<pathelement location="${build.tests.classes.dir}" /> <!-- required to find step definition classes -->
+		<pathelement location="${build.classes.dir}" />		<!-- required to find the GLUEPS classes -->
+	</path>
+
+	<path id="run.build.classpath">
+		<pathelement location="${common.lib.dir}/glue-common.jar" />
+		<pathelement location="${build.classes.dir}" />
+		<pathelement location="${build.conf.dir}" />
+		<pathelement location="${build.lib.dir}/activation.jar" />
+		<pathelement location="${build.lib.dir}/appengine-api.jar" />
+		<pathelement location="${build.lib.dir}/bucket.jar" />
+		<pathelement location="${build.lib.dir}/commons-codec-1.4.jar" />
+		<pathelement location="${build.lib.dir}/commons-collections-3.2.1.jar" />
+		<pathelement location="${build.lib.dir}/commons-fileupload-1.2.2.jar" />
+		<pathelement location="${build.lib.dir}/commons-io-2.0.1.jar" />
+		<pathelement location="${build.lib.dir}/commons-lang3-3.1.jar" />
+		<pathelement location="${build.lib.dir}/commons-logging-1.1.1.jar" />
+		<pathelement location="${build.lib.dir}/dom4j-1.6.1.jar" />
+		<pathelement location="${build.lib.dir}/eclipselink.jar" />
+		<pathelement location="${build.lib.dir}/exist.jar" />
+		<pathelement location="${build.lib.dir}/exist-optional.jar" />
+		<pathelement location="${build.lib.dir}/gson-2.1.jar" />
+		<pathelement location="${build.lib.dir}/guava-14.0.1.jar" />
+		<pathelement location="${build.lib.dir}/httpclient-4.1.3.jar" />
+		<pathelement location="${build.lib.dir}/httpclient-cache-4.1.3.jar" />
+		<pathelement location="${build.lib.dir}/httpcore-4.1.4.jar" />
+		<pathelement location="${build.lib.dir}/httpmime-4.1.3.jar" />
+		<pathelement location="${build.lib.dir}/j2ee-1.4.jar" />
+		<pathelement location="${build.lib.dir}/javax.persistence_2.0.3.v201010191057.jar" />
+		<pathelement location="${build.lib.dir}/javax.servlet.jar" />
+		<pathelement location="${build.lib.dir}/jaxb1-impl.jar" />
+		<pathelement location="${build.lib.dir}/jaxb-api.jar" />
+		<pathelement location="${build.lib.dir}/jaxb-impl.jar" />
+		<pathelement location="${build.lib.dir}/jaxb-xjc.jar" />
+		<pathelement location="${build.lib.dir}/jdo-api-3.0.1.jar" />
+		<pathelement location="${build.lib.dir}/jdom.jar" />
+		<pathelement location="${build.lib.dir}/jsr173_1.0_api.jar" />
+		<pathelement location="${build.lib.dir}/jug-1.1.2.jar" />
+		<pathelement location="${build.lib.dir}/log4j-1.2.11.jar" />
+		<pathelement location="${build.lib.dir}/log4j-1.2.16.jar" />
+		<pathelement location="${build.lib.dir}/mailapi.jar" />
+		<pathelement location="${build.lib.dir}/mysql-connector-java-5.1.18-bin.jar" />
+		<pathelement location="${build.lib.dir}/net.jcip.annotations.jar" />
+		<pathelement location="${build.lib.dir}/org.apache.james.mime4j.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.ajp.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.continuations.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.http.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.io.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.server.jar" />
+		<pathelement location="${build.lib.dir}/org.eclipse.jetty.util.jar" />
+		<pathelement location="${build.lib.dir}/org.json.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.atom.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.crypto.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.fileupload.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.jetty.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.json.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.ext.xml.jar" />
+		<pathelement location="${build.lib.dir}/org.restlet.jar" />
+		<pathelement location="${build.lib.dir}/persistence.jar" />
+		<pathelement location="${build.lib.dir}/ws-commons-util-1.0.2.jar" />
+		<pathelement location="${build.lib.dir}/xml-apis-1.3.04.jar" />
+		<pathelement location="${build.lib.dir}/xml-apis.jar" />
+		<pathelement location="${build.lib.dir}/xmldb.jar" />
+		<pathelement location="${build.lib.dir}/xmlrpc-client-3.1.2.jar" />
+		<pathelement location="${build.lib.dir}/xmlrpc-common-3.1.2.jar" />
+		
+	</path>
+	
+		
+	
+	<path id="path.svnant">
+		<pathelement location="${lib.svn.dir}/svnant.jar"/>
+	    <pathelement location="${lib.svn.dir}/svnClientAdapter.jar"/>
+    </path>
+	    
+    <typedef 
+       resource="org/tigris/subversion/svnant/svnantlib.xml" 
+       classpathref="path.svnant"
+    />
+	
+	<svnSetting
+	        id="svn.settings"
+	        svnkit="false"
+	        javahl="false"
+	        username="guest"
+	        password="" />
+	
+	<!-- Targets --> 
+	
+	<target name="init">
+		<!-- Create the time stamp properties ; use them with ${DSTAMP} , ${TSTAMP}, ${TODAY}; se more at http://ant.apache.org/manual/Tasks/tstamp.html -->
+		<tstamp/>
+		<property name="test.db.name" value="glueps_test_${DSTAMP}${TSTAMP}" />
+	</target>
+
+	<target name="download-common">
+		<!--downloads the GLUE Common project from the SVN, for later compiling -->
+		<!--NOTE: it requires the command "svn" to be in the system path!!-->
+		<svn refid="svn.settings">
+		  <checkout url="http://pandora.tel.uva.es/svn/GLUE/trunk/GLUECommon/" revision="HEAD" destPath="${common.dir}" />
+		</svn>
+	</target>
+	
+	<target name="clean-common">
+		<!--cleans up the (temporary) GLUE common project folder -->
+		<delete dir="${common.dir}" />
+	</target>
+	
+	<target name="compile-common" depends="download-common">
+		<!-- Compiles the GLUECommon classes through their own build file -->
+		<ant dir="${common.dir}" antfile="${common.dir}/build.xml" target="compile" inheritAll="false" />
+	</target>
+
+	<target name="build-common">
+		<!-- Package in a JAR file the GLUECommon classes through their own build file -->
+		<ant dir="${common.dir}" antfile="${common.dir}/build.xml" target="build-glue-common" inheritAll="false" />
+	</target>
+
+	<target name="compile" depends="init, compile-common">
+		<!-- Create the target directory structures -->
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.classes.dir}" />
+		<!-- Compile the java classes for production --> 
+		<javac srcdir="${src.dir}" classpathref="project.classpath" destdir="${build.classes.dir}" encoding="UTF-8" source="1.6" compiler="modern" /> 
+	</target>
+	
+	<target name="build" depends="compile" description="Builds GLUE!PS application layout and contents" >
+		<!-- Create the build directory structures -->
+		<mkdir dir="${build.log.dir}" />
+		<mkdir dir="${build.log.commons.dir}" />
+		<mkdir dir="${build.lib.dir}" />
+		<mkdir dir="${build.lib.tests.dir}" />
+		<!-- Create uploaded directory -->
+		<mkdir dir="${build.uploaded.dir}" />
+		<!-- Create uploaded/temp directory -->
+		<mkdir dir="${build.uploaded.temp.dir}" />
+		<!-- Create uploaded/temp/zips directory -->
+		<mkdir dir="${build.uploaded.temp.zips.dir}" />
+		<!-- Create transActions directory -->
+		<mkdir dir="${build.transactions.dir}" />
+		
+		<!-- Copy configuration and binary contents not-to-be-changed -->
+		<copy todir="${build.dir}" >
+			<fileset dir=".">
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${lib.dir}/**" />
+				<include name="${lib.tests.dir}/selenium-server-standalone-2.31.0.jar" />
+				<!-- Include glue!ps sources, schemas and templates -->
+				<include name="${gui.dir}/**" />
+				<include name="${oauth.dir}/**" />
+				<include name="${schemas.dir}/**" />
+				<include name="${templates.dir}/**" />
+				<include name="${le.dir}/**" />
+				<include name="${transactions.dir}/**" />
+			</fileset>
+			<fileset dir="${doc-usr.dir}" />
+		</copy>
+		
+		<!-- Package the binary classes in a JAR file -->
+		<jar destfile="${build.lib.dir}/${jarname}.jar" basedir="${build.classes.dir}" />
+	</target>
+	
+	<target name="run-build" depends="build-common,build" description="Runs the GLUEPSAR application using the built classes, for development purposes">
+
+		<!--prepare the run.build.classpath, in a similar way to start-glueps.sh-->
+		<!--execute the java process-->
+		<java classname="glueps.core.gluepsManager.GLUEPSManagerServerMain" fork="false" failonerror="true" 
+			classpathref="run.build.classpath" output="${build.log.dir}/manager.log" />
+		<!--get the PID of the process for later stopping it???-->
+		
+	</target>
+		
+
+	<target name="dist" depends="build, build-common" description="Generates GLUEPSmanager distributable packages" >
+		<!-- Create a directory to save the distributable packages -->
+		<mkdir dir="${dist.dir}"/>
+		
+		<!-- Fileset specifying the binary distribution package -->
+		<fileset id="binary.package.contents" dir="${build.root.dir}" >
+			<exclude name="**/classes/**" />
+		</fileset>
+		
+		<fileset id="binary.package.common" dir="${common.dir}" >
+			<include name="bin/ServiceInstaller.exe" />
+			<include name="lib/glue-common.jar" />
+			<!-- RESTlet files -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.atom.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.xml.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.crypto.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.fileupload.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.json.jar" />
+				
+			<!-- RESTlet connector for server side and dependencies -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.jetty.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/*.txt" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.eclipse.jetty_7.1/**" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/javax.servlet_2.5/**" />
+				
+			<!-- RESTlet connector for client side and dependencies -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.httpclient.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/net.jcip.annotations_1.0/net.jcip.annotations.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.commons.codec_1.4/org.apache.commons.codec.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.commons.logging_1.1/org.apache.commons.logging.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpclient_4.0/org.apache.httpclient.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpcore_4.0/org.apache.httpcore.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpmime_4.0/org.apache.httpmime.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.james.mime4j_0.6/org.apache.james.mime4j.jar" />
+			<!-- Eclipselink (JPA implementation) -->
+			<include name="lib/dep/eclipselink/*.html" />
+			<include name="lib/dep/eclipselink/jlib/eclipselink.jar" />
+			<include name="lib/dep/eclipselink/jlib/jpa/javax.persistence_2.0.0.v200911271158.jar" />
+			<!-- EMPTY directory to allocate a JDBC connector; it MUST be empty in the distribution package -->			
+			<include name="lib/dep/jdbc-connector" /> 
+			<include name="lib/dep/jdbc-connector/mysql-connector-java-5.1.11-bin.jar" />
+		</fileset>
+
+		<!-- Generate .zip and .tgz files with the binary distribution fileset -->
+		<zip destfile="${dist.dir}/${cia}_${component}-bin-${version}-${DSTAMP}-${TSTAMP}.zip" duplicate="fail">
+			<fileset refid="binary.package.contents" />
+			<fileset refid="binary.package.common" />
+		</zip>
+
+		<tar destfile="${dist.dir}/${cia}_${component}-bin-${version}-${DSTAMP}-${TSTAMP}.tgz" compression="gzip">
+			<fileset refid="binary.package.contents" />
+			<fileset refid="binary.package.common" />
+		</tar>
+		
+		<!-- Filesets specifying the source distribution package -->
+		<fileset id="source.package.contents" dir="${basedir}" >
+			<include name="${src.dir}/**" />
+			<include name="${bin.dir}/**" />
+			<include name="${conf.dir}/**" />
+			<include name="${doc-usr.dir}/**" />
+			<include name="build.xml" />
+			<include name="${lib.dir}/**" />
+			<include name="${lib.tests.dir}/selenium-server-standalone-2.31.0.jar" />
+			<!-- Include glue!ps sources, schemas and templates -->
+			<include name="${gui.dir}/**" />
+			<include name="${oauth.dir}/**" />
+			<include name="${schemas.dir}/**" />
+			<include name="${templates.dir}/**" />
+			<include name="${le.dir}/**" />
+			<include name="${transactions.dir}/**" />
+		</fileset>
+		
+		
+		<!-- Generate .zip and .tgz files with the source distribution fileset -->
+		<zip destfile="${dist.dir}/${cia}_${component}-src-${version}-${DSTAMP}-${TSTAMP}.zip" duplicate="fail">
+			<fileset refid="source.package.contents" />
+		</zip>
+		
+		<tar destfile="${dist.dir}/${cia}_${component}-src-${version}-${DSTAMP}-${TSTAMP}.tgz" compression="gzip">
+			<fileset refid="source.package.contents" />
+		</tar>
+		
+	</target>
+
+	<target name="install" depends="dist">
+		<echo message="Trying to install to ${install.dir}" />
+		<mkdir dir="${install.dir}"/>
+		<!--We extract the contents of the binary distribution-->
+		<!--TODO: fix the case that more than one distributable is present (see http://stackoverflow.com/questions/6154641/ant-copy-newest-file-with-file-name-filter) now it overwrites it -->
+		<unzip dest="${install.dir}">
+			<fileset dir="${dist.dir}">
+				<include name="**/*-bin-*.zip"/>
+			</fileset>
+		</unzip>
+	</target>
+	
+	
+	<target name="uninstall">
+		<echo message="Trying to uninstall (delete) from ${install.dir}" />
+		<delete dir="${install.dir}" />
+	</target>
+	
+	
+    <target name="compile-tests" depends="compile">
+		<mkdir dir="${build.tests.dir}" />
+        <mkdir dir="${build.tests.classes.dir}"/>
+    	<!-- Compile the java classes for testing --> 
+        <javac srcdir="${src.tests.dir}" destdir="${build.tests.classes.dir}" classpathref="project.tests.classpath" includeantruntime="false"/>
+    </target>
+
+	<target name="setup-test-db" depends="init">
+		<!--Should 1) create database; 2) create structure; 3) populate with test data-->
+		<sql driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/" userid="${db.user}" password="${db.passwd}" print="yes" expandProperties="true">
+			
+			create database ${test.db.name};
+			<classpath>
+				<pathelement location="${lib.dir}/mysql-connector-java-5.1.18-bin.jar"/>
+			</classpath>
+		</sql>
+		<sql driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/${test.db.name}" userid="${db.user}" password="${db.passwd}" print="yes" src="${install.dir}/manager/conf/db/create_glueps_database.sql">
+			<classpath>
+				<pathelement location="${lib.dir}/mysql-connector-java-5.1.18-bin.jar"/>
+			</classpath>
+		</sql>
+		<sql driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/${test.db.name}" userid="${db.user}" password="${db.passwd}" print="yes" src="${install.dir}/manager/conf/db/initial_glueps_population.sql">
+			<classpath>
+				<pathelement location="${lib.dir}/mysql-connector-java-5.1.18-bin.jar"/>
+			</classpath>
+		</sql>
+	</target>
+
+	<target name="teardown-test-db" depends="init">
+		<!--Should 1) create database; 2) create structure; 3) populate with test data-->
+		<sql driver="com.mysql.jdbc.Driver" url="jdbc:mysql://localhost:3306/" userid="${db.user}" password="${db.passwd}" print="yes" expandProperties="true">
+			
+			drop database ${test.db.name};
+			<classpath>
+				<pathelement location="${lib.dir}/mysql-connector-java-5.1.18-bin.jar"/>
+			</classpath>
+		</sql>
+	</target>
+	
+	<target name="setup-test-config" depends="init">
+		<!-- do a backup of the app.properties and set the app path to the build/manager dir--> 
+		<copy file="${install.dir}/manager/conf/app.properties" tofile="${install.dir}/manager/conf/app.properties.${DSTAMP}${TSTAMP}"/>
+		<pathconvert property="pwd" dirsep="/" pathsep="/">
+		      <path location="."/>
+		</pathconvert>
+		<replaceregexp file="${install.dir}/manager/conf/app.properties"
+		               match="app\.path=(.*)"
+		               replace="app\.path=${install.dir}/manager"
+		               byline="true"
+		/>
+		
+		<!-- do a backup of the persistence.xml and set the db parameters -->
+		<copy file="${install.dir}/manager/conf/META-INF/persistence.xml" tofile="${install.dir}/manager/conf/META-INF/persistence.xml.${DSTAMP}${TSTAMP}"/>
+		<replaceregexp file="${install.dir}/manager/conf/META-INF/persistence.xml"
+						match="eclipselink\.jdbc\.user(.*)value=&#34;([^&#34;]*)&#34;"
+		               replace="eclipselink\.jdbc\.user\1value=&#34;${db.user}&#34;"
+		               byline="true"
+		/>
+		<replaceregexp file="${install.dir}/manager/conf/META-INF/persistence.xml"
+						match="eclipselink\.jdbc\.password(.*)value=&#34;([^&#34;]*)&#34;"
+		               replace="eclipselink\.jdbc\.password\1value=&#34;${db.passwd}&#34;"
+		               byline="true"
+		/>
+		<replaceregexp file="${install.dir}/manager/conf/META-INF/persistence.xml"
+						match="jdbc:mysql://localhost:3306/([^&#34;]*)&#34;"
+		               replace="jdbc:mysql://localhost:3306/${test.db.name}&#34;"
+		               byline="true"
+		/>
+		
+	</target>
+	
+	<target name="teardown-test-config" depends="init">
+		<move file="${install.dir}/manager/conf/app.properties.${DSTAMP}${TSTAMP}" tofile="${install.dir}/manager/conf/app.properties"/>
+		<move file="${install.dir}/manager/conf/META-INF/persistence.xml.${DSTAMP}${TSTAMP}" tofile="${install.dir}/manager/conf/META-INF/persistence.xml"/>
+	</target>
+	
+	<target name="glueps-start" depends="init">
+		<!-- TODO REVISE THIS TARGET -->
+		<pathconvert property="pwd" dirsep="/" pathsep="/">
+		      <path location="."/>
+		</pathconvert>
+		<property environment="env"/>
+		   <echo>
+		      Here are sample environment variables in my operating system:
+		      ${env.CLASSPATH}
+		      ${env.CommonProgramFiles}
+		      ${env.CommonProgramFiles(x86)}
+		      ${env.CommonProgramW6432}
+		      ${env.JAVA_HOME}
+		   </echo>
+		
+		<echo message="Executing GLUEPS at ${install.dir}/manager/bin..."/>
+		<!--exec executable="${pwd}/${build.dir}/${bin.dir}/install-glueps.sh" osfamily="unix"></exec>
+		<exec executable="${pwd}/${build.dir}/${bin.dir}/start-glueps.sh" osfamily="unix"></exec-->
+		<exec executable="${install.dir}/manager/bin/install-glueps.bat" osfamily="windows" output="ant.out"></exec>
+		
+		<exec executable="${env.JAVA_HOME}/bin/jps" output="pid.out.file"/>
+		<loadfile srcfile="pid.out.file" property="pid.out">
+			<filterchain>
+				<linecontains>
+					<contains value="GLUEPSManagerServerMain"/>
+				</linecontains>
+				<tokenfilter>
+					<deletecharacters chars="GLUEPSManagerServerMain"/>
+					<trim/>
+					<ignoreblank/>
+				</tokenfilter>
+				<striplinebreaks/>
+			</filterchain>
+		</loadfile>
+		<echo message="The PID is ${pid.out}"/>
+		<!-- this PID is extracted just in case, normally the stop scripts should do their job -->
+	</target>
+	
+	<target name="glueps-stop" depends="init">
+		<!--exec executable="${build.dir}/${bin.dir}/stop-glueps.sh" osfamily="unix"></exec>
+		<exec executable="${build.dir}/${bin.dir}/uninstall-glueps.sh" osfamily="unix"></exec-->
+		<exec executable="${install.dir}/manager/bin/uninstall-glueps.bat" osfamily="windows"></exec>
+	</target>
+
+	
+    <target name="runcukes" depends="compile-tests">
+    	<mkdir dir="${build.tests.dir}/cucumber-junit-report"/>
+    	<!--We assume the MySQL DB is running, and that no GLUEPS is running already in the configured port-->
+    	<!--We install GLUEPS to a temporary work directory for running the tests-->
+    	<antcall target="install">
+    		<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+    	</antcall>
+    	<!--We create temporary config files, pointing to the work dir and test db-->
+    	<antcall target="setup-test-config">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+       	</antcall>
+    	<!--We create the temporary test db and load it with data-->
+    	<antcall target="setup-test-db">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+    	</antcall>
+
+    	<antcall target="glueps-start">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+    	</antcall>
+
+    	<!--TODO: we probably should configure GLUEPS to start BEFORE cucumber kicks in, rather than in the first stepdef - use exec task -->
+    	<!--TODO: now we count on an external GLUElet manager for the tests - we should stub it out... but how!? -->
+        <java classname="cucumber.api.cli.Main" fork="true" failonerror="false" resultproperty="cucumber.exitstatus">
+            <classpath refid="project.tests.classpath"/>
+            <arg value="--format"/>
+            <arg value="junit:${build.tests.dir}/cucumber-junit-report.xml"/>
+            <arg value="--format"/>
+            <arg value="pretty"/>
+            <arg value="--format"/>
+            <arg value="html:${build.tests.dir}/cucumber-html-report"/>
+            <arg value="--glue"/>
+            <arg value="glueps.core.gluepsManager"/>
+            <arg value="${src.tests.dir}"/>
+        </java>
+
+        <junitreport todir="${build.tests.dir}/cucumber-junit-report">
+            <fileset dir="${build.tests.dir}">
+                <include name="cucumber-junit-report.xml"/>
+            </fileset>
+            <report format="frames" todir="${build.tests.dir}/cucumber-junit-report"/>
+        </junitreport>
+
+        <fail message="Cucumber failed">
+            <condition>
+                <not>
+                    <equals arg1="${cucumber.exitstatus}" arg2="0"/>
+                </not>
+            </condition>
+        </fail>
+
+    	<antcall target="glueps-stop">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+    	</antcall>
+    	
+    	<!-- We clean up the DB and config files after successful testing-->
+    	<antcall target="teardown-test-db">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+		</antcall>
+    	
+    	<antcall target="teardown-test-config">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+		</antcall>
+
+    	<antcall target="uninstall">
+			<param name="install.dir" value="${build.tests.dir}/work.${DSTAMP}${TSTAMP}"/>
+		</antcall>
+
+    </target>
+
+
+	
+	
+	
+	
+	<target name="clean" description="clean up" >
+		<!-- Delete the ${build.root.dir} and ${dist} directory trees -->
+		<delete dir="${build.root.dir}" />
+		<delete dir="${dist.dir}" />
+		<delete dir="${build.tests.dir}" />
+	</target>
+	
+</project>

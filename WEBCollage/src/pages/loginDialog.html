@@ -1,0 +1,44 @@
+<div id="LoginDialog" dojoType="dijit.Dialog" title="${users.login}">
+    <div id="LoginErrorReport" dojoType="dijit.layout.ContentPane" class="errorReport">
+    </div>
+    <div dojoType="dijit.layout.ContentPane">
+        <table>
+            <tr>
+                <td>
+                    ${users.nickname}
+                </td>
+                <td>
+                    <input dojoType="dijit.form.TextBox" name="username"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    ${users.password}
+                </td>
+                <td>
+                    <input id="LoginDialogPassword" dojoType="dijit.form.TextBox" name="password" type="password"/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button dojoType="dijit.form.Button" label="${common.ok}" onclick="Loader.doLogin();">
+        </button>
+        <button dojoType="dijit.form.Button" label="${common.cancel}" onclick="Loader.cancelLoginDialog();">
+        </button>
+    </div>
+</div>
+
+<div id="expiredSessionDialog" dojoType="dijit.Dialog" showTitle="true" title="${loader.save.sessionExpired.title}">
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        ${loader.save.sessionExpired}
+    </div>
+    <div dojoType="dijit.layout.ContentPane" align="center">
+        <button id="expiredSessionDialogOk" dojoType="dijit.form.Button" label="${common.ok}" onclick="Loader.openLoginDialog();">
+        </button>
+        <button id="expiredSessionDialogCancel" dojoType="dijit.form.Button" label="${common.cancel}" onclick="Loader.cancelExpiredSessionDialog();">
+        </button>
+    </div>
+</div>
+
+

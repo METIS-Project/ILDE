@@ -1,0 +1,83 @@
+.addIcon {
+	background-image: url('../images/add.gif');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.structureIcon {
+	background-image: url('../images/play.gif');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.actIcon {
+	background-image: url('../images/dependency.gif');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.learningActivityIcon {
+	background-image: url('../images/learning_activity.gif');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+.supportActivityIcon {
+	background-image: url('../images/support_activity.gif');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+
+.tpsClfpIcon {
+	background-image: url('../images/clfps/share.png');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.simulationClfpIcon {
+	background-image: url('../images/clfps/simulation.png');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.pyramidClfpIcon {
+	background-image: url('../images/clfps/pyramid.png');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.jigsawClfpIcon {
+	background-image: url('../images/clfps/jigsaw.png');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.brainstormingClfpIcon {
+	background-image: url('../images/clfps/brainstorming.png');
+	background-repeat: no-repeat; 
+	width: 16px;
+	height: 16px;
+}
+
+.tappsClfpIcon {
+	background-image: url('../images/clfps/tapps.png');
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+}
+
+.peerreviewClfpIcon {
+	background-image: url('../images/clfps/peerreview.png');
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+}

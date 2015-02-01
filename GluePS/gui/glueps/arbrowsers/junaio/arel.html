@@ -1,0 +1,294 @@
+<html>
+<head>
+   <script type="text/javascript" src="http://dev.junaio.com/arel/js/arel.js"></script>
+   <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script> 
+ <!--  <script type="text/javascript" src="http://192.168.0.13:8287/GLUEPSManager/gui/glueps/arbrowsers/junaio/logic.js"></script>  -->  
+</head>
+     	    	
+    	<style type="text/css">
+		* {
+			-webkit-highlight:           none;
+			-webkit-touch-callout :      none;
+			-webkit-user-select:         none;
+		}		
+	
+		body {
+			margin: 0px;
+			padding: 0;
+			-webkit-text-size-adjust: 100%;
+			background-color:transparent;
+		}
+		
+		#info
+		{
+			clear: both;
+			width: 60%;
+			height: 30%;
+			color: #333;
+			background-color: #fff;
+			-webkit-border-radius: 8px;
+			font: normal normal bold 14px/normal Helvetica, Arial, sans-serif;
+			margin: 150px 20% 0px 20%;	
+			padding: 10px 0px 10px 0px;
+			text-align: center;
+			opacity: 0.6;
+			-webkit-box-shadow: 2px 2px 4px #666;
+			-webkit-border-radius: 8px;  
+			display: none;
+		}
+		
+		.close
+		{
+			float: right;
+			text-align: right;
+			width: 20px;
+			height: 20px;
+			color: red;
+			margin-right: 5px;
+		}
+		
+		.text
+		{
+			float: left;
+			text-align: left;
+			padding: 10px;
+		}
+		
+		.buttons
+		{
+			float: left;
+			width: 100%;
+			background-color: #333;
+			color: #fff;
+			-webkit-border-radius: 2px;
+		}
+		
+  		</style>
+  		
+    	<title>LBS 2 - Customizing your POIs with Sound, Videos, Images and custom pop ups.</title>
+</head>
+<SCRIPT LANGUAGE="JavaScript">
+arel.sceneReady(function()
+{
+//	arel.Debug.activate();
+//		arel.Debug.activateArelLogStream();
+	//	arel.Debug.log("inicio");
+	arel.Debug.log("scene ID: " + arel.Scene.getID());
+	arel.Debug.log("Number of objects: " + arel.Scene.getNumberOfObjects() );
+
+//	Handling control POIs
+// 	if (arel.Scene.getNumberOfObjects() == 1){
+// 		var login = arel.Scene.getObject("LoginButton");
+// 	} else if (arel.Scene.getNumberOfObjects() > 1){
+// 		var geo = arel.Scene.getObject("geo");
+// 		var marker = arel.Scene.getObject("marker");
+// 		var logout = arel.Scene.getObject("LogoutButton");
+// 	}
+	
+// 	if (geo){
+// 		arel.Events.setListener(geo, function(obj, type, params){handleControls(obj, type, params);});
+// 		arel.Debug.log("geo");
+// 	}
+// 	if (marker){
+// 		arel.Events.setListener(marker, function(obj, type, params){handleControls(obj, type, params);});
+// 		arel.Debug.log("marker");
+// 	}
+// 	if (login){
+// 		arel.Events.setListener(login, function(obj, type, params){handleControls(obj, type, params);});
+// 		arel.Debug.log("login");
+// 	}
+// 	if (logout){
+// 		arel.Events.setListener(logout, function(obj, type, params){handleControls(obj, type, params);});
+// 		arel.Debug.log("logout");
+// 	}
+	arel.Debug.log("paso de controles");
+	//Sending log when touching normal POIs	
+	//var objects = new Array();
+	
+	
+			var aAllObjects = arel.Scene.getObjects();
+			var count = 0;
+			arel.Debug.log("size: " + aAllObjects.length);
+			for(var i in aAllObjects)
+			{
+				var id = aAllObjects[i].getID();
+				arel.Debug.log("contador: " + count);
+				count++;
+				if (id == "LogoutButton" || id == "LoginButton" || id == "geo" || id == "marker"){
+					
+					if (id == "LogoutButton"){
+						aAllObjects[i].setScreenAnchor(arel.Constants.ANCHOR_BL);
+						aAllObjects[i].setScale(new arel.Vector3D(40,40,40));
+						aAllObjects[i].setTranslation(aAllObjects[i].getTranslation());
+						aAllObjects[i].setRotation(aAllObjects[i].getRotation());
+
+					} else if (id == "LoginButton"){
+						aAllObjects[i].setScreenAnchor(arel.Constants.ANCHOR_CC);
+						aAllObjects[i].setScale(new arel.Vector3D(100,100,100));
+						aAllObjects[i].setTranslation(aAllObjects[i].getTranslation());
+						aAllObjects[i].setRotation(aAllObjects[i].getRotation());
+
+					} else if (id == "geo" || id == "marker"){
+						aAllObjects[i].setScreenAnchor(arel.Constants.ANCHOR_BR);
+						aAllObjects[i].setTranslation(aAllObjects[i].getTranslation());
+						aAllObjects[i].setRotation(aAllObjects[i].getRotation());
+						aAllObjects[i].setParameter("channelid", aAllObjects[i].getParameter("channelid"), true);
+						if (id == "geo"){
+							aAllObjects[i].setScale(new arel.Vector3D(23,23,23));
+						} else {
+							aAllObjects[i].setScale(new arel.Vector3D(40,40,40));
+						}
+					}
+					
+					
+					arel.Events.setListener(aAllObjects[i], function(obj, type, params){handleControls(obj, type, params);});
+				} else {
+					arel.Events.setListener(aAllObjects[i], function(obj, type, params){handleCustomPoiEvent(obj, type, params);});
+				}
+
+			}
+			//Listener to remove the dummy poi used in empty XML answers from logs
+			arel.Events.setListener(arel.Scene, function(type, params){handleRemoveDummy(type, params);});
+
+	//Send initial user trace log, and get POIs to show representation of users
+	//TODO this command produces a infinite loop or something like that
+//	traceUsers();
+	
+// 		var objs = arel.Scene.getObjects();
+
+// 	arel.Debug.log("size array objects: " + objs.length );
+// 	for ( var i = 1; i < objs.length; i++) {
+// 		var object = new Object(objs[i]);
+// 		var id = object.getID();
+// 		arel.Debug.log(id);
+
+// 	arel.Events.setListener(object, function(obj, type, params){handleCustomPoiEvent(obj, type, params);});
+// 	arel.Debug.log("interaction");
+// 	}
+       //      arel.Scene.getCompassRotation(function(test){arel.Debug.log(test});  
+          
+});
+
+//Auto-refresh (every 10 minutes)
+window.setInterval(function(){arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false)},600000);
+
+//tracing users (every 1 minutes)
+window.setInterval(function(){traceUsers()},60000);
+
+
+
+//Function to send a trace log to the server and show POIs representing users
+function traceUsers(){
+	arel.Debug.log("tracing");
+	var bAllObjects = arel.Scene.getObjects();
+	arel.Scene.triggerServerCall(false, {"filter_action": "trace"}, false);
+	
+	arel.Scene.removeObject("dummy");
+	
+	//Removing POIs representing users
+	for(var i in aAllObjects)
+	{
+//		var id = bAllObjects[i].getID();
+		if (bAllObjects[i].getParameter("poitype") == "user"){
+			arel.Scene.removeObject(bAllObjects[i]);
+		}
+	}
+
+	
+	
+}
+
+//Function to send a event when touching a POI
+function handleCustomPoiEvent(obj, type, param)
+{
+
+	//check if there is tracking information available
+	if(type && type === arel.Events.Object.ONTOUCHSTARTED)
+	{
+ 		arel.Debug.log("llego a if de handle");
+ 		arel.Debug.log(obj.getParameter("description"));
+		// 		arel.Debug.log(obj.getParameter("url"));
+		var id = obj.getID();
+		arel.Scene.triggerServerCall(false, {"filter_action": "interaction", "filter_id" : id}, false);
+	}	
+}
+
+
+
+
+function handleControls(obj, type, param){
+	if(type && type === arel.Events.Object.ONTOUCHSTARTED) {
+		var id = obj.getID();
+		if (id == "LogoutButton" || id == "LoginButton"){
+			var url = obj.getParameter("urlaccess");
+			arel.Debug.log("llego a controlador de acceso");
+			arel.Debug.log("id: " + id);
+			arel.Debug.log("url" + url);
+	//		var media = new arel.Media();
+			arel.Debug.log("paso de new media");
+			arel.Media.openWebsite(decodeURIComponent(url));
+			//Refresco del canal al cerrar la Web
+			arel.Events.setListener(arel.Media, function(type, params){closeUrl(type, params);});
+
+
+		} else if (id == "geo" || id == "marker"){
+			var channelid = obj.getParameter("channelid");
+			arel.Scene.switchChannel(channelid);
+		}
+	}
+	
+	
+}
+
+
+
+//Function to remove a dummy poi if it exists after the Scene.ontracking event
+function handleRemoveDummy(type, param)
+{
+
+	//check if there is tracking information available
+	if(type && type === arel.Events.Scene.ONTRACKING)
+	{
+ 		arel.Debug.log("llego a scene listener");
+ 		if (arel.Scene.objectExists("dummy")== true )
+ 		{
+ 			arel.Scene.removeObject("dummy");
+ 		}
+	}	
+}
+
+
+function openurlinternal(url)
+{
+	arel.Debug.log("llego a open internal");
+	arel.Media.openWebsite(decodeURIComponent(url));
+}
+
+function openUrlExternal(url)
+{
+	arel.Debug.log("llego a open external");
+	arel.Media.openWebsite(decodeURIComponent(url), "external");
+}
+
+function closeUrl(type, param)
+{
+	if(type && type === arel.Events.Media.WEBSITE_CLOSED) {
+		arel.Scene.triggerServerCall(true, {"filter_filtered": "true"}, false);
+	}
+}
+
+
+
+
+
+
+</SCRIPT>
+
+<body>
+	<div id="info">
+		<div class="close" ontouchstart="$('#info').hide()">X</div>
+		<div class="text"></div>
+		<div class="buttons"></div>
+	</div>		
+</body> 
+</html>
