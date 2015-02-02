@@ -8,15 +8,8 @@
  * Default language for the ILDE
  */
 $defaultLang = array (
-    'devel' =>		'en',
-    'staging' =>	'en',
     'prod' =>		'en'
 );
-
-/*
- * Hexadecimal string containing the encription key for the VLE data (ie. CBEB2B8ED34385A22685FE2CB8279153).
- */
-//$vle_key = "";
 
 
 /**
@@ -36,23 +29,26 @@ $google_drive = array(
 /**
  * URL and password of the integrated tools.
  */
-//$glueps_url = "";
-//$glueps_password = '';
+//$glueps_url = "http://gluepsserver/";
+//$glueps_password = 'gluepspassword';
 
-//$webcollagerest_url = "";
-//$webcollagerest_password = '';
+//$webcollagerest_url = "http://webcolageserver/";
+//$webcollagerest_password = 'webcollagepassword';
 
-//$exelearningrest_url = "";
-//$exelearningrest_password = '';
+//$exelearningrest_url = "http://exelearningserver/";
+//$exelearningrest_password = 'exelearningpassword';
+
+/*
+ * Hexadecimal string containing the encription key for the VLE data (for example CBEB2B8ED34385A22685FE2CB8279153).
+ */
+//$vle_key = "CBEB2B8ED34385A22685FE2CB8279153";
 
 
 /**
  * List of environments, containing the regular expression of the server name that defines them.
  */
 $envUrls = array (
-    'devel' =>		'^localhost|^127\.0\.0\.1',
-    'staging' =>	'^localhost|^127\.0\.0\.1',
-    'prod' =>		'^localhost|^127\.0\.0\.1',
+    'prod' =>		'^mydomain|^192\.168\.1\.10|^example\.domain\.org',
 );
 
 
@@ -65,32 +61,23 @@ $confOptions = array (
      * Basic DB connection options
      */
     'dbhost' =>		array (
-        'devel' =>		'localhost',
-        'staging' =>	'localhost',
         'prod' =>		'localhost'
     ),
     'dbname' =>		array (
-        'devel' =>		'ilde_db',
-        'staging' =>	'ilde_db',
-        'prod' =>		'ilde_db'
+        'prod' =>		'ldshake_db'
     ),
     'dbuser' =>		array (
-        'devel' =>		'dbuser',
-        'staging' =>	'dbuser',
-        'prod' =>		'dbuser'
+        'prod' =>		'ldshake_user'
     ),
     'dbpass' =>		array (
-        'devel' =>		'dbpass',
-        'staging' =>	'dbpass',
         'prod' =>		'dbpass'
     ),
+
     /**
      * Do your LdShake tables have any prefix? This is useful if you put them in an existing db,
      * athough this is NOT recommended. If in doubt, leave blank.
      */
     'dbprefix' =>	array (
-        'devel' =>		'',
-        'staging' =>	'',
         'prod' =>		''
     ),
 
@@ -135,8 +122,6 @@ $confPaths = array (
      * Location of Python interpreter
      */
     'pythonpath' =>	array (
-        'devel' =>		'python2',
-        'staging' =>	'python2',
         'prod' =>		'python2'
     ),
 
@@ -144,26 +129,20 @@ $confPaths = array (
      * Data path
      */
     'dataroot' =>	array (
-        'devel' =>		'/var/lib/ilde/',
-        'staging' =>	'/var/lib/ilde/',
-        'prod' =>		'/var/lib/ilde/'
+        'prod' =>		'/var/lib/ldshake/'
     ),
 
     /**
      * Temp path (temporal files will be created here)
      */
     'tmppath' =>	array (
-        'devel' =>		'/var/local/ilde/',
-        'staging' =>	'/var/local/ilde/',
-        'prod' =>		'/var/local/ilde/'
+        'prod' =>		'/var/local/ldshake/'
     ),
 
     /**
      * Location of wkhtmltopdf http://wkhtmltopdf.org/
      */
     'pdf_converter_location' => array	(
-        'devel' =>		'/opt/wkhtmltox/bin/wkhtmltopdf',
-        'staging' =>	'/opt/wkhtmltox/bin/wkhtmltopdf',
         'prod' =>		'/opt/wkhtmltox/bin/wkhtmltopdf'
     ),
 
@@ -171,8 +150,6 @@ $confPaths = array (
      * Location of wkhtmltoimage http://wkhtmltopdf.org/
      */
     'screenshot_generator' => array	(
-        'devel' =>		'/opt/wkhtmltox/bin/wkhtmltoimage',
-        'staging' =>	'/opt/wkhtmltox/bin/wkhtmltoimage',
         'prod' =>		'/opt/wkhtmltox/bin/wkhtmltoimage'
     ),
 );
