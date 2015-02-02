@@ -1,0 +1,486 @@
+###################################################################
+# GLUE                                                            #
+#                                                                 #
+# GSIC's  middleware architecture for the integration of existing #
+# external tools in existing Virtual Learning Environments (VLEs) #
+#                                                                 #
+# Copyright 2011 GSIC (UVA)                                       #
+###################################################################
+
+
+#####################
+# PRELIMINARY NOTES #
+#####################
+
+The binary distribution of GLUE has been packaged and tested for its use in 
+GNU/Linux or Windows (XP, Vista or 7) systems. However, as a Java Standard 
+Edition 6 (JSE6) program, it will probably run in other operating systems 
+where a JSE6 runtime platform is available. Even so, this document will
+describe the installation and configuration process just for Linux and Windows
+systems, highlighting their differences when needed. 
+
+You will need administration permissions to install and configure GLUE in your 
+system. In Windows Vista and Windows 7, be sure to start your command console 
+in administration mode (right click, then 'Execute as administrator').
+
+Note that the GLUE binary distribution contains serveral components developed 
+as JSE6 programs. In this document, the term GLUE_HOME will be used to name 
+the base directory where all the JSE6 GLUE components are supposed to be 
+located. Despite this, there are no real dependencies between the different 
+components at the file system level. Feel free to move things to other 
+locations if you need it, and check the runnable scripts 
+in GLUE_HOME/bin, GLUE_HOME/manager/bin and GLUE_HOME/tool_adapters/bin 
+directories to find out how start every component.
+
+The current VLE adapters included in the GLUE_HOME/vle_adapters/ directory 
+are not standalone applications. They work as plugins in their respective VLEs.
+The scripts referred in the INSTALLATION section of this document work only 
+with the JSE6 components in GLUE_HOME/manager and GLUE_HOME/tool_adapters. 
+See the INSTALL.txt file in each GLUE_HOME/vle_adapter/[component] directory
+to manually install each plugin in its correspondent VLE.
+
+
+#########################
+# DISTRIBUTION CONTENTS #
+#########################
+
+This package contains the following GSIC-created GLUE components:
+
+  * GLUEletManager
+  * BasicLTI tool adapter
+  * Facebook Live Stream tool adapter
+  * Google Docs (GData) tool adapter
+  * MediaWiki tool adapter
+  * Web content tool adapter
+  * Apache Wookie tool adapter
+  * Dabbleboard tool adapter
+  * Doodle tool adapter
+  * LAMS VLE Adapter
+  * Moodle VLE adapter
+  * Moodle v2.x VLE adapter
+  * MediaWiki VLE adapter
+
+All these components can be obtained in separate packages at 
+www.gsic.uva.es/glue .
+
+This package is provided under the terms of the GNU General Public License ONLY
+FOR NON COMMERCIAL USES. See the README.txt file in this package for more 
+details about copyrigths and licensing.
+
+The source code for the Java components can be found at www.gsic.uva.es/glue .
+
+
+################
+# DEPENDENCIES #
+################
+
+GLUEletManager and the GSIC tool adapters are Java Standard Edition 6 (JSE6) 
+program. You will need a JSE6 runtime platform installed in your system.
+
+GLUEletManager needs a SQL database system to keep information about the tools 
+to integrate, and to provide persistence for the created instances. Any common 
+database system with a JDBC driver available should be suitable. You will need
+to obtain the JDBC driver from your database system provider to grant 
+GLUEletManager access to its databases.
+
+MoodleAdapter is developed as a module for Moodle, so a running Moodle platform
+is required. Supported versions of Moodle are those in the 1.9.x branch. 
+Recommended versions are between 1.9.8 and 1.9.12, inclusive. Note that 
+MoodleAdapter currently does not work with none of the Moodle 2.x.y versions.
+
+MediaWikiVLEAdapter is developed as an extension for MediaWiki, so a running 
+MediaWiki platform is required. Supported versions of MediaWiki are those 
+from the 1.16 version. 
+
+Additionally, GLUEletManager and the GSIC tool adapters have the following 
+dependencies. All of them are included in the GLUE binary distribution as 
+jar files in different subdirectories. Check the README.txt file for more 
+information about each library and their original providers.
+
+  - GLUECommon 0.9.2: library with common elements for GLUE Java components. 
+  This library is located at GLUE_HOME/lib and is needed by all the 
+  GLUEletManager and GSIC tool adapters.
+	
+  - RESTlet 2.0.11 for Java Standard Edition (only org.restlet.jar,
+  org.restlet.ext.atom.jar and org.restlet.ext.xml.jar files). By now, we 
+  discourage the use of any different RESTlet version with GLUEletManager.
+  This library is located at GLUE_HOME/lib/dep/restlet-jse-2.0.11 and is 
+  needed by all the GLUEletManager and GSIC tool adapters.
+
+  - API and implementation of Java Persistence API 2 (JPA2). We provide 
+  EclipseLink 2.0.0, but you could use any other JPA2 implementation instead. 
+  This library is located at GLUE_HOME/lib/dep/eclipselink and is 
+  only needed by GLUEletManager. It's placed in GLUE_HOME/lib because in 
+  future updates of GLUE it will be needed by the GSIC tool adapters.
+  
+  - Google Data Client Library for Java 1.47.1. Provided to get access to 
+  Google Docs. This library is located at 
+  GLUE_HOME/tool_adapters/gdata/lib/dep/gdata-1.47.1.and is only needed by 
+  the Google Docs (GData) tool adapter.
+
+  - Java Mail API 1.4.3. Provided as a dependency of Google Data Client 
+  Library. This library is located at 
+  GLUE_HOME/tool_adapters/gdata/lib/dep/javamail-1.4.3 and is only needed 
+  by the Google Docs (GData) tool adapter.
+  
+  - Wookie Connector Framework. Provided to get access to Apache Wookie 
+  servers. This library is located at 
+  GLUE_HOME/tool_adapters/wookiewidgets/lib/dep/wookie-connector-framework 
+  and is only needed by the Apache Wookie tool adapter.
+  
+  - Simple Logging Facade for Java (SLF4J). Provided to get access to Wookie 
+  Widgets as a dependency of Wookie Connector Framework. This library is 
+  located at GLUE_HOME/tool_adapters/wookiewidgets/lib/dep/slf4j and is only 
+  needed by the Apache Wookie tool adapter.
+  
+Besides, the GSIC tool adapters provide access to external tools that have 
+their own access rules and requirements. Check the INSTALL.txt file in each
+GLUE_HOME/tool_adapters/[adapter] for more detail.
+
+Additionally, MediaWikiVLEAdapter has the following dependence included
+in the MediaWikiVLEAdapter distribution. Check the README.txt file for its
+copyright and license notice:
+
+  - Protoype Window: JavaScript library to render a window over a HTML page.
+    This library is located at MediaWikiVLEGlueExtension/javascript/windows
+	(funcions) and MediaWikiVLEGlueExtension/themes (visual styles).
+
+
+################
+# INSTALLATION #
+################
+
+The next steps describe the installation of GLUEletManager and the GSIC tool
+adapters in Linux and Windows systems. The VLE adapters included in the 
+distribution must be separately installed in their correspondet VLE platforms.
+Se their INSTALL.txt files at GLUE_HOME/vle_adapters/[adapter] for more 
+details.
+
+1) Choose and create your GLUE_HOME directory.
+
+  ** Linux: directories /opt/glue, /usr/local/share/glue or /usr/share/glue 
+     could be suitable paths for GLUE_HOME.
+
+2) Define the system variable GLUE_HOME containing the full path to the chosen
+GLUE_HOME directory:
+	
+  ** Windows: Start button > Control Pannel > System and Maintenance > 
+	System > Advanced system settings > Advanced tab > Environment Variables 
+	button. 
+
+  ** Linux: Add 'export GLUE_HOME=/usr/share/glue' in /etc/bash.bashrc or 
+  /etc/profile.
+	
+3) Extract the files from the binary package at GLUE_HOME. The following
+contents will be added.
+
+  GLUE_HOME/
+    bin/
+      ServiceInstaller.exe    Apache Foundation helper to register Windows 
+	                           services.
+      install-glue.bat	      Registers GLUEletManager and the GSIC tool 
+	                           adapters as Windows services.
+      install-glue.sh	      Installs GLUEletManager and the GSIC tool 
+	                           adapters in Linux.
+      start-glue.bat          Starts GLUEletManager and the GSIC tool 
+	                           adapters in Windows.
+      start-glue.sh           Starts GLUEletManager and the GSIC tool 
+	                           adapters in Linux.
+      stop-glue.sh            Stops GLUEletManager and the GSIC tool 
+	                           adapters in Linux.
+      stop-glue.sh            Stops GLUEletManager and the GSIC tool 
+	                           adapters in Linux.
+      uninstall-glue.sh       Cleans the GLUEletManager and the GSIC tool 
+	                           adapters installation in Linux.
+      uninstall-glue.bat      Removes GLUEletManager and the GSIC tool 
+	                           adapters from the Windows services register.
+    lib/
+       glue-common.jar        Common elements for GLUE Java components.
+       dep/
+         eclipselink/         JPA2 implementation by Eclipse Foundation.
+           eclipselink.jar
+           javax.persistence_2.0.0.v200911271158.jar
+		 jdbc-connector/      Empty directory to place your JDBC driver.
+         restlet-jse-2.0.11/  RESTlet selected files.
+           org.restlet.ext.atom.jar
+           org.restlet.ext.xml.jar
+           org.restlet.jar
+    manager/                  GLUEletManager specific files; see its contained
+	                           INTALL.txt for details.
+	tool_adapters/
+	  basiclti/            	  BasicLTI tool adapter specific files; see its 
+	                           contained INTALL.txt for details.
+	  dabbleboard/            Dabbleboard tool adapter specific files; see its 
+	                           contained INTALL.txt for details.
+	  facebooklivestream/     Facebook Live Stream tool adapter specific files; 
+                               see its contained INTALL.txt for details.
+	  gdata/                  Google Docs tool adapter specific files; see its 
+	                           contained INTALL.txt for details.
+	  mediawiki/              MediaWiki tool adapter specific files; see its 
+	                           contained INTALL.txt for details.
+	  webcontent/             Web content tool adapter specific files; see its 
+	                           contained INTALL.txt for details.
+	  wookiewidgets/          Apache Wookie tool adapter specific files; see 
+	                           its contained INTALL.txt for details.
+	vle_adapters/
+	  lams_vle_adapter/       LAMS VLE adapter; see its contained INSTALL.txt
+	                           for details.
+	  moodle_vle_adapter/     Moodle VLE adapter; see its contained 
+	                           INSTALL.txt for details.
+	  moodle_vle_adapter/     Moodle VLE adapter; see its contained 
+	                           INSTALL.txt for details.
+	  mediawiki_vle_adapter/  MediaWiki VLE adapter; see its contained 
+	                           INSTALL.txt for details.
+	CHANGELOG.txt                         List of updates.
+	COPYING.txt               GNU GPL license.
+	INSTALL.txt               This document.
+	README.txt                GLUE license and third party notices.
+
+4) ** Linux : grant execution permissions to the *.sh files in GLUE_HOME/bin, 
+GLUE_HOME/manager/bin and GLUE_HOME/tool_adapters/[adapter]/bin
+
+    cd $GLUE_HOME
+    chmod +x ./bin/*.sh ./manager/bin/*.sh ./tool_adapters/*/bin/*.sh
+	
+5) Place a copy of your JDBC driver in GLUE_HOME/lib/dep/jdbc-connector/ (as 
+one or multiple jar files).
+
+6) ** Linux: run GLUE_HOME/bin/install-glue.sh in order to:
+
+    - create empty log files at /var/log/glue, and symbolic links pointing 
+	to them at GLUE_HOME/manager/log and GLUE_HOME/tool_adapters[adapter]/log
+	  
+    - create symbolic links at /usr/bin pointing to the start and stop shell
+	scripts in GLUE_HOME/manager/bin and GLUE_HOME/tool_adapters/[adapter]/bin
+	
+    - create instances.txt files in /srv/glue/tool_adapters/[adapter] to
+	  provide persistence to the objects created with every GSIC tool adapter,
+	  and symbolic links pointing to them in 
+	  GLUE_HOME/tool_adapters/[tool_adpater]/data.
+	
+   ** Windows: run GLUE_HOME/bin/install-glue.bat to 
+   
+    - register GLUEletManager and the GSIC tool adapters as Windows services;
+	
+	- define the names of the log files to be created in GLUE_HOME\manager\log
+	and GLUE_HOME\tool_adapters\[adapter]\log (they will be created with the 
+	first start of GLUE)
+	
+    - create the file instances.txt in GLUE_HOME/tool_adapters/[adapter]/data/
+	to provide persistence to the objects created with the GSIC tool adapters.
+	
+	By default, GLUEletManager and the GSIC tool adapters will be registered 
+	to be started at system boot time. Pass the parameter 'manual' to 
+	install-glue.bat in order to avoid it and force the manual start of 
+	the services.
+
+
+###################################################
+# CREATION, CONFIGURATION AND ACCESS TO DATABASES #
+###################################################
+	
+GLUEletManager requires the existence of two separate databases. The directory 
+GLUE_HOME/manager/conf/db contains create_GLUE_databases.sql, a SQL script file
+defining the structure of both.
+
+The first database, the Internal Registry, will keep the information needed 
+to use every tool available to integrate in the GLUEletManager clients. Proper 
+values for each tool must be inserted in the Internal Registry by the 
+system administrator, according to the instructions provided by each tool 
+adapter.
+
+The second database is the GLUElets Repository. GLUEletManager saves in it the 
+data about the objects created by its clients with the registered tools.
+
+In order to create both databases execute the contents of 
+GLUE_HOME/manager/conf/db/create_GLUE_databases.sql in the management console 
+of your database system. The file 
+GLUE_HOME/manager/conf/db/drop_GLUE_databases.sql executes the opposite 
+operations to erase both databases. BE CAREFUL: this will make unaccesible the
+objects previously created through GLUEletManager.
+
+Don't forget to insert proper values in the Internal Registry after its 
+creation. Check the INTERNAL REGISTRY section below for details about the 
+tool adapters in this distribution, or ask for the details to your tool adapter 
+provider if you want to add externally hosted adapters.
+
+Finally, you must edit the file GLUE_HOME/manager/conf/META-INF/persistence.xml
+to provide the details of the JDBC connection with your database system. You 
+must edit the 'value' attribute of the following properties as your system 
+requires (note that all of them appear TWICE in the persistence.xml file):
+	
+  <property name="javax.persistence.jdbc.url" 
+            value="jdbc:mysql://localhost:3306/InternalRegistry"/> 
+      URL to access each database; note that it includes the name of the 
+	  databasex at the end (InternalRegistry and GLUEletsRepository).
+		
+  <property name="javax.persistence.jdbc.user" value="glue"/>
+      An authorized database user.
+	  
+  <property name="javax.persistence.jdbc.password" value="glue"/>
+      The password of the authorized database user. 
+	  
+  <property name="javax.persistence.jdbc.driver" 
+            value="com.mysql.jdbc.Driver"/>
+	  Name of your JDBC driver class. Check your driver documentation.
+	  
+Note that the password is saved in text format. We strongly reccomend you to 
+create and authorize a specific user for the sole purpose of GLUEletManager 
+operation. This user will need, at least, read permissions over all the 
+Internal Registry tables, and read and insertion permissions over the GLUElets 
+Repository.
+
+
+#####################
+# INTERNAL REGISTRY #
+#####################
+
+Every tool adapter to be accessed with GLUEletManager must be registered in 
+the Internal Registry. This distribution includes the file 
+GLUE_HOME/manager/conf/db/fill_Internal_Registry.sql to make easier the 
+registration process. 
+
+Please, note that this file is a TEMPLATE: several variables marked with 
+square brackets must be replaced with suitable values according to your 
+particular environment. When the replacements are completed, the file may be 
+run in your SQL compliant database management console to register all the 
+tool adapters at once.
+
+There are three tables where you must introduce your own values:
+
+ * InternalRegistry.ToolServices: Apache Wookie and MediaWiki are not 
+ centralized systems, but freely distributable software packages that let you
+ create customized servers. So, a URL for a Apache Wookie server and a URL 
+ for a MediaWiki server must be provided in the rows 6 and 7. 
+ 
+ * InternalRegistry.ImplementationAdapters: the URLs where the tool adapters 
+ will be listening for requests must be completed for all of them. BE CAREFUL:
+ the suffix '/ToolAdapter/[ToolName]' can't be changed. If you install the 
+ GSIC's Tool Adapters and GLUEletManager in the same host and don't change 
+ the default ports, these could be suitable values for the full URLs:
+    - 'http://localhost:8186/ToolAdapter/GData'
+    - 'http://localhost:8187/ToolAdapter/WebContent'
+    - 'http://localhost:8188/ToolAdapter/Dabbleboard'
+    - 'http://localhost:8189/ToolAdapter/WookieWidgets'
+    - 'http://localhost:8190/ToolAdapter/MediaWiki'
+	- 'http://localhost:8192/ToolAdapter/Doodle'
+	- 'http://localhost:8193/ToolAdapter/BasicLTI'
+	- 'http://localhost:8195/ToolAdapter/FacebookLiveStream'
+
+ * InternalRegistry.ToolImplementations: each tool requires its very own 
+ parameters to be inserted in the final column of this table as a string 
+ containing a list of parameters according to the URL encoding format.
+ Note that some adapters provide several tools. A different row for each tool
+ must be present in this table. You will probably want to use the same values
+ in all the tools accessed for each adapter, but this is not mandatory.
+ 
+    - Google Docs adapter: A Gmail account will be needed for the creation of
+	documents in Google Docs. Username and password for that account must be 
+	inserted as values for the 'user' and 'pass' parameters. (Please, note 
+	this is a provisional solution to be replaced in a near future).
+	
+    - Dabbleboard adapter: A Dabbleboard developer account will be needed 
+	for the Dabbleboard adapter gets access to the Dabbleboard API. Please, 
+	check http://www.dabbleboard.com/developer to obtain your developer 
+	account and insert your username and developer key as values for the 
+	'user' and 'pass' parameters. BE CAREFUL. The value need for the 'pass'
+	parameter is your Dabbleboard developer key, not your Dabbleboard 
+	password. Check the 'Account' section while logged-in at 
+	http://www.dabbleboard.com to find your current developer key or generate
+	a new one.
+	
+	- Apache Wookie adapter: A Wookie developer key will be needed to access
+	your Apache Wookie server. Please, follow the link 'Request and API key 
+	for your application' in your Apache Wookie server home page to obtain 
+	your key. IMPORTANT: if your key contains any slash character (/), repeat 
+	the process to get a different key. Then insert your developer key as the 
+	value assigned to the 'devKey' parameter, changing spaces and any other 
+	punctuation characters as the rules for URL encoding require.
+	
+	The URL to your Apache Wookie server must be inserted too, as the value 
+	assigned to the 'feedURL' parameter. Remember to apply the URL encoding
+	rules to the FULL URL, including the reserved characters. For example: 
+	http://host.com:8888/wookie becomes http%3A%2F%2Fhost.com%3A8888%2Fwookie
+	
+	- MediaWiki adapter: A MediaWiki account in your MediaWiki server is needed
+	to create new pages. Insert the credentials as values for the 'user' and 
+	'pass' parameters.
+	
+	The URL to your MediaWiki server must be inserted too, as the value 
+	assigned to the 'feedURL' parameter. Once again, remember to apply the URL
+	encoding rules to the FULL URL, including the reserved characters.
+	For example: http://host.com/mywiki becomes 
+	http%3A%2F%2Fhost.com%2F/mywiki
+
+For more details about the tools provided by each tool adapter, check the 
+INSTALL.txt file in GLUE_HOME/tool_adapters/[adapter].
+
+
+#############
+# OPERATION #
+#############
+	
+Before starting GLUEletManager and the GSIC tool adapters you can edit the 
+app.properties files placed in GLUE_HOME/manager/conf and 
+GLUE_HOME/tool_adapters/[adapter]/conf to change some runtime properties:
+
+  - port     Number of the HTTP port where the component listens for requests.
+  - logging  Keep to 'On' to save information in the log file about every 
+             request processed by the component.
+
+To manually start and stop GLUEletManager and the GSIC tool adapters all at 
+once
+  ** Linux: use the commands start-glue and stop-glue (links to start-glue.sh
+  and stop-glue.sh in GLUE_HOME/bin).
+  
+  GLUEletManager and each GSIC tool adapter can be separately started or 
+  stopped with their respective start and stop shell script files in 
+  GLUE_HOME/manager/bin and GLUE_HOME/tool_adapters/[tool_adapter]/bin. 
+  Symbolyc links to them are created too in /user/bin. Check the INSTALL.txt
+  of every component to see their names.
+  
+  ** Windows: run the batch files start-glue.bat and stop-glue.bat in 
+  GLUE_HOME/bin.
+  
+  GLUEletManager and each GSIC tool adapter can be separately started or 
+  stopped from the Windows service management panel:
+    1) access to the service management panel: Start button > Control Pannel 
+       > System and Maintenance > Administration Tools > Services;
+    2) search and select the service with name 'GLUEletManager' in the services
+       list;
+    3) click the 'Init' or 'Stop' link at the top left corner of the list.
+
+You can see the content of the log files at GLUE_HOME/manager/log and
+GLUE_HOME/tool_adapters/[adapter]/log to check if every component started 
+without problems. You should see a couple of messages like these in 
+manager.log:
+
+  04-jun-2012 18:06:48 org.restlet.ext.httpclient.HttpClientHelper start
+  INFO: Starting the HTTP client
+  2012-06-04 18:06:48.893:INFO::jetty-7.1.6.v20100715
+  2012-06-04 18:06:49.015:INFO::Started SelectChannelConnector@0.0.0.0:8185
+  
+The GSIC tool adapters' log files will show just a message like the second one.
+
+
+###############
+# FINAL NOTES #
+###############
+
+1) If you need to restrict the access to GLUEletManager or any GSIC tool 
+   adapter to a limited set of system users for its start/stop, keep in 
+   mind that authorized users need:
+     - execution permission on the scripts at GLUE_HOME/bin, 
+	 GLUE_HOME/manager/bin and GLUE_HOME/tool_adapters/[adatper]/bin/
+	 - read permission on 
+	    * all the app.properties files
+		* GLUE_HOME/manager/conf/META-INF/persistence.xml
+		* all the jar files
+	 - write permission on /var/log/glue/*.log
+
+2) The GLUEletManager databases may be located at a different host than 
+   GLUEletManager, but they must be both in the same database management 
+   system.
+
+3) BE CAREFUL: In Windows systems, every time GLUEletManager or any GSIC tool
+   adapter is started, the previous log file is erased.
