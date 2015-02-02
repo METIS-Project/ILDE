@@ -152,6 +152,34 @@ $functions = array(
         'capabilities'=> 'moodle/course:view',
     ),
     
+    // === label related functions ===
+	'gws_course_get_labels_course'=> array(
+        'classname'   => 'glueserver_label_external',
+        'methodname'  => 'get_labels_course',
+        'classpath'   => 'local/glueserver/label/externallib.php',
+        'description' => 'Returns the details of all the labels in a course',
+        'type'        => 'read',
+        'capabilities'=> 'moodle/course:view',
+    ),
+    
+    'gws_course_insert_label_course'=> array(
+        'classname'   => 'glueserver_label_external',
+        'methodname'  => 'insert_label_course',
+        'classpath'   => 'local/glueserver/label/externallib.php',
+        'description' => 'Inserts a resource of type label in the course',
+        'type'        => 'read',
+        'capabilities'=> 'moodle/course:view',
+    ),
+    
+   	'gws_course_delete_label_course'=> array(
+        'classname'   => 'glueserver_label_external',
+        'methodname'  => 'delete_label_course',
+        'classpath'   => 'local/glueserver/label/externallib.php',
+        'description' => 'Deletes a resource of type label from the course',
+        'type'        => 'read',
+        'capabilities'=> 'moodle/course:view',
+    ),
+    
     // === forum related functions ===
 	'gws_course_get_forums_course'=> array(
         'classname'   => 'glueserver_forum_external',
