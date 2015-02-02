@@ -1,0 +1,15 @@
+### Version 0.9.2
+
+ - Minor fixes in INSTALL.txt
+ - Added an ANT file to build the distribution packages
+ - scripts to install and start the adapter
+ 
+### Version 0.9.1
+
+ - Fixes in install and stop bash scripts
+
+ 
+### Version 0.9
+
+ - First public release
+   

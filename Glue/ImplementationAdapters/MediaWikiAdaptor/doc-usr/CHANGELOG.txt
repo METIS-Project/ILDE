@@ -1,0 +1,23 @@
+### Version 0.92
+
+ - Minor fixes in INSTALL.txt
+ - Added an ANT file to build the distribution packages
+ - scripts to install and start the adapter
+
+### Version 0.9.1
+
+ - Fixes in install and stop bash scripts
+
+ 
+### Version 0.9
+
+ - Minor fixes in INSTALL.txt
+ - Added commentary for procrun in README.txt
+ - Added copyright notice in *.xhtml files
+ - Fixed comments in app.properties
+ 
+ 
+### Version 0.8
+
+ - First public release
+   
