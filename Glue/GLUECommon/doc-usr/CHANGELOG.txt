@@ -1,0 +1,102 @@
+### Version 0.9.2RC (Release Candidate)
+	bin/
+		start-glue.bat			FIX		añadido 'sc start DoodleAdapter' para arranque de DoodleAdapter		TODO: versión con bucle
+		stop-glue.bat			FIX		añadido 'sc stop DoodleAdapter' para detención de DoodleAdapter		TODO: versión con bucle	(ver uninstall.bat)
+	lib/
+		glue-common.jar			UPDATE	[000095] (liberación de Representations); ver notas SVN hasta revisión 1291
+		restlet-jse-2.0.11/		DEL
+		restlet-jse-2.0.11/		ADD		sustituye al anterior, con JARs extra para conectores Apache HTTP Client y Jetty Server
+	manager/
+		bin/
+			install-gm.bat		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+			start-gm.sh			UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+			stop-gm.sh			UPDATE	cambiado kill -15 por kill -TERM (más portable)
+		conf/
+			META-INF/			UPDATE	cambio InstancesRepositoryPersistenceUnit por GlueletsRepositoryPersistenceUnit
+		lib/
+			gluelet-manager.jar	UPDATE	[000095] ; ver notas SVN
+			
+	tool_adapters/
+		dabbleboard/
+			bin/
+				install-dabbleboard.bat		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				start-dabbleboard.sh		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				stop-dabbleboard.sh			UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			lib/
+				dabbleboard-adapter.jar		UPDATE	[000095] ; ver notas SVN
+		doodle/
+			bin/
+				install-doodle.bat			UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				start-doodle.sh				UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				stop-doodle.sh				UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			conf/
+				DoodleConfiguration.xhtml	FIX		corregida distribución visual de campos de texto en pantalla, en diferentes párrafos (por fin!) 
+			lib/
+				doodle-adapter.jar			UPDATE	[000095] ; ver notas SVN
+		gdata/
+			bin/
+				install-gdata.bat			UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				start-gdata.sh				UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				stop-gdata.sh				UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			lib/
+				gdata-adapter.jar			UPDATE	[000095] ; ver notas SVN
+		mediawiki/
+			bin/
+				install-mediawiki.bat		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				start-mediawiki.sh			UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				stop-mediawiki.sh			UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			lib/
+				mediawiki-adapter.jar		UPDATE	[000095] ; ver notas SVN  hasta revisión 1292
+											FIX		nombre de herramienta cambiado de "GSIC MediaWiki" a "MediaWiki"
+		webcontent/
+			bin/
+				install-webcontent.bat		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				start-webcontent.sh			UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+				stop-webcontent.sh			UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			lib/
+				webcontent-adapter.jar		UPDATE	[000095] ; ver notas SVN
+		wookiewidgets/
+			bin/
+				install-wookiewidgets.bat	UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+											FIX		corregido valor de WOOKIE_EXT_LIB
+				start-wookiewidgets.sh		UPDATE	completado CLASSPATH de arranque con conectores RESTlet 2.0.11 pro
+											FIX		corregido valor de WOOKIE_EXT_LIB
+				stop-wookiewidgets.sh		UPDATE	cambiado kill -15 por kill -TERM (más portable)
+			lib/
+				wookiewidgets-adapter.jar	UPDATE	[000095] ; ver notas SVN
+		
+	vle_adapters/
+		mediawiki_vle_adapter/
+			MediaWikiVleGlueExtension/php/classes/i18n/MediaWikiVLEGlueExtension.i18n.php
+											FIX 	solucionado problema con estilo visible de adaptador cuando el idioma del usuario no es español
+		lams_vle_adapter/		
+			lams-tool-gsglue10.jar/war		UPDATE 	[000095] ; ver notas SVN (hay que actualizar código!!) (war innecesario)
+			deploy.xml						UPDATE	referencias a RESTlet (ojo con paquetes redundantes en LAMS deploy - Apache Commons)
+			lib/
+				glue-common.jar				UPDATE	[000095] ; ver notas SVN
+				restlet-jse-2.0rc4/			DEL
+				restlet-jse-2.0.11/			ADD		sustituye al anterior, con JARs extra para conectores Apache HTTP Client (Jetty NO)
+	
+	**** CHANGELOG.txt, INSTALL.txt, README.txt quedan [TODO] en todos los componentes y en raíz
+
+### Version 0.9.1
+
+ - Added forgotten DoodleAdapter in full GLUE! package.
+ - Improved performance in DabbleboardAdapter.
+ - Fixed URL for Google Presentations in GDataAdapter.
+ - Fixes in install and stop bash scritps.
+
+### Version 0.9
+
+ - Added LAMS_VLE_Adapter
+ - Bug updated in GDataAdapter.
+ - Minor fixes in INSTALL.txt files.
+ - Added commentary for procrun in README.txt files.
+ - Added copyright notice in *.xhtml files.
+ - Fixed comments in app.properties files.
+ 
+ 
+### Version 0.8
+
+ - First public release
+   
