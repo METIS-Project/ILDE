@@ -1,0 +1,35 @@
+#loading-mask {
+  position: absolute;
+  left:     0;
+  top:      0;
+  width:    100%;
+  height:   100%;
+  z-index:  20000;
+  background-color: white;
+}
+
+#loading {
+  position: absolute;
+  left:     50%;
+  top:      50%;
+  padding:  2px;
+  z-index:  20001;
+  height:   auto;
+  margin:   -85px 0 0 -170px;
+  text-align: center;
+  font:       bold 13px tahoma,arial,helvetica;
+  color:      #555;
+}
+
+#loading .loading-indicator {
+  background: url(../images/exe_logo.png) no-repeat center;
+  padding:    0px 0px 90px 0px;
+  margin:     0;
+  height:     auto;
+}
+
+.property-form-dirty {
+  background-image: url('../jsui/extjs/resources/themes/images/default/grid/dirty.gif');
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}​

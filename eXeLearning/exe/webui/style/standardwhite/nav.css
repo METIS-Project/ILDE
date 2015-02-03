@@ -1,0 +1,40 @@
+/*
+Copyright University of Auckland 2004
+Created by Brent Simpson, brent.simpson@auckland.ac.nz
+Centre for Flexible and Distance Learning
+Modified by eXeLearning.net
+*/
+body{padding:15px 20px}
+#content{width:100%;position:relative;padding-bottom:10px;min-width:965px;}
+#main-wrapper{padding:0 20px 0 250px;background:none}
+#main{width:100%}
+#content{padding-bottom:21px}
+#header,#emptyHeader{border:none;background:none;padding:0}
+div#nodeDecoration{padding:0;margin:0;background:none;border:none}
+#nodeTitle{padding:.3em 15px;border-top:1px solid #B3B3B3;border-bottom:1px solid #B3B3B3}
+/* Navigation */
+#skipNav{text-align:center}
+#skipNav a{color:#036;background:none}
+#siteNav{width:230px;float:left;padding-right:20px;border-top:1px solid #B3B3B3}
+#siteNav,#siteNav ul{border-color:#B3B3B3}
+#siteNav ul,#siteNav li{margin:0;padding:0;list-style:none}
+#siteNav a{display:block;padding:4px 0 4px 15px;color:#7D7D7D;border-bottom:1px solid #B3B3B3}
+#siteNav a:hover,#siteNav a:focus{background-color:#F4F4F4;color:#4E4E4E}
+* html #siteNav a{display:inline-block;width:100%} /* IE6 */
+#siteNav ul ul a{padding-left:30px;font-size:.95em}
+#siteNav .active,#siteNav .active:hover,#siteNav .active:focus{background:#fff url(_standardwhite_active_bg.gif) repeat-x bottom;font-weight:bold;color:#4E4E4E}
+#siteNav .other-section{display:none}
+#siteNav ul ul ul a{padding-left:45px}
+#siteFooter{padding-left:250px}
+/* Pagination */
+.pagination{text-align:right;color:#fafafa}
+.pagination a{padding:0;margin:0 5px}
+#topPagination{position:absolute;top:-2px;width:100%;right:20px}
+#topPagination .prev{margin-left:20px}
+#topPagination .pagination{border:none}
+#bottomPagination{padding-right:20px}
+/* Autoclear */
+#content:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0} 
+#content{display:inline-block}
+html[xmlns] #content{display:block}
+* html #content{height: 1%;overflow:visible}

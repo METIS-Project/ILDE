@@ -1,0 +1,41 @@
+/*  
+Copyright University of Auckland 2004
+Created by Brent Simpson, brent.simpson@auckland.ac.nz
+Centre for Flexible and Distance Learning
+Modified by eXeLearning.net
+*/
+body{padding:15px 20px}
+#content{width:100%;position:relative;padding-bottom:10px;min-width:965px;background:#EDEFF0 url(_seamist_side_bg.gif) repeat-y 0 0}
+#main-wrapper{padding:20px 20px 0 260px;background:none}
+#main{width:100%;padding:0}
+#content{padding-bottom:21px}
+#header,#emptyHeader{border-top:none;background:#fff}
+div#nodeDecoration{padding:0;margin:0;background:none;border:none}
+#nodeTitle{padding:.5em 0;border-top:1px solid #fff;border-bottom:1px solid #fff}
+#siteFooter{margin-top:0;padding-left:260px}
+/* Navigation */
+#skipNav{text-align:center}
+#skipNav a{background:#51778A}
+#siteNav{width:220px;float:left;padding-right:20px}
+#siteNav,#siteNav ul{border-color:#FAFFE6}
+#siteNav ul,#siteNav li{margin:0;padding:0;list-style:none}
+#siteNav a{display:block;padding:4px 0 4px 15px;color:#96852C;border-bottom:1px solid #D3D8DA;background:#fff}
+#siteNav a:hover,#siteNav a:focus{background-color:#EDEFF0;color:#517793}
+* html #siteNav a{display:inline-block;width:100%} /* IE6 */
+#siteNav ul ul a{padding-left:30px;font-size:.95em}
+#siteNav .active,#siteNav .active:hover,#siteNav .active:focus{color:#fff;background:#51778A}
+#siteNav .other-section{display:none}
+#siteNav ul ul ul a{padding-left:45px}
+/* Pagination */
+.pagination{border-top:1px solid #fff;padding-top:20px;text-align:right;color:#EDEFF0}
+.pagination a{padding:0;margin:0 5px}
+.pagination a:hover,.pagination a:focus{color:#8B7B73}
+#topPagination{position:absolute;top:-2px;width:100%;right:20px}
+#topPagination .prev{margin-left:20px}
+#topPagination .pagination{border:none;color:#fff}
+#bottomPagination{padding:0 20px 0 250px}
+/* Autoclear */
+#content:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0} 
+#content{display:inline-block}
+html[xmlns] #content{display:block}
+* html #content{height: 1%;overflow:visible}

@@ -1,0 +1,14 @@
+include README
+include COPYING
+include NEWS
+include ChangeLog
+include exe/webui/mr_x.gif
+recursive-include exe/webui/style *
+recursive-include exe/webui/css *
+recursive-include exe/webui/docs *
+recursive-include exe/webui/images *
+recursive-include exe/webui/scripts *
+recursive-include exe/webui/templates *
+recursive-include exe/jsui/scripts *
+recursive-include exe/jsui/templates *
+recursive-include exe/locale *

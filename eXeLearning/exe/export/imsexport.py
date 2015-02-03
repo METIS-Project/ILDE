@@ -1,0 +1,598 @@
+#!/usr/bin/env python
+#-*- coding: utf-8 -*-
+# ===========================================================================
+# eXe 
+# Copyright 2004-2005, University of Auckland
+# Copyright 2004-2008 eXe Project, http://eXeLearning.org/
+# Copyright 2008-2014 eXeLearning.net, http://exelearning.net/
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+# ===========================================================================
+"""
+Exports an eXe package as an IMS Content Package
+"""
+
+import logging
+import time
+import StringIO
+import re
+from cgi                           import escape
+from zipfile                       import ZipFile, ZIP_DEFLATED
+from exe.webui                     import common
+from exe.webui.blockfactory        import g_blockFactory
+from exe.engine.error              import Error
+from exe.engine.path               import Path, TempDirPath
+from exe.engine.version            import release
+from exe.export.pages              import Page, uniquifyNames
+from exe.engine.uniqueidgenerator  import UniqueIdGenerator
+from exe                      	   import globals as G
+from exe.engine.persist import encodeObject
+from exe.engine.persistxml import encodeObjectToXML
+
+log = logging.getLogger(__name__)
+
+
+# ===========================================================================
+class Manifest(object):
+    """
+    Represents an imsmanifest xml file
+    """
+    def __init__(self, config, outputDir, package, pages, metadataType):
+        """
+        Initialize
+        'outputDir' is the directory that we read the html from and also output
+        the mainfest.xml 
+        """
+        self.config       = config
+        self.outputDir    = outputDir
+        self.package      = package
+        self.idGenerator  = UniqueIdGenerator(package.name, config.exePath)
+        self.pages        = pages
+        self.metadataType = metadataType
+        self.itemStr      = ""
+        self.resStr       = ""
+
+
+    def createMetaData(self, template):
+        """
+        if user did not supply metadata title, description or creator
+        then use package title, description, or creator in imslrm
+        if they did not supply a package title, use the package name
+        if they did not supply a date, use today
+        """
+        xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+        namespace = 'xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomCustom.xsd"'          
+        # depending on (user desired) the metadata type:
+        if self.metadataType == 'LOMES':
+            output = StringIO.StringIO()
+            self.package.lomEs.export(output, 0, namespacedef_=namespace, pretty_print=False)
+            xml += output.getvalue()
+        if self.metadataType == 'LOM':
+            output = StringIO.StringIO()
+            self.package.lom.export(output, 0, namespacedef_=namespace, pretty_print=False)
+            xml += output.getvalue()
+        if self.metadataType == 'DC':
+            lrm = self.package.dublinCore.__dict__.copy()
+            # use package values in absentia:
+            if lrm.get('title', '') == '':
+                lrm['title'] = self.package.title
+            if lrm['title'] == '':
+                lrm['title'] = self.package.name
+            if lrm.get('description', '') == '':
+                lrm['description'] = self.package.description
+            if lrm['description'] == '':
+                lrm['description'] = self.package.name
+            if lrm.get('creator', '') == '':
+                lrm['creator'] = self.package.author
+            if lrm['date'] == '':
+                lrm['date'] = time.strftime('%Y-%m-%d')
+            # if they don't look like VCARD entries, coerce to fn:
+            for f in ('creator', 'publisher', 'contributors'):
+                if re.match('.*[:;]', lrm[f]) == None:
+                    lrm[f] = u'FN:' + lrm[f]
+            xml = template % lrm
+        return xml
+
+
+    def save(self, filename):
+        """
+        Save a imsmanifest file to self.outputDir
+        Two works: createXML and createMetaData
+        """
+        out = open(self.outputDir/filename, "w")
+        if filename == "imsmanifest.xml":
+            out.write(self.createXML().encode('utf8'))
+        out.close()
+        # now depending on metadataType, <metadata> content is diferent:     
+        if self.metadataType == 'DC':
+            # if old template is desired, select imslrm.xml file:\r
+            # anything else, yoy should select:    
+            templateFilename = self.config.webDir/'templates'/'imslrm.xml'
+            template = open(templateFilename, 'rb').read()            
+        elif self.metadataType == 'LOMES':
+            template = None
+        elif self.metadataType == 'LOM':
+            template = None
+        # Now the file with metadatas. 
+        # Notice that its name is independent of metadataType:  
+        xml = self.createMetaData(template)
+        out = open(self.outputDir/'imslrm.xml', 'wb')
+        out.write(xml.encode('utf8'))
+        out.close()
+
+
+    def createXML(self):
+        """
+        returning XLM string for manifest file
+        """
+        manifestId = self.idGenerator.generate()
+        orgId      = self.idGenerator.generate()
+        
+        xmlStr = u"""<?xml version="1.0" encoding="UTF-8"?>
+        <!-- Generated by eXe - http://exelearning.net -->
+        <manifest identifier="%s" 
+        xmlns="http://www.imsglobal.org/xsd/imscp_v1p1"
+        xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" 
+        xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_v1p2" 
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:lom="http://www.imsglobal.org/xsd/imsmd_v1p2"
+        """ % manifestId 
+        xmlStr += "\n "
+        xmlStr += "xsi:schemaLocation=\"http://www.imsglobal.org/xsd/"
+        xmlStr += "imscp_v1p1 imscp_v1p1.xsd "        
+        xmlStr += "http://www.imsglobal.org/xsd/imsmd_v1p2 imsmd_v1p2p2.xsd\""
+        xmlStr += "> \n"
+        xmlStr += "<metadata> \n"
+        xmlStr += " <schema>IMS Content</schema> \n"
+        xmlStr += " <schemaversion>1.1.3</schemaversion> \n"
+        xmlStr += " <adlcp:location>imslrm.xml"
+        xmlStr += "</adlcp:location> \n" 
+        xmlStr += "</metadata> \n"
+        xmlStr += "<organizations default=\""+orgId+"\">  \n"
+        xmlStr += "<organization identifier=\""+orgId
+        xmlStr += "\" structure=\"hierarchical\">  \n"
+
+        if self.package.title != '':
+            title = escape(self.package.title)
+        else:
+            title  = escape(self.package.root.titleShort)
+        xmlStr += u"<title>"+title+"</title>\n"
+        
+        depth = 0
+        for page in self.pages:
+            while depth >= page.depth:
+                self.itemStr += "</item>\n"
+                depth -= 1
+            self.genItemResStr(page)
+            depth = page.depth
+
+        while depth >= 1:
+            self.itemStr += "</item>\n"
+            depth -= 1
+
+        xmlStr += self.itemStr
+        xmlStr += "</organization>\n"
+        xmlStr += "</organizations>\n"
+        xmlStr += "<resources>\n"
+        xmlStr += self.resStr
+        xmlStr += "</resources>\n"
+        xmlStr += "</manifest>\n"
+        return xmlStr
+        
+            
+    def genItemResStr(self, page):
+        """
+        Returning xml string for items and resources
+        """
+        itemId   = "ITEM-"+unicode(self.idGenerator.generate())
+        resId    = "RES-"+unicode(self.idGenerator.generate())
+        filename = page.name+".html"
+            
+        
+        self.itemStr += "<item identifier=\""+itemId+"\" isvisible=\"true\" "
+        self.itemStr += "identifierref=\""+resId+"\">\n"
+        self.itemStr += "    <title>"
+        self.itemStr += escape(page.node.titleShort)
+        self.itemStr += "</title>\n"
+        
+        self.resStr += "<resource identifier=\""+resId+"\" "
+        self.resStr += "type=\"webcontent\" "
+
+        self.resStr += "href=\""+filename+"\"> \n"
+        self.resStr += """\
+    <file href="%s"/>
+    <file href="base.css"/>
+    <file href="content.css"/>""" % filename
+        self.resStr += "\n"
+        fileStr = ""
+        
+        dT = common.getExportDocType()
+        if dT == "HTML5" or common.nodeHasMediaelement(page.node):
+            self.resStr += '    <file href="exe_html5.js"/>\n'
+
+        resources = page.node.getResources()
+        my_style = G.application.config.styleStore.getStyle(page.node.package.style)
+        if common.nodeHasMediaelement(page.node):
+            resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'mediaelement').files()]
+        if common.hasGalleryIdevice(page.node):
+            self.resStr += '    <file href="exe_lightbox.js"/>\n'
+            self.resStr += '    <file href="exe_lightbox.css"/>\n'
+            self.resStr += '    <file href="exe_lightbox_close.png"/>\n'
+            self.resStr += '    <file href="exe_lightbox_loading.gif"/>\n'
+            self.resStr += '    <file href="exe_lightbox_next.png"/>\n'
+            self.resStr += '    <file href="exe_lightbox_prev.png"/>\n'
+        if my_style.hasValidConfig:
+            if my_style.get_jquery() == True:
+                self.resStr += '    <file href="exe_jquery.js"/>\n'
+        else:
+            self.resStr += '    <file href="exe_jquery.js"/>\n'
+
+        for resource in resources:
+            fileStr += "    <file href=\""+escape(resource)+"\"/>\n"
+
+        self.resStr += fileStr
+        self.resStr += "</resource>\n"
+
+
+# ===========================================================================
+class IMSPage(Page):
+    """
+    This class transforms an eXe node into a SCO 
+    """  
+    def __init__(self, name, depth, node, metadataType):
+        self.metadataType = metadataType
+        super(IMSPage, self).__init__(name, depth, node)
+
+
+    def save(self, outputDir):
+        """
+        This is the main function.  It will render the page and save it to a
+        file.  
+        'outputDir' is the name of the directory where the node will be saved to,
+        the filename will be the 'self.node.id'.html or 'index.html' if
+        self.node is the root node. 'outputDir' must be a 'Path' instance
+        """
+        out = open(outputDir/self.name+".html", "wb")
+        out.write(self.render())
+        out.close()
+        
+
+    def render(self):
+        """
+        Returns an XHTML string rendering this page.
+        """
+        dT = common.getExportDocType()
+        lb = "\n" #Line breaks
+        sectionTag = "div"
+        headerTag = "div"
+        if dT == "HTML5":
+            sectionTag = "section"        
+            headerTag = "header"
+        html  = common.docType()
+        lenguaje = G.application.config.locale
+        if self.node.package.dublinCore.language!="":
+            lenguaje = self.node.package.dublinCore.language
+        html += u"<html lang=\"" + lenguaje + "\" xml:lang=\"" + lenguaje + "\" xmlns=\"http://www.w3.org/1999/xhtml\">"+lb
+        html += u"<head>"+lb
+        html += u"<title>"
+        if self.node.id=='0':
+            if self.node.package.title!='':
+                html += escape(self.node.package.title)
+            else:
+                html += escape(self.node.titleLong)
+        else:
+            if self.node.package.title!='':
+                html += escape(self.node.titleLong)+" | "+escape(self.node.package.title)
+            else:
+                html += escape(self.node.titleLong)
+        html += u" </title>"+lb   
+        html += u"<meta http-equiv=\"content-type\" content=\"text/html; charset=utf-8\" />"+lb
+        if dT != "HTML5" and self.node.package.dublinCore.language!="":
+            html += '<meta http-equiv="content-language" content="'+lenguaje+'" />'+lb
+        if self.node.package.author!="":
+            html += '<meta name="author" content="'+self.node.package.author+'" />'+lb
+        html += '<meta name="generator" content="eXeLearning '+release+' - exelearning.net" />'+lb
+        if self.node.id=='0':
+            if self.node.package.description!="":
+                html += '<meta name="description" content="'+self.node.package.description+'" />'+lb
+        html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"base.css\" />"+lb
+        if common.hasWikipediaIdevice(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_wikipedia.css\" />"+lb    
+        if common.hasGalleryIdevice(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_lightbox.css\" />"+lb
+        html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />"+lb
+        if dT == "HTML5" or common.nodeHasMediaelement(self.node):
+            html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->'+lb
+        style = G.application.config.styleStore.getStyle(self.node.package.style)
+        
+        # jQuery
+        if style.hasValidConfig:
+            if style.get_jquery() == True:
+                html += u'<script type="text/javascript" src="exe_jquery.js"></script>'+lb
+            else:
+                html += u'<script type="text/javascript" src="'+style.get_jquery()+'"></script>'+lb
+        else:
+            html += u'<script type="text/javascript" src="exe_jquery.js"></script>'+lb
+        
+        if common.hasGalleryIdevice(self.node):
+            html += u'<script type="text/javascript" src="exe_lightbox.js"></script>'+lb
+        html += common.getJavaScriptStrings()+lb
+        html += u'<script type="text/javascript" src="common.js"></script>'+lb
+        if common.hasMagnifier(self.node):
+            html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
+        # Some styles might have their own JavaScript files (see their config.xml file)
+        if style.hasValidConfig:
+            html += style.get_extra_head()
+        html += u"</head>"+lb
+        html += u'<body class="exe-ims"><script type="text/javascript">document.body.className+=" js"</script>'+lb
+        html += u"<"+sectionTag+" id=\"outer\">"+lb
+        html += u"<"+sectionTag+" id=\"main\">"+lb
+        html += u"<"+headerTag+" id=\"nodeDecoration\">"
+        html += u'<h1 id=\"nodeTitle\">'
+        html += escape(self.node.titleLong)
+        html += u'</h1>'
+        html += u"</"+headerTag+">"+lb
+
+        for idevice in self.node.idevices:
+            if idevice.klass != 'NotaIdevice':
+                e=" em_iDevice"
+                if unicode(idevice.emphasis)=='0':
+                    e=""
+                html += u'<'+sectionTag+' class="iDevice_wrapper %s%s" id="id%s">%s' % (idevice.klass, e, idevice.id, lb)
+                block = g_blockFactory.createBlock(None, idevice)
+                if not block:
+                    log.critical("Unable to render iDevice.")
+                    raise Error("Unable to render iDevice.")
+                if hasattr(idevice, "isQuiz"):
+                    html += block.renderJavascriptForWeb()
+                if idevice.title != "Forum Discussion":
+                    html += self.processInternalLinks(
+                        block.renderView(self.node.package.style))
+            html += u'</'+sectionTag+'>'+lb # iDevice div
+
+        html += u"</"+sectionTag+">"+lb # /#main
+        html += self.renderLicense()
+        html += self.renderFooter()
+        html += u"</"+sectionTag+">"+lb # /#outer
+        if style.hasValidConfig:
+            html += style.get_extra_body() 
+        html += u'</body></html>'
+        html = html.encode('utf8')
+        # JRJ: Eliminamos los atributos de las ecuaciones
+        # Let's elliminate the attibutes of the equations
+        aux = re.compile("exe_math_latex=\"[^\"]*\"")
+        html = aux.sub("", html)
+        aux = re.compile("exe_math_size=\"[^\"]*\"")
+        html = aux.sub("", html)
+        #JRJ: Cambio el & en los enlaces del glosario
+        # Then let's change the & of the glossary links
+        html = html.replace("&concept", "&amp;concept")
+        # Remove "resources/" from data="resources/ and the url param
+        html = html.replace("video/quicktime\" data=\"resources/", "video/quicktime\" data=\"")
+        html = html.replace("application/x-mplayer2\" data=\"resources/", "application/x-mplayer2\" data=\"")
+        html = html.replace("audio/x-pn-realaudio-plugin\" data=\"resources/", "audio/x-pn-realaudio-plugin\" data=\"")
+        html = html.replace("<param name=\"url\" value=\"resources/", "<param name=\"url\" value=\"")
+        return html
+
+
+    def processInternalLinks(self, html):
+        """
+        take care of any internal links which are in the form of:
+           href="exe-node:Home:Topic:etc#Anchor"
+        For this IMS Export, go ahead and remove the link entirely,
+        leaving only its text, since such links are not to be in the LMS.
+        """
+        return common.removeInternalLinks(html)
+        
+        
+# ===========================================================================
+class IMSExport(object):
+    """
+    Exports an eXe package as a SCORM package
+    """
+    def __init__(self, config, styleDir, filename):
+        """ Initialize
+        'styleDir' is the directory from which we will copy our style sheets
+        (and some gifs)
+        """
+        self.config       = config
+        self.imagesDir    = config.webDir/"images"
+        self.scriptsDir   = config.webDir/"scripts"
+        self.cssDir       = config.webDir/"css"
+        self.templatesDir = config.webDir/"templates"
+        self.schemasDir   = config.webDir/"schemas/ims"
+        self.styleDir     = Path(styleDir)
+        self.filename     = Path(filename)
+        self.pages        = []
+
+
+    def export(self, package):
+        """ 
+        Export SCORM package
+        """
+        # First do the export to a temporary directory
+        outputDir = TempDirPath()
+
+        self.metadataType = package.exportMetadataType
+
+
+        # Copy the style sheet files to the output dir
+        # But not nav.css
+        styleFiles  = [self.styleDir/'..'/'base.css']
+        styleFiles += [self.styleDir/'..'/'popup_bg.gif']
+        styleFiles += self.styleDir.files("*.css")
+        if "nav.css" in styleFiles:
+            styleFiles.remove("nav.css")
+        styleFiles += self.styleDir.files("*.jpg")
+        styleFiles += self.styleDir.files("*.gif")
+        styleFiles += self.styleDir.files("*.png")
+        styleFiles += self.styleDir.files("*.js")
+        styleFiles += self.styleDir.files("*.html")
+        styleFiles += self.styleDir.files("*.ttf")
+        styleFiles += self.styleDir.files("*.eot")
+        styleFiles += self.styleDir.files("*.otf")
+        styleFiles += self.styleDir.files("*.woff")
+        self.styleDir.copylist(styleFiles, outputDir)
+
+        # copy the package's resource files
+        package.resourceDir.copyfiles(outputDir)
+            
+        # Export the package content
+        self.pages = [ IMSPage("index", 1, package.root,
+           metadataType=self.metadataType) ]
+
+        self.generatePages(package.root, 2)
+        uniquifyNames(self.pages)
+
+        for page in self.pages:
+            page.save(outputDir)
+
+        # Create the manifest file
+        manifest = Manifest(self.config, outputDir, package, self.pages, self.metadataType)
+        manifest.save("imsmanifest.xml")
+        
+        # Copy the scripts
+        
+        # jQuery
+        my_style = G.application.config.styleStore.getStyle(page.node.package.style)
+        if my_style.hasValidConfig:
+            if my_style.get_jquery() == True:
+                jsFile = (self.scriptsDir/'exe_jquery.js')
+                jsFile.copyfile(outputDir/'exe_jquery.js')
+        else:
+            jsFile = (self.scriptsDir/'exe_jquery.js')
+            jsFile.copyfile(outputDir/'exe_jquery.js')                
+        
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
+        dT = common.getExportDocType()
+        if dT == "HTML5":
+            jsFile = (self.scriptsDir/'exe_html5.js')
+            jsFile.copyfile(outputDir/'exe_html5.js')
+        
+        self.schemasDir.copylist(('imscp_v1p1.xsd',
+                                  'imsmd_v1p2p2.xsd',
+                                  'lom.xsd',
+                                  'lomCustom.xsd',
+                                  'ims_xml.xsd'), outputDir)
+
+        # copy players for media idevices.                
+        hasFlowplayer     = False
+        hasMagnifier      = False
+        hasXspfplayer     = False
+        hasGallery        = False
+        hasWikipedia      = False
+        isBreak           = False
+        hasInstructions   = False
+        hasMediaelement   = False
+        
+        for page in self.pages:
+            if isBreak:
+                break
+            for idevice in page.node.idevices:
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasWikipedia and hasInstructions and hasMediaelement):
+                    isBreak = True
+                    break
+                if not hasFlowplayer:
+                    if 'flowPlayer.swf' in idevice.systemResources:
+                        hasFlowplayer = True
+                if not hasMagnifier:
+                    if 'mojomagnify.js' in idevice.systemResources:
+                        hasMagnifier = True
+                if not hasXspfplayer:
+                    if 'xspf_player.swf' in idevice.systemResources:
+                        hasXspfplayer = True
+                if not hasGallery:
+                    hasGallery = common.ideviceHasGallery(idevice)
+                if not hasWikipedia:
+                    if 'WikipediaIdevice' == idevice.klass:
+                        hasWikipedia = True
+                if not hasInstructions:
+                    if 'TrueFalseIdevice' == idevice.klass or 'MultichoiceIdevice' == idevice.klass or 'VerdaderofalsofpdIdevice' == idevice.klass or 'EleccionmultiplefpdIdevice' == idevice.klass:
+                        hasInstructions = True
+                if not hasMediaelement:
+                    hasMediaelement = common.ideviceHasMediaelement(idevice)
+
+        if hasFlowplayer:
+            videofile = (self.templatesDir/'flowPlayer.swf')
+            videofile.copyfile(outputDir/'flowPlayer.swf')
+            controlsfile = (self.templatesDir/'flowplayer.controls.swf')
+            controlsfile.copyfile(outputDir/'flowplayer.controls.swf')
+        if hasMagnifier:
+            videofile = (self.templatesDir/'mojomagnify.js')
+            videofile.copyfile(outputDir/'mojomagnify.js')
+        if hasXspfplayer:
+            videofile = (self.templatesDir/'xspf_player.swf')
+            videofile.copyfile(outputDir/'xspf_player.swf')
+        if hasGallery:
+            imageGalleryCSS = (self.cssDir/'exe_lightbox.css')
+            imageGalleryCSS.copyfile(outputDir/'exe_lightbox.css') 
+            imageGalleryJS = (self.scriptsDir/'exe_lightbox.js')
+            imageGalleryJS.copyfile(outputDir/'exe_lightbox.js') 
+            self.imagesDir.copylist(('exe_lightbox_close.png', 'exe_lightbox_loading.gif', 'exe_lightbox_next.png', 'exe_lightbox_prev.png'), outputDir)
+        if hasWikipedia:
+            wikipediaCSS = (self.cssDir/'exe_wikipedia.css')
+            wikipediaCSS.copyfile(outputDir/'exe_wikipedia.css')
+        if hasInstructions:
+            common.copyFileIfNotInStyle('panel-amusements.png', self, outputDir)
+            common.copyFileIfNotInStyle('stock-stop.png', self, outputDir)
+        if hasMediaelement:
+            mediaelement = (self.scriptsDir/'mediaelement')
+            mediaelement.copyfiles(outputDir)
+            if dT != "HTML5":
+                jsFile = (self.scriptsDir/'exe_html5.js')
+                jsFile.copyfile(outputDir/'exe_html5.js')
+        if hasattr(package, 'exportSource') and package.exportSource:
+            (G.application.config.webDir/'templates'/'content.xsd').copyfile(outputDir/'content.xsd')
+            (outputDir/'content.data').write_bytes(encodeObject(package))
+            (outputDir/'contentv3.xml').write_bytes(encodeObjectToXML(package))
+
+
+        if package.license == "license GFDL":
+            # include a copy of the GNU Free Documentation Licence
+            (self.templatesDir/'fdl.html').copyfile(outputDir/'fdl.html')
+        # Zip it up!
+        self.filename.safeSave(self.doZip, _('EXPORT FAILED!\nLast succesful export is %s.'), outputDir)
+        # Clean up the temporary dir
+        outputDir.rmtree()
+
+    def doZip(self, fileObj, outputDir):
+        """
+        Actually does the zipping of the file. Called by 'Path.safeSave'
+        """
+        zipped = ZipFile(fileObj, "w")
+        for scormFile in outputDir.files():
+            zipped.write(scormFile,
+                    scormFile.basename().encode('utf8'), ZIP_DEFLATED)
+        zipped.close()
+
+    def generatePages(self, node, depth):
+        """
+        Recursive function for exporting a node.
+        'outputDir' is the temporary directory that we are exporting to
+        before creating zip file
+        """
+        for child in node.children:
+            pageName = child.titleShort.lower().replace(" ", "_")
+            pageName = re.sub(r"\W", "", pageName)
+            if not pageName:
+                pageName = "__"
+
+            page = IMSPage(pageName, depth, child, metadataType=self.metadataType)
+
+            self.pages.append(page)
+            self.generatePages(child, depth + 1)
+    
+# ===========================================================================

@@ -1,0 +1,42 @@
+/*
+Copyright eXelearning 2007
+Created by Brent Simpson, brent@exelearning.org
+Modified by eXeLearning.net
+*/
+body{padding:0}
+#content{width:100%;position:relative;min-width:965px}
+#main{padding:20px 20px 0 20px;background:#fff;margin-left:230px;overflow:auto}
+#header,#emptyHeader{border-top:none;padding-left:15px}
+div#nodeDecoration{padding:0;margin:0;background:none;border:none}
+#nodeTitle{padding:0 0 .7em 0;border-bottom:4px solid #8B8B89}
+.iDevice,.readingIdevice .iDevice{margin:2em 0;padding:0}
+.emphasis0{padding:0}
+.iDevice_inner{margin-left:55px;border-bottom:1px solid #ddd;padding-bottom:20px}
+.emphasis0,.GalleryIdevice .iDevice{padding-bottom:15px;border-bottom:1px solid #ddd}
+/* Navigation */
+#skipNav{text-align:center;padding-top:18px}
+#skipNav a{background:#8A0A0A}
+#siteNav{width:230px;float:left}
+#siteNav,#siteNav ul{border-color:#FAFFE6}
+#siteNav ul,#siteNav li{margin:0;padding:0;list-style:none}
+#siteNav a{display:block;padding:4px 0 4px 15px;color:#EAE0C6;border-bottom:1px solid #696967;border-top:1px solid #696967;background:#696967}
+#siteNav a:hover,#siteNav a:focus{background-color:#848484}
+* html #siteNav a{display:inline-block;width:100%} /* IE6 */
+#siteNav ul ul a{padding-left:30px;font-size:.95em}
+#siteNav .active,#siteNav .active:hover,#siteNav .active:focus{background:#8B8B89;border-color:#fff}
+#siteNav .other-section{display:none}
+#siteNav ul ul ul a{padding-left:45px}
+#siteFooter{color:#555;margin-left:230px;background:#fff;padding:20px 0 20px 20px;margin-top:-20px}
+/* Pagination */
+.pagination{text-align:right;color:#fff}
+.pagination a{padding:0;margin:0 5px;color:#036}
+.pagination a:hover,.pagination a:focus{color:#3C5866}
+#topPagination{position:absolute;top:-2px;width:100%;right:20px}
+#topPagination .prev{margin-left:20px}
+#topPagination .pagination{border:none;color:#CAC3B5;padding-top:20px}
+#bottomPagination{padding:0 20px 0 250px}
+/* Autoclear */
+#content:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0} 
+#content{display:inline-block}
+html[xmlns] #content{display:block}
+* html #content{height: 1%;overflow:visible}
