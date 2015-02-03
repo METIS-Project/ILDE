@@ -35,7 +35,12 @@ var Loader = {
         });
         
         Loader.resetLdShakeInfo();
-        Loader.ldShakeMode = false;
+        //Loader.ldShakeMode = false;
+        if (dojo.body().attributes.document_id.value.length > 0 && dojo.body().attributes.sectoken.value.length > 0){
+            Loader.ldShakeMode = true;
+            Loader.ldShakeInfo.document_id = dojo.body().attributes.document_id.value;
+            Loader.ldShakeInfo.sectoken = dojo.body().attributes.sectoken.value;
+        }
     },
     
     inheritance : {

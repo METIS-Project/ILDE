@@ -33,10 +33,7 @@ dojo.addOnLoad(function() {
     GroupPatternsDialog.init();
     
     if (dojo.body().attributes.document_id.value.length > 0 && dojo.body().attributes.sectoken.value.length > 0){
-        LearningDesign.ldid = dojo.body().attributes.document_id.value;
-        Loader.ldShakeMode = true;
-        Loader.ldShakeInfo.document_id = dojo.body().attributes.document_id.value;
-        Loader.ldShakeInfo.sectoken = dojo.body().attributes.sectoken.value;        
+        LearningDesign.ldid = dojo.body().attributes.document_id.value;       
         Loader.load();
     }
     else{

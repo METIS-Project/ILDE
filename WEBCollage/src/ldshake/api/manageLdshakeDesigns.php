@@ -20,7 +20,7 @@ require_once "../db/sectokendb.php";
  */
 function loadLdshakeDesign($document_id, $sectoken, $username) {
     $link = connectToDB();    
-    //Check the sectoken provided matches the one stored in the database for this design
+    //Check if the sectoken provided matches the one stored in the database for this design
     $row = loadSectokenDB($link, $sectoken);
     if ($row !== false) {
         $docid_database = $row['docid'];
@@ -41,14 +41,6 @@ function loadLdshakeDesign($document_id, $sectoken, $username) {
     $result = array("ok" => false, "noAccess" => true);
     return $result;
 }
-
-/**
- * Load a design uploaded by ldshake
- * @param string $document_id Identifier of the design
- * @param string $sectoken The security token associated to the design
- * @param string $username The name of the user who loads the design 
- * @return mixed Array with information about the result
- */
 
 /**
  * Save a design uploaded by ldshake

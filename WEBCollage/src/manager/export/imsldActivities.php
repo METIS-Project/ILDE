@@ -16,31 +16,40 @@ function IMSLDSetActivitiesRec($imsld, $design, $clfpact) {
 			if ($act -> type === 'clfpact') {
 				IMSLDSetActivitiesRec($imsld, $design, $act);
 			} else {/* is an act */
-				IMSLDStartAct($imsld, $act);
+                                $there_are_activities = false;
+                                foreach ($act->roleparts as $rpIndex => $rolepart) {
+                                    $activitycount = count($rolepart -> activities);
+                                    if ($activitycount > 0 && $there_are_activities===false){
+                                        $there_are_activities = true;
+                                    }
+                                }
+                                if ($there_are_activities === true){ 
+                                    IMSLDStartAct($imsld, $act);
 
-				foreach ($act->roleparts as $rpIndex => $rolepart) {
-					$roleId = $rolepart -> roleId;
-					$activitycount = count($rolepart -> activities);
+                                    foreach ($act->roleparts as $rpIndex => $rolepart) {
+                                            $roleId = $rolepart -> roleId;
+                                            $activitycount = count($rolepart -> activities);
 
-					if ($activitycount > 0) {
-						/*						if ($activitycount == 1) {
-						 $activity = $rolepart -> activities[0];
-						 $activityType = $activity -> subtype;
-						 $activityId = IMSLDAddActivity($imsld, $design, $roleId, $activity);
-						 } else {*/
-						$ids = array();
-						foreach ($rolepart->activities as $activityIndex => $activity) {
-							$ids[] = array("id" => IMSLDAddActivity($imsld, $design, $roleId, $activity), "type" => $activity -> subtype);
-						}
-						$activityType = "activity-structure";
-						$activityTitle = $imsld -> getRoleTitle($roleId);
-						$activityId = IMSLDAddActivityStructure($imsld, $ids, $activityTitle);
-						//	}
-						IMSLDAddRolePart($imsld, $imsld -> formatId($rolepart -> roleId), $activityType, $activityId);
-					}
-				}
+                                            if ($activitycount > 0) {
+                                                    /*						if ($activitycount == 1) {
+                                                     $activity = $rolepart -> activities[0];
+                                                     $activityType = $activity -> subtype;
+                                                     $activityId = IMSLDAddActivity($imsld, $design, $roleId, $activity);
+                                                     } else {*/
+                                                    $ids = array();
+                                                    foreach ($rolepart->activities as $activityIndex => $activity) {
+                                                            $ids[] = array("id" => IMSLDAddActivity($imsld, $design, $roleId, $activity), "type" => $activity -> subtype);
+                                                    }
+                                                    $activityType = "activity-structure";
+                                                    $activityTitle = $imsld -> getRoleTitle($roleId);
+                                                    $activityId = IMSLDAddActivityStructure($imsld, $ids, $activityTitle);
+                                                    //	}
+                                                    IMSLDAddRolePart($imsld, $imsld -> formatId($rolepart -> roleId), $activityType, $activityId);
+                                            }
+                                    }
 
-				IMSLDEndAct($imsld);
+                                    IMSLDEndAct($imsld);
+                                }
 			}
 		}
 	}
