@@ -1,0 +1,60 @@
+.navbar {
+	padding-bottom: 20px;
+	width:100%;
+}
+
+#mapContainer{
+	margin-bottom: 0px;	
+}
+
+#firstPersonCamControls{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align:center;
+}
+
+#mainContainer {
+	position:absolute;
+	top:70px;
+	bottom:0px;
+	left:0px;
+	right:0px;
+}
+
+.centering {
+	display: inline-block;
+}
+
+#loadingDeploys {
+	display: inline;
+}
+
+#loadingDeploys img{
+	width: 24px;
+	height: 24px;
+	margin: 0px 4px;	
+}
+
+body .modal-admin {
+    /* new custom width */
+    /*width: 750px;*/
+    /* must be half of the width, minus scrollbar on the left (30px) */
+    /*margin-left: -375px;*/
+    left: 10px;
+    right: 10px;
+    margin-left:0px;
+}
+
+body .modal-body {
+	max-height: none;
+}
+
+table {
+   width: 100%;
+   border: 1px solid #000;
+}
+th, td {
+   text-align: left;
+   vertical-align: top;
+   border: 1px solid #000;
+}

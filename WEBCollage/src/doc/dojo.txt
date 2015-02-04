@@ -1,0 +1,3 @@
+
+comment: dojo.stopEvent(evt); in dijit/Dialog.js, 174, 181, 196
+patch images

@@ -1,0 +1,24 @@
+### Version 0.9.2
+
+ - Minor fixes in INSTALL.txt
+ - Added an ANT file to build the distribution packages
+
+### Version 0.9.1
+
+ - Fixed URL for Google Presentations
+ - Fixes in install and stop bash scripts
+
+ 
+### Version 0.9
+
+ - Fixed URL to documents in Google Docs
+ - Minor fixes in INSTALL.txt
+ - Added commentary for procrun in README.txt
+ - Added copyright notice in *.xhtml files
+ - Fixed comments in app.properties
+ 
+ 
+### Version 0.8
+
+ - First public release
+   

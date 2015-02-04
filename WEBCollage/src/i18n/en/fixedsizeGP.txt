@@ -1,0 +1,18 @@
+grouppattern.fixedsizegroups.title=Fixed Group Size
+grouppattern.fixedsizegroups.title.alert=<font color='brown'>Fixed Group Size</font>
+grouppattern.fixedsizegroups.info=The group size is fixed. You want the group number <br/> depends on how many students there are available <br/> for this phase.
+
+grouppattern.fixedsizegroups.number=Since there ${0}, we can have ${1} of size ${2}
+grouppattern.fixedsizegroups.students.one=is 1 student
+grouppattern.fixedsizegroups.students.several=are ${0} students
+grouppattern.fixedsizegroups.group.one=1 group
+grouppattern.fixedsizegroups.group.several=${0} groups
+
+grouppattern.fixedsizegroups.unspecified=Group size not specified
+
+grouppattern.fixedsizegroups.menuitem.number=Set group size of groups (currently ${0})
+grouppattern.fixedsizegroups.menuitem.unspecified=Set the groups size (unspecified)
+
+help.grouppattern.fixedsizegroups.menuitem=This sets the size of groups for this phase, the desired number of students for every group.
+
+grouppattern.fixedsizegroups.dialog.title=Select the desired group size:

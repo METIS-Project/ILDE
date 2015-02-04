@@ -1,0 +1,138 @@
+{
+	"patterns": [
+		{
+                        "name": "test",
+                        "title": "Individual test",
+                        "description": "correct a test or exam answered by the students.",
+			"assessedActivity": "Answer test",
+			"assessmentActivity": "Correct text",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessed": "assessedAsTest",
+                            "assessment": "assessmentAsTest"
+                        }
+		},
+		{
+                        "name": "observations",
+                        "title": "Observation of collaborative work",
+                        "description": "observe directly collaborative work as it happens in face-to-face scenarios.",
+			"assessmentActivity": "Observe collaboration",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsObservation",
+                            "assessed": "assessedAsObservation"
+                        }
+		},		
+		{
+                        "name": "reportassessment",
+                        "title": "Written report review",
+                        "description": "review a report written by the students.",
+			"assessmentActivity": "Review report",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsReportreview",
+                            "assessed": "assessedAsReportreview"
+                        }
+		},
+		{
+                        "name": "oralpresentation",
+                        "title": "Oral presentation",
+                        "description": "assess an oral presentation given by the students.",
+			"assessedActivity": "Perform presentation",
+			"assessmentActivity": "Observe and assess presentation",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPresentation",
+                            "assessed": "assessedAsPresentation"
+                        }
+		},
+		{
+                        "name": "performance",
+                        "title": "Performance assessment",
+                        "description": "observe and assess a performance activity, requiring certain knowledge or skills.",
+			"assessmentActivity": "Observe and assess performance",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPerformance",
+                            "assessed": "assessedAsPerformance"
+                        }
+		},
+		{
+                        "name": "portfolio",
+                        "title": "Portfolio assessment",
+                        "description": "review and assess a portfolio, compiled by the students over a period of time.",
+			"assessmentActivity": "Assess portfolio",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsPortfolio",
+                            "assessed": "assessedAsPortfolio"
+                        }
+		},
+		{
+                        "name": "roledetection",
+                        "title": "Role detection",
+                        "description": "use interaction analysis tools to infer the roles played by the students during collaborative activities.",
+			"assessmentActivity": "Analyze interactions to infer roles",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsRoles"
+                        }
+		},
+		{
+                        "name": "interactionanalisys",
+                        "title": "Interaction analysis",
+                        "description": "use interaction analysis tools to study collaborative work in computer-mediated scenarios.",
+			"assessmentActivity": "Analyze collaborative interactions",
+			"generaltype": "analysis",
+                        "actions": {
+                            "assessment": "assessmentAsIA"
+                        }
+		},
+		{
+                        "name": "rubric",
+                        "title": "Rubrics",
+                        "description": "add a rubric for the assessor, to guide the assess task.",
+			"generaltype": "resource",
+                        "actions": {
+                            "assessment": "assessmentAsRubric"
+                        }
+		},
+		{
+                        "name": "sharedgrades",
+                        "title": "Shared grades",
+                        "description": "use the assessment to grade students, giving the same grade to all students in each group.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsShared",
+                            "assessed": "assessedAsShared"
+                        }
+		},
+		{
+                        "name": "selfassessment",
+                        "title": "Self-assessment",
+                        "description": "the assessor and the assessee are the same person/group.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsSelf"
+                        }
+		},
+		{
+                        "name": "anonymous", 
+                        "title": "Anonymous assessment",
+                        "description": "the assessor's identity is hidden, making the assess task anonymous.",
+                        "generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsAnonymous"
+                        }
+		},
+		{
+                        "name": "random",
+                        "title": "Random member assessment",
+                        "description": "the assessment is carried out by one student, chosen randomly, from each group.",
+			"generaltype": "general",
+                        "actions": {
+                            "assessment": "assessmentAsRandom"
+                        }
+		}
+	]
+}

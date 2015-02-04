@@ -1,0 +1,19 @@
+#! /bin/sh
+# /etc/init.d/ script to start/stop the program Xvfb 
+#
+
+case "$1" in
+start)
+echo "Starting service... "
+Xvfb :99 -ac > /dev/null 2>&1 &
+;;
+stop)
+echo "Stopping service..."
+pkill Xvfb
+;;
+*)
+echo "Use: /etc/init.d/Xvfb {start|stop}"
+exit 1
+;;
+esac
+exit 0

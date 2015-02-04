@@ -1,0 +1,60 @@
+table.participantsTable tr {
+    background-color: #f3f3f3;
+}
+
+table.participantsTable td {
+    padding: 5px;
+}
+
+table.participantsTable tr:hover {
+    background-color: #eee0ee;
+}
+
+tr.clickable:hover{
+    background-color: #eee0ee;
+    cursor: pointer;
+}
+
+td.clickable:hover{
+    background-color: #eee0ee;
+    cursor: pointer;
+}
+
+table.participantsTable th{
+    font-weight:bold;
+    font-size: 12px;
+    color: blue;
+}
+
+
+table.installationSelected {
+	/*font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;*/
+	font-size: 12px;
+	text-align: left;
+	border-collapse: collapse;
+}
+
+table.installationSelected td {
+	padding: 0px 2px 0px 2px;
+	border-right: 30px solid #fff;
+	border-left: 0px solid #fff;
+	color: #669;
+        /*color: #000;*/
+        min-width: 80px;         
+}
+
+table.installationSelected th{
+	padding: 8px 2px;
+	font-weight: normal;
+	font-size: 14px;
+	border-bottom: 1px solid #000;/*#6678b1*/
+	border-right: 30px solid #fff;
+	border-left: 0px solid #fff;
+        color: #000;
+	/*color: #039;*/
+}
+
+
+div.errorReport {
+    color: #a00000;
+}

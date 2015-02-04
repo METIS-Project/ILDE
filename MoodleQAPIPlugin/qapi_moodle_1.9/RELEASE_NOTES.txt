@@ -1,0 +1,29 @@
+5/9/2011
+qapi1.0juan3
+
+Se añade el recurso course/userlist para listar los usuarios matriculados en un curso. Con course/userlist/XXX se obtiene el listado de usuarios matriculados en el curso con id XXX. Si no se pone XXX se obtiene el listado total de usuarios
+
+17/10/2011
+qapi1.0juan4
+
+Se modifica el recurso course/userlist eliminando el parámetro contextID.
+
+
+16/4/2012
+qapi1.0juan5
+
+*Se modifica el fichero all_courses.inc para que no se muestren los cursos "ocultos" en Moodle. Ello se hace incluyendo el campo "visible" de MySQL en el SELECT.
+*Se soluciona un bug que había en all_courses.inc. aparecía en el listado de cursos también la fila de la tabla course con sortorder=0, que no era un curso, sino el nombre de la instalación de Moodle. Se elimina, filtrando en el SELECT por las entradas cuyo "sortorder" sean distinto de 0.
+
+3/5/2012
+qapi1.0juan6
+
+Se añade el recurso course/grouplist para listar los grupos y sus miembros de un curso. Con course/grouplist/XXX se obtiene el listado de grupos y sus miembros del curso con id XXX. Si no se pone XXX se obtiene el listado total de grupos.
+
+17/7/2013
+qapi1.0j7
+
+Se añade el recurso course/useradmin/<username> para listar los cursos en los que un usuario con username <username> tiene role admin
+
+16/10/2013
+Now the list of courses for an admin user shows as well the invisible courses

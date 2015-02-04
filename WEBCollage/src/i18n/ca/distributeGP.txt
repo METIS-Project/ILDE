@@ -1,0 +1,6 @@
+grouppattern.groupparticipantsdistribute.title=Distribució aleatòria
+grouppattern.groupparticipantsdistribute.title.alert=<font color='brown'>Distribució aleatòria</font>
+grouppattern.groupparticipantsdistribute.info=No s'ha de mofidicar res. Els estudiants <br/> han de ser modificats aleatòriament entre els grups de manera <br/>que cada grup tingui el mateix tamany.
+
+grouppattern.groupparticipantsdistribute.exact=Necessitem ${0} estudiants per grup.
+grouppattern.groupparticipantsdistribute.noexact=Necessitem entre ${0} i ${1} estudiants per grup.

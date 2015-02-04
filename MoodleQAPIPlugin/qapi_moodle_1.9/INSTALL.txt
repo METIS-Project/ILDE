@@ -1,0 +1,48 @@
+INSTALL.txt
+
+$Id$
+
+INSTALLATION
+
+In brief:
+
+Copy this directory into the document root directory of a Moodle install.  Then create a new directory beneath admin/report named "qapi" and copy the index.php and versions.php files, and db and lang subdirectories contained within this directory to the just-created "qapi" directory.  Symlinks from qapi back to these files will also work.
+
+Enable plugin by first navigating to the Administration Notifications section, and then add the trusted IP addresses of clients using the Reports Quick API] section.
+
+In detail:
+
+In the following example, the document root directory for the Moodle installation is named "moodle".  The parent directory of the software to be installed is named "contrib".
+
+1. Copy the software release directory to the Moodle install:
+
+    % cd <software-path>/contrib
+    % cp -r qapi <moodle-path>/moodle
+
+2. Create the admin/report/qapi directory:
+
+    % cd <moodle-path>/moodle/admin/report
+    % mkdir qapi
+
+3. Copy the index.php & version .php files & db & lang dirs  to qapi directory:
+
+    % cd <moodle-path>/moodle/qapi
+    % cp -r index.php version.php db lang ../admin/report/qapi
+
+4. Enable plugin as a Moodle administrative user:
+
+    -- Navigate to the Notifications URL:
+    e.g. http://example.com/admin/index.php
+
+    This should provide display confirmation buttons to install the needed database table and enable the menu item for this plugin.
+
+5. Use the new Reports menu item to enabled trusted clients:
+
+    a. Navigate to the Quick API URL (Moodle->Admin->Reports->Quick API):
+        e.g. http://example.com/admin/report/qapi/index.php
+    b. Add IP addresses of trusted client as necessary.
+    
+6. In Ubuntu 12.04 using Nginx web server, it is necessary to define the PATH_INFO variable:
+	Edit the file /etc/nginx/fastcgi_params 
+	and add the following line:
+	fastcgi_param   PATH_INFO               $fastcgi_path_info;

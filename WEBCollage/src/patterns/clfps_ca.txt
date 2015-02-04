@@ -1,0 +1,25 @@
+{
+	"patterns": [
+		{"id": "brainstorming", "name": "Pluja d'idees", "type": "clfp",
+			"cat": ["low", "share", "confidence", "respect", "attention", "several"]
+		},
+		{"id": "pyramid", "name": "Piràmide", "type": "clfp",
+			"cat": ["medium", "interdependence", "discussion", "consensus"]
+		},
+		{"id": "tps", "name": "Pensa Discuteix Comparteix (TPS)", "type": "clfp",
+			"cat": ["low", "interdependence", "discussion", "attention", "memory", "openended"]
+		},
+		{"id": "jigsaw", "name": "Trencaclosques", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability"]
+		},
+		{"id": "tapps", "name": "Solució en veu alta de problemes en parella (TAPPS)", "type": "clfp",
+			"cat": ["medium", "discussion", "practice", "analytical", "solve", "problems"]
+		},
+		{"id": "peerreview", "name": "Revisió entre parelles", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability", "divisible"]
+		},
+		{"id": "simulation", "name": "Simulació", "type": "clfp",
+			"cat": ["medium", "interdependence", "accountability", "simulation"]
+		}
+	]
+}

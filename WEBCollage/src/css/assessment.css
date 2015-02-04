@@ -1,0 +1,42 @@
+
+.assessmentBlock {
+}
+
+.assessmentFlowTable {
+    display: table;
+    width: 100%;
+}
+
+.assessmentFlowHeader {
+    width: 100%;
+}
+
+.assessmentFlowSection {
+    display: inline-block;
+    text-align: center;
+    width: 32.5%;
+}
+
+.assessmentFlowPaint {
+    height: 200px;
+    width: 100%;
+    position: relative;
+    overflow: auto;
+}
+
+
+.assessmentFlowEditButton {
+}
+
+.assessmentFlowHeader {
+    font-weight: bold;
+}
+
+.assessmentFlowEditButton.span {
+    cursor: pointer;
+}
+
+.assessmentFlowCentralCell {
+    border-left: #303030 dashed 1px;
+    border-right: #303030 dashed 1px;
+}

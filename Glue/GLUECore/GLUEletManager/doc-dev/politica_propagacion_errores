@@ -1,0 +1,20 @@
+Propagación de errores desde Imp. Adaptors
+	Imp responde 4xx 			->	500 Internal Server Error
+	Imp responde 5xx 			->	502 Bad Gateway
+	Error "del conector" (RESTlet)
+		error de comunicación	->	504 Gateway Timeout
+		error de conexión		->	502 Bad Timeout
+		error interno			->	500 Internal Server Error	
+Se añade la descripción del error original
+	¿es buena idea?
+	
+Logging de errores recibidos
+ 
+BLINDAJE
+	todos
+		Exception / Error	-> 500 Internal Server Error
+		logger.warning
+	doInit
+		rethrow
+	get/post/delete
+		return answer

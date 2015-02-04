@@ -1,0 +1,951 @@
+<xs:schema targetNamespace="http://www.imsglobal.org/xsd/imsld_v1p0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.imsglobal.org/xsd/imsld_v1p0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="IMS LD Level B version 1.0 Final Draft">
+	<xs:annotation>
+		<xs:documentation xml:lang="en">
+		27 May 2003 Last update
+		Copyright 2003 Open Universiteit Nederland. All rights reserved.
+		This schema is deducted from the IMS LD Final Draft version v1p0. 
+		It is not modularised. 
+		It should enable an author to create a learning design at level B.
+		However, the only normative schema is the schema published at IMS.
+		</xs:documentation>
+	</xs:annotation>
+	<xs:attributeGroup name="attr.create-new">
+		<xs:attribute name="create-new" default="allowed">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="not-allowed"/>
+					<xs:enumeration value="allowed"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.conference-type">
+		<xs:attribute name="conference-type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="synchronous"/>
+					<xs:enumeration value="asynchronous"/>
+					<xs:enumeration value="announcement"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.identifier">
+		<xs:attribute name="identifier" type="xs:ID"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.identifierref">
+		<xs:attribute name="identifierref" type="xs:IDREF"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.index.req">
+		<xs:attribute name="index" type="xs:IDREF" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.isvisible">
+		<xs:attribute name="isvisible" type="xs:boolean" default="true"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.level">
+		<xs:attribute name="level" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="A"/>
+					<xs:enumeration value="B"/>
+					<xs:enumeration value="C"/>
+					<xs:enumeration value="a"/>
+					<xs:enumeration value="b"/>
+					<xs:enumeration value="c"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.match-persons">
+		<xs:attribute name="match-persons">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="exclusively-in-roles"/>
+					<xs:enumeration value="not-exclusively"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.max-persons">
+		<xs:attribute name="max-persons" type="xs:nonNegativeInteger"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.min-persons">
+		<xs:attribute name="min-persons" type="xs:nonNegativeInteger"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.number-to-select">
+		<xs:attribute name="number-to-select" type="xs:nonNegativeInteger"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.parameters">
+		<xs:attribute name="parameters" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.ref.req">
+		<xs:attribute name="ref" type="xs:IDREF" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.role-ref.req">
+		<xs:attribute name="role-ref" type="xs:IDREF" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.search-type.req">
+		<xs:attribute name="search-type" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="free-text-search"/>
+					<xs:enumeration value="index-with-reference"/>
+					<xs:enumeration value="index-without-reference"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.select.req">
+		<xs:attribute name="select" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="all-persons-in-role"/>
+					<xs:enumeration value="persons-in-role"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.sequence-used">
+		<xs:attribute name="sequence-used" type="xs:boolean" default="false"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.sort">
+		<xs:attribute name="sort" default="as-is">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="as-is"/>
+					<xs:enumeration value="visibility-order"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.structure-type">
+		<xs:attribute name="structure-type">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:enumeration value="sequence"/>
+					<xs:enumeration value="selection"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.type">
+		<xs:attribute name="type" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.version">
+		<xs:attribute name="version" type="xs:string"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.role">
+		<xs:attributeGroup ref="attr.create-new"/>
+		<xs:attributeGroup ref="attr.href"/>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.match-persons"/>
+		<xs:attributeGroup ref="attr.min-persons"/>
+		<xs:attributeGroup ref="attr.max-persons"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.class">
+		<xs:attribute name="class" type="xs:NMTOKENS"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.href.req">
+		<xs:attribute name="href" type="xs:anyURI" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.identifier.req">
+		<xs:attribute name="identifier" type="xs:ID" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.uri.req">
+		<xs:attribute name="uri" type="xs:anyURI" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.href">
+		<xs:attribute name="href" type="xs:anyURI"/>
+	</xs:attributeGroup>
+	<xs:group name="grp.itemmodel">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="item" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.any">
+		<xs:sequence>
+			<xs:any namespace="##other" processContents="strict" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.extend">
+		<xs:sequence>
+			<xs:element ref="schema" minOccurs="0"/>
+			<xs:element ref="schemaversion" minOccurs="0"/>
+			<xs:group ref="grp.any"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:element name="act" type="actType"/>
+	<xs:element name="activities" type="activitiesType"/>
+	<xs:element name="activity-description" type="itemmodelType"/>
+	<xs:element name="activity-structure" type="activity-structureType"/>
+	<xs:element name="complete-act" type="complete-actType"/>
+	<xs:element name="complete-activity" type="complete-activityType"/>
+	<xs:element name="complete-play" type="complete-playType"/>
+	<xs:element name="complete-unit-of-learning" type="complete-unit-of-learningType"/>
+	<xs:element name="components" type="componentsType"/>
+	<xs:element name="conference" type="conferenceType"/>
+	<xs:element name="email-data" type="email-dataType"/>
+	<xs:element name="environment" type="environmentType"/>
+	<xs:element name="environments" type="environmentsType"/>
+	<xs:element name="feedback-description" type="itemmodelType"/>
+	<xs:element name="index" type="indexType"/>
+	<xs:element name="index-search" type="index-searchType"/>
+	<xs:element name="information" type="itemmodelType"/>
+	<xs:element name="item" type="itemType"/>
+	<xs:element name="learner" type="learnerType"/>
+	<xs:element name="learning-activity" type="learning-activityType"/>
+	<xs:element name="learning-design" type="learning-designType"/>
+	<xs:element name="learning-object" type="learning-objectType"/>
+	<xs:element name="learning-objectives" type="itemmodelType"/>
+	<xs:element name="metadata" type="extendType"/>
+	<xs:element name="method" type="methodType"/>
+	<xs:element name="on-completion" type="on-completionType"/>
+	<xs:element name="play" type="playType"/>
+	<xs:element name="prerequisites" type="itemmodelType"/>
+	<xs:element name="role-part" type="role-partType"/>
+	<xs:element name="roles" type="rolesType"/>
+	<xs:element name="send-mail" type="send-mailType"/>
+	<xs:element name="service" type="serviceType"/>
+	<xs:element name="staff" type="staffType"/>
+	<xs:element name="support-activity" type="support-activityType"/>
+	<xs:element name="index-class" type="xs:string"/>
+	<xs:element name="index-type-of-element" type="xs:string"/>
+	<xs:element name="schema" type="xs:string"/>
+	<xs:element name="schemaversion" type="xs:string"/>
+	<xs:element name="title" type="xs:string"/>
+	<xs:element name="user-choice">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="when-last-act-completed">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="conference-manager">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.role-ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="environment-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="index-element">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.index.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="moderator">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.role-ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="observer">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.role-ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="participant">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.role-ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="role-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="search">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.search-type.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="when-play-completed">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="when-role-part-completed">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="support-activity-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="unit-of-learning-href">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.href.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="activity-structure-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="learning-activity-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="actType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="role-part" maxOccurs="unbounded"/>
+			<xs:element ref="complete-act" minOccurs="0"/>
+			<xs:element ref="on-completion" minOccurs="0"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier"/>
+	</xs:complexType>
+	<xs:complexType name="activitiesType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element ref="learning-activity"/>
+			<xs:element ref="support-activity"/>
+			<xs:element ref="activity-structure"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="activity-structureType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="information" minOccurs="0"/>
+			<xs:element ref="environment-ref" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="learning-activity-ref"/>
+				<xs:element ref="support-activity-ref"/>
+				<xs:element ref="unit-of-learning-href"/>
+				<xs:element ref="activity-structure-ref"/>
+			</xs:choice>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.number-to-select"/>
+		<xs:attributeGroup ref="attr.sort"/>
+		<xs:attributeGroup ref="attr.structure-type"/>
+	</xs:complexType>
+	<xs:complexType name="conferenceType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="participant" maxOccurs="unbounded"/>
+			<xs:element ref="observer" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="conference-manager" minOccurs="0"/>
+			<xs:element ref="moderator" minOccurs="0"/>
+			<xs:element ref="item"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.conference-type"/>
+	</xs:complexType>
+	<xs:complexType name="environmentType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="learning-object"/>
+				<xs:element ref="service"/>
+				<xs:element ref="environment-ref"/>
+			</xs:choice>
+			<xs:element ref="metadata" minOccurs="0"/>
+			<xs:group ref="grp.any"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+	</xs:complexType>
+	<xs:complexType name="environmentsType">
+		<xs:sequence>
+			<xs:element ref="environment" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="extendType">
+		<xs:group ref="grp.extend"/>
+	</xs:complexType>
+	<xs:complexType name="indexType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element ref="index-class"/>
+			<xs:element ref="index-element"/>
+			<xs:element ref="index-type-of-element"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="index-searchType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="index"/>
+			<xs:element ref="search"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="itemType">
+		<xs:sequence minOccurs="0" maxOccurs="unbounded">
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="item" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier"/>
+		<xs:attributeGroup ref="attr.identifierref"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+		<xs:attributeGroup ref="attr.parameters"/>
+	</xs:complexType>
+	<xs:complexType name="itemmodelType">
+		<xs:group ref="grp.itemmodel"/>
+	</xs:complexType>
+	<xs:complexType name="learnerType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="information" minOccurs="0"/>
+			<xs:element ref="learner" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.role"/>
+	</xs:complexType>
+	<xs:complexType name="learning-activityType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="learning-objectives" minOccurs="0"/>
+			<xs:element ref="prerequisites" minOccurs="0"/>
+			<xs:element ref="environment-ref" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="activity-description"/>
+			<xs:element ref="complete-activity" minOccurs="0"/>
+			<xs:element ref="on-completion" minOccurs="0"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+		<xs:attributeGroup ref="attr.parameters"/>
+	</xs:complexType>
+	<xs:complexType name="learning-designType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="learning-objectives" minOccurs="0"/>
+			<xs:element ref="prerequisites" minOccurs="0"/>
+			<xs:element ref="components"/>
+			<xs:element ref="method"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.level"/>
+		<xs:attributeGroup ref="attr.sequence-used"/>
+		<xs:attributeGroup ref="attr.uri.req"/>
+		<xs:attributeGroup ref="attr.version"/>
+	</xs:complexType>
+	<xs:complexType name="learning-objectType">
+		<xs:sequence>
+			<xs:group ref="grp.itemmodel"/>
+			<xs:group ref="grp.any"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.class"/>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+		<xs:attributeGroup ref="attr.parameters"/>
+		<xs:attributeGroup ref="attr.type"/>
+	</xs:complexType>
+	<xs:complexType name="playType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="act" maxOccurs="unbounded"/>
+			<xs:element ref="complete-play" minOccurs="0"/>
+			<xs:element ref="on-completion" minOccurs="0"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+	</xs:complexType>
+	<xs:complexType name="role-partType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="role-ref"/>
+			<xs:choice>
+				<xs:element ref="learning-activity-ref"/>
+				<xs:element ref="support-activity-ref"/>
+				<xs:element ref="unit-of-learning-href"/>
+				<xs:element ref="activity-structure-ref"/>
+				<xs:element ref="environment-ref"/>
+			</xs:choice>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier"/>
+	</xs:complexType>
+	<xs:complexType name="rolesType">
+		<xs:sequence>
+			<xs:element ref="learner" maxOccurs="unbounded"/>
+			<xs:element ref="staff" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier"/>
+	</xs:complexType>
+	<xs:complexType name="send-mailType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="email-data" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.select.req"/>
+	</xs:complexType>
+	<xs:complexType name="staffType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="information" minOccurs="0"/>
+			<xs:element ref="staff" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.role"/>
+	</xs:complexType>
+	<xs:complexType name="support-activityType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="role-ref" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="environment-ref" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="activity-description"/>
+			<xs:element ref="complete-activity" minOccurs="0"/>
+			<xs:element ref="on-completion" minOccurs="0"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+		<xs:attributeGroup ref="attr.parameters"/>
+	</xs:complexType>
+	<xs:complexType name="componentsType">
+		<xs:sequence>
+			<xs:element ref="roles"/>
+			<xs:element ref="properties" minOccurs="0"/>
+			<xs:element ref="activities" minOccurs="0"/>
+			<xs:element ref="environments" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="complete-actType">
+		<xs:choice>
+			<xs:element ref="when-role-part-completed" maxOccurs="unbounded"/>
+			<xs:element ref="time-limit"/>
+			<xs:element ref="when-condition-true"/>
+			<xs:element ref="when-property-value-is-set" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="complete-activityType">
+		<xs:choice>
+			<xs:element ref="user-choice"/>
+			<xs:element ref="time-limit"/>
+			<xs:element ref="when-property-value-is-set" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="complete-playType">
+		<xs:choice>
+			<xs:element ref="when-last-act-completed"/>
+			<xs:element ref="time-limit"/>
+			<xs:element ref="when-property-value-is-set" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="complete-unit-of-learningType">
+		<xs:choice>
+			<xs:element ref="when-play-completed" maxOccurs="unbounded"/>
+			<xs:element ref="time-limit"/>
+			<xs:element ref="when-property-value-is-set" maxOccurs="unbounded"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="methodType">
+		<xs:sequence>
+			<xs:element ref="play" maxOccurs="unbounded"/>
+			<xs:element ref="complete-unit-of-learning" minOccurs="0"/>
+			<xs:element ref="on-completion" minOccurs="0"/>
+			<xs:element ref="conditions" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="on-completionType">
+		<xs:sequence>
+			<xs:element ref="feedback-description" minOccurs="0"/>
+			<xs:element ref="change-property-value" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="serviceType">
+		<xs:choice>
+			<xs:element ref="send-mail"/>
+			<xs:element ref="conference"/>
+			<xs:element ref="index-search"/>
+			<xs:element ref="monitor"/>
+			<xs:group ref="grp.any"/>
+		</xs:choice>
+		<xs:attributeGroup ref="attr.class"/>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+		<xs:attributeGroup ref="attr.isvisible"/>
+		<xs:attributeGroup ref="attr.parameters"/>
+	</xs:complexType>
+	<xs:element name="time-limit">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:duration">
+					<xs:attribute name="property-ref" type="xs:IDREF"/>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="email-dataType">
+		<xs:sequence>
+			<xs:element ref="role-ref"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.email-property-ref.req"/>
+		<xs:attributeGroup ref="attr.username-property-ref"/>
+	</xs:complexType>
+	<xs:group name="grp.then">
+		<xs:choice>
+			<xs:element ref="show"/>
+			<xs:element ref="hide"/>
+			<xs:element ref="change-property-value"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.property">
+		<xs:sequence>
+			<xs:element ref="datatype"/>
+			<xs:element ref="initial-value" minOccurs="0"/>
+			<xs:element ref="restriction" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.condition">
+		<xs:sequence>
+			<xs:element ref="if"/>
+			<xs:element ref="then"/>
+			<xs:element ref="else" minOccurs="0"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.show-hide">
+		<xs:choice>
+			<xs:element ref="class"/>
+			<xs:element ref="item-ref"/>
+			<xs:element ref="environment-ref"/>
+			<xs:element ref="learning-activity-ref"/>
+			<xs:element ref="support-activity-ref"/>
+			<xs:element ref="activity-structure-ref"/>
+			<xs:element ref="play-ref"/>
+			<xs:element ref="unit-of-learning-href"/>
+		</xs:choice>
+	</xs:group>
+	<xs:element name="properties" type="propertiesType"/>
+	<xs:element name="loc-property" type="propertyType"/>
+	<xs:element name="locpers-property" type="propertyType"/>
+	<xs:element name="locrole-property" type="rolepropertyType"/>
+	<xs:element name="globpers-property" type="global-propertyType"/>
+	<xs:element name="glob-property" type="global-propertyType"/>
+	<xs:element name="property-group" type="property-groupType"/>
+	<xs:element name="when-property-value-is-set" type="when-property-value-is-setType"/>
+	<xs:element name="when-condition-true" type="when-condition-trueType"/>
+	<xs:element name="change-property-value" type="change-property-valueType"/>
+	<xs:element name="conditions" type="conditionsType"/>
+	<xs:element name="if" type="expressionType"/>
+	<xs:element name="then" type="thenType"/>
+	<xs:element name="else" type="elseType"/>
+	<xs:element name="show" type="show-hideType"/>
+	<xs:element name="hide" type="show-hideType"/>
+	<xs:element name="monitor" type="monitorType"/>
+	<xs:element name="property-value" type="property-valueType"/>
+	<xs:element name="calculate" type="expressionType"/>
+	<xs:element name="global-definition">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title" minOccurs="0"/>
+				<xs:group ref="grp.property"/>
+				<xs:element ref="metadata" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attributeGroup ref="attr.uri.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="expression" type="expressionType"/>
+	<xs:element name="initial-value" type="xs:string"/>
+	<xs:element name="langstring" type="xs:string"/>
+	<xs:element name="datatype">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="datatype" use="required">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value="string"/>
+								<xs:enumeration value="boolean"/>
+								<xs:enumeration value="integer"/>
+								<xs:enumeration value="uri"/>
+								<xs:enumeration value="datetime"/>
+								<xs:enumeration value="file"/>
+								<xs:enumeration value="real"/>
+								<xs:enumeration value="text"/>
+								<xs:enumeration value="duration"/>
+								<xs:enumeration value="other"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="restriction">
+		<xs:complexType>
+			<xs:simpleContent>
+				<xs:extension base="xs:string">
+					<xs:attribute name="restriction-type">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:enumeration value="minExclusive"/>
+								<xs:enumeration value="minInclusive"/>
+								<xs:enumeration value="maxExclusive"/>
+								<xs:enumeration value="maxInclusive"/>
+								<xs:enumeration value="totalDigits"/>
+								<xs:enumeration value="fractionDigits"/>
+								<xs:enumeration value="length"/>
+								<xs:enumeration value="minLength"/>
+								<xs:enumeration value="maxLength"/>
+								<xs:enumeration value="enumeration"/>
+								<xs:enumeration value="whiteSpace"/>
+								<xs:enumeration value="pattern"/>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:extension>
+			</xs:simpleContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="self">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="class">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.class"/>
+			<xs:attribute name="with-control" type="xs:boolean"/>
+			<xs:attribute name="title" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="existing">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.href.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="item-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="play-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="property-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="property-group-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="propertiesType">
+		<xs:choice maxOccurs="unbounded">
+			<xs:element ref="loc-property"/>
+			<xs:element ref="locpers-property"/>
+			<xs:element ref="locrole-property"/>
+			<xs:element ref="globpers-property"/>
+			<xs:element ref="glob-property"/>
+			<xs:element ref="property-group"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="propertyType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:group ref="grp.property"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+	</xs:complexType>
+	<xs:complexType name="rolepropertyType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:element ref="role-ref"/>
+			<xs:group ref="grp.property"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+	</xs:complexType>
+	<xs:complexType name="global-propertyType">
+		<xs:choice>
+			<xs:element ref="existing"/>
+			<xs:element ref="global-definition"/>
+		</xs:choice>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+	</xs:complexType>
+	<xs:complexType name="property-groupType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:choice maxOccurs="unbounded">
+				<xs:element ref="property-ref"/>
+				<xs:element ref="property-group-ref"/>
+			</xs:choice>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attributeGroup ref="attr.identifier.req"/>
+	</xs:complexType>
+	<xs:complexType name="when-property-value-is-setType">
+		<xs:sequence>
+			<xs:element ref="property-ref"/>
+			<xs:element ref="property-value" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="change-property-valueType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element ref="property-ref"/>
+			<xs:element ref="property-value"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="when-condition-trueType">
+		<xs:sequence>
+			<xs:element ref="role-ref"/>
+			<xs:element ref="expression"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="conditionsType">
+		<xs:sequence>
+			<xs:element ref="title" minOccurs="0"/>
+			<xs:group ref="grp.condition" maxOccurs="unbounded"/>
+			<xs:element ref="metadata" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="thenType">
+		<xs:group ref="grp.then" maxOccurs="unbounded"/>
+	</xs:complexType>
+	<xs:complexType name="elseType">
+		<xs:choice>
+			<xs:group ref="grp.then" maxOccurs="unbounded"/>
+			<xs:group ref="grp.condition"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:complexType name="show-hideType">
+		<xs:group ref="grp.show-hide" maxOccurs="unbounded"/>
+	</xs:complexType>
+	<xs:complexType name="monitorType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="role-ref"/>
+				<xs:element ref="self"/>
+			</xs:choice>
+			<xs:group ref="grp.itemmodel"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="property-valueType" mixed="true">
+		<xs:choice minOccurs="0">
+			<xs:element ref="langstring"/>
+			<xs:element ref="calculate"/>
+			<xs:element ref="property-ref"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:group name="grp.operand">
+		<xs:choice>
+			<xs:element ref="property-ref"/>
+			<xs:element ref="property-value"/>
+			<xs:group ref="grp.expression"/>
+		</xs:choice>
+	</xs:group>
+	<xs:group name="grp.calculate">
+		<xs:sequence>
+			<xs:group ref="grp.operand" minOccurs="2" maxOccurs="2"/>
+		</xs:sequence>
+	</xs:group>
+	<xs:group name="grp.expression">
+		<xs:choice>
+			<xs:element ref="is-member-of-role"/>
+			<xs:element ref="is"/>
+			<xs:element ref="is-not"/>
+			<xs:element ref="and"/>
+			<xs:element ref="or"/>
+			<xs:element ref="sum"/>
+			<xs:element ref="subtract"/>
+			<xs:element ref="multiply"/>
+			<xs:element ref="divide"/>
+			<xs:element ref="greater-than"/>
+			<xs:element ref="less-than"/>
+			<xs:element ref="users-in-role"/>
+			<xs:element ref="no-value"/>
+			<xs:element ref="time-unit-of-learning-started"/>
+			<xs:element ref="datetime-activity-started"/>
+			<xs:element ref="current-datetime"/>
+			<xs:element ref="complete"/>
+			<xs:element ref="not"/>
+		</xs:choice>
+	</xs:group>
+	<xs:element name="is" type="calculateType"/>
+	<xs:element name="is-not" type="calculateType"/>
+	<xs:element name="and" type="operatorType"/>
+	<xs:element name="or" type="operatorType"/>
+	<xs:element name="sum" type="sumType"/>
+	<xs:element name="subtract" type="calculateType"/>
+	<xs:element name="multiply" type="calculateType"/>
+	<xs:element name="divide" type="calculateType"/>
+	<xs:element name="greater-than" type="calculateType"/>
+	<xs:element name="less-than" type="calculateType"/>
+	<xs:element name="users-in-role" type="users-in-roleType"/>
+	<xs:element name="no-value" type="no-valueType"/>
+	<xs:element name="complete" type="completeType"/>
+	<xs:element name="not" type="expressionType"/>
+	<xs:element name="current-datetime">
+		<xs:complexType/>
+	</xs:element>
+	<xs:element name="is-member-of-role">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="time-unit-of-learning-started">
+		<xs:complexType>
+			<xs:attribute name="unit-of-learning-uri" type="xs:anyURI" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="datetime-activity-started">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="role-part-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="act-ref">
+		<xs:complexType>
+			<xs:attributeGroup ref="attr.ref.req"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="calculateType">
+		<xs:group ref="grp.calculate"/>
+	</xs:complexType>
+	<xs:complexType name="expressionType">
+		<xs:group ref="grp.expression"/>
+	</xs:complexType>
+	<xs:complexType name="operatorType">
+		<xs:sequence>
+			<xs:group ref="grp.expression" minOccurs="2" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="sumType">
+		<xs:group ref="grp.calculate" maxOccurs="unbounded"/>
+	</xs:complexType>
+	<xs:complexType name="users-in-roleType">
+		<xs:sequence>
+			<xs:element ref="role-ref"/>
+			<xs:element ref="expression"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="no-valueType">
+		<xs:sequence>
+			<xs:element ref="property-ref"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="completeType">
+		<xs:choice>
+			<xs:element ref="learning-activity-ref"/>
+			<xs:element ref="support-activity-ref"/>
+			<xs:element ref="unit-of-learning-href"/>
+			<xs:element ref="activity-structure-ref"/>
+			<xs:element ref="role-part-ref"/>
+			<xs:element ref="act-ref"/>
+			<xs:element ref="play-ref"/>
+		</xs:choice>
+	</xs:complexType>
+	<xs:attributeGroup name="attr.email-property-ref.req">
+		<xs:attribute name="email-property-ref" type="xs:anyURI" use="required"/>
+	</xs:attributeGroup>
+	<xs:attributeGroup name="attr.username-property-ref">
+		<xs:attribute name="username-property-ref" type="xs:anyURI"/>
+	</xs:attributeGroup>
+</xs:schema>

@@ -1,0 +1,18 @@
+grouppattern.fixedsizegroups.title=Tamany de grup fixat
+grouppattern.fixedsizegroups.title.alert=<font color='brown'>Tamany del grup fixa</font>
+grouppattern.fixedsizegroups.info=El tamany del grup es fixa. El número del grup <br/> depén de quants estudiants estiguin disponibles <br/> per a aquesta fase.
+
+grouppattern.fixedsizegroups.number=Degut a que hi ha ${0}, podem tenir ${1} de tamany ${2}
+grouppattern.fixedsizegroups.students.one=és 1 estudiant
+grouppattern.fixedsizegroups.students.several=són ${0} estudiants
+grouppattern.fixedsizegroups.group.one=1 grup
+grouppattern.fixedsizegroups.group.several=${0} grups
+
+grouppattern.fixedsizegroups.unspecified=Tamany de grup no especificat
+
+grouppattern.fixedsizegroups.menuitem.number=Estableix el tamany dels grups (actualment ${0})
+grouppattern.fixedsizegroups.menuitem.unspecified=Estableix el tamany dels grups (no especificat)
+
+help.grouppattern.fixedsizegroups.menuitem=Això estableix el tamany dels grups per a aquesta fase.
+
+grouppattern.fixedsizegroups.dialog.title=Escull el tamany dels grups

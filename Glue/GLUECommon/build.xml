@@ -1,0 +1,426 @@
+<project name="GLUECommon" default="compile" basedir=".">
+	<!-- davivel was here -->
+	<!-- modified by Javier Enrique Hoyos Torio -->
+	
+	<!-- BE CAREFUL ; this file contains targets for the building of the GLUE-COMMON.jar file, used by all the other GLUE components developed in Java; 
+		 AND targets for the generation of the FULL DISTRIBUTION PACKAGES, with all the GLUE components to release; see the comments by each target 	-->
+	
+	<description>
+		Project with the GLUE resource common to several GLUE components. Includes the source
+		of the Java glue-common.jar library, with support elements common to all the Java GLUE 
+		components developed by GSIC and utility classes for the development of new tool adapters.
+	</description>
+
+	
+	<!-- Global properties -->
+	<property name="cia" value="gsic" />				
+	<property name="version" value="0.9.2" />
+	<property name="component" value="glue_common" />				
+	<property name="glue" value="glue" />				
+	<property name="jarname" value="glue-common" />				<!-- just for glue-common.jar -->
+	<property name="src.dir" value="src" />						<!-- just for glue-common.jar -->
+	<property name="build.dir" value="build"/>
+	<property name="build.classes.dir" value="build/classes"/>	<!-- just for glue-common.jar -->
+	<property name="conf.dir" value="conf"/>
+	<property name="db.dir" value="db"/>
+	<property name="dist.dir" value="dist"/>
+	<property name="dist.src.dir" value="dist/src"/>						<!-- a bit of improvisation... --> 	
+	<property name="dist.src.common.dir" value="dist/src/GLUECommon"/>		<!-- ... ; just for full distribution of source -->
+	<property name="doc-usr.dir" value="doc-usr"/>
+	<property name="lib.dir" value="lib"/>
+	<property name="lib.restlet.dir" value="lib/dep/restlet-jse-2.0.11/lib" />
+	<property name="web.dir" value="web"/>
+
+	
+	<!-- VERY IMPORTANT - "pointers" to the external dirs of every GLUE component to be released in the full distribution packages 
+		 MAKE THEM MATCH WITH THE DIRECTORIES IN YOUR WORKSPACE -->
+	<property name="manager.dir" value="../GLUEletManager"/>
+	<property name="dabbleboard.dir" value="../DabbleboardAdapter" />
+	<property name="doodle.dir" value="../DoodleAdapter" />
+	<property name="facebooklivestream.dir" value="../FacebookLiveStreamAdapter" />
+	<property name="gdata.dir" value="../GDataAdapterApi3" />
+	<property name="mediawiki.dir" value="../MediaWikiAdapter" />
+	<property name="webcontent.dir" value="../WebContentAdapter" />
+	<property name="wookiewidgets.dir" value="../WookieWidgetsAdapter" />
+	<property name="mediawiki_vle.dir" value="../MediaWikiVLEAdapter" />
+	<property name="moodle_vle.dir" value="../MoodleVLEAdapter" />
+	<property name="moodle_vle_2x.dir" value="../MoodleVLE2xAdapter" />
+	<property name="basiclti.dir" value="../BasicLTIAdapter" />
+	<property name="lams_vle.dir" value="../LAMSVLEAdapter" />
+	
+	
+	<!-- Global paths -->
+	<path id="restlet.core.libs">
+		<pathelement location="${lib.restlet.dir}/org.restlet.jar" />
+		<pathelement location="${lib.restlet.dir}/org.restlet.ext.atom.jar" />
+		<pathelement location="${lib.restlet.dir}/org.restlet.ext.xml.jar" />
+	</path>
+	
+	<path id="project.classpath">
+		<path refid="restlet.core.libs"/>
+	</path>
+	
+	
+	<!-- Targets --> 
+	<target name="init">
+		<!-- Create the time stamp properties ; use them with ${DSTAMP} , ${TSTAMP}, ${TODAY}; se more at http://ant.apache.org/manual/Tasks/tstamp.html -->
+		<tstamp/>
+	</target>
+	
+	<target name="compile" depends="init">						<!-- just for glue-common.jar -->
+		<!-- Creates directory for compiled classes -->
+		<mkdir dir="${build.classes.dir}"/>
+		<!-- Compiles the java classes for production -->
+		<javac srcdir="${src.dir}" classpathref="project.classpath" destdir="${build.classes.dir}" source="1.6" compiler="modern" />  
+	</target>
+
+	
+	<target name="build-glue-common" depends="compile">			<!-- just for glue-common.jar -->
+		<!-- Package the binary classes in a JAR file -->
+		<jar destfile="${lib.dir}/${jarname}.jar" basedir="${build.classes.dir}" />
+	</target>
+
+	
+	<!-- Builds all the components to include in the full distribution package -->
+	<target name="build-components" depends="init" description="Builds all the components to release">
+		<ant dir="${manager.dir}" antfile="${manager.dir}/build.xml" 						target="build" 								inheritAll="false" />
+		<ant dir="${dabbleboard.dir}" antfile="${dabbleboard.dir}/build.xml" 				target="build" 								inheritAll="false" />
+		<ant dir="${doodle.dir}" antfile="${doodle.dir}/build.xml" 							target="build" 								inheritAll="false" />
+		<ant dir="${facebooklivestream.dir}" antfile="${facebooklivestream.dir}/build.xml" 	target="build" 								inheritAll="false" />
+		<ant dir="${gdata.dir}" antfile="${gdata.dir}/build.xml" 							target="build" 								inheritAll="false" />
+		<ant dir="${mediawiki.dir}" antfile="${mediawiki.dir}/build.xml" 					target="build" 								inheritAll="false" />
+		<ant dir="${webcontent.dir}" antfile="${webcontent.dir}/build.xml" 					target="build" 								inheritAll="false" />
+		<ant dir="${wookiewidgets.dir}" antfile="${wookiewidgets.dir}/build.xml" 			target="build" 								inheritAll="false" />
+		<ant dir="${mediawiki_vle.dir}" antfile="${mediawiki_vle.dir}/build.xml" 			target="build" 								inheritAll="false" />
+		<ant dir="${moodle_vle.dir}" antfile="${moodle_vle.dir}/build.xml" 					target="build" 								inheritAll="false" />
+		<ant dir="${moodle_vle_2x.dir}" antfile="${moodle_vle_2x.dir}/build.xml" 			target="build" 								inheritAll="false" />
+		<ant dir="${basiclti.dir}" antfile="${basiclti.dir}/build.xml" 						target="build" 								inheritAll="false" />
+		<ant dir="${lams_vle.dir}" antfile="${lams_vle.dir}/build.xml" 						target="create-portable-deploy-package" 	inheritAll="false" />
+	</target>
+	
+	
+	<!-- Target for the GLUECommon source package -->
+	<target name="dist-common" description="Generates the GLUECommon source package" >
+		<!-- Creates distribution subdirectories for binary and source packages -->
+		<mkdir dir="${dist.dir}"/>
+		
+		<!-- Fileset specifying the source distribution package -->
+		<fileset id="source.package.common" dir=".">
+			<include name="${src.dir}/**" />
+			<include name="${doc-usr.dir}/**" />
+			<include name="build.xml" />
+		</fileset>
+
+		<!-- Generate .zip and .tgz files with the source distribution fileset -->
+		<zip destfile="${dist.dir}/${cia}_${component}-src-${version}-${DSTAMP}-${TSTAMP}.zip" duplicate="fail">
+			<fileset refid="source.package.common" />
+		</zip>
+
+		<!-- Generate .zip and .tgz files with the source distribution fileset -->
+		<tar destfile="${dist.dir}/${cia}_${component}-src-${version}-${DSTAMP}-${TSTAMP}.tgz" compression="gzip">
+			<fileset refid="source.package.common" />
+		</tar>
+		
+	</target>
+	
+	
+	<!-- Target for the full distribution packages-->
+	<target name="dist-glue" depends="build-components, build-glue-common" description="Generates all the full distribution packages for GLUE" >
+		<!-- Creates distribution subdirectories for binary and source packages -->
+		<mkdir dir="${dist.dir}"/>
+
+		<!-- FilesetS specifying the BINARY distribution package -->
+		<fileset id="binary.package.common" dir="." >
+			<include name="bin/**" />
+			<include name="lib/glue-common.jar" />
+			<!-- RESTlet files -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.atom.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.xml.jar" />
+			<!-- RESTlet connector for server side and dependencies -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.jetty.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/*.txt" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.eclipse.jetty_7.1/**" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/javax.servlet_2.5/**" />
+			<!-- RESTlet connector for client side and dependencies -->
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.restlet.ext.httpclient.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/net.jcip.annotations_1.0/net.jcip.annotations.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.commons.codec_1.4/org.apache.commons.codec.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.commons.logging_1.1/org.apache.commons.logging.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpclient_4.0/org.apache.httpclient.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpcore_4.0/org.apache.httpcore.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.httpmime_4.0/org.apache.httpmime.jar" />
+			<include name="lib/dep/restlet-jse-2.0.11/lib/org.apache.james.mime4j_0.6/org.apache.james.mime4j.jar" />
+			<!-- Eclipselink (JPA implementation) -->
+			<include name="lib/dep/eclipselink/*.html" />
+			<include name="lib/dep/eclipselink/jlib/eclipselink.jar" />
+			<include name="lib/dep/eclipselink/jlib/jpa/javax.persistence_2.0.0.v200911271158.jar" />
+			<!-- EMPTY directory to allocate a JDBC connector; it MUST be empty in the distribution package -->			
+			<include name="lib/dep/jdbc-connector" /> 
+		</fileset>
+		<fileset id="binary.package.txt" dir="${doc-usr.dir}" />
+		
+		<fileset id="binary.package.manager" dir="${manager.dir}/${build.dir}" excludes="**/classes/**" />
+		
+		<fileset id="binary.package.dabbleboard" dir="${dabbleboard.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.doodle" dir="${doodle.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.facebooklivestream" dir="${facebooklivestream.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.gdata" dir="${gdata.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.mediawiki" dir="${mediawiki.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.webcontent" dir="${webcontent.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.wookiewidgets" dir="${wookiewidgets.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.mediawiki_vle" dir="${mediawiki_vle.dir}/${build.dir}" />
+
+		<fileset id="binary.package.moodle_vle" dir="${moodle_vle.dir}/${build.dir}" />
+		<fileset id="binary.package.moodle_vle_2x" dir="${moodle_vle_2x.dir}/${build.dir}" />
+		
+		<fileset id="binary.package.basiclti" dir="${basiclti.dir}/${build.dir}" excludes="**/classes/**" />
+
+		<fileset id="binary.package.lams_vle" dir="${lams_vle.dir}/${build.dir}/deploy" />
+
+		
+		<!-- Generate .zip and .tgz files with the binary distribution fileset -->
+		<zip destfile="${dist.dir}/${cia}_${glue}-bin-${version}-${DSTAMP}-${TSTAMP}.zip" duplicate="fail">
+			<fileset refid="binary.package.common" />
+			<fileset refid="binary.package.txt" />
+			<fileset refid="binary.package.manager" />
+			<fileset refid="binary.package.dabbleboard" />
+			<fileset refid="binary.package.doodle" />
+			<fileset refid="binary.package.facebooklivestream" />
+			<fileset refid="binary.package.gdata" />
+			<fileset refid="binary.package.mediawiki" />
+			<fileset refid="binary.package.webcontent" />
+			<fileset refid="binary.package.wookiewidgets" />
+			<fileset refid="binary.package.mediawiki_vle" />
+			<fileset refid="binary.package.moodle_vle" />
+			<fileset refid="binary.package.moodle_vle_2x" />
+			<fileset refid="binary.package.basiclti" />
+			<fileset refid="binary.package.lams_vle" />
+		</zip>
+
+		<tar destfile="${dist.dir}/${cia}_${glue}-bin-${version}-${DSTAMP}-${TSTAMP}.tgz" compression="gzip">
+			<fileset refid="binary.package.common" />
+			<fileset refid="binary.package.txt" />
+			<fileset refid="binary.package.manager" />
+			<fileset refid="binary.package.dabbleboard" />
+			<fileset refid="binary.package.doodle" />
+			<fileset refid="binary.package.facebooklivestream" />
+			<fileset refid="binary.package.gdata" />
+			<fileset refid="binary.package.mediawiki" />
+			<fileset refid="binary.package.webcontent" />
+			<fileset refid="binary.package.wookiewidgets" />
+			<fileset refid="binary.package.mediawiki_vle" />
+			<fileset refid="binary.package.moodle_vle" />
+			<fileset refid="binary.package.moodle_vle_2x" />
+			<fileset refid="binary.package.basiclti" />
+			<fileset refid="binary.package.lams_vle" />
+		</tar>
+		
+		
+		<!-- New directory tree for source files; sorry for the ugliness -->
+		<mkdir dir="${dist.src.common.dir}" />
+		<mkdir dir="${dist.src.common.dir}/${manager.dir}"/>			<!-- be careful; ${manager.dir} includes "../" ; not pretty, but works :) -->
+		<mkdir dir="${dist.src.common.dir}/${dabbleboard.dir}"/>		<!-- and so all the other... -->
+		<mkdir dir="${dist.src.common.dir}/${doodle.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${facebooklivestream.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${gdata.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${mediawiki.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${webcontent.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${wookiewidgets.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${mediawiki_vle.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${moodle_vle.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${moodle_vle_2x.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${basiclti.dir}"/>
+		<mkdir dir="${dist.src.common.dir}/${lams_vle.dir}"/>
+		
+		<copy todir="${dist.src.dir}" >
+			<fileset dir="${doc-usr.dir}" excludes="**/INSTALL.txt" />
+			<fileset dir="." includes="build.xml" />
+		</copy>
+		<copy todir="${dist.src.common.dir}" >
+			<fileset dir=".">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${manager.dir}" >	
+			<fileset dir="${manager.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${dabbleboard.dir}" >
+			<fileset dir="${dabbleboard.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${doodle.dir}" >
+			<fileset dir="${doodle.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${facebooklivestream.dir}" >
+			<fileset dir="${facebooklivestream.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${gdata.dir}" >
+			<fileset dir="${gdata.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${mediawiki.dir}" >
+			<fileset dir="${mediawiki.dir}">
+				<include name="${src.dir}/**"/>
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${webcontent.dir}" >
+			<fileset dir="${webcontent.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${wookiewidgets.dir}" >
+			<fileset dir="${wookiewidgets.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${mediawiki_vle.dir}" >
+			<fileset dir="${mediawiki_vle.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${moodle_vle.dir}" >
+			<fileset dir="${moodle_vle.dir}">
+				<include name="gluelet/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${moodle_vle_2x.dir}" >
+			<fileset dir="${moodle_vle_2x.dir}">
+				<include name="gluelet/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${basiclti.dir}" >
+			<fileset dir="${basiclti.dir}">
+				<include name="${src.dir}/**" />
+				<include name="${bin.dir}/**" />
+				<include name="${conf.dir}/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+		<copy todir="${dist.src.common.dir}/${lams_vle.dir}" >
+			<fileset dir="${lams_vle.dir}">
+				<include name="${conf.dir}/**" />
+				<include name="${db.dir}/sql/**" />
+				<include name="${doc-usr.dir}/**" />
+				<include name="${src.dir}/**" />
+				<include name="${web.dir}/**" />
+				<include name="*.properties" />
+				<include name="build.xml" />
+			</fileset>
+		</copy>
+	
+	
+	
+		<!-- Generate .zip and .tgz files with the SOURCE distribution fileset -->
+		<zip destfile="${dist.dir}/${cia}_${glue}-src-${version}-${DSTAMP}-${TSTAMP}.zip" duplicate="fail">
+			<fileset dir="${dist.src.dir}" />
+		</zip>
+	
+		<tar destfile="${dist.dir}/${cia}_${glue}-src-${version}-${DSTAMP}-${TSTAMP}.tgz" compression="gzip">
+			<fileset dir="${dist.src.dir}" />
+		</tar>
+	
+	</target>
+	
+	<!-- Target for generating all the packages to distribute -->
+	<target name="dist-all" depends="dist-glue, dist-common" description="Generate all the distribution packages at once ">
+		<ant dir="${manager.dir}" 				antfile="${manager.dir}/build.xml" 				target="dist" 	inheritAll="false" />
+		<ant dir="${dabbleboard.dir}" 			antfile="${dabbleboard.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+		<ant dir="${doodle.dir}" 				antfile="${doodle.dir}/build.xml" 				target="dist" 	inheritAll="false" />
+		<ant dir="${facebooklivestream.dir}"	antfile="${facebooklivestream.dir}/build.xml" 	target="dist" 	inheritAll="false" />
+		<ant dir="${gdata.dir}" 				antfile="${gdata.dir}/build.xml" 				target="dist" 	inheritAll="false" />
+		<ant dir="${mediawiki.dir}" 			antfile="${mediawiki.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+		<ant dir="${webcontent.dir}" 			antfile="${webcontent.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+		<ant dir="${wookiewidgets.dir}" 		antfile="${wookiewidgets.dir}/build.xml" 		target="dist" 	inheritAll="false" />
+		<ant dir="${mediawiki_vle.dir}" 		antfile="${mediawiki_vle.dir}/build.xml" 		target="dist" 	inheritAll="false" />
+		<ant dir="${moodle_vle.dir}" 			antfile="${moodle_vle.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+		<ant dir="${moodle_vle_2x.dir}" 		antfile="${moodle_vle_2x.dir}/build.xml" 		target="dist" 	inheritAll="false" />
+		<ant dir="${basiclti.dir}" 				antfile="${basiclti.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+		<ant dir="${lams_vle.dir}" 				antfile="${lams_vle.dir}/build.xml" 			target="dist" 	inheritAll="false" />
+	</target>
+	
+	
+	<!-- Clean up the directory tree of GLUECommon -->
+	<target name="clean" description="clean up" >
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete file="${lib.dir}/${jarname}.jar" />
+		<delete dir="${build.dir}"/>
+		<delete dir="${dist.dir}"/>
+	</target>
+
+	<!-- Clean up the directory tree of every component -->
+	<target name="clean-all" depends="clean" description="Clean up every GLUE component space ">
+		<ant dir="${manager.dir}" 				antfile="${manager.dir}/build.xml" 				target="clean" 	inheritAll="false" />
+		<ant dir="${dabbleboard.dir}" 			antfile="${dabbleboard.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+		<ant dir="${doodle.dir}" 				antfile="${doodle.dir}/build.xml" 				target="clean" 	inheritAll="false" />
+		<ant dir="${facebooklivestream.dir}"	antfile="${facebooklivestream.dir}/build.xml" 	target="clean" 	inheritAll="false" />
+		<ant dir="${gdata.dir}" 				antfile="${gdata.dir}/build.xml" 				target="clean" 	inheritAll="false" />
+		<ant dir="${mediawiki.dir}" 			antfile="${mediawiki.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+		<ant dir="${webcontent.dir}" 			antfile="${webcontent.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+		<ant dir="${wookiewidgets.dir}" 		antfile="${wookiewidgets.dir}/build.xml" 		target="clean" 	inheritAll="false" />
+		<ant dir="${mediawiki_vle.dir}" 		antfile="${mediawiki_vle.dir}/build.xml" 		target="clean" 	inheritAll="false" />
+		<ant dir="${moodle_vle.dir}" 			antfile="${moodle_vle.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+		<ant dir="${moodle_vle_2x.dir}" 		antfile="${moodle_vle_2x.dir}/build.xml" 		target="clean" 	inheritAll="false" />
+		<ant dir="${basiclti.dir}" 				antfile="${basiclti.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+		<ant dir="${lams_vle.dir}" 				antfile="${lams_vle.dir}/build.xml" 			target="clean" 	inheritAll="false" />
+	</target>
+	
+	
+</project>

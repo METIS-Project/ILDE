@@ -1,0 +1,26 @@
+{
+	"actobjs": [
+		{"id": "share", "name": "Promoure l'intercanvi d'idees", "text": "Encoratjar als estudiants a assumir riscos i compartir les seves idees."},
+		{"id": "confidence", "name": "Recolzar la confiança en si mateixos dels estudiants", "text": "Mostrar als estudiants que el seu coneixement i les seves abilitats amb el llenguatge son valorades i acceptades."},
+		{"id": "respect", "name": "Promoure la tolerància i el respecte", "text": "Ensenyar als estudiants a acceptar i respectar les diferències individuals."}
+	],
+	"procobjs": [
+		{"id": "interdependence", "name": "Promoure la independència positiva", "text": "Promoure el sentiment de que tots els membres d'un grup son necessaris per a assolir l'èxit o una fita."},
+		{"id": "discussion", "name": "Promure la discussió", "text": "Encoratja als estudiants  amb l'objectiu d'acumular coneixement."},
+		{"id": "accountability", "name": "Promoure la responsabilitat individual", "text": "Assegurar que cada estudiant contribueix amb la seva part de la feina."},
+		{"id": "attention", "name": "Focalitzar l'atenció de l'estudiant", "text": "Focalitzar l'atenció de l'estudiant en un tema concret."},
+		{"id": "memory", "name": "Memòria a larg termini", "text": "Crear un canvi per formular respostes del conexeiment amb la memoria a llarg termini."},
+		{"id": "practice", "name": "Practica conceptes", "text": "Permet als estudiants practicar conceptar i assolir una millor comprensió."},
+		{"id": "analytical", "name": "Practica abilitats de raonament analític", "text": "Promoure abilitats de raonament analític."},
+		{"id": "solve", "name": "Promoure abilitats per a solucionar problemes", "text": "Practicar habilitats per a solucionar problemes."}
+	],
+	"problems": [
+		{"id": "divisible", "name": "Problema divisible", "text": "Solucionar un problema complex o una tasca que pot ser dividida fàcilment en diverses seccions independents."},
+		{"id": "consensus", "name": "Un problema que requereix assolir un consens gradual", "text": "Problema complexe, típicament sense resposta única, la solució del qual requereix assolir un acord entre tots els participants."},
+		{"id": "simulation", "name": "Problema que requereix simulació", "text": "Problema enque la solucio implica la simulació d'una situació en que hi han diferents rols involucrats."},
+		{"id": "several", "name": "Problema amb diverses possibles respostes", "text": "Problema en que la solució consisteix en la generació d'un gran número de respostes en un curt espai de temps."},
+		{"id": "openended", "name": "Problema amb resposta oberta", "text": "Problema amb resposta oberta."},
+		{"id": "problems", "name": "Una serie de problemes", "text": "Una serie de problemes, la solució dels quals requereix abilitats de raonament."}
+	]
+}
+

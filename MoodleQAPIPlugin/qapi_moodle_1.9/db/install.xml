@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="mod/qapi/db" VERSION="20081226" COMMENT="XMLDB file for Moodle mod/qapi">
+  <TABLES>
+    <TABLE NAME="qapi_client"  COMMENT="Quick API service clients">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" ENUM="false" NEXT="clientip"/>
+        <FIELD NAME="clientip"  TYPE="char" LENGTH="15"  NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="id" NEXT="sharedkey"/>
+        <FIELD NAME="sharedkey" TYPE="char" LENGTH="255" NOTNULL="true" SEQUENCE="false" ENUM="false" PREVIOUS="clientip"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" COMMENT="Primary key for qapi_client"/>
+      </KEYS>
+    </TABLE>
+  </TABLES>
+</XMLDB>

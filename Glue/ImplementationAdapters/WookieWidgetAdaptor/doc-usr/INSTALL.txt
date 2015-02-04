@@ -1,0 +1,318 @@
+##############################################
+# WookieWidgetsAdapter - INSTALLATION MANUAL #
+# GSIC's Tool Adapter for Apache Wookie      #
+# Copyright 2011-2012 GSIC (UVA)             #
+##############################################
+
+
+#####################
+# PRELIMINARY NOTES #
+#####################
+
+The binary distribution of WookieWidgetsAdapter has been packaged and tested 
+for its use in GNU/Linux or Windows (XP, Vista or 7) systems. However, as a 
+Java Standard Edition 6 (JSE6) program, it will probably run in other 
+operating systems where a JSE6 runtime platform is available. Even so, this 
+document will describe the installation and configuration process just for 
+Linux and Windows systems, highlighting their differences when needed. 
+
+You will need administration permissions to install and configure 
+WookieWidgetsAdapter in your system. In Windows Vista and Windows 7, be sure 
+to start your command console in administration mode (right click, then 
+'Execute as administrator').
+
+Note that the contents of the WookieWidgetsAdapter binary distribution are
+designed to coexist with other GLUE components developed as JSE6 programs.
+In this document, the term GLUE_HOME will be used to name the base directory
+where all the JSE6 GLUE components are supposed to be located. Despite this,
+there are no real dependencies between the different components at the file
+system level. Feel free to move things to other locations if you need it, 
+and check the runnable scripts in GLUE_HOME/bin and GLUE_HOME/[component]/bin 
+directories to find out how start every component.
+
+
+#################
+# TOOLS ADAPTED #
+#################
+
+GSIC's Apache Wookie Adapter is a tool adapter for GLUE that provides access 
+to Apache Wookie, a solution for adding W3C Widgets to web applications as 
+embedded objects.
+
+Each accesible widget in a Wookie server will be handled by Apache Wookie 
+Adapter as a separate tool. Currently, these widgets are supported:
+
+  * Chat Widget
+  * SharedDraw Widget
+  * Sudoku Widget
+  * Forum Widget
+  * Natter Chat Widget
+  * Bubble Game Widget
+  * Butterfly Paint Widget
+  * You Decide Widget
+
+
+################
+# DEPENDENCIES #
+################
+
+WookieWidgetsAdapter is a Java Standard Edition 6 (JSE6) program. You will need
+a JSE6 runtime platform installed in your system.
+
+Apache Wookie is a freely distributable software package for the creation of 
+servers that provide and handle W3C Widgets. You will need an account in a 
+Wookie server to use WookieWidgetsAdapter.
+
+Additionally, WookieWidgetsAdapter has the following dependencies. All of them
+are included in the WookieWidgetsAdapter binary distribution as jar files in 
+different subdirectories. Check the README.txt file for more information 
+about each library and their original providers.
+
+  - GLUECommon 0.9.2: library with common elements for GLUE Java components. 
+    This library is located at GLUE_HOME/lib
+	
+  - RESTlet 2.0.11 for Java Standard Edition (only org.restlet.jar,
+    org.restlet.ext.atom.jar and org.restlet.ext.xml.jar files). By now, we 
+    discourage the use of any different RESTlet version with 
+	WookieWidgetsAdapter. This library is located at 
+	GLUE_HOME/lib/dep/restlet-jse-2.0.11
+	
+  - Wookie Connector Framework. Provided to get access to Apache Wookie 
+  servers. This library is located at 
+  GLUE_HOME/tool_adapters/wookiewidgets/lib/dep/wookie-connector-framework.
+  
+  - Simple Logging Facade for Java (SLF4J). Provided to get access to Wookie 
+  Widgets as a dependency of Wookie Connector Framework. This library is 
+  located at GLUE_HOME/tool_adapters/wookiewidgets/lib/dep/slf4j.
+
+
+################
+# INSTALLATION #
+################
+
+1) Choose and create your GLUE_HOME directory.
+
+  ** Linux: directories /opt/glue, /usr/local/share/glue or /usr/share/glue 
+     could be suitable paths for GLUE_HOME.
+
+2) Define the system variable GLUE_HOME containing the full path to the chosen
+GLUE_HOME directory:
+	
+  ** Windows: Start button > Control Pannel > System and Maintenance > 
+	System > Advanced system settings > Advanced tab > Environment Variables 
+	button. 
+
+  ** Linux: Add 'export GLUE_HOME=/usr/share/glue' in /etc/bash.bashrc or 
+  /etc/profile.
+	
+3) Extract the files from the binary package at GLUE_HOME. The following
+contents will be added.
+
+  GLUE_HOME/
+    bin/
+       ServiceInstaller.exe                   Apache Foundation helper to 
+                                              register Windows services.
+    lib/
+       glue-common.jar                        Common elements for GLUE Java 
+                                              components.
+       dep/
+         restlet-jse-2.0.11/                  RESTlet selected files.
+           org.restlet.ext.atom.jar
+           org.restlet.ext.xml.jar
+           org.restlet.jar
+    tool_adapters/
+	  wookiewidgets/
+        bin/
+          install-wookiewidgets.sh            Installs WookieWidgetsAdapter 
+		                                       in Linux.
+          install-wookiewidgets.bat           Registers WookieWidgetsAdapter
+		                                       as a Windows service.
+          start-wookiewidgets.sh              Starts WookieWidgetsAdapter
+		                                       in Linux.
+          stop-wookiewidgets.sh               Stops WookieWidgetsAdapter in
+		                                       Linux.
+          uninstall-wookiewidgets.sh          Cleans the WookieWidgetsAdapter 
+		                                       installation in Linux.
+          uninstall-wookiewidgets.bat         Removes WookieWidgetsAdapter
+		                                       from the Windows services 
+											   register.
+        conf/
+          db/                                 SQL scripts to update GLUE 
+                                               Internal Registry.
+            fill_Internal_Registry.sql
+	      app.properties                      Runtime configuration file.
+		  WookieWidgetConfiguration.xhtml     Configuration files for new 
+		  YouDecideWidgetConfiguration.xhtml   instances.
+		data/                                 Persistent data directory.
+        lib/
+          wookiewidgets-adapter.jar           WookieWidgetsAdapter binary
+		                                       files.
+          dep/
+            slf4j/                            Simple Logging Facade library.
+              slf4j-api-1.6.0.jar
+              slf4j-simple-1.6.0.jar
+            wookie-connector-framework/       Wookie connector framework.
+              wookie-connector-framework-20100601.jar
+        log/                                  Log files directory.
+        CHANGELOG.txt                         List of updates.
+	    GPL.txt                           	  GNU GPL license.
+	    INSTALL.txt                           This document.
+	    README.txt                            WookieWidgetsAdapter license 
+		                                       and third party notices.
+
+4) ** Linux : grant execution permissions to the *.sh files in 
+GLUE_HOME/tool_adapters/wookiewidgets/bin:
+
+    chmod +x $GLUE_HOME/manager/bin/*.sh
+	
+5) ** Linux: run 
+   GLUE_HOME/tool_adapters/wookiewidgets/bin/install-wookiewidgets.sh in 
+   order to:
+   
+    - create the file /srv/glue/tool_adapters/wookiewidgets/instances.txt to 
+	  provide persistence to the objects created with the WookieWidgets tool
+      through WookieWidgetsAdapter, and a symbolic link in 
+	  GLUE_HOME/tool_adapters/wookiewidgets/data pointing to it;
+	  
+    - create the empty log file /var/log/glue/wookiewidgets_adapter.log, and a 
+	  symbolic link pointing it at GLUE_HOME/tool_adapters/wookiewidgets/log;
+	  
+    - create symbolic links start-wookie and stop-wookie at /usr/bin pointing 
+	  to GLUE_HOME/tool_adapters/wookiewidgets/bin/start-wookiewidgets.sh 
+	  and GLUE_HOME/tool_adapters/wookiewidgets/bin/stop-wookiewidgets.sh
+	
+   ** Windows: run 
+   GLUE_HOME/tool_adapters/wookiewidgets/bin/install-wookiewidgets.bat to:
+   
+    - create the file GLUE_HOME/tool_adapters/wookiewidgets/data/instances.txt 
+	  to provide persistence to the objects created with the WookieWidgets 
+	  tool through WookieWidgetsAdapter;
+	  
+    - register WookieWidgetsAdapter as a Windows service;
+	
+	- define 
+	  GLUE_HOME\tools_adapter\wookiewidgets\log\wookiewidgets_adapter.log as 
+	  the log file (it will be created with the first start of 
+	  WookieWidgetsAdapter).
+	
+	By default, WookieWidgetsAdapter will be registered to be started at system
+	boot time. Pass the parameter 'manual' to install-wookiewidgets.bat in 
+	order to avoid it and force the manual start of WookieWidgetsAdapter.
+
+	
+#####################
+# INTERNAL REGISTRY #
+#####################
+
+Every tool adapter to be accessed with GLUEletManager must be registered in 
+the Internal Registry. This distribution includes the file 
+GLUE_HOME/tool_adapters/wookiewidgets/conf/db/fill_Internal_Registry.sql to 
+make easier the registration process.
+
+Please, note that this file is a TEMPLATE: several variables marked with
+square brackets must be replaced with suitable values according to your 
+particular environment. When the replacements are completed, the file may be
+run in your SQL compliant database management console to register the
+Google Docs adapter.
+
+IMPORTANT: if you got GSIC's Apache Wookie adapter as part of the full GLUE 
+distribution package, you will prefer to use the 
+GLUE_HOME/manager/conf/db/fill_Internal_Registry.sql file to register all 
+the tool adapters at once. See the INSTALL.txt file at GLUE_HOME.
+
+The first column in all the tables modified by fill_Internal_Registry.sql is 
+an integer identifier that works as a primary key for the row added. You must 
+select a non used value in the rows previously existent in your Internal 
+Registry.
+
+BE CAREFUL: all the identifiers but [TOOL_IMP_ID] appear repeated in 
+fill_Internal_Registry.sql as references in tables different to those where 
+they are primary keys. Keep the value of each identifier consistent all over
+the file.
+
+Besides the identifiers, there are three tables where you must introduce your 
+own values:
+
+ * InternalRegistry.ToolServices: Apache Wookie is not a centralized system, 
+ but a freely distributable software package that lets you create customized 
+ servers. So, a URL for a Apache Wookie server must be provided.
+ 
+ * InternalRegistry.ImplementationAdapters: the URLs where the tool adapters 
+ will be listening for requests must be completed. BE CAREFUL: the suffix 
+ '/ToolAdapter/WookieWidgets' can't be changed. If you install the 
+ GSIC's Apache Wookie adapter and GLUEletManager in the same host and 
+ don't change the default port, a suitable value for the full URL could be
+ 'http://localhost:8189/ToolAdapter/WookieWidgets'.
+
+ * InternalRegistry.ToolImplementations:  some values must be inserted in 
+ the final column of this table as a string containing a list of parameters 
+ according to the URL encoding format. Note that eight tools are supported,
+ and a different row for each tool must be inserted. You will probably want 
+ to use the same values for all the tools, but this is not mandatory.
+ 
+	- Apache Wookie adapter: A Wookie developer key will be needed to access
+	your Apache Wookie server. Please, follow the link 'Request and API key 
+	for your application' in your Apache Wookie server home page to obtain 
+	your key. IMPORTANT: if your key contains any slash character (/), repeat 
+	the process to get a different key. Then insert your developer key as the 
+	value assigned to the 'devKey' parameter, changing spaces and any other 
+	punctuation characters as the rules for URL encoding require.
+	
+	The URL to your Apache Wookie server must be inserted too, as the value 
+	assigned to the 'feedURL' parameter. Remember to apply the URL encoding
+	rules to the FULL URL, including the reserved characters. For example: 
+	http://host.com:8888/wookie becomes http%3A%2F%2Fhost.com%3A8888%2Fwookie
+	
+
+#############
+# OPERATION #
+#############
+	
+Before starting WookieWidgetsAdapter you can edit the file 
+GLUE_HOME/tool_adapters/wookiewidgets/conf/app.properties to change some 
+runtime properties:
+
+  - port     Number of the HTTP port where WookieWidgetsAdapter listens for 
+             requests.
+  - logging  Keep to 'On' to save information in the log file about every 
+             request processed by WookieWidgetsAdapter.
+
+To manually start and stop WookieWidgetsAdapter:
+
+  ** Linux: use the commands start-wookie and stop-wookie.
+  
+  ** Windows: 
+    1) access to the service management panel: Start button > Control Pannel 
+       > System and Maintenance > Administration Tools > Services;
+    2) search and select the service with name 'WookieWidgetsAdapter' in the 
+	   services list;
+    3) click the 'Init' or 'Stop' link at the top left corner of the list.
+
+You can see the content of 
+GLUE_HOME/tool_adapters/wookiewidgets/log/wookiewidgets_adapter.log to check if 
+WookieWidgetsAdapter started without problems. You should see a message like 
+this:
+
+  2 [main] INFO org.eclipse.jetty.util.log - Logging to org.slf4j.impl.
+  SimpleLogger(org.eclipse.jetty.util.log) via org.eclipse.jetty.util.log.Slf4
+  jLog
+  4 [main] INFO org.eclipse.jetty.util.log - jetty-7.0.1.v20091125
+  129 [main] INFO org.eclipse.jetty.util.log - Started SelectChannelConnector@
+  0.0.0.0:8189
+
+
+###############
+# FINAL NOTES #
+###############
+
+1) If you need to restrict the access to the WookieWidgetsAdapter to a limited
+   set of system users for its start/stop, keep in mind that authorized users
+   need:
+     - execution permission on GLUE_HOME/tool_adapters/wookiewidgets/bin/*.sh
+	 - read permission on 
+	    * GLUE_HOME/tool_adapters/wookiewidgets/conf/app.properties
+		* all the jar files
+	 - write permission on /var/log/glue/tool_adapters_wookiewidgets.log
+
+2) BE CAREFUL: In Windows systems, every time WookieWidgetsAdapter is started, 
+   the previous log file is erased.

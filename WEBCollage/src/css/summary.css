@@ -1,0 +1,112 @@
+
+.clfptitle {
+    font-weight: bold;
+    background-color: #ffcc99;
+    padding: 3px;
+}
+
+.clfpcontainer {
+    padding: 6px;
+    margin: 10px;
+}
+
+.clfpcontainer_brainstorming {
+    background: #663333;   
+}.clfpcontainer_jigsaw {
+    background: #000099;
+}.clfpcontainer_peerreview {
+    background: #aa4400;
+}.clfpcontainer_pyramid {
+    background: #336600;
+}.clfpcontainer_simulation {
+    background: #cc6600;
+}.clfpcontainer_tapps {
+    background: #0099cc;
+}.clfpcontainer_tps {
+    background: #aaaa00;
+}
+
+.clfpcontainerinner {
+    padding: 5px;
+    background: #fcfcff;
+}
+
+.clfpsummaryphasenolast {
+    border-bottom: 2px solid gray;
+}
+
+.actcellA {
+    background-color: #fbfbff;
+}
+.actcellB {
+    background-color: #fdfdff;
+}
+
+.activitiestableheader {
+    text-align: center;
+    font-style: italic;
+    font-size: small;
+    width: 200px;
+}
+
+.activitiestableheader img {
+    width: 22px;
+    height: 22px;
+}
+
+
+
+.learningactivitysummary, .supportactivitysummary, .assessmentactivitysummary {
+    border: thin solid black;
+    max-width: 300px;
+    padding:5px;
+    margin:5px;
+    max-width: 200px;
+}
+/* colors */
+.assessmentactivitysummary {
+    background-color: #ffffdd;
+}
+
+.learningactivitysummary {
+    background-color: #eeeeff;
+}
+.supportactivitysummary {
+    background-color: #eeffee;
+}
+
+.activitysummarytitle {
+    font-weight: bold;
+    text-align: center;
+}
+
+.activitysummarydescription, .summaryassessmentlink, .assessmentsummaryblock {
+    border-top: dashed gray thin;
+    min-height: 5px;
+}
+
+.clfpsummaryicon {
+    padding: 2px;
+}
+
+.clfpsummaryphase {
+    border-right:thin dotted maroon;
+    font-variant:small-caps;
+    font-weight:bold;
+    padding-right: 5px;
+}
+
+.clfpsummaryact {
+    padding-bottom:10px;
+}
+
+
+.assessmentcontainer {
+    background: gray;
+    padding: 4px;
+}
+
+.assessmentinnercontainer {
+    background: #fffdfd;
+    padding: 4px;
+}

@@ -1,0 +1,16 @@
+
+
+body {
+	color: black; 
+	background: #663333;
+  	margin-left: 8%; margin-right: 8%; 
+}
+
+h1 { 
+	color: white;
+}
+
+h2,h3,h4,h5,h6 { 
+	margin-left: -4%; 
+}
+

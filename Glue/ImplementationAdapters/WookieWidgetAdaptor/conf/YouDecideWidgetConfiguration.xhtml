@@ -1,0 +1,96 @@
+<!--
+ This file is part of WookieWidgetAdapter.
+
+ WookieWidgetAdapter is a property of the Intelligent & Cooperative Systems
+ Research Group (GSIC) from the University of Valladolid (UVA).
+
+ Copyright 2011 GSIC (UVA).
+
+ WookieWidgetAdapter is licensed under the GNU General Public License (GPL)
+ EXCLUSIVELY FOR NON-COMMERCIAL USES. Please, note this is an additional
+ restriction to the terms of GPL that must be kept in any redistribution of
+ the original code or any derivative work by third parties.
+
+ If you intend to use WookieWidgetAdapter for any commercial purpose you can
+ contact to GSIC to obtain a commercial license at <glue@gsic.tel.uva.es>.
+
+ If you have licensed this product under a commercial license from GSIC,
+ please see the file LICENSE.txt included.
+
+ The next copying permission statement (between square brackets []) is
+ applicable only when GPL is suitable, this is, when WookieWidgetAdapter is
+ used and/or distributed FOR NON COMMERCIAL USES.
+
+ [ You can redistribute WookieWidgetAdapter and/or modify it under the
+   terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>
+ ]
+-->
+
+<!-- 
+ * Configuration form for a new You Decide widget.
+ *
+ * Empty form; just reusability flag
+ *
+ * @author      Carlos Alario
+ * @version     2011051600
+ * @package     -
+-->
+<div xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:xf="http://www.w3.org/2002/xforms"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ins="http://gsic.uva.es/glue/adapters/implementation/wookiewidgets/1.0"
+    xmlns:glue="http://gsic.uva.es/glue">
+    
+    <!-- model -->        
+    <xf:model> 
+	 	<xf:instance id="input-file">
+            <ins:data>
+                <glue:reusable xsi:type="xs:boolean">true</glue:reusable>
+                <ins:question-input xsi:type="xs:string">Question</ins:question-input>    
+            	<ins:answer-1 xsi:type="xs:string">Answer 1</ins:answer-1>    
+            	<ins:answer-2 xsi:type="xs:string">Answer 2</ins:answer-2>    
+            	<ins:answer-3 xsi:type="xs:string">Answer 3</ins:answer-3>    
+            	<ins:answer-4 xsi:type="xs:string">Answer 4</ins:answer-4>    
+            	<ins:answer-5 xsi:type="xs:string">Answer 5</ins:answer-5>      
+            </ins:data>
+        </xf:instance>
+    </xf:model> 
+
+    <!-- user interface control in body ; only 'ref' bindings are used -->        
+    <p> 
+	    <xf:input ref="/ins:data/ins:question-input">
+	        <xf:label>Question:</xf:label>
+	    </xf:input>
+	    <xf:input ref="/ins:data/ins:answer-1">
+	        <xf:label>Answer 1:</xf:label>
+	    </xf:input>
+	    <xf:input ref="/ins:data/ins:answer-2">
+	        <xf:label>Answer 2:</xf:label>
+	    </xf:input>
+	    <xf:input ref="/ins:data/ins:answer-3">
+	        <xf:label>Answer 3:</xf:label>
+	    </xf:input>
+	    <xf:input ref="/ins:data/ins:answer-4">
+	        <xf:label>Answer 4:</xf:label>
+	    </xf:input>
+	    <xf:input ref="/ins:data/ins:answer-5">
+	        <xf:label>Answer 5:</xf:label>
+	    </xf:input>
+    </p> 
+
+
+
+</div>
+

@@ -1,0 +1,6 @@
+grouppattern.groupparticipantsdistribute.title=Random distribution
+grouppattern.groupparticipantsdistribute.title.alert=<font color='brown'>Random distribution</font>
+grouppattern.groupparticipantsdistribute.info=Nothing needs to be fixed. You want the students <br/> are distributed randomly among the groups <br/>so that each group has the same size.
+
+grouppattern.groupparticipantsdistribute.exact=We need ${0} students per group.
+grouppattern.groupparticipantsdistribute.noexact=We need between ${0} and ${1} students per group.

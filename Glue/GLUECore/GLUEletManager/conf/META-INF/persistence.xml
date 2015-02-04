@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+ This file is part of GlueletManager.
+
+ GlueletManager is a property of the Intelligent & Cooperative Systems
+ Research Group (GSIC) from the University of Valladolid (UVA).
+
+ Copyright 2011 GSIC (UVA).
+
+ GlueletManager is licensed under the GNU General Public License (GPL)
+ EXCLUSIVELY FOR NON-COMMERCIAL USES. Please, note this is an additional
+ restriction to the terms of GPL that must be kept in any redistribution of
+ the original code or any derivative work by third parties.
+
+ If you intend to use GlueletManager for any commercial purpose you can
+ contact to GSIC to obtain a commercial license at <glue@gsic.tel.uva.es>.
+
+ If you have licensed this product under a commercial license from GSIC,
+ please see the file LICENSE.txt included.
+
+ The next copying permission statement (between square brackets []) is
+ applicable only when GPL is suitable, this is, when GlueletManager is
+ used and/or distributed FOR NON COMMERCIAL USES.
+
+ [ You can redistribute GlueletManager and/or modify it under the
+   terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>
+ ]
+-->
+
+<!-- 
+ * Description of binding from JPA classes in Java code to database
+ *
+ * This file must be accesible to GLUEletManager administrator for installation
+ *
+ * @author      juaase
+ * @contributor    David A. Velasco
+ * @version     2010070700
+ * @package     -
+ */
+-->
+
+<persistence    version="2.0" 
+                xmlns="http://java.sun.com/xml/ns/persistence" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+  <!-- name is refered in glue.core.controllers classes - DO NOT CHANGE -->
+  <persistence-unit name="InternalRegistryPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+  
+    <!-- JPA implementation -->
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <!-- entity classes declarations - DO NOT CHANGE -->
+    <class>glue.core.entities.Tool</class>
+    <class>glue.core.entities.ToolImplementation</class>
+    <class>glue.core.entities.ImplementationModel</class>
+    <class>glue.core.entities.ImplementationAdapter</class>
+    <class>glue.core.entities.ToolService</class>
+   
+	<!-- database binding properties - CHANGE TO FIT YOUR SYSTEM -->
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/InternalRegistry"/>    <!-- binding to database -->
+      <property name="javax.persistence.jdbc.user" value="glue"/>                                           <!-- database user -->
+      <property name="javax.persistence.jdbc.password" value="glue"/>                                       <!-- database password -->
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>                        <!-- JDBC driver ; implies externar JAR -->
+    </properties>
+    
+  </persistence-unit>
+
+  
+  <!-- name is refered in glue.core.controllers classes - DO NOT CHANGE -->
+  <persistence-unit name="GlueletsRepositoryPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+  
+    <!-- JPA implementation -->
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    
+    <!-- entity classes declarations - DO NOT CHANGE -->
+    <class>glue.core.entities.Gluelet</class>
+   
+    <!-- database binding properties - CHANGE TO FIT YOUR SYSTEM -->
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/GlueletsRepository"/>		<!-- binding to database -->
+      <property name="javax.persistence.jdbc.user" value="glue"/>                                               <!-- database user -->
+      <property name="javax.persistence.jdbc.password" value="glue"/>                                           <!-- database password -->
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>                            <!-- JDBC driver ; implies externar JAR -->
+    </properties>
+    
+  </persistence-unit>
+  
+</persistence>

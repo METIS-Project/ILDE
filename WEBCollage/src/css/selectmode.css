@@ -1,0 +1,25 @@
+
+.flowSelectModeAnnouncement {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 10px;
+    border: solid 1px black;
+    padding: 10px;
+    
+    background: #fd8;
+    
+    box-shadow: 3px 3px #ccc;
+}
+
+.flowSelectModeAnnouncementText {
+    display:inline;    
+}
+
+.flowSelectModeAnnouncementButton {
+    display:inline;
+    cursor:pointer;
+    font-weight: bold;
+    color: blue;
+}
+

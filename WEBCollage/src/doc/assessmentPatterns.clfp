@@ -1,0 +1,15 @@
+
+Implementing Assessment Patterns
+
+* The definition must indicate:
+	- For field "type": "activity"
+   		+ "subtype": represents how to introduce the pattern in the flow:
+		- "subtype": "inlearnersrolepart". Factory.create is passed: {act: act, roleId: learnerId, staffIds: [staffIds]}
+		- "subtype": "instaffsrolepart". Factory.create is passed: {act: act, roleId: staffId}
+		- "subtype": "inanyrolepart". Factory.create is passed: {act: act, roleId: roleId}
+
+* The factory must define:
+	- create(data): where data is the info described before.
+
+* The Assessment Pattern must define:
+	-  

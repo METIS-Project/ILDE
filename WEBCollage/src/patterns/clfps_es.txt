@@ -1,0 +1,25 @@
+{
+	"patterns": [
+		{"id": "brainstorming", "name": "Brainstorming", "type": "clfp",
+			"cat": ["low", "share", "confidence", "respect", "attention", "several"]
+		},
+		{"id": "pyramid", "name": "Pirámide", "type": "clfp",
+			"cat": ["medium", "interdependence", "discussion", "consensus"]
+		},
+		{"id": "tps", "name": "Piensa Discute Comparte (TPS)", "type": "clfp",
+			"cat": ["low", "interdependence", "discussion", "attention", "memory", "openended"]
+		},
+		{"id": "jigsaw", "name": "Jigsaw", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability"]
+		},
+		{"id": "tapps", "name": "Solución de problemas en pareja en voz alta (TAPPS)", "type": "clfp",
+			"cat": ["medium", "discussion", "practice", "analytical", "solve", "problems"]
+		},
+		{"id": "peerreview", "name": "Revisión entre pares", "type": "clfp",
+			"cat": ["high", "interdependence", "discussion", "accountability", "divisible"]
+		},
+		{"id": "simulation", "name": "Simulación", "type": "clfp",
+			"cat": ["medium", "interdependence", "accountability", "simulation"]
+		}
+	]
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><div xmlns="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:glue="http://gsic.uva.es/glue" xmlns:ins="http://gsic.uva.es/glue/adaptors/implementation/mediawiki/1.0" xmlns:xf="http://www.w3.org/2002/xforms" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    
+    <!-- model -->        
+    <xf:model> 
+		<xf:instance id="input-file">
+	    	<ins:data xmlns="">
+            	<glue:reusable xsi:type="xs:boolean">false</glue:reusable>
+                <title xsi:type="xs:string">Title</title>    
+	        </ins:data>
+	    </xf:instance>
+    </xf:model> 
+    
+    <!-- user interface control in body ; only 'ref' bindings are used -->        
+    <p> 
+	    <xf:input ref="/ins:data/title">
+	        <xf:label>Title:</xf:label>
+	    </xf:input>
+
+    </p> 
+    
+</div>

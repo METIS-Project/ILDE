@@ -1,0 +1,107 @@
+
+li.ldItem:hover {
+    background: #eeeeee;
+}
+
+.ldItemName {
+	font-weight: bold;
+}
+
+.ldItemName:hover {
+	cursor: pointer;
+}
+
+
+.ldItemVisibility {
+	font-size: small;
+	color: #008000;
+	padding-left: 10px;
+}
+
+
+div.loginMenu {
+	text-align: right;
+}
+
+div.userName {
+	display: inline-block;
+	font-weight: bold;
+}
+
+div.loginMenuItem {
+	display: inline-block;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ff8000;
+}
+
+div.loginMenuItem:hover {
+	color: #ffa020;
+}
+
+div.errorReport {
+	color: #a00000;
+}
+
+div.floating {
+	position: absolute;
+	height: 50px;
+	width: 100px;
+	left: 330px;
+	top: 100px;
+	border: 1px black solid;
+	background: #fafafa;
+	opacity: 0;
+}
+
+div#MagicPopupsContainer {
+	position: absolute;
+	width: 0px;
+	height: 0px;
+	top: 0px;
+	left: 0px;
+	overflow: visible;
+}
+
+.home {
+    float: left;
+    cursor: pointer;
+}
+
+.localeChooseBlock {
+    float: right;
+    cursor: pointer;
+}
+
+.localeChooseBlock > a {
+    padding-left: 5px;
+}
+
+.toolInstanceName{
+	font-family:arial, helvetica;
+	padding-left:1em;
+}
+
+.tool{
+		font-family:arial, helvetica;
+		font-weight: bold;
+		color: black;
+	}
+	
+.referedTool{
+		font-family:arial, helvetica;
+		font-weight: bold;
+		color: blue;
+	}
+
+.tableDesigns ul{
+		padding-left: 15px;
+	}
+	
+.tableDeployments li:hover{
+		background-color:rgb(210, 220, 250);
+	}
+	
+div.errorReport {
+    color: #a00000;
+}
