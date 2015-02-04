@@ -1,0 +1,128 @@
+/* MAIN CONTENT STYLES */
+
+#content {
+
+}
+
+#main-wrapper{
+	margin-left: 260px;
+	margin-top: 0px;
+	margin-right: 20px;
+	/*position: absolute;
+	text-align:left;*/    
+}
+
+#main{
+    width:100%;
+}
+
+/* ITE elements */
+#siteNav {
+	width: 250px;
+	float: left;
+	margin-top: 0px;
+	margin-left:10px;
+	padding-top: 20px;
+	text-align:left;
+	position:absolute;
+	font-family: Helvetica, sans-serif;
+}
+
+#siteNav ul,#siteNav li{
+	margin:2px 0 2px 0;
+	padding:0;
+	list-style:none;
+}
+
+#siteNav a {
+	display: block;
+	padding: 4px 0 4px 18px;
+	border-bottom: 1px solid #ffffff;
+	width: 195px;
+	border-top: 1px solid #ffffff;
+	color: #044085;
+	background-color: #DEEDFA;
+	text-decoration: none;
+	border-radius: 1em;
+    	-moz-border-radius: 1em;
+    	-webkit-border-radius: 1em;
+}
+
+#siteNav a:hover {
+	color: #044085;
+	background-color:#C3DCF7;
+	font-weight: bold;
+}
+
+#siteNav #active .active {
+	background-color: #C3DCF7;
+	color: #044085;
+	border-bottom: 1px solid #fff;
+	background-image:url(active_bg.gif);
+	background-position: -2px 1px;
+	background-repeat:no-repeat;
+	font-weight: bold;
+}
+
+/* Hide from IE5-mac. Only IE-win sees this. Fixes the peek-a-boo bug!!! */
+* html #siteNav {
+	margin-right: 10px;
+}
+
+#siteNav ul ul a{
+	display: block;
+	border: 0 !important;
+	width: 187px;
+	margin-left: 10px;
+	padding: 4px 0 4px 16px;
+}
+
+#siteNav .other-section{
+	display:none; /* Remove if you want all levels to be displayed */
+}
+
+.pagination{
+	text-align:right;
+}
+
+.pagination .prev{
+	color: #044085;
+	background-color: #DEEDFA;
+	padding: 4px 4px 4px 18px;
+	font-weight: bold;
+	border-radius: 1em 0 0 1em;
+    	-moz-border-radius: 1em 0 0 1em;
+    	-webkit-border-radius: 1em 0 0 1em;
+}
+.pagination .prev:hover{
+	color: #044085;
+	background-color:#C3DCF7;
+	text-decoration: none;
+}
+.pagination .next{
+	color: #044085;
+	background-color: #DEEDFA;
+	padding: 4px 18px 4px 4px;
+	font-weight: bold;
+	border-radius: 0 1em 1em 0;
+    	-moz-border-radius: 0 1em 1em 0;
+    	-webkit-border-radius: 0 1em 1em 0;
+}
+.pagination .next:hover{
+	color: #044085;
+	background-color:#C3DCF7;
+	text-decoration: none;
+}
+
+/* Invisible content (visible for screen reader users) */
+#topPagination{
+	position:absolute;
+	overflow:hidden;
+	clip:rect(0,0,0,0);
+	height:0;
+}
+
+#bottomPagination{
+    padding:0 20px 20px 0;
+    color:#fff;
+}
