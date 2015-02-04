@@ -30,5 +30,13 @@ public interface IDynamicVLEDeployer extends IVLEAdaptor {
 	 */
 	public Deploy redeploy(String string, Deploy newDeploy);
 	
+	/**
+	 * The deploy containing the current learningEnvironment info can be deployed into the VLE
+	 * @param baseUri The base URI of the LE (upon which the deployment calls are calculated) 
+	 * @param lfdeploy The GLUEPS deploy structure to be deployed (in lingua franca, Java objects)
+	 * @return The deploy can be deployed into the course 
+	 */
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy);
+	
 	
 }

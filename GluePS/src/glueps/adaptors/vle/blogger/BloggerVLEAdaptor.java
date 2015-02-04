@@ -15,15 +15,15 @@ import glueps.core.persistence.entities.OauthTokenEntity;
 public class BloggerVLEAdaptor implements VLEAdaptor{
 
 	@Override
-	public IVLEAdaptor getVLEAdaptor(GLUEPSManagerApplication applicationRest, Map<String, String> parameters) {
+	public IVLEAdaptor getVLEAdaptor(Map<String, String> parameters) {
 		String clientid = parameters.get("clientid");
 		String apikey = parameters.get("apikey");
 		String accessToken = parameters.get("accessToken");
 		BloggerAdaptor bloggerAdaptor;
 		if (accessToken!=null){
-			bloggerAdaptor = new BloggerAdaptor(applicationRest, accessToken, clientid, apikey);
+			bloggerAdaptor = new BloggerAdaptor(accessToken, clientid, apikey, parameters);
 		}else{
-			bloggerAdaptor = new BloggerAdaptor(applicationRest, "", clientid, apikey);
+			bloggerAdaptor = new BloggerAdaptor("", clientid, apikey, parameters);
 		}
 		return bloggerAdaptor;
 	}

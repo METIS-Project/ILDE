@@ -48,6 +48,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -60,12 +61,18 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,13 +108,6 @@ import glueps.core.model.ToolInstance;
 
 public class MoodleAdaptor implements IStaticVLEDeployer{
 	
-	private static final String COURSE_FULLNAME_PARAMETER = "fullname";
-	private static final String COURSE_SHORTNAME_PARAMETER = "shortname";
-	private static final String COURSE_NUMSECTIONS_PARAMETER = "numsections";
-	private static final String COURSE_RELATIVEURL_PARAMETER = "relativeurl";
-	private static final String COURSE_TIMEMODIFIED_PARAMETER = "timemodified";
-	private static final String COURSE_SUMMARY_PARAMETER = "summary";
-	
 	protected String CLASSES = "glueps.adaptors.vle.moodle.model";
 	protected String BACKUPFILENAME = "moodle.xml";
 	protected String TMP_DIR = null;
@@ -116,7 +116,6 @@ public class MoodleAdaptor implements IStaticVLEDeployer{
 	 private static String XML_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"; 
 	 private String ZIPNAME="moodle.zip";
 	 protected String BASE="c:/uploaded/";
-	 protected GLUEPSManagerApplication app;
 	 //This is the template XML backup file that we use as a base
 	 //private String TEMPLATE="C:\\Proyectos\\ProtoGLUEPS_GUI\\war\\WEB-INF\\classes\\20110519_moodlebackup-curso_todos_modulos_v6.xml";
 	 //private String TEMPLATE="D:\\workspace\\ProtoGLUEPS\\war\\WEB-INF\\classes\\20110519_moodlebackup-curso_todos_modulos_v6.xml";
@@ -127,9 +126,10 @@ public class MoodleAdaptor implements IStaticVLEDeployer{
 	 private static String DEFAULT_CONFIG_FILENAME="defaultMoodleConfiguration.xforms";
 	 private String templateDir="d:\\workspace\\GLUEPSManager\\templates";
 	 
-	 private String moodleUrl;
-	 private String moodleUser;
-	 private String moodlePassword;
+	 protected String moodleUrl;
+	 protected String moodleUser;
+	 protected String moodlePassword;
+	 protected Map<String, String> parameters;
 	 
 	 
 public MoodleAdaptor() {
@@ -137,7 +137,7 @@ public MoodleAdaptor() {
 	}
 
 
-public MoodleAdaptor(String base, String template,GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword) {
+public MoodleAdaptor(String base, String template,String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
 	super();
 	//This is the pathname to the final zip file. This is no longer set here, since it needs the deployId to construct the path to the file
 	//ZIPNAME = zipname;
@@ -145,19 +145,18 @@ public MoodleAdaptor(String base, String template,GLUEPSManagerApplication appli
 	BASE = base;
 	//This the pathname to the moodle xml template
 	TEMPLATE = template;
-	//This is the Restlet Application of GLUE!-PS, to get the configuration parameters like directory paths, etc
-	app=applicationRest;
 	
 	this.moodleUrl = moodleUrl;
 	this.moodleUser = moodleUser;
 	this.moodlePassword = moodlePassword;
+	this.parameters = parameters;
 }
 
 
-public MoodleAdaptor(String base, String template,GLUEPSManagerApplication applicationRest, String modelPackage, String backupXmlFilename,
-		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword) {
+public MoodleAdaptor(String base, String template,String modelPackage, String backupXmlFilename,
+		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
 	
-	this(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword);
+	this(base, template, moodleUrl, moodleUser, moodlePassword, parameters);
 
 	//This is the package that contains the Moodle XML model classes
 	CLASSES = modelPackage;
@@ -695,8 +694,8 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 	        	 //NUMSECTIONS
 	        	 //Aqui ira el nï¿½mero de secciones que hay, que calculamos sumando las secciones al valor de tema incremental puesto por el usuario y restando 1 (e.g. 4 secciones a partir del 3, da 6 como ï¿½ltimo nï¿½mero)
 	        	 int totalSeccionesCurso=0;
-	        	 if(lfdeploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD)!=null) 
-	        		 totalSeccionesCurso = (new BigInteger(String.valueOf(numSecciones))).intValue() + (new BigInteger(lfdeploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD))).intValue() - 1;
+	        	 if(lfdeploy.getFieldFromDeployData(getStartingSectionField())!=null) 
+	        		 totalSeccionesCurso = (new BigInteger(String.valueOf(numSecciones))).intValue() + (new BigInteger(lfdeploy.getFieldFromDeployData(getStartingSectionField()))).intValue() - 1;
 	        	 else 
 	        		 totalSeccionesCurso = (new BigInteger(String.valueOf(numSecciones))).intValue();
 	        	 
@@ -777,7 +776,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 	        		//NuMBER section
 	        		//Change to set the first section number to a determined number (for incremental deployments)
 	        		BigInteger startingSection = new BigInteger("1");//Default starting section is 1
-	        		String lfsection = lfdeploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD);
+	        		String lfsection = lfdeploy.getFieldFromDeployData(getStartingSectionField());
 	        		if(lfsection!=null && lfsection.length()>0){
 	        			try{
 	        				int start = Integer.parseInt(lfsection);
@@ -792,8 +791,8 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 	        		String nameSect = getNameSection(lfdeploy.getDesign().getRootActivity(),i);
 	        		//we erase the Root/Method part, which is useless, and add a link back to the GLUE!-PS, in case changes have to be made to the deploy
 	        		nameSect = nameSect.replace("Root/Method - ", "");
-	        		String lfdeployUrl = app.getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
-	        		if (app.getLdShakeMode()==false){
+	        		String lfdeployUrl = getAppExternalUri() + "gui/glueps/deploy.html?deployId=" + lfdeploy.getId();
+	        		if (getLdShakeMode()==false){
 	        			nameSect += "... this section was generated with <a href=\""+ lfdeployUrl + "\" target=\"_new\">GLUE!-PS</a><br/>";
 	        		}
 	        		section.setSUMMARY(nameSect);
@@ -1652,7 +1651,8 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 					 
 						 //Creo los modulos
 						 construyeModulo=false;
-						 for (int i=0; i<lfdeploy.getInstancedActivities().size();i++){	
+						 if (lfdeploy.getInstancedActivities()!=null){
+							 for (int i=0; i<lfdeploy.getInstancedActivities().size();i++){	
 					    		if (listChildren.get(j).getId().equals(lfdeploy.getInstancedActivities().get(i).getActivityId())){
 					    			//Resource resource,ToolInstance toolInstance,InstancedActivity instancedActivity,String modeActivity
 					       			
@@ -1708,6 +1708,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 					    			}*/
 					    		}    		
 					    	}
+						 }
 						
 						 if (!construyeModulo)
 						 {
@@ -1800,7 +1801,6 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 	public Contenedor getTypeMod(Resource resource,ToolInstance toolInstance,InstancedActivity instancedActivity,String modeActivity,Deploy lfDeploy){
 		 Contenedor cont = new Contenedor();	
 		 File directorio;	 
-		 GLUEPSManagerApplication app = (GLUEPSManagerApplication) this.app;
 			 // Si viene tollinstace a null se que el modulo se esta generando apartir de un resource
 			
 		    if (resource!=null){
@@ -1879,7 +1879,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 							} else {
 								//Juan: Lo siguiente ya estaba, para distinguir el google presentations
 								//TODO PREGUNTAR A LUIS PABLO COMO IDENTIFICA EL google presentations
-								if ((!resource.getToolTypeNumber().equals(app.getGPresGMType())) && (!resource.getToolTypeNumber().equals(app.getGPres3GMType()))){			
+								if ((!resource.getToolTypeNumber().equals(getGPresGMType())) && (!resource.getToolTypeNumber().equals(getGPres3GMType()))){			
 									cont.setOptions("frame");	
 								}else{
 									//Incluimos contenido de la variable POPUP, para tratamiento de google Presentations
@@ -1890,7 +1890,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 						} else {
 							//Juan: Lo siguiente ya estaba, para distinguir el google presentations
 							//TODO PREGUNTAR A LUIS PABLO COMO IDENTIFICA EL google presentations
-							if ((!resource.getToolTypeNumber().equals(app.getGPresGMType())) && (!resource.getToolTypeNumber().equals(app.getGPres3GMType()))){			
+							if ((!resource.getToolTypeNumber().equals(getGPresGMType())) && (!resource.getToolTypeNumber().equals(getGPres3GMType()))){			
 								cont.setOptions("frame");	
 							}else{
 								//Incluimos contenido de la variable POPUP, para tratamiento de google Presentations
@@ -1920,7 +1920,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 							} else {
 								
 								//Modification to make access to external tools through GM (false) or GLUEPS (true)
-								if(!app.isMoodleRealTimeGlueps()) cont.setLocation(toolInstance.getLocationWithRedirects(lfDeploy).toString());
+								if(!isMoodleRealTimeGlueps()) cont.setLocation(toolInstance.getLocationWithRedirects(lfDeploy).toString());
 								else cont.setLocation(toolInstance.getId());								
 							}
 							
@@ -1969,7 +1969,7 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 						cont.setModName(toolInstance.getName());
 						if (toolInstance.getLocation() !=null){
 							//Modification to make access to external tools through GM (false) or GLUEPS (true)
-							if(!app.isMoodleRealTimeGlueps()) cont.setLocation(toolInstance.getLocationWithRedirects(lfDeploy).toString());
+							if(!isMoodleRealTimeGlueps()) cont.setLocation(toolInstance.getLocationWithRedirects(lfDeploy).toString());
 							else cont.setLocation(toolInstance.getId());
 						}
 
@@ -2511,6 +2511,54 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 		
 		
 	}
+	
+	protected String doPostToUrl(String url, List<NameValuePair> nameValuePairs) throws Exception {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httppost = new HttpPost(url);
+		HttpResponse response = null;
+		HttpEntity entity = null;
+		try {
+			System.out.println((new Date()).toString()+" - Trying to POST to "+url);
+			
+			UrlEncodedFormEntity entityToPost = new UrlEncodedFormEntity(nameValuePairs, HTTP.UTF_8);
+			httppost.setEntity(entityToPost);
+			response = httpclient.execute(httppost);
+			
+			int rc = response.getStatusLine().getStatusCode();
+
+			entity = response.getEntity();
+			if (rc != 201 && rc != 200) {
+				throw new Exception("POST unsuccessful. Returned code "+rc);
+			}
+				
+			if (entity != null) {
+				String content = EntityUtils.toString(entity, "UTF-8");
+				//unescape the entity escapes to a string containing the actual Unicode characters corresponding to the escapes. Otherwise, the parsing process could fail with some tags such as the firstname and lastname tags)
+				content = StringEscapeUtils.unescapeHtml4(content);
+				System.out.println((new Date()).toString()+" - Got response from server: "+content);
+				return content;
+			} else throw new Exception("GET unsuccessful. Null entity!");
+			
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw e;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		} finally {
+			if(entity!=null){
+				try {
+					EntityUtils.consume(entity);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if(httppost!=null) httppost.abort();
+			if(httpclient!=null) httpclient.getConnectionManager().shutdown();
+		}
+	}
 
 
 	@Override
@@ -2606,5 +2654,37 @@ public HashMap<String, String> getCourses(String moodleBaseUri, String username)
 		}
     	return auth;
     }
+   
+   protected String getStartingSectionField(){
+	   return parameters.get("startingSection");
+   }
+   
+   protected String getAppExternalUri(){
+	   return parameters.get("appExternalUri");
+   }
+   
+   protected Boolean getLdShakeMode(){
+	   if (parameters.get("ldshakeMode")!= null && String.valueOf("ldshakeMode").equals("true")){
+		   return true;
+	   }else{
+		   return false;
+	   }
+   }
+   
+   protected String getGPresGMType(){
+	   return parameters.get("gpresGmType");
+   }
+   
+   protected String getGPres3GMType(){
+	   return parameters.get("gpres3GmType");
+   }
 	
+   protected Boolean isMoodleRealTimeGlueps(){
+	   if (parameters.get("moodleRealTimeGlueps")!=null && String.valueOf("moodleRealTimeGlueps").equals("true")){
+		   return true;
+	   }
+	   else{
+		   return false;
+	   }
+   }
 }

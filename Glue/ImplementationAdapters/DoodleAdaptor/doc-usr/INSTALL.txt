@@ -1,0 +1,246 @@
+##############################################
+# DoodleAdapter - INSTALLATION MANUAL        #
+# GSIC's Tool Adapter for Doodle             #
+# Copyright 2012 GSIC (UVA)                  #
+##############################################
+
+
+#####################
+# PRELIMINARY NOTES #
+#####################
+
+The binary distribution of DoodleAdapter has been packaged and tested for
+its use in GNU/Linux or Windows (XP, Vista or 7) systems. However, as a Java
+Standard Edition 6 (JSE6) program, it will probably run in other operating
+systems where a JSE6 runtime platform is available. Even so, this document
+will describe the installation and configuration process just for Linux and
+Windows systems, highlighting their differences when needed. 
+
+You will need administration permissions to install and configure 
+DoodleAdapter in your system. In Windows Vista and Windows 7, be sure to
+start your command console in administration mode (right click, then 'Execute 
+as administrator').
+
+Note that the contents of the DoodleAdapter binary distribution are
+designed to coexist with other GLUE components developed as JSE6 programs.
+In this document, the term GLUE_HOME will be used to name the base directory
+where all the JSE6 GLUE components are supposed to be located. Despite this,
+there are no real dependencies between the different components at the file 
+system level. Feel free to move things to other locations if you need it, 
+and check the runnable scripts in GLUE_HOME/bin and GLUE_HOME/[component]/bin 
+directories to find out how start every component.
+
+
+#################
+# TOOLS ADAPTED #
+#################
+
+GSIC's Doodle Adapter is a tool adapter for GLUE that provides access to 
+Doodle, an on-line voting tool. Find out more about Doodle at www.doodle.com 
+
+  
+################
+# DEPENDENCIES #
+################
+
+DoodleAdapter is a Java Standard Edition 6 (JSE6) program. You will need 
+a JSE6 runtime platform installed in your system.
+
+Doodle is an on-line tool. The correct operation of DoodleAdapter depends
+upon the coorect operation of Doodle, and the state of its public API.
+
+Additionally, DoodleAdapter has the following dependencies. All of them 
+are included in the DoodleAdapter binary distribution as jar files in 
+different subdirectories. Check the README.txt file for more information 
+about each library and their original providers.
+
+  - GLUECommon 0.9.2: library with common elements for GLUE Java components. 
+    This library is located at GLUE_HOME/lib.
+	
+  - RESTlet 2.0.11 for Java Standard Edition (only org.restlet.jar,
+    org.restlet.ext.atom.jar and org.restlet.ext.xml.jar files). By now, we 
+    discourage the use of any different RESTlet version with 
+	DoodleAdapter. This library is located at 
+	GLUE_HOME/lib/dep/restlet-jse-2.0.11.
+	
+
+################
+# INSTALLATION #
+################
+
+1) Choose and create your GLUE_HOME directory.
+
+  ** Linux: directories /opt/glue, /usr/local/share/glue or /usr/share/glue 
+     could be suitable paths for GLUE_HOME.
+
+2) Define the system variable GLUE_HOME containing the full path to the chosen
+GLUE_HOME directory:
+	
+  ** Windows: Start button > Control Pannel > System and Maintenance > 
+	System > Advanced system settings > Advanced tab > Environment Variables 
+	button. 
+
+  ** Linux: Add 'export GLUE_HOME=[your/path/to/glue]' in /etc/bash.bashrc or 
+  /etc/profile.
+	
+3) Extract the files from the binary package at GLUE_HOME. The following
+contents will be added.
+
+  GLUE_HOME/
+    bin/
+       ServiceInstaller.exe   Apache Foundation helper to register Windows 
+	                          services.
+    lib/
+       glue-common.jar        Common elements for GLUE Java components)
+       dep/
+         restlet-jse-2.0.11/  RESTlet selected files.
+           org.restlet.ext.atom.jar
+           org.restlet.ext.xml.jar
+           org.restlet.jar
+    tool_adapters/
+      doodle/
+        bin/
+          install-doodle.bat    Registers DoodleAdapter as a Windows service.
+          install-doodle.sh     Installs DoodleAdapter in Linux.
+          start-doodle.sh       Starts DoodleAdapter in Linux.
+          stop-doodle.sh        Stops DoodleAdapter in Linux.
+          uninstall-doodle.bat  Removes DoodleAdapter from the Windows services 
+		                         register.
+          uninstall-doodle.sh   Cleans the DoodleAdapter installation in Linux.
+        conf/
+          db/                   Scripts SQL to update GLUE Internal Registry.
+            fill_Internal_Registry.sql
+	      app.properties        Runtime configuration file.
+		  DoodleConfiguration.xhtml
+		data/                   Persistent data directory.
+        lib/
+          doodle-adapter.jar    DoodleAdapter binary files.
+        log/                    Log files directory.
+	    GPL.txt             GNU GPL license.
+	    INSTALL.txt             This document.
+	    README.txt              DoodleAdapter license and third party notices.
+
+4) ** Linux : grant execution permissions to the *.sh files in 
+GLUE_HOME/tool_adapters/doodle/bin:
+
+    chmod +x $GLUE_HOME/manager/bin/*.sh
+	
+5) ** Linux: run GLUE_HOME/tool_adapters/doodle/bin/install-doodle.sh
+   in order to:
+   
+    - create the file /srv/glue/tool_adapters/doodle/instances.txt to 
+	  provide persistence to the objects created with the Doodle tool
+      through DoodleAdapter, and a symbolic link in 
+	  GLUE_HOME/tool_adapters/doodle/data pointing to it;
+	  
+    - create the empty log file /var/log/glue/doodle_adapter.log, and a 
+	  symbolic link pointing it at GLUE_HOME/tool_adapters/doodle/log;
+	  
+    - create symbolic links start-doodle and stop-doodle at /usr/bin pointing 
+	  to GLUE_HOME/tool_adapters/doodle/bin/start-doodle.sh 
+	  and GLUE_HOME/tool_adapters/doodle/bin/stop-doodle.sh
+	
+   ** Windows: run 
+   GLUE_HOME/tool_adapters/doodle/bin/install-doodle.bat to:
+   
+    - create the file GLUE_HOME/tool_adapters/doodle/data/instances.txt 
+	  to provide persistence to the objects created with the Doodle tool
+      through DoodleAdapter;
+	  
+    - register DoodleAdapter as a Windows service;
+	
+	- define GLUE_HOME\tools_adapter\doodle\log\doodle_adapter.log as the log 
+	  file (it will be created with the first start of DoodleAdapter).
+	
+	By default, DoodleAdapter will be registered to be started at system 
+	boot time. Pass the parameter 'manual' to install-doodle.bat in order 
+	to avoid it and force the manual start of DoodleAdapter.
+
+	
+#####################
+# INTERNAL REGISTRY #
+#####################
+
+Every tool adapter to be accessed with GLUEletManager must be registered in 
+the Internal Registry. This distribution includes the file 
+GLUE_HOME/tool_adapters/doodle/conf/db/fill_Internal_Registry.sql to 
+make easier the registration process.
+
+Please, note that this file is a TEMPLATE: several variables marked with
+square brackets must be replaced with suitable values according to your 
+particular environment. When the replacements are completed, the file may be
+run in your SQL compliant database management console to register the
+Doodle adapter.
+
+IMPORTANT: if you got GSIC's Doodle adapter as part of the full GLUE 
+distribution package, you will prefer to use the 
+GLUE_HOME/manager/conf/db/fill_Internal_Registry.sql file to register all 
+the tool adapters at once. See the INSTALL.txt file at GLUE_HOME.
+
+The first column in all the tables modified by fill_Internal_Registry.sql is 
+an integer identifier that works as a primary key for the row added. You must 
+select a non used value in the rows previously existent in your Internal 
+Registry.
+
+BE CAREFUL: all the identifiers but [TOOL_IMP_ID_x] appear repeated in 
+fill_Internal_Registry.sql as references in tables different to those where 
+they are primary keys. Keep the value of each identifier consistent all over
+the file.
+
+Besides the identifiers, there is other table where you must introduce your 
+own values:
+
+ * InternalRegistry.ImplementationAdapters: the URL where the tool adapter 
+ will be listening for requests must be completed. BE CAREFUL: the suffix 
+ '/ToolAdapter/Doodle' can't be changed. If you install the 
+ GSIC's Doodle adapter and GLUEletManager in the same host and don't 
+ change the default port, a suitable value for the full URL could be 
+ 'http://localhost:8186/ToolAdapter/Doodle'.
+
+
+#############
+# OPERATION #
+#############
+	
+Before starting DoodleAdapter you can edit the file 
+GLUE_HOME/tool_adapters/doodle/conf/app.properties to change some runtime 
+properties:
+
+  - port     Number of the HTTP port where DoodleAdapter listens for 
+             requests.
+  - logging  Keep to 'On' to save information in the log file about every 
+             request processed by DoodleAdapter.
+
+To manually start and stop DoodleAdapter:
+
+  ** Linux: use the commands start-doodle and stop-doodle.
+  
+  ** Windows: 
+    1) access to the service management panel: Start button > Control Pannel 
+       > System and Maintenance > Administration Tools > Services;
+    2) search and select the service with name 'DoodleAdapter' in the 
+	   services list;
+    3) click the 'Init' or 'Stop' link at the top left corner of the list.
+
+You can see the content of GLUE_HOME/tool_adapters/doodle/log/doodle_adapter.log 
+to check if DoodleAdapter started without problems. You should see a message 
+like this:
+
+  2012-06-04 18:06:49.817:INFO::jetty-7.1.6.v20100715
+  2012-06-04 18:06:49.880:INFO::Started SelectChannelConnector@0.0.0.0:8192
+
+
+###############
+# FINAL NOTES #
+###############
+
+1) If you need to restrict the access to DoodleAdapter to a limited set of 
+   system users for its start/stop, keep in mind that authorized users need:
+     - execution permission on GLUE_HOME/tool_adapters/doodle/bin/*.sh 
+	 - read permission on 
+	    * GLUE_HOME/tool_adapters/doodle/conf/app.properties
+		* all the jar files
+	 - write permission on /var/log/glue/tool_adapters_doodle.log
+
+2) BE CAREFUL: In Windows systems, every time DoodleAdapter is started, 
+   the previous log file is erased.

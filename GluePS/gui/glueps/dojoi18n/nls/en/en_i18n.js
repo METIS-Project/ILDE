@@ -33,7 +33,9 @@
 "ErrorToolActivity":"You must select a tool for each activity. Check the activities",
 
 "updateParticipantList":"Click here to <b>update the participant list</b> with the participants available for the course selected in the VLE. <br />It will show the participants added, deleted or who remain since the last update process",
-"ErrorUpdatingParticipants":"The list of participants could not be updated from the course",
+"ErrorUpdatingParticipants.credentialError":"The list of participants could not be updated from the course.<br> The credentials provided for the VLE are wrong. Please, check your credentials in the VLE.",
+"ErrorUpdatingParticipants.courseError":"The list of participants could not be updated from the course. <br> Please, check that the course exists in the VLE and that you have the necessary permissions in that course.",
+"ErrorUpdatingParticipants.internalError":"The list of participants could not be updated from the course. <br> The server returned an internal error.",
 "SuccessUpdatingParticipants":"The list of participants has been updated successfully",
 "participantsToAdd":"Participants to be added",
 "participantsToDelete":"Participants to be deleted",
@@ -69,7 +71,7 @@
 "ImportDeployDeleteToolsConf":"Import configuration",
 "helpCheckImportInfo":"Check it only if you want to keep the configuration of the tools from the deploy to import. <br />Take into account that the changes you make can affect the original deploy. ",
 "errorGetCourseList":"The course list from the VLE could not be returned.<br />An unexpected error has occurred.",
-"errorGetCourseListCredentials":"The course list from the VLE could not be returned.<br />Please, check your credentials for the VLE.",
+"errorGetCourseListCredentials":"The course list from the VLE could not be returned.<br />The credentials provided for the VLE are wrong. <br />Please, check your credentials in the VLE.",
 
 //Menu LE user
 "MenuEditLe":"Edit VLE",
@@ -178,6 +180,7 @@
 "deletingToolInstance":"The tool instance is being deleted",
 "creatingToolInstance":"The tool instance is being created.",
 "loadingConfiguration":"Loading the configuration form.",
+"creatingDeployment":"The deployment is being created",
 
 "info":"Information",
 "createdToolInstance": "The tool instance has been created.",
@@ -200,7 +203,7 @@
 "deploymentOk": "The deployment process has been completed successfully.",
 "deploymentError": "The deployment process has not been completed successfully.<br />Some of the tool instances could not be created.<br />Please, review their configuration.",
 "deploymentErrorProcess": "The deployment process has not been completed successfully.<br />There have been an unknown error in the deployment process.",
-"deploymentErrorCredentials": "The deployment process has not been completed successfully.<br />The VLE user associated with the deployment is not authorized to deploy in the VLE. <br>Please, check your credentials for the VLE used for this deployment.",
+"deploymentErrorCredentials": "The deployment process has not been completed successfully.<br />The VLE user associated with the deployment is not authorized to deploy in the VLE. <br>Please, check your credentials and permissions for the VLE and course used for this deployment.",
 "deploymentErrorInProcess": "The course content could not be generated in the VLE.<br />There is in process another request for deploying this deploy into the VLE.<br />Wait until it finishes and try then again.",
 "deploymentErrorCourseInProcess": "The course content could not be generated in the VLE.<br />There is in process another request for deploying into the same VLE and course.<br />Wait a time until it can have finished and try it again",
 

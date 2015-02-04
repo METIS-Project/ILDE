@@ -292,6 +292,8 @@ public class DeployResource extends GLUEPSResource {
 	    if (getReference().getIdentifier().contains("/metadata")){
    	    		return getMetadata();
    	    }
+	    
+	    if(deploy.isInProcess()) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "The deployment is being created. Please try getting it again later");
     	
     	//If they ask about the zip, we generate it (if not done already) and redirect
     	//if(getReference().getIdentifier().endsWith("/static")) return this.getStaticDeploy();
@@ -364,6 +366,8 @@ public class DeployResource extends GLUEPSResource {
 	    }
     	
        	logger.info("** GET JSON DEPLOY received");
+       	
+       	if(deploy.isInProcess()) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "The deployment is being created. Please try getting it again later");
 
        	Representation answer = null;
 
@@ -785,7 +789,10 @@ public class DeployResource extends GLUEPSResource {
     	}
 		//WE check that the deploy is not in process, and that the request does not try to override the (faulty) in process mechanism
     	String override = this.getQuery()!=null ? this.getQuery().getValues("override") : null;
-    	boolean deployInProcess = GLUEPSManagerServerMain.ips.askDeployInProcess(new InProcessInfo(deploy.getId(),deploy.getLearningEnvironment().getAccessLocation().toString(),deploy.getCourse().getId()));
+    	boolean deployInProcess = false;
+    	if (deploy.getLearningEnvironment()!=null){
+    		deployInProcess = GLUEPSManagerServerMain.ips.askDeployInProcess(new InProcessInfo(deploy.getId(),deploy.getLearningEnvironment().getAccessLocation().toString(),deploy.getCourse().getId()));
+    	}
 		if(deployInProcess && override==null) throw new ResourceException(Status.SERVER_ERROR_SERVICE_UNAVAILABLE, "The deployment is in process. Please try modifying it again later");
 
     	logger.info("** DELETE DEPLOY received");
@@ -1160,8 +1167,11 @@ public class DeployResource extends GLUEPSResource {
    		if(!(adaptor instanceof IDynamicVLEDeployer)) throw new ResourceException(Status.CLIENT_ERROR_METHOD_NOT_ALLOWED, "The VLE does not support live deployments");
    		
 		//Since we support live deployments, we try to generate the live deployment (e.g. wiki pages)
-		IDynamicVLEDeployer dynAdaptor = (IDynamicVLEDeployer) adaptor;
-			
+		IDynamicVLEDeployer dynAdaptor = (IDynamicVLEDeployer) adaptor;		
+		
+   		if (!dynAdaptor.canBeDeployed(newDeploy.getLearningEnvironment().getAccessLocation().toString(), newDeploy)){
+   			throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "You are not allowed to deploy into that course. Please, check your credentials and permissions in that VLE and course");
+   		}
 			
 		//Supposedly, this method already updates the live deploy URL to the right value
 		//newDeploy = dynAdaptor.deploy(newDeploy.getLearningEnvironment().getAccessLocation().toString(), newDeploy);

@@ -1,0 +1,67 @@
+<!-- 
+ This file is part of DabbleboardVLEAdapter.
+
+ DabbleboardVLEAdapter is a property of the Intelligent & Cooperative Systems
+ Research Group (GSIC) from the University of Valladolid (UVA).
+
+ Copyright 2011 GSIC (UVA).
+
+ DabbleboardVLEAdapter is licensed under the GNU General Public License (GPL)
+ EXCLUSIVELY FOR NON-COMMERCIAL USES. Please, note this is an additional
+ restriction to the terms of GPL that must be kept in any redistribution of
+ the original code or any derivative work by third parties.
+
+ If you intend to use DabbleboardVLEAdapter for any commercial purpose you can
+ contact to GSIC to obtain a commercial license at <glue@gsic.tel.uva.es>.
+
+ If you have licensed this product under a commercial license from GSIC,
+ please see the file LICENSE.txt included.
+
+ The next copying permission statement (between square brackets []) is
+ applicable only when GPL is suitable, this is, when DabbleboardVLEAdapter is
+ used and/or distributed FOR NON COMMERCIAL USES.
+
+ [ You can redistribute DabbleboardVLEAdapter and/or modify it under the
+   terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>
+ ]
+-->
+
+
+<!-- 
+ * Configuration form for a new Wookie widget.
+ *
+ * Empty form; just reusability flag
+ *
+ * @author      David A. Velasco
+ * @version     2011051100
+ * @package     -
+-->
+<div xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:xf="http://www.w3.org/2002/xforms"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ins="http://gsic.uva.es/glue/adapters/implementation/noteflight/1.0"
+    xmlns:glue="http://gsic.uva.es/glue">
+    
+    <!-- model -->        
+    <xf:model> 
+	 	<xf:instance id="input-file">
+            <ins:data>
+                <glue:reusable xsi:type="xs:boolean">true</glue:reusable>
+            </ins:data>
+        </xf:instance>
+    </xf:model> 
+
+</div>
+

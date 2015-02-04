@@ -33,7 +33,9 @@ i18n.i18nStrings["es"]={
 "ErrorToolActivity":"Debe seleccionar una herramienta para cada actividad. Revise las actividades",
 
 "updateParticipantList":"Haz click aquí para <b>actualizar la lista de participantes</b> con los participantes disponibles en el curso seleccionado en el VLE.<br />Se mostrarán los alumnos añadidos, eliminados y que se mantienen desde la última actualización",
-"ErrorUpdatingParticipants":"No se ha podido obtener actualizar la lista de participantes del curso",
+"ErrorUpdatingParticipants.credentialError":"No se ha podido actualizar la lista de participantes del curso.<br> Los credenciales proporcionados para el VLE son incorrectos. Por favor, comprueba tus credenciales en el VLE.",
+"ErrorUpdatingParticipants.courseError":"No se ha podido actualizar la lista de participantes del curso. <br> Por favor, comprueba que el curso existe en el VLE y que posees los permisos necesarios en el curso.",
+"ErrorUpdatingParticipants.internalError":"No se ha podido actualizar la lista de participantes del curso. <br> El servidor devolvió un error interno.",
 "SuccessUpdatingParticipants":"La lista de participantes del curso ha sido actualizada con éxito",
 "participantsToAdd":"Participantes a añadir",
 "participantsToDelete":"Participantes a borrar",
@@ -69,7 +71,7 @@ i18n.i18nStrings["es"]={
 "ImportDeployDeleteToolsConf":"Importar configuración",
 "helpCheckImportInfo":"Marca esta opción sólo si desea mantener la configuración de las herramientas del despliegue a importar. <br />Tenga en cuenta que los cambios que realice pueden afectar al despliegue original.",
 "errorGetCourseList":"No se ha podido obtener la lista de cursos del VLE. <br />Se ha producido un error inesperado.",
-"errorGetCourseListCredentials":"No se ha podido obtener la lista de cursos del VLE. <br />Por favor, comprueba tus credenciales para el VLE.",
+"errorGetCourseListCredentials":"No se ha podido obtener la lista de cursos del VLE. <br />Los credenciales proporcionados para el VLE son incorrectos. <br />Por favor, comprueba tus credenciales en el VLE.",
 
 //Menu LE user
 "MenuEditLe":"Editar VLE",
@@ -178,6 +180,7 @@ i18n.i18nStrings["es"]={
 "deletingToolInstance":"Se está borrando la instancia de la herramienta.",
 "creatingToolInstance":"Se está creando la instancia de la herramienta.",
 "loadingConfiguration":"Cargando el formulario de configuración.",
+"creatingDeployment":"Se está creando el despliegue.",
 
 "info":"Información",
 "createdToolInstance": "Se ha creado la instancia de la herramienta.",
@@ -200,7 +203,7 @@ i18n.i18nStrings["es"]={
 "deploymentOk": "El proceso de despliegue se ha completado correctamente.",
 "deploymentError": "El proceso de despliegue no se ha completado correctamente.<br>Algunas de las instancias de herramientas no se han podido crear.<br>Por favor, revise su configuración.",
 "deploymentErrorProcess": "El proceso de despliegue no se ha completado correctamente.<br />Ha habido un error desconocido en el proceso de despliegue.",
-"deploymentErrorCredentials": "El proceso de despliegue no se ha completado correctamente.<br />El usuario de VLE asociado al despliegue no está autorizado para desplegar. <br>Por favor, comprueba tus credenciales para el VLE usado en este despliegue.",
+"deploymentErrorCredentials": "El proceso de despliegue no se ha completado correctamente.<br />El usuario de VLE asociado al despliegue no está autorizado para desplegar. <br>Por favor, comprueba tus credenciales y permisos para el VLE y cursos usados en este despliegue.",
 "deploymentErrorInProcess": "No se pudo generar el contenido del curso en el VLE.<br />Está en proceso otra petición para desplegar este despliegue en el VLE.<br />Espere a que termine e inténtelo entonces de nuevo.",
 "deploymentErrorCourseInProcess": "No se pudo generar el contenido del curso en el VLE.<br />Está en proceso otra petición para desplegar en el mismo VLE y curso.<br />Espere un tiempo hasta que pueda haber terminado e inténtelo de nuevo.",
 

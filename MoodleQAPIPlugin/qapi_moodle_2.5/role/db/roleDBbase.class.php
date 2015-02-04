@@ -49,5 +49,26 @@ abstract class glueserver_role_db_base {
         $sqlparams = array($userid,$courseid);
         return $DB->get_records_sql($sql, $sqlparams);
     }
+    
+     /**
+     * Returns an array of the global roles of a user
+     *
+     *
+     * @return array of global roles of a user 
+     */
+    public static function glueserver_get_global_roles_username($username){
+        global $DB,$CFG;
+        
+		//cx.contextlevel = 10 is used to get only the global roles
+		//cx.instanceid = '0' since the role is not related to an specific course
+        $sql = "SELECT r.*
+                FROM {$CFG->prefix}role r
+                INNER JOIN {$CFG->prefix}role_assignments ra ON ra.roleid = r.id
+                INNER JOIN {$CFG->prefix}context cx ON cx.id = ra.contextid AND cx.contextlevel = '10' AND cx.instanceid = '0'
+                INNER JOIN {$CFG->prefix}user usr ON usr.id = ra.userid
+                WHERE usr.username = ?";
+        $sqlparams = array($username);
+        return $DB->get_records_sql($sql, $sqlparams);
+    }
 
 }

@@ -123,7 +123,7 @@ public class CourseListResource extends GLUEPSResource {
 			
 			LearningEnvironment le = null;
 			try {
-				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null);
+				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null,false,false);
 				if (version!=null && !version.isEmpty() && wstoken!=null && !wstoken.isEmpty()){					
 					le.setParameters("version=" + Reference.encode(version) + "&wstoken=" + wstoken);
 				}
@@ -137,11 +137,11 @@ public class CourseListResource extends GLUEPSResource {
 			HashMap<String,String> courses = le.getCourses();						
 			String coursename = courses.get(courseId);
 			Course course;
-			//TODO For now, we just get course id and name... we could think of getting all the data at some point
+			//TODO For now, we just get course id and name... we could think of getting all the data at some point		
 			if(coursename != null){
 				course = new Course(courseId, coursename, null, null, null);
 			}
-			else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist");
+			else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist or you do not have the necessary permissions to get its participants.");
 			
 			VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory((GLUEPSManagerApplication) this.getApplication());
 			IVLEAdaptor adaptor = adaptorFactory.getVLEAdaptor(le);
@@ -163,7 +163,7 @@ public class CourseListResource extends GLUEPSResource {
 			//Otherwise, we return only the course list in that VLE
 			LearningEnvironment le = null;
 			try {
-				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null);
+				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null,false,false);
 				if (version!=null && !version.isEmpty() && wstoken!=null && !wstoken.isEmpty()){					
 					le.setParameters("version=" + Reference.encode(version) + "&wstoken=" + wstoken);
 				}
@@ -263,7 +263,7 @@ public class CourseListResource extends GLUEPSResource {
 			
 			LearningEnvironment le = null;
 			try {
-				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null);
+				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null,false,false);
 				if (version!=null && !version.isEmpty() && wstoken!=null && !wstoken.isEmpty()){					
 					le.setParameters("version=" + Reference.encode(version) + "&wstoken=" + wstoken);
 				}
@@ -281,7 +281,7 @@ public class CourseListResource extends GLUEPSResource {
 			if(coursename != null){
 				course = new Course(courseId, coursename, null, null, null);
 			}
-			else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist");
+			else throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND, "The course does not exist or you do not have the necessary permissions to get its participants.");
 			
 			VLEAdaptorFactory adaptorFactory = new VLEAdaptorFactory((GLUEPSManagerApplication) this.getApplication());
 			IVLEAdaptor adaptor = adaptorFactory.getVLEAdaptor(le);
@@ -310,7 +310,7 @@ public class CourseListResource extends GLUEPSResource {
 			//Otherwise, we return only the course list in that VLE
 			LearningEnvironment le = null;
 			try {
-				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null);
+				le = new LearningEnvironment(null, null, type, new URL(accessLocation), null, creduser, credsecret,null,false,false);
 				if (version!=null && !version.isEmpty() && wstoken!=null && !wstoken.isEmpty()){					
 					le.setParameters("version=" + Reference.encode(version) + "&wstoken=" + wstoken);
 				}

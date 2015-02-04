@@ -137,7 +137,7 @@ class glueserver_course_external extends external_api {
     
      /**
      *
-     * Function to get list of courses where a user is enrolled
+     * Function to get list of courses where a user is enrolled with a role
      *
      * @return user details
      */
@@ -160,6 +160,48 @@ class glueserver_course_external extends external_api {
      * @return external_description
      */
     public static function get_courses_username_returns() {
+        return new external_multiple_structure(
+            glueserver_course::get_class_structure()
+        );
+    }
+    
+    /**
+     * Returns description of method parameters
+     * @return external_function_parameters
+     */
+    public static function get_courses_enrolled_username_parameters() {
+        return new external_function_parameters(
+            array(
+				'username'    => new external_value(PARAM_RAW, 'user name', VALUE_REQUIRED, 0, NULL_NOT_ALLOWED)
+            )
+        );
+    }
+    
+     /**
+     *
+     * Function to get the list of courses in which a user is enrolled (with or without a role)
+     *
+     * @return the list of courses in which the user is enrolled
+     */
+    public static function get_courses_enrolled_username($username) {
+        $context = get_context_instance(CONTEXT_SYSTEM);
+        self::validate_context($context);
+        require_capability('moodle/course:view', $context);
+            
+        $courses = glueserver_course_db::glueserver_get_courses_enrolled_username($username);
+        $returns = array();
+        foreach ($courses as $course) {
+            $course = new glueserver_course($course);
+            $returns[] = $course->get_data();
+        }
+        return $returns;
+    }
+    
+     /**
+     * Returns description of method result value
+     * @return external_description
+     */
+    public static function get_courses_enrolled_username_returns() {
         return new external_multiple_structure(
             glueserver_course::get_class_structure()
         );
@@ -196,6 +238,7 @@ class glueserver_course_external extends external_api {
         $sections = glueserver_course_db::glueserver_get_sections_course($courseid);
         $returns = array();
         foreach ($sections as $section) {
+        	$section->summary = '<![CDATA['.$section->summary.']]>';//Important!. The summary could contain html tags. We insert that summary between the <![CDATA[ and ]]> tags
             $section = new glueserver_section($section);
             $returns[] = $section->get_data();
         }

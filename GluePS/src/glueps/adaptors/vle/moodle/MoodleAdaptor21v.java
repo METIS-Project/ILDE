@@ -11,6 +11,7 @@ import glueps.adaptors.vle.moodle.model.moodle2.CourseQuiz;
 import glueps.adaptors.vle.moodle.model.moodle2.CourseSection;
 import glueps.adaptors.vle.moodle.model.moodle2.CourseUrl;
 import glueps.adaptors.vle.moodle.model.moodle2.Module;
+import glueps.adaptors.vle.moodle.model.moodle2.Role;
 import glueps.core.gluepsManager.GLUEPSManagerApplication;
 import glueps.core.model.Course;
 import glueps.core.model.Deploy;
@@ -25,11 +26,18 @@ import java.math.BigInteger;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.apache.commons.lang3.StringEscapeUtils;
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.restlet.data.Reference;
@@ -44,37 +52,22 @@ import org.xml.sax.InputSource;
 public class MoodleAdaptor21v extends MoodleAdaptor{
 	
 	private String wstoken;	
-	private String moodleUrl;
-	private String moodleUser;
-	private String moodlePassword;
-	 
+	
 	public MoodleAdaptor21v() {
 		super();
 	}
 
 
-public MoodleAdaptor21v(String base, String template,GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword, String wstoken) {
-	super();
-	//This is the pathname to the final zip file. This is no longer set here, since it needs the deployId to construct the path to the file
-	//ZIPNAME = zipname;
-	//This is the base directory where all uploaded files are
-	BASE = base;
-	//This the pathname to the moodle xml template
-	TEMPLATE = template;
-	//This is the Restlet Application of GLUE!-PS, to get the configuration parameters like directory paths, etc
-	app=applicationRest;
-	
-	this.moodleUrl = moodleUrl;
-	this.moodleUser = moodleUser;
-	this.moodlePassword = moodlePassword;
+public MoodleAdaptor21v(String base, String template, String moodleUrl, String moodleUser, String moodlePassword, String wstoken, Map<String, String> parameters) {
+	super(base, template,moodleUrl, moodleUser, moodlePassword, parameters);
 	this.wstoken = wstoken;
 }
 
 
-public MoodleAdaptor21v(String base, String template,GLUEPSManagerApplication applicationRest, String modelPackage, String backupXmlFilename,
-		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, String wstoken) {
+public MoodleAdaptor21v(String base, String template, String modelPackage, String backupXmlFilename,
+		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, String wstoken, Map<String, String> parameters) {
 	
-	this(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword, wstoken);
+	this(base, template, moodleUrl, moodleUser, moodlePassword, wstoken, parameters);
 
 	//This is the package that contains the Moodle XML model classes
 	CLASSES = modelPackage;
@@ -103,8 +96,10 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	HashMap<String,Participant> vleUsers = null;
 	
 	try {
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		String response = doGetFromURL(qapiUrl);
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		String response = doPostToUrl(qapiUrl, parameters);
 		
 		DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		DocumentBuilder db = dbf.newDocumentBuilder();
@@ -176,8 +171,11 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		HashMap<String,String> vleCourses = null;
 		
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			String response = doPostToUrl(qapiUrl, parameters);
+			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -228,20 +226,153 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	 *  
 	 */
 	@Override
-	public HashMap<String, String> getCourses(String moodleBaseUri, String username){		
+	public HashMap<String, String> getCourses(String moodleBaseUri, String username){
+		HashMap<String,String> vleCourses = null;
+		HashMap<String,String> courses;
 		Boolean auth = moodleAuth(moodleBaseUri, moodleUser, moodlePassword);
 		if (auth==false){
 			throw new ResourceException(Status.CLIENT_ERROR_FORBIDDEN, "The user is not allowed to get the courses from the VLE. Please, check your credentials for the VLE");
 		}
+		
+		String roleid = "1"; //the admin role id is 1
+		//get the courses in which the user is enrolled with the admin role
+		courses = getCoursesRole(moodleBaseUri, username, roleid);
+		if (courses!=null){
+			Iterator<Map.Entry<String,String>> it = courses.entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<String, String> entry = it.next();
+				if (vleCourses == null){
+					vleCourses = new HashMap<String, String>();
+				}
+				vleCourses.put(entry.getKey(), entry.getValue());
+			}
+		}
+		
+		roleid = "3"; //the teacher role id is 3
+		//get the courses in which the user is enrolled with the teacher role
+		courses = getCoursesRole(moodleBaseUri, username, roleid);
+		if (courses!=null){
+			Iterator<Map.Entry<String,String>> it = courses.entrySet().iterator();
+			while(it.hasNext()){
+				Map.Entry<String, String> entry = it.next();
+				if (vleCourses == null){
+					vleCourses = new HashMap<String, String>();
+				}
+				vleCourses.put(entry.getKey(), entry.getValue());
+			}
+		}
+		//Get the global roles of the user
+		ArrayList<Role> globalRoles = getGlobalRolesUsername(moodleBaseUri, username);
+		if (globalRoles != null && globalRoles.isEmpty()==false){
+			//get the courses in which the user is enrolled with or without a role
+			courses = getCoursesIsEnrolled(moodleBaseUri, username);
+			if (courses!=null){
+				Iterator<Map.Entry<String, String>> it = courses.entrySet().iterator();
+				while(it.hasNext()){
+					Map.Entry<String, String> entry = it.next();
+					if (vleCourses==null || vleCourses.get(entry.getKey())==null){
+						//the user is enrolled with no roles or the role is neither admin nor teacher
+						//the user has a global role, so it is enrolled in the course with that role too
+						if (vleCourses == null){
+							vleCourses = new HashMap<String, String>();
+						}
+						vleCourses.put(entry.getKey(), entry.getValue());					
+					}
+				}
+			}
+		}
+		
+		if (vleCourses!=null){
+			System.out.println("The courses are: "+vleCourses.toString());
+		}
+
+		return vleCourses;
+	}
+	
+	/**
+	 * Gets the global roles of a user from a Moodle installation
+	 * @param moodleBaseUri The Base URI of the Moodle installation
+	 * @param username The user's name
+	 * @return The global roles of the user
+	 *  
+	 */
+	public ArrayList<Role> getGlobalRolesUsername(String moodleBaseUri, String username){
+		ArrayList<Role> roles = new ArrayList<Role>();
+		String qapiUrl = moodleBaseUri+"webservice/rest/server.php";
+		String wsfunction = "gws_role_get_global_roles_username";
+		
+		try {
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("username",username));
+			String response = doPostToUrl(qapiUrl, parameters);
+			
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource(new StringReader(response));
+			Document doc = db.parse(is);
+			//optional, but recommended
+			doc.getDocumentElement().normalize();
+			//Every role is contained in a SINGLE tag
+			NodeList roleNodeList = doc.getDocumentElement().getElementsByTagName("SINGLE");
+			for (int i = 0; i < roleNodeList.getLength(); i++){
+				Node roleNode = roleNodeList.item(i);
+				//Each role has a set of nodes with the values
+				NodeList keyNodeList = roleNode.getChildNodes();
+				String id = "";
+				String name = "";
+				String shortname = "";
+				String description = "";
+				String sortorder = "";
+				for (int j = 0; j < keyNodeList.getLength(); j++){
+					Node keyNode = keyNodeList.item(j);
+					if (keyNode.getNodeType() == Node.ELEMENT_NODE) {						 
+						Element keyElement = (Element) keyNode;
+						String keyName = keyElement.getAttribute("name");
+						if (keyName.equals("id")){
+							id = keyElement.getChildNodes().item(0).getTextContent();
+						}else if(keyName.equals("name")){
+							name = keyElement.getChildNodes().item(0).getTextContent();
+						}else if (keyName.equals("shortname")){
+							shortname = keyElement.getChildNodes().item(0).getTextContent();
+						}else if (keyName.equals("description")){
+							description = keyElement.getChildNodes().item(0).getTextContent();
+						}else if (keyName.equals("sortorder")){
+							sortorder = keyElement.getChildNodes().item(0).getTextContent();
+						}
+					}
+				}
+				if (!id.isEmpty() && !shortname.isEmpty()){
+					Role role = new Role(Integer.valueOf(id),name,shortname,description,Integer.valueOf(sortorder));
+					roles.add(role);
+				}
+			}
+		} catch (Exception e) {
+			return null;
+		}
+		return roles;
+	}
+	
+	/**
+	 * Gets from a Moodle installation the courses in which the user is enrolled with any role
+	 * @param moodleBaseUri The Base URI of the Moodle installation
+	 * @param username The user's name
+	 * @return The courses in which the user is enrolled and has a role
+	 *  
+	 */
+	public HashMap<String, String> getCoursesHasRole(String moodleBaseUri, String username){		
 		String qapiUrl = moodleBaseUri+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_courses_username";
-		String roleid = "3"; //the admin role id is 1 and the teacher role id is 3
 
 		HashMap<String,String> vleCourses = null;
 		
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&username=" + URLEncoder.encode(username, "UTF-8") + "&roleid=" + roleid;
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("username",username));
+			String response = doPostToUrl(qapiUrl, parameters);
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -283,23 +414,100 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		
 		if (vleCourses!=null){
-			System.out.println("The courses are: "+vleCourses.toString());
+			System.out.println("The courses in which the user " + username + " is enrolled are: "+vleCourses.toString());
 		}
 
 		return vleCourses;
 	}
+	
+	/**
+	 * Gets from a Moodle installation the courses in which the user has an specific role
+	 * @param moodleBaseUri The Base URI of the Moodle installation
+	 * @param username The user's name
+	 * @param roleid The id of the role
+	 * @return The courses in which the user has that role
+	 *  
+	 */
+	public HashMap<String, String> getCoursesRole(String moodleBaseUri, String username, String roleid){		
+		String qapiUrl = moodleBaseUri+"webservice/rest/server.php";
+		String wsfunction = "gws_course_get_courses_username";
 
+		HashMap<String,String> vleCourses = null;
+		
+		try {
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("username",username));
+			parameters.add(new BasicNameValuePair("roleid",roleid));
+			String response = doPostToUrl(qapiUrl, parameters);
+			
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource(new StringReader(response));
+			Document doc = db.parse(is);
+			//optional, but recommended
+			doc.getDocumentElement().normalize();
+			//Every course is contained in a SINGLE tag
+			NodeList courseNodeList = doc.getDocumentElement().getElementsByTagName("SINGLE");
+			for (int i = 0; i < courseNodeList.getLength(); i++){
+				Node courseNode = courseNodeList.item(i);
+				//Each course has a set of nodes with the values
+				NodeList keyNodeList = courseNode.getChildNodes();
+				String id = "";
+				String fullname = "";
+				for (int j = 0; j < keyNodeList.getLength(); j++){
+					Node keyNode = keyNodeList.item(j);
+					if (keyNode.getNodeType() == Node.ELEMENT_NODE) {						 
+						Element keyElement = (Element) keyNode;
+						String keyName = keyElement.getAttribute("name");
+						if (keyName.equals("id")){
+							id = keyElement.getChildNodes().item(0).getTextContent();
+						}else if(keyName.equals("fullname")){
+							fullname = keyElement.getChildNodes().item(0).getTextContent();
+						}
+					}
+				}
+				if (!id.isEmpty() && !fullname.isEmpty()){
+					if (vleCourses == null){
+						vleCourses = new HashMap<String, String>();
+					}//Add the course to the hash map
+					vleCourses.put(id, fullname);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		if (vleCourses!=null){
+			System.out.println("The courses in which the user " + username + " has the role " + roleid + " are: "+vleCourses.toString());
+		}
+
+		return vleCourses;
+	}
+	
+
+	/**
+	 * Get the users that are enrolled in a course with or without a role
+	 * @param moodleBaseUri	the Moodle uri
+	 * @param courseId the course id in Moodle
+	 * @return The users enrolled in the course
+	 */
 	@Override
 	public HashMap<String, Participant> getCourseUsers(String moodleBaseUri, String courseId) {
-		
 		String qapiUrl = moodleBaseUri+"webservice/rest/server.php";
 		String wsfunction = "gws_user_get_users_courseid";
 	
 		HashMap<String,Participant> courseUsers = null;
 		
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseId;
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("courseid",courseId));
+			String response = doPostToUrl(qapiUrl, parameters);			
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -401,9 +609,10 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 													}
 												}
 											}
-											//Staff roles in moodle are: teacher, editingteacher, manager, coursecreator
+											//Staff roles in moodle are: manager(1), coursecreator(2), editingteacher(3), teacher(4)  
 											//Take into account that the admin role has been renamed to manager role in Moodle 2
-											boolean staff = (shortname.equals("editingteacher")||shortname.equals("manager")||shortname.equals("teacher")||shortname.equals("coursecreator"));
+											boolean staff = (shortname.equals("editingteacher")||shortname.equals("manager")||shortname.equals("teacher")||shortname.equals("coursecreator")
+															 || roleId.equals("1") || roleId.equals("2") || roleId.equals("3") || roleId.equals("4"));
 											
 											Participant p = courseUsers.get(username);
 											//System.out.println("Retrieved participant: "+p.toString());
@@ -420,6 +629,14 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 							}
 						}
 					}
+					Participant p = courseUsers.get(username);
+					//If the participant is not staff in the course, check if it has some global role. If so, the participant is considered staff
+					if (p!=null && !p.isStaff()){
+						ArrayList<Role> globalRoles = getGlobalRolesUsername(moodleBaseUri, username);
+						if (globalRoles!=null && globalRoles.isEmpty()==false){
+							p.setStaff(true);
+						}
+					}
 				}
 			}
 			
@@ -428,8 +645,7 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 			e.printStackTrace();
 			return null;
 		}
-		return courseUsers;
-	
+		return courseUsers;	
 	}
 
 	@Override
@@ -441,8 +657,11 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		HashMap<String,Group> courseGroups = null;
 		
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseId;
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("courseid",courseId));
+			String response = doPostToUrl(qapiUrl, parameters);
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -576,12 +795,15 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "moodle_group_delete_groups";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		
 		for (int i = 0; i < groupids.size(); i++){
-			qapiUrl += "&groupids[" + i + "]=" + groupids.get(i);
+			parameters.add(new BasicNameValuePair("groupids[" + i + "]",String.valueOf(groupids.get(i))));
 		}
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -599,8 +821,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String wsfunction = "gws_user_check_user_credentials";
 		
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&username=" + URLEncoder.encode(user, "UTF-8") + "&password=" + URLEncoder.encode(pass, "UTF-8");
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("username",user));
+			parameters.add(new BasicNameValuePair("password",pass));
+			String response = doPostToUrl(qapiUrl, parameters);
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -651,8 +877,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String courseid = c.getId();
 		Integer enrolid = null;
 		try {
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&enrol=" + URLEncoder.encode(enrol, "UTF-8") + "&courseid=" + courseid;
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("enrol",enrol));
+			parameters.add(new BasicNameValuePair("courseid",courseid));
+			String response = doPostToUrl(qapiUrl, parameters);
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -686,10 +916,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		ArrayList<CourseEnrol> enrols = new ArrayList<CourseEnrol>();
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_enrol_get_enrols_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + c.getId();
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("courseid",c.getId()));
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -748,11 +981,14 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	public Boolean deleteCourseEnrol(Integer enrolid, Integer courseid){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_enrol_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		qapiUrl = qapiUrl + "&enrolid=" + enrolid + "&courseid=" + courseid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("enrolid",String.valueOf(enrolid)));
+		parameters.add(new BasicNameValuePair("courseid",String.valueOf(courseid)));
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -793,14 +1029,18 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	 * @param participants The users to be enrolled in the course
 	 */
 	public void enrolUsers(Course c, ArrayList<Participant> participants) {
-		if (participants.size() == 0){
+		if (participants == null || participants.size() == 0){
 			return;
 		}
  		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "moodle_enrol_manual_enrol_users"; //The name of the webservice function in Moodle 2.0 and 2.1
 		String userid, roleid, courseid;
 		courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		
 		for (int i = 0; i < participants.size(); i++){
 			roleid = userid = "";
 			Participant p = participants.get(i);
@@ -821,19 +1061,79 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	        		roleid = "5"; //student role in Moodle 2.1
 	        	}
         	}
-        	try {
-        		qapiUrl += "&enrolments[" + i + "][roleid]=" + URLEncoder.encode(roleid, "UTF-8");
-        		qapiUrl += "&enrolments[" + i + "][userid]=" + URLEncoder.encode(userid, "UTF-8");
-        		qapiUrl += "&enrolments[" + i + "][courseid]=" + URLEncoder.encode(courseid, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+    		parameters.add(new BasicNameValuePair("enrolments[" + i + "][roleid]",roleid));
+    		parameters.add(new BasicNameValuePair("enrolments[" + i + "][userid]",userid));
+    		parameters.add(new BasicNameValuePair("enrolments[" + i + "][courseid]",courseid));
 		}
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * Get the courses in which a user is enrolled (with or without a role)
+	 * @param username The user's name
+	 * @return the courses the user is enrolled in (with or without a role)
+	 */
+	public HashMap<String, String> getCoursesIsEnrolled(String moodleBaseUri, String username){		
+		String qapiUrl = moodleBaseUri+"webservice/rest/server.php";
+		String wsfunction = "gws_course_get_courses_enrolled_username";
+
+		HashMap<String,String> vleCourses = null;
+		
+		try {
+			List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+			parameters.add(new BasicNameValuePair("wstoken",wstoken));
+			parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+			parameters.add(new BasicNameValuePair("username",username));
+			String response = doPostToUrl(qapiUrl, parameters);
+			
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+			InputSource is = new InputSource(new StringReader(response));
+			Document doc = db.parse(is);
+			//optional, but recommended
+			doc.getDocumentElement().normalize();
+			//Every course is contained in a SINGLE tag
+			NodeList courseNodeList = doc.getDocumentElement().getElementsByTagName("SINGLE");
+			for (int i = 0; i < courseNodeList.getLength(); i++){
+				Node courseNode = courseNodeList.item(i);
+				//Each course has a set of nodes with the values
+				NodeList keyNodeList = courseNode.getChildNodes();
+				String id = "";
+				String fullname = "";
+				for (int j = 0; j < keyNodeList.getLength(); j++){
+					Node keyNode = keyNodeList.item(j);
+					if (keyNode.getNodeType() == Node.ELEMENT_NODE) {						 
+						Element keyElement = (Element) keyNode;
+						String keyName = keyElement.getAttribute("name");
+						if (keyName.equals("id")){
+							id = keyElement.getChildNodes().item(0).getTextContent();
+						}else if(keyName.equals("fullname")){
+							fullname = keyElement.getChildNodes().item(0).getTextContent();
+						}
+					}
+				}
+				if (!id.isEmpty() && !fullname.isEmpty()){
+					if (vleCourses == null){
+						vleCourses = new HashMap<String, String>();
+					}//Add the course to the hash map
+					vleCourses.put(id, fullname);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		if (vleCourses!=null){
+			System.out.println("The courses in which the user " + username + " is enrolled are: "+vleCourses.toString());
+		}
+
+		return vleCourses;
 	}
 	
 	/**
@@ -848,9 +1148,14 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String courseid;
 		courseid = c.getId();
 		String success = "";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&userid=" + participant.getId() + "&courseid=" + courseid + "&enrolid=" + enrolid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("userid",participant.getId()));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
+		parameters.add(new BasicNameValuePair("enrolid",String.valueOf(enrolid)));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -897,7 +1202,10 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String wsfunction = "moodle_group_create_groups"; //The name of the webservice function in Moodle 2.0 and 2.1
 		String courseid = c.getId();
 		String name, description;
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		
 		for (int i = 0; i < groups.size(); i++){
 			Group g = groups.get(i);
 			name = g.getName();
@@ -910,18 +1218,14 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 				}
 			}
 			if (!exists){
-				try {
-					qapiUrl += "&groups[" + i + "][courseid]=" + URLEncoder.encode(courseid, "UTF-8");
-					qapiUrl += "&groups[" + i + "][name]=" + URLEncoder.encode(name, "UTF-8");
-					qapiUrl += "&groups[" + i + "][description]=" + URLEncoder.encode(description, "UTF-8");
-				} catch (UnsupportedEncodingException e) {
-					e.printStackTrace();
-				}
+				parameters.add(new BasicNameValuePair("groups[" + i + "][courseid]",courseid));
+				parameters.add(new BasicNameValuePair("groups[" + i + "][name]",name));
+				parameters.add(new BasicNameValuePair("groups[" + i + "][description]",description));
+				parameters.add(new BasicNameValuePair("groups[" + i + "][enrolmentkey]",name));
 			}
 		}
 		try {
-			String response = doGetFromURL(qapiUrl);
-			
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -975,18 +1279,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "moodle_group_add_groupmembers"; //The name of the webservice function in Moodle 2.0 and 2.1
 		String userid;
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		
 		for (int i = 0; i < partIds.size(); i++){
 			userid = partIds.get(i);
-			try {
-				qapiUrl += "&members[" + i + "][groupid]=" + groupId;
-				qapiUrl += "&members[" + i + "][userid]=" + URLEncoder.encode(userid, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			parameters.add(new BasicNameValuePair("members[" + i + "][groupid]",String.valueOf(groupId)));
+			parameters.add(new BasicNameValuePair("members[" + i + "][userid]",userid));
 		}
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -1002,21 +1305,19 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_grouping_create_grouping"; //The name of the webservice function in the glue webservice
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		String name, description;
 		for (int i = 0; i < groups.size(); i++){
 			name = groups.get(i).getName();
 			description = "";
-			try {
-				qapiUrl += "&groupings[" + i + "][courseid]=" + URLEncoder.encode(courseid, "UTF-8");
-				qapiUrl += "&groupings[" + i + "][name]=" + URLEncoder.encode(name, "UTF-8");
-				qapiUrl += "&groupings[" + i + "][description]=" + URLEncoder.encode(description, "UTF-8");
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
+			parameters.add(new BasicNameValuePair("groupings[" + i + "][courseid]",courseid));
+			parameters.add(new BasicNameValuePair("groupings[" + i + "][name]",name));
+			parameters.add(new BasicNameValuePair("groupings[" + i + "][description]",description));
 		}
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
@@ -1062,21 +1363,23 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	}
 	
 	/**
-	 * Assign the groups to the groupings in a Moodle's course. Each group is assign to a different grouping
+	 * Assign the groups to the groupings in a Moodle's course. Each group is assigned to a different grouping
 	 * @param groupingId ids of the groupings in the Moodle's course
 	 * @param groupId ids of the groups in the Moodle's course
 	 */
 	public void assignGrouping(ArrayList<Integer> groupingId, ArrayList<Integer> groupId){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_grouping_assign_grouping"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		if (groupingId.size() == groupId.size()){
 			for (int i = 0; i < groupingId.size(); i++){
-				qapiUrl += "&groupings_groups[" + i + "][groupingid]=" + groupingId.get(i);
-				qapiUrl += "&groupings_groups[" + i + "][groupid]=" + groupId.get(i);
+				parameters.add(new BasicNameValuePair("groupings_groups[" + i + "][groupingid]",String.valueOf(groupingId.get(i))));
+				parameters.add(new BasicNameValuePair("groupings_groups[" + i + "][groupid]",String.valueOf(groupId.get(i))));
 			}
 			try {
-				String response = doGetFromURL(qapiUrl);
+				String response = doPostToUrl(qapiUrl, parameters);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1089,10 +1392,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_sections_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
-		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1157,10 +1462,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_modules_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
-		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1228,10 +1535,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_urls_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1252,7 +1562,7 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 				String externalurl = "";
 				String display = "";
 				String displayoptions = "";
-				String parameters = "";
+				String param = "";
 				String timemodified = "";
 				for (int j = 0; j < keyNodeList.getLength(); j++){
 					Node keyNode = keyNodeList.item(j);
@@ -1277,7 +1587,7 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 							displayoptions = keyElement.getChildNodes().item(0).getTextContent();
 						}
 						else if(keyName.equals("parameters")){
-							parameters = keyElement.getChildNodes().item(0).getTextContent();
+							param = keyElement.getChildNodes().item(0).getTextContent();
 						}
 						else if(keyName.equals("timemodified")){
 							timemodified = keyElement.getChildNodes().item(0).getTextContent();
@@ -1287,7 +1597,7 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 				CourseUrl courseUrl = new CourseUrl(Integer.parseInt(id), Integer.parseInt(course), name, intro, Integer.parseInt(introformat), externalurl);
 				courseUrl.setDisplay(Integer.parseInt(display));
 				courseUrl.setDisplayoptions(displayoptions);
-				courseUrl.setParameters(parameters);
+				courseUrl.setParameters(param);
 				courseUrl.setTimemodified(Integer.parseInt(timemodified));
 				urls.add(courseUrl);
 			}
@@ -1302,10 +1612,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		CourseModule cm = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_module";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&moduleid=" + moduleid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("moduleid",String.valueOf(moduleid)));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1374,13 +1687,21 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	public Boolean updateCourseModule(CourseModule cm){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_update_module";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		qapiUrl = qapiUrl + "&module[id]=" + cm.getId() + "&module[course]=" + cm.getCourse() + "&module[module]=" + cm.getModule() + "&module[instance]=" + cm.getInstance();
-		qapiUrl = qapiUrl + "&module[section]=" + cm.getSection() + "&module[visible]=" + cm.getVisible() + "&module[groupmode]=" + cm.getGroupmode() + "&module[groupingid]=" + cm.getGroupingid();
-		qapiUrl = qapiUrl + "&module[groupmembersonly]=" + cm.getGroupmembersonly();
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));	
+		parameters.add(new BasicNameValuePair("module[id]",String.valueOf(cm.getId())));
+		parameters.add(new BasicNameValuePair("module[course]",String.valueOf(cm.getCourse())));
+		parameters.add(new BasicNameValuePair("module[module]",String.valueOf(cm.getModule())));
+		parameters.add(new BasicNameValuePair("module[instance]",String.valueOf(cm.getInstance())));
+		parameters.add(new BasicNameValuePair("module[section]",String.valueOf(cm.getSection())));
+		parameters.add(new BasicNameValuePair("module[visible]",String.valueOf(cm.getVisible())));
+		parameters.add(new BasicNameValuePair("module[groupmode]",String.valueOf(cm.getGroupmode())));
+		parameters.add(new BasicNameValuePair("module[groupingid]",String.valueOf(cm.getGroupingid())));
+		parameters.add(new BasicNameValuePair("module[groupmembersonly]",String.valueOf(cm.getGroupmembersonly())));
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1423,16 +1744,24 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	public Boolean updateCourseSection(CourseSection cs){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_update_section";
-		try{
-			qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-			qapiUrl = qapiUrl + "&section[id]=" + cs.getId() + "&section[course]=" + cs.getCourse() + "&section[section]=" + cs.getSection() + "&section[name]=" + URLEncoder.encode(cs.getName(), "UTF-8");
-			qapiUrl = qapiUrl + "&section[summary]=" + URLEncoder.encode(cs.getSummary(), "UTF-8") + "&section[summaryformat]=" + cs.getSummaryformat() + "&section[sequence]=" + URLEncoder.encode(cs.getSequence(), "UTF-8") + "&section[visible]=" + cs.getVisible();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("section[id]",String.valueOf(cs.getId())));
+		parameters.add(new BasicNameValuePair("section[course]",String.valueOf(cs.getCourse())));
+		parameters.add(new BasicNameValuePair("section[section]",String.valueOf(cs.getSection())));
+		parameters.add(new BasicNameValuePair("section[name]",cs.getName()));
+		parameters.add(new BasicNameValuePair("section[summary]",cs.getSummary()));
+		parameters.add(new BasicNameValuePair("section[summaryformat]",String.valueOf(cs.getSummaryformat())));
+		parameters.add(new BasicNameValuePair("section[sequence]",cs.getSequence()));
+		parameters.add(new BasicNameValuePair("section[visible]",String.valueOf(cs.getVisible())));
+		parameters.add(new BasicNameValuePair("section[summary]",cs.getSummary()));
+		parameters.add(new BasicNameValuePair("section[summaryformat]",String.valueOf(cs.getSummaryformat())));
+		parameters.add(new BasicNameValuePair("section[sequence]",cs.getSequence()));
+		parameters.add(new BasicNameValuePair("section[visible]",String.valueOf(cs.getVisible())));
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1476,16 +1805,28 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		Integer urlid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_insert_url_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		/*qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
 		try {
 			qapiUrl = qapiUrl + "&course=" + url.getCourse() + "&name=" + URLEncoder.encode(url.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(url.getIntro(),"UTF-8") + "&introformat=" + url.getIntroformat() + "&externalurl=" + URLEncoder.encode(url.getExternalurl(), "UTF-8");
 			qapiUrl = qapiUrl + "&display=" + url.getDisplay() + "&displayoptions=" + URLEncoder.encode(url.getDisplayoptions(),"UTF-8") + "&parameters=" + URLEncoder.encode(url.getParameters(),"UTF-8");
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
-		}
-
+		}*/
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction", wsfunction));
+		parameters.add(new BasicNameValuePair("course", String.valueOf(url.getCourse())));
+		parameters.add(new BasicNameValuePair("name", url.getName()));
+		parameters.add(new BasicNameValuePair("intro", url.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat", String.valueOf(url.getIntroformat())));
+		parameters.add(new BasicNameValuePair("externalurl", url.getExternalurl()));
+		parameters.add(new BasicNameValuePair("display", String.valueOf(url.getDisplay())));
+		parameters.add(new BasicNameValuePair("displayoptions", String.valueOf(url.getDisplayoptions())));
+		parameters.add(new BasicNameValuePair("parameters", String.valueOf(url.getParameters())));
+		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			//String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1525,14 +1866,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_url_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < urls.size(); i++){
 			CourseUrl url = urls.get(i);
-			qapiUrl += "&urls[" + i + "][urlid]=" + url.getId() + "&urls[" + i + "][courseid]=" + url.getCourse();
+			parameters.add(new BasicNameValuePair("urls[" + i + "][urlid]",String.valueOf(url.getId())));
+			parameters.add(new BasicNameValuePair("urls[" + i + "][courseid]",String.valueOf(url.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1576,12 +1920,20 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		Integer moduleid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_insert_module"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		qapiUrl = qapiUrl + "&course=" + cm.getCourse() + "&module=" + cm.getModule() + "&instance=" + cm.getInstance() + "&section=" + cm.getSection() + "&visible=" + cm.getVisible();
-		qapiUrl = qapiUrl + "&groupmode=" + cm.getGroupmode() + "&groupingid=" + cm.getGroupingid() + "&groupmembersonly=" + cm.getGroupmembersonly();
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(cm.getCourse())));
+		parameters.add(new BasicNameValuePair("module",String.valueOf(cm.getModule())));
+		parameters.add(new BasicNameValuePair("instance",String.valueOf(cm.getInstance())));
+		parameters.add(new BasicNameValuePair("section",String.valueOf(cm.getSection())));
+		parameters.add(new BasicNameValuePair("visible",String.valueOf(cm.getVisible())));
+		parameters.add(new BasicNameValuePair("groupmode",String.valueOf(cm.getGroupmode())));
+		parameters.add(new BasicNameValuePair("groupingid",String.valueOf(cm.getGroupingid())));
+		parameters.add(new BasicNameValuePair("groupmembersonly",String.valueOf(cm.getGroupmembersonly())));
 
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1622,15 +1974,18 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_module";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 
 		for (int i = 0; i < modules.size(); i++){
 			CourseModule module = modules.get(i);
-			qapiUrl += "&modules[" + i + "][moduleid]=" + module.getId() + "&modules[" + i + "][courseid]=" + module.getCourse();
+			parameters.add(new BasicNameValuePair("modules[" + i + "][moduleid]",String.valueOf(module.getId())));
+			parameters.add(new BasicNameValuePair("modules[" + i + "][courseid]",String.valueOf(module.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1669,10 +2024,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_forums_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
-		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1740,17 +2097,22 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	public Integer insertCourseForum(CourseForum forum){
 		Integer forumid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
-		String wsfunction = "gws_course_insert_forum_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		try {
-			qapiUrl = qapiUrl + "&course=" + forum.getCourse() + "&type=" + URLEncoder.encode(forum.getType(),"UTF-8") + "&name=" + URLEncoder.encode(forum.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(forum.getIntro(),"UTF-8");
-			qapiUrl = qapiUrl + "&introformat=" + forum.getIntroformat() + "&assessed=" + forum.getAssessed() + "&assesstimestart=" + forum.getAssesstimestart() + "&assesstimefinish=" + forum.getAssesstimefinish() + "&maxattachments=" + forum.getMaxattachments();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		String wsfunction = "gws_course_insert_forum_course"; //The name of the webservice function in the glue webservice		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(forum.getCourse())));
+		parameters.add(new BasicNameValuePair("type",forum.getType()));
+		parameters.add(new BasicNameValuePair("name",forum.getName()));
+		parameters.add(new BasicNameValuePair("intro",forum.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat",String.valueOf(forum.getIntroformat())));
+		parameters.add(new BasicNameValuePair("assessed",String.valueOf(forum.getAssessed())));
+		parameters.add(new BasicNameValuePair("assesstimestart",String.valueOf(forum.getAssesstimestart())));
+		parameters.add(new BasicNameValuePair("assesstimefinish",String.valueOf(forum.getAssesstimefinish())));
+		parameters.add(new BasicNameValuePair("maxattachments",String.valueOf(forum.getMaxattachments())));
 
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1790,14 +2152,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_forum_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < forums.size(); i++){
 			CourseForum forum = forums.get(i);
-			qapiUrl += "&forums[" + i + "][forumid]=" + forum.getId() + "&forums[" + i + "][courseid]=" + forum.getCourse();
+			parameters.add(new BasicNameValuePair("forums[" + i + "][forumid]",String.valueOf(forum.getId())));
+			parameters.add(new BasicNameValuePair("forums[" + i + "][courseid]",String.valueOf(forum.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1837,10 +2202,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_chats_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1907,16 +2275,20 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		Integer chatid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_insert_chat_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		try {
-			qapiUrl = qapiUrl + "&course=" + chat.getCourse() + "&name=" + URLEncoder.encode(chat.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(chat.getIntro(),"UTF-8") + "&introformat=" + chat.getIntroformat();
-			qapiUrl = qapiUrl + "&keepdays=" + chat.getKeepdays() + "&studentlogs=" + chat.getStudentlogs() + "&chattime=" + chat.getChattime() + "&schedule=" + chat.getSchedule();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(chat.getCourse())));
+		parameters.add(new BasicNameValuePair("name",chat.getName()));
+		parameters.add(new BasicNameValuePair("intro",chat.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat",String.valueOf(chat.getIntroformat())));
+		parameters.add(new BasicNameValuePair("keepdays",String.valueOf(chat.getKeepdays())));
+		parameters.add(new BasicNameValuePair("studentlogs",String.valueOf(chat.getStudentlogs())));
+		parameters.add(new BasicNameValuePair("chattime",String.valueOf(chat.getChattime())));
+		parameters.add(new BasicNameValuePair("schedule",String.valueOf(chat.getSchedule())));
 
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -1957,14 +2329,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_chat_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < chats.size(); i++){
 			CourseChat chat = chats.get(i);
-			qapiUrl += "&chats[" + i + "][chatid]=" + chat.getId() + "&chats[" + i + "][courseid]=" + chat.getCourse();
+			parameters.add(new BasicNameValuePair("chats[" + i + "][chatid]",String.valueOf(chat.getId())));
+			parameters.add(new BasicNameValuePair("chats[" + i + "][courseid]",String.valueOf(chat.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2005,10 +2380,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_quizzes_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
-		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2075,16 +2452,20 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		Integer quizid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_insert_quiz_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair>();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(quiz.getCourse())));
+		parameters.add(new BasicNameValuePair("name",quiz.getName()));
+		parameters.add(new BasicNameValuePair("intro",quiz.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat",String.valueOf(quiz.getIntroformat())));
+		parameters.add(new BasicNameValuePair("timeopen",String.valueOf(quiz.getTimeopen())));
+		parameters.add(new BasicNameValuePair("timeclose",String.valueOf(quiz.getTimeclose())));
+		parameters.add(new BasicNameValuePair("preferredbehaviour",quiz.getPreferredbehaviour()));
+		parameters.add(new BasicNameValuePair("attempts",String.valueOf(quiz.getAttempts())));
+		
 		try {
-			qapiUrl = qapiUrl + "&course=" + quiz.getCourse() + "&name=" + URLEncoder.encode(quiz.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(quiz.getIntro(),"UTF-8") + "&introformat=" + quiz.getIntroformat();
-			qapiUrl = qapiUrl + "&timeopen=" + quiz.getTimeopen() + "&timeclose=" + quiz.getTimeclose() + "&preferredbehaviour=" + URLEncoder.encode(quiz.getPreferredbehaviour(),"UTF-8") + "&attempts=" + quiz.getAttempts();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2124,14 +2505,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_quiz_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < quizzes.size(); i++){
 			CourseQuiz quiz = quizzes.get(i);
-			qapiUrl += "&quizzes[" + i + "][quizid]=" + quiz.getId() + "&quizzes[" + i + "][courseid]=" + quiz.getCourse();
+			parameters.add(new BasicNameValuePair("quizzes[" + i + "][quizid]",String.valueOf(quiz.getId())));
+			parameters.add(new BasicNameValuePair("quizzes[" + i + "][courseid]",String.valueOf(quiz.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2171,10 +2555,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_assignments_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2241,22 +2628,28 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 	/**
 	 * Insert a resource of type assignment into a course
 	 * @param assignment The resource of type Assignment to be inserted
-	 * @return The quiz id
+	 * @return The assignment id
 	 */
 	public Integer insertCourseAssignment(CourseAssignment assignment){
 		Integer assignmentid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
-		String wsfunction = "gws_course_insert_assignment_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		try {
-			qapiUrl = qapiUrl + "&course=" + assignment.getCourse() + "&name=" + URLEncoder.encode(assignment.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(assignment.getIntro(),"UTF-8") + "&introformat=" + assignment.getIntroformat();
-			qapiUrl = qapiUrl + "&assignmenttype=" + URLEncoder.encode(assignment.getAssignmenttype(), "UTF-8") + "&resubmit=" + assignment.getResubmit() + "&preventlate=" + assignment.getPreventlate() + "&emailteachers=" + assignment.getEmailteachers() + "&grade=" + assignment.getGrade() + "&maxbytes=" + assignment.getMaxbytes();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		String wsfunction = "gws_course_insert_assignment_course"; //The name of the webservice function in the glue webservice		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(assignment.getCourse())));
+		parameters.add(new BasicNameValuePair("name",assignment.getName()));
+		parameters.add(new BasicNameValuePair("intro",assignment.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat",String.valueOf(assignment.getIntroformat())));
+		parameters.add(new BasicNameValuePair("assignmenttype",assignment.getAssignmenttype()));
+		parameters.add(new BasicNameValuePair("resubmit",String.valueOf(assignment.getResubmit())));
+		parameters.add(new BasicNameValuePair("preventlate",String.valueOf(assignment.getPreventlate())));
+		parameters.add(new BasicNameValuePair("emailteachers",String.valueOf(assignment.getEmailteachers())));
+		parameters.add(new BasicNameValuePair("grade",String.valueOf(assignment.getGrade())));
+		parameters.add(new BasicNameValuePair("maxbytes",String.valueOf(assignment.getMaxbytes())));
 
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2296,14 +2689,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_assignment_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < assignments.size(); i++){
 			CourseAssignment assignment = assignments.get(i);
-			qapiUrl += "&assignments[" + i + "][assignmentid]=" + assignment.getId() + "&assignments[" + i + "][courseid]=" + assignment.getCourse();
+			parameters.add(new BasicNameValuePair("assignments[" + i + "][assignmentid]",String.valueOf(assignment.getId())));
+			parameters.add(new BasicNameValuePair("assignments[" + i + "][courseid]",String.valueOf(assignment.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2343,10 +2739,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_pages_course";
 		String courseid = c.getId();
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + courseid;
-		
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",courseid));
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2413,16 +2811,20 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		Integer pageid = null;
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_insert_page_course"; //The name of the webservice function in the glue webservice
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
-		try {
-			qapiUrl = qapiUrl + "&course=" + page.getCourse() + "&name=" + URLEncoder.encode(page.getName(),"UTF-8") + "&intro=" + URLEncoder.encode(page.getIntro(),"UTF-8") + "&introformat=" + page.getIntroformat();
-			qapiUrl = qapiUrl + "&content=" + URLEncoder.encode(page.getContent(), "UTF-8") + "&contentformat=" + page.getContentformat() + "&display=" + page.getDisplay() + "&displayoptions=" + URLEncoder.encode(page.getDisplayoptions(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("course",String.valueOf(page.getCourse())));
+		parameters.add(new BasicNameValuePair("name",page.getName()));
+		parameters.add(new BasicNameValuePair("intro",page.getIntro()));
+		parameters.add(new BasicNameValuePair("introformat",String.valueOf(page.getIntroformat())));
+		parameters.add(new BasicNameValuePair("content",page.getContent()));
+		parameters.add(new BasicNameValuePair("contentformat",String.valueOf(page.getContentformat())));
+		parameters.add(new BasicNameValuePair("display",String.valueOf(page.getDisplay())));
+		parameters.add(new BasicNameValuePair("displayoptions",page.getDisplayoptions()));
 
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2462,14 +2864,17 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_delete_page_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		for (int i = 0; i < pages.size(); i++){
 			CoursePage page = pages.get(i);
-			qapiUrl += "&pages[" + i + "][pageid]=" + page.getId() + "&pages[" + i + "][courseid]=" + page.getCourse();
+			parameters.add(new BasicNameValuePair("pages[" + i + "][pageid]",String.valueOf(page.getId())));
+			parameters.add(new BasicNameValuePair("pages[" + i + "][courseid]",String.valueOf(page.getCourse())));
 		}
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2508,10 +2913,13 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		ArrayList<CourseGrouping> groupings = new ArrayList<CourseGrouping>();
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_course_get_groupings_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction + "&courseid=" + c.getId();
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
+		parameters.add(new BasicNameValuePair("courseid",c.getId()));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2567,16 +2975,19 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		}
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_grouping_delete_grouping_course";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		
 		for (int i = 0; i < groupings.size(); i++){
 			CourseGrouping grouping = groupings.get(i);
-			qapiUrl += "&groupings[" + i + "][groupingid]=" + grouping.getId() + "&groupings[" + i + "][courseid]=" + grouping.getCourseid();
+			parameters.add(new BasicNameValuePair("groupings[" + i + "][groupingid]",String.valueOf(grouping.getId())));
+			parameters.add(new BasicNameValuePair("groupings[" + i + "][courseid]",String.valueOf(grouping.getCourseid())));
 		}
 		
 		String success = "";
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));
@@ -2619,10 +3030,12 @@ public HashMap<String,Participant> getUsers(String moodleBaseUri){
 		ArrayList<Module> modules = new ArrayList<Module>();
 		String qapiUrl = moodleUrl+"webservice/rest/server.php";
 		String wsfunction = "gws_module_get_modules";
-		qapiUrl = qapiUrl + "?wstoken=" + wstoken + "&wsfunction=" + wsfunction;
+		List<NameValuePair> parameters = new ArrayList<NameValuePair> ();
+		parameters.add(new BasicNameValuePair("wstoken",wstoken));
+		parameters.add(new BasicNameValuePair("wsfunction",wsfunction));
 		
 		try {
-			String response = doGetFromURL(qapiUrl);
+			String response = doPostToUrl(qapiUrl, parameters);
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(response));

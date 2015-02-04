@@ -70,6 +70,46 @@ class glueserver_role_external extends external_api{
             glueserver_role::get_class_structure()
         );
     }
+    
+    
+    
+     /**
+     * Returns description of method parameters
+     * @return external_function_parameters
+     */
+	public static function get_global_roles_username_parameters(){
+        return new external_function_parameters(
+            array(
+				'username'    => new external_value(PARAM_RAW, 'user name', VALUE_REQUIRED, 0, NULL_NOT_ALLOWED)
+            )
+        );
+    }
+    
+     /**
+     *
+     * Function to get the list of global roles of a user
+     *
+     * @return user details
+     */
+    public static function get_global_roles_username($username){
+        $roles = glueserver_role_db::glueserver_get_global_roles_username($username);
+        $returns = array();
+        foreach ($roles as $role) {
+            $role = new glueserver_role($role);
+            $returns[] = $role->get_data();
+        }
+        return $returns;
+    }
+    
+     /**
+     * Returns description of method result value
+     * @return external_description
+     */
+    public static function get_global_roles_username_returns() {
+        return new external_multiple_structure(
+        		glueserver_role::get_class_structure()
+        );
+    }
 	
 }
 

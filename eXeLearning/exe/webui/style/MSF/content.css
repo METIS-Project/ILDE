@@ -1,0 +1,2631 @@
+body{font:.75em/1.5 Arial,Verdana,Helvetica,sans-serif;padding:15px;margin:0;text-align:left;color:#333;background:#ffffff}
+a{color:#CE2239}
+#header, #emptyHeader{text-align:left;height:75px;padding-left:250px;font-size:1.25em;line-height:101px;vertical-align:bottom;color:#000;background:#fff url('_max_cabecera.jpg') no-repeat 0 0;border-top:5px solid #000;border-bottom:5px solid #000}
+#header h1{margin:0;font-size:1em}
+/* start MSF MGR*/
+/* 
+#nodeTitle,.nodeTitle{font-size:1.5em;margin:0;text-align:left;font-weight:bold;color:#222;padding:.1em 0 .6em 0;border-bottom:5px solid #B50536} */
+#nodeTitle, .nodeTitle{font-size:1.5em;margin:0;text-align:left;font-weight:bold;color:#222;padding:.1em 0 .6em 0;border-bottom:5px solid #EE0000} 
+/* End MSF MGR */
+/* .nodeTitle when single page */
+#main .nodeTitle{margin-top:.6em;color:#222}
+/* start MSF MGR*/
+/* #main h2{font-size:1.4em;color:#9A042F}*/
+#main h2{font-size:1.4em;color:#EE0000}
+/* End MSF MGR */
+#main h2.iDeviceTitle{display:inline;font-size:1.2em}
+#main h3{font-size:1.3em;color:#1E80B8}
+#main h4{font-size:1.2em}
+#main h5{font-size:1.1em}
+.iDevice{margin:1.8em 0}
+.iDeviceTitle{font-size:1.2em;vertical-align:top;top:-2px;color:#666;line-height:2em}
+.iDevice_icon{width:23px;height:auto;margin-right:5px} /* Icons: "Iconic" (Creative Commons by-sa), by P. J. Onori (http://www.somerandomdude.com/work/iconic/) */
+.iDevice_inner{padding: 10px 20px;border:1px solid #f0f0f0;background:#f9f9f9;color:#444;border-radius:5px}
+#siteFooter{color:#666666;font-size:.95em}
+#siteFooter a{color:#000}
+input, select, textarea{font-family:Arial,Verdana,Helvetica,sans-serif;font-size:1em}
+#lbOverlay{background-color:#f3f3f3}
+#lbOuterContainer{border-color:#ddd}
+.ExternalUrlIdevice iframe{border:none}
+/* base.css */
+/* start MSF MGR imagen cabecera*/
+div#nodeDecoration{padding:0;border:medium none;text-align:left;background-image:url('my_ims_header.jpg');background-position:right top;background-repeat:no-repeat;}
+/* End MSF MGR */
+.block, .feedback{padding:0}
+.feedback{font-family:Arial,Verdana,Helvetica,sans-serif;font-size:1em}
+li{list-style-position:outside}
+#wikipedia-content ul li{list-style-image:url('none');margin-bottom:auto}
+/* Form buttons */
+/* start MSF MGR*/
+/* .iDevice_inner input[type=submit],.iDevice_inner input[type=button],.feedbackbutton{background:#B50536;border:0;padding:3px 5px;color:#fff;border-radius:5px;text-shadow:1px 1px 1px #000;box-shadow:1px 1px 3px 0 #ccc;margin-bottom:1em} */
+ .iDevice_inner input[type=submit], .iDevice_inner input[type=button], .feedbackbutton{background:#EE0000;border:0px none;color:#fff;border-radius:5px;text-shadow:1px 1px 1px #000;box-shadow:1px 1px 3px 0 #ccc;margin-bottom:1em; padding-left:5px; padding-right:5px; padding-top:3px; padding-bottom:3px} 
+ /* End MSF MGR */
+.iDevice_inner input[type=submit]:hover, .iDevice_inner input[type=button]:hover, .feedbackbutton:hover{background:#000;color:#f3f3f3}
+/* A partir de aqu� es la hoja de estilo del proyecto de Doekos*/
+@font-face {
+
+	font-family: "Bradley Hand ITC";
+	src:url('bradhitc.eot?#iefix');
+	src:url('bradhitc.eot?#iefix') format("embedded-opentype"), url('nutrition/bradhitc.eot') format("woff"), url('/main/css/dokeos2_msf/font/bradhitc.ttf') format("truetype"), url('/main/css/dokeos2_msf/font/bradhitc.svg#filename') format("svg");
+	font-weight:bold;
+	font-style:normal;
+	word-spacing: 2px;
+	letter-spacing: -0.5px;
+
+}
+.image_top {
+       background: url('nutrition/back_all_transparent.png') no-repeat center top;
+    height: auto;
+    min-height: 400px;
+    padding-top: 65px
+    }
+
+    .under_line {
+       background: url('nutrition/under_line.png') repeat-y center top;
+    font-family: 'The Great Escape';
+    font-size: 18px;
+    height: auto;
+    line-height: 30px;
+    margin: auto;
+    width: 680px
+    }
+
+    .image_pic {
+          background: url('nutrition/pic_back.png') no-repeat 0 0;
+    float: left;
+    height: 190px;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: -50px;
+    padding-left: 55px;
+    padding-top: 44px;
+    position: relative;
+    width: 155px
+    }
+
+    .inside {
+        
+      margin: auto auto auto 100px;
+    position: relative;
+    width: 735px;
+    }
+
+    .box_black {
+
+        height: auto;
+text-align:left;
+
+    }
+
+    .box_top {
+        background: url('nutrition/box_top.png') no-repeat center top;
+        height: 5px
+    }
+    .box_content {
+        background: url('nutrition/box_content.png') repeat-y center top;
+        min-height: 30px
+    }
+    .back_footer {
+        background: url('nutrition/back_footer.png') repeat-y center top;
+        padding-top:10px;
+        height: auto;
+        min-height: 75px
+    }
+    .content_box_black {
+        color: #FFFFFF;
+        font-family: 'The Great Escape';
+        font-size: 18px;
+        line-height: 22px;
+        margin: auto;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        width: 720px;
+
+    }
+
+    .attachment {
+      
+        width: 144px; 
+        position: absolute; 
+        bottom: 0px;
+    }
+
+    .content_attachment {
+     
+        margin: auto; 
+        width: 675px; 
+        height: auto;
+    }
+
+    .content_right {
+       
+        float: right;    
+        width: 535px;
+    }
+
+ 
+
+@font-face {
+
+	font-family: "The Great Escape";
+	
+	src:url('nutrition/TheGreatEscape.eot');
+	
+	src:url('nutrition/TheGreatEscape.eot?#iefix') format("embedded-opentype"), url('/main/css/dokeos2_msf/font/TheGreatEscape.eot') format("woff"), url('/main/css/dokeos2_msf/font/TheGreatEscape.ttf') format("truetype"), url('/main/css/dokeos2_msf/font/TheGreatEscape.svg#filename') format("svg");
+	
+	font-weight:bold;
+	
+	font-style:normal;
+	word-spacing: 2px;
+	letter-spacing: -0.5px;
+
+}
+
+@font-face {
+
+	font-family: "The Great Escape Bold";
+	
+	src:url('nutrition/TheGreatEscapeBold.eot');
+	
+	src:url('nutrition/TheGreatEscape.eot?#iefix') format("embedded-opentype"), url('/main/css/dokeos2_msf/font/TheGreatEscapeBold.eot') format("woff"), url('/main/css/dokeos2_msf/font/TheGreatEscapeBold.ttf') format("truetype"), url('/main/css/dokeos2_msf/font/TheGreatEscapeBold.svg#filename') format("svg");
+	
+	font-weight:bold;
+	
+	font-style:normal;
+	word-spacing: 2px;
+	letter-spacing: -0.5px;
+
+}
+
+
+
+
+
+#content_msf
+{
+	width:751px;
+	height:auto;
+	 
+	}
+
+#content_bottom
+{
+	width:751px;
+	height:auto;
+	 
+	}
+#img_top {
+	background-image:url('nutrition/img_top_pic.png'); 
+	background-repeat: repeat-y; 
+	float: left; 
+	min-height:10px;
+	height: auto;
+	 
+	width: 751px;
+}
+
+
+
+#img_middle_repeat {
+	background-image:url('nutrition/img_middle_repeat.png'); 
+	background-repeat: repeat-y;
+	 
+	float: left; 
+	height: auto;
+	width: 751px;
+}
+
+
+#img_middle_bottom {
+	background-image:url('nutrition/img_middle_bottom.png'); 
+	background-repeat: repeat;
+	text-align:center; 
+font-family: "Bradley Hand ITC";
+	float: left; 
+	height: auto;
+	width: 751px;
+LIST-STYLE: none none inside; PADDING-LEFT: 0px; FONT-SIZE: 22px; FONT-WEIGHT: bolder; paddin-right: 5px
+}
+
+
+#bar_black{
+	background-image:url('nutrition/bar_black_new.png'); 
+	background-repeat: no-repeat;
+	font-family: "Bradley Hand ITC";
+	float: left; 
+	height: 14px;
+	width: 751px;
+}
+
+#bar_black_bottom{
+	 background-image: url('nutrition/bar_black_bottom.png');
+    background-repeat: repeat-y;
+   
+    float: left;
+    height: auto;
+    padding-left: 40px;
+    padding-right: 32px;
+    width: 670px
+		}
+
+#bar_black_bottom_repeat{
+	background-image: url('nutrition/bar_black_bottom_repeat.png');
+    background-repeat: no-repeat;
+    float: left;
+    height: 6px;;
+    padding-left: 40px;
+    padding-right: 32px;
+    width: 670px
+	}
+
+
+#content_bottom_2 {
+	background-image:url('nutrition/img_bottom_repeat.png'); 
+	background-repeat: repeat-y;
+	float: left; 
+	height: auto;
+	width: 751px
+}
+
+
+
+
+#img_bottom2  {
+	background-image:url('nutrition/img_bottom.png'); 
+	background-repeat: no-repeat;
+	float: left; 
+	height: 30px;
+	width: 751px
+	}
+
+#text_1 li {
+	color:#000000;
+	}
+
+#text_1 {
+	/*background-image:url('nutrition/img_middle_repeat.png);
+	background-repeat:repeat-y; */
+     float: left;
+	 
+	font-family:"The Great Escape";
+	font-size: 18px;
+	height: auto;
+	color:#000000;
+	margin-left: 87px;
+	margin-top: 10px;
+	text-align: left;
+	width: 605px;
+}
+
+#bar_black_bottom li {
+font-family:"The Great Escape";
+	color:#ffffff;
+	}
+
+ 
+
+#pic {
+	
+	 height:159px;
+	/* border:1px solid red;*/
+	 margin-left:240px; 
+	 overflow:hidden;
+}
+
+#script {
+	
+	padding-top:10px;
+	padding-bottom: 10px;
+padding-right:10px;
+	width:751px;
+	float:left;
+	text-align:center;
+	}
+
+
+
+#title_msf {
+	float: left;
+  font-family:"The Great Escape";
+    height: auto;
+    margin-left: 87px;
+    margin-top: 70px;
+    
+    text-align: left;
+    width: 605px;
+	
+	}
+
+
+li {
+LIST-STYLE: none none inside; BORDER-BOTTOM: #ababab 1px dashed; PADDING-LEFT: 0px; FONT-SIZE: 18px; FONT-WEIGHT: bolder;  
+}
+
+/*td {
+FONT-SIZE: 20px; FONT-WEIGHT: bolder; paddin-right: 5px
+}*/
+
+
+
+
+.text {
+	COLOR: #000000; FONT-SIZE: 18px; 
+	font-family:"The Great Escape";
+}
+.h1_underline {
+	LIST-STYLE: none none inside; 
+	BORDER-BOTTOM: #ababab 1px dashed; 
+	PADDING-LEFT: 20px; COLOR: #f00800; 
+	font-family:"The Great Escape Bold";
+	FONT-SIZE: 24px; 
+	FONT-WEIGHT: bolder; 
+	paddin-right: 20px; 
+	text-align:left;
+}
+
+.h2_underline {
+	LIST-STYLE: none none inside; 
+	BORDER-BOTTOM: #ababab 1px dashed; 
+	PADDING-LEFT: 20px; 
+	COLOR: #000000; 
+	font-family:"The Great Escape Bold";
+	FONT-SIZE: 35px; 
+	FONT-WEIGHT: bolder; 
+	paddin-right: 20px; 
+	text-align:left;
+}
+
+
+
+.underline {
+	LIST-STYLE: none none inside;
+	BORDER-BOTTOM: #ababab 1px dashed; 
+	PADDING-LEFT: 0px; COLOR: #000000; 
+	FONT-SIZE: 22px; 
+	FONT-WEIGHT: bolder; 
+ 
+}
+
+#show-js {
+
+        font-family: "The Great Escape"; 
+
+    }
+
+    #medias-js {
+        display: block
+    }	
+    .content_show-js{
+    
+    margin: auto auto auto 20px;
+    padding-bottom: 10px;
+     
+    }	
+
+div.exercise_questions_tpl {
+ background-position: 47px center !important;
+
+}
+
+
+div.exercise_questions_bottom {
+background-position: 27px center;
+}	
+
+.font-bradley {
+	FONT-FAMILY: "Bradley Hand ITC"
+}
+
+.font-great{
+font-family:"The Great Escape";
+}
+
+.font-great-bold{
+font-family:"The Great Escape Bold";
+}
+
+#show-js {
+	font-family:"The Great Escape";
+padding-right:40px;
+	}
+div.scroll_feedback {
+  margin-left: 0px !important;
+}
+
+#attachment {
+	background-image: url('nutrition/attachment.png');
+    background-position:  
+               center bottom;
+    background-repeat: no-repeat;
+    height: 104px;
+    margin-left: 61px;
+    margin-top: 46px;
+    position: absolute;
+    width: 116px;
+    z-index: 5
+	}
+
+#layer3 {
+	BACKGROUND-IMAGE: url('nutrition/cardback3_3.png'); BACKGROUND-COLOR: #ffffff; WIDTH: 737px; BACKGROUND-REPEAT: no-repeat; BACKGROUND-POSITION: right top; FLOAT: left; HEIGHT: 125px; MARGIN-RIGHT: 1px
+}
+#layer3_right {
+	TEXT-ALIGN: left; MIN-HEIGHT: 85px; WIDTH: 473px; FONT-FAMILY: "The Great Escape"; FLOAT: right; HEIGHT: 90px; MARGIN-LEFT: 5px; OVERFLOW: hidden; MARGIN-RIGHT: 46px
+}
+#layer6 {
+	BACKGROUND-IMAGE: url('/nutrition/cardback6.png'); BACKGROUND-COLOR: #ffffff; MIN-HEIGHT: 10px; WIDTH: 737px; BACKGROUND-REPEAT: repeat-y; FONT-FAMILY: "The Great Escape"; FLOAT: left; HEIGHT: 10px
+}		
+<pre>***************************************************** 
+ *  HEADER STYLES                                    *
+ *****************************************************/
+#header {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+/* Header 1: Containing title, portal and organization */
+#header1 {
+	font-size: 12px;
+	padding: 4px;
+	background-color: #264269;
+	color: #fff;
+	border-bottom: 1px solid white;
+}
+#header1 a {
+	color: #ffffff;
+	text-decoration: none;
+}
+#header1 a:hover {
+	text-decoration: underline;
+}
+#sitename {
+	margin: 0;
+	font-weight: bold;
+}
+#institution {
+	float: left;
+	font-weight: bold;
+}
+#my_courses {
+	float: right;
+	font-weight: bold;
+}
+/* Header 2: Containing My Courses, My Profile,... */
+#header2 {
+	font-size: 12px;
+	padding: 4px;
+	background-color: #4271B5;
+	color: #fff;
+	border-bottom: 1px solid white;
+}
+#header2 .banner_links {
+	margin: 0;
+}
+#header2 a {
+	text-decoration: none;
+	color: #fff;
+	background: transparent;
+	font-weight:normal;
+	font-size: 12px;
+}
+#header2 input.logout {
+	/* makes an input appear like a link in this header */	
+	margin: 0;
+	padding: 0;
+	background-color: transparent;
+	border: none;
+	color: #fff;
+	font-size: 12px;
+	font-weight:normal;
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+#header2 a:hover, #header2 input.logout:hover {
+	border-bottom: 1px solid #fff;
+}
+#logout {
+	float: right;
+	width:20%;
+	text-align:right;
+}
+/* Header 3: Containing breadcrumbs, online users, student/teacher view, help */
+#header3 {
+	position: relative; /* to avoid the IE peekabo bug*/
+	font-size: 12px;
+	font-weight: normal;
+	padding: 4px;
+	background-color: #90AFDD;
+	color: #fff;
+	border-bottom: 1px solid white;
+}
+#header3 a {
+	color: #ffffff;
+	text-decoration: none;
+	font-weight:normal;
+}
+#header3 a:hover {
+	text-decoration: underline;
+}
+/* Header3Right: online users, student/teacher view, help */
+#Header3Right ul {
+	position: relative; /* to avoid the IE peekabo bug*/
+	float: right;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+	text-align: right;
+}
+#Header3Right ul li {
+	display: inline;
+}
+#Header3Right ul li a {
+	padding: 4px 6px 4px 4px;
+	color:#fff;
+}
+/* Header 4: not used */
+#header4 {
+	background-color: #fff;
+	color: #009;
+	padding: 4px;
+	margin-bottom: 2px;
+}
+#header4 a {
+	color: #4171b5;
+}
+#header4 a:hover {
+	text-decoration: none;
+	color: #f00;
+}
+/* The tool shortcuts */
+#toolshortcuts {
+	text-align: right;
+}
+/***************************************************** 
+ *  FOOTER STYLES                                    *
+ *****************************************************/
+#footer {
+	padding: 8px;
+	border-top: 1px solid #4171B5;
+	background-color: #E5EDF9;
+	font-size: 12px;
+}
+#footer .copyright {
+	float: right;
+}
+/***************************************************** 
+ *  MAIN STYLES                                      *
+ *****************************************************/
+#main {
+	position: relative; /* to avoid the IE peekabo bug*/
+	margin: 0px auto;
+	margin-top: 10px;
+	/*width: 98%;*/
+	padding: 0px 10px 10px 10px;
+	background-color: #fff;
+	min-height: 500px;
+}
+/* for content section in main index.php file */
+.maincontent {
+	float: left;
+	width: 78%;
+	padding: 4px;
+	background-color: #fff;
+}
+/* "menu" classes for menu/navigation section in main index.php  */
+.menu {
+	float: right;
+	width: 20%;
+	padding: 0 0 6px 0;
+	background-color: #E5EDF9;
+	border: 1px solid #4171B5;
+}
+.menucaption {
+	font-size: 12px;
+	font-weight: bold;
+	padding-left: 12px;
+}
+.menusection {
+	width: auto;
+	margin: 24px 6px 0 6px;
+	padding-left: 10px;
+	border: 1px solid #4171B5;
+}
+.menusectioncaption {
+	position: relative;
+	top: -9px;
+	background-color: #E5EDF9;
+	font-size: 12px;
+	padding: 0 8px 0 4px;
+}
+.menulist {
+	list-style: none;
+	margin: 0 0 12px 0;
+	padding: 0;
+}
+#lang_form {
+	text-align: left;
+	font-size: 12px;
+	margin: 2px 0 10px 0;
+	padding: 2px;
+}
+#lang_form input, #lang_form select {
+	font-size: 12px;
+}
+#loginform label {
+	font-size: 12px;
+	margin: 4px 6px;
+}
+#loginform input {
+	display: block;
+	font-size: 13px;
+	margin: 4px 6px;
+}
+#login_fail {
+	margin: 0 6px 6px 6px;
+	padding: 4px;
+	border: 1px solid #f00;
+	background-color: #fff;
+	font-size: 12px;
+	color: #f00;
+}
+/*** layout divs for course and tool pages (being tested in some pages) ****/  
+#contentfloatholder {/* also makes the right "sliding" tab  */
+	/*background: url(../pics/sidebar-r.gif) repeat-y 100% 0;
+background: url(../pics/bg_fountain.jpg) no-repeat 100% 0; */
+float: left;
+	width: 100%;
+	position: relative;
+}
+#contentfloatholder:after {
+	/* this is for NN6 to clear floats */
+content: ".";
+	display: block;
+	height: 0px;
+	clear: both;
+	visibility: hidden;
+}
+#centerwrap {
+	float: left;
+	width: 100%;
+	margin-right: -95%;/* this needs to be less than 100% for Moz/Mac which thinks 
+         it's empty otherwise. The difference is made up by putting a 
+         negative left margin on the left float:
+	   Note IE/Mac doesn't like this method ~ it wants the 100% so it can 
+	   be fed in using IE only CSS below becasue IE/Win also works with the 100% method.  
+	*/
+}
+#center {
+	margin: 0 0 0 180px;
+	padding: 10px 0 40px 0;
+	min-height: 300px;
+}
+#left {
+	float: left;
+	width: 180px;
+	padding: 20px 0 0 0;
+	margin-left: -5%; /* the difference to make the left colum appear flush left */
+}
+/* --- left navigation box menu as a definition list  --- */
+#leftnavbox {
+	margin: 0;
+	padding: 0;
+	float:left;
+}
+#leftnavbox dl {
+	width: 160px;
+	margin: 12px auto 4px auto;
+	padding: 0 0 10px 0;
+	background: transparent;
+	font-size: 12px;
+	text-align: center;
+}
+#leftnavbox dt {
+	margin: 0;
+	padding: 1px 2px;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	color: #000;
+	border-bottom: 1px solid #fff;
+	background: transparent;
+}
+#leftnavbox dd {
+	margin: 0;
+	padding: 0;
+	color: #009;
+	text-align: left;
+	border-bottom:1px solid #fff;
+	background: #ccf;
+}
+#leftnavlist a, #leftnavlist a:link {
+	display: block;
+	color: #fff;
+	text-decoration: none;
+	padding: 2px 5px 2px 10px;
+	background: #4171B5;
+	width:140px;
+	border: 1px solid #009;
+}
+#leftnavlist a:visited {
+	color:#eee;
+	text-decoration: none;
+	display: block;
+	padding: 2px 5px 2px 10px;
+	background: #4171B5;
+	color: #eee;
+	width:140px;
+}
+#leftnavlist a:hover {
+	background: #fff;
+	color:#4171B5;
+	display: block;
+}
+/* --- end of left side definition list menu section  --- */ 
+
+
+ 
+/* various sections in course-home.php file  */
+#toolremove {
+	width: 40%;
+	color: #f00;
+	font-weight: bold;
+	margin: 10px auto;
+	padding: 10px;
+	border: 2px solid #f00;
+}
+#courseintro {
+	clear: both;
+	width: 80%;
+	margin: 10px auto;
+	padding: 10px;
+	border-bottom: 1px solid #4171B5;
+}
+#courseintro_icons {
+	clear: both;
+	width: 80%;
+	margin: 10px auto;
+}
+.everybodyview {
+	position: relative; /* to avoid the IE peekabo bug ?*/
+	width: 80%;
+	margin: 10px auto;
+	padding: 10px;
+}
+.courseadminview, .platformadminview {
+	position: relative;
+	width: 80%;
+	margin: 25px auto 10px;
+	padding: 10px;
+	border: 1px solid #4171B5;
+}
+.viewcaption {
+	position: relative;
+	top: -20px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #4171B5;
+	background-color: #fff;
+	padding: 0 4px;
+}
+/***********************************/
+
+/* ===================================================
+					AGENDA STYLES
+===================================================*/
+
+/* ---------------------------------------------------
+	check if these are still used or not
+-----------------------------------------------------*/
+#agenda {
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid #4171B5;
+	border-collapse: collapse;
+}
+.agenda_month_divider {
+	background-color: #4171B5;
+	font-weight: bold;
+	font-size: 12px;
+	color: #fff;
+	text-align: center;
+}
+#agenda #title a {
+	color: #fff;
+}
+#agenda .agendaitem {
+	font-size: 12px;
+}
+#smallcalendar #title {
+	background-color: #4171B5;
+	font-weight: bold;
+	padding: 2px;
+	color: #fff;
+	text-align: center;
+	font-size: 11px;
+}
+#smallcalendar #title a {
+	color: #fff;
+}
+#agenda_select {
+	list-style: none;
+	border: 0px solid green;
+	margin: 30px 0 0 0;
+	padding: 0 0 0 10px;
+}
+/* ---------------------------------------------------
+	styles for the agenda (day, week, month view)
+-----------------------------------------------------*/
+#agenda_list {
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid #fff;
+	border-collapse: collapse;
+}
+/*The caption of the calendar (displays the month and the &lt;&lt; and &gt;&gt; links*/ 
+#agenda_list #title {
+	background-color: #4171B5;
+	font-weight: bold;
+	font-size: 12px;
+	color: #fff;
+	text-align: left;
+	padding: 2px 10px;
+	text-align: center;
+	border: 1px solid #264269;
+}
+#agenda_list #title a:link, #agenda_list #title a:visited {
+	background-color: #4171B5;
+	font-weight: bold;
+	font-size: 12px;
+	color: #fff;
+	text-align: left;
+	padding: 2px 10px;
+	text-align: center;
+}
+#agenda_list #title a:hover {
+	background-color: #4171B5;
+	font-weight: bold;
+	font-size: 12px;
+	color: #ff0000;
+	text-align: left;
+	padding: 2px 10px;
+	text-align: center;
+}
+/* The cells with the name of the days of the weeks (mon-&gt;sun)*/
+#agenda_list .weekdays {
+	background-color: #D3DFF1;
+	text-align: center;
+	font-weight: bold;
+	border: 1px solid #264269;
+	border-collapse: collapse;
+}
+/* The cells for the days (1-&gt;31) */ 
+#agenda_list .days_week {
+	height: 40px;
+	width: 12%;
+	text-align: left;
+	vertical-align: top;
+	border: 1px solid #264269;
+	border-collapse: collapse;
+	background-color: #f5f5f5;
+}
+#agenda_list .days_weekend {
+	height: 40px;
+	width: 12%;
+	text-align: left;
+	vertical-align: top;
+	border: 1px solid #264269;
+	border-collapse: collapse;
+	background-color: #e6e6e6;
+}
+#agenda_list .days_today {
+	height: 40px;
+	width: 12%;
+	text-align: left;
+	vertical-align: top;
+	border: 1px solid #264269;
+	border-collapse: collapse;
+	background-color: #FFCA8D;
+	color: #CC3300;
+	font-weight: bold;
+}
+/* text in the cells: display of agenda items (visible)*/
+#agenda_list .data {
+	background-color: #eee;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: bold;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+#agenda_list .datanotbold {
+	background-color: #eee;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+#agenda_list .text {
+	background-color: #fff;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+/*text in the cells: display of agenda items (invisible)*/   
+#agenda_list .data_hidden {
+	background-color: #eee;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: bold;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+	color: #999999;
+}
+#agenda_list .datanotbold_hidden {
+	background-color: #eee;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+	color: #999999;
+}
+#agenda_list .text_hidden {
+	background-color: #fff;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+	color: #999999;
+}
+/*text in the cells: display of agenda items (highlighted)*/    
+#agenda_list .datanow {
+	background-color: #FFCC00;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: bold;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+#agenda_list .datanotboldnow {
+	background-color: #FFCC00;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+#agenda_list .textnow {
+	background-color: #fff;
+	text-align: left;
+	padding: 2px 10px;
+	font-weight: normal;
+	border: 0px solid #4171B5;
+	border-collapse: collapse;
+}
+/* ---------------------------------------------------
+	styles for the mini agenda
+-----------------------------------------------------*/ 
+#smallcalendar {
+	width: 100%;
+	margin: 0 auto;
+	border: 1px solid #fff;
+	border-collapse: collapse;
+}
+#smallcalendar .weekdays {
+	background-color: #D3DFF1;
+	text-align: center;
+	font-size: 11px;
+	font-weight: bold;
+	border: 1px solid #fff;
+	border-collapse: collapse;
+}
+#smallcalendar .days_week {
+	background-color: #f5f5f5;
+	text-align: center;
+	font-size: 11px;
+	border-collapse: collapse;
+}
+#smallcalendar .days_weekend {
+	background-color: #e6e6e6;
+	text-align: center;
+	font-size: 11px;
+	border: 1px solid #fff;
+	border-collapse: collapse;
+}
+#smallcalendar .days_today {
+	width: 12%;
+	text-align: center;
+	font-size: 11px;
+	border: 1px solid #FA8500;
+	border-collapse: collapse;
+	background-color: #FFCA8D;
+}
+/* ---------------------------------------------------
+	styles for the personal agenda
+-----------------------------------------------------*/
+.personal_agenda {
+	color: #008000;
+}
+.personal_agenda a:link, .personal_agenda a:visited {
+	color: #008000;
+}
+a.personal_agenda:link, a.personal_agenda:visited {
+	color: #008000;
+}
+.personal_agenda a:hover, .personal_agenda a:hover {
+	color: #666666;
+}
+a.personal_agenda:hover, a.personal_agenda:hover {
+	color: #666666;
+}
+/* normal and erro message-box */
+.normal-message, .error-message {
+	position: relative;
+	margin: 10px auto;
+	margin-left: -250px;
+	width: 500px;
+	left: 50%;
+	right: 50%;
+	border-width: 1px;
+	border-style: solid;
+	padding: 5px;
+}
+.normal-message {
+	border: 1px solid #FF8001;
+	color: #000;
+	background-color: #FDC77E;
+}
+.error-message {
+	border: 1px solid #3F70AC;
+	color: #000;
+	background-color: #FDC273;
+}
+#message {
+	margin: 0 auto;
+	text-align: center;
+}
+#message select {
+	margin: 10px 0;
+	width: 220px;
+}
+#message textarea {
+	margin: 10px 0;
+}
+#message td {
+	padding: 4px;
+}
+/* styles from the document.php file */
+.comment {
+	margin-left: 30px;
+}
+.invisible {
+	color: #999;
+}
+.invisible a:link, .invisible a:visited {
+	color: #999;
+}
+a.invisible:link, a.invisible:visited {
+	color: #999;
+}
+/* styles from the upload.php file */
+dl.upload_option {
+	margin: 1em 0;
+	padding: 0;
+}
+.upload_option dt {
+	font-weight:bold;
+	margin:0;
+}
+.upload_option dd {
+	margin:0;
+}
+/* styles from dropbox.php file */
+.dropbox_detail {
+	font-size: small
+}
+.dropbox_date {
+	font-style: italic
+}
+.dropbox_person {
+	font-weight: bold
+}
+.dropbox_listTitle {
+	color: #000000;
+}
+.dropbox_feedback {
+	font-size: x-small;
+	height: 50px;
+	width: 200px;
+	overflow: auto
+}
+.dropbox_feedbacks {
+	height: 250px;
+	width: 100%;
+	overflow: auto
+}
+/* styles for chat / conference tools */
+#chat_entermessage {
+	background-color: #D6E5FA;
+	border-top: 1px solid #4171B5;
+	padding: 5px;
+	margin: 0;
+}
+/* styles for general formatting */
+.clear {
+	clear: both;
+	line-height: 0;
+	height: 0;
+}
+p, blockquote, ol, ul {
+	font-size: 12px;
+}
+h1 {
+	font-size: 21px;
+}
+h2 {
+	font-size: 18px;
+}
+h3 {
+	font-size: 15px;
+	margin-top:0px;
+	padding-top:0px;
+}
+h4 {
+	font-size: 12px;
+}
+h5, h6 {
+	font-family: verdana, arial, helvetica, sans-serif;
+}
+/* the following for regular &lt;a&gt; elements */
+a:link {
+	text-decoration: none;
+	font-weight : bold;
+	color : #FF0000;
+}
+a:visited {
+	text-decoration: none;
+	font-weight : bold;
+	color : #FF0000;
+}
+a:hover {
+	text-decoration: none;
+	color: *000000;
+	font-weight: bold
+}
+a:active {
+	text-decoration: none;
+	font-weight : bold;
+	color : #f00;
+}
+input.link_alike {
+	background-color: #FFFFFF;
+	border-width: 0px;
+	color: #4171b5;
+	font-weight: bold;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+input.link_alike:hover {
+	background-color: #FFFFFF;
+	border-width: 0px;
+	color: #FF0000;
+	font-weight: bold;
+	text-align: left;
+	padding: 0px;
+	margin: 0px;
+}
+input[type="text"] {
+    border: 1px solid lightgrey !important;
+}
+
+/* the following for the greyed out elements */
+a.nobold:link, a.nobold:visited, a.nobold:active {
+	font-weight: normal;
+	color: #999;
+	margin: 0 0 0 25px;
+}
+a.nobold:hover {
+	font-weight: normal;
+	color: #999;
+	text-decoration: underline;
+	margin: 0 0 0 25px;
+}
+.note {
+	margin: 6px;
+	font-size: 12px;
+	line-height: 14px;
+	font-family: verdana, arial, helvetica, sans-serif;
+	background-color: #FFF089;
+	color: #4171B5;
+	border: 1px solid #4171B5;
+	padding: 4px;
+}
+.alternativeBgLight {
+	background-color: #f5f5f5;
+	border: 1px solid #4171B5;
+	border-collapse: collapse;
+}
+.alternativeBgDark {
+	background-color: #ccf;
+	border: 1px solid #4171B5;
+	border-collapse: collapse;
+}
+.myagendatoday {
+	background-color: #FFCA8D;
+	border-collapse: collapse;
+	font-family: verdana, arial, helvetica, sans-serif;
+	color: #CC3300;
+	font-weight: bold;
+}
+/* Form elements - some general styling*/
+select, textarea {
+	color : #000;
+	border: 1px solid #000;
+}
+input.checkbox {
+	border-width: 0;
+}
+input.mainoption {
+	font-weight : bold;
+}   /* Main submit button      */
+input.liteoption {
+	font-weight : normal;
+} /* None-bold submit button */
+select, input[type=checkbox], input[type=radio], input[type=button], input[type=submit] {
+	cursor:	pointer;
+	font-size: 12px;
+}
+input[text] {
+	font-size: 12px;
+}
+/************************************************************
+  styles below here are not necessarily used in the current
+	release and the CVS files, they are from earlier versions,
+	and have been left untouched for anyone needing them in
+	their own platform ...
+*************************************************************/
+.topBanner a:link, .topBanner a:active, .topBanner a:visited {
+	text-decoration:none;
+	color:white;
+}
+.topBanner table {
+	text-decoration:none;
+}
+.topBanner a:hover {
+	text-decoration:underline;
+}
+.topBanner td {
+	border-top: solid White 1px;
+}
+.alternativeBgLight {
+	background-color: #f5f5f5;
+}
+.alternativeBgDark {
+	background-color: #e6e6e6
+}
+.forms {
+	letter-spacing: normal;
+	text-align: justify;
+	text-indent: 3pt;
+	word-spacing: normal;
+	padding: 2px 5px;
+}
+.formsTips {
+	text-align: justify;
+	text-indent: 15pt;
+	word-spacing: normal;
+}
+/*
+input.forms	{ letter-spacing: normal; text-align: justify; text-indent: 3pt;	word-spacing: normal;
+padding-top: 0px;	padding-right: 0px;	padding-bottom: 0px;	padding-left: 0px;}
+*/
+.warn {
+	border: thin double Silver;
+	margin-left: 15px;
+	margin-right: 15px;
+	font-family: serif;
+	color: Red;
+	padding-left: 25px;
+}
+.small {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px
+}
+.xsmall {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px
+}
+.xxsmall {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9px
+}
+/***************************************************** 
+ *  DATA TABLE STYLES                                *
+ *****************************************************/
+.cell_header {
+	background-color: #EEEEFF;
+	font-weight:bold;
+	text-align:left;
+	padding-left:5px;
+}   /* header cell in data table in tools */
+.data_table {
+	border-collapse: collapse;
+	width: 100%;
+	padding: 5px;
+}
+.data_table th {
+	padding-right: 20px;
+	border: 1px solid gray;
+	background-color: #E5EDF9;
+}
+.data_table tr.row_odd {
+	background-color: #fafafa;
+}
+.data_table tr.row_odd:hover, .data_table tr.row_even:hover {
+	background-color: #f0f0f0;
+}
+.data_table tr.row_even {
+	background-color: #fff;
+}
+.data_table td {
+	padding: 5px;
+	vertical-align: top;
+	border-bottom: 1px solid #b0b0b0;
+	border-right: 1px dotted #e1e1e1;
+	border-left: 1px dotted #e1e1e1;
+}
+/* admin page tool list definitions */
+.tool_list dt {
+	font-weight: bold;
+}
+.tool_list dd {
+	margin: 0;
+	padding: 4px 0 0 10px;
+}
+/* divs for category list / platform news on home page */
+.home_cats {
+	width: 45%;
+	float: left;
+	margin: 0;
+	padding: 0px;
+	padding-top: 8px;
+	background: #fff;
+}
+.home_news {
+	width: 45%;
+	float: right;
+	margin: 0;
+	padding: 0px;
+	padding-top: 8px;
+	background: #fff;
+}
+label.left {
+	float: left;
+	width: 15em;
+	margin: 0 0 0.5em 0;
+}
+form br {
+	clear: both;
+}
+/* Fix for alignment problem in IE-Win browsers  */
+/*  Hide from IE5-mac. Only IE-win sees this. \*/
+* html .label {
+	margin-right: 10px;
+}
+* html .data {
+	height: 1%;
+	margin-left: 0;
+}
+/* End hide from IE5/mac */
+
+.radio, .checkbox {
+	margin: 0;
+	padding: 0;
+	border: none;
+	background-color: transparent;
+}
+.required {
+	color: #f00;
+	font-weight: bold;
+}
+/* Admin section */
+div.admin_section {
+	width: 40%;
+	float: left;
+	padding: 5px;
+	margin: 10px 20px;
+}
+div.admin_section h4 {
+	margin: 0;
+	border-bottom: 1px solid gray;
+	width: 100%;
+}
+.user_course_category {
+	background-color: #efefef;
+	border: 1px solid #666;
+	font-weight: bold;
+	color: #666;
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+}
+/* Styles for the Dokeos Config Settings of the platform admin section*/
+.sectiontitle {
+	background-color: #EFEFEF;
+	border: 1px solid #cccccc;
+	font-weight: bold;
+	color: #666666;
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+	font-size: 11px;
+}
+.sectioncomment {
+	color: #000000;
+	margin: 5px;
+	padding: 5px;
+	font-size: 11px;
+}
+.sectionvalue {
+	list-style-type: none;
+	margin: 5px;
+	padding: 5px;
+}
+/* New Announcements Tool */
+.announcements_datum {
+	font-size: 12px;
+	font-weight: italic;
+	color: #666666;
+}
+/* System announcements on homepage */
+div.system_announcements {
+}
+div.system_announcements h3 {
+}
+div.system_announcements ul {
+	list-style-type: none;
+}
+div.system_announcement {
+	margin: 5px;
+}
+div.system_announcement_title {
+}
+div.system_announcement_content {
+	margin-left: 20px;
+	border-left: 1px solid gray;
+	padding-left: 5px;
+}</pre>
+/*************** GENRERAL STYLES *********************/
+/*****************************************************/
+@font-face {
+    font-family: "Bradley Hand ITC";
+    src: url('nutrition/bradhitc.eot');
+    src: url('nutrition/bradhitc.eot?#iefix') format("embedded-opentype"), 
+         url('nutrition/bradhitc.eot') format("woff"), 
+         url('nutrition/bradhitc.ttf') format("truetype"), 
+         url('nutrition/bradhitc.svg#filename') format("svg");
+    font-weight:bold;
+    font-style:normal;
+    word-spacing: 2px;
+    letter-spacing: -0.5px;
+}
+
+@font-face {
+    font-family: "The Great Escape";
+    src: url('nutrition/TheGreatEscape.eot');
+    src: url('nutrition/TheGreatEscape.eot?#iefix') format("embedded-opentype"), 
+         url('nutrition/TheGreatEscape.eot') format("woff"), 
+         url('nutrition/TheGreatEscape.ttf') format("truetype"), 
+         url('nutrition/TheGreatEscape.svg#filename') format("svg");
+    font-weight:bold;
+    font-style:normal;
+    word-spacing: 2px;
+    letter-spacing: -0.5px;
+}
+
+@font-face {
+    font-family: "The Great Escape Bold";
+    src: url('nutrition/TheGreatEscapeBold.eot');
+    src: url('nutrition/TheGreatEscape.eot?#iefix') format("embedded-opentype"), 
+         url('nutrition/TheGreatEscapeBold.eot') format("woff"), 
+         url('nutrition/TheGreatEscapeBold.ttf') format("truetype"), 
+         url('nutrition/TheGreatEscapeBold.svg#filename') format("svg");
+    font-weight:bold;
+    font-style:normal;
+    word-spacing: 2px;
+    letter-spacing: -0.5px;
+}
+body {
+font-family:arial,verdana;
+font-size:1em;
+color:#424242;
+background-color: #FFF;
+}
+
+* {
+margin:0;
+/*padding:0;*/
+border:0px none;
+/*vertical-align:top;*/
+}
+
+#header {
+/*background-image:url(nutrition/header.jpg);*/
+background-repeat:repeat-x;
+width:100%;
+}
+
+div#fixedscreen { width:960px; margin-left:auto; margin-right:auto; text-align:center;}
+
+div#headerinner {text-align:left;}
+
+div.roundframe {
+background-color:#ffffff;
+width:920px; margin-left:auto; margin-right:auto; text-align:center; margin-top:40px; -moz-border-radius:6px; -webkit-border-radius:6px; -khtml-border-radius:6px; border-radius:6px; behavior: url(border-radius.htc);
+border:1px solid #b8b7b9;
+}
+
+
+/****************** FCK STYLES ****************************/
+/**********************************************************/
+
+.white {
+/*tableau blanc corps de page*/
+font-family:verdana;
+width:900px; background-color:#ffffff; margin:auto; 
+text-align:left;
+}
+
+.smallwhite {
+	/*tableau blanc corps de page*/
+	font-family:verdana;
+	width:760px; background-color:#ffffff; margin:auto; 
+	text-align:left;
+        margin:auto !important;
+}
+
+
+.cellscontent {margin:20px 20px 40px 20px; width:860px;}
+
+
+table {
+border-collapse:collapse; /* soit cellspacing=0 pour tous les tableaux */
+}
+
+table td {
+padding:0px; /* soit cellpadding=0 pour tous les tableaux */
+}
+
+p {
+margin-bottom:10px;
+}
+
+h1 {
+font-size:1.7em; font-weight:normal; color: #1084A7; margin:20px; padding: 10px 0px;
+border-bottom:1px dotted #1084A7;
+}
+
+.smallwhite h1 {
+	padding-top:0px;
+}
+
+h1.orange {
+font-size :2.7em;
+font-weight:normal;
+padding: 20px 5px 7px 0px;
+border-bottom:1px dotted #1084A7;
+margin-bottom:20px;
+margin-right:10px;
+text-align:left;
+}
+
+h2 {
+color: #1084A7; font-size:1.2em;
+font-weight:normal;
+padding:0px 5px 15px 0px;
+}
+
+h3 {
+font-size:1em;
+color: #EE0000;
+background-image:url('nutrition/biblio-bullet.png');
+background-repeat:no-repeat;
+font-weight:normal;
+text-decoration:underline; padding-left:25px; padding-right:5px; padding-top:1px; padding-bottom:5px
+}
+
+h3.tablet_title {
+    
+    color: #1084A7;
+    display: block;
+    font-size: 130%;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-top: 20px;
+    margin-left: 5px;    
+    background: none !important;
+    text-decoration: none;
+}
+
+
+h4 {
+font-size:0.9em;
+font-style:italic;
+padding:0px 5px 15px 15px;
+}
+
+
+
+/******************************************** liste items ****************************************************/
+td#buble-talk, td#buble-talk2 {background-image:url('/main/img/templates/bubble-talk.png'); background-position: left bottom; background-repeat:no-repeat; color: #e25502; padding-left:20px; padding-right:20px; padding-top:0px; padding-bottom:30px}
+
+table.perso-and-buble {width:260px;}
+
+.items {
+margin:2px;
+}
+
+td.arrow {
+background-image:url('nutrition/orange-arrow.png');
+background-repeat:no-repeat;
+background-position: 5px 0px;
+padding-bottom:10px;
+padding-left:35px;
+padding-right:10px
+}
+
+/******************************************** 2 columns *****************************************************/
+td.imagecenter { /* center and place the image ine the baseline */
+margin:0px auto;
+vertical-align:bottom;
+}
+
+
+td.roundcell{
+background-image:url('nutrition/pattern1.jpg');
+background-repeat:repeat-x;
+width:40%;
+padding:20px;
+-moz-border-radius:5px; -webkit-border-radius:5px; -khtml-border-radius:5px; border-radius:5px; behavior: url(border-radius.htc)
+
+}
+
+
+/******************************************** post-it ******************************************************/
+.post-it-table {
+margin:0px 30px;
+}
+
+.PI {
+background-image:url('nutrition/scotch-post-it.jpg'); background-repeat:no-repeat
+}
+
+.PI-corner {
+background-image:url('nutrition/corner-post-it.jpg'); background-repeat:no-repeat; background-position: right bottom; width:450px
+}
+
+.PI-corner td {
+padding:40px 30px 40px 50px;
+}
+
+.PI p {
+
+line-height:1.5em;
+}
+
+
+/******************************************** pyramide ******************************************************/
+.pyramide-background {
+width:580px; background-image:url('nutrition/pyramide.jpg'); background-repeat:no-repeat; text-align:center; margin:0px 10px; padding-top:70px;
+text-align:center; background-position-y:center
+}
+
+.pyramide-background p {
+margin-bottom:0px;
+}
+
+.pyramide-background td{
+border-top:2px solid #ffffff;
+text-align:center;
+color:#fff;
+text-align:center;
+margin-right:auto;
+margin-left:auto;
+padding:10px 0px;
+}
+
+.perso-and-buble2 {
+margin:15px 10px 40px 10px;
+}
+
+td#buble-talk2 {background-image:url('nutrition/little-bubble-talk.png');}
+
+
+/********************************************* tableau *****************************************************/
+.the-tableau {
+background-color: #afb1b6;
+border:1px solid #c0c2c4;
+width:100%;
+}
+
+.premiere {
+background-color: #9b9fa7;
+border:1px solid #ffffff;
+color:#ffffff;
+
+}
+
+.ligne td, .premiere td {
+padding:5px 10px;
+border:1px solid #ffffff;
+}
+
+.ligne {
+background-color: #eceaea;
+}
+
+.comments {
+margin-top:20px;
+width:100%;
+}
+
+/******************************************* gallery *********************************************************/
+
+td.item-image-legende img {
+margin:5px;
+border:1px solid #cccccc; 
+}
+
+
+td.item-image-legende {
+padding:5px;
+background-image:url('nutrition/pattern2.jpg');
+background-repeat:repeat-x;
+text-align:center;
+width:33%
+
+}
+
+td.item-image-legende p {
+	font-size:0.9em; padding:5px; color: #1084A7; text-align:center; margin:0px 15px;
+}
+
+.cellscontent2 {margin:20px 20px 40px 20px; width:860px; border-collapse:separate;}
+
+.cellscontent tr { margin:50px; }
+
+
+/********************************************** process ****************************************************/
+td.cell-item-process {
+padding:10px 10px 10px 60px;
+width:95px;
+border-collapse:collapse;
+font-size:16px;
+}
+
+td.first-item-process {
+padding:10px 10px 10px 20px;
+width:95px;
+}
+
+
+td.cell-item-process {
+background-image:url('nutrition/process-grey.jpg');
+background-repeat:no-repeat;
+background-position: left center;
+}
+
+
+
+/********************************************* 4 items ******************************************************/
+table.quatreitems tr td p, table.quatreitems_scenario tr td p {
+margin:25px 15px; 
+}
+
+
+table.quatreitems, table.quatreitems_scenario{
+position:relative; z-index: 0;
+width:570px;
+border-collapse:separate;
+margin-right:25px;
+}
+
+
+.quatreitems tr {
+height:200px;
+}
+
+.quatreitems_scenario tr {
+height:100px;
+}
+td.rond {
+border: 1px solid #cbcbcb;
+color:#666;
+vertical-align:top;
+margin-right:15px;
+-moz-border-radius:7px; -webkit-border-radius:7px; -khtml-border-radius:7px; border-radius:7px; behavior: url(border-radius.htc);
+}
+
+
+/********************************************* image **********************************************************/
+.image-and-legend {
+margin-right:25px;
+width:25%;
+}
+
+.image-and-legend td {
+text-align:center;
+padding:0px 10px 10px 10px;
+}
+
+.image-and-legend td img{
+border:1px solid #cccccc;
+}
+
+td.legendingrey {
+border:1px solid #cccccc; background-color:#9b9fa7; font-size:0.9em; color: #ffffff; padding:5px;
+}
+
+/******************************************SON*****************************************************/
+td#buble-talk-ud {background-image:url('bubble-talk-ud.png'); background-position: left bottom; background-repeat:no-repeat; color: #e25502; padding-left:20px; padding-right:20px; padding-top:0px; padding-bottom:30px}
+
+table.sound {margin-left:50px; width:500px;}
+td.readsound {padding:5px; text-align:center; background-color:#d6d6d5; border:1px solid #b8b7b9;}
+td.commentsound {padding-top:40px; padding-left:15px; padding-right:15px;}
+/**********************************************KparK********************************************/
+
+
+
+
+.the-tableau h4 {color: #1084A7; padding-bottom:15px; font-weight:normal; font-style:italic;}
+
+.ligne-K td{
+padding:10px;
+border-bottom:3px solid #eee;
+}
+
+td.theK {background-color:#afafaf; color: #fff; width:30%; padding:10px;}
+
+td.theK h3, td.theK h2, td.thek h4 {color: #fff; background-image:url('none'); padding-left:0; text-decoration:none}
+
+.ligne-K {
+background-color:#fff;
+padding:10px;
+}
+
+.the-tableau ul {
+list-style-image:url('nutrition/orange-bullet.png');
+margin-left:25px
+}
+
+.the-tableau ul li {
+margin-bottom:15px;
+}
+
+
+#the-tableau-K  { 
+margin-left:40px;
+width:90%;
+border:3px solid #ececec;
+}
+
+
+
+/********************************************biblio******************************************************/
+.liste-livre {
+width:500px;
+color:#666;
+vertical-align:top;
+margin-right:15px;
+margin-left:35px;
+}
+
+td.book {
+background-image:url('nutrition/biblio-bullet.png');
+background-repeat:no-repeat;
+padding-bottom:15px
+}
+
+h4.details {
+font-size:0.8em;
+padding:5px 0 0 15px;
+margin:0;
+font-weight:bold;
+font-style:italic;
+}
+
+.liste-livre p {
+padding:5px 10px 5px 15px;
+font-size:0.9em;
+}
+
+.liste-livre h3 {
+background-image:url('nutrition/none'); /* inorder to replace the current style h3 : the bullet is coded in the td.book */
+}
+
+
+/**********************************************rouages*********************************************************/
+
+.rouages {
+background-image:url('/nutrition/gears.jpg');
+background-repeat:no-repeat;
+width:500px;
+height:400px;
+margin-top:30px;
+margin-bottom:20px;
+color:#666
+}
+
+
+td#buble-talk2-ud {
+background-image:url('nutrition/little-bubble-talk-ud.png'); background-position: left bottom; background-repeat:no-repeat; color: #e25502; padding-left:20px; padding-right:20px; padding-top:30px; padding-bottom:30px
+}
+
+#bord-un {
+width:55px;
+}
+
+#rouage-un {
+width:160px;
+padding-top:80px;
+text-align:center;
+}
+
+#bord-deux {
+width:45px;
+}
+
+
+#rouage-deux {
+width:115px;
+padding-top:160px;
+text-align:center;
+}
+
+#bord-trois {
+width:35px;
+}
+
+#rouage-trois {
+padding-top:60px;
+font-size:0.9em;
+text-align:center;
+}
+
+
+/**********************************************circular*********************************************************/
+.circular {
+width:450px;
+margin-top:30px;
+margin-bottom:35px;
+margin-right:20px;
+margin-left:100px;
+color:#666;
+}
+
+table.circ-a1 {
+background-image:url('nutrition/circular-mil.jpg');
+width:450px
+}
+
+table#circ-a2 {
+background-image:url('nutrition/circular-haut.jpg');
+background-repeat:no-repeat;
+width:450px
+}
+
+table#circ-a3 {
+background-image:url('nutrition/circular-bas.jpg');
+background-position: left bottom;
+background-repeat:no-repeat;
+width:450px
+}
+
+td.circular-item {
+background-image:url('nutrition/degrade1.jpg');
+background-repeat:repeat-x;
+width:120px;
+-moz-border-radius:7px; -webkit-border-radius:7px; -khtml-border-radius:7px; border-radius:7px; padding-left:5px; padding-right:5px; padding-top:15px; padding-bottom:15px 
+}
+
+.circular p {
+padding:0px;
+text-align:center;
+}
+
+
+/****************************************************************text-arrow-3 + arrow-channel****************************************************/
+table.grey-arrow, table.dark-grey, table.arrow-ch, table.ch-end {
+width:470px;
+margin:5px 18px 0px 18px;
+}
+
+table.grey-arrow p, table.dark-grey p, table.arrow-ch p, table.ch-end p{
+padding:4px 35px;
+font-size:0.9em;
+}
+
+table.grey-arrow h2, table.dark-grey h2, table.arrow-ch h2, table.ch-end h2 {
+padding:7px 15px;
+color: #fff;
+font-size:1em;
+}
+
+table.grey-arrow h2 {
+color: #6c6e74;
+}
+
+table.grey-arrow td {
+padding:10px 0px;
+background-repeat:repeat-x;
+-moz-border-radius:10px; -webkit-border-radius:10px; -khtml-border-radius:10px; border-radius:10px; 
+
+}
+
+table.grey-arrow td {
+background-image:url('nutrition/pattern5.jpg');
+}
+
+table.dark-grey td {
+color:#fff;
+padding:15px 0px;
+background-color: #7a7d84;
+-moz-border-radius:10px; -webkit-border-radius:10px; -khtml-border-radius:10px; border-radius:10px; 
+
+}
+
+
+table.grey-arrow td.fleche-grise {
+background-image:url('nutrition/fleche-grise.jpg');
+background-repeat:no-repeat;
+height:18px; background-position-y:center
+}
+
+
+table.dark-grey {
+margin-bottom:15px;
+}
+
+/****************************************************************arrow-channel****************************************************/
+table.arrow-ch {
+margin-left:70px;
+background-color:#d9dbde;
+width:470px;
+}
+
+td.arrow-ch-int {
+width:100%;
+border-top:5px solid #d9dbde; 
+background-image:url('nutrition/fon-essai.jpg');
+background-repeat:no-repeat;
+padding-bottom:40px;
+color: #fff; background-position-y:center
+}
+
+
+
+table.arrow-ch h2 {
+
+font-weight:normal;
+font-size:1.2em;
+margin:0px 15px;
+}
+
+table.ch-end {
+margin-bottom:40px;
+margin-top:3px;
+border:5px solid #d9dbde; 
+width:470px;
+margin-left:70px;
+}
+
+table.ch-end td {
+background-image:url('nutrition/grey-pattern.jpg');
+background-repeat:repeat-x;
+background-position: left top;
+color:#999ba0; padding-left:0px; padding-right:0px; padding-top:3px; padding-bottom:3px
+}
+
+table.ch-end td h2 {
+font-weight:normal;
+font-size:1.1em;
+margin:0px 15px;
+color: #1084A7;
+
+}
+
+
+/******************************************************** certificate ********************************************************/
+.certif {
+background-color: #dfe0e3;
+border:1px solid #98999e;
+width:580px;
+height:350px;
+color:#666;
+}
+
+.certif-in {
+margin:12px;
+width:556px;
+height:326px;
+}
+
+.certif-in td {
+background-color:#FFFFFF;
+background-image:url('nutrition/laurel.jpg');
+background-repeat:no-repeat;
+border:1px solid #cacbcc;
+color: #666666; padding-left:40px; padding-right:40px; padding-top:30px; padding-bottom:40px; background-position-y:center
+}
+
+.certif-in h2 {
+margin-bottom:20px;
+font-size:1.6em;
+padding:0px 10px;
+padding-bottom:2px;
+margin-bottom:50px;
+text-align:center;
+font-style:italic;
+}
+
+
+.certif-in p {
+margin:10px 50px;
+}
+
+.little {
+font-size:0.8em;
+}
+
+.little-bold-right{
+font-size:0.8em; font-weight:bold; text-align:right;
+}
+
+
+
+/*************************************************** growth ***********************************************/
+
+.growth {
+background-image:url('nutrition/climbing-arrow.jpg');
+background-repeat:no-repeat;
+width:500px;
+margin-left:50px;
+color:#666;
+vertical-align:top
+}
+
+
+
+.growth td.text-growth-stage {
+font-size:0.9em;
+padding-top:145px;
+padding-left:15px;
+}
+
+
+.growth td.text-growth-stage p{
+padding:0;
+margin:0;
+}
+.growth td.text-growth-stage table td {
+padding-top:0px; padding-bottom:25px;
+}
+
+span.orange-bold {
+font-weight:bold;
+color: #1084A7;
+}
+
+
+/************************************************** faq ***********************************************************/
+.right-table {
+width:550px;
+margin-left:30px;
+}
+
+.right-table td.faq {
+padding:10px;
+margin-bottom:15px;
+
+}
+
+
+.right-table td.faq h2 {
+font-size:1.1em;
+}
+
+.right-table td.faq p{
+margin: 5px 25px;
+font-size:0.9em;
+
+}
+
+
+/**************************************************** frame *************************************************/
+.frame-for-text {
+background-color:#abadb2;
+padding:15px 20px;
+margin:0;
+color:#fff;
+font-size:0.9em;
+-moz-border-radius:7px; -webkit-border-radius:7px; -khtml-border-radius:7px; border-radius:7px;
+}
+.persoandframe {
+margin-right:15px;
+}
+
+
+.frame-for-text h2 {
+font-size:1.2em;
+color:#fff;
+margin: 5px 0px 15px 0px;
+}
+
+.left-table-for-text {
+width:500px;
+color:#666;
+vertical-align:top;
+margin-right:60px;
+}
+
+
+.left-table-for-text p {
+padding:5px 15px;
+font-size:0.9em;
+}
+
+.left-table-for-text h3 {
+
+}
+
+.left-table-for-text h4 {
+font-size:0.8em;
+padding:10px 0 5px 15px;
+margin:0;
+font-weight:bold;
+font-style:italic;
+}
+
+/************************************************************* map *******************************************************/
+table.map {margin-left:35px; width:550px;}
+td.part {
+padding: 10px 20px;
+font-size:0.9em;
+line-height:1.1em;
+}
+
+td.part h2 {
+background-color:#abadb2;
+padding:1px 10px 6px 10px;
+margin-bottom:10px;
+-moz-border-radius:3px; -webkit-border-radius:3px; -khtml-border-radius:3px; border-radius:3px;
+color:#fff;
+}
+
+td.part h3 {
+color:#1084A7;
+background-image:url('nutrition/orange-arrow.png');
+background-repeat:no-repeat;
+font-size:1em;
+padding-left:30px; padding-right:30px; padding-top:5px; padding-bottom:5px
+}
+
+td.part h4 {
+font-size:1em;
+padding:5px 40px;
+}
+
+td.part ul {
+font-size:0.9em;
+list-style-image:url('nutrition/orange-bullet.png');padding-left:60px; padding-right:20px; padding-top:10px; padding-bottom:10px
+}
+
+td.part li {
+margin-bottom:10px;
+}
+
+/********************************************** video ***************************************************/
+table.commentvideo {
+margin-left:40px;
+margin-right:20px;
+}
+
+table.videoplace {
+width:320px;
+}
+
+td.undervideo {
+background-color:#9b9fa7; font-size:0.9em; color: #ffffff; padding:5px;
+}
+
+
+
+/********************************************* video 480 ***********************************************/
+table.videoplace480 {
+width:480px;
+}
+
+.item2 {
+margin:12px;
+background-image:url('nutrition/grey-pattern.jpg');
+background-repeat:repeat-x;
+background-color: #ffffff;
+border:1px solid #ffffff
+}
+
+
+.item2 h2 {
+font-size :1.2em;
+color: #1084A7;
+font-weight:normal;
+padding:10px 5px;
+text-align:center; 
+}
+
+/********************************************title **************************************************/
+table.greyframetitle {
+background-color:#d5d7da; margin:100px 12px 100px 12px; width:836px;
+}
+
+table.whiteframetitle {
+background-color:#ffffff; margin:15px; border:1px solid #bbbbbb; width:806px;
+}
+
+
+/******************************************** diagram *********************************************/
+table.diag {
+text-align:center;
+background-image:url('nutrition/pattern6.jpg');
+background-repeat:repeat-y;
+background-color:#b3b4b9
+}
+tr.diagcorpus {
+background-image:url('nutrition/pattern4.jpg');
+background-repeat:repeat-x;
+background-color: #ffffff;
+border-collapse:separate
+}
+
+tr.diagcorpus td {
+border-right:1px dotted #b3b4b9;
+width:33%;
+}
+
+tr.diagcorpus td p {
+font-size:0.9em;
+}
+
+tr.diagarrow td {
+border-right:1px dotted #ffffff;
+width:33%;
+color:#ffffff;
+}
+
+tr.diagarrow p {
+margin:5px;
+padding:0;
+font-size:0.9em;
+font-weight:bold;
+}
+
+tr.diagcomment {
+background-color:#ffffff;
+text-align:left;
+}
+
+tr.diagcomment td {
+padding:20px 5px 0px 5px;
+}
+
+/**************************************** methodology *********************************/
+table.methodology {
+background-color:#d2d2d7;
+border:1px solid #cecfd4;
+font-size:0.9em;
+color: #6e6e70;
+-moz-border-radius:6px; -webkit-border-radius:6px; -khtml-border-radius:6px; border-radius:6px; 
+}
+
+table.methodology td {
+padding:5px;
+width:25%;
+}
+
+table.methodology img {
+border:1px solid #b3b4b9;
+margin-bottom:10px;
+margin-top:10px;
+}
+
+
+table.methodology h2 {
+color:#fff;
+font-weight:bold;
+}
+
+table.methodology td.methoarrow {
+background-image:url('nutrition/methodologyarrow.png');
+background-position: left center;
+background-repeat:no-repeat;
+padding-left:40px
+}
+
+td.methofirst {
+font-size:1.1em;
+vertical-align:middle;
+}
+
+td.methofirst p, td.methofirst ul{
+padding:15px;
+}
+
+td.methofirst ul li{
+padding-left:5px;
+list-style-image:url('nutrition/liarrow.png');margin-left:7px; margin-right:5px; margin-top:17px; margin-bottom:17px
+}
+
+/************************************************phases *****************************************************/
+table.phases {
+width:600px;
+text-align:center;
+border-collapse:separate;
+margin-right:25px;
+}
+
+td.phase {
+width:33%;
+background-image:url('nutrition/verticalarrow.png');
+background-repeat:no-repeat;
+background-position: 
+               center bottom;
+padding-bottom:100px
+}
+
+td.phaseresult h2 {
+margin:15px;
+background-image:url('nutrition/pattern6.jpg');
+border:1px solid #cecfd4;
+color:#6e6e70;
+padding:15px;
+font-size:1em
+}
+
+td.phaseresult p {
+margin:15px;
+color:#6e6e70;
+font-size:1em;
+}
+
+/********************************************** true or false ***********************************************/
+
+td.theQ {width:30%; padding:10px;}
+
+.tabletruefalse  { 
+width:600px;
+border:1px solid #c0c2c4;
+width:100%;
+background-color: #f1f1f6;
+font-size:0.9em;
+}
+
+td.theQ {
+width:400px;
+border:1px solid #b3b4b9;
+}
+
+td.TF {
+width:80px;
+text-align:center;
+background-color:#ffffff;
+border:1px solid #b3b4b9;
+vertical-align:middle;
+}
+
+.tabletruefalse th{
+background-color: #9b9fa7;
+border:1px solid #ffffff;
+color:#ffffff;
+padding:3px;
+text-align:center;
+}
+
+
+
+.ligne td, .premiere td {
+padding:5px 10px;
+border:1px solid #ffffff;
+}
+
+.ligne {
+background-color: #eceaea;
+}
+
+
+/************************************************result *****************************************************/
+table.result {
+width:600px;
+text-align:center;
+border-collapse:separate;
+margin-right:25px;
+}
+
+td.add1, td.add2 {
+padding-left:75px;
+width:250px;
+}
+
+td.add2 {
+background-image:url('nutrition/plus.png');
+background-repeat:no-repeat;
+background-position: left center;
+}
+
+td.res {
+padding-left:75px;
+text-align:center;
+margin:auto;
+padding-top:20px;
+}
+
+
+td.add1 h2, td.add2 h2 {
+margin:15px;
+background-image:url('nutrition/pattern6.jpg');
+border:1px solid #cecfd4;
+color:#6e6e70;
+padding:15px;
+font-size:1em
+
+}
+
+td.add1 p, td.add2 p{
+margin:15px;
+color:#6e6e70;
+font-size:1em;
+}
+
+/****************************************** base **************************************/
+table.base {
+margin:0 25px;
+}
+
+table.base p {
+margin-left:25px;
+}
+
+.menu-general div a {
+    background-image: url('nutrition/link.png');
+    background-repeat: no-repeat;
+    background-position: 2px 0;
+    display: block;
+    min-height: 40px;
+    line-height: 32px;
+    padding-left: 35px
+}
+
+#wiki_search [dir="rtl"] div.row div.label, #wiki_search [dir="ltr"] div.row div.formw {
+    float: left;
+    margin-left:30px;
+}
+
+#wiki_search div.row div.formw {
+    width: 510px;
+}
+
+
+.box_template {
+        background-color:#ffffff;
+	background: to(#ffffff)) url('-o-linear-gradient(top,%20#FFFFFF, #FFFFFF') -webkit-gradient(linear bottom;
+        border:1px solid #1084a7; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; clear:both; overflow:visible; width:auto; float:left; zoom:1; margin-left:6px; margin-right:6px; margin-top:6px; margin-bottom:20px; padding-left:5px; padding-right:5px; padding-top:0px; padding-bottom:5px; background-image:url('-o-linear-gradient(top,%20#FFFFFF, #FFFFFF')
+	
+}
+
+.box_template_home {
+        background-color:#ffffff;
+	background: to(#ffffff)) url('-o-linear-gradient(top,%20#FFFFFF, #FFFFFF') -webkit-gradient(linear bottom;
+        border:1px solid #96040B; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; font-size:12px; margin-left:7px; margin-right:10px; margin-bottom:15px; width:auto; padding:10px
+        

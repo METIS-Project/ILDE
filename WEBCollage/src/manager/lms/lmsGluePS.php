@@ -55,6 +55,7 @@ class lmsGluePS implements lms {
             foreach ($entries as $entry) {
                 $lms[$i]["id"] = $entry->getElementsByTagName('id')->item(0)->nodeValue;
                 $lms[$i]["name"] = $entry->getElementsByTagName('title')->item(0)->nodeValue;
+                $lms[$i]["type"] = $entry->getElementsByTagName('type')->item(0)->nodeValue;
                 $i++;
             }
             curl_close($ch);
@@ -194,7 +195,7 @@ class lmsGluePS implements lms {
                 $participants = $participants->getElementsByTagName('entry');
                 $i = 0;
                 foreach ($participants as $participant) {
-                    $participantes[$i]["participantId"] = $participant->getElementsByTagName('value')->item(0)->getElementsByTagName('name')->item(0)->nodeValue; //$participant->getElementsByTagName('key')->item(0)->nodeValue;
+                    $participantes[$i]["participantId"] = $participant->getElementsByTagName('key')->item(0)->nodeValue; //$participant->getElementsByTagName('value')->item(0)->getElementsByTagName('name')->item(0)->nodeValue;
                     $participantes[$i]["name"] = $participant->getElementsByTagName('value')->item(0)->getElementsByTagName('name')->item(0)->nodeValue;
                     if (strcmp($participant->getElementsByTagName('value')->item(0)->getElementsByTagName('staff')->item(0)->nodeValue, "false") == 0) {
                         $participantes[$i]["type"] = "student";
@@ -205,7 +206,7 @@ class lmsGluePS implements lms {
                 }
             }
             curl_close($ch);
-            return $participantes;
+            return $participantes; 
         } else {
             curl_close($ch);
             return false;

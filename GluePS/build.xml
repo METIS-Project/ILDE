@@ -9,8 +9,8 @@
 
 	
 	<!-- Global properties for this build -->
-	<property name="db.user" value="glueps" />
-	<property name="db.passwd" value="glueps" />
+	<property name="db.user" value="root" />
+	<property name="db.passwd" value="lprisan" />
 	<property name="component" value="glueps_manager" />
 	<property name="jarname" value="glueps-manager" />
 	<property name="cia" value="gsic" />

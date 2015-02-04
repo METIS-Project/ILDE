@@ -50,30 +50,23 @@ public class OpenMWBatchDeployer4 extends MWOperator implements IMWBatchDeployer
 	// This variable stores temporarily the created page titles, in case we have to roll them back
 	private ArrayList<String> tmpCreatedPages = null;
 	
-	private GLUEPSManagerApplication app = null;
 	
 	private URL tmpDeployURL = null;
 	
 	private String wikiNameSpaceGroupArticles;
+	private Map<String, String> parameters;
 	
 	public OpenMWBatchDeployer4(URL wiki){
 		
 		this.wikiURL = wiki;
 	}
 	
-	public OpenMWBatchDeployer4(URL wiki, String user, String pwd){
+	public OpenMWBatchDeployer4(URL wiki, String user, String pwd, Map<String, String> parameters){
 		
 		this.wikiURL = wiki;
 		this.wikiUser = user;
 		this.wikiPassword = pwd;
-	}
-	
-	public OpenMWBatchDeployer4(URL wiki, String user, String pwd, GLUEPSManagerApplication ap){
-		
-		this.wikiURL = wiki;
-		this.wikiUser = user;
-		this.wikiPassword = pwd;
-		this.app = ap;
+		this.parameters = parameters;
 	}
 	
 	@Override
@@ -1002,7 +995,7 @@ public class OpenMWBatchDeployer4 extends MWOperator implements IMWBatchDeployer
 		if(staffVersion){
 			content += "----\n\n";
 			content += "'''Nota:''' Esta es la versión del profesor de las actividades a realizar. Existe una versión de esta página que incluye [["+wikiNameSpaceGroupArticles+":"+DEFAULT_STUDENT_MAIN_PAGE_NAME+"|sólo las actividades de los alumnos]].\n\n";
-			if(app!=null && app.getAppExternalUri()!=null) content += "'''Nota:''' Estas actividades han sido desplegadas con GLUE!-PS. Para hacer cualquier cambio en el despliegue, grupos o herramientas a usar, diríjase a este enlace ["+app.getAppExternalUri()+"gui/glueps/deploy.html?deployId="+deploy.getId()+"]\n\n";
+			if(getAppExternalUri()!=null) content += "'''Nota:''' Estas actividades han sido desplegadas con GLUE!-PS. Para hacer cualquier cambio en el despliegue, grupos o herramientas a usar, diríjase a este enlace ["+getAppExternalUri()+"gui/glueps/deploy.html?deployId="+deploy.getId()+"]\n\n";
 		}
 		
 		
@@ -1234,6 +1227,10 @@ public class OpenMWBatchDeployer4 extends MWOperator implements IMWBatchDeployer
     	}
     	return true;
     	}
+    
+    private String getAppExternalUri(){
+ 	   return parameters.get("appExternalUri");
+    }
 
 	
 	

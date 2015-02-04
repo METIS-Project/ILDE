@@ -22,20 +22,34 @@ public final class VLEAdaptorFactory {
 			return null;
 		JpaManager dbmanager = JpaManager.getInstance();
 		HashMap<String, String> params = new HashMap<String, String>();
-		if (le.getParameters()!=null){//get the parameters from the le. They are usually provided by ldshake
+		
+		//get the parameters from the le. They are usually provided by ldshake
+		if (le.getParameters()!=null){
 			params.putAll(le.decodeParams());
 		}
-		if (le.getInstallation()!=null){ //if the request comes from ldshake there is not an installation
-			LearningEnvironmentInstallation lei = dbmanager.findLEInstObjectById(le.getInstallation());
-			if (lei!=null){
-				params.putAll(lei.decodeParams());
-				if (lei.getSectype()==1){//user and password
-					params.put("creduser", le.getCreduser());
-					params.put("credsecret", le.getCredsecret());
-				}else if (lei.getSectype()==2){//oauth access token
-					OauthTokenEntity oauthToken= dbmanager.findOauthTokenByLeid(le.getId());
-					params.put("accessToken", oauthToken.getAccessToken());
-				}
+		
+		//get the parameters from the le installation.
+		LearningEnvironmentInstallation lei;
+		if (le.getInstallation()!=null){
+			lei = dbmanager.findLEInstObjectById(le.getInstallation());
+		}else{
+			//If it is an old deploy it could not include the installation id
+			LearningEnvironment leDB = dbmanager.findLEObjectById(le.getId());
+			if (leDB!=null && leDB.getInstallation()!=null){
+				lei = dbmanager.findLEInstObjectById(leDB.getInstallation());
+			}else{
+				//if the request comes from ldshake there is not an installation
+				lei = null;
+			}
+		}
+		if (lei!=null){
+			params.putAll(lei.decodeParams());
+			if (lei.getSectype()==1){//user and password
+				params.put("creduser", le.getCreduser());
+				params.put("credsecret", le.getCredsecret());
+			}else if (lei.getSectype()==2){//oauth access token
+				OauthTokenEntity oauthToken= dbmanager.findOauthTokenByLeid(le.getId());
+				params.put("accessToken", oauthToken.getAccessToken());
 			}
 		}
 		//we assume by now that the sectype is 1 (user and password)
@@ -46,6 +60,16 @@ public final class VLEAdaptorFactory {
 			params.put("credsecret", le.getCredsecret());
 		}
 		params.put("accessLocation", le.getAccessLocation().toString());
+		//Add the additional parameters that are necessary for some vle adaptors
+		params.put("startingSection", GLUEPSManagerApplication.STARTING_SECTION_FIELD);
+		params.put("appExternalUri", app.getAppExternalUri());
+		params.put("ldshakeMode", String.valueOf(app.getLdShakeMode()));
+		params.put("gpresGmType", app.getGPresGMType());
+		params.put("gpres3GmType", app.getGPres3GMType());
+		params.put("webcGmType", app.getWebCGMType());
+		params.put("moodleRealTimeGlueps", String.valueOf(app.isMoodleRealTimeGlueps()));
+		params.put("appPath", app.getAppPath());
+		
 		VLEAdaptor adapter = null;
 		try {
 			//Load at runtime the VLE adapter class for that type of VLE
@@ -55,15 +79,13 @@ public final class VLEAdaptorFactory {
 			e1.printStackTrace();
 			return null;
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
-		return adapter.getVLEAdaptor(this.app, params);
+		return adapter.getVLEAdaptor(params);
 	}
 
 }

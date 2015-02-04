@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import javax.xml.bind.JAXBException;
@@ -49,10 +50,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
 public class MoodleAdaptor21vSelenium extends MoodleAdaptor{
-		
-	private String moodleUrl;
-	private String moodleUser;
-	private String moodlePassword;
 	
 	private WebDriver driver=null;
 	 
@@ -61,27 +58,15 @@ public class MoodleAdaptor21vSelenium extends MoodleAdaptor{
 	}
 
 
-public MoodleAdaptor21vSelenium(String base, String template,GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword) {
-	super();
-	//This is the pathname to the final zip file. This is no longer set here, since it needs the deployId to construct the path to the file
-	//ZIPNAME = zipname;
-	//This is the base directory where all uploaded files are
-	BASE = base;
-	//This the pathname to the moodle xml template
-	TEMPLATE = template;
-	//This is the Restlet Application of GLUE!-PS, to get the configuration parameters like directory paths, etc
-	app=applicationRest;
-	
-	this.moodleUrl = moodleUrl;
-	this.moodleUser = moodleUser;
-	this.moodlePassword = moodlePassword;
+public MoodleAdaptor21vSelenium(String base, String template, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+	super(base, template,moodleUrl, moodleUser, moodlePassword, parameters);
 }
 
 
-public MoodleAdaptor21vSelenium(String base, String template,GLUEPSManagerApplication applicationRest, String modelPackage, String backupXmlFilename,
-		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword) {
+public MoodleAdaptor21vSelenium(String base, String template,String modelPackage, String backupXmlFilename,
+		String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
 	
-	this(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword);
+	this(base, template, moodleUrl, moodleUser, moodlePassword, parameters);
 
 	//This is the package that contains the Moodle XML model classes
 	CLASSES = modelPackage;

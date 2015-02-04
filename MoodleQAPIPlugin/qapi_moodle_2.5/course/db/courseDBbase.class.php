@@ -75,7 +75,7 @@ abstract class glueserver_course_db_base {
     }
     
          /**
-     * Returns an array of the courses where the username enrolled
+     * Returns an array of the courses where the username is enrolled with a role
      *	@param integer the user name
      *  @param integer the role of the user in the course
      *
@@ -104,6 +104,23 @@ abstract class glueserver_course_db_base {
         return $DB->get_records_sql($sql, $sqlparams);		
     }
     
+     /**
+     * Returns an array of the courses in which the user is enrolled (with or without a role)
+     *	@param integer the user name
+     *
+     * @return array of courses where the user is enrolled
+     */
+    public static function glueserver_get_courses_enrolled_username($username){
+		global $DB,$CFG;
+        $sql = "SELECT c.*
+                FROM {$CFG->prefix}course c
+                INNER JOIN {$CFG->prefix}enrol e ON e.courseid = c.id
+                INNER JOIN {$CFG->prefix}user_enrolments ue ON ue.enrolid = e.id
+                INNER JOIN {$CFG->prefix}user u ON u.id = ue.userid
+                WHERE u.username = ?";
+        $sqlparams = array($username);
+        return $DB->get_records_sql($sql, $sqlparams);		
+    }
     
     
   	 /**

@@ -58,13 +58,16 @@ function getTools($uri, $user, $pass) {
           }
           } */
         //Obtener herramientas internas
-        $tools = $dom->getElementsByTagName('internalTools')->item(0);
-        $tools = $tools->getElementsByTagName('entry');
-        $i = count($herramientas);
-        foreach ($tools as $tool) {
-            $herramientas[$i]["id"] = $tool->getElementsByTagName('key')->item(0)->nodeValue;
-            $herramientas[$i]["name"] = $tool->getElementsByTagName('value')->item(0)->nodeValue;
-            $i++;
+        $tools = $dom->getElementsByTagName('internalTools');
+        if ($tools->length > 0){
+            $tools = $tools->item(0);
+            $tools = $tools->getElementsByTagName('entry');
+            $i = count($herramientas);
+            foreach ($tools as $tool) {
+                $herramientas[$i]["id"] = $tool->getElementsByTagName('key')->item(0)->nodeValue;
+                $herramientas[$i]["name"] = $tool->getElementsByTagName('value')->item(0)->nodeValue;
+                $i++;
+            }
         }
 
 

@@ -348,16 +348,17 @@ public class InstanceCollageAdaptor {
 				String roleId = it.next();
 				//We search for the groups that are clones of this role
 				ArrayList<Group> relevantGroups = findGroupsFromRoleId(deploy.getGroups(), roleId);
-				
-				//For each group, we create an instanced activity
-				for(Iterator<Group> it2 = relevantGroups.iterator();it2.hasNext();){
-					Group group = it2.next();
-					
-					//By now, we only set the non-instantiable resources. ToolInstances are created later
-					InstancedActivity instAct = new InstancedActivity(activity.getId()+ACTIVITY_INSTANCE_SEPARATOR+getRoleOcurrence(group), deploy.getId(), activity.getId(), group.getId(), activity.getResourceIdsByInstantiable(deploy.getDesign(), false), null);
-					
-					if(instancedActivities == null) instancedActivities = new ArrayList<InstancedActivity>();
-					instancedActivities.add(instAct);
+				if (relevantGroups!=null){
+					//For each group, we create an instanced activity
+					for(Iterator<Group> it2 = relevantGroups.iterator();it2.hasNext();){
+						Group group = it2.next();
+						
+						//By now, we only set the non-instantiable resources. ToolInstances are created later
+						InstancedActivity instAct = new InstancedActivity(activity.getId()+ACTIVITY_INSTANCE_SEPARATOR+getRoleOcurrence(group), deploy.getId(), activity.getId(), group.getId(), activity.getResourceIdsByInstantiable(deploy.getDesign(), false), null);
+						
+						if(instancedActivities == null) instancedActivities = new ArrayList<InstancedActivity>();
+						instancedActivities.add(instAct);
+					}
 				}
 				
 				

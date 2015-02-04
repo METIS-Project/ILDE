@@ -1,0 +1,190 @@
+/*  ===========================================================================
+     eXe
+     Copyright 2004-2005, University of Auckland
+     Copyright 2004-2007 eXe Project, http://eXeLearning.org/
+
+     These style elements are only used in the editing pane of eXe. They do not 
+     apply when content is exported. Brent.  
+   =========================================================================== */
+  
+html {
+  padding: 10px;
+}
+ 
+textarea { font-family: arial, verdana, helvetica, sans-serif;
+	   font-size: 13px;
+       background: transparent;
+}
+
+.classnote{
+border: 2px solid #E6E6E6;
+-webkit-border-bottom-left-radius: 20px;
+-moz-border-radius-bottomleft: 20px;
+border-bottom-left-radius: 20px;
+background: #FFFFDD;
+padding-left:10px;
+padding-right:10px;
+padding-top:5px;
+margin-top:5px;
+margin-bottom:20px;
+width:35%;
+margin-left:62%;
+
+}
+.notetitle{
+font: bold 14px verdana;
+}
+.notetitleex{
+font: bold 14px verdana;
+border-bottom: 3px solid #cccccc;
+cursor:pointer;
+padding-left:5px;
+padding-bottom:5px;
+}
+.notebtn{
+border: 1px solid #cccccc;
+cursor:pointer;
+margin-top:5px;
+width:100%;
+}
+.notearea{
+display:none;
+}
+.classnote .idevice-edition-buttons
+{
+margin-bottom:0px;
+}
+/* styles for iDevice Editor */
+
+#editorWorkspace {
+	margin-left: 240px;
+}
+
+#editorButtons {
+	 float: left;
+         position: fixed;
+}
+
+#editorButtons input.button
+{
+border: 3px double #999999;
+border-top-color: #CCCCCC;
+border-left-color: #CCCCCC;
+width: 100px;
+padding: 0.25em;
+margin: 4px;
+background-color: #FFFFFF;
+background-image: url(../style/standardwhite/_standardwhite_title_bg.gif);
+background-repeat: repeat-x;
+color: #333333;
+font-size: 75%;
+font-weight: bold;
+font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#editorButtons input.button[disabled] {
+	background-color: #dddddd;
+	background-image: none;
+}
+
+/* styles for Style Manager Editor */
+#styleManagerWorkspace {
+	margin-left: 50px;
+}
+
+#styleManagerButtons {
+	 float: left;
+     position: fixed;
+}
+
+#styleManagerButtons input.button
+{
+	border: 3px double #999999;
+	border-top-color: #CCCCCC;
+	border-left-color: #CCCCCC;
+	width: 100px;
+	padding: 0.25em;
+	margin: 2px;
+	background-color: #FFFFFF;
+	background-image: url(../style/standardwhite/_standardwhite_title_bg.gif);
+	background-repeat: repeat-x;
+	color: #333333;
+	font-size: 75%;
+	font-weight: bold;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+}
+
+#styleManagerButtons input.button[disabled] {
+	background-color: #dddddd;
+	background-image: none;
+}
+
+.flash {
+ border: 1px dashed #6699cc;
+ background-image: url(../images/flash_placeholder.gif); 
+ background-position: 50% 50%;
+ background-repeat: no-repeat;
+}
+
+p.editModeHeading {
+ font-weight: bold;
+ color: red;
+ border: 1px solid red;
+}
+
+.maths {
+border: 1px solid #CCC;
+padding: 2px;
+color: #000000;
+}
+
+.maths a { color: #000000; }
+ 
+/* adds tiny bit of padding to edit.png when in preview mode */
+img.submit {
+    padding: 0 0 2px 2px;
+}
+
+/* exe_lightbox.css */
+.exeImageGallery:after {content:".";display:block;height:0;clear:both;visibility:hidden}
+.exeImageGallery {display: block}
+/* Hides from IE-mac \*/
+* html .exeImageGallery {height: 1%}
+.exeImageGallery {display: block}
+/* End hide from IE-mac */
+
+.exeImageGallery{margin:1em 0 0 15px;padding:0}
+.exeImageGallery li{margin:0;padding:15px 15px 15px 0;display:block;float:left;list-style:none}
+.exeImageGallery a img{border:none}
+.exeImageGallery .tit{display:none}
+
+/* Lightbox 2 by Lokesh Dhakar | [lokeshdhakar.com](http://www.lokeshdhakar.com) | Licensed under the Creative Commons Attribution 2.5 License - http://creativecommons.org/licenses/by/2.5/ */
+body:after{content:url(../images/exe_lightbox_close.png) url(../images/exe_lightbox_loading.gif) url(../images/exe_lightbox_prev.png) url(../images/exe_lightbox_next.png);display:none}
+.lightboxOverlay{position:absolute;top:0;left:0;z-index:9999;background-color:black;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=90);opacity:0.9;display:none}
+.lightbox{position:absolute;left:0;width:100%;z-index:10000;text-align:center;line-height:0;font-weight:normal}
+.lightbox .lb-image{display:block;height:auto;-webkit-border-radius:3px;-moz-border-radius:3px;-ms-border-radius:3px;-o-border-radius:3px;border-radius:3px}
+.lightbox a img{border:none}
+.lb-outerContainer{position:relative;background-color:white;*zoom:1;width:250px;height:250px;margin:0 auto;-webkit-border-radius:4px;-moz-border-radius:4px;-ms-border-radius:4px;-o-border-radius:4px;border-radius:4px}
+.lb-outerContainer:after{content:"";display:table;clear:both}
+.lb-container{padding:4px}
+.lb-loader{position:absolute;top:43%;left:0%;height:25%;width:100%;text-align:center;line-height:0}
+.lb-cancel{display:block;width:32px;height:32px;margin:0 auto;background:url(../images/exe_lightbox_loading.gif) no-repeat}
+.lb-nav{position:absolute;top:0;left:0;height:100%;width:100%;z-index:10}
+.lb-container>.nav{left:0}
+.lb-nav a{outline:none}
+.lb-prev,.lb-next{width:49%;height:100%;cursor:pointer;display:block}
+.lb-prev{left:0;float:left}
+.lb-prev:hover{background:url(../images/exe_lightbox_prev.png) left 48% no-repeat}
+.lb-next{right:0;float:right}
+.lb-next:hover{background:url(../images/exe_lightbox_next.png) right 48% no-repeat}
+.lb-dataContainer{margin:0 auto;padding-top:5px;*zoom:1;width:100%;-moz-border-radius-bottomleft:4px;-webkit-border-bottom-left-radius:4px;border-bottom-left-radius:4px;-moz-border-radius-bottomright:4px;-webkit-border-bottom-right-radius:4px;border-bottom-right-radius:4px}
+.lb-dataContainer:after{content:"";display:table;clear:both}
+.lb-data{padding:0 4px;color:#bbbbbb}
+.lb-data .lb-details{width:85%;float:left;text-align:left;line-height:1.1em}
+.lb-data .lb-caption{font-size:13px;font-weight:bold;line-height:1em}
+.lb-data .lb-number{display:block;clear:left;padding-bottom:1em;font-size:12px;color:#999999}
+.lb-data .lb-close{display:block;float:right;width:30px;height:30px;background:url(../images/exe_lightbox_close.png) top right no-repeat;text-align:right;outline:none;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);opacity:0.7}
+.lb-data .lb-close:hover{cursor:pointer;filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);opacity:1}
+.lightboxOverlay{background-color:#fff}
+.lb-data{color:#333}
+.lb-data .lb-number{color:#444}

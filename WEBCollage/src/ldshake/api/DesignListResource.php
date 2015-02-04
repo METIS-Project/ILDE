@@ -381,9 +381,9 @@ class DesignListResource {
         $changes = true;
         //Get the participants of the course
         $courseParts = array();
-        foreach ($vle_info_obj->course->participants as $pc) {
+        foreach ($vle_info_obj->course->participants as $key => $pc) {
             $participant = new stdClass();
-            $participant->participantId = $pc->name;
+            $participant->participantId = $key;//$pc->name;
             $participant->name = $pc->name;
             if (isset($pc->isStaff) && strcmp($pc->isStaff, "") != 0) {
                 $participant->participantType = "teacher";

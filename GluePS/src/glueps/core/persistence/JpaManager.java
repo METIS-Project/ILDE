@@ -74,7 +74,7 @@ public class JpaManager {
      * Constructor. Crea la unidad de persistencia.
      */
     public JpaManager() {
-        String PERSISTENCEUNIT = "GLUEPS";
+        String PERSISTENCEUNIT = "GLUEPSAR201401_PU";
         EntityManagerFactory factory = Persistence.createEntityManagerFactory(PERSISTENCEUNIT, System.getProperties());
 
         userem = factory.createEntityManager();
@@ -228,28 +228,21 @@ public class JpaManager {
 		}
     	
     	LearningEnvironmentEntity leEnt = findLEbyId(dbId);
-    	if (leEnt == null)
-    	{
+    	if (leEnt == null){
+    		return null;
+    	}
+    	LearningEnvironmentInstallationEntity leInstEnt = findLEInstallationById(leEnt.getInstallation());
+    	if (leInstEnt == null){ 
     		return null;
     	}
     	
-    	/*String xmlfile=null;
-    	try {
-			xmlfile = new String(leEnt.getXmlfile(), "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			//e.printStackTrace();
-			return null;
-		}
-    	
-    	
-    	LearningEnvironment le=(LearningEnvironment) generateObject(xmlfile, glueps.core.model.LearningEnvironment.class);*/
 		LearningEnvironment le = new LearningEnvironment();
-		le.setId(""+leEnt.getId());//we set the object id to the trimmed/db one, just in case the xml has the url
+		le.setId(String.valueOf(leEnt.getId()));//we set the object id to the trimmed/db one, just in case the xml has the url
 		
 		le.setName(leEnt.getName());
-		le.setType(leEnt.getType());
+		le.setType(leInstEnt.getType());
 		try {
-			le.setAccessLocation(new URL(leEnt.getAccessLocation()));
+			le.setAccessLocation(new URL(leInstEnt.getAccessLocation()));
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -258,13 +251,13 @@ public class JpaManager {
 		le.setCreduser(leEnt.getCreduser());
 		le.setCredsecret(leEnt.getCredsecret());
 		le.setInstallation(String.valueOf(leEnt.getInstallation()));
+		le.setShowAR(leEnt.isShowAR());
+		le.setShowVG(leEnt.isShowVG());
 		
     	//le.setId(trimmedId);//we set the LE id to just the trimmed id (just in case the xml is erroneous)
     	
 		System.out.println("Retrieved LE from database: "+le.toString());
-		return le;
-        	
-    	
+		return le;    	
     }
     
 
@@ -281,25 +274,28 @@ public class JpaManager {
     	if(les!=null){
     		leObjects = new ArrayList<LearningEnvironment>();
     		
-    		for(LearningEnvironmentEntity lee : les){
-    			
-    			//LearningEnvironment le = (LearningEnvironment) generateObject(new String(lee.getXmlfile(),"UTF-8"), LearningEnvironment.class);
-    			LearningEnvironment le = new LearningEnvironment();
-    			le.setId(""+lee.getId());//we set the object id to the trimmed/db one, just in case the xml has the url
-    			
-    			le.setName(lee.getName());
-    			le.setType(lee.getType());
-    			try {
-					le.setAccessLocation(new URL(lee.getAccessLocation()));
-				} catch (MalformedURLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				le.setUserid(lee.getUserid());
-				le.setCreduser(lee.getCreduser());
-				le.setCredsecret(lee.getCredsecret());
-				le.setInstallation(String.valueOf(lee.getInstallation()));
-    			leObjects.add(le);    			
+    		for(LearningEnvironmentEntity lee : les){   			
+    			LearningEnvironmentInstallationEntity leInstEnt = findLEInstallationById(lee.getInstallation());
+    			if (leInstEnt!=null){
+	    			LearningEnvironment le = new LearningEnvironment();
+	    			le.setId(String.valueOf(lee.getId()));//we set the object id to the trimmed/db one, just in case the xml has the url
+	    			
+	    			le.setName(lee.getName());
+	    			le.setType(leInstEnt.getType());
+	    			try {
+						le.setAccessLocation(new URL(leInstEnt.getAccessLocation()));
+					} catch (MalformedURLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					le.setUserid(lee.getUserid());
+					le.setCreduser(lee.getCreduser());
+					le.setCredsecret(lee.getCredsecret());
+					le.setInstallation(String.valueOf(lee.getInstallation()));
+					le.setShowAR(lee.isShowAR());
+					le.setShowVG(lee.isShowVG());
+	    			leObjects.add(le); 
+    			}
     		}
     	}
     	return leObjects;
@@ -338,17 +334,6 @@ public class JpaManager {
     }
     
     
-    /*public long insertLearningEnvironment(long id, String xmlfile) throws Exception{
-    	
-    	LearningEnvironmentEntity lee = new LearningEnvironmentEntity();
-    	if(xmlfile==null) throw new Exception("A LE xml file must be specified!!");
-    	lee.setXmlfile(xmlfile.getBytes("UTF-8"));
-    	if(id>0) lee.setId(id);
-    	return insertLearningEnvironment(lee);
-    	
-    }*/
-    
-    
     public long insertLearningEnvironment(LearningEnvironment le) throws Exception{
     	long id;
     	if(le.getId()==null){
@@ -357,7 +342,7 @@ public class JpaManager {
     		id = Long.valueOf(le.getId());
     	}
 
-    	LearningEnvironmentEntity lee = new LearningEnvironmentEntity(id, le.getName(), le.getType(),le.getAccessLocation().toString(), le.getUserid(), le.getCreduser(), le.getCredsecret(), Long.valueOf(le.getInstallation()));
+    	LearningEnvironmentEntity lee = new LearningEnvironmentEntity(id, le.getName(), le.getUserid(), le.getCreduser(), le.getCredsecret(), Long.valueOf(le.getInstallation()), le.isShowAR(), le.isShowVG());
     	return insertLearningEnvironment(lee);   	
     }
     

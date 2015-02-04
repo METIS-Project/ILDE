@@ -208,7 +208,7 @@ function loadDesignDB($link, $docid, $nextid = -1) {
                 $json = new Services_JSON();
                 return array("docid" => $row['docid'],
                         "design" => $json->decode($row['design']),
-                        "instance" => $json->decode($row['instance']),
+                        "instance" => json_decode($row['instance']),
                         "todoDesign" => $json->decode($row['todo_design']),
                         "todoInstance" => $json->decode($row['todo_instance'])
                 );

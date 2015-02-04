@@ -38,7 +38,7 @@ public class MediaWikiVLEAdaptor implements VLEAdaptor{
 	}
 	
 	@Override
-	public IVLEAdaptor getVLEAdaptor(GLUEPSManagerApplication applicationRest, Map<String, String> parameters) {
+	public IVLEAdaptor getVLEAdaptor(Map<String, String> parameters) {
 		MediaWikiAdaptor mwAdaptor;
 		//We construct the MediaWikiAdaptor	
     	String creduser = parameters.get("creduser");
@@ -46,10 +46,10 @@ public class MediaWikiVLEAdaptor implements VLEAdaptor{
 		if (creduser==null || credsecret==null)
 		{
 			//In this case, we use the default user and password as defined in the app.properties file
-			mwAdaptor = new MediaWikiAdaptor(applicationRest, configuration);
+			mwAdaptor = new MediaWikiAdaptor(configuration, parameters);
 		}
 		else{
-			mwAdaptor = new MediaWikiAdaptor(applicationRest, creduser, credsecret, configuration);
+			mwAdaptor = new MediaWikiAdaptor(creduser, credsecret, configuration, parameters);
 		}
 		
 		return mwAdaptor;

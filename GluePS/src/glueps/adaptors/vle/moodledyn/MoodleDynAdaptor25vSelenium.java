@@ -44,16 +44,14 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 	public MoodleDynAdaptor25vSelenium() {
 	}
 
-	public MoodleDynAdaptor25vSelenium(String base, String template,
-			GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor25vSelenium(String base, String template, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
-	public MoodleDynAdaptor25vSelenium(String base, String template,
-			GLUEPSManagerApplication applicationRest, String modelPackage,
-			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, modelPackage, backupXmlFilename,
-				tmpDir, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor25vSelenium(String base, String template, String modelPackage,
+			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, modelPackage, backupXmlFilename,
+				tmpDir, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
 
@@ -77,7 +75,7 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 		    //Here we should look for the course name
 		    driver.findElement(By.linkText(deploy.getCourse().getName())).click();
 		    //get the edit url of the current modules in the course 
-			String lfsection = deploy.getFieldFromDeployData(app.STARTING_SECTION_FIELD);
+			String lfsection = deploy.getFieldFromDeployData(getStartingSectionField());
 			List<String> oldHrefModules;
 			if(lfsection!=null && lfsection.length()>0){
 				WebElement editInput = driver.findElement(By.cssSelector("form[action=\"" + baseUrl + "course/view.php\"] input[type=\"hidden\"][name=\"edit\"]"));
@@ -467,6 +465,11 @@ public class MoodleDynAdaptor25vSelenium extends MoodleAdaptor21vSelenium implem
 	        }
     	}
     	return modulesGroupids;
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
 	}
 
 }

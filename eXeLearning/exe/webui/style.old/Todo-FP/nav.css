@@ -1,0 +1,119 @@
+/* Colores */
+
+body{
+	color:#000; /* Cuerpo de texto */
+	background:#F0F0F0; /* Color de fondo */
+}
+
+#content{
+	border-color:#ADADAD; /* Border del contenedor principal */
+	background:#ffffff; /* Color de fondo del contenedor principal */
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5); /* Sombra */
+}
+
+.noprt{
+	color:#fff; /* Color de texto del bloque Anterior/Siguiente: igual que el color de fondo de la página */
+	border-color:#ADADAD; /* Color de borde del bloque: borde superior */
+}
+
+.noprt a{
+	background-color:#F0F0F0; /* Color de fondo de los enlaces Anterior/Siguiente */
+	color:#6A3A4A; /* Color de texto de estos enlaces */
+}
+
+.noprt a:hover{
+	background-color:#E8EDF1; /* Color de fondo de los enlaces Anterior/Siguiente al pasar sobre ellos */
+	color:#000; /* Color de texto de estos enlaces al pasar sobre ellos */
+}
+
+#topPagination .pagination, #topPagination a{ /* En esta plantilla esta paginación se encuentra oculta por defecto (busca "Invisible content" en este mismo archivo) */
+	color:#DADADA; /* Color de texto de la paginación de la cabecera */
+}
+
+#topPagination a:hover{
+	color:#FFF; /* Color de texto de estos enlaces al pasar sobre ellos */
+}
+
+#main #nodeDecoration{
+	text-shadow:none; /* Sombra del texto del título de la página */
+}
+
+#header{
+	color:#FFFFFF; /* Título del proyecto */
+	text-shadow:1px 1px 1px #466A76; /* Sombra del texto */
+}
+
+#nodeTitle{
+	color:#005F6F; /* Título de cada página */
+}
+
+#skipNav a{
+    background:#436974;
+}
+
+#siteNav a{
+	background:#f0f0f0; /* Color fondo menú */
+	color:#0F5E87; /* Enlaces del menú */
+	border-color:#ADADAD; /* Borde que separa a los enlaces */
+}
+
+#siteNav a:hover{
+	color:#6A3A4A; /* Enlaces al pasar sobre ellos */
+	background:#fff; /* Fondo de los enlaces al pasar sobre ellos */
+}
+
+#siteNav ul ul a{
+	color:#38565F; /* Menú: enlaces de segundo nivel */
+}
+
+#siteNav .active{
+	color:#6A3A4A; /* Enlace activo en el menú principal */
+	font-weight:bold; /* Peso fuente */
+	border-color:#ADADAD;  /* Borde del enlace activo */
+}
+
+#siteNav .other-section{
+	display:none; /* Eliminar si se quiere que se muestren todos los niveles */
+}
+
+/* Otras definiciones */
+body{padding:0;text-align:center}
+#content{width:985px;margin:0 auto 25px auto;text-align:left;position:relative;border-style:solid;border-width:1px;border-top:0;border-bottom-left-radius:10px;border-bottom-right-radius:10px}
+#main-wrapper{padding:10px 20px 0 250px}
+#main{width:100%}
+#content{padding-bottom:11px}
+#header,#emptyHeader{height:40px;background:url(my_header.jpg) no-repeat 0 0;padding:69px 0 0 314px}
+* html #header,* html #emptyHeader{height:109px} /* IE6 */
+#nodeTitle{font-size:1.6em;margin:10px 10px 0 0}
+#main #nodeDecoration{background:none;padding:0;border:none}
+#siteNav{width:230px;float:left;padding-right:20px;padding-bottom:59px;background:url(my_nav_bg.jpg) no-repeat 0 bottom}
+* html #siteNav{width:250px} /* IE6 */
+#siteNav ul,#siteNav li{margin:0;padding:0;list-style:none}
+#siteNav a{display:block;padding:4px 0 4px 10px;border-width:0 0 1px 0;border-style:dotted}
+* html #siteNav a{display:inline-block;width:100%} /* IE6 */
+#siteNav .main-node{font-weight:bold;font-variant:small-caps;letter-spacing:1px;font-size:1.1em}
+#siteNav a.main-node:hover{text-decoration:underline;background:none}
+#siteNav ul ul a{padding-left:25px;font-size:.95em}
+#siteNav ul ul ul a{font-size:1em;padding-left:50px}
+#siteFooter{padding-left:250px}
+.pagination,.noprt{border-style:dotted;border-width:1px 0 0 0;padding-top:10px;text-align:right}
+.pagination a,.noprt a{padding:3px 5px;border-radius:5px}
+.pagination a:hover,.noprt a:hover{text-decoration:none}
+#topPagination{position:absolute;top:72px;right:10px}
+#topPagination .pagination{border:none}
+#topPagination a{padding:0 5px;background:none}
+#topPagination a:hover{text-decoration:underline}
+#bottomPagination{padding:0 20px 0 250px}
+.iDeviceTitle{vertical-align:top}
+/* Autoclear */
+#content:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0} 
+#content{display:inline-block}
+html[xmlns] #content{display:block}
+* html #content{height: 1%;overflow:visible}
+/* Invisible content (visible for screen reader users) */
+#topPagination{
+	position:absolute;
+	overflow:hidden;
+	clip:rect(0,0,0,0);
+	height:0;
+}

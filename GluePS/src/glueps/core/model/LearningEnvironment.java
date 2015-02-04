@@ -51,16 +51,19 @@ public class LearningEnvironment {
 	private HashMap<String, String> courses;
 	
 	//JUAN: introduced to may hide the AR controls
-	private boolean showAr;
+	//private boolean showAr;
 	
 	//Additional parameters for the learning environment
 	private String parameters;
+	
+	private boolean showAR;
+	private boolean showVG;
 	
 	public LearningEnvironment() {
 		super();
 	}
 	
-	public LearningEnvironment(String id, String name, String type, URL accessLocation, String userid, String creduser, String credsecret, String installation) {
+	public LearningEnvironment(String id, String name, String type, URL accessLocation, String userid, String creduser, String credsecret, String installation, boolean showAR, boolean showVG) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,6 +73,8 @@ public class LearningEnvironment {
 		this.creduser = creduser;
 		this.credsecret = credsecret;
 		this.installation = installation;
+		this.showAR = showAR;
+		this.showVG = showVG;
 	}
 
 	public LearningEnvironment(String id, String name, String type, String author, URL accessLocation, String installation) {
@@ -193,13 +198,20 @@ public class LearningEnvironment {
 		return courses;
 	}
 
-	//JUAN: introduced to may hide AR controls
-	public boolean isShowAr() {
-		return showAr;
+	public boolean isShowAR() {
+		return showAR;
 	}
 
-	public void setShowAr(boolean showAr) {
-		this.showAr = showAr;
+	public void setShowAR(boolean showAR) {
+		this.showAR = showAR;
+	}
+
+	public boolean isShowVG() {
+		return showVG;
+	}
+
+	public void setShowVG(boolean showVG) {
+		this.showVG = showVG;
 	}
 	
 	public String getParameters(){

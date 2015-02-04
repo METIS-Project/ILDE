@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBContext;
@@ -28,18 +29,18 @@ import glueps.core.model.Participant;
 
 public class EmailAdaptor implements IDynamicVLEDeployer {
 
-	private GLUEPSManagerApplication app=null;
 	private Properties properties= null;
+	protected Map<String, String> parameters;
 
 	public EmailAdaptor() {
 		super();
 	}
 	
-	public EmailAdaptor(GLUEPSManagerApplication app, Properties properties){
+	public EmailAdaptor(Properties properties, Map<String, String> parameters){
 		
 		super();
-		this.app=app;
 		this.properties = properties;
+		this.parameters = parameters;
 	}
 	
 	@Override
@@ -147,7 +148,7 @@ public class EmailAdaptor implements IDynamicVLEDeployer {
 
 	@Override
 	public Deploy deploy(String baseUri, Deploy lfdeploy) {
-		EmailerFactory factory = new EmailerFactory(app, properties);
+		EmailerFactory factory = new EmailerFactory(properties, parameters);
 		IEmailer emailer = factory.getEmailer(getEmailMode());
 		Deploy newDeploy = null;
 		try {
@@ -196,6 +197,11 @@ public class EmailAdaptor implements IDynamicVLEDeployer {
 	private String getEmailMode(){
 		return properties.getProperty("mode", "single");
     }
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
+	}
 
     
 	

@@ -1,0 +1,7 @@
+To run theses tests run them from the base directory (e.g. iteexe)
+when checked out from git do the following:
+
+export PYTHONPATH=$(pwd)
+python testing/runtests.py
+
+

@@ -74,6 +74,24 @@ abstract class glueserver_user_db_base {
         	$role->sortorder = $record->r_sortorder;
         	$return_records[$record->id]["role"][] = $role;
         }
+        //We also include the enrolled users that doesn't have a role
+        $sql = "SELECT usr.*
+                FROM {$CFG->prefix}user usr
+                INNER JOIN {$CFG->prefix}user_enrolments ue ON ue.userid = usr.id
+                INNER JOIN {$CFG->prefix}enrol er ON er.id = ue.enrolid
+                INNER JOIN {$CFG->prefix}course c ON c.id = er.courseid
+                WHERE c.id = ?
+                	AND usr.deleted = 0";
+        $sqlparams = array($courseid);
+        $records = $DB->get_recordset_sql($sql, $sqlparams);
+        foreach($records as $record){
+        	//Check if the user information is already stored
+        	if (!isset($return_records[$record->id])){
+        		$return_records[$record->id] = array();
+        		$return_records[$record->id]["user"] = $record;
+        	}
+        }
+        
         return $return_records;
     }
     

@@ -15,7 +15,7 @@ var EditActivityDialog = {
         });
         dojo.connect(dojo.byId("LDSelectResourcesNewTool_activity"), "onclick", function() {
             EditActivityDialog.newTool();
-        });
+        });        
     },
     open : function(activity) {
         this.activity = activity;
@@ -45,6 +45,10 @@ var EditActivityDialog = {
         this.resourceManager.buildList();
         var displayLOs = this.activity.subtype != "support" ? "" : "none";
         dijit.byId("LDActivityLOContainer").domNode.style.display = displayLOs;
+        //hide the new tool button if we are in the ldshake mode and information about the lms and class has not been provided
+        if (Loader.ldShakeMode && (DesignInstance.data==null || (DesignInstance.data.instObj.id=="" && DesignInstance.data.lmsObj.id=="" && DesignInstance.data.classObj.id==""))) {
+            dijit.byId("LDSelectResourcesNewTool_activity").domNode.style.display = "none";
+        }
         return;
     },
     save : function() {
@@ -112,6 +116,9 @@ var EditActivityDialog = {
             byebye.className = "generalButton";
             var listener = new DeleteActivityItemListener(resource.id, this);
             dojo.connect(byebye, "onclick", listener, "click");
+        }
+        if (Loader.ldShakeMode && (DesignInstance.data==null || (DesignInstance.data.instObj.id=="" && DesignInstance.data.lmsObj.id=="" && DesignInstance.data.classObj.id==""))) {
+            tools.style.display = "none";
         }
     },
     newTool: function() {

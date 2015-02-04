@@ -61,16 +61,14 @@ public class MoodleDynAdaptor21vSelenium extends MoodleAdaptor21vSelenium implem
 	public MoodleDynAdaptor21vSelenium() {
 	}
 
-	public MoodleDynAdaptor21vSelenium(String base, String template,
-			GLUEPSManagerApplication applicationRest, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor21vSelenium(String base, String template,String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
-	public MoodleDynAdaptor21vSelenium(String base, String template,
-			GLUEPSManagerApplication applicationRest, String modelPackage,
-			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword) {
-		super(base, template, applicationRest, modelPackage, backupXmlFilename,
-				tmpDir, moodleUrl, moodleUser, moodlePassword);
+	public MoodleDynAdaptor21vSelenium(String base, String template, String modelPackage,
+			String backupXmlFilename, String tmpDir, String moodleUrl, String moodleUser, String moodlePassword, Map<String, String> parameters) {
+		super(base, template, modelPackage, backupXmlFilename,
+				tmpDir, moodleUrl, moodleUser, moodlePassword, parameters);
 	}
 
 	
@@ -356,6 +354,11 @@ public class MoodleDynAdaptor21vSelenium extends MoodleAdaptor21vSelenium implem
 	        }
     	}
     	return modulesGroupids;
+	}
+
+	@Override
+	public boolean canBeDeployed(String baseUri, Deploy lfdeploy) {
+		return true;
 	}
 
 }
