@@ -42,106 +42,123 @@ $CONFIG->project_templates['default'] = array(
         'title' => T('Course Map'),
         'type'  => 'doc',
         'subtype'   => 'coursemap',
+        'stage' =>  'conceptualization',
     ),
 
     'MDN' => array(
         'title' => T('Design Narrative'),
         'type'  => 'doc',
         'subtype'   => 'MDN',
+        'stage' =>  'conceptualization',
     ),
 
     'design_pattern' => array(
         'title' => T('Design Pattern'),
         'type'  => 'doc',
         'subtype'   => 'design_pattern',
+        'stage' =>  'conceptualization',
     ),
 
     'PC' => array(
         'title' => T('Persona Card'),
         'type'  => 'doc',
         'subtype'   => 'PC',
+        'stage' =>  'conceptualization',
     ),
 
     'FC' => array(
         'title' => T('Factors and Concerns'),
         'type'  => 'doc',
         'subtype'   => 'FC',
+        'stage' =>  'conceptualization',
     ),
 
     'HE' => array(
         'title' => T('Heuristic Evaluation'),
         'type'  => 'doc',
         'subtype'   => 'HE',
+        'stage' =>  'conceptualization',
     ),
 
     'DB' => array(
         'title' => T('Dream'),
         'type'  => 'doc',
         'subtype'   => 'DB',
-        'icon' => 'doc'
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
     ),
 
     'LO' => array(
         'title' => T('Learning Objectives'),
         'type'  => 'doc',
         'subtype'   => 'LO',
-        'icon' => 'doc'
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
     ),
 
     'scenario' => array(
         'title' => T('Scenario'),
         'type'  => 'doc',
         'subtype'   => 'scenario',
-        'icon' => 'doc'
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
     ),
 
     'exe' => array(
         'title' => T('eXeLearning'),
         'type'  => 'exelearningrest',
         'subtype'   => null,
+        'stage' =>  'authoring',
     ),
 
     'collage' => array(
         'title' => T('WebCollage'),
         'type'  => 'webcollagerest',
         'subtype'   => null,
+        'stage' =>  'authoring',
     ),
 
     'openglm' => array(
         'title' => T('OpenGLM'),
         'type'  => 'openglm',
         'subtype'   => null,
+        'stage' =>  'authoring',
     ),
 
     'cadmos' => array(
         'title' => T('Cadmos'),
         'type'  => 'cadmos',
         'subtype'   => null,
+        'stage' =>  'authoring',
     ),
 
     'cld' => array(
         'title' => T('CompendiumLD'),
         'type'  => 'cld',
         'subtype'   => null,
+        'stage' =>  'conceptualization',
     ),
 
     'image' => array(
         'title' => T('Image'),
         'type'  => 'image',
         'subtype'   => null,
+        'stage' =>  'conceptualization',
     ),
 
     'doc' => array(
         'title' => T('Other'),
         'type'  => 'doc',
         'subtype'   => null,
+        'stage' =>  'conceptualization',
     ),
 
     'mooc_canvas' => array(
         'title' => T('Mooc Canvas'),
         'type'  => 'google_draw',
         'subtype'   => 'mooc_canvas',
-        'icon' => 'doc'
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
     ),
 );
 
@@ -151,12 +168,14 @@ if($CONFIG->ldshake_mode == 'ldshake') {
             'title' => T('Image'),
             'type'  => 'image',
             'subtype'   => null,
+            'stage' =>  'conceptualization',
         ),
 
         'doc' => array(
             'title' => T('Document'),
             'type'  => 'doc',
             'subtype'   => null,
+            'stage' =>  'conceptualization',
         ),
     );
 }
@@ -167,6 +186,7 @@ if($CONFIG->url == 'http://ilde.upf.edu/kek/') {
         'type'  => 'doc',
         'subtype'   => 'kek_p1',
         'icon' => 'text',
+        'stage' =>  'conceptualization',
     );
 
 }
@@ -176,12 +196,14 @@ if(!empty($CONFIG->google_drive)) {
         'title' => T('Google Docs'),
         'type'  => 'google_docs',
         'subtype'   => null,
+        'stage' =>  'conceptualization',
     );
 
     $CONFIG->project_templates['default']['google_spreadsheet'] = array(
         'title' => T('Google Spreadsheet'),
         'type'  => 'google_spreadsheet',
         'subtype'   => null,
+        'stage' =>  'conceptualization',
     );
 }
 
@@ -195,6 +217,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_a01',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_a02' => array(
@@ -202,6 +225,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_spreadsheet',
             'subtype'   => 'msf_a02',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_d00' => array(
@@ -209,6 +233,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_d00',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_d01c' => array(
@@ -216,6 +241,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_d01c',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_d01d' => array(
@@ -223,6 +249,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_d01d',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_d02' => array(
@@ -230,6 +257,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_d02',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
 
         'msf_d03' => array(
@@ -237,6 +265,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
             'type'  => 'google_docs',
             'subtype'   => 'msf_d03',
             'icon' => 'msf',
+            'stage' =>  'conceptualization',
         ),
     );
 

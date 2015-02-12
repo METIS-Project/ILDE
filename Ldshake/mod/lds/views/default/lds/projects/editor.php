@@ -1,4 +1,10 @@
-<?php extract($vars); ?>
+<?php extract($vars);
+    $project_stages = array(
+        'conceptualization',
+        'authoring',
+        'implementation'
+    );
+?>
 <div id="lds_editor_iframe">
 
 <div id="ldproject_conceptualize_grid"> <!-- This will act as design container -->
@@ -6,20 +12,29 @@
 
         <!--<div id="ldproject_toolBar" style="width: <?php echo (18 + 67*(ceil(count($CONFIG->project_templates['full'])/14)))?>px;">-->
         <div id="ldproject_toolBar" style="width: 100%; height: <?php echo (18 + 67*(ceil(count($CONFIG->project_templates['full'])/14)))?>px;">
-
-            <?php foreach($CONFIG->project_templates['full'] as $project_template_key => $project_template): ?>
-            <div class="draggable_wrapper">
-            <div class="draggable" title="<?php echo htmlspecialchars($project_template['title'])?>">
-                <div style="position:relative;width:inherit;height:inherit;">
-                <img src="<?php echo $vars['url']; ?>mod/lds/images/projects/<?php echo htmlspecialchars((isset($project_template['icon']) ? $project_template['icon'] : $project_template_key))?>.png" toolname="<?php echo htmlspecialchars($project_template['title'])?>" tooltype="<?php echo htmlspecialchars($project_template['type'])?>" <?php if(!empty($project_template['subtype'])):?>subtype="<?php echo htmlspecialchars($project_template['subtype']);?>"<?php endif;?>>
-                <?php if(isset($project_template['icon'])): ?>
-                <div unselectable="on" class="projects_tool_caption"><?php echo htmlspecialchars($project_template['title']);?></div>
-                <?php endif; ?>
-                </div>
-            </div>
-            </div>
+            <?php foreach($project_stages as $p_s):?>
+                <?php foreach($CONFIG->project_templates['full'] as $project_template_key => $project_template): ?>
+                    <?php if($project_template['stage'] == $p_s):?>
+                        <div class="draggable_wrapper">
+                            <div class="project-stage-<?php echo $p_s;?> draggable" title="<?php echo htmlspecialchars($project_template['title'])?>">
+                                <div style="position:relative;width:inherit;height:inherit;">
+                                    <img src="<?php echo $vars['url']; ?>mod/lds/images/projects/<?php echo htmlspecialchars((isset($project_template['icon']) ? $project_template['icon'] : $project_template_key))?>.png" toolname="<?php echo htmlspecialchars($project_template['title'])?>" tooltype="<?php echo htmlspecialchars($project_template['type'])?>" <?php if(!empty($project_template['subtype'])):?>subtype="<?php echo htmlspecialchars($project_template['subtype']);?>"<?php endif;?>>
+                                    <?php if(isset($project_template['icon'])): ?>
+                                    <div unselectable="on" class="projects_tool_caption"><?php echo htmlspecialchars($project_template['title']);?></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                <?php endforeach; ?>
             <?php endforeach; ?>
-
+            <div id="project-editor-legend">
+                <ol>
+                    <li id="project-editor-legend-conceptualization">Conceptualization</li>
+                    <li id="project-editor-legend-authoring">Authoring</li>
+                    <li id="project-editor-legend-implementation">Implementation</li>
+                </ol>
+            </div>
         </div>
     </div>
     <div style="clear:both"></div>

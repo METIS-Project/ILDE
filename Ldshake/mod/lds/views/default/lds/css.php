@@ -2411,6 +2411,49 @@ div.cc_info_icon > div.cc_icon_title {
     cursor: default
 }
 
+.draggable.project-stage-conceptualization {
+	border: 3px solid #FF7B7B;
+}
+
+.draggable.project-stage-authoring {
+	border: 3px solid green;
+}
+
+.draggable.project-stage-implementation {
+	border: 3px solid blue;
+}
+
+#project-editor-legend ol {
+	width: 100px;
+	height: 55px;
+	float: right;
+	display: block;
+	margin-top: 17px;
+}
+
+#project-editor-legend ol li {
+	/*border: 2px solid black;*/
+	display: inline-block;
+	color: black;
+	font-weight: bold;
+	text-shadow: 2px 0 0 #FFF, -2px 0 0 #FFF, 0 2px 0 #FFF, 0 -2px 0 #FFF, 1px 1px #FFF, -1px -1px 0 #FFF, 1px -1px 0 #FFF, -1px 1px 0 #FFF;
+	padding: 2px 4px 2px 4px;
+	border-radius: 5px;
+	margin-bottom: 2px;
+}
+
+#project-editor-legend-conceptualization {
+	background-color: red;
+}
+
+#project-editor-legend-authoring {
+	background-color: blue;
+}
+
+#project-editor-legend-implementation {
+	background-color: green;
+}
+
 .workflow_order {
     width: 18px;
     height: 15px;
