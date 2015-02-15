@@ -2314,7 +2314,7 @@ div.cc_info_icon > div.cc_icon_title {
     padding: 5px;
     position: relative;
     float: left;
-    margin: 4px 0px 0px 5px;
+    /*margin: 4px 0px 0px 5px;*/
     background-color: white;
     color: white !important;
     border: 1px solid #dddddd;
@@ -2328,7 +2328,7 @@ div.cc_info_icon > div.cc_icon_title {
     position: relative;
     float: left;
     z-index: 9;
-    margin: 1px;
+    margin: 0px 8px 8px 0px;
 }
 
 .draggable:not([tooltype_added="true"]):hover {
@@ -2427,8 +2427,9 @@ div.cc_info_icon > div.cc_icon_title {
 	width: 100px;
 	height: 55px;
 	float: right;
-	display: block;
-	margin-top: 17px;
+	display: table;
+	margin-top: 10px;
+	padding-right: 5px;
 }
 
 #project-editor-legend ol li {

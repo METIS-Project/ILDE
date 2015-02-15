@@ -84,15 +84,15 @@
                             <?php else: ?>
                                 <div class="lds_select_spacer"></div>
                             <?php endif; ?>
-                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->editor_type; ?>-icon-20.png" alt="LdS" /></a>
+                            <a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img src="<?php echo $url ?>mod/lds/images/lds-<?php echo $item->lds->editor_type; ?>-icon-20.png" alt="LdS" /></a>
                             <div class="lds_info">
                                 <a lds_id="<?php echo $item->lds->guid ?>" class="lds_implement_action" deploy="true" href="#"><?php echo T("Implement as") ?></a>
                                 <span class="lds_title_tags implementable">
 						<a class="lds_title" href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>"><?php echo $item->lds->title ?></a>
                                     <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
-                                <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
+                                <span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?><?php echo T('s');?><?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php if ($item->num_viewers != 1): ?><?php echo T("viewers"); ?><?php else: ?><?php echo T("viewer"); ?><?php endif; ?></span>
+                                <span class="lds_date timeago_timestamp" timestamp="<?php echo $item->last_contribution_at;?>"><?php //echo friendly_time($item->last_contribution_at, false, true) ?></span>
                             </div>
                             <div class="clearfloat"></div>
                         </li>
@@ -105,7 +105,7 @@
 						<a class="lds_title lds_padded" href="<?php echo lds_viewTools::url_for($item->lds, 'viewtrashed') ?>"><?php echo $item->lds->title ?></a>
                         <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
-                                <span class="lds_people"><?php echo $item->starter->name ?> to <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?>s<?php endif; ?>, <?php if($item->num_viewers == -1): ?>all<?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> viewer<?php if ($item->num_viewers != 1): ?>s<?php endif; ?></span>
+                                <span class="lds_people"><?php echo $item->starter->name ?> <?php echo T("to"); ?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?><?php echo T('s');?><?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T("all"); ?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php if ($item->num_viewers != 1): ?><?php echo T("viewers"); ?><?php else: ?><?php echo T("viewer"); ?><?php endif; ?></span>
                                 <span class="lds_date"><?php echo friendly_time($item->lds->time_updated, false, true) ?></span>
                             </div>
                             <div class="clearfloat"></div>

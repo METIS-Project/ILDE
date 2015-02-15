@@ -30,9 +30,9 @@
             <?php endforeach; ?>
             <div id="project-editor-legend">
                 <ol>
-                    <li id="project-editor-legend-conceptualization">Conceptualization</li>
-                    <li id="project-editor-legend-authoring">Authoring</li>
-                    <li id="project-editor-legend-implementation">Implementation</li>
+                    <li id="project-editor-legend-conceptualization"><?php echo T('Conceptualization')?></li>
+                    <li id="project-editor-legend-authoring"><?php echo T('Authoring')?></li>
+                    <li id="project-editor-legend-implementation"><?php echo T('Implementation')?></li>
                 </ol>
             </div>
         </div>

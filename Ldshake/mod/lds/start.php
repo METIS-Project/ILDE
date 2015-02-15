@@ -315,7 +315,7 @@ function lds_page_handler ($page)
 function lds_exec_main ($params)
 {
     global $ldshake_css, $start_time;
-    //echo microtime(true) - $start_time.' start2<br />';
+
     $offset = get_input('offset') ?: '0';
 
     if ($params[1] == 'created-by-me')
@@ -342,16 +342,8 @@ function lds_exec_main ($params)
     }
     else
     {
-        //$time = microtime(true);
         $vars['count'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), true);
-        //echo microtime(true) - $time.' bc<br />';
-        //$time = microtime(true);
         $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset, null, null, "time", true);
-        //echo microtime(true) - $time.' be<br />';
-        //$time = microtime(true);
-        //$vars['list'] = lds_contTools::enrichLdS($entities);
-        //echo microtime(true) - $time.' el<br />';
-
         $vars['title'] = T("All my LdS");
     }
 
@@ -359,39 +351,27 @@ function lds_exec_main ($params)
 
     $vars['section'] = $params[1];
 
-
-    //echo microtime(true) - $start_time.' start25<br />';
     $body = elgg_view('lds/mylds',$vars);
-    //echo microtime(true) - $start_time.' start3<br />';
-
-    //echo microtime(true) - $time.' brl<br />';
-    $offset = get_input('offset') ?: '0';
-
-    $time = microtime(true);
     page_draw($vars['title'], $body);
-    //echo microtime(true) - $time.' draw<br />';
-    //echo microtime(true) - $start_time.' start4<br />';
 }
 
 function lds_exec_implementable ($params)
 {
     global $CONFIG;
     $offset = get_input('offset') ?: '0';
-    $user = get_loggedin_user();
 
     if (strlen($params[1]))
     {
-        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "editor_type", $params[1]);
-        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[1]);
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset, "editor_type", $params[1], "time", true);
+        $vars['count'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), true, 50, 0, "editor_type", $params[1]);
+
         $vars['title'] = T("Created with") . ' ' . $params[1];
         $vars['editor_filter'] = $params[1];
     }
     else
     {
-        $vars['count'] = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), true, 0 , 0, "implementable", '1');
-        $entities = lds_contTools::getUserEditableLdSs(get_loggedin_userid(), false, 50, $offset, "implementable", '1');
-        $vars['list'] = lds_contTools::enrichLdS($entities);
+        $vars['list'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 50, $offset, "implementable", '1', "time", true);
+        $vars['count'] = lds_contTools::getUserEditableLdS(get_loggedin_userid(), true, 50, 0, "implementable", '1');
         $vars['title'] = T("All my LdS > implementable in VLE");
     }
 
@@ -421,7 +401,6 @@ function lds_exec_implementable ($params)
 
     $vars['vle_data'] = $vle_data;
 
-    //$vars['vle_info'] = GluepsManager::getVleInfo();//lds_contTools::getVLECourses($vle);
     $body = elgg_view('lds/implementable',$vars);
 
     page_draw($vars['title'], $body);
