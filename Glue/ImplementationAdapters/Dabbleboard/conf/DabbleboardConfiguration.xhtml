@@ -1,0 +1,52 @@
+<!-- 
+ *******************************************************************************
+ * Copyright (C) 2015 Intelligent & Cooperative Systems Research Group/Education,
+ * Media, Computing & Culture (GSIC-EMIC). University of Valladolid(UVA). 
+ * Valladolid, Spain. https://www.gsic.uva.es/
+ * 
+ * This file is part of Dabbleboard Adapter.
+ * 
+ * Dabbleboard Adapter is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or 
+ * (at your option) any later version.
+ * 
+ * Dabbleboard Adapter is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+ * GNU Affero General Public License for more details.
+ * 
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ ******************************************************************************
+-->
+
+
+<!-- 
+ * Configuration form for a new Wookie widget.
+ *
+ * Empty form; just reusability flag
+ *
+ * @author      David A. Velasco
+ * @version     2011051100
+ * @package     -
+-->
+<div xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:xf="http://www.w3.org/2002/xforms"
+    xmlns:ev="http://www.w3.org/2001/xml-events"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ins="http://gsic.uva.es/glue/adapters/implementation/dabbleboard/1.0"
+    xmlns:glue="http://gsic.uva.es/glue">
+    
+    <!-- model -->        
+    <xf:model> 
+	 	<xf:instance id="input-file">
+            <ins:data>
+                <glue:reusable xsi:type="xs:boolean">true</glue:reusable>
+            </ins:data>
+        </xf:instance>
+    </xf:model> 
+
+</div>
+

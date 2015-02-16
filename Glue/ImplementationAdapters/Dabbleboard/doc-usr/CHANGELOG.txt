@@ -1,0 +1,41 @@
+#################################################################################
+# Copyright (C) 2015 Intelligent & Cooperative Systems Research Group/Education,
+# Media, Computing & Culture (GSIC-EMIC). University of Valladolid(UVA). 
+# Valladolid, Spain. https://www.gsic.uva.es/
+# 
+# This file is part of Dabbleboard Adapter.
+# 
+# Dabbleboard Adapter is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or 
+# (at your option) any later version.
+# 
+# Dabbleboard Adapter is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+# GNU Affero General Public License for more details.
+# 
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#################################################################################
+
+### Version 0.92
+
+ - Minor fixes in INSTALL.txt
+ - Fixed bug while updating the list of users and this is empty
+ - Check that a callerUser is always provided
+ - Added an ANT file to build the distribution packages
+ - scripts to install and start the adapter
+ 
+### Version 0.9
+
+ - Minor fixes in INSTALL.txt
+ - Added commentary for procrun in README.txt
+ - Added copyright notice in *.xhtml files
+ - Fixed comments in app.properties
+ 
+ 
+### Version 0.8
+
+ - First public release
+   
