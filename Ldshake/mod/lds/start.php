@@ -3189,7 +3189,27 @@ function lds_exec_new_project ($params)
 
     $vars['project']['ldproject'] = '[]';
     $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 700, 0, null, null, "time", true));
-    $vars['project']['vle_list'] = array();
+
+    if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
+        $vle_data = array();
+        foreach($vles as $vle) {
+            $vlemanager = VLEManagerFactory::getManager($vle);
+
+            if($vle_info = $vlemanager->getVleInfo()) {
+                $vle_info->item = $vle;
+                $vle_data[$vle->guid] = $vle_info;
+                $CONFIG->project_templates['full']['vle_'.$vle->guid] = array(
+                    'title' => $vle->name,
+                    'type'  => "vle",
+                    'subtype'   => $vle->vle_type,
+                    'icon'  => $vle->vle_type,
+                    'stage' => 'implementation',
+                );
+            }
+        }
+
+    }
+    $vars['project']['vle_list'] = json_encode($vle_data);
     $vars['lds'] = new ElggObject();
     $vars['lds']->subtype = 'LdSProject';
 

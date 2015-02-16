@@ -118,7 +118,6 @@
         <p class="noresults"><?php echo T("Oops, no LdS here!") ?></p>
     <?php endif; ?>
 
-
     <div class="filters">
         <div class="paging">
             <?php echo lds_viewTools::pagination($count, 50) ?>

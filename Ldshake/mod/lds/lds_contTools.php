@@ -42,6 +42,15 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_glueps_isimplementable($editor_type) {
+    $implementable = array("webcollagerest", "openglm", "syncmeta");
+
+    if(in_array($editor_type, $implementable))
+        return true;
+
+    return false;
+}
+
 function ldshake_query_design_implementated_list($userid, $params) {
     $lds_id_id = get_metastring_id("lds_id");
     $lds_implementation_id = get_subtype_id("object", "LdS_implementation");

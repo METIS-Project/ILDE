@@ -121,7 +121,11 @@ $is_implementation = !empty($is_implementation);
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>
                             <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
+                            <?php if(ldshake_glueps_isimplementable($item->lds->type)): ?>
+                                <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>" lds_id="<?php echo $item->lds->guid ?>" vle_id="<?php echo $vle_id;?>" class="lds_implement_action" deploy="true"><?php echo T("Implement"); ?></a>
+                            <?php endif; ?>
                         <?php endif; ?>
+
                         <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $view_mode) ?>"><?php echo $item->lds->title ?></a>
                         <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
@@ -158,5 +162,6 @@ $is_implementation = !empty($is_implementation);
     </div>
 </div>
 
+<?php include (__DIR__.'/implementprojectlds_form.php');?>
 <?php include (__DIR__.'/../clonelds_form.php');?>
 <?php include (__DIR__.'/new_projectimplementation_form.php');?>
