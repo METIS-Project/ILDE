@@ -1,0 +1,21 @@
+########################################################################################
+# MoodleQAPIPlugin for Moodle 2.5.x - INSTALLATION MANUAL                             #
+#                                                                                      #
+# Copyright 2015 GSIC (UVA)                                                            #
+########################################################################################
+
+
+################
+# INSTALLATION #
+################
+1.	Create a new directory called ‘glueserver’ in the ‘local’ directory of your Moodle installation.
+2.	Copy the content of the ‘qapi_moodle_2.x’ directory, being x the number of your Moodle 2 version, into the ‘local/glueserver’ directory. For instance, if your Moodle version is 2.3, you have to copy the content from the ‘qapi_moodle_2.3’ directory. 
+3.	Go to Settings->Site administration->Notifications in order to install the plugin.
+4.	Go to Settings->Site administration->Advanced features. Then enable the checkbox ‘Enable web services’ and click on the button ‘Save changes’.
+5.	Go to Settings->Site administration->Plugins->Web services->Manage protocols and enable the REST protocol. Then save the changes by clicking on the button ‘Save changes’.
+6.	Go to Settings->Site administration->Plugins->Web services->External services and click on ‘Add’.
+7.	Enter a name for the external service, for instance ‘gws’, enable the checkbox ‘enabled’ and click on the button ‘Add service’.
+8.	Click on ‘Add functions’, select all of them and click on the ‘Add functions’ button.
+9.	Go to Settings->Site administration->Plugins->Web services->Manage tokens and click on ‘Add’.
+10.	 Select a user with administrator permissions in Moodle and select the service ‘gws’. Click on the ‘Save changes’ button.
+11.	 Go to Settings->Site administration->Plugins->Web services->API Documentation and check out that the functions were rightly added.
