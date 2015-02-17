@@ -128,6 +128,9 @@ $(document).ready(function()
             title: $('input[name=new_implementation_title]').val()
         };
 
+        if($('#implement_popup input[name=lds_id]').is('[project_guid]'))
+            submitData.project_guid = $('#implement_popup input[name=lds_id]').attr('project_guid');
+
         if(submitData.title.length == 0 || !submitData.vle_id)
             $('#impl_submit_incomplete').show();
         else
@@ -140,8 +143,13 @@ $(document).ready(function()
             });
     });
 
-    $('.lds_implement_action').click(function (){
+    $('.lds_implement_action').click(function (event){
+        event.preventDefault();
         $('#implement_popup input[name=lds_id]').val($(this).attr('lds_id'));
+
+        if($(this).is('[project_guid]'))
+            $('#implement_popup input[name=lds_id]').attr('project_guid', $(this).attr('project_guid'));
+
         $('#implement_popup').fadeToggle(200);
         $('input[name=new_implementation_title]')
             .keypress(function(e) {

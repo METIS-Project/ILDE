@@ -675,7 +675,7 @@ function ldshake_project_find_guid($pg_data, $guid) {
     return false;
 }
 
-function ldsshake_project_implement(&$pg_data, $project_design) {
+function ldsshake_project_implement(&$pg_data, &$project_design) {
     $pd_guid = $project_design->guid;
     $title = $project_design->title;
     $preserved_lds = array();
@@ -685,8 +685,15 @@ function ldsshake_project_implement(&$pg_data, $project_design) {
 
     foreach($pg_data as &$tool) {//tooltype
         $tool = (array)$tool;
+
         if(empty($tool['associatedLdS']) or !is_array($tool['associatedLdS'])) {
             $tool = (object)$tool;
+            continue;
+        }
+
+        if($tool['tooltype'] == "vle") {
+            $project_design->vle = $tool['editor_subtype'];
+            $project_design->save();
             continue;
         }
 

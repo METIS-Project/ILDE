@@ -43,15 +43,14 @@
     <br />
     <br />
 
-    <h3><?php echo T("Select one of your VLE spaces") ?></h3>
+    <h3><?php echo T("Select one course from") ?> <?php echo $vle_info->item->name ?></h3>
 
     <div style="max-height: 300px; overflow-y: auto;">
-        <div class="vle_implement_form_vle_name"><?php echo $vle->name ?></div>
         <div class="vle_implement_form_vle_courses">
-        <?php if(isset($vle->courses)): ?>
-            <?php foreach($vle->courses as $key=>$course): ?>
+        <?php if(isset($vle_info)): ?>
+            <?php foreach($vle_info->courses as $key=>$course): ?>
                 <div>
-                    <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_id?>" vle_name="<?php echo htmlentities($vle->item->name) ?>" course_name="<?php echo htmlentities($course) ?>" /><span class="course-name"><?php echo $course;?></span>
+                    <input type="radio" name="course" value="<?php echo $key?>" vle_id="<?php echo $vle_info->item->guid?>" vle_name="<?php echo htmlentities($vle_info->item->name) ?>" course_name="<?php echo htmlentities($course) ?>" /><span class="course-name"><?php echo $course;?></span>
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

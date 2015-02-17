@@ -618,7 +618,6 @@ function lds_exec_vledata ($params)
 
         foreach($courses as $key => $fvle) {
             $participants[$key] = (array)$gluepsm->getCourseInfo($key)->participants;
-            //uasort($participants[$key], function($a, $b) { return (int)$a->id - (int)$b->id; });
             uasort($participants[$key], function($a, $b) { return strnatcasecmp($a->name, $b->name);});
         }
 
@@ -3051,6 +3050,17 @@ function lds_exec_project_implementation ($params)
     $vars['is_implementation'] = true;
     $vars['implementation_guid'] = $project_implementation->guid;
     $vars['implementation'] = $project_implementation;
+
+    if(!empty($project_implementation->vle)) {
+        if($vle = get_entity($project_implementation->vle)) {
+            $vlemanager = VLEManagerFactory::getManager($vle);
+
+            if ($vle_info = $vlemanager->getVleInfo()) {
+                $vle_info->item = $vle;
+                $vars['vle_info'] = $vle_info;
+            }
+        }
+    }
     $body = elgg_view('lds/projects/myprojects',$vars);
 
     page_draw($vars['title'], $body);
@@ -3201,14 +3211,14 @@ function lds_exec_new_project ($params)
                 $CONFIG->project_templates['full']['vle_'.$vle->guid] = array(
                     'title' => $vle->name,
                     'type'  => "vle",
-                    'subtype'   => $vle->vle_type,
+                    'subtype'   => $vle->guid,
                     'icon'  => $vle->vle_type,
                     'stage' => 'implementation',
                 );
             }
         }
-
     }
+
     $vars['project']['vle_list'] = json_encode($vle_data);
     $vars['lds'] = new ElggObject();
     $vars['lds']->subtype = 'LdSProject';

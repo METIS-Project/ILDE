@@ -1073,10 +1073,10 @@ $translations = array (
 => "Compartir..."
 
 ,"Shared with me"
-=> "Compartir conmigo"
+=> "Compartidos conmigo"
 
 ,"Shared with me > Implementations"
-=> "Compartir conmigo > Implementaciones"
+=> "Compartidos conmigo > Implementaciones"
 
 ,"Sharing options..."
 => "Opciones de compartición..."

@@ -44,6 +44,7 @@ $vle_id = get_input('vle_id');
 $course_id = get_input('course_id');
 $vle_name = get_input('vle_name', null);
 $course_name = get_input('course_name', null);
+$project_guid = get_input('project_guid', null);
 
 $lds = get_entity($lds_id);
 
@@ -71,6 +72,10 @@ if($lds->editor_type == 'exelearningrest') {
     $implementation->course_name = $course_name;
     $implementation->lds_id = $lds->guid;
     $implementation->editor_type = 'gluepsrest';
+
+    if(!empty($project_guid))
+        $implementation->project_design = $project_guid;
+
     $implementation->save();
 
     echo $implementation->guid;
