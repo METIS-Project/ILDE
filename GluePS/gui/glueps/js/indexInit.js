@@ -1,11 +1,22 @@
 /*
- 1.-La primera clase que se carga es la de glueps.js. Que es la encarga de mostrar la primera pantalla. En esta archivo se encuentran las funciones de inter
- nacionalizaci�n.
- 2.-Desde la pantalla inicial. Una vez creado un nuevo dise�o nos iremos a pantalla 2. Cas� toda la funcionalidad esta pantalla est� implementada en el
- archivo Deploy.js y design.js.
-      En design.js destaca la funci�n "construirListadoDisenos" encargada de crear listado de dise�os de pantalla 1 y a�adir bot�n nuevo despliegue
-      En Deploy.js destaca la funci�n "addListDeploys" encargada de mostrar listado de despliegues de cada dise�o a�adir el Aqu� y poner bot�n editar
-         para cada despliegue
+Copyright (C) 2015 Intelligent & Cooperative Systems Research Group/Education,
+Media, Computing & Culture (GSIC-EMIC). University of Valladolid(UVA). 
+Valladolid, Spain. https://www.gsic.uva.es/
+
+This file is part of Glue!PS.
+
+Glue!PS is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or 
+(at your option) any later version.
+
+Glue!PS is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the 
+GNU Affero General Public License for more details.
+
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 dojo.require("dijit.Dialog");
