@@ -1190,7 +1190,7 @@ class RestEditor extends Editor
         $vars['editor_label'] = $CONFIG->rest_editor_list[$editorType]['name'];
         $vars['restapi'] = true;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
 
         $post = array(
             'lang' => $lang,
@@ -1273,7 +1273,7 @@ class RestEditor extends Editor
         $vars['editor_label'] = $CONFIG->rest_editor_list[$this->_document->editorType]['name'];
         $vars['restapi'] = true;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
 
         $post = array(
             'lang' => $lang,
@@ -1370,7 +1370,7 @@ class RestEditor extends Editor
 
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
 
         try {
             //check if the design exists
@@ -2207,7 +2207,7 @@ SQL;
         $vars['editor'] = 'webcollagerest';
         $vars['restapi'] = true;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
 
         $post = array(
             'lang' => $lang,
@@ -3348,7 +3348,7 @@ class GluepsManager
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
         $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
@@ -3568,7 +3568,7 @@ class GluepsManager
         $vars['restapi'] = true;
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
         $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
@@ -4287,7 +4287,7 @@ class MoodleManager
         $vars['editor_id'] = $sectoken;
         $vars['document_url'] = "{$url}deploys/{$deploy_id}";
         //$vars['document_iframe_url'] = "{$url}gui/glueps/deploy.html?deployId={$deploy_id}&sectoken={$sectoken}&lang=en";
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
         $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
@@ -4507,7 +4507,7 @@ class MoodleManager
         $vars['restapi'] = true;
         $vars['restapi_remote_domain'] = $gui_frame_origin;
 
-        $lang = lds_contTools::tool_lang($vars['editor'],$CONFIG->language);
+        $lang = lds_contTools::tool_lang($vars['editor'], get_current_language());
         $vars['document_iframe_url'] = "{$url}gui/glueps/deployLdShake.html?deployId={$deploy_id}&lang={$lang}";
 
         return $vars;
