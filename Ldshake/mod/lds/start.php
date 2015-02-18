@@ -1509,6 +1509,11 @@ function lds_exec_implementeditor($params)
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
     $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
+    //Get the page that we come from (if we come from an editing form, we go back to my lds)
+    if (preg_match('/(implementeditor)/',$_SERVER['HTTP_REFERER']))
+        $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
+    else
+        $vars['referer'] = $_SERVER['HTTP_REFERER'];
 
     $editLdS = get_entity($params[1]);
     if($lds = get_entity($editLdS->lds_id))
@@ -1563,7 +1568,7 @@ function lds_exec_implementeditor($params)
         $vars['initLdS']->guid = $params[1];
 
     } else {
-
+        //is a implementation helper
         $implementation_helper = $editLdS;
         $editLdS = get_entity($editLdS->lds_id);
         $vars['implementation_helper_id'] = $implementation_helper->guid;
@@ -1674,10 +1679,11 @@ function lds_exec_editglueps($params)
     global $CONFIG;
 
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    //if (preg_match('/(neweditor|implementeditor)/',$_SERVER['HTTP_REFERER']))
+    if (preg_match('/(editglueps)/',$_SERVER['HTTP_REFERER']))
         $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
-    //else
-    //    $vars['referer'] = $_SERVER['HTTP_REFERER'];
+    else
+        $vars['referer'] = $_SERVER['HTTP_REFERER'];
+
 
     $editLdS = get_entity($params[1]);
 
@@ -3064,8 +3070,10 @@ function lds_exec_project_implementation ($params)
     $vars['jsondata'] = $project_implementation->jsondata;
     $pg_data = json_decode($project_implementation->description);
     $vars['list'] = ldshake_project_add_title_order($vars['list'], $pg_data);
-    if($vle_implementations = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true, true))
+    if($vle_implementations = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true, false)) {
+        $vle_implementations = lds_contTools::enrichImplementation($vle_implementations);
         $vars['list'] = array_merge($vars['list'], $vle_implementations);
+    }
     $vars['list_type'] = T('LdS');
     $vars['section'] = 'on';
     $vars['is_implementation'] = true;

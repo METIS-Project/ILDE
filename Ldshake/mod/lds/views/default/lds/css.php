@@ -2412,15 +2412,15 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 .draggable.project-stage-conceptualization {
-	border: 3px solid #FF7B7B;
-}
-
-.draggable.project-stage-authoring {
 	border: 3px solid green;
 }
 
-.draggable.project-stage-implementation {
+.draggable.project-stage-authoring {
 	border: 3px solid blue;
+}
+
+.draggable.project-stage-implementation {
+	border: 3px solid #FF7B7B;
 }
 
 #project-editor-legend ol {
@@ -2444,7 +2444,7 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 #project-editor-legend-conceptualization {
-	background-color: red;
+	background-color: green;
 }
 
 #project-editor-legend-authoring {
@@ -2452,7 +2452,7 @@ div.cc_info_icon > div.cc_icon_title {
 }
 
 #project-editor-legend-implementation {
-	background-color: green;
+	background-color: #FF7B7B;
 }
 
 .workflow_order {

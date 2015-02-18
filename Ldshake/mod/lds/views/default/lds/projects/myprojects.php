@@ -120,13 +120,17 @@ $is_implementation = !empty($is_implementation);
                             <div class="lds_info">
 					<span class="lds_title_tags">
        					<?php if (!$item->locked): ?>
-                            <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
-                            <?php if(ldshake_glueps_isimplementable($item->lds->editor_type) and !empty($vle_info)): ?>
-                                <a class="lds_implement_action lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $implementation->guid;?>" lds_id="<?php echo $item->lds->guid ?>" vle_id="<?php echo $vle_info->item->guid;?>" class="lds_implement_action" deploy="true" style="width: auto; float: none;"><?php echo T("Implement"); ?></a>
-                            <?php endif; ?>
+                            <?php
+                            $vle_implementation = (empty($item->glueps) and !empty($item->implementation)) ? " lds_select_implement_action": "";
+                            ?>
+                            <a class="<?php echo $imp_action.$vle_implementation; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" lds="<?php echo $item->lds->guid;?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
                         <?php endif; ?>
 
                         <a class="lds_title<?php if ($item->new): ?> new<?php endif; ?><?php if ($item->locked): ?> lds_padded<?php endif; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $view_mode) ?>"><?php echo $item->lds->title ?></a>
+                        <?php if(ldshake_glueps_isimplementable($item->lds->editor_type) and !empty($vle_info)): ?>
+                            <a class="lds_implement_action lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $implementation->guid;?>" lds_id="<?php echo $item->lds->guid ?>" vle_id="<?php echo $vle_info->item->guid;?>" class="lds_implement_action" deploy="true" style="width: auto; float: none;"><?php echo T("Implement"); ?></a>
+                        <?php endif; ?>
+
                         <?php echo lds_viewTools::all_tag_display ($item->lds) ?>
 					</span>
                                 <span class="lds_people"><?php echo $item->starter->name ?> <?php echo T('to');?> <?php echo $item->num_editors ?> editor<?php if ($item->num_editors != 1): ?><?php echo T('s');?><?php endif; ?>, <?php if($item->num_viewers == -1): ?><?php echo T('all');?><?php else: ?><?php echo $item->num_viewers ?><?php endif; ?> <?php if ($item->num_viewers != 1): ?><?php echo T("viewers"); ?><?php else: ?><?php echo T("viewer"); ?><?php endif; ?></span>
@@ -165,3 +169,15 @@ $is_implementation = !empty($is_implementation);
 <?php include (__DIR__.'/implementprojectlds_form.php');?>
 <?php include (__DIR__.'/../clonelds_form.php');?>
 <?php include (__DIR__.'/new_projectimplementation_form.php');?>
+<div id="editimplementation_popup" class="lds_popup">
+    <a class="lds_close_popup" id="editimplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>
+    <h3><?php echo T("Select the editor that you want to use to edit the implementation") ?></h3>
+
+    <div>
+        <a href="<?php echo $url.'pg/lds/implementeditor/'?>"><span class="editor-name">WebCollage</span></a>
+    </div>
+    <div>
+        <a href="<?php echo $url.'pg/lds/editglueps/'?>"><span class="editor-name">GLUE!-PS</span></a>
+    </div>
+
+</div>

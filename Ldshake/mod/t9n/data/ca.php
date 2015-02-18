@@ -464,8 +464,8 @@ $translations = array (
 "Comparing with previous revision by %1 on %2"
 => "Comparant amb revisió anterior per %1 el %2",
 
-"All LdShakers"
-=> "Tots els LdShakers",
+"All users"
+=> "Tots els usuaris",
 
 "Members of %1"
 => "Membres de %1",
@@ -597,7 +597,7 @@ $translations = array (
 => "Els meus LdS",
 
 "LdShakers"
-=> "LdShakers",
+=> "Comunitat",
 
 "Rich Text"
 => "Text ric",

@@ -42,6 +42,15 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_glueps_isimplementation($editor_type) {
+    $implementable = array("gluepsrest");
+
+    if(in_array($editor_type, $implementable))
+        return true;
+
+    return false;
+}
+
 function ldshake_glueps_isimplementable($editor_type) {
     $implementable = array("webcollagerest", "openglm", "syncmeta");
 
@@ -1715,6 +1724,7 @@ SQL;
             $obj = new stdClass();
             $implementation->title = ($implementation->title == '') ? T('Untitled implementation') : $implementation->title;
             $obj->implementation = $implementation;
+            $obj->lds = $implementation;
             $obj->lds_id = $implementation->lds_id; //The LdS itself
             $obj->starter = get_entity($implementation->owner_guid);
             $obj->glueps = get_entities_from_metadata_multi(array(

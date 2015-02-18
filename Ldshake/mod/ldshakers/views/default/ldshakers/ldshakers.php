@@ -37,7 +37,7 @@
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<ul id="lds_side_sections">
-			<li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo ldshakers_viewTools::getUrl() ?>"><?php echo T("All LdShakers") ?></a></li>
+			<li><a<?php if ($section == '') echo ' class="current"' ?> href="<?php echo ldshakers_viewTools::getUrl() ?>"><?php echo T("All users") ?></a></li>
 			<?php 
 			if (is_array($groups)):
 				foreach ($groups as $g):

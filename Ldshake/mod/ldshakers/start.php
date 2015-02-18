@@ -119,7 +119,7 @@ function ldshakers_exec_main ($params)
 	$groups = ldshakers_contTools::getUserGroups(get_loggedin_userid());
 	$vars['groups'] = $groups;
 	
-	$vars['title'] = T("All LdShakers");
+	$vars['title'] = T("All users");
 	$body = elgg_view('ldshakers/ldshakers',$vars);
 	page_draw($vars['title'], $body);
 }

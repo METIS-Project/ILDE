@@ -305,7 +305,7 @@ ul.links a
     <?php if(!$vars['config']->disable_registration): ?>
         <div id="register">
             <?php echo T("Not an LdShaker yet?") ?> <a href="<?php echo $url ?>account/register.php"><?php echo T("Register here!") ?></a>
-            <div id="about"><span><a target="_blank" href="<?php echo $url ?>views/default/misc/ilde/about.php"><?php echo T("About") ?></span></a></div>
+            <div id="about"><span><a target="_blank" href="http://ilde.upf.edu/about"><?php echo T("About") ?></span></a></div>
         </div>
     <?php endif; ?>
 </div>

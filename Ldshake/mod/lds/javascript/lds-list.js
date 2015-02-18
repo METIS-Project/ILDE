@@ -60,7 +60,6 @@ $(document).ready(function()
 
     $('.project_implement_action').click(function (event) {
         event.preventDefault();
-        //event.stopPropagation();
 
         lds_newprojectimplementation_guid = $(this).attr("project_guid");
 

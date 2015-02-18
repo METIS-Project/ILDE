@@ -106,8 +106,8 @@ $translations = array (
 ,"All LdS"
 => "Todos los LdS"
 
-,"All LdShakers"
-=> "Todos los LdShakers"
+,"All mebers"
+=> "Todos los usuarios"
 
 ,"All LdShakers can read"
 => "Todos los LdShakers pueden leer"
@@ -671,7 +671,7 @@ $translations = array (
 => "LdShake: Learning Design Solutions"
 
 ,"LdShakers"
-=> "LdShakers"
+=> "Comunidad"
 
 ,"Learning Task"
 => "Tareas de aprendizaje"
