@@ -43,7 +43,7 @@ $(document).ready(function()
 
         var lastItemBottom = $('#comment_switcher').offset().top + commentHeight;
 
-		var h = Math.max(400, height - top - commentHeight + document_resized_once*commentHeight);
+		var h = Math.max(600, height - top - commentHeight + document_resized_once*commentHeight);
 		if(!image || (image && lastItemBottom < height)) {
             $('#payload').height(h);
             $('#the_lds').height(h-2);
