@@ -122,7 +122,7 @@ $is_implementation = !empty($is_implementation);
        					<?php if (!$item->locked): ?>
                             <a class="<?php echo $imp_action; ?>" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>"><?php echo $edit_imp_label; ?></a>
                             <?php if(ldshake_glueps_isimplementable($item->lds->editor_type) and !empty($vle_info)): ?>
-                                <a class="lds_implement_action lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $item->lds->guid;?>" lds_id="<?php echo $item->lds->guid ?>" vle_id="<?php echo $vle_info->item->guid;?>" class="lds_implement_action" deploy="true" style="width: auto; float: none;"><?php echo T("Implement"); ?></a>
+                                <a class="lds_implement_action lds_edit_action" href="<?php echo lds_viewTools::url_for($item->lds, $edit_imp_url) ?>" project_guid="<?php echo $implementation->guid;?>" lds_id="<?php echo $item->lds->guid ?>" vle_id="<?php echo $vle_info->item->guid;?>" class="lds_implement_action" deploy="true" style="width: auto; float: none;"><?php echo T("Implement"); ?></a>
                             <?php endif; ?>
                         <?php endif; ?>
 

@@ -94,10 +94,13 @@ else
     $implementation->course_name    = $implementation_helper->course_name;
     $implementation->lds_id         = $implementation_helper->lds_id;
     $implementation->helper_id      = $implementation_helper->guid;
+
     $implementation->save();
 
-    $user = get_loggedin_user();
+    if(!empty($implementation_helper->project_design))
+        add_entity_relationship($implementation->guid, 'lds_project_vle_implementation', $implementation_helper->project_design);
 
+    $user = get_loggedin_user();
 
     $glueps_document = new DocumentEditorObject($implementation->guid, 0);
     $glueps_document->editorType = $editor_type;

@@ -2254,6 +2254,26 @@ function lds_exec_vieweditor ($params)
             $vars['upload'] = true;
             $vars['uploadDoc'] = $vars['ldsDocs'][0];
             break;
+        case 'project_design':
+            if($vles = get_entities('object','user_vle', $vars['currentDoc']->owner_guid, '', 9999)) {
+                $vle_data = array();
+                foreach($vles as $vle) {
+                    $vlemanager = VLEManagerFactory::getManager($vle);
+
+                    if($vle_info = $vlemanager->getVleInfo()) {
+                        $vle_info->item = $vle;
+                        $vle_data[$vle->guid] = $vle_info;
+                        $CONFIG->project_templates['full']['vle_'.$vle->guid] = array(
+                            'title' => $vle->name,
+                            'type'  => "vle",
+                            'subtype'   => $vle->guid,
+                            'icon'  => $vle->vle_type,
+                            'stage' => 'implementation',
+                        );
+                    }
+                }
+            }
+            break;
         default:
             $vars['upload'] = false;
     }
@@ -3039,12 +3059,13 @@ function lds_exec_project_implementation ($params)
     //TODO:check privileges
 
     /*$vars['count'] = $lds_list = lds_contTools::getProjectLdSList($pd_guid, true);*/
-    $vars['list'] = $lds_list = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true);
+    $vars['list'] = $lds_list = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, false, true);
     $vars['title'] = $project_implementation->title;
     $vars['jsondata'] = $project_implementation->jsondata;
     $pg_data = json_decode($project_implementation->description);
     $vars['list'] = ldshake_project_add_title_order($vars['list'], $pg_data);
-
+    if($vle_implementations = lds_contTools::getProjectLdSList($project_implementation->guid, false, false, true, true))
+        $vars['list'] = array_merge($vars['list'], $vle_implementations);
     $vars['list_type'] = T('LdS');
     $vars['section'] = 'on';
     $vars['is_implementation'] = true;
@@ -3323,7 +3344,25 @@ function lds_exec_edit_project ($params)
 
     $vars['project']['ldproject'] = $editLdS->description;
     $vars['project']['ldsToBeListed'] = json_encode(lds_contTools::getUserEditableLdS(get_loggedin_userid(), false, 700, 0, null, null, "time", true));
-    $vars['project']['vle_list'] = array();
+
+    if($vles = get_entities('object','user_vle', get_loggedin_userid(), '', 9999)) {
+        $vle_data = array();
+        foreach($vles as $vle) {
+            $vlemanager = VLEManagerFactory::getManager($vle);
+
+            if($vle_info = $vlemanager->getVleInfo()) {
+                $vle_info->item = $vle;
+                $vle_data[$vle->guid] = $vle_info;
+                $CONFIG->project_templates['full']['vle_'.$vle->guid] = array(
+                    'title' => $vle->name,
+                    'type'  => "vle",
+                    'subtype'   => $vle->guid,
+                    'icon'  => $vle->vle_type,
+                    'stage' => 'implementation',
+                );
+            }
+        }
+    }
 
     $vars['project']['vle_list'] = json_encode($vle_data);
 

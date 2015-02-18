@@ -3012,7 +3012,7 @@ SQL;
         }
     }
 
-    public static function getProjectLdSList($pd_guid, $only_exclusive = false, $guid_only = false, $enrich = false) {
+    public static function getProjectLdSList($pd_guid, $only_exclusive = false, $guid_only = false, $vle_implementation = false, $enrich = false) {
         global $CONFIG;
 
         $callback = "entity_row_to_elggstar";
@@ -3032,6 +3032,8 @@ SQL;
         $rel = "'lds_project_existent','lds_project_nfe','lds_project_new'";
         if($only_exclusive)
             $rel = "'lds_project_nfe','lds_project_new'";
+        if($vle_implementation)
+            $rel = "'lds_project_vle_implementation'";
 
         $query = <<<SQL
 SELECT *, 'object' as type FROM {$table} e NATURAL JOIN entities en WHERE guid IN (
