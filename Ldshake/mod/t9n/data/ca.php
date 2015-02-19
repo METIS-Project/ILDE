@@ -596,7 +596,7 @@ $translations = array (
 "My LdS"
 => "Els meus LdS",
 
-"LdShakers"
+"Community"
 => "Comunitat",
 
 "Rich Text"

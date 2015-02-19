@@ -1510,7 +1510,7 @@ function lds_exec_implementeditor($params)
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
     $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
     //Get the page that we come from (if we come from an editing form, we go back to my lds)
-    if (preg_match('/(implementeditor)/',$_SERVER['HTTP_REFERER']))
+    if (preg_match('/(implementeditor|implementable)/',$_SERVER['HTTP_REFERER']))
         $vars['referer'] = $CONFIG->url.'pg/lds/implementations';
     else
         $vars['referer'] = $_SERVER['HTTP_REFERER'];
@@ -1563,7 +1563,6 @@ function lds_exec_implementeditor($params)
             else
                 $vars['initLdS']->$type = '';
         }
-
 
         $vars['initLdS']->guid = $params[1];
 
@@ -2322,22 +2321,10 @@ function lds_exec_info ($params)
 	
 	$vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
 	$vars['starter'] = get_user($vars['lds']->owner_guid);
-	
-	//These are all my friends
-    /*
-	$friends = lds_contTools::getFriendsArray(get_loggedin_userid());
-	$arrays = lds_contTools::buildFriendArrays($friends, $vars['lds']->access_id, $vars['lds']->write_access_id);
-
-	$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
-	$vars['viewers'] = json_encode($arrays['viewers']);
-	$vars['editors'] = json_encode($arrays['editors']);
-	$vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
-    */
 
     //These are all my friends
     $arrays = lds_contTools::buildObjectsArray($vars['lds']);
     $vars['jsonfriends'] = json_encode($arrays['available']);
-    //$vars['jsonfriends'] = json_encode(array_values($arrays['available']));
     $vars['viewers'] = json_encode($arrays['viewers']);
     $vars['editors'] = json_encode($arrays['editors']);
     $vars['groups'] = json_encode(lds_contTools::buildMinimalUserGroups(get_loggedin_userid()));
@@ -2346,7 +2333,6 @@ function lds_exec_info ($params)
 	
 	$vars['am_i_starter'] = (get_loggedin_userid() == $vars['lds']->owner_guid);
 	
-	//$vars['all_can_read'] = ($vars['lds']->access_id == '1') ? 'true':'false';
     $vars['all_can_read'] = ($vars['lds']->all_can_view == 'yes' || ($vars['lds']->all_can_view === null && $vars['lds']->access_id < 3 && $vars['lds']->access_id > 0)) ? 'true' : 'false';
 
 
