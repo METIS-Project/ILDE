@@ -1,108 +1,43 @@
-<div class=WordSection1>
+<p style="font-family: Arial, sans-serif; text-align: center;"><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:36pt;">Design Pattern</span></span></span></span></strong></p>
 
-<p class=MsoTitle><a name=h.2ofvyt3c7u80></a><b><font size=7 color=black
-face=Arial><span lang=EN-GB style='font-size:36.0pt;line-height:115%'><span
-style='line-height:115%'>Design Pattern</span></span></font></b></p>
+<p style="font-family:Arial, sans-serif;"><strong style="font-size: 12pt; line-height: 1.5em;"><strong><span style="font-size:small;"><span style="font-family:arial;"><span style="font-family:arial,sans-serif;"><span style="font-size:11pt;">Replace the guidance text (in italics) with your own content.</span></span></span></span></strong></strong></p>
 
-<p class=MsoNormal><strong><b><font size=2 color=black face=Arial><span
-lang=EN-GB style='font-size:11.0pt;line-height:115%;font-family:"Arial","sans-serif"'>&nbsp;</span></font></b></strong></p>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Name</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><strong><b><font size=2 color=black face=Arial><span
-lang=EN-GB style='font-size:11.0pt;line-height:115%;font-family:"Arial","sans-serif"'>Replace
-the guidance text (in italics) with your own content.</span></font></b></strong></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">Design patterns are intended to be used as part of a pattern language, as an infrastructure for design-level conversation. As such, the name of a pattern should be amenable for use as a noun in such a conversation. It should be short, memorable and indicative of the big idea of the pattern.</span></span></span></span></em></p>
 
-<h1><a name=h.qvahxbv2llx1></a><b><font size=5 color=red face=Arial><span
-lang=EN-GB style='font-size:18.0pt;line-height:115%;color:red'><span
-style='line-height:115%'>Name</span></span></font></b></h1>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">Replace the document name and delete this section.</span></span></span></span></em></p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>Design patterns are
-intended to be used as part of a pattern language, as an infrastructure for
-design-level conversation. As such, the name of a pattern should be amenable
-for use as a noun in such a conversation. It should be short, memorable and
-indicative of the big idea of the pattern.</span></font></i></p>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Problem</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>Replace the
-document name and delete this section.</span></font></i></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">The problem description provides a clear and succinct presentation of the motivation for the pattern, its raison d&#39;&ecirc;tre.</span></span></span></span></em></p>
 
-<h1><a name=h.5yzmzrtpdxrr></a><a name=h.z1viddwjtksy></a><b><font size=5
-color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
-color:red'><span style='line-height:115%'>Problem</span></span></font></b></h1>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">The educational research literature tends to shy away from the term &ldquo;problem&rdquo;, as it may suggest a negative attitude. In the design literature, and specifically the computer science tradition, problems are seen as opportunities for action.</span></span></span></span></em>&nbsp;<em>From a design perspective, where there is no problem, nothing needs to be changed, no act of design is required and consequently there are no questions for research.</em></p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>The problem
-description provides a clear and succinct presentation of the motivation for
-the pattern, its raison d'être.</span></font></i></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">In either case &ndash; explain what this pattern aims to achieve.</span></span></span></span></em></p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>The educational
-research literature tends to shy away from the term “problem”, as it may
-suggest a negative attitude. In the design literature, and specifically the
-computer science tradition, problems are seen as opportunities for action.</span></font></i><span
-lang=EN-GB> <i><span style='font-style:italic'>From a design perspective, where
-there is no problem, nothing needs to be changed, no act of design is required
-and consequently there are no questions for research.</span></i></span></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">If you prefer &ndash; rename this section as &ldquo;Challenge&rdquo;.</span></span></span></span></em></p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>In either case –
-explain what this pattern aims to achieve.</span></font></i></p>
+<p style="font-family:Arial, sans-serif;">&nbsp;</p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>If you prefer –
-rename this section as “Challenge”.</span></font></i></p>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Context</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">A fundamental premise of design is that problems and solutions are rarely universal. The scope of any statement needs to be qualified if it is to be meaningful. Note the material, social and intentional characteristics of the setting in which the problem is embedded. These are the things you can&rsquo;t change.</span></span></span></span></em></p>
 
-<h1><a name=h.cp8dltpujsvm></a><a name=h.rp2ab0xev1s0></a><b><font size=5
-color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
-color:red'><span style='line-height:115%'>Context</span></span></font></b></h1>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Solution</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>A fundamental
-premise of design is that problems and solutions are rarely universal. The
-scope of any statement needs to be qualified if it is to be meaningful. Note
-the material, social and intentional characteristics of the setting in which
-the problem is embedded. These are the things you can’t change.</span></font></i></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">The solution is the centrepiece of the pattern. In scientific terms, it is the claim that under certain conditions the described actions will have a particular effect which addresses the problem.</span></span></span></span></em></p>
 
-<h1><a name=h.7q6ee1gpwilr></a><a name=h.b11t0notn161></a><b><font size=5
-color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
-color:red'><span style='line-height:115%'>Solution</span></span></font></b></h1>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">The solution would ideally be articulated at a level of detail which allows immediate implementation, and yet is applicable beyond the specific experiences from which it is derived.</span></span></span></span></em></p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>The solution is the
-centrepiece of the pattern. In scientific terms, it is the claim that under
-certain conditions the described actions will have a particular effect which
-addresses the problem.</span></font></i></p>
+<p style="font-family:Arial, sans-serif;">&nbsp;</p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>The solution would
-ideally be articulated at a level of detail which allows immediate
-implementation, and yet is applicable beyond the specific experiences from
-which it is derived. </span></font></i></p>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Examples</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
+<p style="font-family:Arial, sans-serif;"><em><span style="font-size:small;"><span style="font-family:arial;"><span style="color:black;"><span style="font-size:11pt;">Justify the pattern by reference to data from cases where it appears to have had a positive effect. These would primarily be derived from the design experiment at hand and supplemented by external documented cases.</span></span></span></span></em></p>
 
-<h1><a name=h.7xrtpmxyi5un></a><a name=h.afob0c2xdwg0></a><a
-name=h.3r5o70epulpr></a><a name=h.5jeho3lb4y4></a><b><font size=5 color=red
-face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
-color:red'><span style='line-height:115%'>Examples</span></span></font></b></h1>
+<p style="font-family:Arial, sans-serif;">&nbsp;</p>
 
-<p class=MsoNormal><i><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%;font-style:italic'>Justify the pattern
-by reference to data from cases where it appears to have had a positive effect.
-These would primarily be derived from the design experiment at hand and
-supplemented by external documented cases.</span></font></i></p>
+<h1><strong><span style="font-size:large;"><span style="font-family:arial;"><span style="color:red;"><span style="font-size:18pt;">Data and References</span></span></span></span></strong></h1>
 
-<p class=MsoNormal><font size=2 color=black face=Arial><span lang=EN-GB
-style='font-size:11.0pt;line-height:115%'>&nbsp;</span></font></p>
-
-<h1><a name=h.llnc1xxae0iw></a><a name=h.tbdxc6ypkxn1></a><b><font size=5
-color=red face=Arial><span lang=EN-GB style='font-size:18.0pt;line-height:115%;
-color:red'><span style='line-height:115%'>Data and References </span></span></font></b></h1>
-
-<h1><b><font size=5 color=red face=Arial><span lang=EN-GB>&nbsp;</span></font></b></h1>
-
-</div>
+<h1>&nbsp;</h1>

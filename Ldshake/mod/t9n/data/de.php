@@ -1214,6 +1214,12 @@ $translations = array (
 "Tools"
 => "Tools",
 
+'previous'
+=> "Zurück",
+
+'next'
+=> "Weiter",
+
 "Tracking"
 => "Verfolgung",
 
