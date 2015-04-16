@@ -119,7 +119,7 @@
                     $message_contents = strip_tags($message_contents);
                     if ($r->getGUID() != $_SESSION['user']->getGUID() && empty($r->disable_user_notifications)) {
 
-                        notify_user($r->getGUID(), $_SESSION['user']->getGUID(), elgg_echo('messages:email:subject'),
+                        /*notify_user($r->getGUID(), $_SESSION['user']->getGUID(), elgg_echo('messages:email:subject'),
                             sprintf(
                                 elgg_echo('messages:email:body'),
                                 $_SESSION['user']->name,
@@ -128,7 +128,7 @@
                                 $_SESSION['user']->name,
                                 $CONFIG->wwwroot . "mod/messages/send.php?send_to=" . $_SESSION['user']->getGUID()
                             )
-                        );
+                        );*/
 
                     }
                 }

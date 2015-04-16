@@ -63,7 +63,7 @@
 			  //  add_widget_type('messages',elgg_echo("messages:recent"),elgg_echo("messages:widget:description"));
 			    
 			// Override metadata permissions
-			    //register_plugin_hook('permissions_check:metadata','object','messages_can_edit_metadata');
+			    register_plugin_hook('permissions_check:metadata','object','messages_can_edit_metadata');
 
 		}
 		

@@ -59,6 +59,30 @@ $CONFIG->project_templates['default'] = array(
         'stage' =>  'conceptualization',
     ),
 
+    'agile_user_stories' => array(
+        'title' => T('Agile User Stories'),
+        'type'  => 'doc',
+        'subtype'   => 'agile_user_stories',
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
+    ),
+
+    'practice_narrative' => array(
+        'title' => T('Practice Narrative'),
+        'type'  => 'doc',
+        'subtype'   => 'practice_narrative',
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
+    ),
+
+    'practice_pattern' => array(
+        'title' => T('Practice Pattern'),
+        'type'  => 'doc',
+        'subtype'   => 'practice_pattern',
+        'icon' => 'doc',
+        'stage' =>  'conceptualization',
+    ),
+
     'PC' => array(
         'title' => T('Persona Card'),
         'type'  => 'doc',

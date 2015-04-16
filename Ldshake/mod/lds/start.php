@@ -145,6 +145,9 @@ function lds_init()
     register_action("lds/projects/implement", false, $CONFIG->pluginspath . "lds/actions/lds/projects/implement.php");
     register_action("lds/projects/update_preview", false, $CONFIG->pluginspath . "lds/actions/lds/projects/update_preview.php");
 
+    //users search
+    register_action("lds/search_ldshakers", false, $CONFIG->pluginspath . "lds/actions/lds/search_ldshakers.php");
+
     register_action("registercsv", false, $CONFIG->pluginspath . "lds/actions/registercsv.php", true);
 
     if (get_context() == 'admin')
@@ -934,7 +937,10 @@ function lds_exec_new ($params)
                 if($templates = ldshake_get_template($params[2])) {
                     $i=0;
                     foreach($templates as $template) {
-                        $vars['initDocuments'][$i++]->body = $template[0];
+                        $vars['initDocuments'][$i]->body = $template[0];
+                        if(isset($template[2]))
+                            $vars['initDocuments'][$i]->title = $template[2];
+                        $i++;
                     }
                     $vars['editor_subtype'] = $params[2];
                 } else {

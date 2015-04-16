@@ -109,14 +109,20 @@ function ldshakers_exec_main ($params)
 	$vars['section'] = $params[1];
 	$offset = get_input('offset') ?: '0';
 	
-	$ldshakers = get_loggedin_user()->getFriends('', 50, $offset);
-    $ldshakers[] = get_loggedin_user();
-	$vars['count'] = count(get_loggedin_user()->getFriends('',10000,0)) + 1;
-	@Utils::osort($ldshakers, "name");
-	
-	$vars['ldshakers'] = $ldshakers;
-	
-	$groups = ldshakers_contTools::getUserGroups(get_loggedin_userid());
+    $vars['ldshakers'] = ldshakers_contTools::getCommunityMembers(false, 50, $offset);
+    $vars['count'] = ldshakers_contTools::getCommunityMembers(false, 50, $offset, true);
+
+    $vars['ldshakers_activity'] = array();
+    if(is_array($vars['ldshakers'])) {
+        foreach($vars['ldshakers'] as $ldshaker) {
+            $vars['ldshakers_activity'][$ldshaker->guid]['started'] = (int)lds_contTools::getUserEntities('object', 'LdS', 0, true, 9999, 0, null, null, "time", false, null, false, null, false, null, $ldshaker->guid);
+            $vars['ldshakers_activity'][$ldshaker->guid]['coedition'] = (int)lds_contTools::getUserCoedition($ldshaker->guid, 9999, 0, true);
+        }
+    }
+
+    $vars['offset'] = $offset;
+
+    $groups = ldshakers_contTools::getUserGroups(get_loggedin_userid());
 	$vars['groups'] = $groups;
 	
 	$vars['title'] = T("All users");
@@ -153,9 +159,6 @@ function ldshakers_exec_userprofile ($params)
 {
     $option = $params[1];
 	$cuser = get_user_by_username($params[0]);
-
-	//$lds = get_entities('object', 'LdS', $cuser->guid, 'time_updated DESC', 20, 0, false, 1, $cuser->guid);
-	//$list = lds_contTools::enrichLdS($lds);
 
     $activity_counters = array();
 

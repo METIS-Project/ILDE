@@ -61,7 +61,7 @@
 		<h2><?php echo $title ?></h2>
 		<?php endif; ?>
 	</div>
-	
+	<input id="ldshake-interactive-search" type="text" value="<?php echo htmlspecialchars(T('Search for other users'))?>" />
 	<div class="filters">
 		<div class="paging">
 			<?php echo ldshakers_viewTools::pagination($count, 50) ?>
@@ -100,7 +100,19 @@
                 ?>
 
                 <img class="profilepic" width="40" height="40" src="<?php echo $CONFIG->url.'pg/icon/'.$user->username.'/small?t='.hash("crc32b",$user->time_updated); ?>" />
-				<a class="ldshakers_user_name" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><?php echo $user->name ?></a>
+				<div class="ldshakers_user_name_activity">
+					<a class="ldshakers_user_name" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><?php echo $user->name ?></a>
+					<?php if(!empty($ldshakers_activity[$user->guid]['started']) or !empty($ldshakers_activity[$user->guid]['coedition'])):?>
+						<div class="ldshakers_user_activity_box">
+							<?php if(!empty($ldshakers_activity[$user->guid]['started'])):?>
+							<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><span class="ldshakers_user_activity"><?php echo T('%1 LdS created', $ldshakers_activity[$user->guid]['started'])?></a>
+							<?php endif;?>
+							<?php if(!empty($ldshakers_activity[$user->guid]['coedition'])):?>
+							<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>coedited"><span class="ldshakers_user_activity"><?php echo T('%1 LdS coedited', $ldshakers_activity[$user->guid]['coedition'])?></a>
+							<?php endif;?>
+						</div>
+					<?php endif;?>
+				</div>
 				<div style="clear:both"></div>
 			</li>
 			<?php endforeach; ?>
@@ -152,3 +164,12 @@
 		</ul>
 	</div>
 </div>
+
+/* javascript data*/
+<script>
+	var t9n = {
+		search_field : "<?php echo htmlspecialchars(T('Search for other users')) ?>"
+	};
+	var offset = <?php echo $offset?>;
+	var searchTimeout = null;
+</script>

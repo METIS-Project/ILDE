@@ -1,0 +1,173 @@
+<h1>How to use this rubric</h1>
+
+<p>A rubric is a scaffold for evaluation, a set of guidelines and criteria reflecting an accepted standard of quality. To use this rubric, copy the headings to a comment on the practice narrative and for each one, note your rating (<strong><span style="color:#FF0000;">red</span></strong> = requires major revision, <span style="color:#FF8C00;"><strong>amber</strong></span> = acceptable, <strong><span style="color:#00FF00;">green</span></strong> = high quality) and add a note justifying your rating and providing advice as to how to improve the aspect under inspection.</p>
+
+<h2>Synopsis</h2>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 90%;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color:#FFFFE0;">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>No synopsis, or obscure and uninformative synopsis.</td>
+			<td>Synopsis captures some of the essential elements of the narrative but not all. Synopsis too wordy.</td>
+			<td>Synopsis tells us who, what, and how in the clearest and most consice manner. Uses catchy and search-friendly wording.</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Who?</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Actors not specified or are ill-defined.</td>
+			<td>Basic details provided for all actors: name, role, relevant characteristics.</td>
+			<td>A full persona is developed for each actor and linked from the narrative. The personas are&nbsp;ideally on the ILDE, but possibly elsewhere.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Where and When?</h2>
+
+<div>
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Context implicit or ambiguous.</td>
+			<td>Reference to familiar context, but actual details not specified.</td>
+			<td>Systematic listing of the material, social and intentional forces that shape the problem space, including the interactions between them.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<h2>What?</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Intentions are vague, implicit or ambiguous. Intentions listed but &quot;don&#39;t compute&quot;, i.e. do not logically fit with the actors and context.</td>
+			<td>Primary intentions of the main actors noted. Intentions seem reasonable, but no justification provided.</td>
+			<td>Relevant intentions of all actors listed. Evidence or justification provided for key intentions.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>How?</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Actions missing, inconsistent or incoherent.</td>
+			<td>Actions listed consicely, in enough detail to follow the temporal and causal flow of events.</td>
+			<td>Actions listed in detail, with examples and evidence. Visuals included where appropriate. The temporal and causal flow of events from intentions to results is clearly defined and fully justified.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Results..</h2>
+
+<div>
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Results not specified, not qualified, or not justified as a consequence of the actions.</td>
+			<td>Some results specified in a clear and consice manner. The logical link from the actions and events to the results is evident.</td>
+			<td>A rich set of results are specified: positive as well as negative, expected as well as unexpected. The results are described in sufficient detail.&nbsp;The logical link from the actions and events to the results is supported by evidence.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<h2>Gaps and tensions</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Gaps and tensions not specified, or not justified.</td>
+			<td>Some gaps and tensions specified, but others can be induced by comparing results to intentions and yet are not specified. Gaps and tensions not clearly justified by analysis of the intentions, actions and results.&nbsp;</td>
+			<td>A detailed analysis of gaps and tensions, systematically reviewing the intentions, actions and results and identifying where actors&#39; intentions are left unsatisfied, or are satisfied at exsessive cost.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Notes, observations and reflections</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Some unexplained elements in the narrative are left without notice.</td>
+			<td>Any clearly unusual or surprising element in the narrative is noted and discussed.</td>
+			<td>A systematic analysis of all relevant aspects of the narrative not covered by the template. Links and references to relevant supporting materials, theories, and additional evidence.</td>
+		</tr>
+	</tbody>
+</table>
+</div>

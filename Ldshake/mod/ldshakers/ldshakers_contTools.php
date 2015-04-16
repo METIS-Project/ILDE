@@ -39,6 +39,39 @@
  *
  */
 
+
+function ldshake_search_user_by_name($search, $logged = false)
+{
+    $search = preg_replace("/[^\pL\s\pNd]+/u", " ", $search);
+    $search = sanitise_string($search);
+
+    if (!(strlen(trim($search)) > 0 && str_word_count(trim($search)) > 0))
+        return false;
+
+    $query = <<<SQL
+SELECT * FROM users_entity u
+NATURAL JOIN entities e
+WHERE MATCH(u.name) AGAINST('>{$search}' '<{$search}*' IN BOOLEAN MODE)
+AND e.enabled = 'yes'
+AND e.guid <> 2
+SQL;
+
+    if(!$users = get_data($query, "entity_row_to_elggstar"))
+        return false;
+
+    foreach($users as $ldshaker) {
+        $ldshakers_activity[$ldshaker->guid]['started'] = (int)lds_contTools::getUserEntities('object', 'LdS', 0, true, 9999, 0, null, null, "time", false, null, false, null, false, null, $ldshaker->guid);
+        $ldshakers_activity[$ldshaker->guid]['coedition'] = (int)lds_contTools::getUserCoedition($ldshaker->guid, 9999, 0, true);
+    }
+
+    $ldshakers_info = array(
+        'ldshakers' => $users,
+        'ldshakers_activity' => $ldshakers_activity,
+    );
+
+    return $ldshakers_info;
+}
+
 class ldshakers_contTools
 {
 	/**
@@ -119,6 +152,49 @@ SQL;
 
         if($entities)
             return true;
+
+        return false;
+    }
+
+    public static function getCommunityMembers($loggedin = false, $limit = 50, $offset = 0, $count = false)
+    {
+        global $CONFIG;
+
+        $limit = (int)$limit;
+        $offset = (int)$offset;
+        $loggedin_sql = $loggedin ? '' : 'AND e.guid <> ' . get_loggedin_userid();
+        $hide_admin = '';
+        if(get_user(2))
+            $hide_admin = 'AND e.guid <> 2';
+        $select = "SELECT e.guid, 'user' AS 'type'";
+        if($count)
+            $select = "SELECT COUNT(*) as 'total'";
+        $query = <<<SQL
+{$select} FROM entities e
+NATURAL JOIN {$CONFIG->dbprefix}users_entity u
+WHERE e.enabled = 'yes'
+{$loggedin_sql}
+{$hide_admin}
+ORDER BY u.name
+LIMIT {$offset}, {$limit}
+SQL;
+
+        if($count) {
+            $query = <<<SQL
+{$select} FROM entities e
+NATURAL JOIN {$CONFIG->dbprefix}users_entity u
+WHERE e.enabled = 'yes'
+{$loggedin_sql}
+{$hide_admin}
+SQL;
+
+            $row = get_data_row($query);
+            return (int)$row->total;
+        }
+
+        $entities = get_data($query, "entity_row_to_elggstar");
+        if(!empty($entities))
+            return $entities;
 
         return false;
     }

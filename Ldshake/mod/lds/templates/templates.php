@@ -39,6 +39,19 @@ function ldshake_get_template($template, $format = null) {
     global $CONFIG;
 
     $templates = array(
+        'agile_user_stories' => array('agile_user_stories',
+            array('file' => 'agile_user_stories_er',
+                'title' => 'evaluation rubric'),
+            array('file' => 'agile_user_stories_s',
+                'title' => 'Support Document')),
+        'practice_narrative' => array('practice_narrative',
+            array('file' => 'practice_narrative_er',
+                'title' => 'evaluation rubric'),
+            array('file' => 'practice_narrative_s',
+                'title' => 'Support Document')),
+        'practice_pattern' => array('practice_pattern',
+            array('file' => 'practice_pattern_s',
+                'title' => 'Support Document')),
         'MWD' => array('MWD'),
         'kek_p1' => array('kek_p1'),
         'MDN' => array('mdn'),
@@ -78,6 +91,11 @@ function ldshake_get_template($template, $format = null) {
     if(isset($templates[$template])) {
         $doc = array();
         foreach($templates[$template] as $file) {
+            $title = null;
+            if(is_array($file)) {
+                $title = T($file['title']);
+                $file = T($file['file']);
+            }
             $preferred_formats = array('docx','xlsx', 'google_doc_id', null);
 
             foreach($preferred_formats as $format) {
@@ -97,7 +115,10 @@ function ldshake_get_template($template, $format = null) {
 
                 if(!empty($filename)) {
                     if($text = file_get_contents($filename)) {
-                        $doc[] = array($text, $format);
+                        $template_data = array($text, $format);
+                        if($title)
+                            $template_data[] = $title;
+                        $doc[] = $template_data;
                         break;
                     }
                 }

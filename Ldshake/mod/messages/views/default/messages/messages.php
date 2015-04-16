@@ -40,7 +40,7 @@
 	 
     if (isloggedin())
     if (isset($vars['entity'])) {
-    	if ($vars['entity']->toID == $vars['user']->guid
+    	if ($vars['entity']->toId == $vars['user']->guid
     		|| $vars['entity']->owner_guid == $vars['user']->guid) {
     		
 ?>

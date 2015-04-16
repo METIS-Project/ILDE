@@ -1,0 +1,59 @@
+<p><em>A Practice is a recurring&nbsp;pattern of behaviour&nbsp;manifesting certain&nbsp;intentions&nbsp;in a given&nbsp;context.</em></p>
+
+<p><em>Arguably, the aim of (educational) design is to enhance practices: to allow people to revise their intentions and manifest their intentions in more effective and efficient ways.</em></p>
+
+<p><em>Before we attempt to enhance practices, we need to identify existing practices. To do that, <a href="http://ilde.upf.edu/layers/pg/lds/view/1239/">we capture these in narratives</a>.&nbsp;A pattern is a generalised / abstracted narrative, which can be used as a building block in the design process. It<span style="font-size: 12pt; line-height: 1.5em;">&nbsp;is a claim of the form: &quot;In a context </span></em><strong><span style="font-size: 12pt; line-height: 1.5em;">C</span></strong><em><span style="font-size: 12pt; line-height: 1.5em;">, actors of type </span></em><strong><span style="font-size: 12pt; line-height: 1.5em;">T</span></strong><em><span style="font-size: 12pt; line-height: 1.5em;"> have intentions </span></em><strong><span style="font-size: 12pt; line-height: 1.5em;">I</span></strong><em><span style="font-size: 12pt; line-height: 1.5em;"> and perform actions </span></em><strong><span style="font-size: 12pt; line-height: 1.5em;">A</span></strong><em><span style="font-size: 12pt; line-height: 1.5em;"> to satisfy them&quot;.</span></em></p>
+
+<p><em>Ideally, we should derive such patterns by comparing multiple narratives, noting their overlaps and eliminating idiosyncrasies. However, often our data is too sparse, and we need to generalise from a small number of examples. In such cases, we will attempt to identify the salient features of the narrative and seek circumstantial evidence to support our choices. For example, if we have a narrative of a particular middle-aged Asian nurse attending CPD, we would assume that it is her role that is pertinent to the pattern, rather than her gender, race or age.</em></p>
+
+<h1>Who?</h1>
+
+<p><em>Define the &lsquo;&rsquo;actors&rsquo;&rsquo; in the narrative.&nbsp;</em></p>
+
+<p>&nbsp;</p>
+
+<h1>What?</h1>
+
+<p><em>Note the intentions that your narrative focuses on: what were the actors trying to achieve? What were they trying to avoid?</em></p>
+
+<p>&nbsp;</p>
+
+<h1>How?</h1>
+
+<p><em>List the actions that actors performed to satisfy their intentions.</em></p>
+
+<p>&nbsp;</p>
+
+<h1>Using..</h1>
+
+<p>Note the resources used by the actors in their actions.</p>
+
+<p>&nbsp;</p>
+
+<h1>Results..</h1>
+
+<p><em>What were the consequences of the actors&#39; actions? To what extent were their intentions satisfied?</em></p>
+
+<p>&nbsp;</p>
+
+<h1>Gaps and tensions</h1>
+
+<p><em>Were are the &quot;pain points&quot;? Which intentions are unsatisfied? Which are satisfied inneffetivly or inneficiently?</em></p>
+
+<p>&nbsp;</p>
+
+<h1>Sources</h1>
+
+<p><em>Note the narratives, or other sources of data, that this pattern is based on.</em></p>
+
+<p>&nbsp;</p>
+
+<h1>Notes, observations and reflections</h1>
+
+<p><em>Add any thoughts and comments you have as an observer.</em></p>
+
+<p>&nbsp;</p>
+
+<h1>Analysis and Interpretation</h1>
+
+<p><em>Links to theory, analysis of the narrative, explanations and predictions based on theoretical frameworks.</em></p>

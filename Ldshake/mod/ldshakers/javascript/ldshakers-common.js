@@ -197,6 +197,46 @@ function removeFromGroup ()
 	});
 }
 
+/*
+interactive search
+ */
+
+$('#ldshake-interactive-search').on('keyup', function(event) {
+	var search = $(this).val();
+	if(searchTimeout)
+		clearTimeout(searchTimeout);
+
+	searchTimeout = setTimeout(function() {
+		$.post(baseurl + "action/lds/search_ldshakers",
+			{
+				search: search,
+				offset: offset
+			},
+			function (data) {
+				console.log(data);
+				if (search.length > 0)
+					$('.pagination').hide();
+				else {
+					$('.pagination').show();
+				}
+
+				$('#ldshakers_list').html(data);
+			}
+		);
+	}, 300);
+
+}).on('blur', function(event) {
+	var search = $(this).val();
+
+	if (search.length == 0) {
+		$('#ldshake-interactive-search').val(t9n.search_field);
+	}
+});
+
+$('#ldshake-interactive-search').on('focus', function(event) {
+	$(this).val('');
+});
+
 $(document).ready(function()
 {
 	checkboxes();

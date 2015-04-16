@@ -1,0 +1,55 @@
+<h1>Title: 3-10 words</h1>
+
+<p>As a &lt;role&gt; I want to &lt;goal&gt; so that I can &lt;reason&gt;.</p>
+
+<h2>Assets</h2>
+
+<p><em>What are the resources that I might use to achieve my goal?</em></p>
+
+<h2>Barriers</h2>
+
+<p><em>What are the factors that hinder me from achieving my goal?</em></p>
+
+<h2>Acceptance Critieria</h2>
+
+<p><em>How will I know that the job is done?</em></p>
+
+<ul>
+	<li>..</li>
+	<li>...</li>
+	<li>.</li>
+</ul>
+
+<h2>Source</h2>
+
+<p>Stakeholder interview (who, when &amp; where) / practice narrative&nbsp;(link)&nbsp;/ design narrative (link)</p>
+
+<hr />
+<h1>Title: 3-10 words</h1>
+
+<p>As a &lt;role&gt; I want to &lt;goal&gt; so that I can &lt;reason&gt;.</p>
+
+<h2>Assets</h2>
+
+<p><em>What are the resources that I might use to achieve my goal?</em></p>
+
+<h2>Barriers</h2>
+
+<p><em>What are the factors that hinder me from achieving my goal?</em></p>
+
+<h2>Acceptance Critieria</h2>
+
+<p><em>How will I know that the job is done?</em></p>
+
+<ul>
+	<li>..</li>
+	<li>...</li>
+	<li>.</li>
+</ul>
+
+<h2>Source</h2>
+
+<p>Stakeholder interview (who, when &amp; where) / practice narrative&nbsp;(link)&nbsp;/ design narrative (link)</p>
+
+<hr />
+<p>&nbsp;</p>

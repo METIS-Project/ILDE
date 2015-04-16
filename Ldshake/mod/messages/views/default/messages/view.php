@@ -31,8 +31,9 @@
     		if($vars['page_view'] == "inbox") {
         		
     			foreach($vars['entity'] as $message) {
+					$a= $message->toId;
     				if ($message->owner_guid == $vars['user']->guid
-    					|| $message->toID == $vars['user']->guid) {
+    					|| $message->toId == $vars['user']->guid) {
         			
         			//make sure to only display the messages that have not been 'deleted' (1 = deleted)
     				if($message->hiddenFrom != 1){
@@ -79,14 +80,13 @@
 			
 			// get the correct display for the sentbox view
 			if($vars['page_view'] == "sent") {
-    			
     			foreach($vars['entity'] as $message) {
         			
         			//make sure to only display the messages that have not been 'deleted' (1 = deleted)
     				if($message->hiddenFrom != 1){
         				
         				//get the correct user entity
-        				$user = get_entity($message->toID);
+        				$user = get_entity($message->toId);
 
                         $init_user = null;
                         if($user instanceof ElggGroup) {

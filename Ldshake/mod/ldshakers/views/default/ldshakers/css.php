@@ -112,8 +112,52 @@
 .ldshakers_user_name {
 	font-weight: bold;
 	display: block;
-	float: left;
+	/*float: left;*/
 	margin-top: 10px;
+}
+
+.ldshakers_user_activity {
+	font-weight: bold;
+	font-size: 10px;
+	display: block;
+	color: #930;
+	/*float: left;*/
+	/*margin-top: 3px;*/
+}
+
+.ldshakers_user_name_activity {
+	font-weight: bold;
+	display: block;
+	width: 200px;
+	float: left;
+}
+
+a.ldshakers_user_activity_item {
+	display: block;
+	margin: 0px;
+	text-decoration: none;
+	background-color: #97DF97;
+	padding: 1px;
+}
+
+a.ldshakers_user_activity_item.created {
+	border-radius-top-left: 5px;
+	border-radius-top-right: 5px;
+}
+
+a.ldshakers_user_activity_item:hover {
+	background-color: #E2E2E2;
+}
+
+.ldshakers_user_activity_box {
+	/*background-color: #97DF97;*/
+	color: #373737;
+	border-radius: 5px;
+	border: 1px solid #39A339;
+	/*padding: 1px;*/
+	display: inline-block;
+	margin-left: 20px;
+	margin-top: 3px;
 }
 
 #ldshakers_add_to_list {
@@ -164,6 +208,10 @@
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
+}
+
+#ldshake-interactive-search {
+	color: #CCC;
 }
 
 /****************************/

@@ -1,0 +1,141 @@
+<h1>How to use this rubric</h1>
+
+<p>A rubric is a scaffold for evaluation, a set of guidelines and criteria reflecting an accepted standard of quality. To use this rubric, copy the headings to a comment on the practice narrative and for each one, note your rating (<strong><span style="color: rgb(255, 0, 0);">red</span></strong>&nbsp;= requires major revision,<span style="color: rgb(255, 140, 0);"><strong>amber</strong></span>&nbsp;= acceptable,&nbsp;<strong><span style="color: rgb(0, 255, 0);">green</span></strong>&nbsp;= high quality) and add a note justifying your rating and providing advice as to how to improve the aspect under inspection.</p>
+
+<h2>Title</h2>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Title is obscure or missleading</td>
+			<td>title is informative, but long or too short</td>
+			<td>title conveys the essence of the user story in 3-10 words</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>User Story Body</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+			<p>Story describes something the user already does (i.e a solved problem). AND / OR,&nbsp;<span style="font-size: 12pt; line-height: 1.5em;">Story is too abstract, too ambitious, or ill-defined.</span></p>
+			</td>
+			<td>
+			<p>Story describes a real need which is currently unsatisfied, but is too broad, too specific, or vague.</p>
+
+			<p>&nbsp;</p>
+			</td>
+			<td>
+			<p>Story succintly and percisely defines a real need which&nbsp;is currently unsatisfied. This need is defined in a manner that is specific enough to be implemented and broad enough to be meaningful.</p>
+
+			<p>&nbsp;</p>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h2>Assets</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Asset not mentioned, not clearly defined, or not logically related to the story.</td>
+			<td>Some relevant assests listed, some missing.</td>
+			<td>All relevant assests listed and justified.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Barriers</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Barriers not mentioned, not clearly defined, or not logically related to the story.</td>
+			<td>Some relevant barriers listed, some missing.</td>
+			<td>All relevant barriers listed and justified.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Acceptance Critieria</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Criteria not defined, are ambigous or not measurable.</td>
+			<td>Criteria are defined, but are not <a href="http://en.wikipedia.org/wiki/SMART_criteria">SMART</a>.</td>
+			<td>Criteria are&nbsp;<a href="http://en.wikipedia.org/wiki/SMART_criteria">SMART</a>, and are neccesary and sufficient.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<h2>Source</h2>
+
+<div>
+<table border="1" cellpadding="1" cellspacing="1" style="width: 809px;">
+	<thead>
+		<tr>
+			<th scope="col" style="background-color: rgb(255, 0, 0);"><span style="color: rgb(255, 255, 224);">Red</span></th>
+			<th scope="col" style="background-color: rgb(255, 204, 0);">Amber</th>
+			<th scope="col" style="background-color: rgb(102, 255, 51);">Green</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>Source not specified</td>
+			<td>Souce specified, but no reference / links.</td>
+			<td>Source fully specified and linked.</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+</div>

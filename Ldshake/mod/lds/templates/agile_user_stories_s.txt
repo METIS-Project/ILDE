@@ -1,0 +1,14 @@
+<p>To use this ad-hoc template, click &quot;duplicate this LdS&quot; and edit the resulting document. Replace the instructions with your text and images.</p>
+
+<blockquote>
+<p>In software development and product management, a user story is one or more sentences in the everyday or business language of the end user or user of a system that captures what a user does or needs to do as part of his or her job function. User stories are used with agile software development methodologies as the basis for defining the functions a business system must provide, and to facilitate requirements management. It captures the &#39;who&#39;, &#39;what&#39; and &#39;why&#39; of a requirement in a simple, concise way, often limited in detail by what can be hand-written on a small paper notecard.</p>
+</blockquote>
+
+<p><a href="http://en.wikipedia.org/wiki/User_story">User Story, Wikipdia</a></p>
+
+<p>See also:</p>
+
+<ul>
+	<li><a href="https://www.gov.uk/service-manual/agile/writing-user-stories.html">https://www.gov.uk/service-manual/agile/writing-user-stories.html</a></li>
+	<li><a href="https://www.scrumalliance.org/community/articles/2010/april/new-to-user-stories">https://www.scrumalliance.org/community/articles/2010/april/new-to-user-stories</a></li>
+</ul>
