@@ -104,12 +104,18 @@
 					<a class="ldshakers_user_name" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><?php echo $user->name ?></a>
 					<?php if(!empty($ldshakers_activity[$user->guid]['started']) or !empty($ldshakers_activity[$user->guid]['coedition'])):?>
 						<div class="ldshakers_user_activity_box">
+							<ul>
 							<?php if(!empty($ldshakers_activity[$user->guid]['started'])):?>
-							<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><span class="ldshakers_user_activity"><?php echo T('%1 LdS created', $ldshakers_activity[$user->guid]['started'])?></a>
+								<li>
+									<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>"><span class="ldshakers_user_activity"><?php echo T('%1 LdS created', $ldshakers_activity[$user->guid]['started'])?></a>
+								</li>
 							<?php endif;?>
 							<?php if(!empty($ldshakers_activity[$user->guid]['coedition'])):?>
-							<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>coedited"><span class="ldshakers_user_activity"><?php echo T('%1 LdS coedited', $ldshakers_activity[$user->guid]['coedition'])?></a>
+								<li>
+									<a class="ldshakers_user_activity_item" href="<?php echo ldshakers_viewTools::urlFor($user,'user') ?>coedited"><span class="ldshakers_user_activity"><?php echo T('%1 LdS coedited', $ldshakers_activity[$user->guid]['coedition'])?></a>
+								</li>
 							<?php endif;?>
+							</ul>
 						</div>
 					<?php endif;?>
 				</div>

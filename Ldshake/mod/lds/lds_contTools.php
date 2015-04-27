@@ -1733,6 +1733,19 @@ SQL;
                 ),
                 'object','LdS_document_editor', 0, 100);
 
+            /* determine if the status of the implementation and assign the appropiate icon
+            */
+            $obj->icon = 'gluepsrest';
+            if(empty($obj->glueps)) {
+                $pre_implementation = get_entities_from_metadata_multi(array(
+                    'lds_guid' => $implementation->guid,
+                ),
+                    'object','LdS_document_editor', 0, 1);
+
+                if($pre_implementation) {
+                    $obj->icon = 'gluepsrest-wic';
+                }
+            }
             $latest = $implementation->getAnnotations('revised_docs_editor', 1, 0, 'desc');
             $obj->last_contributor = get_entity($latest[0]->owner_guid);
             $obj->last_contribution_at = $latest[0]->time_created;
@@ -1761,7 +1774,7 @@ SQL;
 
             $isnew = true;
 
-            if($last_viewed = get_annotations($lds->guid, 'object','LdS','viewed_LdS','',get_loggedin_userid(), 1,"","time_created desc")) {
+            if($last_viewed = get_annotations($implementation->guid, 'object','LdS','viewed_LdS','',get_loggedin_userid(), 1,"","time_created desc")) {
                 $last_viewed = $last_viewed[0]->time_created;
             }  else {
                 $last_viewed = 0;

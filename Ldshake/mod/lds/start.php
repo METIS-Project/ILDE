@@ -482,6 +482,7 @@ function lds_exec_implementations ($params)
                 $dual[$i*2]->lds = $vars['list'][$i]->implementation;
                 $dual[$i*2]->can_edit = $dual[$i*2]->lds->canEdit();
                 $dual[$i*2+1] = $lds_list_rich[$i];
+
                 if(!empty($dual[$i*2+1])) {
                     $dual[$i*2+1]->can_edit = $dual[$i*2+1]->lds->canEdit();
                 }

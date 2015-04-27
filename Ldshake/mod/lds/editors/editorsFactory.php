@@ -205,6 +205,8 @@ class richTextEditor extends Editor
         $lds->granularity = 0;
         $lds->completeness = 0;
         $lds->cloned = 1;
+        if(!empty($this->_lds->license))
+            $lds->license = $this->_lds->license;
         $lds->all_can_view = $this->_lds->all_can_view;
         $lds->implementable = $this->_lds->implementable;
         $lds->parent = $this->_lds->guid;

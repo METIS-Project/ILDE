@@ -333,6 +333,7 @@ ul.links a
     <div id="footer">
         <div id="footer-logos">
             <ul>
+                <li><a href="http://www.upf.edu/upfsolidaria/" target="_blank"><img src="http://www.upf.edu/upfsolidaria/_img/marca-upf-solidaria.png" alt="UPF solidària"></a></li>
                 <li><a href="http://metis-project.org/index.php" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logo-footer-metis.png" alt="<?php echo T("METIS") ?>"></a></li>
                 <li><a href="http://ec.europa.eu/education/lifelong-learning-programme/" target="_blank"><img src="<?php echo $url ?>_graphics/metis/logos-footer-llp.png" alt="<?php echo T("Lifelong Learning Programme") ?>"></a></li>
                 <li><a href="http://ecampus.msf.org/moodlemsf/" target="_blank"><img src="<?php echo $url ?>_graphics/logoMSF.png" height="56" alt="MEDECINS SANS FRONTIERES"></a></li>

@@ -136,16 +136,30 @@ a.ldshakers_user_activity_item {
 	display: block;
 	margin: 0px;
 	text-decoration: none;
-	background-color: #97DF97;
+	/*background-color: #97DF97;*/
 	padding: 1px;
 }
 
-a.ldshakers_user_activity_item.created {
-	border-radius-top-left: 5px;
-	border-radius-top-right: 5px;
+.ldshakers_user_activity_box ul {
+	margin: 0px;
+	padding: 0px;
 }
 
-a.ldshakers_user_activity_item:hover {
+.ldshakers_user_activity_box ul li {
+	background-color: #97DF97;
+}
+
+.ldshakers_user_activity_box ul li:first-child {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.ldshakers_user_activity_box ul li:last-child {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+.ldshakers_user_activity_box ul li:hover {
 	background-color: #E2E2E2;
 }
 
@@ -211,7 +225,7 @@ a.ldshakers_user_activity_item:hover {
 }
 
 #ldshake-interactive-search {
-	color: #CCC;
+	color: #7B7B7B;
 }
 
 /****************************/

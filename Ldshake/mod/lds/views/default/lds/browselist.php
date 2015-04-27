@@ -53,7 +53,7 @@ if (is_array($vars['list']) && sizeof($vars['list']) > 0): ?>
         ?>
 	<li class="lds_list_element">
 		<div class="lds_icon">
-			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img width="64" height="64" src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-64.png" /></a>
+			<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" ><img width="64" height="64" src="<?php echo $vars['url']; ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? (empty($item->icon) ? $item->lds->editor_type : $item->icon) : 'doc'); ?>-icon-64.png" /></a>
 			<?php if ($item->lds->owner_guid == get_loggedin_userid()): ?>
 			<br />
 			<div class="lds_sticker mine"><?php echo T("Mine") ?></div>
