@@ -159,7 +159,7 @@
 				*/
 				$pathpart = str_replace("//","/",str_replace($_SERVER['DOCUMENT_ROOT'],"",$CONFIG->path));
 				if (substr($pathpart,0,1) != "/") $pathpart = "/" . $pathpart; 
-				$CONFIG->wwwroot = "http://" . $_SERVER['HTTP_HOST'] . $pathpart;
+				$CONFIG->wwwroot = "http" . (($_SERVER['SERVER_PORT'] == 443) ? "s" : "") . "://" . $_SERVER['HTTP_HOST'] . $pathpart;
 			}
 
             if(empty($CONFIG->ldshake_mode))
