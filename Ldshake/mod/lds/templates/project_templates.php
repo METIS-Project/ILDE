@@ -293,7 +293,7 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
         ),
     );
 
-    $CONFIG->project_templates['full'] = array_merge($CONFIG->project_templates['full'], $CONFIG->project_templates['msf']);
+    $CONFIG->project_templates['full'] = array_merge($CONFIG->project_templates['msf'], $CONFIG->project_templates['full']);
 }
 
 if($CONFIG->ldshake_mode == 'highschool') {

@@ -41,6 +41,7 @@
 
 function t9n_init() {	
 	global $CONFIG;
+	$translations = null;
 
     $user = get_loggedin_user();
 

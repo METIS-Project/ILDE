@@ -192,9 +192,9 @@ SQL;
         return $result;
     }
 
-    public function disable() {
+    public function disable($reason = "") {
         $guid = self::getGUID();
-        if($result = parent::disable()) {
+        if($result = parent::disable($reason)) {
 
             $query = <<<SQL
     DELETE FROM objects_property WHERE guid = {$guid}

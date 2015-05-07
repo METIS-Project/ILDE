@@ -3172,6 +3172,9 @@ SQL;
             if(!$count) {
             $order_query['join'] = "";
             $order_query['by'] = "ORDER BY e.last_edited_time DESC";
+            } else {
+                $order_query['join'] = "";
+                $order_query['by'] = "";
             }
         } else {
             $order_query['join'] = "";

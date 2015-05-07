@@ -78,8 +78,11 @@
 	 */
 		
 	// Register the error handler
-		set_error_handler('__elgg_php_error_handler');
-		set_exception_handler('__elgg_php_exception_handler');
+
+    if(!empty($debug)) {
+        set_error_handler('__elgg_php_error_handler');
+        set_exception_handler('__elgg_php_exception_handler');
+    }
 	
 	/// LdShake change ///	
 	//Properly display errors	

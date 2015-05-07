@@ -219,6 +219,8 @@
             $tsblock = (int)floor($time/60);
 
             //no cache data stored
+			if(empty($CONFIG->plugin_cache))
+				return false;
             if($CONFIG->plugin_cache < $tsblock)
                 return false;
 

@@ -98,8 +98,10 @@
 		function get_loggedin_user()
 		{
 			//global $SESSION;
-			
-			return $_SESSION['user'];
+			if(!empty($_SESSION['user']))
+				return $_SESSION['user'];
+			else
+				return null;
 		}
 		
 	/**

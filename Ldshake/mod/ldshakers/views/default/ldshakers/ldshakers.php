@@ -33,7 +33,9 @@
  * technical reasons, the Appropriate Legal Notices must display the words
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
-?><?php extract($vars) ?>
+?><?php extract($vars);
+$group_id = empty($group->id) ? null : $group->id;
+?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
 		<ul id="lds_side_sections">
@@ -42,7 +44,7 @@
 			if (is_array($groups)):
 				foreach ($groups as $g):
 			?>
-			<li><a<?php if ($g->id == $group->id) echo ' class="current"' ?> href="<?php echo ldshakers_viewTools::urlFor($g,'group') ?>"><?php echo $g->name ?> (<?php echo $g->nMembers ?>) <?php if ($g->canEdit) echo '*' ?></a></li>
+			<li><a<?php if ($g->id == $group_id) echo ' class="current"' ?> href="<?php echo ldshakers_viewTools::urlFor($g,'group') ?>"><?php echo $g->name ?> (<?php echo $g->nMembers ?>) <?php if ($g->canEdit) echo '*' ?></a></li>
 			<?php
 				endforeach;
 			endif;
@@ -55,7 +57,7 @@
 
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
-		<?php if ($filtering): ?>
+		<?php if(!empty($filtering)): ?>
 		<h2><a href="<?php echo ldshakers_viewTools::getUrl() ?>"><?php echo $title ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
 		<?php else: ?>
 		<h2><?php echo $title ?></h2>
@@ -171,8 +173,9 @@
 	</div>
 </div>
 
-/* javascript data*/
+
 <script>
+	/* javascript data*/
 	var t9n = {
 		search_field : "<?php echo htmlspecialchars(T('Search for other users')) ?>"
 	};

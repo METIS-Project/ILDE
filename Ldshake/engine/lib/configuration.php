@@ -218,7 +218,7 @@ function ldshake_mode_configuration() {
 		function configuration_init() {
 			global $CONFIG;
 
-			$CONFIG->url = $CONFIG->wwwroot;
+			//$CONFIG->url = $CONFIG->wwwroot;
 			/// LdShake change ///
 			// Load default settings from database
 			get_all_config(1);

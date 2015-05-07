@@ -38,7 +38,7 @@
 
 <?php extract($vars);
 global $CONFIG;
-$disable_projects = $CONFIG->disable_projects;
+$disable_projects = !empty($CONFIG->disable_projects);
 $disable_implementations = false;
 
 if(function_exists("ldshake_mode_mylds")) {
@@ -82,7 +82,7 @@ if(function_exists("ldshake_mode_mylds")) {
 
 <div id="two_column_left_sidebar_maincontent">
 	<div id="content_area_user_title">
-		<?php if ($filtering): ?>
+		<?php if(!empty($filtering)): ?>
 		<h2><a href="<?php echo lds_viewTools::getUrl() ?>"><?php echo $title ?></a> » <span class="lds_tag <?php echo $tagk ?>"><?php echo $tagv ?></span></h2>
 		<?php else: ?>
 		<h2><?php echo $title ?></h2>
@@ -111,12 +111,7 @@ if(function_exists("ldshake_mode_mylds")) {
 			<?php foreach($list as $item): ?>
 			<?php if ($section != 'trashed'): ?>
 			<li class="lds_list_element<?php if ($item->locked): ?> lds_locked<?php endif; ?><?php if ($item->new): ?> new<?php endif; ?>">
-				<?php if ($item->starter->guid == get_loggedin_userid()): ?>
-				<input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<?php else: ?>
-				<!--<div class="lds_select_spacer"></div>-->
                 <input class="lds_select lds_select_one" type="checkbox" name="lds_select" value="<?php echo $item->lds->guid ?>" />
-				<?php endif; ?>
 				<a href="<?php echo lds_viewTools::url_for($item->lds, 'view') ?>" class="lds_icon"><img width="20" height="20" src="<?php echo $url ?>mod/lds/images/lds-<?php echo (lds_viewTools::iconSupport($item->lds->editor_type) ? $item->lds->editor_type : 'doc'); ?>-icon-20.png" alt="LdS" /></a>
 				<div class="lds_info">
 					<span class="lds_title_tags">

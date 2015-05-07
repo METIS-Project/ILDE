@@ -41,7 +41,7 @@
  */
 global $CONFIG;
 
-$disable_projects = $CONFIG->disable_projects;
+$disable_projects = !empty($CONFIG->disable_projects);
 $static_resources = ldshake_theme_static("shell");
 if (isloggedin()) :
 ?>

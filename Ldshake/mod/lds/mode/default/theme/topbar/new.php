@@ -50,7 +50,7 @@
         <li id="tb_new_option_conceptualize" class="menu_suboption"><?php echo T("Conceptualize") ?></li>
         <li id="tb_new_option_author" class="menu_suboption"><?php echo T("Author") ?></li>
         <li id="tb_new_option_implement" class="menu_suboption" ><?php echo T("Implement") ?></li>
-        <?php if(!$disable_projects):?><li id="tb_new_option_project" class="menu_suboption" ><?php echo T("Project") ?></li><?php endif;?>
+        <?php if(empty($CONFIG->disable_projects)):?><li id="tb_new_option_project" class="menu_suboption" ><?php echo T("Project") ?></li><?php endif;?>
     </ul>
 </div>
 <div id="new_menu_author" class="menu level2">
@@ -94,7 +94,7 @@
         <li id="tb_conceptualize_new4" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/neweditor/google_spreadsheet"><?php echo T("Google Spreadsheet") ?></a></li>
     </ul>
 </div>
-<?php if(!$disable_projects):?>
+<?php if(empty($CONFIG->disable_projects)):?>
     <div id="new_menu_project" class="menu level2">
         <ul>
             <li id="tb_newlds_manage_projects" class="menu_option"><a href="<?php echo $vars['url']; ?>pg/lds/projects/implement"><?php echo T("Select Workflow for my Project") ?></a></li>

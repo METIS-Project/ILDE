@@ -102,7 +102,7 @@ END;
     <link rel="icon" type="image/png" href="<?php echo $vars['url']; ?>_graphics/favicon.ico" />
 <?php
 
-		echo $feedref;
+		//echo $feedref;
 		//echo elgg_view('metatags',$vars); //Pau... i removed it :S 
 	
 		echo elgg_view('page_elements/analytics', $vars);

@@ -75,9 +75,9 @@ if(ldshake_check_sanitize_filter_param($filter)) {
                 foreach ($CONFIG->project_templates['full'] as $template):
                 ?><li><?php
                     if($template['subtype']):
-                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                        ?><a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
                     else:
-                        ?><a class="lds_tag <?php echo $classname ?>" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
+                        ?><a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
                     endif;
                 ?></li><?php
                 endforeach;
@@ -153,7 +153,11 @@ if(ldshake_check_sanitize_filter_param($filter)) {
          ?>
 		<?php if (!empty($filter)): ?>
             <?php
-            $tagv_label = $tagv;
+            $tagv_label = array();
+
+            if(!empty($tagv))
+                $tagv_label = $tagv;
+
             if(!empty($filter['editor_subtype'][0]) or !empty($filter['editor_type'][0])) {
 
                 if(!empty($filter['editor_subtype'][0]))

@@ -715,7 +715,6 @@ function lds_exec_browse ($params)
     $offset = get_input('offset') ?: '0';
 
     $vars['order'] = $order;
-    $time = microtime(true);
     $vars['tags'] = lds_contTools::getAllTagsAndFrequenciesUsage (get_loggedin_userid());
     //echo microtime(true) - $time.' tf<br />';
 
@@ -761,6 +760,8 @@ function lds_exec_browse ($params)
             unset($filter['editor_subtype']);
             $filter[$tagk][0] = $tagv;
         } else {
+            if(empty($filter[$tagk]))
+                $filter[$tagk] = array();
             if(in_array($tagk, array('tags', 'discipline', 'pedagogical_approach')))
                 if(!in_array($tagv, $filter[$tagk]))
                     $filter[$tagk][] = $tagv;
@@ -776,10 +777,6 @@ function lds_exec_browse ($params)
     $vars['filter'] = base64_encode(bzcompress(serialize($key_params), 9));
     $title = T("Browse LdS");
 
-    //$time = microtime(true);
-    //echo microtime(true) - $time.' bc<br />';
-    //$time = microtime(true);
-
     $custom = array(
         'build_callback' => 'ldshake_custom_query_edited_project_lds',
         'params' => array(
@@ -790,7 +787,6 @@ function lds_exec_browse ($params)
 
     $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
     $vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
-    //echo microtime(true) - $time.' be<br />';
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
@@ -798,14 +794,8 @@ function lds_exec_browse ($params)
 
     $ldshake_css['#layout_canvas']['min-height'] = $vars['count'] * 137;
 
-    //$time = microtime(true);
     $body = elgg_view('lds/browse',$vars);
-    //echo microtime(true) - $time.' start3<br />';
-
-    //$time = microtime(true);
     page_draw($title, $body);
-    //echo microtime(true) - $time.' start4<br />';
-    //echo microtime(true) - $start_time.' start_finish<br />';
 }
 
 function lds_exec_browse_legacy ($params)

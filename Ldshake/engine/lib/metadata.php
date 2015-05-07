@@ -78,7 +78,7 @@
 		 *
 		 * @return true|false Depending on permissions
 		 */
-		function canEdit() {
+		function canEdit($user_guid = 0) {
 			
 			/// LdShake change ///
 			global $is_admin;               

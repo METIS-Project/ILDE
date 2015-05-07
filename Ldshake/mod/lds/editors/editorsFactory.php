@@ -1099,7 +1099,7 @@ class OpenglmEditor extends Editor {
  * rest editors
  */
 global $CONFIG;
-if(!$CONFIG->rest_editor_list) {
+if(empty($CONFIG->rest_editor_list)) {
     if($user_editor = get_entity(get_loggedin_user()->editor)) {
         $CONFIG->rest_editor_list[$user_editor->internalname] = array(
             'name' => $user_editor->name,

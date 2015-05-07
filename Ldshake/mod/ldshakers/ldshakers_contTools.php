@@ -166,7 +166,7 @@ SQL;
         $hide_admin = '';
         if(get_user(2))
             $hide_admin = 'AND e.guid <> 2';
-        $select = "SELECT e.guid, 'user' AS 'type'";
+        $select = "SELECT e.guid, 'user' AS 'type', e.subtype";
         if($count)
             $select = "SELECT COUNT(*) as 'total'";
         $query = <<<SQL
