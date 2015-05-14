@@ -46,7 +46,7 @@ $form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (".T("requir
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeireyherhyed78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuhfdgeryeryrreh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p><label class=\"sidelabel\">" . T('Username') . " (".T("at least 4 characters sans spaces or symbols, eg. jsmith") . ") (".T("required") . ")</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuh544e78gh5g', 'class' => "registerform", 'value' => $username)) . "</p>";
-	$form_body .= "<p><label class=\"sidelabel\">" . elgg_echo('password') . ' ' . T("(6 or more characters required)") . "</label>" . elgg_view('input/password' , array('internalname' => 'dgn45hygeihg5teh7ggg4e8gh', 'class' => "registerform")) . "</p>";
+	$form_body .= "<p><label class=\"sidelabel\">" . elgg_echo('password') . ' ' . T("(6 or more characters required)") . "</label>" . elgg_view('input/password' , array('internalname' => 'dgn45hygeifsdfww7ggg4e8gh', 'class' => "registerform")) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyuhfdgetge544e78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfgeiyhdgfdgtge544e78gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
 	$form_body .= "<p style=\"display:none\"><label class=\"sidelabel\">" . elgg_echo('username') . "</label>" . elgg_view('input/text' , array('internalname' => 'dfkhsfhjeaeheehyeyey3gh5g', 'class' => "registerform", 'value' => '')) . "</p>";
@@ -66,9 +66,9 @@ $form_body .= "<label class=\"sidelabel\">" . elgg_echo('name') . " (".T("requir
 
 function setUpRegistration() {
 	$('form').submit(function() {
-		$('#formvars').append('<input type="hidden" name="dfgeyeyrehdfheheeryery4e78gh5g" />');
+		$('#formvars').append('<input type="hidden" name="fu7ghhfdddfheheeryery4e78gh5g" />');
 		$('#formvars').append('<input type="hidden" name="dfgeiyuhfdhteyeryheryerh5g" />');
-		$('input[name=dfgeyeyrehdfheheeryery4e78gh5g]').val($('input[name=dgn45hygeihg5teh7ggg4e8gh]').val());
+		$('input[name=fu7ghhfdddfheheeryery4e78gh5g]').val($('input[name=dgn45hygeifsdfww7ggg4e8gh]').val());
 		$('input[name=dfgeiyuhfdhteyeryheryerh5g]').val($('input[name=ndg874h78h5g08erhg854]').val());
 	});
 }

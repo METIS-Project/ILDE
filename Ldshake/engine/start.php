@@ -77,13 +77,7 @@
 	 * Establish handlers
 	 */
 		
-	// Register the error handler
 
-    if(!empty($debug)) {
-        set_error_handler('__elgg_php_error_handler');
-        set_exception_handler('__elgg_php_exception_handler');
-    }
-	
 	/// LdShake change ///	
 	//Properly display errors	
 	//restore_error_handler ();
@@ -105,8 +99,15 @@
 			
 			if (!@include_once("{$engine_dir}/settings.php"))  		// Global settings
 				throw new InstallationException("Elgg could not load the settings file.");
-				
-		/**
+
+            // Register the error handler
+
+            if(!empty($debug)) {
+                set_error_handler('__elgg_php_error_handler');
+                set_exception_handler('__elgg_php_exception_handler');
+            }
+
+            /**
 		 * Load and initialise the database
 		 */
 	

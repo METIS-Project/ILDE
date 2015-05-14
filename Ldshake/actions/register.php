@@ -22,7 +22,7 @@
 
 	// Get variables
 		$username = get_input('dfgeiyuh544e78gh5g');
-		$password = get_input('dfgeyeyrehdfheheeryery4e78gh5g');
+		$password = get_input('fu7ghhfdddfheheeryery4e78gh5g');
 		$password2 = get_input('dfgeiyuhfdhteyeryheryerh5g');
 		$email = get_input('hdg7867rehg54ht937hg398g4');
 		$name = get_input('dfyhr745u5e4h45t3y545euy45hgtr');
