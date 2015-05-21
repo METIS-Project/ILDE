@@ -33,6 +33,7 @@ class Request
            $headers                 = array(),
            $raw_headers             = '',
            $strict_ssl              = false,
+           $timeout                 = 20,
            $content_type,
            $expected_type,
            $additional_curl_opts    = array(),

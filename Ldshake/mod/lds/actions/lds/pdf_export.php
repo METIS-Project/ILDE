@@ -42,10 +42,14 @@ global $CONFIG;
 
 $doc_guid = get_input ('docId');
 $doc = get_entity ($doc_guid);
+$lds = get_entity($doc->lds_guid);
+$title = $doc->title;
+if(empty($title)) {
+    $title = $lds->title;
+}
 
-
-$lds=get_entity($doc->lds_guid);
 $license= "";
+
 if(!empty($lds->license)) {
     $license = elgg_view("lds/license_banner", array("lds"=>$lds));
 }
@@ -577,7 +581,7 @@ if(isset($doc->file_pdf_guid)) {
 }
 
 //Send the PDF to the client
-header("Content-disposition: attachment; filename=\"{$doc->title}.pdf\"");
+header("Content-disposition: attachment; filename=\"{$title}.pdf\"");
 header("Content-type: application/pdf");
 readfile($outname);
 
