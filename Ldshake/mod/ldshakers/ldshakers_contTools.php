@@ -84,20 +84,15 @@ class ldshakers_contTools
 	{
         global $CONFIG;
 
-        //$groups = get_users_membership($userId);
-
-
         $query = <<<SQL
-SELECT DISTINCT e.* from {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}entity_relationships r ON e.guid = r.guid_two WHERE e.type = 'group' AND ((r.relationship = 'member' AND r.guid_one = '{$userId}') OR e.owner_guid = '{$userId}')
+SELECT DISTINCT e.* from {$CONFIG->dbprefix}entities e JOIN {$CONFIG->dbprefix}entity_relationships r ON e.guid = r.guid_two WHERE e.type = 'group'  AND e.enabled = 'yes' AND ((r.relationship = 'member' AND r.guid_one = '{$userId}') OR e.owner_guid = '{$userId}')
 SQL;
         if(isadminloggedin())
             $query = <<<SQL
-SELECT DISTINCT e.* from {$CONFIG->dbprefix}entities e WHERE e.type = 'group'
+SELECT DISTINCT e.* from {$CONFIG->dbprefix}entities e WHERE e.type = 'group' AND e.enabled = 'yes'
 SQL;
 
         $groups = get_data($query, "entity_row_to_elggstar");
-
-
         $groups_list = array();
 
         if($groups) {
@@ -118,22 +113,11 @@ SQL;
             }
         }
 
-
 		return $groups_list;
 	}
 	
 	public static function getGroupsUserIsMember ($userId)
 	{
-        /*
-		$query = "SELECT am.access_collection_id FROM {$CONFIG->dbprefix}access_collection_membership am ";
-		$query .= " LEFT JOIN {$CONFIG->dbprefix}access_collections ag ON ag.id = am.access_collection_id ";
-		$query .= " WHERE am.user_guid = {$userId} AND ag.owner_guid = " . get_loggedin_userid();
-		
-		$groups = array ();
-		$res = execute_query ($query, get_db_link('read'));
-		while ($row = mysql_fetch_object($res))
-			$groups[] = get_access_collection($row->access_collection_id);
-		*/
         if($groups = get_users_membership($userId))
 		    Utils::osort($groups, "name");
 				
