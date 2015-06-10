@@ -71,17 +71,13 @@ if(ldshake_check_sanitize_filter_param($filter)) {
             <h3><?php echo T($tools_term) ?></h3>
             <ul class="tag_selector">
 
-                <?php
-                foreach ($CONFIG->project_templates['full'] as $template):
-                ?><li><?php
-                    if($template['subtype']):
-                        ?><a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_subtype&tagv=<?php echo urlencode($template['subtype']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
-                    else:
-                        ?><a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=editor_type&tagv=<?php echo urlencode($template['type']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a><?php
-                    endif;
-                ?></li><?php
-                endforeach;
-                ?></li>
+            <?php
+            foreach ($templates as $template):
+            ?><li>
+                <a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($template['type_label']) ?>&tagv=<?php echo urlencode($template['value']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?> <?php echo htmlspecialchars($template['count']) ?></a>
+            </li><?php
+            endforeach;
+            ?>
 
             </ul>
 

@@ -710,7 +710,7 @@ function lds_exec_viewtrashed ($params)
 
 function lds_exec_browse ($params)
 {
-    global $ldshake_css, $start_time;
+    global $CONFIG, $ldshake_css, $start_time;
     $order = get_input('order', 'time');
     $offset = get_input('offset') ?: '0';
 
@@ -787,6 +787,15 @@ function lds_exec_browse ($params)
 
     $vars['list'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), false, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
     $vars['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, $offset, null, null, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+
+    foreach ($CONFIG->project_templates['full'] as $template) {
+        $type_label = (empty($template['subtype'])) ? "editor_type" : "editor_subtype";
+        $type_value = (empty($template['subtype'])) ? $template['type'] : $template['subtype'];
+        $vars['templates'][$template['title']]['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, 0, $type_label, $type_value, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+        $vars['templates'][$template['title']]['title'] = $template['title'];
+        $vars['templates'][$template['title']]['type_label'] = $type_label;
+        $vars['templates'][$template['title']]['type_value'] = $type_value;
+    }
 
     if(!is_array($vars['list'])) {
         $vars['list'] = array();
