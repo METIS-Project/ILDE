@@ -74,7 +74,7 @@ if(ldshake_check_sanitize_filter_param($filter)) {
             <?php
             foreach ($templates as $template):
             ?><li>
-                <a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($template['type_label']) ?>&tagv=<?php echo urlencode($template['value']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?> <?php echo htmlspecialchars($template['count']) ?></a>
+                <a class="lds_tag" href="<?php echo $url ?>pg/lds/browse/?tagk=<?php echo urlencode($template['type_label']) ?>&tagv=<?php echo urlencode($template['value']) ?>&filter=<?php echo rawurlencode($filter) ?>"><?php echo htmlspecialchars($template['title']) ?></a> <span class="freq"><?php echo htmlspecialchars($template['count']) ?></span>
             </li><?php
             endforeach;
             ?>
