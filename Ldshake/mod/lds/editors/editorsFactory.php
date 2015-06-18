@@ -201,6 +201,7 @@ class richTextEditor extends Editor
         if($title)
             $lds->title = $title;
         $lds->subtype = $this->_lds->getSubtype();
+        $lds->description = $this->_lds->description;
         $lds->access_id = 2;
         $lds->granularity = 0;
         $lds->completeness = 0;
@@ -215,9 +216,11 @@ class richTextEditor extends Editor
             $lds->editor_subtype = $this->_lds->editor_subtype;
 
         //implementation
-        $lds->vle_id = $this->_lds->vle_id;
-        $lds->course_id = $this->_lds->course_id;
-        $lds->lds_id = $this->_lds->lds_id;
+        if(!empty($lds->vle_id)) {
+            $lds->vle_id = $this->_lds->vle_id;
+            $lds->course_id = $this->_lds->course_id;
+            $lds->lds_id = $this->_lds->lds_id;
+        }
 
         $lds->external_editor = $this->_lds->external_editor;
 
@@ -233,10 +236,20 @@ class richTextEditor extends Editor
         //TODO: fix non existing subtype on empty database
         if($editordocument = get_entities_from_metadata('lds_guid',$this->_lds->guid,'object','LdS_document_editor', 0, 100)) {
             foreach($editordocument as $e_d) {
-                $em = EditorsFactory::getInstance($e_d);
-                $em->cloneDocument($lds->guid);
+                if($em = EditorsFactory::getInstance($e_d))
+                    $em->cloneDocument($lds->guid);
+                //TODO: raise exception on fail
             }
         }
+
+        if($editordocument = get_entities_from_metadata_multi(array('lds_guid' => $this->_lds->guid, 'editorType' => 'project_design'), 'object', 'LdS_document_editor', 0, 100))
+            foreach($editordocument as $project_preview) {
+                $newdoc = new DocumentEditorObject($lds->guid);
+                $newdoc->description = $project_preview->description;
+                $newdoc->editorType = $project_preview->editorType;
+                $newdoc->title = $title;
+                $newdoc->save();
+            }
 
         if(is_array($this->_document))
         foreach($this->_document as $d) {

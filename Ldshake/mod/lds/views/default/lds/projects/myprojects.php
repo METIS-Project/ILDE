@@ -34,7 +34,6 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-
 extract($vars);
 $edit_imp_label = $implement ? T("Implement") : T("Edit");
 $edit_imp_url = isset($implement) ? "implement" : "edit";
@@ -88,11 +87,10 @@ $is_implementation = !empty($is_implementation);
                 <?php if ($section != 'prj-trashed'): ?>
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
+                    <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
                 <?php else: ?>
-
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected ".$list_type) ?>" />
-
                 <?php endif; ?>
 
                 <?php if($is_implementation): ?>
