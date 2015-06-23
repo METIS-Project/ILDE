@@ -3111,10 +3111,7 @@ SQL;
         $query_limit = ($limit == 0 || $count) ? '' : "limit {$offset}, {$limit}";
         $subtype = get_subtype_id($type, $subtype);
         if(empty($subtype)) {
-            if($count)
-                return 0;
-            else
-                return false;
+            return $count ? 0 : false;
         }
 
         $callback = "entity_row_to_elggstar";
@@ -3130,7 +3127,7 @@ SQL;
                 $mj = "JOIN metadata md ON e.guid = md.entity_guid";
                 $mw = "md.name_id = {$mk_id} AND md.value_id = {$mv_id} AND";
             } else {
-                return false;
+                return $count ? 0 : false;
             }
         }
 
@@ -3217,10 +3214,7 @@ SQL;
             $custom_query = $build_callback($user_id, $custom['params']);
 
             if($custom_query === null) {
-                if($count)
-                    return 0;
-                else
-                    return false;
+                return $count ? 0 : false;
             }
 
             if(!$count)

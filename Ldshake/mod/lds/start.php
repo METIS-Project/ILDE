@@ -737,8 +737,6 @@ function lds_exec_browse ($params)
         'image' => 'Image',
     );
 
-    //$tools['editor_subtype'] =
-
     $vars['filtering'] = false;
     //If there is some filtering by tag
     $tagk = urldecode(get_input('tagk', null));
@@ -791,11 +789,11 @@ function lds_exec_browse ($params)
     foreach ($CONFIG->project_templates['full'] as $template) {
         $type_label = (empty($template['subtype'])) ? "editor_type" : "editor_subtype";
         $type_value = (empty($template['subtype'])) ? $template['type'] : $template['subtype'];
-        $vars['templates'][$template['title']]['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, 0, $type_label, $type_value, $order, false, null, true, $custom, false, false, 0, 'viewlist');
+        $vars['templates'][$template['title']]['count'] = lds_contTools::getUserEntities('object', 'LdS', get_loggedin_userid(), true, 10, 0, $type_label, $type_value, $order, false, null, true, null /*$custom*/, false, false, 0, 'viewlist');
         $vars['templates'][$template['title']]['title'] = $template['title'];
         $vars['templates'][$template['title']]['type_label'] = $type_label;
         $vars['templates'][$template['title']]['type_value'] = $type_value;
-        if($template['type'] == doc and empty($template['subtype']))
+        if($template['type'] == 'doc' and empty($template['subtype']))
             $vars['templates'][$template['title']]['count'] = '';
     }
 
