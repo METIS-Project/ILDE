@@ -40,6 +40,7 @@ $edit_imp_url = isset($implement) ? "implement" : "edit";
 $view_mode = isset($implement_list) ? "list" : "view";
 $imp_action = isset($implement) ? "project_implement_action" : "lds_edit_action";
 $is_implementation = !empty($is_implementation);
+$is_workflow = !empty($is_workflow);
 ?>
 <div id="two_column_left_sidebar">
     <div id="owner_block">
@@ -87,7 +88,9 @@ $is_implementation = !empty($is_implementation);
                 <?php if ($section != 'prj-trashed'): ?>
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="trash_some" name="trash_some" value="<?php echo T("Trash selected ".$list_type) ?>" />
-                    <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate design") ?>" disabled="disabled" />
+                    <?php if ($is_workflow): ?>
+                        <input type="button" style="border-color:#999; margin:5px 0;" id="duplicate_design" value="<?php echo T("Duplicate workflow") ?>" disabled="disabled" />
+                    <?php endif; ?>
                 <?php else: ?>
                     <input id="lds_select_all" class="lds_select" type="checkbox" name="lds_group_select" value="" />
                     <input type="submit" style="border-color:#999; margin:5px 0;" id="untrash_some" name="untrash_some" value="<?php echo T("Recover selected ".$list_type) ?>" />

@@ -34,7 +34,7 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 ?><?php extract($vars);
-$group_id = empty($group->id) ? null : $group->id;
+$group_id = empty($group->guid) ? null : (int)$group->guid;
 ?>
 <div id="two_column_left_sidebar">
 	<div id="owner_block">
@@ -63,7 +63,11 @@ $group_id = empty($group->id) ? null : $group->id;
 		<h2><?php echo $title ?></h2>
 		<?php endif; ?>
 	</div>
+
+	<?php if($section != 'group'):?>
 	<input id="ldshake-interactive-search" type="text" value="<?php echo htmlspecialchars(T('Search for other users'))?>" />
+	<?php endif;?>
+
 	<div class="filters">
 		<div class="paging">
 			<?php echo ldshakers_viewTools::pagination($count, 50) ?>

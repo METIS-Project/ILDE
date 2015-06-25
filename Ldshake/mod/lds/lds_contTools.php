@@ -3378,17 +3378,11 @@ SQL;
 */
 
         if($count) {
-            $time = microtime(true);
             $row = get_data_row($query);
-            //echo '<pre>'.$query.'</pre>'.'<br>';
-            //echo microtime(true) - $time.' c<br />'.'<br>';
-            return $row->total;
+            return (int)$row->total;
         } else {
-            $time = microtime(true);
             $query .= " /* {$callback} */";
             $entities = get_data($query, $callback);
-            //echo '<pre>'.$query.'</pre>'.'<br>';
-            //echo microtime(true) - $time.' e<br />';
             return $entities;
         }
     }
@@ -3445,6 +3439,37 @@ SQL;
             return count($entities);
 
         return $entities;
+    }
+
+    public static function getGlobalCoedition($limit = 10, $offset = 0, $count = false) {
+        global $CONFIG;
+
+        $annotation_name_id = get_metastring_id('revised_docs');
+        $annotation_name_id_2 = get_metastring_id('revised_docs_editor');
+        $subtype_id = get_subtype_id('object', 'LdS');
+
+        $query = <<<SQL
+SELECT a.*, e.guid, e.type
+FROM {$CONFIG->dbprefix}entities e
+JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid
+WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2})
+AND e.enabled = 'yes'
+AND e.subtype = {$subtype_id}
+AND e.access_id > 0
+GROUP BY e.guid
+LIMIT {$offset}, {$limit}
+SQL;
+
+        $annotations = get_data($query, "row_to_elggannotation");
+
+        if($count) {
+            if(empty($annotations))
+                return 0;
+            else
+                return count($annotations);
+        }
+
+        return $annotations;
     }
 
     public static function getUserCoedition($user_id = 0, $limit = 10, $offset = 0, $count = false) {

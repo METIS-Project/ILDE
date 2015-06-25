@@ -2946,6 +2946,7 @@ function lds_exec_projects ($params)
 {
     $offset = get_input('offset') ?: '0';
     set_context("lds_exec_main");
+    $vars['is_workflow'] = true;
 
     if ($params[1] == 'created-by-me')
     {
@@ -3226,7 +3227,8 @@ function lds_exec_new_project ($params)
         foreach($vles as $vle) {
             $vlemanager = VLEManagerFactory::getManager($vle);
 
-            if($vle_info = $vlemanager->getVleInfo()) {
+//            if($vle_info = $vlemanager->getVleInfo()) {
+                $vle_info = new stdClass();
                 $vle_info->item = $vle;
                 $vle_data[$vle->guid] = $vle_info;
                 $CONFIG->project_templates['full']['vle_'.$vle->guid] = array(
@@ -3236,7 +3238,7 @@ function lds_exec_new_project ($params)
                     'icon'  => $vle->vle_type,
                     'stage' => 'implementation',
                 );
-            }
+//            }
         }
     }
 
@@ -3374,6 +3376,17 @@ function lds_exec_edit_project ($params)
 function lds_exec_test ($params)
 {
     $vars['lds'] = get_entity($params[1]);
+
+    echo elgg_view('lds/projects/standalone_view', $vars);
+}
+
+function lds_exec_stats($params)
+{
+    $vars['lds'] = get_entity($params[1]);
+
+    $activity_counters['started'] = lds_contTools::getUserEntities('object', 'LdS', 2, true, 9999, 0, null, null, "time", false, null, false, null, false, null);
+    $activity_counters['comments'] = (int)count_annotations_enabled(0, "object", "LdS", 'generic_comment', "", "");
+    $activity_counters['coedition'] = lds_contTools::getGlobalCoedition(9999, 0, true);
 
     echo elgg_view('lds/projects/standalone_view', $vars);
 }
