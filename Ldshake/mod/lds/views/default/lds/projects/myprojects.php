@@ -168,7 +168,7 @@ $is_workflow = !empty($is_workflow);
 </div>
 
 <?php include (__DIR__.'/implementprojectlds_form.php');?>
-<?php include (__DIR__.'/../clonelds_form.php');?>
+<?php include (__DIR__.'/cloneworkflow_form.php');?>
 <?php include (__DIR__.'/new_projectimplementation_form.php');?>
 <div id="editimplementation_popup" class="lds_popup">
     <a class="lds_close_popup" id="editimplementation_popup_close" href="#"><?php echo T("Cancel") ?></a>

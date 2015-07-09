@@ -34,21 +34,34 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-extract ($vars);
-?>
-<div id="two_column_left_sidebar_maincontent">
-	<div id="content_area_user_title">
-        <h2><?php echo T("Activity Dashboard") ?></h2>
-        <div style="float:right"><?php echo $activity_counters['started'] ?></div>
-        <div><?php echo T("Number of designs created")?></div>
-        <div style="float:right"><?php echo $activity_counters['num_designs_edited_one_person'] ?></div>
-        <div><?php echo T("Number of designs edited only by one person")?></div>
-        <div style="float:right"><?php echo $activity_counters['coedition_2e'] ?></div>
-        <div><?php echo T("Number of designs co-edited by 2 people")?></div>
-        <div style="float:right"><?php echo $activity_counters['coedition_3g'] ?></div>
-        <div><?php echo T("Number of designs co-edited by 3 or more people")?></div>
-        <div style="float:right"><?php echo $activity_counters['commented_lds'] ?></div>
-        </di<div><?php echo T("Number of designs with at least one comment")?></div>
+function ldshake_elgg_access_control($table_prefix) {
+    if(!($table_prefix == 'e.' or empty($table_prefix)))
+        return "";
+    $loggedinuserid = get_loggedin_userid();
+    $loggedinuser = get_loggedin_user();
+    $space = (int)$loggedinuser->space;
+    if($loggedinuserid > 0) {
+        return " AND ({$table_prefix}space IN (0,{$space}))";
+    }
 
-</div>
+    return "";
+}
 
+function ldshake_init_entity_space() {
+    $loggedinuserid = get_loggedin_user();
+    if($loggedinuserid ) {
+        if($loggedinuserid->guid > 0)
+            return (int)$loggedinuserid->space;
+    }
+
+    return 0;
+}
+
+function ldshake_init_entity($attributes) {
+    $whitelist = array(
+        "object,LdS"
+    );
+
+    $result = update_data_affected("UPDATE entities SET entities.space = {$attributes['space']} WHERE entities.guid = {$attributes['guid']}");
+    return $result;
+}

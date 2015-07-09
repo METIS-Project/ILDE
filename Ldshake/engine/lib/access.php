@@ -155,24 +155,28 @@
 			if ($table_prefix)
 					$table_prefix = sanitise_string($table_prefix) . ".";
 			
-				$access = get_access_list();
-				
-				$owner = get_loggedin_userid();
-				if (!$owner) $owner = -1;
-				
-				global $is_admin;
-				
-				if (isset($is_admin) && $is_admin == true) {
-					$sql = " (1 = 1) ";
-				}
+			$access = get_access_list();
 
-				if (empty($sql))
-					$sql = " ({$table_prefix}access_id in {$access} or ({$table_prefix}owner_guid = $owner))";
-					//$sql = " ({$table_prefix}access_id in {$access} or ({$table_prefix}access_id = 0 and {$table_prefix}owner_guid = $owner))";
+			$owner = get_loggedin_userid();
+			if (!$owner) $owner = -1;
+
+			global $is_admin;
+
+			if (isset($is_admin) && $is_admin == true) {
+				$sql = " (1 = 1) ";
+			}
+
+			if (empty($sql))
+				$sql = " ({$table_prefix}access_id in {$access} or ({$table_prefix}owner_guid = $owner))";
+				//$sql = " ({$table_prefix}access_id in {$access} or ({$table_prefix}access_id = 0 and {$table_prefix}owner_guid = $owner))";
 
 			if (!$ENTITY_SHOW_HIDDEN_OVERRIDE)
 				$sql .= " and {$table_prefix}enabled='yes'";
-			
+
+			if(function_exists("ldshake_elgg_access_control")) {
+				$sql .= ldshake_elgg_access_control($table_prefix);
+			}
+
 			return $sql;
 		}
 		

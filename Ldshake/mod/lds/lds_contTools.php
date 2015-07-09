@@ -42,6 +42,20 @@
 //include_once __DIR__.'/Java.inc';
 //include_once __DIR__.'/query_repository.php';
 
+function ldshake_unzip($zipfile, $path) {
+    $zip = new ZipArchive;
+    if($zip->open($zipfile) !== TRUE)
+        return false;
+
+    if($zip->extractTo($path) !== TRUE) {
+        $zip->close();
+        return false;
+    }
+
+    $zip->close();
+    return true;
+}
+
 function ldshake_glueps_isimplementation($editor_type) {
     $implementable = array("gluepsrest");
 
@@ -3441,23 +3455,71 @@ SQL;
         return $entities;
     }
 
-    public static function getGlobalCoedition($limit = 10, $offset = 0, $count = false) {
+    public static function getCommentedLdS($limit = 10, $offset = 0, $count = false, $number = 0) {
+        global $CONFIG;
+
+        $annotation_name_id = get_metastring_id('generic_comment');
+        $subtype_id = get_subtype_id('object', 'LdS');
+        $number_filter = '';
+        if($number > 1) {
+            if($number = 2)
+                $number_filter = 'WHERE coedited.number = 2';
+            if($number > 2)
+                $number_filter = 'WHERE coedited.number > 2';
+        }
+
+        $query = <<<SQL
+SELECT * FROM (SELECT a.*, e.guid, e.type, COUNT(e.guid) AS number
+FROM {$CONFIG->dbprefix}entities e
+JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid
+WHERE a.name_id = {$annotation_name_id}
+AND a.owner_guid <> e.owner_guid
+AND e.enabled = 'yes'
+AND e.subtype = {$subtype_id}
+AND e.access_id > 0
+GROUP BY e.guid
+LIMIT {$offset}, {$limit}) AS coedited
+{$number_filter}
+SQL;
+
+        $annotations = get_data($query, "row_to_elggannotation");
+
+        if($count) {
+            if(empty($annotations))
+                return 0;
+            else
+                return count($annotations);
+        }
+
+        return $annotations;
+    }
+
+    public static function getGlobalCoedition($limit = 10, $offset = 0, $count = false, $number = 0) {
         global $CONFIG;
 
         $annotation_name_id = get_metastring_id('revised_docs');
         $annotation_name_id_2 = get_metastring_id('revised_docs_editor');
         $subtype_id = get_subtype_id('object', 'LdS');
+        $number_filter = '';
+        if($number > 1) {
+            if($number == 2)
+                $number_filter = 'WHERE coedited.number = 2';
+            if($number > 2)
+                $number_filter = 'WHERE coedited.number > 2';
+        }
 
         $query = <<<SQL
-SELECT a.*, e.guid, e.type
+SELECT * FROM (SELECT a.*, e.guid, e.type, COUNT(e.guid) AS number
 FROM {$CONFIG->dbprefix}entities e
 JOIN {$CONFIG->dbprefix}annotations a ON a.entity_guid = e.guid
 WHERE (a.name_id = {$annotation_name_id} OR a.name_id = {$annotation_name_id_2})
+AND a.owner_guid <> e.owner_guid
 AND e.enabled = 'yes'
 AND e.subtype = {$subtype_id}
 AND e.access_id > 0
 GROUP BY e.guid
-LIMIT {$offset}, {$limit}
+LIMIT {$offset}, {$limit}) AS coedited
+{$number_filter}
 SQL;
 
         $annotations = get_data($query, "row_to_elggannotation");

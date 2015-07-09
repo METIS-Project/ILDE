@@ -57,7 +57,6 @@ function lds_init()
         return $payload;
     };
 
-    //$CONFIG->webcollagerest_url= "{$CONFIG->url}services/dummy/";
     if(empty($CONFIG->glueps_url)) {
         $CONFIG->glueps_url = "http://pandora.tel.uva.es/METIS/GLUEPSManager/";
         $CONFIG->glueps_password = 'Ld$haK3';
@@ -67,6 +66,8 @@ function lds_init()
     $CONFIG->editor_templates["openglm"]["path"] = "vendors/openglm/EmptyOpenGLM.zip";
     $CONFIG->editor_templates["openglm"]["imsld"]["filename"] = "openglm_file.zip";
     $CONFIG->editor_templates["openglm"]["imsld"]["path"] = "vendors/openglm/EmptyOpenGLM.zip";
+    $CONFIG->editor_templates["reauthoring"]["filename"] = "reauthoring_data.zip";
+    $CONFIG->editor_templates["reauthoring"]["path"] = "vendors/reauthoring/empty.zip";
 
     //Load the model classes
 	//TODO could include the whole directory...
@@ -928,7 +929,6 @@ function lds_exec_new ($params)
 	$vars['initDocuments'][1]->body = '<p> '.T("Write here any support notes for this LdS...").'</p>';
 
     $vars['editor_subtype'] = 0;
-
 
     if(count($params) == 3) {
         switch($params[1]) {
@@ -3380,13 +3380,16 @@ function lds_exec_test ($params)
     echo elgg_view('lds/projects/standalone_view', $vars);
 }
 
-function lds_exec_stats($params)
+function lds_exec_activity_dashboard($params)
 {
-    $vars['lds'] = get_entity($params[1]);
 
     $activity_counters['started'] = lds_contTools::getUserEntities('object', 'LdS', 2, true, 9999, 0, null, null, "time", false, null, false, null, false, null);
-    $activity_counters['comments'] = (int)count_annotations_enabled(0, "object", "LdS", 'generic_comment', "", "");
-    $activity_counters['coedition'] = lds_contTools::getGlobalCoedition(9999, 0, true);
-
-    echo elgg_view('lds/projects/standalone_view', $vars);
+    $activity_counters['commented_lds'] = lds_contTools::getCommentedLdS(9999, 0, true);
+    $activity_counters['coedition_1'] = lds_contTools::getGlobalCoedition(9999, 0, true);
+    $activity_counters['coedition_2e'] = lds_contTools::getGlobalCoedition(9999, 0, true, 2);
+    $activity_counters['coedition_3g'] = lds_contTools::getGlobalCoedition(9999, 0, true, 3);
+    $activity_counters['num_designs_edited_one_person'] = $activity_counters['started'] - $activity_counters['coedition_2e'] - $activity_counters['coedition_3g'];
+    $vars['activity_counters'] = $activity_counters;
+    $body = elgg_view('lds/stats', $vars);
+    page_draw($vars['title'], $body);
 }

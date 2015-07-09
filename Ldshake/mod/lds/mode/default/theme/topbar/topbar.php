@@ -48,3 +48,5 @@
     <li id="tb_about"><a href="<?php echo $vars['url']; ?>pg/lds/about/"><?php echo T("About") ?></a></li>
 </ul>
 <?php ldshake_mode_view('topbar/new'); ?>
+<?php ldshake_mode_view('topbar/browse'); ?>
+<?php ldshake_mode_view('topbar/community'); ?>

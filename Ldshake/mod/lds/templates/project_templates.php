@@ -296,6 +296,17 @@ if($CONFIG->ldshake_mode == 'msf' and !empty($CONFIG->google_drive)) {
     $CONFIG->project_templates['full'] = array_merge($CONFIG->project_templates['msf'], $CONFIG->project_templates['full']);
 }
 
+if($CONFIG->ldshake_mode == 'sydneyuni') {
+    $CONFIG->project_templates['full'] = array_merge(array(
+        'reauthoring' => array(
+            'title' => T('Reauthoring'),
+            'type'  => 'reauthoring',
+            'subtype'   => null,
+            'icon'   => 'doc',
+            'stage' =>  'authoring',
+        )), $CONFIG->project_templates['full']);
+}
+
 if($CONFIG->ldshake_mode == 'highschool') {
     $CONFIG->project_templates['full'] = array();
         if(isloggedin()) {

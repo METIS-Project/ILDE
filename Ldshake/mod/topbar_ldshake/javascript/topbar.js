@@ -91,6 +91,22 @@ $(document).ready(function()
         $('#tb_browse a').toggleClass('menu_active');
     });
 
+    $('#tb_ldshakers').click (function (e)
+    {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var left = $("#tb_ldshakers").position().left-5;
+        $('#toolbar_ldshakers_types').css("left" , left+"px");
+
+        if(!$('#tb_ldshakers a').hasClass('menu_active')) {
+            $('.menu').fadeOut(200);
+            $('.menu_active').removeClass('menu_active');
+        }
+        $('#toolbar_ldshakers_types').fadeToggle(200);
+        $('#tb_browse a').toggleClass('menu_active');
+    });
+
     $('#toolbar_lds_types').mouseenter(function(){
         $(this).find('li')
             .css('background-color', '')

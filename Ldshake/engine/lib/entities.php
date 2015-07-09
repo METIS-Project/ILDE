@@ -98,6 +98,11 @@
 			$this->attributes['time_created'] = "";
 			$this->attributes['time_updated'] = "";
 			$this->attributes['enabled'] = "yes";
+
+			//LdShake change
+			if(function_exists("ldshake_init_entity_space")) {
+				$this->attributes['space'] = ldshake_init_entity_space();
+			}
 			
 			// There now follows a bit of a hack
 			/* Problem: To speed things up, some objects are split over several tables, this means that it requires
@@ -674,13 +679,15 @@
 			else
 			{ 
 				$this->attributes['guid'] = create_entity($this->attributes['type'], $this->attributes['subtype'], $this->attributes['owner_guid'], $this->attributes['access_id'], $this->attributes['site_guid'], $this->attributes['container_guid']); // Create a new entity (nb: using attribute array directly 'cos set function does something special!)
-//				if ($this->attributes['subtype'] == 'LdS'){
-//					die ("id".$this->attributes['guid']);
-//				}
+
 				if (!$this->attributes['guid']){
 					throw new IOException(elgg_echo('IOException:BaseEntitySaveFailed')); 
 				}
-				
+
+				if(function_exists("ldshake_init_entity")) {
+					ldshake_init_entity($this->attributes);
+				}
+
 				// Save any unsaved metadata TODO: How to capture extra information (access id etc)
 				if (sizeof($this->temp_metadata) > 0) {
 					foreach($this->temp_metadata as $name => $value) {
@@ -1402,7 +1409,7 @@
 	 * @param int $site_guid The site to add this entity to. Leave as 0 (default) for the current site.
 	 * @return mixed The new entity's GUID, or false on failure
 	 */
-	function create_entity($type, $subtype, $owner_guid, $access_id, $site_guid = 0, $container_guid = 0)
+	function create_entity($type, $subtype, $owner_guid, $access_id, $site_guid = 0, $container_guid = 0, $space = 0)
 	{
 		global $CONFIG;
 	

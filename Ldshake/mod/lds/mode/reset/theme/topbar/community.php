@@ -34,21 +34,10 @@
  * "Powered by LdShake" with the link to the website http://ldshake.upf.edu.
  ********************************************************************************/
 
-extract ($vars);
 ?>
-<div id="two_column_left_sidebar_maincontent">
-	<div id="content_area_user_title">
-        <h2><?php echo T("Activity Dashboard") ?></h2>
-        <div style="float:right"><?php echo $activity_counters['started'] ?></div>
-        <div><?php echo T("Number of designs created")?></div>
-        <div style="float:right"><?php echo $activity_counters['num_designs_edited_one_person'] ?></div>
-        <div><?php echo T("Number of designs edited only by one person")?></div>
-        <div style="float:right"><?php echo $activity_counters['coedition_2e'] ?></div>
-        <div><?php echo T("Number of designs co-edited by 2 people")?></div>
-        <div style="float:right"><?php echo $activity_counters['coedition_3g'] ?></div>
-        <div><?php echo T("Number of designs co-edited by 3 or more people")?></div>
-        <div style="float:right"><?php echo $activity_counters['commented_lds'] ?></div>
-        </di<div><?php echo T("Number of designs with at least one comment")?></div>
-
+<div id="toolbar_ldshakers_types" class="menu">
+    <ul>
+        <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/ldshakers/'?>"><?php echo T("LdShakers") ?></a></li>
+        <li class="menu_suboption"><a href="<?php echo $CONFIG->url.'pg/lds/activity_dashboard/'?>"><?php echo T("Activity Dashboard") ?></a></li>
+    </ul>
 </div>
-

@@ -826,6 +826,8 @@ class EditorsFactory
             return new UploadEditor($document);
         if($document->editorType == 'image')
             return new UploadEditor($document);
+        if($document->editorType == 'reauthoring')
+            return new ReauthoringEditor($document);
         if($document->editorType == 'gluepsrest')
             return new GluepsManager(null, null, $document);
 
@@ -868,6 +870,8 @@ class EditorsFactory
             return new UploadEditor(null, $editorType);
         if($editorType == 'image')
             return new UploadEditor(null, $editorType);
+        if($editorType == 'reauthoring')
+            return new ReauthoringEditor(null, $editorType);
         if($editorType == 'google_docs')
             return new GoogleEditor(null, $editorType);
         if($editorType == 'google_spreadsheet')
@@ -2441,8 +2445,13 @@ SQL;
         global $CONFIG;
 
         try {
-            $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
-            mkdir($preview_path);
+            if(!empty($this->_clone_mode->previewDir))
+                $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_clone_mode->previewDir;
+            else
+                $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+
+            if(!is_dir($preview_path))
+                mkdir($preview_path);
 
             if(!($fd = fopen($preview_path.'/index.html','w')))
                 throw new Exception("Cannot create file.");
@@ -2635,6 +2644,165 @@ SQL;
     }
 }
 
+class ReauthoringEditor extends UploadEditor {
+
+    public function saveNewDocument($params = null)
+    {
+        global $CONFIG;
+
+        $resultIds = new stdClass();
+        $user = get_loggedin_user();
+
+        //create a new file to store the document
+        $rand_id = mt_rand(400,9000000);
+        $filestorename = (string)$rand_id;
+        $file = $this->getNewFile($filestorename);
+        $this->_document->file_guid = $file->guid;
+
+        //save the contents
+        if($docSession = $params['editor_id']) {
+            $doc_file = get_entity($docSession);
+            //TODO: check $doc_file permisssions before proceeding
+            $this->_document->upload_filename = $doc_file->upload_filename;
+            $file_origin = Editor::getFullFilePath($docSession);
+            copy($file_origin, $file->getFilenameOnFilestore());
+        } elseif(isset($CONFIG->editor_templates[$this->_document->editorType])) {
+            $this->_document->upload_filename = $CONFIG->editor_templates[$this->_document->editorType]['filename'];
+            $file_origin = $CONFIG->path.$CONFIG->editor_templates[$this->_document->editorType]['path'];
+            copy($file_origin, $file->getFilenameOnFilestore());
+        }
+
+        $this->_document->save();
+
+        //assign a random string to each directory
+        $this->_document->previewDir = rand_str(64);
+        $this->_document->pub_previewDir = rand_str(64);
+        $this->_document->revisionDir = rand_str(64);
+
+        $this->_document->rev_last = 0;
+        $this->_document->lds_revision_id = 0;
+
+        $resultIds->guid = $this->_document->lds_guid;
+        $resultIds->file_guid = $this->_document->file_guid;
+
+        $this->_document->save();
+
+        $tmp_folder = rand_str(64);
+        $tmp_path = $CONFIG->tmppath . $tmp_folder;
+        if(!mkdir($tmp_path))
+            throw new Exception("Cannot create temp folder");
+
+        $runtime_zipfile = __DIR__ . '/../../../vendors/reauthoring/runtime.zip';
+
+        if(!ldshake_unzip($runtime_zipfile, $tmp_path))
+            throw new Exception("Cannot unzip reauthoring");
+
+        if(!ldshake_unzip($file_origin, $tmp_path))
+            throw new Exception("Cannot unzip data");
+
+        if(!chmod($tmp_path . '/reauthoring.sh', 0744))
+            throw new Exception("Cannot assign permissions");
+
+        exec("bash " . $tmp_path . "/reauthoring.sh");
+
+        $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+
+        if(!is_dir($preview_path))
+            if(!mkdir($preview_path))
+                throw new Exception("Cannot create preview folder");
+
+        shell_exec("cp -r {$tmp_path}/_build/html/. {$preview_path}");
+        shell_exec("rm -r {$tmp_path}");
+
+        return array($this->_document, $resultIds);
+    }
+
+    //update the previous contents
+    public function saveExistingDocument($params=null)
+    {
+        global $CONFIG;
+        $user = get_loggedin_user();
+        $resultIds = new stdClass();
+        $docSession = $params['editor_id'];
+        if($doc_file = get_entity($docSession)) {
+            //create a new file to store the document
+            $file_origin = Editor::getFullFilePath($docSession);
+            copy($file_origin, Editor::getFullFilePath($this->_document->file_guid));
+            copy($file_origin, Editor::getFullFilePath($this->_document->file_imsld_guid));
+            $this->_document->upload_filename = $doc_file->upload_filename;
+        }
+
+        $this->_document->previewDir = rand_str(64);
+
+
+        /*
+        file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
+        exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
+        if(strlen((string)$docSession) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->exedata.'export/singlePage/'.$docSession);
+        if(strlen((string)$old_previewDir) > 0)
+            exec('rm -r --interactive=never '.$CONFIG->editors_content.'content/exe/'.$old_previewDir);
+
+
+        $this->updateExportDocument($this->_document->ims_ld, $docSession, 'IMS');
+        $this->updateExportDocument($this->_document->scorm, $docSession, 'scorm');
+        $this->updateExportDocument($this->_document->scorm2004, $docSession, 'scorm2004');
+        $this->updateExportDocument($this->_document->webZip, $docSession, 'zipFile');
+
+        */
+        $revisions = get_entities_from_metadata('document_guid',$this->_document->guid,'object','LdS_document_editor_revision',0,10000,0,'time_created');
+        $resultIds->count = count($revisions);
+
+        //create the diff content against the last saved revision
+        if(count($revisions) > 0)
+        {
+            /*
+            $output = array();
+            exec ("{$CONFIG->pythonpath} {$CONFIG->path}mod/lds/ext/diff.py".' '.$CONFIG->editors_content.'content/exe/'.$revisions[count($revisions)-1]->previewDir.'/index.html'.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/index.html', $output);
+            $diff = implode('', $output);
+            //insert an inline style definition to highlight the differences
+            $diff = str_replace("<del", "<del style=\"background-color: #fcc;display: inline-block;text-decoration: none;\" ", $diff);
+            $diff = str_replace("<ins", "<ins style=\"background-color: #cfc;display: inline-block;text-decoration: none;\" ", $diff);
+            $handle = fopen($CONFIG->editors_content.'content/exe/'.$this->_document->previewDir.'/diff.html', "w");
+            fwrite($handle, $diff);
+            fclose($handle);
+            */
+        }
+
+        $this->_document->save();
+
+        $tmp_folder = rand_str(64);
+        $tmp_path = $CONFIG->tmppath . $tmp_folder;
+        if(!mkdir($tmp_path))
+            throw new Exception("Cannot create temp folder");
+
+        $runtime_zipfile = __DIR__ . '/../../../vendors/reauthoring/runtime.zip';
+
+        if(!ldshake_unzip($runtime_zipfile, $tmp_path))
+            throw new Exception("Cannot unzip reauthoring");
+
+        if(!ldshake_unzip($file_origin, $tmp_path))
+            throw new Exception("Cannot unzip data");
+
+        if(!chmod($tmp_path . '/reauthoring.sh', 0744))
+            throw new Exception("Cannot assign permissions");
+
+        exec("bash " . $tmp_path . "/reauthoring.sh");
+
+        $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+
+        if(!is_dir($preview_path))
+            if(!mkdir($preview_path))
+                throw new Exception("Cannot create preview folder");
+
+        shell_exec("cp -r {$tmp_path}/_build/html/. {$preview_path}");
+        shell_exec("rm -r {$tmp_path}");
+
+        return array($this->_document, $resultIds);
+    }
+}
+
+
 class UploadEditor extends Editor
 {
     public $document_url;
@@ -2717,6 +2885,17 @@ class UploadEditor extends Editor
 
         $clone->rev_last = 0;
         $clone->lds_revision_id = 0;
+
+        $old_preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+        $new_preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$clone->previewDir;
+
+        if(file_exists($old_preview_path . '/index.html')) {
+            if(!is_dir($new_preview_path))
+                if(!mkdir($new_preview_path))
+                    throw new Exception("Cannot create preview folder");
+
+            shell_exec("cp -r {$old_preview_path}/. {$new_preview_path}");
+        }
 
         $clone->save();
 
