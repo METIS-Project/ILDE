@@ -2732,9 +2732,6 @@ class ReauthoringEditor extends UploadEditor {
             $this->_document->upload_filename = $doc_file->upload_filename;
         }
 
-        $this->_document->previewDir = rand_str(64);
-
-
         /*
         file('http://127.0.0.1/exelearning/?export='.$docSession.'&type=singlePage&filename=singlePage');
         exec('cp -r '.$CONFIG->exedata.'export/singlePage/'.$docSession.' '.$CONFIG->editors_content.'content/exe/'.$this->_document->previewDir);
@@ -2771,33 +2768,36 @@ class ReauthoringEditor extends UploadEditor {
 
         $this->_document->save();
 
-        $tmp_folder = rand_str(64);
-        $tmp_path = $CONFIG->tmppath . $tmp_folder;
-        if(!mkdir($tmp_path))
-            throw new Exception("Cannot create temp folder");
+        if($doc_file) {
+            $this->_document->previewDir = rand_str(64);
+            $tmp_folder = rand_str(64);
+            $tmp_path = $CONFIG->tmppath . $tmp_folder;
+            if (!mkdir($tmp_path))
+                throw new Exception("Cannot create temp folder");
 
-        $runtime_zipfile = __DIR__ . '/../../../vendors/reauthoring/runtime.zip';
+            $runtime_zipfile = __DIR__ . '/../../../vendors/reauthoring/runtime.zip';
 
-        if(!ldshake_unzip($runtime_zipfile, $tmp_path))
-            throw new Exception("Cannot unzip reauthoring");
+            if (!ldshake_unzip($runtime_zipfile, $tmp_path))
+                throw new Exception("Cannot unzip reauthoring");
 
-        if(!ldshake_unzip($file_origin, $tmp_path))
-            throw new Exception("Cannot unzip data");
+            if (!ldshake_unzip($file_origin, $tmp_path))
+                throw new Exception("Cannot unzip data");
 
-        if(!chmod($tmp_path . '/reauthoring.sh', 0744))
-            throw new Exception("Cannot assign permissions");
+            if (!chmod($tmp_path . '/reauthoring.sh', 0744))
+                throw new Exception("Cannot assign permissions");
 
-        exec("bash " . $tmp_path . "/reauthoring.sh");
+            exec("bash " . $tmp_path . "/reauthoring.sh");
 
-        $preview_path = $CONFIG->editors_content.'content/'.'webcollagerest'.'/'.$this->_document->previewDir;
+            $preview_path = $CONFIG->editors_content . 'content/' . 'webcollagerest' . '/' . $this->_document->previewDir;
 
-        if(!is_dir($preview_path))
-            if(!mkdir($preview_path))
-                throw new Exception("Cannot create preview folder");
+            if (!is_dir($preview_path))
+                if (!mkdir($preview_path))
+                    throw new Exception("Cannot create preview folder");
 
-        shell_exec("cp -r {$tmp_path}/_build/html/. {$preview_path}");
-        shell_exec("rm -r {$tmp_path}");
-
+            shell_exec("cp -r {$tmp_path}/_build/html/. {$preview_path}");
+            shell_exec("rm -r {$tmp_path}");
+            $this->_document->save();
+        }
         return array($this->_document, $resultIds);
     }
 }
